@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5E53F046-420F-4FC4-B410-53B0601E37AE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LVSDK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</key>
+		<string>gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git</string>
+		<key>32E2D9B5E22579C4E4215D2B151CB03139C07130</key>
+		<string>gitlab.alibaba-inc.com:juhuasuanwireless/LuaViewCode.git</string>
+		<key>D44F993AF8B25EB321097C5952971238F8027CA4</key>
+		<string>gitlab.alibaba-inc.com:xicheng.dxc/luaview.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LVSDK.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</key>
+		<string>../..</string>
+		<key>32E2D9B5E22579C4E4215D2B151CB03139C07130</key>
+		<string>../../LuaViewCode</string>
+		<key>D44F993AF8B25EB321097C5952971238F8027CA4</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>gitlab.alibaba-inc.com:xicheng.dxc/luaview.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D44F993AF8B25EB321097C5952971238F8027CA4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D44F993AF8B25EB321097C5952971238F8027CA4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>luaview</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>32E2D9B5E22579C4E4215D2B151CB03139C07130</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LuaViewCode</string>
+		</dict>
+	</array>
+</dict>
+</plist>

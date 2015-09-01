@@ -1,0 +1,6 @@
+
+pod 'LVSDK', :git => 'git@gitlab.alibaba-inc.com:xicheng.dxc/luaview.git', :tag => '1.2.0'
+
+pod 'LVSDK', :git => 'git@gitlab.alibaba-inc.com:xicheng.dxc/luaview.git', :branch => 'feature/lvport_openUrl'
+
+pod 'JoyMapsKit', :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/joymapskit.git', :commit => 'fd8714f76c77429ac113c210ab9b89fe3b79d61c'

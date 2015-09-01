@@ -1,0 +1,50 @@
+//
+//  LVNativeClass.h
+//  LVSDK
+//
+//  Created by dongxicheng on 4/23/15.
+//  Copyright (c) 2015 dongxicheng. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "LVHeads.h"
+#import "LVMethod.h"
+
+
+
+typedef struct _LVUserDataNativeObject {
+    LVUserDataCommonHead;
+    const void* nativeObjBox;
+} LVUserDataNativeObject;
+
+
+//LVData
+@interface LVNativeObjBox : NSObject
+
+@property(nonatomic,weak) LView* lview;
+@property(nonatomic,assign) LVUserDataNativeObject* userData;
+
+@property(nonatomic,strong) id nativeObject;
+@property(nonatomic,assign) BOOL openAllMethod;
+
+
+-(id) init:(lv_State*) l  nativeObject:(id)nativeObject;
+-(void) addMethod:(LVMethod*) method;
+-(int) performMethod:(NSString*) methodName L:(lv_State*)L;
+
+
+
++(int) classDefine:(lv_State *)L ;
+
+/*
+ * 注册native对象到脚本中, sel可以为空(如果为空注册所有api)
+ */
++(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) luaName sel:(SEL) sel ;
+
+/*
+ * 清除脚本中注册的native对象
+ */
++(int) unregisteObjectWithL:(lv_State *)L name:(NSString*) name;
+
+
+@end

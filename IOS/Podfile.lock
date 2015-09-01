@@ -1,0 +1,24 @@
+PODS:
+  - JUFLXLayoutKit (0.1.1):
+    - JUFLXLayoutKit/LayoutExtensions (= 0.1.1)
+  - JUFLXLayoutKit/LayoutExtensions (0.1.1)
+  - OpenSSL (1.0.1)
+
+DEPENDENCIES:
+  - JUFLXLayoutKit (from `git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git`)
+  - OpenSSL (= 1.0.1)
+
+EXTERNAL SOURCES:
+  JUFLXLayoutKit:
+    :git: git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git
+
+CHECKOUT OPTIONS:
+  JUFLXLayoutKit:
+    :commit: fc9d4e69df94a6e82bfc267eef2d551e5edc86df
+    :git: git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git
+
+SPEC CHECKSUMS:
+  JUFLXLayoutKit: 03782ca36252918b2867442bd16500c32eba5735
+  OpenSSL: 89261317e5d7c966e4cbb3d837bf9def64573e41
+
+COCOAPODS: 0.35.0

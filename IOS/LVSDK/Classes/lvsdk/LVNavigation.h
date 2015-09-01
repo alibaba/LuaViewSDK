@@ -1,0 +1,16 @@
+//
+//  LVNavigationBar.h
+//  LVSDK
+//
+//  Created by dongxicheng on 7/15/15.
+//  Copyright (c) 2015 dongxicheng. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "LVHeads.h"
+
+@interface LVNavigation : NSObject
+
++(int) classDefine:(lv_State *)L ;
+
+@end

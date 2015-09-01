@@ -1,0 +1,20 @@
+# Uncomment this line to define a global platform for your project
+
+platform :ios, "6.0"
+
+def common_pods
+    pod 'OpenSSL',          '1.0.1'
+    pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
+end
+
+target 'LVSDKDemo' do
+    platform :ios, '6.0'
+    common_pods
+end
+
+target 'LVSDK' do
+    platform :ios, '6.0'
+    
+    common_pods
+end
+
