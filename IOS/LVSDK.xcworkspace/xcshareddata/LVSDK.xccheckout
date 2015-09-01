@@ -12,28 +12,20 @@
 	<dict>
 		<key>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</key>
 		<string>gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git</string>
-		<key>32E2D9B5E22579C4E4215D2B151CB03139C07130</key>
-		<string>gitlab.alibaba-inc.com:juhuasuanwireless/LuaViewCode.git</string>
-		<key>D44F993AF8B25EB321097C5952971238F8027CA4</key>
-		<string>gitlab.alibaba-inc.com:xicheng.dxc/luaview.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LVSDK.xcworkspace</string>
+	<string>IOS/LVSDK.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</key>
 		<string>../..</string>
-		<key>32E2D9B5E22579C4E4215D2B151CB03139C07130</key>
-		<string>../../LuaViewCode</string>
-		<key>D44F993AF8B25EB321097C5952971238F8027CA4</key>
-		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>gitlab.alibaba-inc.com:xicheng.dxc/luaview.git</string>
+	<string>gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D44F993AF8B25EB321097C5952971238F8027CA4</string>
+	<string>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -42,23 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>143C8B9BD4757D587B0C3AF45A8EEDB35B34865D</string>
 			<key>IDESourceControlWCCName</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D44F993AF8B25EB321097C5952971238F8027CA4</string>
-			<key>IDESourceControlWCCName</key>
-			<string>luaview</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>32E2D9B5E22579C4E4215D2B151CB03139C07130</string>
-			<key>IDESourceControlWCCName</key>
-			<string>LuaViewCode</string>
+			<string>LuaViewSDK</string>
 		</dict>
 	</array>
 </dict>

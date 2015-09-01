@@ -316,7 +316,6 @@
 		84E446981AEE0655009C9A8A /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; };
 		84E446991AEE0655009C9A8A /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
 		84E4469A1AEE0655009C9A8A /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
-		84E4469C1AEE2E29009C9A8A /* 内存引用关系图.pages in Resources */ = {isa = PBXBuildFile; fileRef = 84E4469B1AEE2E29009C9A8A /* 内存引用关系图.pages */; };
 		84EFEA161B589EEA00C85B29 /* DemoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFEA151B589EEA00C85B29 /* DemoModel.m */; };
 		84F4A01F1B4B9E600062A7B2 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; };
 		84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
@@ -364,7 +363,6 @@
 		84056E711B5CA5990078F9D6 /* LVErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVErrorView.m; sourceTree = "<group>"; };
 		84056E751B5CADE30078F9D6 /* LVNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNotice.h; sourceTree = "<group>"; };
 		84056E761B5CADE30078F9D6 /* LVNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNotice.m; sourceTree = "<group>"; };
-		840757731B155CE30047F347 /* LuaView.key */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuaView.key; sourceTree = "<group>"; };
 		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
 		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
 		840AD5881A5EAF560075CB58 /* LVApiDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVApiDelegate.h; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 		846AAE3F1B4A6295001CC71E /* lft.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lft.lua; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
-		84765E291ADE17CE002506CB /* LVSDK--API文档.numbers */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LVSDK--API文档.numbers"; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
 		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
 		848523431B8EE97D00E5BA71 /* stringDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringDemo.lua; sourceTree = "<group>"; };
@@ -565,8 +562,6 @@
 		84CF56741AE9184000A49B36 /* LVNativeObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNativeObjBox.m; sourceTree = "<group>"; };
 		84CF56781AEA15A500A49B36 /* LVMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVMethod.h; sourceTree = "<group>"; };
 		84CF56791AEA15A500A49B36 /* LVMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVMethod.m; sourceTree = "<group>"; };
-		84D205A11AF8585C00C28563 /* luaview动态注册接口.numbers */ = {isa = PBXFileReference; lastKnownFileType = file; path = "luaview动态注册接口.numbers"; sourceTree = "<group>"; };
-		84D205A21AF8585C00C28563 /* 高效-动态化-LuaView(IOS).pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "高效-动态化-LuaView(IOS).pdf"; sourceTree = "<group>"; };
 		84D42C1C1B2A8AD500D40A0E /* collectionViewDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = collectionViewDemo.lua; sourceTree = "<group>"; };
 		84D446F01AF75BD8000A3911 /* LVPkgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgManager.h; path = PKG/LVPkgManager.h; sourceTree = "<group>"; };
 		84D446F11AF75BD8000A3911 /* LVPkgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgManager.m; path = PKG/LVPkgManager.m; sourceTree = "<group>"; };
@@ -609,7 +604,6 @@
 		84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTapGestureRecognizer.m; sourceTree = "<group>"; };
 		84E446961AEE0655009C9A8A /* LVBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBlock.h; sourceTree = "<group>"; };
 		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
-		84E4469B1AEE2E29009C9A8A /* 内存引用关系图.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = "内存引用关系图.pages"; sourceTree = "<group>"; };
 		84EFEA141B589EEA00C85B29 /* DemoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModel.h; sourceTree = "<group>"; };
 		84EFEA151B589EEA00C85B29 /* DemoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoModel.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
@@ -816,14 +810,9 @@
 		846481E21A64F0EB00DE6204 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				84D205A11AF8585C00C28563 /* luaview动态注册接口.numbers */,
-				84E4469B1AEE2E29009C9A8A /* 内存引用关系图.pages */,
-				84765E291ADE17CE002506CB /* LVSDK--API文档.numbers */,
 				846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */,
 				846481E41A64F0EB00DE6204 /* lua源码分析.pdf */,
-				84D205A21AF8585C00C28563 /* 高效-动态化-LuaView(IOS).pdf */,
 				8405078B1ADF8F7300906BAC /* podinstall.text */,
-				840757731B155CE30047F347 /* LuaView.key */,
 			);
 			path = Documentation;
 			sourceTree = "<group>";
@@ -1339,7 +1328,6 @@
 				84D59C391B69EA860084971B /* lazhu.png in Resources */,
 				84D996FB1B09BE1000B9E01B /* 7.tiff in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
-				84E4469C1AEE2E29009C9A8A /* 内存引用关系图.pages in Resources */,
 				84D9970A1B09BE1000B9E01B /* animationSnow.lua in Resources */,
 				8418E3C51A5E804700158125 /* SubViewController.xib in Resources */,
 				84C7817A1B54B5A90021E628 /* bg_home_category_right_shadow@3x.png in Resources */,
