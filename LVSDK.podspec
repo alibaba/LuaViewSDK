@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "5.0"
 
-  s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/luaview.git", :tag => "0.0.1" }
+  s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git", :tag => "0.0.1" }
 
   s.source_files  = "LVSDK/Classes", "IOS/LVSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
