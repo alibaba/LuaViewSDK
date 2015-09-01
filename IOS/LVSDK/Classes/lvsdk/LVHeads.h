@@ -162,4 +162,7 @@ LVTypeIDEnum lv_typeID(const char* type);
 #define isNormalPoint(p)  ( !( isnan(p.x) || isnan(p.y) ) )
 #define isNormalEdgeInsets(e)  ( !( isnan(e.top) || isnan(e.left) || isnan(e.bottom) || isnan(e.right) ) )
 
+
+typedef void(^LVLoadFinished)(void);
+
 #endif

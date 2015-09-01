@@ -20,9 +20,19 @@
 
 -(void) setImageByName:(NSString*) imageName;
 -(void) setImageByData:(NSData*) data;
+-(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished;
+
+/*
+ * Lua 脚本回调
+ */
+-(void) callLuaDelegate;
 
 +(int) classDefine:(lv_State *) L ;
 
+/*
+ * 修改LVImageView
+ */
 + (void) setDefaultStyle:(Class) c;
+
 
 @end

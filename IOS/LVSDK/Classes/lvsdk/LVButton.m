@@ -44,10 +44,13 @@
     }
 }
 
+-(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished{
+    
+}
+
 -(void) setImageUrl:(NSString*) url placeholder:(UIImage *)placeholder state:(UIControlState) state {
     if( [LVUtil isExternalUrl:url] ){
-        // [self setImage:[LVUtil getImageFromURL:[NSURL URLWithString:url]] forState:state];
-        // [self setImageWithCDNURL:[NSURL URLWithString:url] forState:state completed:complete];
+        [self setWebImageUrl:url forState:state finished:nil];
     } else {
         if( url ) {
             [self setImage:[LVUtil cachesImage:url] forState:state];

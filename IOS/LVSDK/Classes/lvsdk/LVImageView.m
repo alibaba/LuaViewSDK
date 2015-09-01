@@ -17,7 +17,7 @@
 @property (nonatomic,strong) id functionTag;
 @property (nonatomic,strong) UIImageView* blurImageView;
 @property (nonatomic,strong) UIVisualEffectView *blurEffectView;
-@property (nonatomic,assign) BOOL haveCallbackFunc;
+@property (nonatomic,assign) BOOL needCallLuaFunc;
 @end
 
 @implementation LVImageView
@@ -36,8 +36,7 @@
 }
 
 
--(void) setImageUrl:(NSURL*) url placeholder:(UIImage *)placeholder{
-    // self.image = [LVUtil getImageFromURL:url];
+-(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished{
 //    __weak LVImageView* weakImageView = self;
 //    [self setImageWithURL:url placeholderImage:nil
 //                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
@@ -50,13 +49,13 @@
 //                    } else {
 //                        weakImageView.alpha = 1.0f;
 //                    }
-//                    if( weakImageView.haveCallbackFunc ) {
-//                        [weakImageView performSelectorOnMainThread:@selector(callLuaFunction) withObject:nil waitUntilDone:NO];
+//                    if ( finished ){
+//                        finished();
 //                    }
 //                }];
 }
 
--(void) callLuaFunction{
+-(void) callLuaDelegate{
     lv_State* L = self.lv_lview.l;
     if( L ) {
         [LVUtil pushRegistryValue:L key:self.functionTag];
@@ -71,7 +70,12 @@
     
     if( [LVUtil isExternalUrl:imageName] ){
         //CDN image
-        [self setImageUrl:[NSURL URLWithString:imageName] placeholder:nil];
+        __weak LVImageView* weakImageView = self;
+        [self setWebImageUrl:[NSURL URLWithString:imageName] finished:^{
+            if( weakImageView.needCallLuaFunc ) {
+                [weakImageView performSelectorOnMainThread:@selector(callLuaDelegate) withObject:nil waitUntilDone:NO];
+            }
+        }];
     } else {
         // local Image
         [self setImage:[LVUtil cachesImage:imageName]];
@@ -85,8 +89,11 @@
     }
 }
 
+-(void) canelWebImageLoading{
+    // [self cancelCurrentImageLoad]; // 取消上一次CDN加载
+}
 -(void) cancelImageLoadAndClearCallback:(lv_State*)L{
-//    [self cancelCurrentImageLoad]; // 取消上一次CDN加载
+    [self canelWebImageLoading];
     [NSObject cancelPreviousPerformRequestsWithTarget:self]; // 取消回调脚本
     [LVUtil unregistry:L key:self.functionTag]; // 清除脚本回调
 }
@@ -212,9 +219,9 @@ static int setImage (lv_State *L) {
             [imageView cancelImageLoadAndClearCallback:L];
             if( lv_type(L, 3) == LV_TFUNCTION ) {
                 [LVUtil registryValue:L key:imageView.functionTag stack:3];
-                imageView.haveCallbackFunc = YES;
+                imageView.needCallLuaFunc = YES;
             } else {
-                imageView.haveCallbackFunc = NO;
+                imageView.needCallLuaFunc = NO;
             }
             if ( lv_type(L, 2)==LV_TSTRING ) {
                 NSString* imageName = lv_paramString(L, 2);// 2

@@ -17,9 +17,12 @@
 @property(nonatomic,assign) LVUserDataView* lv_userData;
 
 -(id) init:(lv_State*) l;
+-(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished;
 
 +(int) classDefine:(lv_State *)L ;
 
 -(void) lvButtonCallBack;
+
++ (void) setDefaultStyle:(Class) c;
 
 @end
