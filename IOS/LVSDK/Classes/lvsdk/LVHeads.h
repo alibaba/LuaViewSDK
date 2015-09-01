@@ -22,34 +22,34 @@
 #define USERDATA_FLEX_DELEGATE 2
 
 //---------------用户数据包含的公用头信息---------------------------------------------
-#define LVUserDataCommonHead  int type; const char* typeName
+#define LVUserDataCommonHead  const char* type; const char* typeName
 
 //---------------创建用户数据-------------------------------------------------------
 #define NEW_USERDATA(var, T)    \
     T* var = ( (T*)lv_newuserdata( L, sizeof(T)) ); \
     lv_createUDataLuatable(L,-1);\
-    var->type = LVID_##T; \
+    var->type = LVType_##T; \
     var->typeName = #T ;
 
 //----------------用户数据的类型检查-------------------------------------------------
-#define LVIsType(user,T)  (user && user->type==LVID_##T)
+#define LVIsType( user,T)  (user && user->type==LVType_##T)
+#define LVIsType2(user,T)  (user && user->type==T)
 
 //----------------用户数据类型 ID---------------------------------------------------
-typedef enum : NSUInteger {
-    LVID_LVUserDataView,
-    LVID_LVUserDataData,
-    LVID_LVUserDataDate,
-    LVID_LVUserDataHttp,
-    LVID_LVUserDataMtop,
-    LVID_LVUserDataTimer,
-    LVID_LVUserDataTransform3D,
-    LVID_LVUserDataGesture,
-    LVID_LVUserDataDownloader,
-    LVID_LVUserDataAudioPlayer,
-    LVID_LVUserDataAttributedString,
-    LVID_LVUserDataNativeObject,
-    LVID_LVUserDataStruct,
-} LVUserDataIDS;
+
+extern const char* LVType_LVUserDataView;
+extern const char* LVType_LVUserDataData;
+extern const char* LVType_LVUserDataDate;
+extern const char* LVType_LVUserDataHttp;
+extern const char* LVType_LVUserDataTimer;
+extern const char* LVType_LVUserDataTransform3D;
+extern const char* LVType_LVUserDataGesture;
+extern const char* LVType_LVUserDataDownloader;
+extern const char* LVType_LVUserDataAudioPlayer;
+extern const char* LVType_LVUserDataAttributedString;
+extern const char* LVType_LVUserDataNativeObject;
+extern const char* LVType_LVUserDataStruct;
+
 
 //----------------View的用户数据结构------------------------------------------------
 typedef struct _LVUserDataView {
@@ -79,7 +79,6 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UIViewNewIndex   "UI.View.NewIndex"
 #define META_TABLE_Timer            "LV.Timer"
 #define META_TABLE_Http             "LV.Http"
-#define META_TABLE_Mtop             "LV.Mtop"
 #define META_TABLE_Gesture          "LV.GestureRecognizer"
 #define META_TABLE_PanGesture       "LV.Pan.GestureRecognizer"
 #define META_TABLE_TapGesture       "LV.Tap.GestureRecognizer"
