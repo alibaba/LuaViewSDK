@@ -22,14 +22,20 @@
 #define USERDATA_FLEX_DELEGATE 2
 
 //---------------用户数据包含的公用头信息---------------------------------------------
-#define LVUserDataCommonHead  const char* type; const char* typeName
+#define LVUserDataCommonHead  const char* type;
 
 //---------------创建用户数据-------------------------------------------------------
 #define NEW_USERDATA(var, T)    \
     T* var = ( (T*)lv_newuserdata( L, sizeof(T)) ); \
     lv_createUDataLuatable(L,-1);\
     var->type = LVType_##T; \
-    var->typeName = #T ;
+//
+
+#define NEW_USERDATA2(var, T, typeName)    \
+    T* var = ( (T*)lv_newuserdata( L, sizeof(T)) ); \
+    lv_createUDataLuatable(L,-1);\
+    var->type = typeName; \
+//
 
 //----------------用户数据的类型检查-------------------------------------------------
 #define LVIsType( user,T)  (user && user->type==LVType_##T)
