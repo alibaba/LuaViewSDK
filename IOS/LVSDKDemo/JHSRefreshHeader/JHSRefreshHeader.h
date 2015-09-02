@@ -7,9 +7,8 @@
 //  下拉刷新控件:负责监控用户下拉的状态
 
 #import "JHSRefreshComponent.h"
-#import "LVApiDelegate.h"
 
-@interface JHSRefreshHeader : JHSRefreshComponent<LVRefreshHeaderProtocol>
+@interface JHSRefreshHeader : JHSRefreshComponent 
 /** 创建header */
 + (instancetype)headerWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock;
 /** 创建header */

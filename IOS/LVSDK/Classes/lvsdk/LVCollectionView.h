@@ -8,15 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVApiDelegate.h"
+#import "UIScrollView+LuaView.h"
 
 @interface LVCollectionView : UICollectionView<LVProtocal,UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property(nonatomic,weak) id<LVRefreshHeaderProtocol> refreshHeader;
-@property(nonatomic,weak) id<LVRefreshFooterProtocol> refreshFooter;
-
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;
+
+
 
 + (int) classDefine: (lv_State *)L ;
 

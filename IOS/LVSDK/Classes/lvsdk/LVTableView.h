@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVApiDelegate.h"
+#import "UIScrollView+LuaView.h"
 
 @interface LVTableView : UITableView<LVProtocal,UITableViewDataSource, UITableViewDelegate>
-
-@property(nonatomic,weak) id<LVRefreshHeaderProtocol> refreshHeader;
-@property(nonatomic,weak) id<LVRefreshFooterProtocol> refreshFooter;
 
 
 @property(nonatomic,weak) LView* lv_lview;

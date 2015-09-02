@@ -7,9 +7,8 @@
 //
 
 #import "JHSRefreshFooter.h"
-#import "LVApiDelegate.h"
 
-@interface JHSRefreshAutoFooter : JHSRefreshFooter<LVRefreshFooterProtocol>
+@interface JHSRefreshAutoFooter : JHSRefreshFooter
 /** 是否自动刷新(默认为YES) */
 @property (assign, nonatomic, getter=isAutomaticallyRefresh) BOOL automaticallyRefresh;
 

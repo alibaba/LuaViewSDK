@@ -45,7 +45,6 @@
 
 -(void) myInit{
     self.mySelf = self;
-    self.apiDelegate = [[LVApiDelegate alloc] init];
     self.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)

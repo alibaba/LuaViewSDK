@@ -21,6 +21,11 @@
 @interface LVCollectionView ()
 @property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic,strong) NSMutableDictionary* identifierDic;
+
+//@property(nonatomic,weak) id<LVRefreshHeaderProtocol> refreshHeader;
+//@property(nonatomic,weak) id<LVRefreshFooterProtocol> refreshFooter;
+
+
 @end
 
 
@@ -489,15 +494,6 @@ static int rectForSection (lv_State *L) {
     return 1;
 }
 
-- (void) setRefreshHeader:(id<LVRefreshHeaderProtocol>)head{
-    _refreshHeader = head;
-    [super setRefreshHeader:head];
-}
-
-- (void) setRefreshFooter:(id<LVRefreshFooterProtocol>)foot{
-    _refreshFooter = foot;
-    [super setRefreshFooter:foot];
-}
 
 
 

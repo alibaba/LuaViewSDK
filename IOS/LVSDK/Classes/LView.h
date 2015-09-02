@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVApiDelegate.h"
 
 @class LView;
 @class LVBlock;
@@ -25,7 +24,6 @@
 @interface LView : UIScrollView
 
 @property(nonatomic,weak) id<LVCallback> callback; //用于LuaView回调( luaView大小改变 等回调)
-@property(nonatomic,strong) LVApiDelegate* apiDelegate; //需要重载的API做代理，实现LVApiDelegate
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 @property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本

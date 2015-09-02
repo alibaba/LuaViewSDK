@@ -10,7 +10,6 @@
 
 #import "LVHeads.h"
 #import "LView.h"
-#import "LVApiDelegate.h"
 #import "LVBlock.h"
 
 @interface LVSDK : NSObject

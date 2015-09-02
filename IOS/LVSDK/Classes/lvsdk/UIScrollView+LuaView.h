@@ -8,19 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVApiDelegate.h"
 #import "UIView+LuaView.h"
 
 
 @interface UIScrollView (UIScrollViewLuaView)<LVProtocal>
 
-@property(nonatomic,weak) id<LVRefreshHeaderProtocol> refreshHeader;
-@property(nonatomic,weak) id<LVRefreshFooterProtocol> refreshFooter;
 
-- (void) luaViewPullDownToRefresh;
-- (void) luaViewPullUpToLoadMore;
 
-- (void) luaViewInitRefreshHeader;
-- (void) luaViewInitRefreshFooter;
+// 下拉刷新
+- (void) lv_initRefreshHeader;// 开启下拉刷新功能
+- (void) lv_beginRefreshing;// 进入刷新状态
+- (void) lv_endRefreshing;// 结束刷新状态
+- (BOOL) lv_isRefreshing;// 是否正在刷新
+- (void) lv_hiddenRefreshHeader:(BOOL) hidden;
+
+// 加载更多
+- (void) lv_initRefreshFooter;// 开启上拉加载更多功能
+- (void) lv_hiddenRefreshFooter:(BOOL) hidden;
+- (void) lv_noticeNoMoreData;// 提示没有更多的数据
+- (void) lv_resetNoMoreData;// 重置没有更多的数据（消除没有更多数据的状态）
+
+
+- (void) lv_refreshHeaderToRefresh;
+- (void) lv_refreshFooterToLoadMore;
+
 
 @end

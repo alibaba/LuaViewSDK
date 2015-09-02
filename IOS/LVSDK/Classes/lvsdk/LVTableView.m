@@ -449,16 +449,4 @@ static int delegate (lv_State *L) {
 }
 
 
-
-- (void) setRefreshHeader:(id<LVRefreshHeaderProtocol>)head{
-    _refreshHeader = head;
-    [super setRefreshHeader:head];
-}
-
-- (void) setRefreshFooter:(id<LVRefreshFooterProtocol>)foot{
-    _refreshFooter = foot;
-    [super setRefreshFooter:foot];
-}
-
-
 @end

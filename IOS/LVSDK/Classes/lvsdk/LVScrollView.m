@@ -225,38 +225,20 @@ static int showScrollIndicator (lv_State *L) {
     return 0;
 }
 
-- (void) setRefreshHeader:(id<LVRefreshHeaderProtocol>)head{
-    _refreshHeader = head;
-    [super setRefreshHeader:head];
-}
-
-- (void) setRefreshFooter:(id<LVRefreshFooterProtocol>)foot{
-    _refreshFooter = foot;
-    [super setRefreshFooter:foot];
-}
-
 static int initRefreshHeader (lv_State *L) {
-    LView* lview = (__bridge LView *)(L->lView);
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
-        if( [scrollView isKindOfClass:[UIScrollView class]] ){
-            [lview luaViewInitRefreshHeader];
-            [lview.apiDelegate setHeaderRefresh:scrollView];
-        }
+        [scrollView lv_initRefreshHeader];
     }
     return 0;
 }
 
 static int initRefreshFooter (lv_State *L){
-    LView* lview = (__bridge LView *)(L->lView);
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
-        if( [scrollView isKindOfClass:[UIScrollView class]] ){
-            [lview luaViewInitRefreshFooter];
-            [lview.apiDelegate setFooterRefresh:scrollView];
-        }
+        [scrollView lv_initRefreshFooter];
     }
     return 0;
 }
@@ -267,9 +249,7 @@ static int headerBeginRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshHeader)] ){
-            [scrollView.refreshHeader beginRefreshing];
-        }
+        [scrollView lv_beginRefreshing];
     }
     return 0;
 }
@@ -278,9 +258,7 @@ static int headerEndRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshHeader)] ){
-            [scrollView.refreshHeader endRefreshing];
-        }
+        [scrollView lv_endRefreshing];
     }
     return 0;
 }
@@ -289,9 +267,7 @@ static int footerNoticeNoMoreData (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshFooter)] ){
-            [scrollView.refreshFooter noticeNoMoreData];
-        }
+        [scrollView lv_noticeNoMoreData];
     }
     return 0;
 }
@@ -300,9 +276,7 @@ static int footerResetNoMoreData (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshFooter)] ){
-            [scrollView.refreshFooter resetNoMoreData];
-        }
+        [scrollView lv_resetNoMoreData];
     }
     return 0;
 }
@@ -312,12 +286,8 @@ static int hiddenRefreshHeader (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshHeader)] ){
-            UIView* view = (UIView*)scrollView.refreshHeader;
-            if( [view isKindOfClass:[UIView class]] ) {
-                view.hidden = lv_toboolean(L, 2);
-            }
-        }
+        BOOL hidden = lv_toboolean(L, 2);
+        [scrollView lv_hiddenRefreshHeader:hidden];
     }
     return 0;
 }
@@ -327,12 +297,8 @@ static int hiddenRefreshFooter (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        if( [scrollView respondsToSelector:@selector(refreshHeader)] ){
-            UIView* view = (UIView*)scrollView.refreshFooter;
-            if( [view isKindOfClass:[UIView class]] ) {
-                view.hidden = lv_toboolean(L, 2);
-            }
-        }
+        BOOL hidden = lv_toboolean(L, 2);
+        [scrollView lv_hiddenRefreshFooter:hidden];
     }
     return 0;
 }
