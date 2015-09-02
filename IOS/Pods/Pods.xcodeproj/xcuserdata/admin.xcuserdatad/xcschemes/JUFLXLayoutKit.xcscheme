@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD97D92B59DF9EC23958B2BE"
+               BlueprintIdentifier = "A01D18D322B87EAC141F2D41"
                BuildableName = "JUFLXLayoutKit.bundle"
                BlueprintName = "JUFLXLayoutKit"
                ReferencedContainer = "container:Pods.xcodeproj">

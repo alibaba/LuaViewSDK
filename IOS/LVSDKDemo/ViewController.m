@@ -17,6 +17,8 @@
 #import "JHSLuaLoadingView.h"
 #import "JHSLuaCollectionView.h"
 #import "JHSLuaTableView.h"
+#import "JHSLuaViewButton.h"
+#import "JHSLuaViewImageView.h"
 
 typedef struct __MyStruct{
     char a;
@@ -67,6 +69,8 @@ typedef struct __MyStruct{
         
         [LVErrorView setDefaultStyle:[JHSLuaErrorView class]];
         [LVLoadingView setDefaultStyle:[JHSLuaLoadingView class]];
+        [LVButton setDefaultStyle:[JHSLuaViewButton class]];
+        [LVImageView setDefaultStyle:[JHSLuaViewImageView class]];
         [LVCollectionView setDefaultStyle:[JHSLuaCollectionView class]];
         [LVTableView setDefaultStyle:[JHSLuaTableView class]];
         

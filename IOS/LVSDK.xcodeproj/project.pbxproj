@@ -223,6 +223,8 @@
 		848CA3641B29748800C70321 /* LVCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA3621B29748800C70321 /* LVCollectionViewCell.h */; };
 		848CA3651B29748800C70321 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
 		848CA3661B29748800C70321 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
+		848F3C371B96EA9800D5D510 /* JHSLuaViewButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C341B96EA9800D5D510 /* JHSLuaViewButton.m */; };
+		848F3C381B96EA9800D5D510 /* JHSLuaViewImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C361B96EA9800D5D510 /* JHSLuaViewImageView.m */; };
 		849708371A67653A00E913F4 /* LVDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 849708351A67653A00E913F4 /* LVDB.h */; };
 		849708381A67653A00E913F4 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
 		849708391A67653A00E913F4 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
@@ -506,6 +508,10 @@
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
 		848CA3621B29748800C70321 /* LVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewCell.h; sourceTree = "<group>"; };
 		848CA3631B29748800C70321 /* LVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewCell.m; sourceTree = "<group>"; };
+		848F3C331B96EA9800D5D510 /* JHSLuaViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaViewButton.h; sourceTree = "<group>"; };
+		848F3C341B96EA9800D5D510 /* JHSLuaViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaViewButton.m; sourceTree = "<group>"; };
+		848F3C351B96EA9800D5D510 /* JHSLuaViewImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaViewImageView.h; sourceTree = "<group>"; };
+		848F3C361B96EA9800D5D510 /* JHSLuaViewImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaViewImageView.m; sourceTree = "<group>"; };
 		849708351A67653A00E913F4 /* LVDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDB.h; sourceTree = "<group>"; };
 		849708361A67653A00E913F4 /* LVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDB.m; sourceTree = "<group>"; };
 		8497083A1A6765B000E913F4 /* LVSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSystem.h; sourceTree = "<group>"; };
@@ -687,6 +693,10 @@
 				84470B161B5E66FF00980E31 /* JHSLuaErrorView.m */,
 				84D8409F1B5F33D900BC59F3 /* JHSLuaLoadingView.h */,
 				84D840A01B5F33D900BC59F3 /* JHSLuaLoadingView.m */,
+				848F3C331B96EA9800D5D510 /* JHSLuaViewButton.h */,
+				848F3C341B96EA9800D5D510 /* JHSLuaViewButton.m */,
+				848F3C351B96EA9800D5D510 /* JHSLuaViewImageView.h */,
+				848F3C361B96EA9800D5D510 /* JHSLuaViewImageView.m */,
 				844F9F561B969E4300E24A24 /* JHSLuaCollectionView.h */,
 				844F9F571B969E4300E24A24 /* JHSLuaCollectionView.m */,
 				844F9F591B96A0AF00E24A24 /* JHSLuaTableView.h */,
@@ -1423,6 +1433,7 @@
 				843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */,
 				91882E911AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */,
 				8454D1471A7FA7A400774565 /* LVHttpResponse.m in Sources */,
+				848F3C371B96EA9800D5D510 /* JHSLuaViewButton.m in Sources */,
 				84056E781B5CADE30078F9D6 /* LVNotice.m in Sources */,
 				846481D11A64C61F00DE6204 /* LVPageControl.m in Sources */,
 				840AD5F61A63ED7D003E837D /* lVdblib.c in Sources */,
@@ -1450,6 +1461,7 @@
 				8454D1421A7F732500774565 /* LVHttp.m in Sources */,
 				849708381A67653A00E913F4 /* LVDB.m in Sources */,
 				840AD5E81A63ED7D003E837D /* lVapi.c in Sources */,
+				848F3C381B96EA9800D5D510 /* JHSLuaViewImageView.m in Sources */,
 				84342D8F1AE0E02B00ECB4EF /* LVAttributedString.m in Sources */,
 				844F9F581B969E4300E24A24 /* JHSLuaCollectionView.m in Sources */,
 				842D726A1A6639A200936AD2 /* LVFunctionRegister.m in Sources */,

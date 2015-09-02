@@ -6,6 +6,7 @@ def demo_pods
     pod 'OpenSSL',          '1.0.1'
     pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
     pod 'MJRefresh'
+    pod 'SDWebImage',   :git => 'https://github.com/rs/SDWebImage.git'
 end
 
 def sdk_pods
