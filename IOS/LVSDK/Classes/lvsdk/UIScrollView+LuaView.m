@@ -53,17 +53,6 @@
     [self callLuaWithNoArgs:FOOTER_BEGIN_REFRESHING];
 }
 
-//- (id<LVRefreshFooterProtocol>) refreshFooter{
-//    return nil;
-//}
-//
-//- (void) setRefreshFooter:(id<LVRefreshFooterProtocol>)foot{
-//    __weak typeof(self) wself = self;
-//    foot.refreshingBlock = ^(){
-//        [wself luaViewPullUpToLoadMore];
-//    };
-//}
-
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self callLuaWithNoArgs:@"Scrolling"];
