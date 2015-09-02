@@ -2,10 +2,12 @@ PODS:
   - JUFLXLayoutKit (0.1.1):
     - JUFLXLayoutKit/LayoutExtensions (= 0.1.1)
   - JUFLXLayoutKit/LayoutExtensions (0.1.1)
+  - MJRefresh (2.4.7)
   - OpenSSL (1.0.1)
 
 DEPENDENCIES:
   - JUFLXLayoutKit (from `git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git`)
+  - MJRefresh
   - OpenSSL (= 1.0.1)
 
 EXTERNAL SOURCES:
@@ -19,6 +21,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   JUFLXLayoutKit: 03782ca36252918b2867442bd16500c32eba5735
+  MJRefresh: 6ebd06a92fc73b4ccc058e144252ffc11a0381b4
   OpenSSL: 89261317e5d7c966e4cbb3d837bf9def64573e41
 
 COCOAPODS: 0.35.0

@@ -2,19 +2,24 @@
 
 platform :ios, "6.0"
 
-def common_pods
+def demo_pods
+    pod 'OpenSSL',          '1.0.1'
+    pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
+    pod 'MJRefresh'
+end
+
+def sdk_pods
     pod 'OpenSSL',          '1.0.1'
     pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
 end
 
 target 'LVSDKDemo' do
     platform :ios, '6.0'
-    common_pods
+    demo_pods
 end
 
 target 'LVSDK' do
     platform :ios, '6.0'
-    
-    common_pods
+    sdk_pods
 end
 

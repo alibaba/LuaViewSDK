@@ -8,15 +8,14 @@
 
 #import "JHSLuaTableView.h"
 #import "UIScrollView+MJRefresh.h"
-#import "JHSRefreshAutoFooter.h"
-#import "JHSRefreshStateHeader.h"
-#import "JHSRefreshAutoStateFooter.h"
+#import <MJRefreshNormalHeader.h>
+
 
 @implementation JHSLuaTableView
 
 // 下拉刷新
 -(void) lv_initRefreshHeader{// 初始化下拉刷新功能
-    JHSRefreshStateHeader* refreshHeader = [[JHSRefreshStateHeader alloc] init];
+    MJRefreshNormalHeader* refreshHeader = [[MJRefreshNormalHeader alloc] init];
     self.header = refreshHeader;
     refreshHeader.refreshingBlock = ^(){
         [self lv_refreshHeaderToRefresh];

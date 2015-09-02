@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-LVSDKDemo-MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-LVSDKDemo-OpenSSL.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,37 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>49EB610E47A071039F27991E</key>
+		<key>0188A78D0F35856490FDAE7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>795343E6FF4E4D0B38F6C392</key>
+		<key>07233325462467BCFAE45EA0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8539DF17F97CA011D4F54680</key>
+		<key>377DD02468B6CD8ED40788BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A466F145652D7F7D8346657A</key>
+		<key>673C1A0AA35B6208D992ABEC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9F67262A43CC0E783E37618</key>
+		<key>74E5077BB0CF7814B84A268D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCC6D06EBB44828575A4E92B</key>
+		<key>85BB8F278917CEE9E3DF0B57</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7AC510CC9507AD06189DC7E</key>
+		<key>DD97D92B59DF9EC23958B2BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCCD26B5348D928C9346F8D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -5,17 +5,14 @@
 //  Created by dongxicheng on 9/2/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
-
-#import "UIScrollView+MJRefresh.h"
 #import "JHSLuaCollectionView.h"
-#import "JHSRefreshAutoFooter.h"
-#import "JHSRefreshStateHeader.h"
-#import "JHSRefreshAutoStateFooter.h"
+#import <UIScrollView+MJRefresh.h>
+#import <MJRefreshNormalHeader.h>
 
 @implementation JHSLuaCollectionView
 // 下拉刷新
 -(void) lv_initRefreshHeader{// 初始化下拉刷新功能
-    JHSRefreshStateHeader* refreshHeader = [[JHSRefreshStateHeader alloc] init];
+    MJRefreshNormalHeader* refreshHeader = [[MJRefreshNormalHeader alloc] init];
     self.header = refreshHeader;
     refreshHeader.refreshingBlock = ^(){
         [self lv_refreshHeaderToRefresh];

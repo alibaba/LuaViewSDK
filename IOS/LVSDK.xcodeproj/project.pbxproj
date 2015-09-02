@@ -208,16 +208,6 @@
 		846481DF1A64C61F00DE6204 /* LVUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BC1A64C61F00DE6204 /* LVUtil.h */; };
 		846481E01A64C61F00DE6204 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
 		846481E11A64C61F00DE6204 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
-		84661A971B5E0D7B00893453 /* JHSRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A831B5E0D7B00893453 /* JHSRefreshAutoFooter.m */; };
-		84661A981B5E0D7B00893453 /* JHSRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A851B5E0D7B00893453 /* JHSRefreshAutoStateFooter.m */; };
-		84661A991B5E0D7B00893453 /* JHSRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A871B5E0D7B00893453 /* JHSRefreshComponent.m */; };
-		84661A9A1B5E0D7B00893453 /* JHSRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A891B5E0D7B00893453 /* JHSRefreshFooter.m */; };
-		84661A9B1B5E0D7B00893453 /* JHSRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A8B1B5E0D7B00893453 /* JHSRefreshHeader.m */; };
-		84661A9C1B5E0D7B00893453 /* JHSRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A8D1B5E0D7B00893453 /* JHSRefreshStateHeader.m */; };
-		84661A9D1B5E0D7B00893453 /* JHSRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A901B5E0D7B00893453 /* JHSRefreshConst.m */; };
-		84661A9E1B5E0D7B00893453 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A921B5E0D7B00893453 /* UIScrollView+MJExtension.m */; };
-		84661A9F1B5E0D7B00893453 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A941B5E0D7B00893453 /* UIScrollView+MJRefresh.m */; };
-		84661AA01B5E0D7B00893453 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84661A961B5E0D7B00893453 /* UIView+MJExtension.m */; };
 		846AAE401B4A6295001CC71E /* lft.lua in Resources */ = {isa = PBXBuildFile; fileRef = 846AAE3F1B4A6295001CC71E /* lft.lua */; };
 		846E879B1A653DEC000D14DA /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; };
 		846E879C1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
@@ -504,26 +494,6 @@
 		846481BD1A64C61F00DE6204 /* LVUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVUtil.m; sourceTree = "<group>"; };
 		846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Lua中文教程.pdf"; sourceTree = "<group>"; };
 		846481E41A64F0EB00DE6204 /* lua源码分析.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "lua源码分析.pdf"; sourceTree = "<group>"; };
-		84661A821B5E0D7B00893453 /* JHSRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshAutoFooter.h; sourceTree = "<group>"; };
-		84661A831B5E0D7B00893453 /* JHSRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshAutoFooter.m; sourceTree = "<group>"; };
-		84661A841B5E0D7B00893453 /* JHSRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshAutoStateFooter.h; sourceTree = "<group>"; };
-		84661A851B5E0D7B00893453 /* JHSRefreshAutoStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshAutoStateFooter.m; sourceTree = "<group>"; };
-		84661A861B5E0D7B00893453 /* JHSRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshComponent.h; sourceTree = "<group>"; };
-		84661A871B5E0D7B00893453 /* JHSRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshComponent.m; sourceTree = "<group>"; };
-		84661A881B5E0D7B00893453 /* JHSRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshFooter.h; sourceTree = "<group>"; };
-		84661A891B5E0D7B00893453 /* JHSRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshFooter.m; sourceTree = "<group>"; };
-		84661A8A1B5E0D7B00893453 /* JHSRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshHeader.h; sourceTree = "<group>"; };
-		84661A8B1B5E0D7B00893453 /* JHSRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshHeader.m; sourceTree = "<group>"; };
-		84661A8C1B5E0D7B00893453 /* JHSRefreshStateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshStateHeader.h; sourceTree = "<group>"; };
-		84661A8D1B5E0D7B00893453 /* JHSRefreshStateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshStateHeader.m; sourceTree = "<group>"; };
-		84661A8F1B5E0D7B00893453 /* JHSRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSRefreshConst.h; sourceTree = "<group>"; };
-		84661A901B5E0D7B00893453 /* JHSRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSRefreshConst.m; sourceTree = "<group>"; };
-		84661A911B5E0D7B00893453 /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
-		84661A921B5E0D7B00893453 /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
-		84661A931B5E0D7B00893453 /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
-		84661A941B5E0D7B00893453 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
-		84661A951B5E0D7B00893453 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
-		84661A961B5E0D7B00893453 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		846AAE3F1B4A6295001CC71E /* lft.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lft.lua; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
@@ -765,7 +735,6 @@
 			isa = PBXGroup;
 			children = (
 				84160C461B9591CA008E967E /* delegate */,
-				84661A811B5E0D7B00893453 /* JHSRefreshHeader */,
 				84D996C21B09BDC400B9E01B /* lua */,
 				84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */,
 				84EFEA141B589EEA00C85B29 /* DemoModel.h */,
@@ -813,33 +782,6 @@
 				8405078B1ADF8F7300906BAC /* podinstall.text */,
 			);
 			path = Documentation;
-			sourceTree = "<group>";
-		};
-		84661A811B5E0D7B00893453 /* JHSRefreshHeader */ = {
-			isa = PBXGroup;
-			children = (
-				84661A821B5E0D7B00893453 /* JHSRefreshAutoFooter.h */,
-				84661A831B5E0D7B00893453 /* JHSRefreshAutoFooter.m */,
-				84661A841B5E0D7B00893453 /* JHSRefreshAutoStateFooter.h */,
-				84661A851B5E0D7B00893453 /* JHSRefreshAutoStateFooter.m */,
-				84661A881B5E0D7B00893453 /* JHSRefreshFooter.h */,
-				84661A891B5E0D7B00893453 /* JHSRefreshFooter.m */,
-				84661A861B5E0D7B00893453 /* JHSRefreshComponent.h */,
-				84661A871B5E0D7B00893453 /* JHSRefreshComponent.m */,
-				84661A8A1B5E0D7B00893453 /* JHSRefreshHeader.h */,
-				84661A8B1B5E0D7B00893453 /* JHSRefreshHeader.m */,
-				84661A8C1B5E0D7B00893453 /* JHSRefreshStateHeader.h */,
-				84661A8D1B5E0D7B00893453 /* JHSRefreshStateHeader.m */,
-				84661A8F1B5E0D7B00893453 /* JHSRefreshConst.h */,
-				84661A901B5E0D7B00893453 /* JHSRefreshConst.m */,
-				84661A911B5E0D7B00893453 /* UIScrollView+MJExtension.h */,
-				84661A921B5E0D7B00893453 /* UIScrollView+MJExtension.m */,
-				84661A931B5E0D7B00893453 /* UIScrollView+MJRefresh.h */,
-				84661A941B5E0D7B00893453 /* UIScrollView+MJRefresh.m */,
-				84661A951B5E0D7B00893453 /* UIView+MJExtension.h */,
-				84661A961B5E0D7B00893453 /* UIView+MJExtension.m */,
-			);
-			path = JHSRefreshHeader;
 			sourceTree = "<group>";
 		};
 		848B5C151A0A4CA000F59678 = {
@@ -1447,7 +1389,6 @@
 				840AD6081A63ED7D003E837D /* lViolib.c in Sources */,
 				840AD5EB1A63ED7D003E837D /* lVauxlib.c in Sources */,
 				84B58E3B1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */,
-				84661AA01B5E0D7B00893453 /* UIView+MJExtension.m in Sources */,
 				84470B171B5E66FF00980E31 /* JHSLuaErrorView.m in Sources */,
 				84DDB85E1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */,
 				840AD6031A63ED7D003E837D /* lVgc.c in Sources */,
@@ -1459,8 +1400,6 @@
 				840AD6291A63ED7D003E837D /* lVstrlib.c in Sources */,
 				840AD5FE1A63ED7D003E837D /* lVdump.c in Sources */,
 				846481DA1A64C61F00DE6204 /* LVTimer.m in Sources */,
-				84661A981B5E0D7B00893453 /* JHSRefreshAutoStateFooter.m in Sources */,
-				84661A9E1B5E0D7B00893453 /* UIScrollView+MJExtension.m in Sources */,
 				848CA3651B29748800C70321 /* LVCollectionViewCell.m in Sources */,
 				840AD6161A63ED7D003E837D /* lVobject.c in Sources */,
 				840AD62E1A63ED7D003E837D /* lVtablib.c in Sources */,
@@ -1471,7 +1410,6 @@
 				84DCB2B21B39349A00244C39 /* LVLuaObjBox.m in Sources */,
 				846481DD1A64C61F00DE6204 /* LVTransform3D.m in Sources */,
 				8425324D1ADCBD3A003C05BF /* LVDownloader.m in Sources */,
-				84661A9F1B5E0D7B00893453 /* UIScrollView+MJRefresh.m in Sources */,
 				840AD5E51A63ED7D003E837D /* lV.c in Sources */,
 				840AD62B1A63ED7D003E837D /* lVtable.c in Sources */,
 				840AD6001A63ED7D003E837D /* lVfunc.c in Sources */,
@@ -1484,7 +1422,6 @@
 				8497083D1A6765B000E913F4 /* LVSystem.m in Sources */,
 				843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */,
 				91882E911AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */,
-				84661A9B1B5E0D7B00893453 /* JHSRefreshHeader.m in Sources */,
 				8454D1471A7FA7A400774565 /* LVHttpResponse.m in Sources */,
 				84056E781B5CADE30078F9D6 /* LVNotice.m in Sources */,
 				846481D11A64C61F00DE6204 /* LVPageControl.m in Sources */,
@@ -1497,7 +1434,6 @@
 				840AD5F81A63ED7D003E837D /* lVdebug.c in Sources */,
 				846481C81A64C61F00DE6204 /* LVHeads.m in Sources */,
 				842532481ADCB7C0003C05BF /* LVAudioPlayer.m in Sources */,
-				84661A971B5E0D7B00893453 /* JHSRefreshAutoFooter.m in Sources */,
 				84D446F81AF7631C000A3911 /* LVInputStream.m in Sources */,
 				846E879C1A653DEC000D14DA /* LVDate.m in Sources */,
 				844F9F5B1B96A0AF00E24A24 /* JHSLuaTableView.m in Sources */,
@@ -1525,16 +1461,13 @@
 				84DF1DA71A6F5BC9009F970A /* LVTapGestureRecognizer.m in Sources */,
 				84185DC21B451E28003E0ECE /* LVStruct.m in Sources */,
 				8410D9AC1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */,
-				84661A9D1B5E0D7B00893453 /* JHSRefreshConst.m in Sources */,
 				846481D41A64C61F00DE6204 /* LVScrollView.m in Sources */,
 				8434474B1B61DDED0039B98A /* UIView+LuaView.m in Sources */,
 				84D840A11B5F33D900BC59F3 /* JHSLuaLoadingView.m in Sources */,
 				84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */,
 				8418E3C61A5E804700158125 /* ViewController.m in Sources */,
 				84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */,
-				84661A991B5E0D7B00893453 /* JHSRefreshComponent.m in Sources */,
 				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,
-				84661A9C1B5E0D7B00893453 /* JHSRefreshStateHeader.m in Sources */,
 				918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */,
 				8418E3C31A5E804700158125 /* main.m in Sources */,
 				8418E3C41A5E804700158125 /* SubViewController.m in Sources */,
@@ -1546,7 +1479,6 @@
 				84765E2E1ADE37A7002506CB /* LVFile.m in Sources */,
 				840AD60F1A63ED7D003E837D /* lVmathlib.c in Sources */,
 				846481E01A64C61F00DE6204 /* LVUtil.m in Sources */,
-				84661A9A1B5E0D7B00893453 /* JHSRefreshFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
