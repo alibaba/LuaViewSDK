@@ -82,9 +82,9 @@ typedef struct __MyStruct{
         //[self.lv runFile:@"collectionViewDemo.lua"];// CollectionView 测试
         //[lv runFile:@"testDebug.lua"];// 调试脚本
         //[self.lv runFile:@"animationSnow.lua"];// 下雪动画
-        [self.lv runFile:@"animationLiZi.lua"];// 粒子动画
+        //[self.lv runFile:@"animationLiZi.lua"];// 粒子动画
         //[self.lv runFile:@"animationFire.lua"];// 火焰动画
-        //[self.lv runFile:@"animationFire2.lua"];// 火焰动画3
+        [self.lv runFile:@"animationFire2.lua"];// 火焰动画3
         //[lv runFile:@"testunit.lua"];// 单元测试 脚本
         //[lv runFile:@"shake.lua"];//摇一摇测试脚本
         //[lv runFile:@"downloader.lua"];// 下载测试脚本
@@ -92,7 +92,7 @@ typedef struct __MyStruct{
         //[self.lv runFile:@"testluabox.lua"];// 测试luabox
         //[self.lv runFile:@"flxNodeDemo.lua"];// 测试luabox
 
-//        [self.lv runFile:@"lft.lua"];// 量贩团页面
+        //[self.lv runFile:@"lft.lua"];// 量贩团页面
         
         //self.luabg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
         //[self.lv callLua:@"testCallLua" environment:self.luabg args:@[@"",self,@""]];
