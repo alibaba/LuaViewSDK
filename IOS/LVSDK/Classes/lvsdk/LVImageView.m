@@ -10,8 +10,8 @@
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "LVData.h"
-//#import <TBCDNImage.h>
 #import <Accelerate/Accelerate.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LVImageView ()
 @property (nonatomic,strong) id functionTag;
@@ -37,22 +37,22 @@
 
 
 -(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished{
-//    __weak LVImageView* weakImageView = self;
-//    [self setImageWithURL:url placeholderImage:nil
-//                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
-//                    double duration = (cacheType == SDImageCacheTypeNone && !error)?.4f:.0f;
-//                    if( duration>0 ) {
-//                        weakImageView.alpha = 0;
-//                        [UIView animateWithDuration:duration animations:^{
-//                            weakImageView.alpha = 1.0f;
-//                        }];
-//                    } else {
-//                        weakImageView.alpha = 1.0f;
-//                    }
-//                    if ( finished ){
-//                        finished();
-//                    }
-//                }];
+    __weak LVImageView* weakImageView = self;
+    [self sd_setImageWithURL:url placeholderImage:nil
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL* url){
+                       double duration = (cacheType == SDImageCacheTypeNone && !error)?.4f:.0f;
+                       if( duration>0 ) {
+                           weakImageView.alpha = 0;
+                           [UIView animateWithDuration:duration animations:^{
+                               weakImageView.alpha = 1.0f;
+                           }];
+                       } else {
+                           weakImageView.alpha = 1.0f;
+                       }
+                       if( finished ) {
+                           finished();
+                       }
+                   }];
 }
 
 -(void) callLuaDelegate{

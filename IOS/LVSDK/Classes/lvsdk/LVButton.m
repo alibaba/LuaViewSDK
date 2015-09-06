@@ -12,6 +12,7 @@
 #import "LVUtil.h"
 #import "LView.h"
 #import "LVAttributedString.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface  LVButton()
 @end
@@ -44,8 +45,8 @@
     }
 }
 
--(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished{
-    
+-(void) setWebImageUrl:(NSString *)url forState:(UIControlState)state finished:(LVLoadFinished)finished{
+    [self setWebImageUrl:url forState:state finished:nil];
 }
 
 -(void) setImageUrl:(NSString*) url placeholder:(UIImage *)placeholder state:(UIControlState) state {
