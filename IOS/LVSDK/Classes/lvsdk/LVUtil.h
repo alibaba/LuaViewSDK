@@ -166,11 +166,6 @@ int lv_uicolor2int(UIColor* color,NSUInteger* c ,float* a);
 
 
 /*
- * Get Root UIViewController
- */
-+(UIViewController *)getCurrentRootViewController ;
-
-/*
  * Is External Url
  */
 +(BOOL) isExternalUrl:(NSString*) url;
