@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18640E54E138AB03F9E3A026"
+               BlueprintIdentifier = "A2FAC3C99BDA3B4FAF41913A"
                BuildableName = "libPods-LVSDK-JUFLXLayoutKit.a"
                BlueprintName = "Pods-LVSDK-JUFLXLayoutKit"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDK-OpenSSL.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-LVSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,11 +25,6 @@
 			<false/>
 		</dict>
 		<key>Pods-LVSDKDemo-MJRefresh.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-LVSDKDemo-OpenSSL.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,47 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>18640E54E138AB03F9E3A026</key>
+		<key>0D1B5C300536B629C110A284</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>38156D3AA72DC2ABA4079783</key>
+		<key>3251B574CE3154F3EB6BE4D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44B6274223E0F440CA9D7292</key>
+		<key>4E8792CC39EBD2B3CAC1D3C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>921A66650C5B19F6EB79716A</key>
+		<key>5DFE3EAE3BC79128A5E0D98E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D8D9524493864F26A6F469C</key>
+		<key>904BFFD7614BA3FECF0646C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A01D18D322B87EAC141F2D41</key>
+		<key>A2FAC3C99BDA3B4FAF41913A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1D56617A293C60FBC701929</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C6BFE3A880EC2FA07FF7E324</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F8DE16B210DA08CF395EB282</key>
+		<key>F19275230D7E8F7B80043D7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

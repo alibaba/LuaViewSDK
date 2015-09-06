@@ -79,10 +79,10 @@ typedef struct __MyStruct{
         //[self.lv runFile:@"mtopDemo.lua"];// mtop测试demo
         //[lv runFile:@"attributedFontDemo.lua"];//AttributedString 富文本 测试脚本
         //[self.lv runFile:@"tableViewDemo.lua"];// tableView脚本
-        [self.lv runFile:@"collectionViewDemo.lua"];// CollectionView 测试
+        //[self.lv runFile:@"collectionViewDemo.lua"];// CollectionView 测试
         //[lv runFile:@"testDebug.lua"];// 调试脚本
         //[self.lv runFile:@"animationSnow.lua"];// 下雪动画
-        //[self.lv runFile:@"animationLiZi.lua"];// 粒子动画
+        [self.lv runFile:@"animationLiZi.lua"];// 粒子动画
         //[self.lv runFile:@"animationFire.lua"];// 火焰动画
         //[self.lv runFile:@"animationFire2.lua"];// 火焰动画3
         //[lv runFile:@"testunit.lua"];// 单元测试 脚本

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F8DE16B210DA08CF395EB282"
+               BlueprintIdentifier = "3251B574CE3154F3EB6BE4D2"
                BuildableName = "libPods-LVSDKDemo-MJRefresh.a"
                BlueprintName = "Pods-LVSDKDemo-MJRefresh"
                ReferencedContainer = "container:Pods.xcodeproj">

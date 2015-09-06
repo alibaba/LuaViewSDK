@@ -12,8 +12,6 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import <Security/SecItem.h>
-#import <OpenSSL/bio.h>
-#import <OpenSSL/pem.h>
 #import "LVUtil.h"
 
 @implementation LVRSA

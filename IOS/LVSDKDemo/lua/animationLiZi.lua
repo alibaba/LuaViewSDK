@@ -12,8 +12,8 @@ function snowCreater() {
 
 	snow.times = 0;
 
-	snow.imageView = UIImageView();
-	snow.imageView.cornerRadius(5);
+	snow.imageView = UIView();
+	-- snow.imageView.cornerRadius(5);
 	snow.imageView.clipsToBounds = true;
 	-- snow.imageView.backgroundColor(0xff);
 
