@@ -409,44 +409,44 @@ int lv_uicolor2int(UIColor* color,NSUInteger* c ,float* a){
 }
 
 + (NSString*) MD5HashFromData:(NSData*) data {
-    unsigned char ret[CC_MD5_DIGEST_LENGTH];
-    bzero(ret, sizeof(ret));
-    CC_MD5_CTX md5Context;
-    CC_MD5_Init(&md5Context);
-    size_t bytesHashed = 0;
-    while (bytesHashed < [data length]) {
+    unsigned char bs[CC_MD5_DIGEST_LENGTH];
+    bzero(bs, sizeof(bs));
+    CC_MD5_CTX context;
+    CC_MD5_Init(&context);
+    size_t bytesHashedNum = 0;
+    while (bytesHashedNum < [data length]) {
         CC_LONG updateSize = 1024 * 1024;
-        if (([data length] - bytesHashed) < (size_t)updateSize) {
-            updateSize = (CC_LONG)([data length] - bytesHashed);
+        if (([data length] - bytesHashedNum) < (size_t)updateSize) {
+            updateSize = (CC_LONG)([data length] - bytesHashedNum);
         }
-        CC_MD5_Update(&md5Context, (char *)[data bytes] + bytesHashed, updateSize);
-        bytesHashed += updateSize;
+        CC_MD5_Update(&context, (char *)[data bytes] + bytesHashedNum, updateSize);
+        bytesHashedNum += updateSize;
     }
-    CC_MD5_Final(ret, &md5Context);
+    CC_MD5_Final(bs, &context);
     
     return [NSString stringWithFormat:
             @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-            ret[0], ret[1], ret[2],  ret[3],  ret[4],  ret[5],  ret[6], ret[7],
-            ret[8], ret[9], ret[10], ret[11], ret[12], ret[13], ret[14],ret[15]];
+            bs[0], bs[1], bs[2],  bs[3],  bs[4],  bs[5],  bs[6], bs[7],
+            bs[8], bs[9], bs[10], bs[11], bs[12], bs[13], bs[14],bs[15]];
 }
 
 + (NSData*) MD5HashDataFromData:(NSData*) data {
-    unsigned char ret[CC_MD5_DIGEST_LENGTH];
-    bzero(ret, sizeof(ret));
-    CC_MD5_CTX md5Context;
-    CC_MD5_Init(&md5Context);
-    size_t bytesHashed = 0;
-    while (bytesHashed < [data length]) {
+    unsigned char bs[CC_MD5_DIGEST_LENGTH];
+    bzero(bs, sizeof(bs));
+    CC_MD5_CTX context;
+    CC_MD5_Init(&context);
+    size_t bytesHashedNum = 0;
+    while (bytesHashedNum < [data length]) {
         CC_LONG updateSize = 1024 * 1024;
-        if (([data length] - bytesHashed) < (size_t)updateSize) {
-            updateSize = (CC_LONG)([data length] - bytesHashed);
+        if (([data length] - bytesHashedNum) < (size_t)updateSize) {
+            updateSize = (CC_LONG)([data length] - bytesHashedNum);
         }
-        CC_MD5_Update(&md5Context, (char *)[data bytes] + bytesHashed, updateSize);
-        bytesHashed += updateSize;
+        CC_MD5_Update(&context, (char *)[data bytes] + bytesHashedNum, updateSize);
+        bytesHashedNum += updateSize;
     }
-    CC_MD5_Final(ret, &md5Context);
+    CC_MD5_Final(bs, &context);
     
-    return [[NSData alloc] initWithBytes:ret length:16];
+    return [[NSData alloc] initWithBytes:bs length:16];
 }
 
 BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key){
