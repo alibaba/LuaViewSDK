@@ -60,7 +60,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:identifier.UTF8String key2:"Init" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
@@ -72,7 +72,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:identifier.UTF8String key2:"Layout" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
         }
     }
     lview.conentView = nil;
@@ -178,17 +178,19 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     lv_State* l = self.lv_lview.l;
     if( l ){
-        // 参数 cell,section,row
-        lv_settop(l, 0);
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, indexPath.section);
-        lv_pushnumber(l, indexPath.row);
-        
-        lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
-        [LVUtil call:l key1:"Cell" key2:"Select" nargs:2 nrets:0];
+        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+        if( identifier ) {
+            // 参数 cell,section,row
+            lv_settop(l, 0);
+            lv_checkstack(l, 12);
+            lv_pushnumber(l, indexPath.section);
+            lv_pushnumber(l, indexPath.row);
+            
+            lv_pushUserdata(l, self.lv_userData);
+            lv_pushUDataRef(l, KEY_LUA_INFO);
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Select" nargs:2 nrets:0];
+        }
     }
-//    [self.header endRefreshing];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -68,6 +68,10 @@
 }
 
 +(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
+    return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret];
+}
+
++(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 nargs:(int)nargs nrets:(int)nret{
     if( l ){
         if( lv_type(l, -1)==LV_TNIL ){
             return -1;
@@ -80,6 +84,12 @@
                 lv_pushstring(l, key2);
                 lv_gettable(l, -2);
                 lv_remove(l, -2);
+                
+                if( lv_type(l, -1)==LV_TTABLE && key3){//table
+                    lv_pushstring(l, key3);
+                    lv_gettable(l, -2);
+                    lv_remove(l, -2);
+                }
             }
         }
         if( lv_type(l, -1)==LV_TFUNCTION ){//function

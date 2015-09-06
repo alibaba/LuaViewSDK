@@ -48,32 +48,32 @@ tableView.delegate = {
 		Height = ^( section, row ){
 			return cellHeight;
 		},
-		Select = ^( section, row ){
-			print(section, row);
-			row = row %4;
-			if( row ==0 ) {
-				tableView.headerEndRefreshing();
-			} else if (row ==1 ) {
-				tableView.footerNoticeNoMoreData();
-			} else if ( row == 2 ) {
-				tableView.hiddenRefreshFooter(true);
-			}
-			-- tableView.reloadData();
-			System.gc();
-		}
-	},
-	"图片+文字" = {
-		Init = ^(cell, section, row){
-			cell.icon = UIImageView();
-			cell.title = UILabel();
-			print("构造Cell");
-		},
-		Layout = ^(cell, section, row){
-			cell.icon.setFrame(0, 0, cellHeight, cellHeight);
-			cell.icon.setImage(imageUrl1);
+		"图片+文字" = {
+			Init = ^(cell, section, row){
+				cell.icon = UIImageView();
+				cell.title = UILabel();
+				print("构造Cell");
+			},
+			Layout = ^(cell, section, row){
+				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
+				cell.icon.setImage(imageUrl1);
 
-			cell.title.setFrame(cellHeight, 0, w-cellHeight, cellHeight);
-			cell.title.setText("测试"..section .."--" .. row);
+				cell.title.setFrame(cellHeight, 0, w-cellHeight, cellHeight);
+				cell.title.setText("测试"..section .."--" .. row);
+			},
+			Select = ^( section, row ){
+				print(section, row);
+				row = row %4;
+				if( row ==0 ) {
+					tableView.headerEndRefreshing();
+				} else if (row ==1 ) {
+					tableView.footerNoticeNoMoreData();
+				} else if ( row == 2 ) {
+					tableView.hiddenRefreshFooter(true);
+				}
+				-- tableView.reloadData();
+				System.gc();
+			}
 		}
 	},
     HeaderBeginRefreshing = ^(){
