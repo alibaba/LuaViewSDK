@@ -325,7 +325,9 @@ static int lvNewCollectionView (lv_State *L) {
         haveArgs = YES;
     }
     if( haveArgs ) {
-        identifierArray = lv_luaTableKeys(L, 1);
+        lv_pushstring(L, "Cell");
+        lv_gettable(L, 1);
+        identifierArray = lv_luaTableKeys(L, -1);
     }
     LVCollectionView* tableView = [[g_class alloc] init:L identifierArray:identifierArray];
 
@@ -353,7 +355,9 @@ static int delegate (lv_State *L) {
         if ( lv_gettop(L)>=2 ) {
             NSArray* identifierArray = nil;
             if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TTABLE ) {
-                identifierArray = lv_luaTableKeys(L, 2);
+                lv_pushstring(L, "Cell");
+                lv_gettable(L, 2);
+                identifierArray = lv_luaTableKeys(L, -1);
             }
             lv_settop(L, 2);
             lv_udataRef(L, USERDATA_KEY_DELEGATE);
