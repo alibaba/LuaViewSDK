@@ -10,7 +10,6 @@ end
 
 def sdk_pods
     pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
-    pod 'SDWebImage',   :git => 'https://github.com/rs/SDWebImage.git'
 end
 
 target 'LVSDKDemo' do
