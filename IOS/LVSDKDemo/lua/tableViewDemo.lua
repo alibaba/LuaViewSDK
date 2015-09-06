@@ -45,10 +45,10 @@ tableView.delegate = {
 		Identifier = ^( section, row ){
 			return  "图片+文字";
 		},
-		Height = ^( section, row ){
-			return cellHeight;
-		},
 		"图片+文字" = {
+			Height = ^( section, row ){
+				return cellHeight;
+			},
 			Init = ^(cell, section, row){
 				cell.icon = UIImageView();
 				cell.title = UILabel();

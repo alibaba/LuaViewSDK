@@ -21,11 +21,6 @@
 @interface LVCollectionView ()
 @property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic,strong) NSMutableDictionary* identifierDic;
-
-//@property(nonatomic,weak) id<LVRefreshHeaderProtocol> refreshHeader;
-//@property(nonatomic,weak) id<LVRefreshFooterProtocol> refreshFooter;
-
-
 @end
 
 
@@ -85,7 +80,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:identifier.UTF8String key2:"Init" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
@@ -97,7 +92,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:identifier.UTF8String key2:"Layout" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
         }
     }
     lview.conentView = nil;
@@ -144,8 +139,13 @@
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = [self returnSizeCallByKey1:"Cell" key2:"Size" section:indexPath.section row:indexPath.row];
-    return size;
+    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+    if( identifier ) {
+        CGSize size = [self returnSizeCallByKey1:"Cell" key2:identifier.UTF8String key3:"Size" section:indexPath.section row:indexPath.row];
+        return size;
+    } else {
+        return CGSizeMake(20, 20);
+    }
 }
 //定义每个UICollectionView 的间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -199,7 +199,7 @@
     return nil;
 }
 
-- (CGSize) returnSizeCallByKey1:(const char*) functionName key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row {
+- (CGSize) returnSizeCallByKey1:(const char*) functionName key2:(const char*)key2 key3:(const char*)key3 section:(NSInteger) section row:(NSInteger) row {
     lv_State* l = self.lv_lview.l;
     if( l ){
         // args
@@ -211,7 +211,7 @@
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
         
-        if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:2] ==0 ) {
+        if(  [LVUtil call:l key1:functionName key2:key2 key3:key3 nargs:2 nrets:2] ==0 ) {
             CGSize size = {0};
             size.width = lv_tonumber(l, -2);
             size.height = lv_tonumber(l, -1);
@@ -244,7 +244,7 @@
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (void) callByKey1:(const char*) functionName key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row {
+- (void) callByKey1:(const char*) functionName key2:(const char*)key2 key3:(const char*)key3 section:(NSInteger) section row:(NSInteger) row {
     lv_State* l = self.lv_lview.l;
     if( l ){
         // args
@@ -256,7 +256,7 @@
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
         
-        if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:0]==0 ) {
+        if(  [LVUtil call:l key1:functionName key2:key2 key3:key3 nargs:2 nrets:0]==0 ) {
         }
     }
 }
@@ -264,9 +264,12 @@
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     lv_State* l = self.lv_lview.l;
     if( l ){
-        // 参数 cell,section,row
-        lv_settop(l, 0);
-        [self callByKey1:"Cell" key2:"Select" section:indexPath.section row:indexPath.row];
+        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+        if ( identifier ) {
+            // 参数 cell,section,row
+            lv_settop(l, 0);
+            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"Select" section:indexPath.section row:indexPath.row];
+        }
     }
 }
 
