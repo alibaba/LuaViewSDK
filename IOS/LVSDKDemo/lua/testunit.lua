@@ -482,7 +482,7 @@ function setLabel( i )
 		end
 		label.setFont(64);
 		label.sizeToFit();
-		label.setCenter(w/2,h-60);
+		label.setCenter(w/2,h-120);
 end
 
 setLabel(1);
@@ -491,9 +491,9 @@ gesture = UITapGestureRecognizer(
 	^( g ){
 		print("Test"..index .. " : ");
 		func = demoArray[index];
-		func();
 		index = index + 1;
 		setLabel(index);
+		func();
 	}
 );
 
