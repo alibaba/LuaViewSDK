@@ -499,17 +499,25 @@ extern char g_debug_lua[];
 #pragma mark - registe object.method
 
 -(void) registeObject:(id) object name:(NSString*) name sel:(SEL) sel {
-    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:sel];
+    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:sel weakMode:YES];
+}
+
+-(void) registeObject:(id) object name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode{
+    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:sel weakMode:weakMode];
 }
 
 -(void) registeObject:(id) object name:(NSString*) name{
-    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:nil];
+    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:nil weakMode:YES];
+}
+
+-(void) registeObject:(id) object name:(NSString*) name weakMode:(BOOL)weakMode{
+    [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:nil weakMode:weakMode];
 }
 
 
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key{
     if ( [key isKindOfClass:[NSString class]] ){
-        [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:(NSString*)key sel:nil];
+        [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:(NSString*)key sel:nil weakMode:YES];
     }
 }
 

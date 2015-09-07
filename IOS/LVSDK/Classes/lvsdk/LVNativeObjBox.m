@@ -25,6 +25,25 @@
     return self;
 }
 
+- (void) setWeakMode:(BOOL)weakMode{
+    _weakMode = weakMode;
+    if( weakMode ) {
+        if( self.realObject ) {
+            self.realObjectWeak = self.realObject;
+        }
+        self.realObject = nil;
+    } else {
+        if( self.realObjectWeak ) {
+            self.realObject = self.realObjectWeak;
+        }
+        self.realObjectWeak = nil;
+    }
+}
+
+- (id) realObject{
+    return _realObject ? _realObject : _realObjectWeak;
+}
+
 -(void) addMethod:(LVMethod*) method {
     [self.methods setObject:method forKey:method.selectName];
 }
@@ -65,7 +84,7 @@ static int __gc (lv_State *L) {
     return 0;
 }
 
-+(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) name sel:(SEL) sel {
++(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode {
     if( L && nativeObject && name ) {
         lv_checkstack(L, 64);
         lv_getglobal(L, name.UTF8String);
@@ -90,6 +109,7 @@ static int __gc (lv_State *L) {
         } else {
             nativeObjBox.openAllMethod = YES;
         }
+        nativeObjBox.weakMode = weakMode;
         
         NEW_USERDATA(userData, LVUserDataNativeObject);
         userData->realObjBox = CFBridgingRetain(nativeObjBox);

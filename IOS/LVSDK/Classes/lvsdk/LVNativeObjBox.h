@@ -24,7 +24,9 @@ typedef struct _LVUserDataNativeObject {
 @property(nonatomic,weak) LView* lview;
 @property(nonatomic,assign) LVUserDataNativeObject* userData;
 
+@property(nonatomic,assign) BOOL weakMode;
 @property(nonatomic,strong) id realObject;
+@property(nonatomic,weak)   id realObjectWeak;
 @property(nonatomic,assign) BOOL openAllMethod;
 
 
@@ -39,7 +41,7 @@ typedef struct _LVUserDataNativeObject {
 /*
  * 注册native对象到脚本中, sel可以为空(如果为空注册所有api)
  */
-+(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) luaName sel:(SEL) sel ;
++(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) luaName sel:(SEL) sel weakMode:(BOOL) weakMode;
 
 /*
  * 清除脚本中注册的native对象
