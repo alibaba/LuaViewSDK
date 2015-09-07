@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8418E33F1A5E67FC00158125"
-               BuildableName = "libLVSDK.a"
-               BlueprintName = "LVSDK"
-               ReferencedContainer = "container:LVSDK.xcodeproj">
+               BlueprintIdentifier = "848B5C1D1A0A4CA000F59678"
+               BuildableName = "LuaViewSDK.app"
+               BlueprintName = "Demo"
+               ReferencedContainer = "container:LuaViewSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "848B5C1D1A0A4CA000F59678"
+            BuildableName = "LuaViewSDK.app"
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:LuaViewSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,15 +48,16 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8418E33F1A5E67FC00158125"
-            BuildableName = "libLVSDK.a"
-            BlueprintName = "LVSDK"
-            ReferencedContainer = "container:LVSDK.xcodeproj">
+            BlueprintIdentifier = "848B5C1D1A0A4CA000F59678"
+            BuildableName = "LuaViewSDK.app"
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -55,17 +65,18 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8418E33F1A5E67FC00158125"
-            BuildableName = "libLVSDK.a"
-            BlueprintName = "LVSDK"
-            ReferencedContainer = "container:LVSDK.xcodeproj">
+            BlueprintIdentifier = "848B5C1D1A0A4CA000F59678"
+            BuildableName = "LuaViewSDK.app"
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

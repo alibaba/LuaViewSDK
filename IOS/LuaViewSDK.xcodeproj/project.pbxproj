@@ -123,7 +123,7 @@
 		84185DC31B451E28003E0ECE /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
 		8418E3AB1A5E704100158125 /* LVSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A71A5E704100158125 /* LVSDK.h */; };
 		8418E3AC1A5E704100158125 /* LVSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LVSDK.m */; };
-		8418E3AD1A5E704100158125 /* LVSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A91A5E704100158125 /* LVSDK-Prefix.pch */; };
+		8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */; };
 		8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
 		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
 		8418E3C31A5E804700158125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
@@ -211,6 +211,7 @@
 		84765E2D1ADE37A7002506CB /* LVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84765E2B1ADE37A7002506CB /* LVFile.h */; };
 		84765E2E1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		84765E2F1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
+		8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */; };
 		848523441B8EE97D00E5BA71 /* stringDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 848523431B8EE97D00E5BA71 /* stringDemo.lua */; };
 		848C5BE91B6B203C003F2D38 /* animationFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 848C5BE81B6B203C003F2D38 /* animationFire2.lua */; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
@@ -228,8 +229,6 @@
 		8497083D1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
 		8497083E1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
 		849D319E1B3A876E00F08CAB /* testluabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849D319D1B3A876E00F08CAB /* testluabox.lua */; };
-		84A63D721B958BE70048CBD3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6D1B958B9F0048CBD3 /* libz.dylib */; };
-		84A63D731B958BF30048CBD3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6D1B958B9F0048CBD3 /* libz.dylib */; };
 		84B1E3811AEF24480054B9F1 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; };
 		84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3831AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
@@ -411,10 +410,10 @@
 		8410D9AF1A70A51C00B22E49 /* LVGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVGestureRecognizer.m; sourceTree = "<group>"; };
 		84185DBF1B451E28003E0ECE /* LVStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVStruct.h; sourceTree = "<group>"; };
 		84185DC01B451E28003E0ECE /* LVStruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStruct.m; sourceTree = "<group>"; };
-		8418E3401A5E67FC00158125 /* libLVSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLVSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8418E3401A5E67FC00158125 /* libLuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8418E3A71A5E704100158125 /* LVSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSDK.h; sourceTree = "<group>"; };
 		8418E3A81A5E704100158125 /* LVSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSDK.m; sourceTree = "<group>"; };
-		8418E3A91A5E704100158125 /* LVSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LVSDK-Prefix.pch"; sourceTree = "<group>"; };
+		8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
 		8418E3AA1A5E704100158125 /* LVSDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = LVSDK.xcconfig; sourceTree = "<group>"; };
 		8418E3B01A5E804700158125 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8418E3B11A5E804700158125 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -491,7 +490,7 @@
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
 		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
 		848523431B8EE97D00E5BA71 /* stringDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringDemo.lua; sourceTree = "<group>"; };
-		848B5C1E1A0A4CA000F59678 /* LVSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LVSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C5BE81B6B203C003F2D38 /* animationFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = animationFire2.lua; path = lua/animationFire2.lua; sourceTree = "<group>"; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
@@ -592,7 +591,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A63D731B958BF30048CBD3 /* libz.dylib in Frameworks */,
 				819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,7 +599,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A63D721B958BE70048CBD3 /* libz.dylib in Frameworks */,
+				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
 				47168501E4B4D89573316ABF /* libPods-LVSDKDemo.a in Frameworks */,
@@ -694,13 +692,13 @@
 			name = delegate;
 			sourceTree = "<group>";
 		};
-		8418E3411A5E67FC00158125 /* LVSDK */ = {
+		8418E3411A5E67FC00158125 /* LuaViewSDK */ = {
 			isa = PBXGroup;
 			children = (
 				8418E3A61A5E704100158125 /* Classes */,
 				8418E3AE1A5E704600158125 /* Supporting Files */,
 			);
-			path = LVSDK;
+			path = LuaViewSDK;
 			sourceTree = "<group>";
 		};
 		8418E3A61A5E704100158125 /* Classes */ = {
@@ -724,13 +722,13 @@
 		8418E3AE1A5E704600158125 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8418E3A91A5E704100158125 /* LVSDK-Prefix.pch */,
+				8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */,
 				8418E3AA1A5E704100158125 /* LVSDK.xcconfig */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8418E3AF1A5E804700158125 /* LVSDKDemo */ = {
+		8418E3AF1A5E804700158125 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				84160C461B9591CA008E967E /* delegate */,
@@ -746,7 +744,7 @@
 				8418E3BC1A5E804700158125 /* ViewController.h */,
 				8418E3BD1A5E804700158125 /* ViewController.m */,
 			);
-			path = LVSDKDemo;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		846481A51A64C61F00DE6204 /* lvsdk */ = {
@@ -782,8 +780,8 @@
 			isa = PBXGroup;
 			children = (
 				842ECCD41B71A3900034C3A2 /* TAGS_NOTES.md */,
-				8418E3AF1A5E804700158125 /* LVSDKDemo */,
-				8418E3411A5E67FC00158125 /* LVSDK */,
+				8418E3AF1A5E804700158125 /* Demo */,
+				8418E3411A5E67FC00158125 /* LuaViewSDK */,
 				848B5C1F1A0A4CA000F59678 /* Products */,
 				CACC8D0F2D9A900CA53CA849 /* Pods */,
 				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
@@ -794,8 +792,8 @@
 		848B5C1F1A0A4CA000F59678 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				848B5C1E1A0A4CA000F59678 /* LVSDK.app */,
-				8418E3401A5E67FC00158125 /* libLVSDK.a */,
+				848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */,
+				8418E3401A5E67FC00158125 /* libLuaViewSDK.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1071,7 +1069,7 @@
 				840AD5FD1A63ED7D003E837D /* lVdo.h in Headers */,
 				8454D1411A7F732500774565 /* LVHttp.h in Headers */,
 				840AD5E71A63ED7D003E837D /* lV.h in Headers */,
-				8418E3AD1A5E704100158125 /* LVSDK-Prefix.pch in Headers */,
+				8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */,
 				846481C71A64C61F00DE6204 /* LVHeads.h in Headers */,
 				8418E3AB1A5E704100158125 /* LVSDK.h in Headers */,
 				84E446981AEE0655009C9A8A /* LVBlock.h in Headers */,
@@ -1143,9 +1141,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8418E33F1A5E67FC00158125 /* LVSDK */ = {
+		8418E33F1A5E67FC00158125 /* LuaViewSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LVSDK" */;
+			buildConfigurationList = 8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */;
 			buildPhases = (
 				8418E33C1A5E67FC00158125 /* Sources */,
 				8418E33D1A5E67FC00158125 /* Frameworks */,
@@ -1156,14 +1154,14 @@
 			);
 			dependencies = (
 			);
-			name = LVSDK;
+			name = LuaViewSDK;
 			productName = LVSDK;
-			productReference = 8418E3401A5E67FC00158125 /* libLVSDK.a */;
+			productReference = 8418E3401A5E67FC00158125 /* libLuaViewSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		848B5C1D1A0A4CA000F59678 /* LVSDKDemo */ = {
+		848B5C1D1A0A4CA000F59678 /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "LVSDKDemo" */;
+			buildConfigurationList = 848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				848B5C1A1A0A4CA000F59678 /* Sources */,
 				848B5C1B1A0A4CA000F59678 /* Frameworks */,
@@ -1173,9 +1171,9 @@
 			);
 			dependencies = (
 			);
-			name = LVSDKDemo;
+			name = Demo;
 			productName = lua5.1.4;
-			productReference = 848B5C1E1A0A4CA000F59678 /* LVSDK.app */;
+			productReference = 848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1196,7 +1194,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LVSDK" */;
+			buildConfigurationList = 848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1209,8 +1207,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				848B5C1D1A0A4CA000F59678 /* LVSDKDemo */,
-				8418E33F1A5E67FC00158125 /* LVSDK */,
+				848B5C1D1A0A4CA000F59678 /* Demo */,
+				8418E33F1A5E67FC00158125 /* LuaViewSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -1495,7 +1493,7 @@
 			baseConfigurationReference = 54B6EDD5D78058D3F68F371A /* Pods-LVSDK.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LVSDK/LVSDK-Prefix.pch";
+				GCC_PREFIX_HEADER = "LuaViewSDK/LuaViewSDK-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1503,7 +1501,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LuaViewSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
@@ -1514,10 +1512,10 @@
 			baseConfigurationReference = DDB7491AED7D3B6086D18263 /* Pods-LVSDK.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LVSDK/LVSDK-Prefix.pch";
+				GCC_PREFIX_HEADER = "LuaViewSDK/LuaViewSDK-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LuaViewSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
@@ -1620,11 +1618,11 @@
 					LV_USE_APICHECK,
 					"lv_assert=assert",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/LVSDKDemo/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = LVSDK;
+				PRODUCT_NAME = LuaViewSDK;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1638,11 +1636,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/LVSDKDemo/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = LVSDK;
+				PRODUCT_NAME = LuaViewSDK;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -1650,7 +1648,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LVSDK" */ = {
+		8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8418E3521A5E67FC00158125 /* Debug */,
@@ -1659,7 +1657,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LVSDK" */ = {
+		848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				848B5C3F1A0A4CA000F59678 /* Debug */,
@@ -1668,7 +1666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "LVSDKDemo" */ = {
+		848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				848B5C421A0A4CA000F59678 /* Debug */,

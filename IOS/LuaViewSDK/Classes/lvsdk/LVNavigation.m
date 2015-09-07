@@ -93,7 +93,7 @@ static int setBackground(lv_State*L ) {
                 UIImageView* imgView = obj;
                 [navBar setBackgroundImage:imgView.image forBarMetrics:UIBarMetricsDefault];
             }
-            [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+            [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
         }
     }
     return 0;
