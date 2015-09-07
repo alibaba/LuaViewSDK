@@ -7,8 +7,8 @@ window.setUserInteractionEnabled(true);
 window.setBackgroundColor(0xffffff,1);
 
 imageUrl = "https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/img/logo_white_ee663702.png"
-print("ImageCache.exist: ", ImageCache:exist(imageUrl) )
-ImageCache:download(imageUrl)
+
+
 Download( imageUrl,"baidu.png",^(data){
 		print( data );
 		--数据流写到文件中
@@ -49,8 +49,4 @@ button.delegate = ^(){
 	end
 }
 
-
-MiscData:get("UI","Switch",^(value){
-print(value);
-});
 
