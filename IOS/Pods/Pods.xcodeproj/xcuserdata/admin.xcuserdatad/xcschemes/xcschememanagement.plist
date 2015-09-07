@@ -9,32 +9,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDK-JUFLXLayoutKit.xcscheme</key>
+		<key>Pods-Demo-JUFLXLayoutKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDK.xcscheme</key>
+		<key>Pods-Demo-MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDKDemo-JUFLXLayoutKit.xcscheme</key>
+		<key>Pods-Demo-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDKDemo-MJRefresh.xcscheme</key>
+		<key>Pods-Demo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDKDemo-SDWebImage.xcscheme</key>
+		<key>Pods-LuaViewSDK-JUFLXLayoutKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LVSDKDemo.xcscheme</key>
+		<key>Pods-LuaViewSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D1B5C300536B629C110A284</key>
+		<key>01A2ADE0049C856C345B5338</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3251B574CE3154F3EB6BE4D2</key>
+		<key>06C40BD0589F950EA58F99B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E8792CC39EBD2B3CAC1D3C4</key>
+		<key>11EBBF980B2C7D7C9F1CC488</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5DFE3EAE3BC79128A5E0D98E</key>
+		<key>312644C4CD6A6B6BDB5D2B90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>904BFFD7614BA3FECF0646C4</key>
+		<key>75B36A2680D3AD23F307A325</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A2FAC3C99BDA3B4FAF41913A</key>
+		<key>BB7A435410A6E0DAA91F307B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F19275230D7E8F7B80043D7F</key>
+		<key>E3BFF07509AA8F2F54D1CAB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

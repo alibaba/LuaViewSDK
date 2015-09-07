@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK.xcodeproj">
+      location = "group:LuaViewSDK.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "75B36A2680D3AD23F307A325"
-               BuildableName = "JUFLXLayoutKit.bundle"
-               BlueprintName = "JUFLXLayoutKit"
+               BlueprintIdentifier = "312644C4CD6A6B6BDB5D2B90"
+               BuildableName = "libPods-Demo-MJRefresh.a"
+               BlueprintName = "Pods-Demo-MJRefresh"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

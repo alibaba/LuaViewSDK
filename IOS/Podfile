@@ -12,12 +12,12 @@ def sdk_pods
     pod 'JUFLXLayoutKit',   :git => 'git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git'
 end
 
-target 'LVSDKDemo' do
+target 'Demo' do
     platform :ios, '6.0'
     demo_pods
 end
 
-target 'LVSDK' do
+target 'LuaViewSDK' do
     platform :ios, '6.0'
     sdk_pods
 end

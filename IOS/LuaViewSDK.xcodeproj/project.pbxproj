@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47168501E4B4D89573316ABF /* libPods-LVSDKDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */; };
+		80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
 		819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */; };
 		84056E6D1B5C8DF10078F9D6 /* LVLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E6B1B5C8DF10078F9D6 /* LVLoadingView.h */; };
 		84056E6E1B5C8DF10078F9D6 /* LVLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E6C1B5C8DF10078F9D6 /* LVLoadingView.m */; };
@@ -321,6 +322,7 @@
 		91ACCE781AC531160034D9B3 /* LVDebugCmd.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebugCmd.m */; };
 		91ACCE791AC531160034D9B3 /* LVDebugCmd.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebugCmd.m */; };
 		BEDFCC851B82DA2200AE8EC8 /* flxNodeDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */; };
+		E961449DAA11DF4DDE3E3C59 /* libPods-LuaViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -337,8 +339,8 @@
 
 /* Begin PBXFileReference section */
 		1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		54B6EDD5D78058D3F68F371A /* Pods-LVSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LVSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LVSDK/Pods-LVSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		778CF8AEA1F4013D47A3BD6E /* Pods-LVSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LVSDKDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LVSDKDemo/Pods-LVSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E6B1B5C8DF10078F9D6 /* LVLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLoadingView.h; sourceTree = "<group>"; };
 		84056E6C1B5C8DF10078F9D6 /* LVLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingView.m; sourceTree = "<group>"; };
@@ -582,8 +584,10 @@
 		91ACCE761AC531160034D9B3 /* LVDebugCmd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugCmd.m; path = lvdebug/LVDebugCmd.m; sourceTree = "<group>"; };
 		A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flxNodeDemo.lua; sourceTree = "<group>"; };
-		D9C20F8DECF49DDF8020BE9D /* Pods-LVSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LVSDKDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LVSDKDemo/Pods-LVSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		DDB7491AED7D3B6086D18263 /* Pods-LVSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LVSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-LVSDK/Pods-LVSDK.release.xcconfig"; sourceTree = "<group>"; };
+		C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuaViewSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1D7913A587AD4124F9407CC /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		DDB7491AED7D3B6086D18263 /* Pods-LuaViewSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -592,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */,
+				E961449DAA11DF4DDE3E3C59 /* libPods-LuaViewSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +608,7 @@
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
 				47168501E4B4D89573316ABF /* libPods-LVSDKDemo.a in Frameworks */,
+				80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,6 +1027,8 @@
 				84232D421AE4F4E300C9ED93 /* iAd.framework */,
 				1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */,
 				A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */,
+				D1D7913A587AD4124F9407CC /* libPods-Demo.a */,
+				C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1039,10 +1047,10 @@
 		CACC8D0F2D9A900CA53CA849 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D9C20F8DECF49DDF8020BE9D /* Pods-LVSDKDemo.debug.xcconfig */,
-				778CF8AEA1F4013D47A3BD6E /* Pods-LVSDKDemo.release.xcconfig */,
-				54B6EDD5D78058D3F68F371A /* Pods-LVSDK.debug.xcconfig */,
-				DDB7491AED7D3B6086D18263 /* Pods-LVSDK.release.xcconfig */,
+				D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */,
+				778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */,
+				54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */,
+				DDB7491AED7D3B6086D18263 /* Pods-LuaViewSDK.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1145,10 +1153,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */;
 			buildPhases = (
+				2486D7F982CC2283902F5259 /* Check Pods Manifest.lock */,
 				8418E33C1A5E67FC00158125 /* Sources */,
 				8418E33D1A5E67FC00158125 /* Frameworks */,
 				8418E33E1A5E67FC00158125 /* CopyFiles */,
 				8418E3A01A5E6AA700158125 /* Headers */,
+				C2FB1865BC90F3DF7F6ADC2F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1163,9 +1173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
+				B2580C5FCEEB8B0B0970BD23 /* Check Pods Manifest.lock */,
 				848B5C1A1A0A4CA000F59678 /* Sources */,
 				848B5C1B1A0A4CA000F59678 /* Frameworks */,
 				848B5C1C1A0A4CA000F59678 /* Resources */,
+				69CC6A6DF47C8503DB94DAE1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1260,6 +1272,69 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2486D7F982CC2283902F5259 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		69CC6A6DF47C8503DB94DAE1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2580C5FCEEB8B0B0970BD23 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C2FB1865BC90F3DF7F6ADC2F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8418E33C1A5E67FC00158125 /* Sources */ = {
@@ -1490,7 +1565,7 @@
 /* Begin XCBuildConfiguration section */
 		8418E3521A5E67FC00158125 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54B6EDD5D78058D3F68F371A /* Pods-LVSDK.debug.xcconfig */;
+			baseConfigurationReference = 54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LuaViewSDK/LuaViewSDK-Prefix.pch";
@@ -1509,7 +1584,7 @@
 		};
 		8418E3531A5E67FC00158125 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDB7491AED7D3B6086D18263 /* Pods-LVSDK.release.xcconfig */;
+			baseConfigurationReference = DDB7491AED7D3B6086D18263 /* Pods-LuaViewSDK.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LuaViewSDK/LuaViewSDK-Prefix.pch";
@@ -1603,7 +1678,7 @@
 		};
 		848B5C421A0A4CA000F59678 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9C20F8DECF49DDF8020BE9D /* Pods-LVSDKDemo.debug.xcconfig */;
+			baseConfigurationReference = D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1629,7 +1704,7 @@
 		};
 		848B5C431A0A4CA000F59678 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 778CF8AEA1F4013D47A3BD6E /* Pods-LVSDKDemo.release.xcconfig */;
+			baseConfigurationReference = 778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
