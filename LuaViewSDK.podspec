@@ -1,12 +1,12 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "LVSDK"
+  s.name         = "LuaViewSDK"
   s.version      = "1.2.0"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
-                   A longer description of LVSDK.podspec in Markdown format.
+                   A longer description of LuaViewSDK.podspec in Markdown format.
                    * LuaView
                    DESC
 
@@ -27,10 +27,10 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git", :tag => "1.1.2" }
 
-  s.source_files  = "LVSDK/Classes", "IOS/LVSDK/Classes/**/*.{h,m,c}"
+  s.source_files  = "LuaViewSDK/Classes", "IOS/LuaViewSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
 
-  #s.public_header_files = "LVSDK/Classes/**/*.h"
+  #s.public_header_files = "LuaViewSDK/Classes/**/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

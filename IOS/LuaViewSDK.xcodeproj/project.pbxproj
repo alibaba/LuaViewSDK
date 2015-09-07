@@ -22,7 +22,7 @@
 		840AD5841A5EAB4A0075CB58 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; };
 		840AD5851A5EAB4A0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		840AD5C91A5EB78D0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
-		840AD5CB1A5EB78D0075CB58 /* LVSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LVSDK.m */; };
+		840AD5CB1A5EB78D0075CB58 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LuaViewSDK.m */; };
 		840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B41A5E804700158125 /* Main.storyboard */; };
 		840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B21A5E804700158125 /* LaunchScreen.xib */; };
 		840AD5E51A63ED7D003E837D /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
@@ -122,8 +122,8 @@
 		84185DC11B451E28003E0ECE /* LVStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 84185DBF1B451E28003E0ECE /* LVStruct.h */; };
 		84185DC21B451E28003E0ECE /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
 		84185DC31B451E28003E0ECE /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
-		8418E3AB1A5E704100158125 /* LVSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A71A5E704100158125 /* LVSDK.h */; };
-		8418E3AC1A5E704100158125 /* LVSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LVSDK.m */; };
+		8418E3AB1A5E704100158125 /* LuaViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A71A5E704100158125 /* LuaViewSDK.h */; };
+		8418E3AC1A5E704100158125 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LuaViewSDK.m */; };
 		8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */; };
 		8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
 		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
@@ -413,8 +413,8 @@
 		84185DBF1B451E28003E0ECE /* LVStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVStruct.h; sourceTree = "<group>"; };
 		84185DC01B451E28003E0ECE /* LVStruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStruct.m; sourceTree = "<group>"; };
 		8418E3401A5E67FC00158125 /* libLuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8418E3A71A5E704100158125 /* LVSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSDK.h; sourceTree = "<group>"; };
-		8418E3A81A5E704100158125 /* LVSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSDK.m; sourceTree = "<group>"; };
+		8418E3A71A5E704100158125 /* LuaViewSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaViewSDK.h; sourceTree = "<group>"; };
+		8418E3A81A5E704100158125 /* LuaViewSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaViewSDK.m; sourceTree = "<group>"; };
 		8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
 		8418E3AA1A5E704100158125 /* LVSDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = LVSDK.xcconfig; sourceTree = "<group>"; };
 		8418E3B01A5E804700158125 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -717,8 +717,8 @@
 				840AD5AD1A63ED7C003E837D /* lv514 */,
 				840AD5311A5EAB4A0075CB58 /* LView.h */,
 				840AD5321A5EAB4A0075CB58 /* LView.m */,
-				8418E3A71A5E704100158125 /* LVSDK.h */,
-				8418E3A81A5E704100158125 /* LVSDK.m */,
+				8418E3A71A5E704100158125 /* LuaViewSDK.h */,
+				8418E3A81A5E704100158125 /* LuaViewSDK.m */,
 				84E446961AEE0655009C9A8A /* LVBlock.h */,
 				84E446971AEE0655009C9A8A /* LVBlock.m */,
 			);
@@ -1079,7 +1079,7 @@
 				840AD5E71A63ED7D003E837D /* lV.h in Headers */,
 				8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */,
 				846481C71A64C61F00DE6204 /* LVHeads.h in Headers */,
-				8418E3AB1A5E704100158125 /* LVSDK.h in Headers */,
+				8418E3AB1A5E704100158125 /* LuaViewSDK.h in Headers */,
 				84E446981AEE0655009C9A8A /* LVBlock.h in Headers */,
 				840AD6321A63ED7D003E837D /* lVtm.h in Headers */,
 				918B9F1D1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.h in Headers */,
@@ -1383,7 +1383,7 @@
 				84185DC31B451E28003E0ECE /* LVStruct.m in Sources */,
 				842142A41ACD3427001FD0ED /* DebugLuaFile.m in Sources */,
 				846481D51A64C61F00DE6204 /* LVScrollView.m in Sources */,
-				8418E3AC1A5E704100158125 /* LVSDK.m in Sources */,
+				8418E3AC1A5E704100158125 /* LuaViewSDK.m in Sources */,
 				840AD61D1A63ED7D003E837D /* lVoslib.c in Sources */,
 				91882E8D1AAD45A400107DFC /* LVPinchGestureRecognizer.m in Sources */,
 				8410D9B21A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */,
@@ -1516,7 +1516,7 @@
 				840AD6391A63ED7D003E837D /* lVzio.c in Sources */,
 				84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */,
 				840AD5C91A5EB78D0075CB58 /* LView.m in Sources */,
-				840AD5CB1A5EB78D0075CB58 /* LVSDK.m in Sources */,
+				840AD5CB1A5EB78D0075CB58 /* LuaViewSDK.m in Sources */,
 				84DD8F8A1B560933001C83E9 /* LVNavigation.m in Sources */,
 				84DF1DA71A6F5BC9009F970A /* LVTapGestureRecognizer.m in Sources */,
 				84185DC21B451E28003E0ECE /* LVStruct.m in Sources */,

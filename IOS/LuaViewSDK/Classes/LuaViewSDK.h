@@ -12,6 +12,6 @@
 #import "LView.h"
 #import "LVBlock.h"
 
-@interface LVSDK : NSObject
+@interface LuaViewSDK : NSObject
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVSDK.h"
+#import "LuaViewSDK.h"
 
-@implementation LVSDK
+@implementation LuaViewSDK
 
 @end
