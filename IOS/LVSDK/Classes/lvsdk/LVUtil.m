@@ -475,8 +475,8 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
         case LV_TUSERDATA: {
             LVUserDataNativeObject* user =  (LVUserDataNativeObject*)lv_touserdata(L, idx);
             if ( LVIsType(user, LVUserDataNativeObject) ) {
-                LVNativeObjBox* objBox = (__bridge LVNativeObjBox *)(user->nativeObjBox);
-                return objBox.nativeObject;
+                LVNativeObjBox* objBox = (__bridge LVNativeObjBox *)(user->realObjBox);
+                return objBox.realObject;
             } else if ( LVIsType(user, LVUserDataView) ) {
                 LVUserDataView* viewBox = (LVUserDataView*)user;
                 UIView* view = (__bridge UIView *)(viewBox->view);
@@ -566,7 +566,7 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
     nativeObjBox.openAllMethod = YES;// 所有api都开放
     
     NEW_USERDATA(userData, LVUserDataNativeObject);
-    userData->nativeObjBox = CFBridgingRetain(nativeObjBox);
+    userData->realObjBox = CFBridgingRetain(nativeObjBox);
     nativeObjBox.userData = userData;
     lvL_getmetatable(L, META_TABLE_NativeObject );
     lv_setmetatable(L, -2);

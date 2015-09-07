@@ -14,7 +14,7 @@
 
 typedef struct _LVUserDataNativeObject {
     LVUserDataCommonHead;
-    const void* nativeObjBox;
+    const void* realObjBox;
 } LVUserDataNativeObject;
 
 
@@ -24,7 +24,7 @@ typedef struct _LVUserDataNativeObject {
 @property(nonatomic,weak) LView* lview;
 @property(nonatomic,assign) LVUserDataNativeObject* userData;
 
-@property(nonatomic,strong) id nativeObject;
+@property(nonatomic,strong) id realObject;
 @property(nonatomic,assign) BOOL openAllMethod;
 
 

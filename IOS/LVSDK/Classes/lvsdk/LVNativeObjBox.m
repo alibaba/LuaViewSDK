@@ -19,7 +19,7 @@
     self = [super init];
     if( self ){
         self.lview = (__bridge LView *)(l->lView);
-        self.nativeObject = nativeObject;
+        self.realObject = nativeObject;
         self.methods = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -37,7 +37,7 @@
         } else if( self.openAllMethod ) {
             //动态创建API
             SEL sel = NSSelectorFromString(methodName);
-            LVMethod* method = [[LVMethod alloc] initWithNativeObject:self.nativeObject sel:sel];
+            LVMethod* method = [[LVMethod alloc] initWithNativeObject:self.realObject sel:sel];
             self.methods[methodName] = method;
             return [method performMethodWithArgs:L];
         } else {
@@ -48,13 +48,13 @@
 }
 
 static void releaseNativeObject(LVUserDataNativeObject* user){
-    if( user && user->nativeObjBox ){
-        LVNativeObjBox* data = CFBridgingRelease(user->nativeObjBox);
-        user->nativeObjBox = NULL;
+    if( user && user->realObjBox ){
+        LVNativeObjBox* data = CFBridgingRelease(user->realObjBox);
+        user->realObjBox = NULL;
         if( data ){
             data.userData = nil;
             data.lview = nil;
-            data.nativeObject = nil;
+            data.realObject = nil;
         }
     }
 }
@@ -74,8 +74,8 @@ static int __gc (lv_State *L) {
         if( lv_type(L, -1)==LV_TUSERDATA ) {
             LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, -1);
             if( LVIsType(user, LVUserDataNativeObject) ){
-                LVNativeObjBox* temp = (__bridge LVNativeObjBox *)(user->nativeObjBox);
-                if( temp.nativeObject==nativeObject ){
+                LVNativeObjBox* temp = (__bridge LVNativeObjBox *)(user->realObjBox);
+                if( temp.realObject==nativeObject ){
                     nativeObjBox = temp;
                 }
             }
@@ -92,7 +92,7 @@ static int __gc (lv_State *L) {
         }
         
         NEW_USERDATA(userData, LVUserDataNativeObject);
-        userData->nativeObjBox = CFBridgingRetain(nativeObjBox);
+        userData->realObjBox = CFBridgingRetain(nativeObjBox);
         nativeObjBox.userData = userData;
         lvL_getmetatable(L, META_TABLE_NativeObject );
         lv_setmetatable(L, -2);
@@ -116,8 +116,8 @@ static int __gc (lv_State *L) {
 static int __tostring (lv_State *L) {
     LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, 1);
     if( user ){
-        LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->nativeObjBox);
-        NSString* s = [[NSString alloc] initWithFormat:@"{ UserDataType=NativeObject, %@ }",nativeObjBox.nativeObject];
+        LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->realObjBox);
+        NSString* s = [[NSString alloc] initWithFormat:@"{ UserDataType=NativeObject, %@ }",nativeObjBox.realObject];
         lv_pushstring(L, s.UTF8String);
         return 1;
     }
@@ -140,7 +140,7 @@ static void ifNotEnoughArgmentTagAppendIt(NSMutableString* funcName, int luaArgs
 static int callNativeObjectFunction (lv_State *L) {
     LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, lv_upvalueindex(1));
     if ( user ) {
-        LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->nativeObjBox);
+        LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->realObjBox);
         NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
         int luaArgsNum = lv_gettop(L);
 
@@ -159,8 +159,8 @@ static int __index (lv_State *L) {
     LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, 1);
     NSString* functionName = lv_paramString(L, 2);
     
-    LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->nativeObjBox);
-    id object = nativeObjBox.nativeObject;
+    LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->realObjBox);
+    id object = nativeObjBox.realObject;
     if( nativeObjBox && object && functionName ){
         lv_pushcclosure(L, callNativeObjectFunction, 2);
         return 1;

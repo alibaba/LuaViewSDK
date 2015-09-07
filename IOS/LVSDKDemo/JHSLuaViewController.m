@@ -26,6 +26,10 @@
 
 @implementation JHSLuaViewController
 
+- (void) dealloc{
+    [self.lv releaseLuaView];
+}
+
 - (id)initWithSource:(NSString*) source{
     self = [super init];
     if (self) {
