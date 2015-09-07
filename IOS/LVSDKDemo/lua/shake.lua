@@ -16,3 +16,7 @@ window.delegate =   {
 		print("window.shakeEnded");
 	}
 };
+
+label  = UILabel();
+label.text  = "  摇一摇变色  ";
+label.setFrame(0,0,320,60);
