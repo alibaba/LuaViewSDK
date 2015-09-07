@@ -14,6 +14,7 @@
 #import "LVNativeObjBox.h"
 #import "LVBlock.h"
 #import "LVPkgManager.h"
+#import "UIView+LuaView.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -65,6 +66,7 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    self.lv_lview = self;
 }
 
 -(void) dealloc{
@@ -226,28 +228,28 @@ extern char g_debug_lua[];
 -(void) viewWillAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"viewWillAppear"];
+        [self callLuaWithNoArgs:@"viewWillAppear"];
     }
 }
 
 -(void) viewDidAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"viewDidAppear"];
+        [self callLuaWithNoArgs:@"viewDidAppear"];
     }
 }
 
 -(void) viewWillDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"viewWillDisAppear"];
+        [self callLuaWithNoArgs:@"viewWillDisAppear"];
     }
 }
 
 -(void) viewDidDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"viewDidDisAppear"];
+        [self callLuaWithNoArgs:@"viewDidDisAppear"];
     }
 }
 
@@ -256,7 +258,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"didMoveToSuperview"];
+        [self callLuaWithNoArgs:@"didMoveToSuperview"];
     }
 }
 
@@ -265,7 +267,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"didMoveToSuperview"];
+        [self callLuaWithNoArgs:@"didMoveToSuperview"];
     }
 }
 
@@ -274,25 +276,25 @@ extern char g_debug_lua[];
 -(void) keyboardWillShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"keyboardWillShow"];
+        [self callLuaWithNoArgs:@"keyboardWillShow"];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"keyboardDidShow"];
+        [self callLuaWithNoArgs:@"keyboardDidShow"];
     }
 }
 -(void) keyboardWillHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"keyboardWillHide"];
+        [self callLuaWithNoArgs:@"keyboardWillHide"];
     }
 }
 -(void) keyboardDidHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"keyboardDidHide"];
+        [self callLuaWithNoArgs:@"keyboardDidHide"];
     }
 }
 
@@ -302,7 +304,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [LVUtil call:self.l lightUserData:self key:"shakeBegan"];
+            [self callLuaWithNoArgs:@"shakeBegan"];
         }
     }
 }
@@ -312,7 +314,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [LVUtil call:self.l lightUserData:self key:"shakeCancelled"];
+            [self callLuaWithNoArgs:@"shakeCancelled"];
         }
     }
 }
@@ -322,7 +324,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [LVUtil call:self.l lightUserData:self key:"shakeEnded"];
+            [self callLuaWithNoArgs:@"shakeEnded"];
         }
     }
 }
@@ -334,7 +336,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [LVUtil call:self.l lightUserData:self key:"layoutSubviews"];
+        [self callLuaWithNoArgs:@"layoutSubviews"];
     }
 }
 
