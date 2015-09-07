@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LVSDK"
-  s.version      = "0.0.1"
+  s.version      = "1.2.0"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://gitlab.alibaba-inc.com/xicheng.dxc/luaview"
 
 
-  s.license      = { :type => 'Apache License, Version 2.0', :file => 'LICENSE.txt' }
+  s.license      = { :type => 'GNU General Public Licence (GPL), Version 2.0', :file => 'LICENSE.txt' }
 
   s.author             = { "城西" => "xicheng.dxc@alibaba-inc.com" }
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "5.0"
 
-  s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git", :tag => "0.0.1" }
+  s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git", :tag => "1.1.2" }
 
   s.source_files  = "LVSDK/Classes", "IOS/LVSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
@@ -54,10 +54,6 @@ Pod::Spec.new do |s|
   #
 
   s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-  # s.prefix_header_contents = '#import <UIKit/UIKit.h>', '#import <Foundation/Foundation.h>'
-
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
 
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -68,9 +64,4 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JoyMapsKit"
-  # s.dependency 'OpenSSL'
-  # s.dependency 'TBSecuritySDK'
-  # s.dependency 'MtopSDK'
 end
