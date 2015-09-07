@@ -142,7 +142,6 @@ demoArray = {
 	print(System.gc());
 },
 ^(){
-	System.openUrl("SubViewController");
 },
 ^(){
 	print(IsMethod(UIAlertView));	

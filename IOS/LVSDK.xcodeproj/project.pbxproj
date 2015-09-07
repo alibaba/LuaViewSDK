@@ -127,8 +127,6 @@
 		8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
 		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
 		8418E3C31A5E804700158125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
-		8418E3C41A5E804700158125 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BA1A5E804700158125 /* SubViewController.m */; };
-		8418E3C51A5E804700158125 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3BB1A5E804700158125 /* SubViewController.xib */; };
 		8418E3C61A5E804700158125 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BD1A5E804700158125 /* ViewController.m */; };
 		842142A31ACD3427001FD0ED /* DebugLuaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* DebugLuaFile.m */; };
 		842142A41ACD3427001FD0ED /* DebugLuaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* DebugLuaFile.m */; };
@@ -425,9 +423,6 @@
 		8418E3B61A5E804700158125 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8418E3B71A5E804700158125 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8418E3B81A5E804700158125 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8418E3B91A5E804700158125 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
-		8418E3BA1A5E804700158125 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
-		8418E3BB1A5E804700158125 /* SubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 		8418E3BC1A5E804700158125 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8418E3BD1A5E804700158125 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		842142A21ACD3427001FD0ED /* DebugLuaFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugLuaFile.m; path = lvdebug/DebugLuaFile.m; sourceTree = "<group>"; };
@@ -746,9 +741,6 @@
 				8418E3B21A5E804700158125 /* LaunchScreen.xib */,
 				8418E3B81A5E804700158125 /* main.m */,
 				8418E3B41A5E804700158125 /* Main.storyboard */,
-				8418E3B91A5E804700158125 /* SubViewController.h */,
-				8418E3BA1A5E804700158125 /* SubViewController.m */,
-				8418E3BB1A5E804700158125 /* SubViewController.xib */,
 				8418E3B01A5E804700158125 /* AppDelegate.h */,
 				8418E3B11A5E804700158125 /* AppDelegate.m */,
 				8418E3BC1A5E804700158125 /* ViewController.h */,
@@ -1262,7 +1254,6 @@
 				84D996FB1B09BE1000B9E01B /* 7.tiff in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
 				84D9970A1B09BE1000B9E01B /* animationSnow.lua in Resources */,
-				8418E3C51A5E804700158125 /* SubViewController.xib in Resources */,
 				84C7817A1B54B5A90021E628 /* bg_home_category_right_shadow@3x.png in Resources */,
 				84B58E3E1B66162F0048F33D /* animationLiZi.lua in Resources */,
 				84D997081B09BE1000B9E01B /* testDebug.lua in Resources */,
@@ -1466,7 +1457,6 @@
 				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,
 				918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */,
 				8418E3C31A5E804700158125 /* main.m in Sources */,
-				8418E3C41A5E804700158125 /* SubViewController.m in Sources */,
 				840AD6301A63ED7D003E837D /* lVtm.c in Sources */,
 				846481CB1A64C61F00DE6204 /* LVImageView.m in Sources */,
 				840AD5F01A63ED7D003E837D /* lVc.c in Sources */,
