@@ -114,6 +114,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_AttributedString "lv.AttributedString"
 #define META_TABLE_Global           "lv.global"
 #define META_TABLE_NativeObject     "lv.nativeObjBox"
+#define META_TABLE_System           "lv.System"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );

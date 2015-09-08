@@ -44,7 +44,8 @@
                    @"tableViewDemo.lua", @"collectionViewDemo.lua",//
                    @"animationSnow.lua",@"animationLiZi.lua", @"animationFire.lua",@"animationFire2.lua",//
                    @"testunit.lua",//
-                   @"shake.lua",@"downloader.lua",@"downloader2.lua",@"flxNodeDemo.lua"];
+                   @"shake.lua",@"downloader.lua",@"downloader2.lua",@"flxNodeDemo.lua",//
+                   @"System.lua"];
 }
 
 

@@ -1055,6 +1055,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"setOrigin",  origin },
     {"origin",     origin },
     
+    {"setXY",  origin },
+    {"xy",     origin },
+    
     
     {"setCenter", center},
     {"center",    center},

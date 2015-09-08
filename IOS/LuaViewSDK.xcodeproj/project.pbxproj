@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47168501E4B4D89573316ABF /* libPods-LVSDKDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */; };
 		80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
 		819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */; };
 		84056E6D1B5C8DF10078F9D6 /* LVLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E6B1B5C8DF10078F9D6 /* LVLoadingView.h */; };
@@ -161,6 +160,7 @@
 		843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		843447511B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		843A64831B8F0AC2003ACCEE /* tableDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 843A64821B8F0AC2003ACCEE /* tableDemo.lua */; };
+		843B7F811B9ECA9E009691BF /* System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 843B7F801B9ECA9E009691BF /* System.lua */; };
 		84470B171B5E66FF00980E31 /* JHSLuaErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLuaErrorView.m */; };
 		844F9F581B969E4300E24A24 /* JHSLuaCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLuaCollectionView.m */; };
 		844F9F5B1B96A0AF00E24A24 /* JHSLuaTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLuaTableView.m */; };
@@ -451,6 +451,7 @@
 		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
 		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
 		843A64821B8F0AC2003ACCEE /* tableDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tableDemo.lua; sourceTree = "<group>"; };
+		843B7F801B9ECA9E009691BF /* System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = System.lua; sourceTree = "<group>"; };
 		84470B151B5E66FF00980E31 /* JHSLuaErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaErrorView.h; sourceTree = "<group>"; };
 		84470B161B5E66FF00980E31 /* JHSLuaErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaErrorView.m; sourceTree = "<group>"; };
 		844F9F561B969E4300E24A24 /* JHSLuaCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaCollectionView.h; sourceTree = "<group>"; };
@@ -607,7 +608,6 @@
 				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
-				47168501E4B4D89573316ABF /* libPods-LVSDKDemo.a in Frameworks */,
 				80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1013,6 +1013,7 @@
 				BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */,
 				848523431B8EE97D00E5BA71 /* stringDemo.lua */,
 				843A64821B8F0AC2003ACCEE /* tableDemo.lua */,
+				843B7F801B9ECA9E009691BF /* System.lua */,
 			);
 			name = lua;
 			sourceTree = "<group>";
@@ -1262,6 +1263,7 @@
 				840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */,
 				84D59C391B69EA860084971B /* lazhu.png in Resources */,
 				84D996FB1B09BE1000B9E01B /* 7.tiff in Resources */,
+				843B7F811B9ECA9E009691BF /* System.lua in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
 				84D9970A1B09BE1000B9E01B /* animationSnow.lua in Resources */,
 				84C7817A1B54B5A90021E628 /* bg_home_category_right_shadow@3x.png in Resources */,
