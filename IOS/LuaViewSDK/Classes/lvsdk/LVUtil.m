@@ -18,7 +18,7 @@
 
 
 +(BOOL) isExternalUrl:(NSString*) url{
-    return [url hasPrefix:@"http://"];
+    return [url hasPrefix:@"https://"] || [url hasPrefix:@"http://"];
 }
 
 +(int) call:(lv_State*) l  lightUserData:(id) lightUserData key:(const char*) key{
