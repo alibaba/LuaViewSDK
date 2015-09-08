@@ -1020,6 +1020,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"setUserInteractionEnabled", userInteractionEnabled },
     {"userInteractionEnabled",    userInteractionEnabled },
     
+    {"setEnabled", userInteractionEnabled },
+    {"enabled",    userInteractionEnabled },
+    
     {"setBackgroundColor",  backgroundColor },
     {"backgroundColor",     backgroundColor },
     
