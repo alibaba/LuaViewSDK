@@ -36,7 +36,7 @@ function fireCreater() {
 	fire.bg.addSubview(fire.imageView2);
 
 	function fire.initX0Y0()
-		self.bg.transformRoteAndScale(0, 1, 1);
+		self.bg.scale(1, 1);
 		self.bg.size( r*2, r*2);
 		self.bg.alpha = 0.5;
 
@@ -53,7 +53,7 @@ function fireCreater() {
 
 	function fire.move() {
 		self.bg.center( self.x, self.y );
-		self.bg.transformRoteAndScale(0, 0.2, 0.4);
+		self.bg.scale( 0.2, 0.4 );
 		self.imageView1.alpha(0);
 		self.imageView2.alpha(1);
 		self.bg.alpha = 0;

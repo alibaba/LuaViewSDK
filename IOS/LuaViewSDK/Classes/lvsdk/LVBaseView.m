@@ -972,6 +972,32 @@ static int rotationY (lv_State *L) {
     return 0;
 }
 
+static int scale (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        int argNum = lv_gettop(L);
+        if ( argNum >=2 ) {
+            double scaleX = lv_tonumber(L, 2);
+            view.lv_scaleX = scaleX;
+            if( argNum>=3 ) {
+                double scaleY = lv_tonumber(L, 3);
+                view.lv_scaleY = scaleY;
+            }
+            CGAffineTransform tran1 = CGAffineTransformMakeScale(view.lv_scaleX, view.lv_scaleY);
+            CGAffineTransform tran2 = CGAffineTransformMakeRotation(view.lv_rotation);
+            view.transform = CGAffineTransformConcat(tran1, tran2);
+            lv_pushvalue(L,1);
+            return 1;
+        } else {
+            lv_pushnumber(L, view.lv_scaleX);
+            lv_pushnumber(L, view.lv_scaleY);
+            return 2;
+        }
+    }
+    return 0;
+}
+
 static int scaleX (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -1232,6 +1258,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"scaleY", scaleY },
     {"setScaleX", scaleX },
     {"setScaleY", scaleY },
+    
+    {"scale", scale },
+    {"setScale", scale },
     
     {"setAnchorPoint",  anchorPoint },
     {"anchorPoint",     anchorPoint },
