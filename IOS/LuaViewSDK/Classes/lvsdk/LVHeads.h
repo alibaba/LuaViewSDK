@@ -171,4 +171,6 @@ LVTypeIDEnum lv_typeID(const char* type);
 
 typedef void(^LVLoadFinished)(void);
 
+#import "UIView+LuaView.h"
+
 #endif

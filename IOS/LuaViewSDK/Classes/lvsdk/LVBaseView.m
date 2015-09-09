@@ -906,6 +906,112 @@ static int transformRoteAndScale (lv_State *L) {
     return 0;
 }
 
+static int rotation (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            double angle = lv_tonumber(L, 2);
+            view.lv_rotation = angle;
+            CATransform3D tX = CATransform3DMakeRotation(view.lv_rotationX, 1, 0, 0);
+            CATransform3D tY = CATransform3DMakeRotation(view.lv_rotationY, 0, 1, 0);
+            CATransform3D tZ = CATransform3DMakeRotation(view.lv_rotation, 0, 0, 1);
+            CATransform3D r = CATransform3DConcat(tX, tY);
+            r = CATransform3DConcat(r, tZ);
+            view.layer.transform = r;
+            lv_pushvalue(L,1);
+            return 1;
+        } else {
+            lv_pushnumber(L, view.lv_rotationX);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int rotationX (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            double angle = lv_tonumber(L, 2);
+            view.lv_rotationX = angle;
+            CATransform3D tX = CATransform3DMakeRotation(view.lv_rotationX, 1, 0, 0);
+            CATransform3D tY = CATransform3DMakeRotation(view.lv_rotationY, 0, 1, 0);
+            CATransform3D tZ = CATransform3DMakeRotation(view.lv_rotation, 0, 0, 1);
+            CATransform3D r = CATransform3DConcat(tX, tY);
+            r = CATransform3DConcat(r, tZ);
+            view.layer.transform = r;
+            return 1;
+        } else {
+            lv_pushnumber(L, view.lv_rotationX);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int rotationY (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            double angle = lv_tonumber(L, 2);
+            view.lv_rotationY = angle;
+            CATransform3D tX = CATransform3DMakeRotation(view.lv_rotationX, 1, 0, 0);
+            CATransform3D tY = CATransform3DMakeRotation(view.lv_rotationY, 0, 1, 0);
+            CATransform3D tZ = CATransform3DMakeRotation(view.lv_rotation, 0, 0, 1);
+            CATransform3D r = CATransform3DConcat(tX, tY);
+            r = CATransform3DConcat(r, tZ);
+            view.layer.transform = r;
+        } else {
+            lv_pushnumber(L, view.lv_rotationY);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int scaleX (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if ( lv_gettop(L)>=2 ) {
+            double scaleX = lv_tonumber(L, 2);
+            view.lv_scaleX = scaleX;
+            CGAffineTransform tran1 = CGAffineTransformMakeScale(view.lv_scaleX, view.lv_scaleY);
+            CGAffineTransform tran2 = CGAffineTransformMakeRotation(view.lv_rotation);
+            view.transform = CGAffineTransformConcat(tran1, tran2);
+            lv_pushvalue(L,1);
+            return 1;
+        } else {
+            lv_pushnumber(L, view.lv_scaleX);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int scaleY (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            double scaleY = lv_tonumber(L, 2);
+            view.lv_scaleY = scaleY;
+            CGAffineTransform tran1 = CGAffineTransformMakeScale(view.lv_scaleX, view.lv_scaleY);
+            CGAffineTransform tran2 = CGAffineTransformMakeRotation(view.lv_rotation);
+            view.transform = CGAffineTransformConcat(tran1, tran2);
+            lv_pushvalue(L,1);
+            return 1;
+        } else {
+            lv_pushnumber(L, view.lv_scaleY);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int transform3D (lv_State *L) {
     LVUserDataView* user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -1102,13 +1208,30 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"addSubView",          addSubview },
     {"addSubview",          addSubview },
+    {"addView",          addSubview },
+    
     {"removeFromSuperView", removeFromSuperview },
     {"removeFromSuperview", removeFromSuperview },
+    {"removeFromSuper", removeFromSuperview },
     
     {"removeAllSubviews", removeAllSubviews },
+    {"removeAllViews", removeAllSubviews },
     
     {"transformRoteAndScale", transformRoteAndScale },
     {"roteAndScale", transformRoteAndScale },
+    
+    {"rotation", rotation },
+    {"rotationX", rotationX },
+    {"rotationY", rotationY },
+    
+    {"setRotation", rotation },
+    {"setRotationX", rotationX },
+    {"setRotationY", rotationY },
+    
+    {"scaleX", scaleX },
+    {"scaleY", scaleY },
+    {"setScaleX", scaleX },
+    {"setScaleY", scaleY },
     
     {"setAnchorPoint",  anchorPoint },
     {"anchorPoint",     anchorPoint },
@@ -1119,6 +1242,10 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"isFirstResponder",        isFirstResponder },
     {"becomeFirstResponder",    becomeFirstResponder },
     {"resignFirstResponder",    resignFirstResponder },
+    
+    {"hasFocus",        isFirstResponder },
+    {"requestFocus",    becomeFirstResponder },
+    {"cancelFocus",    resignFirstResponder },
     
     
     {"setTransform3D", transform3D },
