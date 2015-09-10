@@ -11,7 +11,6 @@
 #import "LVTableViewCell.h"
 #import "LVScrollView.h"
 #import "LView.h"
-#import "UIScrollView+LuaView.h"
 
 #define KEY_LUA_INFO 1
 

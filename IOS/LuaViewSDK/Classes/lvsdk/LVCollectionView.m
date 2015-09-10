@@ -13,6 +13,8 @@
 #import "LVScrollView.h"
 #import "UIScrollView+LuaView.h"
 
+#define IDENTIFIER "Id"
+
 // lua 对应的数据 key
 #define KEY_LUA_INFO  1
 
@@ -57,7 +59,7 @@
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
     identifier = self.identifierDic[identifier];
     if( identifier == nil ){
         identifier = DEFAULT_CELL_IDENTIFIER;
@@ -139,7 +141,7 @@
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
     if( identifier ) {
         CGSize size = [self returnSizeCallByKey1:"Cell" key2:identifier.UTF8String key3:"Size" section:indexPath.section row:indexPath.row];
         return size;
@@ -264,11 +266,11 @@
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     lv_State* l = self.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
-            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"Select" section:indexPath.section row:indexPath.row];
+            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"Delegate" section:indexPath.section row:indexPath.row];
         }
     }
 }
@@ -413,46 +415,6 @@ static int miniSpacing (lv_State *L) {
     }
     return 0;
 }
-
-//static int setTableHeaderView (lv_State *L) {
-//    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-//    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-//    if( LVIsType(user1,LVUserDataView) && LVIsType(user2,LVUserDataView)  ){
-//        LVTableView* tableView = (__bridge LVTableView *)(user1->view);
-//        if( [tableView isKindOfClass:[LVTableView class]] ) {
-//            UIView* head = (__bridge LVTableView *)(user2->view);
-//            tableView.tableHeaderView = head;
-//            
-//            // 绑定 tableHeaderView
-//            [LVUtil pushRegistryValue:L key:tableView]; // table = registry[&Key]
-//            lv_pushstring(L, "table.headerView");// key
-//            lv_pushUserdata(L, user2);// value
-//            lv_settable(L, -3);// registry[&Key] = tableView
-//            return 0;
-//        }
-//    }
-//    return 0;
-//}
-
-//static int setTableFooterView (lv_State *L) {
-//    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-//    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-//    if( LVIsType(user1,LVUserDataView) && LVIsType(user2,LVUserDataView)  ){
-//        LVTableView* tableView = (__bridge LVTableView *)(user1->view);
-//        if( [tableView isKindOfClass:[LVTableView class]] ) {
-//            UIView* head = (__bridge LVTableView *)(user2->view);
-//            tableView.tableFooterView = head;
-//            
-//            // 绑定 tableFooterView
-//            [LVUtil pushRegistryValue:L key:tableView];
-//            lv_pushstring(L, "table.footerView");// key
-//            lv_pushUserdata(L, user2);// value
-//            lv_settable(L, -3);// table[&Key] = value
-//            return 0;
-//        }
-//    }
-//    return 0;
-//}
 
 static int rectForSection (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);

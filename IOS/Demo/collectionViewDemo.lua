@@ -18,9 +18,6 @@ tableView.delegate =
 		NumberOfRows = ^(section){
 			return 4;
 		},
-		HeaderHeight = ^(section){
-			return 30;
-		},
 		Spacing = ^(section ){
 			return 0;
 		},
@@ -30,7 +27,7 @@ tableView.delegate =
 
 	},
 	Cell = { 
-		Identifier = function ( section, row ){
+		Id = function ( section, row ){
 			if( section%2==0 ) {
 				return "图片+文字";
 			} else {
@@ -62,7 +59,7 @@ tableView.delegate =
 
 				window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
 			},
-			Select = ^(section, row){
+			Delegate = ^(section, row){
 				print(section, row);
 				System.gc();
 			}
@@ -101,7 +98,7 @@ tableView.delegate =
 
 				window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
 			},
-			Select = ^(section, row){
+			Delegate = ^(section, row){
 				print(section, row);
 				System.gc();
 			}
