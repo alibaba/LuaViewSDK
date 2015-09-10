@@ -188,7 +188,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Select" nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Delegate" nargs:2 nrets:0];
         }
     }
 }
@@ -295,6 +295,52 @@
     }
 }
 
+- (UIView*) lv_getViewFromLuaByKey:(NSString*)key{
+    lv_State* l = self.lv_lview.l;
+    if( l ){
+        int num = lv_gettop(l);
+        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUDataRef(l, KEY_LUA_INFO);
+        [LVUtil call:l key1:key.UTF8String key2:NULL nargs:0 nrets:1];
+        if( lv_type(l, -1)==LV_TUSERDATA ) {
+            LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
+            if( LVIsType(user, LVUserDataView) ) {
+                
+                // 绑定 tableHeaderView
+                lv_pushUserdata(l, self.lv_userData);
+                lv_pushUDataRef(l, KEY_LUA_INFO );
+                
+                lv_pushstring(l, [NSString stringWithFormat:@"%@.backup",key].UTF8String);// key
+                lv_pushUserdata(l, user);// value
+                lv_settable(l, -3);// registry[&Key] = tableView
+                
+                lv_settop(l, num);
+                return (__bridge UIView *)(user->view);
+            }
+        }
+        lv_settop(l, num);
+    }
+    return nil;
+}
+
+- (void) getHeaderFooterFromDelegate {
+    self.tableHeaderView = [self lv_getViewFromLuaByKey:@"Header"];
+    self.tableFooterView = [self lv_getViewFromLuaByKey:@"Footer"];
+}
+
+-(void) reloadData {
+    [super reloadData];
+    [self getHeaderFooterFromDelegate];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+}
+
 #pragma -mark lvNewTextField
 static Class g_class = nil;
 
@@ -316,6 +362,8 @@ static int lvNewTableView (lv_State *L) {
         if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
             lv_pushvalue(L, 1);
             lv_udataRef(L, KEY_LUA_INFO );
+            
+            [tableView getHeaderFooterFromDelegate];
         }
         
         lvL_getmetatable(L, META_TABLE_UITableView );
@@ -351,7 +399,7 @@ static int setTableHeaderView (lv_State *L) {
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, KEY_LUA_INFO );
             
-            lv_pushstring(L, "table.headerView");// key
+            lv_pushstring(L, "Header");// key
             lv_pushUserdata(L, user2);// value
             lv_settable(L, -3);// registry[&Key] = tableView
             
@@ -373,7 +421,7 @@ static int setTableFooterView (lv_State *L) {
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, KEY_LUA_INFO );
             
-            lv_pushstring(L, "table.footerView");// key
+            lv_pushstring(L, "Footer");// key
             lv_pushUserdata(L, user2);// value
             lv_settable(L, -3);// table[&Key] = value
             
@@ -416,10 +464,12 @@ static int rectForSection (lv_State *L) {
 
 static int delegate (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
+    if( user && LVIsType(user, LVUserDataView) ){
         if ( lv_gettop(L)>=2 ) {
             lv_settop(L, 2);
             lv_udataRef(L, USERDATA_KEY_DELEGATE);
+            LVTableView* tableView = (__bridge LVTableView *)(user->view);
+            [tableView getHeaderFooterFromDelegate];
             return 1;
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);

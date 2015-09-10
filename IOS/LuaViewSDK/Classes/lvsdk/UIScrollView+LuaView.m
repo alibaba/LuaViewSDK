@@ -41,36 +41,34 @@
 - (void) lv_resetNoMoreData{// 重置没有更多的数据（消除没有更多数据的状态）
 }
 
-
-
 - (void) lv_refreshHeaderToRefresh{
     // 开始下拉刷新调用
-    [self callLuaWithNoArgs:HEADER_BEGIN_REFRESHING];
+    [self callLuaWithNoArgs:@"Refresh" key2:@"PullDown"];
 }
 
 - (void) lv_refreshFooterToLoadMore{
     // 开始上拉刷新调用
-    [self callLuaWithNoArgs:FOOTER_BEGIN_REFRESHING];
+    [self callLuaWithNoArgs:@"Refresh" key2:@"PullUp"];
 }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scrolling"];
+    [self callLuaWithNoArgs:@"Scroll" key2:@"Scrolling"];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"BeginDragging"];
+    [self callLuaWithNoArgs:@"Scroll" key2:@"Begin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"BeginDecelerating"];
+    //[self callLuaWithNoArgs:@"Scroll" key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"EndScrolling"];
+    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"EndScrolling"];
+    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
 }
 
 @end

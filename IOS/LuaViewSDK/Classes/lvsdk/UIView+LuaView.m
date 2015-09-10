@@ -26,12 +26,16 @@
 }
 
 - (void) callLuaWithNoArgs:(NSString*) funcName{
+    [self callLuaWithNoArgs:funcName key2:nil];
+}
+
+- (void) callLuaWithNoArgs:(NSString*) funcName key2:(NSString*) key2{
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData && funcName){
         lv_checkStack32(l);
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        [LVUtil call:l key1:funcName.UTF8String key2:NULL nargs:0 nrets:0];
+        [LVUtil call:l key1:funcName.UTF8String key2:key2.UTF8String nargs:0 nrets:0];
     }
 }
 

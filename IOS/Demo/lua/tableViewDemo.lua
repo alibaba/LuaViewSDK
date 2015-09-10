@@ -16,28 +16,6 @@ tableView.delegate = {
 
 		NumberOfRows = ^(section){
 			return 10;
-		},
-
-		HeaderHeight = ^(section){
-			return 30;
-		},
-		Header = ^(section){
-			local view = UIButton();
-			view.setFrame(0,0,w,30);
-			view.setBackgroundColor(0xffff,1);
-			view.setTitle("section 头:"..section);
-			return view;
-		},
-
-		FooterHeight = ^(section){
-			return 30;
-		},
-		Footer = ^(section){
-			local view = UIButton();
-			view.setFrame(0,0,w,30);
-			view.setBackgroundColor(0xffff,1);
-			view.setTitle("section 尾:"..section);
-			return view;
 		}
 	},
 
@@ -61,7 +39,7 @@ tableView.delegate = {
 				cell.title.setFrame(cellHeight, 0, w-cellHeight, cellHeight);
 				cell.title.setText("测试"..section .."--" .. row);
 			},
-			Select = ^( section, row ){
+			Delegate = ^( section, row ){
 				print(section, row);
 				row = row %4;
 				if( row ==0 ) {
@@ -76,11 +54,38 @@ tableView.delegate = {
 			}
 		}
 	},
-    HeaderBeginRefreshing = ^(){
-    	print("HeaderRefresh");
+	Refresh = {
+	    PullDown = ^(){
+	    	print("PullDown");
+		},
+	    PullUp = ^(){
+	    	print("PullUp");
+		}
 	},
-    FooterBeginRefreshing = ^(){
-    	print("FooterRefresh");
+	Header = ^(){
+		local head = UIButton();
+		head.setTitle("我是头");
+		head.setFrame(0,0,w,100);
+		head.setBackgroundColor(0xff);
+		return head;
+	},
+	Footer = ^(){
+		local foot = UIButton();
+		foot.setTitle("我是结尾");
+		foot.setFrame(0,0,w,100);
+		foot.setBackgroundColor(0xff0000);
+		return foot;
+	},
+	Scroll = {
+		Scrolling = ^(){
+			print("scrolling");
+		},
+		Begin = ^(){
+			print("scrolling begin");
+		},
+		End = ^(){
+			print("scrolling end");
+		}
 	}
 };
 
@@ -92,18 +97,4 @@ tableView.setBackgroundColor(0xffFFFF);
 tableView.initRefreshHeader();
 tableView.initRefreshFooter();
 
-
-
-local head = UIButton();
-head.setTitle("我是头");
-head.setFrame(0,0,w,100);
-head.setBackgroundColor(0xff);
-tableView.setTableHeaderView(head);
-
-
-local foot = UIButton();
-foot.setTitle("我是结尾");
-foot.setFrame(0,0,w,100);
-foot.setBackgroundColor(0xff0000);
-tableView.setTableFooterView(foot);
 

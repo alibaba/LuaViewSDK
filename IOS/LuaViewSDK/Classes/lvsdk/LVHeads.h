@@ -131,10 +131,6 @@ void lv_stopAndExitNow(lv_State* l);
 @end
 
 
-#define HEADER_BEGIN_REFRESHING  @"HeaderBeginRefreshing"
-#define FOOTER_BEGIN_REFRESHING  @"FooterBeginRefreshing"
-
-
 typedef enum:int{
     LVTypeID_NONE = 0,
     LVTypeID_void,

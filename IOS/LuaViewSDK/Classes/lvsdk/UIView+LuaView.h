@@ -20,5 +20,6 @@
 @property(nonatomic,assign) CGFloat lv_scaleY;
 
 - (void) callLuaWithNoArgs:(NSString*) funcName;
+- (void) callLuaWithNoArgs:(NSString*) funcName key2:(NSString*) key2;
 
 @end

@@ -389,6 +389,18 @@ static const struct lvL_reg memberFunctions [] = {
     
     {"scrollRectToVisible",     scrollRectToVisible },
     
+    
+    {"initPullDownRefresh", initRefreshHeader},
+    {"initPullUpRefresh", initRefreshFooter},
+    
+    {"beginPullDownRefreshing", headerBeginRefreshing},
+    {"endPullDownRefreshing", headerEndRefreshing},
+    {"hiddenPullDownRefreshing", hiddenRefreshHeader},
+    
+    {"footerNoticeNoMoreData", footerNoticeNoMoreData},
+    {"footerResetNoMoreData", footerResetNoMoreData},
+    {"hiddenRefreshFooter", hiddenRefreshFooter},
+    
     {NULL, NULL}
 };
 
