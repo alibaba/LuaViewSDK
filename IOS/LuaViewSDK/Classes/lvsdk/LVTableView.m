@@ -438,6 +438,10 @@ static int delegate (lv_State *L) {
         {"reloadData",    reloadData},
         {"setTableHeaderView", setTableHeaderView},
         {"setTableFooterView", setTableFooterView},
+        
+        {"setHeader", setTableHeaderView},
+        {"setFooter", setTableFooterView},
+        
         {"rectForSection", rectForSection},
         
         {"setDelegate", delegate},
