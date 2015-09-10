@@ -20,7 +20,7 @@ tableView.delegate = {
 	},
 
 	Cell = {
-		Identifier = ^( section, row ){
+		Id = ^( section, row ){
 			return  "图片+文字";
 		},
 		"图片+文字" = {

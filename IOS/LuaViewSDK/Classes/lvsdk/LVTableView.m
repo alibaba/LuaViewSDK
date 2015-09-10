@@ -12,6 +12,8 @@
 #import "LVScrollView.h"
 #import "LView.h"
 
+#define Identifier "Id"
+
 #define KEY_LUA_INFO 1
 
 @implementation LVTableView
@@ -34,7 +36,7 @@
 
 //----------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
     if( identifier == nil ){
         identifier = @"LVTableViewCell.default.identifier";
     }
@@ -177,7 +179,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     lv_State* l = self.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
         if( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
@@ -195,7 +197,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     lv_State* l = self.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:"Identifier" section:indexPath.section row:indexPath.row];
+        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
         if( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
