@@ -15,6 +15,7 @@
 #import "LVBlock.h"
 #import "LVPkgManager.h"
 #import "UIView+LuaView.h"
+#import "LVDebuger.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -92,7 +93,9 @@
     if( g_printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
         [data appendBytes:chars length:len];
-        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"loadfile",@"File-Name":fileName}];
+        
+        [LVDebuger sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+//        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"loadfile",@"File-Name":fileName}];
     }
 }
 
@@ -108,13 +111,16 @@ extern char g_debug_lua[];
     static BOOL checked = NO;
     if( checked==NO ){
         checked = YES;
-        NSMutableData* data = [[NSMutableData alloc] init];
-        const char* cs = "connect ok\n";
-        [data appendBytes:cs length:strlen(cs)];
-        NSString* ret = [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"log"}];
-        if( ret ){// 成功连接到调试模块
-            [self loadDebugModel];// 加载调试模块
-        }
+        
+        [LVDebuger sendCmd:@"log" info:@"connect ok\n"];
+        [self loadDebugModel];// 加载调试模块
+//        NSMutableData* data = [[NSMutableData alloc] init];
+//        const char* cs = "connect ok\n";
+//        [data appendBytes:cs length:strlen(cs)];
+//        NSString* ret = [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9876" content:data dictionary:@{@"Cmd-Name":@"log"}];
+//        if( ret ){// 成功连接到调试模块
+//            [self loadDebugModel];// 加载调试模块
+//        }
     }
 }
 #endif

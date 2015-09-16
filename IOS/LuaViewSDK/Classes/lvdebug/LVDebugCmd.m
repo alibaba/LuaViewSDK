@@ -8,6 +8,7 @@
 
 #import "LVDebugCmd.h"
 #import "LVHeads.h"
+#import "LVDebuger.h"
 
 
 @implementation LVDebugCmd
@@ -54,11 +55,7 @@
 }
 
 static int DebugReadCmd (lv_State *L) {
-    NSString* url = nil;
-    if( lv_gettop(L)>0 ){
-        url = lv_paramString(L, 1);
-    }
-    NSString* cmd = [LVDebugCmd sendAndReadCmdByUrl:url content:[@"\n\n\n\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString* cmd = [LVDebuger getCmd];
     if( cmd ){
         lv_pushstring(L, cmd.UTF8String);
     } else {
@@ -74,19 +71,19 @@ static int DebugPrintToServer (lv_State *L) {
 }
 
 static int runningLine (lv_State *L) {
-    const char* fileNameChars = lvL_checkstring(L, 1);
+    NSString* fileName = lv_paramString(L, 1);
+    if( fileName == nil ){
+        fileName = @"unkown";
+    }
     int lineNumber = lv_tonumber(L, 2);
     
-    if( fileNameChars == nil ){
-        fileNameChars = "unkown";
-    }
+    NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
     
-    NSString* fileName = [NSString stringWithFormat:@"%s",fileNameChars];
-    
-    NSMutableData* data = [[NSMutableData alloc] init];
-    const char* cs = [NSString stringWithFormat:@"%d",lineNumber].UTF8String;
-    [data appendBytes:cs length:strlen(cs)];
-    [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"running",@"File-Name":fileName}];
+//    NSMutableData* data = [[NSMutableData alloc] init];
+//    const char* cs = [NSString stringWithFormat:@"%d",lineNumber].UTF8String;
+//    [data appendBytes:cs length:strlen(cs)];
+//    [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"running",@"File-Name":fileName}];
+    [LVDebuger  sendCmd:@"running" fileName:fileName info:lineInfo];
     return 0;
 }
 
@@ -121,7 +118,9 @@ void lv_printToServer(const char* cs, int withTabChar){
             [data appendBytes:"      " length:4];
         }
         [data appendBytes:cs length:strlen(cs)];
-        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"log"}];
+        
+        [LVDebuger  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+//        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"log"}];
     }
 }
 

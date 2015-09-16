@@ -238,6 +238,9 @@
 		84B58E3B1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
 		84B58E3C1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
 		84B58E3E1B66162F0048F33D /* animationLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B58E3D1B66162F0048F33D /* animationLiZi.lua */; };
+		84BC62201BA95A3F0019B02E /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebuger.h */; };
+		84BC62211BA95A3F0019B02E /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebuger.m */; };
+		84BC62221BA95A3F0019B02E /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebuger.m */; };
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72B1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
@@ -516,6 +519,8 @@
 		84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVActivityIndicatorView.h; sourceTree = "<group>"; };
 		84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVActivityIndicatorView.m; sourceTree = "<group>"; };
 		84B58E3D1B66162F0048F33D /* animationLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = animationLiZi.lua; path = lua/animationLiZi.lua; sourceTree = "<group>"; };
+		84BC621E1BA95A3F0019B02E /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
+		84BC621F1BA95A3F0019B02E /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
 		84C781751B54B25F0021E628 /* JHSIconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JHSIconfont.ttf; sourceTree = "<group>"; };
@@ -1041,6 +1046,8 @@
 				842142A21ACD3427001FD0ED /* DebugLuaFile.m */,
 				91ACCE751AC531160034D9B3 /* LVDebugCmd.h */,
 				91ACCE761AC531160034D9B3 /* LVDebugCmd.m */,
+				84BC621E1BA95A3F0019B02E /* LVDebuger.h */,
+				84BC621F1BA95A3F0019B02E /* LVDebuger.m */,
 			);
 			name = lvdebug;
 			sourceTree = "<group>";
@@ -1110,6 +1117,7 @@
 				846481DC1A64C61F00DE6204 /* LVTransform3D.h in Headers */,
 				846E879B1A653DEC000D14DA /* LVDate.h in Headers */,
 				840AD61B1A63ED7D003E837D /* lVopcodes.h in Headers */,
+				84BC62201BA95A3F0019B02E /* LVDebuger.h in Headers */,
 				84B58E3A1B65CC260048F33D /* LVActivityIndicatorView.h in Headers */,
 				846481C11A64C61F00DE6204 /* LVBaseView.h in Headers */,
 				8425324C1ADCBD3A003C05BF /* LVDownloader.h in Headers */,
@@ -1391,6 +1399,7 @@
 				8410D9B21A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */,
 				846481D21A64C61F00DE6204 /* LVPageControl.m in Sources */,
 				849708391A67653A00E913F4 /* LVDB.m in Sources */,
+				84BC62221BA95A3F0019B02E /* LVDebuger.m in Sources */,
 				840AD62F1A63ED7D003E837D /* lVtablib.c in Sources */,
 				840AD6011A63ED7D003E837D /* lVfunc.c in Sources */,
 				84B1E3831AEF24480054B9F1 /* LVRSA.m in Sources */,
@@ -1528,6 +1537,7 @@
 				84D840A11B5F33D900BC59F3 /* JHSLuaLoadingView.m in Sources */,
 				84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */,
 				8418E3C61A5E804700158125 /* ViewController.m in Sources */,
+				84BC62211BA95A3F0019B02E /* LVDebuger.m in Sources */,
 				84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */,
 				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,
 				918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */,
