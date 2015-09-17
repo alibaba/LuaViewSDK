@@ -95,7 +95,6 @@
         [data appendBytes:chars length:len];
         
         [LVDebuger sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-//        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"loadfile",@"File-Name":fileName}];
     }
 }
 

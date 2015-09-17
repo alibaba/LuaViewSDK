@@ -85,7 +85,6 @@ void lv_printToServer(const char* cs, int withTabChar){
         [data appendBytes:cs length:strlen(cs)];
         
         [LVDebuger  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-//        [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"log"}];
     }
 }
 
