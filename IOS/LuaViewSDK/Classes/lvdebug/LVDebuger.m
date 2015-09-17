@@ -46,6 +46,10 @@ static NSString* receivedCmd = nil;
     return self;
 }
 
+- (void) dealloc{
+    [self closeSocket];
+}
+
 - (NSInteger) waitUntilConnectionEnd{
     for(;self.state==SOCKET_CONNECTINTG;) {
         [NSThread sleepForTimeInterval:0.01];
@@ -139,6 +143,18 @@ static NSString* receivedCmd = nil;
     CFRelease(source);
 }
 
+-(void) closeSocket{
+    self.closed = TRUE;
+    self.canWrite = FALSE;
+    
+    if (_socket != NULL)
+    {
+        CFSocketInvalidate(_socket);
+        CFRelease(_socket);
+        _socket = NULL;
+    }
+}
+
 static void ServerConnectCallBack( CFSocketRef socket,
                                   CFSocketCallBackType type,
                                   CFDataRef address,
@@ -151,17 +167,9 @@ static void ServerConnectCallBack( CFSocketRef socket,
             NSString* ret = readString(socket);
             NSLog(@"%@", ret);
             receivedCmd = ret;
-            // socket 关闭掉了
+            // 关闭掉socket
             if ( ret.length<=0 ){
-                debuger.closed = TRUE;
-                debuger.canWrite = FALSE;
-                
-                if (socket != NULL)
-                {
-                    CFSocketInvalidate(socket);
-                    CFRelease(socket);
-                    socket = NULL;
-                }
+                [debuger closeSocket];
             }
             break;
         }
