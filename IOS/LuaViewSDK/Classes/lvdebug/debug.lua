@@ -208,16 +208,40 @@ function debug_help()
     print( "bt            print traceback" )
 end
 
+function doRuningCmd( )
+    local cmd = debug:readCmd()
+    if( cmd==nil ) then 
+    	return;
+    end
+    local c = cmd
+    local expr = ""
+    local si = string:find( cmd, " " )
+    if si ~= nil then
+        c = string:sub( cmd, 1, si - 1 )
+        expr = string:sub( cmd, string:find( cmd, " %w" ) + 1 )
+    end
+
+    if c == "b" then
+        add_breakpoint( expr )
+    elseif c == "rb" then
+        remove_breakpoint( expr )
+    elseif c == "p" then
+        debug_print_expr( expr )
+    end
+end
+
 function debug_execute_cmd( env )
     --print( "(ldb) " )
     local cmd = debug:readCmd()
-
-    --取上一次的命令,方便调试
-    if cmd ~= "" then
-        debug.bps.last_cmd = cmd
-    else
-        cmd = debug.bps.last_cmd
+    if ( cmd ==nil ) then
+    	return;
     end
+    --取上一次的命令,方便调试
+    -- if cmd ~= "" then
+    --     debug.bps.last_cmd = cmd
+    -- else
+    --     cmd = debug.bps.last_cmd
+    -- end
 
     local c = cmd
     local expr = ""
@@ -263,7 +287,6 @@ function debug_execute_cmd( env )
     else
         debug_log( "invalid cmd:" .. cmd )
     end
-
     return false
 end
 
@@ -284,8 +307,8 @@ function debug_trace( event, line )
             debug.bps.trace = true
         elseif trace_count == debug.bps.trace_count then
             if debug.bps.cur_func == env.func then
-            debug.bps.next = false
-            debug.bps.trace = true
+	            debug.bps.next = false
+	            debug.bps.trace = true
             end
         end
      end
@@ -310,7 +333,9 @@ function debug_trace( event, line )
         debug.bps.cur_line = line
         while not debug_execute_cmd( env ) do
         end
+        return;
     end
+    -- doRuningCmd();
 end
 
 function begin_debug()

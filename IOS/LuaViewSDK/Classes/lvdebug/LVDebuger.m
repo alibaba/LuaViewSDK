@@ -80,9 +80,10 @@ static NSString* receivedCmd = @"none";
     NSString* cmd = receivedCmd;
     if( cmd ) {
         receivedCmd = nil;
+    } else {
+        [NSThread sleepForTimeInterval:0.01];
     }
-    [NSThread sleepForTimeInterval:0.01];
-    return cmd ? cmd : @"none";
+    return cmd;
 }
 
 + (void) sendCmd:(NSString*) cmdName info:(NSString*) info{
@@ -95,8 +96,9 @@ static NSString* receivedCmd = @"none";
         [buffer appendFormat:@"Cmd-Name:%@\n",cmdName];
     }
     if ( fileName ){
-        [buffer appendFormat:@"File-Name:%@\n\n",fileName];
+        [buffer appendFormat:@"File-Name:%@\n",fileName];
     }
+    [buffer appendString:@"\n"];
     if ( info ){
         [buffer appendFormat:@"%@",info];
     }

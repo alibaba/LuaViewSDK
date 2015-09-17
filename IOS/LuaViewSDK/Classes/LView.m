@@ -20,7 +20,7 @@
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
 @property (nonatomic,assign) BOOL stateInited;
-
+@property (nonatomic,assign) BOOL loadedDebugScript;
 @end
 
 @implementation LView
@@ -109,18 +109,18 @@ extern char g_debug_lua[];
 
 -(void) checkDeuggerIsRunningToLoadDebugModel{
     static BOOL checked = NO;
+    static BOOL openDebugMode = NO;
     if( checked==NO ){
         checked = YES;
         if ( [[LVDebuger sharedInstance] waitUntilConnectionEnd] >0 ) {
+            openDebugMode = YES;
+        }
+    }
+    if( openDebugMode ) {
+        if( self.loadedDebugScript == NO ) {
+            self.loadedDebugScript = YES;
             [LVDebuger sendCmd:@"log" info:@"connect ok\n"];
             [self loadDebugModel];// 加载调试模块
-    //        NSMutableData* data = [[NSMutableData alloc] init];
-    //        const char* cs = "connect ok\n";
-    //        [data appendBytes:cs length:strlen(cs)];
-    //        NSString* ret = [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9876" content:data dictionary:@{@"Cmd-Name":@"log"}];
-    //        if( ret ){// 成功连接到调试模块
-    //            [self loadDebugModel];// 加载调试模块
-    //        }
         }
     }
 }
