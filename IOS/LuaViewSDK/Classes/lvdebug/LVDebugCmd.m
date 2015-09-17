@@ -13,46 +13,6 @@
 
 @implementation LVDebugCmd
 
-+ (NSString *)sendAndReadCmdByUrl:(NSString*)url  content:(NSData*) content
-{
-    return [LVDebugCmd sendAndReadCmdByUrl:url content:content dictionary:nil];
-}
-
-+ (NSString *)sendAndReadCmdByUrl:(NSString*)url  content:(NSData*) content dictionary:(NSDictionary*) dictionary
-{
-    if( url ==nil ){
-        url = @"http://127.0.0.1:9876";
-    }
-    // 初始化请求, 这里是变长的, 方便扩展
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
-    // 设置
-    [request setTimeoutInterval:120];//超时时间
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:[NSString stringWithFormat:@"%ld",(long)content.length] forHTTPHeaderField:@"Content-Length"];
-    if( dictionary ){
-        NSArray* keys = dictionary.allKeys;
-        for( id key in keys ){
-            id value = dictionary[key];
-            if( key && value ){
-                [request setValue:value forHTTPHeaderField:key];
-            }
-        }
-    }
-    [request setHTTPBody:content];
-    
-    // 发送同步请求, data就是返回的数据
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
-    if (data == nil) {
-        //LVError(@"send request failed: %@", error);
-        return nil;
-    }
-    
-    NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return response;
-}
 
 static int DebugReadCmd (lv_State *L) {
     NSString* cmd = [LVDebuger getCmd];
@@ -62,6 +22,14 @@ static int DebugReadCmd (lv_State *L) {
         lv_pushnil(L);
     }
     return 1;
+}
+
+static int DebugSleep (lv_State *L) {
+    float time = lv_tonumber(L, 1);
+    if( time>0 ) {
+        [NSThread sleepForTimeInterval:time];
+    }
+    return 0;
 }
 
 static int DebugPrintToServer (lv_State *L) {
@@ -79,10 +47,6 @@ static int runningLine (lv_State *L) {
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
     
-//    NSMutableData* data = [[NSMutableData alloc] init];
-//    const char* cs = [NSString stringWithFormat:@"%d",lineNumber].UTF8String;
-//    [data appendBytes:cs length:strlen(cs)];
-//    [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9875" content:data dictionary:@{@"Cmd-Name":@"running",@"File-Name":fileName}];
     [LVDebuger  sendCmd:@"running" fileName:fileName info:lineInfo];
     return 0;
 }
@@ -95,6 +59,7 @@ static int get_file_line( lv_State *L )
 
 static const lvL_Reg dblib[] = {
     {"readCmd", DebugReadCmd},
+    {"sleep", DebugSleep},
     {"printToServer", DebugPrintToServer},
     {"runningLine", runningLine},
     {"get_file_line", get_file_line},

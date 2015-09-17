@@ -80,8 +80,6 @@ static NSString* receivedCmd = @"none";
     NSString* cmd = receivedCmd;
     if( cmd ) {
         receivedCmd = nil;
-    } else {
-        [NSThread sleepForTimeInterval:0.01];
     }
     return cmd;
 }

@@ -234,7 +234,8 @@ function debug_execute_cmd( env )
     --print( "(ldb) " )
     local cmd = debug:readCmd()
     if ( cmd ==nil ) then
-    	return;
+    	debug:sleep(0.01);
+    	return false;
     end
     --取上一次的命令,方便调试
     -- if cmd ~= "" then
@@ -335,7 +336,7 @@ function debug_trace( event, line )
         end
         return;
     end
-    -- doRuningCmd();
+    doRuningCmd();
 end
 
 function begin_debug()
