@@ -1,6 +1,6 @@
 
 // debug.lua
-char g_debug_lua[9502] = {
+char g_debug_lua[9530] = {
     '_','D','E','B','U','G','_','F','I','L','E',' ','=',' ','"','d','e','b','u','g','.','l','u','a','"',0xa,
     // _DEBUG_FILE = "debug.lua"
     0xa,
@@ -394,10 +394,8 @@ char g_debug_lua[9502] = {
     'e','n','d',0xa,
     // end
     0xa,
-    'f','u','n','c','t','i','o','n',' ','d','o','R','u','n','i','n','g','C','m','d','(',' ',')',0xa,
-    // function doRuningCmd( )
-    ' ',' ',' ',' ','l','o','c','a','l',' ','c','m','d',' ','=',' ','d','e','b','u','g',':','r','e','a','d','C','m','d','(',')',0xa,
-    // local cmd = debug:readCmd()
+    'f','u','n','c','t','i','o','n',' ','d','e','b','u','g','_','r','u','n','i','n','g','_','e','x','e','c','u','t','e','(',' ','c','m','d',' ',')',0xa,
+    // function debug_runing_execute( cmd )
     ' ',' ',' ',' ','i','f','(',' ','c','m','d','=','=','n','i','l',' ',')',' ','t','h','e','n',' ',0xa,
     // if( cmd==nil ) then
     ' ',' ',' ',' ',0x9,'r','e','t','u','r','n',';',0xa,
@@ -641,8 +639,11 @@ char g_debug_lua[9502] = {
     // return;
     ' ',' ',' ',' ','e','n','d',0xa,
     // end
-    ' ',' ',' ',' ','d','o','R','u','n','i','n','g','C','m','d','(',')',';',0xa,
-    // doRuningCmd();
+    0xa,
+    ' ',' ',' ',' ','l','o','c','a','l',' ','c','m','d',' ','=',' ','d','e','b','u','g',':','r','e','a','d','C','m','d','(',')',0xa,
+    // local cmd = debug:readCmd()
+    ' ',' ',' ',' ','d','e','b','u','g','_','r','u','n','i','n','g','_','e','x','e','c','u','t','e','(',' ','c','m','d',' ',')',';',0xa,
+    // debug_runing_execute( cmd );
     'e','n','d',0xa,
     // end
     0xa,

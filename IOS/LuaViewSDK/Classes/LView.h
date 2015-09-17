@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
+
+extern NSString *const LuaViewRunCmdNotification;
+
 @class LView;
 @class LVBlock;
 @protocol LVProtocal;

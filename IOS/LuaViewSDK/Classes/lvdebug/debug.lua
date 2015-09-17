@@ -208,8 +208,7 @@ function debug_help()
     print( "bt            print traceback" )
 end
 
-function doRuningCmd( )
-    local cmd = debug:readCmd()
+function debug_runing_execute( cmd )
     if( cmd==nil ) then 
     	return;
     end
@@ -336,7 +335,9 @@ function debug_trace( event, line )
         end
         return;
     end
-    doRuningCmd();
+
+    local cmd = debug:readCmd()
+    debug_runing_execute( cmd );
 end
 
 function begin_debug()

@@ -16,6 +16,7 @@
 #import <net/if.h>
 #import <netdb.h>
 #import "LVUtil.h"
+#import "LView.h"
 
 static NSString* receivedCmd = nil;
 
@@ -164,12 +165,14 @@ static void ServerConnectCallBack( CFSocketRef socket,
     LVDebuger* debuger = (__bridge LVDebuger *)(info);
     switch ( type ){
         case kCFSocketReadCallBack: {
-            NSString* ret = readString(socket);
-            NSLog(@"%@", ret);
-            receivedCmd = ret;
+            NSString* cmd = readString(socket);
+            NSLog(@"%@", cmd);
+            receivedCmd = cmd;
             // 关闭掉socket
-            if ( ret.length<=0 ){
+            if ( cmd.length<=0 ){
                 [debuger closeSocket];
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:LuaViewRunCmdNotification object:cmd];
             }
             break;
         }
