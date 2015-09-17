@@ -128,8 +128,8 @@
 		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
 		8418E3C31A5E804700158125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
 		8418E3C61A5E804700158125 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BD1A5E804700158125 /* ViewController.m */; };
-		842142A31ACD3427001FD0ED /* DebugLuaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* DebugLuaFile.m */; };
-		842142A41ACD3427001FD0ED /* DebugLuaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* DebugLuaFile.m */; };
+		842142A31ACD3427001FD0ED /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
+		842142A41ACD3427001FD0ED /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
 		8422AB641B3114C800007661 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8422AB631B3114C800007661 /* snow.png */; };
 		84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84232D441AE4F55B00C9ED93 /* AdSupport.framework */; };
 		842532471ADCB7C0003C05BF /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; };
@@ -429,7 +429,7 @@
 		8418E3B81A5E804700158125 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8418E3BC1A5E804700158125 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8418E3BD1A5E804700158125 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		842142A21ACD3427001FD0ED /* DebugLuaFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugLuaFile.m; path = lvdebug/DebugLuaFile.m; sourceTree = "<group>"; };
+		842142A21ACD3427001FD0ED /* LVDebugLua.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugLua.m; path = lvdebug/LVDebugLua.m; sourceTree = "<group>"; };
 		842142A51ACD3E2C001FD0ED /* debug.lua */ = {isa = PBXFileReference; lastKnownFileType = text; name = debug.lua; path = lvdebug/debug.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8422AB631B3114C800007661 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		84232D421AE4F4E300C9ED93 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -1043,7 +1043,7 @@
 			isa = PBXGroup;
 			children = (
 				842142A51ACD3E2C001FD0ED /* debug.lua */,
-				842142A21ACD3427001FD0ED /* DebugLuaFile.m */,
+				842142A21ACD3427001FD0ED /* LVDebugLua.m */,
 				91ACCE751AC531160034D9B3 /* LVDebuger.h */,
 				91ACCE761AC531160034D9B3 /* LVDebuger.m */,
 				84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */,
@@ -1391,7 +1391,7 @@
 				84342D901AE0E02B00ECB4EF /* LVAttributedString.m in Sources */,
 				840AD6371A63ED7D003E837D /* lVvm.c in Sources */,
 				84185DC31B451E28003E0ECE /* LVStruct.m in Sources */,
-				842142A41ACD3427001FD0ED /* DebugLuaFile.m in Sources */,
+				842142A41ACD3427001FD0ED /* LVDebugLua.m in Sources */,
 				846481D51A64C61F00DE6204 /* LVScrollView.m in Sources */,
 				8418E3AC1A5E704100158125 /* LuaViewSDK.m in Sources */,
 				840AD61D1A63ED7D003E837D /* lVoslib.c in Sources */,
@@ -1464,7 +1464,7 @@
 				840AD6261A63ED7D003E837D /* lVstring.c in Sources */,
 				846481D71A64C61F00DE6204 /* LVTextField.m in Sources */,
 				84C3B72B1A84622A00923404 /* LVData.m in Sources */,
-				842142A31ACD3427001FD0ED /* DebugLuaFile.m in Sources */,
+				842142A31ACD3427001FD0ED /* LVDebugLua.m in Sources */,
 				840AD6291A63ED7D003E837D /* lVstrlib.c in Sources */,
 				840AD5FE1A63ED7D003E837D /* lVdump.c in Sources */,
 				846481DA1A64C61F00DE6204 /* LVTimer.m in Sources */,

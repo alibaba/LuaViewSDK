@@ -12,7 +12,7 @@ public class DebugLuaCreaterMain {
 	public static void main(String[] args) {
 		
 		byte[] bs = file_to_bytes("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/debug.lua");
-		PrintStream ps = getPrintStream("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/DebugLuaFile.m");
+		PrintStream ps = getPrintStream("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/LVDebugLua.m");
 		ps.println();
 		ps.println("// debug.lua");
 		ps.println("char g_debug_lua[" + (bs.length + 1) + "] = {");
