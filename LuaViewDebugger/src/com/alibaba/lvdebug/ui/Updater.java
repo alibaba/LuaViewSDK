@@ -1,13 +1,18 @@
 package com.alibaba.lvdebug.ui;
 
-import com.alibaba.lvdebug.Log;
+import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ServerMain;
-import com.alibaba.lvdebug.ui.SrcCodeCenter;
 import com.alibaba.lvdebug.ui.UICmd;
 
 public final class Updater {
-	public static final String CMD_NAME = "Cmd-Name:".toLowerCase();
-	public static final String FILE_NAME = "File-Name:".toLowerCase();
+	public final String CMD_NAME = "Cmd-Name:".toLowerCase();
+	public final String FILE_NAME = "File-Name:".toLowerCase();
+
+	private final Center center;
+
+	public Updater(Center center) {
+		this.center = center;
+	}
 
 	private UICmd readCmd(String string) throws Exception {
 		String[] heads = null;
@@ -42,11 +47,11 @@ public final class Updater {
 			UICmd cmd = this.readCmd(string);
 			if (cmd.cmd != null) {
 				if ("log".equals(cmd.cmd)) {
-					Log.print(cmd.content);
+					center.log.print(cmd.content);
 				} else if ("loadfile".equals(cmd.cmd)) {
-					SrcCodeCenter.loadfile(cmd.fileName, cmd.content);
+					this.center.srcCodeCenter.loadfile(cmd.fileName, cmd.content);
 				} else if ("running".equals(cmd.cmd)) {
-					SrcCodeCenter.running(cmd.fileName, cmd.content);
+					this.center.srcCodeCenter.running(cmd.fileName, cmd.content);
 				} else {
 					System.err.println("unkonw cmd: " + cmd.cmd);
 				}

@@ -5,17 +5,17 @@ import java.awt.Graphics2D;
 import java.util.Hashtable;
 
 public class Word {
+	public static final Color KeyWordColor = new Color(126, 8, 84);
+	public static final Color StringWordColor = new Color(45, 36, 251);
+	public static final Color NumberWordColor = new Color(183, 24, 29);
+	public static final Color CommentWordColor = new Color(65, 126, 96);
+
 	public final String text;
 	public final Color color;
 	public boolean isKeyWord;
 	public boolean isNumber;
 	public boolean isString;
 	public boolean isComment;
-
-	public static final Color KeyWordColor = new Color(126, 8, 84);
-	public static final Color StringWordColor = new Color(45, 36, 251);
-	public static final Color NumberWordColor = new Color(183, 24, 29);
-	public static final Color CommentWordColor = new Color(65, 126, 96);
 
 	public Word(String s) {
 		this.text = s;

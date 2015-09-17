@@ -6,9 +6,9 @@ import java.net.Socket;
 
 public final class ExitHttpRequest {
 
-	public static final String EXIT_APP = "Exit-App".toLowerCase();
+	public final String EXIT_APP = "Exit-App".toLowerCase();
 
-	public static String sendExitCmd() {
+	public String sendExitCmd() {
 		String result = null;
 		try {
 			Socket socket = new Socket("127.0.0.1", ServerMain.PORT);

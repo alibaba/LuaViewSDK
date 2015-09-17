@@ -2,16 +2,15 @@ package com.alibaba.lvdebug;
 
 import java.io.*;
 import java.net.*;
-
-import com.alibaba.lvdebug.ui.Updater;
+import com.alibaba.lvdebug.ClientCmdBuffer.ClientCmd;
 
 public final class Server {
 	private Socket connection;
 	private DataOutputStream writer = null;
 	private DataInputStream reader = null;
-	private Updater uiUpdater;
+	private Center center;
 
-	public Server(Socket connection) {
+	public Server(Socket connection, Center center) {
 		super();
 		this.connection = connection;
 		try {
@@ -20,7 +19,7 @@ public final class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		uiUpdater = new Updater();
+		this.center = center;
 	}
 
 	private void writeString(String s) throws Exception {
@@ -74,7 +73,7 @@ public final class Server {
 							System.exit(0);
 							return;
 						} else {
-							uiUpdater.run(string);
+							center.updater.run(string);
 						}
 					}
 				} catch (Exception e) {
@@ -91,7 +90,7 @@ public final class Server {
 			public void run() {
 				try {
 					for (; continueRun;) {
-						ClientCmd cmd = ClientCmd.popCmd();
+						ClientCmd cmd = center.cmdBuffer.popCmd();
 						if (cmd != null) {
 							System.out.println("Send Client Cmd: " + cmd);
 							writeString(cmd.cmdString);

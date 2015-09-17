@@ -20,7 +20,7 @@ abstract public class MyScrollPanel extends JPanel {
 
 	private Font font = new java.awt.Font("宋体", 0, 14);
 
-	public static final int LINE_H = 24;
+	public final int LINE_H = 24;
 
 	private int bar_w = 16;
 

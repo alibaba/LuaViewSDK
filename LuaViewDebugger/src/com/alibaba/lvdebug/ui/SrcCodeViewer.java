@@ -15,8 +15,8 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Vector;
-
-import com.alibaba.lvdebug.ClientCmd;
+import com.alibaba.lvdebug.Center;
+import com.alibaba.lvdebug.ClientCmdBuffer.ClientCmd;
 
 // 类的作用：树结构的浏览器
 /**
@@ -26,18 +26,21 @@ import com.alibaba.lvdebug.ClientCmd;
  */
 public final class SrcCodeViewer extends MyScrollPanel {
 
+	private static final long serialVersionUID = -196018687886621L;
+
 	public boolean canBreakPoint = true;
 
 	public final String fileName;
-
-	private static final long serialVersionUID = -196018687886621L;
 
 	private final Vector<Line> lines = new Vector<Line>();
 
 	private FontMetrics fontMetrics;
 
-	SrcCodeViewer(String fileName, String content) {
+	private Center center;
+
+	SrcCodeViewer(String fileName, String content, Center center) {
 		super();
+		this.center = center;
 		this.setFont(new Font("黑体", Font.PLAIN, 16));
 		fontMetrics = getFontMetrics(getFont());
 
@@ -71,8 +74,8 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		}
 	}
 
-	private static final int X0 = LINE_H * 3;
-	private static final int Y0 = LINE_H * 2;
+	private final int X0 = LINE_H * 3;
+	private final int Y0 = LINE_H * 2;
 
 	public void myPaint(Graphics2D g) {
 		g.setColor(new Color(0xf0f0f0));
@@ -132,10 +135,10 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			updateUI();
 			if (line.isBreakPoint) {
 				String s = "b " + this.fileName + ":" + line.index;
-				ClientCmd.pushCmd(new ClientCmd(s));
+				center.cmdBuffer.pushCmd(new ClientCmd(s));
 			} else {
 				String s = "rb " + this.fileName + ":" + line.index;
-				ClientCmd.pushCmd(new ClientCmd(s));
+				center.cmdBuffer.pushCmd(new ClientCmd(s));
 			}
 		}
 	}

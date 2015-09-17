@@ -2,18 +2,21 @@ package com.alibaba.lvdebug;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.swing.JTextArea;
 
-import com.alibaba.lvdebug.ui.DebuggerFrame;
-
 public final class Log {
-	public static synchronized void print(String s) {
+	private Center center;
+
+	public Log(Center center) {
+		this.center = center;
+	}
+
+	public synchronized void print(String s) {
 		if (s == null) {
 			s = "";
 		}
-		if (DebuggerFrame.frame != null) {
-			JTextArea textArea = DebuggerFrame.frame.getOutputArea();
+		if (center.frame != null) {
+			JTextArea textArea = center.frame.getOutputArea();
 			{
 				String text = textArea.getText();
 				if (text.length() <= 0 || text.endsWith("\n")) {
@@ -26,9 +29,9 @@ public final class Log {
 	}
 
 	// 设置日期格式
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat("[MM-dd HH:mm:ss.SSS]  ");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("[MM-dd HH:mm:ss.SSS]  ");
 
-	public static String date() {
+	public String date() {
 		return dateFormat.format(new Date());
 	}
 }

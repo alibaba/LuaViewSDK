@@ -4,11 +4,18 @@ import java.util.Hashtable;
 
 import javax.swing.JTabbedPane;
 
+import com.alibaba.lvdebug.Center;
+
 public class SrcCodeCenter {
+	public final Center center;
 
-	static final Hashtable<String, SrcCodeViewer> table = new Hashtable<String, SrcCodeViewer>();
+	public SrcCodeCenter(Center center) {
+		this.center = center;
+	}
 
-	public static void showHelpTab() {
+	final Hashtable<String, SrcCodeViewer> table = new Hashtable<String, SrcCodeViewer>();
+
+	public void showHelpTab() {
 		String s = "h             help info" + "\n" + //
 				"c             continue run" + "\n" + //
 				"s             trace" + "\n" + //
@@ -21,34 +28,34 @@ public class SrcCodeCenter {
 		loadfile("帮助信息", s).canBreakPoint = false;
 	}
 
-	public static SrcCodeViewer loadfile(String fileName, String content) {
+	public SrcCodeViewer loadfile(String fileName, String content) {
 		content = content.replace("\t", "    ");
-		JTabbedPane tabbedPane = DebuggerFrame.frame.getTabbedPane();
+		JTabbedPane tabbedPane = center.frame.getTabbedPane();
 		if (fileName != null) {
 			SrcCodeViewer temp = table.get(fileName);
 			tabbedPane.remove(temp);
 			table.remove(fileName);
 		}
-		SrcCodeViewer viewer = new SrcCodeViewer(fileName, content);
+		SrcCodeViewer viewer = new SrcCodeViewer(fileName, content, this.center);
 		tabbedPane.addTab(fileName, viewer);
 		table.put(fileName, viewer);
 		return viewer;
 	}
 
-	public static void running(String fileName, String lineNumber) {
+	public void running(String fileName, String lineNumber) {
 		try {
 			if (fileName != null) {
 				SrcCodeViewer viewer = table.get(fileName);
 				if (viewer != null) {
 					viewer.gotoLine(Integer.parseInt(lineNumber.trim()));
 
-					JTabbedPane tabbedPane = DebuggerFrame.frame.getTabbedPane();
+					JTabbedPane tabbedPane = center.frame.getTabbedPane();
 					tabbedPane.setSelectedComponent(viewer);
-					if (DebuggerFrame.frame.isAlwaysOnTop()) {
-						DebuggerFrame.frame.setAlwaysOnTop(true);
+					if (center.frame.isAlwaysOnTop()) {
+						center.frame.setAlwaysOnTop(true);
 					}
-					if (DebuggerFrame.frame.isVisible()) {
-						DebuggerFrame.frame.setVisible(true);
+					if (center.frame.isVisible()) {
+						center.frame.setVisible(true);
 					}
 				}
 			}

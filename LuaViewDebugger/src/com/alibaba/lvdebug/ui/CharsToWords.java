@@ -92,14 +92,14 @@ public class CharsToWords {
 		return null;
 	}
 
-	public static boolean is09(char c) {
+	public boolean is09(char c) {
 		if ('0' <= c && c <= '9') {
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean isAF(char c) {
+	public boolean isAF(char c) {
 		if ('A' <= c && c <= 'F') {
 			return true;
 		}
@@ -109,7 +109,7 @@ public class CharsToWords {
 		return false;
 	}
 
-	public static boolean isAZ(char c) {
+	public boolean isAZ(char c) {
 		if ('A' <= c && c <= 'Z') {
 			return true;
 		}
