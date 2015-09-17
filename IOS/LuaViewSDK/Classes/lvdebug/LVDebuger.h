@@ -1,22 +1,21 @@
 //
-//  LVDebuger.h
-//  CFSocketDemo
+//  LVDebugCmd.h
+//  LVSDK
 //
-//  Created by dongxicheng on 9/16/15.
-//  Copyright (c) 2015 dongxicheng. All rights reserved.
+//  Created by 城西 on 15/3/27.
+//  Copyright (c) 2015年 dongxicheng. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "LVHeads.h"
+
+extern int g_printToServer;
+void lv_printToServer(const char* cs, int withTabChar);
+void lv_print(NSString* format,...);
 
 @interface LVDebuger : NSObject
 
-+ (instancetype)sharedInstance ;
- 
-+ (NSString*) getCmd;
++(int) classDefine:(lv_State *)L;
 
-- (NSInteger) waitUntilConnectionEnd;
-
-+ (void) sendCmd:(NSString*) cmdName info:(NSString*) info;
-+ (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info;
 
 @end

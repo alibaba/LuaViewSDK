@@ -35,7 +35,7 @@
 #import "LVData.h"
 #import "LVSwipeGestureRecognizer.h"
 #import "LVLongPressGestureRecognizer.h"
-#import "LVDebugCmd.h"
+#import "LVDebuger.h"
 #import "LVTableView.h"
 #import "LVTableViewCell.h"
 #import "LVDownloader.h"
@@ -384,7 +384,7 @@ static int debug_log (lv_State *L) {
     [LVAudioPlayer classDefine:L];
     
     // 调试
-    [LVDebugCmd classDefine:L];
+    [LVDebuger classDefine:L];
     
     // attributedString
     [LVAttributedString classDefine:L];
