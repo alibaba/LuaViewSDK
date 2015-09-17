@@ -20,8 +20,7 @@
 #include "lVlib.h"
 
 // 调试信息
-extern int g_printToServer;
-extern void lv_printToServer(const char* cs, int withTabChar);
+extern void lv_printToServer(lv_State* L, const char* cs, int withTabChar);
 
 
 
@@ -47,21 +46,15 @@ static int lvB_print (lv_State *L) {
         if (i>1) {
             fputs("\t", stdout);
             fputs(s, stdout);
-            if( g_printToServer ) {
-                lv_printToServer(s, 1);
-            }
+            lv_printToServer(L, s, 1);
         } else {
             fputs(s, stdout);
-            if( g_printToServer ) {
-                lv_printToServer(s, 0);
-            }
+            lv_printToServer(L, s, 0);
         }
         lv_pop(L, 1);  /* pop result */
     }
     fputs("\n", stdout);
-    if( g_printToServer ) {
-        lv_printToServer("\n", 0);
-    }
+    lv_printToServer(L, "\n", 0);
     return 0;
 }
 

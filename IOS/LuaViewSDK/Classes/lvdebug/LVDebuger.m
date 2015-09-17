@@ -9,13 +9,16 @@
 #import "LVDebuger.h"
 #import "LVHeads.h"
 #import "LVDebugConnection.h"
+#import "LView.h"
 
 
 @implementation LVDebuger
 
 
 static int DebugReadCmd (lv_State *L) {
-    NSString* cmd = [LVDebugConnection getCmd];
+    LView* luaView = (__bridge LView *)(L->lView);
+    
+    NSString* cmd = [luaView.debugConnection getCmd];
     if( cmd ){
         lv_pushstring(L, cmd.UTF8String);
     } else {
@@ -33,8 +36,9 @@ static int DebugSleep (lv_State *L) {
 }
 
 static int DebugPrintToServer (lv_State *L) {
+    LView* luaView = (__bridge LView *)(L->lView);
     BOOL open = lvL_checkbool(L, 1);
-    g_printToServer = !!open;
+    luaView.debugConnection.printToServer = !!open;
     return 0;
 }
 
@@ -46,8 +50,8 @@ static int runningLine (lv_State *L) {
     int lineNumber = lv_tonumber(L, 2);
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
-    
-    [LVDebugConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
+    LView* luaView = (__bridge LView *)(L->lView);
+    [luaView.debugConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
     return 0;
 }
 
@@ -71,32 +75,30 @@ static const lvL_Reg dblib[] = {
     return 0;
 }
 
-
-// 是否把日志传导服务器
-int g_printToServer = NO;
-
 // 把日志传送到服务器
-void lv_printToServer(const char* cs, int withTabChar){
-    if( g_printToServer ){
+void lv_printToServer(lv_State* L, const char* cs, int withTabChar){
+    LView* lview = (__bridge LView *)(L->lView);
+    if( lview.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
         if( withTabChar ){
             [data appendBytes:"      " length:4];
         }
         [data appendBytes:cs length:strlen(cs)];
         
-        [LVDebugConnection  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        [lview.debugConnection  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
 }
 
-void lv_print(NSString*format, ...) {
-    va_list argumentList;
-    va_start(argumentList, format);
-    NSMutableString * message = [[NSMutableString alloc] initWithFormat:format
-                                                              arguments:argumentList];
-    [message appendString:@"\n"];
-    lv_printToServer(message.UTF8String,0);
-    va_end(argumentList);
-}
+// 可变参数实例
+//void lv_print(NSString*format, ...) {
+//    va_list argumentList;
+//    va_start(argumentList, format);
+//    NSMutableString * message = [[NSMutableString alloc] initWithFormat:format
+//                                                              arguments:argumentList];
+//    [message appendString:@"\n"];
+//    lv_printToServer(message.UTF8String,0);
+//    va_end(argumentList);
+//}
 
 
 

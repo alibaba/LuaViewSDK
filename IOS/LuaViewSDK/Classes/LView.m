@@ -16,6 +16,7 @@
 #import "LVPkgManager.h"
 #import "UIView+LuaView.h"
 #import "LVDebugConnection.h"
+#import "LVDebugConnection.h"
 
 NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 
@@ -74,6 +75,7 @@ NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 
 -(void) dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.debugConnection closeAll];
 }
 
 #pragma mark - run
@@ -92,11 +94,11 @@ NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 }
 
 -(void) checkDebugOrNot:(const char*) chars length:(NSInteger) len fileName:(NSString*) fileName {
-    if( g_printToServer ){
+    if( self.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
         [data appendBytes:chars length:len];
         
-        [LVDebugConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        [self.debugConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
 }
 
@@ -125,18 +127,14 @@ extern char g_debug_lua[];
 }
 
 -(void) checkDeuggerIsRunningToLoadDebugModel{
-    static BOOL checked = NO;
-    static BOOL openDebugMode = NO;
-    if( checked==NO ){
-        checked = YES;
-        if ( [[LVDebugConnection sharedInstance] waitUntilConnectionEnd] >0 ) {
-            openDebugMode = YES;
-        }
+    if( self.debugConnection== nil) {
+        self.debugConnection = [[LVDebugConnection alloc] init];
     }
-    if( openDebugMode ) {
+
+    if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
-            [LVDebugConnection sendCmd:@"log" info:@"connect ok\n"];
+            [self.debugConnection sendCmd:@"log" info:@"connect ok\n"];
             [self loadDebugModel];// 加载调试模块
         }
     }

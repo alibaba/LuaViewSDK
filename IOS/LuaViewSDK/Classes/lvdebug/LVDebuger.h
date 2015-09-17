@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-extern int g_printToServer;
-void lv_printToServer(const char* cs, int withTabChar);
-void lv_print(NSString* format,...);
+extern void lv_printToServer(lv_State* L, const char* cs, int withTabChar);
 
 @interface LVDebuger : NSObject
 

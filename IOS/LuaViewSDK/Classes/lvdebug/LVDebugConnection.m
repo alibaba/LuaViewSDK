@@ -18,7 +18,6 @@
 #import "LVUtil.h"
 #import "LView.h"
 
-static NSString* receivedCmd = nil;
 
 #define SOCKET_ERROR        (-1)
 #define SOCKET_CONNECTINTG  (0)
@@ -30,6 +29,7 @@ static NSString* receivedCmd = nil;
 @property(nonatomic,assign) BOOL closed;
 @property(nonatomic,strong) NSMutableArray* dataArray;
 @property(nonatomic,assign) NSInteger state;
+@property(nonatomic,strong) NSString* receivedCmd;
 @end
 
 @implementation LVDebugConnection{
@@ -39,17 +39,22 @@ static NSString* receivedCmd = nil;
 -(id) init{
     self  = [super init];
     if( self ) {
+        static int index = 0;
         self.myThread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];
-        self.myThread.name = @"LuaView.Debuger";
+        self.myThread.name = [NSString stringWithFormat:@"LuaView.Debuger.%d",index];
         self.dataArray = [[NSMutableArray alloc] init];
+        [self startThread];
     }
     return self;
 }
 
 - (void) dealloc{
-    [self closeSocket];
+    [self closeAll];
 }
 
+-(BOOL) isOk{
+    return self.state>0;
+}
 - (NSInteger) waitUntilConnectionEnd{
     for(;self.state==SOCKET_CONNECTINTG;) {
         [NSThread sleepForTimeInterval:0.01];
@@ -71,29 +76,29 @@ static NSString* receivedCmd = nil;
     }
 }
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t onceToken;
-    static LVDebugConnection* temp = nil;
-    dispatch_once(&onceToken, ^{
-        temp = [[LVDebugConnection alloc] init];
-        [temp startThread];
-    });
-    return temp;
-}
+//+ (instancetype)sharedInstance {
+//    static dispatch_once_t onceToken;
+//    static LVDebugConnection* temp = nil;
+//    dispatch_once(&onceToken, ^{
+//        temp = [[LVDebugConnection alloc] init];
+//        [temp startThread];
+//    });
+//    return temp;
+//}
 
-+ (NSString*) getCmd{
-    NSString* cmd = receivedCmd;
+- (NSString*) getCmd{
+    NSString* cmd = self.receivedCmd;
     if( cmd ) {
-        receivedCmd = nil;
+        self.receivedCmd = nil;
     }
     return cmd;
 }
 
-+ (void) sendCmd:(NSString*) cmdName info:(NSString*) info{
-    [LVDebugConnection sendCmd:cmdName fileName:nil info:info];
+- (void) sendCmd:(NSString*) cmdName info:(NSString*) info{
+    [self sendCmd:cmdName fileName:nil info:info];
 }
 
-+ (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
+- (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
     NSMutableString* buffer = [[NSMutableString alloc] init];
     if ( cmdName ) {
         [buffer appendFormat:@"Cmd-Name:%@\n",cmdName];
@@ -105,7 +110,7 @@ static NSString* receivedCmd = nil;
     if ( info ){
         [buffer appendFormat:@"%@",info];
     }
-    [[LVDebugConnection sharedInstance] sendString:buffer];
+    [self sendString:buffer];
 }
 
 -(void)Connect:(NSString*) ip port:(NSUInteger)port
@@ -143,15 +148,20 @@ static NSString* receivedCmd = nil;
     CFRelease(source);
 }
 
--(void) closeSocket{
+-(void) closeAll{
     self.closed = TRUE;
     self.canWrite = FALSE;
+    self.state = -1;
     
     if (_socket != NULL)
     {
         CFSocketInvalidate(_socket);
         CFRelease(_socket);
         _socket = NULL;
+    }
+    
+    if( !self.myThread.isCancelled ) {
+        [self.myThread cancel];
     }
 }
 
@@ -166,10 +176,10 @@ static void ServerConnectCallBack( CFSocketRef socket,
         case kCFSocketReadCallBack: {
             NSString* cmd = readString(socket);
             NSLog(@"%@", cmd);
-            receivedCmd = cmd;
+            debuger.receivedCmd = cmd;
             // 关闭掉socket
             if ( cmd.length<=0 ){
-                [debuger closeSocket];
+                [debuger closeAll];
             } else {
                 [[NSNotificationCenter defaultCenter] postNotificationName:LuaViewRunCmdNotification object:cmd];
             }

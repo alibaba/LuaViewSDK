@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
+#import "LVDebugConnection.h"
 
 
 extern NSString *const LuaViewRunCmdNotification;
@@ -30,6 +31,7 @@ extern NSString *const LuaViewRunCmdNotification;
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 @property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
+@property (nonatomic,strong) LVDebugConnection* debugConnection;
 
 
 /**
