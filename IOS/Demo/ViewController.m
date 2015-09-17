@@ -19,7 +19,6 @@
 #import "JHSLuaViewButton.h"
 #import "JHSLuaViewImageView.h"
 #import "JHSLuaViewController.h"
-#import "LVDebuger.h"
 
 
 @interface ViewController ()
@@ -32,7 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [LVDebuger sharedInstance];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"LuaView 测试demo";

@@ -14,6 +14,8 @@
  
 + (NSString*) getCmd;
 
+- (NSInteger) waitUntilConnectionEnd;
+
 + (void) sendCmd:(NSString*) cmdName info:(NSString*) info;
 + (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info;
 

@@ -15,12 +15,19 @@
 #import <sys/ioctl.h>
 #import <net/if.h>
 #import <netdb.h>
+#import "LVUtil.h"
 
 static NSString* receivedCmd = @"none";
 
+#define SOCKET_ERROR        (-1)
+#define SOCKET_CONNECTINTG  (0)
+#define SOCKET_SUCCESS      (1)
 
 @interface LVDebuger ()
 @property(nonatomic,strong) NSThread* myThread;
+@property(nonatomic,assign) BOOL canWrite;
+@property(nonatomic,strong) NSMutableArray* dataArray;
+@property(nonatomic,assign) NSInteger state;
 @end
 
 @implementation LVDebuger{
@@ -30,22 +37,27 @@ static NSString* receivedCmd = @"none";
 -(id) init{
     self  = [super init];
     if( self ) {
-        self.myThread = [[NSThread alloc] initWithTarget:self
-                                           selector:@selector(myThreadMainMethod:)
-                                                  object:nil];
+        self.myThread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];
         self.myThread.qualityOfService = NSQualityOfServiceUserInteractive;
+        self.myThread.name = @"LuaViewDebuger";
+        self.dataArray = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (NSInteger) waitUntilConnectionEnd{
+    for(;self.state==SOCKET_CONNECTINTG;) {
+        [NSThread sleepForTimeInterval:0.01];
+    }
+    return self.state;
 }
 
 -(void) startThread{
     [self.myThread start]; //启动线程
 }
 
--(void) myThreadMainMethod:(id) obj{
-    
+-(void) run:(id) obj{
     @autoreleasepool {
-        [[NSThread currentThread] setName:@"LuaViewDebuger"];
         [self Connect:@"127.0.0.1" port:9876];
         
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
@@ -74,12 +86,20 @@ static NSString* receivedCmd = @"none";
 }
 
 + (void) sendCmd:(NSString*) cmdName info:(NSString*) info{
-    NSString* buffer = [NSString stringWithFormat:@"Cmd-Name:%@\n\n%@", cmdName, info ];
-    [[LVDebuger sharedInstance] sendString:buffer];
+    [LVDebuger sendCmd:cmdName fileName:nil info:info];
 }
 
 + (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
-    NSString* buffer = [NSString stringWithFormat:@"Cmd-Name:%@\nFile-Name:%@\n\n%@", cmdName, fileName, info];
+    NSMutableString* buffer = [[NSMutableString alloc] init];
+    if ( cmdName ) {
+        [buffer appendFormat:@"Cmd-Name:%@\n",cmdName];
+    }
+    if ( fileName ){
+        [buffer appendFormat:@"File-Name:%@\n\n",fileName];
+    }
+    if ( info ){
+        [buffer appendFormat:@"%@",info];
+    }
     [[LVDebuger sharedInstance] sendString:buffer];
 }
 
@@ -87,12 +107,13 @@ static NSString* receivedCmd = @"none";
 {
     //////////////////////创建套接字//////////////
     CFSocketContext socketConent = {0,NULL,NULL,NULL,NULL};
+    socketConent.info = (__bridge void *)(self);
     _socket = CFSocketCreate(
                              kCFAllocatorDefault,
                              PF_INET,
                              SOCK_STREAM,
                              IPPROTO_TCP,
-                             kCFSocketConnectCallBack|kCFSocketReadCallBack,     // 类型，表示连接时调用
+                             kCFSocketConnectCallBack|kCFSocketReadCallBack|kCFSocketWriteCallBack,     // 类型，表示连接时调用
                              ServerConnectCallBack,    // 调用的函数
                              &socketConent );
     
@@ -121,8 +142,9 @@ static void ServerConnectCallBack( CFSocketRef socket,
                                   CFSocketCallBackType type,
                                   CFDataRef address,
                                   const void *data,
-                                  void * info)
+                                  void* info)
 {
+    LVDebuger* debuger = (__bridge LVDebuger *)(info);
     switch ( type ){
         case kCFSocketReadCallBack: {
             NSString* ret = readString(socket);
@@ -130,13 +152,34 @@ static void ServerConnectCallBack( CFSocketRef socket,
             receivedCmd = ret;
             break;
         }
-        case kCFSocketConnectCallBack: {
-            NSLog(@"connect success");
+        case kCFSocketWriteCallBack: {
+            debuger.canWrite = YES;
+            [debuger sendOneData];
             break;
         }
-        default: {
-            NSLog(@"connect type %d", (int)type );
+        case kCFSocketConnectCallBack:
+            if( data ) {
+                LVError(@"Debuger Socket Connect Error" );
+                debuger.state = SOCKET_ERROR;
+            } else {
+                LVLog(@"Debuger Socket connect Success");
+                debuger.state = SOCKET_SUCCESS;
+            }
             break;
+        default: {
+            LVLog(@"connect type %d", (int)type );
+            break;
+        }
+    }
+}
+
+-(void) sendOneData{
+    NSData* data = self.dataArray.lastObject;
+    if( self.canWrite && data) {
+        [self.dataArray removeLastObject];
+        if( data ) {
+            NSInteger sendLength = send(CFSocketGetNative(_socket), data.bytes, data.length, 0);
+            LVLog(@"Debuger socket Send length : %d", (int)sendLength);
         }
     }
 }
@@ -172,17 +215,23 @@ static NSString* readString(CFSocketRef socket)
 /////////////////////////发送信息给服务器////////////////////////
 - (void) sendString:(NSString *)string
 {
-    NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSUInteger len = data.length;
-    NSMutableData* buffer = [[NSMutableData alloc] init];
-    unsigned char head[4] = {0};
-    head[0] = (len>>24);
-    head[1] = (len>>16);
-    head[2] = (len>>8);
-    head[3] = (len);
-    [buffer appendBytes:head length:4];
-    [buffer appendData:data];
-    NSInteger sendLength = send(CFSocketGetNative(_socket), buffer.bytes, buffer.length, 0);
-    NSLog(@"socket Send length : %d", (int)sendLength);
+    if( self.canWrite ) {
+        NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
+        NSUInteger len = data.length;
+        NSMutableData* buffer = [[NSMutableData alloc] init];
+        unsigned char head[4] = {0};
+        head[0] = (len>>24);
+        head[1] = (len>>16);
+        head[2] = (len>>8);
+        head[3] = (len);
+        [buffer appendBytes:head length:4];
+        [buffer appendData:data];
+        
+        [self.dataArray insertObject:buffer atIndex:0];
+        
+        [self sendOneData];
+        //    NSInteger sendLength = send(CFSocketGetNative(_socket), buffer.bytes, buffer.length, 0);
+        //    NSLog(@"socket Send length : %d", (int)sendLength);
+    }
 }
 @end

@@ -111,16 +111,17 @@ extern char g_debug_lua[];
     static BOOL checked = NO;
     if( checked==NO ){
         checked = YES;
-        
-        [LVDebuger sendCmd:@"log" info:@"connect ok\n"];
-        [self loadDebugModel];// 加载调试模块
-//        NSMutableData* data = [[NSMutableData alloc] init];
-//        const char* cs = "connect ok\n";
-//        [data appendBytes:cs length:strlen(cs)];
-//        NSString* ret = [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9876" content:data dictionary:@{@"Cmd-Name":@"log"}];
-//        if( ret ){// 成功连接到调试模块
-//            [self loadDebugModel];// 加载调试模块
-//        }
+        if ( [[LVDebuger sharedInstance] waitUntilConnectionEnd] >0 ) {
+            [LVDebuger sendCmd:@"log" info:@"connect ok\n"];
+            [self loadDebugModel];// 加载调试模块
+    //        NSMutableData* data = [[NSMutableData alloc] init];
+    //        const char* cs = "connect ok\n";
+    //        [data appendBytes:cs length:strlen(cs)];
+    //        NSString* ret = [LVDebugCmd sendAndReadCmdByUrl:@"http://127.0.0.1:9876" content:data dictionary:@{@"Cmd-Name":@"log"}];
+    //        if( ret ){// 成功连接到调试模块
+    //            [self loadDebugModel];// 加载调试模块
+    //        }
+        }
     }
 }
 #endif
