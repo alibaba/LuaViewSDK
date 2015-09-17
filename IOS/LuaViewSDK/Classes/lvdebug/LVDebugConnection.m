@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVDebugerConnection.h"
+#import "LVDebugConnection.h"
 #import <CFNetwork/CFNetwork.h>
 #import <TargetConditionals.h>
 #import <sys/socket.h>
@@ -24,7 +24,7 @@ static NSString* receivedCmd = nil;
 #define SOCKET_CONNECTINTG  (0)
 #define SOCKET_SUCCESS      (1)
 
-@interface LVDebugerConnection ()
+@interface LVDebugConnection ()
 @property(nonatomic,strong) NSThread* myThread;
 @property(nonatomic,assign) BOOL canWrite;
 @property(nonatomic,assign) BOOL closed;
@@ -32,7 +32,7 @@ static NSString* receivedCmd = nil;
 @property(nonatomic,assign) NSInteger state;
 @end
 
-@implementation LVDebugerConnection{
+@implementation LVDebugConnection{
     CFSocketRef _socket;
 }
 
@@ -73,9 +73,9 @@ static NSString* receivedCmd = nil;
 
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
-    static LVDebugerConnection* temp = nil;
+    static LVDebugConnection* temp = nil;
     dispatch_once(&onceToken, ^{
-        temp = [[LVDebugerConnection alloc] init];
+        temp = [[LVDebugConnection alloc] init];
         [temp startThread];
     });
     return temp;
@@ -90,7 +90,7 @@ static NSString* receivedCmd = nil;
 }
 
 + (void) sendCmd:(NSString*) cmdName info:(NSString*) info{
-    [LVDebugerConnection sendCmd:cmdName fileName:nil info:info];
+    [LVDebugConnection sendCmd:cmdName fileName:nil info:info];
 }
 
 + (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
@@ -105,7 +105,7 @@ static NSString* receivedCmd = nil;
     if ( info ){
         [buffer appendFormat:@"%@",info];
     }
-    [[LVDebugerConnection sharedInstance] sendString:buffer];
+    [[LVDebugConnection sharedInstance] sendString:buffer];
 }
 
 -(void)Connect:(NSString*) ip port:(NSUInteger)port
@@ -161,7 +161,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
                                   const void *data,
                                   void* info)
 {
-    LVDebugerConnection* debuger = (__bridge LVDebugerConnection *)(info);
+    LVDebugConnection* debuger = (__bridge LVDebugConnection *)(info);
     switch ( type ){
         case kCFSocketReadCallBack: {
             NSString* cmd = readString(socket);

@@ -8,14 +8,14 @@
 
 #import "LVDebuger.h"
 #import "LVHeads.h"
-#import "LVDebugerConnection.h"
+#import "LVDebugConnection.h"
 
 
 @implementation LVDebuger
 
 
 static int DebugReadCmd (lv_State *L) {
-    NSString* cmd = [LVDebugerConnection getCmd];
+    NSString* cmd = [LVDebugConnection getCmd];
     if( cmd ){
         lv_pushstring(L, cmd.UTF8String);
     } else {
@@ -47,7 +47,7 @@ static int runningLine (lv_State *L) {
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
     
-    [LVDebugerConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
+    [LVDebugConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
     return 0;
 }
 
@@ -84,7 +84,7 @@ void lv_printToServer(const char* cs, int withTabChar){
         }
         [data appendBytes:cs length:strlen(cs)];
         
-        [LVDebugerConnection  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        [LVDebugConnection  sendCmd:@"log" info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
 }
 

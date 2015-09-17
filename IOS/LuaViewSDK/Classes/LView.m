@@ -15,7 +15,7 @@
 #import "LVBlock.h"
 #import "LVPkgManager.h"
 #import "UIView+LuaView.h"
-#import "LVDebugerConnection.h"
+#import "LVDebugConnection.h"
 
 NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 
@@ -96,7 +96,7 @@ NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
         NSMutableData* data = [[NSMutableData alloc] init];
         [data appendBytes:chars length:len];
         
-        [LVDebugerConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        [LVDebugConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
 }
 
@@ -129,14 +129,14 @@ extern char g_debug_lua[];
     static BOOL openDebugMode = NO;
     if( checked==NO ){
         checked = YES;
-        if ( [[LVDebugerConnection sharedInstance] waitUntilConnectionEnd] >0 ) {
+        if ( [[LVDebugConnection sharedInstance] waitUntilConnectionEnd] >0 ) {
             openDebugMode = YES;
         }
     }
     if( openDebugMode ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
-            [LVDebugerConnection sendCmd:@"log" info:@"connect ok\n"];
+            [LVDebugConnection sendCmd:@"log" info:@"connect ok\n"];
             [self loadDebugModel];// 加载调试模块
         }
     }

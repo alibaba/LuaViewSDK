@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LVDebugerConnection : NSObject
+@interface LVDebugConnection : NSObject
 
 + (instancetype)sharedInstance ;
  
