@@ -17,7 +17,7 @@
 #import <netdb.h>
 #import "LVUtil.h"
 
-static NSString* receivedCmd = @"none";
+static NSString* receivedCmd = nil;
 
 #define SOCKET_ERROR        (-1)
 #define SOCKET_CONNECTINTG  (0)
@@ -26,6 +26,7 @@ static NSString* receivedCmd = @"none";
 @interface LVDebuger ()
 @property(nonatomic,strong) NSThread* myThread;
 @property(nonatomic,assign) BOOL canWrite;
+@property(nonatomic,assign) BOOL closed;
 @property(nonatomic,strong) NSMutableArray* dataArray;
 @property(nonatomic,assign) NSInteger state;
 @end
@@ -150,6 +151,18 @@ static void ServerConnectCallBack( CFSocketRef socket,
             NSString* ret = readString(socket);
             NSLog(@"%@", ret);
             receivedCmd = ret;
+            // socket 关闭掉了
+            if ( ret.length<=0 ){
+                debuger.closed = TRUE;
+                debuger.canWrite = FALSE;
+                
+                if (socket != NULL)
+                {
+                    CFSocketInvalidate(socket);
+                    CFRelease(socket);
+                    socket = NULL;
+                }
+            }
             break;
         }
         case kCFSocketWriteCallBack: {
