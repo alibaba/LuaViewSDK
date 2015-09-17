@@ -40,8 +40,7 @@ static NSString* receivedCmd = nil;
     self  = [super init];
     if( self ) {
         self.myThread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];
-        self.myThread.qualityOfService = NSQualityOfServiceUserInteractive;
-        self.myThread.name = @"LuaViewDebuger";
+        self.myThread.name = @"LuaView.Debuger";
         self.dataArray = [[NSMutableArray alloc] init];
     }
     return self;
@@ -203,10 +202,13 @@ static void ServerConnectCallBack( CFSocketRef socket,
         [self.dataArray removeLastObject];
         if( data ) {
             NSInteger sendLength = send(CFSocketGetNative(_socket), data.bytes, data.length, 0);
-            LVLog(@"Debuger socket Send length : %d", (int)sendLength);
+            if( sendLength!=data.length ) {
+                LVError(@"Debuger socket Send length Error : %d != %d", (int)sendLength, (int)data.length);
+            }
         }
     }
 }
+
 ///////////////////监听来自服务器的信息///////////////////
 static NSString* readString(CFSocketRef socket)
 {
