@@ -111,7 +111,6 @@
 		840AD6391A63ED7D003E837D /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		840AD63A1A63ED7D003E837D /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		840AD63B1A63ED7D003E837D /* lVzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E41A63ED7D003E837D /* lVzio.h */; };
-		841042C01B141F8700AD4EE7 /* demo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 841042BF1B141F8700AD4EE7 /* demo.lua */; };
 		8410D9AB1A70A00400B22E49 /* LVPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9A91A70A00400B22E49 /* LVPanGestureRecognizer.h */; };
 		8410D9AC1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
 		8410D9AD1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
@@ -159,8 +158,6 @@
 		8434474F1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; };
 		843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		843447511B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
-		843A64831B8F0AC2003ACCEE /* tableDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 843A64821B8F0AC2003ACCEE /* tableDemo.lua */; };
-		843B7F811B9ECA9E009691BF /* System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 843B7F801B9ECA9E009691BF /* System.lua */; };
 		84470B171B5E66FF00980E31 /* JHSLuaErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLuaErrorView.m */; };
 		844F9F581B969E4300E24A24 /* JHSLuaCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLuaCollectionView.m */; };
 		844F9F5B1B96A0AF00E24A24 /* JHSLuaTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLuaTableView.m */; };
@@ -213,7 +210,6 @@
 		84765E2E1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		84765E2F1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */; };
-		848523441B8EE97D00E5BA71 /* stringDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 848523431B8EE97D00E5BA71 /* stringDemo.lua */; };
 		848C5BE91B6B203C003F2D38 /* animationFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 848C5BE81B6B203C003F2D38 /* animationFire2.lua */; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
 		848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
@@ -229,11 +225,20 @@
 		8497083C1A6765B000E913F4 /* LVSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8497083A1A6765B000E913F4 /* LVSystem.h */; };
 		8497083D1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
 		8497083E1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
-		849D319E1B3A876E00F08CAB /* testluabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849D319D1B3A876E00F08CAB /* testluabox.lua */; };
 		84B1E3811AEF24480054B9F1 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; };
 		84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3831AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1E3841AEF2ED90054B9F1 /* Security.framework */; };
+		84B3917C1BAC315900563600 /* collectionViewDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391721BAC315900563600 /* collectionViewDemo.lua */; };
+		84B3917D1BAC315900563600 /* debug.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391731BAC315900563600 /* debug.lua */; };
+		84B3917E1BAC315900563600 /* demo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391741BAC315900563600 /* demo.lua */; };
+		84B3917F1BAC315900563600 /* demo2015.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391751BAC315900563600 /* demo2015.lua */; };
+		84B391801BAC315900563600 /* flxNodeDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391761BAC315900563600 /* flxNodeDemo.lua */; };
+		84B391811BAC315900563600 /* stringDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391771BAC315900563600 /* stringDemo.lua */; };
+		84B391821BAC315900563600 /* System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391781BAC315900563600 /* System.lua */; };
+		84B391831BAC315900563600 /* tableDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B391791BAC315900563600 /* tableDemo.lua */; };
+		84B391841BAC315900563600 /* testluabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B3917A1BAC315900563600 /* testluabox.lua */; };
+		84B391851BAC315900563600 /* ui.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84B3917B1BAC315900563600 /* ui.lua */; };
 		84B58E3A1B65CC260048F33D /* LVActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */; };
 		84B58E3B1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
 		84B58E3C1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
@@ -256,7 +261,6 @@
 		84CF567A1AEA15A500A49B36 /* LVMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56781AEA15A500A49B36 /* LVMethod.h */; };
 		84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
 		84CF567C1AEA15A500A49B36 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
-		84D42C1D1B2A8AD500D40A0E /* collectionViewDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84D42C1C1B2A8AD500D40A0E /* collectionViewDemo.lua */; };
 		84D446F21AF75BD8000A3911 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; };
 		84D446F31AF75BD8000A3911 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
 		84D446F41AF75BD8000A3911 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
@@ -308,7 +312,6 @@
 		84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84F4A0211B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84F66FB71AFB0BBA0012BB38 /* 2015-05-07.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */; };
-		84F66FBB1AFB61000012BB38 /* demo2015.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F66FBA1AFB61000012BB38 /* demo2015.lua */; };
 		9171D4A41AADD0300040DAA3 /* LVLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */; };
 		9171D4A51AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
 		9171D4A61AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
@@ -324,7 +327,6 @@
 		91ACCE771AC531160034D9B3 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; };
 		91ACCE781AC531160034D9B3 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
 		91ACCE791AC531160034D9B3 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
-		BEDFCC851B82DA2200AE8EC8 /* flxNodeDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */; };
 		E961449DAA11DF4DDE3E3C59 /* libPods-LuaViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */; };
 /* End PBXBuildFile section */
 
@@ -408,7 +410,6 @@
 		840AD5E21A63ED7D003E837D /* lVvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVvm.h; sourceTree = "<group>"; };
 		840AD5E31A63ED7D003E837D /* lVzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVzio.c; sourceTree = "<group>"; };
 		840AD5E41A63ED7D003E837D /* lVzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVzio.h; sourceTree = "<group>"; };
-		841042BF1B141F8700AD4EE7 /* demo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.lua; sourceTree = "<group>"; };
 		8410D9A91A70A00400B22E49 /* LVPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPanGestureRecognizer.h; sourceTree = "<group>"; };
 		8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPanGestureRecognizer.m; sourceTree = "<group>"; };
 		8410D9AE1A70A51C00B22E49 /* LVGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVGestureRecognizer.h; sourceTree = "<group>"; };
@@ -453,8 +454,6 @@
 		843447491B61DDED0039B98A /* UIView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LuaView.m"; sourceTree = "<group>"; };
 		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
 		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
-		843A64821B8F0AC2003ACCEE /* tableDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tableDemo.lua; sourceTree = "<group>"; };
-		843B7F801B9ECA9E009691BF /* System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = System.lua; sourceTree = "<group>"; };
 		84470B151B5E66FF00980E31 /* JHSLuaErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaErrorView.h; sourceTree = "<group>"; };
 		84470B161B5E66FF00980E31 /* JHSLuaErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaErrorView.m; sourceTree = "<group>"; };
 		844F9F561B969E4300E24A24 /* JHSLuaCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaCollectionView.h; sourceTree = "<group>"; };
@@ -495,7 +494,6 @@
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
 		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
-		848523431B8EE97D00E5BA71 /* stringDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringDemo.lua; sourceTree = "<group>"; };
 		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C5BE81B6B203C003F2D38 /* animationFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = animationFire2.lua; path = lua/animationFire2.lua; sourceTree = "<group>"; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
@@ -510,12 +508,21 @@
 		849708361A67653A00E913F4 /* LVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDB.m; sourceTree = "<group>"; };
 		8497083A1A6765B000E913F4 /* LVSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSystem.h; sourceTree = "<group>"; };
 		8497083B1A6765B000E913F4 /* LVSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSystem.m; sourceTree = "<group>"; };
-		849D319D1B3A876E00F08CAB /* testluabox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testluabox.lua; sourceTree = "<group>"; };
 		84A63D6D1B958B9F0048CBD3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		84B1E37F1AEF24480054B9F1 /* LVRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVRSA.h; path = RSA/LVRSA.h; sourceTree = "<group>"; };
 		84B1E3801AEF24480054B9F1 /* LVRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVRSA.m; path = RSA/LVRSA.m; sourceTree = "<group>"; };
 		84B1E3841AEF2ED90054B9F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		84B391721BAC315900563600 /* collectionViewDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = collectionViewDemo.lua; path = lua/collectionViewDemo.lua; sourceTree = "<group>"; };
+		84B391731BAC315900563600 /* debug.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = debug.lua; path = lua/debug.lua; sourceTree = "<group>"; };
+		84B391741BAC315900563600 /* demo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo.lua; path = lua/demo.lua; sourceTree = "<group>"; };
+		84B391751BAC315900563600 /* demo2015.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo2015.lua; path = lua/demo2015.lua; sourceTree = "<group>"; };
+		84B391761BAC315900563600 /* flxNodeDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = flxNodeDemo.lua; path = lua/flxNodeDemo.lua; sourceTree = "<group>"; };
+		84B391771BAC315900563600 /* stringDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stringDemo.lua; path = lua/stringDemo.lua; sourceTree = "<group>"; };
+		84B391781BAC315900563600 /* System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = System.lua; path = lua/System.lua; sourceTree = "<group>"; };
+		84B391791BAC315900563600 /* tableDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tableDemo.lua; path = lua/tableDemo.lua; sourceTree = "<group>"; };
+		84B3917A1BAC315900563600 /* testluabox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testluabox.lua; path = lua/testluabox.lua; sourceTree = "<group>"; };
+		84B3917B1BAC315900563600 /* ui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.lua; path = lua/ui.lua; sourceTree = "<group>"; };
 		84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVActivityIndicatorView.h; sourceTree = "<group>"; };
 		84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVActivityIndicatorView.m; sourceTree = "<group>"; };
 		84B58E3D1B66162F0048F33D /* animationLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = animationLiZi.lua; path = lua/animationLiZi.lua; sourceTree = "<group>"; };
@@ -532,7 +539,6 @@
 		84CF56741AE9184000A49B36 /* LVNativeObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNativeObjBox.m; sourceTree = "<group>"; };
 		84CF56781AEA15A500A49B36 /* LVMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVMethod.h; sourceTree = "<group>"; };
 		84CF56791AEA15A500A49B36 /* LVMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVMethod.m; sourceTree = "<group>"; };
-		84D42C1C1B2A8AD500D40A0E /* collectionViewDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = collectionViewDemo.lua; sourceTree = "<group>"; };
 		84D446F01AF75BD8000A3911 /* LVPkgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgManager.h; path = PKG/LVPkgManager.h; sourceTree = "<group>"; };
 		84D446F11AF75BD8000A3911 /* LVPkgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgManager.m; path = PKG/LVPkgManager.m; sourceTree = "<group>"; };
 		84D446F51AF7631C000A3911 /* LVInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVInputStream.h; path = PKG/LVInputStream.h; sourceTree = "<group>"; };
@@ -577,7 +583,6 @@
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
 		84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "2015-05-07.zip"; sourceTree = "<group>"; };
-		84F66FBA1AFB61000012BB38 /* demo2015.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo2015.lua; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -589,7 +594,6 @@
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
 		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
 		A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flxNodeDemo.lua; sourceTree = "<group>"; };
 		C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuaViewSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D7913A587AD4124F9407CC /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -991,7 +995,6 @@
 				84C781781B54B5A90021E628 /* bg_home_category_right_shadow@3x.png */,
 				84C781751B54B25F0021E628 /* JHSIconfont.ttf */,
 				8422AB631B3114C800007661 /* snow.png */,
-				84F66FBA1AFB61000012BB38 /* demo2015.lua */,
 				84D996E71B09BE1000B9E01B /* 1.tiff */,
 				84D996E81B09BE1000B9E01B /* 4.tiff */,
 				84D996E91B09BE1000B9E01B /* 7.tiff */,
@@ -1002,23 +1005,26 @@
 				84D996EE1B09BE1000B9E01B /* callOC.lua */,
 				84D996EF1B09BE1000B9E01B /* coroutineDemo.lua */,
 				84D996F01B09BE1000B9E01B /* downloader.lua */,
+				84D996F51B09BE1000B9E01B /* tableViewDemo.lua */,
+				84B391721BAC315900563600 /* collectionViewDemo.lua */,
+				84B391731BAC315900563600 /* debug.lua */,
+				84B391741BAC315900563600 /* demo.lua */,
+				84B391751BAC315900563600 /* demo2015.lua */,
+				84B391761BAC315900563600 /* flxNodeDemo.lua */,
+				84B391771BAC315900563600 /* stringDemo.lua */,
+				84B391781BAC315900563600 /* System.lua */,
+				84B391791BAC315900563600 /* tableDemo.lua */,
+				84B3917A1BAC315900563600 /* testluabox.lua */,
+				84B3917B1BAC315900563600 /* ui.lua */,
 				84D996F11B09BE1000B9E01B /* downloader2.lua */,
 				84D996F21B09BE1000B9E01B /* gifDemo.lua */,
 				84D996F41B09BE1000B9E01B /* shake.lua */,
-				84D996F51B09BE1000B9E01B /* tableViewDemo.lua */,
-				84D42C1C1B2A8AD500D40A0E /* collectionViewDemo.lua */,
 				84D996F61B09BE1000B9E01B /* testDebug.lua */,
 				84D996F71B09BE1000B9E01B /* testunit.lua */,
 				84D996F81B09BE1000B9E01B /* animationSnow.lua */,
 				84B58E3D1B66162F0048F33D /* animationLiZi.lua */,
 				84D59C2E1B69C7D20084971B /* animationFire.lua */,
 				848C5BE81B6B203C003F2D38 /* animationFire2.lua */,
-				841042BF1B141F8700AD4EE7 /* demo.lua */,
-				849D319D1B3A876E00F08CAB /* testluabox.lua */,
-				BEDFCC841B82DA2200AE8EC8 /* flxNodeDemo.lua */,
-				848523431B8EE97D00E5BA71 /* stringDemo.lua */,
-				843A64821B8F0AC2003ACCEE /* tableDemo.lua */,
-				843B7F801B9ECA9E009691BF /* System.lua */,
 			);
 			name = lua;
 			sourceTree = "<group>";
@@ -1243,38 +1249,40 @@
 				848C5BE91B6B203C003F2D38 /* animationFire2.lua in Resources */,
 				84D996F91B09BE1000B9E01B /* 1.tiff in Resources */,
 				84D997091B09BE1000B9E01B /* testunit.lua in Resources */,
-				848523441B8EE97D00E5BA71 /* stringDemo.lua in Resources */,
+				84B3917D1BAC315900563600 /* debug.lua in Resources */,
 				84F66FB71AFB0BBA0012BB38 /* 2015-05-07.zip in Resources */,
 				84C781761B54B25F0021E628 /* JHSIconfont.ttf in Resources */,
 				84D59C321B69D1270084971B /* color1.png in Resources */,
 				84C781791B54B5A90021E628 /* bg_home_category_right_shadow@2x.png in Resources */,
-				841042C01B141F8700AD4EE7 /* demo.lua in Resources */,
 				84D997021B09BE1000B9E01B /* downloader.lua in Resources */,
-				84F66FBB1AFB61000012BB38 /* demo2015.lua in Resources */,
 				84D996FD1B09BE1000B9E01B /* 13.tiff in Resources */,
 				84D59C2F1B69C7D20084971B /* animationFire.lua in Resources */,
-				849D319E1B3A876E00F08CAB /* testluabox.lua in Resources */,
-				BEDFCC851B82DA2200AE8EC8 /* flxNodeDemo.lua in Resources */,
-				84D42C1D1B2A8AD500D40A0E /* collectionViewDemo.lua in Resources */,
 				840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */,
 				8422AB641B3114C800007661 /* snow.png in Resources */,
 				84D997071B09BE1000B9E01B /* tableViewDemo.lua in Resources */,
 				84D997031B09BE1000B9E01B /* downloader2.lua in Resources */,
 				84D997001B09BE1000B9E01B /* callOC.lua in Resources */,
-				843A64831B8F0AC2003ACCEE /* tableDemo.lua in Resources */,
+				84B391841BAC315900563600 /* testluabox.lua in Resources */,
+				84B391851BAC315900563600 /* ui.lua in Resources */,
+				84B3917E1BAC315900563600 /* demo.lua in Resources */,
 				84D997061B09BE1000B9E01B /* shake.lua in Resources */,
 				84D996FE1B09BE1000B9E01B /* 16.tiff in Resources */,
+				84B3917C1BAC315900563600 /* collectionViewDemo.lua in Resources */,
 				84D996FA1B09BE1000B9E01B /* 4.tiff in Resources */,
 				84D997041B09BE1000B9E01B /* gifDemo.lua in Resources */,
 				84D996FC1B09BE1000B9E01B /* 10.tiff in Resources */,
 				84D996FF1B09BE1000B9E01B /* attributedFontDemo.lua in Resources */,
 				840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */,
 				84D59C391B69EA860084971B /* lazhu.png in Resources */,
+				84B391811BAC315900563600 /* stringDemo.lua in Resources */,
 				84D996FB1B09BE1000B9E01B /* 7.tiff in Resources */,
-				843B7F811B9ECA9E009691BF /* System.lua in Resources */,
+				84B391801BAC315900563600 /* flxNodeDemo.lua in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
+				84B391821BAC315900563600 /* System.lua in Resources */,
 				84D9970A1B09BE1000B9E01B /* animationSnow.lua in Resources */,
 				84C7817A1B54B5A90021E628 /* bg_home_category_right_shadow@3x.png in Resources */,
+				84B3917F1BAC315900563600 /* demo2015.lua in Resources */,
+				84B391831BAC315900563600 /* tableDemo.lua in Resources */,
 				84B58E3E1B66162F0048F33D /* animationLiZi.lua in Resources */,
 				84D997081B09BE1000B9E01B /* testDebug.lua in Resources */,
 				84D59C331B69D1270084971B /* color2.png in Resources */,
