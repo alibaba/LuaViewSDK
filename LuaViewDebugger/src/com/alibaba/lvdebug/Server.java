@@ -20,6 +20,7 @@ public final class Server {
 			e.printStackTrace();
 		}
 		this.center = center;
+		this.center.worker = this;
 	}
 
 	private void writeString(String s) throws Exception {
@@ -45,7 +46,7 @@ public final class Server {
 						}
 						System.out.println("Received Cmd: " + string);
 						if ("exit".equalsIgnoreCase(string)) {
-							center.serverMain.close();
+							center.main.close();
 							System.exit(0);
 							return;
 						} else {

@@ -1,17 +1,26 @@
 package com.alibaba.lvdebug.ui;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JTabbedPane;
+
 import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ClientCmd;
+
 import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
@@ -108,6 +117,13 @@ public class DebuggerFrame extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		splitPane.setLeftComponent(tabbedPane);
+
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				center.worker.close();
+			}
+		});
 	}
 
 	private JTabbedPane tabbedPane;
