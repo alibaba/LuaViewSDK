@@ -57,7 +57,7 @@ public class DebugLuaCreaterMain {
 		return null;
 	}
 
-	private void strings_to_file(Vector<String> strings, String fileName) {
+	void strings_to_file(Vector<String> strings, String fileName) {
 		try {
 			PrintStream dos = getPrintStream(fileName);
 			for (int i = 0; i < strings.size(); i++) {
