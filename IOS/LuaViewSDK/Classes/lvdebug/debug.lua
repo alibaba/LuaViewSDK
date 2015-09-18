@@ -48,6 +48,10 @@ function debug_print_var( name, value, level )
 end
 
 function debug_print_expr( var )
+    if ( var==nil ) then
+        print("debug_print_expr var==nil");
+        return;
+    end
     --清空临时变量表
     debug.var_tbl = {}
 

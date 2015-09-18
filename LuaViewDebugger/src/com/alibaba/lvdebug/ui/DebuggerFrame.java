@@ -54,7 +54,7 @@ public class DebuggerFrame extends JFrame {
 			}
 		});
 		panelHead.add(textFieldCmdInput);
-		textFieldCmdInput.setColumns(20);
+		textFieldCmdInput.setColumns(15);
 
 		buttonNextLine = new JButton("下一行");
 		buttonNextLine.addActionListener(new ActionListener() {
@@ -79,6 +79,14 @@ public class DebuggerFrame extends JFrame {
 			}
 		});
 		panelHead.add(buttonNextBreakPoint);
+
+		buttonCallStack = new JButton("显示调用栈");
+		buttonCallStack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				center.cmdBuffer.pushCmd(new ClientCmd("bt"));
+			}
+		});
+		panelHead.add(buttonCallStack);
 
 		JPanel panelBody = new JPanel();
 		panel.add(panelBody, BorderLayout.CENTER);
@@ -107,6 +115,7 @@ public class DebuggerFrame extends JFrame {
 	private JButton buttonNextLine;
 	private JButton buttonNextCodeLine;
 	private JButton buttonNextBreakPoint;
+	private JButton buttonCallStack;
 
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;

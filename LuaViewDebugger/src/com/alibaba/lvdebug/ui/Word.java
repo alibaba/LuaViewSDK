@@ -44,7 +44,12 @@ public final class Word {
 	public boolean isNumber;
 	public boolean isString;
 	public boolean isComment;
-	private int x, y, w, h;
+
+	// 宽高信息
+	int x;
+	int w;
+	int y;
+	int h;
 
 	public String getPressedString(int x, int y) {
 		// && this.y <= y && y <= this.y + this.h
