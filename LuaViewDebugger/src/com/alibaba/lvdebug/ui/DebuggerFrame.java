@@ -18,20 +18,18 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class DebuggerFrame extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4760175577170083855L;
+
 	private JPanel contentPane;
 	private JTextField textFieldCmdInput;
-
-	public final Center center;
+	private final Center center;
 
 	/**
 	 * Create the frame.
 	 */
-	public DebuggerFrame(final Center center) {
-		this.center = center;
+	public DebuggerFrame(final Center c) {
+		this.center = c;
 		setTitle("Lua调试器 V1.0.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 750);
@@ -102,8 +100,6 @@ public class DebuggerFrame extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		splitPane.setLeftComponent(tabbedPane);
-
-		this.setVisible(true);
 	}
 
 	private JTabbedPane tabbedPane;

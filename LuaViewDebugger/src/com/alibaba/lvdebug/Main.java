@@ -14,10 +14,6 @@ public class Main {
 		new Main().main();
 	}
 
-	public static final String IP = "127.0.0.1";
-
-	public static final int PORT = 9876;
-
 	private ServerSocket serverSocket;
 
 	public void main() {
@@ -33,19 +29,27 @@ public class Main {
 		}
 		System.out.println("启动...");
 
+		{
+			DebuggerFrame frame = new DebuggerFrame(null);
+			frame.dispose();
+		}
+
+		// 启动主控制窗口
+		MainFrame.main();
+
 		// 启动socket调试端口监听服务
 		try {
-			mainThread();
+			openSocketListner();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void mainThread() throws Exception {
-		serverSocket = new ServerSocket(PORT);
+	private void openSocketListner() throws Exception {
+		serverSocket = new ServerSocket(Config.PORT);
 		while (serverSocket.isBound()) {
 			Socket connection = serverSocket.accept();
-			connection.setSoTimeout(120000 * 1000);// 超时时间
+			connection.setSoTimeout(60 * 60 * 24 * 1000);// 超时时间
 			Center center = new Center(this);
 			center.frame = debuggerFrameMain(center);
 			Server worker = new Server(connection, center);
@@ -70,6 +74,7 @@ public class Main {
 		frame.setVisible(true);
 
 		frame.setIsDebugging(true);
+		frame.setVisible(true);
 		// center.log.print("等待...手机链接到调试器\n");
 		return frame;
 	}

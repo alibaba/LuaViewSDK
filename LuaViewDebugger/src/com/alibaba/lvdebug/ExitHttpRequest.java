@@ -11,7 +11,7 @@ public final class ExitHttpRequest {
 	public String sendExitCmd() {
 		String result = null;
 		try {
-			Socket socket = new Socket(Main.IP, Main.PORT);
+			Socket socket = new Socket(Config.IP, Config.PORT);
 
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());

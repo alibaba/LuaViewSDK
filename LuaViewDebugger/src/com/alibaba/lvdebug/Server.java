@@ -92,6 +92,8 @@ public final class Server {
 			connection.close();
 			reader.close();
 			writer.close();
+			if (Config.closeWhenConnectionEnd)
+				this.center.frame.dispose();
 		} catch (Exception e) {
 		}
 	}
