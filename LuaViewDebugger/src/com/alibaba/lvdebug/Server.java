@@ -2,7 +2,7 @@ package com.alibaba.lvdebug;
 
 import java.io.*;
 import java.net.*;
-import com.alibaba.lvdebug.ClientCmdBuffer.ClientCmd;
+import com.alibaba.lvdebug.ClientCmd;
 
 public final class Server {
 	private Socket connection;
@@ -23,35 +23,11 @@ public final class Server {
 	}
 
 	private void writeString(String s) throws Exception {
-		writeString(s, writer);
-	}
-
-	public static void writeString(String s, DataOutputStream writer) throws Exception {
-		if (s != null) {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			DataOutputStream dos = new DataOutputStream(bos);
-			dos.writeInt(s.length());
-			dos.write(s.getBytes("UTF-8"));
-			dos.flush();
-			byte[] bs = bos.toByteArray();
-			writer.write(bs);
-			writer.flush();
-		}
+		Util.writeString(s, writer);
 	}
 
 	private String readString() throws Exception {
-		return readString(reader);
-	}
-
-	public static String readString(DataInputStream reader) throws Exception {
-		int len = reader.readInt();
-		if (len > 0) {
-			byte[] bs = new byte[len];
-			reader.readFully(bs);
-			String s = new String(bs, "UTF-8");
-			return s;
-		}
-		return null;
+		return Util.readString(reader);
 	}
 
 	private boolean continueRun = true;
@@ -69,7 +45,7 @@ public final class Server {
 						}
 						System.out.println("Received Cmd: " + string);
 						if ("exit".equalsIgnoreCase(string)) {
-							ServerMain.close();
+							center.serverMain.close();
 							System.exit(0);
 							return;
 						} else {

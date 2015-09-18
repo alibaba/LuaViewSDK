@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import com.alibaba.lvdebug.Center;
-import com.alibaba.lvdebug.ClientCmdBuffer.ClientCmd;
+import com.alibaba.lvdebug.ClientCmd;
 import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
@@ -134,5 +134,12 @@ public class DebuggerFrame extends JFrame {
 
 	public JButton getButtonNextBreakPoint() {
 		return buttonNextBreakPoint;
+	}
+
+	public void setIsDebugging(boolean yes) {
+		this.getButtonNextLine().setEnabled(yes);
+		this.getButtonNextCodeLine().setEnabled(yes);
+		this.getButtonNextBreakPoint().setEnabled(yes);
+		this.getTextFieldCmdInput().setEnabled(yes);
 	}
 }

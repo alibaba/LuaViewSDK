@@ -7,12 +7,13 @@ import java.net.*;
 import com.alibaba.lvdebug.ui.DebuggerFrame;
 
 public final class ServerMain {
-
 	public static final String IP = "127.0.0.1";
-	public static final int PORT = 9876;
-	private static ServerSocket serverSocket;
 
-	public static void main() {
+	public static final int PORT = 9876;
+
+	private ServerSocket serverSocket;
+
+	public void main() {
 		Runnable run = new Runnable() {
 			public void run() {
 				try {
@@ -30,7 +31,7 @@ public final class ServerMain {
 		while (serverSocket.isBound()) {
 			Socket connection = serverSocket.accept();
 			connection.setSoTimeout(120000 * 1000);// 超时时间
-			Center center = new Center();
+			Center center = new Center(this);
 			center.frame = debuggerFrameMain(center);
 			Server worker = new Server(connection, center);
 			worker.run();
@@ -53,12 +54,12 @@ public final class ServerMain {
 		frame.setSize(w / 2, h);
 		frame.setVisible(true);
 
-		ClientCmdBuffer.setIsDebugging(true);
+		frame.setIsDebugging(true);
 		// center.log.print("等待...手机链接到调试器\n");
 		return frame;
 	}
 
-	public static void close() {
+	public void close() {
 		try {
 			if (serverSocket != null)
 				serverSocket.close();

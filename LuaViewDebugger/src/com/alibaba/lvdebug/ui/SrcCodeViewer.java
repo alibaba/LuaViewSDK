@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Vector;
 import com.alibaba.lvdebug.Center;
-import com.alibaba.lvdebug.ClientCmdBuffer.ClientCmd;
+import com.alibaba.lvdebug.ClientCmd;
 
 // 类的作用：树结构的浏览器
 /**

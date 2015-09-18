@@ -11,12 +11,12 @@ public final class ExitHttpRequest {
 	public String sendExitCmd() {
 		String result = null;
 		try {
-			Socket socket = new Socket("127.0.0.1", ServerMain.PORT);
+			Socket socket = new Socket(ServerMain.IP, ServerMain.PORT);
 
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			Server.writeString("exit", dos);
-			result = Server.readString(dis);
+			Util.writeString("exit", dos);
+			result = Util.readString(dis);
 			socket.close();
 			Thread.sleep(1000);
 		} catch (Exception e) {

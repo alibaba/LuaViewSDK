@@ -15,24 +15,7 @@ package com.alibaba.lvdebug;
 public final class ClientCmdBuffer {
 
 	private final Center center;
-
-	public static class ClientCmd {
-
-		public final String cmdString;
-
-		public String toString() {
-			return "Cmd: " + cmdString;
-		}
-
-		public ClientCmd(String cmd) {
-			if (cmd != null) {
-				this.cmdString = cmd;
-			} else {
-				this.cmdString = "none";
-			}
-		}
-
-	}
+ 
 
 	public ClientCmdBuffer(Center center) {
 		this.center = center;
@@ -40,12 +23,7 @@ public final class ClientCmdBuffer {
 
 	private ClientCmd currentCmd;
 
-	public static void setIsDebugging(boolean yes) {
-		// DebuggerFrame.frame.getButtonNextLine().setEnabled(yes);
-		// DebuggerFrame.frame.getButtonNextCodeLine().setEnabled(yes);
-		// DebuggerFrame.frame.getButtonNextBreakPoint().setEnabled(yes);
-		// DebuggerFrame.frame.getTextFieldCmdInput().setEnabled(yes);
-	}
+
 
 	public synchronized void pushCmd(ClientCmd cmd) {
 		if (currentCmd != null) {

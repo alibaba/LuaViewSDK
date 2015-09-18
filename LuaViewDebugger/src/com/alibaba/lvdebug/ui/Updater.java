@@ -1,7 +1,6 @@
 package com.alibaba.lvdebug.ui;
 
 import com.alibaba.lvdebug.Center;
-import com.alibaba.lvdebug.ServerMain;
 import com.alibaba.lvdebug.ui.UICmd;
 
 public final class Updater {
@@ -61,7 +60,4 @@ public final class Updater {
 		}
 	}
 
-	public void closeServer() {
-		ServerMain.close();
-	}
 }

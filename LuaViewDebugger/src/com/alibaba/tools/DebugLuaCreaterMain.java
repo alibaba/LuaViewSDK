@@ -10,7 +10,10 @@ import java.util.Vector;
 public class DebugLuaCreaterMain {
 
 	public static void main(String[] args) {
-		
+		new DebugLuaCreaterMain().run();
+	}
+
+	private void run() {
 		byte[] bs = file_to_bytes("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/debug.lua");
 		PrintStream ps = getPrintStream("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/LVDebugLua.m");
 		ps.println();
@@ -40,7 +43,7 @@ public class DebugLuaCreaterMain {
 		ps.close();
 	}
 
-	public static byte[] file_to_bytes(String fileName) {
+	private byte[] file_to_bytes(String fileName) {
 		try {
 			DataInputStream fis = new DataInputStream(new FileInputStream(fileName));
 			int length = fis.available();
@@ -54,9 +57,9 @@ public class DebugLuaCreaterMain {
 		return null;
 	}
 
-	public synchronized static void strings_to_file(Vector<String> strings, String fileName) {
+	private void strings_to_file(Vector<String> strings, String fileName) {
 		try {
-			PrintStream dos = DebugLuaCreaterMain.getPrintStream(fileName);
+			PrintStream dos = getPrintStream(fileName);
 			for (int i = 0; i < strings.size(); i++) {
 				dos.println(strings.elementAt(i));
 			}
@@ -66,7 +69,7 @@ public class DebugLuaCreaterMain {
 		}
 	}
 
-	private static PrintStream getPrintStream(String fileName) {
+	private PrintStream getPrintStream(String fileName) {
 		try {
 			PrintStream f = new PrintStream(new File(fileName), "UTF-8");
 			return f;
