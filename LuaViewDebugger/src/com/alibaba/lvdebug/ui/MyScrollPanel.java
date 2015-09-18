@@ -14,13 +14,15 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.JPanel;
 
+import com.alibaba.lvdebug.Config;
+
 abstract public class MyScrollPanel extends JPanel {
 
 	private static final long serialVersionUID = -8495786914354054078L;
 
 	private Font font = new java.awt.Font("宋体", 0, 14);
 
-	public final int LINE_H = 24;
+	public final int LINE_H = Config.LINE_H;
 
 	private int bar_w = 16;
 
@@ -280,11 +282,28 @@ abstract public class MyScrollPanel extends JPanel {
 		if (point != null) {
 			int tmp = Math.abs(point.y + zeroPoint.y - y);
 			if (tmp < r) {
-				point = null;
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public int pressedPointX() {
+		if (point != null) {
+			return point.x + zeroPoint.x;
+		}
+		return 0;
+	}
+
+	public int pressedPointY() {
+		if (point != null) {
+			return point.y + zeroPoint.y;
+		}
+		return 0;
+	}
+
+	public void clearPoint() {
+		point = null;
 	}
 
 	private boolean m_repaint;

@@ -28,4 +28,15 @@ public class Line {
 		}
 		return x;
 	}
+
+	public String getPressedString(int x, int y) {
+		for (int i = 0; i < words.size(); i++) {
+			Word word = words.elementAt(i);
+			String s = word.getPressedString(x, y);
+			if (s != null) {
+				return s;
+			}
+		}
+		return null;
+	}
 }

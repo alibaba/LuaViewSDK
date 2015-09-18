@@ -74,8 +74,8 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		}
 	}
 
-	private final int X0 = LINE_H * 3;
-	private final int Y0 = LINE_H * 2;
+	public final int X0 = LINE_H * 3;
+	public final int Y0 = LINE_H * 2;
 
 	public void myPaint(Graphics2D g) {
 		g.setColor(new Color(0xf0f0f0));
@@ -92,6 +92,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			line.tag = "" + (i + 1);
 			drawOneLine(true, line, g, line.x, line.y);
 		}
+		this.clearPoint();
 	}
 
 	BasicStroke stroke = new BasicStroke(1);
@@ -130,7 +131,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			int w = g.getFontMetrics().stringWidth(line.tag);
 			g.drawString(line.tag, x - w - LINE_H, y - 2);
 		}
-		if (this.canBreakPoint && isPressTheLine(x, y, LINE_H / 2)) {
+		if (this.pressedPointX() < X0 && this.canBreakPoint && isPressTheLine(x, y, LINE_H / 2)) {
 			line.isBreakPoint = !line.isBreakPoint;
 			updateUI();
 			if (line.isBreakPoint) {
@@ -139,6 +140,13 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			} else {
 				String s = "rb " + this.fileName + ":" + line.index;
 				center.cmdBuffer.pushCmd(new ClientCmd(s));
+			}
+		}
+
+		if (X0 < this.pressedPointX() && isPressTheLine(x, y, LINE_H / 2)) {
+			String s = line.getPressedString(this.pressedPointX(), this.pressedPointY());
+			if (s != null) {
+				center.cmdBuffer.pushCmd(new ClientCmd("p " + s));
 			}
 		}
 	}

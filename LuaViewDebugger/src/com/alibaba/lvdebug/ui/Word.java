@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Hashtable;
 
+import com.alibaba.lvdebug.Config;
+
 public final class Word {
 	public static final Color KeyWordColor = new Color(126, 8, 84);
 	public static final Color StringWordColor = new Color(45, 36, 251);
@@ -42,6 +44,15 @@ public final class Word {
 	public boolean isNumber;
 	public boolean isString;
 	public boolean isComment;
+	private int x, y, w, h;
+
+	public String getPressedString(int x, int y) {
+		// && this.y <= y && y <= this.y + this.h
+		if (this.x <= x && x <= this.x + this.w) {
+			return this.text.trim();
+		}
+		return null;
+	}
 
 	public Word(String s) {
 		this.text = s;
@@ -66,7 +77,12 @@ public final class Word {
 		if (text != null) {
 			g.setColor(this.color);
 			g.drawString(text, x, y);
-			return x + g.getFontMetrics().stringWidth(text);
+			int x2 = x + g.getFontMetrics().stringWidth(text);
+			this.x = x;
+			this.y = y;
+			this.w = x2 - x;
+			this.h = Config.LINE_H;
+			return x2;
 		}
 		return x;
 	}
