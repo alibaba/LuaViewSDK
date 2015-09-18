@@ -23,6 +23,7 @@
 #define SOCKET_CONNECTINTG  (0)
 #define SOCKET_SUCCESS      (1)
 
+// 调试器的默认IP和端口
 static NSString* SERVER_IP = @"127.0.0.1";
 static int SERVER_PORT = 9876;
 
