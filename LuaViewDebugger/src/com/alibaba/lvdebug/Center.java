@@ -10,9 +10,9 @@ public class Center {
 	public final Updater updater;
 	public final Log log;
 	public final ClientCmdBuffer cmdBuffer;
-	public final ServerMain serverMain;
+	public final Main serverMain;
 
-	public Center(ServerMain serverMain) {
+	public Center(Main serverMain) {
 		this.serverMain = serverMain;
 		this.cmdBuffer = new ClientCmdBuffer(this);
 		this.srcCodeCenter = new SrcCodeCenter(this);
