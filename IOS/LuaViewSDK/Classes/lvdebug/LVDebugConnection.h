@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVHeads.h"
 
 @interface LVDebugConnection : NSObject
 
 @property (nonatomic,assign) BOOL printToServer;
+@property (nonatomic,weak) LView* lview;
+@property (atomic,strong) NSMutableArray* receivedArray;
 
 - (BOOL) isOk;
 

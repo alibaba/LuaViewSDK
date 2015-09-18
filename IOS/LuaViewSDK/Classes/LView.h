@@ -11,8 +11,6 @@
 #import "LVDebugConnection.h"
 
 
-extern NSString *const LuaViewRunCmdNotification;
-
 @class LView;
 @class LVBlock;
 @protocol LVProtocal;
@@ -161,6 +159,14 @@ extern NSString *const LuaViewRunCmdNotification;
 - (BOOL) argumentToBool:(int) index;
 - (double)  argumentToNumber:(int) index;
 - (id) argumentToObject:(int) index;
+
+@end
+
+
+// 只是调试工具使用
+@interface LView (LViewDebuger)
+
+-(void) callLuaToExecuteServerCmd;
 
 @end
 

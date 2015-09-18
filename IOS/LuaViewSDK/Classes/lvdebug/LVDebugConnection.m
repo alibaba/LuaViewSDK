@@ -26,10 +26,8 @@
 @interface LVDebugConnection ()
 @property(nonatomic,strong) NSThread* myThread;
 @property(nonatomic,assign) BOOL canWrite;
-@property(nonatomic,assign) BOOL closed;
-@property(nonatomic,strong) NSMutableArray* dataArray;
 @property(nonatomic,assign) NSInteger state;
-@property(nonatomic,strong) NSString* receivedCmd;
+@property(atomic,strong) NSMutableArray* sendArray;
 @end
 
 @implementation LVDebugConnection{
@@ -42,7 +40,8 @@
         static int index = 0;
         self.myThread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];
         self.myThread.name = [NSString stringWithFormat:@"LuaView.Debuger.%d",index];
-        self.dataArray = [[NSMutableArray alloc] init];
+        self.sendArray = [[NSMutableArray alloc] init];
+        self.receivedArray = [[NSMutableArray alloc] init];
         [self startThread];
     }
     return self;
@@ -87,9 +86,9 @@
 //}
 
 - (NSString*) getCmd{
-    NSString* cmd = self.receivedCmd;
+    NSString* cmd = self.receivedArray.lastObject;
     if( cmd ) {
-        self.receivedCmd = nil;
+        [self.receivedArray removeLastObject];
     }
     return cmd;
 }
@@ -149,7 +148,6 @@
 }
 
 -(void) closeAll{
-    self.closed = TRUE;
     self.canWrite = FALSE;
     self.state = -1;
     
@@ -165,6 +163,7 @@
     }
 }
 
+
 static void ServerConnectCallBack( CFSocketRef socket,
                                   CFSocketCallBackType type,
                                   CFDataRef address,
@@ -175,13 +174,13 @@ static void ServerConnectCallBack( CFSocketRef socket,
     switch ( type ){
         case kCFSocketReadCallBack: {
             NSString* cmd = readString(socket);
-            NSLog(@"%@", cmd);
-            debuger.receivedCmd = cmd;
+            LVLog(@"received CMD: %@", cmd);
+            [debuger.receivedArray insertObject:cmd atIndex:0];
             // 关闭掉socket
             if ( cmd.length<=0 ){
                 [debuger closeAll];
             } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:LuaViewRunCmdNotification object:cmd];
+                [debuger.lview  callLuaToExecuteServerCmd];
             }
             break;
         }
@@ -207,9 +206,9 @@ static void ServerConnectCallBack( CFSocketRef socket,
 }
 
 -(void) sendOneData{
-    NSData* data = self.dataArray.lastObject;
+    NSData* data = self.sendArray.lastObject;
     if( self.canWrite && data) {
-        [self.dataArray removeLastObject];
+        [self.sendArray removeLastObject];
         if( data ) {
             NSInteger sendLength = send(CFSocketGetNative(_socket), data.bytes, data.length, 0);
             if( sendLength!=data.length ) {
@@ -263,11 +262,9 @@ static NSString* readString(CFSocketRef socket)
         [buffer appendBytes:head length:4];
         [buffer appendData:data];
         
-        [self.dataArray insertObject:buffer atIndex:0];
+        [self.sendArray insertObject:buffer atIndex:0];
         
         [self sendOneData];
-        //    NSInteger sendLength = send(CFSocketGetNative(_socket), buffer.bytes, buffer.length, 0);
-        //    NSLog(@"socket Send length : %d", (int)sendLength);
     }
 }
 @end

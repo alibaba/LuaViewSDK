@@ -18,12 +18,12 @@
 #import "LVDebugConnection.h"
 #import "LVDebugConnection.h"
 
-NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
 @property (nonatomic,assign) BOOL stateInited;
 @property (nonatomic,assign) BOOL loadedDebugScript;
+@property (atomic,assign) NSInteger callLuaTimes;
 @end
 
 @implementation LView
@@ -106,25 +106,24 @@ NSString *const LuaViewRunCmdNotification = @"LuaViewRunCmdNotification";
 extern char g_debug_lua[];
 
 -(int) loadDebugModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(debugListener:)
-                                                 name:LuaViewRunCmdNotification
-                                               object:nil];
-    
     NSData* data = [[NSData alloc] initWithBytes:g_debug_lua length:strlen(g_debug_lua)];
     return [self runData:data fileName:@"debug.lua"];
 }
 
--(void) debugListener:(NSNotification*) info{
-    NSString* cmd = info.object;
-    [self performSelectorOnMainThread:@selector(callDebugToExecuteCmd:) withObject:cmd waitUntilDone:NO];
+- (void) callLuaToExecuteServerCmd{
+    [self performSelectorOnMainThread:@selector(callLuaToExecuteServerCmd0) withObject:nil waitUntilDone:NO];
 }
 
--(void) callDebugToExecuteCmd:(NSString*) cmd{
+- (void) callLuaToExecuteServerCmd0{
+    NSString* cmd = self.debugConnection.receivedArray.lastObject;
+    if( cmd ) {
+        [self.debugConnection.receivedArray removeLastObject];
+    }
     if( [cmd isKindOfClass:[NSString class]] ) {
         [self callLua:@"debug_runing_execute" args:@[cmd]];
     }
 }
+
 
 -(void) checkDeuggerIsRunningToLoadDebugModel{
     if( self.debugConnection== nil) {
