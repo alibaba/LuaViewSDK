@@ -23,6 +23,9 @@
 #define SOCKET_CONNECTINTG  (0)
 #define SOCKET_SUCCESS      (1)
 
+static NSString* SERVER_IP = @"127.0.0.1";
+static int SERVER_PORT = 9876;
+
 @interface LVDebugConnection ()
 @property(nonatomic,strong) NSThread* myThread;
 @property(nonatomic,assign) BOOL canWrite;
@@ -65,25 +68,20 @@
     [self.myThread start]; //启动线程
 }
 
++(void) setDebugerIP:(NSString*) ip port:(int) port{
+    SERVER_IP = ip;
+    SERVER_PORT = port;
+}
+
 -(void) run:(id) obj{
     @autoreleasepool {
-        [self Connect:@"127.0.0.1" port:9876];
+        [self Connect:SERVER_IP port:SERVER_PORT];
         
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
         [runLoop run];
     }
 }
-
-//+ (instancetype)sharedInstance {
-//    static dispatch_once_t onceToken;
-//    static LVDebugConnection* temp = nil;
-//    dispatch_once(&onceToken, ^{
-//        temp = [[LVDebugConnection alloc] init];
-//        [temp startThread];
-//    });
-//    return temp;
-//}
 
 - (NSString*) getCmd{
     NSString* cmd = self.receivedArray.lastObject;

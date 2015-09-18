@@ -71,7 +71,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* name =  self.names[indexPath.row];
-    NSLog(@"%@",name);
+    NSLog(@"load lua: %@",name);
     JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithSource:name];
     [self.navigationController pushViewController:c animated:YES];
 }
