@@ -190,7 +190,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
         }
         case kCFSocketConnectCallBack:
             if( data ) {
-                LVError(@"Debuger Socket Connect Error" );
+                LVLog(@"Debuger Socket Connect failed" );
                 debuger.state = SOCKET_ERROR;
             } else {
                 LVLog(@"Debuger Socket connect Success");

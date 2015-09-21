@@ -22,7 +22,6 @@
 -(void) dealloc{
     lv_State* L = self.lv_lview.l;
     if( L ) {
-        lv_createtable(L, 0, 0);
         [LVUtil unregistry:L key:self];
     }
 }
