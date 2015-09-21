@@ -9,10 +9,16 @@ public class CharsToWords {
 	public Vector<Word> split(String s) {
 		Vector<Word> words = new Vector<Word>();
 		index = 0;
+		Word prev = null;
 		for (int i = 0; i < s.length(); i++) {
 			Word word = getOneWord(s);
 			if (word != null) {
+				if (prev != null) {
+					word.prev = prev;
+					prev.next = word;
+				}
 				words.add(word);
+				prev = word;
 			} else {
 				break;
 			}
@@ -99,7 +105,7 @@ public class CharsToWords {
 		return false;
 	}
 
-	public boolean isAF(char c) {
+	public static boolean isAF(char c) {
 		if ('A' <= c && c <= 'F') {
 			return true;
 		}
@@ -109,7 +115,17 @@ public class CharsToWords {
 		return false;
 	}
 
-	public boolean isAZ(char c) {
+	public static boolean wordStart(char c) {
+		if (isAZ(c)) {
+			return true;
+		}
+		if ('_' == c) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isAZ(char c) {
 		if ('A' <= c && c <= 'Z') {
 			return true;
 		}

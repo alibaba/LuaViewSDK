@@ -146,7 +146,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		if (X0 < this.pressedPointX() && isPressTheLine(x, y, LINE_H / 2)) {
 			String s = line.getPressedString(this.pressedPointX(), this.pressedPointY());
 			if (s != null && s.length() > 0) {
-				center.cmdBuffer.pushCmd(new ClientCmd("p " + s));
+				center.cmdBuffer.pushCmd(new ClientCmd("run print(\"" + s + " =\" , " + s + ")"));
 			}
 		}
 	}

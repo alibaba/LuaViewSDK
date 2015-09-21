@@ -183,7 +183,11 @@ static int loadJson (lv_State *L) {
             int errorCode = lv_pcall( L, 0, 1, 0);
             if( errorCode == 0 ){
                 return 1;
+            } else {
+                LVError( @"loadJson : %s", lv_tostring(L, -1) );
             }
+        } else {
+            LVError( @"loadJson : %s", lv_tostring(L, -1) );
         }
     }
     return 0; /* number of results */

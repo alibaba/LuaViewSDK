@@ -264,10 +264,11 @@ function debug_execute_cmd( env )
     local si = string:find( cmd, " " )
     if si ~= nil then
         c = string:sub( cmd, 1, si - 1 )
-        local index = string:find( cmd, " %w" );
-        if ( index ) then
-            expr = string:sub( cmd, index + 1 );
-        end
+        -- local index = string:find( cmd, " %w" );
+        -- if ( index ) then
+        --     expr = string:sub( cmd, index + 1 );
+        -- end
+        expr = string:sub(cmd, si + 1 );
     end
     if c=="none" then
         return false;

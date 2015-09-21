@@ -40,10 +40,14 @@ public final class Word {
 
 	public final String text;
 	public final Color color;
+	public boolean isWord;
 	public boolean isKeyWord;
 	public boolean isNumber;
 	public boolean isString;
 	public boolean isComment;
+
+	public Word prev;
+	public Word next;
 
 	// 宽高信息
 	int x;
@@ -54,7 +58,13 @@ public final class Word {
 	public String getPressedString(int x, int y) {
 		// && this.y <= y && y <= this.y + this.h
 		if (this.x <= x && x <= this.x + this.w) {
-			return this.text.trim();
+			String s = this.text.trim();
+			Word w = this;
+			for (; w.prev != null && w.prev.prev != null && w.prev.text.equals(".") && w.prev.prev.isWord;) {
+				s = w.prev.prev.text + w.prev.text + w.text;
+				w = w.prev.prev;
+			}
+			return s;
 		}
 		return null;
 	}
@@ -75,6 +85,12 @@ public final class Word {
 			this.color = NumberWordColor;
 		} else {
 			this.color = Color.black;
+		}
+		if (s.equals("System")) {
+			System.out.println("");
+		}
+		if (s != null && s.length() > 0 && CharsToWords.wordStart(s.charAt(0))) {
+			this.isWord = true;
 		}
 	}
 
