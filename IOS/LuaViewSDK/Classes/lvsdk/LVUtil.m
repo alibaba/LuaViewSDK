@@ -140,6 +140,9 @@ NSArray* lv_luaTableKeys(lv_State* L, int index){
     // Push another reference to the table on top of the stack (so we know
     // where it is, and this function can work for negative, positive and
     // pseudo indices
+    if ( lv_type(L, index)!= LV_TTABLE ){
+        return nil;
+    }
     lv_pushvalue(L, index);
     // stack now contains: -1 => table
     lv_pushnil(L);
