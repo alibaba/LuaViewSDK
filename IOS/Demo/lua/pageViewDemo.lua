@@ -1,9 +1,9 @@
 --工具包引入
 require "lv_kit"
 
-local width = System.screenSize()
+local width, height= System.screenSize()
 
-UIPageView({
+pageView = UIPageView({
     PageCount = 12,
     Indicator = function()
 --        活动指示器
@@ -30,5 +30,25 @@ UIPageView({
         Selected=function( index )
             UIToast("Selected")
         end
+    },
+    Scroll = {
+        Begin=function( index )
+            print("Begin")
+        end,
+        Scrolling=function( )
+            print("Scrolling")
+        end,
+        End=function( index ) 
+            print("End")
+        end,
+        FromPage=function( index )
+            print("FromePage: " , index)
+        end,
+        ToPage=function( index ) 
+            print("ToPage: " , index)
+        end
     }
 })
+
+windowWidth , windowHeight = window.size();
+pageView.setFrame(0,0,windowWidth,windowHeight-64)

@@ -49,6 +49,7 @@
 #import "LVNavigation.h"
 #import "LVLoadingView.h"
 #import "LVErrorView.h"
+#import "LVPageView.h"
 
 //------------------------------------------------------------------------------------
 #pragma -mark base
@@ -344,6 +345,7 @@ static int debug_log (lv_State *L) {
     [LVScrollView classDefine:L];
     [LVTableView classDefine:L];
     [LVCollectionView classDefine:L];
+    [LVPageView classDefine:L];
     [LVTimer       classDefine:L];
     [LVPageControl classDefine:L];
     [LVLoadingView classDefine:L];

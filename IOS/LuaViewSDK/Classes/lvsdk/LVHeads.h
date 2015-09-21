@@ -106,6 +106,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UITableViewCell  "UI.TableView.Cell"
 #define META_TABLE_UICollectionView      "UI.CollectionView"
 #define META_TABLE_UICollectionViewCell  "UI.CollectionView.Cell"
+#define META_TABLE_UIPageView       "UI.PageView"
 #define META_TABLE_UIAlertView      "UI.AlertView"
 #define META_TABLE_Transform3D      "UI.Transfrom3D"
 #define META_TABLE_Struct           "UI.Struct"
