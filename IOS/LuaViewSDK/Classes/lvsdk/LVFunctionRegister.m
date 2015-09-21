@@ -316,6 +316,8 @@ static int debug_log (lv_State *L) {
     }
     lv_pushcfunction(L, runFile);
     lv_setglobal(L, "run");
+    lv_pushcfunction(L, runFile);
+    lv_setglobal(L, "require");
 }
 // 注册函数
 +(void) registryApi:(lv_State*)L  lView:(LView*)lView{

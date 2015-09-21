@@ -42,7 +42,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.names = @[@"gifDemo.lua", @"attributedFontDemo.lua",//
-                   @"tableViewDemo.lua", @"collectionViewDemo.lua",//
+                   @"tableViewDemo.lua", @"collectionViewDemo.lua", @"pageViewDemo.lua",//
                    @"animationSnow.lua",@"animationLiZi.lua", @"animationFire.lua",@"animationFire2.lua",//
                    @"testunit.lua",//
                    @"shake.lua",@"downloader.lua",@"downloader2.lua",@"flxNodeDemo.lua",//
