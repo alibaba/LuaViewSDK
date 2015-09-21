@@ -7,10 +7,10 @@ import java.util.Hashtable;
 import com.alibaba.lvdebug.Config;
 
 public final class Word {
-	public static final Color KeyWordColor = new Color(126, 8, 84);
-	public static final Color StringWordColor = new Color(45, 36, 251);
-	public static final Color NumberWordColor = new Color(183, 24, 29);
-	public static final Color CommentWordColor = new Color(65, 126, 96);
+	private static final Color KeyWordColor = new Color(126, 8, 84);
+	private static final Color StringWordColor = new Color(45, 36, 251);
+	private static final Color NumberWordColor = new Color(183, 24, 29);
+	private static final Color CommentWordColor = new Color(65, 126, 96);
 
 	private static final Hashtable<String, String> map = new Hashtable<String, String>();
 	{

@@ -10,8 +10,9 @@ public class Util {
 		if (s != null) {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			DataOutputStream dos = new DataOutputStream(bos);
-			dos.writeInt(s.length());
-			dos.write(s.getBytes("UTF-8"));
+			byte[] data = s.getBytes("UTF-8");
+			dos.writeInt(data.length);
+			dos.write(data);
 			dos.flush();
 			byte[] bs = bos.toByteArray();
 			writer.write(bs);
