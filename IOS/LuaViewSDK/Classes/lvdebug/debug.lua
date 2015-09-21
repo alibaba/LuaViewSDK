@@ -14,21 +14,24 @@ function debug_log( log_str )
     print( "(ldb) " .. log_str )
 end
 
-function debug_print_var( name, value, level )
+function debug_print_var_0( name, value, level )
+    local ret = "";
     local prefix = string:rep( "    ", level )
     local str = string:format( "%s%s = %s", prefix, name, tostring(value) )
 
     if type( value ) == "table" then
         if debug.var_tbl[value] then
             --已在临时表中的,只打印表地址
-            print( str )
-            return
+            -- print( str )
+            ret = ret .. tostring(str) .. '\n';
+            return ret;
         end
 
         --加到临时表中,以免表出现循环引用时,打印也产生死循环
         debug.var_tbl[value] = true
         --打印表中所有数据
-        print( string:format( "%s%s = {", prefix, name ) )
+        --print( string:format( "%s%s = {", prefix, name ) )
+        ret = ret .. string:format( "%s%s = {", prefix, name ) .. '\n';
         for k, v in pairs( value ) do
             if type( k ) == "string" then
             else
@@ -36,15 +39,24 @@ function debug_print_var( name, value, level )
             end
             --不打印 "_"开头的内部变量
             --if string:sub( k, 1, 1 ) ~= "_" then
-            debug_print_var( k, v, level + 1 )
+            ret = ret .. debug_print_var_0( k, v, level + 1 )
             --end
         end
-        print( prefix .. "}" )
+        -- print( prefix .. "}" )
+        ret = ret .. prefix .. "}" .. '\n';
     elseif type( value ) == "string" then
-        print( str )
+        -- print( str )
+        ret = ret .. tostring(str) .. '\n';
     else
-        print( str )
+        -- print( str )
+        ret = ret .. tostring(str) .. '\n';
     end
+    return ret;
+end
+
+function debug_print_var( name, value, level )
+    local s = debug_print_var_0( name, value, level );
+    print( s );
 end
 
 function debug_print_expr( var )
