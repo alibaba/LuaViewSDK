@@ -114,7 +114,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		if (isYOnView(y - LINE_H) || isYOnView(y + LINE_H)) {
 			if (line.isCurrentLine) {
 				g.setColor(new Color(221, 234, 207));
-				g.fillRect(0, y - LINE_H + 4, this.getWidth(), LINE_H);
+				g.fillRect(0, y - LINE_H + 2, this.getWidth(), LINE_H);
 			}
 
 			g.setColor(Color.BLACK);
@@ -122,7 +122,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			line.draw(g, x + 2, y - 2);
 
 			if (line.isBreakPoint) {// 断点
-				int dx = 5;
+				int dx = 2;
 				g.setColor(Color.red);
 				g.fillArc(x - LINE_H * 2 - LINE_H + dx, y - LINE_H + (int) (dx * 2), LINE_H - dx * 2, LINE_H - dx * 2, 0, 360);
 			}
