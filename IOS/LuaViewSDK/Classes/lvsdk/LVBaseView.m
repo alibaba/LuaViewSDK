@@ -1104,7 +1104,7 @@ static int __tostring (lv_State *L) {
     if( user ){
         UIView<LVProtocal>* view = (__bridge UIView<LVProtocal> *)(user->view);
         if( view ){
-            NSString* s = [NSString stringWithFormat:@"LVUserDataView: %d: %@", (int)user, view];
+            NSString* s = [NSString stringWithFormat:@"%@",view];
             lv_pushstring(L, s.UTF8String);
             return 1;
         }

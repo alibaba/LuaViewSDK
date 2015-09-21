@@ -29,6 +29,7 @@ abstract public class MyScrollPanel extends JPanel {
 	private int max_w, max_h;
 
 	private Point point, pointPressed, draggedPoint, m_repressedPoint;
+	private int m_pressedButtonID = -1;
 
 	private final Point zeroPoint = new Point(0, 0);
 
@@ -79,6 +80,7 @@ abstract public class MyScrollPanel extends JPanel {
 		 */
 		addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {
+				m_pressedButtonID = e.getButton();
 				if (e.getClickCount() >= 2) {
 					m_repressedPoint = e.getPoint();
 				}
@@ -300,6 +302,10 @@ abstract public class MyScrollPanel extends JPanel {
 			return point.y + zeroPoint.y;
 		}
 		return 0;
+	}
+
+	public int pressedButtonID() {
+		return m_pressedButtonID;
 	}
 
 	public void clearPoint() {
