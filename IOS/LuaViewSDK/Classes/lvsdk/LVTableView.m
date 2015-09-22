@@ -56,8 +56,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//argcell
-            lv_pushnumber(l, indexPath.section);// section
-            lv_pushnumber(l, indexPath.row);// row
+            lv_pushnumber(l, indexPath.section+1);// section
+            lv_pushnumber(l, indexPath.row+1);// row
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -68,8 +68,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];
-            lv_pushnumber(l, indexPath.section);
-            lv_pushnumber(l, indexPath.row);
+            lv_pushnumber(l, indexPath.section+1);
+            lv_pushnumber(l, indexPath.row+1);
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -102,7 +102,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         //args
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -121,8 +121,8 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -140,7 +140,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -159,8 +159,8 @@
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -184,8 +184,8 @@
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
-            lv_pushnumber(l, indexPath.section);
-            lv_pushnumber(l, indexPath.row);
+            lv_pushnumber(l, indexPath.section+1);
+            lv_pushnumber(l, indexPath.row+1);
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -202,8 +202,8 @@
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
-            lv_pushnumber(l, indexPath.section);
-            lv_pushnumber(l, indexPath.row);
+            lv_pushnumber(l, indexPath.section+1);
+            lv_pushnumber(l, indexPath.row+1);
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -270,7 +270,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);

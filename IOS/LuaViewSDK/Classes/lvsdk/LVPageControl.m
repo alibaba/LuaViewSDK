@@ -68,10 +68,10 @@ static int setCurrentPage(lv_State *L) {
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int currentPage = lv_tonumber(L, 2);
-                view.currentPage = currentPage;
+                view.currentPage = currentPage-1;
                 return 0;
             } else {
-                lv_pushnumber(L, view.currentPage );
+                lv_pushnumber(L, view.currentPage+1 );
                 return 1;
             }
         }

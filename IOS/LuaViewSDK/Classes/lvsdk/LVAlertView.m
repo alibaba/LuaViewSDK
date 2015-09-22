@@ -36,7 +36,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        lv_pushnumber(l, buttonIndex);//传参数
+        lv_pushnumber(l, buttonIndex+1);//传参数
         [LVUtil call:l lightUserData:self key:"callback" nargs:1];
         self.lv_lview = nil;
     }

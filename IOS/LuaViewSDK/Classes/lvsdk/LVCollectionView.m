@@ -77,8 +77,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath.section);//arg2: section
-            lv_pushnumber(l, indexPath.row);//arg3: row
+            lv_pushnumber(l, indexPath.section+1);//arg2: section
+            lv_pushnumber(l, indexPath.row+1);//arg3: row
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -89,8 +89,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath.section);//arg2: section
-            lv_pushnumber(l, indexPath.row);//arg3: row
+            lv_pushnumber(l, indexPath.section+1);//arg2: section
+            lv_pushnumber(l, indexPath.row+1);//arg3: row
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -122,7 +122,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         // args
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -165,7 +165,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
@@ -184,8 +184,8 @@
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -206,8 +206,8 @@
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -227,8 +227,8 @@
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -251,8 +251,8 @@
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
-        lv_pushnumber(l, row);
+        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, row+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -280,7 +280,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section);
+        lv_pushnumber(l, section+1);
         
         // table
         lv_pushUserdata(l, self.lv_userData);
@@ -423,8 +423,8 @@ static int rectForSection (lv_State *L) {
         if( [tableView isKindOfClass:[LVCollectionView class]] ) {
             int nargs = lv_gettop(L);
             if( nargs>=3 ){
-                int section = lv_tonumber(L, 2);
-                int row = lv_tonumber(L, 3);
+                int section = lv_tonumber(L, 2)-1;
+                int row = lv_tonumber(L, 3)-1;
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:section];
                 CGRect r = [tableView layoutAttributesForItemAtIndexPath:indexPath].frame;
                 lv_pushnumber(L, r.origin.x);
