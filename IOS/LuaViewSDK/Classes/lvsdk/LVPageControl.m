@@ -152,12 +152,19 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         lv_pushcfunction(L, lvNewPageControl);
         lv_setglobal(L, "UIPageControl");
     }
+    {
+        lv_pushcfunction(L, lvNewPageControl);
+        lv_setglobal(L, "UIIndicator");
+    }
     const struct lvL_reg memberFunctions [] = {
         {"setNumberOfPages",  setNumberOfPages },
         {"numberOfPages",     setNumberOfPages },
+        
+        {"setPageCount",  setNumberOfPages },
+        {"pageCount",     setNumberOfPages },
+        
         {"setCurrentPage",  setCurrentPage },
         {"currentPage",     setCurrentPage },
-        
         
         {"setPageIndicatorTintColor",     pageIndicatorTintColor },
         {"pageIndicatorTintColor",     pageIndicatorTintColor },

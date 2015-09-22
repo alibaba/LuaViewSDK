@@ -53,22 +53,22 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"Scrolling"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"Scrolling"];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"Begin"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollBegin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self callLuaWithNoArgs:@"Scroll" key2:@"BeginDecelerating"];
+    //[self callLuaWithNoArgs:@"Callback" key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollEnd"];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollEnd"];
 }
 
 @end

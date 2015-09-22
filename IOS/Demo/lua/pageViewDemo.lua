@@ -5,16 +5,7 @@ local width, height= System.screenSize()
 
 pageView = UIPageView({
     PageCount = 12,
-    Indicator = function()
---        活动指示器
-        local indicator = UIIndicator()
-        indicator.alignCenter()
-        return indicator
-    end,
     Pages = {
-        Title = function(pos)
-            return "Title"
-        end,
         Init = function(page, pos)
             page.icon = UIButton()
         end,
@@ -23,30 +14,16 @@ pageView = UIPageView({
             page.icon.setFrame(0, 0, width, 200)
         end
     },
-    Listeners = {
-        Scrolled=function( index )
-            UIToast("Scrolled")
+    Callback = {
+
+        Scrolling = function( pageIndex, percent , offset )
+            print("Scrolling", pageIndex, percent, offset)
         end,
-        Selected=function( index )
-            UIToast("Selected")
+
+        ScrollEnd = function( pageIndex )
+            print("ScrollEnd", pageIndex )
         end
-    },
-    Scroll = {
-        Begin=function( index )
-            print("Begin")
-        end,
-        Scrolling=function( )
-            print("Scrolling")
-        end,
-        End=function( index ) 
-            print("End")
-        end,
-        FromPage=function( index )
-            print("FromePage: " , index)
-        end,
-        ToPage=function( index ) 
-            print("ToPage: " , index)
-        end
+        
     }
 })
 

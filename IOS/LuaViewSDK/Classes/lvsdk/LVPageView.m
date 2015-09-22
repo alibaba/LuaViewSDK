@@ -270,22 +270,8 @@ static int showScrollBar(lv_State *L) {
     return 1;
 }
 
-- (void) callLuaWithScrollFromPage{
-    if( self.currentPageIndex>=0 ) {
-        lv_State* l = self.lv_lview.l;
-        if( l && self.lv_userData ){
-            lv_checkStack32(l);
-            lv_pushnumber(l, self.currentPageIndex);
-            
-            lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            
-            [LVUtil call:l key1:"Scroll" key2:"FromPage" nargs:1 nrets:0];
-        }
-    }
-}
 
-- (void) callLuaWithScrollToPage{
+- (void) callLuaWithScrolling{
     int offset = self.contentOffset.x + 1;
     int pageIndex = offset/self.frame.size.width;
     self.currentPageIndex = pageIndex;
@@ -293,35 +279,55 @@ static int showScrollBar(lv_State *L) {
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
-        lv_pushnumber(l, pageIndex);
+        float x = self.contentOffset.x;
+        float w = self.frame.size.width;
+        float f =  x/w;
+        double ip = 0;
+        double fp = modf(f, &ip);
+        lv_pushnumber(l, pageIndex + 1 );
+        lv_pushnumber(l, fp);
+        lv_pushnumber(l, x - ip*w);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:"Scroll" key2:"ToPage" nargs:1 nrets:0];
+        [LVUtil call:l key1:"Callback" key2:"Scrolling" nargs:3 nrets:0];
     }
 }
 
+- (void) callLuaWithScrollEnd{
+    lv_State* l = self.lv_lview.l;
+    if( l && self.lv_userData ){
+        lv_checkStack32(l);
+        lv_pushnumber(l, self.currentPageIndex + 1 );
+        
+        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
+        
+        [LVUtil call:l key1:"Callback" key2:"ScrollEnd" nargs:1 nrets:0];
+    }
+}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"Scrolling"];
+    [self callLuaWithScrolling];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"Begin"];
-    [self callLuaWithScrollFromPage];
+    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollBegin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self callLuaWithNoArgs:@"Scroll" key2:@"BeginDecelerating"];
+    //[self callLuaWithNoArgs:@"Callback" key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
-    [self callLuaWithScrollToPage];
+    [self callLuaWithScrolling];
+    [self callLuaWithScrollEnd];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
-    [self callLuaWithScrollToPage];
+    [self callLuaWithScrolling];
+    [self callLuaWithScrollEnd];
 }
 
 @end

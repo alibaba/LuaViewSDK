@@ -335,11 +335,11 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"End"];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scroll" key2:@"End"];
+    [self callLuaWithNoArgs:@"Callback" key2:@"End"];
 }
 
 #pragma -mark lvNewTextField

@@ -76,14 +76,14 @@ tableView.delegate = {
 		foot.setBackgroundColor(0xff0000);
 		return foot;
 	},
-	Scroll = {
+	Callback = {
 		Scrolling = ^(){
 			print("scrolling");
 		},
-		Begin = ^(){
+		ScrollBegin = ^(){
 			print("scrolling begin");
 		},
-		End = ^(){
+		ScrollEnd = ^(){
 			print("scrolling end");
 		}
 	}

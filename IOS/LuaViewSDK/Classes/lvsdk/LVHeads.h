@@ -18,6 +18,7 @@
 #import "LVUtil.h"
 //--------------------------------------------------------------------------------
 
+
 #define USERDATA_KEY_DELEGATE 1
 #define USERDATA_FLEX_DELEGATE 2
 
@@ -116,6 +117,9 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_Global           "lv.global"
 #define META_TABLE_NativeObject     "lv.nativeObjBox"
 #define META_TABLE_System           "lv.System"
+
+// listner
+#define LV_TAG_CALLBACK  @"Callback"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );
