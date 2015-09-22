@@ -281,6 +281,7 @@
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72B1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
+		84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* 2015-05-07.zip */; settings = {ASSET_TAGS = (); }; };
 		84CF566E1AE8EC3D00A49B36 /* LVExternalLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */; };
 		84CF566F1AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
 		84CF56701AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
@@ -319,7 +320,6 @@
 		84F4A01F1B4B9E600062A7B2 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; };
 		84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84F4A0211B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
-		84F66FB71AFB0BBA0012BB38 /* 2015-05-07.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */; };
 		9171D4A41AADD0300040DAA3 /* LVLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */; };
 		9171D4A51AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
 		9171D4A61AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
@@ -568,6 +568,7 @@
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
+		84CC637F1BB16AF300613B74 /* 2015-05-07.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "2015-05-07.zip"; sourceTree = "<group>"; };
 		84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExternalLinker.h; sourceTree = "<group>"; };
 		84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExternalLinker.m; sourceTree = "<group>"; };
 		84CF56731AE9184000A49B36 /* LVNativeObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNativeObjBox.h; sourceTree = "<group>"; };
@@ -596,7 +597,6 @@
 		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
-		84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "2015-05-07.zip"; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -762,7 +762,6 @@
 			children = (
 				84160C461B9591CA008E967E /* delegate */,
 				84799AA41BAFDDA00070E214 /* lua */,
-				84F66FB61AFB0BBA0012BB38 /* 2015-05-07.zip */,
 				8418E3B61A5E804700158125 /* Images.xcassets */,
 				8418E3B71A5E804700158125 /* Info.plist */,
 				8418E3B21A5E804700158125 /* LaunchScreen.xib */,
@@ -846,6 +845,7 @@
 				84799AA61BAFDDA00070E214 /* 10.tiff */,
 				84799AA71BAFDDA00070E214 /* 13.tiff */,
 				84799AA81BAFDDA00070E214 /* 16.tiff */,
+				84CC637F1BB16AF300613B74 /* 2015-05-07.zip */,
 				84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */,
 			);
 			path = lua;
@@ -1270,6 +1270,7 @@
 				84799AD21BAFDDA00070E214 /* animationLiZi.lua in Resources */,
 				84799AD81BAFDDA00070E214 /* collectionViewDemo.lua in Resources */,
 				84799ADA1BAFDDA00070E214 /* color2.png in Resources */,
+				84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */,
 				84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */,
 				84799AE31BAFDDA00070E214 /* JHSIconfont.ttf in Resources */,
 				84799AE81BAFDDA00070E214 /* System.lua in Resources */,
@@ -1290,7 +1291,6 @@
 				84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */,
 				84799AEC1BAFDDA00070E214 /* testluabox.lua in Resources */,
 				84799ADE1BAFDDA00070E214 /* demo2015.lua in Resources */,
-				84F66FB71AFB0BBA0012BB38 /* 2015-05-07.zip in Resources */,
 				84799AE61BAFDDA00070E214 /* snow.png in Resources */,
 				84799AEA1BAFDDA00070E214 /* tableViewDemo.lua in Resources */,
 				84799AD31BAFDDA00070E214 /* animationSnow.lua in Resources */,
