@@ -43,11 +43,9 @@ tableView.delegate = {
 				print(section, row);
 				row = row %4;
 				if( row ==1 ) {
-					tableView.headerEndRefreshing();
+					tableView.stopRefreshing();
 				} else if (row ==2 ) {
-					tableView.footerNoticeNoMoreData();
 				} else if ( row == 3 ) {
-					tableView.hiddenRefreshFooter(true);
 				}
 				-- tableView.reloadData();
 				System.gc();
