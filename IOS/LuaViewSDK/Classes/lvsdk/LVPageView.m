@@ -39,7 +39,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.cellArray = [[NSMutableArray alloc] init];
         self.pagingEnabled = YES;
-        self.showsHorizontalScrollIndicator = YES;
+        self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.currentPageIndex = -1;
     }
