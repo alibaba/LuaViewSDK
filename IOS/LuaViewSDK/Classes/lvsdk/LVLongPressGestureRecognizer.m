@@ -55,7 +55,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setNumberOfTouchesRequired (lv_State *L) {
+static int setTouchCount (lv_State *L) {
     LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataGesture) ){
         LVLongPressGestureRecognizer* gesture =  (__bridge LVLongPressGestureRecognizer *)(user->gesture);
@@ -84,8 +84,8 @@ static int setNumberOfTouchesRequired (lv_State *L) {
     
     {
         const struct lvL_reg memberFunctions [] = {
-            {"numberOfTouchesRequired",     setNumberOfTouchesRequired},
-            {"setNumberOfTouchesRequired",  setNumberOfTouchesRequired},
+            {"touchCount",     setTouchCount},
+            {"setTouchCount",  setTouchCount},
             {NULL, NULL}
         };
         lvL_openlib(L, NULL, memberFunctions, 0);

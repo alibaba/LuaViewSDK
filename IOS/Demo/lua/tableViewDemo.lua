@@ -12,9 +12,9 @@ imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr
 tableView = UITableView();
 tableView.delegate = {
 	Section = {
-		NumberOfSections = 2,
+		SectionCount = 2,
 
-		NumberOfRows = ^(section){
+		RowCount = ^(section){
 			return 10;
 		}
 	},

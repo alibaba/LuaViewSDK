@@ -131,7 +131,7 @@ demoArray = {
     UISwipeGestureRecognizerDirectionLeft  = 2,
     UISwipeGestureRecognizerDirectionUp    = 4,
     UISwipeGestureRecognizerDirectionDown  = 8]]
-	g.setNumberOfTouchesRequired(2);
+	g.setTouchCount(2);
 	g.setDirection(UISwipeGestureRecognizerDirectionLeft);
 	window.addGestureRecognizer(g);
 },
@@ -141,7 +141,7 @@ demoArray = {
 				print( "长按手势检测到了" );
 			end
 		});
-	g.setNumberOfTouchesRequired(2);
+	g.setTouchCount(2);
 	window.addGestureRecognizer(g);
 },
 ^(){
@@ -315,7 +315,7 @@ demoArray = {
 	window.setBackgroundColor(0,0.5);
  	pageControl = UIPageControl();
  	pageControl.setCenter(150,10);
- 	pageControl.setNumberOfPages(10);
+ 	pageControl.setPageCount(10);
  	print(pageControl.numberOfPages() );
  	scrollView.delegate = ^(){
  		local  x,y = scrollView.contentOffset();

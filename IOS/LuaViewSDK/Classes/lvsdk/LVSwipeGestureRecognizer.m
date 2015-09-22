@@ -66,7 +66,7 @@ static int numberOfTouchesRequired (lv_State *L) {
     return 0;
 }
 
-static int setNumberOfTouchesRequired (lv_State *L) {
+static int setTouchCount (lv_State *L) {
     LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataGesture) && lv_gettop(L)>=2 ){
         float num = lv_tonumber(L, 2);
@@ -122,8 +122,8 @@ static int setDirection (lv_State *L) {
     
     {
         const struct lvL_reg memberFunctions [] = {
-            {"numberOfTouchesRequired", numberOfTouchesRequired},
-            {"setNumberOfTouchesRequired", setNumberOfTouchesRequired},
+            {"touchCount", numberOfTouchesRequired},
+            {"setTouchCount", setTouchCount},
             {"direction", direction},
             {"setDirection", setDirection},
             {NULL, NULL}

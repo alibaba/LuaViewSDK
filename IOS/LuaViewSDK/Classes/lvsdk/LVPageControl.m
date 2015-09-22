@@ -43,7 +43,7 @@ static int lvNewPageControl (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setNumberOfPages(lv_State *L) {
+static int setPageCount(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVPageControl* view = (__bridge LVPageControl *)(user->view);
@@ -157,11 +157,8 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         lv_setglobal(L, "UIIndicator");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setNumberOfPages",  setNumberOfPages },
-        {"numberOfPages",     setNumberOfPages },
-        
-        {"setPageCount",  setNumberOfPages },
-        {"pageCount",     setNumberOfPages },
+        {"setPageCount",  setPageCount },
+        {"pageCount",     setPageCount },
         
         {"setCurrentPage",  setCurrentPage },
         {"currentPage",     setCurrentPage },

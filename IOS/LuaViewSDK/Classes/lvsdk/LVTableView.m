@@ -87,7 +87,7 @@
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
         
-        if(  [LVUtil call:l key1:"Section" key2:"NumberOfSections" nargs:0 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:"Section" key2:"SectionCount" nargs:0 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
                 return num;
@@ -106,7 +106,7 @@
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, KEY_LUA_INFO);
-        if(  [LVUtil call:l key1:"Section" key2:"NumberOfRows" nargs:1 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:"Section" key2:"RowCount" nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
                 return num;

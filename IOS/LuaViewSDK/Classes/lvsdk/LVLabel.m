@@ -81,7 +81,7 @@ static int setText (lv_State *L) {
     return 0;
 }
 
-static int setNumberOfLines(lv_State *L) {
+static int setLineCound(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -223,8 +223,8 @@ static int setTextAlignment (lv_State *L) {
         {"setTextAlignment", setTextAlignment},
         {"textAlignment",    setTextAlignment},
         
-        {"setNumberOfLines", setNumberOfLines},
-        {"numberOfLines",    setNumberOfLines},
+        {"setLineCount", setLineCound},
+        {"lineCount",    setLineCound},
         
         {"adjustsFontSizeToFitWidth",  adjustsFontSizeToFitWidth},
         

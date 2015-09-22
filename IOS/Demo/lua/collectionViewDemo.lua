@@ -13,9 +13,9 @@ tableView = UICollectionView();
 tableView.delegate = 
 {
 	Section = {
-		NumberOfSections = 2,
+		SectionCount = 2,
 
-		NumberOfRows = ^(section){
+		RowCount = ^(section){
 			return 4;
 		},
 		Spacing = ^(section ){
