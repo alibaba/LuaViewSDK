@@ -166,11 +166,11 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         {"setCurrentPage",  setCurrentPage },
         {"currentPage",     setCurrentPage },
         
-        {"setPageIndicatorTintColor",     pageIndicatorTintColor },
-        {"pageIndicatorTintColor",     pageIndicatorTintColor },
+        {"setPageColor",     pageIndicatorTintColor },
+        {"pageColor",     pageIndicatorTintColor },
         
-        {"setCurrentPageIndicatorTintColor",     currentPageIndicatorTintColor },
-        {"currentPageIndicatorTintColor",     currentPageIndicatorTintColor },
+        {"setCurrentPageColor",     currentPageIndicatorTintColor },
+        {"currentPageColor",     currentPageIndicatorTintColor },
         {NULL, NULL}
     };
     
