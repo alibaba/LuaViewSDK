@@ -1,16 +1,15 @@
 
 print("初始化窗口大小, 默认窗口大小是(0,0)");
 w,h = System.screenSize();
-window.setFrame(0, 0, w, h);
-window.setUserInteractionEnabled(true);
+
 window.setBackgroundColor(0,1);
 
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
-tableView = UICollectionView();
-tableView.delegate = 
+collectionView = UICollectionView();
+collectionView.delegate = 
 {
 	Section = {
 		SectionCount = 2,
@@ -74,6 +73,7 @@ tableView.delegate =
 
 				cell.button = UIButton();
 				cell.button.setFrame(0,0,100,60);
+				cell.button.setBackgroundColor(0x777777);
 				cell.button.delegate = ^(){
 						UIAnimate( ^(){
 										cell.icon2.setCenter(160,100);
@@ -106,8 +106,8 @@ tableView.delegate =
 	}
 };
 
-tableView.setFrame(0,0,w,h);
-tableView.setBackgroundColor(0xffFFFF);
+collectionView.setFrame(0,0,w,h-64);
+collectionView.setBackgroundColor(0xffFFFF);
 
 
 
