@@ -35,18 +35,23 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"LuaView 测试demo";
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    CGRect r = self.view.bounds;
+    r.origin.y = 64;
+    r.size.height -= 64;
+    self.tableView = [[UITableView alloc] initWithFrame:r];
     [self.view addSubview:self.tableView];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.names = @[@"gifDemo.lua", @"attributedFontDemo.lua",//
-                   @"tableViewDemo.lua", @"collectionViewDemo.lua", @"pageViewDemo.lua",//
-                   @"animationSnow.lua",@"animationLiZi.lua", @"animationFire.lua",@"animationFire2.lua",//
-                   @"testunit.lua",//
-                   @"shake.lua",@"downloader.lua",@"downloader2.lua",@"flxNodeDemo.lua",//
-                   @"System.lua"];
+    
+    NSArray* urlArray =  [[NSBundle mainBundle] URLsForResourcesWithExtension:@"lua" subdirectory:nil];
+    NSMutableArray* nameArray = [[NSMutableArray alloc] init];
+    for( int i =0; i<urlArray.count; i++ ) {
+        NSURL* url = urlArray[i];
+        NSString* name = [url relativeString];
+        [nameArray addObject:name];
+    }
+    self.names = nameArray;
 }
 
 
