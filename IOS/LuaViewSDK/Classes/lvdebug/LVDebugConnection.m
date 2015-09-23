@@ -173,8 +173,8 @@ static void ServerConnectCallBack( CFSocketRef socket,
     switch ( type ){
         case kCFSocketReadCallBack: {
             NSString* cmd = readString(socket);
-            LVLog(@"received CMD: %@", cmd);
-            if ( cmd ) {
+            if ( cmd && cmd.length>0) {
+                LVLog(@"received CMD: %@", cmd);
                 [debuger.receivedArray insertObject:cmd atIndex:0];
             }
             // 关闭掉socket
@@ -192,7 +192,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
         }
         case kCFSocketConnectCallBack:
             if( data ) {
-                LVLog(@"Debuger Socket Connect failed" );
+                // LVLog(@"Debuger Socket Connect failed" );
                 debuger.state = SOCKET_ERROR;
             } else {
                 LVLog(@"Debuger Socket connect Success");
