@@ -17,7 +17,7 @@
 @implementation JHSLuaViewButton
 
 -(void) setWebImageUrl:(NSString *)url forState:(UIControlState)state finished:(LVLoadFinished)finished{
-    [self sd_setImageWithURL:[NSURL URLWithString:url] forState:state completed:nil];
+    [self sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:state completed:nil];
 }
 
 //----------------------------------------------------------------------------------------

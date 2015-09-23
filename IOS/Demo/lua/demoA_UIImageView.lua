@@ -1,15 +1,18 @@
 
 
 print("初始化窗口大小, 默认窗口大小是(0,0)");
-w,h = System.screenSize();
-window.setFrame(0, 0, w, h);
-window.setUserInteractionEnabled(true);
+scrW, scrH = System.screenSize();
 window.setBackgroundColor(0x777777,1);
 
-Y0 = 100
+w = scrW/3;
+X0 = scrW/10;
+Y0 = scrH/4;
+
+
+
 
 imageView = UIImageView();
-imageView.setFrame(30, Y0, 100, 100);
+imageView.setFrame(X0, Y0, w, w);
 imageView.setBackgroundColor(0xff0000,1);
 names = {};
 for i=1,16 do
@@ -21,6 +24,6 @@ imageView.startAnimating( names, 3.0, 1);
 
 
 imageView2 = UIImageView();
-imageView2.setFrame(160, Y0, 100, 100);
+imageView2.setFrame(X0+w+X0, Y0, w, w);
 imageView2.setImage("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png");
 
