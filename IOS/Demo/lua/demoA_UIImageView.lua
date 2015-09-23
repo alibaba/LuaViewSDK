@@ -25,5 +25,7 @@ imageView.startAnimating( names, 3.0, 1);
 
 imageView2 = UIImageView();
 imageView2.setFrame(X0+w+X0, Y0, w, w);
-imageView2.setImage("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png");
+imageView2.setImage("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",^(){
+		print("图片加载成功!");
+	});
 

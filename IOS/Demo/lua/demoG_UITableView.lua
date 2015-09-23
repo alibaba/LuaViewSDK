@@ -1,8 +1,7 @@
 
 print("初始化窗口大小, 默认窗口大小是(0,0)");
 w,h = System.screenSize();
-window.setFrame(0, 0, w, h);
-window.setUserInteractionEnabled(true);
+
 window.setBackgroundColor(0,1);
 
 cellHeight = 100
@@ -21,7 +20,11 @@ tableView.delegate = {
 
 	Cell = {
 		Id = ^( section, row ){
-			return  "图片+文字";
+			if ( section==1  ) then
+				return  "图片+文字";
+			else
+				return "图片+图片";
+			end
 		},
 		"图片+文字" = {
 			Height = ^( section, row ){
@@ -41,13 +44,29 @@ tableView.delegate = {
 			},
 			Delegate = ^( section, row ){
 				print(section, row);
-				row = row %4;
-				if( row ==1 ) {
-					tableView.stopRefreshing();
-				} else if (row ==2 ) {
-				} else if ( row == 3 ) {
-				}
-				-- tableView.reloadData();
+				tableView.stopRefreshing();
+				System.gc();
+			}
+		},
+		"图片+图片" = {
+			Height = ^( section, row ){
+				return cellHeight;
+			},
+			Init = ^(cell, section, row){
+				cell.icon = UIImageView();
+				cell.icon2 = UIImageView();
+			},
+			Layout = ^(cell, section, row){
+				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
+				cell.icon.setImage(imageUrl1);
+
+
+				cell.icon2.setFrame(cellHeight+10, 0, cellHeight, cellHeight);
+				cell.icon2.setImage(imageUrl1);
+			},
+			Delegate = ^( section, row ){
+				print(section, row);
+				tableView.stopRefreshing();
 				System.gc();
 			}
 		}
@@ -89,7 +108,7 @@ tableView.delegate = {
 
 loading = false;
 
-tableView.setFrame(0,50,w,h-100);
+tableView.setFrame(0,0,w,h-64);
 tableView.setBackgroundColor(0xffFFFF);
 
 tableView.initRefreshHeader();
