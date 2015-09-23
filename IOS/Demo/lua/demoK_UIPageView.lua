@@ -13,6 +13,9 @@ pageView = UIPageView({
             page.button.setText("测试按钮"..pos)
             page.button.setFrame(0, 0, scrW, 200)
             page.button.setBackgroundColor(0x777777);
+            page.button.delegate = ^(){
+                print("第",pos,"页");
+            }
         end
     },
     Callback = {

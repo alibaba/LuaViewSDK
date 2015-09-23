@@ -1,18 +1,28 @@
-print("System.ios = " , System.ios )
-print("System.android = ", System.android )
-print("System.vmVersion = ", System.vmVersion)
-print("System.osVersion = ", System.osVersion)	--获取手机操作系统版本号
-print("System.platform = ", System.platform )	--获取平台信息
-print("System.scale = ", System.scale )	--获取屏幕分辨率
-print("System.device = ", System.device )	--获取设备信息
-print("System.screenSize() = ", System.screenSize() );
-System.gc ()
+scrW,scrH = System.screenSize();
+label = UILabel();
+label.setFrame(0,0,scrW,scrH-64);
+label.setLineCount(100);
+
+function myprint( s , s2 )
+	s = s .. tostring(s2)
+	print(s);
+	local text = label.text();
+	if( text ) then 
+		label.text =  text .. "\n" .. s;
+	else
+		label.text =  s;
+	end
+end
 
 
-button = UIButton();
-button.setTitle("测试");
-button.setFrame(30,50,100,100);
-button.backgroundColor(0xff);
-button.delegate =^(){
-    button.setAnchorPoint(0,0);
-};
+
+
+myprint("System.ios = " , System.ios )
+myprint("System.android = ", System.android )
+myprint("System.vmVersion = ", System.vmVersion)
+myprint("System.osVersion = ", System.osVersion)	--获取手机操作系统版本号
+myprint("System.platform = ", System.platform )	--获取平台信息
+myprint("System.scale = ", System.scale )	--获取屏幕分辨率
+myprint("System.device = ", System.device )	--获取设备信息
+myprint("System.screenSize() = ", System.screenSize() );
+myprint("---end---",nil);

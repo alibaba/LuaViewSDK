@@ -16,8 +16,6 @@ function createButton( text, x,y,w,h, callback)
     return button;
 end
 
-
-
 button1 = createButton("关闭1", 0, 50, w, 40, ^(){
     UIAlertView("标题", "内容",
                 "确定",
@@ -29,7 +27,7 @@ button1 = createButton("关闭1", 0, 50, w, 40, ^(){
 
 
 
-button2 = createButton("关闭2", 0, 100, w, 40, ^(){
+button2 = createButton("关闭2", 10, 100, w-20, 40, ^(){
     UIAlertView("标题", "内容",
                 "确定","取消",
                     ^(index){

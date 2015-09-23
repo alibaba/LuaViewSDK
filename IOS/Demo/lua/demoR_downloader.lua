@@ -1,6 +1,4 @@
-print("下载测试脚本")
 
-print("初始化窗口大小, 默认窗口大小是(0,0)");
 w,h = System.screenSize();
 window.setFrame(0, 0, w, h);
 window.setUserInteractionEnabled(true);

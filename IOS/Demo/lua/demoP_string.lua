@@ -1,53 +1,69 @@
-t = "123456789";
-print( t.byte(2,4) )
+scrW,scrH = System.screenSize();
+label = UILabel();
+label.setFrame(0,0,scrW,scrH-64);
+label.setLineCount(100);
 
-print( string:char(51,52,53) )
+function myprint( s )
+	print(s);
+	local text = label.text();
+	if( text ) then 
+		label.text =  text .. "\n" .. s;
+	else
+		label.text =  s;
+	end
+end
+
+
+t = "123456789";
+myprint( t.byte(2,4) )
+
+myprint( string:char(51,52,53) )
 
 local s = "just a test";
 startPos, endPos = s.find("st")
-print(startPos, endPos)
+myprint(startPos, endPos)
 
-print(string:format("%s is %d", "ten", 10))
+myprint(string:format("%s is %d", "ten", 10))
 
 
 s = "just a test"
 for w in s.gmatch("%a+") do
-	print(w)
+	myprint(w)
 end
 
 
 local s = "just a test";
-print( s.gsub("st", "*"))
+myprint( s.gsub("st", "*"))
 
 
 
 local s = "num is 1234567890"
-print( s.gsub("%d", "*"))
+myprint( s.gsub("%d", "*"))
 
 
 
 s = "sethook, setlocal, setmetatable, setupvalue, setuservalue"
-print( s.gsub("s%a+", "S", 2) )
+myprint( s.gsub("s%a+", "S", 2) )
 
 
 local s = "just a test"
-print(s.match("test"))
+myprint(s.match("test"))
 
 s = "today is 2003-5-31"
-print(s.match("%d+-%d+-%d+"))
+myprint(s.match("%d+-%d+-%d+"))
 
 s = "abcdabcd"
-print(s.match("a"))
+myprint(s.match("a"))
 
 local s = "你好"
-print( s.rep(3) )
-print( s.rep(3,'!dddd')  )
+myprint( s.rep(3) )
+myprint( s.rep(3,'!dddd')  )
 
 local s = "reverse";
-print(s.reverse())
+myprint(s.reverse())
 
 local s = "abcdefg";
-print(s.sub(2, 4))
+myprint(s.sub(2, 4))
 
 
 HELP_MESSAGE = [[
@@ -57,9 +73,10 @@ And here is the third.
 Let's make sure to include enough text to bore the user.
 ]];
 for line in HELP_MESSAGE.gfind('[^\n]+') do
-print(line);
+myprint(line);
 end
 
+myprint("--end---");
 
 
 

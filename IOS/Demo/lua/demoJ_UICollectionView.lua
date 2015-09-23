@@ -1,5 +1,4 @@
 
-print("初始化窗口大小, 默认窗口大小是(0,0)");
 w,h = System.screenSize();
 
 window.setBackgroundColor(0,1);
