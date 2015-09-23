@@ -229,8 +229,8 @@
 		84799ADB1BAFDDA00070E214 /* demoU_coroutineDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB61BAFDDA00070E214 /* demoU_coroutineDemo.lua */; settings = {ASSET_TAGS = (); }; };
 		84799ADD1BAFDDA00070E214 /* demoE_UIButton.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB81BAFDDA00070E214 /* demoE_UIButton.lua */; settings = {ASSET_TAGS = (); }; };
 		84799ADE1BAFDDA00070E214 /* demoZ_2015.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB91BAFDDA00070E214 /* demoZ_2015.lua */; settings = {ASSET_TAGS = (); }; };
-		84799ADF1BAFDDA00070E214 /* demoR_downloader.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABA1BAFDDA00070E214 /* demoR_downloader.lua */; settings = {ASSET_TAGS = (); }; };
-		84799AE01BAFDDA00070E214 /* demoR_downloader2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABB1BAFDDA00070E214 /* demoR_downloader2.lua */; settings = {ASSET_TAGS = (); }; };
+		84799ADF1BAFDDA00070E214 /* demoR_DownloadAndFile.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABA1BAFDDA00070E214 /* demoR_DownloadAndFile.lua */; settings = {ASSET_TAGS = (); }; };
+		84799AE01BAFDDA00070E214 /* demoR_AudioPlayer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABB1BAFDDA00070E214 /* demoR_AudioPlayer.lua */; settings = {ASSET_TAGS = (); }; };
 		84799AE11BAFDDA00070E214 /* demoO_flxNode.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABC1BAFDDA00070E214 /* demoO_flxNode.lua */; settings = {ASSET_TAGS = (); }; };
 		84799AE21BAFDDA00070E214 /* demoA_UIImageView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABD1BAFDDA00070E214 /* demoA_UIImageView.lua */; settings = {ASSET_TAGS = (); }; };
 		84799AE31BAFDDA00070E214 /* JHSIconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -520,8 +520,8 @@
 		84799AB61BAFDDA00070E214 /* demoU_coroutineDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoU_coroutineDemo.lua; sourceTree = "<group>"; };
 		84799AB81BAFDDA00070E214 /* demoE_UIButton.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoE_UIButton.lua; sourceTree = "<group>"; };
 		84799AB91BAFDDA00070E214 /* demoZ_2015.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_2015.lua; sourceTree = "<group>"; };
-		84799ABA1BAFDDA00070E214 /* demoR_downloader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoR_downloader.lua; sourceTree = "<group>"; };
-		84799ABB1BAFDDA00070E214 /* demoR_downloader2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoR_downloader2.lua; sourceTree = "<group>"; };
+		84799ABA1BAFDDA00070E214 /* demoR_DownloadAndFile.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoR_DownloadAndFile.lua; sourceTree = "<group>"; };
+		84799ABB1BAFDDA00070E214 /* demoR_AudioPlayer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoR_AudioPlayer.lua; sourceTree = "<group>"; };
 		84799ABC1BAFDDA00070E214 /* demoO_flxNode.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_flxNode.lua; sourceTree = "<group>"; };
 		84799ABD1BAFDDA00070E214 /* demoA_UIImageView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_UIImageView.lua; sourceTree = "<group>"; };
 		84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JHSIconfont.ttf; sourceTree = "<group>"; };
@@ -820,8 +820,8 @@
 				84799AC21BAFDDA00070E214 /* demoP_string.lua */,
 				84799AC31BAFDDA00070E214 /* demoP_System.lua */,
 				84799AC01BAFDDA00070E214 /* demoQ_shake.lua */,
-				84799ABA1BAFDDA00070E214 /* demoR_downloader.lua */,
-				84799ABB1BAFDDA00070E214 /* demoR_downloader2.lua */,
+				84799ABA1BAFDDA00070E214 /* demoR_DownloadAndFile.lua */,
+				84799ABB1BAFDDA00070E214 /* demoR_AudioPlayer.lua */,
 				84799AB21BAFDDA00070E214 /* demoS_callOC.lua */,
 				84799AB61BAFDDA00070E214 /* demoU_coroutineDemo.lua */,
 				84799AC71BAFDDA00070E214 /* demoW_luabox.lua */,
@@ -1276,7 +1276,7 @@
 				84799AE11BAFDDA00070E214 /* demoO_flxNode.lua in Resources */,
 				84799AF21BAFDF370070E214 /* lv_kit.lua in Resources */,
 				84799ACF1BAFDDA00070E214 /* 7.tiff in Resources */,
-				84799AE01BAFDDA00070E214 /* demoR_downloader2.lua in Resources */,
+				84799AE01BAFDDA00070E214 /* demoR_AudioPlayer.lua in Resources */,
 				84799ACA1BAFDDA00070E214 /* 1.tiff in Resources */,
 				84799AD91BAFDDA00070E214 /* color1.png in Resources */,
 				84799AE71BAFDDA00070E214 /* demoP_string.lua in Resources */,
@@ -1295,7 +1295,7 @@
 				84799AE21BAFDDA00070E214 /* demoA_UIImageView.lua in Resources */,
 				840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */,
 				84799ACB1BAFDDA00070E214 /* 10.tiff in Resources */,
-				84799ADF1BAFDDA00070E214 /* demoR_downloader.lua in Resources */,
+				84799ADF1BAFDDA00070E214 /* demoR_DownloadAndFile.lua in Resources */,
 				84799AF01BAFDDCA0070E214 /* demoK_UIPageView.lua in Resources */,
 				84799ACC1BAFDDA00070E214 /* 13.tiff in Resources */,
 				84799AD11BAFDDA00070E214 /* demoN_UIAnimateFire2.lua in Resources */,
