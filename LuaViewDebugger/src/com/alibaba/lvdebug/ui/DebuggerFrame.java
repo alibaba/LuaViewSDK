@@ -1,9 +1,7 @@
 package com.alibaba.lvdebug.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Image;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +26,9 @@ import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class DebuggerFrame extends JFrame {
 
@@ -76,23 +77,22 @@ public class DebuggerFrame extends JFrame {
 				center.cmdBuffer.pushCmd(new ClientCmd("n"));
 			}
 		});
-		buttonNextBreakPoint = new JButton();
-		buttonNextBreakPoint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				center.srcCodeCenter.clearGotoLine();
-				setIsDebugging(false);
-				center.cmdBuffer.pushCmd(new ClientCmd("c"));
-			}
-		});
 		try {
 			Image img = ImageIO.read(getClass().getResource("run.png"));
-			buttonNextBreakPoint.setIcon(new ImageIcon(img));
-			buttonNextBreakPoint.setPreferredSize(new Dimension(60, 30));
-
-			img = ImageIO.read(getClass().getResource("disableRun.png"));
-			buttonNextBreakPoint.setDisabledIcon(new ImageIcon(img));
+			Image img2 = ImageIO.read(getClass().getResource("disableRun.png"));
+			buttonNextBreakPoint = new ImageButton(new ImageIcon(img), new ImageIcon(img2));
+			buttonNextBreakPoint.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					center.srcCodeCenter.clearGotoLine();
+					setIsDebugging(false);
+					center.cmdBuffer.pushCmd(new ClientCmd("c"));
+				}
+			});
 		} catch (Exception ex) {
 		}
+
+		label = new JLabel("  ");
+		panelHead.add(label);
 		panelHead.add(buttonNextBreakPoint);
 		panelHead.add(buttonNextLine);
 
@@ -119,6 +119,9 @@ public class DebuggerFrame extends JFrame {
 		panelBody.setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
+
+		// splitPane.setBorderPainted(false);// 不打印边框
+		splitPane.setBorder(null);// 除去边框
 		splitPane.setResizeWeight(0.8);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panelBody.add(splitPane, BorderLayout.CENTER);
@@ -133,6 +136,7 @@ public class DebuggerFrame extends JFrame {
 		scrollPane.setViewportView(outputArea);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBorder(null);
 		splitPane.setLeftComponent(tabbedPane);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -149,6 +153,7 @@ public class DebuggerFrame extends JFrame {
 	private JButton buttonNextCodeLine;
 	private JButton buttonNextBreakPoint;
 	private JButton buttonCallStack;
+	private JLabel label;
 
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;

@@ -128,6 +128,7 @@ extern char g_debug_lua[];
 -(void) checkDeuggerIsRunningToLoadDebugModel{
     if( self.debugConnection== nil) {
         self.debugConnection = [[LVDebugConnection alloc] init];
+        self.debugConnection.lview = self;
     }
 
     if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
