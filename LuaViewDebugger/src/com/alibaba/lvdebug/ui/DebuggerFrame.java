@@ -20,7 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
@@ -85,9 +84,6 @@ public class DebuggerFrame extends JFrame {
 			});
 		} catch (Exception ex) {
 		}
-
-		label = new JLabel("  ");
-		panelHead.add(label);
 		panelHead.add(buttonNextBreakPoint);
 		panelHead.add(buttonNextLine);
 
@@ -148,7 +144,6 @@ public class DebuggerFrame extends JFrame {
 	private JButton buttonNextCodeLine;
 	private JButton buttonNextBreakPoint;
 	private JButton buttonCallStack;
-	private JLabel label;
 
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;

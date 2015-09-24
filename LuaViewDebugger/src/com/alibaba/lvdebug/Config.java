@@ -1,7 +1,7 @@
 package com.alibaba.lvdebug;
 
 public class Config {
-	public static final int LINE_H = 18;
+	public static final int LINE_H = 15;
 
 	public static boolean closeWhenConnectionEnd;
 

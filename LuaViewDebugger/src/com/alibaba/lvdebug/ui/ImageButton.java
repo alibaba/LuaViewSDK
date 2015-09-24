@@ -13,7 +13,7 @@ public class ImageButton extends JButton {
 	public ImageButton(ImageIcon icon, ImageIcon icon2) {
 		setIcon(icon);
 		this.setDisabledIcon(icon2);
-		setMargin(new Insets(0, 0, 0, 0));// 将边框外的上下左右空间设置为0
+		setMargin(new Insets(0, 20, 0, 10));// 将边框外的上下左右空间设置为0
 		setIconTextGap(0);// 将标签中显示的文本和图标之间的间隔量设置为0
 		setBorderPainted(false);// 不打印边框
 		setBorder(null);// 除去边框
@@ -21,6 +21,6 @@ public class ImageButton extends JButton {
 		setFocusPainted(false);// 除去焦点的框
 		setContentAreaFilled(false);// 除去默认的背景填充
 		setSize(24, 24);
-		this.setPreferredSize(new Dimension(24, 24));
+		this.setPreferredSize(new Dimension(24 + 30, 24));
 	}
 }

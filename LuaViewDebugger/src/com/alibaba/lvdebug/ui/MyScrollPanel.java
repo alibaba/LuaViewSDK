@@ -280,10 +280,12 @@ abstract public class MyScrollPanel extends JPanel {
 		return false;
 	}
 
-	public boolean isPressTheLine(int x, int y, int r) {
+	public boolean isPressTheLine(int x, int y, int h) {
 		if (point != null) {
-			int tmp = Math.abs(point.y + zeroPoint.y - y);
-			if (tmp < r) {
+			int pY = point.y + zeroPoint.y;
+			int y0 = y - h;
+			int y1 = y;
+			if (y0 < pY && pY < y1) {
 				return true;
 			}
 		}

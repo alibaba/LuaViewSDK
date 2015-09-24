@@ -38,10 +38,13 @@ public final class SrcCodeViewer extends MyScrollPanel {
 
 	private Center center;
 
+	private Font font16 = new Font("黑体", Font.PLAIN, 13);
+	private Font font12 = new Font("黑体", Font.PLAIN, 11);
+
 	SrcCodeViewer(String fileName, String content, Center center) {
 		super();
 		this.center = center;
-		this.setFont(new Font("黑体", Font.PLAIN, 16));
+		this.setFont(font16);
 		fontMetrics = getFontMetrics(getFont());
 
 		addKeyListener(new KeyListener() {
@@ -62,9 +65,12 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		});
 		this.fileName = fileName;
 		this.setFileSting(content);
+		int len = (this.lines.size() + "").length();
+
+		this.X0 = (int) (LINE_H * 0.5) * len + LINE_H;
 	}
 
-	void setFileSting(String s) {
+	private void setFileSting(String s) {
 		this.lines.removeAllElements();
 		String[] arr = s.split("\n");
 		for (int i = 0; i < arr.length; i++) {
@@ -74,12 +80,12 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		}
 	}
 
-	public final int X0 = LINE_H * 3;
-	public final int Y0 = LINE_H * 2;
+	private final int X0;// LINE_H * 5 / 2;
+	private final int Y0 = LINE_H * 2;
 
 	public void myPaint(Graphics2D g) {
 		g.setColor(new Color(0xf0f0f0));
-		g.fillRect(0, 0, LINE_H * 2, (this.lines.size() + 2) * LINE_H);
+		g.fillRect(0, 0, X0, (this.lines.size() + 2) * LINE_H);
 		resetMaxWH();
 		try {
 			setNodeX(X0);
@@ -114,24 +120,26 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		if (isYOnView(y - LINE_H) || isYOnView(y + LINE_H)) {
 			if (line.isCurrentLine) {
 				g.setColor(new Color(221, 234, 207));
-				g.fillRect(0, y - LINE_H + 2, this.getWidth(), LINE_H);
+				g.fillRect(0, y - LINE_H, this.getWidth(), LINE_H);
 			}
 
 			g.setColor(Color.BLACK);
-			// g.drawString(text, x + 2, y - 2);
-			line.draw(g, x + 2, y - 2);
+
+			line.draw(g, x + 2, y - 3);
 
 			if (line.isBreakPoint) {// 断点
 				int dx = 2;
 				g.setColor(Color.red);
-				g.fillArc(x - LINE_H * 2 - LINE_H + dx, y - LINE_H + (int) (dx * 2), LINE_H - dx * 2, LINE_H - dx * 2, 0, 360);
+				g.fillArc(0, y - LINE_H + dx, LINE_H - dx * 2, LINE_H - dx * 2, 0, 360);
 			}
 
 			g.setColor(Color.GRAY);
+			g.setFont(font12);
 			int w = g.getFontMetrics().stringWidth(line.tag);
-			g.drawString(line.tag, x - w - LINE_H, y - 2);
+			g.drawString(line.tag, X0 - w - 2, y - 3);
+			g.setFont(font16);
 		}
-		if (this.pressedPointX() < X0 && this.canBreakPoint && isPressTheLine(x, y, LINE_H / 2)) {
+		if (this.pressedPointX() < X0 && this.canBreakPoint && isPressTheLine(x, y, LINE_H)) {
 			line.isBreakPoint = !line.isBreakPoint;
 			updateUI();
 			if (line.isBreakPoint) {
@@ -143,7 +151,7 @@ public final class SrcCodeViewer extends MyScrollPanel {
 			}
 		}
 
-		if (X0 < this.pressedPointX() && isPressTheLine(x, y, LINE_H / 2)) {
+		if (X0 < this.pressedPointX() && isPressTheLine(x, y, LINE_H)) {
 			String s = line.getPressedString(this.pressedPointX(), this.pressedPointY());
 			if (s != null && s.length() > 0) {
 				if (s.indexOf('.') < 0) {

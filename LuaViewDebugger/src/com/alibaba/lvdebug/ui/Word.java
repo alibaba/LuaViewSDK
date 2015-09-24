@@ -14,14 +14,14 @@ public final class Word {
 
 	private static final Hashtable<String, String> map = new Hashtable<String, String>();
 	{
-		String[] keys = { "if", "else", "elseif", "then", "do", "end",//
+		String[] keys = { "for", "if", "else", "elseif", "then", "do", "end",//
 				"print", "return", "delegate", "function", "local",//
-				"self", "this", "contine", "break",//
+				"self", "this", "contine", "break", "null", "nil",//
 				"window", "System", //
 				"UITableView", "UIImageView", "UIButton", "UILabel", "UIView",//
 				"UIAlertView", "UIPageControl", "UIScrollView",//
 				"UITextField", "Timer",//
-				"true", "false", "^", "~", "!", "table", ":" };
+				"true", "false", "^", "~", "!", "table", ":", "repeat", "until", "debug", };
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
 			map.put(key, key);
