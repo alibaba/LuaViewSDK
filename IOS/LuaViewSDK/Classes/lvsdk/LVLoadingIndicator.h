@@ -1,5 +1,5 @@
 //
-//  LVActivityIndicatorView.h
+//  LVLoadingIndicator.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/27/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVActivityIndicatorView : UIActivityIndicatorView<LVProtocal>
+@interface LVLoadingIndicator : UIActivityIndicatorView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;

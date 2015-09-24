@@ -1,16 +1,16 @@
 //
-//  LVActivityIndicatorView.m
+//  LVLoadingIndicator.m
 //  LVSDK
 //
 //  Created by dongxicheng on 7/27/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVActivityIndicatorView.h"
+#import "LVLoadingIndicator.h"
 #import "LVBaseView.h"
 
 
-@implementation LVActivityIndicatorView
+@implementation LVLoadingIndicator
 
 
 
@@ -28,7 +28,7 @@
 #pragma -mark lvNewActivityIndicator
 static int lvNewActivityIndicator (lv_State *L) {
     {
-        LVActivityIndicatorView* pageControl = [[LVActivityIndicatorView alloc] init:L];
+        LVLoadingIndicator* pageControl = [[LVLoadingIndicator alloc] init:L];
         
         {
             NEW_USERDATA(userData, LVUserDataView);
@@ -48,7 +48,7 @@ static int lvNewActivityIndicator (lv_State *L) {
 static int startAnimating(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVActivityIndicatorView* view = (__bridge LVActivityIndicatorView *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
         if( view ){
             [view startAnimating];
         }
@@ -59,7 +59,7 @@ static int startAnimating(lv_State *L) {
 static int stopAnimating(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVActivityIndicatorView* view = (__bridge LVActivityIndicatorView *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
         if( view ){
             [view stopAnimating];
         }
@@ -70,7 +70,7 @@ static int stopAnimating(lv_State *L) {
 static int isAnimating(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVActivityIndicatorView* view = (__bridge LVActivityIndicatorView *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
         if( view ){
             lv_pushboolean(L, view.isAnimating);
             return 1;
@@ -82,7 +82,7 @@ static int isAnimating(lv_State *L) {
 static int color(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVActivityIndicatorView* view = (__bridge LVActivityIndicatorView *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 NSUInteger color = lv_tonumber(L, 2);

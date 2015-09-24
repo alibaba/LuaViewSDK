@@ -271,9 +271,9 @@
 		84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3831AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1E3841AEF2ED90054B9F1 /* Security.framework */; };
-		84B58E3A1B65CC260048F33D /* LVActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */; };
-		84B58E3B1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
-		84B58E3C1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */; };
+		84B58E3A1B65CC260048F33D /* LVLoadingIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVLoadingIndicator.h */; };
+		84B58E3B1B65CC270048F33D /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
+		84B58E3C1B65CC270048F33D /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
 		84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; };
 		84BC62211BA95A3F0019B02E /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
 		84BC62221BA95A3F0019B02E /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
@@ -563,8 +563,8 @@
 		84B1E37F1AEF24480054B9F1 /* LVRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVRSA.h; path = RSA/LVRSA.h; sourceTree = "<group>"; };
 		84B1E3801AEF24480054B9F1 /* LVRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVRSA.m; path = RSA/LVRSA.m; sourceTree = "<group>"; };
 		84B1E3841AEF2ED90054B9F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVActivityIndicatorView.h; sourceTree = "<group>"; };
-		84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVActivityIndicatorView.m; sourceTree = "<group>"; };
+		84B58E381B65CC260048F33D /* LVLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLoadingIndicator.h; sourceTree = "<group>"; };
+		84B58E391B65CC260048F33D /* LVLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingIndicator.m; sourceTree = "<group>"; };
 		84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebugConnection.h; path = lvdebug/LVDebugConnection.h; sourceTree = "<group>"; };
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
@@ -898,8 +898,8 @@
 				846481B11A64C61F00DE6204 /* LVLabel.m */,
 				846481B21A64C61F00DE6204 /* LVPageControl.h */,
 				846481B31A64C61F00DE6204 /* LVPageControl.m */,
-				84B58E381B65CC260048F33D /* LVActivityIndicatorView.h */,
-				84B58E391B65CC260048F33D /* LVActivityIndicatorView.m */,
+				84B58E381B65CC260048F33D /* LVLoadingIndicator.h */,
+				84B58E391B65CC260048F33D /* LVLoadingIndicator.m */,
 				84056E6B1B5C8DF10078F9D6 /* LVLoadingView.h */,
 				84056E6C1B5C8DF10078F9D6 /* LVLoadingView.m */,
 				84056E701B5CA5990078F9D6 /* LVErrorView.h */,
@@ -1152,7 +1152,7 @@
 				846E879B1A653DEC000D14DA /* LVDate.h in Headers */,
 				840AD61B1A63ED7D003E837D /* lVopcodes.h in Headers */,
 				84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */,
-				84B58E3A1B65CC260048F33D /* LVActivityIndicatorView.h in Headers */,
+				84B58E3A1B65CC260048F33D /* LVLoadingIndicator.h in Headers */,
 				846481C11A64C61F00DE6204 /* LVBaseView.h in Headers */,
 				8425324C1ADCBD3A003C05BF /* LVDownloader.h in Headers */,
 				84CF56751AE9184000A49B36 /* LVNativeObjBox.h in Headers */,
@@ -1418,7 +1418,7 @@
 				84E4469A1AEE0655009C9A8A /* LVBlock.m in Sources */,
 				840AD5FF1A63ED7D003E837D /* lVdump.c in Sources */,
 				84DDB85F1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */,
-				84B58E3C1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */,
+				84B58E3C1B65CC270048F33D /* LVLoadingIndicator.m in Sources */,
 				846481C01A64C61F00DE6204 /* LVAnimate.m in Sources */,
 				846481C91A64C61F00DE6204 /* LVHeads.m in Sources */,
 				848CA3611B29669A00C70321 /* LVCollectionView.m in Sources */,
@@ -1499,7 +1499,7 @@
 				846481C21A64C61F00DE6204 /* LVBaseView.m in Sources */,
 				840AD6081A63ED7D003E837D /* lViolib.c in Sources */,
 				840AD5EB1A63ED7D003E837D /* lVauxlib.c in Sources */,
-				84B58E3B1B65CC270048F33D /* LVActivityIndicatorView.m in Sources */,
+				84B58E3B1B65CC270048F33D /* LVLoadingIndicator.m in Sources */,
 				84470B171B5E66FF00980E31 /* JHSLuaErrorView.m in Sources */,
 				84DDB85E1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */,
 				840AD6031A63ED7D003E837D /* lVgc.c in Sources */,

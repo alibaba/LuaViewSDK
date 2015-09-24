@@ -15,7 +15,7 @@
 #import "LVTimer.h"
 #import "LVUtil.h"
 #import "LVPageControl.h"
-#import "LVActivityIndicatorView.h"
+#import "LVLoadingIndicator.h"
 #import "LVImageView.h"
 #import "LVLabel.h"
 #import "LVBaseView.h"
@@ -376,7 +376,7 @@ static int debug_log (lv_State *L) {
     
     //清理栈
     lv_settop(L, 0);
-    [LVActivityIndicatorView classDefine:L];
+    [LVLoadingIndicator classDefine:L];
     
     // http
     [LVHttp classDefine:L];
