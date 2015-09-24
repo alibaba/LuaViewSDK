@@ -82,6 +82,22 @@ function debug_print_expr( var )
         end
     end
 
+    -- try upvalues
+    local func = debug:getinfo(4,"f").func
+    local index = 1
+    while true do
+        local name, value = debug:getupvalue(func, index)
+        if not name then 
+            break 
+        end
+        if name == var then 
+            debug_print_var( var, value, 0 )
+            return
+        end
+       index = index + 1
+    end
+
+
     --找全局变量
     if _G[var] ~= nil then
         debug_print_var( var, _G[var], 0 )
@@ -359,8 +375,8 @@ function debug_trace( event, line )
         return;
     end
 
-    local cmd = debug:readCmd()
-    debug_runing_execute( cmd );
+    -- local cmd = debug:readCmd()
+    -- debug_runing_execute( cmd );
 end
 
 function begin_debug()
