@@ -118,11 +118,16 @@ static int color(lv_State *L) {
         lv_pushcfunction(L, lvNewActivityIndicator);
         lv_setglobal(L, "UIActivityIndicatorView");
     }
+    {
+        lv_pushcfunction(L, lvNewActivityIndicator);
+        lv_setglobal(L, "UILoadingView");
+    }
     const struct lvL_reg memberFunctions [] = {
-        {"startAnimating",  startAnimating },
-        {"stopAnimating",   stopAnimating },
+        {"start",  startAnimating },
+        {"stop",   stopAnimating },
         {"isAnimating",  isAnimating },
         {"color", color},
+        {"setColor", color},
         {NULL, NULL}
     };
     

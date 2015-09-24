@@ -1267,6 +1267,8 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"setDelegate",  delegate },
     {"delegate",     delegate },
+    {"setCallback",  delegate },
+    {"callback",     delegate },
     
     {"isFirstResponder",        isFirstResponder },
     {"becomeFirstResponder",    becomeFirstResponder },
