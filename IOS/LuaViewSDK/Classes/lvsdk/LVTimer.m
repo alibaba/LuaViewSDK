@@ -63,33 +63,39 @@ static void releaseUserDataTimer(LVUserDataTimer* user){
 #pragma -mark Timer
 
 static int lvNewTimer (lv_State *L) {
-    if( lv_gettop(L)>=1 ) {
-        LVTimer* timer = [[LVTimer alloc] init:L];
+    LVTimer* timer = [[LVTimer alloc] init:L];
+    {
+        NEW_USERDATA(userData, LVUserDataTimer);
+        userData->timer = CFBridgingRetain(timer);
+        timer.userData = userData;
         
-        {
-            NEW_USERDATA(userData, LVUserDataTimer);
-            userData->timer = CFBridgingRetain(timer);
-            timer.userData = userData;
-            
-            lvL_getmetatable(L, META_TABLE_Timer );
-            lv_setmetatable(L, -2);
-        }
-        if( lv_type(L, 1) == LV_TFUNCTION ) {
-            lv_pushvalue(L, 1);
-            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-        }
-        return 1;
-    } else {
-        LVError(@"Timer( Callback==nil )!!!");
+        lvL_getmetatable(L, META_TABLE_Timer );
+        lv_setmetatable(L, -2);
     }
-    return 0;
+    if( lv_type(L, 1) == LV_TFUNCTION ) {
+        lv_pushvalue(L, 1);
+        lv_udataRef(L, USERDATA_KEY_DELEGATE);
+    }
+    return 1;
+}
+
+static int setCallback (lv_State *L) {
+    if( lv_type(L, 2) == LV_TFUNCTION ) {
+        lv_pushvalue(L, 1);
+        lv_pushvalue(L, 2);
+        lv_udataRef(L, USERDATA_KEY_DELEGATE);
+    }
+    lv_settop(L, 1);
+    return 1;
 }
 
 static int start (lv_State *L) {
     LVUserDataTimer * user = (LVUserDataTimer *)lv_touserdata(L, 1);
     double time = lv_tonumber(L, 2);
-    BOOL repeat = lvL_checkbool(L, 3);
-    
+    BOOL repeat = NO;
+    if( lv_gettop(L)>=3 ) {
+        repeat = lv_toboolean(L, 3);
+    }
     if( user ){
         LVTimer* timer = (__bridge LVTimer *)(user->timer);
         if( timer ){
@@ -135,9 +141,13 @@ static int __tostring (lv_State *L) {
         lv_setglobal(L, "Timer");
     }
     const struct lvL_reg memberFunctions [] = {
+        {"setCallback",setCallback},
+        {"callback",setCallback},
+        
         {"start", start },
         {"cancel", cancel },
         {"stop", cancel },
+        
         {"__gc", __gc },
         
         {"__tostring", __tostring },

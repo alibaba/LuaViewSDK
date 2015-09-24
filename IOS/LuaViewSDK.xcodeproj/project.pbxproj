@@ -319,6 +319,7 @@
 		84F4A01F1B4B9E600062A7B2 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; };
 		84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84F4A0211B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
+		84FC64D21BB399A500B6AF86 /* demoT_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D11BB399A500B6AF86 /* demoT_Timer.lua */; settings = {ASSET_TAGS = (); }; };
 		9171D4A41AADD0300040DAA3 /* LVLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */; };
 		9171D4A51AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
 		9171D4A61AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
@@ -595,6 +596,7 @@
 		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
+		84FC64D11BB399A500B6AF86 /* demoT_Timer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoT_Timer.lua; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				84799ABA1BAFDDA00070E214 /* demoR_DownloadAndFile.lua */,
 				84799ABB1BAFDDA00070E214 /* demoR_AudioPlayer.lua */,
 				84799AB21BAFDDA00070E214 /* demoS_callOC.lua */,
+				84FC64D11BB399A500B6AF86 /* demoT_Timer.lua */,
 				84799AB61BAFDDA00070E214 /* demoU_coroutineDemo.lua */,
 				84799AC71BAFDDA00070E214 /* demoW_luabox.lua */,
 				84799AC41BAFDDA00070E214 /* demoY_table.lua */,
@@ -1281,6 +1284,7 @@
 				84799AD91BAFDDA00070E214 /* color1.png in Resources */,
 				84799AE71BAFDDA00070E214 /* demoP_string.lua in Resources */,
 				84799AE91BAFDDA00070E214 /* demoY_table.lua in Resources */,
+				84FC64D21BB399A500B6AF86 /* demoT_Timer.lua in Resources */,
 				84799AD71BAFDDA00070E214 /* demoS_callOC.lua in Resources */,
 				84799ADB1BAFDDA00070E214 /* demoU_coroutineDemo.lua in Resources */,
 				84799AEE1BAFDDA00070E214 /* demoZ_ui.lua in Resources */,
