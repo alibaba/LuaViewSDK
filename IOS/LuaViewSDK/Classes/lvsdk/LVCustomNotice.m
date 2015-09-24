@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVNotice.h"
+#import "LVCustomNotice.h"
 #import "LView.h"
 #import "LVBaseView.h"
 
-@implementation LVNotice
+@implementation LVCustomNotice
 
 
 -(id) init:(lv_State*) l notice:(NSString*) info{
@@ -23,18 +23,18 @@
 
 static Class g_class = nil;
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVNotice class]] ){
+    if( [c isSubclassOfClass:[LVCustomNotice class]] ){
         g_class = c;
     }
 }
 
 static int lvNewNoticeView (lv_State *L) {
     if( g_class == nil ) {
-        g_class = [LVNotice class];
+        g_class = [LVCustomNotice class];
     }
     NSString* info = lv_paramString(L, 1);
     {
-        LVNotice* notice = [[g_class alloc] init:L notice:info];
+        LVCustomNotice* notice = [[g_class alloc] init:L notice:info];
         
         {
             NEW_USERDATA(userData, LVUserDataView);

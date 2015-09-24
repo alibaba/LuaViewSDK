@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVAlertView.h"
+#import "LVAlert.h"
 #import "LVBaseView.h"
 #import "LView.h"
 
 
-@implementation LVAlertView
+@implementation LVAlert
 
 
 -(id) init:(lv_State*) l argNum:(int)num{
@@ -51,7 +51,7 @@ static NSString* getArgs(lv_State* L, int index, int max){
 
 static int lvNewAlertView (lv_State *L) {
     int num = lv_gettop(L);
-    LVAlertView* alertView = [[LVAlertView alloc] init:L argNum:num];
+    LVAlert* alertView = [[LVAlert alloc] init:L argNum:num];
     if( num>0 ){
         if( lv_type(L, -1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:alertView stack:-1];
@@ -64,7 +64,7 @@ static int lvNewAlertView (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewAlertView);
-        lv_setglobal(L, "UIAlertView");
+        lv_setglobal(L, "UIAlert");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

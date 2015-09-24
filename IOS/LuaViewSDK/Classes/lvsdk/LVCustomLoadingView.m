@@ -1,21 +1,21 @@
 //
-//  LVLoadingView.m
+//  LVCustomLoadingView.m
 //  LVSDK
 //
 //  Created by dongxicheng on 7/20/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVLoadingView.h"
+#import "LVCustomLoadingView.h"
 #import "LView.h"
 #import "LVBaseView.h"
 
-@implementation LVLoadingView
+@implementation LVCustomLoadingView
 
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVLoadingView class]] ){
+    if( [c isSubclassOfClass:[LVCustomLoadingView class]] ){
         g_class = c;
     }
 }
@@ -23,13 +23,13 @@ static Class g_class = nil;
 static int lvNewLoadingView (lv_State *L) {
     {
         if( g_class == nil ) {
-            g_class = [LVLoadingView class];
+            g_class = [LVCustomLoadingView class];
         }
         CGRect r = CGRectMake(0, 0, 0, 0);
         if( lv_gettop(L)>=4 ) {
             r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
         }
-        LVLoadingView* loadingView = [[g_class alloc] initWithFrame:r];
+        LVCustomLoadingView* loadingView = [[g_class alloc] initWithFrame:r];
         
         {
             NEW_USERDATA(userData, LVUserDataView);

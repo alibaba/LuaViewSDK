@@ -1,16 +1,16 @@
 //
-//  LVErrorNotice.m
+//  LVCustomErrorView.m
 //  LVSDK
 //
 //  Created by dongxicheng on 7/20/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVErrorView.h"
+#import "LVCustomErrorView.h"
 #import "LVBaseView.h"
 #import "LView.h"
 
-@implementation LVErrorView
+@implementation LVCustomErrorView
 
 - (void) callLuaFuncToReloadData {
     lv_State* L = self.lv_lview.l;
@@ -25,20 +25,20 @@
 
 static Class g_class = nil;
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVErrorView class]] ){
+    if( [c isSubclassOfClass:[LVCustomErrorView class]] ){
         g_class = c;
     }
 }
 
 static int lvNewErrorView (lv_State *L) {
     if( g_class == nil ) {
-        g_class = [LVErrorView class];
+        g_class = [LVCustomErrorView class];
     }
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
         r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
     }
-    LVErrorView* errorNotice = [[g_class alloc] initWithFrame:r];
+    LVCustomErrorView* errorNotice = [[g_class alloc] initWithFrame:r];
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(errorNotice);

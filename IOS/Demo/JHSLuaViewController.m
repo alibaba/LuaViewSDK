@@ -34,8 +34,8 @@
     self = [super init];
     if (self) {
         self.source = source;
-        [LVErrorView setDefaultStyle:[JHSLuaErrorView class]];
-        [LVLoadingView setDefaultStyle:[JHSLuaLoadingView class]];
+        [LVCustomErrorView setDefaultStyle:[JHSLuaErrorView class]];
+        [LVCustomLoadingView setDefaultStyle:[JHSLuaLoadingView class]];
         [LVButton setDefaultStyle:[JHSLuaViewButton class]];
         [LVImageView setDefaultStyle:[JHSLuaViewImageView class]];
         [LVCollectionView setDefaultStyle:[JHSLuaCollectionView class]];

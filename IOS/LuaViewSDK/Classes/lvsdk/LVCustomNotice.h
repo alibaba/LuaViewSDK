@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVNotice : UIView<LVProtocal>
+@interface LVCustomNotice : UIView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;

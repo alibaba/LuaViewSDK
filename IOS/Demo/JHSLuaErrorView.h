@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVErrorView.h"
+#import "LVCustomErrorView.h"
 
-@interface JHSLuaErrorView : LVErrorView
+@interface JHSLuaErrorView : LVCustomErrorView
 
 @end

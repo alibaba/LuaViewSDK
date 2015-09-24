@@ -23,7 +23,7 @@
 #import "LVTextField.h"
 #import "LVAnimate.h"
 #import "LVDate.h"
-#import "LVAlertView.h"
+#import "LVAlert.h"
 #import "LVSystem.h"
 #import "LVDB.h"
 #import "LVGestureRecognizer.h"
@@ -47,8 +47,8 @@
 #import "LVCollectionView.h"
 #import "LVStruct.h"
 #import "LVNavigation.h"
-#import "LVLoadingView.h"
-#import "LVErrorView.h"
+#import "LVCustomLoadingView.h"
+#import "LVCustomErrorView.h"
 #import "LVPageView.h"
 
 //------------------------------------------------------------------------------------
@@ -352,13 +352,13 @@ static int debug_log (lv_State *L) {
     [LVPageView classDefine:L];
     [LVTimer       classDefine:L];
     [LVPageIndicator classDefine:L];
-    [LVLoadingView classDefine:L];
-    [LVErrorView classDefine:L];
+    [LVCustomLoadingView classDefine:L];
+    [LVCustomErrorView classDefine:L];
     [LVTransform3D classDefine:L];
     [LVTextField classDefine:L];
     [LVAnimate classDefine:L];
     [LVDate classDefine:L];
-    [LVAlertView classDefine:L];
+    [LVAlert classDefine:L];
     // 注册DB
     [LVDB classDefine:L];
     

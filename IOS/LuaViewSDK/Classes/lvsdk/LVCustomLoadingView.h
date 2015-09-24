@@ -1,5 +1,5 @@
 //
-//  LVLoadingView.h
+//  LVCustomLoadingView.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/20/15.
@@ -11,7 +11,7 @@
 
 
 
-@interface LVLoadingView : UIView<LVProtocal>
+@interface LVCustomLoadingView : UIView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;

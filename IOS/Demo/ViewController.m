@@ -11,7 +11,7 @@
 #import "LVRSA.h"
 #import "LVPkgManager.h"
 #import "LVLuaObjBox.h"
-#import "LVErrorView.h"
+#import "LVCustomErrorView.h"
 #import "JHSLuaErrorView.h"
 #import "JHSLuaLoadingView.h"
 #import "JHSLuaCollectionView.h"

@@ -17,7 +17,7 @@ function createButton( text, x,y,w,h, callback)
 end
 
 button1 = createButton("关闭1", 0, 50, w, 40, ^(){
-    UIAlertView("标题", "内容",
+    UIAlert("标题", "内容",
                 "确定",
                     ^(index){
                         print("按钮ID:",index)
@@ -28,7 +28,7 @@ button1 = createButton("关闭1", 0, 50, w, 40, ^(){
 
 
 button2 = createButton("关闭2", 10, 100, w-20, 40, ^(){
-    UIAlertView("标题", "内容",
+    UIAlert("标题", "内容",
                 "确定","取消",
                     ^(index){
                         print("按钮ID:",index)
@@ -39,7 +39,7 @@ button2 = createButton("关闭2", 10, 100, w-20, 40, ^(){
 
 
 button3 = createButton("关闭3", 0, 150, w, 40, ^(){
-    UIAlertView("标题", nil,
+    UIAlert("标题", nil,
                 "确定","取消",
                     ^(index){
                         print("按钮ID:",index)
@@ -50,7 +50,7 @@ button3 = createButton("关闭3", 0, 150, w, 40, ^(){
 
 
 button4 = createButton("关闭4", 0, 200, w, 40, ^(){
-    UIAlertView(nil, "内容",
+    UIAlert(nil, "内容",
                 "确定","取消",
                     ^(index){
                         print("按钮ID:",index)
