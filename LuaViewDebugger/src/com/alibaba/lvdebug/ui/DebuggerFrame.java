@@ -6,29 +6,21 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import java.awt.FlowLayout;
-
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JTabbedPane;
-
 import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ClientCmd;
-
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class DebuggerFrame extends JFrame {
 
@@ -78,8 +70,8 @@ public class DebuggerFrame extends JFrame {
 			}
 		});
 		try {
-			Image img = ImageIO.read(getClass().getResource("run.png"));
-			Image img2 = ImageIO.read(getClass().getResource("disableRun.png"));
+			Image img = ImageIO.read(getClass().getResource("play.png"));
+			Image img2 = ImageIO.read(getClass().getResource("play2.png"));
 			buttonNextBreakPoint = new ImageButton(new ImageIcon(img), new ImageIcon(img2));
 			buttonNextBreakPoint.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
