@@ -1,15 +1,15 @@
 //
-//  LVPageControl.m
+//  LVPageIndicator.m
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/18/14.
 //  Copyright (c) 2014 dongxicheng. All rights reserved.
 //
 
-#import "LVPageControl.h"
+#import "LVPageIndicator.h"
 #import "LVBaseView.h"
 
-@implementation LVPageControl
+@implementation LVPageIndicator
 
 
 -(id) init:(lv_State*) l{
@@ -26,7 +26,7 @@
 #pragma -mark PageControl
 static int lvNewPageControl (lv_State *L) {
     {
-        LVPageControl* pageControl = [[LVPageControl alloc] init:L];
+        LVPageIndicator* pageControl = [[LVPageIndicator alloc] init:L];
         
         {
             NEW_USERDATA(userData, LVUserDataView);
@@ -46,7 +46,7 @@ static int lvNewPageControl (lv_State *L) {
 static int setPageCount(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageControl* view = (__bridge LVPageControl *)(user->view);
+        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int number = lv_tonumber(L, 2);
@@ -64,7 +64,7 @@ static int setPageCount(lv_State *L) {
 static int setCurrentPage(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageControl* view = (__bridge LVPageControl *)(user->view);
+        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int currentPage = lv_tonumber(L, 2);
@@ -82,7 +82,7 @@ static int setCurrentPage(lv_State *L) {
 static int pageIndicatorTintColor(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageControl* view = (__bridge LVPageControl *)(user->view);
+        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 NSUInteger color = lv_tonumber(L, 2);
@@ -116,7 +116,7 @@ static int pageIndicatorTintColor(lv_State *L) {
 static int currentPageIndicatorTintColor(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageControl* view = (__bridge LVPageControl *)(user->view);
+        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 NSUInteger color = lv_tonumber(L, 2);

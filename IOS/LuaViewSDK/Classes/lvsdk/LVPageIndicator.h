@@ -1,5 +1,5 @@
 //
-//  LVPageControl.h
+//  LVPageIndicator.h
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/18/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVPageControl : UIPageControl<LVProtocal>
+@interface LVPageIndicator : UIPageControl<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;
