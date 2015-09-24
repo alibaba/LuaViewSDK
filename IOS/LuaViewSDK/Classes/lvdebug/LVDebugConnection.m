@@ -180,6 +180,8 @@ static void ServerConnectCallBack( CFSocketRef socket,
             // 关闭掉socket
             if ( cmd.length<=0 ){
                 [debuger closeAll];
+                [debuger.receivedArray insertObject:@"close" atIndex:0];
+                [debuger.receivedArray insertObject:@"close" atIndex:0];
             } else {
                 [debuger.lview  callLuaToExecuteServerCmd];
             }

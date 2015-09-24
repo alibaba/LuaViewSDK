@@ -270,7 +270,10 @@ function debug_execute_cmd( env )
         -- end
         expr = string:sub(cmd, si + 1 );
     end
-    if c=="none" then
+    if c=="close" then
+        debug_close();
+        return true;
+    elseif c=="none" then
         return false;
     elseif c == "c" then
         debug.bps.trace = false
