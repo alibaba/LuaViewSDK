@@ -424,6 +424,7 @@ static const struct lvL_reg memberFunctions [] = {
 //----------------------------------------------------------------------------------------
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UIScrollView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<UIScrollView(0x%x) frame = %@; contentSize = %@>", (int)[self hash],
+            NSStringFromCGRect(self.frame),NSStringFromCGSize(self.contentSize) ];
 }
 @end
