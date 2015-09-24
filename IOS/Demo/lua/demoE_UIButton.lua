@@ -1,7 +1,4 @@
 
-window.setFrame(0,0,320,480);
-
-
 function createButton( text , x,y,w,h, callback) {
 	local button = UIButton();
 	button.setFrame(x,y,w,h);
