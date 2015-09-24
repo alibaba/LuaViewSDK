@@ -33,6 +33,10 @@
 -(void) dealloc{
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<UIButton(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+}
+
 -(void) lvButtonCallBack{
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){

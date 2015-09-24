@@ -330,4 +330,7 @@ static int showScrollBar(lv_State *L) {
     [self callLuaWithScrollEnd];
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<UIPageView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+}
 @end
