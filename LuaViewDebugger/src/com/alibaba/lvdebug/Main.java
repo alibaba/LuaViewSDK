@@ -75,7 +75,6 @@ public class Main {
 
 		frame.setIsDebugging(true);
 		frame.setVisible(true);
-		// center.log.print("等待...手机链接到调试器\n");
 		return frame;
 	}
 

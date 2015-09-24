@@ -57,6 +57,7 @@ public class SrcCodeCenter {
 					if (center.frame.isVisible()) {
 						center.frame.setVisible(true);
 					}
+					center.frame.setIsDebugging(true);
 				}
 			}
 		} catch (Exception e) {
@@ -64,4 +65,17 @@ public class SrcCodeCenter {
 		}
 		// System.out.println(fileName + lineNumber);
 	}
+
+	public void clearGotoLine() {
+		try {
+			JTabbedPane tabbedPane = center.frame.getTabbedPane();
+			SrcCodeViewer viewer = (SrcCodeViewer) tabbedPane.getSelectedComponent();
+			if (viewer != null) {
+				viewer.clearGotoLine();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

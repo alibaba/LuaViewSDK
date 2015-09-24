@@ -205,4 +205,8 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		this.updateUI();
 	}
 
+	public void clearGotoLine() {
+		this.gotoLine(-100);
+	}
+
 }

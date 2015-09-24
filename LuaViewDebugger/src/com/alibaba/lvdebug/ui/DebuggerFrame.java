@@ -1,19 +1,29 @@
 package com.alibaba.lvdebug.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JTabbedPane;
+
 import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ClientCmd;
+
+import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
@@ -61,26 +71,40 @@ public class DebuggerFrame extends JFrame {
 		buttonNextLine = new JButton("下一行");
 		buttonNextLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				center.srcCodeCenter.clearGotoLine();
+				setIsDebugging(false);
 				center.cmdBuffer.pushCmd(new ClientCmd("n"));
 			}
 		});
+		buttonNextBreakPoint = new JButton();
+		buttonNextBreakPoint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				center.srcCodeCenter.clearGotoLine();
+				setIsDebugging(false);
+				center.cmdBuffer.pushCmd(new ClientCmd("c"));
+			}
+		});
+		try {
+			Image img = ImageIO.read(getClass().getResource("run.png"));
+			buttonNextBreakPoint.setIcon(new ImageIcon(img));
+			buttonNextBreakPoint.setPreferredSize(new Dimension(60, 30));
+
+			img = ImageIO.read(getClass().getResource("disableRun.png"));
+			buttonNextBreakPoint.setDisabledIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+		}
+		panelHead.add(buttonNextBreakPoint);
 		panelHead.add(buttonNextLine);
 
 		buttonNextCodeLine = new JButton("下一步");
 		buttonNextCodeLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				center.srcCodeCenter.clearGotoLine();
+				setIsDebugging(false);
 				center.cmdBuffer.pushCmd(new ClientCmd("s"));
 			}
 		});
 		panelHead.add(buttonNextCodeLine);
-
-		buttonNextBreakPoint = new JButton("下一断点");
-		buttonNextBreakPoint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				center.cmdBuffer.pushCmd(new ClientCmd("c"));
-			}
-		});
-		panelHead.add(buttonNextBreakPoint);
 
 		buttonCallStack = new JButton("显示调用栈");
 		buttonCallStack.addActionListener(new ActionListener() {
@@ -155,5 +179,6 @@ public class DebuggerFrame extends JFrame {
 		this.getButtonNextCodeLine().setEnabled(yes);
 		this.getButtonNextBreakPoint().setEnabled(yes);
 		this.getTextFieldCmdInput().setEnabled(yes);
+		this.buttonCallStack.setEnabled(yes);
 	}
 }
