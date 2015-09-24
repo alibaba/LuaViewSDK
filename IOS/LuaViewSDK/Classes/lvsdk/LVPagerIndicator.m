@@ -1,15 +1,15 @@
 //
-//  LVPageIndicator.m
+//  LVPagerIndicator.m
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/18/14.
 //  Copyright (c) 2014 dongxicheng. All rights reserved.
 //
 
-#import "LVPageIndicator.h"
+#import "LVPagerIndicator.h"
 #import "LVBaseView.h"
 
-@implementation LVPageIndicator
+@implementation LVPagerIndicator
 
 
 -(id) init:(lv_State*) l{
@@ -26,7 +26,7 @@
 #pragma -mark PageControl
 static int lvNewPageControl (lv_State *L) {
     {
-        LVPageIndicator* pageControl = [[LVPageIndicator alloc] init:L];
+        LVPagerIndicator* pageControl = [[LVPagerIndicator alloc] init:L];
         
         {
             NEW_USERDATA(userData, LVUserDataView);
@@ -46,7 +46,7 @@ static int lvNewPageControl (lv_State *L) {
 static int setPageCount(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int number = lv_tonumber(L, 2);
@@ -64,7 +64,7 @@ static int setPageCount(lv_State *L) {
 static int setCurrentPage(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int currentPage = lv_tonumber(L, 2);
@@ -82,7 +82,7 @@ static int setCurrentPage(lv_State *L) {
 static int pageIndicatorTintColor(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 NSUInteger color = lv_tonumber(L, 2);
@@ -116,7 +116,7 @@ static int pageIndicatorTintColor(lv_State *L) {
 static int currentPageIndicatorTintColor(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageIndicator* view = (__bridge LVPageIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 NSUInteger color = lv_tonumber(L, 2);
@@ -154,7 +154,7 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     }
     {
         lv_pushcfunction(L, lvNewPageControl);
-        lv_setglobal(L, "UIPageIndicator");
+        lv_setglobal(L, "UIPagerIndicator");
     }
     const struct lvL_reg memberFunctions [] = {
         {"setPageCount",  setPageCount },

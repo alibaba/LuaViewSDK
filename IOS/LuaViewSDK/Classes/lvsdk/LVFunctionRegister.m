@@ -14,7 +14,7 @@
 #import "LView.h"
 #import "LVTimer.h"
 #import "LVUtil.h"
-#import "LVPageIndicator.h"
+#import "LVPagerIndicator.h"
 #import "LVLoadingIndicator.h"
 #import "LVImageView.h"
 #import "LVLabel.h"
@@ -351,7 +351,7 @@ static int debug_log (lv_State *L) {
     [LVCollectionView classDefine:L];
     [LVPageView classDefine:L];
     [LVTimer       classDefine:L];
-    [LVPageIndicator classDefine:L];
+    [LVPagerIndicator classDefine:L];
     [LVCustomLoadingView classDefine:L];
     [LVCustomErrorView classDefine:L];
     [LVTransform3D classDefine:L];

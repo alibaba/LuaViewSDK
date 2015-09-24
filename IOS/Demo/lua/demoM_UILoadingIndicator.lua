@@ -7,7 +7,7 @@ local scrW, scrH = System.screenSize()
 
 
 
-loading = UILoadingView();
+loading = UILoadingIndicator();
 
 btnH = scrH/10;
 

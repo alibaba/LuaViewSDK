@@ -116,11 +116,7 @@ static int color(lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewActivityIndicator);
-        lv_setglobal(L, "UIActivityIndicatorView");
-    }
-    {
-        lv_pushcfunction(L, lvNewActivityIndicator);
-        lv_setglobal(L, "UILoadingView");
+        lv_setglobal(L, "UILoadingIndicator");
     }
     const struct lvL_reg memberFunctions [] = {
         {"start",  startAnimating },
