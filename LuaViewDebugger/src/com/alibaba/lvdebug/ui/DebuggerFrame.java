@@ -21,6 +21,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class DebuggerFrame extends JFrame {
 
@@ -48,6 +50,7 @@ public class DebuggerFrame extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelHead = new JPanel();
+		panelHead.setBorder(new LineBorder(new Color(0, 0, 0)));
 		FlowLayout flowLayout = (FlowLayout) panelHead.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panelHead, BorderLayout.NORTH);

@@ -1,6 +1,8 @@
 package com.alibaba.lvdebug.ui;
 
+import java.awt.Dimension;
 import java.awt.Insets;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -9,7 +11,6 @@ public class ImageButton extends JButton {
 	private static final long serialVersionUID = -8171450113272087720L;
 
 	public ImageButton(ImageIcon icon, ImageIcon icon2) {
-		setSize(icon.getImage().getWidth(null), icon.getImage().getHeight(null));
 		setIcon(icon);
 		this.setDisabledIcon(icon2);
 		setMargin(new Insets(0, 0, 0, 0));// 将边框外的上下左右空间设置为0
@@ -19,5 +20,7 @@ public class ImageButton extends JButton {
 		setText(null);// 除去按钮的默认名称
 		setFocusPainted(false);// 除去焦点的框
 		setContentAreaFilled(false);// 除去默认的背景填充
+		setSize(24, 24);
+		this.setPreferredSize(new Dimension(24, 24));
 	}
 }
