@@ -1,40 +1,55 @@
+scrW,scrH = System.screenSize();
+label = UILabel();
+label.setFrame(0,0,scrW,scrH-64);
+label.setLineCount(100);
+
+function myprint( s , s2 )
+	s = s .. tostring(s2)
+	print(s);
+	local text = label.text();
+	if( text ) then 
+		label.text =  text .. "\n" .. s;
+	else
+		label.text =  s;
+	end
+end
 
 
 --[ local variable definition --]
 --[ repeat loop execution --]
 local a = 1
 repeat
-    print("value of a:", a)
+    myprint("value of a:", a)
     a = a + 1
 until( a > 5 )
 
 
-print("coroutine begin");
+myprint("coroutine begin");
 
 function foo(a)
-    print("foo", a)
+    myprint("foo", a)
     return coroutine:yield(2 * a)
 end
 
 co = coroutine:create(function ( a, b )
-    print("co-body1", a, b)
+    myprint("co-body1", a, b)
     local r = foo(a + 1)
-    print("co-body2", r)
+    myprint("co-body2", r)
     local r, s = coroutine:yield(a + b, a - b)
-    print("co-body3", r, s)
+    myprint("co-body3", r, s)
     return b, "end"
 end)
 
 function demo(  )
-    print("测试1");
-    print("test2");
-    print("test3");
+    myprint("测试1");
+    myprint("test2");
+    myprint("test3");
 end
 
 demo();
-print("main1", coroutine:resume(co, 1, 10))
-print("main2", coroutine:resume(co, "r"))
-print("main3", coroutine:resume(co, "x", "y"))
-print("main4", coroutine:resume(co, "x", "y"))
-print("main4", coroutine:resume(co, "x", "y"))
+myprint("main1", coroutine:resume(co, 1, 10))
+myprint("main2", coroutine:resume(co, "r"))
+myprint("main3", coroutine:resume(co, "x", "y"))
+myprint("main4", coroutine:resume(co, "x", "y"))
+myprint("main4", coroutine:resume(co, "x", "y"))
 
