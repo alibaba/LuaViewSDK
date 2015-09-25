@@ -112,6 +112,9 @@ public final class SrcCodeViewer extends MyScrollPanel {
 
 	BasicStroke stroke = new BasicStroke(1);
 
+	private static Color currentLineColor = new Color(221, 234, 207);
+	private static Color breakPointLineBGColor = new Color(255, 230, 230);
+
 	/**
 	 * 显示root
 	 * 
@@ -127,8 +130,13 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		int y = line.y;
 
 		if (isYOnView(y - LINE_H) || isYOnView(y + LINE_H)) {
+			if (line.isBreakPoint) {
+				g.setColor(breakPointLineBGColor);
+				g.fillRect(0, y - LINE_H + 1, this.getWidth(), LINE_H - 2);
+			}
+
 			if (line.isCurrentLine) {
-				g.setColor(new Color(221, 234, 207));
+				g.setColor(currentLineColor);
 				g.fillRect(0, y - LINE_H, this.getWidth(), LINE_H);
 			}
 
