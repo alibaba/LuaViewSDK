@@ -128,7 +128,7 @@ public class DebuggerFrame extends JFrame {
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panelBody.add(splitPane, BorderLayout.CENTER);
 
-		JScrollPane scrollPane = new ToLineScrollPanel();
+		JScrollPane scrollPane = new TopLineScrollPane();
 		scrollPane.setBorder(null);
 		scrollPane.setViewportBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

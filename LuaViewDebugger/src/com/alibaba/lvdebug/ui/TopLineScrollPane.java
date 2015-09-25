@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.JScrollPane;
 
-public class ToLineScrollPanel extends JScrollPane {
+public class TopLineScrollPane extends JScrollPane {
 
 	private static final long serialVersionUID = -3785351070903066566L;
 
