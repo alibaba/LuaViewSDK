@@ -36,6 +36,7 @@ abstract public class MyScrollPanel extends JPanel {
 	public boolean updateUI = true;
 
 	public MyScrollPanel() {
+		this.setBorder(null);
 		this.addMouseWheelListener(new MouseWheelListener() {
 
 			public void mouseWheelMoved(MouseWheelEvent arg0) {

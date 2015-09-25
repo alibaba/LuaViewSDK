@@ -120,6 +120,7 @@ public class DebuggerFrame extends JFrame {
 		panelHead.add(buttonCallStack);
 
 		JPanel panelBody = new JPanel();
+		panelBody.setBorder(null);
 		panel.add(panelBody, BorderLayout.CENTER);
 		panelBody.setLayout(new BorderLayout(0, 0));
 
