@@ -66,6 +66,9 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		this.fileName = fileName;
 		this.setFileSting(content);
 		int len = (this.lines.size() + "").length();
+		if (len < 2) {
+			len = 2;
+		}
 
 		this.X0 = (int) (LINE_H * 0.5) * len + LINE_H;
 	}

@@ -1,35 +1,30 @@
 package com.alibaba.lvdebug.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ClientCmd;
 import com.alibaba.lvdebug.Config;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
-import javax.swing.JSplitPane;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import java.awt.Color;
 
 public class DebuggerFrame extends JFrame {
 
@@ -133,16 +128,19 @@ public class DebuggerFrame extends JFrame {
 		panelBody.add(splitPane, BorderLayout.CENTER);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		splitPane.setRightComponent(scrollPane);
 
 		outputArea = new JTextArea();
+		outputArea.setTabSize(4);
 		outputArea.setLineWrap(true);
 		scrollPane.setViewportView(outputArea);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(null);
+		tabbedPane.setUI(new EclipseTabbedPaneUI());
 		splitPane.setLeftComponent(tabbedPane);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

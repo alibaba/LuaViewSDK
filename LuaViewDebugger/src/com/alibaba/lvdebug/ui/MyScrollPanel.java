@@ -24,7 +24,7 @@ abstract public class MyScrollPanel extends JPanel {
 
 	public final int LINE_H = Config.LINE_H;
 
-	private int bar_w = 14;
+	private int bar_w = 16;
 
 	private int max_w, max_h;
 
@@ -201,8 +201,8 @@ abstract public class MyScrollPanel extends JPanel {
 		y += 1;
 		h -= 1;
 		h = h < 2 ? 2 : h;
-		x += 3;
-		w -= 5;
+		x += 4;
+		w -= 8;
 		g.setColor(new Color(194, 194, 194));
 		g.fillRoundRect(x, y, w, h, w, w);
 		// for (int i = 0; i < w / 2; i++) {
