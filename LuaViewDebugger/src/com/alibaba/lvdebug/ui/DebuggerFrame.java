@@ -120,6 +120,7 @@ public class DebuggerFrame extends JFrame {
 		panelBody.setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setDividerSize(7);
 
 		// splitPane.setBorderPainted(false);// 不打印边框
 		splitPane.setBorder(null);// 除去边框
@@ -127,20 +128,20 @@ public class DebuggerFrame extends JFrame {
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panelBody.add(splitPane, BorderLayout.CENTER);
 
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new ToLineScrollPanel();
 		scrollPane.setBorder(null);
 		scrollPane.setViewportBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		splitPane.setRightComponent(scrollPane);
 
-		outputArea = new JTextArea();
+		outputArea = new TopLineTextArea();
 		outputArea.setTabSize(4);
 		outputArea.setLineWrap(true);
 		outputArea.setBorder(null);
 		scrollPane.setViewportView(outputArea);
 
-		tabbedPane = new MyTabbedPanel(JTabbedPane.TOP);
+		tabbedPane = new BottomLineTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(null);
 		tabbedPane.setUI(new EclipseTabbedPaneUI());
 		splitPane.setLeftComponent(tabbedPane);

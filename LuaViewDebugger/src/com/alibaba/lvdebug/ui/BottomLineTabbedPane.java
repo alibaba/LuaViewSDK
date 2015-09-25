@@ -4,10 +4,10 @@ import java.awt.Graphics;
 
 import javax.swing.JTabbedPane;
 
-public class MyTabbedPanel extends JTabbedPane {
+public class BottomLineTabbedPane extends JTabbedPane {
 	private static final long serialVersionUID = -4995869134364341154L;
 
-	public MyTabbedPanel(int tabPlacement) {
+	public BottomLineTabbedPane(int tabPlacement) {
 		super(tabPlacement);
 	}
 
