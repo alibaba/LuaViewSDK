@@ -1,26 +1,34 @@
 package com.alibaba.lvdebug.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Image;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JTabbedPane;
+
 import com.alibaba.lvdebug.Center;
 import com.alibaba.lvdebug.ClientCmd;
+import com.alibaba.lvdebug.Config;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 public class DebuggerFrame extends JFrame {
@@ -36,7 +44,7 @@ public class DebuggerFrame extends JFrame {
 	 */
 	public DebuggerFrame(final Center c) {
 		this.center = c;
-		setTitle("Lua调试器 V1.0.0");
+		setTitle("LuaView 调试工具");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 750);
 		contentPane = new JPanel();
@@ -48,13 +56,16 @@ public class DebuggerFrame extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		JPanel panelHead = new JPanel();
-		panelHead.setBorder(new LineBorder(new Color(0, 0, 0)));
+		JPanel panelHead = new HeadPanel();
+		panelHead.setBackground(Color.WHITE);
+		panelHead.setBorder(null);
 		FlowLayout flowLayout = (FlowLayout) panelHead.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panelHead, BorderLayout.NORTH);
 
 		textFieldCmdInput = new JTextField();
+		textFieldCmdInput.setToolTipText("调试命令");
+		textFieldCmdInput.setPreferredSize(new Dimension(100, Config.BTN_H + 1));
 		textFieldCmdInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				center.cmdBuffer.pushCmd(new ClientCmd(textFieldCmdInput.getText().trim()));
@@ -64,6 +75,7 @@ public class DebuggerFrame extends JFrame {
 		textFieldCmdInput.setColumns(15);
 
 		buttonNextLine = new JButton("下一行");
+		buttonNextLine.setPreferredSize(new Dimension(Config.BTN_W, Config.BTN_H));
 		buttonNextLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				center.srcCodeCenter.clearGotoLine();
@@ -88,6 +100,7 @@ public class DebuggerFrame extends JFrame {
 		panelHead.add(buttonNextLine);
 
 		buttonNextCodeLine = new JButton("下一步");
+		buttonNextCodeLine.setPreferredSize(new Dimension(Config.BTN_W, Config.BTN_H));
 		buttonNextCodeLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				center.srcCodeCenter.clearGotoLine();
@@ -98,6 +111,7 @@ public class DebuggerFrame extends JFrame {
 		panelHead.add(buttonNextCodeLine);
 
 		buttonCallStack = new JButton("显示调用栈");
+		buttonCallStack.setPreferredSize(new Dimension(Config.BTN_W2, Config.BTN_H));
 		buttonCallStack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				center.cmdBuffer.pushCmd(new ClientCmd("bt"));

@@ -1,6 +1,10 @@
 package com.alibaba.lvdebug;
 
 public class Config {
+	public static final int BTN_W = 60;
+	public static final int BTN_W2 = 80;
+	public static final int BTN_H = 22;
+
 	public static final int LINE_H = 15;
 
 	public static boolean closeWhenConnectionEnd;

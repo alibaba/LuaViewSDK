@@ -24,7 +24,7 @@ abstract public class MyScrollPanel extends JPanel {
 
 	public final int LINE_H = Config.LINE_H;
 
-	private int bar_w = 16;
+	private int bar_w = 14;
 
 	private int max_w, max_h;
 
@@ -179,10 +179,16 @@ abstract public class MyScrollPanel extends JPanel {
 		int bar_Y = zeroPoint.y * screenH / max_h;
 		int bar_W = bar_w;
 		int bar_H = screenH * screenH / max_h;
+		if (bar_H > screenH - 1) {
+			bar_H = screenH - 1;
+		}
 		g.setClip(0, 0, screenW, screenH);
+		g.setColor(new Color(250, 250, 250));
+		g.fillRect(screenW - bar_w, -1, bar_w + 1, screenH + 2);
+		g.setColor(new Color(232, 232, 232));
+		g.drawRect(screenW - bar_w, -1, bar_w + 8, screenH + 2);
 		fillBar(g, bar_X, bar_Y, bar_W, bar_H);
 		g.setColor(new Color(0x777777));
-		g.drawRect(screenW - bar_w, 0, bar_w - 1, screenH - 1);
 		if (m_repaint) {
 			m_repaint = false;
 			if (updateUI)
@@ -191,21 +197,25 @@ abstract public class MyScrollPanel extends JPanel {
 	}
 
 	private void fillBar(Graphics g, int x, int y, int w, int h) {
+		y += 1;
+		h -= 1;
 		h = h < 2 ? 2 : h;
-		w = w / 2 * 2;
-		int T = 7;
-		for (int i = 0; i < w / 2; i++) {
-			int t = 255 * (i + T) / ((w / 2) + T);
-			Color c = new Color((t << 16) + (t << 8) + t);
-			g.setColor(c);
-			g.drawLine(x + i, y, x + i, y + h);
-		}
-		for (int i = w / 2; i < w; i++) {
-			int t = 255 * ((w - i) + T) / ((w / 2) + T);
-			Color c = new Color((t << 16) + (t << 8) + t);
-			g.setColor(c);
-			g.drawLine(x + i, y, x + i, y + h);
-		}
+		x += 3;
+		w -= 5;
+		g.setColor(new Color(194, 194, 194));
+		g.fillRoundRect(x, y, w, h, w, w);
+		// for (int i = 0; i < w / 2; i++) {
+		// int t = 255 * (i + T) / ((w / 2) + T);
+		// Color c = new Color((t << 16) + (t << 8) + t);
+		// g.setColor(c);
+		// g.drawLine(x + i, y, x + i, y + h);
+		// }
+		// for (int i = w / 2; i < w; i++) {
+		// int t = 255 * ((w - i) + T) / ((w / 2) + T);
+		// Color c = new Color((t << 16) + (t << 8) + t);
+		// g.setColor(c);
+		// g.drawLine(x + i, y, x + i, y + h);
+		// }
 	}
 
 	abstract public void myPaint(Graphics2D g);
