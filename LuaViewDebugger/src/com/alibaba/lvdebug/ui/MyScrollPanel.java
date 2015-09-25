@@ -24,7 +24,7 @@ abstract public class MyScrollPanel extends JPanel {
 
 	public final int LINE_H = Config.LINE_H;
 
-	private int bar_w = 16;
+	private int bar_w = 15;
 
 	private int max_w, max_h;
 

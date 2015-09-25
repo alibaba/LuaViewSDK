@@ -128,6 +128,7 @@ public class DebuggerFrame extends JFrame {
 		panelBody.add(splitPane, BorderLayout.CENTER);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
 		scrollPane.setViewportBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -136,6 +137,7 @@ public class DebuggerFrame extends JFrame {
 		outputArea = new JTextArea();
 		outputArea.setTabSize(4);
 		outputArea.setLineWrap(true);
+		outputArea.setBorder(null);
 		scrollPane.setViewportView(outputArea);
 
 		tabbedPane = new MyTabbedPanel(JTabbedPane.TOP);
