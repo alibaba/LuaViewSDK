@@ -88,7 +88,13 @@ public final class SrcCodeViewer extends MyScrollPanel {
 
 	public void myPaint(Graphics2D g) {
 		g.setColor(new Color(0xf0f0f0));
-		g.fillRect(0, 0, X0, (this.lines.size() + 2) * LINE_H);
+		{
+			int h = (this.lines.size() + 2) * LINE_H;
+			if (h < this.getHeight()) {
+				h = this.getHeight();
+			}
+			g.fillRect(0, 0, X0, h);
+		}
 		resetMaxWH();
 		try {
 			setNodeX(X0);

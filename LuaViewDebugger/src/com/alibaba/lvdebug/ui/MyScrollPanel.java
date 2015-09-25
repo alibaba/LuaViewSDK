@@ -189,7 +189,11 @@ abstract public class MyScrollPanel extends JPanel {
 		g.setColor(new Color(232, 232, 232));
 		g.drawRect(screenW - bar_w, -1, bar_w + 8, screenH + 2);
 		fillBar(g, bar_X, bar_Y, bar_W, bar_H);
-		g.setColor(new Color(0x777777));
+
+		int w = this.getWidth();
+		int h = this.getHeight();
+		g.setColor(new Color(171, 171, 171));
+		g.drawLine(0, h, w, h);
 		if (m_repaint) {
 			m_repaint = false;
 			if (updateUI)
@@ -198,8 +202,8 @@ abstract public class MyScrollPanel extends JPanel {
 	}
 
 	private void fillBar(Graphics g, int x, int y, int w, int h) {
-		y += 1;
-		h -= 1;
+		y += 3;
+		h -= 6;
 		h = h < 2 ? 2 : h;
 		x += 4;
 		w -= 8;

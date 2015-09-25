@@ -138,7 +138,7 @@ public class DebuggerFrame extends JFrame {
 		outputArea.setLineWrap(true);
 		scrollPane.setViewportView(outputArea);
 
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new MyTabbedPanel(JTabbedPane.TOP);
 		tabbedPane.setBorder(null);
 		tabbedPane.setUI(new EclipseTabbedPaneUI());
 		splitPane.setLeftComponent(tabbedPane);
