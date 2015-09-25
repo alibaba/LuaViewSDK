@@ -106,23 +106,17 @@ abstract public class MyScrollPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				draggedPoint = point = pointPressed = null;
 				pointPressed = e.getPoint();
+
+				Point t = e.getPoint();
+				if (!isOnBarArea(t.x)) {
+					point = t;
+				}
 				requestFocus();
 				updateUI();
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				if (pointPressed != null) {
-					Point t = e.getPoint();
-					if (pointPressed.x == t.x && pointPressed.y == t.y) {
-						if (!isOnBarArea(t.x)) {
-							point = t;
-							updateUI();
-							return;
-						}
-					}
-				}
 				draggedPoint = point = pointPressed = null;
-				updateUI();
 			}
 		});
 	}
