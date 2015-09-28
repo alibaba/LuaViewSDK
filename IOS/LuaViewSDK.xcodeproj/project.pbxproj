@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
-		819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */; };
 		84056E6D1B5C8DF10078F9D6 /* LVCustomLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E6B1B5C8DF10078F9D6 /* LVCustomLoadingView.h */; };
 		84056E6E1B5C8DF10078F9D6 /* LVCustomLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E6C1B5C8DF10078F9D6 /* LVCustomLoadingView.m */; };
 		84056E6F1B5C8DF10078F9D6 /* LVCustomLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E6C1B5C8DF10078F9D6 /* LVCustomLoadingView.m */; };
@@ -625,7 +624,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				819EE7070F6D823B6CD9449F /* libPods-LVSDK.a in Frameworks */,
 				E961449DAA11DF4DDE3E3C59 /* libPods-LuaViewSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

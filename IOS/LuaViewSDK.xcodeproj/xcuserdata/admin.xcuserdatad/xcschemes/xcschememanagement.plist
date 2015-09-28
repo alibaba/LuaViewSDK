@@ -9,7 +9,7 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>LVSDK.xcscheme</key>
+		<key>LuaViewSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>16</integer>
