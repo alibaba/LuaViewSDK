@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import com.alibaba.lvdebug.Config;
 
-abstract public class MyScrollPanel extends JPanel {
+abstract public class SrcCodeScrollPanel extends JPanel {
 
 	private static final long serialVersionUID = -8495786914354054078L;
 
@@ -35,7 +35,7 @@ abstract public class MyScrollPanel extends JPanel {
 
 	public boolean updateUI = true;
 
-	public MyScrollPanel() {
+	public SrcCodeScrollPanel() {
 		this.setBorder(null);
 		this.addMouseWheelListener(new MouseWheelListener() {
 

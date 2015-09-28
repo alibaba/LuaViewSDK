@@ -24,9 +24,13 @@ import com.alibaba.lvdebug.ClientCmd;
  * @author dongxicheng
  * 
  */
-public final class SrcCodeViewer extends MyScrollPanel {
+public final class SrcCodeViewer extends SrcCodeScrollPanel {
 
 	private static final long serialVersionUID = -196018687886621L;
+
+	private static final Color currentLineColor = new Color(221, 234, 207);
+	private static final Color breakPointBGColor = null;
+	// new Color(240, 240, 255);
 
 	public boolean canBreakPoint = true;
 
@@ -112,9 +116,6 @@ public final class SrcCodeViewer extends MyScrollPanel {
 
 	BasicStroke stroke = new BasicStroke(1);
 
-	private static Color currentLineColor = new Color(221, 234, 207);
-	private static Color breakPointLineBGColor = new Color(255, 230, 230);
-
 	/**
 	 * 显示root
 	 * 
@@ -130,8 +131,8 @@ public final class SrcCodeViewer extends MyScrollPanel {
 		int y = line.y;
 
 		if (isYOnView(y - LINE_H) || isYOnView(y + LINE_H)) {
-			if (line.isBreakPoint) {
-				g.setColor(breakPointLineBGColor);
+			if (line.isBreakPoint && breakPointBGColor != null) {
+				g.setColor(breakPointBGColor);
 				g.fillRect(0, y - LINE_H + 1, this.getWidth(), LINE_H - 2);
 			}
 

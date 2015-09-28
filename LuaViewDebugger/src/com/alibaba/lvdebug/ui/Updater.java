@@ -49,6 +49,7 @@ public final class Updater {
 					center.log.print(cmd.content);
 				} else if ("loadfile".equals(cmd.cmd)) {
 					this.center.srcCodeCenter.loadfile(cmd.fileName, cmd.content);
+					center.frame.setTitle(cmd.fileName);
 				} else if ("running".equals(cmd.cmd)) {
 					this.center.srcCodeCenter.running(cmd.fileName, cmd.content);
 				} else {

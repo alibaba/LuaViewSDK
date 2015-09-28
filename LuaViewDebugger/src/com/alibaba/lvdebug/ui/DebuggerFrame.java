@@ -34,12 +34,21 @@ public class DebuggerFrame extends JFrame {
 	private JTextField textFieldCmdInput;
 	private final Center center;
 
+	private String addtionTitle;
+
+	public void setTitle(String name) {
+		if (this.addtionTitle == null || this.addtionTitle.length() <= 0) {
+			this.addtionTitle = name;
+		}
+		super.setTitle("LuaView - " + addtionTitle);
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public DebuggerFrame(final Center c) {
 		this.center = c;
-		setTitle("LuaView 调试工具");
+		setTitle("");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 750);
 		contentPane = new JPanel();
