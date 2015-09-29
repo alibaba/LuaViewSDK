@@ -141,7 +141,7 @@ function add_breakpoint( expr )
 
     debug.bps[line][source] = tbl
     debug.bps.max = debug.bps.max + 1
-    debug_log( string:format( "add breakpoint %s:%d", source, line ) )
+    debug_log( string:format( "加断点(%s:%d)", source, line ) )
 end
 
 function remove_breakpoint( expr )
@@ -158,7 +158,7 @@ function remove_breakpoint( expr )
     --先查找有不有相同断点
     if( ( debug.bps[line] ~= nil ) and ( debug.bps[line][source] ~= nil ) )then
         debug.bps[line][source] = nil;
-        debug_log( string:format( "remove breakpoint %s:%d", source, line ) )
+        debug_log( string:format( "删点断(%s:%d)", source, line ) )
         return
     else
         debug_log( string:format( "not found breakpoint %s:%d existed", source, line ) )
@@ -359,7 +359,7 @@ function debug_trace( event, line )
             --如果在next时,碰到断点了,就清除单步运行状态
             debug.bps.next = false
             debug.bps.trace = true
-            debug_log( "breakpoint " .. tbl.number )
+            -- debug_log( "碰到断点 " .. env.source .. " - " .. line )
         end
     end
 
