@@ -9,6 +9,7 @@ import com.alibaba.luaview.debugger.Config;
 public final class Word {
 	private static final Color KeyWordColor = new Color(184, 51, 161);
 	private static final Color ClassNameColor = new Color(111, 65, 166);
+	private static final Color MemberColor = new Color(80, 129, 135);
 	private static final Color StringWordColor = new Color(45, 36, 251);
 	private static final Color NumberWordColor = new Color(183, 24, 29);
 	private static final Color CommentWordColor = new Color(65, 126, 96);
@@ -16,9 +17,9 @@ public final class Word {
 	private static final Hashtable<String, String> map = new Hashtable<String, String>();
 	{
 		String[] keys = { "for", "if", "else", "elseif", "then", "do", "end",//
-				"print", "return", "delegate", "function", "local",//
+				"print", "return", "function", "local",//
 				"self", "this", "contine", "break", "null", "nil",//
-				"window", "System", //
+				"System", //
 				"UITableView", "UIImageView", "UIButton", "UILabel", "UIView",//
 				"UIAlertView", "UIPageControl", "UIScrollView",//
 				"UITextField", "Timer",//
@@ -51,6 +52,7 @@ public final class Word {
 	public boolean isString;
 	public boolean isComment;
 	public boolean isClassName;
+	public boolean isMember;
 
 	public Word prev;
 	public Word next;
@@ -75,7 +77,7 @@ public final class Word {
 		return null;
 	}
 
-	public Word(String s) {
+	public Word(String s, Word prev) {
 		this.text = s;
 		if (isClassName(s)) {
 			this.isClassName = true;
@@ -93,10 +95,13 @@ public final class Word {
 			this.isNumber = true;
 			this.color = NumberWordColor;
 		} else {
-			this.color = Color.black;
-		}
-		if (s.equals("System")) {
-			System.out.println("");
+			if (s.equals("window")) {
+				this.color = MemberColor;
+			} else if (prev != null && ".".equals(prev.text)) {
+				this.color = MemberColor;
+			} else {
+				this.color = Color.black;
+			}
 		}
 		if (s != null && s.length() > 0 && CharsToWords.wordStart(s.charAt(0))) {
 			this.isWord = true;

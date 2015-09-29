@@ -30,7 +30,8 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 	private static final long serialVersionUID = -196018687886621L;
 
 	private static final Color currentLineColor = new Color(221, 234, 207);
-	private static final Color breakPointBGColor = new Color(251, 238, 235);
+	private static final Color breakPointBGColor = null;
+	// new Color(251, 238, 235);
 
 	public boolean canBreakPoint = true;
 

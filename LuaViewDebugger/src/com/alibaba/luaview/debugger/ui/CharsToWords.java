@@ -11,7 +11,7 @@ public class CharsToWords {
 		index = 0;
 		Word prev = null;
 		for (int i = 0; i < s.length(); i++) {
-			Word word = getOneWord(s);
+			Word word = getOneWord(s, prev);
 			if (word != null) {
 				if (prev != null) {
 					word.prev = prev;
@@ -33,7 +33,7 @@ public class CharsToWords {
 		return 0;
 	}
 
-	public Word getOneWord(String s) {
+	public Word getOneWord(String s, Word preWord) {
 		StringBuffer buffer = new StringBuffer();
 		for (; index < s.length();) {
 			char c = s.charAt(index);
@@ -93,7 +93,7 @@ public class CharsToWords {
 		}
 		if (buffer.length() > 0) {
 			String w = buffer.toString();
-			return new Word(w);
+			return new Word(w, preWord);
 		}
 		return null;
 	}
