@@ -37,6 +37,12 @@ public class CharsToWords {
 		StringBuffer buffer = new StringBuffer();
 		for (; index < s.length();) {
 			char c = s.charAt(index);
+			// ".." 链接运算符
+			if (buffer.length() <= 0 && charAt(index, s) == '.' && charAt(index + 1, s) == '.') {
+				buffer.append("..");
+				index += 2;
+				break;
+			}
 			// 字符串
 			if (buffer.length() <= 0 && (c == '"' || c == '\'')) {
 				char c0 = c;

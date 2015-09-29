@@ -11,25 +11,34 @@ public final class Word {
 	private static final Color ClassNameColor = new Color(111, 65, 167);
 	private static final Color MemberColor = new Color(80, 129, 135);
 	private static final Color StringWordColor = new Color(207, 49, 37);
-	// (45, 36, 251);
+
 	private static final Color NumberWordColor = new Color(41, 52, 212);
 	private static final Color CommentWordColor = new Color(146, 146, 146);
-	// private static final Color CommentWordColor = new Color(65, 126, 96);
 
-	private static final Hashtable<String, String> map = new Hashtable<String, String>();
+	private static final Hashtable<String, String> keyWordsMap = new Hashtable<String, String>();
 	{
 		String[] keys = { "for", "if", "else", "elseif", "then", "do", "end", "while",//
 				"print", "return", "function", "local",//
 				"self", "this", "contine", "break", "null", "nil",//
-				"true", "false", "^", "~", "!", "table", ":", "repeat", "until", "debug", };
+				"true", "false", "^", "~", "!", ":", "repeat", "until",//
+				"debug", "math", "string", "table", "ipairs", "pairs", "require", };
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
-			map.put(key, key);
+			keyWordsMap.put(key, key);
 		}
 	}
 
 	public static boolean isKeyWord(String key) {
-		return map.get(key) != null;
+		return keyWordsMap.get(key) != null;
+	}
+
+	private static final Hashtable<String, String> globalsMap = new Hashtable<String, String>();
+	{
+		String[] keys = { "window", "debug", "math", "string", "table", "ipairs", "pairs", "require", };
+		for (int i = 0; i < keys.length; i++) {
+			String key = keys[i];
+			globalsMap.put(key, key);
+		}
 	}
 
 	public static boolean isClassName(String key) {
@@ -39,10 +48,7 @@ public final class Word {
 				return true;
 			}
 		}
-		if ("window".equals(key)) {
-			return true;
-		}
-		return false;
+		return globalsMap.get(key) != null;
 	}
 
 	public final String text;
@@ -96,7 +102,7 @@ public final class Word {
 			this.isNumber = true;
 			this.color = NumberWordColor;
 		} else {
-			if (prev != null && ".".equals(prev.text)) {
+			if (isMember(prev)) {
 				this.color = MemberColor;
 			} else {
 				this.color = Color.black;
@@ -105,6 +111,15 @@ public final class Word {
 		if (s != null && s.length() > 0 && CharsToWords.wordStart(s.charAt(0))) {
 			this.isWord = true;
 		}
+	}
+
+	private boolean isMember(Word pre) {
+		if (pre != null) {
+			if (".".equals(pre.text) || ":".equals(pre.text)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int draw(Graphics2D g, int x, int y) {
