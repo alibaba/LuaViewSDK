@@ -4,14 +4,17 @@
     <options buildIfNeeded="true" compress="true" descriptionLocation="/LuaViewDebugger/pkgjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.lvdebug{Main.java[Main" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+    <manifest generateManifest="true" mainClassHandleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger{Main.java[Main" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.lvdebug.ui"/>
-        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.lvdebug"/>
+        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba"/>
+        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger.ui"/>
+        <file path="/LuaViewDebugger/src/.DS_Store"/>
+        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger"/>
+        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com"/>
     </selectedElements>
 </jardesc>
