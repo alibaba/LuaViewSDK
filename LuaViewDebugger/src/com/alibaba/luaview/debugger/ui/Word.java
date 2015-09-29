@@ -10,8 +10,9 @@ public final class Word {
 	private static final Color KeyWordColor = new Color(184, 51, 161);
 	private static final Color ClassNameColor = new Color(111, 65, 166);
 	private static final Color MemberColor = new Color(80, 129, 135);
-	private static final Color StringWordColor = new Color(45, 36, 251);
-	private static final Color NumberWordColor = new Color(183, 24, 29);
+	private static final Color StringWordColor = new Color(207, 49, 37);
+	// (45, 36, 251);
+	private static final Color NumberWordColor = new Color(41, 52, 212);
 	private static final Color CommentWordColor = new Color(146, 146, 146);
 	// private static final Color CommentWordColor = new Color(65, 126, 96);
 
