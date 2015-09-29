@@ -8,7 +8,7 @@ import com.alibaba.luaview.debugger.Config;
 
 public final class Word {
 	private static final Color KeyWordColor = new Color(184, 51, 161);
-	private static final Color ClassNameColor = new Color(111, 65, 166);
+	private static final Color ClassNameColor = new Color(111, 65, 167);
 	private static final Color MemberColor = new Color(80, 129, 135);
 	private static final Color StringWordColor = new Color(207, 49, 37);
 	// (45, 36, 251);
