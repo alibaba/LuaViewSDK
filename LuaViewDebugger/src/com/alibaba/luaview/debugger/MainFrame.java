@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 					MainFrame frame = new MainFrame();
 					int h = frame.getHeight();
 					frame.setLocation(h, screenSize.height - h * 3 / 2);
-					frame.setVisible(true);
+					// frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
