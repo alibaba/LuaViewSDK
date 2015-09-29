@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.Graphics2D;
 import java.util.Vector;

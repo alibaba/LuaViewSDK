@@ -1,13 +1,12 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JTextArea;
 
-import javax.swing.JScrollPane;
+public class TopLineTextArea extends JTextArea {
 
-public class TopLineScrollPane extends JScrollPane {
-
-	private static final long serialVersionUID = -3785351070903066566L;
+	private static final long serialVersionUID = 5017533477769014810L;
 
 	public void paint(Graphics g) {
 		super.paint(g);

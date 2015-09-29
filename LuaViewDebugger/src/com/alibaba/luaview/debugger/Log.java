@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug;
+package com.alibaba.luaview.debugger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

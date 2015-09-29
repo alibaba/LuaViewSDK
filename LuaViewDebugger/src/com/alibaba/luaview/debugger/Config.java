@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug;
+package com.alibaba.luaview.debugger;
 
 public class Config {
 	public static final int BTN_W = 60;

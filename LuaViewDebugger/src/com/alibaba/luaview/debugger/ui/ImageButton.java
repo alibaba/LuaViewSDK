@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -7,7 +7,7 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.alibaba.lvdebug.Config;
+import com.alibaba.luaview.debugger.Config;
 
 public class ImageButton extends JButton {
 	private static final int BUT_H = Config.BTN_H - 2;

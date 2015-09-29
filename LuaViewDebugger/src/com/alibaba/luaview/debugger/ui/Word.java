@@ -1,10 +1,10 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Hashtable;
 
-import com.alibaba.lvdebug.Config;
+import com.alibaba.luaview.debugger.Config;
 
 public final class Word {
 	private static final Color KeyWordColor = new Color(126, 8, 84);

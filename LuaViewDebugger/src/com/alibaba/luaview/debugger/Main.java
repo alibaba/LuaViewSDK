@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug;
+package com.alibaba.luaview.debugger;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.alibaba.lvdebug.ui.DebuggerFrame;
+import com.alibaba.luaview.debugger.ui.DebuggerFrame;
 
 public class Main {
 

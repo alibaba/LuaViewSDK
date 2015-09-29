@@ -1,8 +1,9 @@
-package com.alibaba.lvdebug;
+package com.alibaba.luaview.debugger;
 
 import java.io.*;
 import java.net.*;
-import com.alibaba.lvdebug.ClientCmd;
+
+import com.alibaba.luaview.debugger.ClientCmd;
 
 public final class Server {
 	private Socket connection;

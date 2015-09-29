@@ -1,10 +1,10 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.util.Hashtable;
 
 import javax.swing.JTabbedPane;
 
-import com.alibaba.lvdebug.Center;
+import com.alibaba.luaview.debugger.Center;
 
 public class SrcCodeCenter {
 	public final Center center;

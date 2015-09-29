@@ -1,8 +1,8 @@
-package com.alibaba.lvdebug;
+package com.alibaba.luaview.debugger;
 
-import com.alibaba.lvdebug.ui.DebuggerFrame;
-import com.alibaba.lvdebug.ui.SrcCodeCenter;
-import com.alibaba.lvdebug.ui.Updater;
+import com.alibaba.luaview.debugger.ui.DebuggerFrame;
+import com.alibaba.luaview.debugger.ui.SrcCodeCenter;
+import com.alibaba.luaview.debugger.ui.Updater;
 
 public class Center {
 	public DebuggerFrame frame;

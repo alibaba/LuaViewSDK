@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,7 +14,7 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.JPanel;
 
-import com.alibaba.lvdebug.Config;
+import com.alibaba.luaview.debugger.Config;
 
 abstract public class SrcCodeScrollPanel extends JPanel {
 

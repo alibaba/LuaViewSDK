@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 public class UICmd {
 

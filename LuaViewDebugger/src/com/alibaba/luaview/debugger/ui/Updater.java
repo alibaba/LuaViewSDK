@@ -1,7 +1,7 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
-import com.alibaba.lvdebug.Center;
-import com.alibaba.lvdebug.ui.UICmd;
+import com.alibaba.luaview.debugger.Center;
+import com.alibaba.luaview.debugger.ui.UICmd;
 
 public final class Updater {
 	public final String CMD_NAME = "Cmd-Name:".toLowerCase();

@@ -1,4 +1,4 @@
-package com.alibaba.lvdebug.ui;
+package com.alibaba.luaview.debugger.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,9 +22,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import com.alibaba.lvdebug.Center;
-import com.alibaba.lvdebug.ClientCmd;
-import com.alibaba.lvdebug.Config;
+import com.alibaba.luaview.debugger.Center;
+import com.alibaba.luaview.debugger.ClientCmd;
+import com.alibaba.luaview.debugger.Config;
 
 public class DebuggerFrame extends JFrame {
 
