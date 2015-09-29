@@ -12,17 +12,14 @@ public final class Word {
 	private static final Color MemberColor = new Color(80, 129, 135);
 	private static final Color StringWordColor = new Color(45, 36, 251);
 	private static final Color NumberWordColor = new Color(183, 24, 29);
-	private static final Color CommentWordColor = new Color(65, 126, 96);
+	private static final Color CommentWordColor = new Color(146, 146, 146);
+	// private static final Color CommentWordColor = new Color(65, 126, 96);
 
 	private static final Hashtable<String, String> map = new Hashtable<String, String>();
 	{
-		String[] keys = { "for", "if", "else", "elseif", "then", "do", "end",//
+		String[] keys = { "for", "if", "else", "elseif", "then", "do", "end", "while",//
 				"print", "return", "function", "local",//
 				"self", "this", "contine", "break", "null", "nil",//
-				"System", //
-				"UITableView", "UIImageView", "UIButton", "UILabel", "UIView",//
-				"UIAlertView", "UIPageControl", "UIScrollView",//
-				"UITextField", "Timer",//
 				"true", "false", "^", "~", "!", "table", ":", "repeat", "until", "debug", };
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
@@ -40,6 +37,9 @@ public final class Word {
 			if ('A' <= c && c <= 'Z') {
 				return true;
 			}
+		}
+		if ("window".equals(key)) {
+			return true;
 		}
 		return false;
 	}
@@ -95,9 +95,7 @@ public final class Word {
 			this.isNumber = true;
 			this.color = NumberWordColor;
 		} else {
-			if (s.equals("window")) {
-				this.color = MemberColor;
-			} else if (prev != null && ".".equals(prev.text)) {
+			if (prev != null && ".".equals(prev.text)) {
 				this.color = MemberColor;
 			} else {
 				this.color = Color.black;
