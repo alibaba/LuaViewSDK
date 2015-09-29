@@ -134,7 +134,7 @@ extern char g_debug_lua[];
     if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
-            [self.debugConnection sendCmd:@"log" info:@"连接成功! 开始调试!\n"];
+            [self.debugConnection sendCmd:@"log" info:@"[调试器] 开始调试!\n"];
             [self loadDebugModel];// 加载调试模块
         }
     }
@@ -593,5 +593,9 @@ static NSArray* g_boundlePaths = nil;
     return g_boundlePaths;
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<UIView(0x%x) frame = %@; contentSize = %@>",
+            (int)[self hash], NSStringFromCGRect(self.frame) , NSStringFromCGSize(self.contentSize)];
+}
 
 @end

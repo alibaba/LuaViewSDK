@@ -29,7 +29,7 @@ public final class Log {
 	}
 
 	// 设置日期格式
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("[MM-dd HH:mm:ss.SSS]  ");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("[HH:mm:ss.SSS]  ");
 
 	public String date() {
 		return dateFormat.format(new Date());

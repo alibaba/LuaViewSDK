@@ -334,7 +334,7 @@ static int db_errorfb (lv_State *L) {
         lv_pushliteral(L, "");
     else if (!lv_isstring(L, arg+1)) return 1;  /* message is not a string */
     else lv_pushliteral(L, "\n");
-    lv_pushliteral(L, "stack traceback:");
+    lv_pushliteral(L, "调用栈:");
     while (lv_getstack(L1, level++, &ar)) {
         if (level > LEVELS1 && firstpart) {
             /* no more than `LEVELS2' more levels? */
@@ -350,7 +350,7 @@ static int db_errorfb (lv_State *L) {
         }
         lv_pushliteral(L, "\n\t");
         lv_getinfo(L1, "Snl", &ar);
-        lv_pushfstring(L, "%s:", ar.short_src);
+        lv_pushfstring(L, "%s:", ar.source);
         if (ar.currentline > 0)
             lv_pushfstring(L, "%d:", ar.currentline);
         if (*ar.namewhat != '\0')  /* is there a name? */
@@ -362,7 +362,7 @@ static int db_errorfb (lv_State *L) {
                 lv_pushliteral(L, " ?");  /* C function or tail call */
             else
                 lv_pushfstring(L, " in function <%s:%d>",
-                               ar.short_src, ar.linedefined);
+                               ar.source, ar.linedefined);
         }
         lv_concat(L, lv_gettop(L) - arg);
     }

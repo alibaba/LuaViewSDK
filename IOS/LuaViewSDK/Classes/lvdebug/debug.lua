@@ -11,7 +11,7 @@ debug.bps = {
 }
 
 function debug_log( log_str )
-    print( "(ldb) " .. log_str )
+    print( "[调试器] " .. log_str );
 end
 
 function debug_print_var_0( name, value, level )
@@ -56,12 +56,17 @@ end
 
 function debug_print_var( name, value, level )
     local s = debug_print_var_0( name, value, level );
-    print( s );
+    if( s ) then
+        s = s.sub(1,s.length()-1);
+        debug_log( s );
+    else
+        debug_log( s );
+    end
 end
 
 function debug_print_expr( var )
     if ( var==nil ) then
-        print("debug_print_expr var==nil");
+        debug_log("debug_print_expr var==nil");
         return;
     end
     --清空临时变量表
@@ -179,7 +184,7 @@ function debug_show_bp()
                 else
                     str = str .. "disable"
                 end
-                print( str )
+                debug_log( str )
             end
         end
     end
@@ -391,7 +396,7 @@ function debug_close()
     debug:sethook()
 end
 
-print("load debug model");
+debug_log("load debug model");
 debug:printToServer(true);
 
 

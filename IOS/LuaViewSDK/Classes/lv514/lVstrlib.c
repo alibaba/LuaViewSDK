@@ -849,6 +849,7 @@ static const lvL_Reg strlib[] = {
     {"gmatch", gmatch},
     {"gsub", str_gsub},
     {"len", str_len},
+    {"length", str_len},
     {"lower", str_lower},
     {"match", str_match},
     {"rep", str_rep},
