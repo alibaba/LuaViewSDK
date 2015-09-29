@@ -7,7 +7,8 @@ import java.util.Hashtable;
 import com.alibaba.luaview.debugger.Config;
 
 public final class Word {
-	private static final Color KeyWordColor = new Color(126, 8, 84);
+	private static final Color KeyWordColor = new Color(184, 51, 161);
+	private static final Color ClassNameColor = new Color(111, 65, 166);
 	private static final Color StringWordColor = new Color(45, 36, 251);
 	private static final Color NumberWordColor = new Color(183, 24, 29);
 	private static final Color CommentWordColor = new Color(65, 126, 96);
@@ -29,13 +30,17 @@ public final class Word {
 	}
 
 	public static boolean isKeyWord(String key) {
+		return map.get(key) != null;
+	}
+
+	public static boolean isClassName(String key) {
 		if (key != null && key.length() > 0) {
 			char c = key.charAt(0);
 			if ('A' <= c && c <= 'Z') {
 				return true;
 			}
 		}
-		return map.get(key) != null;
+		return false;
 	}
 
 	public final String text;
@@ -45,6 +50,7 @@ public final class Word {
 	public boolean isNumber;
 	public boolean isString;
 	public boolean isComment;
+	public boolean isClassName;
 
 	public Word prev;
 	public Word next;
@@ -71,7 +77,10 @@ public final class Word {
 
 	public Word(String s) {
 		this.text = s;
-		if (isKeyWord(s)) {
+		if (isClassName(s)) {
+			this.isClassName = true;
+			this.color = ClassNameColor;
+		} else if (isKeyWord(s)) {
 			this.isKeyWord = true;
 			this.color = KeyWordColor;
 		} else if (s.startsWith("--")) {

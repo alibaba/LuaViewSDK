@@ -30,8 +30,7 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 	private static final long serialVersionUID = -196018687886621L;
 
 	private static final Color currentLineColor = new Color(221, 234, 207);
-	private static final Color breakPointBGColor = null;
-	// new Color(240, 240, 255);
+	private static final Color breakPointBGColor = new Color(251, 238, 235);
 
 	public boolean canBreakPoint = true;
 
@@ -44,7 +43,7 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 	private Center center;
 
 	private Font font16 = new Font("黑体", Font.PLAIN, 13);
-	private Font font12 = new Font("黑体", Font.PLAIN, 11);
+	private Font font12 = new Font("黑体", Font.PLAIN, 10);
 
 	SrcCodeViewer(String fileName, String content, Center center) {
 		super();
@@ -74,8 +73,8 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 		if (len < 2) {
 			len = 2;
 		}
-
-		this.X0 = (int) (LINE_H * 0.5) * len + LINE_H;
+		this.X0_TAG = (int) (LINE_H * 0.5) * len;
+		this.X0 = this.X0_TAG + LINE_H;
 	}
 
 	private void setFileSting(String s) {
@@ -88,6 +87,7 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 		}
 	}
 
+	private final int X0_TAG;// LINE_H * 5 / 2;
 	private final int X0;// LINE_H * 5 / 2;
 	private final int Y0 = LINE_H * 2;
 
@@ -99,6 +99,8 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 				h = this.getHeight();
 			}
 			g.fillRect(0, 0, X0, h);
+			g.setColor(new Color(217, 217, 217));
+			g.drawLine(X0, 0, X0, h);
 		}
 		resetMaxWH();
 		try {
@@ -134,12 +136,12 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 		if (isYOnView(y - LINE_H) || isYOnView(y + LINE_H)) {
 			if (line.isBreakPoint && breakPointBGColor != null) {
 				g.setColor(breakPointBGColor);
-				g.fillRect(0, y - LINE_H + 1, this.getWidth(), LINE_H - 2);
+				g.fillRect(X0 + 1, y - LINE_H, this.getWidth(), LINE_H);
 			}
 
 			if (line.isCurrentLine) {
 				g.setColor(currentLineColor);
-				g.fillRect(0, y - LINE_H, this.getWidth(), LINE_H);
+				g.fillRect(X0 + 1, y - LINE_H, this.getWidth(), LINE_H);
 			}
 
 			g.setColor(Color.BLACK);
@@ -149,13 +151,13 @@ public final class SrcCodeViewer extends SrcCodeScrollPanel {
 			if (line.isBreakPoint) {// 断点
 				int dx = 2;
 				g.setColor(Color.red);
-				g.fillArc(0, y - LINE_H + dx, LINE_H - dx * 2, LINE_H - dx * 2, 0, 360);
+				g.fillArc(this.X0_TAG + 3, y - LINE_H + dx, LINE_H - dx * 2, LINE_H - dx * 2, 0, 360);
 			}
 
 			g.setColor(Color.GRAY);
 			g.setFont(font12);
 			int w = g.getFontMetrics().stringWidth(line.tag);
-			g.drawString(line.tag, X0 - w - 2, y - 3);
+			g.drawString(line.tag, X0_TAG - w, y - 3);
 			g.setFont(font16);
 		}
 		if (this.pressedPointX() < X0 && this.canBreakPoint && isPressTheLine(x, y, LINE_H)) {
