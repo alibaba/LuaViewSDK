@@ -70,10 +70,10 @@ demoArray = {
 	);	
 },
 ^(){
-	imageView = UIImageView();
+	imageView = UIImage();
 	imageView.setImage(imageUrl);
 	imageView.setFrame(200,0,64,64);
-    detail("UIImageView");
+    detail("UIImage");
     imageView.setCenter(w/2,h/2);
 },
 ^(){

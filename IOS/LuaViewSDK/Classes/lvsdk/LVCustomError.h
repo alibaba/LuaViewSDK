@@ -1,5 +1,5 @@
 //
-//  LVCustomLoadingView.h
+//  LVCustomErrorView.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/20/15.
@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-
-
-@interface LVCustomLoadingView : UIView<LVProtocal>
+@interface LVCustomError : UIView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;
@@ -22,6 +20,8 @@
 @property(nonatomic,assign) CGFloat lv_scaleY;
 
 +(int) classDefine:(lv_State *)L ;
+
+- (void) callLuaFuncToReloadData;
 
 + (void) setDefaultStyle:(Class) c;
 

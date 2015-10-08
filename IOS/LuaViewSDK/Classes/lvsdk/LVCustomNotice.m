@@ -54,7 +54,7 @@ static int lvNewNoticeView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewNoticeView);
-        lv_setglobal(L, "NoticeView");
+        lv_setglobal(L, "UICustomNotice");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

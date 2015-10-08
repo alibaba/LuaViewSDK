@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomLoadingView.h"
+#import "LVCustomLoading.h"
 #import "LView.h"
 #import "LVBaseView.h"
 
-@implementation LVCustomLoadingView
+@implementation LVCustomLoading
 
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCustomLoadingView class]] ){
+    if( [c isSubclassOfClass:[LVCustomLoading class]] ){
         g_class = c;
     }
 }
@@ -23,13 +23,13 @@ static Class g_class = nil;
 static int lvNewLoadingView (lv_State *L) {
     {
         if( g_class == nil ) {
-            g_class = [LVCustomLoadingView class];
+            g_class = [LVCustomLoading class];
         }
         CGRect r = CGRectMake(0, 0, 0, 0);
         if( lv_gettop(L)>=4 ) {
             r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
         }
-        LVCustomLoadingView* loadingView = [[g_class alloc] initWithFrame:r];
+        LVCustomLoading* loadingView = [[g_class alloc] initWithFrame:r];
         
         {
             NEW_USERDATA(userData, LVUserDataView);
@@ -49,7 +49,7 @@ static int lvNewLoadingView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewLoadingView);
-        lv_setglobal(L, "LoadingView");
+        lv_setglobal(L, "UICustomLoading");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

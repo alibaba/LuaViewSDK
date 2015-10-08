@@ -11,7 +11,7 @@
 #import "LView.h"
 
 
-@interface LVImageView : UIImageView<LVProtocal>
+@interface LVImage : UIImageView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;

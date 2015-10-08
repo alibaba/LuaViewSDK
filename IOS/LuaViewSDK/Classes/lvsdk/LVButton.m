@@ -8,7 +8,7 @@
 
 #import "LVButton.h"
 #import "LVBaseView.h"
-#import "LVImageView.h"
+#import "LVImage.h"
 #import "LVUtil.h"
 #import "LView.h"
 #import "LVAttributedString.h"

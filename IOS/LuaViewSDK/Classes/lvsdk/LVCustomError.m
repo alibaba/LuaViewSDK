@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomErrorView.h"
+#import "LVCustomError.h"
 #import "LVBaseView.h"
 #import "LView.h"
 
-@implementation LVCustomErrorView
+@implementation LVCustomError
 
 - (void) callLuaFuncToReloadData {
     lv_State* L = self.lv_lview.l;
@@ -25,20 +25,20 @@
 
 static Class g_class = nil;
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCustomErrorView class]] ){
+    if( [c isSubclassOfClass:[LVCustomError class]] ){
         g_class = c;
     }
 }
 
 static int lvNewErrorView (lv_State *L) {
     if( g_class == nil ) {
-        g_class = [LVCustomErrorView class];
+        g_class = [LVCustomError class];
     }
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
         r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
     }
-    LVCustomErrorView* errorNotice = [[g_class alloc] initWithFrame:r];
+    LVCustomError* errorNotice = [[g_class alloc] initWithFrame:r];
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(errorNotice);
@@ -58,7 +58,7 @@ static int lvNewErrorView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewErrorView);
-        lv_setglobal(L, "ErrorView");
+        lv_setglobal(L, "UICustomError");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

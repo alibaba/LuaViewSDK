@@ -13,7 +13,7 @@ local r = 40*percent;
 local bodyX0 = scrW/2;
 local bodyY0 = scrH/2;
 
-lazhuBody = UIImageView();
+lazhuBody = UIImage();
 lazhuBody.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
 lazhuBody.setImage("lazhu.png");
 
@@ -23,14 +23,14 @@ function fireCreater() {
 	local fire = {};
 	fire.times = 0;
 
-	fire.imageView1 = UIImageView();
-	fire.imageView2 = UIImageView();
+	fire.imageView1 = UIImage();
+	fire.imageView2 = UIImage();
 	fire.imageView1.setImage("color1.png");
 	fire.imageView2.setImage("color2.png");
 	fire.imageView1.setFrame(0,0,r*2,r*2);
 	fire.imageView2.setFrame(0,0,r*2,r*2);
 
-	fire.bg = UIImageView();
+	fire.bg = UIImage();
 	fire.bg.setFrame(0,0,r*2,r*2);
 	fire.bg.addSubview(fire.imageView1);
 	fire.bg.addSubview(fire.imageView2);

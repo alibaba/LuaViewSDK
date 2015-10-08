@@ -2,9 +2,9 @@ imageUrl = "http://ico.ooopic.com/ajax/iconpng/?id=96776.png";
 
 
 
-imageRander0 = UIImageView();
+imageRander0 = UIImage();
 imageRander0.setFrame(0,100,100,100);
-imageRander1 = UIImageView();
+imageRander1 = UIImage();
 imageRander1.setFrame(0,100,90,90);
 imageRander0.setImage(imageUrl,^(){
     imageRander1.render(imageRander0,0);
@@ -95,10 +95,10 @@ demoArray = {
 	);	
 },
 ^(){
-	imageView = UIImageView();
+	imageView = UIImage();
 	imageView.setImage(imageUrl);
 	imageView.setFrame(200,0,64,64);
-    detail("UIImageView");
+    detail("UIImage");
     imageView.setCenter(w/2,h/2);
 },
 ^(){

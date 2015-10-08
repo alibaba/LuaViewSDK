@@ -37,7 +37,7 @@ collectionView.delegate =
 				return (w-10)/2 ,200;
 			},
 			Init = ^(cell){
-				cell.icon = UIImageView();
+				cell.icon = UIImage();
 				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
 
 				cell.title = UILabel();
@@ -67,7 +67,7 @@ collectionView.delegate =
 				return w ,200;
 			},
 			Init = ^(cell){
-				cell.icon = UIImageView();
+				cell.icon = UIImage();
 				cell.icon.setFrame(w*0.05, 10, cellHeight, cellHeight);
 
 				cell.button = UIButton();
@@ -81,7 +81,7 @@ collectionView.delegate =
 				};
 
 
-				cell.icon2 = UIImageView();
+				cell.icon2 = UIImage();
 				cell.icon2.setFrame(160, 0, cellHeight, cellHeight);
 
 				print("构造Cell--2");

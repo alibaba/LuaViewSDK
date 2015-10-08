@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 #import "LView.h"
-#import "LVImageView.h"
+#import "LVImage.h"
 
 
-@interface JHSLuaViewImageView : LVImageView
+@interface JHSLuaViewImageView : LVImage
 
 @end

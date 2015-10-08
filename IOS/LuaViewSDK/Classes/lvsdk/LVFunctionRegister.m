@@ -16,7 +16,7 @@
 #import "LVUtil.h"
 #import "LVPagerIndicator.h"
 #import "LVLoadingIndicator.h"
-#import "LVImageView.h"
+#import "LVImage.h"
 #import "LVLabel.h"
 #import "LVBaseView.h"
 #import "LVTransform3D.h"
@@ -47,8 +47,8 @@
 #import "LVCollectionView.h"
 #import "LVStruct.h"
 #import "LVNavigation.h"
-#import "LVCustomLoadingView.h"
-#import "LVCustomErrorView.h"
+#import "LVCustomLoading.h"
+#import "LVCustomError.h"
 #import "LVPageView.h"
 
 //------------------------------------------------------------------------------------
@@ -344,7 +344,7 @@ static int debug_log (lv_State *L) {
     lv_settop(L, 0);
     [LVBaseView classDefine:L];
     [LVButton    classDefine:L ];
-    [LVImageView classDefine:L];
+    [LVImage classDefine:L];
     [LVLabel     classDefine:L ];
     [LVScrollView classDefine:L];
     [LVTableView classDefine:L];
@@ -352,8 +352,8 @@ static int debug_log (lv_State *L) {
     [LVPageView classDefine:L];
     [LVTimer       classDefine:L];
     [LVPagerIndicator classDefine:L];
-    [LVCustomLoadingView classDefine:L];
-    [LVCustomErrorView classDefine:L];
+    [LVCustomLoading classDefine:L];
+    [LVCustomError classDefine:L];
     [LVTransform3D classDefine:L];
     [LVTextField classDefine:L];
     [LVAnimate classDefine:L];

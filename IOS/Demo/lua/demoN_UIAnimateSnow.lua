@@ -14,7 +14,7 @@ function snowCreater() {
 
 	snow.times = 0;
 
-	snow.imageView = UIImageView(imageUrl);
+	snow.imageView = UIImage(imageUrl);
 	local snowW = math:random(32,64);
 
 	snow.imageView.setFrame( 0, 0, snowW, snowW);

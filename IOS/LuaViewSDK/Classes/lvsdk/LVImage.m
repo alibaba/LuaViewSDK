@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 dongxicheng. All rights reserved.
 //
 
-#import "LVImageView.h"
+#import "LVImage.h"
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "LVData.h"
 //#import <TBCDNImage.h>
 #import <Accelerate/Accelerate.h>
 
-@interface LVImageView ()
+@interface LVImage ()
 @property (nonatomic,strong) id functionTag;
 @property (nonatomic,strong) UIImageView* blurImageView;
 @property (nonatomic,strong) UIVisualEffectView *blurEffectView;
 @property (nonatomic,assign) BOOL needCallLuaFunc;
 @end
 
-@implementation LVImageView
+@implementation LVImage
 
 
 -(id) init:(lv_State*) l{
@@ -70,7 +70,7 @@
     
     if( [LVUtil isExternalUrl:imageName] ){
         //CDN image
-        __weak LVImageView* weakImageView = self;
+        __weak LVImage* weakImageView = self;
         [self setWebImageUrl:[NSURL URLWithString:imageName] finished:^{
             if( weakImageView.needCallLuaFunc ) {
                 [weakImageView performSelectorOnMainThread:@selector(callLuaDelegate) withObject:nil waitUntilDone:NO];
@@ -108,19 +108,19 @@
 + (UIImage *)applyLightEffect:(UIImage*)image
 {
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
-    return [LVImageView applyBlurWithImage:image radius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [LVImage applyBlurWithImage:image radius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 +(UIImage *)applyExtraLightEffect:(UIImage*)image
 {
     UIColor *tintColor = [UIColor colorWithWhite:0.97 alpha:0.87];
-    return [LVImageView applyBlurWithImage:image radius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [LVImage applyBlurWithImage:image radius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 + (UIImage *)applyDarkEffect:(UIImage*)image
 {
     UIColor *tintColor = [UIColor colorWithWhite:0.11 alpha:0.73];
-    return [LVImageView applyBlurWithImage:image radius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [LVImage applyBlurWithImage:image radius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 -(UIImage*) viewShot:(UIView*) view  rect:(CGRect) rect{
@@ -135,7 +135,7 @@
     return resultImg;
 }
 
-- (void)renderLayerWithView:(LVImageView*)view style:(UIBlurEffectStyle)style
+- (void)renderLayerWithView:(LVImage*)view style:(UIBlurEffectStyle)style
 {
     [self renderLayerWithView:view style:style userSystemBlur:NO];
 }
@@ -164,13 +164,13 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             switch (style) {
                 case UIBlurEffectStyleExtraLight:
-                    image = [LVImageView applyExtraLightEffect:image];
+                    image = [LVImage applyExtraLightEffect:image];
                     break;
                 case UIBlurEffectStyleLight:
-                    image = [LVImageView applyLightEffect:image];
+                    image = [LVImage applyLightEffect:image];
                     break;
                 default:
-                    image = [LVImageView applyDarkEffect:image];
+                    image = [LVImage applyDarkEffect:image];
                     break;
             }
             
@@ -183,7 +183,7 @@
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVImageView class]] ) {
+    if( [c isSubclassOfClass:[LVImage class]] ) {
         g_class = c;
     }
 }
@@ -191,11 +191,11 @@ static Class g_class = nil;
 #pragma -mark ImageView
 static int lvNewImageView(lv_State *L) {
     if( g_class == nil ){
-        g_class = [LVImageView class];
+        g_class = [LVImage class];
     }
     NSString* imageName = lv_paramString(L, 1);
     
-    LVImageView* imageView = [[g_class alloc] init:L];
+    LVImage* imageView = [[g_class alloc] init:L];
     [imageView setImageByName:imageName];
     {
         NEW_USERDATA(userData, LVUserDataView);
@@ -214,8 +214,8 @@ static int lvNewImageView(lv_State *L) {
 static int setImage (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView cancelImageLoadAndClearCallback:L];
             if( lv_type(L, 3) == LV_TFUNCTION ) {
                 [LVUtil registryValue:L key:imageView.functionTag stack:3];
@@ -249,8 +249,8 @@ static int setImage (lv_State *L) {
 static int resizeImage (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             if( lv_gettop(L)>=5 ) {
                 float top = lv_tonumber(L, 2);
                 float left = lv_tonumber(L, 3);
@@ -276,8 +276,8 @@ static int resizeImage (lv_State *L) {
 static int setContentMode (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             if( lv_gettop(L)>=2 ) {
                 int model = lv_tonumber(L, 2);// 2
                 [imageView setContentMode:model];
@@ -297,9 +297,9 @@ static int render (lv_State *L) {
     LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
     LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
     if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
-        LVImageView* imageView = (__bridge LVImageView *)(user1->view);
+        LVImage* imageView = (__bridge LVImage *)(user1->view);
         UIView* view = (__bridge UIView *)(user2->view);
-        if ( [imageView isKindOfClass:[LVImageView class]]
+        if ( [imageView isKindOfClass:[LVImage class]]
             && [view isKindOfClass:[UIView class]] ) {
             int color = 0;
             if( lv_gettop(L)>=3 ) {
@@ -315,9 +315,9 @@ static int renderSystemApi (lv_State *L) {
     LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
     LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
     if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
-        LVImageView* imageView = (__bridge LVImageView *)(user1->view);
-        LVImageView* view = (__bridge LVImageView *)(user2->view);
-        if ( [imageView isKindOfClass:[LVImageView class]]
+        LVImage* imageView = (__bridge LVImage *)(user1->view);
+        LVImage* view = (__bridge LVImage *)(user2->view);
+        if ( [imageView isKindOfClass:[LVImage class]]
             && [view isKindOfClass:[UIView class]] ) {
             int color = 0;
             if( lv_gettop(L)>=3 ) {
@@ -332,8 +332,8 @@ static int renderSystemApi (lv_State *L) {
 static int startAnimating (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             NSArray* urlArray = lv_luaTableToArray(L,2);
             float repeatCount = 1;
             float duration = 0.3;
@@ -362,8 +362,8 @@ static int startAnimating (lv_State *L) {
 static int stopAnimating (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView stopAnimating];
             return 0;
         }
@@ -374,8 +374,8 @@ static int stopAnimating (lv_State *L) {
 static int isAnimating (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVImageView* imageView = (__bridge LVImageView *)(user->view);
-        if ( [imageView isKindOfClass:[LVImageView class]] ) {
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
             lv_pushboolean(L, imageView.isAnimating?1:0);
             return 1;
         }
@@ -387,7 +387,7 @@ static int isAnimating (lv_State *L) {
 +(int) classDefine:(lv_State *) L {
     {
         lv_pushcfunction(L, lvNewImageView);
-        lv_setglobal(L, "UIImageView");
+        lv_setglobal(L, "UIImage");
     }
     const struct lvL_reg memberFunctions [] = {
         {"setImage",  setImage},

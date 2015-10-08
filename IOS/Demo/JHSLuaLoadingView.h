@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomLoadingView.h"
+#import "LVCustomLoading.h"
 
-@interface JHSLuaLoadingView : LVCustomLoadingView
+@interface JHSLuaLoadingView : LVCustomLoading
 
 @end

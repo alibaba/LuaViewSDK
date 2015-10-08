@@ -30,7 +30,7 @@ tableView.delegate = {
 				return cellHeight;
 			},
 			Init = ^(cell, section, row){
-				cell.icon = UIImageView();
+				cell.icon = UIImage();
 				cell.title = UILabel();
 				print("构造Cell");
 			},
@@ -52,8 +52,8 @@ tableView.delegate = {
 				return cellHeight;
 			},
 			Init = ^(cell, section, row){
-				cell.icon = UIImageView();
-				cell.icon2 = UIImageView();
+				cell.icon = UIImage();
+				cell.icon2 = UIImage();
 			},
 			Layout = ^(cell, section, row){
 				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
