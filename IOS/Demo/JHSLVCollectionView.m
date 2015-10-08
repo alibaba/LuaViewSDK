@@ -1,18 +1,15 @@
 //
-//  JHSLuaTableView.m
+//  JHSLVCollectionView.m
 //  LVSDK
 //
 //  Created by dongxicheng on 9/2/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
-
-#import "JHSLuaTableView.h"
-#import "UIScrollView+MJRefresh.h"
+#import "JHSLVCollectionView.h"
+#import <UIScrollView+MJRefresh.h>
 #import <MJRefreshNormalHeader.h>
 
-
-@implementation JHSLuaTableView
-
+@implementation JHSLVCollectionView
 // 下拉刷新
 -(void) lv_initRefreshHeader{// 初始化下拉刷新功能
     MJRefreshNormalHeader* refreshHeader = [[MJRefreshNormalHeader alloc] init];
@@ -37,4 +34,5 @@
 - (BOOL) lv_isRefreshing{// 是否正在刷新
     return self.header.isRefreshing;
 }
+
 @end

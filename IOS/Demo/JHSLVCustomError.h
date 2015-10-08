@@ -1,5 +1,5 @@
 //
-//  JHSLuaErrorView.h
+//  JHSLVCustomError.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/21/15.
@@ -8,6 +8,6 @@
 
 #import "LVCustomError.h"
 
-@interface JHSLuaErrorView : LVCustomError
+@interface JHSLVCustomError : LVCustomError
 
 @end

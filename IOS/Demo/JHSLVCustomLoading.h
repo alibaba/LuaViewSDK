@@ -1,5 +1,5 @@
 //
-//  JHSLoadingView.h
+//  JHSLVCustomLoading.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/22/15.
@@ -8,6 +8,6 @@
 
 #import "LVCustomLoading.h"
 
-@interface JHSLuaLoadingView : LVCustomLoading
+@interface JHSLVCustomLoading : LVCustomLoading
 
 @end

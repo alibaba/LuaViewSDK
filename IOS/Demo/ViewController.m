@@ -12,12 +12,12 @@
 #import "LVPkgManager.h"
 #import "LVLuaObjBox.h"
 #import "LVCustomError.h"
-#import "JHSLuaErrorView.h"
-#import "JHSLuaLoadingView.h"
-#import "JHSLuaCollectionView.h"
-#import "JHSLuaTableView.h"
-#import "JHSLuaViewButton.h"
-#import "JHSLuaViewImageView.h"
+#import "JHSLVCustomError.h"
+#import "JHSLVCustomLoading.h"
+#import "JHSLVCollectionView.h"
+#import "JHSLVTableView.h"
+#import "JHSLVButton.h"
+#import "JHSLVImage.h"
 #import "JHSLuaViewController.h"
 
 

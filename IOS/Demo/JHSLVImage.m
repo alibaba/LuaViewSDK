@@ -1,23 +1,23 @@
 //
-//  LVImageView.m
+//  JHSLVImage.m
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/19/14.
 //  Copyright (c) 2014 dongxicheng. All rights reserved.
 //
 
-#import "JHSLuaViewImageView.h"
+#import "JHSLVImage.h"
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "LVData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 
-@implementation JHSLuaViewImageView
+@implementation JHSLVImage
 
 
 -(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished{
-    __weak JHSLuaViewImageView* weakImageView = self;
+    __weak JHSLVImage* weakImageView = self;
     [self sd_setImageWithURL:url placeholderImage:nil
                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL* url){
                     double duration = (cacheType == SDImageCacheTypeNone && !error)?.4f:.0f;

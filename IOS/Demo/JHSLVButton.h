@@ -1,5 +1,5 @@
 //
-//  LVButton.h
+//  JHSLVButton.h
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/17/14.
@@ -12,6 +12,6 @@
 #import "LVButton.h"
 
 
-@interface JHSLuaViewButton : LVButton
+@interface JHSLVButton : LVButton
 
 @end

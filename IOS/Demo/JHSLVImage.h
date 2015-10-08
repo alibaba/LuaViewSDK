@@ -1,5 +1,5 @@
 //
-//  LVImageView.h
+//  JHSLVImage.h
 //  lv5.1.4
 //
 //  Created by dongxicheng on 12/19/14.
@@ -12,6 +12,6 @@
 #import "LVImage.h"
 
 
-@interface JHSLuaViewImageView : LVImage
+@interface JHSLVImage : LVImage
 
 @end

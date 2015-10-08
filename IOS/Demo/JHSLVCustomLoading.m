@@ -1,17 +1,17 @@
 //
-//  JHSLoadingView.m
+//  JHSLVCustomLoading.m
 //  LVSDK
 //
 //  Created by dongxicheng on 7/22/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "JHSLuaLoadingView.h"
+#import "JHSLVCustomLoading.h"
 
-@interface JHSLuaLoadingView ()
+@interface JHSLVCustomLoading ()
 @property (nonatomic, strong) UIActivityIndicatorView* loading;
 @end
-@implementation JHSLuaLoadingView
+@implementation JHSLVCustomLoading
 
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

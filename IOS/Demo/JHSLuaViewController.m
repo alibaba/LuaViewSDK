@@ -8,12 +8,12 @@
 
 #import "JHSLuaViewController.h"
 #import "LView.h"
-#import "JHSLuaErrorView.h"
-#import "JHSLuaLoadingView.h"
-#import "JHSLuaCollectionView.h"
-#import "JHSLuaTableView.h"
-#import "JHSLuaViewButton.h"
-#import "JHSLuaViewImageView.h"
+#import "JHSLVCustomError.h"
+#import "JHSLVCustomLoading.h"
+#import "JHSLVCollectionView.h"
+#import "JHSLVTableView.h"
+#import "JHSLVButton.h"
+#import "JHSLVImage.h"
 
 
 @interface JHSLuaViewController ()
@@ -34,12 +34,12 @@
     self = [super init];
     if (self) {
         self.source = source;
-        [LVCustomError setDefaultStyle:[JHSLuaErrorView class]];
-        [LVCustomLoading setDefaultStyle:[JHSLuaLoadingView class]];
-        [LVButton setDefaultStyle:[JHSLuaViewButton class]];
-        [LVImage setDefaultStyle:[JHSLuaViewImageView class]];
-        [LVCollectionView setDefaultStyle:[JHSLuaCollectionView class]];
-        [LVTableView setDefaultStyle:[JHSLuaTableView class]];
+        [LVCustomError setDefaultStyle:[JHSLVCustomError class]];
+        [LVCustomLoading setDefaultStyle:[JHSLVCustomLoading class]];
+        [LVButton setDefaultStyle:[JHSLVButton class]];
+        [LVImage setDefaultStyle:[JHSLVImage class]];
+        [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
+        [LVTableView setDefaultStyle:[JHSLVTableView class]];
     }
     return self;
 }

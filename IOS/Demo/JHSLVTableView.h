@@ -1,13 +1,13 @@
 //
-//  JHSLuaCollectionView.h
+//  JHSLVTableView.h
 //  LVSDK
 //
 //  Created by dongxicheng on 9/2/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCollectionView.h"
+#import "LVTableView.h"
 
-@interface JHSLuaCollectionView : LVCollectionView
+@interface JHSLVTableView : LVTableView
 
 @end
