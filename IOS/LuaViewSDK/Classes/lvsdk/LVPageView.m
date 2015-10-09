@@ -128,6 +128,7 @@
     LView* lview = self.lv_lview;
     lv_State* l = lview.l;
     lview.conentView = cell;
+    lview.contentViewIsWindow = NO;
     if ( l ) {
         if( !cell.isInited ){
             cell.isInited = YES;
@@ -156,6 +157,7 @@
         }
     }
     lview.conentView = nil;
+    lview.contentViewIsWindow = NO;
     return cell;
 }
 
@@ -209,9 +211,9 @@ static int lvNewPageView (lv_State *L) {
         [pageView createAllCell];
     }
     
-    UIView* lview = (__bridge UIView *)(L->lView);
+    LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
-        [lview addSubview:pageView];
+        [lview containerAddSubview:pageView];
     }
     lv_pushvalue(L, 2);
     return 1;

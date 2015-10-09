@@ -1314,7 +1314,7 @@ static int lvNewView (lv_State *L) {
         
         LView* lView = (__bridge LView *)(L->lView);
         if( lView ){
-            [lView addSubview:view];
+            [lView containerAddSubview:view];
         }
     }
     return 1; /* new userdatum is already on the stack */

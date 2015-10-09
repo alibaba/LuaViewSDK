@@ -204,9 +204,9 @@ static int lvNewImageView(lv_State *L) {
         lvL_getmetatable(L, META_TABLE_UIImageView );
         lv_setmetatable(L, -2);
     }
-    UIView* view = (__bridge UIView *)(L->lView);
+    LView* view = (__bridge LView *)(L->lView);
     if( view ){
-        [view addSubview:imageView];
+        [view containerAddSubview:imageView];
     }
     return 1; /* new userdatum is already on the stack */
 }

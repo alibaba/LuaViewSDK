@@ -47,6 +47,7 @@
         cell = [[LVTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     lview.conentView = cell.contentView;
+    lview.contentViewIsWindow = NO;
     if ( l ) {
         if( !cell.isInited ){
             cell.isInited = YES;
@@ -65,6 +66,7 @@
         }
     }
     lview.conentView = nil;
+    lview.contentViewIsWindow = NO;
     return cell;
 }
 
@@ -77,6 +79,7 @@
     lv_State* l = lview.l;
     LVTableViewCell* cell = (LVTableViewCell*)cell0;
     lview.conentView = cell.contentView;
+    lview.contentViewIsWindow = NO;
     if ( l ) {
         // 通知布局调整
         // 参数 cell,section,row
@@ -91,6 +94,7 @@
         [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
     }
     lview.conentView = nil;
+    lview.contentViewIsWindow = NO;
 }
 
 // section数量
@@ -383,9 +387,9 @@ static int lvNewTableView (lv_State *L) {
         lvL_getmetatable(L, META_TABLE_UITableView );
         lv_setmetatable(L, -2);
     }
-    UIView* lview = (__bridge UIView *)(L->lView);
+    LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
-        [lview addSubview:tableView];
+        [lview containerAddSubview:tableView];
     }
     return 1;
 }

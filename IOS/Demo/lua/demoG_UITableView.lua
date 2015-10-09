@@ -56,6 +56,7 @@ tableView.delegate = {
 				cell.icon2 = UIImage();
 			},
 			Layout = ^(cell, section, row){
+				print(window);
 				local cellWdith, cellHeight = cell.window.size();
 				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
 				cell.icon.setImage(imageUrl1);

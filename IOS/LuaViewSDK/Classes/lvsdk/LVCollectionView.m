@@ -68,6 +68,7 @@
     LView* lview = self.lv_lview;
     lv_State* l = lview.l;
     lview.conentView = cell.contentView;
+    lview.contentViewIsWindow = NO;
     if ( l ) {
         if( !cell.isInited ){
             cell.isInited = YES;
@@ -98,6 +99,7 @@
         }
     }
     lview.conentView = nil;
+    lview.contentViewIsWindow = NO;
     return cell;
 }
 
@@ -344,9 +346,9 @@ static int lvNewCollectionView (lv_State *L) {
         lv_udataRef(L, KEY_LUA_INFO );
     }
     
-    UIView* lview = (__bridge UIView *)(L->lView);
+    LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
-        [lview addSubview:tableView];
+        [lview containerAddSubview:tableView];
     }
     return 1;
 }

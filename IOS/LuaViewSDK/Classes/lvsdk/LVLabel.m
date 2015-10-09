@@ -44,7 +44,7 @@ static int lvNewLabel(lv_State *L) {
         }
         LView* view = (__bridge LView *)(L->lView);
         if( view ){
-            [view addSubview:label];
+            [view containerAddSubview:label];
         }
     }
     return 1; /* new userdatum is already on the stack */

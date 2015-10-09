@@ -85,9 +85,9 @@ static int lvNewTextField (lv_State *L) {
         lvL_getmetatable(L, META_TABLE_UITextField );
         lv_setmetatable(L, -2);
     }
-    UIView* lview = (__bridge UIView *)(L->lView);
+    LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
-        [lview addSubview:textFiled];
+        [lview containerAddSubview:textFiled];
     }
     return 1; /* new userdatum is already on the stack */
 }

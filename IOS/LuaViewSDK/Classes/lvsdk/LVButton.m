@@ -85,9 +85,9 @@ static int lvNewButton (lv_State *L) {
             lvL_getmetatable(L, META_TABLE_UIButton );
             lv_setmetatable(L, -2);
         }
-        UIView* father = (__bridge UIView *)(L->lView);
+        LView* father = (__bridge LView *)(L->lView);
         if( father ){
-            [father addSubview:button];
+            [father containerAddSubview:button];
         }
     }
     return 1; /* new userdatum is already on the stack */

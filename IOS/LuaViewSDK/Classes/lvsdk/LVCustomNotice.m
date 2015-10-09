@@ -43,9 +43,9 @@ static int lvNewNoticeView (lv_State *L) {
             lvL_getmetatable(L, META_TABLE_NoticeView );
             lv_setmetatable(L, -2);
         }
-        UIView* view = (__bridge UIView *)(L->lView);
+        LView* view = (__bridge LView *)(L->lView);
         if( view ){
-            [view addSubview:notice];
+            [view containerAddSubview:notice];
         }
     }
     return 1; /* new userdatum is already on the stack */

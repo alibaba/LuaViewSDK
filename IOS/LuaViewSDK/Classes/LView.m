@@ -217,14 +217,6 @@ extern char g_debug_lua[];
     [self.callback luaviewContentSizeDidChange:self];
 }
 
--(void) addToTopWindow{
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    if (window == nil) {
-        window = [UIApplication sharedApplication].windows[0];
-    }
-    [window addSubview:self];
-}
-
 -(void) releaseLuaView{
     self.hidden = YES;
     [self removeFromSuperview];
@@ -363,7 +355,7 @@ extern char g_debug_lua[];
 }
 
 -(void) addSubview:(UIView *)view{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView addSubview:view];
     } else {
         [super addSubview:view];
@@ -371,7 +363,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setFrame:(CGRect)frame{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setFrame:frame];
     } else {
         [super setFrame:frame];
@@ -380,7 +372,7 @@ extern char g_debug_lua[];
 }
 
 -(CGRect) frame{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return self.conentView.frame;
     } else {
         return super.frame;
@@ -388,7 +380,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setBackgroundColor:(UIColor *)backgroundColor{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setBackgroundColor:backgroundColor];
     } else {
         [super setBackgroundColor:backgroundColor];
@@ -396,7 +388,7 @@ extern char g_debug_lua[];
 }
 
 -(UIColor*) backgroundColor{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return [self.conentView backgroundColor];
     } else {
         return [super backgroundColor];
@@ -404,7 +396,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setClipsToBounds:(BOOL)clipsToBounds{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setClipsToBounds:clipsToBounds];
     } else {
         [super setClipsToBounds:clipsToBounds];
@@ -412,7 +404,7 @@ extern char g_debug_lua[];
 }
 
 -(BOOL) clipsToBounds{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return self.conentView.clipsToBounds;
     } else {
         return [super clipsToBounds];
@@ -420,7 +412,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setAlpha:(CGFloat)alpha{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setAlpha:alpha];
     } else {
         [super setAlpha:alpha];
@@ -428,7 +420,7 @@ extern char g_debug_lua[];
 }
 
 -(CGFloat) alpha{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return self.conentView.alpha;
     } else {
         return [super alpha];
@@ -436,7 +428,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setCenter:(CGPoint)center{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setCenter:center];
     } else {
         [super setCenter:center];
@@ -444,7 +436,7 @@ extern char g_debug_lua[];
 }
 
 -(CGPoint) center{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return [self.conentView center];
     } else {
         return [super center];
@@ -452,7 +444,7 @@ extern char g_debug_lua[];
 }
 
 -(void) setHidden:(BOOL)hidden{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         [self.conentView setHidden:hidden];
     } else {
         [super setHidden:hidden];
@@ -460,7 +452,7 @@ extern char g_debug_lua[];
 }
 
 -(BOOL) isHidden{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return [self.conentView isHidden];
     } else {
         return [super isHidden];
@@ -468,7 +460,7 @@ extern char g_debug_lua[];
 }
 
 -(CALayer*) layer{
-    if( self.conentView ){
+    if( self.contentViewIsWindow && self.conentView ){
         return [self.conentView layer];
     } else {
         return [super layer];
@@ -480,6 +472,7 @@ extern char g_debug_lua[];
     if( self.l ){
         lv_checkstack(self.l, 8 + (int)args.count*2);
         self.conentView = environment;
+        self.contentViewIsWindow = YES;
         
         [LVUtil pushRegistryValue:self.l key:tag]; // param1: cell
         
@@ -495,6 +488,7 @@ extern char g_debug_lua[];
         lv_getglobal(self.l, functionName.UTF8String);// function
         lv_runFunctionWithArgs(self.l, (int)args.count+1, 0);
         self.conentView = nil;
+        self.contentViewIsWindow = NO;
     }
 }
 
@@ -506,6 +500,7 @@ extern char g_debug_lua[];
     if( self.l ){
         lv_checkstack(self.l, (int)args.count*2 + 2);
         self.conentView = nil;
+        self.contentViewIsWindow = NO;
         
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
@@ -597,5 +592,18 @@ static NSArray* g_boundlePaths = nil;
     return [NSString stringWithFormat:@"<UIView(0x%x) frame = %@; contentSize = %@>",
             (int)[self hash], NSStringFromCGRect(self.frame) , NSStringFromCGSize(self.contentSize)];
 }
+
+-(void) containerAddSubview:(UIView *)view{
+    if( self.conentView ) {
+        if( view.superview!=self.conentView ) {
+            [self.conentView addSubview:view];
+        }
+    } else {
+        if( view.superview!=self ) {
+            [super addSubview:view];
+        }
+    }
+}
+
 
 @end

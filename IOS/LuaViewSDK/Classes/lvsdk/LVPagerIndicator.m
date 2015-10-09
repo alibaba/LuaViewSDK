@@ -8,6 +8,7 @@
 
 #import "LVPagerIndicator.h"
 #import "LVBaseView.h"
+#import "LView.h"
 
 @implementation LVPagerIndicator
 
@@ -35,9 +36,9 @@ static int lvNewPageControl (lv_State *L) {
             lvL_getmetatable(L, META_TABLE_UIPageControl );
             lv_setmetatable(L, -2);
         }
-        UIView* view = (__bridge UIView *)(L->lView);
+        LView* view = (__bridge LView *)(L->lView);
         if( view ){
-            [view addSubview:pageControl];
+            [view containerAddSubview:pageControl];
         }
     }
     return 1; /* new userdatum is already on the stack */

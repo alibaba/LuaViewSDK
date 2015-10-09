@@ -79,18 +79,16 @@
  */
 -(void) releaseLuaView;
 
-/**
- *  把luaView放到最顶层
- */
--(void) addToTopWindow;
-
-
 #pragma mark - 系统使用的, 基本上不用关心细节
 //@interface LView (LViewPrivateData)<LVProtocal>
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view
 @property (nonatomic, weak)   LView* lv_lview;
 @property (nonatomic, assign) LVUserDataView* lv_userData;// 脚本中的window对象 数据绑定
 @property (nonatomic, assign) lv_State* l; // lua 状态机
+
+
+-(void) containerAddSubview:(UIView *)view;
+@property(nonatomic,assign) BOOL contentViewIsWindow;// contentView是否是窗口
 //@end
 @end
 
@@ -169,4 +167,5 @@
 -(void) callLuaToExecuteServerCmd;
 
 @end
+
 
