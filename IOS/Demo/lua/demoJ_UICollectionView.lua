@@ -37,6 +37,8 @@ collectionView.delegate =
 				return (w-10)/2 ,200;
 			},
 			Init = ^(cell){
+				local cellWidth ,cellHeight = cell.window.size();
+				cellHeight = cellHeight / 2;
 				cell.icon = UIImage();
 				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
 
@@ -55,7 +57,7 @@ collectionView.delegate =
 				cell.title.setText("测试"..section .."--" .. row);
 				print("布局Cell--" , section, "--", row);
 
-				window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
+				cell.window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
 			},
 			Delegate = ^(section, row){
 				print(section, row);
@@ -95,7 +97,7 @@ collectionView.delegate =
 				cell.icon2.setImage(imageUrl1)
 				print("布局Cell--" , section, "--", row);
 
-				window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
+				cell.window.setBackgroundColor( section*0x770000 +  (row%3)*0x33 );
 			},
 			Delegate = ^(section, row){
 				print(section, row);

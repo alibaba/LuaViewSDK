@@ -30,6 +30,7 @@
     if( L ) {
         lv_createtable(L, 0, 0);
         [LVUtil registryValue:L key:self stack:-1];
+        lv_tableSetWeakWindow(L, self);
     }
 }
 
@@ -38,6 +39,10 @@
     if( L ) {
         [LVUtil pushRegistryValue:L key:self];
     }
+}
+
+-(UIView*) contentView{
+    return self;
 }
 
 

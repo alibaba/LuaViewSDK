@@ -420,7 +420,7 @@ static int debug_log (lv_State *L) {
     userData->view = CFBridgingRetain(lView);
     lView.lv_userData = userData;
     
-    lvL_getmetatable(L, META_TABLE_UIScrollView );
+    lvL_getmetatable(L, META_TABLE_UIView );
     lv_setmetatable(L, -2);
     
     lv_setglobal(L, "window");

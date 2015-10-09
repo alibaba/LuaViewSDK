@@ -204,6 +204,9 @@
 		846E879B1A653DEC000D14DA /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; };
 		846E879C1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
 		846E879D1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
+		8473D3B01BC79B55009758F5 /* LVCellTargetProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8473D3AE1BC79B55009758F5 /* LVCellTargetProxy.h */; settings = {ASSET_TAGS = (); }; };
+		8473D3B11BC79B55009758F5 /* LVCellTargetProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473D3AF1BC79B55009758F5 /* LVCellTargetProxy.m */; settings = {ASSET_TAGS = (); }; };
+		8473D3B21BC79B55009758F5 /* LVCellTargetProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473D3AF1BC79B55009758F5 /* LVCellTargetProxy.m */; settings = {ASSET_TAGS = (); }; };
 		84765E2D1ADE37A7002506CB /* LVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84765E2B1ADE37A7002506CB /* LVFile.h */; };
 		84765E2E1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		84765E2F1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
@@ -501,6 +504,8 @@
 		846481E41A64F0EB00DE6204 /* lua源码分析.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "lua源码分析.pdf"; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
+		8473D3AE1BC79B55009758F5 /* LVCellTargetProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCellTargetProxy.h; sourceTree = "<group>"; };
+		8473D3AF1BC79B55009758F5 /* LVCellTargetProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCellTargetProxy.m; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
 		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
 		84799AA51BAFDDA00070E214 /* 1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 1.tiff; sourceTree = "<group>"; };
@@ -815,6 +820,8 @@
 				848CA3631B29748800C70321 /* LVCollectionViewCell.m */,
 				846481B41A64C61F00DE6204 /* LVScrollView.h */,
 				846481B51A64C61F00DE6204 /* LVScrollView.m */,
+				8473D3AE1BC79B55009758F5 /* LVCellTargetProxy.h */,
+				8473D3AF1BC79B55009758F5 /* LVCellTargetProxy.m */,
 			);
 			name = container;
 			sourceTree = "<group>";
@@ -1241,6 +1248,7 @@
 				846481D01A64C61F00DE6204 /* LVPagerIndicator.h in Headers */,
 				846481C41A64C61F00DE6204 /* LVButton.h in Headers */,
 				84DDB85D1B43BAEB006ACE9A /* LVPointerValueBox.h in Headers */,
+				8473D3B01BC79B55009758F5 /* LVCellTargetProxy.h in Headers */,
 				840AD6351A63ED7D003E837D /* lVundump.h in Headers */,
 				84DF1DA61A6F5BC9009F970A /* LVTapGestureRecognizer.h in Headers */,
 				84264BEE1A78E66F008D833B /* LVTableViewCell.h in Headers */,
@@ -1532,6 +1540,7 @@
 				840AD6041A63ED7D003E837D /* lVgc.c in Sources */,
 				846481C61A64C61F00DE6204 /* LVButton.m in Sources */,
 				84799AF71BAFECA00070E214 /* LVPageView.m in Sources */,
+				8473D3B21BC79B55009758F5 /* LVCellTargetProxy.m in Sources */,
 				8410D9AD1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */,
 				840AD60B1A63ED7D003E837D /* lVlex.c in Sources */,
 				846481DB1A64C61F00DE6204 /* LVTimer.m in Sources */,
@@ -1654,6 +1663,7 @@
 				8418E3C31A5E804700158125 /* main.m in Sources */,
 				840AD6301A63ED7D003E837D /* lVtm.c in Sources */,
 				846481CB1A64C61F00DE6204 /* LVImage.m in Sources */,
+				8473D3B11BC79B55009758F5 /* LVCellTargetProxy.m in Sources */,
 				840AD5F01A63ED7D003E837D /* lVc.c in Sources */,
 				84CF56761AE9184000A49B36 /* LVNativeObjBox.m in Sources */,
 				840AD60A1A63ED7D003E837D /* lVlex.c in Sources */,
@@ -1754,7 +1764,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1791,7 +1801,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

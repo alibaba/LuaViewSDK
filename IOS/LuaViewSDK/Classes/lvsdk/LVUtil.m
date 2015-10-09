@@ -659,6 +659,20 @@ void lv_udataUnref(lv_State* L, int key) {
     }
 }
 
+
+void lv_tableSetWeakWindow(lv_State* L, id cell){
+    lv_pushstring(L, "window");
+    
+    NEW_USERDATA(userData, LVUserDataView);
+    userData->view = CFBridgingRetain(cell);
+    //lView.lv_userData = userData;
+    
+    lvL_getmetatable(L, META_TABLE_UIView );
+    lv_setmetatable(L, -2);
+    
+    lv_settable(L, -3);
+}
+
 void LVLog( NSString* format, ... ){
     va_list params; //定义一个指向个数可变的参数列表指针;
     va_start(params,format);//va_start 得到第一个可变参数地址,

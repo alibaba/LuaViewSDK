@@ -145,6 +145,11 @@ id lv_luaValueToNativeObject(lv_State* L, int idx);
  */
 BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key);
 
+/*
+ * lua table添加window属性
+ */
+void lv_tableSetWeakWindow(lv_State* L, id cell);
+
 /**
  *  重置lua虚拟机的栈大小位置
  *

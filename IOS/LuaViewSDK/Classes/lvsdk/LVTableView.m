@@ -63,6 +63,21 @@
             lv_pushUDataRef(l, KEY_LUA_INFO);
             [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
         }
+    }
+    lview.conentView = nil;
+    return cell;
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell0 forRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
+    if( identifier == nil ){
+        identifier = @"LVTableViewCell.default.identifier";
+    }
+    LView* lview = self.lv_lview;
+    lv_State* l = lview.l;
+    LVTableViewCell* cell = (LVTableViewCell*)cell0;
+    lview.conentView = cell.contentView;
+    if ( l ) {
         {   // 通知布局调整
             // 参数 cell,section,row
             lv_settop(l, 0);
@@ -77,7 +92,6 @@
         }
     }
     lview.conentView = nil;
-    return cell;
 }
 
 // section数量
