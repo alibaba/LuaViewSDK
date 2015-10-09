@@ -78,18 +78,17 @@
     LVTableViewCell* cell = (LVTableViewCell*)cell0;
     lview.conentView = cell.contentView;
     if ( l ) {
-        {   // 通知布局调整
-            // 参数 cell,section,row
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
-            [cell pushTableToStack];
-            lv_pushnumber(l, indexPath.section+1);
-            lv_pushnumber(l, indexPath.row+1);
-            
-            lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
-        }
+        // 通知布局调整
+        // 参数 cell,section,row
+        lv_settop(l, 0);
+        lv_checkstack(l, 12);
+        [cell pushTableToStack];
+        lv_pushnumber(l, indexPath.section+1);
+        lv_pushnumber(l, indexPath.row+1);
+        
+        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUDataRef(l, KEY_LUA_INFO);
+        [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
     }
     lview.conentView = nil;
 }
