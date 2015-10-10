@@ -503,7 +503,7 @@ static int delegate (lv_State *L) {
         lv_setglobal(L, "UITableView");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"reloadData",    reloadData},
+        {"reload",    reloadData},
         
         {"setHeader", setTableHeaderView},
         {"setFooter", setTableFooterView},

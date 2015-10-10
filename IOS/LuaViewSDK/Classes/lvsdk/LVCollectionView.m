@@ -446,7 +446,7 @@ static int rectForSection (lv_State *L) {
         lv_setglobal(L, "UICollectionView");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"reloadData",    reloadData},
+        {"reload",    reloadData},
         {"rectForSection", rectForSection},
         
         {"miniSpacing", miniSpacing},
