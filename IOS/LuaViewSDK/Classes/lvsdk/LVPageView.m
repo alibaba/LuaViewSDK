@@ -205,17 +205,18 @@ static int lvNewPageView (lv_State *L) {
     lv_setmetatable(L, -2);
     
     if ( haveArgs ) {
+        int stackNum = lv_gettop(L);
         lv_pushvalue(L, 1);
         lv_udataRef(L, KEY_LUA_INFO );
         
         [pageView createAllCell];
+        lv_settop(L, stackNum);
     }
     
     LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
         [lview containerAddSubview:pageView];
     }
-    lv_pushvalue(L, 2);
     return 1;
 }
 
@@ -252,6 +253,23 @@ static int showScrollBar(lv_State *L) {
     return 0;
 }
 
+static int delegate (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, LVUserDataView) ){
+        if ( lv_gettop(L)>=2 ) {
+            lv_settop(L, 2);
+            lv_udataRef(L, USERDATA_KEY_DELEGATE);
+            LVPageView* tableView = (__bridge LVPageView *)(user->view);
+            [tableView createAllCell];
+            return 1;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewPageView);
@@ -261,6 +279,10 @@ static int showScrollBar(lv_State *L) {
         {"reload",    reloadData},
         {"setShowScrollBar",  showScrollBar },
         {"showScrollBar",     showScrollBar },
+        
+        
+        {"delegate",     delegate },
+        {"setDelegate",     delegate },
         {NULL, NULL}
     };
     

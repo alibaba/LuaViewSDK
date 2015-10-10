@@ -3,7 +3,7 @@ require "lv_kit"
 
 local scrW, scrH= System.screenSize()
 
-pageView = UIPageView({
+pageView = UIPageView {
     PageCount = 12,
     Pages = {
         Init = function(page, pos)
@@ -29,7 +29,7 @@ pageView = UIPageView({
         end
         
     }
-})
+};
 
 
 pageView.setFrame(0, 0, scrW, scrH-64 )
