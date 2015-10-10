@@ -112,7 +112,6 @@ loading = false;
 tableView.setFrame(0,0,w,h-64);
 tableView.setBackgroundColor(0xffFFFF);
 
-tableView.initRefreshHeader();
-tableView.initRefreshFooter();
+tableView.initRefreshing();
 
 

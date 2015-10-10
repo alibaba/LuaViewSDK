@@ -376,13 +376,6 @@ static const struct lvL_reg memberFunctions [] = {
     {"setAlwaysBounce", alwaysBounce },
     {"alwaysBounce",    alwaysBounce },
     
-    {"initRefreshHeader", initRefreshHeader},
-    {"initRefreshFooter", initRefreshFooter},
-    
-    {"headerBeginRefreshing", headerBeginRefreshing},
-    {"headerEndRefreshing", headerEndRefreshing},
-    {"hiddenRefreshHeader", hiddenRefreshHeader},
-    
     {"footerNoticeNoMoreData", footerNoticeNoMoreData},
     {"footerResetNoMoreData", footerResetNoMoreData},
     {"hiddenRefreshFooter", hiddenRefreshFooter},
@@ -393,12 +386,6 @@ static const struct lvL_reg memberFunctions [] = {
     {"initRefreshing", initRefreshHeader},
     {"startRefreshing", headerBeginRefreshing},
     {"stopRefreshing", headerEndRefreshing},
-    // {"hiddenPullDownRefreshing", hiddenRefreshHeader},
-    
-//    {"initPullUpRefreshing", initRefreshFooter},
-//    {"noticePullUpNoMoreData", footerNoticeNoMoreData},
-//    {"resetPullUpRefreshing", footerResetNoMoreData},
-//    {"hiddenPullUpRefreshing", hiddenRefreshFooter},
     
     {NULL, NULL}
 };

@@ -151,10 +151,6 @@ static int currentPageIndicatorTintColor(lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewPageControl);
-        lv_setglobal(L, "UIPageControl");
-    }
-    {
-        lv_pushcfunction(L, lvNewPageControl);
         lv_setglobal(L, "UIPagerIndicator");
     }
     const struct lvL_reg memberFunctions [] = {

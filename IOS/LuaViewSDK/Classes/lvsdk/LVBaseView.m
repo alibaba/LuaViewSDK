@@ -1149,9 +1149,6 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"setHidden", hidden },
     {"hidden",    hidden },
     
-    {"setUserInteractionEnabled", userInteractionEnabled },
-    {"userInteractionEnabled",    userInteractionEnabled },
-    
     {"setEnabled", userInteractionEnabled },
     {"enabled",    userInteractionEnabled },
     
@@ -1269,10 +1266,6 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"delegate",     delegate },
     {"setCallback",  delegate },
     {"callback",     delegate },
-    
-    {"isFirstResponder",        isFirstResponder },
-    {"becomeFirstResponder",    becomeFirstResponder },
-    {"resignFirstResponder",    resignFirstResponder },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },

@@ -504,8 +504,6 @@ static int delegate (lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"reloadData",    reloadData},
-        {"setTableHeaderView", setTableHeaderView},
-        {"setTableFooterView", setTableFooterView},
         
         {"setHeader", setTableHeaderView},
         {"setFooter", setTableFooterView},
