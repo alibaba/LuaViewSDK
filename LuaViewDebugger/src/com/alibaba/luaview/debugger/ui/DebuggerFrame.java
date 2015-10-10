@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 import com.alibaba.luaview.debugger.Center;
 import com.alibaba.luaview.debugger.ClientCmd;
@@ -130,6 +134,31 @@ public class DebuggerFrame extends JFrame {
 
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(7);
+		try {
+			splitPane.setUI(new BasicSplitPaneUI() {
+				public BasicSplitPaneDivider createDefaultDivider() {
+					return new BasicSplitPaneDivider(this) {
+						private static final long serialVersionUID = -7493346152989839058L;
+						private Color color = new Color(171, 171, 171);
+
+						public void setBorder(Border b) {
+						}
+
+						public void paint(Graphics g) {
+							super.paint(g);
+							int w = this.getWidth();
+							int h = this.getHeight();
+							g.setClip(0, 0, w, h);
+							g.setColor(color);
+							g.drawLine(0, 0, w, 0);
+							g.drawLine(0, h, w, h);
+						}
+					};
+				}
+			});
+		} catch (Exception e) {
+
+		}
 
 		// splitPane.setBorderPainted(false);// 不打印边框
 		splitPane.setBorder(null);// 除去边框
@@ -137,14 +166,14 @@ public class DebuggerFrame extends JFrame {
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panelBody.add(splitPane, BorderLayout.CENTER);
 
-		JScrollPane scrollPane = new TopLineScrollPane();
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(null);
 		scrollPane.setViewportBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		splitPane.setRightComponent(scrollPane);
 
-		outputArea = new TopLineTextArea();
+		outputArea = new JTextArea();
 		outputArea.setTabSize(4);
 		outputArea.setLineWrap(true);
 		outputArea.setBorder(null);

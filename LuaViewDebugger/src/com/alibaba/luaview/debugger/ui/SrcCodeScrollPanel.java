@@ -184,10 +184,6 @@ abstract public class SrcCodeScrollPanel extends JPanel {
 		g.drawRect(screenW - bar_w, -1, bar_w + 8, screenH + 2);
 		fillBar(g, bar_X, bar_Y, bar_W, bar_H);
 
-		int w = this.getWidth();
-		int h = this.getHeight();
-		g.setColor(new Color(171, 171, 171));
-		g.drawLine(0, h, w, h);
 		if (m_repaint) {
 			m_repaint = false;
 			if (updateUI)
