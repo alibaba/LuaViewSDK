@@ -61,6 +61,7 @@
             [self.cellArray addObject:view];
         }
     }
+    [self resetCellFrame];
 }
 
 -(void) resetCellFrame{
