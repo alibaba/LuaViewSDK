@@ -610,7 +610,7 @@ static void addinfo (lv_State *L, const char *msg) {
         char buff[LV_IDSIZE];  /* add file:line information */
         int line = currentline(L, ci);
         lvO_chunkid(buff, getstr(get_l_u_a_proto(ci)->source), LV_IDSIZE);
-        lvO_pushfstring(L, "%s:%d: %s", buff, line, msg);
+        lvO_pushfstring(L, "<%s:%d> %s", buff, line, msg);
     }
 }
 
