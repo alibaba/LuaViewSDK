@@ -234,17 +234,6 @@ static int initRefreshHeader (lv_State *L) {
     return 0;
 }
 
-static int initRefreshFooter (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
-        [scrollView lv_initRefreshFooter];
-    }
-    return 0;
-}
-
-
-
 static int headerBeginRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){

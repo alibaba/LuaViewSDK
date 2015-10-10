@@ -201,14 +201,14 @@ void lvO_chunkid (char *out, const char *source, size_t bufflen) {
       size_t len = strcspn(source, "\n\r");  /* stop at first newline */
       bufflen -= sizeof(" [string \"...\"] ");
       if (len > bufflen) len = bufflen;
-      strcpy(out, "[string \"");
+      strcpy(out, "\"");
       if (source[len] != '\0') {  /* must truncate? */
         strncat(out, source, len);
         strlcat(out, "...", bufflen);
       }
       else
         strlcat(out, source, bufflen);
-      strlcat(out, "\"]", bufflen);
+      strlcat(out, "\"", bufflen);
     }
   }
 }
