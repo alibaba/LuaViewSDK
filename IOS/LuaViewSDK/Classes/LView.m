@@ -174,7 +174,12 @@ extern char g_debug_lua[];
     int error = -1;
     error = lvL_loadbuffer(self.l, data.bytes , data.length, fileName.UTF8String) ;
     if ( error ) {
-        LVError( @"running function : %s", lv_tostring(self.l, -1));
+        const char* s = lv_tostring(self.l, -1);
+        LVError( @"%s", s );
+#ifdef DEBUG
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
+        lv_printToServer(self.l, string.UTF8String, 0);
+#endif
     } else {
         lv_runFunction(self.l);
     }

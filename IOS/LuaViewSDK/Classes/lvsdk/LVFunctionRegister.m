@@ -78,7 +78,12 @@ int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
         }
         int errorCode = lv_pcall( l, nargs, nret, 0);
         if ( errorCode != 0 ) {
-            LVError( @"running function : %s", lv_tostring(l, -1) );
+            const char* s = lv_tostring(l, -1);
+            LVError( @"%s", s );
+#ifdef DEBUG
+            NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
+            lv_printToServer(l, string.UTF8String, 0);
+#endif
         }
         return errorCode;
     }
