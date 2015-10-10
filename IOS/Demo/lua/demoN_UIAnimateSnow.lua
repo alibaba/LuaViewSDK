@@ -6,7 +6,7 @@ w,h = System.screenSize();
 
 window.setFrame(0, 0, w, h);
 window.setBackgroundColor(0,0);
-window.setUserInteractionEnabled(true);
+window.enabled(true);
 
 -------------------------------
 function snowCreater() {

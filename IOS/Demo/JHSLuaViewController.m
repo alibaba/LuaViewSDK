@@ -76,7 +76,7 @@
     [self.view addSubview:self.lv];
     
     //注册外部对象.
-    self.lv[@"ViewController"] = self;
+    self.lv[@"viewController"] = self;
     
     [self.lv runFile:self.source];// 量贩团页面
 }

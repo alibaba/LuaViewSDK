@@ -3,7 +3,7 @@ scrW, scrH = System.screenSize();
 
 window.setFrame(0, 0, scrW, scrH);
 window.setBackgroundColor(0xffffff,1);
-window.setUserInteractionEnabled(true);
+window.enabled(true);
 
 
 
@@ -20,7 +20,7 @@ function createLaZhu(x,y){
 	lazhu.lazhuBody = UIImage();
 	lazhu.lazhuBody.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
 	lazhu.lazhuBody.setImage("lazhu.png");
-	lazhu.lazhuBody.setUserInteractionEnabled(true);
+	lazhu.lazhuBody.enabled(true);
 
 	lazhu.onOff = true;
 	lazhu.button = UIButton();

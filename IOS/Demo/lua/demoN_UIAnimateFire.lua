@@ -3,7 +3,7 @@ scrW, scrH = System.screenSize();
 
 window.setFrame(0, 0, scrW, scrH);
 window.setBackgroundColor(0xffffff,1);
-window.setUserInteractionEnabled(true);
+window.enabled(true);
 
 
 
