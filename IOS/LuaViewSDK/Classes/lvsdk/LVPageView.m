@@ -254,6 +254,38 @@ static int showScrollBar(lv_State *L) {
     return 0;
 }
 
+static int setCurrentPage(lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVPageView* view = (__bridge LVPageView *)(user->view);
+        if( [view isKindOfClass:[UIScrollView class]] ){
+            if( lv_gettop(L)>=2 ) {
+                int pageIndex = lv_tonumber(L, 2);
+                pageIndex -= 1;
+                float offsetX = pageIndex*view.frame.size.width ;
+                if( offsetX<=0 ){
+                    offsetX = 0;
+                }
+                float maxOffset = view.contentSize.width-view.frame.size.width;
+                if( offsetX > maxOffset ){
+                    offsetX = maxOffset;
+                }
+                BOOL animated = YES;
+                if( lv_gettop(L)>=3 ) {
+                    animated = lv_toboolean(L, 3);
+                }
+                [view setContentOffset:CGPointMake(offsetX, 0) animated:animated];
+                lv_settop(L, 1);
+                return 1;
+            } else {
+                lv_pushnumber( L, view.currentPageIndex+1 );
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 static int delegate (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user && LVIsType(user, LVUserDataView) ){
@@ -281,9 +313,12 @@ static int delegate (lv_State *L) {
         {"setShowScrollBar",  showScrollBar },
         {"showScrollBar",     showScrollBar },
         
-        
         {"delegate",     delegate },
         {"setDelegate",     delegate },
+        
+        {"setCurrentPage",     setCurrentPage },
+        {"currentPage",     setCurrentPage },
+
         {NULL, NULL}
     };
     

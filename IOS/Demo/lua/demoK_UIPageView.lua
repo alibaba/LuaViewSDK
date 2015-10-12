@@ -16,6 +16,8 @@ pageView.delegate = {
             page.button.setBackgroundColor(0x777777);
             page.button.delegate = ^(){
                 print("第",pos,"页");
+                pageView.setCurrentPage(pos+1);
+                print(pageView.currentPage() );
             }
         end
     },
