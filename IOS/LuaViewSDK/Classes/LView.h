@@ -147,6 +147,7 @@
 - (void) registeObject:(id) object name:(NSString*) name weakMode:(BOOL) weakMode;// 注册改对象的所有api
 - (void) unregisteObjectWithName:(NSString*) name;// 取消注册对象
 
+- (void) addCustomPanel:(Class) c boundName:(NSString*) boundName;
 @end
 
 

@@ -17,6 +17,8 @@
 #import "UIView+LuaView.h"
 #import "LVDebugConnection.h"
 #import "LVDebugConnection.h"
+#import "LVCustomPanel.h"
+#import <objc/runtime.h>
 
 
 @interface LView ()
@@ -540,6 +542,12 @@ extern char g_debug_lua[];
 
 
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key{
+    if( [key isKindOfClass:[NSString class]]
+       && object_isClass(object)
+       && [object isSubclassOfClass:[LVCustomPanel class]] ) {
+        [self addCustomPanel:object boundName:(NSString*)key];
+        return;
+    }
     if ( [key isKindOfClass:[NSString class]] ){
         [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:(NSString*)key sel:nil weakMode:YES];
     }
@@ -549,6 +557,11 @@ extern char g_debug_lua[];
     [LVNativeObjBox unregisteObjectWithL:self.l name:name];
 }
 
+- (void) addCustomPanel:(Class) c boundName:(NSString*) boundName{
+    if( self.l ) {
+        [LVCustomPanel addCustomPanel:c boundName:boundName state:self.l];
+    }
+}
 
 #pragma mark - package
 

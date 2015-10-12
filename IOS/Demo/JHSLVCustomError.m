@@ -29,9 +29,13 @@
         [bg addSubview:button];
         
         [self addSubview:bg];
-        [button addTarget:self action:@selector(callLuaWithArgs) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(refleshButtonCall) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
+}
+
+-(void) refleshButtonCall{
+    [self callLuaWithArgument:@"reflesh"];
 }
 
 -(void) layoutSubviews{

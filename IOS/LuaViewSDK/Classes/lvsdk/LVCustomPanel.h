@@ -21,8 +21,8 @@
 
 +(int) classDefine:(lv_State *)L ;
 
-- (void) callLuaWithArgs;
+- (void) callLuaWithArgument:(NSString*) info;
 
-+ (void) addPanelStyle:(Class) c;
++ (void) addCustomPanel:(Class) c boundName:(NSString*) boundName state:(lv_State*) L;
 
 @end

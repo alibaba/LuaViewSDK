@@ -34,12 +34,6 @@
     self = [super init];
     if (self) {
         self.source = source;
-        [LVCustomPanel addPanelStyle:[JHSLVCustomError class]];
-        [LVCustomPanel addPanelStyle:[JHSLVCustomLoading class]];
-        [LVButton setDefaultStyle:[JHSLVButton class]];
-        [LVImage setDefaultStyle:[JHSLVImage class]];
-        [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
-        [LVTableView setDefaultStyle:[JHSLVTableView class]];
     }
     return self;
 }
@@ -75,7 +69,17 @@
     self.lv.viewController = self;
     [self.view addSubview:self.lv];
     
-    //注册外部对象.
+    // 修改默认样式行为
+    [LVButton setDefaultStyle:[JHSLVButton class]];
+    [LVImage setDefaultStyle:[JHSLVImage class]];
+    [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
+    [LVTableView setDefaultStyle:[JHSLVTableView class]];
+    
+    // 注册 用户面板类型
+    self.lv[@"UICustomError"] = [JHSLVCustomError class];
+    self.lv[@"UICustomLoading"] = [JHSLVCustomLoading class];
+    
+    // 注册 外部对象.
     self.lv[@"viewController"] = self;
     
     [self.lv runFile:self.source];// 量贩团页面

@@ -12,33 +12,55 @@
 
 @implementation LVCustomPanel
 
-- (void) callLuaWithArgs {
+- (void) callLuaWithArgument:(NSString*) info {
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         int num = lv_gettop(L);
+        lv_pushstring(L, info.UTF8String);
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-        lv_runFunction(L);
+        lv_runFunctionWithArgs(L, 1, 0);
         lv_settop(L, num);
     }
 }
 
-static Class g_class = nil;
-+ (void) addPanelStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCustomPanel class]] ){
-        g_class = c;
+static int lvNewErrorView (lv_State *L) ;
+
+static NSMutableDictionary* g_classDic = nil;
+
++ (void) addCustomPanel:(Class) c boundName:(NSString*) boundName state:(lv_State*) L{
+    if (g_classDic == nil ) {
+        g_classDic = [[NSMutableDictionary alloc] init];
     }
+    if( [c isSubclassOfClass:[LVCustomPanel class]] ){
+        [g_classDic setObject:c forKey:boundName];
+    }
+    lv_checkstack(L, 16);
+    lv_pushstring(L, boundName.UTF8String);
+    lv_pushcclosure(L, lvNewErrorView, 1);
+    lv_setglobal(L, boundName.UTF8String);
 }
 
 static int lvNewErrorView (lv_State *L) {
-    if( g_class == nil ) {
-        g_class = [LVCustomPanel class];
+    Class tempClass = nil;
+    NSString* name = nil;
+    if( lv_type(L, lv_upvalueindex(1)) ==LV_TSTRING ) {
+        const char* s = lv_tostring(L, lv_upvalueindex(1) );
+        if( s ) {
+            name = [NSString stringWithFormat:@"%s",s];
+        }
+    }
+    if( name ) {
+        tempClass = g_classDic[name];
+    }
+    if( tempClass == nil ) {
+        tempClass = [LVCustomPanel class];
     }
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
         r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
     }
-    LVCustomPanel* errorNotice = [[g_class alloc] initWithFrame:r];
+    LVCustomPanel* errorNotice = [[tempClass alloc] initWithFrame:r];
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(errorNotice);
@@ -58,7 +80,7 @@ static int lvNewErrorView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewErrorView);
-        lv_setglobal(L, "Error");
+        lv_setglobal(L, "UIPanel");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}
