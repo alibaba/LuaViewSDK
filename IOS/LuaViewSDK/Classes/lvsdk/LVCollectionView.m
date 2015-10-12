@@ -155,10 +155,12 @@
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     UIEdgeInsets insets = [self callFunction4:"Section" key2:"EdgeInsets" section:section row:0];
+    //insets.top = self.flowLayout.minimumLineSpacing;
     return insets;
 }
 //定义每个UICollectionView 纵向的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    //    return self.flowLayout.minimumLineSpacing;
     CGFloat spacing = [self callReturnNumberKey1:"Section" key2:"Spacing" section:section];
     return spacing;
 }
@@ -217,8 +219,13 @@
         
         if(  [LVUtil call:l key1:functionName key2:key2 key3:key3 nargs:2 nrets:2] ==0 ) {
             CGSize size = {0};
-            size.width = lv_tonumber(l, -2);
-            size.height = lv_tonumber(l, -1);
+            if( lv_type(l, -1) ==LV_TNIL ) {
+                size.width = self.frame.size.width;
+                size.height = lv_tonumber(l, -2);
+            } else{
+                size.width = lv_tonumber(l, -2);
+                size.height = lv_tonumber(l, -1);
+            }
             return size;
         }
     }

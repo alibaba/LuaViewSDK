@@ -16,12 +16,12 @@ collectionView.delegate =
 		RowCount = ^(section){
 			return 4;
 		},
-		Spacing = ^(section ){
-			return 0;
-		},
-		EdgeInsets = ^(section ){
-			return 20,0,0,0;
-		}
+		-- Spacing = ^(section ){
+		-- 	return 0;
+		-- },
+		-- EdgeInsets = ^(section ){
+		-- 	return 20,0,0,0;
+		-- }
 
 	},
 	Cell = { 
@@ -109,6 +109,7 @@ collectionView.delegate =
 
 collectionView.setFrame(0,0,w,h-64);
 collectionView.setBackgroundColor(0xffFFFF);
+collectionView.miniSpacing(10);
 
 
 
