@@ -24,7 +24,7 @@
     }
 }
 
-static int lvNewErrorView (lv_State *L) ;
+static int lvNewCustomPanelView (lv_State *L) ;
 
 static NSMutableDictionary* g_classDic = nil;
 
@@ -37,11 +37,11 @@ static NSMutableDictionary* g_classDic = nil;
     }
     lv_checkstack(L, 16);
     lv_pushstring(L, boundName.UTF8String);
-    lv_pushcclosure(L, lvNewErrorView, 1);
+    lv_pushcclosure(L, lvNewCustomPanelView, 1);
     lv_setglobal(L, boundName.UTF8String);
 }
 
-static int lvNewErrorView (lv_State *L) {
+static int lvNewCustomPanelView (lv_State *L) {
     Class tempClass = nil;
     NSString* name = nil;
     if( lv_type(L, lv_upvalueindex(1)) ==LV_TSTRING ) {
@@ -79,7 +79,7 @@ static int lvNewErrorView (lv_State *L) {
 
 +(int) classDefine:(lv_State *)L {
     {
-        lv_pushcfunction(L, lvNewErrorView);
+        lv_pushcfunction(L, lvNewCustomPanelView);
         lv_setglobal(L, "UIPanel");
     }
     const struct lvL_reg memberFunctions [] = {
