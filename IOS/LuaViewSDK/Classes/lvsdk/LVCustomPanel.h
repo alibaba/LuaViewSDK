@@ -1,5 +1,5 @@
 //
-//  LVNotice.h
+//  LVCustomErrorView.h
 //  LVSDK
 //
 //  Created by dongxicheng on 7/20/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVCustomNotice : UIView<LVProtocal>
+@interface LVCustomPanel : UIView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;
@@ -19,10 +19,10 @@
 @property(nonatomic,assign) CGFloat lv_scaleX;
 @property(nonatomic,assign) CGFloat lv_scaleY;
 
--(id) init:(lv_State*) l notice:(NSString*) info;
-
 +(int) classDefine:(lv_State *)L ;
 
-+ (void) setDefaultStyle:(Class) c;
+- (void) callLuaWithArgs;
+
++ (void) addPanelStyle:(Class) c;
 
 @end

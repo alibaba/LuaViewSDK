@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomError.h"
+#import "LVCustomPanel.h"
 #import "LVBaseView.h"
 #import "LView.h"
 
-@implementation LVCustomError
+@implementation LVCustomPanel
 
-- (void) callLuaFuncToReloadData {
+- (void) callLuaWithArgs {
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         int num = lv_gettop(L);
@@ -24,21 +24,21 @@
 }
 
 static Class g_class = nil;
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCustomError class]] ){
++ (void) addPanelStyle:(Class) c{
+    if( [c isSubclassOfClass:[LVCustomPanel class]] ){
         g_class = c;
     }
 }
 
 static int lvNewErrorView (lv_State *L) {
     if( g_class == nil ) {
-        g_class = [LVCustomError class];
+        g_class = [LVCustomPanel class];
     }
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
         r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
     }
-    LVCustomError* errorNotice = [[g_class alloc] initWithFrame:r];
+    LVCustomPanel* errorNotice = [[g_class alloc] initWithFrame:r];
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(errorNotice);
@@ -58,7 +58,7 @@ static int lvNewErrorView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewErrorView);
-        lv_setglobal(L, "UICustomError");
+        lv_setglobal(L, "Error");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

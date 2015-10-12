@@ -270,18 +270,6 @@ static int footerResetNoMoreData (lv_State *L){
     return 0;
 }
 
-
-static int hiddenRefreshHeader (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        BOOL hidden = lv_toboolean(L, 2);
-        [scrollView lv_hiddenRefreshHeader:hidden];
-    }
-    return 0;
-}
-
-
 static int hiddenRefreshFooter (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){

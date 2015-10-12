@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomLoading.h"
+#import "LVCustomPanel.h"
 
-@interface JHSLVCustomLoading : LVCustomLoading
+@interface JHSLVCustomLoading : LVCustomPanel
 
 @end

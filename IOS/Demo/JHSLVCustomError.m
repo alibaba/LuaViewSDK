@@ -29,7 +29,7 @@
         [bg addSubview:button];
         
         [self addSubview:bg];
-        [button addTarget:self action:@selector(callLuaFuncToReloadData) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(callLuaWithArgs) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }

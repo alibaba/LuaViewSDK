@@ -47,8 +47,7 @@
 #import "LVCollectionView.h"
 #import "LVStruct.h"
 #import "LVNavigation.h"
-#import "LVCustomLoading.h"
-#import "LVCustomError.h"
+#import "LVCustomPanel.h"
 #import "LVPageView.h"
 
 //------------------------------------------------------------------------------------
@@ -357,8 +356,7 @@ static int debug_log (lv_State *L) {
     [LVPageView classDefine:L];
     [LVTimer       classDefine:L];
     [LVPagerIndicator classDefine:L];
-    [LVCustomLoading classDefine:L];
-    [LVCustomError classDefine:L];
+    [LVCustomPanel classDefine:L];
     [LVTransform3D classDefine:L];
     [LVTextField classDefine:L];
     [LVAnimate classDefine:L];

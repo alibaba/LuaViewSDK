@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVCustomError.h"
+#import "LVCustomPanel.h"
 
-@interface JHSLVCustomError : LVCustomError
+@interface JHSLVCustomError : LVCustomPanel
 
 @end
