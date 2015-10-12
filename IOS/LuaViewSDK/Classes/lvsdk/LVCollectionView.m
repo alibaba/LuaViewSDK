@@ -425,6 +425,23 @@ static int miniSpacing (lv_State *L) {
     return 0;
 }
 
+static int scrollDirection (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            int value1 = lv_tonumber(L, 2);
+            tableView.flowLayout.scrollDirection = value1;
+            return 0;
+        } else {
+            CGFloat value1 = tableView.flowLayout.scrollDirection;
+            lv_pushnumber(L, value1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int rectForSection (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataView) ){
@@ -461,6 +478,9 @@ static int rectForSection (lv_State *L) {
         
         {"setDelegate", delegate},
         {"delegate", delegate},
+        
+        
+        {"scrollDirection", scrollDirection},
         {NULL, NULL}
     };
     

@@ -26,7 +26,7 @@ collectionView.delegate =
 	},
 	Cell = { 
 		Id = function ( section, row ){
-			if( section%2==0 ) {
+			if( section%2==1 ) {
 				return "图片+文字";
 			} else {
 				return "图片+文字2";
@@ -110,6 +110,6 @@ collectionView.delegate =
 collectionView.setFrame(0,0,w,h-64);
 collectionView.setBackgroundColor(0xffFFFF);
 collectionView.miniSpacing(10);
-
+-- collectionView.scrollDirection(1);
 
 
