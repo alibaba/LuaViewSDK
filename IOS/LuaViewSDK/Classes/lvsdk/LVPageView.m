@@ -297,21 +297,19 @@ static int delegate (lv_State *L) {
 
 
 - (void) callLuaWithScrolling{
-    int offset = self.contentOffset.x + 1;
-    int pageIndex = offset/self.frame.size.width;
-    self.currentPageIndex = pageIndex;
+    float offsetX = self.contentOffset.x;
+    float pageWidth = self.frame.size.width;
+    float pageIndex = offsetX/pageWidth;
+    self.currentPageIndex = (int)pageIndex;
     
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
-        float x = self.contentOffset.x;
-        float w = self.frame.size.width;
-        float f =  x/w;
-        double ip = 0;
-        double fp = modf(f, &ip);
-        lv_pushnumber(l, pageIndex + 1 );
-        lv_pushnumber(l, fp);
-        lv_pushnumber(l, x - ip*w);
+        double intPart = 0;
+        double floatPart = modf( pageIndex, &intPart);
+        lv_pushnumber(l, (int)pageIndex + 1 );
+        lv_pushnumber(l, floatPart);
+        lv_pushnumber(l, offsetX - intPart*pageWidth);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
