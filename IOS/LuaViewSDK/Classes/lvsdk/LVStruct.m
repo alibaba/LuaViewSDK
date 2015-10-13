@@ -129,7 +129,6 @@ static int __index (lv_State *L) {
 static int __newindex (lv_State *L) {
     LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
     if( user ){
-//        NSString* key = lv_paramString(L, 2);
         if( lv_type(L, 2)==LV_TNUMBER ){
             return setValue(L);
         } else if( lv_type(L, 3)==LV_TSTRING ){
@@ -144,11 +143,11 @@ static int __newindex (lv_State *L) {
         lv_pushcfunction(L, lvNewStruct);
         lv_setglobal(L, "Struct");
         lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "CGRect");
+        lv_setglobal(L, "Rect");
         lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "CGSize");
+        lv_setglobal(L, "Size");
         lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "CGPoint");
+        lv_setglobal(L, "Point");
     }
     const struct lvL_reg memberFunctions [] = {
         {"__index", __index },
