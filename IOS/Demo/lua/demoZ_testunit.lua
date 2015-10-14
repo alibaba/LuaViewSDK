@@ -253,7 +253,7 @@ demoArray = {
 	end
 },
 ^(){
-	imageView.removeFromSuperView();
+	imageView.removeFromSuper();
 	imageView = nil;
 	System.gc();	
 },
@@ -299,7 +299,7 @@ demoArray = {
  	};
 },
 ^(){
-	scrollView.removeFromSuperView();
+	scrollView.removeFromSuper();
 	scrollView = nil;
 },
 
@@ -333,7 +333,7 @@ demoArray = {
 	print(textFiled.text());
 },
 ^(){
-	textFiled.removeFromSuperView();
+	textFiled.removeFromSuper();
 	textFiled = nil;
 },
 
@@ -433,7 +433,7 @@ demoArray = {
 	print( view.center() );
 },
 ^(){
-	title.removeFromSuperView();
+	title.removeFromSuper();
 },
 ^(){
 	view.addSubView(title);

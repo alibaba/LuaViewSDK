@@ -32,8 +32,8 @@ function fireCreater() {
 
 	fire.bg = UIImage();
 	fire.bg.setFrame(0,0,r*2,r*2);
-	fire.bg.addSubview(fire.imageView1);
-	fire.bg.addSubview(fire.imageView2);
+	fire.bg.addView(fire.imageView1);
+	fire.bg.addView(fire.imageView2);
 
 	function fire.initX0Y0()
 		self.bg.scale(1, 1);

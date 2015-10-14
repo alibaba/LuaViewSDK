@@ -37,7 +37,7 @@ function createLaZhu(x,y){
 			}
 		}
 	};
-	lazhu.lazhuBody.addSubview(lazhu.button);
+	lazhu.lazhuBody.addView(lazhu.button);
 
 	function lazhu.move( dx,dy )
 	 	bodyX0 = bodyX0 + dx;
@@ -60,8 +60,8 @@ function createLaZhu(x,y){
 
 		fire.bg = UIImage();
 		fire.bg.setFrame(0,0,r*2,r*2);
-		fire.bg.addSubview(fire.imageView1);
-		fire.bg.addSubview(fire.imageView2);
+		fire.bg.addView(fire.imageView1);
+		fire.bg.addView(fire.imageView2);
 
 		function fire.initX0Y0()
 			self.bg.scale( 1, 1);

@@ -1229,15 +1229,8 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"addGestureRecognizer",          addGestureRecognizer },
     {"removeGestureRecognizer",       removeGestureRecognizer },
     
-    {"addSubView",          addSubview },
-    {"addSubview",          addSubview },
     {"addView",          addSubview },
-    
-    {"removeFromSuperView", removeFromSuperview },
-    {"removeFromSuperview", removeFromSuperview },
     {"removeFromSuper", removeFromSuperview },
-    
-    {"removeAllSubviews", removeAllSubviews },
     {"removeAllViews", removeAllSubviews },
     
     {"transformRoteAndScale", transformRoteAndScale },
