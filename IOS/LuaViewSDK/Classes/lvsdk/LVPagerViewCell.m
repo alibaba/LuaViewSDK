@@ -6,14 +6,14 @@
 //  Copyright © 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVPageViewCell.h"
+#import "LVPagerViewCell.h"
 #import "LView.h"
 
-@interface LVPageViewCell ()
+@interface LVPagerViewCell ()
 @property (nonatomic,weak) LView* lv_lview;
 @end
 
-@implementation LVPageViewCell
+@implementation LVPagerViewCell
 
 
 

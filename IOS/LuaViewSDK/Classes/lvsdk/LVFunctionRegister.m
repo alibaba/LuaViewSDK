@@ -48,7 +48,7 @@
 #import "LVStruct.h"
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
-#import "LVPageView.h"
+#import "LVPagerView.h"
 
 //------------------------------------------------------------------------------------
 #pragma -mark base
@@ -353,7 +353,7 @@ static int debug_log (lv_State *L) {
     [LVScrollView classDefine:L];
     [LVTableView classDefine:L];
     [LVCollectionView classDefine:L];
-    [LVPageView classDefine:L];
+    [LVPagerView classDefine:L];
     [LVTimer       classDefine:L];
     [LVPagerIndicator classDefine:L];
     [LVCustomPanel classDefine:L];

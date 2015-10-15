@@ -6,11 +6,11 @@
 //  Copyright © 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVPageView.h"
+#import "LVPagerView.h"
 #import "LView.h"
 #import "LVBaseView.h"
 #import "LVScrollView.h"
-#import "LVPageViewCell.h"
+#import "LVPagerViewCell.h"
 
 
 #define IDENTIFIER "Id"
@@ -20,7 +20,7 @@
 
 #define DEFAULT_CELL_IDENTIFIER  @"LVCollectionCell.default.identifier"
 
-@interface LVPageView ()
+@interface LVPagerView ()
 @property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic,strong) NSMutableDictionary* identifierDic;
 @property (nonatomic,strong) NSMutableArray* cellArray;
@@ -30,7 +30,7 @@
 @end
 
 
-@implementation LVPageView
+@implementation LVPagerView
 
 -(id) init:(lv_State*) l {
     self = [super init];
@@ -57,7 +57,7 @@
         }
     } else if (num>self.cellArray.count ) {
         for( int i=((int)self.cellArray.count); i<num; i++ ) {
-            LVPageViewCell* view = [[LVPageViewCell alloc] init];
+            LVPagerViewCell* view = [[LVPagerViewCell alloc] init];
             [self.cellArray addObject:view];
         }
     }
@@ -117,15 +117,15 @@
 -(void) dealloc{
 }
 
-- (LVPageViewCell*) cellOfIndex:(int) index{
+- (LVPagerViewCell*) cellOfIndex:(int) index{
     if( index>=0 && index<self.cellArray.count ) {
         return self.cellArray[index];
     }
     return nil;
 }
 
-- (LVPageViewCell*) cellForItemAtIndex:(int)indexPath {
-    LVPageViewCell* cell = [self cellOfIndex:indexPath];
+- (LVPagerViewCell*) cellForItemAtIndex:(int)indexPath {
+    LVPagerViewCell* cell = [self cellOfIndex:indexPath];
     LView* lview = self.lv_lview;
     lv_State* l = lview.l;
     lview.conentView = cell;
@@ -183,7 +183,7 @@
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVPageView class]] ) {
+    if( [c isSubclassOfClass:[LVPagerView class]] ) {
         g_class = c;
     }
 }
@@ -191,13 +191,13 @@ static Class g_class = nil;
 #pragma -mark lvNewCollectionView
 static int lvNewPageView (lv_State *L) {
     if( g_class == nil ) {
-        g_class = [LVPageView class];
+        g_class = [LVPagerView class];
     }
     BOOL haveArgs = NO;
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
         haveArgs = YES;
     }
-    LVPageView* pageView = [[g_class alloc] init:L];
+    LVPagerView* pageView = [[g_class alloc] init:L];
     
     NEW_USERDATA(userData, LVUserDataView);
     userData->view = CFBridgingRetain(pageView);
@@ -228,7 +228,7 @@ static int lvNewPageView (lv_State *L) {
 static int reloadData (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageView* pageView = (__bridge LVPageView *)(user->view);
+        LVPagerView* pageView = (__bridge LVPagerView *)(user->view);
         [pageView reloadData];
         lv_pushvalue(L, 1);
         return 1;
@@ -257,7 +257,7 @@ static int showScrollBar(lv_State *L) {
 static int setCurrentPage(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
-        LVPageView* view = (__bridge LVPageView *)(user->view);
+        LVPagerView* view = (__bridge LVPagerView *)(user->view);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 int pageIndex = lv_tonumber(L, 2);
@@ -292,7 +292,7 @@ static int delegate (lv_State *L) {
         if ( lv_gettop(L)>=2 ) {
             lv_settop(L, 2);
             lv_udataRef(L, USERDATA_KEY_DELEGATE);
-            LVPageView* tableView = (__bridge LVPageView *)(user->view);
+            LVPagerView* tableView = (__bridge LVPagerView *)(user->view);
             [tableView createAllCell];
             return 1;
         } else {
@@ -306,7 +306,7 @@ static int delegate (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewPageView);
-        lv_setglobal(L, "UIPageView");
+        lv_setglobal(L, "UIPagerView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},

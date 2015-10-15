@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LView.h"
 
-@interface LVPageViewCell : UIView
+@interface LVPagerViewCell : UIView
 
 
 @property (nonatomic, assign) BOOL isInited;

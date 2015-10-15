@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVPageView : UIScrollView<LVProtocal,UIScrollViewDelegate>
+@interface LVPagerView : UIScrollView<LVProtocal,UIScrollViewDelegate>
 
 
 @property(nonatomic,weak) LView* lv_lview;

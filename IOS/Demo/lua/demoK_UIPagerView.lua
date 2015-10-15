@@ -3,7 +3,7 @@ require "lv_kit"
 
 local scrW, scrH= System.screenSize()
 
-pageView = UIPageView ();
+pageView = UIPagerView ();
 pageView.delegate = {
     PageCount = 12,
     Pages = {
