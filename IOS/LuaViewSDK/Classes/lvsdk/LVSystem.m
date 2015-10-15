@@ -132,8 +132,6 @@ static int __index (lv_State *L) {
         lv_pushnumber(L, LV_ALIGN_LEFT);
         lv_setfield(L, -2, "LEFT");
         
-        lv_pushnumber(L, LV_ALIGN_H_CENTER);
-        lv_setfield(L, -2, "H_CENTER");// 水平居中
         
         lv_pushnumber(L, LV_ALIGN_RIGHT);
         lv_setfield(L, -2, "RIGHT");
@@ -141,11 +139,16 @@ static int __index (lv_State *L) {
         lv_pushnumber(L, LV_ALIGN_TOP);
         lv_setfield(L, -2, "TOP");
         
-        lv_pushnumber(L, LV_ALIGN_V_CENTER);
-        lv_setfield(L, -2, "V_CENTER");
-        
         lv_pushnumber(L, LV_ALIGN_BOTTOM);
         lv_setfield(L, -2, "BOTTOM");
+        
+        lv_pushnumber(L, LV_ALIGN_H_CENTER);
+        lv_setfield(L, -2, "H_CENTER");// 水平居中
+        lv_pushnumber(L, LV_ALIGN_V_CENTER);// 垂直居中
+        lv_setfield(L, -2, "V_CENTER");
+        
+        lv_pushnumber(L, LV_ALIGN_H_CENTER | LV_ALIGN_V_CENTER);
+        lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
     return 0;
 }
