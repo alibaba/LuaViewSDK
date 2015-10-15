@@ -575,16 +575,6 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
     lv_setmetatable(L, -2);
 }
 
-+(BOOL) ios6{
-    static BOOL yes = NO;
-    static BOOL inited = NO;
-    if( !inited ) {
-        inited = YES;
-        yes = ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] != NSOrderedAscending);
-    }
-    return yes;
-}
-
 +(BOOL) ios7{
     static BOOL yes = NO;
     static BOOL inited = NO;

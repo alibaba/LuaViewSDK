@@ -50,7 +50,7 @@ static int lvNewLabel(lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setText (lv_State *L) {
+static int text (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ) {
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -81,7 +81,7 @@ static int setText (lv_State *L) {
     return 0;
 }
 
-static int setLineCound(lv_State *L) {
+static int lineCount(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -114,7 +114,7 @@ static int adjustsFontSizeToFitWidth(lv_State *L) {
     return 0;
 }
 
-static int setTextColor (lv_State *L) {
+static int textColor (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -148,7 +148,7 @@ static int setTextColor (lv_State *L) {
     return 0;
 }
 
-static int setFont (lv_State *L) {
+static int font (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -176,19 +176,33 @@ static int setFont (lv_State *L) {
     return 0;
 }
 
-static int setTextAlignment (lv_State *L) {
+static int textAlign (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
         if( lv_gettop(L)>=2 ) {
-            NSInteger color = lv_tonumber(L, 2);// 2
+            NSInteger align = lv_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
-                view.textAlignment = color;
+                if( align&LV_ALIGN_H_CENTER ) {
+                    align = NSTextAlignmentCenter;
+                } else if( align&LV_ALIGN_RIGHT ) {
+                    align = NSTextAlignmentRight;
+                } else {//默认是LEFT
+                    align = NSTextAlignmentLeft;
+                }
+                view.textAlignment = align;
                 return 0;
             }
         } else {
-            int textAlignment = view.textAlignment;
-            lv_pushnumber(L, textAlignment );
+            int align = view.textAlignment;
+            if( align==NSTextAlignmentCenter ) {
+                align = LV_ALIGN_H_CENTER;
+            } else if( align==NSTextAlignmentRight ) {
+                align = LV_ALIGN_RIGHT;
+            } else {//默认是LEFT
+                align = LV_ALIGN_LEFT;
+            }
+            lv_pushnumber(L, align );
             return 1;
         }
     }
@@ -200,31 +214,22 @@ static int setTextAlignment (lv_State *L) {
         lv_pushcfunction(L, lvNewLabel);
         lv_setglobal(L, "UILabel");
     }
-    {
-        lv_pushnumber(L, 0);
-        lv_setglobal(L, "TextAlignmentLeft");
-        lv_pushnumber(L, 1);
-        lv_setglobal(L, "TextAlignmentCenter");
-        lv_pushnumber(L, 2);
-        lv_setglobal(L, "TextAlignmentRight");
-    }
     const struct lvL_reg memberFunctions [] = {
-        {"setText", setText},
-        {"text",    setText},
+        {"setText", text},
+        {"text",    text},
         
-        {"setTextColor", setTextColor},
-        {"textColor",    setTextColor},
-        {"setColor", setTextColor},
-        {"color",    setTextColor},
+        {"setTextColor", textColor},
+        {"textColor",    textColor},
+        {"setColor", textColor},
+        {"color",    textColor},
         
-        {"setFont", setFont},
-        {"font",    setFont},
+        {"setFont", font},
+        {"font",    font},
         
-        {"setTextAlignment", setTextAlignment},
-        {"textAlignment",    setTextAlignment},
+        {"textAlign",    textAlign},
         
-        {"setLineCount", setLineCound},
-        {"lineCount",    setLineCound},
+        {"setLineCount", lineCount},
+        {"lineCount",    lineCount},
         
         {"adjustsFontSizeToFitWidth",  adjustsFontSizeToFitWidth},
         

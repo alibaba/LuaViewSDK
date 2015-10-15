@@ -80,7 +80,7 @@ static int lvNewCustomPanelView (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewCustomPanelView);
-        lv_setglobal(L, "UIPanel");
+        lv_setglobal(L, "UICustomPanel");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

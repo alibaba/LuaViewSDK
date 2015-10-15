@@ -127,7 +127,7 @@ static int enabled (lv_State *L) {
     return 0;
 }
 
-static int setImage (lv_State *L) {
+static int image (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         NSString* normalImage = lv_paramString(L, 2);// 2
@@ -267,8 +267,7 @@ static int showsTouchWhenHighlighted(lv_State *L) {
         lv_setglobal(L, "UIButton");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setImage",    setImage},
-        
+        {"setImage",    image},
         
         {"setFont",    font},
         {"font",    font},
