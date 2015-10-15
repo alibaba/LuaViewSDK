@@ -17,6 +17,14 @@
 #import "lVgc.h"
 #import "LVUtil.h"
 //--------------------------------------------------------------------------------
+#define LV_ALIGN_LEFT       (1)
+#define LV_ALIGN_H_CENTER   (2)
+#define LV_ALIGN_RIGHT      (4)
+
+#define LV_ALIGN_TOP        (8)
+#define LV_ALIGN_V_CENTER   (16)
+#define LV_ALIGN_BOTTOM     (32)
+
 
 
 #define USERDATA_KEY_DELEGATE 1
@@ -97,9 +105,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_Data             "LV.Data"
 #define META_TABLE_UIPageControl    "UI.PageControl"
 #define META_TABLE_UIActivityIndicatorView    "UI.UIActivityIndicator"
-#define META_TABLE_LoadingView      "UI.LoadingView"
-#define META_TABLE_ErrorView        "UI.ErrorView"
-#define META_TABLE_NoticeView       "UI.NoticeView"
+#define META_TABLE_UICustomPanel        "UI.CustomPanel"
 #define META_TABLE_UIImageView      "UI.ImageView"
 #define META_TABLE_UILabel          "UI.Label"
 #define META_TABLE_UITextField      "UI.TextField"
@@ -107,7 +113,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UITableViewCell  "UI.TableView.Cell"
 #define META_TABLE_UICollectionView      "UI.CollectionView"
 #define META_TABLE_UICollectionViewCell  "UI.CollectionView.Cell"
-#define META_TABLE_UIPageView       "UI.PageView"
+#define META_TABLE_UIPageView       "UI.PagerView"
 #define META_TABLE_UIAlertView      "UI.AlertView"
 #define META_TABLE_Transform3D      "UI.Transfrom3D"
 #define META_TABLE_Struct           "UI.Struct"
