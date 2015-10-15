@@ -17,10 +17,12 @@ function createLaZhu(x,y){
 	local bodyY0 = y;
 	local fireArr = {};
 
-	lazhu.lazhuBody = UIImage();
-	lazhu.lazhuBody.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
+    lazhu.lazhuBodyBG = UIView();
+    lazhu.lazhuBody = UIImage();
+    lazhu.lazhuBody.setFrame(0, 0, 64, 104);
+    lazhu.lazhuBodyBG.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
 	lazhu.lazhuBody.setImage("lazhu.png");
-	lazhu.lazhuBody.enabled(true);
+    lazhu.lazhuBodyBG.addView(lazhu.lazhuBody);
 
 	lazhu.onOff = true;
 	lazhu.button = UIButton();
@@ -37,12 +39,12 @@ function createLaZhu(x,y){
 			}
 		}
 	};
-	lazhu.lazhuBody.addView(lazhu.button);
+	lazhu.lazhuBodyBG.addView(lazhu.button);
 
 	function lazhu.move( dx,dy )
 	 	bodyX0 = bodyX0 + dx;
 	 	bodyY0 = bodyY0 + dy;
-		self.lazhuBody.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
+		self.lazhuBodyBG.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
 	 end 
 
 
@@ -58,7 +60,7 @@ function createLaZhu(x,y){
 		fire.imageView1.setFrame(0,0,r*2,r*2);
 		fire.imageView2.setFrame(0,0,r*2,r*2);
 
-		fire.bg = UIImage();
+		fire.bg = UIView();
 		fire.bg.setFrame(0,0,r*2,r*2);
 		fire.bg.addView(fire.imageView1);
 		fire.bg.addView(fire.imageView2);

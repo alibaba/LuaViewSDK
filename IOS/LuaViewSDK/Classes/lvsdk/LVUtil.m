@@ -673,6 +673,20 @@ void lv_tableSetWeakWindow(lv_State* L, id cell){
     lv_settable(L, -3);
 }
 
+void lv_tableRemoveKeys(lv_State* L, const char** keys){
+    if ( lv_type(L, -1)== LV_TTABLE ) {
+        for ( int i=0; ;i++ ){
+            const char* key = keys[i];
+            if( key ) {
+                lv_pushnil(L);
+                lv_setfield(L, -2, key);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
 void LVLog( NSString* format, ... ){
     va_list params; //定义一个指向个数可变的参数列表指针;
     va_start(params,format);//va_start 得到第一个可变参数地址,

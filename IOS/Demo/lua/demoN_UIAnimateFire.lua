@@ -30,7 +30,7 @@ function fireCreater() {
 	fire.imageView1.setFrame(0,0,r*2,r*2);
 	fire.imageView2.setFrame(0,0,r*2,r*2);
 
-	fire.bg = UIImage();
+	fire.bg = UIView();
 	fire.bg.setFrame(0,0,r*2,r*2);
 	fire.bg.addView(fire.imageView1);
 	fire.bg.addView(fire.imageView2);

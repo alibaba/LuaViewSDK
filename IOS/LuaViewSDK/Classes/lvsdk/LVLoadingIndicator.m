@@ -132,6 +132,9 @@ static int color(lv_State *L) {
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
+    
+    const char* keys[] = { "addView", NULL};// 移除多余API
+    lv_tableRemoveKeys(L, keys );
     return 1;
 }
 

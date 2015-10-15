@@ -188,6 +188,8 @@ NSArray* lv_luaTableKeys(lv_State* L, int index);
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
+void lv_tableRemoveKeys(lv_State* L, const char** keys);
+
 @end
 
 
