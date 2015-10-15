@@ -234,7 +234,7 @@ static int initRefreshHeader (lv_State *L) {
     return 0;
 }
 
-static int headerBeginRefreshing (lv_State *L){
+static int startHeaderRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
@@ -243,11 +243,22 @@ static int headerBeginRefreshing (lv_State *L){
     return 0;
 }
 
-static int headerEndRefreshing (lv_State *L){
+static int stopHeaderRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
         [scrollView lv_endRefreshing];
+    }
+    return 0;
+}
+
+static int isHeaderRefreshing (lv_State *L){
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+        BOOL yes = [scrollView lv_isRefreshing];
+        lv_pushboolean(L, yes);
+        return 1;
     }
     return 0;
 }
@@ -361,8 +372,9 @@ static const struct lvL_reg memberFunctions [] = {
     
     
     {"initRefreshing", initRefreshHeader},
-    {"startRefreshing", headerBeginRefreshing},
-    {"stopRefreshing", headerEndRefreshing},
+    {"startRefreshing", startHeaderRefreshing},
+    {"stopRefreshing", stopHeaderRefreshing},
+    {"isRefreshing", isHeaderRefreshing},
     
     {NULL, NULL}
 };
