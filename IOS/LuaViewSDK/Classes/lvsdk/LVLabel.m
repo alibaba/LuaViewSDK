@@ -55,7 +55,13 @@ static int text (lv_State *L) {
     if( user ) {
         LVLabel* view = (__bridge LVLabel *)(user->view);
         if( lv_gettop(L)>=2 ) {
-            if( lv_type(L, 2)==LV_TSTRING ){
+            if( lv_type(L, 2)==LV_TNUMBER ){
+                CGFloat text = lv_tonumber(L, 2);// 2
+                if( [view isKindOfClass:[LVLabel class]] ){
+                    view.text = [NSString stringWithFormat:@"%f",text];
+                    return 0;
+                }
+            } else if( lv_type(L, 2)==LV_TSTRING ){
                 NSString* text = lv_paramString(L, 2);// 2
                 if( [view isKindOfClass:[LVLabel class]] ){
                     view.text = text;
