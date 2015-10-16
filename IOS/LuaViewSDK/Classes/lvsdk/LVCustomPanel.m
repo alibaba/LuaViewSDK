@@ -44,11 +44,15 @@ static NSMutableDictionary* g_classDic = nil;
 static int lvNewCustomPanelView (lv_State *L) {
     Class tempClass = nil;
     NSString* name = nil;
+    
     if( lv_type(L, lv_upvalueindex(1)) ==LV_TSTRING ) {
         const char* s = lv_tostring(L, lv_upvalueindex(1) );
         if( s ) {
             name = [NSString stringWithFormat:@"%s",s];
         }
+    } else if( lv_type(L, 1)==LV_TSTRING ){
+        name = lv_paramString(L, 1);
+        lv_remove(L, 1);
     }
     if( name ) {
         tempClass = g_classDic[name];
