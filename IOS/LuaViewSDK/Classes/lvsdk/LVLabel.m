@@ -54,34 +54,30 @@ static int text (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ) {
         LVLabel* view = (__bridge LVLabel *)(user->view);
-        if( lv_gettop(L)>=2 ) {
-            if( lv_type(L, 2)==LV_TNUMBER ){
-                CGFloat text = lv_tonumber(L, 2);// 2
-                if( [view isKindOfClass:[LVLabel class]] ){
+        if ( [view isKindOfClass:[LVLabel class]] ) {
+            if( lv_gettop(L)>=2 ) {
+                if( lv_type(L, 2)==LV_TNUMBER ){
+                    CGFloat text = lv_tonumber(L, 2);// 2
                     view.text = [NSString stringWithFormat:@"%f",text];
                     return 0;
-                }
-            } else if( lv_type(L, 2)==LV_TSTRING ){
-                NSString* text = lv_paramString(L, 2);// 2
-                if( [view isKindOfClass:[LVLabel class]] ){
+                } else if( lv_type(L, 2)==LV_TSTRING ){
+                    NSString* text = lv_paramString(L, 2);// 2
                     view.text = text;
                     return 0;
-                }
-            } else if( lv_type(L, 2)==LV_TUSERDATA ){
-                LVUserDataAttributedString * user2 = lv_touserdata(L, 2);// 2
-                if( user2 && LVIsType(user2, LVUserDataAttributedString) ) {
-                    LVLabel* view = (__bridge LVLabel *)(user->view);
-                    LVAttributedString* attString = (__bridge LVAttributedString *)(user2->attributedString);
-                    if( [view isKindOfClass:[LVLabel class]] ){
+                } else if( lv_type(L, 2)==LV_TUSERDATA ){
+                    LVUserDataAttributedString * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, LVUserDataAttributedString) ) {
+                        LVLabel* view = (__bridge LVLabel *)(user->view);
+                        LVAttributedString* attString = (__bridge LVAttributedString *)(user2->attributedString);
                         [view setAttributedText:attString.mutableAttributedString];
                         return 0;
                     }
                 }
+            } else {
+                NSString* text = view.text;
+                lv_pushstring(L, text.UTF8String);
+                return 1;
             }
-        } else {
-            NSString* text = view.text;
-            lv_pushstring(L, text.UTF8String);
-            return 1;
         }
     }
     return 0;
