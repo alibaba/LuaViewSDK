@@ -27,8 +27,6 @@
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.clipsToBounds = YES;
-        
-        [self lv_initRefreshHeader];
     }
     return self;
 }
@@ -208,7 +206,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Delegate" nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Click" nargs:2 nrets:0];
         }
     }
 }
@@ -370,11 +368,14 @@ static Class g_class = nil;
     }
 }
 
-static int lvNewTableView (lv_State *L) {
+static int createTableView (lv_State *L , BOOL haveRefreshHead) {
     if( g_class == nil ){
         g_class = [LVTableView class];
     }
     LVTableView* tableView = [[g_class alloc] init:L];
+    if( haveRefreshHead ) {
+        [tableView lv_initRefreshHeader];
+    }
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(tableView);
@@ -395,6 +396,15 @@ static int lvNewTableView (lv_State *L) {
     }
     return 1;
 }
+
+static int lvCreateTableViewNoRefresh (lv_State *L) {
+    return createTableView(L, NO);
+}
+
+static int lvCreateTableViewHaveRefresh (lv_State *L) {
+    return createTableView(L, YES);
+}
+
 
 static int reloadData (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -501,8 +511,12 @@ static int delegate (lv_State *L) {
 
 +(int) classDefine: (lv_State *)L {
     {
-        lv_pushcfunction(L, lvNewTableView);
+        lv_pushcfunction(L, lvCreateTableViewNoRefresh );
         lv_setglobal(L, "TableView");
+    }
+    {
+        lv_pushcfunction(L, lvCreateTableViewHaveRefresh );
+        lv_setglobal(L, "RefreshTableView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},
