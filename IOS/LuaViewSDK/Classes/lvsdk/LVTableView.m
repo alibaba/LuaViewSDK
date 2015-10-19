@@ -542,7 +542,7 @@ static int delegate (lv_State *L) {
 }
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UITableView(0x%x) frame = %@; contentSize = %@>", (int)[self hash], NSStringFromCGRect(self.frame), NSStringFromCGSize(self.contentSize) ];
+    return [NSString stringWithFormat:@"<TableView(0x%x) frame = %@; contentSize = %@>", (int)[self hash], NSStringFromCGRect(self.frame), NSStringFromCGSize(self.contentSize) ];
 }
 
 @end

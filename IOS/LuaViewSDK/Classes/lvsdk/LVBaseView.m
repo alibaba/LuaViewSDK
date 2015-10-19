@@ -1092,6 +1092,21 @@ static int delegate (lv_State *L) {
     return 0;
 }
 
+static int click (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 ) {
+            lv_settop(L, 2);
+            lv_udataRef(L, USERDATA_KEY_CLICK);
+            return 1;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_CLICK);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 #pragma -mark __gc
 static int __gc (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -1127,23 +1142,23 @@ static int releaseObject(lv_State *L) {
     return 0;
 }
 //---------------------------
-static int __newindex (lv_State *L) {
-    NSString* key = lv_paramString(L, 2);
-    if( key ){
-        lv_getmetatable( L, 1 );
-        lv_getfield(L, -1, key.UTF8String);
-        if( lv_type(L, -1)==LV_TFUNCTION ) {
-            lv_CFunction function =  lv_tocfunction(L,-1);
-            if( function ) {
-                lv_remove(L, 2);
-                lv_settop(L, 2);
-                return function(L);
-            }
-        }
-    }
-    LVError(@"not found property: %@", key);
-    return 0;
-}
+//static int __newindex (lv_State *L) {
+//    NSString* key = lv_paramString(L, 2);
+//    if( key ){
+//        lv_getmetatable( L, 1 );
+//        lv_getfield(L, -1, key.UTF8String);
+//        if( lv_type(L, -1)==LV_TFUNCTION ) {
+//            lv_CFunction function =  lv_tocfunction(L,-1);
+//            if( function ) {
+//                lv_remove(L, 2);
+//                lv_settop(L, 2);
+//                return function(L);
+//            }
+//        }
+//    }
+//    LVError(@"not found property: %@", key);
+//    return 0;
+//}
 
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
@@ -1212,7 +1227,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"anchorPoint",     anchorPoint },
     
     {"delegate",     delegate },
-    {"callback",     delegate },
+    {"click",     click },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
@@ -1226,7 +1241,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"__tostring",  __tostring},
     
-    {"__newindex",  __newindex },
+//    {"__newindex",  __newindex },
     
     {"flxChildNodes",  flxChildNodes },
     {"flxLayout",  flxLayout },
@@ -1272,7 +1287,7 @@ static int lvNewView (lv_State *L) {
 //----------------------------------------------------------------------------------------
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UIView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<View(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 
 @end

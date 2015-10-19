@@ -8,7 +8,7 @@ imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXX
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
 tableView = RefreshTableView();
-tableView.delegate = {
+tableView.delegate {
 	Section = {
 		SectionCount = 2,
 

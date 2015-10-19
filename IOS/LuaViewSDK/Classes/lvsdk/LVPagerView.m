@@ -388,6 +388,6 @@ static int delegate (lv_State *L) {
 }
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UIPageView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<PagerView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 @end

@@ -219,11 +219,6 @@ extern char g_debug_lua[];
 
 #pragma mark - setFrame
 
--(void) setContentSize:(CGSize)contentSize{
-    [super setContentSize:contentSize];
-    [self.callback luaviewContentSizeDidChange:self];
-}
-
 -(void) releaseLuaView{
     self.hidden = YES;
     [self removeFromSuperview];
@@ -607,8 +602,7 @@ static NSArray* g_boundlePaths = nil;
 }
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UIView(0x%x) frame = %@; contentSize = %@>",
-            (int)[self hash], NSStringFromCGRect(self.frame) , NSStringFromCGSize(self.contentSize)];
+    return [NSString stringWithFormat:@"<View(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 
 -(void) containerAddSubview:(UIView *)view{

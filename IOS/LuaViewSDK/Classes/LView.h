@@ -18,12 +18,11 @@
 #pragma mark - LuaView窗口大小变动回调
 @protocol LVCallback <NSObject>
 - (void) luaviewFrameDidChange:(LView *)lView;
-- (void) luaviewContentSizeDidChange:(LView *)lView;
 @end
 
 
 #pragma mark -LuaView 类
-@interface LView : UIScrollView
+@interface LView : UIView
 
 @property(nonatomic,weak) id<LVCallback> callback; //用于LuaView回调( luaView大小改变 等回调)
 

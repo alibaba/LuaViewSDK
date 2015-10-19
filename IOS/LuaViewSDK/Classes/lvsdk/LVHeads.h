@@ -43,8 +43,9 @@
 //------------------------------
 
 
-#define USERDATA_KEY_DELEGATE 1
-#define USERDATA_FLEX_DELEGATE 2
+#define USERDATA_KEY_DELEGATE   1
+#define USERDATA_KEY_CLICK      2
+#define USERDATA_FLEX_DELEGATE  8
 
 //---------------用户数据包含的公用头信息---------------------------------------------
 #define LVUserDataCommonHead  const char* type;

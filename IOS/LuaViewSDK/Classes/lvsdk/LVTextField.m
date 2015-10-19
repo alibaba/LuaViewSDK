@@ -163,7 +163,7 @@ static int placeholder (lv_State *L) {
 }
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UITextField(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<TextField(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 
 @end

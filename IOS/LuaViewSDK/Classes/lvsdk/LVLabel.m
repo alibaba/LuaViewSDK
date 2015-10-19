@@ -243,7 +243,7 @@ static int textAlignment (lv_State *L) {
 
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UILabel(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<Label(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 
 @end

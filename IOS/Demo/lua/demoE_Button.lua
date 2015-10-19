@@ -4,12 +4,12 @@ function createButton( text , x,y,w,h, callback) {
 	button.frame(x,y,w,h);
 	button.text(text);
 	button.backgroundColor(0xeeeeee);
-	button.delegate = ^(){
+	button.click( function()
 		print("ok",button);
-		if( callback ) {
+		if( callback ) then
 			callback();
-		}
-	};
+		end
+	end);
 	return button;
 }
 
@@ -22,10 +22,10 @@ button2.frame(10,100+80,100,100);
 button2.image("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png","http://g.alicdn.com/ju/lua/2.0.25/doc/icon2.png");
 
 
-button2.delegate = ^(){
+button2.click(function()
 	print("我是图片按钮");
     button2.sizeToFit();
-}
+end);
 
 
 	-- print("clear");

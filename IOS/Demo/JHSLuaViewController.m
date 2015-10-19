@@ -114,7 +114,6 @@
         rect.origin.y = 64;
     }
     self.lv.frame = rect;
-    self.lv.contentOffset = CGPointZero;
 }
 
 -(void) viewDidAppear:(BOOL)animated{

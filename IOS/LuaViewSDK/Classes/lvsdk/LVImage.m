@@ -549,7 +549,7 @@ static int isAnimating (lv_State *L) {
 }
 
 -(NSString*) description{
-    return [NSString stringWithFormat:@"<UIImageView(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
+    return [NSString stringWithFormat:@"<Image(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
 
 @end
