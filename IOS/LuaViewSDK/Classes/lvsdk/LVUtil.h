@@ -177,8 +177,6 @@ int lv_uicolor2int(UIColor* color,NSUInteger* c ,float* a);
 
 UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 
-
-+(BOOL) ios6;
 +(BOOL) ios7;
 +(BOOL) ios8;
 
