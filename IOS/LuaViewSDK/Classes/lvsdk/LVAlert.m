@@ -64,7 +64,7 @@ static int lvNewAlertView (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewAlertView);
-        lv_setglobal(L, "UIAlert");
+        lv_setglobal(L, "Alert");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

@@ -75,7 +75,7 @@ static int setTouchCount (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "UILongPressGestureRecognizer");
+        lv_setglobal(L, "LongPressGestureRecognizer");
     }
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
@@ -85,7 +85,6 @@ static int setTouchCount (lv_State *L) {
     {
         const struct lvL_reg memberFunctions [] = {
             {"touchCount",     setTouchCount},
-            {"setTouchCount",  setTouchCount},
             {NULL, NULL}
         };
         lvL_openlib(L, NULL, memberFunctions, 0);

@@ -1,5 +1,5 @@
 
-window.setBackgroundColor(0xeeddee);
+window.backgroundColor(0xeeddee);
 
 local scrW, scrH = System.screenSize()
 
@@ -7,31 +7,31 @@ local scrW, scrH = System.screenSize()
 
 totalPageNum = 1;
 
-pagerIndicator = UIPagerIndicator();
-pagerIndicator.setPageCount(totalPageNum);
+pagerIndicator = PagerIndicator();
+pagerIndicator.pageCount(totalPageNum);
 
 btnH = scrH/10;
 
-btn1 = UIButton()
-btn1.setText("totalPageNum")
-btn1.setFrame(0, btnH*1.0, scrW, btnH)
-btn1.setBackgroundColor(0xCCCCCC);
-btn1.setCallback(function()
+btn1 = Button()
+btn1.text("totalPageNum")
+btn1.frame(0, btnH*1.0, scrW, btnH)
+btn1.backgroundColor(0xCCCCCC);
+btn1.callback(function()
     totalPageNum = totalPageNum + 1;
-    pagerIndicator.setPageCount(totalPageNum)
+    pagerIndicator.pageCount(totalPageNum)
 end)
 
 
 index = 0;
-btn3 = UIButton()
-btn3.setBackgroundColor(0xCCCCCC);
-btn3.setText("Change Page")
-btn3.setFrame(0, btnH*4.0, scrW, btnH)
-btn3.setCallback(function()
+btn3 = Button()
+btn3.backgroundColor(0xCCCCCC);
+btn3.text("Change Page")
+btn3.frame(0, btnH*4.0, scrW, btnH)
+btn3.callback(function()
        index = index+1;
-       pagerIndicator.setCurrentPage(index %totalPageNum + 1);
+       pagerIndicator.currentPage(index %totalPageNum + 1);
 end)
 
 
 
-pagerIndicator.setCenter(scrW/2, btnH*6);
+pagerIndicator.center(scrW/2, btnH*6);

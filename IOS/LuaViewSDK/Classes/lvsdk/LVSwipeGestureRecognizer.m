@@ -55,77 +55,71 @@ static int lvNewGestureRecognizer (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int numberOfTouchesRequired (lv_State *L) {
+static int touchCount (lv_State *L) {
     LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataGesture) ){
         LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
-        float num = gesture.numberOfTouchesRequired;
-        lv_pushnumber(L, num);
-        return 1;
+        if( lv_gettop(L)>=2 ) {
+            float num = lv_tonumber(L, 2);
+            gesture.numberOfTouchesRequired = num;
+            return 0;
+        } else {
+            float num = gesture.numberOfTouchesRequired;
+            lv_pushnumber(L, num);
+            return 1;
+        }
     }
     return 0;
 }
 
-static int setTouchCount (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataGesture) && lv_gettop(L)>=2 ){
-        float num = lv_tonumber(L, 2);
-        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
-        gesture.numberOfTouchesRequired = num;
-        lv_pushvalue(L, 1);
-        return 1;
-    }
-    return 0;
-}
 static int direction (lv_State *L) {
     LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataGesture) ){
         LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
-        float direction = gesture.direction;
-        lv_pushnumber(L, direction);
-        return 1;
-    }
-    return 0;
-}
-
-static int setDirection (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataGesture) && lv_gettop(L)>=2 ){
-        float num = lv_tonumber(L, 2);
-        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
-        gesture.direction = num;
-        lv_pushvalue(L, 1);
-        return 1;
+        if ( lv_gettop(L)>=2 ) {
+            float num = lv_tonumber(L, 2);
+            gesture.direction = num;
+            return 0;
+        } else {
+            float direction = gesture.direction;
+            lv_pushnumber(L, direction);
+            return 1;
+        }
     }
     return 0;
 }
 
 +(int) classDefine:(lv_State *)L {
     {
-        lv_pushnumber(L, 1);
-        lv_setglobal(L, "UISwipeGestureRecognizerDirectionRight");
-        lv_pushnumber(L, 2);
-        lv_setglobal(L, "UISwipeGestureRecognizerDirectionLeft");
-        lv_pushnumber(L, 3);
-        lv_setglobal(L, "UISwipeGestureRecognizerDirectionUp");
-        lv_pushnumber(L, 4);
-        lv_setglobal(L, "UISwipeGestureRecognizerDirectionDown");
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "SwipeGestureDirection", lib);
+        
+        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionRight);
+        lv_setfield(L, -2, "RIGHT");
+        
+        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionLeft);
+        lv_setfield(L, -2, "LEFT");
+        
+        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionUp);
+        lv_setfield(L, -2, "UP");
+        
+        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionDown);
+        lv_setfield(L, -2, "DOWN");
     }
+    
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "UISwipeGestureRecognizer");
+        lv_setglobal(L, "SwipeGestureRecognizer");
     }
-    
     lv_createClassMetaTable(L ,META_TABLE_SwipeGesture);
-    
     lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
-    
     {
         const struct lvL_reg memberFunctions [] = {
-            {"touchCount", numberOfTouchesRequired},
-            {"setTouchCount", setTouchCount},
+            {"touchCount", touchCount},
             {"direction", direction},
-            {"setDirection", setDirection},
             {NULL, NULL}
         };
         lvL_openlib(L, NULL, memberFunctions, 0);

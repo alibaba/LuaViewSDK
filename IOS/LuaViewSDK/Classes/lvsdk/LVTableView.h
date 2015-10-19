@@ -12,7 +12,6 @@
 
 @interface LVTableView : UITableView<LVProtocal,UITableViewDataSource, UITableViewDelegate>
 
-
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;
 @property(nonatomic,assign) CGFloat lv_rotation;

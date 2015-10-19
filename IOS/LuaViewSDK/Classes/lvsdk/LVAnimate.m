@@ -93,7 +93,7 @@ static int lvNewAnimate (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewAnimate);
-        lv_setglobal(L, "UIAnimate");
+        lv_setglobal(L, "Animate");
     }
     return 1;
 }

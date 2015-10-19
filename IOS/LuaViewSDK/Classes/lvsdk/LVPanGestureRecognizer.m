@@ -58,7 +58,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "UIPanGestureRecognizer");
+        lv_setglobal(L, "PanGestureRecognizer");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

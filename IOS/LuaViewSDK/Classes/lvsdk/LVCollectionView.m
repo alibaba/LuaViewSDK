@@ -467,18 +467,15 @@ static int rectForSection (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewCollectionView);
-        lv_setglobal(L, "UICollectionView");
+        lv_setglobal(L, "CollectionView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},
         {"rectForSection", rectForSection},
         
         {"miniSpacing", miniSpacing},
-        {"setMiniSpacing", miniSpacing},
         
-        {"setDelegate", delegate},
         {"delegate", delegate},
-        
         
         {"scrollDirection", scrollDirection},
         {NULL, NULL}

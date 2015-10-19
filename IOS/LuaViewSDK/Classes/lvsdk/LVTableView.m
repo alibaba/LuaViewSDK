@@ -27,6 +27,8 @@
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.clipsToBounds = YES;
+        
+        [self lv_initRefreshHeader];
     }
     return self;
 }
@@ -500,17 +502,16 @@ static int delegate (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewTableView);
-        lv_setglobal(L, "UITableView");
+        lv_setglobal(L, "TableView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},
         
-        {"setHeader", setTableHeaderView},
-        {"setFooter", setTableFooterView},
+        {"header", setTableHeaderView},
+        {"footer", setTableFooterView},
         
         {"rectForSection", rectForSection},
         
-        {"setDelegate", delegate},
         {"delegate", delegate},
         {NULL, NULL}
     };

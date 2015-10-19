@@ -264,30 +264,20 @@ static int showsTouchWhenHighlighted(lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewButton);
-        lv_setglobal(L, "UIButton");
+        lv_setglobal(L, "Button");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setImage",    image},
+        {"image",    image},
         
-        {"setFont",    font},
         {"font",    font},
         
-        {"setTitleColor",    titleColor},
         {"titleColor",    titleColor},
-        
-        {"setTitle",    title},
         {"title",    title},
-        
-        {"setText",    title},
         {"text",    title},
 
-        {"setSelected", selected},
         {"selected",    selected},
-
-        {"setEnabled", enabled},
         {"enabled",    enabled},
         
-        {"setShowsTouchWhenHighlighted", showsTouchWhenHighlighted},
         {"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
         {NULL, NULL}
     };

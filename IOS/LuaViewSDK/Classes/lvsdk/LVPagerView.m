@@ -306,19 +306,15 @@ static int delegate (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewPageView);
-        lv_setglobal(L, "UIPagerView");
+        lv_setglobal(L, "PagerView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},
-        {"setShowScrollBar",  showScrollBar },
         {"showScrollBar",     showScrollBar },
         
         {"delegate",     delegate },
-        {"setDelegate",     delegate },
         
-        {"setCurrentPage",     setCurrentPage },
         {"currentPage",     setCurrentPage },
-
         {NULL, NULL}
     };
     

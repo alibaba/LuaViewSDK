@@ -880,31 +880,31 @@ static int sizeToFit(lv_State *L) {
 }
 
 #pragma -mark transformRoteAndScale
-static int transformRoteAndScale (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    double angle = lv_tonumber(L, 2);
-    double scaleX = 1;
-    double scaleY = 1;
-    if( user ){
-        if( lv_isnumber(L, 3) ){
-            scaleX = lv_tonumber(L, 3);
-        } else {
-            scaleX = 1;
-        }
-        if( lv_isnumber(L, 4) ){
-            scaleY = lv_tonumber(L, 4);
-        } else {
-            scaleY = 1;
-        }
-        UIView* view = (__bridge UIView *)(user->view);
-        CGAffineTransform tran1 = CGAffineTransformMakeScale(scaleX, scaleY);
-        CGAffineTransform tran2 = CGAffineTransformMakeRotation(angle);
-        view.transform = CGAffineTransformConcat(tran1, tran2);
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
+//static int transformRoteAndScale (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    double angle = lv_tonumber(L, 2);
+//    double scaleX = 1;
+//    double scaleY = 1;
+//    if( user ){
+//        if( lv_isnumber(L, 3) ){
+//            scaleX = lv_tonumber(L, 3);
+//        } else {
+//            scaleX = 1;
+//        }
+//        if( lv_isnumber(L, 4) ){
+//            scaleY = lv_tonumber(L, 4);
+//        } else {
+//            scaleY = 1;
+//        }
+//        UIView* view = (__bridge UIView *)(user->view);
+//        CGAffineTransform tran1 = CGAffineTransformMakeScale(scaleX, scaleY);
+//        CGAffineTransform tran2 = CGAffineTransformMakeRotation(angle);
+//        view.transform = CGAffineTransformConcat(tran1, tran2);
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
 
 static int rotation (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -1146,83 +1146,51 @@ static int __newindex (lv_State *L) {
 }
 
 static const struct lvL_reg baseMemberFunctions [] = {
-    {"setHidden", hidden },
     {"hidden",    hidden },
     
-    {"setEnabled", userInteractionEnabled },
     {"enabled",    userInteractionEnabled },
     
-    {"setBackgroundColor",  backgroundColor },
     {"backgroundColor",     backgroundColor },
     
-    {"setAlpha",    alpha },
     {"alpha",       alpha },
     
-    {"setCornerRadius",     cornerRadius },
     {"cornerRadius",        cornerRadius },
     
-    {"setBorderWidth",      borderWidth },
     {"borderWidth",         borderWidth },
     
-    {"setBorderColor",      borderColor },
     {"borderColor",         borderColor },
     
-    {"setClipsToBounds",    clipsToBounds },
     {"clipsToBounds",       clipsToBounds },
     
     
-    {"setShadowPath",       setShadowPath },
-    {"setMasksToBounds",    setMasksToBounds },
-    {"setShadowOffset",     setShadowOffset },
-    {"setShadowRadius",     setShadowRadius },
-    {"setShadowOpacity",    setShadowOpacity },
-    {"setShadowColor",      setShadowColor },
+    {"shadowPath",       setShadowPath },
+    {"masksToBounds",    setMasksToBounds },
+    {"shadowOffset",     setShadowOffset },
+    {"shadowRadius",     setShadowRadius },
+    {"shadowOpacity",    setShadowOpacity },
+    {"shadowColor",      setShadowColor },
     
-    {"setFrame",  frame },
     {"frame",     frame },
     
-    {"setSize",  size },
     {"size",     size },
     
-    {"setOrigin",  origin },
     {"origin",     origin },
-    
-    {"setXY",  origin },
     {"xy",     origin },
     
-    
-    {"setCenter", center},
     {"center",    center},
-    
     {"centerX",    centerX},
-    {"setCenterX",    centerX},
     {"centerY",    centerY},
-    {"setCenterY",    centerY},
     
     {"x",    x},
-    {"setX", x},
-    
     {"y",    y},
-    {"setY", y},
-    
     
     {"left", x},
-    {"setLeft", x},
-    
     {"top",     y},
-    {"setTop",  y},
-    
     {"bottom", bottom},
-    {"setBottom", bottom},
-    
     {"right",  right},
-    {"setRight",  right},
     
     {"width",    width},
-    {"setWidth", width},
-    
     {"height",    height},
-    {"setHeight", height},
     
     {"sizeToFit", sizeToFit},
     
@@ -1233,39 +1201,23 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"removeFromSuper", removeFromSuperview },
     {"removeAllViews", removeAllSubviews },
     
-    {"transformRoteAndScale", transformRoteAndScale },
-    {"roteAndScale", transformRoteAndScale },
-    
     {"rotation", rotation },
     {"rotationX", rotationX },
     {"rotationY", rotationY },
     
-    {"setRotation", rotation },
-    {"setRotationX", rotationX },
-    {"setRotationY", rotationY },
-    
+    {"scale", scale },
     {"scaleX", scaleX },
     {"scaleY", scaleY },
-    {"setScaleX", scaleX },
-    {"setScaleY", scaleY },
     
-    {"scale", scale },
-    {"setScale", scale },
-    
-    {"setAnchorPoint",  anchorPoint },
     {"anchorPoint",     anchorPoint },
     
-    {"setDelegate",  delegate },
     {"delegate",     delegate },
-    {"setCallback",  delegate },
     {"callback",     delegate },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
     {"cancelFocus",    resignFirstResponder },
     
-    
-    {"setTransform3D", transform3D },
     {"transform3D",    transform3D },
     
     {"release",     releaseObject},
@@ -1309,7 +1261,7 @@ static int lvNewView (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewView);
-        lv_setglobal(L, "UIView");
+        lv_setglobal(L, "View");
     }
     lv_createClassMetaTable(L, META_TABLE_UIView);
     

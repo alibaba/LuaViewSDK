@@ -178,7 +178,7 @@ static int font (lv_State *L) {
     return 0;
 }
 
-static int textAlign (lv_State *L) {
+static int textAlignment (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
@@ -214,26 +214,20 @@ static int textAlign (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewLabel);
-        lv_setglobal(L, "UILabel");
+        lv_setglobal(L, "Label");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setText", text},
         {"text",    text},
-        
-        {"setTextColor", textColor},
         {"textColor",    textColor},
-        {"setColor", textColor},
         {"color",    textColor},
         
-        {"setFont", font},
         {"font",    font},
         
-        {"textAlign",    textAlign},
+        {"textAlignment",    textAlignment},
         
-        {"setLineCount", lineCount},
         {"lineCount",    lineCount},
         
-        {"adjustsFontSizeToFitWidth",  adjustsFontSizeToFitWidth},
+        {"adjustsFontSize",  adjustsFontSizeToFitWidth},
         
         {NULL, NULL}
     };

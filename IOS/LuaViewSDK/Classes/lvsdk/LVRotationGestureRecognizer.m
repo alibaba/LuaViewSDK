@@ -68,7 +68,7 @@ static int rotation (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "UIRotationGestureRecognizer");
+        lv_setglobal(L, "RotationGestureRecognizer");
     }
     
     lv_createClassMetaTable(L ,META_TABLE_RotaionGesture);

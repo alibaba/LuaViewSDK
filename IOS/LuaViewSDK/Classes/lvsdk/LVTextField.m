@@ -123,20 +123,22 @@ static int text (lv_State *L) {
     }
     return 0;
 }
-static int setPlaceholder (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        NSString* text = lv_paramString(L, 2);// 2
-        LVTextField* view = (__bridge LVTextField *)(user->view);
-        if( [view isKindOfClass:[LVTextField class]] ){
-            view.placeholder = text;
-            
-            lv_pushvalue(L,1);
-            return 1;
-        }
-    }
-    return 0;
-}
+
+//static int setPlaceholder (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        NSString* text = lv_paramString(L, 2);// 2
+//        LVTextField* view = (__bridge LVTextField *)(user->view);
+//        if( [view isKindOfClass:[LVTextField class]] ){
+//            view.placeholder = text;
+//            
+//            lv_pushvalue(L,1);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
+
 static int placeholder (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -156,13 +158,11 @@ static int placeholder (lv_State *L) {
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewTextField);
-        lv_setglobal(L, "UITextField");
+        lv_setglobal(L, "TextField");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setText", setText},
         {"text", text},
-        {"setPlaceholder", setPlaceholder},
-        {"placeholder", placeholder},
+        {"hint", placeholder},
         {NULL, NULL}
     };
     

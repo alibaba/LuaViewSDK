@@ -86,20 +86,30 @@ static const struct lvL_reg baseMemberFunctions [] = {
     //        UIGestureRecognizerStateCancelled,
     //        UIGestureRecognizerStateFailed
     //    };
-    {
-        lv_pushnumber(L, 0);
-        lv_setglobal(L, "UIGestureRecognizerStatePossible");
-        lv_pushnumber(L, 1);
-        lv_setglobal(L, "UIGestureRecognizerStateBegan");
-        lv_pushnumber(L, 2);
-        lv_setglobal(L, "UIGestureRecognizerStateChanged");
-        lv_pushnumber(L, 3);
-        lv_setglobal(L, "UIGestureRecognizerStateEnded");
-        lv_pushnumber(L, 4);
-        lv_setglobal(L, "UIGestureRecognizerStateCancelled");
-        lv_pushnumber(L, 5);
-        lv_setglobal(L, "UIGestureRecognizerStateFailed");
-    }
+    lv_settop(L, 0);
+    const struct lvL_reg lib [] = {
+        {NULL, NULL}
+    };
+    lvL_register(L, "GestureState", lib);
+    
+    lv_pushnumber(L, LVGestureRecognizerStatePossible);
+    lv_setfield(L, -2, "POSSIBLE");
+    
+    lv_pushnumber(L, LVGestureRecognizerStateBegan);
+    lv_setfield(L, -2, "BEGIN");
+    
+    lv_pushnumber(L, LVGestureRecognizerStateChanged);
+    lv_setfield(L, -2, "CHANGED");
+    
+    lv_pushnumber(L, LVGestureRecognizerStateEnded);
+    lv_setfield(L, -2, "END");
+    
+    lv_pushnumber(L, LVGestureRecognizerStateCancelled);
+    lv_setfield(L, -2, "CANCEL");
+    
+    lv_pushnumber(L, LVGestureRecognizerStateFailed);
+    lv_setfield(L, -2, "FAILED");
+    
     return 0;
 }
 @end

@@ -25,6 +25,22 @@
 #define LV_ALIGN_V_CENTER   (16)
 #define LV_ALIGN_BOTTOM     (32)
 
+//------------------------------
+
+
+#define LVGestureRecognizerStatePossible    0
+#define LVGestureRecognizerStateBegan       1
+#define LVGestureRecognizerStateChanged     2
+#define LVGestureRecognizerStateEnded       3
+#define LVGestureRecognizerStateCancelled   4
+#define LVGestureRecognizerStateFailed      5
+
+
+#define LVSwipeGestureRecognizerDirectionRight   (1 << 0)
+#define LVSwipeGestureRecognizerDirectionLeft    (1 << 1)
+#define LVSwipeGestureRecognizerDirectionUp      (1 << 2)
+#define LVSwipeGestureRecognizerDirectionDown    (1 << 3)
+//------------------------------
 
 
 #define USERDATA_KEY_DELEGATE 1
@@ -117,12 +133,11 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UIAlertView      "UI.AlertView"
 #define META_TABLE_Transform3D      "UI.Transfrom3D"
 #define META_TABLE_Struct           "UI.Struct"
-#define META_TABLE_Downloader       "lv.Downloader"
-#define META_TABLE_AudioPlayer      "lv.AudioPlayer"
-#define META_TABLE_AttributedString "lv.AttributedString"
-#define META_TABLE_Global           "lv.global"
-#define META_TABLE_NativeObject     "lv.nativeObjBox"
-#define META_TABLE_System           "lv.System"
+#define META_TABLE_Downloader       "LV.Downloader"
+#define META_TABLE_AudioPlayer      "LV.AudioPlayer"
+#define META_TABLE_AttributedString "LV.AttributedString"
+#define META_TABLE_NativeObject     "LV.nativeObjBox"
+#define META_TABLE_System           "LV.System"
 
 // listner
 #define LV_TAG_CALLBACK  @"Callback"

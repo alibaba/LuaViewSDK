@@ -108,11 +108,11 @@ static int setStatusBarStyle (lv_State *L) {
 
 +(int) classDefine:(lv_State *)L{
     const struct lvL_reg staticFunctions [] = {
-        {"setTitle", setTitle},
-        {"setLeftBarButton", setLeftBarButton},
-        {"setRightBarButton", setRightBarButton},
-        {"setBackground", setBackground},
-        {"setStatusBarStyle", setStatusBarStyle},
+        {"title", setTitle},
+        {"leftBarButton", setLeftBarButton},
+        {"rightBarButton", setRightBarButton},
+        {"background", setBackground},
+        {"statusBarStyle", setStatusBarStyle},
         {NULL, NULL}
     };
     lvL_openlib(L, "Navigation", staticFunctions, 0);

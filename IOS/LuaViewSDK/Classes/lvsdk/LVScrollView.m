@@ -22,6 +22,10 @@
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
         self.delegate = self;
+        self.alwaysBounceHorizontal = YES;
+        self.alwaysBounceVertical = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
     }
     return self;
 }
@@ -186,23 +190,23 @@ static int scrollIndicatorInsets (lv_State *L) {
     return 0;
 }
 
-static int pageEnable (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
-        if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);// 2
-                view.pagingEnabled = yes;
-                return 0;
-            } else {
-                lv_pushnumber(L, view.pagingEnabled );
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
+//static int pageEnable (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+//        if( [view isKindOfClass:[UIScrollView class]] ){
+//            if( lv_gettop(L)>=2 ) {
+//                BOOL yes = lvL_checkbool(L, 2);// 2
+//                view.pagingEnabled = yes;
+//                return 0;
+//            } else {
+//                lv_pushnumber(L, view.pagingEnabled );
+//                return 1;
+//            }
+//        }
+//    }
+//    return 0;
+//}
 
 static int showScrollIndicator (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -225,14 +229,14 @@ static int showScrollIndicator (lv_State *L) {
     return 0;
 }
 
-static int initRefreshHeader (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
-        [scrollView lv_initRefreshHeader];
-    }
-    return 0;
-}
+//static int initRefreshHeader (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
+//        [scrollView lv_initRefreshHeader];
+//    }
+//    return 0;
+//}
 
 static int startHeaderRefreshing (lv_State *L){
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -263,54 +267,54 @@ static int isHeaderRefreshing (lv_State *L){
     return 0;
 }
 
-static int footerNoticeNoMoreData (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        [scrollView lv_noticeNoMoreData];
-    }
-    return 0;
-}
+//static int footerNoticeNoMoreData (lv_State *L){
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+//        [scrollView lv_noticeNoMoreData];
+//    }
+//    return 0;
+//}
+//
+//static int footerResetNoMoreData (lv_State *L){
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+//        [scrollView lv_resetNoMoreData];
+//    }
+//    return 0;
+//}
+//
+//static int hiddenRefreshFooter (lv_State *L){
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+//        BOOL hidden = lv_toboolean(L, 2);
+//        [scrollView lv_hiddenRefreshFooter:hidden];
+//    }
+//    return 0;
+//}
 
-static int footerResetNoMoreData (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        [scrollView lv_resetNoMoreData];
-    }
-    return 0;
-}
-
-static int hiddenRefreshFooter (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-        BOOL hidden = lv_toboolean(L, 2);
-        [scrollView lv_hiddenRefreshFooter:hidden];
-    }
-    return 0;
-}
-
-static int alwaysBounce(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
-        if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
-                BOOL yesVertical = lv_toboolean(L, 2);
-                BOOL yesHorizontal = lv_toboolean(L, 3);
-                view.alwaysBounceVertical = yesVertical;
-                view.alwaysBounceHorizontal = yesHorizontal;
-                return 0;
-            } else {
-                lv_pushboolean(L, view.alwaysBounceVertical);
-                lv_pushboolean(L, view.alwaysBounceHorizontal);
-                return 2;
-            }
-        }
-    }
-    return 0;
-}
+//static int alwaysBounce(lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+//        if( [view isKindOfClass:[UIScrollView class]] ){
+//            if( lv_gettop(L)>=2 ) {
+//                BOOL yesVertical = lv_toboolean(L, 2);
+//                BOOL yesHorizontal = lv_toboolean(L, 3);
+//                view.alwaysBounceVertical = yesVertical;
+//                view.alwaysBounceHorizontal = yesHorizontal;
+//                return 0;
+//            } else {
+//                lv_pushboolean(L, view.alwaysBounceVertical);
+//                lv_pushboolean(L, view.alwaysBounceHorizontal);
+//                return 2;
+//            }
+//        }
+//    }
+//    return 0;
+//}
 
 static int scrollRectToVisible (lv_State *L) {
     if( lv_gettop(L)>=5 ) {
@@ -343,39 +347,26 @@ static int scrollRectToVisible (lv_State *L) {
 }
 
 static const struct lvL_reg memberFunctions [] = {
-    {"setContentSize",  contentSize },
     {"contentSize",     contentSize },
+    {"offset",     contentOffset },
     
-    {"setContentOffset",  contentOffset },
-    {"contentOffset",     contentOffset },
-    
-    {"setContentInset",  contentInset },
     {"contentInset",     contentInset },
-    
-    {"setScrollIndicatorInsets",  scrollIndicatorInsets },
     {"scrollIndicatorInsets",     scrollIndicatorInsets },
     
-    {"setPageEnable",  pageEnable },
-    {"pageEnable",     pageEnable },
-    
-    {"setShowScrollIndicator",  showScrollIndicator },
     {"showScrollIndicator",     showScrollIndicator },
-    
-    {"setAlwaysBounce", alwaysBounce },
-    {"alwaysBounce",    alwaysBounce },
-    
-    {"footerNoticeNoMoreData", footerNoticeNoMoreData},
-    {"footerResetNoMoreData", footerResetNoMoreData},
-    {"hiddenRefreshFooter", hiddenRefreshFooter},
     
     {"scrollRectToVisible",     scrollRectToVisible },
     
-    
-    {"initRefreshing", initRefreshHeader},
+    // 下拉刷新
+    //    {"initRefreshing", initRefreshHeader},
     {"startRefreshing", startHeaderRefreshing},
     {"stopRefreshing", stopHeaderRefreshing},
     {"isRefreshing", isHeaderRefreshing},
     
+    // 上拉加载更多
+    //    {"footerNoticeNoMoreData", footerNoticeNoMoreData},
+    //    {"footerResetNoMoreData", footerResetNoMoreData},
+    //    {"hiddenRefreshFooter", hiddenRefreshFooter},
     {NULL, NULL}
 };
 
@@ -386,13 +377,16 @@ static const struct lvL_reg memberFunctions [] = {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "UIScrollView");
+        lv_setglobal(L, "ScrollView");
     }
     
     lv_createClassMetaTable(L ,META_TABLE_UIScrollView);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
+    
+    const char* keys[] = { "startRefreshing", "stopRefreshing", "isRefreshing", NULL};// 移除多余API
+    lv_luaTableRemoveKeys(L, keys );
     return 1;
 }
 

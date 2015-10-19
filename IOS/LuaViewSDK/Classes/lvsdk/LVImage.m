@@ -387,10 +387,10 @@ static int isAnimating (lv_State *L) {
 +(int) classDefine:(lv_State *) L {
     {
         lv_pushcfunction(L, lvNewImageView);
-        lv_setglobal(L, "UIImage");
+        lv_setglobal(L, "Image");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setImage",  setImage},
+        {"image",  setImage},
         {"setContentMode",  setContentMode},
         
         {"startAnimating",  startAnimating},

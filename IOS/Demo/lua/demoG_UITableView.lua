@@ -41,7 +41,7 @@ tableView.delegate = {
 				cell.title.setFrame(cellHeight, 0, w-cellHeight, cellHeight);
 				cell.title.setText("测试"..section .."--" .. row);
 			},
-			Delegate = ^( section, row ){
+			Click = ^( section, row ){
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
