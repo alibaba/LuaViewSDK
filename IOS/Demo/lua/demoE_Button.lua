@@ -1,8 +1,8 @@
 
 function createButton( text , x,y,w,h, callback) {
-	local button = UIButton();
-	button.setFrame(x,y,w,h);
-	button.setText(text);
+	local button = Button();
+	button.frame(x,y,w,h);
+	button.text(text);
 	button.backgroundColor(0xeeeeee);
 	button.delegate = ^(){
 		print("ok",button);
@@ -17,9 +17,9 @@ button1 = createButton("测试",10,10,300,60);
 
 
 
-button2 = UIButton();
-button2.setFrame(10,100+80,100,100);
-button2.setImage("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png","http://g.alicdn.com/ju/lua/2.0.25/doc/icon2.png");
+button2 = Button();
+button2.frame(10,100+80,100,100);
+button2.image("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png","http://g.alicdn.com/ju/lua/2.0.25/doc/icon2.png");
 
 
 button2.delegate = ^(){

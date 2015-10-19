@@ -1,8 +1,8 @@
 
 scrW, scrH = System.screenSize();
 
-window.setFrame(0, 0, scrW, scrH);
-window.setBackgroundColor(0xffffff,1);
+window.frame(0, 0, scrW, scrH);
+window.backgroundColor(0xffffff,1);
 window.enabled(true);
 
 
@@ -13,9 +13,9 @@ local r = 40*percent;
 local bodyX0 = scrW/2;
 local bodyY0 = scrH/2;
 
-lazhuBody = UIImage();
-lazhuBody.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
-lazhuBody.setImage("lazhu.png");
+lazhuBody = Image();
+lazhuBody.frame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
+lazhuBody.image("lazhu.png");
 
 
 -------------------------------
@@ -23,15 +23,15 @@ function fireCreater() {
 	local fire = {};
 	fire.times = 0;
 
-	fire.imageView1 = UIImage();
-	fire.imageView2 = UIImage();
-	fire.imageView1.setImage("color1.png");
-	fire.imageView2.setImage("color2.png");
-	fire.imageView1.setFrame(0,0,r*2,r*2);
-	fire.imageView2.setFrame(0,0,r*2,r*2);
+	fire.imageView1 = Image();
+	fire.imageView2 = Image();
+	fire.imageView1.image("color1.png");
+	fire.imageView2.image("color2.png");
+	fire.imageView1.frame(0,0,r*2,r*2);
+	fire.imageView2.frame(0,0,r*2,r*2);
 
-	fire.bg = UIView();
-	fire.bg.setFrame(0,0,r*2,r*2);
+	fire.bg = View();
+	fire.bg.frame(0,0,r*2,r*2);
 	fire.bg.addView(fire.imageView1);
 	fire.bg.addView(fire.imageView2);
 
@@ -43,7 +43,7 @@ function fireCreater() {
 		local x0 = math:random(bodyX0, bodyX0 + r*0.1);
 		local y0 = math:random(bodyY0, bodyY0 + r*0.3);
 
-		self.bg.setCenter(x0,y0);
+		self.bg.center(x0,y0);
 		self.x = x0;
 		self.y = y0;
 
@@ -73,7 +73,7 @@ function fireCreater() {
 		self.nextXYAndColor();
 
 		local time = math:random(15,20)/10.0;
-		UIAnimate(time,
+		Animate(time,
 			function (){
 				self.move();
 			}

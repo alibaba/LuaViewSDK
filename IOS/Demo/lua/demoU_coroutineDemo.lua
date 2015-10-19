@@ -1,7 +1,7 @@
 scrW,scrH = System.screenSize();
-label = UILabel();
-label.setFrame(0,0,scrW,scrH-64);
-label.setLineCount(100);
+label = Label();
+label.frame(0,0,scrW,scrH-64);
+label.lineCount(100);
 
 function myprint( s , s2 )
 	s = s .. tostring(s2)

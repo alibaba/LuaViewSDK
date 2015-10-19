@@ -1,6 +1,6 @@
 
 scrW, scrH = System.screenSize();
-window.setBackgroundColor(0x777777,1);
+window.backgroundColor(0x777777,1);
 
 w = scrW/3;
 X0 = scrW/10;

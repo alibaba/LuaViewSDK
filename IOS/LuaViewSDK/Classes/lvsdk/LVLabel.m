@@ -219,7 +219,6 @@ static int textAlignment (lv_State *L) {
     const struct lvL_reg memberFunctions [] = {
         {"text",    text},
         {"textColor",    textColor},
-        {"color",    textColor},
         
         {"font",    font},
         

@@ -1,8 +1,8 @@
 
 scrW, scrH = System.screenSize();
 
-window.setFrame(0, 0, scrW, scrH);
-window.setBackgroundColor(0xffffff,1);
+window.frame(0, 0, scrW, scrH);
+window.backgroundColor(0xffffff,1);
 window.enabled(true);
 
 
@@ -17,18 +17,18 @@ function createLaZhu(x,y){
 	local bodyY0 = y;
 	local fireArr = {};
 
-    lazhu.lazhuBodyBG = UIView();
-    lazhu.lazhuBody = UIImage();
-    lazhu.lazhuBody.setFrame(0, 0, 64, 104);
-    lazhu.lazhuBodyBG.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
-	lazhu.lazhuBody.setImage("lazhu.png");
+    lazhu.lazhuBodyBG = View();
+    lazhu.lazhuBody = Image();
+    lazhu.lazhuBody.frame(0, 0, 64, 104);
+    lazhu.lazhuBodyBG.frame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
+	lazhu.lazhuBody.image("lazhu.png");
     lazhu.lazhuBodyBG.addView(lazhu.lazhuBody);
 
 	lazhu.onOff = true;
-	lazhu.button = UIButton();
-	lazhu.button.setTitle("开/关");
-	lazhu.button.setBackgroundColor(0xff0000,1);
-	lazhu.button.setFrame(0, 50, 64, 60);
+	lazhu.button = Button();
+	lazhu.button.title("开/关");
+	lazhu.button.backgroundColor(0xff0000,1);
+	lazhu.button.frame(0, 50, 64, 60);
 	lazhu.button.delegate = ^(){
 		if( lazhu.onOff ) {
 			lazhu.onOff = false;
@@ -44,7 +44,7 @@ function createLaZhu(x,y){
 	function lazhu.move( dx,dy )
 	 	bodyX0 = bodyX0 + dx;
 	 	bodyY0 = bodyY0 + dy;
-		self.lazhuBodyBG.setFrame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
+		self.lazhuBodyBG.frame( bodyX0 - 64*0.45, bodyY0 + r*0.5, 64, 104);
 	 end 
 
 
@@ -53,15 +53,15 @@ function createLaZhu(x,y){
 		local fire = {};
 		fire.times = 0;
 
-		fire.imageView1 = UIImage();
-		fire.imageView2 = UIImage();
-		fire.imageView1.setImage("color1.png");
-		fire.imageView2.setImage("color2.png");
-		fire.imageView1.setFrame(0,0,r*2,r*2);
-		fire.imageView2.setFrame(0,0,r*2,r*2);
+		fire.imageView1 = Image();
+		fire.imageView2 = Image();
+		fire.imageView1.image("color1.png");
+		fire.imageView2.image("color2.png");
+		fire.imageView1.frame(0,0,r*2,r*2);
+		fire.imageView2.frame(0,0,r*2,r*2);
 
-		fire.bg = UIView();
-		fire.bg.setFrame(0,0,r*2,r*2);
+		fire.bg = View();
+		fire.bg.frame(0,0,r*2,r*2);
 		fire.bg.addView(fire.imageView1);
 		fire.bg.addView(fire.imageView2);
 
@@ -73,7 +73,7 @@ function createLaZhu(x,y){
 			local x0 = math:random(bodyX0, bodyX0 + r*0.1);
 			local y0 = math:random(bodyY0, bodyY0 + r*0.3);
 
-			self.bg.setCenter(x0,y0);
+			self.bg.center(x0,y0);
 			self.x = x0;
 			self.y = y0;
 
@@ -103,7 +103,7 @@ function createLaZhu(x,y){
 			self.nextXYAndColor();
 
 			local time = math:random(7,10)/10.0;
-			UIAnimate(time,
+			Animate(time,
 				function (){
 					self.move();
 				}
@@ -143,12 +143,12 @@ lazhu3 = createLaZhu(260,200);
 
 
 
-	dragGesture = UIPanGestureRecognizer(
+	dragGesture = PanGestureRecognizer(
 		^( g ){
 			local state = g.state();
-			if( state == UIGestureRecognizerStateBegan ) {
+			if( state == GestureState.BEGIN ) {
 				 gestureX, gestureY = g.location();
-			} else  if( state == UIGestureRecognizerStateChanged ) {
+			} else  if( state == GestureState.CHANGED ) {
 				 local x, y = g.location();
 				 local dx = x- gestureX;
 				 local dy = y- gestureY;

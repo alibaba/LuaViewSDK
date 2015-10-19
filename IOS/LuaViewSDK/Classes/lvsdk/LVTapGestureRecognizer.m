@@ -61,7 +61,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "TapGestureRecognizer");
+        lv_setglobal(L, "TapGesture");
     }
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

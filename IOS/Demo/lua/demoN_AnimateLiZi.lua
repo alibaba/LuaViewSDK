@@ -1,8 +1,8 @@
 
 w,h = System.screenSize();
 
-window.setFrame(0, 0, w, h);
-window.setBackgroundColor(0,0);
+window.frame(0, 0, w, h);
+window.backgroundColor(0,0);
 window.enabled(true);
 
 
@@ -12,7 +12,7 @@ function snowCreater() {
 
 	snow.times = 0;
 
-	snow.imageView = UIView();
+	snow.imageView = View();
 	snow.imageView.cornerRadius(5);
 	snow.imageView.clipsToBounds = true;
 	-- snow.imageView.backgroundColor(0xff);
@@ -25,7 +25,7 @@ function snowCreater() {
 		self.imageView.alpha = 0.85;
 		local x0 = math:random(160,160+5);
 		local y0 = math:random(160,160+5);
-		self.imageView.setCenter(x0,y0);
+		self.imageView.center(x0,y0);
 		self.x = x0;
 		self.y = y0;
 
@@ -33,7 +33,7 @@ function snowCreater() {
 	end
 
 	function snow.move() {
-		self.imageView.setCenter(self.x,self.y);
+		self.imageView.center(self.x,self.y);
 		self.imageView.alpha(0);
 		self.imageView.backgroundColor(self.color);
 	}
@@ -59,7 +59,7 @@ function snowCreater() {
 		self.nextXYAndColor();
 
 		local time = math:random(15,20)/10.0;
-		UIAnimate(time,
+		Animate(time,
 			^(){
 				self.move();
 			}

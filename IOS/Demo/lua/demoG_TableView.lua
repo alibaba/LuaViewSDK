@@ -1,13 +1,13 @@
 
 w,h = System.screenSize();
 
-window.setBackgroundColor(0,1);
+window.backgroundColor(0,1);
 
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
-tableView = UITableView();
+tableView = TableView();
 tableView.delegate = {
 	Section = {
 		SectionCount = 2,
@@ -30,16 +30,16 @@ tableView.delegate = {
 				return cellHeight;
 			},
 			Init = ^(cell, section, row){
-				cell.icon = UIImage();
-				cell.title = UILabel();
+				cell.icon = Image();
+				cell.title = Label();
 				print("构造Cell");
 			},
 			Layout = ^(cell, section, row){
-				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
-				cell.icon.setImage(imageUrl1);
+				cell.icon.frame(0, 0, cellHeight, cellHeight);
+				cell.icon.image(imageUrl1);
 
-				cell.title.setFrame(cellHeight, 0, w-cellHeight, cellHeight);
-				cell.title.setText("测试"..section .."--" .. row);
+				cell.title.frame(cellHeight, 0, w-cellHeight, cellHeight);
+				cell.title.text("测试"..section .."--" .. row);
 			},
 			Click = ^( section, row ){
 				print(section, row);
@@ -52,18 +52,18 @@ tableView.delegate = {
 				return cellHeight;
 			},
 			Init = ^(cell, section, row){
-				cell.icon = UIImage();
-				cell.icon2 = UIImage();
+				cell.icon = Image();
+				cell.icon2 = Image();
 			},
 			Layout = ^(cell, section, row){
 				print(window);
 				local cellWdith, cellHeight = cell.window.size();
-				cell.icon.setFrame(0, 0, cellHeight, cellHeight);
-				cell.icon.setImage(imageUrl1);
+				cell.icon.frame(0, 0, cellHeight, cellHeight);
+				cell.icon.image(imageUrl1);
 
 
-				cell.icon2.setFrame(cellHeight+10, 0, cellHeight, cellHeight);
-				cell.icon2.setImage(imageUrl1);
+				cell.icon2.frame(cellHeight+10, 0, cellHeight, cellHeight);
+				cell.icon2.image(imageUrl1);
 			},
 			Delegate = ^( section, row ){
 				print(section, row);
@@ -81,17 +81,17 @@ tableView.delegate = {
 		}
 	},
 	Header = ^(){
-		local head = UIButton();
-		head.setTitle("我是头");
-		head.setFrame(0,0,w,100);
-		head.setBackgroundColor(0xff);
+		local head = Button();
+		head.title("我是头");
+		head.frame(0,0,w,100);
+		head.backgroundColor(0xff);
 		return head;
 	},
 	Footer = ^(){
-		local foot = UIButton();
-		foot.setTitle("我是结尾");
-		foot.setFrame(0,0,w,100);
-		foot.setBackgroundColor(0xff0000);
+		local foot = Button();
+		foot.title("我是结尾");
+		foot.frame(0,0,w,100);
+		foot.backgroundColor(0xff0000);
 		return foot;
 	},
 	Callback = {
@@ -109,8 +109,8 @@ tableView.delegate = {
 
 loading = false;
 
-tableView.setFrame(0,0,w,h-64);
-tableView.setBackgroundColor(0xffFFFF);
+tableView.frame(0,0,w,h-64);
+tableView.backgroundColor(0xffFFFF);
 
 tableView.initRefreshing();
 

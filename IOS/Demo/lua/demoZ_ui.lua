@@ -4,15 +4,15 @@ imageUrl = "snow.png";
 w,h = System.screenSize();
 
 
-window.setFrame(0, 0, w, h);
-window.setBackgroundColor(0,0);
+window.frame(0, 0, w, h);
+window.backgroundColor(0,0);
 window.enabled(true);
 
 System.gc();
 
 
-textField = UITextField();
-textField.setFrame((w-300)/2,(h-40)/2-40,300,40);
+textField = TextField();
+textField.frame((w-300)/2,(h-40)/2-40,300,40);
 textField.backgroundColor = 0xff0000;
 
 textField.delegate =    ^(){
@@ -21,9 +21,9 @@ textField.delegate =    ^(){
 
 
 
-button = UIButton();
-button.setFrame( (w-300)/2,(h-40)/2,300,40);
-button.setTitle("关闭");
+button = Button();
+button.frame( (w-300)/2,(h-40)/2,300,40);
+button.title("关闭");
 
 print(button);
 
@@ -31,7 +31,7 @@ DBKey = "keyvalue";
 
 button.delegate =  ^(){
 			            times = DB:get(DBKey,"0");
-			            UIAlertView("提示信息".. times,
+			            AlertView("提示信息".. times,
 			            			"确定退出",
 			            			"确定","取消",
 			            			 ^(index){
@@ -66,16 +66,16 @@ function snowCreater() {
 
 	snow.times = 0;
 
-	snow.imageView = UIImage(imageUrl);
+	snow.imageView = Image(imageUrl);
 	local snowW = math:random(32,64);
 
-	snow.imageView.setFrame( 0, 0, snowW, snowW);
+	snow.imageView.frame( 0, 0, snowW, snowW);
 	local x0 = math:random(0,w);
 	local y0 = -math:random(0,60);
-	snow.imageView.setCenter(x0,y0);
+	snow.imageView.center(x0,y0);
 
 	function snow.move() {
-		self.imageView.setCenter(self.x,self.y);
+		self.imageView.center(self.x,self.y);
 		self.imageView.transformRoteAndScale(self.rote, self.scale, self.scale);
 	}
 	function snow.nextXY() {
@@ -95,7 +95,7 @@ function snowCreater() {
 
 		self.nextXY();
 		local time = math:random(20,30)/10.0;
-		UIAnimate(time,
+		Animate(time,
 			^(){
 				self.move();
 			},
@@ -132,25 +132,25 @@ date2 = Date();
 
 print(date2 - date1)
 
-shake = UIButton();
-shake.setFrame( (w-300)/2,(h-40)/2+40,300,40);
-shake.setTitle("震动");
-shake.setDelegate( ^(){
+shake = Button();
+shake.frame( (w-300)/2,(h-40)/2+40,300,40);
+shake.title("震动");
+shake.delegate( ^(){
     Vibrate();
 }
 
 );
 
-gesture = UIPanGestureRecognizer(
+gesture = PanGesture(
         ^( g ){
             x,y = g.location();
-			print("UIPanGestureRecognizer: ".. x .. "," ..y);
+			print("PanGesture: ".. x .. "," ..y);
 		}
 );
 
 
 
-window.addGestureRecognizer(gesture);
+window.addGesture(gesture);
 
 
 --r = loadstring("local function test (){ print(1234) } r = test");

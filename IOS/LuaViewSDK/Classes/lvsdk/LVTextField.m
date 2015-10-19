@@ -72,9 +72,11 @@
     }
     return YES;
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     return YES;
 }
+
 #pragma -mark lvNewTextField
 static int lvNewTextField (lv_State *L) {
     LVTextField* textFiled = [[LVTextField alloc] init:L];
@@ -92,69 +94,52 @@ static int lvNewTextField (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setText (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        NSString* text = lv_paramString(L, 2);// 2
-        LVTextField* view = (__bridge LVTextField *)(user->view);
-        if( [view isKindOfClass:[LVTextField class]] ){
-            view.text = text;
-            
-            lv_pushvalue(L,1);
-            return 1;
-        }
-    }
-    return 0;
-}
-
 static int text (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->view);
         if( [view isKindOfClass:[LVTextField class]] ){
-            NSString* s = view.text;
-            if( s ) {
-                lv_pushstring(L, s.UTF8String);
+            if ( lv_gettop(L)>=2 ) {
+                NSString* text = lv_paramString(L, 2);// 2
+                view.text = text;
+                return 0;
             } else {
-                lv_pushnil(L);
+                NSString* s = view.text;
+                if( s ) {
+                    lv_pushstring(L, s.UTF8String);
+                } else {
+                    lv_pushnil(L);
+                }
+                return 1;
             }
-            return 1;
         }
     }
     return 0;
 }
-
-//static int setPlaceholder (lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user ){
-//        NSString* text = lv_paramString(L, 2);// 2
-//        LVTextField* view = (__bridge LVTextField *)(user->view);
-//        if( [view isKindOfClass:[LVTextField class]] ){
-//            view.placeholder = text;
-//            
-//            lv_pushvalue(L,1);
-//            return 1;
-//        }
-//    }
-//    return 0;
-//}
 
 static int placeholder (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->view);
         if( [view isKindOfClass:[LVTextField class]] ){
-            NSString* s = view.placeholder;
-            if( s ) {
-                lv_pushstring(L, s.UTF8String);
+            if ( lv_gettop(L)>=2 ) {
+                NSString* text = lv_paramString(L, 2);// 2
+                view.placeholder = text;
+                return 0;
             } else {
-                lv_pushnil(L);
+                NSString* s = view.placeholder;
+                if( s ) {
+                    lv_pushstring(L, s.UTF8String);
+                } else {
+                    lv_pushnil(L);
+                }
             }
             return 1;
         }
     }
     return 0;
 }
+
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewTextField);
@@ -163,6 +148,7 @@ static int placeholder (lv_State *L) {
     const struct lvL_reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},
+        {"placeholder", placeholder},
         {NULL, NULL}
     };
     

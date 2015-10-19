@@ -68,7 +68,7 @@ static int scale (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "PinchGestureRecognizer");
+        lv_setglobal(L, "PinchGesture");
     }
     
     lv_createClassMetaTable(L ,META_TABLE_PinchGesture);

@@ -4,8 +4,8 @@ imageUrl = "snow.png";
 w,h = System.screenSize();
 
 
-window.setFrame(0, 0, w, h);
-window.setBackgroundColor(0,0);
+window.rrame(0, 0, w, h);
+window.backgroundColor(0,0);
 window.enabled(true);
 
 -------------------------------
@@ -14,16 +14,16 @@ function snowCreater() {
 
 	snow.times = 0;
 
-	snow.imageView = UIImage(imageUrl);
+	snow.imageView = Image(imageUrl);
 	local snowW = math:random(32,64);
 
-	snow.imageView.setFrame( 0, 0, snowW, snowW);
+	snow.imageView.frame( 0, 0, snowW, snowW);
 	local x0 = math:random(0,w);
 	local y0 = -math:random(0,60);
-	snow.imageView.setCenter(x0,y0);
+	snow.imageView.center(x0,y0);
 
 	function snow.move() {
-		self.imageView.setCenter(self.x,self.y);
+		self.imageView.center(self.x,self.y);
 		self.imageView.transformRoteAndScale(self.rote, self.scale, self.scale);
 	}
 	function snow.nextXY() {
@@ -43,7 +43,7 @@ function snowCreater() {
 
 		self.nextXY();
 		local time = math:random(20,30)/10.0;
-		UIAnimate(time,
+		Animate(time,
 			^(){
 				self.move();
 			},

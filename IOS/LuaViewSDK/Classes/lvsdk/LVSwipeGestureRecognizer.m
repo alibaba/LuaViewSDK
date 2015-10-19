@@ -112,7 +112,7 @@ static int direction (lv_State *L) {
     
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "SwipeGestureRecognizer");
+        lv_setglobal(L, "SwipeGesture");
     }
     lv_createClassMetaTable(L ,META_TABLE_SwipeGesture);
     lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);

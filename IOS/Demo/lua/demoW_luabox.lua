@@ -12,14 +12,7 @@ function createObject( )
 	    test = "测试结果",
 	    name = "脚本名字"
 	};
-	-- function obj.setTest( s ) {
-	-- 	self.test = s;
-	-- 	print(self.test);
-	-- };
-	-- function obj.setName( s ) {
-	-- 	self.name = s;
-	-- 	print(self.name);
-	-- };
+
     function obj.testPointer( s )
     	ViewController.printPointer(s);
     end

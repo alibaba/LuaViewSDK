@@ -2,13 +2,13 @@ imageUrl = "http://ico.ooopic.com/ajax/iconpng/?id=96776.png";
 
 
 
-imageRander0 = UIImage();
-imageRander0.setFrame(0,100,100,100);
-imageRander1 = UIImage();
-imageRander1.setFrame(0,100,90,90);
-imageRander0.setImage(imageUrl,^(){
+imageRander0 = Image();
+imageRander0.frame(0,100,100,100);
+imageRander1 = Image();
+imageRander1.frame(0,100,90,90);
+imageRander0.image(imageUrl,^(){
     imageRander1.render(imageRander0,0);
-    imageRander1.setAlpha(0.98)
+    imageRander1.alpha(0.98)
 });
 
 w,h = System.screenSize();--获取屏幕尺寸
@@ -29,12 +29,12 @@ while s.len()>0 do
 end
 
 
-demoLabel = UILabel();
-demoLabel.setFrame(0,20,w,40);
-demoLabel.setText("点击屏幕一次执行一个测试demo");
+demoLabel = Label();
+demoLabel.frame(0,20,w,40);
+demoLabel.text("点击屏幕一次执行一个测试demo");
 
-label = UILabel();-- 创建一个文本框
-label.setFrame(160,h-80,w,80);
+label = Label();-- 创建一个文本框
+label.frame(160,h-80,w,80);
 
 
 att1 = AttributedString( "12te",  { fontSize=12, fontWeight="bold", foregroundColor=0xff, foregroundColorAlpha=0.9 , charpace=4} );
@@ -42,25 +42,24 @@ att2 = AttributedString( "测试",  { fontSize=30, foregroundColor=0xff0000, bac
 att3 = AttributedString( "289",  { fontSize=13, foregroundColor=0x777777, strikethroughStyle=1} );
 att4 = AttributedString( "下划", { fontSize=9, foregroundColor=0x777777, underlineStyle=1} );
 
-label2 = UILabel();
-label2.setFrame(20,30,w-40, 60);
-label2.setText(att1 + att2 + att3 + att4);
+label2 = Label();
+label2.frame(20,30,w-40, 60);
+label2.text(att1 + att2 + att3 + att4);
 
-label2.setBackgroundColor(0xff00FF)
-label2.setMasksToBounds(false);
-label2.setCornerRadius(4);
---label2.setClipsToBounds(true);
---label2.setShadowPath();
-label2.setShadowOffset(1,1);
-label2.setShadowRadius(2);
-label2.setShadowOpacity(8);
-label2.setShadowColor(0xff0000);
+label2.backgroundColor(0xff00FF)
+label2.masksToBounds(false);
+label2.cornerRadius(4);
 
-detailInfo = UILabel();
-detailInfo.setFrame(0, h-40, w, 40);
+label2.shadowOffset(1,1);
+label2.shadowRadius(2);
+label2.shadowOpacity(8);
+label2.shadowColor(0xff0000);
+
+detailInfo = Label();
+detailInfo.frame(0, h-40, w, 40);
 
 function detail( info )
-    detailInfo.setText(info);
+    detailInfo.text(info);
     detailInfo.sizeToFit();
 end
 --------------------------
@@ -95,54 +94,54 @@ demoArray = {
 	);	
 },
 ^(){
-	imageView = UIImage();
-	imageView.setImage(imageUrl);
-	imageView.setFrame(200,0,64,64);
-    detail("UIImage");
-    imageView.setCenter(w/2,h/2);
+	imageView = Image();
+	imageView.image(imageUrl);
+	imageView.frame(200,0,64,64);
+    detail("Image");
+    imageView.center(w/2,h/2);
 },
 ^(){
 	--[[
-	UIGestureRecognizerStatePossible,
-    UIGestureRecognizerStateBegan,// 手势开始
-    UIGestureRecognizerStateChanged,
-    UIGestureRecognizerStateEnded,// 手势结束
-    UIGestureRecognizerStateCancelled,
-    UIGestureRecognizerStateFailed,
+	GestureState.POSSIBLE
+    GestureState.BEGAN // 手势开始
+    GestureState.CHANGED
+    GestureState.END // 手势结束
+    GestureState.CANCEL
+    GestureState.FAILED
 	]]
-	local g = UIPinchGestureRecognizer(^(gesture){
+	local g = PinchGestureRecognizer(^(gesture){
 			imageView.transformRoteAndScale( 0, gesture.scale());
 		});
 	window.addGestureRecognizer(g);
 },
 ^(){
-	local g = UIRotationGestureRecognizer(^(gesture){
+	local g = RotationGesture(^(gesture){
 			imageView.transformRoteAndScale( gesture.rotation(), 1);
 		});
 	window.addGestureRecognizer(g);
 },
 ^(){
-	local g = UISwipeGestureRecognizer(^(gesture){
-			if( gesture.state()==UIGestureRecognizerStateEnded ) then
+	local g = SwipeGesture(^(gesture){
+			if( gesture.state()==GestureState.END ) then
 				print( "两个手势向左滑动" );
 			end
 		});
-    --[[UISwipeGestureRecognizerDirectionRight = 1,
-    UISwipeGestureRecognizerDirectionLeft  = 2,
-    UISwipeGestureRecognizerDirectionUp    = 4,
-    UISwipeGestureRecognizerDirectionDown  = 8]]
-	g.setTouchCount(2);
-	g.setDirection(UISwipeGestureRecognizerDirectionLeft);
+    --[[ GestureDirection.RIGHT = 1,
+    GestureDirection.LEFT = 2,
+    GestureDirection.UP = 4,
+    GestureDirection.DOWN  = 8]]
+	g.touchCount(2);
+	g.direction( GestureDirection.LEFT);
 	window.addGestureRecognizer(g);
 },
 ^(){
-	local g = UILongPressGestureRecognizer(^(gesture){
-			if( gesture.state()==UIGestureRecognizerStateEnded )  then
+	local g = LongPressGesture(^(gesture){
+			if( gesture.state()== GestureState.END )  then
 				print( "长按手势检测到了" );
 			end
 		});
-	g.setTouchCount(2);
-	window.addGestureRecognizer(g);
+	g.touchCount(2);
+	window.addGesture(g);
 },
 ^(){
 	Vibrate();
@@ -169,11 +168,11 @@ demoArray = {
 ^(){
 },
 ^(){
-	print(IsMethod(UIAlertView));	
+	print(IsMethod(AlertView));
 },
 
 ^(){
-	UIAlertView("title","msg", "ok", "cancel",
+	Alert("title","msg", "ok", "cancel",
 	         ^(buttonID){--提示框回调
 	         	print(buttonID);
 	         }
@@ -206,7 +205,7 @@ demoArray = {
 		print("transform1.isIdentiy()==false")
 	end
 	transform1.scale(2,2,2);
-	imageView.setTransform3D(transform1);
+	imageView.transform3D(transform1);
 	if transform1.isIdentity()  then
 		print("transform1.isIdentiy()==true")
 	else
@@ -222,17 +221,17 @@ demoArray = {
 ^(){
 	transform2 = Transform3D();
 	transform2.translation(20,20,20);
-	imageView.setTransform3D(transform2);
+	imageView.transform3D(transform2);
 },
 ^(){
 	transform3 = Transform3D();
 	transform3.translation(20,20,20);
 	transform3.rotate(3.14/3,0,1,0)    
-	imageView.setTransform3D(transform3);
+	imageView.transform3D(transform3);
 },
 ^(){
 	transform4 = transform1.concat(transform2).concat(transform3);
-	imageView.setTransform3D(transform4);
+	imageView.transform3D(transform4);
 	if transform1==transform2  then
 		print("transform1==transform2")
 	else
@@ -246,16 +245,16 @@ demoArray = {
 	end
 },
 ^(){
-	imageView.setTransform3D(Transform3D());
+	imageView.transform3D(Transform3D());
 },
 
 ^(){
 	transform4 = transform1.reset().scale(2,2,2) * transform2 * transform3;
 	
 		print("动画开始");
-	UIAnimate(3,0,
+	Animate(3,0,
 		^(){
-			imageView.setTransform3D(transform4);
+			imageView.transform3D(transform4);
 		}, 
 		^(){
 			print("动画结束了");
@@ -264,7 +263,7 @@ demoArray = {
 },
 ^(){
 	transform4 = transform1.reset().scale(2,2,2) * transform2 * transform3;
-	imageView.setTransform3D(transform4);
+	imageView.transform3D(transform4);
 	if transform1==transform2  then
 		print("transform1==transform2")
 	else
@@ -297,29 +296,29 @@ demoArray = {
 },
 
 ^(){
-	scrollView = UIScrollView();
-	scrollView.setBackgroundColor(0xff00);
-	scrollView.setFrame(10,10,100,100);
-	scrollView.setContentSize(600,300);
+	scrollView = ScrollView();
+	scrollView.backgroundColor(0xff00);
+	scrollView.frame(10,10,100,100);
+	scrollView.contentSize(600,300);
 	print(scrollView.contentSize());
 },
 ^(){
-	scrollView.setContentOffset(150,0,false);
+	scrollView.contentOffset(150,0,false);
 	print( scrollView.contentOffset() );
 },
 ^(){
-	scrollView.setPageEnable(true);
-	print(scrollView.pageEnable());
+--	scrollView.pageEnable(true);
+--	print(scrollView.pageEnable());
 },
 ^(){
-	window.setBackgroundColor(0,0.5);
- 	pageControl = UIPageControl();
- 	pageControl.setCenter(150,10);
- 	pageControl.setPageCount(10);
+	window.backgroundColor(0,0.5);
+ 	pageControl = PagerIndicator();
+ 	pageControl.center(150,10);
+ 	pageControl.pageCount(10);
  	print(pageControl.numberOfPages() );
  	scrollView.delegate = ^(){
  		local  x,y = scrollView.contentOffset();
- 		pageControl.setCurrentPage(x/100);
+ 		pageControl.currentPage(x/100);
  		print(pageControl.currentPage());
  	};
 },
@@ -329,10 +328,10 @@ demoArray = {
 },
 
 ^(){
-	textFiled = UITextField();
-	textFiled.setPlaceholder("我是输入框");
-	textFiled.setBackgroundColor(0xffff00);
-	textFiled.setFrame(10,20,300,40);
+	textFiled = TextField();
+	textFiled.placeholder("我是输入框");
+	textFiled.backgroundColor(0xffff00);
+	textFiled.frame(10,20,300,40);
 	textFiled.delegate =  {
 		                          开始编辑=^(){
 							            print("开始编辑")
@@ -354,7 +353,7 @@ demoArray = {
 					      };
 },
 ^(){
-	textFiled.setText("GameOver");
+	textFiled.text("GameOver");
 	print(textFiled.text());
 },
 ^(){
@@ -363,20 +362,19 @@ demoArray = {
 },
 
 ^(){
-
-	view = UIButton();
-	view.setFrame(10,60,100,200);
+	view = Button();
+	view.frame(10,60,100,200);
 	print( view.frame() );
-	view.setBackgroundColor(0xff0000);
+	view.backgroundColor(0xff0000);
 	print(view);
 	view.delegate = ^(){
 		print("button call back");
 	}
 
-	title = UILabel();
-	title.setText("测试测试测试测试测试测试测试测试测试");
-	title.setBackgroundColor(0xff00ff);
-	title.setFrame(50,50,500,30);
+	title = Label();
+	title.text("测试测试测试测试测试测试测试测试测试");
+	title.backgroundColor(0xff00ff);
+	title.frame(50,50,500,30);
 	title.sizeToFit();
 	view.addSubView(title);
 },
@@ -387,31 +385,30 @@ demoArray = {
 	urlB = "http://img2.3lian.com/img2007/13/68/20080405154401440.png";
 	urlC = "http://img2.3lian.com/img2007/13/68/20080405154401926.png";
 
-	button = UIButton();
-	button.setFrame(150,50,100,100);
-	button.setImage(urlA ,urlB,urlC )
+	button = Button();
+	button.frame(150,50,100,100);
+	button.image(urlA ,urlB,urlC )
 	button.delegate = ^(){
 		print("button call back");
 	};
-	button.setEnabled(false);
-    --button.setSelected(true);
+	button.enabled(false);
 },
 
 ^(){
-	textButton = UIButton();
-	textButton.setFrame(150,10,100,40);
-	textButton.setTitle("A","B","C","D");
+	textButton = Button();
+	textButton.frame(150,10,100,40);
+	textButton.title("A","B","C","D");
 	textButton.delegate = ^(){
 		print("textButton call back");
 	};
 },
 
 ^(){
-	view.setHidden(true);
+	view.hidden(true);
 	print( view.hidden() );
 },
 ^(){
-	view.setHidden(false);
+	view.hidden(false);
 	print( view.hidden() );
 },
 ^(){
@@ -424,37 +421,37 @@ demoArray = {
 },
 ^(){
 	print( view.backgroundColor() );
-	view.setBackgroundColor(0xff);
+	view.backgroundColor(0xff);
 	print( view.backgroundColor() );
 },
 ^(){
 	print( view.alpha() );
-	view.setAlpha(0.5);
+	view.alpha(0.5);
 	print( view.alpha() );
 },
 ^(){
-	view.setCornerRadius(8);
+	view.cornerRadius(8);
 	print( view.cornerRadius() );
 },
 ^(){
-	view.setBorderWidth(2);
+	view.borderWidth(2);
 	print( view.borderWidth() );
 },
 ^(){
-	view.setBorderColor(0xff0000);
+	view.borderColor(0xff0000);
 	print( view.borderColor() );
 },
 ^(){
-	view.setClipsToBounds(true);
+	view.clipsToBounds(true);
 	print( view.clipsToBounds() );
 },
 ^(){
-	view.setClipsToBounds(false);
+	view.clipsToBounds(false);
 	print( view.clipsToBounds() );
 },
 ^(){
 	print( view.center() );
-	view.setCenter(160,240);
+	view.center(160,240);
 	print( view.center() );
 },
 ^(){
@@ -470,14 +467,14 @@ demoArray = {
 	title.transformRoteAndScale( 0, 1);
 },
 ^(){
-	title.setAnchorPoint( 0.0, 0.5 );
+	title.anchorPoint( 0.0, 0.5 );
 },
 ^(){
 	title.transformRoteAndScale( 3.14/2,  2);
 },
 
 ^(){
-	dragGesture = UIPanGestureRecognizer(
+	dragGesture = PanGestureRecognizer(
 		^( g ){
 			print("drag");
 		}
@@ -499,20 +496,20 @@ index = 1;
 
 
 function setLabel( i )
-		label.setText(""..i);
+		label.text(""..i);
 		if ( i%2==1 ) then
-			label.setColor(0xff,1);
+			label.color(0xff,1);
 		else 
-			label.setColor(0,0.2);
+			label.color(0,0.2);
 		end
-		label.setFont(64);
+		label.font(64);
 		label.sizeToFit();
-		label.setCenter(w/2,h-60);
+		label.center(w/2,h-60);
 end
 
 setLabel(1);
 
-gesture = UITapGestureRecognizer(
+gesture = TapGesture(
 	^( g ){
 		print("Test"..index .. " : ");
 		func = demoArray[index];
@@ -524,7 +521,7 @@ gesture = UITapGestureRecognizer(
 
 window.addGestureRecognizer(gesture);
 
-window.setFrame(0,0,w,h);
+window.frame(0,0,w,h);
 
 
 window.delegate = {

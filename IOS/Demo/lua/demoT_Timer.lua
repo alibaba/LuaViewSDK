@@ -1,7 +1,7 @@
 scrW,scrH = System.screenSize();
-label = UILabel();
-label.setFrame(0,0,scrW,scrH-64);
-label.setLineCount(100);
+label = Label();
+label.frame(0,0,scrW,scrH-64);
+label.lineCount(100);
 
 function myprint( s , s2 )
 	s = s .. " " .. tostring(s2)
@@ -25,7 +25,7 @@ timer1 = timer1.start(1.0, false);
 --2
 index2 = 1;
 timer2 = Timer()
-timer2.setCallback(
+timer2.callback(
 	function() 
 		myprint("Timer2 Run",index2) 
 		index2 = index2 + 1;
@@ -39,3 +39,4 @@ timer3 = Timer(function()
 	myprint("Timer3 Run") 
 end)
 timer3.start(10)
+

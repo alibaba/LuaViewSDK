@@ -1,5 +1,5 @@
 
-window.setBackgroundColor(0xeeddee);
+window.backgroundColor(0xeeddee);
 
 local scrW, scrH = System.screenSize()
 
@@ -7,36 +7,36 @@ local scrW, scrH = System.screenSize()
 
 
 
-loading = UILoadingIndicator();
+loading = LoadingIndicator();
 
 btnH = scrH/10;
 
-btn1 = UIButton()
-btn1.setText("Start")
-btn1.setFrame(0, btnH*1.0, scrW, btnH)
-btn1.setBackgroundColor(0xCCCCCC);
-btn1.setCallback(function()
+btn1 = Button()
+btn1.text("Start")
+btn1.frame(0, btnH*1.0, scrW, btnH)
+btn1.backgroundColor(0xCCCCCC);
+btn1.callback(function()
 	print("start");
     loading.start()
 end)
 
 
-btn2 = UIButton()
-btn2.setText("Stop")
-btn2.setFrame(0, btnH*2.5, scrW, btnH)
-btn2.setBackgroundColor(0xCCCCCC);
-btn2.setCallback(function()
+btn2 = Button()
+btn2.text("Stop")
+btn2.frame(0, btnH*2.5, scrW, btnH)
+btn2.backgroundColor(0xCCCCCC);
+btn2.callback(function()
 	print("stop");
        loading.stop()
 end)
 
 
 index = 0;
-btn3 = UIButton()
-btn3.setBackgroundColor(0xCCCCCC);
-btn3.setText("Change Color")
-btn3.setFrame(0, btnH*4.0, scrW, btnH)
-btn3.setCallback(function()
+btn3 = Button()
+btn3.backgroundColor(0xCCCCCC);
+btn3.text("Change Color")
+btn3.frame(0, btnH*4.0, scrW, btnH)
+btn3.callback(function()
 	   print("stop");
 	   if( index%2 == 0 ) then
        		loading.color(0xff0000);
@@ -48,4 +48,4 @@ end)
 
 
 
-loading.setCenter(scrW/2, btnH*6);
+loading.center(scrW/2, btnH*6);

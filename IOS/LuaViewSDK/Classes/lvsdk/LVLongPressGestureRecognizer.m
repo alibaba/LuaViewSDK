@@ -75,7 +75,7 @@ static int setTouchCount (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "LongPressGestureRecognizer");
+        lv_setglobal(L, "LongPressGesture");
     }
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);

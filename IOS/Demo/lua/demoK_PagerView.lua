@@ -3,20 +3,20 @@ require "lv_kit"
 
 local scrW, scrH= System.screenSize()
 
-pageView = UIPagerView ();
+pageView = PagerView ();
 pageView.delegate = {
     PageCount = 12,
     Pages = {
         Init = function(page, pos)
-            page.button = UIButton()
+            page.button = Button()
         end,
         Layout = function(page, pos)
-            page.button.setText("测试按钮"..pos)
-            page.button.setFrame(0, 0, scrW, 200)
-            page.button.setBackgroundColor(0x777777);
+            page.button.text("测试按钮"..pos)
+            page.button.frame(0, 0, scrW, 200)
+            page.button.backgroundColor(0x777777);
             page.button.delegate = ^(){
                 print("第",pos,"页");
-                pageView.setCurrentPage(pos+1);
+                pageView.currentPage(pos+1);
                 print(pageView.currentPage() );
             }
         end
@@ -35,4 +35,4 @@ pageView.delegate = {
 };
 
 
-pageView.setFrame(0, 0, scrW, scrH-64 )
+pageView.frame(0, 0, scrW, scrH-64 )
