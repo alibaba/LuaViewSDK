@@ -174,7 +174,7 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     lvL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
-    lv_tableRemoveKeys(L, keys );
+    lv_luaTableRemoveKeys(L, keys );
     return 1;
 }
 

@@ -650,12 +650,11 @@ void lv_udataUnref(lv_State* L, int key) {
 }
 
 
-void lv_tableSetWeakWindow(lv_State* L, id cell){
+void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell){
     lv_pushstring(L, "window");
     
     NEW_USERDATA(userData, LVUserDataView);
     userData->view = CFBridgingRetain(cell);
-    //lView.lv_userData = userData;
     
     lvL_getmetatable(L, META_TABLE_UIView );
     lv_setmetatable(L, -2);
@@ -663,7 +662,7 @@ void lv_tableSetWeakWindow(lv_State* L, id cell){
     lv_settable(L, -3);
 }
 
-void lv_tableRemoveKeys(lv_State* L, const char** keys){
+void lv_luaTableRemoveKeys(lv_State* L, const char** keys){
     if ( lv_type(L, -1)== LV_TTABLE ) {
         for ( int i=0; ;i++ ){
             const char* key = keys[i];

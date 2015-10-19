@@ -141,6 +141,16 @@ void lv_pushNativeObjectWithBox(lv_State* L,id nativeObject);
 id lv_luaValueToNativeObject(lv_State* L, int idx);
 
 /*
+ * 获取LuaTable对象的 keys
+ */
+NSArray* lv_luaTableKeys(lv_State* L, int index);
+
+/*
+ * 移除LuaTable对象的 指定Keys
+ */
+void lv_luaTableRemoveKeys(lv_State* L, const char** keys);
+
+/*
  * lua table是否包含属性
  */
 BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key);
@@ -148,7 +158,7 @@ BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key);
 /*
  * lua table添加window属性
  */
-void lv_tableSetWeakWindow(lv_State* L, id cell);
+void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell);
 
 /**
  *  重置lua虚拟机的栈大小位置
@@ -180,13 +190,11 @@ UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 +(BOOL) ios7;
 +(BOOL) ios8;
 
-NSArray* lv_luaTableKeys(lv_State* L, int index);
 
 
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
-void lv_tableRemoveKeys(lv_State* L, const char** keys);
 
 @end
 
