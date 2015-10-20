@@ -146,4 +146,8 @@
 -(void) openUrl:(NSString*)actionUrl{
 }
 
+-(void) gotoHistory{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

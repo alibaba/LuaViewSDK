@@ -1,49 +1,52 @@
 
 scrW, scrH = System.screenSize();
 
-function createButton( text , x,y,w,h, callback) {
+function createButton( text , x,y,w,h, callback) 
 	local button = Button();
 	button.frame(x,y,w,h);
 	button.text(text);
 	button.backgroundColor(0xeeeeee);
-	button.delegate = ^(){
+	button.click( function()
 		print("ok",button);
-		if( callback ) {
+		if( callback ) then
 			callback();
-		}
-	};
+		end
+	end );
 	return button;
-}
+end
 
 buttonH = scrH /10;
 
 -----------------
 
-button1 = createButton("设置导航栏 标题",0,buttonH*1,scrW,buttonH, ^(){
+button1 = createButton("设置导航栏 标题",0,buttonH*1,scrW,buttonH, function()
 			-- 设置导航栏 标题
 			titleButton = Button()
 			titleButton.text("测试view")
 			Navigation.title(titleButton)
-	});
+	end);
 
-button2 = createButton("设置导航栏 左菜单",0,buttonH*2.5,scrW,buttonH, ^(){
+button2 = createButton("设置导航栏 左菜单",0,buttonH*2.5,scrW,buttonH, function()
 			-- 	设置导航栏 左菜单
 			leftButton = Button()
 			leftButton.text("左")
 			leftButton.sizeToFit();
 			Navigation.leftBarButton (leftButton)
-	});
+			leftButton.click(function ()
+				viewController.gotoHistory();
+			end)
+	end);
 
-button3 = createButton("设置导航栏 右菜单",0,buttonH*4,scrW,buttonH, ^(){
+button3 = createButton("设置导航栏 右菜单",0,buttonH*4,scrW,buttonH, function()
 			-- 设置导航栏 标题
 			rightButton = Button()
 			rightButton.text("右")
 			rightButton.sizeToFit();
 			Navigation.rightBarButton(rightButton)
-	});
+	end);
 
 
-button4 = createButton("设置导航栏 左菜单2",0,buttonH*5.5,scrW,buttonH, ^(){
+button4 = createButton("设置导航栏 左菜单2",0,buttonH*5.5,scrW,buttonH, function()
 			-- 	设置导航栏 左菜单
 			leftButton = Button()
 			leftButton.text("左1")
@@ -52,9 +55,15 @@ button4 = createButton("设置导航栏 左菜单2",0,buttonH*5.5,scrW,buttonH, 
 			leftButton2.text("左2")
 			leftButton2.sizeToFit();
 			Navigation.leftBarButton (leftButton, leftButton2)
-	});
+			leftButton.click(function ()
+				viewController.gotoHistory();
+			end)
+			leftButton2.click(function ()
+				viewController.gotoHistory();
+			end)
+	end);
 
-button5 = createButton("设置导航栏 右菜单2",0,buttonH*7,scrW,buttonH, ^(){
+button5 = createButton("设置导航栏 右菜单2",0,buttonH*7,scrW,buttonH, function()
 			-- 设置导航栏 标题
 			rightButton = Button()
 			rightButton.text("右1")
@@ -63,5 +72,5 @@ button5 = createButton("设置导航栏 右菜单2",0,buttonH*7,scrW,buttonH, ^(
 			rightButton2.text("右2")
 			rightButton2.sizeToFit();
 			Navigation.rightBarButton(rightButton,rightButton2)
-	});
+	end);
 
