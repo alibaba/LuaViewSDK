@@ -38,7 +38,7 @@ function fireCreater() {
 	function fire.initX0Y0()
 		self.bg.scale(1, 1);
 		self.bg.size( r*2, r*2);
-		self.bg.alpha = 0.5;
+		self.bg.alpha( 0.5);
 
 		local x0 = math:random(bodyX0, bodyX0 + r*0.1);
 		local y0 = math:random(bodyY0, bodyY0 + r*0.3);
@@ -47,8 +47,8 @@ function fireCreater() {
 		self.x = x0;
 		self.y = y0;
 
-		self.imageView1.alpha = 1;
-		self.imageView2.alpha = 0;
+		self.imageView1.alpha( 1);
+		self.imageView2.alpha( 0);
 	end
 
 	function fire.move() {
@@ -56,7 +56,7 @@ function fireCreater() {
 		self.bg.scale( 0.2, 0.4 );
 		self.imageView1.alpha(0);
 		self.imageView2.alpha(1);
-		self.bg.alpha = 0;
+		self.bg.alpha(0);
 	}
 
 	function fire.nextXYAndColor() {
