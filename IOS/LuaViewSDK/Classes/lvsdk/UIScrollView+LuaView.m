@@ -43,32 +43,32 @@
 
 - (void) lv_refreshHeaderToRefresh{
     // 开始下拉刷新调用
-    [self callLuaWithNoArgs:@"Refresh" key2:@"PullDown"];
+    [self callLuaWithNoArgs:@"PullDownRefreshCallback" key2:nil];
 }
 
 - (void) lv_refreshFooterToLoadMore{
     // 开始上拉刷新调用
-    [self callLuaWithNoArgs:@"Refresh" key2:@"PullUp"];
+    [self callLuaWithNoArgs:@"PullUpRefreshCallback" key2:nil];
 }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"Scrolling"];
+    [self callLuaWithNoArgs:@"ScrollingCallback" key2:nil];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollBegin"];
+    [self callLuaWithNoArgs:@"ScrollBeginCallback" key2:nil];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
     //[self callLuaWithNoArgs:@"Callback" key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollEnd"];
+    [self callLuaWithNoArgs:@"ScrollEndCallback" key2:nil];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollEnd"];
+    [self callLuaWithNoArgs:@"ScrollEndCallback" key2:nil];
 }
 
 @end

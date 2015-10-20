@@ -380,20 +380,22 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(tableView);
         tableView.lv_userData = userData;
+        
+        lvL_getmetatable(L, META_TABLE_UITableView );
+        lv_setmetatable(L, -2);
+        
         if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
             lv_pushvalue(L, 1);
             lv_udataRef(L, KEY_LUA_INFO );
             
             [tableView getHeaderFooterFromDelegate];
         }
-        
-        lvL_getmetatable(L, META_TABLE_UITableView );
-        lv_setmetatable(L, -2);
     }
     LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
         [lview containerAddSubview:tableView];
     }
+    lv_pushUserdata(L, tableView.lv_userData);
     return 1;
 }
 
@@ -526,7 +528,7 @@ static int delegate (lv_State *L) {
         
         {"rectForSection", rectForSection},
         
-        {"delegate", delegate},
+//        {"delegate", delegate},
         {NULL, NULL}
     };
     

@@ -1226,7 +1226,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"anchorPoint",     anchorPoint },
     
-    {"delegate",     delegate },
+//    {"delegate",     delegate },
     {"click",     click },
     
     {"hasFocus",        isFirstResponder },

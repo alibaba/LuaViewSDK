@@ -169,6 +169,9 @@ static int title (lv_State *L) {
                             [button setAttributedTitle:attString.mutableAttributedString forState:g_states[j++]  ];
                             [button.titleLabel sizeToFit];
                         }
+                    }else if ( lv_type(L, i) == LV_TNUMBER ) {
+                        float f = lv_tonumber(L, i);
+                        [button setTitle:[NSString stringWithFormat:@"%f",f] forState:g_states[j++]];
                     }
                 }
                 return 0;

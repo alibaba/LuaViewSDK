@@ -7,8 +7,7 @@ cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
-tableView = TableView();
-tableView.delegate {
+tableView = TableView {
 	Section = {
 		SectionCount = 2,
 
@@ -41,7 +40,7 @@ tableView.delegate {
 				cell.title.frame(cellHeight, 0, w-cellHeight, cellHeight);
 				cell.title.text("测试"..section .."--" .. row);
 			},
-			Click = ^( section, row ){
+			ClickCallback = ^( section, row ){
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
@@ -65,8 +64,8 @@ tableView.delegate {
 				cell.icon2.frame(cellHeight+10, 0, cellHeight, cellHeight);
 				cell.icon2.image(imageUrl1);
 			},
-			Click = ^( section, row ){
-				print(section, row);
+			ClickCallback = ^( section, row ){
+				print(tableView, section, row);
 				tableView.stopRefreshing();
 				System.gc();
 			}
@@ -94,16 +93,14 @@ tableView.delegate {
 		foot.backgroundColor(0xff0000);
 		return foot;
 	},
-	Callback = {
-		Scrolling = ^(){
-			print("scrolling");
-		},
-		ScrollBegin = ^(){
-			print("scrolling begin");
-		},
-		ScrollEnd = ^(){
-			print("scrolling end");
-		}
+	ScrollingCallback = ^(){
+		print("scrolling");
+	},
+	ScrollBeginCallback = ^(){
+		print("scrolling begin");
+	},
+	ScrollEndCallback = ^(){
+		print("scrolling end");
 	}
 };
 

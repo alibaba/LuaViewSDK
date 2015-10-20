@@ -69,7 +69,12 @@ static int setBackground(lv_State*L ) {
             id obj = lv_luaValueToNativeObject(L, 1);
             if( [obj isKindOfClass:[UIImageView class]] ) {
                 UIImageView* imgView = obj;
-                [navBar setBackgroundImage:imgView.image forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
+                UIImage* image = imgView.image;
+                float scale = [UIScreen mainScreen].scale;
+                if( image.scale<scale) {
+                    image = [UIImage imageWithCGImage:image.CGImage scale:scale orientation:0];
+                }
+                [navBar setBackgroundImage:image  forBarMetrics:UIBarMetricsDefault];
             }
             if ( lv_type(L, 2) ==LV_TNUMBER ) {
                 NSUInteger color = lv_tonumber(L, 2);

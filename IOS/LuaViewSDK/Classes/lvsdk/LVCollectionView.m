@@ -475,7 +475,7 @@ static int rectForSection (lv_State *L) {
         
         {"miniSpacing", miniSpacing},
         
-        {"delegate", delegate},
+//        {"delegate", delegate},
         
         {"scrollDirection", scrollDirection},
         {NULL, NULL}

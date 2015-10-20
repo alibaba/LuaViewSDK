@@ -57,10 +57,9 @@ static int lvNewScrollView (lv_State *L) {
         userData->view = CFBridgingRetain(scrollView);
         scrollView.lv_userData = userData;
         
-        if ( lv_gettop(L)>=2 ) {
-            lv_pushvalue(L, 1);
-            lv_udataRef(L, KEY_LUA_INFO );
-        }
+        //创建delegate用的事件存储器
+        lv_createtable(L, 0, 0);
+        lv_udataRef(L, KEY_LUA_INFO );
         
         lvL_getmetatable(L, META_TABLE_UIScrollView );
         lv_setmetatable(L, -2);
@@ -346,6 +345,109 @@ static int scrollRectToVisible (lv_State *L) {
     return 0;
 }
 
+static int scrollBeginCallback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, "ScrollBeginCallback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, "ScrollBeginCallback");
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int scrollingCallback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, "ScrollingCallback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, "ScrollingCallback");
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+static int scrollEndCallback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, "ScrollEndCallback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, "ScrollEndCallback");
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int pullDownRefreshCallback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, "PullDownRefreshCallback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, "PullDownRefreshCallback");
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+static int pullUpRefreshCallback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, "PullUpRefreshCallback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, "PullUpRefreshCallback");
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static const struct lvL_reg memberFunctions [] = {
     {"contentSize",     contentSize },
     {"offset",     contentOffset },
@@ -367,6 +469,13 @@ static const struct lvL_reg memberFunctions [] = {
     //    {"footerNoticeNoMoreData", footerNoticeNoMoreData},
     //    {"footerResetNoMoreData", footerResetNoMoreData},
     //    {"hiddenRefreshFooter", hiddenRefreshFooter},
+    
+    // 事件回调处理
+    {"scrollBeginCallback", scrollBeginCallback },
+    {"scrollingCallback", scrollingCallback },
+    {"scrollEndCallback", scrollEndCallback },
+    {"pullDownRefreshCallback", pullDownRefreshCallback },
+    {"pullUpRefreshCallback", pullUpRefreshCallback },
     {NULL, NULL}
 };
 
