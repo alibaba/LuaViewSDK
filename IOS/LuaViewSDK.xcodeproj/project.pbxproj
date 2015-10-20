@@ -249,6 +249,7 @@
 		84799AFA1BAFEFDA0070E214 /* LVPagerViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */; settings = {ASSET_TAGS = (); }; };
 		84799AFB1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		84799AFC1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */; settings = {ASSET_TAGS = (); }; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
 		848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
 		848CA3611B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
@@ -542,6 +543,7 @@
 		84799AF41BAFECA00070E214 /* LVPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerView.m; sourceTree = "<group>"; };
 		84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerViewCell.h; sourceTree = "<group>"; };
 		84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerViewCell.m; sourceTree = "<group>"; };
+		8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoG_RefreshTableView.lua; sourceTree = "<group>"; };
 		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
 				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
 				84799AC51BAFDDA00070E214 /* demoG_TableView.lua */,
+				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
 				84799AB31BAFDDA00070E214 /* demoJ_CollectionView.lua */,
 				84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */,
 				84799AC61BAFDDA00070E214 /* demoL_Alert.lua */,
@@ -1381,6 +1384,7 @@
 				84FC64D81BB3DDE100B6AF86 /* demoM_PagerIndicator.lua in Resources */,
 				84799AED1BAFDDA00070E214 /* demoZ_testunit.lua in Resources */,
 				849832131BCB682F0032BF05 /* demoV1_Customloading.lua in Resources */,
+				8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */,
 				84799AD01BAFDDA00070E214 /* demoN_AnimateFire.lua in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
 				84799AD41BAFDDA00070E214 /* demoC_Label.lua in Resources */,

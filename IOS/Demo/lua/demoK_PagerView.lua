@@ -4,7 +4,7 @@ require "lv_kit"
 local scrW, scrH= System.screenSize()
 
 pageView = PagerView ();
-pageView.delegate = {
+pageView.delegate{
     PageCount = 12,
     Pages = {
         Init = function(page, pos)
@@ -14,15 +14,14 @@ pageView.delegate = {
             page.button.text("测试按钮"..pos)
             page.button.frame(0, 0, scrW, 200)
             page.button.backgroundColor(0x777777);
-            page.button.delegate = ^(){
+            page.button.click( function()
                 print("第",pos,"页");
                 pageView.currentPage(pos+1);
                 print(pageView.currentPage() );
-            }
+            end)
         end
     },
     Callback = {
-
         Scrolling = function( pageIndex, percent , offset )
             print("Scrolling", pageIndex, percent, offset)
         end,
@@ -30,7 +29,6 @@ pageView.delegate = {
         ScrollEnd = function( pageIndex )
             print("ScrollEnd", pageIndex )
         end
-        
     }
 };
 

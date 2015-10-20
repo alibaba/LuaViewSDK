@@ -27,7 +27,13 @@ button2.click(function()
     button2.sizeToFit();
 end);
 
+obj = {};
 
+function obj.test( a )
+	print(self, a);
+end
+
+obj.test"good";
 	-- print("clear");
 	-- System.gc();
 	-- collectgarbage("collect");

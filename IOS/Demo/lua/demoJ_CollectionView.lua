@@ -8,18 +8,18 @@ imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXX
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
 collectionView = CollectionView();
-collectionView.delegate = 
+collectionView.delegate
 {
 	Section = {
 		SectionCount = 2,
 
-		RowCount = ^(section){
+		RowCount = function(section){
 			return 4;
 		},
-		-- Spacing = ^(section ){
+		-- Spacing = function(section ){
 		-- 	return 0;
 		-- },
-		-- EdgeInsets = ^(section ){
+		-- EdgeInsets = function(section ){
 		-- 	return 20,0,0,0;
 		-- }
 
@@ -33,10 +33,10 @@ collectionView.delegate =
 			}
 		},
 		"图片+文字" = {
-			Size = ^(section, row){
+			Size = function(section, row){
 				return (w-10)/2 ,200;
 			},
-			Init = ^(cell){
+			Init = function(cell){
 				local cellWidth ,cellHeight = cell.window.size();
 				cellHeight = cellHeight / 2;
 				cell.icon = Image();
@@ -48,8 +48,8 @@ collectionView.delegate =
 				cell.title.backgroundColor(0xff00ff);
 				print("构造Cell--2");
 			},
-			Layout = ^(cell , section, row){
-				cell.icon.image(imageUrl1, ^(){
+			Layout = function(cell , section, row)
+				cell.icon.image(imageUrl1, function(){
 					local x,y,w,h = cell.icon.frame();
 					print("dongxicheng----",x,y,w,h);
 					});
@@ -58,51 +58,53 @@ collectionView.delegate =
 				print("布局Cell--" , section, "--", row);
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
-			},
-			Delegate = ^(section, row){
+			end,
+			Delegate = function(section, row)
 				print(section, row);
 				System.gc();
-			}
+			end
 		},
 		"图片+文字2" = {
-			Size = ^(section, row){
+			Size = function(section, row){
 				return w ,200;
 			},
-			Init = ^(cell){
+			Init = function(cell)
 				cell.icon = Image();
 				cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
 
 				cell.button = Button();
 				cell.button.frame(0,0,100,60);
 				cell.button.backgroundColor(0x777777);
-				cell.button.delegate = ^(){
-						Animate( ^(){
+				cell.button.click( function()
+						Animate( function()
 										cell.icon2.center(160,100);
-									}
-								 );
-				};
+								 end
+							    ) ;
+				end);
 
 
 				cell.icon2 = Image();
 				cell.icon2.frame(160, 0, cellHeight, cellHeight);
 
 				print("构造Cell--2");
-			},
-			Layout = ^(cell , section, row){
-				cell.icon.image(imageUrl1, ^(){
-					local x,y,w,h = cell.icon.frame();
-					print("dongxicheng----",x,y,w,h);
-					});
+			end,
+			Layout = function(cell , section, row)
+				cell.icon.image(
+					imageUrl1, 
+					function() 
+						local x,y,w,h = cell.icon.frame();
+						print("dongxicheng----",x,y,w,h);
+					end);
 
 				cell.icon2.image(imageUrl1)
 				print("布局Cell--" , section, "--", row);
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
-			},
-			Delegate = ^(section, row){
+			end,
+			Delegate = function(section, row)
 				print(section, row);
 				System.gc();
-			}
+			end
 		}
 	}
 };

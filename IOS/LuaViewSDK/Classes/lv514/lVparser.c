@@ -749,7 +749,7 @@ static void primaryexp (LexState *ls, expdesc *v) {
             case '.': {  /* field */
                 lvX_lookahead(ls);
                 if( ls->t.token =='.' && ls->lookahead.token==TK_NAME
-                   && (ls->lookahead2.token=='('||ls->lookahead2.token=='{') ){// dongxicheng
+                   && (ls->lookahead2.token=='('||ls->lookahead2.token==TK_STRING||ls->lookahead2.token=='{') ){// dongxicheng
                     ls->t.token = ':';
                     expdesc key;
                     lvX_next(ls);
