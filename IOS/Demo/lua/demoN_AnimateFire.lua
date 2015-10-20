@@ -19,7 +19,7 @@ lazhuBody.image("lazhu.png");
 
 
 -------------------------------
-function fireCreater() {
+function fireCreater() 
 	local fire = {};
 	fire.times = 0;
 
@@ -51,15 +51,15 @@ function fireCreater() {
 		self.imageView2.alpha( 0);
 	end
 
-	function fire.move() {
+	function fire.move() 
 		self.bg.center( self.x, self.y );
 		self.bg.scale( 0.2, 0.4 );
 		self.imageView1.alpha(0);
 		self.imageView2.alpha(1);
 		self.bg.alpha(0);
-	}
+	end
 
-	function fire.nextXYAndColor() {
+	function fire.nextXYAndColor() 
 		local len = 30*percent;
 		local dx = math:random(-len,len);
 		local maxDy = math:sqrt( (len*len*2 - dx*dx) )*2;
@@ -67,39 +67,40 @@ function fireCreater() {
 		local x,y = self.bg.center();
 		self.x = x+dx;
 		self.y = y+dy;
-	}
-	function fire.showfires() {
+	end
+
+	function fire.showfires() 
 		self.initX0Y0();
 		self.nextXYAndColor();
 
 		local time = math:random(15,20)/10.0;
 		Animate(time,
-			function (){
+			function ()
 				self.move();
-			}
+			end
 			,
-			function (){
+			function ()
 				self.showfires();
-			}
+			end
 			);
-	}
+	end
 
 	return fire;
-}
+end
 -------------------------------------
 fireArr = {};
 
 index = 1;
 fireTimer = Timer(
-	^(){
-		if (index<20 ) {
+	function()
+		if (index<20 ) then
 			index = index+1;
 		   	fireArr[index] = fireCreater();
 			fireArr[index].showfires();
-		} else {
+		else
 			fireTimer.cancel();
-		}
-	}
+		end
+	end
 );
 
 fireTimer.start(0.1, true);
