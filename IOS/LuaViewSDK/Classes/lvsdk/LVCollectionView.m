@@ -278,7 +278,7 @@
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
-            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"ClickCallback" section:indexPath.section row:indexPath.row];
+            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"Callback" section:indexPath.section row:indexPath.row];
         }
     }
 }

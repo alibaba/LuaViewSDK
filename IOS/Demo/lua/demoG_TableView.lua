@@ -12,13 +12,13 @@ function createTableView( )
 		Section = {
 			SectionCount = 2,
 
-			RowCount = ^(section){
+			RowCount = function(section){
 				return 10;
 			}
 		},
 
 		Cell = {
-			Id = ^( section, row ){
+			Id = function( section, row ){
 				if ( section==1  ) then
 					return  "图片+文字";
 				else
@@ -26,37 +26,37 @@ function createTableView( )
 				end
 			},
 			"图片+文字" = {
-				Height = ^( section, row ){
+				Height = function( section, row ){
 					return cellHeight;
 				},
-				Init = ^(cell, section, row){
+				Init = function(cell, section, row){
 					cell.icon = Image();
 					cell.title = Label();
 					print("构造Cell");
 					print(cell.window);
 				},
-				Layout = ^(cell, section, row){
+				Layout = function(cell, section, row){
 					cell.icon.frame(0, 0, cellHeight, cellHeight);
 					cell.icon.image(imageUrl1);
 
 					cell.title.frame(cellHeight, 0, w-cellHeight, cellHeight);
 					cell.title.text("测试"..section .."--" .. row);
 				},
-				ClickCallback = ^( section, row ){
+				Callback = function( section, row ){
 					print(section, row);
 					tv.stopRefreshing();
 					System.gc();
 				}
 			},
 			"图片+图片" = {
-				Height = ^( section, row ){
+				Height = function( section, row ){
 					return cellHeight;
 				},
-				Init = ^(cell, section, row){
+				Init = function(cell, section, row){
 					cell.icon = Image();
 					cell.icon2 = Image();
 				},
-				Layout = ^(cell, section, row){
+				Layout = function(cell, section, row){
 					print(window);
 					local cellWdith, cellHeight = cell.window.size();
 					cell.icon.frame(0, 0, cellHeight, cellHeight);
@@ -66,45 +66,39 @@ function createTableView( )
 					cell.icon2.frame(cellHeight+10, 0, cellHeight, cellHeight);
 					cell.icon2.image(imageUrl1);
 				},
-				ClickCallback = ^( section, row ){
+				Callback = function( section, row ){
 					print(tv, section, row);
 					tv.stopRefreshing();
 					System.gc();
 				}
 			}
 		},
-		Refresh = {
-		    PullDown = ^(){
-		    	print("PullDown");
-			},
-		    PullUp = ^(){
-		    	print("PullUp");
-			}
-		},
-		Header = ^(){
+		Header = function(){
 			local head = Button();
 			head.title("我是头");
 			head.frame(0,0,w,100);
 			head.backgroundColor(0xff);
 			return head;
 		},
-		Footer = ^(){
+		Footer = function(){
 			local foot = Button();
 			foot.title("我是结尾");
 			foot.frame(0,0,w,100);
 			foot.backgroundColor(0xff0000);
 			return foot;
-		},
-		ScrollingCallback = ^(){
-			print("scrolling");
-		},
-		ScrollBeginCallback = ^(){
-			print("scrolling begin");
-		},
-		ScrollEndCallback = ^(){
-			print("scrolling end");
 		}
 	};
+	tv.callback {
+			Scrolling = function(){
+				print("scrolling");
+			},
+			ScrollBegin = function(){
+				print("scrolling begin");
+			},
+			ScrollEnd = function(){
+				print("scrolling end");
+			}
+		};
 	return tv;
 end
 

@@ -29,13 +29,17 @@
     [self callLuaWithNoArgs:funcName key2:nil];
 }
 
-- (void) callLuaWithNoArgs:(NSString*) funcName key2:(NSString*) key2{
+- (void) callLuaWithNoArgs:(NSString*) key1 key2:(NSString*) key2{
     lv_State* l = self.lv_lview.l;
-    if( l && self.lv_userData && funcName){
+    if( l && self.lv_userData && key1){
         lv_checkStack32(l);
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        [LVUtil call:l key1:funcName.UTF8String key2:key2.UTF8String nargs:0 nrets:0];
+        if( lv_type(l, -1) == LV_TTABLE ) {
+            lv_pushstring(l, "Callback");
+            lv_gettable(l, -2);
+        }
+        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String nargs:0 nrets:0];
     }
 }
 

@@ -683,7 +683,10 @@ int lv_callbackFunction(lv_State* L, const char* functionName){
         if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            
+            if( lv_type(L, -1)==LV_TNIL ) {
+                lv_createtable(L, 0, 0);
+                lv_udataRef(L, USERDATA_KEY_DELEGATE);
+            }
             lv_pushstring(L, functionName);
             lv_pushvalue(L, 2);
             lv_settable(L, -3);

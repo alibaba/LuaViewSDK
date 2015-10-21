@@ -45,5 +45,8 @@
     return self;
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<PagerViewCell(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame)];
+}
 
 @end

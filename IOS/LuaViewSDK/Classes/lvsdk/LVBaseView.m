@@ -1092,15 +1092,35 @@ static int anchorPoint (lv_State *L) {
 //    return 0;
 //}
 
-static int click (lv_State *L) {
+static int callback (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
-            lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_CALLBACK);
-            return 1;
+            lv_checkstack(L, 8);
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            if( lv_type(L, -1)==LV_TNIL ) {
+                lv_settop(L, 2);
+                lv_pushvalue(L, 1);
+                lv_createtable(L, 0, 0);
+                lv_udataRef(L, USERDATA_KEY_DELEGATE );
+                
+                lv_settop(L, 2);
+                lv_pushvalue(L, 1);
+                lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            }
+            lv_pushstring(L, "Callback");
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
         } else {
-            lv_pushUDataRef(L, USERDATA_KEY_CALLBACK);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            if ( lv_type(L, -1)==LV_TTABLE ) {
+                lv_pushstring(L, "Callback");
+                lv_gettable(L, -2);
+            } else {
+                lv_pushnil(L);
+            }
             return 1;
         }
     }
@@ -1227,7 +1247,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"anchorPoint",     anchorPoint },
     
     // {"delegate",     delegate },
-    {"click",     click },
+    {"callback",     callback },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
@@ -1250,20 +1270,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {NULL, NULL}
 };
 
-static int shakeBeganCallback (lv_State *L) {
-    return lv_callbackFunction(L, CALLBACK_SHAKE_BEGIN);
-}
-static int shakeCanceledCallback (lv_State *L) {
-    return lv_callbackFunction(L, CALLBACK_SHAKE_CANCELED);
-}
-static int shakeEndedCallback (lv_State *L) {
-    return lv_callbackFunction(L, CALLBACK_SHAKE_ENDED);
-}
-
 static const struct lvL_reg luaViewMemberFunctions [] = {
-    {CALLBACK_SHAKE_BEGIN,    shakeBeganCallback },
-    {CALLBACK_SHAKE_CANCELED,    shakeCanceledCallback },
-    {CALLBACK_SHAKE_ENDED,    shakeEndedCallback },
     {NULL,    NULL },
 };
 

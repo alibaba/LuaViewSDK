@@ -55,4 +55,7 @@
     [super setHighlighted:NO animated:NO];
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<TableViewCell(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame)];
+}
 @end

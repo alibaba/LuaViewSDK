@@ -352,7 +352,7 @@ static int setCurrentPage(lv_State *L) {
     }
 }
 
-- (void) callLuaWithScrollEnd{
+- (void) callLuaWithScrollEnded{
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
@@ -379,12 +379,12 @@ static int setCurrentPage(lv_State *L) {
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self callLuaWithScrolling];
-    [self callLuaWithScrollEnd];
+    [self callLuaWithScrollEnded];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self callLuaWithScrolling];
-    [self callLuaWithScrollEnd];
+    [self callLuaWithScrollEnded];
 }
 
 -(NSString*) description{

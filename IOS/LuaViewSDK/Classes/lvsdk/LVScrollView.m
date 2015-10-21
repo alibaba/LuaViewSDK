@@ -344,46 +344,9 @@ static int scrollRectToVisible (lv_State *L) {
     return 0;
 }
 
-static int scrollBeginCallback (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
-            lv_pushvalue(L, 1);
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            
-            lv_pushstring(L, "ScrollBeginCallback");
-            lv_pushvalue(L, 2);
-            lv_settable(L, -3);
-            return 0;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            lv_pushstring(L, "ScrollBeginCallback");
-            lv_gettable(L, -2);
-            return 1;
-        }
-    }
-    return 0;
-}
-
-
-static int scrollingCallback (lv_State *L) {
-    return lv_callbackFunction(L, "ScrollingCallback");
-}
-
-static int scrollEndCallback (lv_State *L) {
-    return lv_callbackFunction(L, "ScrollEndCallback");
-}
-
-static int pullDownRefreshCallback (lv_State *L) {
-    return lv_callbackFunction(L, "PullDownRefreshCallback");
-}
-static int pullUpRefreshCallback (lv_State *L) {
-    return lv_callbackFunction(L, "PullUpRefreshCallback");
-}
-
 static const struct lvL_reg memberFunctions [] = {
-    {"contentSize",     contentSize },
-    {"offset",     contentOffset },
+    {"contentSize",     contentSize },//TODO
+    {"offset",     contentOffset },//TODO
     
     {"contentInset",     contentInset },
     {"scrollIndicatorInsets",     scrollIndicatorInsets },
@@ -403,12 +366,6 @@ static const struct lvL_reg memberFunctions [] = {
     //    {"footerResetNoMoreData", footerResetNoMoreData},
     //    {"hiddenRefreshFooter", hiddenRefreshFooter},
     
-    // 事件回调处理
-    {"scrollBegin", scrollBeginCallback },
-    {"scrolling", scrollingCallback },
-    {"scrollEnd", scrollEndCallback },
-    {"pullDownRefresh", pullDownRefreshCallback },
-    {"pullUpRefresh", pullUpRefreshCallback },
     {NULL, NULL}
 };
 

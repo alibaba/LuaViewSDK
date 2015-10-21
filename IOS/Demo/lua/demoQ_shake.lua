@@ -2,20 +2,20 @@
 
 print("摇一摇测试脚本");
 
-window.shakeBeganCallback(function(){
+window.callback{
+	ShakeBegin =  function(){
 		window.backgroundColor(0xff00ff);
-		print("window.shakeBegan");
-	});
-
-window.shakeCanceledCallback(function(){
+		print("window.shakeBegin");
+	},
+	ShakeCanceled = function(){
 		window.backgroundColor(0xff);
 		print("window.shakeCancelled");
-	})
-
-window.shakeEndedCallback(function(){
+	},
+	ShakeEnded = function(){
 		window.backgroundColor(0xffFFff);
 		print("window.shakeEnded");
-	})
+	}
+}
 
 label  = Label();
 label.text ( "  摇一摇变色  " );

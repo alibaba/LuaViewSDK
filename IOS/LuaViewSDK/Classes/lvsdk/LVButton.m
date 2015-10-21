@@ -42,14 +42,21 @@
     if( L && self.lv_userData ){
         int num = lv_gettop(L);
         lv_pushUserdata(L, self.lv_userData);
-        lv_pushUDataRef(L, USERDATA_KEY_CALLBACK );
+        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+        if( lv_type(L, -1)==LV_TTABLE ) {
+            lv_pushstring(L, "Callback");
+            lv_gettable(L, -2);
+        }
+        if( lv_type(L, -1)==LV_TTABLE ) {
+            lv_pushstring(L, "Click");
+            lv_gettable(L, -2);
+        }
         lv_runFunction(L);
         lv_settop(L, num);
     }
 }
 
 -(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished{
-    
 }
 
 -(void) setImageUrl:(NSString*) url placeholder:(UIImage *)placeholder state:(UIControlState) state {

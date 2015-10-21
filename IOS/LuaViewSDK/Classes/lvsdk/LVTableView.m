@@ -11,6 +11,7 @@
 #import "LVTableViewCell.h"
 #import "LVScrollView.h"
 #import "LView.h"
+#import "UIScrollView+LuaView.h"
 
 #define Identifier "Id"
 
@@ -212,7 +213,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"ClickCallback" nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Callback" nargs:2 nrets:0];
         }
     }
 }
@@ -360,14 +361,6 @@
 -(void) reloadData {
     [super reloadData];
     [self getHeaderFooterFromDelegate];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"End"];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"End"];
 }
 
 #pragma -mark lvNewTextField

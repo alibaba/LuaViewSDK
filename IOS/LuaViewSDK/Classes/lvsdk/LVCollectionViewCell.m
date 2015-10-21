@@ -43,5 +43,9 @@
     }
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"<CollectionViewCell(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame)];
+}
+
 
 @end
