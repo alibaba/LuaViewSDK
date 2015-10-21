@@ -195,6 +195,8 @@ UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
+//----------------------------------------
+int lv_callbackFunction(lv_State* l, const char* functionName);
 
 @end
 

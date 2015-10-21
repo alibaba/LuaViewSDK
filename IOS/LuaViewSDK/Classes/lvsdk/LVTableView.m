@@ -14,8 +14,6 @@
 
 #define Identifier "Id"
 
-#define KEY_LUA_INFO 1
-
 @implementation LVTableView
 
 -(id) init:(lv_State*) l{
@@ -69,7 +67,7 @@
             lv_pushnumber(l, indexPath.row+1);// row
             
             lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
+            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
         }
     }
@@ -98,7 +96,7 @@
         lv_pushnumber(l, indexPath.row+1);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
     }
     lview.conentView = nil;
@@ -110,7 +108,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ){
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         if(  [LVUtil call:l key1:"Section" key2:"SectionCount" nargs:0 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
@@ -130,7 +128,7 @@
         lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"Section" key2:"RowCount" nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
@@ -150,7 +148,7 @@
         lv_pushnumber(l, row+1);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 CGFloat heigth = lv_tonumber(l, -1);
@@ -168,7 +166,7 @@
         lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l  key1:funcName key2:key2 nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 CGFloat heigth = lv_tonumber(l, -1);
@@ -189,7 +187,7 @@
         
         // table
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         if(  [LVUtil call:l key1:key1 key2:key2 nargs:2 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TSTRING ){
@@ -213,7 +211,7 @@
             lv_pushnumber(l, indexPath.row+1);
             
             lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
+            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"ClickCallback" nargs:2 nrets:0];
         }
     }
@@ -238,7 +236,7 @@
     lv_pushnumber(l, indexPath.row+1);
     
     lv_pushUserdata(l, self.lv_userData);
-    lv_pushUDataRef(l, KEY_LUA_INFO);
+    lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
     [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Height" nargs:2 nrets:1];
     if( lv_type(l, -1)==LV_TNUMBER ) {
         CGFloat heigth = lv_tonumber(l, -1);
@@ -261,7 +259,7 @@
     if( l && self.lv_userData ){
         // 绑定 tableHeaderView
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         NSString* key = [NSString stringWithFormat:@"tableview.headerView.%ld",(long)section];
         lv_pushstring(l, key.UTF8String);// key
@@ -283,7 +281,7 @@
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData){
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         lv_pushstring(l, [NSString stringWithFormat:@"tableView.footerView.%d",(int)section].UTF8String);// key
         lv_pushUserdata(l, user);// value
@@ -303,7 +301,7 @@
         lv_pushnumber(l, section+1);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:key1 key2:key2 nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TUSERDATA ) {
                 LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
@@ -321,7 +319,7 @@
         lv_checkstack(l, 12);
         
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l key1:"LayoutSubviews" key2:NULL nargs:0 nrets:0];
     }
 }
@@ -331,7 +329,7 @@
     if( l ){
         int num = lv_gettop(l);
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l key1:key.UTF8String key2:NULL nargs:0 nrets:1];
         if( lv_type(l, -1)==LV_TUSERDATA ) {
             LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
@@ -339,7 +337,7 @@
                 
                 // 绑定 tableHeaderView
                 lv_pushUserdata(l, self.lv_userData);
-                lv_pushUDataRef(l, KEY_LUA_INFO );
+                lv_pushUDataRef(l, USERDATA_KEY_DELEGATE );
                 
                 lv_pushstring(l, [NSString stringWithFormat:@"%@.backup",key].UTF8String);// key
                 lv_pushUserdata(l, user);// value
@@ -399,7 +397,7 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
         
         if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
             lv_pushvalue(L, 1);
-            lv_udataRef(L, KEY_LUA_INFO );
+            lv_udataRef(L, USERDATA_KEY_DELEGATE );
             
             [tableView getHeaderFooterFromDelegate];
         }
@@ -442,7 +440,7 @@ static int setTableHeaderView (lv_State *L) {
             
             // 绑定 tableHeaderView
             lv_pushvalue(L, 1);
-            lv_pushUDataRef(L, KEY_LUA_INFO );
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
             
             lv_pushstring(L, "Header");// key
             lv_pushUserdata(L, user2);// value
@@ -464,7 +462,7 @@ static int setTableFooterView (lv_State *L) {
             UIView* head = (__bridge LVTableView *)(user2->view);
             
             lv_pushvalue(L, 1);
-            lv_pushUDataRef(L, KEY_LUA_INFO );
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
             
             lv_pushstring(L, "Footer");// key
             lv_pushUserdata(L, user2);// value

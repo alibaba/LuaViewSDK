@@ -676,6 +676,28 @@ void lv_luaTableRemoveKeys(lv_State* L, const char** keys){
     }
 }
 
+
+int lv_callbackFunction(lv_State* L, const char* functionName){
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            
+            lv_pushstring(L, functionName);
+            lv_pushvalue(L, 2);
+            lv_settable(L, -3);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            lv_pushstring(L, functionName);
+            lv_gettable(L, -2);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void LVLog( NSString* format, ... ){
     va_list params; //定义一个指向个数可变的参数列表指针;
     va_start(params,format);//va_start 得到第一个可变参数地址,

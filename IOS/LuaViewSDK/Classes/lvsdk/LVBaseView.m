@@ -1097,10 +1097,10 @@ static int click (lv_State *L) {
     if( user ){
         if ( lv_gettop(L)>=2 ) {
             lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_CLICK);
+            lv_udataRef(L, USERDATA_KEY_CALLBACK);
             return 1;
         } else {
-            lv_pushUDataRef(L, USERDATA_KEY_CLICK);
+            lv_pushUDataRef(L, USERDATA_KEY_CALLBACK);
             return 1;
         }
     }
@@ -1226,7 +1226,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"anchorPoint",     anchorPoint },
     
-//    {"delegate",     delegate },
+    // {"delegate",     delegate },
     {"click",     click },
     
     {"hasFocus",        isFirstResponder },
@@ -1241,13 +1241,30 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"__tostring",  __tostring},
     
-//    {"__newindex",  __newindex },
-    
+    // {"__newindex",  __newindex },
+
     {"flxChildNodes",  flxChildNodes },
     {"flxLayout",  flxLayout },
     {"flxBindingCSS", flxBindingInlineCSS},
     
     {NULL, NULL}
+};
+
+static int shakeBeganCallback (lv_State *L) {
+    return lv_callbackFunction(L, CALLBACK_SHAKE_BEGIN);
+}
+static int shakeCanceledCallback (lv_State *L) {
+    return lv_callbackFunction(L, CALLBACK_SHAKE_CANCELED);
+}
+static int shakeEndedCallback (lv_State *L) {
+    return lv_callbackFunction(L, CALLBACK_SHAKE_ENDED);
+}
+
+static const struct lvL_reg luaViewMemberFunctions [] = {
+    {CALLBACK_SHAKE_BEGIN,    shakeBeganCallback },
+    {CALLBACK_SHAKE_CANCELED,    shakeCanceledCallback },
+    {CALLBACK_SHAKE_ENDED,    shakeEndedCallback },
+    {NULL,    NULL },
 };
 
 +(const lvL_reg*) baseMemberFunctions{
@@ -1281,6 +1298,11 @@ static int lvNewView (lv_State *L) {
     lv_createClassMetaTable(L, META_TABLE_UIView);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    
+    
+    lv_createClassMetaTable(L, META_TABLE_LuaView);
+    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, luaViewMemberFunctions, 0);
     return 1;
 }
 

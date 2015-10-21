@@ -292,7 +292,7 @@ extern char g_debug_lua[];
 -(void) keyboardWillShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"keyboardWillShow"];
+        [self callLuaWithNoArgs:@CALLBACK_KEYBOARD_WILL_SHOW];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
@@ -320,7 +320,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"shakeBegan"];
+            [self callLuaWithNoArgs:@CALLBACK_SHAKE_BEGIN];
         }
     }
 }
@@ -330,7 +330,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"shakeCancelled"];
+            [self callLuaWithNoArgs:@CALLBACK_SHAKE_CANCELED];
         }
     }
 }
@@ -340,7 +340,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"shakeEnded"];
+            [self callLuaWithNoArgs:@CALLBACK_SHAKE_ENDED];
         }
     }
 }

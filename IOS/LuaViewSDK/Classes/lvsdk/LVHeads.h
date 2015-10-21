@@ -44,9 +44,20 @@
 
 
 #define USERDATA_KEY_DELEGATE   1
-#define USERDATA_KEY_CLICK      2
+#define USERDATA_KEY_CALLBACK   2
 #define USERDATA_FLEX_DELEGATE  8
+// ----摇一摇 回调 名字集合----
+#define CALLBACK_SHAKE_BEGIN    "shakeBeganCallback"
+#define CALLBACK_SHAKE_CANCELED "shakeCanceledCallback"
+#define CALLBACK_SHAKE_ENDED    "shakeEndedCallback"
 
+// ----键盘 回调 名字集合----
+#define CALLBACK_KEYBOARD_WILL_SHOW    "keyboardWillShow"
+#define CALLBACK_SHAKE_CANCELED "shakeCanceledCallback"
+#define CALLBACK_SHAKE_ENDED    "shakeEndedCallback"
+#define CALLBACK_SHAKE_BEGIN    "shakeBeganCallback"
+#define CALLBACK_SHAKE_CANCELED "shakeCanceledCallback"
+#define CALLBACK_SHAKE_ENDED    "shakeEndedCallback"
 //---------------用户数据包含的公用头信息---------------------------------------------
 #define LVUserDataCommonHead  const char* type;
 
@@ -108,6 +119,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UIButton         "UI.Button"
 #define META_TABLE_UIScrollView     "UI.ScrollView"
 #define META_TABLE_UIView           "UI.View"
+#define META_TABLE_LuaView           "UI.LuaView"
 #define META_TABLE_UIViewNewIndex   "UI.View.NewIndex"
 #define META_TABLE_Timer            "LV.Timer"
 #define META_TABLE_Http             "LV.Http"

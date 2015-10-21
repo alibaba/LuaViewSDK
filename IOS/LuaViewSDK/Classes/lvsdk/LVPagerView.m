@@ -16,7 +16,7 @@
 #define IDENTIFIER "Id"
 
 // lua 对应的数据 key
-#define KEY_LUA_INFO  1
+#define USERDATA_KEY_DELEGATE  1
 
 #define DEFAULT_CELL_IDENTIFIER  @"LVCollectionCell.default.identifier"
 
@@ -109,7 +109,7 @@
         lv_checkstack(l, 12);
         // table
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l  key1:"LayoutSubviews" key2:NULL nargs:0 nrets:0];
     }
 }
@@ -142,7 +142,7 @@
             lv_pushnumber(l, indexPath+1);//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
+            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Pages" key2:"Init" key3:NULL nargs:2 nrets:0];
         }
         {   // 通知布局调整
@@ -153,7 +153,7 @@
             lv_pushnumber(l, indexPath+1);//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
+            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0];
         }
     }
@@ -167,7 +167,7 @@
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, KEY_LUA_INFO);
+        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"PageCount" key2:NULL nargs:0 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
@@ -208,7 +208,7 @@ static int lvNewPageView (lv_State *L) {
     if ( haveArgs ) {
         int stackNum = lv_gettop(L);
         lv_pushvalue(L, 1);
-        lv_udataRef(L, KEY_LUA_INFO );
+        lv_udataRef(L, USERDATA_KEY_DELEGATE );
         
         [pageView createAllCell];
         lv_settop(L, stackNum);

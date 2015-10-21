@@ -42,7 +42,7 @@
     if( L && self.lv_userData ){
         int num = lv_gettop(L);
         lv_pushUserdata(L, self.lv_userData);
-        lv_pushUDataRef(L, USERDATA_KEY_CLICK );
+        lv_pushUDataRef(L, USERDATA_KEY_CALLBACK );
         lv_runFunction(L);
         lv_settop(L, num);
     }
