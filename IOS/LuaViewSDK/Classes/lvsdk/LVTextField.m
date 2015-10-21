@@ -35,7 +35,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [LVUtil call:l lightUserData:self key:"开始编辑"];
+        [self callLuaWithNoArgs:@"BeginEditing"];
     }
 }
 
@@ -43,33 +43,33 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [LVUtil call:l lightUserData:self key:"结束编辑"];
+        [self callLuaWithNoArgs:@"EndEditing"];
     }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-    lv_State* l = self.lv_lview.l;
-    if( l ) {
-        lv_checkStack32(l);
-        if(  [LVUtil call:l lightUserData:self key:"清理"] ){
-            if(  lv_isboolean(l, -1) ){
-                return lv_toboolean(l, -1);
-            }
-        }
-    }
+//    lv_State* l = self.lv_lview.l;
+//    if( l ) {
+//        lv_checkStack32(l);
+//        if(  [LVUtil call:l lightUserData:self key:"清理"] ){
+//            if(  lv_isboolean(l, -1) ){
+//                return lv_toboolean(l, -1);
+//            }
+//        }
+//    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    lv_State* l = self.lv_lview.l;
-    if( l ) {
-        lv_checkStack32(l);
-        if( [LVUtil call:l lightUserData:self key:"返回"]==0 ){
-            if(  lv_isboolean(l, -1) ){
-                return lv_toboolean(l, -1);
-            }
-        }
-    }
+//    lv_State* l = self.lv_lview.l;
+//    if( l ) {
+//        lv_checkStack32(l);
+//        if( [LVUtil call:l lightUserData:self key:"返回"]==0 ){
+//            if(  lv_isboolean(l, -1) ){
+//                return lv_toboolean(l, -1);
+//            }
+//        }
+//    }
     return YES;
 }
 

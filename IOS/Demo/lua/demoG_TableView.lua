@@ -86,9 +86,8 @@ function createTableView( )
 			foot.frame(0,0,w,100);
 			foot.backgroundColor(0xff0000);
 			return foot;
-		}
-	};
-	tv.callback {
+		},
+		Callback = {
 			Scrolling = function(){
 				print("scrolling");
 			},
@@ -98,7 +97,8 @@ function createTableView( )
 			ScrollEnd = function(){
 				print("scrolling end");
 			}
-		};
+		}
+	};
 	return tv;
 end
 
