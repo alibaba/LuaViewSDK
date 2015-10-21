@@ -57,7 +57,7 @@ collectionView = CollectionView {
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
-			ClickCallback = function(section, row)
+			Callback = function(section, row)
 				print(section, row);
 				System.gc();
 			end
@@ -73,7 +73,7 @@ collectionView = CollectionView {
 				cell.button = Button();
 				cell.button.frame(0,0,100,60);
 				cell.button.backgroundColor(0x777777);
-				cell.button.click( function()
+				cell.button.callback( function()
 						Animate( function()
 										cell.icon2.center(160,100);
 								 end
@@ -99,10 +99,21 @@ collectionView = CollectionView {
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
-			ClickCallback = function(section, row)
+			Callback = function(section, row)
 				print(section, row);
 				System.gc();
 			end
+		}
+	},
+	Callback = {
+		Scrolling = ^(){
+			print("scrolling");
+		},
+		ScrollBegin = ^(){
+			print("scrolling begin");
+		},
+		ScrollEnd = ^(){
+			print("scrolling end");
 		}
 	}
 };

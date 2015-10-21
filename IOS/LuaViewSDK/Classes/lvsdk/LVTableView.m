@@ -321,6 +321,7 @@
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
+        
         [LVUtil call:l key1:"LayoutSubviews" key2:NULL nargs:0 nrets:0];
     }
 }
@@ -377,9 +378,6 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
         g_class = [LVTableView class];
     }
     LVTableView* tableView = [[g_class alloc] init:L];
-    if( haveRefreshHead ) {
-        [tableView lv_initRefreshHeader];
-    }
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(tableView);
@@ -398,6 +396,9 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
     LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
         [lview containerAddSubview:tableView];
+    }
+    if( haveRefreshHead ) {
+        [tableView lv_initRefreshHeader];
     }
     lv_pushUserdata(L, tableView.lv_userData);
     return 1;
@@ -545,6 +546,14 @@ static int rectForSection (lv_State *L) {
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );
     return 1;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
 }
 
 -(NSString*) description{

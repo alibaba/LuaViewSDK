@@ -6,7 +6,7 @@ function createButton( text , x,y,w,h, callback)
 	button.frame(x,y,w,h);
 	button.text(text);
 	button.backgroundColor(0xeeeeee);
-	button.click( function()
+	button.callback( function()
 		print("ok",button);
 		if( callback ) then
 			callback();
@@ -32,7 +32,7 @@ button2 = createButton("设置导航栏 左菜单",0,buttonH*2.5,scrW,buttonH, f
 			leftButton.text("左")
 			leftButton.sizeToFit();
 			Navigation.leftBarButton (leftButton)
-			leftButton.click(function ()
+			leftButton.callback(function ()
 				viewController.gotoHistory();
 			end)
 	end);
@@ -55,10 +55,10 @@ button4 = createButton("设置导航栏 左菜单2",0,buttonH*5.5,scrW,buttonH, 
 			leftButton2.text("左2")
 			leftButton2.sizeToFit();
 			Navigation.leftBarButton (leftButton, leftButton2)
-			leftButton.click(function ()
+			leftButton.callback(function ()
 				viewController.gotoHistory();
 			end)
-			leftButton2.click(function ()
+			leftButton2.callback(function ()
 				viewController.gotoHistory();
 			end)
 	end);

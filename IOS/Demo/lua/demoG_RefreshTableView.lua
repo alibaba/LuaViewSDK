@@ -40,7 +40,7 @@ tableView = RefreshTableView{
 				cell.title.frame(cellHeight, 0, w-cellHeight, cellHeight);
 				cell.title.text("测试"..section .."--" .. row);
 			},
-			ClickCallback = ^( section, row ){
+			Callback = ^( section, row ){
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
@@ -64,7 +64,7 @@ tableView = RefreshTableView{
 				cell.icon2.frame(cellHeight+10, 0, cellHeight, cellHeight);
 				cell.icon2.image(imageUrl1);
 			},
-			ClickCallback = ^( section, row ){
+			Callback = ^( section, row ){
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
@@ -93,14 +93,16 @@ tableView = RefreshTableView{
 		foot.backgroundColor(0xff0000);
 		return foot;
 	},
-	ScrollingCallback = ^(){
-		print("scrolling");
-	},
-	ScrollBeginCallback = ^(){
-		print("scrolling begin");
-	},
-	ScrollEndCallback = ^(){
-		print("scrolling end");
+	Callback = {
+		Scrolling = ^(){
+			print("scrolling");
+		},
+		ScrollBegin = ^(){
+			print("scrolling begin");
+		},
+		ScrollEnd = ^(){
+			print("scrolling end");
+		}
 	}
 };
 
