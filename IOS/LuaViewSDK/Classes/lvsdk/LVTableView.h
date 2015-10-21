@@ -10,6 +10,8 @@
 #import "LVHeads.h"
 #import "UIScrollView+LuaView.h"
 
+#define Identifier "Id"
+
 @interface LVTableView : UITableView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;

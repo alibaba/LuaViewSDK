@@ -13,22 +13,27 @@
 @implementation LVScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.tableView lv_callLuaByKey1:@"Scrolling" key2:nil];
+    [self.owner lv_callLuaByKey1:@"Scrolling" key2:nil];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.tableView lv_callLuaByKey1:@"ScrollBegin" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollBegin" key2:nil];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self.tableView lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.tableView lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if( !decelerate ) {
+        [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+    }
+}
 
 @end

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface LVScrollViewDelegate : NSObject
-
-@property(nonatomic,weak) UIView* tableView;
+@interface LVScrollViewDelegate : NSObject<UIScrollViewDelegate>
+@property(nonatomic,weak) UIView* owner;
 @end
