@@ -279,7 +279,7 @@
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
-            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"Delegate" section:indexPath.section row:indexPath.row];
+            [self callByKey1:"Cell" key2:identifier.UTF8String key3:"ClickCallback" section:indexPath.section row:indexPath.row];
         }
     }
 }
@@ -360,33 +360,33 @@ static int lvNewCollectionView (lv_State *L) {
     return 1;
 }
 
-static int delegate (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        if ( lv_gettop(L)>=2 ) {
-            NSArray* identifierArray = nil;
-            if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TTABLE ) {
-                lv_pushstring(L, "Cell");
-                lv_gettable(L, 2);
-                identifierArray = lv_luaTableKeys(L, -1);
-            }
-            lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-            
-            if ( identifierArray ) {
-                LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->view);
-                for( NSString* identifier in identifierArray ){
-                    [collectionView registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
-                }
-            }
-            return 1;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            return 1;
-        }
-    }
-    return 0;
-}
+//static int delegate (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        if ( lv_gettop(L)>=2 ) {
+//            NSArray* identifierArray = nil;
+//            if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TTABLE ) {
+//                lv_pushstring(L, "Cell");
+//                lv_gettable(L, 2);
+//                identifierArray = lv_luaTableKeys(L, -1);
+//            }
+//            lv_settop(L, 2);
+//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
+//            
+//            if ( identifierArray ) {
+//                LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->view);
+//                for( NSString* identifier in identifierArray ){
+//                    [collectionView registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
+//                }
+//            }
+//            return 1;
+//        } else {
+//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
 
 static int reloadData (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);

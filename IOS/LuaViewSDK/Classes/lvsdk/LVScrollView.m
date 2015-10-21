@@ -471,11 +471,11 @@ static const struct lvL_reg memberFunctions [] = {
     //    {"hiddenRefreshFooter", hiddenRefreshFooter},
     
     // 事件回调处理
-    {"scrollBeginCallback", scrollBeginCallback },
-    {"scrollingCallback", scrollingCallback },
-    {"scrollEndCallback", scrollEndCallback },
-    {"pullDownRefreshCallback", pullDownRefreshCallback },
-    {"pullUpRefreshCallback", pullUpRefreshCallback },
+    {"scrollBegin", scrollBeginCallback },
+    {"scrolling", scrollingCallback },
+    {"scrollEnd", scrollEndCallback },
+    {"pullDownRefresh", pullDownRefreshCallback },
+    {"pullUpRefresh", pullUpRefreshCallback },
     {NULL, NULL}
 };
 

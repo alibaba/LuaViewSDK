@@ -248,21 +248,21 @@ static int font (lv_State *L) {
     return 0;
 }
 
-static int showsTouchWhenHighlighted(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVButton* button = (__bridge LVButton *)(user->view);
-        if( lv_gettop(L)<=1 ) {
-            lv_pushboolean(L, button.showsTouchWhenHighlighted );
-            return 1;
-        } else {
-            BOOL yes = lvL_checkbool(L, 2);
-            button.showsTouchWhenHighlighted = yes;
-            return 0;
-        }
-    }
-    return 0;
-}
+//static int showsTouchWhenHighlighted(lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVButton* button = (__bridge LVButton *)(user->view);
+//        if( lv_gettop(L)<=1 ) {
+//            lv_pushboolean(L, button.showsTouchWhenHighlighted );
+//            return 1;
+//        } else {
+//            BOOL yes = lvL_checkbool(L, 2);
+//            button.showsTouchWhenHighlighted = yes;
+//            return 0;
+//        }
+//    }
+//    return 0;
+//}
 
 +(int) classDefine:(lv_State *)L {
     {
@@ -281,7 +281,7 @@ static int showsTouchWhenHighlighted(lv_State *L) {
         {"selected",    selected},
         {"enabled",    enabled},
         
-        {"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
+        //{"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
         {NULL, NULL}
     };
     

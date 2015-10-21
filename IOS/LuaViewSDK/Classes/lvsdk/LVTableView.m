@@ -494,22 +494,22 @@ static int rectForSection (lv_State *L) {
     return 0;
 }
 
-static int delegate (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataView) ){
-        if ( lv_gettop(L)>=2 ) {
-            lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-            LVTableView* tableView = (__bridge LVTableView *)(user->view);
-            [tableView getHeaderFooterFromDelegate];
-            return 1;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            return 1;
-        }
-    }
-    return 0;
-}
+//static int delegate (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user && LVIsType(user, LVUserDataView) ){
+//        if ( lv_gettop(L)>=2 ) {
+//            lv_settop(L, 2);
+//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
+//            LVTableView* tableView = (__bridge LVTableView *)(user->view);
+//            [tableView getHeaderFooterFromDelegate];
+//            return 1;
+//        } else {
+//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
 
 +(int) classDefine: (lv_State *)L {
     {

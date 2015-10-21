@@ -1077,20 +1077,20 @@ static int anchorPoint (lv_State *L) {
     return 0;
 }
 
-static int delegate (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        if ( lv_gettop(L)>=2 ) {
-            lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-            return 1;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            return 1;
-        }
-    }
-    return 0;
-}
+//static int delegate (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        if ( lv_gettop(L)>=2 ) {
+//            lv_settop(L, 2);
+//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
+//            return 1;
+//        } else {
+//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
 
 static int click (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);

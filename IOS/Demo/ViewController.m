@@ -36,8 +36,8 @@
     self.title = @"LuaView 测试demo";
     
     CGRect r = self.view.bounds;
-    r.origin.y = 64;
-    r.size.height -= 64;
+    //    r.origin.y = 64;
+    //    r.size.height -= 64;
     self.tableView = [[UITableView alloc] initWithFrame:r];
     [self.view addSubview:self.tableView];
     
@@ -71,7 +71,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 64;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

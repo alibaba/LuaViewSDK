@@ -17,8 +17,10 @@ for i=1,10 do
 end
 scrollView.backgroundColor(0xff0000);
 
-scrollView.scrollingCallback(function ( )
-	print("scrolling");
-end);
+scrollView.scrolling( 
+	function ()
+		print("scrolling");
+	end
+	);
 
 

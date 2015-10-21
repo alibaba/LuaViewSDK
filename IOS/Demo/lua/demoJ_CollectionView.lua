@@ -7,9 +7,7 @@ cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
-collectionView = CollectionView();
-collectionView.delegate
-{
+collectionView = CollectionView {
 	Section = {
 		SectionCount = 2,
 
@@ -59,7 +57,7 @@ collectionView.delegate
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
-			Delegate = function(section, row)
+			ClickCallback = function(section, row)
 				print(section, row);
 				System.gc();
 			end
@@ -101,7 +99,7 @@ collectionView.delegate
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
-			Delegate = function(section, row)
+			ClickCallback = function(section, row)
 				print(section, row);
 				System.gc();
 			end
