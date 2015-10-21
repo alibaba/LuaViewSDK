@@ -8,7 +8,7 @@ function createButton( text, x,y,w,h, callback)
     button.backgroundColor(0x777777,1);
 
 
-    button.click( 
+    button.callback( 
      function()
         if( callback ) then
             callback();
