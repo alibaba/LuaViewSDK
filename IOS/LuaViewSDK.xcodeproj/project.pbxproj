@@ -254,6 +254,9 @@
 		8481E0601BD7AEF300FDFEEA /* LVTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E05E1BD7AEF300FDFEEA /* LVTableViewDelegate.h */; settings = {ASSET_TAGS = (); }; };
 		8481E0611BD7AEF300FDFEEA /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		8481E0621BD7AEF300FDFEEA /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		8481E0651BD7B29100FDFEEA /* LVCollectionViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */; settings = {ASSET_TAGS = (); }; };
+		8481E0661BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		8481E0671BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
 		848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
 		848CA3611B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
@@ -551,6 +554,8 @@
 		8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVScrollViewDelegate.m; sourceTree = "<group>"; };
 		8481E05E1BD7AEF300FDFEEA /* LVTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTableViewDelegate.h; sourceTree = "<group>"; };
 		8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTableViewDelegate.m; sourceTree = "<group>"; };
+		8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewDelegate.h; sourceTree = "<group>"; };
+		8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewDelegate.m; sourceTree = "<group>"; };
 		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
@@ -823,6 +828,8 @@
 				848CA35E1B29669A00C70321 /* LVCollectionView.m */,
 				848CA3621B29748800C70321 /* LVCollectionViewCell.h */,
 				848CA3631B29748800C70321 /* LVCollectionViewCell.m */,
+				8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */,
+				8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */,
 				846481B41A64C61F00DE6204 /* LVScrollView.h */,
 				846481B51A64C61F00DE6204 /* LVScrollView.m */,
 				8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */,
@@ -1231,6 +1238,7 @@
 				84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */,
 				84B58E3A1B65CC260048F33D /* LVLoadingIndicator.h in Headers */,
 				846481C11A64C61F00DE6204 /* LVBaseView.h in Headers */,
+				8481E0651BD7B29100FDFEEA /* LVCollectionViewDelegate.h in Headers */,
 				8425324C1ADCBD3A003C05BF /* LVDownloader.h in Headers */,
 				84CF56751AE9184000A49B36 /* LVNativeObjBox.h in Headers */,
 				84CF566E1AE8EC3D00A49B36 /* LVExternalLinker.h in Headers */,
@@ -1544,6 +1552,7 @@
 				840AD6311A63ED7D003E837D /* lVtm.c in Sources */,
 				846481E11A64C61F00DE6204 /* LVUtil.m in Sources */,
 				84DD8F8B1B560933001C83E9 /* LVNavigation.m in Sources */,
+				8481E0671BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */,
 				9171D4A61AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */,
 				840AD6041A63ED7D003E837D /* lVgc.c in Sources */,
 				846481C61A64C61F00DE6204 /* LVButton.m in Sources */,
@@ -1614,6 +1623,7 @@
 				91ACCE781AC531160034D9B3 /* LVDebuger.m in Sources */,
 				84056E731B5CA5990078F9D6 /* LVCustomPanel.m in Sources */,
 				84799AFB1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */,
+				8481E0661BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */,
 				8497083D1A6765B000E913F4 /* LVSystem.m in Sources */,
 				843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */,
 				91882E911AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */,
