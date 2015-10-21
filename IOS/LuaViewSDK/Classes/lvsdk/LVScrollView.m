@@ -11,7 +11,11 @@
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "UIScrollView+LuaView.h"
+#import "LVScrollViewDelegate.h"
 
+@interface LVScrollView ()
+@property (nonatomic,strong) LVScrollViewDelegate* scrollViewDelegate;
+@end
 
 @implementation LVScrollView
 
@@ -20,7 +24,8 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
-        self.delegate = self;
+        self.scrollViewDelegate = [[LVScrollViewDelegate alloc] init:self];
+        self.delegate = self.scrollViewDelegate;
         self.alwaysBounceHorizontal = YES;
         self.alwaysBounceVertical = NO;
         self.showsHorizontalScrollIndicator = NO;

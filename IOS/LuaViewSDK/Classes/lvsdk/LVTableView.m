@@ -16,16 +16,10 @@
 #import "LVTableViewDelegate.h"
 
 
-
-
-
-
-//----------
-
-
 @interface LVTableView ()
 @property(nonatomic,strong) LVTableViewDelegate* tableViewDelegate;
 @end
+
 @implementation LVTableView
 
 -(id) init:(lv_State*) l{
@@ -45,18 +39,10 @@
 -(void) dealloc{
 }
 
-
 -(void) layoutSubviews{
     [super layoutSubviews];
-    lv_State* l = self.lv_lview.l;
-    if( l ){
-        lv_checkstack(l, 12);
-        
-        lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        
-        [LVUtil call:l key1:"LayoutSubviews" key2:NULL nargs:0 nrets:0];
-    }
+    
+    [self lv_callLuaByKey1:@"LayoutSubviews"];
 }
 
 - (UIView*) lv_getViewFromLuaByKey:(NSString*)key{

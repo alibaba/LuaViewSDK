@@ -11,6 +11,5 @@
 
 @interface LVTableViewDelegate : LVScrollViewDelegate<UITableViewDataSource, UITableViewDelegate>
 
--(id) init:(UIView*) view;
 
 @end

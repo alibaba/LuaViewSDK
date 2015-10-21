@@ -10,5 +10,9 @@
 #import <Foundation/Foundation.h>
 
 @interface LVScrollViewDelegate : NSObject<UIScrollViewDelegate>
+
 @property(nonatomic,weak) UIView* owner;
+
+-(id) init:(UIView*) view;
+
 @end

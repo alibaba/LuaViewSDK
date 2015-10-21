@@ -15,13 +15,6 @@
 
 @implementation LVTableViewDelegate
 
--(id) init:(UIView*) tableView{
-    self = [super init];
-    if( self ){
-        self.owner = tableView;
-    }
-    return self;
-}
 
 //----------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

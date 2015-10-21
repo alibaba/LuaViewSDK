@@ -12,6 +12,14 @@
 
 @implementation LVScrollViewDelegate
 
+-(id) init:(UIView*) tableView{
+    self = [super init];
+    if( self ){
+        self.owner = tableView;
+    }
+    return self;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"Scrolling" key2:nil];
 }
