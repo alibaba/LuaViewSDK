@@ -13,7 +13,7 @@ pageView = PagerView{
             page.button.title("测试按钮"..pos)
             page.button.frame(0, 0, scrW, 200)
             page.button.backgroundColor(0x777777);
-            page.button.click( function()
+            page.button.callback( function()
                 print("第",pos,"页");
                 pageView.currentPage(pos+1);
                 print(pageView.currentPage() );

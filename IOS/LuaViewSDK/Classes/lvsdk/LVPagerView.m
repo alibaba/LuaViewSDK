@@ -103,15 +103,7 @@
     
     [self checkCellVisible];
     
-    lv_State* l = self.lv_lview.l;
-    if( l ){
-        lv_settop(l, 0);
-        lv_checkstack(l, 12);
-        // table
-        lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        [LVUtil call:l  key1:"LayoutSubviews" key2:NULL nargs:0 nrets:0];
-    }
+    [self lv_callLuaByKey1:@"LayoutSubviews"];
 }
 
 -(void) dealloc{
