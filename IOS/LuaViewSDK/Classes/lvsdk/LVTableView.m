@@ -53,6 +53,14 @@
             cell.isInited = YES;
             [cell doInitWithLView:lview];
             
+            {   // 设置默认的宽度高度
+                CGFloat height = [self heightForRowAtIndexPath:indexPath identifier:identifier lvState:l];
+                CGRect r = cell.frame;
+                r.size.width = self.frame.size.width;
+                r.size.height = height;
+                cell.frame = r;
+            }
+            
             // 创建cell初始化
             lv_settop(l, 0);
             lv_checkstack(l, 12);
@@ -216,20 +224,25 @@
     if( l ){
         NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
         if( identifier ) {
-            // 参数 cell,section,row
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
-            lv_pushnumber(l, indexPath.section+1);
-            lv_pushnumber(l, indexPath.row+1);
-            
-            lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Height" nargs:2 nrets:1];
-            if( lv_type(l, -1)==LV_TNUMBER ) {
-                CGFloat heigth = lv_tonumber(l, -1);
-                return heigth;
-            }
+            return [self heightForRowAtIndexPath:indexPath identifier:identifier lvState:l];
         }
+    }
+    return 0;
+}
+
+-(CGFloat) heightForRowAtIndexPath:(NSIndexPath*)indexPath identifier:(NSString*)identifier lvState:(lv_State*) l{
+    // 参数 cell,section,row
+    lv_settop(l, 0);
+    lv_checkstack(l, 12);
+    lv_pushnumber(l, indexPath.section+1);
+    lv_pushnumber(l, indexPath.row+1);
+    
+    lv_pushUserdata(l, self.lv_userData);
+    lv_pushUDataRef(l, KEY_LUA_INFO);
+    [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Height" nargs:2 nrets:1];
+    if( lv_type(l, -1)==LV_TNUMBER ) {
+        CGFloat heigth = lv_tonumber(l, -1);
+        return heigth;
     }
     return 0;
 }

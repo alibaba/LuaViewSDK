@@ -33,6 +33,7 @@ function createTableView( )
 					cell.icon = Image();
 					cell.title = Label();
 					print("构造Cell");
+					print(cell.window);
 				},
 				Layout = ^(cell, section, row){
 					cell.icon.frame(0, 0, cellHeight, cellHeight);
