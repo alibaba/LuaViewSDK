@@ -9,7 +9,6 @@
 #import "LVCollectionViewCell.h"
 #import "LVHeads.h"
 #import "LView.h"
-#import "LVCellTargetProxy.h"
 
 @interface LVCollectionViewCell ()
 @property (nonatomic,weak) LView* lv_lview;
