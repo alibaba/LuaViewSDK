@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "UIScrollView+LuaView.h"
 
-@interface LVTableView : UITableView<LVProtocal,UITableViewDataSource, UITableViewDelegate>
+@interface LVTableView : UITableView<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataView* lv_userData;

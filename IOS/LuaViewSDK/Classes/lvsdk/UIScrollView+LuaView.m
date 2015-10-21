@@ -51,23 +51,5 @@
     [self callLuaWithNoArgs:@"PullUpRefresh" key2:nil];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Scrolling" key2:nil];
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"ScrollBegin" key2:nil];
-}
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self callLuaWithNoArgs:@"Callback" key2:@"BeginDecelerating"];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
-}
 
 @end

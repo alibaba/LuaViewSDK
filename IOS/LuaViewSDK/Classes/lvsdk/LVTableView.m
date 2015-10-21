@@ -15,22 +15,18 @@
 
 #define Identifier "Id"
 
-@implementation LVTableView
+@interface LVTableViewDelegate : NSObject<UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic,weak) LVTableView* tableView;
+@end
 
--(id) init:(lv_State*) l{
-    self = [super initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+@implementation LVTableViewDelegate
+
+-(id) init:(LVTableView*) tableView{
+    self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
-        self.delegate = self;
-        self.dataSource = self;
-        self.backgroundColor = [UIColor clearColor];
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.clipsToBounds = YES;
+        self.tableView = tableView;
     }
     return self;
-}
-
--(void) dealloc{
 }
 
 //----------
@@ -39,7 +35,7 @@
     if( identifier == nil ){
         identifier = @"LVTableViewCell.default.identifier";
     }
-    LView* lview = self.lv_lview;
+    LView* lview = self.tableView.lv_lview;
     lv_State* l = lview.l;
     LVTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if( cell==nil ) {
@@ -55,7 +51,7 @@
             {   // 设置默认的宽度高度
                 CGFloat height = [self heightForRowAtIndexPath:indexPath identifier:identifier lvState:l];
                 CGRect r = cell.frame;
-                r.size.width = self.frame.size.width;
+                r.size.width = self.tableView.frame.size.width;
                 r.size.height = height;
                 cell.frame = r;
             }
@@ -67,7 +63,7 @@
             lv_pushnumber(l, indexPath.section+1);// section
             lv_pushnumber(l, indexPath.row+1);// row
             
-            lv_pushUserdata(l, self.lv_userData);
+            lv_pushUserdata(l, self.tableView.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
         }
@@ -82,7 +78,7 @@
     if( identifier == nil ){
         identifier = @"LVTableViewCell.default.identifier";
     }
-    LView* lview = self.lv_lview;
+    LView* lview = self.tableView.lv_lview;
     lv_State* l = lview.l;
     LVTableViewCell* cell = (LVTableViewCell*)cell0;
     lview.conentView = cell.contentView;
@@ -96,7 +92,7 @@
         lv_pushnumber(l, indexPath.section+1);
         lv_pushnumber(l, indexPath.row+1);
         
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
     }
@@ -106,9 +102,9 @@
 
 // section数量
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         if(  [LVUtil call:l key1:"Section" key2:"SectionCount" nargs:0 nrets:1] ==0 ) {
@@ -123,12 +119,12 @@
 }
 // 每个区域的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         //args
         lv_pushnumber(l, section+1);
         
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"Section" key2:"RowCount" nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
@@ -142,13 +138,13 @@
 //-------
 
 - (CGFloat) callReturnNumberFunction:(const char*) functionName key2:(const char*) key2 section:(NSInteger) section row:(NSInteger) row{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
         lv_pushnumber(l, section+1);
         lv_pushnumber(l, row+1);
         
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
@@ -161,12 +157,12 @@
 }
 
 - (CGFloat) callReturnNumberKey1:(const char*) funcName key2:(const char*) key2 section:(NSInteger) section {
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
         lv_pushnumber(l, section+1);
         
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l  key1:funcName key2:key2 nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
@@ -179,7 +175,7 @@
 }
 
 - (NSString*) returnStringCallWithKey1:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
@@ -187,7 +183,7 @@
         lv_pushnumber(l, row+1);
         
         // table
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         if(  [LVUtil call:l key1:key1 key2:key2 nargs:2 nrets:1] ==0 ) {
@@ -201,7 +197,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
         if( identifier ) {
@@ -211,7 +207,7 @@
             lv_pushnumber(l, indexPath.section+1);
             lv_pushnumber(l, indexPath.row+1);
             
-            lv_pushUserdata(l, self.lv_userData);
+            lv_pushUserdata(l, self.tableView.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Callback" nargs:2 nrets:0];
         }
@@ -219,7 +215,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:indexPath.row];
         if( identifier ) {
@@ -236,7 +232,7 @@
     lv_pushnumber(l, indexPath.section+1);
     lv_pushnumber(l, indexPath.row+1);
     
-    lv_pushUserdata(l, self.lv_userData);
+    lv_pushUserdata(l, self.tableView.lv_userData);
     lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
     [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Height" nargs:2 nrets:1];
     if( lv_type(l, -1)==LV_TNUMBER ) {
@@ -256,10 +252,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     LVUserDataView* user = [self callReturnUserDataFunction:"Section" key2:"Header" section:section];
-    lv_State* l = self.lv_lview.l;
-    if( l && self.lv_userData ){
+    lv_State* l = self.tableView.lv_lview.l;
+    if( l && self.tableView.lv_userData ){
         // 绑定 tableHeaderView
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         NSString* key = [NSString stringWithFormat:@"tableview.headerView.%ld",(long)section];
@@ -279,9 +275,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     LVUserDataView* user = [self callReturnUserDataFunction:"Section" key2:"Footer" section:section];
-    lv_State* l = self.lv_lview.l;
-    if( l && self.lv_userData){
-        lv_pushUserdata(l, self.lv_userData);
+    lv_State* l = self.tableView.lv_lview.l;
+    if( l && self.tableView.lv_userData){
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
         lv_pushstring(l, [NSString stringWithFormat:@"tableView.footerView.%d",(int)section].UTF8String);// key
@@ -296,12 +292,12 @@
 
 // 回调脚本返回一个用户数据
 - (LVUserDataView *) callReturnUserDataFunction:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section {
-    lv_State* l = self.lv_lview.l;
+    lv_State* l = self.tableView.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
         lv_pushnumber(l, section+1);
         
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l, self.tableView.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:key1 key2:key2 nargs:1 nrets:1] ==0 ) {
             if( lv_type(l, -1)==LV_TUSERDATA ) {
@@ -312,6 +308,53 @@
     }
     return nil;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.tableView callLuaWithNoArgs:@"Scrolling" key2:nil];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.tableView callLuaWithNoArgs:@"ScrollBegin" key2:nil];
+}
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self.tableView callLuaWithNoArgs:@"ScrollEnd" key2:nil];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self.tableView callLuaWithNoArgs:@"ScrollEnd" key2:nil];
+}
+
+@end
+
+
+//----------
+
+
+@interface LVTableView ()
+@property(nonatomic,strong) LVTableViewDelegate* tableViewDelegate;
+@end
+@implementation LVTableView
+
+-(id) init:(lv_State*) l{
+    self = [super initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+    if( self ){
+        self.lv_lview = (__bridge LView *)(l->lView);
+        self.tableViewDelegate = [[LVTableViewDelegate alloc] init:self];
+        self.delegate = self.tableViewDelegate;
+        self.dataSource = self.tableViewDelegate;
+        self.backgroundColor = [UIColor clearColor];
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.clipsToBounds = YES;
+    }
+    return self;
+}
+
+-(void) dealloc{
+}
+
 
 -(void) layoutSubviews{
     [super layoutSubviews];
@@ -546,14 +589,6 @@ static int rectForSection (lv_State *L) {
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );
     return 1;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"ScrollEnd" key2:nil];
 }
 
 -(NSString*) description{
