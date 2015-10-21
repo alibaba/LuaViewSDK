@@ -3,15 +3,14 @@ require "lv_kit"
 
 local scrW, scrH= System.screenSize()
 
-pageView = PagerView ();
-pageView.delegate{
+pageView = PagerView{
     PageCount = 12,
     Pages = {
         Init = function(page, pos)
             page.button = Button()
         end,
         Layout = function(page, pos)
-            page.button.text("测试按钮"..pos)
+            page.button.title("测试按钮"..pos)
             page.button.frame(0, 0, scrW, 200)
             page.button.backgroundColor(0x777777);
             page.button.click( function()

@@ -276,7 +276,8 @@ static int font (lv_State *L) {
         
         {"titleColor",    titleColor},
         {"title",    title},
-        //{"text",    title},
+        {"textColor",    titleColor},
+        {"text",    title},
 
         {"selected",    selected},
         {"enabled",    enabled},

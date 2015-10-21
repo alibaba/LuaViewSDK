@@ -285,23 +285,23 @@ static int setCurrentPage(lv_State *L) {
     }
     return 0;
 }
-
-static int delegate (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataView) ){
-        if ( lv_gettop(L)>=2 ) {
-            lv_settop(L, 2);
-            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-            LVPagerView* tableView = (__bridge LVPagerView *)(user->view);
-            [tableView createAllCell];
-            return 1;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            return 1;
-        }
-    }
-    return 0;
-}
+//
+//static int delegate (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user && LVIsType(user, LVUserDataView) ){
+//        if ( lv_gettop(L)>=2 ) {
+//            lv_settop(L, 2);
+//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
+//            LVPagerView* tableView = (__bridge LVPagerView *)(user->view);
+//            [tableView createAllCell];
+//            return 1;
+//        } else {
+//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
 
 +(int) classDefine: (lv_State *)L {
     {
@@ -312,7 +312,7 @@ static int delegate (lv_State *L) {
         {"reload",    reloadData},
         {"showScrollBar",     showScrollBar },
         
-        {"delegate",     delegate },
+//        {"delegate",     delegate },
         
         {"currentPage",     setCurrentPage },
         {NULL, NULL}
