@@ -206,7 +206,7 @@
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, KEY_LUA_INFO);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Click" nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"ClickCallback" nargs:2 nrets:0];
         }
     }
 }
