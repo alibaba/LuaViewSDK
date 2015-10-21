@@ -248,6 +248,9 @@
 		84799AFC1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */; settings = {ASSET_TAGS = (); }; };
 		8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */; settings = {ASSET_TAGS = (); }; };
+		8481E05B1BD7AC8000FDFEEA /* LVScrollViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */; settings = {ASSET_TAGS = (); }; };
+		8481E05C1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		8481E05D1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
 		848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
 		848CA3611B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
@@ -541,6 +544,8 @@
 		84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerViewCell.m; sourceTree = "<group>"; };
 		8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoG_RefreshTableView.lua; sourceTree = "<group>"; };
 		8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_ScrollView.lua; sourceTree = "<group>"; };
+		8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVScrollViewDelegate.h; sourceTree = "<group>"; };
+		8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVScrollViewDelegate.m; sourceTree = "<group>"; };
 		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
@@ -813,6 +818,8 @@
 				848CA3631B29748800C70321 /* LVCollectionViewCell.m */,
 				846481B41A64C61F00DE6204 /* LVScrollView.h */,
 				846481B51A64C61F00DE6204 /* LVScrollView.m */,
+				8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */,
+				8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */,
 			);
 			name = container;
 			sourceTree = "<group>";
@@ -1230,6 +1237,7 @@
 				84F4A01F1B4B9E600062A7B2 /* UIScrollView+LuaView.h in Headers */,
 				8454D1461A7FA7A400774565 /* LVHttpResponse.h in Headers */,
 				840AD5841A5EAB4A0075CB58 /* LView.h in Headers */,
+				8481E05B1BD7AC8000FDFEEA /* LVScrollViewDelegate.h in Headers */,
 				84D446F21AF75BD8000A3911 /* LVPkgManager.h in Headers */,
 				849708371A67653A00E913F4 /* LVDB.h in Headers */,
 				846481CA1A64C61F00DE6204 /* LVImage.h in Headers */,
@@ -1521,6 +1529,7 @@
 				840AD6171A63ED7D003E837D /* lVobject.c in Sources */,
 				846481DE1A64C61F00DE6204 /* LVTransform3D.m in Sources */,
 				84D446F41AF75BD8000A3911 /* LVPkgManager.m in Sources */,
+				8481E05D1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */,
 				840AD6271A63ED7D003E837D /* lVstring.c in Sources */,
 				848CA3661B29748800C70321 /* LVCollectionViewCell.m in Sources */,
 				840AD6311A63ED7D003E837D /* lVtm.c in Sources */,
@@ -1643,6 +1652,7 @@
 				84D840A11B5F33D900BC59F3 /* JHSLVCustomLoading.m in Sources */,
 				84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */,
 				8418E3C61A5E804700158125 /* ViewController.m in Sources */,
+				8481E05C1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */,
 				84BC62211BA95A3F0019B02E /* LVDebugConnection.m in Sources */,
 				84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */,
 				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,

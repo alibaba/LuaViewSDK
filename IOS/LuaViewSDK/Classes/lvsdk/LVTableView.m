@@ -12,11 +12,11 @@
 #import "LVScrollView.h"
 #import "LView.h"
 #import "UIScrollView+LuaView.h"
+#import "LVScrollViewDelegate.h"
 
 #define Identifier "Id"
 
-@interface LVTableViewDelegate : NSObject<UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic,weak) LVTableView* tableView;
+@interface LVTableViewDelegate : LVScrollViewDelegate<UITableViewDataSource, UITableViewDelegate>
 @end
 
 @implementation LVTableViewDelegate
@@ -307,24 +307,6 @@
         }
     }
     return nil;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.tableView callLuaWithNoArgs:@"Scrolling" key2:nil];
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.tableView callLuaWithNoArgs:@"ScrollBegin" key2:nil];
-}
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self.tableView callLuaWithNoArgs:@"ScrollEnd" key2:nil];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.tableView callLuaWithNoArgs:@"ScrollEnd" key2:nil];
 }
 
 @end

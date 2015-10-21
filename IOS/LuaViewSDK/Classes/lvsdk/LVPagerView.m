@@ -371,10 +371,10 @@ static int setCurrentPage(lv_State *L) {
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callLuaWithNoArgs:@"Callback" key2:@"ScrollBegin"];
+    [self lv_callLuaByKey1:@"Callback" key2:@"ScrollBegin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self callLuaWithNoArgs:@"Callback" key2:@"BeginDecelerating"];
+    //[self lv_callLuaByKey1:@"Callback" key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

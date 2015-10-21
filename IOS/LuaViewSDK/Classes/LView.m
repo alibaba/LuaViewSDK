@@ -244,28 +244,28 @@ extern char g_debug_lua[];
 -(void) viewWillAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"viewWillAppear"];
+        [self lv_callLuaByKey1:@"viewWillAppear"];
     }
 }
 
 -(void) viewDidAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"viewDidAppear"];
+        [self lv_callLuaByKey1:@"viewDidAppear"];
     }
 }
 
 -(void) viewWillDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"viewWillDisAppear"];
+        [self lv_callLuaByKey1:@"viewWillDisAppear"];
     }
 }
 
 -(void) viewDidDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"viewDidDisAppear"];
+        [self lv_callLuaByKey1:@"viewDidDisAppear"];
     }
 }
 
@@ -274,7 +274,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"didMoveToSuperview"];
+        [self lv_callLuaByKey1:@"didMoveToSuperview"];
     }
 }
 
@@ -283,7 +283,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"didMoveToSuperview"];
+        [self lv_callLuaByKey1:@"didMoveToSuperview"];
     }
 }
 
@@ -292,25 +292,25 @@ extern char g_debug_lua[];
 -(void) keyboardWillShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"keyboardWillShow"];
+        [self lv_callLuaByKey1:@"keyboardWillShow"];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"keyboardDidShow"];
+        [self lv_callLuaByKey1:@"keyboardDidShow"];
     }
 }
 -(void) keyboardWillHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"keyboardWillHide"];
+        [self lv_callLuaByKey1:@"keyboardWillHide"];
     }
 }
 -(void) keyboardDidHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"keyboardDidHide"];
+        [self lv_callLuaByKey1:@"keyboardDidHide"];
     }
 }
 
@@ -320,7 +320,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"ShakeBegin"];
+            [self lv_callLuaByKey1:@"ShakeBegin"];
         }
     }
 }
@@ -330,7 +330,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"ShakeCanceled"];
+            [self lv_callLuaByKey1:@"ShakeCanceled"];
         }
     }
 }
@@ -340,7 +340,7 @@ extern char g_debug_lua[];
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( self.l ) {
             lv_checkStack32(self.l);
-            [self callLuaWithNoArgs:@"ShakeEnded"];
+            [self lv_callLuaByKey1:@"ShakeEnded"];
         }
     }
 }
@@ -352,7 +352,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self callLuaWithNoArgs:@"layoutSubviews"];
+        [self lv_callLuaByKey1:@"layoutSubviews"];
     }
 }
 

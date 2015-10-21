@@ -35,7 +35,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [self callLuaWithNoArgs:@"BeginEditing"];
+        [self lv_callLuaByKey1:@"BeginEditing"];
     }
 }
 
@@ -43,7 +43,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [self callLuaWithNoArgs:@"EndEditing"];
+        [self lv_callLuaByKey1:@"EndEditing"];
     }
 }
 
