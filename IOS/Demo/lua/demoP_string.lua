@@ -7,9 +7,9 @@ function myprint( s )
 	print(s);
 	local text = label.text();
 	if( text ) then 
-		label.text =  text .. "\n" .. s;
+		label.text( text .. "\n" .. s);
 	else
-		label.text =  s;
+		label.text( s);
 	end
 end
 

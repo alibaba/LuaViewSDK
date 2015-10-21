@@ -7,14 +7,14 @@ window.enabled(true);
 
 
 -------------------------------
-function snowCreater() {
+function snowCreater()
 	local snow = {};
 
 	snow.times = 0;
 
 	snow.imageView = View();
 	snow.imageView.cornerRadius(5);
-	snow.imageView.clipsToBounds = true;
+	snow.imageView.clipsToBounds(true);
 	-- snow.imageView.backgroundColor(0xff);
 
 	snow.imageView.size( 10, 10);
@@ -22,7 +22,7 @@ function snowCreater() {
 
 
 	function snow.initX0Y0( )
-		self.imageView.alpha = 0.85;
+		self.imageView.alpha( 0.85);
 		local x0 = math:random(160,160+5);
 		local y0 = math:random(160,160+5);
 		self.imageView.center(x0,y0);
@@ -32,20 +32,19 @@ function snowCreater() {
 		self.imageView.backgroundColor( self.randomColor() );
 	end
 
-	function snow.move() {
+	function snow.move()
 		self.imageView.center(self.x,self.y);
 		self.imageView.alpha(0);
 		self.imageView.backgroundColor(self.color);
-	}
+	end
 	function snow.randomColor()
 		return 0xff;
-	
 		-- local r = math:abs( math:random()*256 ) % 256 ;
 		-- local g = math:abs( math:random()*256 ) % 256 ;
 		-- local b = math:abs( math:random()*256 ) % 256 ;
 		-- return r*256*256 + g*256 + b;
 	end
-	function snow.nextXYAndColor() {
+	function snow.nextXYAndColor()
 		local len = 160;
 		local dx = math:random(-len,len);
 		local dy = math:random(-len,len);
@@ -53,39 +52,39 @@ function snowCreater() {
 		self.x = x+dx;
 		self.y = y+dy*1.5;
 		self.color = self.randomColor();
-	}
-	function snow.showSnows() {
+	end
+	function snow.showSnows()
 		self.initX0Y0();
 		self.nextXYAndColor();
 
 		local time = math:random(15,20)/10.0;
 		Animate(time,
-			^(){
+			function()
 				self.move();
-			}
+			end
 			,
-			^(){
+			function()
 				self.showSnows();
-			}
+			end
 			);
-	}
+	end
 
 	return snow;
-}
+end
 -------------------------------------
 snowArr = {};
 
 index = 1;
 snowTimer = Timer(
-	^(){
-		if (index<100 ) {
+	function()
+		if (index<100 ) then
 			index = index+1;
 		   	snowArr[index] = snowCreater();
 			snowArr[index].showSnows();
-		} else {
+		else
 			snowTimer.cancel();
-		}
-	}
+		end
+	end
 );
 
 snowTimer.start(0.1, true);
