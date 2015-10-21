@@ -74,12 +74,11 @@ button5 = createButton("设置导航栏 右菜单2",0,buttonH*7,scrW,buttonH, fu
 			Navigation.rightBarButton(rightButton,rightButton2)
 	end);
 
--- img = Image();
--- img.image("http://gtms02.alicdn.com/tps/i2/TB1qmXnHpXXXXcuaXXXQG.m0FXX-640-128.jpg",function()
--- 	Navigation.background(img)
--- end);
+img = Image();
+img.image("http://gtms02.alicdn.com/tps/i2/TB1qmXnHpXXXXcuaXXXQG.m0FXX-640-128.jpg",function()
+	Navigation.background(img,0xff0000)
+end);
 
-Navigation.background(0xff0000)
 
 
 

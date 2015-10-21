@@ -65,40 +65,32 @@ static int setBackground(lv_State*L ) {
     UIViewController* vc = lview.viewController;
     if( vc ) {
         UINavigationBar* navBar = vc.navigationController.navigationBar;
-        if ( [LVUtil ios7] ) {
-            id obj = lv_luaValueToNativeObject(L, 1);
-            if( [obj isKindOfClass:[UIImageView class]] ) {
-                UIImageView* imgView = obj;
-                UIImage* image = imgView.image;
-                float scale = [UIScreen mainScreen].scale;
-                if( image.scale<scale) {
-                    image = [UIImage imageWithCGImage:image.CGImage scale:scale orientation:0];
-                }
-                [navBar setBackgroundImage:image  forBarMetrics:UIBarMetricsDefault];
+        
+        id obj = lv_luaValueToNativeObject(L, 1);
+        if( [obj isKindOfClass:[UIImageView class]] ) {
+            UIImageView* imgView = obj;
+            UIImage* image = imgView.image;
+            float scale = [UIScreen mainScreen].scale;
+            if( image.scale<scale) {
+                image = [UIImage imageWithCGImage:image.CGImage scale:scale orientation:0];
             }
-            if ( lv_type(L, 2) ==LV_TNUMBER ) {
-                NSUInteger color = lv_tonumber(L, 2);
-                float a = ( (color>>24)&0xff )/255.0;
-                float r = ( (color>>16)&0xff )/255.0;
-                float g = ( (color>>8)&0xff )/255.0;
-                float b = ( (color>>0)&0xff )/255.0;
-                if( a==0 ){
-                    a = 1;
-                }
-                if( lv_gettop(L)>=3 && lv_type(L, 3) ==LV_TNUMBER){
-                    a = lv_tonumber(L, 3);
-                }
-                UIColor* c  = [UIColor colorWithRed:r green:g blue:b alpha:a];
-                [navBar setTintColor:c];
-                [navBar setBarTintColor:c];
+            [navBar setBackgroundImage:image  forBarMetrics:UIBarMetricsDefault];
+        }
+        if ( lv_type(L, 2) ==LV_TNUMBER ) {
+            NSUInteger color = lv_tonumber(L, 2);
+            float a = ( (color>>24)&0xff )/255.0;
+            float r = ( (color>>16)&0xff )/255.0;
+            float g = ( (color>>8)&0xff )/255.0;
+            float b = ( (color>>0)&0xff )/255.0;
+            if( a==0 ){
+                a = 1;
             }
-        } else {
-            id obj = lv_luaValueToNativeObject(L, 1);
-            if( [obj isKindOfClass:[UIImageView class]] ) {
-                UIImageView* imgView = obj;
-                [navBar setBackgroundImage:imgView.image forBarMetrics:UIBarMetricsDefault];
+            if( lv_gettop(L)>=3 && lv_type(L, 3) ==LV_TNUMBER){
+                a = lv_tonumber(L, 3);
             }
-            [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+            UIColor* c  = [UIColor colorWithRed:r green:g blue:b alpha:a];
+            [navBar setTintColor:c];
+            [navBar setBarTintColor:c];
         }
     }
     return 0;
