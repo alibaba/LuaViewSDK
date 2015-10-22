@@ -15,7 +15,7 @@ btn1 = Button()
 btn1.text("Start")
 btn1.frame(0, btnH*1.0, scrW, btnH)
 btn1.backgroundColor(0xCCCCCC);
-btn1.click(function()
+btn1.callback(function()
 	print("start");
     loading.start()
 end)
@@ -25,7 +25,7 @@ btn2 = Button()
 btn2.text("Stop")
 btn2.frame(0, btnH*2.5, scrW, btnH)
 btn2.backgroundColor(0xCCCCCC);
-btn2.click(function()
+btn2.callback(function()
 	print("stop");
        loading.stop()
 end)
@@ -36,7 +36,7 @@ btn3 = Button()
 btn3.backgroundColor(0xCCCCCC);
 btn3.text("Change Color")
 btn3.frame(0, btnH*4.0, scrW, btnH)
-btn3.click(function()
+btn3.callback(function()
 	   print("stop");
 	   if( index%2 == 0 ) then
        		loading.color(0xff0000);
@@ -49,3 +49,5 @@ end)
 
 
 loading.center(scrW/2, btnH*6);
+
+
