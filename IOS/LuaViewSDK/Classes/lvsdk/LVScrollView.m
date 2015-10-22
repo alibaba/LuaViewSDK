@@ -145,43 +145,11 @@ static int contentInset (lv_State *L) {
                     edgeInsets.right = lv_tonumber(L, 5);
                 if( isNormalEdgeInsets(edgeInsets) ) {
                     view.contentInset = edgeInsets;
-                }
-                return 0;
-            } else {
-                UIEdgeInsets edgeInsets = view.contentInset;
-                lv_pushnumber(L, edgeInsets.top   );
-                lv_pushnumber(L, edgeInsets.left   );
-                lv_pushnumber(L, edgeInsets.bottom   );
-                lv_pushnumber(L, edgeInsets.right   );
-                return 4;
-            }
-        }
-    }
-    return 0;
-}
-
-static int scrollIndicatorInsets (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
-        if( [view isKindOfClass:[UIScrollView class]] ){
-            int num = lv_gettop(L);
-            if( num>=2 ) {
-                UIEdgeInsets edgeInsets = view.scrollIndicatorInsets;
-                if( num>=2 )
-                    edgeInsets.top = lv_tonumber(L, 2);
-                if( num>=3 )
-                    edgeInsets.left = lv_tonumber(L, 3);
-                if( num>=4 )
-                    edgeInsets.bottom = lv_tonumber(L, 4);
-                if( num>=5 )
-                    edgeInsets.right = lv_tonumber(L, 5);
-                if( isNormalEdgeInsets(edgeInsets )  ) {
                     view.scrollIndicatorInsets = edgeInsets;
                 }
                 return 0;
             } else {
-                UIEdgeInsets edgeInsets = view.scrollIndicatorInsets;
+                UIEdgeInsets edgeInsets = view.contentInset;
                 lv_pushnumber(L, edgeInsets.top   );
                 lv_pushnumber(L, edgeInsets.left   );
                 lv_pushnumber(L, edgeInsets.bottom   );
@@ -354,7 +322,6 @@ static const struct lvL_reg memberFunctions [] = {
     {"offset",     contentOffset },//TODO
     
     {"contentInset",     contentInset },
-    {"scrollIndicatorInsets",     scrollIndicatorInsets },
     
     {"showScrollIndicator",     showScrollIndicator },
     
