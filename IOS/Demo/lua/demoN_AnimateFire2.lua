@@ -29,7 +29,7 @@ function createLaZhu(x,y)
 	lazhu.button.title("开/关");
 	lazhu.button.backgroundColor(0xff0000,1);
 	lazhu.button.frame(0, 50, 64, 60);
-	lazhu.button.click( function()
+	lazhu.button.callback( function()
 		if( lazhu.onOff ) then
 			lazhu.onOff = false;
 		else
