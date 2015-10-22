@@ -52,18 +52,15 @@
         if( lv_type(l, -1)==LV_TNIL ){
             return -1;
         } else if( lv_type(l, -1)==LV_TTABLE && key1){//table
-            lv_pushstring(l, key1);
-            lv_gettable(l, -2);
+            lv_getfield(l, -1, key1);
             lv_remove(l, -2);
             
             if( lv_type(l, -1)==LV_TTABLE && key2){//table
-                lv_pushstring(l, key2);
-                lv_gettable(l, -2);
+                lv_getfield(l, -1, key2);
                 lv_remove(l, -2);
                 
                 if( lv_type(l, -1)==LV_TTABLE && key3){//table
-                    lv_pushstring(l, key3);
-                    lv_gettable(l, -2);
+                    lv_getfield(l, -1, key3);
                     lv_remove(l, -2);
                 }
             }

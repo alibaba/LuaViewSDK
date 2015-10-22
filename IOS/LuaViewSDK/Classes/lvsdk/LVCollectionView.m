@@ -82,8 +82,7 @@ static int lvNewCollectionView (lv_State *L) {
         haveArgs = YES;
     }
     if( haveArgs ) {
-        lv_pushstring(L, "Cell");
-        lv_gettable(L, 1);
+        lv_getfield(L, 1, "Cell");
         identifierArray = lv_luaTableKeys(L, -1);
     }
     LVCollectionView* tableView = [[g_class alloc] init:L identifierArray:identifierArray];

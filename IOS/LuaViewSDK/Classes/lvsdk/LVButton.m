@@ -44,12 +44,10 @@
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
         if( lv_type(L, -1)==LV_TTABLE ) {
-            lv_pushstring(L, "Callback");
-            lv_gettable(L, -2);
+            lv_getfield(L, -1, "Callback");
         }
         if( lv_type(L, -1)==LV_TTABLE ) {
-            lv_pushstring(L, "Click");
-            lv_gettable(L, -2);
+            lv_getfield(L, -1, "Click");
         }
         lv_runFunction(L);
         lv_settop(L, num);

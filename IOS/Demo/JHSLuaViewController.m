@@ -76,8 +76,8 @@
     [LVTableView setDefaultStyle:[JHSLVTableView class]];
     
     // 注册 用户面板类型
-    self.lv[@"UICustomError"] = [JHSLVCustomError class];
-    self.lv[@"UICustomLoading"] = [JHSLVCustomLoading class];
+    self.lv[@"CustomError"] = [JHSLVCustomError class];
+    self.lv[@"CustomLoading"] = [JHSLVCustomLoading class];
     
     // 注册 外部对象.
     self.lv[@"viewController"] = self;
