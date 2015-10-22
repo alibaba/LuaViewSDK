@@ -7,9 +7,9 @@ button = Button();
 button.title("播放音效");
 button.frame(0,100,w,40);
 button.backgroundColor(0xff,1);
-button.delegate = ^(){
+button.callback( function()
 	if( player ) then
 		player.play();
 	end
-}
+end)
 

@@ -159,7 +159,7 @@ static const unsigned int PKG_VERSION = (102010 );
     NSDictionary* dic = info;
     if( dic ){
         NSString* version = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_LUAVIEW];
-        if( [LVPkgManager versionToInteger:version] <= [LVPkgManager versionToInteger:LUAVIEW_VERSION] ){
+        if( [LVPkgManager versionToInteger:version] <= [LVPkgManager versionToInteger:@LUAVIEW_VERSION] ){
             NSString* time1 = [LVPkgManager timeOfPackage:name];
             NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
             if( time1 && time2 &&

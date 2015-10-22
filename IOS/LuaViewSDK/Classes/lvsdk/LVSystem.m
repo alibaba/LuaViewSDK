@@ -8,13 +8,14 @@
 
 #import "LVSystem.h"
 #import "LView.h"
+#import "LVPkgManager.h"
 
 @implementation LVSystem
 
 
 // // lv 扩展API
 static int lv_vmVersion (lv_State *L) {
-    lv_pushstring(L, "1.2.0") ;
+    lv_pushstring(L, LUAVIEW_VERSION ) ;
     return 1; /* number of results */
 }
 
@@ -27,6 +28,11 @@ static int osVersion (lv_State *L) {
 
 static int ios (lv_State *L) {
     lv_pushboolean(L, 1);
+    return 1;
+}
+
+static int android (lv_State *L) {
+    lv_pushboolean(L, 0);
     return 1;
 }
 
@@ -88,13 +94,8 @@ static int __index (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         const struct lvL_reg functions [] = {
-            {"ios", ios},
-            {"osVersion", osVersion},
-            {"vmVersion", lv_vmVersion},
-            {"version", lv_vmVersion},
-            {"scale", scale},
-            {"platform",platform},
-            {"device",device},
+            {"IOS", ios},
+            {"ANDROID", android},
             {NULL, NULL}
         };
         lv_createClassMetaTable(L, META_TABLE_System);
@@ -114,6 +115,11 @@ static int __index (lv_State *L) {
         const struct lvL_reg staticFunctions [] = {
             {"screenSize", screenSize},
             {"gc",static_gc},
+            {"osVersion", osVersion},
+            {"vmVersion", lv_vmVersion},
+            {"scale", scale},
+            {"platform",platform},
+            {"device",device},
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);
