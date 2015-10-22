@@ -17,7 +17,7 @@ detailInfo.frame(0, h-40, w, 40);
 
 function detail( info )
     detailInfo.text(info);
-    detailInfo.sizeToFit();
+    detailInfo.adjustSize();
 end
 --------------------------
 demoArray = {
@@ -340,7 +340,7 @@ demoArray = {
 	title.text("测试测试测试测试测试测试测试测试测试");
 	title.backgroundColor(0xff00ff);
 	title.frame(50,50,500,30);
-	title.sizeToFit();
+	title.adjustSize();
 	view.addSubView(title);
 },
 
@@ -468,7 +468,7 @@ function setLabel( i )
 			label.textColor(0,0.2);
 		end
 		label.font(64);
-		label.sizeToFit();
+		label.adjustSize();
 		label.center(w/2,h-120);
 end
 

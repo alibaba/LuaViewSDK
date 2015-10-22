@@ -24,7 +24,7 @@ button2.image("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png","http://g.alicdn.
 
 button2.callback(function()
 	print("我是图片按钮");
-    button2.sizeToFit();
+    button2.adjustSize();
 end);
 
 obj = {};

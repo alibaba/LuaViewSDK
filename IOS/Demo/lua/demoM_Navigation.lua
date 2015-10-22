@@ -30,7 +30,7 @@ button2 = createButton("设置导航栏 左菜单",0,buttonH*2.5,scrW,buttonH, f
 			-- 	设置导航栏 左菜单
 			leftButton = Button()
 			leftButton.text("左")
-			leftButton.sizeToFit();
+			leftButton.adjustSize();
 			Navigation.leftBarButton (leftButton)
 			leftButton.callback(function ()
 				viewController.gotoHistory();
@@ -41,7 +41,7 @@ button3 = createButton("设置导航栏 右菜单",0,buttonH*4,scrW,buttonH, fun
 			-- 设置导航栏 标题
 			rightButton = Button()
 			rightButton.text("右")
-			rightButton.sizeToFit();
+			rightButton.adjustSize();
 			Navigation.rightBarButton(rightButton)
 	end);
 
@@ -50,10 +50,10 @@ button4 = createButton("设置导航栏 左菜单2",0,buttonH*5.5,scrW,buttonH, 
 			-- 	设置导航栏 左菜单
 			leftButton = Button()
 			leftButton.text("左1")
-			leftButton.sizeToFit();
+			leftButton.adjustSize();
 			leftButton2 = Button()
 			leftButton2.text("左2")
-			leftButton2.sizeToFit();
+			leftButton2.adjustSize();
 			Navigation.leftBarButton (leftButton, leftButton2)
 			leftButton.callback(function ()
 				viewController.gotoHistory();
@@ -67,10 +67,10 @@ button5 = createButton("设置导航栏 右菜单2",0,buttonH*7,scrW,buttonH, fu
 			-- 设置导航栏 标题
 			rightButton = Button()
 			rightButton.text("右1")
-			rightButton.sizeToFit();
+			rightButton.adjustSize();
 			rightButton2 = Button()
 			rightButton2.text("右2")
-			rightButton2.sizeToFit();
+			rightButton2.adjustSize();
 			Navigation.rightBarButton(rightButton,rightButton2)
 	end);
 
