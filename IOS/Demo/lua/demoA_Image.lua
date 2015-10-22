@@ -23,6 +23,7 @@ imageView.startAnimating( names, 3.0, 1);
 
 imageView2 = Image();
 imageView2.frame(X0+w+X0, Y0, w, w);
-imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",^(){
+imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
+    function()
 		print("图片加载成功!");
-	});
+	end);
