@@ -14,17 +14,17 @@ function createObject( )
 	};
 
     function obj.testPointer( s )
-    	ViewController.printPointer(s);
+    	viewController.printPointer(s);
     end
     function obj.testRect( rect )
     	rect.set(2,789);
-    	ViewController.testRect(rect);
+    	viewController.testRect(rect);
     end
     function obj.testStruct( struct )
     	struct[1] = 123; 
     	print(  struct.get(2,TYPE_CHAR)  );
     	struct.set( 2, string:byte("A"), TYPE_CHAR );
-    	ViewController.testStruct( struct );
+    	viewController.testStruct( struct );
     end
 	return obj;
 end
@@ -33,4 +33,4 @@ end
 
 
 
-ViewController.setLuaBox( createObject() );
+viewController.setLuaBox( createObject() );

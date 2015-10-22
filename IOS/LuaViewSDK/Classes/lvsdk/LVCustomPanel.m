@@ -22,6 +22,7 @@
         
         if( lv_type(L, -1)==LV_TTABLE ) {
             lv_getfield(L, -1, STR_CALLBACK);
+            lv_remove(L, -2);
         }
         lv_runFunctionWithArgs(L, 1, 0);
         lv_settop(L, num);

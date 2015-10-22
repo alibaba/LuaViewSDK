@@ -11,30 +11,29 @@ collectionView = CollectionView {
 	Section = {
 		SectionCount = 2,
 
-		RowCount = function(section){
+		RowCount = function(section)
 			return 4;
-		},
-		-- Spacing = function(section ){
+		end,
+		-- Spacing = function(section )
 		-- 	return 0;
-		-- },
-		-- EdgeInsets = function(section ){
+		-- end,
+		-- EdgeInsets = function(section )
 		-- 	return 20,0,0,0;
-		-- }
-
+		-- end
 	},
 	Cell = { 
-		Id = function ( section, row ){
-			if( section%2==1 ) {
-				return "图片+文字";
-			} else {
-				return "图片+文字2";
-			}
-		},
-		"图片+文字" = {
-			Size = function(section, row){
+		Id = function ( section, row )
+			if( section%2==1 ) then
+				return "ImageAndLabel";
+			else
+				return "ImageAndLabel2";
+			end
+		end,
+		ImageAndLabel = {
+			Size = function(section, row)
 				return (w-10)/2 ,200;
-			},
-			Init = function(cell){
+			end,
+			Init = function(cell)
 				local cellWidth ,cellHeight = cell.window.size();
 				cellHeight = cellHeight / 2;
 				cell.icon = Image();
@@ -45,12 +44,12 @@ collectionView = CollectionView {
 				cell.title.textColor(0xffFFFF);
 				cell.title.backgroundColor(0xff00ff);
 				print("构造Cell--2");
-			},
+			end,
 			Layout = function(cell , section, row)
-				cell.icon.image(imageUrl1, function(){
-					local x,y,w,h = cell.icon.frame();
-					print("dongxicheng----",x,y,w,h);
-					});
+				cell.icon.image(imageUrl1, function()
+						local x,y,w,h = cell.icon.frame();
+						print("dongxicheng----",x,y,w,h);
+					end);
 
 				cell.title.text("测试"..section .."--" .. row);
 				print("布局Cell--" , section, "--", row);
@@ -62,10 +61,10 @@ collectionView = CollectionView {
 				System.gc();
 			end
 		},
-		"图片+文字2" = {
-			Size = function(section, row){
+		ImageAndLabel2 = {
+			Size = function(section, row)
 				return w ,200;
-			},
+			end,
 			Init = function(cell)
 				cell.icon = Image();
 				cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
@@ -73,12 +72,13 @@ collectionView = CollectionView {
 				cell.button = Button();
 				cell.button.frame(0,0,100,60);
 				cell.button.backgroundColor(0x777777);
-				cell.button.callback( function()
-						Animate( function()
-										cell.icon2.center(160,100);
-								 end
-							    ) ;
-				end);
+				cell.button.callback( 
+					function()
+							Animate( function()
+											cell.icon2.center(160,100);
+									 end
+								    ) ;
+					end);
 
 
 				cell.icon2 = Image();
@@ -106,15 +106,15 @@ collectionView = CollectionView {
 		}
 	},
 	Callback = {
-		Scrolling = ^(){
+		Scrolling = function()
 			print("scrolling");
-		},
-		ScrollBegin = ^(){
+		end,
+		ScrollBegin = function()
 			print("scrolling begin");
-		},
-		ScrollEnd = ^(){
+		end,
+		ScrollEnd = function()
 			print("scrolling end");
-		}
+		end
 	}
 };
 
