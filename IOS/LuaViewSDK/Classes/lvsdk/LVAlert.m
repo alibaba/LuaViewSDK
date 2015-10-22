@@ -37,7 +37,7 @@
     if( l ) {
         lv_checkStack32(l);
         lv_pushnumber(l, buttonIndex+1);//传参数
-        [LVUtil call:l lightUserData:self key:"callback" nargs:1];
+        [LVUtil call:l lightUserData:self key:STR_CALLBACK nargs:1];
         self.lv_lview = nil;
     }
 }

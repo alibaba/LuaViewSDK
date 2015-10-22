@@ -44,7 +44,7 @@
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
         if( lv_type(L, -1)==LV_TTABLE ) {
-            lv_getfield(L, -1, "Callback");
+            lv_getfield(L, -1, STR_CALLBACK);
         }
         if( lv_type(L, -1)==LV_TTABLE ) {
             lv_getfield(L, -1, "Click");

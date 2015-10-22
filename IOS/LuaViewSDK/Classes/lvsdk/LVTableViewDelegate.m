@@ -196,7 +196,7 @@
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Callback" nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:2 nrets:0];
         }
     }
 }

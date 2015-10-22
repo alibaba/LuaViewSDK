@@ -36,7 +36,7 @@
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if( lv_type(l, -1) == LV_TTABLE ) {
-            lv_getfield(l, -1, "Callback");
+            lv_getfield(l, -1, STR_CALLBACK);
         }
         [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String nargs:0 nrets:0];
     }

@@ -340,7 +340,7 @@ static int setCurrentPage(lv_State *L) {
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:"Callback" key2:"Scrolling" nargs:3 nrets:0];
+        [LVUtil call:l key1:STR_CALLBACK key2:"Scrolling" nargs:3 nrets:0];
     }
 }
 
@@ -353,7 +353,7 @@ static int setCurrentPage(lv_State *L) {
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:"Callback" key2:"ScrollEnd" nargs:1 nrets:0];
+        [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" nargs:1 nrets:0];
     }
 }
 
@@ -363,10 +363,10 @@ static int setCurrentPage(lv_State *L) {
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self lv_callLuaByKey1:@"Callback" key2:@"ScrollBegin"];
+    [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self lv_callLuaByKey1:@"Callback" key2:@"BeginDecelerating"];
+    //[self lv_callLuaByKey1:@STR_CALLBACK key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

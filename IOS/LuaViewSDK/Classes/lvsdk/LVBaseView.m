@@ -1109,14 +1109,13 @@ static int callback (lv_State *L) {
                 lv_pushvalue(L, 1);
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             }
-            lv_pushstring(L, "Callback");
             lv_pushvalue(L, 2);
-            lv_settable(L, -3);
+            lv_setfield(L, -2, STR_CALLBACK);
             return 0;
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             if ( lv_type(L, -1)==LV_TTABLE ) {
-                lv_getfield(L, -1, "Callback");
+                lv_getfield(L, -1, STR_CALLBACK);
             } else {
                 lv_pushnil(L);
             }

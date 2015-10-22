@@ -141,8 +141,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_NativeObject     "LV.nativeObjBox"
 #define META_TABLE_System           "LV.System"
 
-// listner
-#define LV_TAG_CALLBACK  @"Callback"
+#define STR_CALLBACK "Callback"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );
