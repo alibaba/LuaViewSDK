@@ -25,7 +25,6 @@ label2.backgroundColor(0xEEEEEE);
 lable3 = Label();
 lable3.frame( 10, 250, 100, 60);
 lable3.backgroundColor(0xEEEEEE);
-lable3.lines(2);
 lable3.text("测试我是测试我是测试我是测试我是测试我是");
 
 
@@ -35,6 +34,5 @@ button = Button();
 button.frame( 10, 300, 100, 60 );
 button.title("按钮");
 button.callback(function()
-
-lable3.sizeToFit();
+    lable3.adjustSize();
 end)

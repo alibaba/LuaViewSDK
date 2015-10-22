@@ -101,7 +101,7 @@ static int lineCount(lv_State *L) {
     return 0;
 }
 
-static int adjustsFontSizeToFitWidth(lv_State *L) {
+static int adjustFontSize(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         BOOL yes = lv_toboolean(L, 2);// 2
@@ -229,7 +229,7 @@ static int textAlignment (lv_State *L) {
         
         {"lines",    lineCount},
         
-        {"adjustsFontSize",  adjustsFontSizeToFitWidth},
+        {"adjustFontSize",  adjustFontSize},
         
         {NULL, NULL}
     };

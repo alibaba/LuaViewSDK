@@ -866,7 +866,7 @@ static int clipsToBounds(lv_State *L) {
     return 0;
 }
 
-static int sizeToFit(lv_State *L) {
+static int adjustSize(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->view);
@@ -1225,7 +1225,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"width",    width},
     {"height",    height},
     
-    {"sizeToFit", sizeToFit},
+    {"adjustSize", adjustSize},
     
     {"addGesture",          addGestureRecognizer },
     {"removeGesture",       removeGestureRecognizer },
