@@ -24,9 +24,9 @@ btn4.flxBindingCSS("sizetofit: 1, margin: 10, align-self:center, padding: 3.0");
 
 window.flxChildNodes(btn1, btn2, btn3, btn4);
 window.flxBindingCSS("flex-direction: column");
-window.flxLayout(true, ^() {
-print("cccc");
-    Animate(^(){
+window.flxLayout(true, function()
+    print("cccc");
+    Animate( function()
         window.frame(10.0, 200.0, 300.0, 120.0);
-    });
-});
+    end);
+end);

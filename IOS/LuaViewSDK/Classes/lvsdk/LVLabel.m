@@ -218,13 +218,16 @@ static int textAlignment (lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"text",    text},
+        
         {"textColor",    textColor},
         
         {"font",    font},
+        {"fontSize",    font},
+        {"textSize",    font},
         
         {"textAlignment",    textAlignment},
         
-        {"lineCount",    lineCount},
+        {"lines",    lineCount},
         
         {"adjustsFontSize",  adjustsFontSizeToFitWidth},
         
