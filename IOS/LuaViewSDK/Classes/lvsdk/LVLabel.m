@@ -178,6 +178,27 @@ static int font (lv_State *L) {
     return 0;
 }
 
+
+static int fontSize (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVLabel* view = (__bridge LVLabel *)(user->view);
+        if( [view isKindOfClass:[LVLabel class]] ){
+            if( lv_gettop(L)>=2 ) {
+                float fontSize = lv_tonumber(L, 2);
+                view.font = [UIFont systemFontOfSize:fontSize];
+                return 0;
+            } else {
+                UIFont* font = view.font;
+                CGFloat fontSize = font.pointSize;
+                lv_pushnumber(L, fontSize);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 static int textAlignment (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -222,12 +243,12 @@ static int textAlignment (lv_State *L) {
         {"textColor",    textColor},
         
         {"font",    font},
-        {"fontSize",    font},
-        {"textSize",    font},
+        {"fontSize",    fontSize},
+        {"textSize",    fontSize},
         
         {"textAlignment",    textAlignment},
         
-        {"lines",    lineCount},
+        {"lineCount",    lineCount},
         
         {"adjustFontSize",  adjustFontSize},
         
