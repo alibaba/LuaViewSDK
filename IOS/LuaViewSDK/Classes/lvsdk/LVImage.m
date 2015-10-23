@@ -18,6 +18,7 @@
 @property (nonatomic,strong) UIImageView* blurImageView;
 @property (nonatomic,strong) UIVisualEffectView *blurEffectView;
 @property (nonatomic,assign) BOOL needCallLuaFunc;
+@property (nonatomic,strong) UITapGestureRecognizer* tapGesture;
 @end
 
 @implementation LVImage
@@ -35,24 +36,19 @@
     return self;
 }
 
+-(void) addClickMethod{
+    if( self.tapGesture== nil ){
+        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lvImageCallBack)];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:self.tapGesture];
+    }
+}
+
+-(void) lvImageCallBack{
+    [self lv_buttonCallBack];
+}
 
 -(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished{
-//    __weak LVImageView* weakImageView = self;
-//    [self setImageWithURL:url placeholderImage:nil
-//                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
-//                    double duration = (cacheType == SDImageCacheTypeNone && !error)?.4f:.0f;
-//                    if( duration>0 ) {
-//                        weakImageView.alpha = 0;
-//                        [UIView animateWithDuration:duration animations:^{
-//                            weakImageView.alpha = 1.0f;
-//                        }];
-//                    } else {
-//                        weakImageView.alpha = 1.0f;
-//                    }
-//                    if ( finished ){
-//                        finished();
-//                    }
-//                }];
 }
 
 -(void) callLuaDelegate:(id) obj{
@@ -202,6 +198,7 @@ static int lvNewImageView(lv_State *L) {
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(imageView);
+        imageView.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UIImageView );
         lv_setmetatable(L, -2);
@@ -386,6 +383,41 @@ static int isAnimating (lv_State *L) {
     return 1;
 }
 
+static int callback (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVImage* lvimage = (__bridge LVImage *)(user->view);
+        [lvimage addClickMethod];
+        if ( lv_gettop(L)>=2 ) {
+            lv_checkstack(L, 8);
+            lv_pushvalue(L, 1);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            if( lv_type(L, -1)==LV_TNIL ) {
+                lv_settop(L, 2);
+                lv_pushvalue(L, 1);
+                lv_createtable(L, 0, 0);
+                lv_udataRef(L, USERDATA_KEY_DELEGATE );
+                
+                lv_settop(L, 2);
+                lv_pushvalue(L, 1);
+                lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            }
+            lv_pushvalue(L, 2);
+            lv_setfield(L, -2, STR_CALLBACK);
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            if ( lv_type(L, -1)==LV_TTABLE ) {
+                lv_getfield(L, -1, STR_CALLBACK);
+            } else {
+                lv_pushnil(L);
+            }
+            return 1;
+        }
+    }
+    return 0;
+}
+
 +(int) classDefine:(lv_State *) L {
     {
         lv_pushcfunction(L, lvNewImageView);
@@ -393,7 +425,7 @@ static int isAnimating (lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"image",  setImage},
-        {"setContentMode",  setContentMode},
+        {"contentMode",  setContentMode},
         
         {"startAnimation",  startAnimating},
         {"stopAnimation",  stopAnimating},
@@ -403,6 +435,8 @@ static int isAnimating (lv_State *L) {
         {"renderSystemApi",  renderSystemApi},
         
         {"resizeImage",  resizeImage},
+        
+        {"callback",  callback},
         {NULL, NULL}
     };
     

@@ -42,6 +42,23 @@
     }
 }
 
+-(void) lv_buttonCallBack{
+    lv_State* L = self.lv_lview.l;
+    if( L && self.lv_userData ){
+        int num = lv_gettop(L);
+        lv_pushUserdata(L, self.lv_userData);
+        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+        if( lv_type(L, -1)==LV_TTABLE ) {
+            lv_getfield(L, -1, STR_CALLBACK);
+        }
+        if( lv_type(L, -1)==LV_TTABLE ) {
+            lv_getfield(L, -1, "Click");
+        }
+        lv_runFunction(L);
+        lv_settop(L, num);
+    }
+}
+
 // rotation
 - (CGFloat) lv_rotation{
     return 0;
