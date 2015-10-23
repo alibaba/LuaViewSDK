@@ -94,8 +94,6 @@ static int __index (lv_State *L) {
 +(int) classDefine:(lv_State *)L {
     {
         const struct lvL_reg functions [] = {
-            {"IOS", ios},
-            {"ANDROID", android},
             {NULL, NULL}
         };
         lv_createClassMetaTable(L, META_TABLE_System);
@@ -120,6 +118,8 @@ static int __index (lv_State *L) {
             {"scale", scale},
             {"platform",platform},
             {"device",device},
+            {"ios", ios},
+            {"android", android},
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);
