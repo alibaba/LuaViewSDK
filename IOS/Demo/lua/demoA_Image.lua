@@ -14,10 +14,10 @@ imageView.frame(X0, Y0, w, w);
 imageView.backgroundColor(0xff0000,1);
 names = {};
 for i=1,16 do
-	names[i] = "" .. i .. ".tiff"
+	names[i] = "img" .. i .. ".tiff"
 end
-imageView.image("16.tiff");
-imageView.startAnimating( names, 3.0, 1);
+imageView.image("img16.tiff");
+imageView.startAnimation( names, 3.0, 1);
 
 
 label = Label();
@@ -25,9 +25,9 @@ label = Label();
 imageView2 = Image();
 imageView2.frame(X0+w+X0, Y0, w, w);
 imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
-    function()
-		print("图片加载成功!");
-        label.text("图片加载成功!")
+    function(info)
+		print("图片加载成功!", info);
+        label.text("图片加载成功!" .. )
         label.adjustSize();
         label.center(scrW/2,scrH/2);
 	end);

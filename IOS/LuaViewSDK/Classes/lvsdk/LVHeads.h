@@ -192,7 +192,7 @@ LVTypeIDEnum lv_typeID(const char* type);
 #define isNormalEdgeInsets(e)  ( !( isnan(e.top) || isnan(e.left) || isnan(e.bottom) || isnan(e.right) ) )
 
 
-typedef void(^LVLoadFinished)(void);
+typedef void(^LVLoadFinished)(id errorInfo);
 
 #import "UIView+LuaView.h"
 #import "UIScrollView+LuaView.h"

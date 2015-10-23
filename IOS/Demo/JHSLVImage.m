@@ -30,7 +30,7 @@
                         weakImageView.alpha = 1.0f;
                     }
                     if( finished ) {
-                        finished();
+                        finished( error );
                     }
                 }];
 }

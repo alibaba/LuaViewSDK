@@ -30,7 +30,7 @@
 /*
  * Lua 脚本回调
  */
--(void) callLuaDelegate;
+-(void) callLuaDelegate:(id) obj;
 
 +(int) classDefine:(lv_State *) L ;
 

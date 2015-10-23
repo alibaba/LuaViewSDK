@@ -55,11 +55,13 @@
 //                }];
 }
 
--(void) callLuaDelegate{
+-(void) callLuaDelegate:(id) obj{
     lv_State* L = self.lv_lview.l;
     if( L ) {
+        lv_checkstack(L, 4);
+        lv_pushboolean(L, obj?0:1);
         [LVUtil pushRegistryValue:L key:self.functionTag];
-        lv_runFunction(L);
+        lv_runFunctionWithArgs(L, 1, 0);
     }
     [LVUtil unregistry:L key:self.functionTag];
 }
@@ -71,9 +73,9 @@
     if( [LVUtil isExternalUrl:imageName] ){
         //CDN image
         __weak LVImage* weakImageView = self;
-        [self setWebImageUrl:[NSURL URLWithString:imageName] finished:^{
+        [self setWebImageUrl:[NSURL URLWithString:imageName] finished:^(id errorInfo){
             if( weakImageView.needCallLuaFunc ) {
-                [weakImageView performSelectorOnMainThread:@selector(callLuaDelegate) withObject:nil waitUntilDone:NO];
+                [weakImageView performSelectorOnMainThread:@selector(callLuaDelegate:) withObject:errorInfo waitUntilDone:NO];
             }
         }];
     } else {
@@ -393,8 +395,8 @@ static int isAnimating (lv_State *L) {
         {"image",  setImage},
         {"setContentMode",  setContentMode},
         
-        {"startAnimating",  startAnimating},
-        {"stopAnimating",  stopAnimating},
+        {"startAnimation",  startAnimating},
+        {"stopAnimation",  stopAnimating},
         {"isAnimating",  isAnimating},
         
         {"render",  render},
