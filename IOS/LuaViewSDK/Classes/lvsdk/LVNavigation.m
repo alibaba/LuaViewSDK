@@ -14,15 +14,18 @@
 
 static int setTitle (lv_State *L) {
     lv_clearFirstTableValue(L);
-    LView* lview = (__bridge LView *)(L->lView);
-    UIViewController* vc = lview.viewController;
-    id object = lv_luaValueToNativeObject(L, 1);
-    if ( [object isKindOfClass:[NSString class]] ) {
-        vc.navigationItem.title = object;
-    } else if([object isKindOfClass:[UIView class]] ) {
-        vc.navigationItem.titleView = object;
+        LView* lview = (__bridge LView *)(L->lView);
+        UIViewController* vc = lview.viewController;
+        if( lv_gettop(L)>=1 ) {
+        id object = lv_luaValueToNativeObject(L, 1);
+        if ( [object isKindOfClass:[NSString class]] ) {
+            vc.navigationItem.title = object;
+        } else if([object isKindOfClass:[UIView class]] ) {
+            vc.navigationItem.titleView = object;
+        }
+        return 0; /* number of results */
     }
-    return 0; /* number of results */
+    return 0;
 }
 
 +(NSArray*) getNavigationItems:(lv_State*)L{

@@ -9,6 +9,7 @@
 #import "LVAlert.h"
 #import "LVBaseView.h"
 #import "LView.h"
+#import "LVToast.h"
 
 
 @implementation LVAlert
@@ -61,8 +62,29 @@ static int lvNewAlertView (lv_State *L) {
     return 0;
 }
 
+
+static int toast (lv_State *L) {
+    int num = lv_gettop(L);
+    if( num>0 ){
+        NSString* s = lv_paramString(L, 1);
+        if( s ==nil ) {
+            s = @"      ";
+        }
+        CGSize size = [UIScreen mainScreen].bounds.size;
+        [LVToast showWithText:s bottomOffset:size.height/4 duration:2];
+    }
+    return 0;
+}
+
+
 +(int) classDefine: (lv_State *)L {
-    {
+    
+    {// 自动消失的提示框
+        lv_pushcfunction(L, toast);
+        lv_setglobal(L, "Toast");
+    }
+
+    {// 系统Alert提示框
         lv_pushcfunction(L, lvNewAlertView);
         lv_setglobal(L, "Alert");
     }
@@ -76,4 +98,7 @@ static int lvNewAlertView (lv_State *L) {
     lvL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
+
+
+
 @end

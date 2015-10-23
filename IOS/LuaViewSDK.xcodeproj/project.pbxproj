@@ -214,6 +214,9 @@
 		8468C96C1BDA11BE002D4B1E /* testUIView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9591BDA11BE002D4B1E /* testUIView.lua */; };
 		8468C96D1BDA11BE002D4B1E /* testViewPager.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95A1BDA11BE002D4B1E /* testViewPager.lua */; };
 		8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */; };
+		8468C9711BDA177C002D4B1E /* LVToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8468C96F1BDA177C002D4B1E /* LVToast.h */; };
+		8468C9721BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		8468C9731BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
 		846E879B1A653DEC000D14DA /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; };
 		846E879C1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
 		846E879D1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
@@ -540,6 +543,8 @@
 		8468C9591BDA11BE002D4B1E /* testUIView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIView.lua; sourceTree = "<group>"; };
 		8468C95A1BDA11BE002D4B1E /* testViewPager.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testViewPager.lua; sourceTree = "<group>"; };
 		8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testViewPagerIndicator.lua; sourceTree = "<group>"; };
+		8468C96F1BDA177C002D4B1E /* LVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVToast.h; sourceTree = "<group>"; };
+		8468C9701BDA177C002D4B1E /* LVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVToast.m; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
@@ -891,6 +896,8 @@
 			children = (
 				842D726C1A6643DB00936AD2 /* LVAlert.h */,
 				842D726D1A6643DB00936AD2 /* LVAlert.m */,
+				8468C96F1BDA177C002D4B1E /* LVToast.h */,
+				8468C9701BDA177C002D4B1E /* LVToast.m */,
 			);
 			name = alert;
 			sourceTree = "<group>";
@@ -1267,6 +1274,7 @@
 				84799AF51BAFECA00070E214 /* LVPagerView.h in Headers */,
 				8454D1411A7F732500774565 /* LVHttp.h in Headers */,
 				840AD5E71A63ED7D003E837D /* lV.h in Headers */,
+				8468C9711BDA177C002D4B1E /* LVToast.h in Headers */,
 				8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */,
 				846481C71A64C61F00DE6204 /* LVHeads.h in Headers */,
 				8418E3AB1A5E704100158125 /* LuaViewSDK.h in Headers */,
@@ -1653,6 +1661,7 @@
 				840AD6091A63ED7D003E837D /* lViolib.c in Sources */,
 				840AD5F31A63ED7D003E837D /* lVcode.c in Sources */,
 				840AD5F71A63ED7D003E837D /* lVdblib.c in Sources */,
+				8468C9731BDA177C002D4B1E /* LVToast.m in Sources */,
 				84056E741B5CA5990078F9D6 /* LVCustomPanel.m in Sources */,
 				84CF567C1AEA15A500A49B36 /* LVMethod.m in Sources */,
 				84DCB2B31B39349A00244C39 /* LVLuaObjBox.m in Sources */,
@@ -1759,6 +1768,7 @@
 				8481E05C1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */,
 				84BC62211BA95A3F0019B02E /* LVDebugConnection.m in Sources */,
 				84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */,
+				8468C9721BDA177C002D4B1E /* LVToast.m in Sources */,
 				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,
 				918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */,
 				8418E3C31A5E804700158125 /* main.m in Sources */,
