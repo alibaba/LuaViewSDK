@@ -208,10 +208,10 @@
 		84799ACD1BAFDDA00070E214 /* 16.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA81BAFDDA00070E214 /* 16.tiff */; };
 		84799ACE1BAFDDA00070E214 /* 4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA91BAFDDA00070E214 /* 4.tiff */; };
 		84799ACF1BAFDDA00070E214 /* 7.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAA1BAFDDA00070E214 /* 7.tiff */; };
-		84799AD01BAFDDA00070E214 /* demoN_AnimateFire.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAB1BAFDDA00070E214 /* demoN_AnimateFire.lua */; };
-		84799AD11BAFDDA00070E214 /* demoN_AnimateFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAC1BAFDDA00070E214 /* demoN_AnimateFire2.lua */; };
-		84799AD21BAFDDA00070E214 /* demoN_AnimateLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAD1BAFDDA00070E214 /* demoN_AnimateLiZi.lua */; };
-		84799AD31BAFDDA00070E214 /* demoN_AnimateSnow.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAE1BAFDDA00070E214 /* demoN_AnimateSnow.lua */; };
+		84799AD01BAFDDA00070E214 /* demoZA1_AnimateFire.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */; };
+		84799AD11BAFDDA00070E214 /* demoZA2_AnimateFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */; };
+		84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */; };
+		84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */; };
 		84799AD41BAFDDA00070E214 /* demoC_Label.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAF1BAFDDA00070E214 /* demoC_Label.lua */; };
 		84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */; };
 		84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */; };
@@ -512,10 +512,10 @@
 		84799AA81BAFDDA00070E214 /* 16.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 16.tiff; sourceTree = "<group>"; };
 		84799AA91BAFDDA00070E214 /* 4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 4.tiff; sourceTree = "<group>"; };
 		84799AAA1BAFDDA00070E214 /* 7.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 7.tiff; sourceTree = "<group>"; };
-		84799AAB1BAFDDA00070E214 /* demoN_AnimateFire.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoN_AnimateFire.lua; sourceTree = "<group>"; };
-		84799AAC1BAFDDA00070E214 /* demoN_AnimateFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoN_AnimateFire2.lua; sourceTree = "<group>"; };
-		84799AAD1BAFDDA00070E214 /* demoN_AnimateLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoN_AnimateLiZi.lua; sourceTree = "<group>"; };
-		84799AAE1BAFDDA00070E214 /* demoN_AnimateSnow.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoN_AnimateSnow.lua; sourceTree = "<group>"; };
+		84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA1_AnimateFire.lua; sourceTree = "<group>"; };
+		84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA2_AnimateFire2.lua; sourceTree = "<group>"; };
+		84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA3_AnimateLiZi.lua; sourceTree = "<group>"; };
+		84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA4_AnimateSnow.lua; sourceTree = "<group>"; };
 		84799AAF1BAFDDA00070E214 /* demoC_Label.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC_Label.lua; sourceTree = "<group>"; };
 		84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@2x.png"; sourceTree = "<group>"; };
 		84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@3x.png"; sourceTree = "<group>"; };
@@ -942,10 +942,6 @@
 				84FC64D51BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua */,
 				84FC64D71BB3DDE100B6AF86 /* demoL_PagerIndicator.lua */,
 				84FC64D31BB3A75100B6AF86 /* demoM_Navigation.lua */,
-				84799AAB1BAFDDA00070E214 /* demoN_AnimateFire.lua */,
-				84799AAC1BAFDDA00070E214 /* demoN_AnimateFire2.lua */,
-				84799AAD1BAFDDA00070E214 /* demoN_AnimateLiZi.lua */,
-				84799AAE1BAFDDA00070E214 /* demoN_AnimateSnow.lua */,
 				84799ABC1BAFDDA00070E214 /* demoO_flxNode.lua */,
 				84799AC21BAFDDA00070E214 /* demoP_string.lua */,
 				84799AC31BAFDDA00070E214 /* demoP_System.lua */,
@@ -962,6 +958,10 @@
 				84799AC91BAFDDA00070E214 /* demoZ_ui.lua */,
 				84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */,
 				84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */,
+				84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */,
+				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
+				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
+				84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */,
 				84799AF11BAFDF370070E214 /* lv_kit.lua */,
 				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
 				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
@@ -1358,7 +1358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84799AD21BAFDDA00070E214 /* demoN_AnimateLiZi.lua in Resources */,
+				84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */,
 				84799AD81BAFDDA00070E214 /* demoJ_CollectionView.lua in Resources */,
 				84799ADA1BAFDDA00070E214 /* color2.png in Resources */,
 				84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */,
@@ -1387,7 +1387,7 @@
 				84799ADE1BAFDDA00070E214 /* demoZ_2015.lua in Resources */,
 				84799AE61BAFDDA00070E214 /* snow.png in Resources */,
 				84799AEA1BAFDDA00070E214 /* demoG_TableView.lua in Resources */,
-				84799AD31BAFDDA00070E214 /* demoN_AnimateSnow.lua in Resources */,
+				84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */,
 				84799AE41BAFDDA00070E214 /* lazhu.png in Resources */,
 				84799ADD1BAFDDA00070E214 /* demoE_Button.lua in Resources */,
 				84799AE21BAFDDA00070E214 /* demoA_Image.lua in Resources */,
@@ -1396,7 +1396,7 @@
 				84799ADF1BAFDDA00070E214 /* demoR_DownloadAndFile.lua in Resources */,
 				84799AF01BAFDDCA0070E214 /* demoK_PagerView.lua in Resources */,
 				84799ACC1BAFDDA00070E214 /* 13.tiff in Resources */,
-				84799AD11BAFDDA00070E214 /* demoN_AnimateFire2.lua in Resources */,
+				84799AD11BAFDDA00070E214 /* demoZA2_AnimateFire2.lua in Resources */,
 				84FC64D41BB3A75100B6AF86 /* demoM_Navigation.lua in Resources */,
 				84799ACE1BAFDDA00070E214 /* 4.tiff in Resources */,
 				84799ACD1BAFDDA00070E214 /* 16.tiff in Resources */,
@@ -1405,7 +1405,7 @@
 				84799AED1BAFDDA00070E214 /* demoZ_testunit.lua in Resources */,
 				849832131BCB682F0032BF05 /* demoV1_Customloading.lua in Resources */,
 				8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */,
-				84799AD01BAFDDA00070E214 /* demoN_AnimateFire.lua in Resources */,
+				84799AD01BAFDDA00070E214 /* demoZA1_AnimateFire.lua in Resources */,
 				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
 				84799AD41BAFDDA00070E214 /* demoC_Label.lua in Resources */,
 			);
