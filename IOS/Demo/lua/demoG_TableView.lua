@@ -20,12 +20,12 @@ function createTableView( )
 		Cell = {
 			Id = function( section, row ){
 				if ( section==1  ) then
-					return  "图片+文字";
+					return  "ImageAndLabel";
 				else
-					return "图片+图片";
+					return "ImageAndImage";
 				end
 			},
-			"图片+文字" = {
+			ImageAndLabel = {
 				Height = function( section, row ){
 					return cellHeight;
 				},
@@ -48,7 +48,7 @@ function createTableView( )
 					System.gc();
 				}
 			},
-			"图片+图片" = {
+			ImageAndImage = {
 				Height = function( section, row ){
 					return cellHeight;
 				},

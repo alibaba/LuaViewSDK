@@ -21,7 +21,7 @@ collectionView = CollectionView {
 		-- 	return 20,0,0,0;
 		-- end
 	},
-	Cell = { 
+	Cell = {
 		Id = function ( section, row )
 			if( section%2==1 ) then
 				return "ImageAndLabel";
