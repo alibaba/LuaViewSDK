@@ -244,28 +244,28 @@ extern char g_debug_lua[];
 -(void) viewWillAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"viewWillAppear"];
+        [self lv_callLuaByKey1:@"ViewWillAppear"];
     }
 }
 
 -(void) viewDidAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"viewDidAppear"];
+        [self lv_callLuaByKey1:@"ViewDidAppear"];
     }
 }
 
 -(void) viewWillDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"viewWillDisAppear"];
+        [self lv_callLuaByKey1:@"ViewWillDisAppear"];
     }
 }
 
 -(void) viewDidDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"viewDidDisAppear"];
+        [self lv_callLuaByKey1:@"ViewDidDisAppear"];
     }
 }
 
@@ -274,7 +274,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"didMoveToSuperview"];
+        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
     }
 }
 
@@ -283,7 +283,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"didMoveToSuperview"];
+        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
     }
 }
 
@@ -292,25 +292,25 @@ extern char g_debug_lua[];
 -(void) keyboardWillShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"keyboardWillShow"];
+        [self lv_callLuaByKey1:@"KeyboardWillShow"];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"keyboardDidShow"];
+        [self lv_callLuaByKey1:@"KeyboardDidShow"];
     }
 }
 -(void) keyboardWillHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"keyboardWillHide"];
+        [self lv_callLuaByKey1:@"KeyboardWillHide"];
     }
 }
 -(void) keyboardDidHide:(NSNotification *)notification {
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"keyboardDidHide"];
+        [self lv_callLuaByKey1:@"KeyboardDidHide"];
     }
 }
 
@@ -352,7 +352,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"layoutSubviews"];
+        [self lv_callLuaByKey1:@"LayoutSubviews"];
     }
 }
 
