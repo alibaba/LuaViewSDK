@@ -44,7 +44,7 @@
 }
 
 static NSString* getArgs(lv_State* L, int index, int max){
-    if( index>=1 && index<max ){
+    if( index>=1 && index<=max ){
         return lv_paramString(L, index);
     }
     return nil;
