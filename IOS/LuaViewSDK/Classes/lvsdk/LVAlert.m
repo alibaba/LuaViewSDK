@@ -11,24 +11,52 @@
 #import "LView.h"
 #import "LVToast.h"
 
+@interface LVAlert ()
+@property(nonatomic,strong) NSArray* cmdArray;
+@property(nonatomic,assign) int argNum;
+@property(nonatomic,assign) int functionNum;
+@end
 
-@implementation LVAlert
+@implementation LVAlert{
+}
+
+-(void) dealloc{
+    lv_State* L = self.lv_lview.l;
+    for ( int i=0; i<self.functionNum; i++ ) {
+        if( lv_type(L, i) == LV_TFUNCTION ) {
+            NSString* tag = self.cmdArray[i];
+            [LVUtil unregistry:L key:tag];
+        }
+    }
+}
 
 
 -(id) init:(lv_State*) l argNum:(int)num{
+    NSString* cancel = getArgs(l, 3, num);
+    NSString* ok = getArgs(l, 4, num);
+    if( cancel==nil && ok==nil ){
+        ok = @"确定";
+    }
     self = [super initWithTitle:getArgs(l, 1, num)
                         message:getArgs(l, 2, num) delegate:self
-              cancelButtonTitle:getArgs(l, 3, num)
-              otherButtonTitles:getArgs(l, 4, num),
+              cancelButtonTitle:cancel
+              otherButtonTitles:ok,
                                 getArgs(l, 5, num),
                                 getArgs(l, 6, num),
                                 getArgs(l, 7, num),
                                 getArgs(l, 8, num),
                                 getArgs(l, 9, num),nil];
     if( self ){
+        self.argNum = num;
         self.lv_lview = (__bridge LView *)(l->lView);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
+        NSMutableArray* mutArray = [[NSMutableArray alloc] init];
+        for( int i=0; i<=9; i++ ){
+            NSString* tag = [[NSMutableString alloc] init];
+            [mutArray addObject:tag];
+        }
+        self.cmdArray = mutArray;
     }
     return self;
 }
@@ -37,8 +65,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        lv_pushnumber(l, buttonIndex+1);//传参数
-        [LVUtil call:l lightUserData:self key:STR_CALLBACK nargs:1];
+        [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key:nil nargs:0];
         self.lv_lview = nil;
     }
 }
@@ -54,8 +81,13 @@ static int lvNewAlertView (lv_State *L) {
     int num = lv_gettop(L);
     LVAlert* alertView = [[LVAlert alloc] init:L argNum:num];
     if( num>0 ){
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
-            [LVUtil registryValue:L key:alertView stack:-1];
+        int argID= 0;
+        for ( int i=1; i<=num; i++ ) {
+            if( lv_type(L, i) == LV_TFUNCTION ) {
+                NSString* tag = alertView.cmdArray[argID++];
+                [LVUtil registryValue:L key:tag stack:i];
+                alertView.argNum = argID;
+            }
         }
         [alertView show];
     }
