@@ -141,7 +141,6 @@ static int __tostring (lv_State *L) {
         lv_setglobal(L, "Timer");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"setCallback",setCallback},
         {"callback",setCallback},
         
         {"start", start },
