@@ -1,5 +1,7 @@
 
-w = System.screenSize();
+scrW,scrH = System.screenSize();
+
+btnH = scrH / 12;
 
 function createButton( text, x,y,w,h, callback)
     local button = Button();
@@ -17,7 +19,7 @@ function createButton( text, x,y,w,h, callback)
     return button;
 end
 
-button1 = createButton("关闭1", 0, 50, w, 40, 
+button1 = createButton("关闭1", 0, btnH*1, scrW, btnH, 
     function()
         Alert("标题", "内容",
                     "确定",
@@ -29,7 +31,7 @@ button1 = createButton("关闭1", 0, 50, w, 40,
 
 
 
-button2 = createButton("关闭2", 10, 100, w-20, 40, 
+button2 = createButton("关闭2", 20, btnH*3, scrW-40, btnH, 
     function()
         Alert("标题", "内容",
                     "确定","取消",
@@ -41,7 +43,7 @@ button2 = createButton("关闭2", 10, 100, w-20, 40,
 
 
 
-button3 = createButton("关闭3", 0, 150, w, 40, 
+button3 = createButton("关闭3", 0, btnH*5, scrW, btnH, 
     function()
         Alert("标题", nil,
                     "确定","取消",
@@ -53,7 +55,7 @@ button3 = createButton("关闭3", 0, 150, w, 40,
 
 
 
-button4 = createButton("关闭4", 0, 200, w, 40, 
+button4 = createButton("关闭4", 0, btnH*7, scrW, btnH, 
     function()
         Alert(nil, "内容",
                     "确定","取消",
