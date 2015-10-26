@@ -22,7 +22,7 @@
  const char* LVType_LVUserDataGesture = "LVType_UserDataGesture";
  const char* LVType_LVUserDataDownloader = "LVType_UserDataDownloader";
  const char* LVType_LVUserDataAudioPlayer = "LVType_UserDataAudioPlayer";
- const char* LVType_LVUserDataAttributedString = "LVType_UserDataAttributedString";
+ const char* LVType_LVUserDataStyledString = "LVType_UserDataStyledString";
  const char* LVType_LVUserDataNativeObject = "LVType_UserDataNativeObject";
  const char* LVType_LVUserDataStruct = "LVType_UserDataStruct";
 

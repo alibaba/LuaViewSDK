@@ -78,7 +78,7 @@ extern const char* LVType_LVUserDataTransform3D;
 extern const char* LVType_LVUserDataGesture;
 extern const char* LVType_LVUserDataDownloader;
 extern const char* LVType_LVUserDataAudioPlayer;
-extern const char* LVType_LVUserDataAttributedString;
+extern const char* LVType_LVUserDataStyledString;
 extern const char* LVType_LVUserDataNativeObject;
 extern const char* LVType_LVUserDataStruct;
 

@@ -9,6 +9,7 @@
 #import "LVTextField.h"
 #import "LVBaseView.h"
 #import "LView.h"
+#import "LVStyledString.h"
 
 @interface LVTextField ()<UITextFieldDelegate>
 
@@ -101,13 +102,37 @@ static int text (lv_State *L) {
         LVTextField* view = (__bridge LVTextField *)(user->view);
         if( [view isKindOfClass:[LVTextField class]] ){
             if ( lv_gettop(L)>=2 ) {
-                NSString* text = lv_paramString(L, 2);// 2
-                view.text = text;
+                if( lv_type(L, 2)==LV_TUSERDATA ) {
+                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
+                        view.attributedText = attString.mutableAttributedString;
+                    }
+                } else if( lv_type(L, 2)==LV_TSTRING ) {
+                    NSString* text = lv_paramString(L, 2);// 2
+                    view.text = text;
+                }
                 return 0;
             } else {
                 NSString* s = view.text;
                 if( s ) {
                     lv_pushstring(L, s.UTF8String);
+                    return 1;
+                }
+                
+                NSAttributedString* att =  view.attributedText;
+                if( att ) {
+                    LVStyledString* attString = [[LVStyledString alloc] init:L];
+                    attString.mutableAttributedString = [[NSMutableAttributedString alloc] init];
+                    [attString.mutableAttributedString appendAttributedString:att];
+                    
+                    NEW_USERDATA(userData, LVUserDataStyledString);
+                    userData->attributedString = CFBridgingRetain(attString);
+                    attString.userData = userData;
+                    
+                    lvL_getmetatable(L, META_TABLE_AttributedString );
+                    lv_setmetatable(L, -2);
+                    return 1;
                 } else {
                     lv_pushnil(L);
                 }
@@ -124,8 +149,16 @@ static int placeholder (lv_State *L) {
         LVTextField* view = (__bridge LVTextField *)(user->view);
         if( [view isKindOfClass:[LVTextField class]] ){
             if ( lv_gettop(L)>=2 ) {
-                NSString* text = lv_paramString(L, 2);// 2
-                view.placeholder = text;
+                if( lv_type(L, 2)==LV_TSTRING ) {
+                    NSString* text = lv_paramString(L, 2);// 2
+                    view.placeholder = text;
+                } else if( lv_type(L, 2)==LV_TUSERDATA ) {
+                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
+                        view.attributedPlaceholder = attString.mutableAttributedString;
+                    }
+                }
                 return 0;
             } else {
                 NSString* s = view.placeholder;

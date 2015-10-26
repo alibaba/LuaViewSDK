@@ -9,7 +9,7 @@
 #import "LVLabel.h"
 #import "LVBaseView.h"
 #import "LView.h"
-#import "LVAttributedString.h"
+#import "LVStyledString.h"
 
 @implementation LVLabel
 
@@ -65,10 +65,10 @@ static int text (lv_State *L) {
                     view.text = text;
                     return 0;
                 } else if( lv_type(L, 2)==LV_TUSERDATA ){
-                    LVUserDataAttributedString * user2 = lv_touserdata(L, 2);// 2
-                    if( user2 && LVIsType(user2, LVUserDataAttributedString) ) {
+                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
                         LVLabel* view = (__bridge LVLabel *)(user->view);
-                        LVAttributedString* attString = (__bridge LVAttributedString *)(user2->attributedString);
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
                         [view setAttributedText:attString.mutableAttributedString];
                         return 0;
                     }

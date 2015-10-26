@@ -12,7 +12,7 @@
 #import "LVUtil.h"
 #import "LView.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import "LVAttributedString.h"
+#import "LVStyledString.h"
 
 @implementation JHSLVButton
 

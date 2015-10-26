@@ -11,7 +11,7 @@
 #import "LVImage.h"
 #import "LVUtil.h"
 #import "LView.h"
-#import "LVAttributedString.h"
+#import "LVStyledString.h"
 #import "UIView+LuaView.h"
 
 @interface  LVButton()
@@ -156,9 +156,9 @@ static int title (lv_State *L) {
                             [button setTitle:text1 forState:g_states[j++]];
                         }
                     } else if( lv_type(L, 2)==LV_TUSERDATA ){
-                        LVUserDataAttributedString * user2 = lv_touserdata(L, 2);
-                        if( user2 && LVIsType(user2, LVUserDataAttributedString) ) {
-                            LVAttributedString* attString = (__bridge LVAttributedString *)(user2->attributedString);
+                        LVUserDataStyledString * user2 = lv_touserdata(L, 2);
+                        if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
+                            LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
                             [button setAttributedTitle:attString.mutableAttributedString forState:g_states[j++]  ];
                             [button.titleLabel sizeToFit];
                         }

@@ -41,7 +41,7 @@
 #import "LVDownloader.h"
 #import "LVAudioPlayer.h"
 #import "LVFile.h"
-#import "LVAttributedString.h"
+#import "LVStyledString.h"
 #import "LVExternalLinker.h"
 #import "LVNativeObjBox.h"
 #import "LVCollectionView.h"
@@ -398,7 +398,7 @@ static int debug_log (lv_State *L) {
     [LVDebuger classDefine:L];
     
     // attributedString
-    [LVAttributedString classDefine:L];
+    [LVStyledString classDefine:L];
     
     // 注册 系统对象window
     [LVFunctionRegister registryWindow:L lView:lView];
