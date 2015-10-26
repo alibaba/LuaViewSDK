@@ -5,10 +5,10 @@ window.backgroundColor(0xDDDDDD);
 
 Y0 = 50
 
-att1 = AttributedString( "123test",  { fontSize=12, fontWeight="bold", foregroundColor=0xff, foregroundColorAlpha=0.9 } );
+att1 = AttributedString( "123test",  { fontSize=12, fontWeight="bold", foregroundColor=0x220000ff, foregroundAlpha=0.5 } );
 att2 = AttributedString( "测试测试",  { fontSize=30, foregroundColor=0xff0000, backgroundColor=0xff} );
-att3 = AttributedString( "2897348",  { fontSize=13, foregroundColor=0x777777, strikethroughStyle=1} );
-att4 = AttributedString( "下划线测试", { fontSize=9, foregroundColor=0x777777, underlineStyle=1} );
+att3 = AttributedString( "2897348",  { fontSize=13, foregroundColor=0x777777, strikethrough =1} );
+att4 = AttributedString( "下划线测试", { fontSize=9, foregroundColor=0x777777, underline=true} );
 
 label = Label();
 label.frame(0,Y0,w, 60);

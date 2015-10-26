@@ -64,12 +64,14 @@ static void resetFont(NSMutableAttributedString* attString, NSDictionary* dic, N
 // 设置前景色
 static void resetForegroundColor(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
     NSNumber* value = dic[@"foregroundColor"];
-    NSNumber* alpha = dic[@"foregroundColorAlpha"];
+    float  alpha = 1;
     if( value ) {
-        if( alpha ==nil ){
-            alpha = @(1);
+        alpha = (value.integerValue>>24) & 0xff;
+        alpha /= 255.0;
+        if( alpha == 0) {
+            alpha = 1;
         }
-        UIColor* color = lv_UIColorFromRGBA(value.integerValue , alpha.floatValue);
+        UIColor* color = lv_UIColorFromRGBA(value.integerValue , alpha );
         [attString addAttribute:NSForegroundColorAttributeName value:color range:range];
     }
 }
@@ -77,12 +79,14 @@ static void resetForegroundColor(NSMutableAttributedString* attString, NSDiction
 // 设置背景色
 static void resetBackgroundColor(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
     NSNumber* value = dic[@"backgroundColor"];
-    NSNumber* alpha = dic[@"backgroundColorAlpha"];
-    if( value ){
-        if( alpha ==nil ){
-            alpha = @(1);
+    float  alpha = 1;
+    if( value ) {
+        alpha = (value.integerValue>>24) & 0xff;
+        alpha /= 255.0;
+        if( alpha == 0) {
+            alpha = 1;
         }
-        UIColor*  color = lv_UIColorFromRGBA(value.integerValue , alpha.floatValue);
+        UIColor*  color = lv_UIColorFromRGBA(value.integerValue , alpha );
         [attString addAttribute:NSBackgroundColorAttributeName value:color range:range];
     }
 }
@@ -102,7 +106,7 @@ static BOOL isNotZeroOrFalse( id value ){
 
 // 设置划线
 static void resetStriketrhroughSytle(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    NSNumber* value = dic[@"strikethroughStyle"];
+    NSNumber* value = dic[@"strikethrough"];
     if( value && isNotZeroOrFalse(value) ){
         [attString addAttribute:NSStrikethroughStyleAttributeName value:value range:range];
     }
@@ -110,7 +114,7 @@ static void resetStriketrhroughSytle(NSMutableAttributedString* attString, NSDic
 
 //下划线
 static void resetUnderLineStyle(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    NSNumber* value = dic[@"underlineStyle"];
+    NSNumber* value = dic[@"underline"];
     if( value  && isNotZeroOrFalse(value) ){
         [attString addAttribute:NSUnderlineStyleAttributeName value:value range:range];
     }

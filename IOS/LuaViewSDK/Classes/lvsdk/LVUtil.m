@@ -114,6 +114,8 @@ NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
             value = @(lv_tonumber(L, -1) );
         } else if( lv_type(L, -1)==LV_TTABLE ){
             value = lv_luaTableToDictionary(L,-1);
+        } else if( lv_type(L, -1)==LV_TBOOLEAN ){
+            value = @(lv_toboolean(L, -1) );
         }
         // stack now contains: -1 => value; -2 => key; -3 => table
         if( value && key ) {

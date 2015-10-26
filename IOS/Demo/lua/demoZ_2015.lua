@@ -37,7 +37,7 @@ label = Label();-- 创建一个文本框
 label.frame(160,h-80,w,80);
 
 
-att1 = AttributedString( "12te",  { fontSize=12, fontWeight="bold", foregroundColor=0xff, foregroundColorAlpha=0.9 , charpace=4} );
+att1 = AttributedString( "12te",  { fontSize=12, fontWeight="bold", foregroundColor=0xff, foregroundAlpha=0.9 , charpace=4} );
 att2 = AttributedString( "测试",  { fontSize=30, foregroundColor=0xff0000, backgroundColor=0xff, charpace=10} );
 att3 = AttributedString( "289",  { fontSize=13, foregroundColor=0x777777, strikethroughStyle=1} );
 att4 = AttributedString( "下划", { fontSize=9, foregroundColor=0x777777, underlineStyle=1} );
