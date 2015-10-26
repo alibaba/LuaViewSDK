@@ -83,6 +83,7 @@ static int lvNewTextField (lv_State *L) {
     {
         NEW_USERDATA(userData, LVUserDataView);
         userData->view = CFBridgingRetain(textFiled);
+        textFiled.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UITextField );
         lv_setmetatable(L, -2);

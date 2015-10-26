@@ -102,8 +102,8 @@ static int toast (lv_State *L) {
         if( s ==nil ) {
             s = @"      ";
         }
-        CGSize size = [UIScreen mainScreen].bounds.size;
-        [LVToast showWithText:s bottomOffset:size.height/4 duration:2];
+        // CGSize size = [UIScreen mainScreen].bounds.size;
+        [LVToast showWithText:s duration:2];
     }
     return 0;
 }

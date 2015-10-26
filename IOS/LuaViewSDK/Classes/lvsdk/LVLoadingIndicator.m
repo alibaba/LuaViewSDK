@@ -122,6 +122,8 @@ static int color(lv_State *L) {
     const struct lvL_reg memberFunctions [] = {
         {"start",  startAnimating },
         {"stop",   stopAnimating },
+        {"show",  startAnimating },
+        {"hide",   stopAnimating },
         {"isAnimating",  isAnimating },
         {"color", color},
         {NULL, NULL}
