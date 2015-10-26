@@ -22,13 +22,13 @@
 }
 
 static void releaseUserDataData(LVUserDataStyledString* user){
-    if( user && user->attributedString ){
-        LVStyledString* data = CFBridgingRelease(user->attributedString);
-        user->attributedString = NULL;
+    if( user && user->styledString ){
+        LVStyledString* data = CFBridgingRelease(user->styledString);
+        user->styledString = NULL;
         if( data ){
             data.userData = NULL;
             data.lview = nil;
-            data.mutableAttributedString = nil;
+            data.mutableStyledString = nil;
         }
     }
 }
@@ -155,19 +155,19 @@ static int lvNewAttributedString (lv_State *L) {
     if( lv_gettop(L)>=2 ) {
         if( lv_type(L, 1)==LV_TSTRING && lv_type(L, 2)==LV_TTABLE ){
             NSString* s = lv_paramString(L, 1);
-            attString.mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:s];
+            attString.mutableStyledString = [[NSMutableAttributedString alloc] initWithString:s];
             
             NSDictionary* dic = lv_luaTableToDictionary(L,2);
             NSRange range = {0};
             range.location = 0;
             range.length = s.length;
-            resetAttributedString(attString.mutableAttributedString, dic, range);
+            resetAttributedString(attString.mutableStyledString, dic, range);
         }
     }
     
     {
         NEW_USERDATA(userData, LVUserDataStyledString);
-        userData->attributedString = CFBridgingRetain(attString);
+        userData->styledString = CFBridgingRetain(attString);
         attString.userData = userData;
         
         lvL_getmetatable(L, META_TABLE_AttributedString );
@@ -179,8 +179,8 @@ static int lvNewAttributedString (lv_State *L) {
 static int __tostring (lv_State *L) {
     LVUserDataStyledString * user = (LVUserDataStyledString *)lv_touserdata(L, 1);
     if( user ){
-        LVStyledString* attString =  (__bridge LVStyledString *)(user->attributedString);
-        NSString* s = attString.mutableAttributedString.string;
+        LVStyledString* attString =  (__bridge LVStyledString *)(user->styledString);
+        NSString* s = attString.mutableStyledString.string;
         if( s==nil ){
             s = [[NSString alloc] initWithFormat:@"{ UserDataType=AttributedString, null }" ];
         }
@@ -193,11 +193,11 @@ static int __tostring (lv_State *L) {
 static int append (lv_State *L) {
     LVUserDataStyledString * user1 = (LVUserDataStyledString *)lv_touserdata(L, 1);
     LVUserDataStyledString * user2 = (LVUserDataStyledString *)lv_touserdata(L, 2);
-    LVStyledString* string1 = (__bridge LVStyledString *)(user1->attributedString);
-    LVStyledString* string2 = (__bridge LVStyledString *)(user2->attributedString);
+    LVStyledString* string1 = (__bridge LVStyledString *)(user1->styledString);
+    LVStyledString* string2 = (__bridge LVStyledString *)(user2->styledString);
     if( LVIsType(user1,LVUserDataStyledString) && LVIsType(user2,LVUserDataStyledString)
-       && string1.mutableAttributedString && string2.mutableAttributedString ){
-        [string1.mutableAttributedString appendAttributedString: string2.mutableAttributedString];
+       && string1.mutableStyledString && string2.mutableStyledString ){
+        [string1.mutableStyledString appendAttributedString: string2.mutableStyledString];
         return 1;
     }
     return 0;
@@ -207,18 +207,18 @@ static int __add (lv_State *L) {
     LVUserDataStyledString * user1 = (LVUserDataStyledString *)lv_touserdata(L, 1);
     LVUserDataStyledString * user2 = (LVUserDataStyledString *)lv_touserdata(L, 2);
     if( LVIsType(user1,LVUserDataStyledString) && LVIsType(user2,LVUserDataStyledString) ){
-        LVStyledString* user1AttString = (__bridge LVStyledString *)(user1->attributedString);
-        LVStyledString* user2AttString = (__bridge LVStyledString *)(user2->attributedString);
+        LVStyledString* user1AttString = (__bridge LVStyledString *)(user1->styledString);
+        LVStyledString* user2AttString = (__bridge LVStyledString *)(user2->styledString);
         
         LVStyledString* attString = [[LVStyledString alloc] init:L];
-        attString.mutableAttributedString = [[NSMutableAttributedString alloc] init];
-        if( user1AttString && user1AttString.mutableAttributedString)
-            [attString.mutableAttributedString appendAttributedString:user1AttString.mutableAttributedString];
-        if( user2AttString && user2AttString.mutableAttributedString)
-            [attString.mutableAttributedString appendAttributedString:user2AttString.mutableAttributedString];
+        attString.mutableStyledString = [[NSMutableAttributedString alloc] init];
+        if( user1AttString && user1AttString.mutableStyledString)
+            [attString.mutableStyledString appendAttributedString:user1AttString.mutableStyledString];
+        if( user2AttString && user2AttString.mutableStyledString)
+            [attString.mutableStyledString appendAttributedString:user2AttString.mutableStyledString];
         {
             NEW_USERDATA(userData, LVUserDataStyledString);
-            userData->attributedString = CFBridgingRetain(attString);
+            userData->styledString = CFBridgingRetain(attString);
             attString.userData = userData;
             
             lvL_getmetatable(L, META_TABLE_AttributedString );

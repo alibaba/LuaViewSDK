@@ -68,8 +68,8 @@ static int text (lv_State *L) {
                     LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
                     if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
                         LVLabel* view = (__bridge LVLabel *)(user->view);
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
-                        [view setAttributedText:attString.mutableAttributedString];
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                        [view setAttributedText:attString.mutableStyledString];
                         return 0;
                     }
                 }

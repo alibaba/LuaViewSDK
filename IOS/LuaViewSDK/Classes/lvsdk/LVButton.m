@@ -158,8 +158,8 @@ static int title (lv_State *L) {
                     } else if( lv_type(L, 2)==LV_TUSERDATA ){
                         LVUserDataStyledString * user2 = lv_touserdata(L, 2);
                         if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                            LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
-                            [button setAttributedTitle:attString.mutableAttributedString forState:g_states[j++]  ];
+                            LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                            [button setAttributedTitle:attString.mutableStyledString forState:g_states[j++]  ];
                             [button.titleLabel sizeToFit];
                         }
                     }else if ( lv_type(L, i) == LV_TNUMBER ) {

@@ -13,7 +13,7 @@
 
 typedef struct _LVUserDataStyledString {
     LVUserDataCommonHead;
-    const void* attributedString;
+    const void* styledString;
 } LVUserDataStyledString;
 
 
@@ -23,7 +23,7 @@ typedef struct _LVUserDataStyledString {
 @property(nonatomic,weak) LView* lview;
 @property(nonatomic,assign) LVUserDataStyledString* userData;
 
-@property(nonatomic,strong) NSMutableAttributedString* mutableAttributedString;//真实的数据
+@property(nonatomic,strong) NSMutableAttributedString* mutableStyledString;//真实的数据
 
 -(id) init:(lv_State*) l;
 +(int) classDefine:(lv_State *)L ;

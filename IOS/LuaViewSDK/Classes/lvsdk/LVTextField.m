@@ -105,8 +105,8 @@ static int text (lv_State *L) {
                 if( lv_type(L, 2)==LV_TUSERDATA ) {
                     LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
                     if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
-                        view.attributedText = attString.mutableAttributedString;
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                        view.attributedText = attString.mutableStyledString;
                     }
                 } else if( lv_type(L, 2)==LV_TSTRING ) {
                     NSString* text = lv_paramString(L, 2);// 2
@@ -123,11 +123,11 @@ static int text (lv_State *L) {
                 NSAttributedString* att =  view.attributedText;
                 if( att ) {
                     LVStyledString* attString = [[LVStyledString alloc] init:L];
-                    attString.mutableAttributedString = [[NSMutableAttributedString alloc] init];
-                    [attString.mutableAttributedString appendAttributedString:att];
+                    attString.mutableStyledString = [[NSMutableAttributedString alloc] init];
+                    [attString.mutableStyledString appendAttributedString:att];
                     
                     NEW_USERDATA(userData, LVUserDataStyledString);
-                    userData->attributedString = CFBridgingRetain(attString);
+                    userData->styledString = CFBridgingRetain(attString);
                     attString.userData = userData;
                     
                     lvL_getmetatable(L, META_TABLE_AttributedString );
@@ -155,8 +155,8 @@ static int placeholder (lv_State *L) {
                 } else if( lv_type(L, 2)==LV_TUSERDATA ) {
                     LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
                     if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->attributedString);
-                        view.attributedPlaceholder = attString.mutableAttributedString;
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                        view.attributedPlaceholder = attString.mutableStyledString;
                     }
                 }
                 return 0;
