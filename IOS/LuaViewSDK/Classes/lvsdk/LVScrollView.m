@@ -354,6 +354,10 @@ static const struct lvL_reg memberFunctions [] = {
         lv_pushcfunction(L, lvNewScrollView);
         lv_setglobal(L, "HScrollView");
     }
+    {
+        lv_pushcfunction(L, lvNewScrollView);
+        lv_setglobal(L, "HorizontalScrollView");
+    }
     
     lv_createClassMetaTable(L ,META_TABLE_UIScrollView);
     
