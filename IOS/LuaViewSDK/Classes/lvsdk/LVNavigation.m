@@ -18,10 +18,10 @@ static int setTitle (lv_State *L) {
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
     if( vc && lv_gettop(L)>=1 ) {
-        if( lv_type(L, 1)== LV_TSTRING ) {// string
+        if( lv_type(L, 1)== LV_TSTRING ) {// 第一种: string
             vc.navigationItem.title = lv_paramString(L, 1);
             return 0;
-        } else if( lv_type(L, 1)== LV_TUSERDATA ) {// 支持复合文本
+        } else if( lv_type(L, 1)== LV_TUSERDATA ) {//第二种: 复合文本
             LVUserDataStyledString * user2 = lv_touserdata(L, 1);
             if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
                 UILabel* label = [[UILabel alloc] init];
@@ -32,7 +32,7 @@ static int setTitle (lv_State *L) {
             }
         }
         id object = lv_luaValueToNativeObject(L, 1);
-        if([object isKindOfClass:[UIView class]] ) {// View
+        if([object isKindOfClass:[UIView class]] ) {// 第三种: View
             vc.navigationItem.titleView = object;
         }
         return 0;
