@@ -87,10 +87,23 @@ static void resetBackgroundColor(NSMutableAttributedString* attString, NSDiction
     }
 }
 
+static BOOL isNotZeroOrFalse( id value ){
+    if( [value isKindOfClass:[NSNumber class]] ) {
+        NSNumber* v = value;
+        if(  v.intValue == 0 ){
+            return NO;
+        }
+        if( v.boolValue== NO ) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 // 设置划线
 static void resetStriketrhroughSytle(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
     NSNumber* value = dic[@"strikethroughStyle"];
-    if( value ){
+    if( value && isNotZeroOrFalse(value) ){
         [attString addAttribute:NSStrikethroughStyleAttributeName value:value range:range];
     }
 }
@@ -98,7 +111,7 @@ static void resetStriketrhroughSytle(NSMutableAttributedString* attString, NSDic
 //下划线
 static void resetUnderLineStyle(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
     NSNumber* value = dic[@"underlineStyle"];
-    if( value ){
+    if( value  && isNotZeroOrFalse(value) ){
         [attString addAttribute:NSUnderlineStyleAttributeName value:value range:range];
     }
 }

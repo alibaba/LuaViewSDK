@@ -18,6 +18,7 @@
 @property(nonatomic,assign) CGFloat lv_rotationY;
 @property(nonatomic,assign) CGFloat lv_scaleX;
 @property(nonatomic,assign) CGFloat lv_scaleY;
+@property(nonatomic,assign) NSUInteger lv_align;
 
 +(int) classDefine:(lv_State *)L ;
 

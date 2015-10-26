@@ -19,8 +19,15 @@
 @property(nonatomic,assign) CGFloat lv_scaleX;
 @property(nonatomic,assign) CGFloat lv_scaleY;
 
+@property(nonatomic,assign) NSUInteger lv_align;
+
 - (void) lv_callLuaByKey1:(NSString*) key1;
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2;
--(void) lv_buttonCallBack;
+- (void) lv_buttonCallBack;
+
+
+- (void) lv_alignSubviews;
+
+- (void) lv_alignSelfWithSuperRect:(CGRect) rect;
 
 @end

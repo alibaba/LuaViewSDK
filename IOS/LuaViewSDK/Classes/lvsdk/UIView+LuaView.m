@@ -94,5 +94,47 @@
 -(void) setLv_scaleY:(CGFloat)f{
 }
 
+// align
+
+-(NSUInteger) lv_align{
+    return 0;
+}
+
+-(void) setLv_align:(NSUInteger)lv_align{
+}
+
+- (void) lv_alignSubviews {
+    CGRect rect = self.frame;
+    NSArray* subviews = [self subviews];
+    for( UIView* view in subviews){
+        [view lv_alignSelfWithSuperRect:rect];
+    }
+}
+
+- (void) lv_alignSelfWithSuperRect:(CGRect) rect{
+    NSUInteger ali = self.lv_align;
+    if( ali ){
+        CGRect r0 = [self frame];
+        CGRect r = r0;
+        if( ali&LV_ALIGN_LEFT ) {
+            r.origin.x = 0;
+        } else if( ali&LV_ALIGN_H_CENTER ) {
+            r.origin.x = (rect.size.width-r.size.width)/2;
+        } else if( ali&LV_ALIGN_RIGHT ) {
+            r.origin.x = rect.size.width-r.size.width;
+        }
+        if( ali&LV_ALIGN_TOP ) {
+            r.origin.y = 0;
+        } else if( ali&LV_ALIGN_V_CENTER ) {
+            r.origin.y = (rect.size.height-r.size.height)/2;
+        } else if( ali&LV_ALIGN_BOTTOM ) {
+            r.origin.y = (rect.size.height-r.size.height);
+        }
+        if( !CGRectEqualToRect(r0, r) ) {
+            self.frame = r;
+        }
+    }
+}
+
 
 @end

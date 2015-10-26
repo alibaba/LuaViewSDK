@@ -49,4 +49,9 @@
     return [NSString stringWithFormat:@"<PagerViewCell(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame)];
 }
 
+- (void) layoutSubviews{
+    [super layoutSubviews];
+    [self lv_alignSubviews];
+}
+
 @end

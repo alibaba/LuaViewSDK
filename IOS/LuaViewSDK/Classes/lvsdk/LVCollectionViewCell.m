@@ -47,5 +47,14 @@
     return [NSString stringWithFormat:@"<CollectionViewCell(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame)];
 }
 
+- (void) layoutSubviews{
+    [super layoutSubviews];
+    
+    CGRect rect = self.frame;
+    NSArray* subviews = [self.contentView subviews];
+    for( UIView* view in subviews){
+        [view lv_alignSelfWithSuperRect:rect];
+    }
+}
 
 @end

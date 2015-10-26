@@ -47,6 +47,16 @@
     // Initialization code
 }
 
+- (void) layoutSubviews{
+    [super layoutSubviews];
+    
+    CGRect rect = self.frame;
+    NSArray* subviews = [self.contentView subviews];
+    for( UIView* view in subviews){
+        [view lv_alignSelfWithSuperRect:rect];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:NO animated:NO];
 }

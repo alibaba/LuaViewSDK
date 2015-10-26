@@ -67,6 +67,7 @@ static int center (lv_State *L) {
                 } else {
                     view.center = center;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, center.x );
@@ -162,6 +163,7 @@ static int frame (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.x    );
@@ -241,6 +243,7 @@ static int origin (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.x    );
@@ -265,6 +268,7 @@ static int x (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.x );
@@ -380,6 +384,7 @@ static int y (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.y );
@@ -403,6 +408,7 @@ static int bottom (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.y + r.size.height );
@@ -426,6 +432,7 @@ static int right (lv_State *L) {
                 } else {
                     view.frame = r;
                 }
+                view.lv_align = 0;
                 return 0;
             } else {
                 lv_pushnumber(L, r.origin.x + r.size.width );
@@ -1145,6 +1152,11 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
+- (void) layoutSubviews{
+    [super layoutSubviews];
+    [self lv_alignSubviews];
+}
+
 static int releaseObject(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -1177,6 +1189,63 @@ static int releaseObject(lv_State *L) {
 //    LVError(@"not found property: %@", key);
 //    return 0;
 //}
+
+
+static int align (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( view ){
+            int argNum = lv_gettop(L);
+            if ( argNum>=2 ) {
+                NSUInteger align = 0;
+                for (int i=2; i<=argNum; i++ ) {
+                    align |= (NSUInteger)lv_tointeger(L, i);
+                }
+                view.lv_align = align;
+                [view lv_alignSelfWithSuperRect:view.superview.frame];
+                return 0;
+            } else {
+                lv_pushnumber(L, view.lv_align );
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+static int alignInfo (lv_State *L, int align) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( view ){
+            view.lv_align = align;
+            [view lv_alignSelfWithSuperRect:view.superview.frame];
+        }
+    }
+    return 0;
+}
+
+static int alignLeft(lv_State *L ) {
+    return alignInfo(L, LV_ALIGN_LEFT);
+}
+
+static int alignRight(lv_State *L ) {
+    return alignInfo(L, LV_ALIGN_RIGHT);
+}
+
+static int alignTop(lv_State *L ) {
+    return alignInfo(L, LV_ALIGN_TOP);
+}
+
+static int alignBottom(lv_State *L ) {
+    return alignInfo(L, LV_ALIGN_BOTTOM);
+}
+
+static int alignCenter(lv_State *L ) {
+    return alignInfo(L, LV_ALIGN_H_CENTER|LV_ALIGN_V_CENTER);
+}
+
 
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
@@ -1265,6 +1334,13 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"flxLayout",  flxLayout },
     {"flxBindingCSS", flxBindingInlineCSS},
     
+    // align
+    {"align", align},
+    {"alignLeft", alignLeft},
+    {"alignRight", alignRight},
+    {"alignTop", alignTop},
+    {"alignButtom", alignBottom},
+    {"alignCenter", alignCenter},
     {NULL, NULL}
 };
 
