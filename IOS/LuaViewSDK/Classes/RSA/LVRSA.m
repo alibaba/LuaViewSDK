@@ -94,11 +94,11 @@ static NSString *g_publicKeyFilePath = nil;
 
 + (SecKeyRef)getPublicKey0
 {
-    SecCertificateRef myCertificate = NULL;
     NSData *certificateData = [LVRSA publickKeyData];
     if ( certificateData==nil ){
         return NULL;
     }
+    SecCertificateRef myCertificate = NULL;
     myCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, (__bridge CFDataRef)certificateData);
     SecPolicyRef myPolicy = SecPolicyCreateBasicX509();
     SecTrustRef myTrust;
@@ -107,8 +107,16 @@ static NSString *g_publicKeyFilePath = nil;
     if (status == noErr) {
         status = SecTrustEvaluate(myTrust, &trustResult);
         if( status == noErr ){
+            CFRelease(myPolicy);
+            if( myCertificate ) {
+                CFRelease(myCertificate);
+            }
             return SecTrustCopyPublicKey(myTrust);
         }
+    }
+    CFRelease(myPolicy);
+    if( myCertificate ) {
+        CFRelease(myCertificate);
     }
     return NULL;
 }

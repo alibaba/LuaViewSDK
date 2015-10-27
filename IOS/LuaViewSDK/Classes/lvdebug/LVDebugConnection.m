@@ -144,6 +144,7 @@ static int SERVER_PORT = 9876;
     CFRunLoopSourceRef  source = CFSocketCreateRunLoopSource(kCFAllocatorDefault,_socket,0);//定义循环对象
     CFRunLoopAddSource(cfrl,source,kCFRunLoopCommonModes); //将循环对象加入当前循环中
     CFRelease(source);
+    CFRelease(address);
 }
 
 -(void) closeAll{
