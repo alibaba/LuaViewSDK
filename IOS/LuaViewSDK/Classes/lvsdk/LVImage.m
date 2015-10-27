@@ -12,6 +12,7 @@
 #import "LVData.h"
 //#import <TBCDNImage.h>
 #import <Accelerate/Accelerate.h>
+#import "LVNinePatchImage.h"
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
@@ -76,7 +77,13 @@
         }];
     } else {
         // local Image
-        [self setImage:[LVUtil cachesImage:imageName]];
+        UIImage* image = [LVUtil cachesImage:imageName];
+        if ( [LVNinePatchImage isNinePathImageName:imageName] ) {
+            image = [LVNinePatchImage createNinePatchImage:image];
+            [self setImage:image];
+        } else {
+            [self setImage:image];
+        }
     }
 }
 

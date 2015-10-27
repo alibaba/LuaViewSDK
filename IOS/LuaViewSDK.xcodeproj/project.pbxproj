@@ -150,6 +150,10 @@
 		8434474F1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; };
 		843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		843447511B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
+		8446F15D1BDF57F2007E4064 /* LVNinePatchImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */; };
+		8446F15E1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		8446F15F1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */; };
 		84470B171B5E66FF00980E31 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLVCustomError.m */; };
 		844F9F581B969E4300E24A24 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */; };
 		844F9F5B1B96A0AF00E24A24 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */; };
@@ -488,6 +492,9 @@
 		843447491B61DDED0039B98A /* UIView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LuaView.m"; sourceTree = "<group>"; };
 		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
 		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
+		8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNinePatchImage.h; sourceTree = "<group>"; };
+		8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNinePatchImage.m; sourceTree = "<group>"; };
+		8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
 		84470B151B5E66FF00980E31 /* JHSLVCustomError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomError.h; sourceTree = "<group>"; };
 		84470B161B5E66FF00980E31 /* JHSLVCustomError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomError.m; sourceTree = "<group>"; };
 		844F9F561B969E4300E24A24 /* JHSLVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCollectionView.h; sourceTree = "<group>"; };
@@ -843,6 +850,8 @@
 				846481AB1A64C61F00DE6204 /* LVButton.m */,
 				846481AE1A64C61F00DE6204 /* LVImage.h */,
 				846481AF1A64C61F00DE6204 /* LVImage.m */,
+				8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */,
+				8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */,
 				846481B01A64C61F00DE6204 /* LVLabel.h */,
 				846481B11A64C61F00DE6204 /* LVLabel.m */,
 				846481B61A64C61F00DE6204 /* LVTextField.h */,
@@ -1003,6 +1012,7 @@
 			isa = PBXGroup;
 			children = (
 				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
+				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
 				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
 				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
 				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
@@ -1310,6 +1320,7 @@
 				840AD61B1A63ED7D003E837D /* lVopcodes.h in Headers */,
 				84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */,
 				84B58E3A1B65CC260048F33D /* LVLoadingIndicator.h in Headers */,
+				8446F15D1BDF57F2007E4064 /* LVNinePatchImage.h in Headers */,
 				846481C11A64C61F00DE6204 /* LVBaseView.h in Headers */,
 				8481E0651BD7B29100FDFEEA /* LVCollectionViewDelegate.h in Headers */,
 				8425324C1ADCBD3A003C05BF /* LVDownloader.h in Headers */,
@@ -1435,6 +1446,7 @@
 				84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */,
 				84799AD81BAFDDA00070E214 /* demoY2_CollectionView.lua in Resources */,
 				8468C96B1BDA11BE002D4B1E /* testUITextView2.lua in Resources */,
+				8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */,
 				84799ADA1BAFDDA00070E214 /* color2.png in Resources */,
 				8468C9651BDA11BE002D4B1E /* testUILoadingView.lua in Resources */,
 				84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */,
@@ -1617,6 +1629,7 @@
 				846481D51A64C61F00DE6204 /* LVScrollView.m in Sources */,
 				8418E3AC1A5E704100158125 /* LuaViewSDK.m in Sources */,
 				840AD61D1A63ED7D003E837D /* lVoslib.c in Sources */,
+				8446F15F1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */,
 				84799AFC1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */,
 				91882E8D1AAD45A400107DFC /* LVPinchGestureRecognizer.m in Sources */,
 				8410D9B21A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */,
@@ -1747,6 +1760,7 @@
 				840AD61E1A63ED7D003E837D /* lVparser.c in Sources */,
 				8454D1421A7F732500774565 /* LVHttp.m in Sources */,
 				849708381A67653A00E913F4 /* LVDB.m in Sources */,
+				8446F15E1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */,
 				840AD5E81A63ED7D003E837D /* lVapi.c in Sources */,
 				848F3C381B96EA9800D5D510 /* JHSLVImage.m in Sources */,
 				84342D8F1AE0E02B00ECB4EF /* LVStyledString.m in Sources */,
