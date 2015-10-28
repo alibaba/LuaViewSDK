@@ -4,7 +4,7 @@ window.backgroundColor(0x777777,1);
 
 w = scrW/3;
 X0 = scrW/10;
-Y0 = scrH/4;
+Y0 = scrH/5;
 
 
 
@@ -31,5 +31,11 @@ imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
         label.adjustSize();
         label.center(scrW/2,scrH/2);
 	end);
+
+
+imageView3 = Image();
+imageView3.frame(X0,Y0+w+Y0,w,w);
+imageView3.image("bt_catebrand_more.9");
+
 
 

@@ -241,6 +241,26 @@ static int font (lv_State *L) {
     return 0;
 }
 
+static int fontSize (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVButton* view = (__bridge LVButton *)(user->view);
+        if( [view isKindOfClass:[LVButton class]] ){
+            int num = lv_gettop(L);
+            if( num>=2 ) {
+                float fontSize = lv_tonumber(L, 2);
+                view.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+                return 0;
+            } else {
+                UIFont* font = view.titleLabel.font;
+                lv_pushnumber(L, font.pointSize);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 //static int showsTouchWhenHighlighted(lv_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
@@ -266,6 +286,8 @@ static int font (lv_State *L) {
         {"image",    image},
         
         {"font",    font},
+        {"fontSize",    fontSize},
+        {"textSize",    fontSize},
         
         {"titleColor",    titleColor},
         {"title",    title},
