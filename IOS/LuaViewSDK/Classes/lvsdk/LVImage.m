@@ -20,6 +20,7 @@
 @property (nonatomic,strong) UIVisualEffectView *blurEffectView;
 @property (nonatomic,assign) BOOL needCallLuaFunc;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGesture;
+@property (nonatomic,strong) id errorInfo;
 @end
 
 @implementation LVImage
@@ -72,6 +73,7 @@
         __weak LVImage* weakImageView = self;
         [self setWebImageUrl:[NSURL URLWithString:imageName] finished:^(id errorInfo){
             if( weakImageView.needCallLuaFunc ) {
+                weakImageView.errorInfo = errorInfo;
                 [weakImageView performSelectorOnMainThread:@selector(callLuaDelegate:) withObject:errorInfo waitUntilDone:NO];
             }
         }];
