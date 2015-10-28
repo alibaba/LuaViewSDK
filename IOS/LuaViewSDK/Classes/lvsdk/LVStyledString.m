@@ -122,7 +122,7 @@ static void resetUnderLineStyle(NSMutableAttributedString* attString, NSDictiona
 
 //设置字间距
 static void resetCharSpace(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    NSNumber* value = dic[@"charpace"];
+    NSNumber* value = dic[@"charSpace"];
     if( value ){
         [attString addAttribute:(id)NSKernAttributeName value:value range:range];
     }
@@ -130,7 +130,7 @@ static void resetCharSpace(NSMutableAttributedString* attString, NSDictionary* d
 
 //设置行间距
 static void resetLineSpace(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    NSNumber* value = dic[@"linespace"];
+    NSNumber* value = dic[@"lineSpace"];
     if( value && [LVUtil ios7] ){
         NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle1.lineBreakMode = NSLineBreakByTruncatingTail;

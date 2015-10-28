@@ -687,34 +687,20 @@ static int backgroundColor (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->view);
-        if( lv_gettop(L)>=2 ) {
-            NSUInteger color = lv_tonumber(L, 2);// 2
-            float a = ( (color>>24)&0xff )/255.0;
-            float r = ( (color>>16)&0xff )/255.0;
-            float g = ( (color>>8)&0xff )/255.0;
-            float b = ( (color>>0)&0xff )/255.0;
-            float alpha = 1;
-            if( lv_gettop(L)>=3 ) {
-                alpha = lv_tonumber(L, 3);
-            }
-            if( a <= 0 ){
-                a =  alpha;
-            }
-            if( a > 1 ){
-                a = 1;
-            }
-            if( [view isKindOfClass:[UIView class]] ){
-                view.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:a];
+        if( [view isKindOfClass:[UIView class]] ){
+            if( lv_gettop(L)>=2 ) {
+                UIColor* color = lv_getColorFromStack(L, 2);
+                view.backgroundColor = color;
                 return 0;
-            }
-        } else {
-            UIColor* color = view.backgroundColor;
-            NSUInteger c = 0;
-            float a = 0;
-            if( lv_uicolor2int(color, &c, &a) ){
-                lv_pushnumber(L, c );
-                lv_pushnumber(L, a );
-                return 2;
+            } else {
+                UIColor* color = view.backgroundColor;
+                NSUInteger c = 0;
+                CGFloat a = 0;
+                if( lv_uicolor2int(color, &c,&a) ){
+                    lv_pushnumber(L, c );
+                    lv_pushnumber(L, a);
+                    return 2;
+                }
             }
         }
     }
@@ -837,14 +823,10 @@ static int setShadowOpacity (lv_State *L) {
 
 static int setShadowColor (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    int color = lv_tonumber(L, 2);// 2
-    float alpha = 1;
-    if( lv_gettop(L)>=3 ) {
-        alpha = lv_tonumber(L, 3);// 2
-    }
-    if( user ){
+    if( user && lv_gettop(L)>=2 ){
         UIView* view = (__bridge UIView *)(user->view);
-        [view.layer setShadowColor:lv_UIColorFromRGBA(color, alpha).CGColor];
+        UIColor* color = lv_getColorFromStack(L, 2);
+        [view.layer setShadowColor:color.CGColor];
         lv_pushvalue(L,1);
         return 1;
     }
@@ -868,21 +850,17 @@ static int borderColor (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->view);
         if ( lv_gettop(L)>=2 ) {
-            int color = lv_tonumber(L, 2);// 2
-            float alpha = 1;
-            if( lv_gettop(L)>=3 ) {
-                alpha = lv_tonumber(L, 3);// 2
-            }
-            view.layer.borderColor = lv_UIColorFromRGBA(color, alpha).CGColor;
+            UIColor* color = lv_getColorFromStack(L, 2);
+            view.layer.borderColor = color.CGColor;
             lv_pushvalue(L,1);
             return 1;
         } else {
             UIColor* color = [UIColor colorWithCGColor:view.layer.borderColor];
             NSUInteger c = 0;
-            float a = 0;
+            CGFloat a = 0;
             if( lv_uicolor2int(color, &c, &a) ){
                 lv_pushnumber(L, c );
-                lv_pushnumber(L, a );
+                lv_pushnumber(L, a);
                 return 2;
             }
         }

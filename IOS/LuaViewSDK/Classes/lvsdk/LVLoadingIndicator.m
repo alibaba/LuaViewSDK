@@ -86,26 +86,16 @@ static int color(lv_State *L) {
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
         if( view ){
             if( lv_gettop(L)>=2 ) {
-                NSUInteger color = lv_tonumber(L, 2);
-                float a = ( (color>>24)&0xff )/255.0;
-                float r = ( (color>>16)&0xff )/255.0;
-                float g = ( (color>>8)&0xff )/255.0;
-                float b = ( (color>>0)&0xff )/255.0;
-                if( a==0 ){
-                    a = 1;
-                }
-                if( lv_gettop(L)>=3 ){
-                    a = lv_tonumber(L, 3);
-                }
-                view.color = [UIColor colorWithRed:r green:g blue:b alpha:a];;
+                UIColor* color = lv_getColorFromStack(L, 2);
+                view.color = color;
                 return 0;
             } else {
                 UIColor* color = view.color;
                 NSUInteger c = 0;
-                float a = 0;
+                CGFloat a = 1;
                 if( lv_uicolor2int(color, &c, &a) ){
                     lv_pushnumber(L, c );
-                    lv_pushnumber(L, a );
+                    lv_pushnumber(L, a);
                     return 2;
                 }
             }

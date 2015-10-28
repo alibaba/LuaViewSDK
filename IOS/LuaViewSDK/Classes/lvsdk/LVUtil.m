@@ -229,20 +229,55 @@ void lv_clearFirstTableValue(lv_State* L){
     }
 }
 
-int lv_uicolor2int(UIColor* color,NSUInteger* c ,float* a){
+BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
     CGFloat r = 0;
     CGFloat g = 0;
     CGFloat b = 0;
-    CGFloat alpha = 0;
-    if( [color getRed:&r green:&g blue:&b alpha:&alpha] ){
+    CGFloat a = 0;
+    if( [color getRed:&r green:&g blue:&b alpha:&a] ){
         NSUInteger red   = (r*255);
         NSUInteger green = (g*255);
         NSUInteger blue  = (b*255);
-        *c = (red<<16) | (green<<8) | blue;
-        *a = alpha;
-        return 1;
+        NSUInteger alpha = (a*255);
+        *c = (alpha<<24) |(red<<16) | (green<<8) | blue;
+        *alphaP = a;
+        return YES;
     }
-    return 0;
+    return NO;
+}
+
+UIColor* lv_getColorFromStack(lv_State* L, int stackID){
+    if ( lv_type(L, stackID)==LV_TSTRING ) {
+        NSString* s = lv_paramString(L, stackID);
+        if( s.length>0 && [s characterAtIndex:0]=='#' ) {
+            NSUInteger color = [[s substringFromIndex:1] integerValue];
+            float a = 1;
+            float r = ( (color>>16)&0xff )/255.0;
+            float g = ( (color>>8)&0xff )/255.0;
+            float b = ( (color>>0)&0xff )/255.0;
+            UIColor* colorObj = [UIColor colorWithRed:r green:g blue:b alpha:a];
+            return colorObj;
+        }
+    } else if( lv_type(L,stackID)==LV_TNUMBER ) {
+        NSUInteger color = lv_tonumber(L, stackID);
+        float a = 1;
+        float r = ( (color>>16)&0xff )/255.0;
+        float g = ( (color>>8)&0xff )/255.0;
+        float b = ( (color>>0)&0xff )/255.0;
+        int stackID3 = stackID + 1;
+        if ( lv_gettop(L)>=stackID3 && lv_type(L,stackID3)==LV_TNUMBER ) {
+            a = lv_tonumber(L, stackID+1 );
+            if( a>1 ) {
+                a = 1;
+            }
+            if( a<0 ) {
+                a = 0;
+            }
+        }
+        UIColor* colorObj = [UIColor colorWithRed:r green:g blue:b alpha:a];
+        return colorObj;
+    }
+    return [UIColor blackColor];
 }
 
 +(void) download:(NSString*) urlStr callback:(LVFuncDownloadEndCallback) nextStep{

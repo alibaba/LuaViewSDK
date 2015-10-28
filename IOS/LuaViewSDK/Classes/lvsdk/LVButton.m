@@ -189,8 +189,7 @@ static int titleColor (lv_State *L) {
             if ( num>=2 ) {
                 for (int i=2,j=0; i<=num && j<4; i++ ){
                     if( lv_type(L, i)==LV_TNUMBER ) {
-                        NSInteger rgb = lv_tonumber(L, i);
-                        UIColor* c = lv_UIColorFromRGBA(rgb, 1);
+                        UIColor* c = lv_getColorFromStack(L, i);
                         [button setTitleColor:c forState:g_states[j++]];
                     }
                 }
@@ -200,7 +199,7 @@ static int titleColor (lv_State *L) {
                 for (int j=0; j<4; j++ ){
                     UIColor* c = [button titleColorForState:g_states[j++] ];
                     NSUInteger color=0 ;
-                    float a = 0;
+                    CGFloat a = 0;
                     if( lv_uicolor2int(c, &color, &a) ){
                         lv_pushnumber(L, color);
                         lv_pushnumber(L, a);

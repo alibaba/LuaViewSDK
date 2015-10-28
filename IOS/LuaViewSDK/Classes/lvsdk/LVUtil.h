@@ -177,7 +177,9 @@ void lv_clearFirstTableValue(lv_State* l);
 /*
  * uicolor -> int
  */
-int lv_uicolor2int(UIColor* color,NSUInteger* c ,float* a);
+BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alpha);
+
+UIColor* lv_getColorFromStack(lv_State* L, int stackID);
 
 
 /*
