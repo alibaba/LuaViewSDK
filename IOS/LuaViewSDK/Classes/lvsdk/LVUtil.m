@@ -238,8 +238,7 @@ BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
         NSUInteger red   = (r*255);
         NSUInteger green = (g*255);
         NSUInteger blue  = (b*255);
-        NSUInteger alpha = (a*255);
-        *c = (alpha<<24) |(red<<16) | (green<<8) | blue;
+        *c = (red<<16) | (green<<8) | blue;
         *alphaP = a;
         return YES;
     }
@@ -248,22 +247,22 @@ BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
 
 UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     if ( lv_type(L, stackID)==LV_TSTRING ) {
-        NSString* s = lv_paramString(L, stackID);
-        if( s.length>0 && [s characterAtIndex:0]=='#' ) {
-            s = [s substringFromIndex:1];
-            NSScanner * scanner = [[NSScanner alloc] initWithString:s] ;
-            unsigned long long color = 0;
-            [scanner scanHexLongLong:&color];
-            float a = 1;
-            if( s.length>=8 ) {
-                a = ( (color>>24)&0xff )/255.0;
-            }
-            float r = ( (color>>16)&0xff )/255.0;
-            float g = ( (color>>8)&0xff  )/255.0;
-            float b = ( (color>>0)&0xff  )/255.0;
-            UIColor* colorObj = [UIColor colorWithRed:r green:g blue:b alpha:a];
-            return colorObj;
-        }
+//        NSString* s = lv_paramString(L, stackID);
+//        if( s.length>0 && [s characterAtIndex:0]=='#' ) {
+//            s = [s substringFromIndex:1];
+//            NSScanner * scanner = [[NSScanner alloc] initWithString:s] ;
+//            unsigned long long color = 0;
+//            [scanner scanHexLongLong:&color];
+//            float a = 1;
+//            if( s.length>=8 ) {
+//                a = ( (color>>24)&0xff )/255.0;
+//            }
+//            float r = ( (color>>16)&0xff )/255.0;
+//            float g = ( (color>>8)&0xff  )/255.0;
+//            float b = ( (color>>0)&0xff  )/255.0;
+//            UIColor* colorObj = [UIColor colorWithRed:r green:g blue:b alpha:a];
+//            return colorObj;
+//        }
     } else if( lv_type(L,stackID)==LV_TNUMBER ) {
         NSUInteger color = lv_tonumber(L, stackID);
         float a = 1;

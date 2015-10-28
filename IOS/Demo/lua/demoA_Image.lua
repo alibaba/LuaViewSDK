@@ -41,3 +41,18 @@ label.backgroundColor("#ff0000FF");
 
 
 
+view = View();
+view.size(100,100);
+
+view.backgroundColor(1)
+print(view.backgroundColor())
+
+view.backgroundColor(0x88000001)
+print(view.backgroundColor())
+
+view.backgroundColor(0x000001, 0.5)
+print(view.backgroundColor())
+
+view.backgroundColor(0xff000001, 0.5)
+print(view.backgroundColor())
+
