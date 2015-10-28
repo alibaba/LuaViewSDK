@@ -3,7 +3,7 @@ require "kit/lv_kit"
 
 local width, height = System.screenSize()
 
-local vp = ViewPager({
+local vp = PagerView({
     PageCount = 12,
     Indicator = function()
 --        活动指示器
@@ -40,5 +40,5 @@ local vp = ViewPager({
     }
 })
 
-vp.setBackgroundColor(0xaaaa0000)
-vp.setFrame(0, 20, width, height - 20)
+vp.backgroundColor(0xaaaa0000)
+vp.frame(0, 20, width, height - 20)

@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JUFLXLayoutKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Demo-JUFLXLayoutKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Demo-MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,50 +19,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LuaViewSDK-JUFLXLayoutKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-LuaViewSDK.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01A2ADE0049C856C345B5338</key>
+		<key>541404365ED9E7ADAB42D565</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>06C40BD0589F950EA58F99B0</key>
+		<key>86782CD54B5F8CCB6F5D7163</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>11EBBF980B2C7D7C9F1CC488</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>312644C4CD6A6B6BDB5D2B90</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>75B36A2680D3AD23F307A325</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BB7A435410A6E0DAA91F307B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E3BFF07509AA8F2F54D1CAB8</key>
+		<key>A0C380CADD624D104F129595</key>
 		<dict>
 			<key>primary</key>
 			<true/>

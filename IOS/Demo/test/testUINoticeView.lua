@@ -4,7 +4,8 @@ require "kit/lv_kit"
 local width = System.screenSize()
 
 btn1 = Button()
-btn1.setCallback(function()
+
+btn1.callback(function()
     Notice("测试一下Toast")
 end)
 

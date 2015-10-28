@@ -1,33 +1,23 @@
 PODS:
-  - JUFLXLayoutKit (0.1.1):
-    - JUFLXLayoutKit/LayoutExtensions (= 0.1.1)
-  - JUFLXLayoutKit/LayoutExtensions (0.1.1)
   - MJRefresh (2.4.7)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
-  - JUFLXLayoutKit (from `git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git`)
   - MJRefresh
   - SDWebImage (from `https://github.com/rs/SDWebImage.git`)
 
 EXTERNAL SOURCES:
-  JUFLXLayoutKit:
-    :git: git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git
   SDWebImage:
     :git: https://github.com/rs/SDWebImage.git
 
 CHECKOUT OPTIONS:
-  JUFLXLayoutKit:
-    :commit: fc9d4e69df94a6e82bfc267eef2d551e5edc86df
-    :git: git@gitlab.alibaba-inc.com:juhuasuanwireless/JUFLXLayoutKit.git
   SDWebImage:
     :commit: 5a5c65d7996c09931a3384e86a8b96ff8f4ac5e7
     :git: https://github.com/rs/SDWebImage.git
 
 SPEC CHECKSUMS:
-  JUFLXLayoutKit: 03782ca36252918b2867442bd16500c32eba5735
   MJRefresh: 6ebd06a92fc73b4ccc058e144252ffc11a0381b4
   SDWebImage: 54a4775686fae6df77068bb465d7e12bcc7388a7
 

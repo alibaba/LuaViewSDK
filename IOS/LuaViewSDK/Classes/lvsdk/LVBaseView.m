@@ -11,7 +11,7 @@
 #import "LVTransform3D.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LVStruct.h"
-#import <JUFLXLayoutKit/JUFLXLayoutKit.h>
+//#import <JUFLXLayoutKit/JUFLXLayoutKit.h>
 
 @implementation LVBaseView
 
@@ -282,39 +282,39 @@ static int x (lv_State *L) {
 #pragma - mark flxNode
 static int flxChildNodes(lv_State *L)
 {
-    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
-    if (user) {
-        UIView *view = (__bridge UIView *)(user->view);
-        int childNum = lv_gettop(L);
-        if (view && childNum>=2 ) {
-            NSMutableArray* childs = [[NSMutableArray alloc] init];
-            for( int i=2; i<=childNum; i++ ) {
-                LVUserDataView * childUser = (LVUserDataView *)lv_touserdata(L, i);
-                if( LVIsType(user, LVUserDataView) ) {
-                    UIView* temp = (__bridge UIView *)(childUser->view);
-                    if( temp ) {
-                        [childs addObject:temp.ju_flxNode];
-                    }
-                }
-            }
-            view.ju_flxNode.childNodes = childs;
-            return 0;
-        }
-    }
+//    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if (user) {
+//        UIView *view = (__bridge UIView *)(user->view);
+//        int childNum = lv_gettop(L);
+//        if (view && childNum>=2 ) {
+//            NSMutableArray* childs = [[NSMutableArray alloc] init];
+//            for( int i=2; i<=childNum; i++ ) {
+//                LVUserDataView * childUser = (LVUserDataView *)lv_touserdata(L, i);
+//                if( LVIsType(user, LVUserDataView) ) {
+//                    UIView* temp = (__bridge UIView *)(childUser->view);
+//                    if( temp ) {
+//                        [childs addObject:temp.ju_flxNode];
+//                    }
+//                }
+//            }
+//            view.ju_flxNode.childNodes = childs;
+//            return 0;
+//        }
+//    }
     return 0;
 }
 
 static int flxBindingInlineCSS(lv_State *L)
 {
-    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
-    UIView *view = (__bridge UIView *)(user->view);
-    int childNum = lv_gettop(L);
-    if (view && childNum==2) {
-        if (lv_type(L, 2) == LV_TSTRING) {
-            [view.ju_flxNode bindingInlineCSS:[NSString stringWithUTF8String:lv_tostring(L, 2)]];
-            return 0;
-        }
-    }
+//    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
+//    UIView *view = (__bridge UIView *)(user->view);
+//    int childNum = lv_gettop(L);
+//    if (view && childNum==2) {
+//        if (lv_type(L, 2) == LV_TSTRING) {
+//            [view.ju_flxNode bindingInlineCSS:[NSString stringWithUTF8String:lv_tostring(L, 2)]];
+//            return 0;
+//        }
+//    }
     return 0;
 }
 
@@ -346,27 +346,27 @@ static int flxBindingInlineCSS(lv_State *L)
 
 static int flxLayout(lv_State *L)
 {
-    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
-    if (user) {
-        BOOL async = FALSE;
-        int argNum = lv_gettop(L);
-        for ( int i=1; i<=argNum; i++ ) {
-            if ( lv_type(L, i)==LV_TBOOLEAN ){
-                async = lv_toboolean(L, i);
-            }
-            if( lv_type(L, i) == LV_TFUNCTION ) {
-                lv_pushvalue(L, 1);
-                lv_pushvalue(L, i);
-                lv_udataRef(L, USERDATA_FLEX_DELEGATE);
-            }
-        }
-        UIView *view = (__bridge UIView *)(user->view);
-        [view.ju_flxNode layoutAsync:async completionBlock:^{
-            lv_pushUserdata(L, user );
-            lv_pushUDataRef(L, USERDATA_FLEX_DELEGATE );
-            lv_runFunction(L);
-        }];
-    }
+//    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if (user) {
+//        BOOL async = FALSE;
+//        int argNum = lv_gettop(L);
+//        for ( int i=1; i<=argNum; i++ ) {
+//            if ( lv_type(L, i)==LV_TBOOLEAN ){
+//                async = lv_toboolean(L, i);
+//            }
+//            if( lv_type(L, i) == LV_TFUNCTION ) {
+//                lv_pushvalue(L, 1);
+//                lv_pushvalue(L, i);
+//                lv_udataRef(L, USERDATA_FLEX_DELEGATE);
+//            }
+//        }
+//        UIView *view = (__bridge UIView *)(user->view);
+//        [view.ju_flxNode layoutAsync:async completionBlock:^{
+//            lv_pushUserdata(L, user );
+//            lv_pushUDataRef(L, USERDATA_FLEX_DELEGATE );
+//            lv_runFunction(L);
+//        }];
+//    }
     return 0;
 }
 

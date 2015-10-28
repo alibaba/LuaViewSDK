@@ -6,18 +6,6 @@
 // project.
 
 
-// JUFLXLayoutKit
-#define COCOAPODS_POD_AVAILABLE_JUFLXLayoutKit
-#define COCOAPODS_VERSION_MAJOR_JUFLXLayoutKit 0
-#define COCOAPODS_VERSION_MINOR_JUFLXLayoutKit 1
-#define COCOAPODS_VERSION_PATCH_JUFLXLayoutKit 1
-
-// JUFLXLayoutKit/LayoutExtensions
-#define COCOAPODS_POD_AVAILABLE_JUFLXLayoutKit_LayoutExtensions
-#define COCOAPODS_VERSION_MAJOR_JUFLXLayoutKit_LayoutExtensions 0
-#define COCOAPODS_VERSION_MINOR_JUFLXLayoutKit_LayoutExtensions 1
-#define COCOAPODS_VERSION_PATCH_JUFLXLayoutKit_LayoutExtensions 1
-
 // MJRefresh
 #define COCOAPODS_POD_AVAILABLE_MJRefresh
 #define COCOAPODS_VERSION_MAJOR_MJRefresh 2

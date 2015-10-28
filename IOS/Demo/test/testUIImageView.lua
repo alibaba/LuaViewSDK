@@ -23,7 +23,7 @@ images[1] = "animate1"
 images[2] = "animate2"
 view3.backgroundColor(0xff00aa00)
 view3.frame(300, 600, 300, 600)
-view3.startAnimation(images, 1000, 0)
+view3.startAnimation(images, 1 , 0)
 
 
 
