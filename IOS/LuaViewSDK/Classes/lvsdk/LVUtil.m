@@ -254,7 +254,10 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
             NSScanner * scanner = [[NSScanner alloc] initWithString:s] ;
             unsigned long long color = 0;
             [scanner scanHexLongLong:&color];
-            float a = ( (color>>24)&0xff )/255.0;
+            float a = 1;
+            if( s.length>=8 ) {
+                a = ( (color>>24)&0xff )/255.0;
+            }
             float r = ( (color>>16)&0xff )/255.0;
             float g = ( (color>>8)&0xff  )/255.0;
             float b = ( (color>>0)&0xff  )/255.0;
