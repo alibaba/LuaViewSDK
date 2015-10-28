@@ -156,6 +156,24 @@ static int __index (lv_State *L) {
         lv_pushnumber(L, LV_ALIGN_H_CENTER | LV_ALIGN_V_CENTER);
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
+    {
+        // TextAlign. LEFT RIGHT CENTER
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "TextAlign", lib);
+        
+        lv_pushnumber(L, NSTextAlignmentLeft);
+        lv_setfield(L, -2, "LEFT");
+        
+        
+        lv_pushnumber(L, NSTextAlignmentRight);
+        lv_setfield(L, -2, "RIGHT");
+        
+        lv_pushnumber(L, NSTextAlignmentCenter);
+        lv_setfield(L, -2, "CENTER");// 上下左右都居中
+    }
     return 0;
 }
 
