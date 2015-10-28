@@ -250,7 +250,10 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     if ( lv_type(L, stackID)==LV_TSTRING ) {
         NSString* s = lv_paramString(L, stackID);
         if( s.length>0 && [s characterAtIndex:0]=='#' ) {
-            NSUInteger color = [[s substringFromIndex:1] integerValue];
+            s = [s substringFromIndex:1];
+            NSScanner * scanner = [[NSScanner alloc] initWithString:s] ;
+            unsigned long long color = 0;
+            [scanner scanHexLongLong:&color];
             float a = 1;
             float r = ( (color>>16)&0xff )/255.0;
             float g = ( (color>>8)&0xff )/255.0;

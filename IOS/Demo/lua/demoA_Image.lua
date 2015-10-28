@@ -37,5 +37,7 @@ imageView3 = Image();
 imageView3.frame(X0,Y0+w+Y0,w,w);
 imageView3.image("bt_catebrand_more.9");
 
+label.backgroundColor("#ff0000FF");
+
 
 
