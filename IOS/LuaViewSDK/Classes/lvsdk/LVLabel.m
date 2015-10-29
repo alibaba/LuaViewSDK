@@ -20,7 +20,7 @@
         self.lv_lview = (__bridge LView *)(l->lView);
         self.text = imageName;
         self.backgroundColor = [UIColor clearColor];
-        self.textAlignment = NSTextAlignmentCenter;
+        self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
 }
