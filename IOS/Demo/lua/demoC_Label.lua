@@ -20,6 +20,7 @@ label2 = Label();
 label2.frame(0,Y0+100,w, 60);
 label2.text("测试我是文本框");
 label2.backgroundColor(0xEEEEEE);
+label2.textAlign(TextAlign.CENTER);
 
 
 lable3 = Label();
