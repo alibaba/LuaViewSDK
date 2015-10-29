@@ -222,7 +222,7 @@ static int textAlignment (lv_State *L) {
         {"fontSize",    fontSize},
         {"textSize",    fontSize},
         
-        {"textAlignment",    textAlignment},
+        {"textAlign",    textAlignment},
         {"gravity",    textAlignment},
         
         {"lineCount",    lineCount},
