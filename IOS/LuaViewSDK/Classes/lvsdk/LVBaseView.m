@@ -20,6 +20,7 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.clipsToBounds = YES;
     }
     return self;
 }
@@ -762,77 +763,77 @@ static int borderWidth (lv_State *L) {
 }
 
 #pragma -mark shadow
-static int setShadowPath (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        [view layer].shadowPath =[UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-static int setMasksToBounds (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    BOOL masksToBounds = lvL_checkbool(L, 2);// 2
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        view.layer.masksToBounds = masksToBounds;
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-
-static int setShadowOffset (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    float x = lv_tonumber(L, 2);// 2
-    float y = lv_tonumber(L, 3);// 2
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        [view.layer setShadowOffset:CGSizeMake(x, y)];
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-
-static int setShadowRadius (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    float radius = lv_tonumber(L, 2);// 2
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        [view.layer setShadowRadius:radius];
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-
-static int setShadowOpacity (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    float opacity = lv_tonumber(L, 2);// 2
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        [view.layer setShadowOpacity:opacity];
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-
-static int setShadowColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user && lv_gettop(L)>=2 ){
-        UIView* view = (__bridge UIView *)(user->view);
-        UIColor* color = lv_getColorFromStack(L, 2);
-        [view.layer setShadowColor:color.CGColor];
-        lv_pushvalue(L,1);
-        return 1;
-    }
-    return 0;
-}
-
+//static int setShadowPath (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        [view layer].shadowPath =[UIBezierPath bezierPathWithRect:view.bounds].CGPath;
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//static int setMasksToBounds (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    BOOL masksToBounds = lvL_checkbool(L, 2);// 2
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        view.layer.masksToBounds = masksToBounds;
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//
+//static int setShadowOffset (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    float x = lv_tonumber(L, 2);// 2
+//    float y = lv_tonumber(L, 3);// 2
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        [view.layer setShadowOffset:CGSizeMake(x, y)];
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//
+//static int setShadowRadius (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    float radius = lv_tonumber(L, 2);// 2
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        [view.layer setShadowRadius:radius];
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//
+//static int setShadowOpacity (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    float opacity = lv_tonumber(L, 2);// 2
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        [view.layer setShadowOpacity:opacity];
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//
+//static int setShadowColor (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user && lv_gettop(L)>=2 ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        UIColor* color = lv_getColorFromStack(L, 2);
+//        [view.layer setShadowColor:color.CGColor];
+//        lv_pushvalue(L,1);
+//        return 1;
+//    }
+//    return 0;
+//}
+//
 
 #pragma -mark borderColor
 
@@ -869,23 +870,23 @@ static int borderColor (lv_State *L) {
 }
 
 #pragma -mark clipsToBounds
-static int clipsToBounds(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
-        if( view ){
-            if( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);
-                view.clipsToBounds = yes;
-                return 0;
-            } else {
-                lv_pushnumber(L, view.clipsToBounds );
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
+//static int clipsToBounds(lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        UIView* view = (__bridge UIView *)(user->view);
+//        if( view ){
+//            if( lv_gettop(L)>=2 ) {
+//                BOOL yes = lvL_checkbool(L, 2);
+//                view.clipsToBounds = yes;
+//                return 0;
+//            } else {
+//                lv_pushnumber(L, view.clipsToBounds );
+//                return 1;
+//            }
+//        }
+//    }
+//    return 0;
+//}
 
 static int adjustSize(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -1282,15 +1283,15 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"borderColor",         borderColor },
     
-    {"clipsToBounds",       clipsToBounds },
+//    {"clipsToBounds",       clipsToBounds },
     
     
-    {"shadowPath",       setShadowPath },
-    {"masksToBounds",    setMasksToBounds },
-    {"shadowOffset",     setShadowOffset },
-    {"shadowRadius",     setShadowRadius },
-    {"shadowOpacity",    setShadowOpacity },
-    {"shadowColor",      setShadowColor },
+//    {"shadowPath",       setShadowPath },
+//    {"masksToBounds",    setMasksToBounds },
+//    {"shadowOffset",     setShadowOffset },
+//    {"shadowRadius",     setShadowRadius },
+//    {"shadowOpacity",    setShadowOpacity },
+//    {"shadowColor",      setShadowColor },
     
     {"frame",     frame },
     
