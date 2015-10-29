@@ -196,25 +196,11 @@ static int textAlignment (lv_State *L) {
         if( lv_gettop(L)>=2 ) {
             NSInteger align = lv_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
-                if( align&LV_ALIGN_H_CENTER ) {
-                    align = NSTextAlignmentCenter;
-                } else if( align&LV_ALIGN_RIGHT ) {
-                    align = NSTextAlignmentRight;
-                } else {//默认是LEFT
-                    align = NSTextAlignmentLeft;
-                }
                 view.textAlignment = align;
                 return 0;
             }
         } else {
             int align = view.textAlignment;
-            if( align==NSTextAlignmentCenter ) {
-                align = LV_ALIGN_H_CENTER;
-            } else if( align==NSTextAlignmentRight ) {
-                align = LV_ALIGN_RIGHT;
-            } else {//默认是LEFT
-                align = LV_ALIGN_LEFT;
-            }
             lv_pushnumber(L, align );
             return 1;
         }
@@ -237,6 +223,7 @@ static int textAlignment (lv_State *L) {
         {"textSize",    fontSize},
         
         {"textAlignment",    textAlignment},
+        {"gravity",    textAlignment},
         
         {"lineCount",    lineCount},
         

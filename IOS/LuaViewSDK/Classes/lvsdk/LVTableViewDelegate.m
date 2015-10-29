@@ -251,9 +251,13 @@ static NSInteger mapRow(NSInteger row){
     
     lv_pushUserdata(l, self.owner.lv_userData);
     lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-    [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Height" nargs:2 nrets:1];
+    [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Size" nargs:2 nrets:2];
     if( lv_type(l, -1)==LV_TNUMBER ) {
         CGFloat heigth = lv_tonumber(l, -1);
+        return heigth;
+    }
+    if( lv_type(l, -2)==LV_TNUMBER ) {
+        CGFloat heigth = lv_tonumber(l, -2);
         return heigth;
     }
     return 0;

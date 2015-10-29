@@ -25,7 +25,7 @@ tableView = RefreshTableView{
 			end
 		end,
 		ImageAndLabel = {
-			Height = function( section, row )
+			Size = function( section, row )
 				return cellHeight;
 			end,
 			Init = function(cell, section, row)
@@ -47,7 +47,7 @@ tableView = RefreshTableView{
 			end
 		},
 		ImageAndImage = {
-			Height = function( section, row )
+			Size = function( section, row )
 				return cellHeight;
 			end,
 			Init = function(cell, section, row)
