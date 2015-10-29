@@ -104,6 +104,7 @@ function createTableView( )
 end
 
 tableView = createTableView();
+tableView.dividerHeight(20);
 
 loading = false;
 

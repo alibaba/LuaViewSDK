@@ -11,5 +11,6 @@
 
 @interface LVTableViewDelegate : LVScrollViewDelegate<UITableViewDataSource, UITableViewDelegate>
 
+@property(nonatomic,assign) CGFloat dividerHeight;
 
 @end

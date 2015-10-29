@@ -197,7 +197,7 @@ static int rectForSection (lv_State *L) {
             if( nargs>=3 ){
                 int section = lv_tonumber(L, 2);
                 int row = lv_tonumber(L, 3);
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row*2-1 inSection:section];
                 CGRect r = [tableView rectForRowAtIndexPath:indexPath];
                 lv_pushnumber(L, r.origin.x);
                 lv_pushnumber(L, r.origin.y);
@@ -235,6 +235,22 @@ static int rectForSection (lv_State *L) {
 //    return 0;
 //}
 
+static int dividerHeight (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, LVUserDataView) ){
+        LVTableView* tableView = (__bridge LVTableView *)(user->view);
+        if ( lv_gettop(L)>=2 ) {
+            CGFloat h = lv_tonumber(L, 2);
+            tableView.tableViewDelegate.dividerHeight = h;
+            return 0;
+        } else {
+            CGFloat h = tableView.tableViewDelegate.dividerHeight;
+            lv_pushnumber(L, h);
+            return 1;
+        }
+    }
+    return 0;
+}
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvCreateTableViewNoRefresh );
@@ -252,7 +268,7 @@ static int rectForSection (lv_State *L) {
         
         {"rectForSection", rectForSection},
         
-//        {"delegate", delegate},
+        {"dividerHeight", dividerHeight},
         {NULL, NULL}
     };
     
