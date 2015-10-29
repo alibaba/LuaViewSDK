@@ -21,6 +21,7 @@
 @property (nonatomic,assign) BOOL needCallLuaFunc;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGesture;
 @property (nonatomic,strong) id errorInfo;
+@property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
 @end
 
 @implementation LVImage
@@ -34,20 +35,9 @@
         self.functionTag = [[NSMutableString alloc] init];
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
+        self.lv_isCallbackAddClickGesture = YES;
     }
     return self;
-}
-
--(void) addClickMethod{
-    if( self.tapGesture== nil ){
-        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lvImageCallBack)];
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:self.tapGesture];
-    }
-}
-
--(void) lvImageCallBack{
-    [self lv_buttonCallBack];
 }
 
 -(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished{
@@ -392,41 +382,6 @@ static int isAnimating (lv_State *L) {
     return 1;
 }
 
-static int callback (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVImage* lvimage = (__bridge LVImage *)(user->view);
-        [lvimage addClickMethod];
-        if ( lv_gettop(L)>=2 ) {
-            lv_checkstack(L, 8);
-            lv_pushvalue(L, 1);
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            if( lv_type(L, -1)==LV_TNIL ) {
-                lv_settop(L, 2);
-                lv_pushvalue(L, 1);
-                lv_createtable(L, 0, 0);
-                lv_udataRef(L, USERDATA_KEY_DELEGATE );
-                
-                lv_settop(L, 2);
-                lv_pushvalue(L, 1);
-                lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            }
-            lv_pushvalue(L, 2);
-            lv_setfield(L, -2, STR_CALLBACK);
-            return 0;
-        } else {
-            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            if ( lv_type(L, -1)==LV_TTABLE ) {
-                lv_getfield(L, -1, STR_CALLBACK);
-            } else {
-                lv_pushnil(L);
-            }
-            return 1;
-        }
-    }
-    return 0;
-}
-
 +(int) classDefine:(lv_State *) L {
     {
         lv_pushcfunction(L, lvNewImageView);
@@ -445,7 +400,6 @@ static int callback (lv_State *L) {
         
         {"resizeImage",  resizeImage},
         
-        {"callback",  callback},
         {NULL, NULL}
     };
     

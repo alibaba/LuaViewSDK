@@ -13,6 +13,10 @@
 #import "LVStruct.h"
 //#import <JUFLXLayoutKit/JUFLXLayoutKit.h>
 
+@interface LVBaseView ()
+@property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
+@end
+
 @implementation LVBaseView
 
 
@@ -20,7 +24,8 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
-        self.clipsToBounds = YES;
+        //self.clipsToBounds = YES;
+        self.lv_isCallbackAddClickGesture = YES;
     }
     return self;
 }
@@ -1118,6 +1123,8 @@ static int callback (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
+            UIView* view = (__bridge UIView *)(user->view);
+            [view lv_callbackAddClickGesture];// 检测是否添加手势
             lv_checkstack(L, 8);
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);

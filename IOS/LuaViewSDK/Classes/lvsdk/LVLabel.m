@@ -11,6 +11,10 @@
 #import "LView.h"
 #import "LVStyledString.h"
 
+@interface LVLabel ()
+@property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
+@end
+
 @implementation LVLabel
 
 
@@ -21,6 +25,7 @@
         self.text = imageName;
         self.backgroundColor = [UIColor clearColor];
         self.textAlignment = NSTextAlignmentLeft;
+        self.lv_isCallbackAddClickGesture = YES;
     }
     return self;
 }

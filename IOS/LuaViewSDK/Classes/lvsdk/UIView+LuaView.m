@@ -42,6 +42,21 @@
     }
 }
 
+-(BOOL) lv_isCallbackAddClickGesture{
+    return NO;
+}
+-(void) setLv_isCallbackAddClickGesture:(BOOL)lv_isCallbackAddClickGesture{
+}
+
+-(void) lv_callbackAddClickGesture {
+    if( self.lv_isCallbackAddClickGesture ){
+        self.lv_isCallbackAddClickGesture = NO;
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lv_buttonCallBack)];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:gesture];
+    }
+}
+
 -(void) lv_buttonCallBack{
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){

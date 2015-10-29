@@ -27,6 +27,11 @@ lable3 = Label();
 lable3.frame( 10, 250, 100, 60);
 lable3.backgroundColor(0xEEEEEE);
 lable3.text("测试我是测试我是测试我是测试我是测试我是");
+lable3.callback(
+    function()
+        print("lable3");
+    end
+);
 
 
 

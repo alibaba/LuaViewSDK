@@ -21,6 +21,7 @@
 
 @property(nonatomic,assign) NSUInteger lv_align;
 
+
 - (void) lv_callLuaByKey1:(NSString*) key1;
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2;
 - (void) lv_buttonCallBack;
@@ -29,5 +30,9 @@
 - (void) lv_alignSubviews;
 
 - (void) lv_alignSelfWithSuperRect:(CGRect) rect;
+
+@property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 设置Callback时需要注册手势回调,才设置成true
+
+-(void) lv_callbackAddClickGesture;// 回调添加
 
 @end

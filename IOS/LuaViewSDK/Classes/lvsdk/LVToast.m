@@ -11,12 +11,11 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface LVToast (private)
+@interface LVToast ()
 
 - (id)initWithText:(NSString *)text_;
 - (void)setDuration:(CGFloat) duration_;
 
-- (void)dismisToast;
 - (void)toastTaped:(UIButton *)sender_;
 
 - (void)showAnimation;
