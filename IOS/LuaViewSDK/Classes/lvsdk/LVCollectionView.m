@@ -72,7 +72,7 @@ static Class g_class = nil;
 }
 
 #pragma -mark lvNewCollectionView
-static int lvNewCollectionView (lv_State *L) {
+static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
     if( g_class == nil ) {
         g_class = [LVCollectionView class];
     }
@@ -86,6 +86,9 @@ static int lvNewCollectionView (lv_State *L) {
         identifierArray = lv_luaTableKeys(L, -1);
     }
     LVCollectionView* tableView = [[g_class alloc] init:L identifierArray:identifierArray];
+    if( refresh ) {
+        [tableView lv_initRefreshHeader];
+    }
 
     NEW_USERDATA(userData, LVUserDataView);
     userData->view = CFBridgingRetain(tableView);
@@ -103,6 +106,14 @@ static int lvNewCollectionView (lv_State *L) {
         [lview containerAddSubview:tableView];
     }
     return 1;
+}
+
+static int lvNewCollectionView (lv_State *L) {
+    return lvNewCollectionView0(L, NO);
+}
+
+static int lvNewRefreshCollectionView (lv_State *L) {
+    return lvNewCollectionView0(L, YES);
 }
 
 //static int delegate (lv_State *L) {
@@ -213,6 +224,10 @@ static int rectForSection (lv_State *L) {
     {
         lv_pushcfunction(L, lvNewCollectionView);
         lv_setglobal(L, "CollectionView");
+    }
+    {
+        lv_pushcfunction(L, lvNewRefreshCollectionView);
+        lv_setglobal(L, "RefreshCollectionView");
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reloadData},
