@@ -14,8 +14,6 @@ function snowCreater()
 
 	snow.imageView = View();
 	snow.imageView.cornerRadius(5);
-	snow.imageView.clipsToBounds(true);
-	-- snow.imageView.backgroundColor(0xff);
 
 	snow.imageView.size( 10, 10);
 

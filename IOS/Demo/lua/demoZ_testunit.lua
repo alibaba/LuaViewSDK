@@ -1,16 +1,59 @@
 imageUrl = "http://ico.ooopic.com/ajax/iconpng/?id=96776.png";
 
+
+
+imageRander0 = Image();
+imageRander0.frame(0,100,100,100);
+imageRander1 = Image();
+imageRander1.frame(0,100,90,90);
+imageRander0.image(imageUrl,function()
+    imageRander1.render(imageRander0,0);
+    imageRander1.alpha(0.98)
+end);
+
 w,h = System.screenSize();--获取屏幕尺寸
 
+
+--字符串分割测试
+s = "中文2344中文2234中文";
+while s.len()>0 do
+    i,j = s.find("%d+") ;
+	if( i and j ) then
+        print(s.sub(1,i-1));
+		print(s.sub(i,j));
+		s = s.sub(j+1,s.len());
+	else
+		print(s);
+		s = "";
+    end
+end
+
+
 demoLabel = Label();
-demoLabel.frame(0,20,w-20,40);
+demoLabel.frame(0,20,w,40);
 demoLabel.text("点击屏幕一次执行一个测试demo");
-demoLabel.backgroundColor(0xddeeee);
 
 label = Label();-- 创建一个文本框
 label.frame(160,h-80,w,80);
 
 
+att1 = StyledString( "12te",  { fontSize=12, fontWeight="bold", foregroundColor=0xff, foregroundAlpha=0.9 , charpace=4} );
+att2 = StyledString( "测试",  { fontSize=30, foregroundColor=0xff0000, backgroundColor=0xff, charpace=10} );
+att3 = StyledString( "289",  { fontSize=13, foregroundColor=0x777777, strikethroughStyle=1} );
+att4 = StyledString( "下划", { fontSize=9, foregroundColor=0x777777, underlineStyle=1} );
+
+label2 = Label();
+label2.frame(20,30,w-40, 60);
+label2.text(att1 + att2 + att3 + att4);
+
+label2.backgroundColor(0xff00FF)
+label2.masksToBounds(false);
+label2.cornerRadius(4);
+
+label2.shadowOffset(1,1);
+label2.shadowRadius(2);
+label2.shadowOpacity(8);
+label2.shadowColor(0xff0000);
 
 detailInfo = Label();
 detailInfo.frame(0, h-40, w, 40);
@@ -21,33 +64,7 @@ function detail( info )
 end
 --------------------------
 demoArray = {
-	function()
-		demoLabel.x = 2;
-	end,
-	function()
-		demoLabel.y = 2;
-	end,
-	function()
-		demoLabel.right = w-2;
-	end,
-	function()
-		demoLabel.left = 2;
-	end,
-	function()
-		demoLabel.bottom = 2;
-	end,
-	function()
-		demoLabel.top = 2;
-	end,
-	function()
-		demoLabel.width = 200;
-	end,
-	function()
-		demoLabel.height = 80;
-	end,
-	function()
-		demoLabel.x = 10;
-	end,
+
 	function()
 		Http:get("http://www.baidu.com", --http url
 			function(request)-- http call back
@@ -60,22 +77,24 @@ demoArray = {
 				end
 			end
 		);	
-	end ,
+	end,
+
 	function()
 		Http:post(
-			"https://login-test.alibaba-inc.com/authorize/login.do",--url
-			nil,--http头信息
-			{--http post数据
-				appcode="123456",
-				name="taobao-hz\xicheng.dxc",
-				password="dxc123",
-				authtype="system"
-			},
+		"https://login-test.alibaba-inc.com/authorize/login.do",--url
+		nil,--http头信息
+		{--http post数据
+			appcode="123456",
+			name="taobao-hz\xicheng.dxc",
+			password="dxc123",
+			authtype="system"
+		},
 			function(request)--http 返回的数据
 			  print(request.data() );
 			end
 		);	
 	end,
+
 	function()
 		imageView = Image();
 		imageView.image(imageUrl);
@@ -84,34 +103,42 @@ demoArray = {
 	    imageView.center(w/2,h/2);
 	end,
 	function()
-		local g = PinchGesture(
-			function(gesture)
+		--[[
+		GestureState.POSSIBLE
+	    GestureState.BEGAN // 手势开始
+	    GestureState.CHANGED
+	    GestureState.END // 手势结束
+	    GestureState.CANCEL
+	    GestureState.FAILED
+		]]
+		local g = PinchGesture(function(gesture)
 				imageView.transformRoteAndScale( 0, gesture.scale());
 			end);
 		window.addGesture(g);
 	end,
+
 	function()
-		local g = RotationGesture(
-			function(gesture)
+		local g = RotationGesture(function(gesture)
 				imageView.transformRoteAndScale( gesture.rotation(), 1);
 			end);
 		window.addGesture(g);
 	end,
 	function()
-		local g = SwipeGesture(
-			function(gesture)
+		local g = SwipeGesture(function(gesture)
 				if( gesture.state()==GestureState.END ) then
 					print( "两个手势向左滑动" );
 				end
 			end);
-
+	    --[[ GestureDirection.RIGHT = 1,
+	    GestureDirection.LEFT = 2,
+	    GestureDirection.UP = 4,
+	    GestureDirection.DOWN  = 8]]
 		g.touchCount(2);
 		g.direction( GestureDirection.LEFT);
 		window.addGesture(g);
 	end,
 	function()
-		local g = LongPressGesture (
-			function(gesture)
+		local g = LongPressGesture(function(gesture)
 				if( gesture.state()== GestureState.END )  then
 					print( "长按手势检测到了" );
 				end
@@ -134,8 +161,8 @@ demoArray = {
 		print( DB:get("key",-1) );	
 	end,
 	function()
-		print(System.utdid());
-		print(System.version());
+		print(System.osVersion());
+		print(System.vmVersion());
 		print(System.platform());
 		print(System.device());
 		print(System.screenSize());
@@ -144,11 +171,11 @@ demoArray = {
 	function()
 	end,
 	function()
-		print(IsMethod(AlertView));
+		print(type(AlertView));
 	end,
 
 	function()
-		AlertView("title","msg", "ok", "cancel",
+		Alert("title","msg", "ok", "cancel",
 		         function(buttonID)--提示框回调
 		         	print(buttonID);
 		         end
@@ -169,7 +196,7 @@ demoArray = {
 		else
 			print("date2 !=date3");
 		end
-			print( date1 - date2 );
+		print( date1 - date2 );
 	end,
 
 
@@ -260,7 +287,7 @@ demoArray = {
 
 	function()
 		timer = Timer(function()
-			print("test timer");
+				print("test timer");
 			end);
 		timer.start(0.1,false);
 	end,
@@ -283,19 +310,20 @@ demoArray = {
 		print( scrollView.offset() );
 	end,
 	function()
-
+	--	scrollView.pageEnable(true);
+	--	print(scrollView.pageEnable());
 	end,
 	function()
 		window.backgroundColor(0,0.5);
-	 	pageControl = PageControl();
+	 	pageControl = PagerIndicator();
 	 	pageControl.center(150,10);
 	 	pageControl.pageCount(10);
-	 	print(pageControl.numberOfPages() );
-	 	scrollView.delegate = function()
-	 		local  x,y = scrollView.contentOffset();
+	 	print(pageControl.pageCount() );
+	 	scrollView.callback( function()
+	 		local  x,y = scrollView.offset();
 	 		pageControl.currentPage(x/100);
 	 		print(pageControl.currentPage());
-	 	end;
+	 	end );
 	end,
 	function()
 		scrollView.removeFromSuper();
@@ -308,18 +336,21 @@ demoArray = {
 		textFiled.backgroundColor(0xffff00);
 		textFiled.frame(10,20,300,40);
 		textFiled.callback{
-	                          BeginEidting=function()
-						            print("开始编辑")
-						      end,
-	                          EndEditing=function()
-						            print("结束编辑")
-						      end
-						  };
-		print( textFiled.placeholder() );
+				BeginEdit=function()
+					print("开始编辑")
+				end,
+				EndEdit=function()
+					print("结束编辑")
+				end
+		}
+		print(textFiled.placeholder());
 	end,
 
 	function()
-		textFiled.focus();
+		textFiled.requestFocus();
+		textFiled.callback( function()
+						            print("开始编辑")
+						      end );
 	end,
 	function()
 		textFiled.text("GameOver");
@@ -331,22 +362,21 @@ demoArray = {
 	end,
 
 	function()
-
-		view = Button();
+		view = View();
 		view.frame(10,60,100,200);
 		print( view.frame() );
 		view.backgroundColor(0xff0000);
 		print(view);
-		view.delegate = function()
+		view.callback( function()
 			print("button call back");
-		end
+		end)
 
 		title = Label();
 		title.text("测试测试测试测试测试测试测试测试测试");
 		title.backgroundColor(0xff00ff);
 		title.frame(50,50,500,30);
 		title.adjustSize();
-		view.addSubView(title);
+		view.addView(title);
 	end,
 
 
@@ -358,9 +388,9 @@ demoArray = {
 		button = Button();
 		button.frame(150,50,100,100);
 		button.image(urlA ,urlB,urlC )
-		button.delegate = function()
-			print("button call back");
-		end;
+		button.callback( function()
+				print("button call back");
+			end);
 		button.enabled(false);
 	end,
 
@@ -368,9 +398,9 @@ demoArray = {
 		textButton = Button();
 		textButton.frame(150,10,100,40);
 		textButton.title("A","B","C","D");
-		textButton.delegate = function()
+		textButton.callback( function()
 			print("textButton call back");
-		end;
+		end) ;
 	end,
 
 	function()
@@ -382,12 +412,12 @@ demoArray = {
 		print( view.hidden() );
 	end,
 	function()
-		view.userInteractionEnabled = false;
-		print( view.userInteractionEnabled() );
+		view.enabled( false );
+		print( view.enabled() );
 	end,
 	function()
-		view.userInteractionEnabled = true;
-		print( view.userInteractionEnabled() );
+		view.enabled(true);
+		print( view.enabled() );
 	end,
 	function()
 		print( view.backgroundColor() );
@@ -412,12 +442,12 @@ demoArray = {
 		print( view.borderColor() );
 	end,
 	function()
-		view.clipsToBounds(true);
-		print( view.clipsToBounds() );
+		-- view.clipsToBounds(true);
+		-- print( view.clipsToBounds() );
 	end,
 	function()
-		view.clipsToBounds(false);
-		print( view.clipsToBounds() );
+		-- view.clipsToBounds(false);
+		-- print( view.clipsToBounds() );
 	end,
 	function()
 		print( view.center() );
@@ -428,19 +458,22 @@ demoArray = {
 		title.removeFromSuper();
 	end,
 	function()
-		view.addSubView(title);
+		view.addView(title);
 	end,
 	function()
-		title.transformRoteAndScale( 3.14/2,  2);
+		title.rotation(3.14/2);
+		title.scale(2);
 	end,
 	function()
-		title.transformRoteAndScale( 0, 1);
+		title.rotation(0);
+		title.scale(1);
 	end,
 	function()
 		title.anchorPoint( 0.0, 0.5 );
 	end,
 	function()
-		title.transformRoteAndScale( 3.14/2,  2);
+		title.rotation( 3.14/2);
+		title.scale(2);
 	end,
 
 	function()
@@ -470,22 +503,22 @@ function setLabel( i )
 		if ( i%2==1 ) then
 			label.textColor(0xff,1);
 		else 
-			label.textColor(0,0.2);
+			label.textColor(0x00,0.2);
 		end
 		label.font(64);
 		label.adjustSize();
-		label.center(w/2,h-120);
+		label.center(w/2,h-128);
 end
 
 setLabel(1);
 
-gesture = TapGestureRecognizer(
+gesture = TapGesture(
 	function( g )
 		print("Test"..index .. " : ");
 		func = demoArray[index];
+		func();
 		index = index + 1;
 		setLabel(index);
-		func();
 	end
 );
 
@@ -493,33 +526,32 @@ window.addGesture(gesture);
 
 window.frame(0,0,w,h);
 
-
-window.callback = {
-	viewWillAppear = function()
+window.callback{
+	ViewWillAppear = function()
 		print("viewWillAppear");
 	end,
-	viewDidAppear = function()
+	ViewDidAppear = function()
 		print("viewDidAppear");
 	end,
-	viewWillDisAppear = function()
+	ViewWillDisAppear = function()
 		print("viewWillDisAppear");
 	end,
-	viewDidDisAppear = function()
+	ViewDidDisAppear = function()
 		print("viewDidDisAppear");
 	end,
-	keyboardWillShow = function()
+	KeyboardWillShow = function()
 		print("keyboardWillShow");
 	end,
-	keyboardDidShow = function()
+	KeyboardDidShow = function()
 		print("keyboardDidShow");
 	end,
-	keyboardWillHide = function()
+	KeyboardWillHide = function()
 		print("keyboardWillHide");
 	end,
-	keyboardDidHide = function()
+	KeyboardDidHide = function()
 		print("keyboardDidHide");
 	end,
-	layoutSubviews = function()
+	LayoutSubviews = function()
 		print("layoutSubviews");
 	end,
 };
