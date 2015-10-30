@@ -478,9 +478,9 @@ demoArray = {
 
 	function()
 		dragGesture = PanGesture(
-			function( g ){
+			function( g )
 				print("drag");
-			}
+			end
 		);
 
 		window.addGesture(dragGesture);
