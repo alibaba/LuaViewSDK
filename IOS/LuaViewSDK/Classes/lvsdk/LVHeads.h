@@ -26,20 +26,6 @@
 #define LV_ALIGN_BOTTOM     (32)
 
 //------------------------------
-
-
-#define LVGestureRecognizerStatePossible    0
-#define LVGestureRecognizerStateBegan       1
-#define LVGestureRecognizerStateChanged     2
-#define LVGestureRecognizerStateEnded       3
-#define LVGestureRecognizerStateCancelled   4
-#define LVGestureRecognizerStateFailed      5
-
-
-#define LVSwipeGestureRecognizerDirectionRight   (1 << 0)
-#define LVSwipeGestureRecognizerDirectionLeft    (1 << 1)
-#define LVSwipeGestureRecognizerDirectionUp      (1 << 2)
-#define LVSwipeGestureRecognizerDirectionDown    (1 << 3)
 //------------------------------
 
 

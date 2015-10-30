@@ -95,18 +95,19 @@ static int direction (lv_State *L) {
         const struct lvL_reg lib [] = {
             {NULL, NULL}
         };
-        lvL_register(L, "SwipeGestureDirection", lib);
+        lvL_register(L, "GestureDirection", lib);
         
-        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionRight);
-        lv_setfield(L, -2, "RIGHT");
         
-        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionLeft);
+        lv_pushnumber(L, UISwipeGestureRecognizerDirectionLeft);
         lv_setfield(L, -2, "LEFT");
         
-        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionUp);
+        lv_pushnumber(L, UISwipeGestureRecognizerDirectionRight);
+        lv_setfield(L, -2, "RIGHT");
+        
+        lv_pushnumber(L, UISwipeGestureRecognizerDirectionUp);
         lv_setfield(L, -2, "UP");
         
-        lv_pushnumber(L, LVSwipeGestureRecognizerDirectionDown);
+        lv_pushnumber(L, UISwipeGestureRecognizerDirectionDown);
         lv_setfield(L, -2, "DOWN");
     }
     

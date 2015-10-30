@@ -92,22 +92,22 @@ static const struct lvL_reg baseMemberFunctions [] = {
     };
     lvL_register(L, "GestureState", lib);
     
-    lv_pushnumber(L, LVGestureRecognizerStatePossible);
+    lv_pushnumber(L, UIGestureRecognizerStatePossible);
     lv_setfield(L, -2, "POSSIBLE");
     
-    lv_pushnumber(L, LVGestureRecognizerStateBegan);
+    lv_pushnumber(L, UIGestureRecognizerStateBegan);
     lv_setfield(L, -2, "BEGIN");
     
-    lv_pushnumber(L, LVGestureRecognizerStateChanged);
+    lv_pushnumber(L, UIGestureRecognizerStateChanged);
     lv_setfield(L, -2, "CHANGED");
     
-    lv_pushnumber(L, LVGestureRecognizerStateEnded);
+    lv_pushnumber(L, UIGestureRecognizerStateEnded);
     lv_setfield(L, -2, "END");
     
-    lv_pushnumber(L, LVGestureRecognizerStateCancelled);
+    lv_pushnumber(L, UIGestureRecognizerStateCancelled);
     lv_setfield(L, -2, "CANCEL");
     
-    lv_pushnumber(L, LVGestureRecognizerStateFailed);
+    lv_pushnumber(L, UIGestureRecognizerStateFailed);
     lv_setfield(L, -2, "FAILED");
     
     return 0;

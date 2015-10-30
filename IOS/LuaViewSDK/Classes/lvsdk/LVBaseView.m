@@ -286,8 +286,8 @@ static int x (lv_State *L) {
 }
 
 #pragma - mark flxNode
-static int flxChildNodes(lv_State *L)
-{
+//static int flxChildNodes(lv_State *L)
+//{
 //    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if (user) {
 //        UIView *view = (__bridge UIView *)(user->view);
@@ -307,11 +307,11 @@ static int flxChildNodes(lv_State *L)
 //            return 0;
 //        }
 //    }
-    return 0;
-}
+//    return 0;
+//}
 
-static int flxBindingInlineCSS(lv_State *L)
-{
+//static int flxBindingInlineCSS(lv_State *L)
+//{
 //    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
 //    UIView *view = (__bridge UIView *)(user->view);
 //    int childNum = lv_gettop(L);
@@ -321,8 +321,8 @@ static int flxBindingInlineCSS(lv_State *L)
 //            return 0;
 //        }
 //    }
-    return 0;
-}
+//    return 0;
+//}
 
 //static int flxMeasure(lv_State *L)
 //{
@@ -350,8 +350,8 @@ static int flxBindingInlineCSS(lv_State *L)
 //    return 0;
 //}
 
-static int flxLayout(lv_State *L)
-{
+//static int flxLayout(lv_State *L)
+//{
 //    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if (user) {
 //        BOOL async = FALSE;
@@ -373,8 +373,8 @@ static int flxLayout(lv_State *L)
 //            lv_runFunction(L);
 //        }];
 //    }
-    return 0;
-}
+//    return 0;
+//}
 
 
 static int y (lv_State *L) {
@@ -1358,9 +1358,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     // {"__newindex",  __newindex },
 
-    {"flxChildNodes",  flxChildNodes },
-    {"flxLayout",  flxLayout },
-    {"flxBindingCSS", flxBindingInlineCSS},
+//    {"flxChildNodes",  flxChildNodes },
+//    {"flxLayout",  flxLayout },
+//    {"flxBindingCSS", flxBindingInlineCSS},
     
     // align
     {"align", align},
