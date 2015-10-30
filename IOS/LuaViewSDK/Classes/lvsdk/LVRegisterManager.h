@@ -11,7 +11,7 @@
 #import "LVHeads.h"
 #import "LView.h"
 
-@interface LVFunctionRegister : NSObject
+@interface LVRegisterManager : NSObject
 
 
 +(void) registryApi:(lv_State*) l  lView:(LView*)lView;

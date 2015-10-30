@@ -75,23 +75,6 @@ static int static_gc (lv_State *L) {
     return 0;
 }
 
-static int __index (lv_State *L) {
-    if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TSTRING ){
-        NSString* key = lv_paramString(L, 2);
-        lvL_getmetatable(L, META_TABLE_System );
-        lv_getfield(L, -1, key.UTF8String);
-        if( lv_type(L, -1)==LV_TFUNCTION ) {
-            lv_CFunction function =  lv_tocfunction(L,-1);
-            if( function ) {
-                lv_settop(L, 0);
-                function(L);
-                return lv_gettop(L);
-            }
-        }
-    }
-    return 0; /* new userdatum is already on the stack */
-}
-
 static int vibrate(lv_State*L){
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     return 1;
@@ -114,6 +97,7 @@ static int vibrate(lv_State*L){
         };
         lvL_openlib(L, "System", staticFunctions, 0);
     }
+    // ----  常量注册 ----
     {
         // Align 常量
         lv_settop(L, 0);
@@ -124,7 +108,6 @@ static int vibrate(lv_State*L){
         
         lv_pushnumber(L, LV_ALIGN_LEFT);
         lv_setfield(L, -2, "LEFT");
-        
         
         lv_pushnumber(L, LV_ALIGN_RIGHT);
         lv_setfield(L, -2, "RIGHT");
@@ -153,7 +136,6 @@ static int vibrate(lv_State*L){
         
         lv_pushnumber(L, NSTextAlignmentLeft);
         lv_setfield(L, -2, "LEFT");
-        
         
         lv_pushnumber(L, NSTextAlignmentRight);
         lv_setfield(L, -2, "RIGHT");

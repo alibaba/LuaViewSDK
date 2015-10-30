@@ -7,7 +7,7 @@
 //
 
 #import "LView.h"
-#import "LVFunctionRegister.h"
+#import "LVRegisterManager.h"
 #import "LVTimer.h"
 #import "LVDebuger.h"
 #import "lVtable.h"
@@ -154,7 +154,7 @@ extern char g_debug_lua[];
         lvopen_string(self.l); /* opens the string lib. */
         lvopen_math(self.l);   /* opens the math lib. */
         
-        [LVFunctionRegister registryApi:self.l lView:self];
+        [LVRegisterManager registryApi:self.l lView:self];
         self.l->lView = (__bridge void *)(self);
     }
 }

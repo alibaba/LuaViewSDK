@@ -7,7 +7,7 @@
 //
 
 #import "LVScrollView.h"
-#import "LVFunctionRegister.h"
+#import "LVRegisterManager.h"
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "UIScrollView+LuaView.h"

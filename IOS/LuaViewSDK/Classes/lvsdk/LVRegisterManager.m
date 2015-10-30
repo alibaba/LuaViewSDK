@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LVFunctionRegister.h"
+#import "LVRegisterManager.h"
 #import "LVButton.h"
 #import "LVScrollView.h"
 #import "LView.h"
@@ -51,12 +51,12 @@
 
 
 //------------------------------------------------------------------------
-@implementation LVFunctionRegister
+@implementation LVRegisterManager
 
 
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
-+(void) registryApiStaticMethod:(lv_State *)L lView:(LView *)lView{
++(void) registryStaticMethod:(lv_State *)L lView:(LView *)lView{
     {
         lv_pushcfunction(L, loadJson);
         lv_setglobal(L, "loadJson");
@@ -77,7 +77,7 @@
     lv_checkstack(L, 128);
     
     // 注册静态全局方法和常量
-    [LVFunctionRegister registryApiStaticMethod:L lView:lView];
+    [LVRegisterManager registryStaticMethod:L lView:lView];
     
     // 注册System对象
     [LVSystem classDefine:L];
@@ -143,7 +143,7 @@
     [LVStyledString classDefine:L];
     
     // 注册 系统对象window
-    [LVFunctionRegister registryWindow:L lView:lView];
+    [LVRegisterManager registryWindow:L lView:lView];
     
     // 导航栏按钮
     [LVNavigation classDefine:L];
