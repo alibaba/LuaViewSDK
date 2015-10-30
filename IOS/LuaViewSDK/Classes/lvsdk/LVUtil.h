@@ -189,7 +189,6 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID);
 
 UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 
-+(BOOL) ios7;
 +(BOOL) ios8;
 
 

@@ -1187,7 +1187,8 @@ static int releaseObject(lv_State *L) {
         user->view = NULL;
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
-            lv_stopAndExitNow(lView.l);
+            L->lView = NULL;
+            [lView releaseLuaView];
         }
         [view removeFromSuperview];
     }

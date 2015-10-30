@@ -13,6 +13,7 @@
 #import "LVPkgManager.h"
 #import "LVLuaObjBox.h"
 #import "LVPointerValueBox.h"
+#import "LVDebuger.h"
 
 @implementation LVUtil
 
@@ -77,6 +78,29 @@
     return -1;
 }
 
+
+int lv_runFunction(lv_State* l){
+    return lv_runFunctionWithArgs(l, 0, 0);
+}
+
+int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
+    if( lv_type(l, -1) == LV_TFUNCTION ) {
+        if( nargs>0 ){
+            lv_insert(l, -nargs-1);
+        }
+        int errorCode = lv_pcall( l, nargs, nret, 0);
+        if ( errorCode != 0 ) {
+            const char* s = lv_tostring(l, -1);
+            LVError( @"%s", s );
+#ifdef DEBUG
+            NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
+            lv_printToServer(l, string.UTF8String, 0);
+#endif
+        }
+        return errorCode;
+    }
+    return -1;
+}
 
 #define api_incr_top(L)   {api_check(L, L->top < L->ci->top); L->top++;}
 void lv_pushUserdata(lv_State* L, void* p){///是否正确 ????????
@@ -614,14 +638,18 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
     lv_setmetatable(L, -2);
 }
 
-+(BOOL) ios7{
-    static BOOL yes = NO;
-    static BOOL inited = NO;
-    if( !inited ) {
-        inited = YES;
-        yes = ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending);
+// 获取参数-》字符串类型
+NSString* lv_paramString(lv_State* L, int idx ){
+    if( lv_gettop(L)>=ABS(idx) && lv_type(L, idx) == LV_TSTRING ) {
+        size_t n = 0;
+        const char* chars = lvL_checklstring(L, idx, &n );
+        NSString* s = @"";
+        if( chars && n>0 ){
+            s = [NSString stringWithUTF8String:chars];
+        }
+        return s;
     }
-    return yes;
+    return nil;
 }
 
 +(BOOL) ios8{

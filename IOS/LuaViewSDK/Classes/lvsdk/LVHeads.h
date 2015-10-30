@@ -135,7 +135,6 @@ NSString* lv_paramString(lv_State* L, int idx );
 // run
 int  lv_runFunction(lv_State* l);
 int  lv_runFunctionWithArgs(lv_State* l, int nargs, int nret);
-void lv_stopAndExitNow(lv_State* l);
 
 
 

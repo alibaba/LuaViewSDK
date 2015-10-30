@@ -131,12 +131,10 @@ static void resetCharSpace(NSMutableAttributedString* attString, NSDictionary* d
 //设置行间距
 static void resetLineSpace(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
     NSNumber* value = dic[@"lineSpace"];
-    if( value && [LVUtil ios7] ){
-        NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle1.lineBreakMode = NSLineBreakByTruncatingTail;
-        [paragraphStyle1 setLineSpacing:value.intValue];
-        [attString addAttribute:(id)NSParagraphStyleAttributeName value:paragraphStyle1 range:range];
-    }
+    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle1.lineBreakMode = NSLineBreakByTruncatingTail;
+    [paragraphStyle1 setLineSpacing:value.intValue];
+    [attString addAttribute:(id)NSParagraphStyleAttributeName value:paragraphStyle1 range:range];
 }
 
 

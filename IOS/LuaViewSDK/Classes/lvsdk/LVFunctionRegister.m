@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 #import "LVFunctionRegister.h"
 #import "LVButton.h"
 #import "LVScrollView.h"
@@ -51,132 +50,6 @@
 #import "LVPagerView.h"
 
 //------------------------------------------------------------------------------------
-#pragma -mark base
-// 获取参数-》字符串类型
-NSString* lv_paramString(lv_State* L, int idx ){
-    if( lv_gettop(L)>=ABS(idx) && lv_type(L, idx) == LV_TSTRING ) {
-        size_t n = 0;
-        const char* chars = lvL_checklstring(L, idx, &n );
-        NSString* s = @"";
-        if( chars && n>0 ){
-            s = [NSString stringWithUTF8String:chars];
-        }
-        return s;
-    }
-    return nil;
-}
-
-int lv_runFunction(lv_State* l){
-    return lv_runFunctionWithArgs(l, 0, 0);
-}
-
-int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
-    if( lv_type(l, -1) == LV_TFUNCTION ) {
-        if( nargs>0 ){
-            lv_insert(l, -nargs-1);
-        }
-        int errorCode = lv_pcall( l, nargs, nret, 0);
-        if ( errorCode != 0 ) {
-            const char* s = lv_tostring(l, -1);
-            LVError( @"%s", s );
-#ifdef DEBUG
-            NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
-            lv_printToServer(l, string.UTF8String, 0);
-#endif
-        }
-        return errorCode;
-    }
-    return -1;
-}
-
-void lv_stopAndExitNow(lv_State* l){
-    LView* view = (__bridge LView *)(l->lView);
-    l->lView = NULL;
-    [view releaseLuaView];
-}
-
-static int IsMethod (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TFUNCTION ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsBoolean (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TBOOLEAN ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsNumber (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TNUMBER ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsNil (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TNIL ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsUserData (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TUSERDATA ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsString (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TSTRING ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-static int IsTable (lv_State *L) {
-    int argN = lv_gettop(L);
-    for( int i=0; i<argN; i++) {
-        if( lv_type(L, 1) == LV_TTABLE ) {
-            lv_pushboolean(L, 1);
-        } else {
-            lv_pushboolean(L, 0);
-        }
-    }
-    return argN; /* number of results */
-}
-
-static int vibrate(lv_State*L){
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    return 1;
-}
 
 static int loadJson (lv_State *L) {
     NSString* json = lv_paramString(L, 1);
@@ -216,7 +89,7 @@ static int unicode(lv_State *L) {
 }
 //------------------------------------------------------------------------
 
-static int runFile (lv_State *L) {
+static int loadAndRun (lv_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName ){
         LView* lview = (__bridge LView *)(L->lView);
@@ -232,45 +105,6 @@ static int runFile (lv_State *L) {
             lv_pushnumber(L, ret);
             return 1;
         }
-    }
-    return 0; /* number of results */
-}
-//------------------------------------------------------------------------
-static int debug_log (lv_State *L) {
-    switch ( lv_type(L, 1) ) {
-        case LV_TNONE:
-            LVLog(@"[none]");
-            break;
-        case LV_TNIL:
-            LVLog(@"nil");
-            break;
-        case LV_TBOOLEAN:
-            LVLog(@"%d", lv_toboolean(L, 1) );
-            break;
-        case LV_TLIGHTUSERDATA:
-            LVLog(@"[lightuserdata]" );
-            break;
-        case LV_TNUMBER:
-            LVLog(@"%.f", lv_tonumber(L, 1));
-            break;
-        case LV_TSTRING:
-            LVLog(@"%@", lv_paramString(L, 1));
-            break;
-        case LV_TTABLE:
-            LVLog(@"[table]");
-            break;
-        case LV_TFUNCTION:
-            LVLog(@"[function]");
-            break;
-        case LV_TUSERDATA:
-            LVLog(@"[userdata]");
-            break;
-        case LV_TTHREAD:
-            LVLog(@"[thread]");
-            break;
-        default:
-            LVError(@"unkown Lua Type");
-            break;
     }
     return 0; /* number of results */
 }
@@ -296,36 +130,14 @@ static int debug_log (lv_State *L) {
         lv_setglobal(L, "FALSE");
     }
     {
-        lv_pushcfunction(L, debug_log);
-        lv_setglobal(L, "Debug");
-    }
-    {
         lv_pushcfunction(L, unicode);
         lv_setglobal(L, "Unicode");
     }
     {
-        lv_pushcfunction(L, IsMethod);
-        lv_setglobal(L, "IsMethod");
-        lv_pushcfunction(L, IsString);
-        lv_setglobal(L, "IsString");
-        lv_pushcfunction(L, IsTable);
-        lv_setglobal(L, "IsTable");
-        lv_pushcfunction(L, IsUserData);
-        lv_setglobal(L, "IsUserData");
-        lv_pushcfunction(L, IsNumber);
-        lv_setglobal(L, "IsNumber");
-        lv_pushcfunction(L, IsNil);
-        lv_setglobal(L, "IsNil");
-        lv_pushcfunction(L, IsBoolean);
-        lv_setglobal(L, "IsBoolean");
-        lv_pushcfunction(L, vibrate);
-        lv_setglobal(L, "Vibrate");
         lv_pushcfunction(L, loadJson);
         lv_setglobal(L, "LoadJson");
     }
-    lv_pushcfunction(L, runFile);
-    lv_setglobal(L, "run");
-    lv_pushcfunction(L, runFile);
+    lv_pushcfunction(L, loadAndRun);
     lv_setglobal(L, "require");
 }
 // 注册函数

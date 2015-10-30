@@ -9,6 +9,7 @@
 #import "LVSystem.h"
 #import "LView.h"
 #import "LVPkgManager.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation LVSystem
 
@@ -90,6 +91,12 @@ static int __index (lv_State *L) {
     }
     return 0; /* new userdatum is already on the stack */
 }
+
+static int vibrate(lv_State*L){
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    return 1;
+}
+
 
 +(int) classDefine:(lv_State *)L {
     {
@@ -192,6 +199,11 @@ static int __index (lv_State *L) {
         lv_pushnumber(L, NSTextAlignmentCenter);
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
+    
+    
+    
+    lv_pushcfunction(L, vibrate);
+    lv_setglobal(L, "Vibrate");
     return 0;
 }
 
