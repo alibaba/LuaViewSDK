@@ -114,7 +114,7 @@ end
 
 
 function debug_run_expr( s )
-    LoadJson(s)
+    loadJson(s)
 end
 
 function add_breakpoint( expr )

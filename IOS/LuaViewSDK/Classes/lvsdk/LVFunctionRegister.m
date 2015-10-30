@@ -89,7 +89,7 @@ static int unicode(lv_State *L) {
 }
 //------------------------------------------------------------------------
 
-static int loadAndRun (lv_State *L) {
+static int require2 (lv_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName ){
         LView* lview = (__bridge LView *)(L->lView);
@@ -135,9 +135,9 @@ static int loadAndRun (lv_State *L) {
     }
     {
         lv_pushcfunction(L, loadJson);
-        lv_setglobal(L, "LoadJson");
+        lv_setglobal(L, "loadJson");
     }
-    lv_pushcfunction(L, loadAndRun);
+    lv_pushcfunction(L, require2);
     lv_setglobal(L, "require");
 }
 // 注册函数

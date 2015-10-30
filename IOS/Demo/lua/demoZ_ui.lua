@@ -157,7 +157,7 @@ local fun = loadstring(" return 345;")
 print( fun() )
 
 
-mode = LoadJson(" {\"key\":\"可以嘛\"}");
+mode = loadJson(" {\"key\":\"可以嘛\"}");
 
 print(mode.key);
 

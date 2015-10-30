@@ -218,8 +218,8 @@ char g_debug_lua[10759] = {
     0xa,
     'f','u','n','c','t','i','o','n',' ','d','e','b','u','g','_','r','u','n','_','e','x','p','r','(',' ','s',' ',')',0xa,
     // function debug_run_expr( s )
-    ' ',' ',' ',' ','L','o','a','d','J','s','o','n','(','s',')',0xa,
-    // LoadJson(s)
+    ' ',' ',' ',' ','l','o','a','d','J','s','o','n','(','s',')',0xa,
+    // loadJson(s)
     'e','n','d',0xa,
     // end
     0xa,

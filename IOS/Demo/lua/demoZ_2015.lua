@@ -150,7 +150,7 @@ demoArray = {
 		Vibrate();
 	end,
 	function()
-		temp = LoadJson("{test=\"haha\"}");
+		temp = loadJson("{test=\"haha\"}");
 		print(temp.test)	
 	end,
 	function()
