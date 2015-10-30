@@ -49,66 +49,6 @@
 #import "LVCustomPanel.h"
 #import "LVPagerView.h"
 
-//------------------------------------------------------------------------------------
-
-static int loadJson (lv_State *L) {
-    NSString* json = lv_paramString(L, 1);
-    if( json ){
-        json = [NSString stringWithFormat:@"return %@",json];
-        lvL_loadstring(L, json.UTF8String);
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
-            int errorCode = lv_pcall( L, 0, 1, 0);
-            if( errorCode == 0 ){
-                return 1;
-            } else {
-                LVError( @"loadJson : %s", lv_tostring(L, -1) );
-            }
-        } else {
-            LVError( @"loadJson : %s", lv_tostring(L, -1) );
-        }
-    }
-    return 0; /* number of results */
-}
-
-static int unicode(lv_State *L) {
-    int num = lv_gettop(L);
-    NSMutableString* buf = [[NSMutableString alloc] init];
-    for( int i=1; i<=num; i++ ) {
-        if( lv_type(L, i) == LV_TNUMBER ) {
-            unichar c = lv_tonumber(L, i);
-            [buf appendFormat:@"%C",c];
-        } else {
-            break;
-        }
-    }
-    if( buf.length>0 ) {
-        lv_pushstring(L, buf.UTF8String);
-        return 1;
-    }
-    return 0; /* number of results */
-}
-//------------------------------------------------------------------------
-
-static int require2 (lv_State *L) {
-    NSString* fileName = lv_paramString(L, 1);
-    if( fileName ){
-        LView* lview = (__bridge LView *)(L->lView);
-        if( lview ) {
-            int ret = 0;
-            if ( lview.runInSignModel ) {
-                fileName = [NSString stringWithFormat:@"%@.lv",fileName];
-                ret = [lview runSignFile:fileName];
-            } else {
-                fileName = [NSString stringWithFormat:@"%@.lua",fileName];
-                ret =[lview runFile:fileName];
-            }
-            lv_pushnumber(L, ret);
-            return 1;
-        }
-    }
-    return 0; /* number of results */
-}
-
 
 //------------------------------------------------------------------------
 @implementation LVFunctionRegister
@@ -118,27 +58,17 @@ static int require2 (lv_State *L) {
 // 全局静态常量 和 静态方法
 +(void) registryApiStaticMethod:(lv_State *)L lView:(LView *)lView{
     {
-        lv_pushboolean(L, 1);
-        lv_setglobal(L, "YES");
-        lv_pushboolean(L, 1);
-        lv_setglobal(L, "TRUE");
+        lv_pushcfunction(L, loadJson);
+        lv_setglobal(L, "loadJson");
     }
     {
-        lv_pushboolean(L, 0);
-        lv_setglobal(L, "NO");
-        lv_pushboolean(L, 0);
-        lv_setglobal(L, "FALSE");
+        lv_pushcfunction(L, requireMethodForLuaView);
+        lv_setglobal(L, "require");
     }
     {
         lv_pushcfunction(L, unicode);
         lv_setglobal(L, "Unicode");
     }
-    {
-        lv_pushcfunction(L, loadJson);
-        lv_setglobal(L, "loadJson");
-    }
-    lv_pushcfunction(L, require2);
-    lv_setglobal(L, "require");
 }
 // 注册函数
 +(void) registryApi:(lv_State*)L  lView:(LView*)lView{
@@ -240,5 +170,65 @@ static int require2 (lv_State *L) {
     
     lv_setglobal(L, "window");
 }
+//------------------------------------------------------------------------------------
+
+static int loadJson (lv_State *L) {
+    NSString* json = lv_paramString(L, 1);
+    if( json ){
+        json = [NSString stringWithFormat:@"return %@",json];
+        lvL_loadstring(L, json.UTF8String);
+        if( lv_type(L, -1) == LV_TFUNCTION ) {
+            int errorCode = lv_pcall( L, 0, 1, 0);
+            if( errorCode == 0 ){
+                return 1;
+            } else {
+                LVError( @"loadJson : %s", lv_tostring(L, -1) );
+            }
+        } else {
+            LVError( @"loadJson : %s", lv_tostring(L, -1) );
+        }
+    }
+    return 0; /* number of results */
+}
+
+static int unicode(lv_State *L) {
+    int num = lv_gettop(L);
+    NSMutableString* buf = [[NSMutableString alloc] init];
+    for( int i=1; i<=num; i++ ) {
+        if( lv_type(L, i) == LV_TNUMBER ) {
+            unichar c = lv_tonumber(L, i);
+            [buf appendFormat:@"%C",c];
+        } else {
+            break;
+        }
+    }
+    if( buf.length>0 ) {
+        lv_pushstring(L, buf.UTF8String);
+        return 1;
+    }
+    return 0; /* number of results */
+}
+//------------------------------------------------------------------------
+
+static int requireMethodForLuaView (lv_State *L) {
+    NSString* fileName = lv_paramString(L, 1);
+    if( fileName ){
+        LView* lview = (__bridge LView *)(L->lView);
+        if( lview ) {
+            int ret = 0;
+            if ( lview.runInSignModel ) {
+                fileName = [NSString stringWithFormat:@"%@.lv",fileName];
+                ret = [lview runSignFile:fileName];
+            } else {
+                fileName = [NSString stringWithFormat:@"%@.lua",fileName];
+                ret =[lview runFile:fileName];
+            }
+            lv_pushnumber(L, ret);
+            return 1;
+        }
+    }
+    return 0; /* number of results */
+}
+
 
 @end

@@ -15,7 +15,7 @@
 
 
 // // lv 扩展API
-static int lv_vmVersion (lv_State *L) {
+static int vmVersion (lv_State *L) {
     lv_pushstring(L, LUAVIEW_VERSION ) ;
     return 1; /* number of results */
 }
@@ -99,29 +99,12 @@ static int vibrate(lv_State*L){
 
 
 +(int) classDefine:(lv_State *)L {
-    {
-        const struct lvL_reg functions [] = {
-            {NULL, NULL}
-        };
-        lv_createClassMetaTable(L, META_TABLE_System);
-        lvL_openlib(L, NULL, functions, 0);
-    }
-    
-    const char* TEMP_TABLE = "lv.System.__index";
-    {
-        lv_createClassMetaTable(L, TEMP_TABLE);
-        const struct lvL_reg temp [] = {
-            {"__index", __index},
-            {NULL, NULL}
-        };
-        lvL_openlib(L, NULL, temp, 0);
-    }
-    {
+    {// System
         const struct lvL_reg staticFunctions [] = {
             {"screenSize", screenSize},
             {"gc",static_gc},
             {"osVersion", osVersion},
-            {"vmVersion", lv_vmVersion},
+            {"vmVersion", vmVersion},
             {"scale", scale},
             {"platform",platform},
             {"device",device},
@@ -131,11 +114,8 @@ static int vibrate(lv_State*L){
         };
         lvL_openlib(L, "System", staticFunctions, 0);
     }
-    lv_getglobal(L, "System");
-    lvL_getmetatable(L, TEMP_TABLE );
-    lv_setmetatable(L, -2);
-    
-    {// Align
+    {
+        // Align 常量
         lv_settop(L, 0);
         const struct lvL_reg lib [] = {
             {NULL, NULL}
@@ -164,7 +144,7 @@ static int vibrate(lv_State*L){
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
     {
-        // TextAlign. LEFT RIGHT CENTER
+        // TextAlign常量. LEFT RIGHT CENTER
         lv_settop(L, 0);
         const struct lvL_reg lib [] = {
             {NULL, NULL}
@@ -182,28 +162,10 @@ static int vibrate(lv_State*L){
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
     {
-        // TextAlign. LEFT RIGHT CENTER
-        lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "Gravity", lib);
-        
-        lv_pushnumber(L, NSTextAlignmentLeft);
-        lv_setfield(L, -2, "LEFT");
-        
-        
-        lv_pushnumber(L, NSTextAlignmentRight);
-        lv_setfield(L, -2, "RIGHT");
-        
-        lv_pushnumber(L, NSTextAlignmentCenter);
-        lv_setfield(L, -2, "CENTER");// 上下左右都居中
+        // 震动
+        lv_pushcfunction(L, vibrate);
+        lv_setglobal(L, "Vibrate");
     }
-    
-    
-    
-    lv_pushcfunction(L, vibrate);
-    lv_setglobal(L, "Vibrate");
     return 0;
 }
 
