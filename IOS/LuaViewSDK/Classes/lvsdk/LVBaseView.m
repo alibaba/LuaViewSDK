@@ -1368,7 +1368,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"alignLeft", alignLeft},
     {"alignRight", alignRight},
     {"alignTop", alignTop},
-    {"alignButtom", alignBottom},
+    {"alignBottom", alignBottom},
     {"alignCenter", alignCenter},
     {NULL, NULL}
 };

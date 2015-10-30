@@ -12,7 +12,7 @@ att4 = StyledString( "下划线测试", { fontSize=9, foregroundColor=0x777777, 
 
 label = Label();
 label.frame(0,Y0,w, 60);
-label.text(att1 + att2 + att3 + att4);
+label.text(att1 + att2 + att3 + att4 + "字符串");
 
 
 
