@@ -363,7 +363,7 @@ static int setCurrentPage(lv_State *L) {
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin"];
+    [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
     //[self lv_callLuaByKey1:@STR_CALLBACK key2:@"BeginDecelerating"];

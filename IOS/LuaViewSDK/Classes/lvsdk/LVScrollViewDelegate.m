@@ -21,26 +21,26 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"Scrolling" key2:nil];
+    [self.owner lv_callLuaByKey1:@"Scrolling"];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollBegin" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollBegin"];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollEnd"];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+    [self.owner lv_callLuaByKey1:@"ScrollEnd"];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if( !decelerate ) {
-        [self.owner lv_callLuaByKey1:@"ScrollEnd" key2:nil];
+        [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     }
 }
 

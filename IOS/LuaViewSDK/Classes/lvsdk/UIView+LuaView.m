@@ -26,10 +26,10 @@
 }
 
 - (void) lv_callLuaByKey1:(NSString*) key1{
-    [self lv_callLuaByKey1:key1 key2:nil];
+    [self lv_callLuaByKey1:key1 key2:nil argN:0];
 }
 
-- (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2{
+- (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData && key1){
         lv_checkStack32(l);
@@ -38,7 +38,7 @@
         if( lv_type(l, -1) == LV_TTABLE ) {
             lv_getfield(l, -1, STR_CALLBACK);
         }
-        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String nargs:0 nrets:0];
+        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String nargs:argN nrets:0];
     }
 }
 
