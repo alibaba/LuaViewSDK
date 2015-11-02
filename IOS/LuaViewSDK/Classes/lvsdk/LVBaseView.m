@@ -593,6 +593,18 @@ static int hidden(lv_State *L) {
     return 0;
 }
 
+static int hide(lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        if( view ){
+            view.hidden = YES;
+            return 0;
+        }
+    }
+    return 0;
+}
+
 static int show(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
@@ -1275,7 +1287,7 @@ static int alignCenter(lv_State *L ) {
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
     
-    {"hide",    hidden },
+    {"hide",    hide },
     {"isHide",    isHide },
     
     {"show",    show },
