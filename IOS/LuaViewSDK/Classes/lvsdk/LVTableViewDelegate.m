@@ -218,12 +218,14 @@ static NSInteger mapRow(NSInteger row){
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
+
+            lv_pushnil(l);// 参数cell 目前是空的;
             lv_pushnumber(l, indexPath.section+1);
             lv_pushnumber(l, mapRow(indexPath.row)+1);
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:2 nrets:0];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK  nargs:3 nrets:0];
         }
     }
 }

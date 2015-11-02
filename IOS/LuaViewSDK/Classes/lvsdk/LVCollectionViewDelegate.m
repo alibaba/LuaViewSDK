@@ -219,23 +219,6 @@
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (void) callByKey1:(const char*) functionName key2:(const char*)key2 key3:(const char*)key3 section:(NSInteger) section row:(NSInteger) row {
-    lv_State* l = self.owner.lv_lview.l;
-    if( l ){
-        // args
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
-        
-        // table
-        lv_pushUserdata(l, self.owner.lv_userData);
-        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        
-        if(  [LVUtil call:l key1:functionName key2:key2 key3:key3 nargs:2 nrets:0]==0 ) {
-        }
-    }
-}
-
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
@@ -243,7 +226,17 @@
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
-            [self callByKey1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK section:indexPath.section row:indexPath.row];
+            lv_checkstack(l, 12);
+            lv_pushnil(l);// cell
+            lv_pushnumber(l, indexPath.section+1);
+            lv_pushnumber(l, indexPath.row+1);
+            
+            // table
+            lv_pushUserdata(l, self.owner.lv_userData);
+            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
+            
+            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:3 nrets:0]==0 ) {
+            }
         }
     }
 }

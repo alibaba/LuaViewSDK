@@ -40,7 +40,7 @@ tableView = RefreshTableView{
 				cell.title.frame(cellHeight, 0, w-cellHeight, cellHeight);
 				cell.title.text("测试"..section .."--" .. row);
 			end,
-			Callback = function( section, row )
+			Callback = function( cell, section, row )
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
@@ -64,7 +64,7 @@ tableView = RefreshTableView{
 				cell.icon2.frame(cellHeight+10, 0, cellHeight, cellHeight);
 				cell.icon2.image(imageUrl1);
 			end,
-			Callback = function( section, row )
+			Callback = function(cell, section, row )
 				print(section, row);
 				tableView.stopRefreshing();
 				System.gc();
