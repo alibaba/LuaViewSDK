@@ -29,10 +29,10 @@ btn1.frame(0, 300, width, 200)
 
 
 
-att1 = StyledString( "123test",  { fontSize=12, fontWeight="bold", foregroundColor=0x220000ff, foregroundAlpha=0.5 } );
-att2 = StyledString( "测试测试",  { fontSize=30, foregroundColor=0xff0000, backgroundColor=0xff} );
-att3 = StyledString( "2897348",  { fontSize=13, foregroundColor=0x777777, strikethrough =1} );
-att4 = StyledString( "下划线测试", { fontSize=9, foregroundColor=0x777777, underline=true} );
+att1 = StyledString( "123test",  { fontSize=12, fontWeight="bold", fontColor=0x220000ff, foregroundAlpha=0.5 } );
+att2 = StyledString( "测试测试",  { fontSize=30, fontColor=0xff0000, backgroundColor=0xff} );
+att3 = StyledString( "2897348",  { fontSize=13, fontColor=0x777777, strikethrough =1} );
+att4 = StyledString( "下划线测试", { fontSize=9, fontColor=0x777777, underline=true} );
 
 tf.text(att1+att2+att3+att4);
 

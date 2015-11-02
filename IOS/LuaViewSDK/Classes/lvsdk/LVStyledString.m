@@ -40,15 +40,18 @@ static int __attributedString_gc (lv_State *L) {
 }
 
 static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWeigth, NSString* fontStyle){
-    if( fontName ){
-        return [UIFont fontWithName:fontName size:fontSize.floatValue];
-    } else {
-        if( fontWeigth && [fontWeigth isEqualToString:@"bold"] ){
-            return [UIFont boldSystemFontOfSize:fontSize.floatValue];
-        } else{
-            return [UIFont systemFontOfSize:fontSize.floatValue];
+    if ( fontSize ) {
+        if( fontName ){
+            return [UIFont fontWithName:fontName size:fontSize.floatValue];
+        } else {
+            if( fontWeigth && [fontWeigth isEqualToString:@"bold"] ){
+                return [UIFont boldSystemFontOfSize:fontSize.floatValue];
+            } else{
+                return [UIFont systemFontOfSize:fontSize.floatValue];
+            }
         }
     }
+    return nil;
 }
 
 // 设置字体
@@ -58,12 +61,14 @@ static void resetFont(NSMutableAttributedString* attString, NSDictionary* dic, N
     NSString* fontWeight = dic[@"fontWeight"];
     NSString* fontStyle = dic[@"fontStyle"];
     UIFont* font = getFont(fontName, fontSize, fontWeight, fontStyle);
-    [attString addAttribute:NSFontAttributeName value:font range:range];
+    if( font ) {
+        [attString addAttribute:NSFontAttributeName value:font range:range];
+    }
 }
 
 // 设置前景色
 static void resetForegroundColor(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    NSNumber* value = dic[@"foregroundColor"];
+    NSNumber* value = dic[@"fontColor"];
     float  alpha = 1;
     if( value ) {
         alpha = (value.integerValue>>24) & 0xff;
