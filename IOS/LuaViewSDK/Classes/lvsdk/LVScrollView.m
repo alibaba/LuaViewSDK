@@ -41,6 +41,11 @@
     return YES;
 }
 
+- (void) layoutSubviews{
+    [super layoutSubviews];
+    [self lv_alignSubviews];
+}
+
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{

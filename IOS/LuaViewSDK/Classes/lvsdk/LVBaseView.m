@@ -535,6 +535,8 @@ static int addSubview (lv_State *L) {
             if ( viewSub.superview!= viewRoot ) {
                 [viewSub removeFromSuperview];
                 [viewRoot addSubview:viewSub];
+                
+                [viewSub lv_alignSelfWithSuperRect:viewRoot.frame];
             }
             lv_pushvalue(L,1);
             return 1;
