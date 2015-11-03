@@ -89,8 +89,8 @@ function createTableView( )
 			return foot;
 		end,
 		Callback = {
-			Scrolling = function()
-				print("scrolling");
+			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
 			end,
 			ScrollBegin = function()
 				print("scrolling begin");

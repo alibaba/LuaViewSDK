@@ -17,16 +17,22 @@
 @implementation LVTableViewDelegate
 
 
-static BOOL isDivider(NSInteger row){
+static inline BOOL isDivider(NSInteger row){
     return row&1;
 }
 
-static NSInteger mapRow(NSInteger row){
-    return row/2;
+static inline NSInteger mapRow(NSInteger row){
+    return row/2 + 1;
+}
+
+static inline NSInteger mapSection(NSInteger section){
+    return section + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if( isDivider(indexPath.row) ) {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if( isDivider(row) ) {
         static NSString* tag = @"divider.Height.identifier";
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:tag];
         if( cell==nil ) {
@@ -39,7 +45,7 @@ static NSInteger mapRow(NSInteger row){
         return cell;
     }
     
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:mapRow(indexPath.row)];
+    NSString* identifier = [self retStrCallKey1:"Cell" key2:Identifier mapedSection:mapSection(section) mapedRow:mapRow(row)];
     if( identifier == nil ){
         identifier = @"LVTableViewCell.default.identifier";
     }
@@ -57,7 +63,7 @@ static NSInteger mapRow(NSInteger row){
             [cell doInitWithLView:lview];
             
             {   // 设置默认的宽度高度
-                CGFloat height = [self heightForRowAtIndexPath:indexPath identifier:identifier lvState:l];
+                CGFloat height = [self retHeightCallAtIndexPath:indexPath identifier:identifier lvState:l];
                 CGRect r = cell.frame;
                 r.size.width = self.owner.frame.size.width;
                 r.size.height = height;
@@ -68,8 +74,8 @@ static NSInteger mapRow(NSInteger row){
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//argcell
-            lv_pushnumber(l, indexPath.section+1);// section
-            lv_pushnumber(l, mapRow(indexPath.row)+1);// row
+            lv_pushnumber(l, mapSection(section) );// section
+            lv_pushnumber(l, mapRow(row) );// row
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -85,7 +91,9 @@ static NSInteger mapRow(NSInteger row){
     if( isDivider(indexPath.row) ){
         return;
     }
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:mapRow(indexPath.row)];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    NSString* identifier = [self retStrCallKey1:"Cell" key2:Identifier mapedSection:mapSection(section) mapedRow:mapRow(row)];
     if( identifier == nil ){
         identifier = @"LVTableViewCell.default.identifier";
     }
@@ -100,8 +108,8 @@ static NSInteger mapRow(NSInteger row){
         lv_settop(l, 0);
         lv_checkstack(l, 12);
         [cell pushTableToStack];
-        lv_pushnumber(l, indexPath.section+1);
-        lv_pushnumber(l, mapRow(indexPath.row)+1);
+        lv_pushnumber(l, mapSection(section));
+        lv_pushnumber(l, mapRow(row) );
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -133,7 +141,7 @@ static NSInteger mapRow(NSInteger row){
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         //args
-        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, mapSection(section) );
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -146,32 +154,12 @@ static NSInteger mapRow(NSInteger row){
     }
     return 0;
 }
-//-------
 
-- (CGFloat) callReturnNumberFunction:(const char*) functionName key2:(const char*) key2 section:(NSInteger) section row:(NSInteger) row{
+- (CGFloat) retFloatCallKey1:(const char*) funcName key2:(const char*) key2 mapedSection:(NSInteger) mapedSection {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
-        
-        lv_pushUserdata(l, self.owner.lv_userData);
-        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:1] ==0 ) {
-            if( lv_type(l, -1)==LV_TNUMBER ) {
-                CGFloat heigth = lv_tonumber(l, -1);
-                return heigth;
-            }
-        }
-    }
-    return 0;
-}
-
-- (CGFloat) callReturnNumberKey1:(const char*) funcName key2:(const char*) key2 section:(NSInteger) section {
-    lv_State* l = self.owner.lv_lview.l;
-    if( l ){
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, mapedSection);
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -185,13 +173,13 @@ static NSInteger mapRow(NSInteger row){
     return 0;
 }
 
-- (NSString*) returnStringCallWithKey1:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row{
+- (NSString*) retStrCallKey1:(const char*) key1 key2:(const char*)key2 mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow{
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
+        lv_pushnumber(l, mapedSection);
+        lv_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
@@ -208,20 +196,22 @@ static NSInteger mapRow(NSInteger row){
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if( isDivider(indexPath.row) ){
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if( isDivider(row) ){
         return;
     }
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:mapRow(indexPath.row)];
+        NSString* identifier = [self retStrCallKey1:"Cell" key2:Identifier mapedSection:mapSection(section) mapedRow:mapRow(row)];
         if( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
 
             lv_pushnil(l);// 参数cell 目前是空的;
-            lv_pushnumber(l, indexPath.section+1);
-            lv_pushnumber(l, mapRow(indexPath.row)+1);
+            lv_pushnumber(l, mapSection(section) );
+            lv_pushnumber(l, mapRow(row) );
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -231,25 +221,27 @@ static NSInteger mapRow(NSInteger row){
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(isDivider(indexPath.row) ) {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if( isDivider(row) ) {
         return self.dividerHeight;
     }
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:Identifier section:indexPath.section row:mapRow(indexPath.row) ];
+        NSString* identifier = [self retStrCallKey1:"Cell" key2:Identifier mapedSection:mapSection(section) mapedRow:mapRow(row) ];
         if( identifier ) {
-            return [self heightForRowAtIndexPath:indexPath identifier:identifier lvState:l];
+            return [self retHeightCallAtIndexPath:indexPath identifier:identifier lvState:l];
         }
     }
     return 0;
 }
 
--(CGFloat) heightForRowAtIndexPath:(NSIndexPath*)indexPath identifier:(NSString*)identifier lvState:(lv_State*) l{
+-(CGFloat) retHeightCallAtIndexPath:(NSIndexPath*)indexPath identifier:(NSString*)identifier lvState:(lv_State*) l{
     // 参数 cell,section,row
     lv_settop(l, 0);
     lv_checkstack(l, 12);
-    lv_pushnumber(l, indexPath.section+1);
-    lv_pushnumber(l, mapRow(indexPath.row)+1);
+    lv_pushnumber(l, mapSection(indexPath.section) );
+    lv_pushnumber(l, mapRow(indexPath.row) );
     
     lv_pushUserdata(l, self.owner.lv_userData);
     lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -266,15 +258,15 @@ static NSInteger mapRow(NSInteger row){
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return [self callReturnNumberKey1:"Section" key2:"HeaderHeight" section:section ];
+    return [self retFloatCallKey1:"Section" key2:"HeaderHeight" mapedSection:mapSection(section) ];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return [self callReturnNumberKey1:"Section" key2:"FooterHeight" section:section];
+    return [self retFloatCallKey1:"Section" key2:"FooterHeight" mapedSection:mapSection(section) ];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    LVUserDataView* user = [self callReturnUserDataFunction:"Section" key2:"Header" section:section];
+    LVUserDataView* user = [self retUserDataCallKey1:"Section" key2:"Header" mapedSection:mapSection(section) ];
     lv_State* l = self.owner.lv_lview.l;
     if( l && self.owner.lv_userData ){
         // 绑定 tableHeaderView
@@ -297,7 +289,7 @@ static NSInteger mapRow(NSInteger row){
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    LVUserDataView* user = [self callReturnUserDataFunction:"Section" key2:"Footer" section:section];
+    LVUserDataView* user = [self retUserDataCallKey1:"Section" key2:"Footer" mapedSection:mapSection(section) ];
     lv_State* l = self.owner.lv_lview.l;
     if( l && self.owner.lv_userData){
         lv_pushUserdata(l, self.owner.lv_userData);
@@ -314,11 +306,11 @@ static NSInteger mapRow(NSInteger row){
 }
 
 // 回调脚本返回一个用户数据
-- (LVUserDataView *) callReturnUserDataFunction:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section {
+- (LVUserDataView *) retUserDataCallKey1:(const char*) key1 key2:(const char*)key2 mapedSection:(NSInteger) mapedSection {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, mapedSection );
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -330,6 +322,34 @@ static NSInteger mapRow(NSInteger row){
         }
     }
     return nil;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    UITableView* tableView = (UITableView*)self.owner;
+    NSArray* indexPaths = [tableView indexPathsForVisibleRows];
+    int visibleCount = 0;
+    NSIndexPath* indexPath0 = nil;
+    
+    for( NSIndexPath* indexPath in indexPaths ) {
+        if( isDivider(indexPath.row) ){
+        } else {
+            visibleCount ++;
+            if( indexPath0== nil ) {
+                indexPath0 = indexPath;
+            }
+        }
+    }
+    lv_State* L = self.owner.lv_lview.l;
+    if( L && indexPath0 ) {
+        NSInteger section = indexPath0.section;
+        NSInteger row = indexPath0.row;
+        
+        lv_settop(L, 0);
+        lv_pushnumber(L, mapSection(section) );
+        lv_pushnumber(L, mapRow(row) );
+        lv_pushnumber(L, visibleCount );
+        [self.owner lv_callLuaByKey1:@"Scrolling" key2:nil argN:3];
+    }
 }
 
 @end
