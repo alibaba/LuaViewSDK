@@ -116,35 +116,7 @@ static int lvNewRefreshCollectionView (lv_State *L) {
     return lvNewCollectionView0(L, YES);
 }
 
-//static int delegate (lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user ){
-//        if ( lv_gettop(L)>=2 ) {
-//            NSArray* identifierArray = nil;
-//            if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TTABLE ) {
-//                lv_pushstring(L, "Cell");
-//                lv_gettable(L, 2);
-//                identifierArray = lv_luaTableKeys(L, -1);
-//            }
-//            lv_settop(L, 2);
-//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-//            
-//            if ( identifierArray ) {
-//                LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->view);
-//                for( NSString* identifier in identifierArray ){
-//                    [collectionView registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
-//                }
-//            }
-//            return 1;
-//        } else {
-//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-//            return 1;
-//        }
-//    }
-//    return 0;
-//}
-
-static int reloadData (lv_State *L) {
+static int reload (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
@@ -198,28 +170,6 @@ static int scrollDirection (lv_State *L) {
     return 0;
 }
 
-static int rectForSection (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
-        if( [tableView isKindOfClass:[LVCollectionView class]] ) {
-            int nargs = lv_gettop(L);
-            if( nargs>=3 ){
-                int section = lv_tonumber(L, 2)-1;
-                int row = lv_tonumber(L, 3)-1;
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-                CGRect r = [tableView layoutAttributesForItemAtIndexPath:indexPath].frame;
-                lv_pushnumber(L, r.origin.x);
-                lv_pushnumber(L, r.origin.y);
-                lv_pushnumber(L, r.size.width);
-                lv_pushnumber(L, r.size.height);
-                return 4;
-            }
-        }
-    }
-    return 0;
-}
-
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewCollectionView);
@@ -230,12 +180,9 @@ static int rectForSection (lv_State *L) {
         lv_setglobal(L, "RefreshCollectionView");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"reload",    reloadData},
-        {"rectForSection", rectForSection},
+        {"reload",    reload},
         
         {"miniSpacing", miniSpacing},
-        
-//        {"delegate", delegate},
         
         {"scrollDirection", scrollDirection},
         {NULL, NULL}

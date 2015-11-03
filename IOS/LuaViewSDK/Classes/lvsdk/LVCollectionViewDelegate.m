@@ -14,6 +14,13 @@
 #import "LVHeads.h"
 
 
+static inline NSInteger mapRow(NSInteger row){
+    return row + 1;
+}
+
+static inline NSInteger mapSection(NSInteger section){
+    return section + 1;
+}
 
 @interface LVCollectionViewDelegate ()
 
@@ -23,7 +30,9 @@
 @implementation LVCollectionViewDelegate
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row)];
     identifier = self.identifierDic[identifier];
     if( identifier == nil ){
         identifier = DEFAULT_CELL_IDENTIFIER;
@@ -42,8 +51,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath.section+1);//arg2: section
-            lv_pushnumber(l, indexPath.row+1);//arg3: row
+            lv_pushnumber(l, mapSection(section) );//arg2: section
+            lv_pushnumber(l, mapRow(row) );//arg3: row
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -54,8 +63,8 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath.section+1);//arg2: section
-            lv_pushnumber(l, indexPath.row+1);//arg3: row
+            lv_pushnumber(l, mapSection(section) );//arg2: section
+            lv_pushnumber(l, mapRow(row) );//arg3: row
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -88,7 +97,7 @@
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
-        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, mapSection(section) );
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
@@ -107,9 +116,11 @@
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) ];
     if( identifier ) {
-        CGSize size = [self returnSizeCallByKey1:"Cell" key2:identifier.UTF8String key3:"Size" section:indexPath.section row:indexPath.row];
+        CGSize size = [self retSizeCallKey1:"Cell" key2:identifier.UTF8String key3:"Size" mapedSection:mapSection(section) mapedRow:mapRow(row) ];
         return size;
     } else {
         return CGSizeMake(20, 20);
@@ -118,22 +129,22 @@
 //定义每个UICollectionView 的间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    UIEdgeInsets insets = [self callFunction4:"Section" key2:"EdgeInsets" section:section row:0];
+    UIEdgeInsets insets = [self retInsetCallKey1:"Section" key2:"EdgeInsets" mapedSection:mapSection(section) mapedRow:mapRow(0)];
     //insets.top = self.flowLayout.minimumLineSpacing;
     return insets;
 }
 //定义每个UICollectionView 纵向的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     //    return self.flowLayout.minimumLineSpacing;
-    CGFloat spacing = [self callReturnNumberKey1:"Section" key2:"Spacing" section:section];
+    CGFloat spacing = [self retFloatCallKey1:"Section" key2:"Spacing" mapedSection:mapSection(section) ];
     return spacing;
 }
 
-- (CGFloat) callReturnNumberKey1:(const char*) funcName key2:(const char*) key2 section:(NSInteger) section {
+- (CGFloat) retFloatCallKey1:(const char*) funcName key2:(const char*) key2 mapedSection:(NSInteger) mapedSection {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
+        lv_pushnumber(l, mapedSection);
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -147,13 +158,14 @@
     return 0;
 }
 
-- (NSString*) returnStringCallWithKey1:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row{
+- (NSString*) retStringCallKey1:(const char*) key1 key2:(const char*)key2
+                   mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow{
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
+        lv_pushnumber(l, mapedSection);
+        lv_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
@@ -169,19 +181,20 @@
     return nil;
 }
 
-- (CGSize) returnSizeCallByKey1:(const char*) functionName key2:(const char*)key2 key3:(const char*)key3 section:(NSInteger) section row:(NSInteger) row {
+- (CGSize) retSizeCallKey1:(const char*) key1 key2:(const char*)key2 key3:(const char*)key3
+              mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
+        lv_pushnumber(l, mapedSection);
+        lv_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:functionName key2:key2 key3:key3 nargs:2 nrets:2] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:key3 nargs:2 nrets:2] ==0 ) {
             CGSize size = {0};
             if( lv_type(l, -1) ==LV_TNIL ) {
                 size.width = self.owner.frame.size.width;
@@ -195,19 +208,20 @@
     }
     return CGSizeMake(0, 0);
 }
-- (UIEdgeInsets) callFunction4:(const char*) functionName key2:(const char*)key2 section:(NSInteger) section row:(NSInteger) row {
+- (UIEdgeInsets) retInsetCallKey1:(const char*) key1 key2:(const char*)key2
+                     mapedSection:(NSInteger) mapSection mapedRow:(NSInteger)mapedRow {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        lv_pushnumber(l, row+1);
+        lv_pushnumber(l, mapSection);
+        lv_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:functionName key2:key2 nargs:2 nrets:4] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 nargs:2 nrets:4] ==0 ) {
             UIEdgeInsets egeInsets = {0};
             egeInsets.top = lv_tonumber(l, -4);
             egeInsets.left = lv_tonumber(l, -3);
@@ -220,16 +234,18 @@
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
-        NSString* identifier = [self returnStringCallWithKey1:"Cell" key2:IDENTIFIER section:indexPath.section row:indexPath.row];
+        NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) ];
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             lv_pushnil(l);// cell
-            lv_pushnumber(l, indexPath.section+1);
-            lv_pushnumber(l, indexPath.row+1);
+            lv_pushnumber(l, mapSection(section) );
+            lv_pushnumber(l, mapRow(row) );
             
             // table
             lv_pushUserdata(l, self.owner.lv_userData);
@@ -241,24 +257,5 @@
     }
 }
 
-// 回调脚本返回一个用户数据
-- (LVUserDataView *) callReturnUserDataFunction:(const char*) key1 key2:(const char*)key2 section:(NSInteger) section {
-    lv_State* l = self.owner.lv_lview.l;
-    if( l ){
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, section+1);
-        
-        // table
-        lv_pushUserdata(l, self.owner.lv_userData);
-        lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:key1 key2:key2 nargs:1 nrets:1] ==0 ) {
-            if( lv_type(l, -1)==LV_TUSERDATA ) {
-                LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
-                return user;
-            }
-        }
-    }
-    return nil;
-}
 
 @end
