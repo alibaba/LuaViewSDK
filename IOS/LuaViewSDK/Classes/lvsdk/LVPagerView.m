@@ -11,6 +11,7 @@
 #import "LVBaseView.h"
 #import "LVScrollView.h"
 #import "LVPagerViewCell.h"
+#import "LVPagerIndicator.h"
 
 
 static inline NSInteger mapPageIdx(NSInteger pageIdx){
@@ -34,7 +35,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 @property (nonatomic,strong) NSMutableArray* cellArray;
 
 @property (nonatomic,assign) NSInteger pageIdx;
-
+@property (nonatomic,weak) LVPagerIndicator* pagerIndicator;
 @end
 
 
@@ -70,6 +71,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         }
     }
     [self resetCellFrame];
+    LVPagerIndicator* indicator = [self callLuaGetIndicator];
+    [self setIndicator:indicator];
 }
 
 -(void) resetCellFrame{
@@ -179,6 +182,54 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     return 1;
 }
 
+- (LVPagerIndicator*) callLuaGetIndicator{
+    lv_State* L = self.lv_lview.l;
+    if( L && self.lv_userData ){
+        lv_pushUserdata(L, self.lv_userData);
+        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+        if(  [LVUtil call:L key1:"Indicator" key2:NULL nargs:0 nrets:1] ==0 ) {
+            if( lv_type(L, -1)==LV_TUSERDATA ) {
+                
+                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, -1);
+                if( LVIsType(user2, LVUserDataView) ) {
+                    lv_checkstack(L, 8);
+                    lv_pushvalue(L, 1);
+                    lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+                    lv_pushvalue(L, -2);// value
+                    lv_setfield(L, -2, "Indicator.object");
+                    
+                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
+                    if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
+                        [self setIndicator:pagerIndicator];// 设置Indicator
+                        return pagerIndicator;
+                    }
+                }
+            }
+        }
+    }
+    return nil;
+}
+
+
+-(void) setIndicator:(LVPagerIndicator*) indicator{
+    self.pagerIndicator = indicator;
+    self.pagerIndicator.numberOfPages = self.cellArray.count;
+    if( self.pageIdx>=0 && self.pageIdx<self.cellArray.count ) {
+        self.pagerIndicator.currentPage = self.pageIdx;
+    }
+}
+
+-(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation{
+    float offsetX = pageIdx * self.frame.size.width ;
+    if( offsetX<=0 ){
+        offsetX = 0;
+    }
+    float maxOffset = self.contentSize.width - self.frame.size.width;
+    if( offsetX > maxOffset ){
+        offsetX = maxOffset;
+    }
+    [self setContentOffset:CGPointMake(offsetX, 0) animated:animation];
+}
 
 static Class g_class = nil;
 
@@ -218,6 +269,7 @@ static int lvNewPageView (lv_State *L) {
     if( lview ){
         [lview containerAddSubview:pageView];
     }
+    lv_pushUserdata(L, pageView.lv_userData);
     return 1;
 }
 
@@ -261,19 +313,11 @@ static int setCurrentPage(lv_State *L) {
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 int luaPageIdx = lv_tonumber(L, 2);
-                float offsetX = unmapPageIdx(luaPageIdx) * view.frame.size.width ;
-                if( offsetX<=0 ){
-                    offsetX = 0;
-                }
-                float maxOffset = view.contentSize.width - view.frame.size.width;
-                if( offsetX > maxOffset ){
-                    offsetX = maxOffset;
-                }
                 BOOL animated = YES;
                 if( lv_gettop(L)>=3 ) {
                     animated = lv_toboolean(L, 3);
                 }
-                [view setContentOffset:CGPointMake(offsetX, 0) animated:animated];
+                [view setCurrentPageIdx:unmapPageIdx(luaPageIdx) animation:animated];
                 lv_settop(L, 1);
                 return 1;
             } else {
@@ -281,6 +325,36 @@ static int setCurrentPage(lv_State *L) {
                 lv_pushnumber( L, mapPageIdx(currentPageIdx) );
                 return 1;
             }
+        }
+    }
+    return 0;
+}
+
+static int indicator(lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVPagerView* view = (__bridge LVPagerView *)(user->view);
+        if( lv_gettop(L)>=2 ) {
+            if ( lv_type(L, 2)==LV_TNIL ) {
+                
+            } else {
+                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
+                if( LVIsType(user2, LVUserDataView) ) {
+                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
+                    if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
+                        [view setIndicator:pagerIndicator];// 设置Indicator
+                        lv_pushvalue(L, 1);
+                        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+                        lv_pushvalue(L, 2);// value
+                        lv_setfield(L, -2, "Indicator");
+                    }
+                }
+            }
+            return 0;
+        } else {
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+            lv_getfield(L, -2, "Indicator");
+            return 1;
         }
     }
     return 0;
@@ -295,6 +369,7 @@ static int setCurrentPage(lv_State *L) {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
+        {"indicator", indicator},
         {NULL, NULL}
     };
     
@@ -315,6 +390,7 @@ static int setCurrentPage(lv_State *L) {
     float pageWidth = self.frame.size.width;
     float pageIndex = offsetX/pageWidth;
     self.pageIdx = (int)pageIndex;
+    self.pagerIndicator.currentPage = self.pageIdx;
     
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
@@ -344,7 +420,6 @@ static int setCurrentPage(lv_State *L) {
         [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" nargs:1 nrets:0];
     }
 }
-
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self callLuaWithScrolling];
