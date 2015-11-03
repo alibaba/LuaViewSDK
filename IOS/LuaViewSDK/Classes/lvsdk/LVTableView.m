@@ -132,7 +132,7 @@ static int lvCreateTableViewHaveRefresh (lv_State *L) {
 }
 
 
-static int reloadData (lv_State *L) {
+static int reload (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVTableView* tableView = (__bridge LVTableView *)(user->view);
@@ -263,7 +263,7 @@ static int dividerHeight (lv_State *L) {
         lv_setglobal(L, "RefreshTableView");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"reload",    reloadData},
+        {"reload",    reload},
         
         {"header", setTableHeaderView},
         {"footer", setTableFooterView},

@@ -13,6 +13,14 @@
 #import "LVPagerViewCell.h"
 
 
+static inline NSInteger mapPageIdx(NSInteger pageIdx){
+    return pageIdx + 1;
+}
+
+static inline NSInteger unmapPageIdx(NSInteger pageIdx){
+    return pageIdx - 1;
+}
+
 #define IDENTIFIER "Id"
 
 // lua 对应的数据 key
@@ -25,7 +33,7 @@
 @property (nonatomic,strong) NSMutableDictionary* identifierDic;
 @property (nonatomic,strong) NSMutableArray* cellArray;
 
-@property (nonatomic,assign) NSInteger currentPageIndex;
+@property (nonatomic,assign) NSInteger pageIdx;
 
 @end
 
@@ -41,7 +49,7 @@
         self.pagingEnabled = YES;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
-        self.currentPageIndex = -1;
+        self.pageIdx = -1;
     }
     return self;
 }
@@ -88,7 +96,7 @@
             CGRect r = view.frame;
             if(  CGRectIntersectsRect(r, r0) ){
                 if( view.superview!= self ) {
-                    [self cellForItemAtIndex:i];
+                    [self cellInitAtPageIdx:i];
                     [self addSubview:view];
                 }
             } else {
@@ -109,15 +117,15 @@
 -(void) dealloc{
 }
 
-- (LVPagerViewCell*) cellOfIndex:(int) index{
+- (LVPagerViewCell*) cellOfPageIdx:(int) index{
     if( index>=0 && index<self.cellArray.count ) {
         return self.cellArray[index];
     }
     return nil;
 }
 
-- (LVPagerViewCell*) cellForItemAtIndex:(int)indexPath {
-    LVPagerViewCell* cell = [self cellOfIndex:indexPath];
+- (LVPagerViewCell*) cellInitAtPageIdx:(int)pageIdx {
+    LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
     LView* lview = self.lv_lview;
     lv_State* l = lview.l;
     lview.conentView = cell;
@@ -131,7 +139,7 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath+1);//arg2: section
+            lv_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -142,7 +150,7 @@
             lv_settop(l, 0);
             lv_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, indexPath+1);//arg2: section
+            lv_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -217,7 +225,7 @@ static int lvNewPageView (lv_State *L) {
     [self createAllCell];
 }
 
-static int reloadData (lv_State *L) {
+static int reload (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVPagerView* pageView = (__bridge LVPagerView *)(user->view);
@@ -252,13 +260,12 @@ static int setCurrentPage(lv_State *L) {
         LVPagerView* view = (__bridge LVPagerView *)(user->view);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
-                int pageIndex = lv_tonumber(L, 2);
-                pageIndex -= 1;
-                float offsetX = pageIndex*view.frame.size.width ;
+                int luaPageIdx = lv_tonumber(L, 2);
+                float offsetX = unmapPageIdx(luaPageIdx) * view.frame.size.width ;
                 if( offsetX<=0 ){
                     offsetX = 0;
                 }
-                float maxOffset = view.contentSize.width-view.frame.size.width;
+                float maxOffset = view.contentSize.width - view.frame.size.width;
                 if( offsetX > maxOffset ){
                     offsetX = maxOffset;
                 }
@@ -270,30 +277,14 @@ static int setCurrentPage(lv_State *L) {
                 lv_settop(L, 1);
                 return 1;
             } else {
-                lv_pushnumber( L, view.currentPageIndex+1 );
+                NSInteger currentPageIdx = view.pageIdx;
+                lv_pushnumber( L, mapPageIdx(currentPageIdx) );
                 return 1;
             }
         }
     }
     return 0;
 }
-//
-//static int delegate (lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user && LVIsType(user, LVUserDataView) ){
-//        if ( lv_gettop(L)>=2 ) {
-//            lv_settop(L, 2);
-//            lv_udataRef(L, USERDATA_KEY_DELEGATE);
-//            LVPagerView* tableView = (__bridge LVPagerView *)(user->view);
-//            [tableView createAllCell];
-//            return 1;
-//        } else {
-//            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-//            return 1;
-//        }
-//    }
-//    return 0;
-//}
 
 +(int) classDefine: (lv_State *)L {
     {
@@ -301,11 +292,8 @@ static int setCurrentPage(lv_State *L) {
         lv_setglobal(L, "PagerView");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"reload",    reloadData},
+        {"reload",    reload},
         {"showScrollBar",     showScrollBar },
-        
-//        {"delegate",     delegate },
-        
         {"currentPage",     setCurrentPage },
         {NULL, NULL}
     };
@@ -326,7 +314,7 @@ static int setCurrentPage(lv_State *L) {
     float offsetX = self.contentOffset.x;
     float pageWidth = self.frame.size.width;
     float pageIndex = offsetX/pageWidth;
-    self.currentPageIndex = (int)pageIndex;
+    self.pageIdx = (int)pageIndex;
     
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
@@ -348,7 +336,7 @@ static int setCurrentPage(lv_State *L) {
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
-        lv_pushnumber(l, self.currentPageIndex + 1 );
+        lv_pushnumber(l, mapPageIdx(self.pageIdx) );
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
