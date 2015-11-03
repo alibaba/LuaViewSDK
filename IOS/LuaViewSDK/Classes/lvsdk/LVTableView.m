@@ -188,36 +188,6 @@ static int setTableFooterView (lv_State *L) {
     return 0;
 }
 
-static int rectForSection (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVTableView* tableView = (__bridge LVTableView *)(user->view);
-        if( [tableView isKindOfClass:[LVTableView class]] ) {
-            int nargs = lv_gettop(L);
-            if( nargs>=3 ){
-                int section = lv_tonumber(L, 2);
-                int row = lv_tonumber(L, 3);
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row*2-1 inSection:section-1];
-                CGRect r = [tableView rectForRowAtIndexPath:indexPath];
-                lv_pushnumber(L, r.origin.x);
-                lv_pushnumber(L, r.origin.y);
-                lv_pushnumber(L, r.size.width);
-                lv_pushnumber(L, r.size.height);
-                return 4;
-            } else if (nargs>=2 ){
-                int section = lv_tonumber(L, 2)-1;
-                CGRect r = [tableView rectForSection:section];
-                lv_pushnumber(L, r.origin.x);
-                lv_pushnumber(L, r.origin.y);
-                lv_pushnumber(L, r.size.width);
-                lv_pushnumber(L, r.size.height);
-                return 4;
-            }
-        }
-    }
-    return 0;
-}
-
 static int scrollToCell (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( LVIsType(user,LVUserDataView) ){
@@ -238,7 +208,7 @@ static int scrollToCell (lv_State *L) {
                     }
                 }
                 
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row*2-1 inSection:section];
+                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:(row-1)*2 inSection:section-1];
                 CGRect r = [tableView rectForRowAtIndexPath:indexPath];
                 if( r.size.height>0 ) {
                     CGFloat y =  r.origin.y + offsetY;
@@ -314,8 +284,6 @@ static int dividerHeight (lv_State *L) {
         
         {"header", setTableHeaderView},
         {"footer", setTableFooterView},
-        
-        {"rectForSection", rectForSection},
         
         {"dividerHeight", dividerHeight},
         

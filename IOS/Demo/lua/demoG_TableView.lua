@@ -70,6 +70,11 @@ function createTableView( )
 					print(tv, section, row);
 					tv.stopRefreshing();
 					System.gc();
+					if( row%2==1 ) then
+						tv.scrollToCell(1,2);
+					else
+						tv.scrollToTop();
+					end
 				end
 
 			}
