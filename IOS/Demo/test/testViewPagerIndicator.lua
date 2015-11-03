@@ -33,9 +33,6 @@ pagerView = PagerView({
     Callback = {
         Scrolling=function(pos, percent, distance)
             Toast("滑动"..pos)
-        end,
-        Selected=function(pos)
-            Toast("选中"..pos)
         end
     }
 })
