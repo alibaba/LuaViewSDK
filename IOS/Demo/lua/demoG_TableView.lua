@@ -79,20 +79,6 @@ function createTableView( )
 
 			}
 		},
-		Header = function()
-			local head = Button();
-			head.title("我是头");
-			head.frame(0,0,w,100);
-			head.backgroundColor(0xff);
-			return head;
-		end,
-		Footer = function()
-			local foot = Button();
-			foot.title("我是结尾");
-			foot.frame(0,0,w,100);
-			foot.backgroundColor(0xff0000);
-			return foot;
-		end,
 		Callback = {
 			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
 				print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
@@ -115,6 +101,22 @@ loading = false;
 
 tableView.frame(0,0,w,h-64);
 tableView.backgroundColor(0xffFFFF);
+
+
+header = Button();
+header.title("我是头");
+header.frame(0,0,w,100);
+header.backgroundColor(0xff);
+
+tableView.header(header);
+
+
+footer = Button();
+footer.title("我是结尾");
+footer.frame(0,0,w,100);
+footer.backgroundColor(0xff0000);
+
+tableView.footer(footer);
 
 
 

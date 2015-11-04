@@ -73,14 +73,8 @@
     return nil;
 }
 
-- (void) getHeaderFooterFromDelegate {
-    self.tableHeaderView = [self lv_getViewFromLuaByKey:@"Header"];
-    self.tableFooterView = [self lv_getViewFromLuaByKey:@"Footer"];
-}
-
 -(void) reloadData {
     [super reloadData];
-    [self getHeaderFooterFromDelegate];
 }
 
 #pragma -mark lvNewTextField
@@ -108,8 +102,6 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
         if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
             lv_pushvalue(L, 1);
             lv_udataRef(L, USERDATA_KEY_DELEGATE );
-            
-            [tableView getHeaderFooterFromDelegate];
         }
     }
     LView* lview = (__bridge LView *)(L->lView);
