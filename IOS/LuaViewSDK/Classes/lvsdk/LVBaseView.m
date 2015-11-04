@@ -913,8 +913,6 @@ static int adjustSize(lv_State *L) {
         UIView* view = (__bridge UIView *)(user->view);
         if( view ){
             [view sizeToFit];
-            lv_pushvalue(L,1);
-            return 1;
         }
     }
     return 0;

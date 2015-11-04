@@ -55,7 +55,6 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     return self;
 }
 
-
 -(void) createAllCell {
     NSInteger num = [self numberOfPagesInPageView];
     if( num<self.cellArray.count ) {
@@ -71,8 +70,6 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         }
     }
     [self resetCellFrame];
-    LVPagerIndicator* indicator = [self callLuaGetIndicator];
-    [self setIndicator:indicator];
 }
 
 -(void) resetCellFrame{
@@ -182,33 +179,33 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     return 1;
 }
 
-- (LVPagerIndicator*) callLuaGetIndicator{
-    lv_State* L = self.lv_lview.l;
-    if( L && self.lv_userData ){
-        lv_pushUserdata(L, self.lv_userData);
-        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:L key1:"Indicator" key2:NULL nargs:0 nrets:1] ==0 ) {
-            if( lv_type(L, -1)==LV_TUSERDATA ) {
-                
-                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, -1);
-                if( LVIsType(user2, LVUserDataView) ) {
-                    lv_checkstack(L, 8);
-                    lv_pushvalue(L, 1);
-                    lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-                    lv_pushvalue(L, -2);// value
-                    lv_setfield(L, -2, "Indicator.object");
-                    
-                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
-                    if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
-                        [self setIndicator:pagerIndicator];// 设置Indicator
-                        return pagerIndicator;
-                    }
-                }
-            }
-        }
-    }
-    return nil;
-}
+//- (LVPagerIndicator*) callLuaGetIndicator{
+//    lv_State* L = self.lv_lview.l;
+//    if( L && self.lv_userData ){
+//        lv_pushUserdata(L, self.lv_userData);
+//        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+//        if(  [LVUtil call:L key1:"Indicator" key2:NULL nargs:0 nrets:1] ==0 ) {
+//            if( lv_type(L, -1)==LV_TUSERDATA ) {
+//                
+//                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, -1);
+//                if( LVIsType(user2, LVUserDataView) ) {
+//                    lv_checkstack(L, 8);
+//                    lv_pushvalue(L, 1);
+//                    lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+//                    lv_pushvalue(L, -2);// value
+//                    lv_setfield(L, -2, "Indicator.object");
+//                    
+//                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
+//                    if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
+//                        [self setIndicator:pagerIndicator];// 设置Indicator
+//                        return pagerIndicator;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    return nil;
+//}
 
 
 -(void) setIndicator:(LVPagerIndicator*) indicator{
@@ -245,33 +242,31 @@ static int lvNewPageView (lv_State *L) {
     if( g_class == nil ) {
         g_class = [LVPagerView class];
     }
-    BOOL haveArgs = NO;
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
-        haveArgs = YES;
-    }
-    LVPagerView* pageView = [[g_class alloc] init:L];
-    
-    NEW_USERDATA(userData, LVUserDataView);
-    userData->view = CFBridgingRetain(pageView);
-    pageView.lv_userData = userData;
-    lvL_getmetatable(L, META_TABLE_UIPageView );
-    lv_setmetatable(L, -2);
-    
-    if ( haveArgs ) {
+        LVPagerView* pageView = [[g_class alloc] init:L];
+        
+        NEW_USERDATA(userData, LVUserDataView);
+        userData->view = CFBridgingRetain(pageView);
+        pageView.lv_userData = userData;
+        lvL_getmetatable(L, META_TABLE_UIPageView );
+        lv_setmetatable(L, -2);
+        
+        LView* lview = (__bridge LView *)(L->lView);
+        if( lview ){
+            [lview containerAddSubview:pageView];
+        }
+        
         int stackNum = lv_gettop(L);
         lv_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
         
         [pageView createAllCell];
         lv_settop(L, stackNum);
+        
+        lv_pushUserdata(L, pageView.lv_userData);
+        return 1;
     }
-    
-    LView* lview = (__bridge LView *)(L->lView);
-    if( lview ){
-        [lview containerAddSubview:pageView];
-    }
-    lv_pushUserdata(L, pageView.lv_userData);
-    return 1;
+    return 0;
 }
 
 -(void) reloadData{
@@ -337,7 +332,12 @@ static int indicator(lv_State *L) {
         LVPagerView* view = (__bridge LVPagerView *)(user->view);
         if( lv_gettop(L)>=2 ) {
             if ( lv_type(L, 2)==LV_TNIL ) {
-                
+                view.pagerIndicator = nil;
+                [view setIndicator:nil];// 设置Indicator
+                lv_pushvalue(L, 1);
+                lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+                lv_pushnil(L);// value
+                lv_setfield(L, -2, "Indicator");
             } else {
                 LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
                 if( LVIsType(user2, LVUserDataView) ) {
@@ -391,7 +391,7 @@ static int indicator(lv_State *L) {
     float pageWidth = self.frame.size.width;
     float pageIndex = offsetX/pageWidth;
     self.pageIdx = (int)pageIndex;
-    self.pagerIndicator.currentPage = self.pageIdx;
+    self.pagerIndicator.currentPage = (int)(pageIndex+0.5);
     
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){

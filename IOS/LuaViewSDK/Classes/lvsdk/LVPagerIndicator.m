@@ -136,7 +136,6 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         lv_setglobal(L, "PagerIndicator");
     }
     const struct lvL_reg memberFunctions [] = {
-        // {"pageCount",     setPageCount },
         {"currentPage",     setCurrentPage },
         
         {"pageColor",     pageIndicatorTintColor },
