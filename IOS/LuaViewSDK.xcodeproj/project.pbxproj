@@ -11,6 +11,7 @@
 		84056E721B5CA5990078F9D6 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; };
 		84056E731B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
 		84056E741B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
+		840870851BE9DB47004CADB7 /* demo2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 840870841BE9DB47004CADB7 /* demo2015_testunit.lua */; };
 		840AD5841A5EAB4A0075CB58 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; };
 		840AD5851A5EAB4A0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		840AD5C91A5EB78D0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
@@ -389,6 +390,7 @@
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
+		840870841BE9DB47004CADB7 /* demo2015_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo2015_testunit.lua; sourceTree = "<group>"; };
 		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
 		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
 		840AD5AE1A63ED7C003E837D /* lV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lV.c; sourceTree = "<group>"; };
@@ -1005,8 +1007,14 @@
 		84799AA41BAFDDA00070E214 /* lua */ = {
 			isa = PBXGroup;
 			children = (
-				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
+				84CC637F1BB16AF300613B74 /* 2015-05-07.zip */,
+				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
+				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
 				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
+				84799AB41BAFDDA00070E214 /* color1.png */,
+				84799AB51BAFDDA00070E214 /* color2.png */,
+				840870841BE9DB47004CADB7 /* demo2015_testunit.lua */,
+				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
 				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
 				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
 				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
@@ -1035,13 +1043,6 @@
 				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
 				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
 				84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */,
-				84799AF11BAFDF370070E214 /* lv_kit.lua */,
-				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
-				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
-				84799AB41BAFDDA00070E214 /* color1.png */,
-				84799AB51BAFDDA00070E214 /* color2.png */,
-				84799ABF1BAFDDA00070E214 /* lazhu.png */,
-				84799AC11BAFDDA00070E214 /* snow.png */,
 				84799AA51BAFDDA00070E214 /* img1.tiff */,
 				84799AA91BAFDDA00070E214 /* img4.tiff */,
 				84799AAA1BAFDDA00070E214 /* img7.tiff */,
@@ -1049,7 +1050,9 @@
 				84799AA71BAFDDA00070E214 /* img13.tiff */,
 				84799AA81BAFDDA00070E214 /* img16.tiff */,
 				84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */,
-				84CC637F1BB16AF300613B74 /* 2015-05-07.zip */,
+				84799ABF1BAFDDA00070E214 /* lazhu.png */,
+				84799AF11BAFDF370070E214 /* lv_kit.lua */,
+				84799AC11BAFDDA00070E214 /* snow.png */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -1474,6 +1477,7 @@
 				84799AEA1BAFDDA00070E214 /* demoG_TableView.lua in Resources */,
 				84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */,
 				84799AE41BAFDDA00070E214 /* lazhu.png in Resources */,
+				840870851BE9DB47004CADB7 /* demo2015_testunit.lua in Resources */,
 				8468C9661BDA11BE002D4B1E /* testUINoticeView.lua in Resources */,
 				84799ADD1BAFDDA00070E214 /* demoE_Button.lua in Resources */,
 				84799AE21BAFDDA00070E214 /* demoA_Image.lua in Resources */,
