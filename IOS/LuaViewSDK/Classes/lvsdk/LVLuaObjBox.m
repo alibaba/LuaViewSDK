@@ -171,7 +171,7 @@ static BOOL object_isProtocol(id obj ) {
                 luaArgNum ++;
             }
             [LVUtil pushRegistryValue:L key:self];
-            [LVUtil call:L key1:keyName key2:NULL nargs:luaArgNum nrets:haveReturnValue];
+            [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LV_TNONE];
             if ( haveReturnValue ) {
                 [invocation retainArguments];
                 [LVTypeConvert setInvocationReturnValue:invocation withLua:L stackID:-1];

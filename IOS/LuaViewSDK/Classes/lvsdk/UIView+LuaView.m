@@ -39,7 +39,7 @@
             lv_getfield(l, -1, STR_CALLBACK);
             lv_remove(l, -2);
         }
-        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String nargs:argN nrets:0];
+        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String key3:NULL nargs:argN nrets:0 retType:LV_TNONE];
     }
 }
 

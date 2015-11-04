@@ -48,7 +48,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
     if( l ){
         lv_checkStack32(l);
         [LVUtil pushRegistryValue:l key:self];
-        [LVUtil call:l lightUserData:self.function key:"callback" nargs:1];
+        [LVUtil call:l lightUserData:self.function key1:"callback" key2:NULL nargs:1];
     }
     self.response = nil;
     self.mySelf = nil;

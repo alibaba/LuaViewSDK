@@ -51,7 +51,7 @@
         int num = lv_gettop(l);
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        [LVUtil call:l key1:key.UTF8String key2:NULL nargs:0 nrets:1];
+        [LVUtil call:l key1:key.UTF8String key2:NULL key3:NULL nargs:0 nrets:1 retType:LV_TNONE];
         if( lv_type(l, -1)==LV_TUSERDATA ) {
             LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
             if( LVIsType(user, LVUserDataView) ) {

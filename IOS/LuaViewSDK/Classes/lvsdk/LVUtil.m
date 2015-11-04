@@ -22,33 +22,24 @@
     return [url hasPrefix:@"https://"] || [url hasPrefix:@"http://"];
 }
 
-+(int) call:(lv_State*) l  lightUserData:(id) lightUserData key:(const char*) key{
-    return [self call:l lightUserData:lightUserData key:key nargs:0];
-}
-
-+(int) call:(lv_State*) l  lightUserData:(id) lightUserData key:(const char*) key1 nargs:(int)nargs {
-    return [self call:l lightUserData:lightUserData key:key1 nargs:nargs nrets:0];
-}
-+(int) call:(lv_State*) l  lightUserData:(id) lightUserData key:(const char*) key1 nargs:(int)nargs nrets:(int)nret{
-    return [self call:l lightUserData:lightUserData key1:key1 key2:NULL nargs:nargs nrets:nret];
-}
-
-+(int) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
++(int) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
     if( l ){
         lv_checkStack32(l);
         lv_pushlightuserdata(l, (__bridge void *)lightUserData);// key=view
         lv_gettable(l, LV_REGISTRYINDEX);/* table = registry[&Key] */
         
-        return [LVUtil call:l key1:key1 key2:key2 nargs:nargs nrets:nret];
+        return [LVUtil call:l key1:key1 key2:key2 nargs:nargs nrets:0];
     }
     return -1;
 }
 
 +(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
-    return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret];
+    return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret retType:-8];
 }
 
-+(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 nargs:(int)nargs nrets:(int)nret{
++(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
+      nargs:(int)nargs nrets:(int)nret
+    retType:(int) retType{
     if( l ){
         if( lv_type(l, -1)==LV_TNIL ){
             return -1;
@@ -66,18 +57,16 @@
                 }
             }
         }
-        if( lv_type(l, -1)==LV_TFUNCTION ){//function
-            return lv_runFunctionWithArgs(l, nargs, nret);
-        }
-        if( nret<=1 ) {
+        int type = lv_type(l, -1);
+        if ( type==retType && nret==1 ) {
             return 0;
-        } else {
-            return -1;
+        }
+        if( type == LV_TFUNCTION ){//function
+            return lv_runFunctionWithArgs(l, nargs, nret);
         }
     }
     return -1;
 }
-
 
 int lv_runFunction(lv_State* l){
     return lv_runFunctionWithArgs(l, 0, 0);

@@ -73,14 +73,14 @@ static int lvNewAnimate (lv_State *L) {
         [UIView animateWithDuration:duration delay:delay options:option animations:^{
             if( animate.lv_lview && animate.lv_lview.l ) {
                 lv_checkStack32( animate.lv_lview.l);
-                [LVUtil call:animate.lv_lview.l lightUserData:animate key:"animations"];
+                [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
             }
         } completion:^(BOOL finished) {
             lv_State* l = animate.lv_lview.l;
             if( l ) {
                 lv_settop(l, 0);
                 lv_checkStack32(l);
-                [LVUtil call:l lightUserData:animate key:"completion"];
+                [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
                 
                 [LVUtil unregistry:l key:animate];
             }

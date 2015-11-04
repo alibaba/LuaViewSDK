@@ -31,7 +31,7 @@
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l,self.userData);
-        [LVUtil call:l lightUserData:self key:"callback" nargs:1];
+        [LVUtil call:l lightUserData:self key1:"callback" key2:NULL nargs:1];
     }
 }
 

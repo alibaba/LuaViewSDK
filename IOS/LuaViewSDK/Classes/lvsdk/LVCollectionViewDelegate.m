@@ -56,7 +56,7 @@ static inline NSInteger mapSection(NSInteger section){
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:0 retType:LV_TNONE];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
@@ -68,7 +68,7 @@ static inline NSInteger mapSection(NSInteger section){
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:1];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LV_TNONE];
         }
     }
     lview.conentView = nil;
@@ -82,7 +82,7 @@ static inline NSInteger mapSection(NSInteger section){
     if( l && self.owner.lv_userData ){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"Section" key2:"SectionCount" nargs:0 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:"Section" key2:"SectionCount" key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
                 return num;
@@ -102,7 +102,7 @@ static inline NSInteger mapSection(NSInteger section){
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"Section" key2:"RowCount" nargs:1 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:"Section" key2:"RowCount" key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
                 return num;
@@ -148,7 +148,7 @@ static inline NSInteger mapSection(NSInteger section){
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:funcName key2:key2 nargs:1 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:funcName key2:key2 key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 CGFloat heigth = lv_tonumber(l, -1);
                 return heigth;
@@ -171,7 +171,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 nargs:2 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:1 retType:LV_TSTRING] ==0 ) {
             if( lv_type(l, -1)==LV_TSTRING ){
                 NSString* value = lv_paramString(l, -1);
                 return value;
@@ -194,7 +194,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 key3:key3 nargs:2 nrets:2] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:key3 nargs:2 nrets:2 retType:LV_TNONE] ==0 ) {
             CGSize size = {0};
             if( lv_type(l, -1) ==LV_TNIL ) {
                 size.width = self.owner.frame.size.width;
@@ -221,7 +221,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 nargs:2 nrets:4] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:4 retType:LV_TNONE] ==0 ) {
             UIEdgeInsets egeInsets = {0};
             egeInsets.top = lv_tonumber(l, -4);
             egeInsets.left = lv_tonumber(l, -3);
@@ -251,7 +251,7 @@ static inline NSInteger mapSection(NSInteger section){
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             
-            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:3 nrets:0]==0 ) {
+            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:3 nrets:0 retType:LV_TNONE]==0 ) {
             }
         }
     }

@@ -65,7 +65,7 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key:nil nargs:0];
+        [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key1:NULL key2:NULL nargs:0];
         self.lv_lview = nil;
     }
 }

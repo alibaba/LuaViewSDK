@@ -143,7 +143,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Pages" key2:"Init" key3:NULL nargs:2 nrets:0];
+            [LVUtil call:l key1:"Pages" key2:"Init" key3:NULL nargs:2 nrets:0 retType:LV_TNONE];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
@@ -154,7 +154,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0];
+            [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LV_TNONE];
         }
     }
     lview.conentView = nil;
@@ -168,7 +168,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"PageCount" key2:NULL nargs:0 nrets:1] ==0 ) {
+        if(  [LVUtil call:l key1:"PageCount" key2:NULL key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
                 return num;
@@ -405,7 +405,7 @@ static int indicator(lv_State *L) {
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:STR_CALLBACK key2:"Scrolling" nargs:3 nrets:0];
+        [LVUtil call:l key1:STR_CALLBACK key2:"Scrolling" key3:NULL nargs:3 nrets:0 retType:LV_TNONE];
     }
 }
 
@@ -418,7 +418,7 @@ static int indicator(lv_State *L) {
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" nargs:1 nrets:0];
+        [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" key3:NULL nargs:1 nrets:0 retType:LV_TNONE];
     }
 }
 

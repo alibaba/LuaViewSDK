@@ -86,7 +86,7 @@ static int download (lv_State *L) {
         } else {
             lv_pushnil(L);
         }
-        [LVUtil call:L lightUserData:self key1:nil key2:nil nargs:1 nrets:0];
+        [LVUtil call:L lightUserData:self key1:nil key2:nil nargs:1];
         
         [LVUtil unregistry:L key:self.luaObjRetainKey];
         [LVUtil unregistry:L key:self];
