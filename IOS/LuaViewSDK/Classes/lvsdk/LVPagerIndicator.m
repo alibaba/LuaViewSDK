@@ -9,6 +9,7 @@
 #import "LVPagerIndicator.h"
 #import "LVBaseView.h"
 #import "LView.h"
+#import "LVPagerView.h"
 
 @implementation LVPagerIndicator
 
@@ -44,23 +45,23 @@ static int lvNewPageControl (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setPageCount(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
-        if( view ){
-            if( lv_gettop(L)>=2 ) {
-                int number = lv_tonumber(L, 2);
-                view.numberOfPages = number;
-                return 0;
-            } else {
-                lv_pushnumber(L, view.numberOfPages );
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
+//static int setPageCount(lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
+//        if( view ){
+//            if( lv_gettop(L)>=2 ) {
+//                int number = lv_tonumber(L, 2);
+//                view.numberOfPages = number;
+//                return 0;
+//            } else {
+//                lv_pushnumber(L, view.numberOfPages );
+//                return 1;
+//            }
+//        }
+//    }
+//    return 0;
+//}
 
 static int setCurrentPage(lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -69,7 +70,8 @@ static int setCurrentPage(lv_State *L) {
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int currentPage = lv_tonumber(L, 2);
-                view.currentPage = currentPage-1;
+                //view.currentPage = currentPage-1;
+                [view.pagerView setCurrentPageIdx:currentPage-1 animation:YES];
                 return 0;
             } else {
                 lv_pushnumber(L, view.currentPage+1 );
@@ -134,7 +136,7 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         lv_setglobal(L, "PagerIndicator");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"pageCount",     setPageCount },
+        // {"pageCount",     setPageCount },
         {"currentPage",     setCurrentPage },
         
         {"pageColor",     pageIndicatorTintColor },

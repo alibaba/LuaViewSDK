@@ -5,8 +5,10 @@ require "kit/lv_kit"
 -- 活动指示器
 local SCREEN_WIDTH, SCREEN_HEGITH = window.size()
 
+indicator = nil;
+
 function createSelfDefinedIndicator()
-    local indicator = PagerIndicator()
+    indicator = PagerIndicator()
     indicator.size(SCREEN_WIDTH/2, 200)
     indicator.backgroundColor(0x33333333)
     indicator.alignCenter()
@@ -36,4 +38,14 @@ pagerView = PagerView({
         end
     }
 })
+
 pagerView.frame(0,0,SCREEN_WIDTH, SCREEN_HEGITH);
+
+
+button = Button();
+button.backgroundColor(0xff);
+button.title("测试");
+button.frame(0,300,100,100);
+button.callback(function()
+    indicator.currentPage(3);
+end);

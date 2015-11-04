@@ -20,7 +20,6 @@ pageView = PagerView{
             end)
         end
     },
-    Indicator = fucntion
     Callback = {
         Scrolling = function( pageIndex, percent , offset )
             print("Scrolling", pageIndex, percent, offset)

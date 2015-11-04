@@ -213,6 +213,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 -(void) setIndicator:(LVPagerIndicator*) indicator{
     self.pagerIndicator = indicator;
+    self.pagerIndicator.pagerView = self;
     self.pagerIndicator.numberOfPages = self.cellArray.count;
     if( self.pageIdx>=0 && self.pageIdx<self.cellArray.count ) {
         self.pagerIndicator.currentPage = self.pageIdx;

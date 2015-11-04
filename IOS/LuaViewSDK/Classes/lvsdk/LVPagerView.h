@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVPagerIndicator.h"
 
+@class LVPagerIndicator;
 @interface LVPagerView : UIScrollView<LVProtocal,UIScrollViewDelegate>
 
 
@@ -29,5 +29,6 @@
 + (void) setDefaultStyle:(Class) c;
 
 -(void) setIndicator:(LVPagerIndicator*) indicator;
+-(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation;
 
 @end

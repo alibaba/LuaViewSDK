@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
+@class LVPagerView;
+
 @interface LVPagerIndicator : UIPageControl<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
@@ -20,9 +22,14 @@
 @property(nonatomic,assign) CGFloat lv_scaleY;
 @property(nonatomic,assign) NSUInteger lv_align;
 
+
 -(id) init:(lv_State*) l;
 
 +(int) classDefine:(lv_State *)L ;
 
+/*
+ 关联PagerIndicator用的
+ */
+@property(nonatomic,weak) LVPagerView* pagerView;
 
 @end
