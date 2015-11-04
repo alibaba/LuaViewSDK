@@ -24,8 +24,11 @@ function snowCreater()
 
 	function snow.move()
 		self.imageView.center(self.x,self.y);
-		self.imageView.rotation(self.rote);
-		self.imageView.scale(self.scale, self.scale);
+		local t = Transform3D();
+		t.rotate(self.rote, 1, 0,0);
+		t.rotate(self.rote/2, 0, 1,0);
+		t.scale(self.scale, self.scale, 1 );
+		self.imageView.transform3D(t);
 	end
 	function snow.nextXY()
 		local dx = math:random(-5,5);
@@ -34,7 +37,7 @@ function snowCreater()
 		self.x = x+dx;
 		self.y = y+dy*1.5;
 		self.rote = math:random(10,90)/100.0*3.14;
-		self.scale = math:random(8,10)/10;
+		self.scale = math:random(2,10)/10;
 	end
 	function snow.showSnows()
 		if ( self.times>20 ) then
