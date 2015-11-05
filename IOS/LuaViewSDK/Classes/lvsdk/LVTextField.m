@@ -24,6 +24,7 @@
         self.lv_lview = (__bridge LView *)(l->lView);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
+        self.clipsToBounds = YES;
     }
     return self;
 }

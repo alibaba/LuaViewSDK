@@ -26,6 +26,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.textAlignment = NSTextAlignmentLeft;
         self.lv_isCallbackAddClickGesture = YES;
+        self.clipsToBounds = YES;
     }
     return self;
 }

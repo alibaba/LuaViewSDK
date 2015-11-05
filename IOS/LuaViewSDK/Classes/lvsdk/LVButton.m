@@ -27,6 +27,7 @@
         
         // 默认黑色字
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.clipsToBounds = YES;
     }
     return self;
 }
@@ -120,26 +121,26 @@ static int enabled (lv_State *L) {
     return 0;
 }
 
-static int image (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        NSString* normalImage = lv_paramString(L, 2);// 2
-        NSString* hightLightImage = lv_paramString(L, 3);// 2
-        NSString* disableImage = lv_paramString(L, 4);// 2
-        NSString* selectedImage = lv_paramString(L, 5);// 2
-        LVButton* button = (__bridge LVButton *)(user->view);
-        if( [button isKindOfClass:[LVButton class]] ){
-            [button setImageUrl:normalImage placeholder:nil state:UIControlStateNormal];
-            [button setImageUrl:hightLightImage placeholder:nil state:UIControlStateHighlighted];
-            [button setImageUrl:disableImage placeholder:nil state:UIControlStateDisabled];
-            [button setImageUrl:selectedImage placeholder:nil state:UIControlStateSelected];
-            
-            lv_pushvalue(L, 1);
-            return 1;
-        }
-    }
-    return 0;
-}
+//static int image (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        NSString* normalImage = lv_paramString(L, 2);// 2
+//        NSString* hightLightImage = lv_paramString(L, 3);// 2
+//        NSString* disableImage = lv_paramString(L, 4);// 2
+//        NSString* selectedImage = lv_paramString(L, 5);// 2
+//        LVButton* button = (__bridge LVButton *)(user->view);
+//        if( [button isKindOfClass:[LVButton class]] ){
+//            [button setImageUrl:normalImage placeholder:nil state:UIControlStateNormal];
+//            [button setImageUrl:hightLightImage placeholder:nil state:UIControlStateHighlighted];
+//            [button setImageUrl:disableImage placeholder:nil state:UIControlStateDisabled];
+//            [button setImageUrl:selectedImage placeholder:nil state:UIControlStateSelected];
+//            
+//            lv_pushvalue(L, 1);
+//            return 1;
+//        }
+//    }
+//    return 0;
+//}
 
 static const UIControlState g_states[] = {UIControlStateNormal,UIControlStateHighlighted,UIControlStateDisabled,UIControlStateSelected};
 static int title (lv_State *L) {

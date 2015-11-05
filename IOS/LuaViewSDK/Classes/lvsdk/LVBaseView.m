@@ -24,7 +24,7 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
-        //self.clipsToBounds = YES;
+        self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
     }
     return self;
