@@ -41,13 +41,15 @@ static int __attributedString_gc (lv_State *L) {
 
 static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWeigth, NSString* fontStyle){
     if ( fontSize ) {
-        if( fontName ){
+        if( [fontName isKindOfClass:[NSString class]] ){
             return [UIFont fontWithName:fontName size:fontSize.floatValue];
         }
-        if ( fontStyle && [fontStyle isEqualToString:@"italic"] ) {
+        if ( [fontStyle isKindOfClass:[NSString class]] &&
+            [fontStyle compare:@"italic" options:NSCaseInsensitiveSearch]==NSOrderedSame ) {
             return [UIFont italicSystemFontOfSize:fontSize.floatValue];
         }
-        if( fontWeigth && [fontWeigth isEqualToString:@"bold"] ){
+        if( [fontWeigth isKindOfClass:[NSString class]] &&
+           [fontWeigth compare:@"bold" options:NSCaseInsensitiveSearch]==NSOrderedSame ){
             return [UIFont boldSystemFontOfSize:fontSize.floatValue];
         }
         return [UIFont systemFontOfSize:fontSize.floatValue];
