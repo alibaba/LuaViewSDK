@@ -18,6 +18,7 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.clipsToBounds = YES;
     }
     return self;
 }

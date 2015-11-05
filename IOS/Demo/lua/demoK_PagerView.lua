@@ -34,6 +34,6 @@ pageView = PagerView{
 pageView.frame(0, 0, scrW, scrH-64 )
 
 indicator = PagerIndicator();
-indicator.pageColor(0xff);
+indicator.pageColor(0xff00FF);
 pageView.indicator( indicator );
-indicator.frame(10,10,200,100);
+indicator.frame(0,10,scrW,100);
