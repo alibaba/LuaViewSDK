@@ -118,7 +118,10 @@ static int contentOffset (lv_State *L) {
             if( [view isKindOfClass:[UIScrollView class]] ){
                 CGPoint p = CGPointMake(x, y);
                 if( isNormalPoint(p) ) {
-                    [view setContentOffset:p animated:yes];
+                    CGRect r = view.frame;
+                    r.origin.x = x;
+                    r.origin.y = y;
+                    [view scrollRectToVisible:r animated:yes];
                 }
                 return 0;
             }
