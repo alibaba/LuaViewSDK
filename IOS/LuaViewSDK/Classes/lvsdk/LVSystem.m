@@ -144,6 +144,35 @@ static int vibrate(lv_State*L){
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
     {
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "FontStyle", lib);
+        
+        lv_pushstring(L, "normal");
+        lv_setfield(L, -2, "NORMAL");
+        
+        lv_pushstring(L, "italic");
+        lv_setfield(L, -2, "ITALIC");
+        
+        lv_pushstring(L, "oblique");
+        lv_setfield(L, -2, "OBLIQUE");// 上下左右都居中
+    }
+    {
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "FontWeight", lib);
+        
+        lv_pushstring(L, "normal");
+        lv_setfield(L, -2, "NORMAL");
+        
+        lv_pushstring(L, "bold");
+        lv_setfield(L, -2, "BOLD");
+    }
+    {
         // 震动
         lv_pushcfunction(L, vibrate);
         lv_setglobal(L, "Vibrate");

@@ -43,13 +43,14 @@ static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWei
     if ( fontSize ) {
         if( fontName ){
             return [UIFont fontWithName:fontName size:fontSize.floatValue];
-        } else {
-            if( fontWeigth && [fontWeigth isEqualToString:@"bold"] ){
-                return [UIFont boldSystemFontOfSize:fontSize.floatValue];
-            } else{
-                return [UIFont systemFontOfSize:fontSize.floatValue];
-            }
         }
+        if ( fontStyle && [fontStyle isEqualToString:@"italic"] ) {
+            return [UIFont italicSystemFontOfSize:fontSize.floatValue];
+        }
+        if( fontWeigth && [fontWeigth isEqualToString:@"bold"] ){
+            return [UIFont boldSystemFontOfSize:fontSize.floatValue];
+        }
+        return [UIFont systemFontOfSize:fontSize.floatValue];
     }
     return nil;
 }
