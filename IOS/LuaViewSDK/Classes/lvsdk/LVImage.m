@@ -244,88 +244,88 @@ static int setImage (lv_State *L) {
     return 0;
 }
 
-static int resizeImage (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
-        if ( [imageView isKindOfClass:[LVImage class]] ) {
-            if( lv_gettop(L)>=5 ) {
-                float top = lv_tonumber(L, 2);
-                float left = lv_tonumber(L, 3);
-                float bottom = lv_tonumber(L, 4);
-                float right = lv_tonumber(L, 5);
-                UIImage* image = imageView.image;
-                UIEdgeInsets edgeInset = UIEdgeInsetsMake(top, left, bottom, right);
-                if ( lv_gettop(L)>=6 ) {
-                    image = [image resizableImageWithCapInsets:edgeInset];
-                    imageView.image = image;
-                } else {
-                    float model = lv_tonumber(L, 6);
-                    image = [image resizableImageWithCapInsets:edgeInset resizingMode:model];
-                    imageView.image = image;
-                }
-            }
-        }
-    }
-    return 0;
-}
+//static int resizeImage (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVImage* imageView = (__bridge LVImage *)(user->view);
+//        if ( [imageView isKindOfClass:[LVImage class]] ) {
+//            if( lv_gettop(L)>=5 ) {
+//                float top = lv_tonumber(L, 2);
+//                float left = lv_tonumber(L, 3);
+//                float bottom = lv_tonumber(L, 4);
+//                float right = lv_tonumber(L, 5);
+//                UIImage* image = imageView.image;
+//                UIEdgeInsets edgeInset = UIEdgeInsetsMake(top, left, bottom, right);
+//                if ( lv_gettop(L)>=6 ) {
+//                    image = [image resizableImageWithCapInsets:edgeInset];
+//                    imageView.image = image;
+//                } else {
+//                    float model = lv_tonumber(L, 6);
+//                    image = [image resizableImageWithCapInsets:edgeInset resizingMode:model];
+//                    imageView.image = image;
+//                }
+//            }
+//        }
+//    }
+//    return 0;
+//}
 
 
-static int setContentMode (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
-        if ( [imageView isKindOfClass:[LVImage class]] ) {
-            if( lv_gettop(L)>=2 ) {
-                int model = lv_tonumber(L, 2);// 2
-                [imageView setContentMode:model];
-                return 0;
-            } else {
-                UIViewContentMode model = imageView.contentMode;
-                lv_pushnumber(L, model);
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
-
-
-static int render (lv_State *L) {
-    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-    if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
-        LVImage* imageView = (__bridge LVImage *)(user1->view);
-        UIView* view = (__bridge UIView *)(user2->view);
-        if ( [imageView isKindOfClass:[LVImage class]]
-            && [view isKindOfClass:[UIView class]] ) {
-            int color = 0;
-            if( lv_gettop(L)>=3 ) {
-                color = lv_tonumber(L, 3);
-            }
-            [imageView renderLayerWithView:view style:color userSystemBlur:NO];
-        }
-    }
-    return 0;
-}
-
-static int renderSystemApi (lv_State *L) {
-    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-    if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
-        LVImage* imageView = (__bridge LVImage *)(user1->view);
-        LVImage* view = (__bridge LVImage *)(user2->view);
-        if ( [imageView isKindOfClass:[LVImage class]]
-            && [view isKindOfClass:[UIView class]] ) {
-            int color = 0;
-            if( lv_gettop(L)>=3 ) {
-                color = lv_tonumber(L, 3);
-            }
-            [imageView renderLayerWithView:view style:color userSystemBlur:YES];
-        }
-    }
-    return 0;
-}
+//static int setContentMode (lv_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    if( user ){
+//        LVImage* imageView = (__bridge LVImage *)(user->view);
+//        if ( [imageView isKindOfClass:[LVImage class]] ) {
+//            if( lv_gettop(L)>=2 ) {
+//                int model = lv_tonumber(L, 2);// 2
+//                [imageView setContentMode:model];
+//                return 0;
+//            } else {
+//                UIViewContentMode model = imageView.contentMode;
+//                lv_pushnumber(L, model);
+//                return 1;
+//            }
+//        }
+//    }
+//    return 0;
+//}
+//
+//
+//static int render (lv_State *L) {
+//    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
+//    if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
+//        LVImage* imageView = (__bridge LVImage *)(user1->view);
+//        UIView* view = (__bridge UIView *)(user2->view);
+//        if ( [imageView isKindOfClass:[LVImage class]]
+//            && [view isKindOfClass:[UIView class]] ) {
+//            int color = 0;
+//            if( lv_gettop(L)>=3 ) {
+//                color = lv_tonumber(L, 3);
+//            }
+//            [imageView renderLayerWithView:view style:color userSystemBlur:NO];
+//        }
+//    }
+//    return 0;
+//}
+//
+//static int renderSystemApi (lv_State *L) {
+//    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
+//    if( user1 && user2 && LVIsType(user1, LVUserDataView) && LVIsType(user2, LVUserDataView)){
+//        LVImage* imageView = (__bridge LVImage *)(user1->view);
+//        LVImage* view = (__bridge LVImage *)(user2->view);
+//        if ( [imageView isKindOfClass:[LVImage class]]
+//            && [view isKindOfClass:[UIView class]] ) {
+//            int color = 0;
+//            if( lv_gettop(L)>=3 ) {
+//                color = lv_tonumber(L, 3);
+//            }
+//            [imageView renderLayerWithView:view style:color userSystemBlur:YES];
+//        }
+//    }
+//    return 0;
+//}
 
 static int startAnimating (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -389,16 +389,16 @@ static int isAnimating (lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"image",  setImage},
-        {"contentMode",  setContentMode},
+//        {"contentMode",  setContentMode},
         
         {"startAnimation",  startAnimating},
         {"stopAnimation",  stopAnimating},
         {"isAnimating",  isAnimating},
         
-        {"render",  render},
-        {"renderSystemApi",  renderSystemApi},
-        
-        {"resizeImage",  resizeImage},
+//        {"render",  render},
+//        {"renderSystemApi",  renderSystemApi},
+//
+//        {"resizeImage",  resizeImage},
         
         {NULL, NULL}
     };
