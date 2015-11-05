@@ -43,7 +43,7 @@
 
 - (void) lv_refreshHeaderToRefresh{
     // 开始下拉刷新调用
-    [self lv_callLuaByKey1:@"PullDownRefresh"];
+    [self lv_callLuaByKey1:@"PullDown"];
 }
 
 - (void) lv_refreshFooterToLoadMore{

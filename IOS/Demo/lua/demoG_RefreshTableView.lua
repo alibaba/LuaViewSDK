@@ -81,10 +81,10 @@ tableView = RefreshTableView{
 		ScrollEnd = function()
 			print("scrolling end");
 		end,
-	    PullDownRefresh = function()
+	    PullDown = function()
 	    	print("PullDown");
 		end,
-	    PullUpRefresh = function()
+	    PullUp = function()
 	    	print("PullUp");
 		end
 	}
