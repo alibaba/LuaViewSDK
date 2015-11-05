@@ -295,36 +295,6 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 
-static int scrollRectToVisible (lv_State *L) {
-    if( lv_gettop(L)>=5 ) {
-        LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-        double x = lv_tonumber(L, 2);// 2
-        double y = lv_tonumber(L, 3);// 3
-        double w = lv_tonumber(L, 4);// 3
-        double h = lv_tonumber(L, 5);// 3
-        BOOL yes = NO;
-        if( lv_gettop(L)>=6 ) {
-            yes = lv_toboolean(L, 6);
-        }
-        if( user ){
-            UIScrollView* view = nil;
-            view = (__bridge UIScrollView *)(user->view);
-            if( [view isKindOfClass:[UIScrollView class]] ){
-                CGRect r = {0};
-                r.origin.x = x;
-                r.origin.y = y;
-                r.size.width = w;
-                r.size.height = h;
-                if( isNormalRect(r) ) {
-                    [view scrollRectToVisible:r animated:yes];
-                }
-                return 0;
-            }
-        }
-    }
-    return 0;
-}
-
 static const struct lvL_reg memberFunctions [] = {
     {"contentSize",     contentSize },//TODO
     {"offset",     contentOffset },//TODO
@@ -332,8 +302,6 @@ static const struct lvL_reg memberFunctions [] = {
     {"contentInset",     contentInset },
     
     {"showScrollIndicator",     showScrollIndicator },
-    
-    {"scrollRectToVisible",     scrollRectToVisible },
     
     // 下拉刷新
     //    {"initRefreshing", initRefreshHeader},
