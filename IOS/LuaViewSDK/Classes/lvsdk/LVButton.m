@@ -282,7 +282,7 @@ static int fontSize (lv_State *L) {
         lv_setglobal(L, "Button");
     }
     const struct lvL_reg memberFunctions [] = {
-        {"image",    image},
+//        {"image",    image},
         
         {"font",    font},
         {"fontSize",    fontSize},
