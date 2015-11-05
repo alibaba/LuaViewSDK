@@ -47,7 +47,7 @@ btn3.callback(function()
 end)
 
 
-
+loading.size(30,30);
 loading.center(scrW/2, btnH*6);
 
 
