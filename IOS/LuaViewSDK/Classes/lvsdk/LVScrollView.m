@@ -322,10 +322,10 @@ static const struct lvL_reg memberFunctions [] = {
 }
 
 +(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "ScrollView");
-    }
+//    {
+//        lv_pushcfunction(L, lvNewScrollView);
+//        lv_setglobal(L, "ScrollView");
+//    }
     {
         lv_pushcfunction(L, lvNewScrollView);
         lv_setglobal(L, "HScrollView");
