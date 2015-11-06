@@ -505,7 +505,7 @@ function setLabel( i )
 		else 
 			label.textColor(0x00,0.2);
 		end
-		label.font(64);
+		label.fontSize(64);
 		label.adjustSize();
 		label.center(w/2,h-128);
 end

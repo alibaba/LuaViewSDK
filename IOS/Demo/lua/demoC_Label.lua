@@ -26,7 +26,7 @@ label2.textAlign(TextAlign.CENTER);
 lable3 = Label();
 lable3.frame( 10, 250, w, 60);
 lable3.backgroundColor(0xEEEEEE);
-lable3.text("测试我是测试");
+lable3.text("    测试我是测试 ");
 lable3.textAlign(TextAlign.CENTER)
 lable3.callback(
     function()
