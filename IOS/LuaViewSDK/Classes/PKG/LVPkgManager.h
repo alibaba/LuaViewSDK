@@ -26,13 +26,18 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 +(BOOL) unpackageOnceWithFile:(NSString*) fileName;
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime;
 
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
+// 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
++(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
+// 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
++(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
 
 +(NSData*) readLuaFile:(NSString*) fileName;
 
 +(NSString*) timeOfPackage:(NSString*)packageName;
 +(BOOL) wirteTimeFileOfPackage:(NSString*)packageName time:(NSString*) time;
+
+// 返回值说明   0:本地和线上版本一样;   -1:错误或者不相等
++(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;
 
 //清理所有LuaView相关文件
 +(void) clearCachesPath;

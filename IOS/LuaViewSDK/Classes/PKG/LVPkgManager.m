@@ -172,16 +172,19 @@ static const unsigned int PKG_VERSION = (102010 );
     return -1;
 }
 
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
-    [self downLoadPackage:packageName withInfo:info callback:nil];
++(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
+    return [self downLoadPackage:packageName withInfo:info callback:nil];
 }
 
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
++(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     if( info ) {
         if( [LVPkgManager compareLocalInfoOfPackage:packageName withServerInfo:info] ){
             [LVPkgManager doDownLoadPackage:packageName withInfo:info callback:callback];
+            return 1;
         }
+        return 0;
     }
+    return -1;
 }
 
 +(void) doDownLoadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
