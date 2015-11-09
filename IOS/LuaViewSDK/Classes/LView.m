@@ -193,6 +193,10 @@ extern char g_debug_lua[];
 }
 
 -(int) globalNumber:(const char*) globalName{
+    if ( self.l ==nil ){
+        LVError( @"Lua State is released !!!");
+        return 0;
+    }
     lv_getglobal(self.l, globalName);
     
     if( !lv_isnumber(self.l, -1) ){
@@ -205,6 +209,10 @@ extern char g_debug_lua[];
 }
 
 -(NSString*) globalString:(const char*) globalName{
+    if ( self.l ==nil ){
+        LVError( @"Lua State is released !!!");
+        return nil;
+    }
     lv_getglobal(self.l, globalName);
     
     if( !lv_isstring(self.l, -1) ){
@@ -518,6 +526,10 @@ extern char g_debug_lua[];
 }
 
 -(LVBlock*) getLuaBlock:(NSString*) name{
+    if ( self.l ==nil ){
+        LVError( @"Lua State is released !!!");
+        return nil;
+    }
     return [[LVBlock alloc] initWith:self.l globalName:name];
 }
 
@@ -541,6 +553,10 @@ extern char g_debug_lua[];
 
 
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key{
+    if ( self.l ==nil ){
+        LVError( @"Lua State is released !!!");
+        return;
+    }
     if( [key isKindOfClass:[NSString class]]
        && object_isClass(object)
        && [object isSubclassOfClass:[LVCustomPanel class]] ) {
@@ -553,6 +569,10 @@ extern char g_debug_lua[];
 }
 
 -(void) unregisteObjectForName:(NSString*) name{
+    if ( self.l ==nil ){
+        LVError( @"Lua State is released !!!");
+        return ;
+    }
     [LVNativeObjBox unregisteObjectWithL:self.l name:name];
 }
 
@@ -574,21 +594,21 @@ extern char g_debug_lua[];
 
 
 -(BOOL) argumentToBool:(int) index{
-    if ( self.lv_lview && self.l ) {
+    if ( self.l ) {
         return lv_toboolean(self.l, index);
     }
     return NO;
 }
 
 -(double)  argumentToNumber:(int) index{
-    if ( self.lv_lview && self.l ) {
+    if ( self.l ) {
         return lv_tonumber(self.l, index);
     }
     return 0;
 }
 
 -(id) argumentToObject:(int) index{
-    if ( self.lv_lview && self.l ) {
+    if ( self.l ) {
         return lv_luaValueToNativeObject(self.l, index);
     }
     return 0;

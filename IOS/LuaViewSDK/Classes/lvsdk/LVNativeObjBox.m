@@ -85,7 +85,11 @@ static int __gc (lv_State *L) {
 }
 
 +(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode {
-    if( L && nativeObject && name ) {
+    if ( L==nil ){
+        LVError( @"Lua State is released !!!");
+        return 0;
+    }
+    if( nativeObject && name ) {
         lv_checkstack(L, 64);
         lv_getglobal(L, name.UTF8String);
         
@@ -126,7 +130,7 @@ static int __gc (lv_State *L) {
 
 
 +(int) unregisteObjectWithL:(lv_State *)L name:(NSString*) name{
-    if ( name ) {
+    if ( L && name ) {
         lv_pushnil(L);
         lv_setglobal(L, name.UTF8String);
     }
