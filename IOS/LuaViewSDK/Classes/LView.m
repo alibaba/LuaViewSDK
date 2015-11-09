@@ -519,19 +519,19 @@ extern char g_debug_lua[];
 
 #pragma mark - registe object.method
 
--(void) registerObject:(id) object name:(NSString*) name sel:(SEL) sel {
+-(void) registerObject:(id) object forName:(NSString*) name sel:(SEL) sel {
     [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:sel weakMode:YES];
 }
 
--(void) registerObject:(id) object name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode{
+-(void) registerObject:(id) object forName:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode{
     [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:sel weakMode:weakMode];
 }
 
--(void) registerObject:(id) object name:(NSString*) name{
+-(void) registerObject:(id) object forName:(NSString*) name{
     [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:nil weakMode:YES];
 }
 
--(void) registerObject:(id) object name:(NSString*) name weakMode:(BOOL)weakMode{
+-(void) registerObject:(id) object forName:(NSString*) name weakMode:(BOOL)weakMode{
     [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:name sel:nil weakMode:weakMode];
 }
 
