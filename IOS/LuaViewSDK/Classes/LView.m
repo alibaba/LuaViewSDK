@@ -540,7 +540,7 @@ extern char g_debug_lua[];
     if( [key isKindOfClass:[NSString class]]
        && object_isClass(object)
        && [object isSubclassOfClass:[LVCustomPanel class]] ) {
-        [self addCustomPanel:object boundName:(NSString*)key];
+        [self registerCustomPanel:object boundName:(NSString*)key];
         return;
     }
     if ( [key isKindOfClass:[NSString class]] ){
@@ -552,7 +552,7 @@ extern char g_debug_lua[];
     [LVNativeObjBox unregisteObjectWithL:self.l name:name];
 }
 
-- (void) addCustomPanel:(Class) c boundName:(NSString*) boundName{
+- (void) registerCustomPanel:(Class) c boundName:(NSString*) boundName{
     if( self.l ) {
         [LVCustomPanel addCustomPanel:c boundName:boundName state:self.l];
     }
