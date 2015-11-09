@@ -20,6 +20,7 @@
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
         self.clipsToBounds = YES;
+        self.userInteractionEnabled = NO;
     }
     return self;
 }
