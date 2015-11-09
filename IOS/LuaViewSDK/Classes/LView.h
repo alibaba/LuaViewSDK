@@ -140,11 +140,11 @@
 @interface LView (LViewRegister)
 
 - (void) setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
-- (void) registeObject:(id) object name:(NSString*) name sel:(SEL) sel;// 只注册指定API
-- (void) registeObject:(id) object name:(NSString*) name sel:(SEL) sel weakMode:(BOOL) weakMode;// 只注册指定API
-- (void) registeObject:(id) object name:(NSString*) name;// 注册改对象的所有api
-- (void) registeObject:(id) object name:(NSString*) name weakMode:(BOOL) weakMode;// 注册改对象的所有api
-- (void) unregisteObjectWithName:(NSString*) name;// 取消注册对象
+- (void) registerObject:(id) object name:(NSString*) name sel:(SEL) sel;// 只注册指定API
+- (void) registerObject:(id) object name:(NSString*) name sel:(SEL) sel weakMode:(BOOL) weakMode;// 只注册指定API
+- (void) registerObject:(id) object name:(NSString*) name;// 注册改对象的所有api
+- (void) registerObject:(id) object name:(NSString*) name weakMode:(BOOL) weakMode;// 注册改对象的所有api
+- (void) unregisteObjectForName:(NSString*) name;// 取消注册对象
 
 - (void) addCustomPanel:(Class) c boundName:(NSString*) boundName;
 @end
