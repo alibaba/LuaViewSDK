@@ -160,6 +160,10 @@ extern char g_debug_lua[];
 }
 
 -(int) runData:(NSData *)data fileName:(NSString*)fileName{
+    if( self.l==NULL ){
+        LVError( @"Lua State is released !!!");
+        return -1;
+    }
     if( fileName==nil ){
         static int i = 0;
         fileName = [NSString stringWithFormat:@"%d.lua",i];
