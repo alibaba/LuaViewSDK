@@ -44,6 +44,8 @@ static int lvNewAnimate (lv_State *L) {
         float delay = 0;
         float duration = 0.3;
         UIViewAnimationOptions option = 0;
+        CGFloat dampingRatio = 0;//0~1
+        CGFloat velocity = 0;//0~1
         
         if( lv_type(L, stackID)==LV_TNUMBER ){
             duration = lv_tonumber(L,stackID++);
@@ -51,6 +53,15 @@ static int lvNewAnimate (lv_State *L) {
         if( lv_type(L, stackID)==LV_TNUMBER ){
             delay = lv_tonumber(L,stackID++);
         }
+        
+        if( lv_type(L, stackID)==LV_TNUMBER ){
+            dampingRatio = lv_tonumber(L,stackID++);
+        }
+        
+        if( lv_type(L, stackID)==LV_TNUMBER ){
+            velocity = lv_tonumber(L,stackID++);
+        }
+        
         if( lv_type(L, stackID)==LV_TNUMBER ){
             option = lv_tonumber(L,stackID++);
         }
@@ -70,22 +81,48 @@ static int lvNewAnimate (lv_State *L) {
         
         [LVUtil registryValue:L key:animate stack:-1];
         
-        [UIView animateWithDuration:duration delay:delay options:option animations:^{
-            if( animate.lv_lview && animate.lv_lview.l ) {
-                lv_checkStack32( animate.lv_lview.l);
-                [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
-            }
-        } completion:^(BOOL finished) {
-            lv_State* l = animate.lv_lview.l;
-            if( l ) {
-                lv_settop(l, 0);
-                lv_checkStack32(l);
-                [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
-                
-                [LVUtil unregistry:l key:animate];
-            }
-            animate.mySelf = nil;
-        }];
+        
+        if( dampingRatio>0 ) {
+            [UIView animateWithDuration:duration
+                                  delay:delay
+                 usingSpringWithDamping:dampingRatio
+                  initialSpringVelocity:velocity
+                                options:option animations:^{
+                if( animate.lv_lview && animate.lv_lview.l ) {
+                    lv_checkStack32( animate.lv_lview.l);
+                    [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
+                }
+            } completion:^(BOOL finished) {
+                lv_State* l = animate.lv_lview.l;
+                if( l ) {
+                    lv_settop(l, 0);
+                    lv_checkStack32(l);
+                    [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
+                    
+                    [LVUtil unregistry:l key:animate];
+                }
+                animate.mySelf = nil;
+            }];
+        } else {
+            [UIView animateWithDuration:duration
+                                  delay:delay
+                                options:option animations:^{
+                                    if( animate.lv_lview && animate.lv_lview.l ) {
+                                        lv_checkStack32( animate.lv_lview.l);
+                                        [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
+                                    }
+                                } completion:^(BOOL finished) {
+                                    lv_State* l = animate.lv_lview.l;
+                                    if( l ) {
+                                        lv_settop(l, 0);
+                                        lv_checkStack32(l);
+                                        [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
+                                        
+                                        [LVUtil unregistry:l key:animate];
+                                    }
+                                    animate.mySelf = nil;
+                                }];
+        }
     }
     return 0; /* new userdatum is already on the stack */
 }
