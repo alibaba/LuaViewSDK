@@ -50,7 +50,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         self.pagingEnabled = YES;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
-        self.pageIdx = -1;
+        self.pageIdx = 0;
     }
     return self;
 }
