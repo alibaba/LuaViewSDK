@@ -107,8 +107,8 @@ static int setStatusBarStyle (lv_State *L) {
 +(int) classDefine:(lv_State *)L{
     const struct lvL_reg fs [] = {
         {"title", setTitle},
-        {"leftBarButton", setLeftButton},
-        {"rightBarButton", setRightButton},
+        {"left", setLeftButton},
+        {"right", setRightButton},
         {"background", setBackground},
         {"statusBarStyle", setStatusBarStyle},
         {NULL, NULL}
