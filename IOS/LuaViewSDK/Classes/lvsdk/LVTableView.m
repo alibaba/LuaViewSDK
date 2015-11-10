@@ -31,7 +31,6 @@
         self.dataSource = self.tableViewDelegate;
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.clipsToBounds = YES;
     }
     return self;
 }
