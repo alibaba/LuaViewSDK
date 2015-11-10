@@ -15,8 +15,8 @@
 #define LV_PKGINFO_PROPERTY_TIME     @"time"
 #define LV_PKGINFO_PROPERTY_LUAVIEW  @"luaview"
 
-#define LVPKG_SIGN_FILE_NAME @"___sign_%@.data"
-#define LVPKG_TIME_FILE_NAME @"___time_%@.data"
+#define LVPKG_SIGN_FILE_NAME @"%@__sign__.data"
+#define LVPKG_TIME_FILE_NAME @"%@__time__.data"
 
 
 typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);

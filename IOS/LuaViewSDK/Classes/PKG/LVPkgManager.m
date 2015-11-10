@@ -89,7 +89,8 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 +(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime{
-    if( pkgData && [LVUtil createPath:LUAVIEW_ROOT_PATH] ){
+    if( pkgData && [LVUtil createPath:LUAVIEW_ROOT_PATH]
+       && [LVUtil createPath:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,packageName]]  ){
         if( pkgData && pkgData.length>0 ) {
             LVInputStream* is = [[LVInputStream alloc] initWithData:pkgData];
             unsigned int pkgTag = [is readInt];
