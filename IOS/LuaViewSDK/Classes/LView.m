@@ -89,10 +89,20 @@
 }
 
 -(int) runSignFile:(NSString*) fileName{
+    if( self.packageName.length>0 ) {
+        fileName = [NSString stringWithFormat:@"%@/%@",self.packageName,fileName];
+    }
     self.runInSignModel = TRUE;
     NSData* code = [LVPkgManager readLuaFile:fileName];
     int error = [self runData:code fileName:fileName];
     return error;
+}
+
+-(int) runPackage:(NSString*) packageName{
+    self.runInSignModel = TRUE;
+    self.packageName = packageName;
+    NSString* fileName = @"main.lv";
+    return [self runSignFile:fileName];
 }
 
 -(void) checkDebugOrNot:(const char*) chars length:(NSInteger) len fileName:(NSString*) fileName {

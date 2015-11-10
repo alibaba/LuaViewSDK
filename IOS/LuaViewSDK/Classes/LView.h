@@ -28,6 +28,7 @@
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 @property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
+@property (nonatomic,copy) NSString* packageName;
 @property (nonatomic,strong) LVDebugConnection* debugConnection;
 
 
@@ -39,6 +40,15 @@
  *  @return 返回运行结果
  */
 -(int) runFile:(NSString*) fileName;
+
+/**
+ *  运行一个包, main.lv是主入口
+ *
+ *  @param fileName 本地文件名
+ *
+ *  @return 返回运行结果
+ */
+-(int) runPackage:(NSString*) packageName;
 
 /**
  *  运行签名的脚本文件

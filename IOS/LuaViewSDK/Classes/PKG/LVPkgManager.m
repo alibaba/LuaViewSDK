@@ -17,13 +17,16 @@ static const unsigned int PKG_VERSION = (102010 );
 
 @implementation LVPkgManager
 
-+(BOOL) writeFile:(NSData*) data  fileName:(NSString*)fileName{
++(BOOL) writeFile:(NSData*) data packageName:(NSString*) packageName fileName:(NSString*)fileName {
+    if( packageName.length>0 ) {
+        fileName = [NSString stringWithFormat:@"%@/%@",packageName,fileName];
+    }
     NSString* relativeName = [NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,fileName];
     if(  [LVUtil saveData:data toFile:relativeName] ){
-        LVLog  (@"writeFile: %@, %d",fileName, (int)data.length);
+        LVLog  (@"writeFile: %@, %d", fileName, (int)data.length);
         return YES;
     } else {
-        LVError(@"writeFile: %@, %d",fileName, (int)data.length);
+        LVError(@"writeFile: %@, %d", fileName, (int)data.length);
         return NO;
     }
 }
@@ -37,7 +40,7 @@ static const unsigned int PKG_VERSION = (102010 );
     // time file
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
-    return [LVPkgManager writeFile:timeBytes fileName:fileName];
+    return [LVPkgManager writeFile:timeBytes packageName:nil fileName:fileName];
 }
 
 
@@ -68,7 +71,7 @@ static const unsigned int PKG_VERSION = (102010 );
     return NO;
 }
 
-+(void) unpkgSignFiles:(NSData*)data{
++(void) unpkgSignFiles:(NSData*)data packageName:(NSString*) packageName{
     LVInputStream* is = [[LVInputStream alloc] initWithData:data];
     int num = [is readInt];
     for( int i=0; i<num; i++ ){
@@ -77,7 +80,7 @@ static const unsigned int PKG_VERSION = (102010 );
         NSData* data = [is readData:length];
         
         NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
-        [LVPkgManager writeFile:data fileName:signfileName];
+        [LVPkgManager writeFile:data packageName:packageName fileName:signfileName];
     }
 }
 
@@ -111,12 +114,12 @@ static const unsigned int PKG_VERSION = (102010 );
                 NSString* fileName = [is readUTF];
                 NSInteger length = [is readInt];
                 NSData* data = [is readData:length];
-                [LVPkgManager writeFile:data fileName:fileName];
+                [LVPkgManager writeFile:data packageName:packageName fileName:fileName];
             }
             // sign file
             NSInteger signBytesLength = [is readInt];
             NSData* signBytes = [is readData:signBytesLength];
-            [LVPkgManager unpkgSignFiles:signBytes];
+            [LVPkgManager unpkgSignFiles:signBytes packageName:packageName];
             
             if( PKG_TAG==[is readInt] ){
                 return YES;
