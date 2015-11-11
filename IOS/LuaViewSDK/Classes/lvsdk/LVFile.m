@@ -9,6 +9,7 @@
 #import "LVFile.h"
 #import "LVHeads.h"
 #import "LVData.h"
+#import "LView.h"
 
 @implementation LVFile
 
@@ -40,9 +41,10 @@ static int file_save (lv_State *L) {
 }
 
 static int file_read(lv_State *L){
-    if( lv_gettop(L)>=1 ){
+    if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
-        NSData* data = [LVUtil dataReadFromFile:fileName];
+        LView* lview = (__bridge LView *)(L->lView);
+        NSData* data = [LVUtil dataReadFromFile:fileName package:lview.packageName];
         if( data ){
             [LVData createDataObject:L data:data];
             return 1;
@@ -52,9 +54,10 @@ static int file_read(lv_State *L){
 }
 
 static int file_exist(lv_State *L){
-    if( lv_gettop(L)>=1 ){
+    if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
-        if(  [LVUtil cachesPath:fileName] ){
+        LView* lview = (__bridge LView *)(L->lView);
+        if(  [LVUtil cachesPath:fileName package:lview.packageName] ){
             lv_pushboolean(L, 1);
             return 1;
         }

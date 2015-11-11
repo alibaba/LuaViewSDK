@@ -83,17 +83,14 @@
 #pragma mark - run
 -(int) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
-    NSData* code = [LVUtil dataReadFromFile:fileName];
+    NSData* code = [LVUtil dataReadFromFile:fileName package:self.packageName];
     int error = [self runData:code fileName:fileName];
     return error;
 }
 
 -(int) runSignFile:(NSString*) fileName{
-    if( self.packageName.length>0 ) {
-        fileName = [NSString stringWithFormat:@"%@/%@",self.packageName,fileName];
-    }
     self.runInSignModel = TRUE;
-    NSData* code = [LVPkgManager readLuaFile:fileName];
+    NSData* code = [LVPkgManager readLuaFile:fileName package:self.packageName];
     int error = [self runData:code fileName:fileName];
     return error;
 }

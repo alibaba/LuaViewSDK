@@ -31,22 +31,21 @@ static const unsigned int PKG_VERSION = (102010 );
     }
 }
 
-+(NSString*) timefileNameOfPackage:(NSString*) packageName{
-    packageName = [LVUtil MD5HashFromData:[packageName dataUsingEncoding:NSUTF8StringEncoding]];
-    return [NSString stringWithFormat:LVPKG_TIME_FILE_NAME,packageName];
++(NSString*) timefileNameOfPackage{
+    return [NSString stringWithFormat:@"___time___"];
 }
 
 +(BOOL) wirteTimeFileOfPackage:(NSString*)packageName time:(NSString*) time{
     // time file
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
-    NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
-    return [LVPkgManager writeFile:timeBytes packageName:nil fileName:fileName];
+    NSString* fileName = [LVPkgManager timefileNameOfPackage];
+    return [LVPkgManager writeFile:timeBytes packageName:packageName fileName:fileName];
 }
 
 
 +(NSString*) timeOfPackage:(NSString*)packageName{
-    NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
-    NSData* data = [LVUtil dataReadFromFile:fileName];
+    NSString* fileName = [LVPkgManager timefileNameOfPackage];
+    NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
@@ -64,8 +63,8 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime{
-    if( [LVUtil cachesPath:fileName] && [LVUtil createPath:LUAVIEW_ROOT_PATH] ){
-        NSData* pkgData = [LVUtil dataReadFromFile:fileName];
+    if( [LVUtil cachesPath:fileName package:nil] && [LVUtil createPath:LUAVIEW_ROOT_PATH] ){
+        NSData* pkgData = [LVUtil dataReadFromFile:fileName package:nil];
         return [LVPkgManager unpackageData:pkgData packageName:packageName checkTime:checkTime];
     }
     return NO;
@@ -131,7 +130,7 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 +(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
-    return [NSString stringWithFormat:LVPKG_SIGN_FILE_NAME,fileName];
+    return [NSString stringWithFormat:@"%@.sign___",fileName];
 }
 
 
@@ -256,10 +255,10 @@ static const unsigned int PKG_VERSION = (102010 );
     }
     return nil;
 }
-+(NSData*) readLuaFile:(NSString*) fileName{
++(NSData*) readLuaFile:(NSString*) fileName package:(NSString *)package{
     NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
-    NSData* signData = [LVUtil dataReadFromFile:signfileName];
-    NSData* encodedfileData = [LVUtil dataReadFromFile:fileName];
+    NSData* signData = [LVUtil dataReadFromFile:signfileName package:package];
+    NSData* encodedfileData = [LVUtil dataReadFromFile:fileName package:package];
     NSData* fileData0 = LV_AES256DecryptDataWithKey(encodedfileData, [LVRSA aesKeyBytes]);
     NSData* fileData = [LVPkgManager gzipUnpack:fileData0];
     // LVLog(@"%@",[[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding]);

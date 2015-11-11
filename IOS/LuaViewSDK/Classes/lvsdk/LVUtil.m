@@ -325,8 +325,8 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return NO;
 }
 
-+(NSData*) dataReadFromFile:(NSString*) fileName{
-    NSString* path = [LVUtil cachesPath:fileName];
++(NSData*) dataReadFromFile:(NSString*) fileName package:(NSString *)package{
+    NSString* path = [LVUtil cachesPath:fileName package:package];
     if( path ){
         NSFileManager* fm = [NSFileManager defaultManager];
         NSData* data = [fm contentsAtPath:path];
@@ -344,9 +344,9 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return NO;
 }
 
-+(NSString*) cachesPath:(NSString*) fileName{
++(NSString*) cachesPath:(NSString*) fileName package:(NSString *)package{
     NSString* path = nil;
-    path = [LVUtil PathForLuaViewResource:fileName];
+    path = [LVUtil PathForLuaViewResource:fileName package:package];
     if( [self exist:path] ){
         return path;
     }
@@ -373,8 +373,8 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return nil;
 }
 
-+(UIImage*) cachesImage:(NSString*) imageName{
-    NSString* path = [LVUtil cachesPath:imageName];
++(UIImage*) cachesImage:(NSString*) imageName package:(NSString *)package{
+    NSString* path = [LVUtil cachesPath:imageName package:package];
     if( path ){
         return [UIImage imageWithContentsOfFile:path];
     }
@@ -416,13 +416,16 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return [cachesPath stringByAppendingPathComponent:relativePath];
 }
 
-+ (NSString*) PathForLuaViewResource:(NSString* )relativePath {
++ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(NSString*) package{
     {// 首次初始化目录
         static int inited = NO;
         if( !inited ){
             inited = YES;
             [LVUtil createPath:LUAVIEW_ROOT_PATH];
         }
+    }
+    if( package.length>0 ) {
+        relativePath = [NSString stringWithFormat:@"%@/%@",package,relativePath];
     }
     return [LVUtil PathForCachesResource:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,relativePath]];
 }

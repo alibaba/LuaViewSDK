@@ -8,6 +8,7 @@
 
 #import "LVAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "LView.h"
 
 @implementation LVAudioPlayer{
     AVAudioPlayer* audioPlayer;
@@ -37,15 +38,15 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
     return self;
 }
 
--(void) setPlayFileName0:(NSString*) fileName{
-    NSString* path = [LVUtil cachesPath:fileName];
+-(void) setPlayFileName0:(NSString*) fileName package:(NSString*) package{
+    NSString* path = [LVUtil cachesPath:fileName package:package];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];//使用本地URL创建
     }
 }
 
--(void) setPlayFileName:(NSString*) fileName{
+-(void) setPlayFileName:(NSString*) fileName package:(NSString*) package{
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
@@ -53,11 +54,11 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
             NSData* theFileNameData = [fileName dataUsingEncoding:NSUTF8StringEncoding];
             NSString* md5Path = [LVUtil MD5HashFromData:theFileNameData];
             if(  [LVUtil saveData:fileData toFile:md5Path] ) {
-                [self setPlayFileName0:md5Path];
+                [self setPlayFileName0:md5Path package:package];
             }
         }];
     } else {
-        [self setPlayFileName0:fileName];
+        [self setPlayFileName0:fileName package:package];
     }
 }
 
@@ -75,9 +76,9 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
 static int lvNewAudioPlayer (lv_State *L) {
     if( lv_gettop(L)>=1 ) {
         LVAudioPlayer* player = [[LVAudioPlayer alloc] init:L];
-        
+        LView* lview = (__bridge LView *)(L->lView);
         NSString* fileName = lv_paramString(L, 1);
-        [player setPlayFileName:fileName];
+        [player setPlayFileName:fileName package:lview.packageName];
         
         {
             NEW_USERDATA(userData, LVUserDataAudioPlayer);

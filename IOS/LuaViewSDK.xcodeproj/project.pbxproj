@@ -311,7 +311,7 @@
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72B1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
-		84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* 2015-05-07.zip */; };
+		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
 		84CF566E1AE8EC3D00A49B36 /* LVExternalLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */; };
 		84CF566F1AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
 		84CF56701AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
@@ -629,7 +629,7 @@
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
-		84CC637F1BB16AF300613B74 /* 2015-05-07.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "2015-05-07.zip"; sourceTree = "<group>"; };
+		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
 		84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExternalLinker.h; sourceTree = "<group>"; };
 		84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExternalLinker.m; sourceTree = "<group>"; };
 		84CF56731AE9184000A49B36 /* LVNativeObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNativeObjBox.h; sourceTree = "<group>"; };
@@ -1007,7 +1007,7 @@
 		84799AA41BAFDDA00070E214 /* lua */ = {
 			isa = PBXGroup;
 			children = (
-				84CC637F1BB16AF300613B74 /* 2015-05-07.zip */,
+				84CC637F1BB16AF300613B74 /* fire.zip */,
 				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
 				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
 				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
@@ -1443,7 +1443,7 @@
 				8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */,
 				84799ADA1BAFDDA00070E214 /* color2.png in Resources */,
 				8468C9651BDA11BE002D4B1E /* testUILoadingView.lua in Resources */,
-				84CC63801BB16AF300613B74 /* 2015-05-07.zip in Resources */,
+				84CC63801BB16AF300613B74 /* fire.zip in Resources */,
 				8468C96D1BDA11BE002D4B1E /* testViewPager.lua in Resources */,
 				84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */,
 				849832121BCB682F0032BF05 /* demoV1_CustomError.lua in Resources */,

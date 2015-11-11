@@ -15,8 +15,6 @@
 #define LV_PKGINFO_PROPERTY_TIME     @"time"
 #define LV_PKGINFO_PROPERTY_LUAVIEW  @"luaview"
 
-#define LVPKG_SIGN_FILE_NAME @"%@__sign__.data"
-#define LVPKG_TIME_FILE_NAME @"%@__time__.data"
 
 
 typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
@@ -31,7 +29,7 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
 
-+(NSData*) readLuaFile:(NSString*) fileName;
++(NSData*) readLuaFile:(NSString*) fileName package:(NSString*) package;
 
 +(NSString*) timeOfPackage:(NSString*)packageName;
 +(BOOL) wirteTimeFileOfPackage:(NSString*)packageName time:(NSString*) time;

@@ -51,7 +51,8 @@
         [self setWebImageUrl:url forState:state finished:nil];
     } else {
         if( url ) {
-            [self setImage:[LVUtil cachesImage:url] forState:state];
+            NSString* package = self.lv_lview.packageName;
+            [self setImage:[LVUtil cachesImage:url package:package] forState:state];
         }
     }
 }
