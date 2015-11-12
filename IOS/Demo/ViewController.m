@@ -52,6 +52,10 @@
         [nameArray addObject:name];
     }
     self.names = nameArray;
+    
+    // Test package
+    [LVPkgManager unpackageFile:@"fire.zip" packageName:@"fire" checkTime:YES];
+    [LVPkgManager clearCachesPath];
 }
 
 

@@ -595,11 +595,6 @@ extern char g_debug_lua[];
     [LVPkgManager downLoadPackage:packageName withInfo:info];
 }
 
-+(BOOL) unpackageOnceWithFile:(NSString*) fileName{
-    return [LVPkgManager unpackageOnceWithFile:fileName];
-}
-
-
 -(BOOL) argumentToBool:(int) index{
     if ( self.l ) {
         return lv_toboolean(self.l, index);

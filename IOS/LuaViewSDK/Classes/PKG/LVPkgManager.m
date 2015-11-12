@@ -23,10 +23,10 @@ static const unsigned int PKG_VERSION = (102010 );
     }
     NSString* relativeName = [NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,fileName];
     if(  [LVUtil saveData:data toFile:relativeName] ){
-        LVLog  (@"writeFile: %@, %d", fileName, (int)data.length);
+        LVLog  (@"writeFile: %@, Size:%d", fileName, (int)data.length);
         return YES;
     } else {
-        LVError(@"writeFile: %@, %d", fileName, (int)data.length);
+        LVError(@"writeFile: %@, Size:%d", fileName, (int)data.length);
         return NO;
     }
 }
