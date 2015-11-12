@@ -23,10 +23,10 @@ static const unsigned int PKG_VERSION = (102010 );
     }
     NSString* relativeName = [NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,fileName];
     if(  [LVUtil saveData:data toFile:relativeName] ){
-        LVLog  (@"writeFile: %@, Size:%d", fileName, (int)data.length);
+        LVLog  (@"writeFile: %@, %d", fileName, (int)data.length);
         return YES;
     } else {
-        LVError(@"writeFile: %@, Size:%d", fileName, (int)data.length);
+        LVError(@"writeFile: %@, %d", fileName, (int)data.length);
         return NO;
     }
 }
@@ -35,7 +35,7 @@ static const unsigned int PKG_VERSION = (102010 );
     return [NSString stringWithFormat:@"___time___"];
 }
 
-+(BOOL) wirteTimeFileOfPackage:(NSString*)packageName time:(NSString*) time{
++(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time{
     // time file
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     NSString* fileName = [LVPkgManager timefileNameOfPackage];
@@ -45,6 +45,28 @@ static const unsigned int PKG_VERSION = (102010 );
 
 +(NSString*) timeOfPackage:(NSString*)packageName{
     NSString* fileName = [LVPkgManager timefileNameOfPackage];
+    NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
+    if( data ) {
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    } else {
+        return nil;
+    }
+}
+
++(NSString*) timefileNameOfLocalPackage{
+    return [NSString stringWithFormat:@"___time__local__"];
+}
+
++(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time{
+    // time file
+    NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
+    NSString* fileName = [LVPkgManager timefileNameOfLocalPackage];
+    return [LVPkgManager writeFile:timeBytes packageName:packageName fileName:fileName];
+}
+
+
++(NSString*) timeOfLocalPackage:(NSString*)packageName{
+    NSString* fileName = [LVPkgManager timefileNameOfLocalPackage];
     NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -65,7 +87,7 @@ static const unsigned int PKG_VERSION = (102010 );
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime{
     if( [LVUtil cachesPath:fileName package:nil] && [LVUtil createPath:LUAVIEW_ROOT_PATH] ){
         NSData* pkgData = [LVUtil dataReadFromFile:fileName package:nil];
-        return [LVPkgManager unpackageData:pkgData packageName:packageName checkTime:checkTime];
+        return [LVPkgManager unpackageData:pkgData packageName:packageName checkTime:checkTime localMode:YES];
     }
     return NO;
 }
@@ -83,11 +105,11 @@ static const unsigned int PKG_VERSION = (102010 );
     }
 }
 
-+(BOOL) unpackageData:(NSData*) data packageName:(NSString*) packageName {
-    return [LVPkgManager unpackageData:data packageName:packageName checkTime:NO];
++(BOOL) unpackageData:(NSData*) data packageName:(NSString*) packageName  localMode:(BOOL) localMode{
+    return [LVPkgManager unpackageData:data packageName:packageName checkTime:NO localMode:localMode];
 }
 
-+(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime{
++(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime localMode:(BOOL) localMode{
     if( pkgData && [LVUtil createPath:LUAVIEW_ROOT_PATH]
        && [LVUtil createPath:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,packageName]]  ){
         if( pkgData && pkgData.length>0 ) {
@@ -100,12 +122,21 @@ static const unsigned int PKG_VERSION = (102010 );
             }
             NSString* time = [is readUTF];
             if( checkTime ){
-                NSString* oldTime = [LVPkgManager timeOfPackage:packageName];
+                NSString* oldTime = nil;
+                if( localMode ) {
+                    oldTime = [LVPkgManager timeOfLocalPackage:packageName];
+                } else {
+                    oldTime = [LVPkgManager timeOfPackage:packageName];
+                }
                 if( time.length>0 && oldTime.length>0 && [time isEqualToString:oldTime] ){
                     LVLog(@" Not Need unpackage, %@, %@",packageName,time);
                     return NO;
                 } else {
-                    [LVPkgManager wirteTimeFileOfPackage:packageName time:time];
+                    if( localMode ) {
+                        [LVPkgManager wirteTimeForLocalPackage:packageName time:time];
+                    } else {
+                        [LVPkgManager wirteTimeForPackage:packageName time:time];
+                    }
                 }
             }
             
@@ -202,8 +233,8 @@ static const unsigned int PKG_VERSION = (102010 );
     if( pkgName.length>0 && url.length>0 && time.length>0){
         [LVUtil download:url callback:^(NSData *data) {
             if( data ){
-                if( [LVPkgManager unpackageData:data packageName:pkgName] ){// 解包成功
-                    if(  [LVPkgManager wirteTimeFileOfPackage:pkgName time:time] ){// 写标记成功
+                if( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ){// 解包成功
+                    if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
                         callback(info, nil);
                         return ;
                     }
