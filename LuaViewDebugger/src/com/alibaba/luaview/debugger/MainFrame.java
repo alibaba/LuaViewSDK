@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 					MainFrame frame = new MainFrame();
 					int h = frame.getHeight();
 					frame.setLocation(h, screenSize.height - h * 3 / 2);
-					// frame.setVisible(true);
+					 frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,7 +40,7 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setResizable(false);
-		setTitle("调试器控制台");
+		setTitle("调试器: 请再启动模拟器, 调试器会自动开始调试");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 354, 120);
 		contentPane = new JPanel();
