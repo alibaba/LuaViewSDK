@@ -17,7 +17,7 @@ function snowCreater()
 	snow.imageView = Image(imageUrl);
 	local snowW = math:random(32,64);
 	snow.imageView.callback(function()
-		print("我是雪花");
+        viewController.openUrl("jhs://go/luaview?source=ppt.lv&package=ppt");
 	end);
 
 	snow.imageView.frame( 0, 0, snowW, snowW);
@@ -28,8 +28,8 @@ function snowCreater()
 	function snow.move()
 		self.imageView.center(self.x,self.y);
 		local t = Transform3D();
-		t.rotate(self.rote, 1, 0,0);
-		t.rotate(self.rote/2, 0, 1,0);
+		--t.rotate(self.rote, 1, 0,0);
+		--t.rotate(self.rote/2, 0, 1,0);
 		t.scale(self.scale, self.scale, 1 );
 		self.imageView.transform3D(t);
 	end
