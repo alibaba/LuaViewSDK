@@ -83,11 +83,11 @@ function createTableView( )
 			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
 				print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
 			end,
-			ScrollBegin = function()
-				print("scrolling begin");
+			ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
 			end,
-			ScrollEnd = function()
-				print("scrolling end");
+			ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
 			end
 		}
 	};

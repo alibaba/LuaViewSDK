@@ -324,7 +324,7 @@ static inline NSInteger mapSection(NSInteger section){
     return nil;
 }
 
--(void) callScrollWithKey:(NSString*) key{
+-(void) callWithScrollArgsForKey:(NSString*) functionName{
     UITableView* tableView = (UITableView*)self.owner;
     NSArray* indexPaths = [tableView indexPathsForVisibleRows];
     int visibleCount = 0;
@@ -348,29 +348,29 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushnumber(L, mapSection(section) );
         lv_pushnumber(L, mapRow(row) );
         lv_pushnumber(L, visibleCount );
-        [self.owner lv_callLuaByKey1:key key2:nil argN:3];
+        [self.owner lv_callLuaByKey1:functionName key2:nil argN:3];
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self callScrollWithKey:@"Scrolling"];
+    [self callWithScrollArgsForKey:@"Scrolling"];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self callScrollWithKey:@"ScrollBegin"];
+    [self callWithScrollArgsForKey:@"ScrollBegin"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self callScrollWithKey:@"ScrollEnd"];
+    [self callWithScrollArgsForKey:@"ScrollEnd"];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self callScrollWithKey:@"ScrollEnd"];
+    [self callWithScrollArgsForKey:@"ScrollEnd"];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if( !decelerate ) {
-        [self callScrollWithKey:@"ScrollEnd"];
+        [self callWithScrollArgsForKey:@"ScrollEnd"];
     }
 }
 @end
