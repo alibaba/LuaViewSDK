@@ -1,5 +1,5 @@
 
-imageUrl = "snow.png";
+imageUrl = "http://img.hb.aicdn.com/e7639de7054d813670c82f3f2bd5e02adec0b81129204-5B4zXs_fw580";
 
 w,h = System.screenSize();
 
@@ -16,6 +16,9 @@ function snowCreater()
 
 	snow.imageView = Image(imageUrl);
 	local snowW = math:random(32,64);
+	snow.imageView.callback(function()
+		print("我是雪花");
+	end);
 
 	snow.imageView.frame( 0, 0, snowW, snowW);
 	local x0 = math:random(0,w);
@@ -47,7 +50,7 @@ function snowCreater()
 
 		self.nextXY();
 		local time = math:random(20,30)/10.0;
-		Animate(time,
+		Animate(time,0,0,0,3,
 			function()
 				self.move();
 			end,
