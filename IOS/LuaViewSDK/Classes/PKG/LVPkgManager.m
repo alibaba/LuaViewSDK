@@ -189,8 +189,6 @@ static const unsigned int PKG_VERSION = (102010 );
     return nil;
 }
 
-//NSString* version = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_LUAVIEW];
-//if( [LVPkgManager versionToInteger:version] <= [LVPkgManager versionToInteger:@LUAVIEW_VERSION] ){
 +(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info{
     NSDictionary* dic = info;
     if( dic ){
