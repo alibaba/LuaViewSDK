@@ -44,7 +44,7 @@
 
 
 // static
-static BOOL object_isProtocol(id obj ) {
+static BOOL lv_object_isProtocol(id obj ) {
     static Class ProtocolClass = NULL;
     if( ProtocolClass == NULL ) {
         ProtocolClass = objc_getClass("Protocol");
@@ -65,7 +65,7 @@ static BOOL object_isProtocol(id obj ) {
     if ( obj==nil )
         return ;
     
-    if ( (object_isClass(obj) || object_isProtocol(obj)) ) {
+    if ( (class_isMetaClass(object_getClass(obj)) || lv_object_isProtocol(obj)) ) {
         [self addProtocolOnce:obj];
     } else if ( [obj isKindOfClass:[NSString class]] ) {
         if ( [self addProtocolOnce:NSProtocolFromString(obj)]==FALSE ){
@@ -81,7 +81,7 @@ static BOOL object_isProtocol(id obj ) {
 
 - (BOOL) addProtocolOnce:(id) class{
     if ( class ) {
-        if ( object_isClass(class) || object_isProtocol(class) ) {
+        if ( class_isMetaClass(object_getClass(class)) || lv_object_isProtocol(class) ) {
             if( ![self.protocolArray containsObject:class] ) {
                  [self.protocolArray addObject:class];
                 return YES;
@@ -106,14 +106,14 @@ static BOOL object_isProtocol(id obj ) {
     for (id type in self.protocolArray ){
         struct objc_method_description* desc = NULL;
         
-        if( object_isProtocol(type) ){ // protocol
+        if( lv_object_isProtocol(type) ){ // protocol
             Protocol* protocol = type;
             struct objc_method_description temp = protocol_getMethodDescription( protocol, selector, YES, YES);
             if( temp.types==NULL || temp.name==NULL ) {
                 temp = protocol_getMethodDescription( protocol, selector,  NO, YES);
             }
             desc = &temp;
-        } else if( object_isClass(type) ) { // class
+        } else if( class_isMetaClass(object_getClass(type)) ) { // class
             Class class = (Class)type;
             Method method = class_getInstanceMethod( class, selector );
             if ( method==NULL ){

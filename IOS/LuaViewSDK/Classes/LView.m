@@ -565,7 +565,7 @@ extern char g_debug_lua[];
         return;
     }
     if( [key isKindOfClass:[NSString class]]
-       && object_isClass(object)
+       && class_isMetaClass(object_getClass(object))
        && [object isSubclassOfClass:[LVCustomPanel class]] ) {
         [self registerCustomPanel:object boundName:(NSString*)key];
         return;
