@@ -13,7 +13,6 @@
 
 #define LV_PKGINFO_PROPERTY_URL      @"url"
 #define LV_PKGINFO_PROPERTY_TIME     @"time"
-#define LV_PKGINFO_PROPERTY_LUAVIEW  @"luaview"
 
 
 

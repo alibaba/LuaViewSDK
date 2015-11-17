@@ -189,18 +189,17 @@ static const unsigned int PKG_VERSION = (102010 );
     return nil;
 }
 
+//NSString* version = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_LUAVIEW];
+//if( [LVPkgManager versionToInteger:version] <= [LVPkgManager versionToInteger:@LUAVIEW_VERSION] ){
 +(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info{
     NSDictionary* dic = info;
     if( dic ){
-        NSString* version = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_LUAVIEW];
-        if( [LVPkgManager versionToInteger:version] <= [LVPkgManager versionToInteger:@LUAVIEW_VERSION] ){
-            NSString* time1 = [LVPkgManager timeOfPackage:name];
-            NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
-            if( time1 && time2 &&
-               [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
-               [time1 isEqualToString:time2] ){
-                return 0;
-            }
+        NSString* time1 = [LVPkgManager timeOfPackage:name];
+        NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
+        if( time1 && time2 &&
+           [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
+           [time1 isEqualToString:time2] ){
+            return 0;
         }
     }
     return -1;
