@@ -5,7 +5,7 @@ w,h = System.screenSize();
 
 
 window.frame(0, 0, w, h);
-window.backgroundColor(0,0);
+window.backgroundColor(0,0.5);
 window.enabled(true);
 
 -------------------------------
@@ -43,7 +43,12 @@ function snowCreater()
 		self.scale = math:random(2,10)/10;
 	end
 	function snow.showSnows()
-		if ( self.times>20 ) then
+		if ( self.times>5 ) then
+			diedNum = diedNum - 1;
+			print(diedNum);
+			if( diedNum == 1 ) then
+				closeApp();
+			end
 			return ;
 		end
 		self.times = self.times + 1;
@@ -65,10 +70,13 @@ end
 -------------------------------------
 snowArr = {};
 
+totoalNum = 50;
+diedNum = 50;
+
 index = 1;
 snowTimer = Timer(
 	function()
-		if (index<50 ) then
+		if (index<totoalNum ) then
 		   	snowArr[index] = snowCreater();
 			snowArr[index].showSnows();
 		else
@@ -80,4 +88,15 @@ snowTimer = Timer(
 
 snowTimer.start(0.2, true);
 
+
+function closeApp()
+	Animate(
+		function ()
+			window.alpha(0)
+		end,
+		function ()
+			window.release();
+		end
+		)
+end
 
