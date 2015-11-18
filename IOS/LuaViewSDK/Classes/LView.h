@@ -21,15 +21,12 @@
 @end
 
 
-#pragma mark -LuaView 类
+#pragma mark -LuaView 类加载脚本调用接口
 @interface LView : UIView
 
 @property(nonatomic,weak) id<LVCallback> callback; //用于LuaView回调( luaView大小改变 等回调)
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
-@property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
-@property (nonatomic,copy) NSString* packageName;
-@property (nonatomic,strong) LVDebugConnection* debugConnection;
 
 
 /**
@@ -70,9 +67,6 @@
  */
 -(int) runData:(NSData*) data fileName:(NSString*) fileName;
 
-
-
-
 /*
  *
  *调用lua脚本, functionName:lua的function名称,  environment:运行窗口,  args:传递参数
@@ -88,48 +82,35 @@
  */
 -(void) releaseLuaView;
 
-#pragma mark - 系统使用的, 基本上不用关心细节
-//@interface LView (LViewPrivateData)<LVProtocal>
-@property (nonatomic, weak)   UIView* conentView; // 运行环境view
-@property (nonatomic, weak)   LView* lv_lview;
-@property (nonatomic, assign) LVUserDataView* lv_userData;// 脚本中的window对象 数据绑定
-@property (nonatomic, assign) lv_State* l; // lua 状态机
-
-
--(void) containerAddSubview:(UIView *)view;
-@property(nonatomic,assign) BOOL contentViewIsWindow;// contentView是否是窗口
-//@end
 @end
 
 
+#pragma mark -  设置资源搜索路径
+@interface LView ()
 
-@interface LView (LViewPackageManager)
-/**
- *  解压本地脚本包
+/** 
+ * 设置 图片资源bundle查询路径
  */
-+(BOOL) unpackageOnceWithFile:(NSString*) fileName;
++(void) setBundleSearchPath:(NSArray*) path;
+
+
+/** 
+ * 获取 图片资源bundle查询路径
+ */
++(NSArray*) bundleSearchPath;
 
 /*
- * name: 报名  比如:"home"
- * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/1.2.1/2015-05-04.js" , "time":"1430740218338", "luaview":"1.0.0" }
+ * packageName: 包名  比如:"ppt"
+ * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/3.2.12/ppt4.4.0.js" , "time":"2015-11-18 09:53"}
  */
 +(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*)info;
 
 
-/** 图片资源bundle查询路径
- *
- */
-+(void) setBundleSearchPath:(NSArray*) path;
-+(NSArray*) bundleSearchPath;
-
 @end
 
-
-
-
-@interface LView (LViewSystemCallback)
-
 #pragma mark -  各种系统回调, 回调会传递到lua脚本中执行脚本代码
+@interface LView ()
+
 -(void) viewWillAppear;
 -(void) viewDidAppear;
 -(void) viewWillDisAppear;
@@ -146,8 +127,8 @@
 @end
 
 
-
-@interface LView (LViewRegister)
+#pragma mark - Register 注册外部api接口
+@interface LView ()
 
 - (void) setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
 - (void) registerObject:(id) object forName:(NSString*) name sel:(SEL) sel;// 只注册指定API
@@ -161,8 +142,8 @@
 
 
 
-
-@interface LView (LViewBlock)
+#pragma mark -  LViewBlock lua闭包参数获取使用
+@interface LView ()
 
 - (BOOL) argumentToBool:(int) index;
 - (double)  argumentToNumber:(int) index;
@@ -171,11 +152,27 @@
 @end
 
 
-// 只是调试工具使用
-@interface LView (LViewDebuger)
+#pragma mark - debugger 只是调试工具使用
+@interface LView ()
 
 -(void) callLuaToExecuteServerCmd;
+@property (nonatomic,strong) LVDebugConnection* debugConnection;
 
 @end
 
+
+#pragma mark - Property 系统使用的, 基本上不用关心细节
+@interface LView ()
+@property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
+@property (nonatomic,copy) NSString* packageName;
+
+@property (nonatomic, weak)   UIView* conentView; // 运行环境view
+@property (nonatomic, weak)   LView* lv_lview;
+@property (nonatomic, assign) LVUserDataView* lv_userData;// 脚本中的window对象 数据绑定
+@property (nonatomic, assign) lv_State* l; // lua 状态机
+@property(nonatomic,assign) BOOL contentViewIsWindow;// contentView是否是窗口
+
+-(void) containerAddSubview:(UIView *)view;
+
+@end
 

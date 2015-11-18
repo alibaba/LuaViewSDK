@@ -20,7 +20,6 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 
 @interface LVPkgManager : NSObject
 
-+(BOOL) unpackageOnceWithFile:(NSString*) fileName;
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误

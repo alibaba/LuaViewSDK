@@ -75,11 +75,6 @@ static const unsigned int PKG_VERSION = (102010 );
     }
 }
 
-+(BOOL) unpackageOnceWithFile:(NSString*) fileName{
-    NSString* packageName = fileName;
-    return [LVPkgManager unpackageFile:fileName packageName:packageName checkTime:YES];
-}
-
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName{
     return [LVPkgManager unpackageFile:fileName packageName:packageName checkTime:NO];
 }
