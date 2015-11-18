@@ -1009,13 +1009,6 @@
 		84799AA41BAFDDA00070E214 /* lua */ = {
 			isa = PBXGroup;
 			children = (
-				84CC637F1BB16AF300613B74 /* fire.zip */,
-				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
-				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
-				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
-				84799AB41BAFDDA00070E214 /* color1.png */,
-				84799AB51BAFDDA00070E214 /* color2.png */,
-				840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */,
 				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
 				8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */,
 				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
@@ -1039,6 +1032,7 @@
 				84799AB31BAFDDA00070E214 /* demoY2_CollectionView.lua */,
 				84799ABC1BAFDDA00070E214 /* demoY2_flxNode.lua */,
 				84799ABA1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua */,
+				840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */,
 				84799AB91BAFDDA00070E214 /* demoZ_testunit.lua */,
 				84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */,
 				84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */,
@@ -1046,6 +1040,14 @@
 				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
 				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
 				84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */,
+				84799AF11BAFDF370070E214 /* lv_kit.lua */,
+				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
+				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
+				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
+				84799AB41BAFDDA00070E214 /* color1.png */,
+				84799AB51BAFDDA00070E214 /* color2.png */,
+				84799ABF1BAFDDA00070E214 /* lazhu.png */,
+				84799AC11BAFDDA00070E214 /* snow.png */,
 				84799AA51BAFDDA00070E214 /* img1.tiff */,
 				84799AA91BAFDDA00070E214 /* img4.tiff */,
 				84799AAA1BAFDDA00070E214 /* img7.tiff */,
@@ -1053,9 +1055,7 @@
 				84799AA71BAFDDA00070E214 /* img13.tiff */,
 				84799AA81BAFDDA00070E214 /* img16.tiff */,
 				84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */,
-				84799ABF1BAFDDA00070E214 /* lazhu.png */,
-				84799AF11BAFDF370070E214 /* lv_kit.lua */,
-				84799AC11BAFDDA00070E214 /* snow.png */,
+				84CC637F1BB16AF300613B74 /* fire.zip */,
 			);
 			path = lua;
 			sourceTree = "<group>";
