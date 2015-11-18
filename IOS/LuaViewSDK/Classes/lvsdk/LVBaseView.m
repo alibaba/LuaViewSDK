@@ -1171,7 +1171,6 @@ static int releaseObject(lv_State *L) {
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
         UIView* view = (__bridge UIView *)(user->view);
-        user->view = NULL;
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
             L->lView = NULL;

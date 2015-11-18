@@ -56,3 +56,11 @@ print(view.backgroundColor())
 view.backgroundColor(0xff000001, 0.5)
 print(view.backgroundColor())
 
+closeButton = Button();
+closeButton.callback(function ()
+window.release();
+end);
+
+closeButton.title("关闭");
+closeButton.frame(0,0,100,100);
+

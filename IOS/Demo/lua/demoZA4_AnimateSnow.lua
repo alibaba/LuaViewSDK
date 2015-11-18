@@ -100,3 +100,11 @@ function closeApp()
 		)
 end
 
+closeButton = Button();
+closeButton.callback(function ()
+closeApp();
+end);
+
+closeButton.title("关闭");
+closeButton.frame(0,0,100,100);
+
