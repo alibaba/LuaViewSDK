@@ -201,7 +201,7 @@ static NSString *g_publicKeyFilePath = nil;
                                          [bits mutableBytes],
                                          &keyBufferSize);
     NSAssert(sanityCheck == noErr, @"Error decrypting, OSStatus == %d", (int)sanityCheck);
-    
+    NSLog(@"Error decrypting, OSStatus == %d",(int)sanityCheck);
     [bits setLength:keyBufferSize];
     
     return bits;

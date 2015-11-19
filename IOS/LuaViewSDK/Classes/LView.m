@@ -148,6 +148,9 @@ extern char g_debug_lua[];
         }
     }
 }
+#else
+- (void) callLuaToExecuteServerCmd{
+}
 #endif
 
 -(void) registeLibs{
