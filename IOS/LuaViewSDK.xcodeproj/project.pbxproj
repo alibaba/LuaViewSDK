@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
 		84056E721B5CA5990078F9D6 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; };
 		84056E731B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
 		84056E741B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
@@ -696,7 +695,6 @@
 				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
-				80074A43CA93D4FDDEC5F88E /* libPods-Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
