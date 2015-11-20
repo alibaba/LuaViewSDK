@@ -761,19 +761,23 @@ int lv_callbackFunction(lv_State* L, const char* functionName){
 }
 
 void LVLog( NSString* format, ... ){
+#ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;
     va_start(params,format);//va_start 得到第一个可变参数地址,
     NSString* s = [[NSString alloc] initWithFormat:format arguments:params];
     NSLog(@"[LuaView]  %@", s);
     va_end(params);
+#endif
 }
 
 void LVError( NSString* format, ... ){
+#ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;
     va_start(params,format);//va_start 得到第一个可变参数地址,
     NSString* s = [[NSString alloc] initWithFormat:format arguments:params];
     NSLog(@"[LuaView][error]   %@", s);
     va_end(params);
+#endif
 }
 
 @end

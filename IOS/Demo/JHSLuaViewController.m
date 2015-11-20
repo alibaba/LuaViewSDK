@@ -144,7 +144,7 @@
  * openUrl API, 暴露给脚本调用
  */
 -(void) openUrl:(NSString*)actionUrl{
-    NSLog(@"%@",actionUrl);
+    LVLog(@"%@",actionUrl);
 }
 
 -(void) gotoHistory{

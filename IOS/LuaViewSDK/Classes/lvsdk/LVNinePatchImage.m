@@ -1,6 +1,7 @@
 
 
 #import "LVNinePatchImage.h"
+#import "LVUtil.h"
 
 #define BYTES_PER_PIXEL 4
 
@@ -44,12 +45,12 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
     if ( [self isNinePathImageName:name] ) {
         UIImage* oriImage = [UIImage imageNamed:name];
         if ( oriImage==nil ) {
-            NSLog(@"createNinePatchImageNamed: The input image is nil");
+            LVLog(@"createNinePatchImageNamed: The input image is nil");
             return nil;
         }
         return [self createResizableImageFromNinePatchImage:oriImage];
     }
-    NSLog(@"createNinePatchImageNamed: Image name is not ended with .9");
+    LVLog(@"createNinePatchImageNamed: Image name is not ended with .9");
     return nil;
 }
 
@@ -104,7 +105,7 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
             break;
         }
     }
-    // NSLog(@"The .9 PNG format error!!!.   left==-1");
+    // LVLog(@"The .9 PNG format error!!!.   left==-1");
     for (int i = count - 1; i >= 0; i--) {
         NSNumber* alpha = topBarRgba[i];
         if ( alpha.floatValue == 1) {
@@ -112,11 +113,11 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
             break;
         }
     }
-    // NSLog(@"The .9 PNG format error!!!.   right==-1");
+    // LVLog(@"The .9 PNG format error!!!.   right==-1");
     for (int i = left + 1; i <= right - 1; i++) {
         NSNumber* alpha = topBarRgba[i];
         if ( alpha.floatValue < 1) {
-            NSLog(@"The 9-patch PNG format is not support. 1");
+            LVLog(@"The 9-patch PNG format is not support. 1");
         }
     }
     count = (int) leftBarRgba.count;
@@ -127,7 +128,7 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
             break;
         }
     }
-    //NSLog(@"The .9 PNG format error!!!.   top==-1");
+    //LVLog(@"The .9 PNG format error!!!.   top==-1");
     for (int i = count - 1; i >= 0; i--) {
         NSNumber* alpha = leftBarRgba[i];
         if ( alpha.floatValue == 1) {
@@ -135,11 +136,11 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
             break;
         }
     }
-    //NSLog(@"The .9 PNG format error!!!.   bottom==-1");
+    //LVLog(@"The .9 PNG format error!!!.   bottom==-1");
     for (int i = top + 1; i <= bottom - 1; i++) {
         NSNumber* alpha = leftBarRgba[i];
         if ( alpha.floatValue == 0) {
-            NSLog(@"The 9-patch PNG format is not support.2");
+            LVLog(@"The 9-patch PNG format is not support.2");
         }
     }
     if ( top>=0 && left>=0 && bottom>=0 && right>=0 ) {
