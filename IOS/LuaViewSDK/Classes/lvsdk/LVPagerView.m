@@ -70,6 +70,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         }
     }
     [self resetCellFrame];
+    self.pagerIndicator.numberOfPages = self.cellArray.count;
 }
 
 -(void) resetCellFrame{
@@ -79,7 +80,6 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         view.frame =CGRectMake(i*r.size.width, 0, r.size.width, r.size.height);
     }
     self.contentSize = CGSizeMake(self.cellArray.count*self.frame.size.width, 0);
-    self.pagerIndicator.numberOfPages = self.cellArray.count;
 }
 
 -(void) setFrame:(CGRect)frame{
