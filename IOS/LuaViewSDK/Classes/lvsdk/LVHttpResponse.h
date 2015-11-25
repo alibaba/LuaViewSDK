@@ -11,7 +11,7 @@
 @interface LVHttpResponse : NSObject
 @property(nonatomic,strong) NSURLResponse *response;
 @property(nonatomic,strong) NSHTTPURLResponse *httpResponse;
-@property(nonatomic,strong) NSData *data;
+@property(nonatomic,strong) NSMutableData *data;
 @property(nonatomic,strong) NSError *error;
 
 

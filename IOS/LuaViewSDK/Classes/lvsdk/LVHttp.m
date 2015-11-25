@@ -85,7 +85,10 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    self.response.data = data;
+    if( self.response.data == nil ) {
+        self.response.data = [[NSMutableData alloc] init];
+    }
+    [self.response.data appendData:data];
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
