@@ -11,7 +11,7 @@
 #import "LVData.h"
 #import "LView.h"
 
-@interface LVHttp ()
+@interface LVHttp ()<NSURLConnectionDataDelegate>
 @property(nonatomic,strong) id mySelf;
 @property(nonatomic,strong) LVHttpResponse* response;
 @property(nonatomic,strong) id function;
@@ -39,6 +39,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
         self.lview = (__bridge LView *)(l->lView);
         self.mySelf = self;
         self.function = [[NSMutableString alloc] init];
+        self.response = [[LVHttpResponse alloc] init];
     }
     return self;
 }
@@ -52,6 +53,46 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
     }
     self.response = nil;
     self.mySelf = nil;
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+
++(BOOL) isTrustedHost:(NSString*) host{
+    NSArray* trustedHosts = @[@".alicdn.com",@".tbcdn.com",@".taobao.com",@".tmall.com",@".juhuasuan.com"];
+    for( NSString* host in trustedHosts ) {
+        if( [host hasSuffix:host] ) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    if ( [challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust] ){
+        if ( [LVHttp isTrustedHost:challenge.protectionSpace.host] ) {
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+        }
+    }
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+
+-(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    self.response.error = error;
+    [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
+}
+
+-(void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    self.response.data = data;
+}
+
+-(void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    self.response.response = response;
+}
+-(void) connectionDidFinishLoading:(NSURLConnection *)connection{
+    [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
 }
 
 static int lvNewHttpObject (lv_State *L, LVHttp* http ) {
@@ -84,12 +125,9 @@ static int get (lv_State *L) {
         [request setTimeoutInterval:30.0];
         
         NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:queue
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-                                   http.response = [[LVHttpResponse alloc] initWithResponse:response data:data error:error];
-                                   [http performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
-                               }];
+        NSURLConnection* c = [[NSURLConnection alloc] initWithRequest:request delegate:http];
+        [c setDelegateQueue:queue];
+        [c start];
     }
     return 0; /* new userdatum is already on the stack */
 }

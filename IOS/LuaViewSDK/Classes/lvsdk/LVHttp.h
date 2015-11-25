@@ -29,4 +29,9 @@ typedef struct _LVUserDataHttp {
 
 +(int) classDefine:(lv_State *)L ;
 
+/*
+ * https检查是否是信任的域名, 改方法 可以被覆盖
+ */
++(BOOL) isTrustedHost:(NSString*) host;
+
 @end
