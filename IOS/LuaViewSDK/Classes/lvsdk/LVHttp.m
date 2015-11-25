@@ -92,7 +92,9 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    self.response.response = response;
+    if( [response isKindOfClass:[NSHTTPURLResponse class]] ){
+        self.response.response = response;
+    }
 }
 -(void) connectionDidFinishLoading:(NSURLConnection *)connection{
     [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
@@ -176,13 +178,9 @@ static int post (lv_State *L) {
         }
         
         NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:queue
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-                                   http.response = [[LVHttpResponse alloc] initWithResponse:response data:data error:error];
-                                   [http performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
-                                   
-                               }];
+        NSURLConnection* c = [[NSURLConnection alloc] initWithRequest:request delegate:http];
+        [c setDelegateQueue:queue];
+        [c start];
     }
     return 0; /* new userdatum is already on the stack */
 }

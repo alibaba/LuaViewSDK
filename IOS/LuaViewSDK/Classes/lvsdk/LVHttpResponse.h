@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface LVHttpResponse : NSObject
+
 @property(nonatomic,strong) NSURLResponse *response;
 @property(nonatomic,strong) NSHTTPURLResponse *httpResponse;
 @property(nonatomic,strong) NSMutableData *data;
 @property(nonatomic,strong) NSError *error;
 
-
--(id) initWithResponse:(NSURLResponse*)response data:(NSData*)data error:(NSError*)error;
 @end
