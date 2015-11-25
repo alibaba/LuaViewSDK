@@ -39,6 +39,7 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self.owner lv_callLuaByKey1:@"DragEnd"];
     if( !decelerate ) {
         [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     }
