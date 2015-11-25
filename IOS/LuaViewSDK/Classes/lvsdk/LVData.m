@@ -186,7 +186,6 @@ static int __add (lv_State *L) {
         {"__gc", lvDataGC },
         
         {"__tostring", __tostring },
-        {"toString", __tostring },
         {NULL, NULL}
     };
     
