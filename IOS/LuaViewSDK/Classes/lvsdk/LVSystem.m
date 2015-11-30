@@ -81,8 +81,32 @@ static int vibrate(lv_State*L){
 }
 
 
+
+static int stringToTable(lv_State*L){
+    if( lv_type(L, -1) == LV_TSTRING ) {
+        NSString* s = lv_paramString(L, -1);
+        if( s ) {
+            id obj = [LVUtil stringToObject:s];
+            lv_pushNativeObject(L, obj);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int tableToString(lv_State*L){
+    if( lv_type(L, -1) == LV_TTABLE ) {
+        id obj = lv_luaValueToNativeObject(L,-1);
+        NSString* s = [LVUtil objectToString:obj];
+        lv_pushstring(L, s.UTF8String);
+        return 1;
+    }
+    return 0;
+}
+
 +(int) classDefine:(lv_State *)L {
-    {// System
+    {
+        // System
         const struct lvL_reg staticFunctions [] = {
             {"screenSize", screenSize},
             {"gc",static_gc},
@@ -96,6 +120,15 @@ static int vibrate(lv_State*L){
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);
+    }
+    {
+        // Json
+        const struct lvL_reg fs [] = {
+            {"toString", tableToString},
+            {"toTable",stringToTable},
+            {NULL, NULL}
+        };
+        lvL_openlib(L, "Json", fs, 0);
     }
     // ----  常量注册 ----
     {
