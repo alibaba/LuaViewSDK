@@ -95,11 +95,26 @@
     return error;
 }
 
--(int) runPackage:(NSString*) packageName{
+-(int) runPackage:(NSString*) packageName {
+    return [self runPackage:packageName args:nil];
+}
+
+-(int) runPackage:(NSString*) packageName args:(NSArray*) args{
     self.runInSignModel = TRUE;
     self.packageName = packageName;
     NSString* fileName = @"main.lv";
-    return [self runSignFile:fileName];
+    int ret = [self runSignFile:fileName];
+    if( ret==0 && self.l ) {
+        for( int i=0; i<args.count; i++ ){
+            id obj = args[i];
+            lv_pushNativeObject( self.l, obj );
+        }
+        lv_getglobal(self.l, "main");// function
+        if( lv_type(self.l, -1) == LV_TFUNCTION ) {
+            ret = lv_runFunctionWithArgs(self.l, (int)args.count, 0);
+        }
+    }
+    return ret;
 }
 
 -(void) checkDebugOrNot:(const char*) chars length:(NSInteger) len fileName:(NSString*) fileName {

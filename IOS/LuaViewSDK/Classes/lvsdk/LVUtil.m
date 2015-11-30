@@ -73,7 +73,7 @@ int lv_runFunction(lv_State* l){
 }
 
 int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
-    if( lv_type(l, -1) == LV_TFUNCTION ) {
+    if( l && lv_type(l, -1) == LV_TFUNCTION ) {
         if( nargs>0 ){
             lv_insert(l, -nargs-1);
         }

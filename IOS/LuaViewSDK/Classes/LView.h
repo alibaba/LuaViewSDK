@@ -48,6 +48,16 @@
 -(int) runPackage:(NSString*) packageName;
 
 /**
+ *  运行一个包, main.lv是主入口
+ *
+ *  @param fileName 本地文件名
+ *  @args args 参数
+ *
+ *  @return 返回运行结果
+ */
+-(int) runPackage:(NSString*) packageName args:(NSArray*) args;
+
+/**
  *  运行签名的脚本文件
  *
  *  @param fileName 本地文件名
