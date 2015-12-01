@@ -15,6 +15,8 @@
 @property(nonatomic,strong) id mySelf;
 @property(nonatomic,strong) LVHttpResponse* response;
 @property(nonatomic,strong) id function;
+@property(nonatomic,assign) CGFloat timeout;
+@property(nonatomic,strong) NSURLConnection* connection;
 @end
 
 @implementation LVHttp
@@ -40,6 +42,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
         self.mySelf = self;
         self.function = [[NSMutableString alloc] init];
         self.response = [[LVHttpResponse alloc] init];
+        self.timeout = 30.0;
     }
     return self;
 }
@@ -50,6 +53,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
         lv_checkStack32(l);
         [LVUtil pushRegistryValue:l key:self];
         [LVUtil call:l lightUserData:self.function key1:"callback" key2:NULL nargs:1];
+        [LVUtil unregistry:l key:self];
     }
     self.response = nil;
     self.mySelf = nil;
@@ -92,15 +96,17 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    self.response.response = response;
     if( [response isKindOfClass:[NSHTTPURLResponse class]] ){
-        self.response.response = response;
+        self.response.httpResponse = (NSHTTPURLResponse*)response;
     }
 }
 -(void) connectionDidFinishLoading:(NSURLConnection *)connection{
     [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
 }
 
-static int lvNewHttpObject (lv_State *L, LVHttp* http ) {
+static int lvNewHttpObject (lv_State *L ) {
+    LVHttp* http = [[LVHttp alloc] init:L];
     {
         NEW_USERDATA(userData, LVUserDataHttp);
         userData->http = CFBridgingRetain(http);
@@ -116,71 +122,77 @@ static int lvNewHttpObject (lv_State *L, LVHttp* http ) {
 static int get (lv_State *L) {
     int argN = lv_gettop(L);
     if( argN>=2 ){
-        NSString* urlStr = lv_paramString(L, 1);
-        LVHttp* http = [[LVHttp alloc] init:L];
-        
-        if( lv_type(L, 2) != LV_TNIL ) {
-            [LVUtil registryValue:L key:http.function stack:2];
+        LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
+        if(  LVIsType(user,LVUserDataHttp) ) {
+            LVHttp* http = (__bridge LVHttp *)(user->http);
+            NSString* urlStr = lv_paramString(L, 2);
+            
+            if( lv_type(L, 3) != LV_TNIL ) {
+                [LVUtil registryValue:L key:http.function stack:3];
+            }
+            NSURL *url = [NSURL URLWithString:urlStr];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            [request setHTTPMethod:@"GET"];
+            [request setTimeoutInterval:http.timeout];
+            
+            NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+            http.connection = [[NSURLConnection alloc] initWithRequest:request delegate:http];
+            [http.connection setDelegateQueue:queue];
+            [http.connection start];
         }
-        
-        lvNewHttpObject(http.lview.l, http);
-        NSURL *url = [NSURL URLWithString:urlStr];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"GET"];
-        [request setTimeoutInterval:30.0];
-        
-        NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-        NSURLConnection* c = [[NSURLConnection alloc] initWithRequest:request delegate:http];
-        [c setDelegateQueue:queue];
-        [c start];
     }
     return 0; /* new userdatum is already on the stack */
 }
 
 static int post (lv_State *L) {
     int argN = lv_gettop(L);
-    if( argN>=4 ){
-        // 1:url    2:heads   3:data   4:callback
-        NSString* urlStr = lv_paramString(L, 1);
-        LVHttp* http = [[LVHttp alloc] init:L];
-        NSDictionary* dic = nil;
-        NSData* data = nil;
-        
-        if( lv_type(L,2) == LV_TTABLE ) {//第二个参数是头信息
-            dic = lv_luaTableToDictionary(L,2);
-        }
-        if( lv_type(L, 3) != LV_TSTRING ) {// 数据
-            NSString* s = lv_paramString(L, 3);
-            data = [s dataUsingEncoding:NSUTF8StringEncoding];
-        }
-        
-        if( lv_type(L, 4) != LV_TNIL ) {
-            [LVUtil registryValue:L key:http.function stack:4];
-        }
-        
-        lvNewHttpObject(http.lview.l, http);
-        NSURL *url = [NSURL URLWithString:urlStr];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"POST"];
-        [request setTimeoutInterval:30.0];
-        
-        // http头信息
-        if( dic.count>0 ){
-            for (NSString *key in dic) {
-                NSString* value = dic[key];
-                [request setValue:value forHTTPHeaderField:key];
+    if( argN>=3 ){
+        LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
+        if(  LVIsType(user,LVUserDataHttp) ) {
+            // 1:url    2:heads   3:data   4:callback
+            NSString* urlStr = lv_paramString(L, 2);
+            LVHttp* http = (__bridge LVHttp *)(user->http);
+            NSDictionary* dic = nil;
+            NSData* data = nil;
+            for( int i=3 ; i<=argN ; i++ ) {
+                int type = lv_type(L, i);
+                if( type==LV_TSTRING ) {// 数据
+                    NSString* s = lv_paramString(L, i);
+                    data = [s dataUsingEncoding:NSUTF8StringEncoding];
+                }
+                if( type==LV_TTABLE ) {// 数据
+                    NSDictionary* tempDic = lv_luaTableToDictionary(L, i);
+                    NSString* s = [LVUtil objectToString:tempDic];
+                    data = [s dataUsingEncoding:NSUTF8StringEncoding];
+                }
+                
+                if( type==LV_TFUNCTION ) {
+                    [LVUtil registryValue:L key:http.function stack:4];
+                }
             }
+            NSURL *url = [NSURL URLWithString:urlStr];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            [request setHTTPMethod:@"POST"];
+            [request setTimeoutInterval:http.timeout];
+            
+            // http头信息
+            if( dic.count>0 ){
+                for (NSString *key in dic) {
+                    NSString* value = dic[key];
+                    [request setValue:value forHTTPHeaderField:key];
+                }
+            }
+            
+            // data
+            if( data.length>0 ){
+                [request setHTTPBody:data];
+            }
+            
+            NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+            http.connection = [[NSURLConnection alloc] initWithRequest:request delegate:http];
+            [http.connection setDelegateQueue:queue];
+            [http.connection start];
         }
-        
-        // data
-        if( data.length>0 ){
-            [request setHTTPBody:data];
-        }
-        
-        NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-        NSURLConnection* c = [[NSURLConnection alloc] initWithRequest:request delegate:http];
-        [c setDelegateQueue:queue];
-        [c start];
     }
     return 0; /* new userdatum is already on the stack */
 }
@@ -237,6 +249,15 @@ static int responseHeaderFields (lv_State *L) {
     }
     return 0;
 }
+static int cancel (lv_State *L) {
+    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, LVUserDataHttp) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->http);
+        [http.connection cancel];
+        return 0;
+    }
+    return 0;
+}
 
 +(int) classDefine:(lv_State *)L {
     {
@@ -246,8 +267,13 @@ static int responseHeaderFields (lv_State *L) {
             {"__tostring", __tostring },
             
             {"data", data },
-            {"responseStatusCode", responseStatusCode },
-            {"responseHeaderFields", responseHeaderFields },
+            {"statusCode", responseStatusCode },
+            {"headerFields", responseHeaderFields },
+            
+            {"get", get },
+            {"post", post },
+            
+            {"cancel", cancel },
             
             {NULL, NULL}
         };
@@ -257,13 +283,8 @@ static int responseHeaderFields (lv_State *L) {
         lvL_openlib(L, NULL, memberFunctions, 0);
     }
     {
-        static const struct lvL_reg memberFunctions [] = {
-            {"get", get },
-            {"post", post },
-            {NULL, NULL}
-        };
-        
-        lvL_openlib(L, "Http", memberFunctions, 0);
+        lv_pushcfunction(L, lvNewHttpObject );
+        lv_setglobal(L, "Http");
     }
     return 1;
 }
