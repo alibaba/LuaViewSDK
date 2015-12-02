@@ -270,6 +270,11 @@
 		84799AFA1BAFEFDA0070E214 /* LVPagerViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */; };
 		84799AFB1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
 		84799AFC1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
+		847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9011C0E95C5008776E9 /* demoZ_1212.lua */; };
+		847BE9061C0E97AF008776E9 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9031C0E97AF008776E9 /* enter.png */; };
+		847BE9071C0E97AF008776E9 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9041C0E97AF008776E9 /* line.png */; };
+		847BE9081C0E97AF008776E9 /* hongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9051C0E97AF008776E9 /* hongbao.png */; };
+		847BE90A1C0EA493008776E9 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9091C0EA493008776E9 /* close.png */; };
 		8480C71E1C059BA70081B8A3 /* demoU_Http.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8480C71D1C059BA70081B8A3 /* demoU_Http.lua */; };
 		8480F0B71BFC1880005DB2AE /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */; };
 		8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */; };
@@ -596,6 +601,11 @@
 		84799AF41BAFECA00070E214 /* LVPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerView.m; sourceTree = "<group>"; };
 		84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerViewCell.h; sourceTree = "<group>"; };
 		84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerViewCell.m; sourceTree = "<group>"; };
+		847BE9011C0E95C5008776E9 /* demoZ_1212.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_1212.lua; sourceTree = "<group>"; };
+		847BE9031C0E97AF008776E9 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
+		847BE9041C0E97AF008776E9 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		847BE9051C0E97AF008776E9 /* hongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hongbao.png; sourceTree = "<group>"; };
+		847BE9091C0EA493008776E9 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		8480C71D1C059BA70081B8A3 /* demoU_Http.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoU_Http.lua; sourceTree = "<group>"; };
 		8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
 		8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoG_RefreshTableView.lua; sourceTree = "<group>"; };
@@ -827,6 +837,7 @@
 			children = (
 				84160C461B9591CA008E967E /* delegate */,
 				84799AA41BAFDDA00070E214 /* lua */,
+				847BE9001C0E95C5008776E9 /* lua_animate */,
 				8468C9481BDA11BE002D4B1E /* test */,
 				8418E3B61A5E804700158125 /* Images.xcassets */,
 				8418E3B71A5E804700158125 /* Info.plist */,
@@ -1059,6 +1070,18 @@
 				84CC637F1BB16AF300613B74 /* fire.zip */,
 			);
 			path = lua;
+			sourceTree = "<group>";
+		};
+		847BE9001C0E95C5008776E9 /* lua_animate */ = {
+			isa = PBXGroup;
+			children = (
+				847BE9091C0EA493008776E9 /* close.png */,
+				847BE9011C0E95C5008776E9 /* demoZ_1212.lua */,
+				847BE9031C0E97AF008776E9 /* enter.png */,
+				847BE9041C0E97AF008776E9 /* line.png */,
+				847BE9051C0E97AF008776E9 /* hongbao.png */,
+			);
+			path = lua_animate;
 			sourceTree = "<group>";
 		};
 		848B5C151A0A4CA000F59678 = {
@@ -1464,6 +1487,7 @@
 				84799ACF1BAFDDA00070E214 /* img7.tiff in Resources */,
 				84799AE01BAFDDA00070E214 /* demoW2_AudioPlayer.lua in Resources */,
 				84799ACA1BAFDDA00070E214 /* img1.tiff in Resources */,
+				847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */,
 				84799AD91BAFDDA00070E214 /* color1.png in Resources */,
 				84799AE71BAFDDA00070E214 /* demoP_string.lua in Resources */,
 				8468C9641BDA11BE002D4B1E /* testUILoadingDialog.lua in Resources */,
@@ -1474,6 +1498,7 @@
 				8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */,
 				8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */,
 				84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */,
+				847BE9071C0E97AF008776E9 /* line.png in Resources */,
 				84FC64D61BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua in Resources */,
 				8468C9671BDA11BE002D4B1E /* testUIRefreshTableView.lua in Resources */,
 				84799AEC1BAFDDA00070E214 /* demoZ1_luabox.lua in Resources */,
@@ -1489,6 +1514,7 @@
 				840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */,
 				8468C9601BDA11BE002D4B1E /* testUIAlert.lua in Resources */,
 				84799ACB1BAFDDA00070E214 /* img10.tiff in Resources */,
+				847BE9061C0E97AF008776E9 /* enter.png in Resources */,
 				8468C95C1BDA11BE002D4B1E /* testLuaLang.lua in Resources */,
 				84799ADF1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua in Resources */,
 				8480C71E1C059BA70081B8A3 /* demoU_Http.lua in Resources */,
@@ -1499,6 +1525,8 @@
 				84799AD11BAFDDA00070E214 /* demoZA2_AnimateFire2.lua in Resources */,
 				8468C96C1BDA11BE002D4B1E /* testUIView.lua in Resources */,
 				84FC64D41BB3A75100B6AF86 /* demoM_Navigation.lua in Resources */,
+				847BE9081C0E97AF008776E9 /* hongbao.png in Resources */,
+				847BE90A1C0EA493008776E9 /* close.png in Resources */,
 				8468C96A1BDA11BE002D4B1E /* testUITextView.lua in Resources */,
 				84799ACE1BAFDDA00070E214 /* img4.tiff in Resources */,
 				84799ACD1BAFDDA00070E214 /* img16.tiff in Resources */,
