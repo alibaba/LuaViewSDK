@@ -221,6 +221,7 @@
 		8468C9711BDA177C002D4B1E /* LVToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8468C96F1BDA177C002D4B1E /* LVToast.h */; };
 		8468C9721BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
 		8468C9731BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		846A4E7B1C1067BC000B98C5 /* jhs.png in Resources */ = {isa = PBXBuildFile; fileRef = 846A4E7A1C1067BC000B98C5 /* jhs.png */; };
 		846E879B1A653DEC000D14DA /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; };
 		846E879C1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
 		846E879D1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
@@ -557,6 +558,7 @@
 		8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testViewPagerIndicator.lua; sourceTree = "<group>"; };
 		8468C96F1BDA177C002D4B1E /* LVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVToast.h; sourceTree = "<group>"; };
 		8468C9701BDA177C002D4B1E /* LVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVToast.m; sourceTree = "<group>"; };
+		846A4E7A1C1067BC000B98C5 /* jhs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jhs.png; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
@@ -1080,6 +1082,7 @@
 				847BE9031C0E97AF008776E9 /* enter.png */,
 				847BE9041C0E97AF008776E9 /* line.png */,
 				847BE9051C0E97AF008776E9 /* hongbao.png */,
+				846A4E7A1C1067BC000B98C5 /* jhs.png */,
 			);
 			path = lua_animate;
 			sourceTree = "<group>";
@@ -1486,6 +1489,7 @@
 				8468C9621BDA11BE002D4B1E /* testUIHorizontalScrollView.lua in Resources */,
 				84799ACF1BAFDDA00070E214 /* img7.tiff in Resources */,
 				84799AE01BAFDDA00070E214 /* demoW2_AudioPlayer.lua in Resources */,
+				846A4E7B1C1067BC000B98C5 /* jhs.png in Resources */,
 				84799ACA1BAFDDA00070E214 /* img1.tiff in Resources */,
 				847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */,
 				84799AD91BAFDDA00070E214 /* color1.png in Resources */,
