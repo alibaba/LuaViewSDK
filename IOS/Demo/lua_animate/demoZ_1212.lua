@@ -101,9 +101,9 @@ function showEnterButton()
 	end);
 	enterButton.center( SCR_W/2, SCR_H/2 );
 	enterButton.scale( 0, 0)
-	Animate( 3, 0, 0.3,0, 
+	Animate( 1, 0, 0.5,0,
 		function(){
-			enterButton.scale(1.2,1.2);
+			enterButton.scale(1,1);
 		}, 
 		function ()
 		end)
@@ -112,6 +112,8 @@ function showEnterButton()
 	closeButton = Image();
 	closeButton.image("close.png");
 	closeButton.adjustSize();
+	local imageW,imageH = closeButton.size();
+	closeButton.size(imageW/3, imageH/3);
 	closeButton.bottom(enterButton.top());
 	closeButton.right(enterButton.right());
 	closeButton.callback(function ()
