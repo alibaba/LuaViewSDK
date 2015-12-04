@@ -3,13 +3,13 @@ SCR_W, SCR_H = System.screenSize();
 
 
 window.frame(0, 0, SCR_W, SCR_H);
-window.backgroundColor(0);
+window.backgroundColor(0,0.5);
 window.enabled(true);
 
-bg = Image();
-bg.image("jhs.png");
-bg.frame(0,0,SCR_W, SCR_H);
-bg.alpha(0.5)
+-- bg = Image();
+-- bg.image("jhs.png");
+-- bg.frame(0,0,SCR_W, SCR_H);
+-- bg.alpha(0.5)
 
 -------------------------------
 function snowCreater(fileName, x0, y0)
@@ -96,7 +96,8 @@ function showEnterButton()
 	enterButton.size(imageW/3*small, imageH/3*small);
 
 	enterButton.callback(function ()
-		viewController.openUrl("http://taoboa.com");
+		viewController.openUrl("https://ju.taobao.com/m/jusp/my/main/mtp.htm");--12.8
+		-- viewController.openUrl("https://ju.taobao.com/m/jusp/nv/juczmd/mtp.htm?hongbao=true");--12.10
 	end);
 	enterButton.center( SCR_W*0.5, SCR_H*0.4 );
 	enterButton.scale( 0, 0)
