@@ -1,6 +1,6 @@
 -- 1. 函数{}支持
 function abc(a, b, c) {
-    Toast("Fun" .. a .. b .. c)
+    Toast("Fun" .. a .. "\n" .. b .. c)
 }
 
 abc(1, 'a', ',')

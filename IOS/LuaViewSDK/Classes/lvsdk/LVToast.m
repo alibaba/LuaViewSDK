@@ -47,10 +47,11 @@
         text = [text_ copy];
         
         UIFont *font = [UIFont boldSystemFontOfSize:14];
-        CGSize textSize = [text sizeWithFont:font
-                           constrainedToSize:CGSizeMake(280, MAXFLOAT)
-                               lineBreakMode:NSLineBreakByWordWrapping];
         
+        CGSize textSize = [text boundingRectWithSize:CGSizeMake(280, MAXFLOAT)
+                                             options:(NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                          attributes:@{NSFontAttributeName: font }
+                                             context:nil].size;
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 12, textSize.height + 12)];
         textLabel.backgroundColor = [UIColor clearColor];
         textLabel.textColor = [UIColor whiteColor];
