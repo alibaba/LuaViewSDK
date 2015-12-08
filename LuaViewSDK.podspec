@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LuaViewSDK"
-  s.version      = "1.2.0"
+  s.version      = "2.0.0"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
@@ -23,9 +23,9 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios, "5.0"
+  s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "git@gitlab.alibaba-inc.com:xicheng.dxc/LuaViewSDK.git", :tag => "1.1.2" }
+  s.source       = { :git => "git@gitlab.alibaba-inc.com:juhuasuanwireless/LuaViewSDK.git", :tag => "2.0.0.0" }
 
   s.source_files  = "LuaViewSDK/Classes", "IOS/LuaViewSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
