@@ -19,6 +19,11 @@
 		<key>LuaViewSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>temp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 	</dict>
@@ -45,6 +50,21 @@
 			<true/>
 		</dict>
 		<key>848B5C361A0A4CA000F59678</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>84C1D6991C16B09D0058E974</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>84C1D6A21C16B09D0058E974</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>84C1D7C31C16C3CD0058E974</key>
 		<dict>
 			<key>primary</key>
 			<true/>

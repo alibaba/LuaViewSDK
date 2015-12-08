@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-               BuildableName = "LuaViewSDK.framework"
-               BlueprintName = "LuaViewSDK"
+               BlueprintIdentifier = "8418E33F1A5E67FC00158125"
+               BuildableName = "libLuaViewSDK.a"
+               BlueprintName = "temp"
                ReferencedContainer = "container:LuaViewSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-            BuildableName = "LuaViewSDK.framework"
-            BlueprintName = "LuaViewSDK"
+            BlueprintIdentifier = "8418E33F1A5E67FC00158125"
+            BuildableName = "libLuaViewSDK.a"
+            BlueprintName = "temp"
             ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-            BuildableName = "LuaViewSDK.framework"
-            BlueprintName = "LuaViewSDK"
+            BlueprintIdentifier = "8418E33F1A5E67FC00158125"
+            BuildableName = "libLuaViewSDK.a"
+            BlueprintName = "temp"
             ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

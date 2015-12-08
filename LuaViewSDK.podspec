@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    * LuaView
                    DESC
 
-  s.homepage     = "http://gitlab.alibaba-inc.com/xicheng.dxc/luaview"
+  s.homepage     = "http://gitlab.alibaba-inc.com/juhuasuanwireless/LuaViewSDK"
 
 
   s.license      = { :type => 'GNU General Public Licence (GPL), Version 2.0', :file => 'LICENSE.txt' }

@@ -9,196 +9,127 @@
 /* Begin PBXBuildFile section */
 		539AD374E91F407031F9272B /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
 		84056E721B5CA5990078F9D6 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; };
-		84056E731B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
 		84056E741B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
 		840870851BE9DB47004CADB7 /* demoZ_2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */; };
 		840AD5841A5EAB4A0075CB58 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; };
 		840AD5851A5EAB4A0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
-		840AD5C91A5EB78D0075CB58 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
-		840AD5CB1A5EB78D0075CB58 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LuaViewSDK.m */; };
 		840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B41A5E804700158125 /* Main.storyboard */; };
 		840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B21A5E804700158125 /* LaunchScreen.xib */; };
-		840AD5E51A63ED7D003E837D /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
 		840AD5E61A63ED7D003E837D /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
 		840AD5E71A63ED7D003E837D /* lV.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5AF1A63ED7C003E837D /* lV.h */; };
-		840AD5E81A63ED7D003E837D /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
 		840AD5E91A63ED7D003E837D /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
 		840AD5EA1A63ED7D003E837D /* lVapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B11A63ED7C003E837D /* lVapi.h */; };
-		840AD5EB1A63ED7D003E837D /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
 		840AD5EC1A63ED7D003E837D /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
 		840AD5ED1A63ED7D003E837D /* lVauxlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B31A63ED7C003E837D /* lVauxlib.h */; };
-		840AD5EE1A63ED7D003E837D /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
 		840AD5EF1A63ED7D003E837D /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
-		840AD5F01A63ED7D003E837D /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
 		840AD5F11A63ED7D003E837D /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
-		840AD5F21A63ED7D003E837D /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
 		840AD5F31A63ED7D003E837D /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
 		840AD5F41A63ED7D003E837D /* lVcode.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B71A63ED7C003E837D /* lVcode.h */; };
 		840AD5F51A63ED7D003E837D /* lVconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B81A63ED7C003E837D /* lVconf.h */; };
-		840AD5F61A63ED7D003E837D /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
 		840AD5F71A63ED7D003E837D /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
-		840AD5F81A63ED7D003E837D /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
 		840AD5F91A63ED7D003E837D /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
 		840AD5FA1A63ED7D003E837D /* lVdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BB1A63ED7C003E837D /* lVdebug.h */; };
-		840AD5FB1A63ED7D003E837D /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
 		840AD5FC1A63ED7D003E837D /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
 		840AD5FD1A63ED7D003E837D /* lVdo.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BD1A63ED7C003E837D /* lVdo.h */; };
-		840AD5FE1A63ED7D003E837D /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
 		840AD5FF1A63ED7D003E837D /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
-		840AD6001A63ED7D003E837D /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
 		840AD6011A63ED7D003E837D /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
 		840AD6021A63ED7D003E837D /* lVfunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C01A63ED7C003E837D /* lVfunc.h */; };
-		840AD6031A63ED7D003E837D /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
 		840AD6041A63ED7D003E837D /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
 		840AD6051A63ED7D003E837D /* lVgc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C21A63ED7C003E837D /* lVgc.h */; };
-		840AD6061A63ED7D003E837D /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
 		840AD6071A63ED7D003E837D /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
-		840AD6081A63ED7D003E837D /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
 		840AD6091A63ED7D003E837D /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
-		840AD60A1A63ED7D003E837D /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
 		840AD60B1A63ED7D003E837D /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
 		840AD60C1A63ED7D003E837D /* lVlex.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C61A63ED7C003E837D /* lVlex.h */; };
 		840AD60D1A63ED7D003E837D /* lVlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C71A63ED7C003E837D /* lVlib.h */; };
 		840AD60E1A63ED7D003E837D /* lVlimits.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C81A63ED7C003E837D /* lVlimits.h */; };
-		840AD60F1A63ED7D003E837D /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
 		840AD6101A63ED7D003E837D /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
-		840AD6111A63ED7D003E837D /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
 		840AD6121A63ED7D003E837D /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
 		840AD6131A63ED7D003E837D /* lVmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CB1A63ED7C003E837D /* lVmem.h */; };
-		840AD6141A63ED7D003E837D /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
 		840AD6151A63ED7D003E837D /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
-		840AD6161A63ED7D003E837D /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
 		840AD6171A63ED7D003E837D /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
 		840AD6181A63ED7D003E837D /* lVobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CE1A63ED7C003E837D /* lVobject.h */; };
-		840AD6191A63ED7D003E837D /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
 		840AD61A1A63ED7D003E837D /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
 		840AD61B1A63ED7D003E837D /* lVopcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D01A63ED7C003E837D /* lVopcodes.h */; };
-		840AD61C1A63ED7D003E837D /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
 		840AD61D1A63ED7D003E837D /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
-		840AD61E1A63ED7D003E837D /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
 		840AD61F1A63ED7D003E837D /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
 		840AD6201A63ED7D003E837D /* lVparser.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D31A63ED7C003E837D /* lVparser.h */; };
-		840AD6211A63ED7D003E837D /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
 		840AD6221A63ED7D003E837D /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
-		840AD6231A63ED7D003E837D /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
 		840AD6241A63ED7D003E837D /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
 		840AD6251A63ED7D003E837D /* lVstate.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D61A63ED7C003E837D /* lVstate.h */; };
-		840AD6261A63ED7D003E837D /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
 		840AD6271A63ED7D003E837D /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
 		840AD6281A63ED7D003E837D /* lVstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D81A63ED7C003E837D /* lVstring.h */; };
-		840AD6291A63ED7D003E837D /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
 		840AD62A1A63ED7D003E837D /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
-		840AD62B1A63ED7D003E837D /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
 		840AD62C1A63ED7D003E837D /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
 		840AD62D1A63ED7D003E837D /* lVtable.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DB1A63ED7D003E837D /* lVtable.h */; };
-		840AD62E1A63ED7D003E837D /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
 		840AD62F1A63ED7D003E837D /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
-		840AD6301A63ED7D003E837D /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
 		840AD6311A63ED7D003E837D /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
 		840AD6321A63ED7D003E837D /* lVtm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DE1A63ED7D003E837D /* lVtm.h */; };
-		840AD6331A63ED7D003E837D /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
 		840AD6341A63ED7D003E837D /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
 		840AD6351A63ED7D003E837D /* lVundump.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E01A63ED7D003E837D /* lVundump.h */; };
-		840AD6361A63ED7D003E837D /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
 		840AD6371A63ED7D003E837D /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
 		840AD6381A63ED7D003E837D /* lVvm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E21A63ED7D003E837D /* lVvm.h */; };
-		840AD6391A63ED7D003E837D /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		840AD63A1A63ED7D003E837D /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		840AD63B1A63ED7D003E837D /* lVzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E41A63ED7D003E837D /* lVzio.h */; };
 		8410D9AB1A70A00400B22E49 /* LVPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9A91A70A00400B22E49 /* LVPanGestureRecognizer.h */; };
-		8410D9AC1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
 		8410D9AD1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
 		8410D9B01A70A51C00B22E49 /* LVGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9AE1A70A51C00B22E49 /* LVGestureRecognizer.h */; };
-		8410D9B11A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGestureRecognizer.m */; };
 		8410D9B21A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGestureRecognizer.m */; };
 		84185DC11B451E28003E0ECE /* LVStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 84185DBF1B451E28003E0ECE /* LVStruct.h */; };
-		84185DC21B451E28003E0ECE /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
 		84185DC31B451E28003E0ECE /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
 		8418E3AB1A5E704100158125 /* LuaViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A71A5E704100158125 /* LuaViewSDK.h */; };
 		8418E3AC1A5E704100158125 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LuaViewSDK.m */; };
 		8418E3AD1A5E704100158125 /* LuaViewSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */; };
-		8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
 		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
-		8418E3C31A5E804700158125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
-		8418E3C61A5E804700158125 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BD1A5E804700158125 /* ViewController.m */; };
-		842142A31ACD3427001FD0ED /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
 		842142A41ACD3427001FD0ED /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
 		84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84232D441AE4F55B00C9ED93 /* AdSupport.framework */; };
 		842532471ADCB7C0003C05BF /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; };
-		842532481ADCB7C0003C05BF /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
 		842532491ADCB7C0003C05BF /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
 		8425324C1ADCBD3A003C05BF /* LVDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8425324A1ADCBD3A003C05BF /* LVDownloader.h */; };
-		8425324D1ADCBD3A003C05BF /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
 		8425324E1ADCBD3A003C05BF /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
 		84264BE91A78DD3E008D833B /* LVTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84264BE71A78DD3E008D833B /* LVTableView.h */; };
-		84264BEA1A78DD3E008D833B /* LVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BE81A78DD3E008D833B /* LVTableView.m */; };
 		84264BEB1A78DD3E008D833B /* LVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BE81A78DD3E008D833B /* LVTableView.m */; };
 		84264BEE1A78E66F008D833B /* LVTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84264BEC1A78E66F008D833B /* LVTableViewCell.h */; };
-		84264BEF1A78E66F008D833B /* LVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BED1A78E66F008D833B /* LVTableViewCell.m */; };
 		84264BF01A78E66F008D833B /* LVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BED1A78E66F008D833B /* LVTableViewCell.m */; };
 		842D72691A6639A200936AD2 /* LVRegisterManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVRegisterManager.h */; };
-		842D726A1A6639A200936AD2 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
 		842D726B1A6639A200936AD2 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
 		842D726E1A6643DB00936AD2 /* LVAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D726C1A6643DB00936AD2 /* LVAlert.h */; };
-		842D726F1A6643DB00936AD2 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
 		842D72701A6643DB00936AD2 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
 		84342D8E1AE0E02B00ECB4EF /* LVStyledString.h in Headers */ = {isa = PBXBuildFile; fileRef = 84342D8C1AE0E02B00ECB4EF /* LVStyledString.h */; };
-		84342D8F1AE0E02B00ECB4EF /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
 		84342D901AE0E02B00ECB4EF /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
 		8434474A1B61DDED0039B98A /* UIView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 843447481B61DDED0039B98A /* UIView+LuaView.h */; };
-		8434474B1B61DDED0039B98A /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
 		8434474C1B61DDED0039B98A /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
 		8434474F1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; };
-		843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		843447511B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		8446F15D1BDF57F2007E4064 /* LVNinePatchImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */; };
-		8446F15E1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
 		8446F15F1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
 		8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */; };
-		84470B171B5E66FF00980E31 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLVCustomError.m */; };
-		844F9F581B969E4300E24A24 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */; };
-		844F9F5B1B96A0AF00E24A24 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */; };
 		8454D1411A7F732500774565 /* LVHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D13F1A7F732500774565 /* LVHttp.h */; };
-		8454D1421A7F732500774565 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		8454D1431A7F732500774565 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		8454D1461A7FA7A400774565 /* LVHttpResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D1441A7FA7A400774565 /* LVHttpResponse.h */; };
-		8454D1471A7FA7A400774565 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		8454D1481A7FA7A400774565 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		846481BE1A64C61F00DE6204 /* LVAnimate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A61A64C61F00DE6204 /* LVAnimate.h */; };
-		846481BF1A64C61F00DE6204 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
 		846481C01A64C61F00DE6204 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
 		846481C11A64C61F00DE6204 /* LVBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A81A64C61F00DE6204 /* LVBaseView.h */; };
-		846481C21A64C61F00DE6204 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
 		846481C31A64C61F00DE6204 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
 		846481C41A64C61F00DE6204 /* LVButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AA1A64C61F00DE6204 /* LVButton.h */; };
-		846481C51A64C61F00DE6204 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
 		846481C61A64C61F00DE6204 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
 		846481C71A64C61F00DE6204 /* LVHeads.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AC1A64C61F00DE6204 /* LVHeads.h */; };
-		846481C81A64C61F00DE6204 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
 		846481C91A64C61F00DE6204 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
 		846481CA1A64C61F00DE6204 /* LVImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AE1A64C61F00DE6204 /* LVImage.h */; };
-		846481CB1A64C61F00DE6204 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
 		846481CC1A64C61F00DE6204 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
 		846481CD1A64C61F00DE6204 /* LVLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B01A64C61F00DE6204 /* LVLabel.h */; };
-		846481CE1A64C61F00DE6204 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
 		846481CF1A64C61F00DE6204 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
 		846481D01A64C61F00DE6204 /* LVPagerIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B21A64C61F00DE6204 /* LVPagerIndicator.h */; };
-		846481D11A64C61F00DE6204 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
 		846481D21A64C61F00DE6204 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
 		846481D31A64C61F00DE6204 /* LVScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B41A64C61F00DE6204 /* LVScrollView.h */; };
-		846481D41A64C61F00DE6204 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
 		846481D51A64C61F00DE6204 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
 		846481D61A64C61F00DE6204 /* LVTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B61A64C61F00DE6204 /* LVTextField.h */; };
-		846481D71A64C61F00DE6204 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
 		846481D81A64C61F00DE6204 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
 		846481D91A64C61F00DE6204 /* LVTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B81A64C61F00DE6204 /* LVTimer.h */; };
-		846481DA1A64C61F00DE6204 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
 		846481DB1A64C61F00DE6204 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
 		846481DC1A64C61F00DE6204 /* LVTransform3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BA1A64C61F00DE6204 /* LVTransform3D.h */; };
-		846481DD1A64C61F00DE6204 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
 		846481DE1A64C61F00DE6204 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
 		846481DF1A64C61F00DE6204 /* LVUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BC1A64C61F00DE6204 /* LVUtil.h */; };
-		846481E01A64C61F00DE6204 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
 		846481E11A64C61F00DE6204 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
 		8468C95C1BDA11BE002D4B1E /* testLuaLang.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9491BDA11BE002D4B1E /* testLuaLang.lua */; };
 		8468C95D1BDA11BE002D4B1E /* testNavigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94A1BDA11BE002D4B1E /* testNavigation.lua */; };
@@ -220,14 +151,11 @@
 		8468C96D1BDA11BE002D4B1E /* testViewPager.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95A1BDA11BE002D4B1E /* testViewPager.lua */; };
 		8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */; };
 		8468C9711BDA177C002D4B1E /* LVToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8468C96F1BDA177C002D4B1E /* LVToast.h */; };
-		8468C9721BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
 		8468C9731BDA177C002D4B1E /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
 		846A4E7B1C1067BC000B98C5 /* jhs.png in Resources */ = {isa = PBXBuildFile; fileRef = 846A4E7A1C1067BC000B98C5 /* jhs.png */; };
 		846E879B1A653DEC000D14DA /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; };
-		846E879C1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
 		846E879D1A653DEC000D14DA /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
 		84765E2D1ADE37A7002506CB /* LVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84765E2B1ADE37A7002506CB /* LVFile.h */; };
-		84765E2E1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		84765E2F1ADE37A7002506CB /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
 		8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */; };
 		84799ACA1BAFDDA00070E214 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA51BAFDDA00070E214 /* img1.tiff */; };
@@ -267,10 +195,8 @@
 		84799AF01BAFDDCA0070E214 /* demoK_PagerView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */; };
 		84799AF21BAFDF370070E214 /* lv_kit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AF11BAFDF370070E214 /* lv_kit.lua */; };
 		84799AF51BAFECA00070E214 /* LVPagerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF31BAFECA00070E214 /* LVPagerView.h */; };
-		84799AF61BAFECA00070E214 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
 		84799AF71BAFECA00070E214 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
 		84799AFA1BAFEFDA0070E214 /* LVPagerViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */; };
-		84799AFB1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
 		84799AFC1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
 		847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9011C0E95C5008776E9 /* demoZ_1212.lua */; };
 		847BE9061C0E97AF008776E9 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9031C0E97AF008776E9 /* enter.png */; };
@@ -282,102 +208,286 @@
 		8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */; };
 		8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */; };
 		8481E05B1BD7AC8000FDFEEA /* LVScrollViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */; };
-		8481E05C1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
 		8481E05D1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
 		8481E0601BD7AEF300FDFEEA /* LVTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E05E1BD7AEF300FDFEEA /* LVTableViewDelegate.h */; };
-		8481E0611BD7AEF300FDFEEA /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; };
 		8481E0621BD7AEF300FDFEEA /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; };
 		8481E0651BD7B29100FDFEEA /* LVCollectionViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */; };
-		8481E0661BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
 		8481E0671BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
 		848CA35F1B29669A00C70321 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; };
-		848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
 		848CA3611B29669A00C70321 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
 		848CA3641B29748800C70321 /* LVCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA3621B29748800C70321 /* LVCollectionViewCell.h */; };
-		848CA3651B29748800C70321 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
 		848CA3661B29748800C70321 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
-		848F3C371B96EA9800D5D510 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C341B96EA9800D5D510 /* JHSLVButton.m */; };
-		848F3C381B96EA9800D5D510 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C361B96EA9800D5D510 /* JHSLVImage.m */; };
 		849708371A67653A00E913F4 /* LVDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 849708351A67653A00E913F4 /* LVDB.h */; };
-		849708381A67653A00E913F4 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
 		849708391A67653A00E913F4 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
 		8497083C1A6765B000E913F4 /* LVSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8497083A1A6765B000E913F4 /* LVSystem.h */; };
-		8497083D1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
 		8497083E1A6765B000E913F4 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
 		849832121BCB682F0032BF05 /* demoV1_CustomError.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849832101BCB682F0032BF05 /* demoV1_CustomError.lua */; };
 		849832131BCB682F0032BF05 /* demoV1_Customloading.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849832111BCB682F0032BF05 /* demoV1_Customloading.lua */; };
 		84B1E3811AEF24480054B9F1 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; };
-		84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3831AEF24480054B9F1 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1E3841AEF2ED90054B9F1 /* Security.framework */; };
 		84B58E3A1B65CC260048F33D /* LVLoadingIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVLoadingIndicator.h */; };
-		84B58E3B1B65CC270048F33D /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
 		84B58E3C1B65CC270048F33D /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
 		84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; };
-		84BC62211BA95A3F0019B02E /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
 		84BC62221BA95A3F0019B02E /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
+		84C1D79D1C16BAF70058E974 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C361B96EA9800D5D510 /* JHSLVImage.m */; };
+		84C1D79E1C16BAF70058E974 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C341B96EA9800D5D510 /* JHSLVButton.m */; };
+		84C1D79F1C16BAF70058E974 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */; };
+		84C1D7A01C16BAF70058E974 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */; };
+		84C1D7A11C16BAF70058E974 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLVCustomError.m */; };
+		84C1D7A21C16BAF70058E974 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */; };
+		84C1D7A31C16BAF70058E974 /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E04FBC1B9D6D7D009529EC /* JHSLuaViewController.m */; };
+		84C1D7A41C16BAF70058E974 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
+		84C1D7A51C16BAF70058E974 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
+		84C1D7A61C16BAF70058E974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BD1A5E804700158125 /* ViewController.m */; };
+		84C1D7C91C16C3CD0058E974 /* LuaViewSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */; };
+		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
+		84C1D7CD1C16C3CD0058E974 /* LuaViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D7CF1C16C3CD0058E974 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */; };
+		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
+		84C1D7D51C16C3F90058E974 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
+		84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
+		84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
+		84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
+		84C1D7D91C16C3FA0058E974 /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		84C1D7DA1C16C3FA0058E974 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
+		84C1D7DB1C16C3FA0058E974 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
+		84C1D7DC1C16C3FA0058E974 /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
+		84C1D7DD1C16C3FA0058E974 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
+		84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
+		84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		84C1D7E01C16C3FA0058E974 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
+		84C1D7E11C16C3FA0058E974 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
+		84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
+		84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
+		84C1D7E41C16C3FA0058E974 /* LVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BE81A78DD3E008D833B /* LVTableView.m */; };
+		84C1D7E51C16C3FA0058E974 /* LVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BED1A78E66F008D833B /* LVTableViewCell.m */; };
+		84C1D7E61C16C3FA0058E974 /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; };
+		84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
+		84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
+		84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
+		84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
+		84C1D7EB1C16C3FA0058E974 /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
+		84C1D7EC1C16C3FA0058E974 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
+		84C1D7ED1C16C3FA0058E974 /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
+		84C1D7EE1C16C3FA0058E974 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
+		84C1D7EF1C16C3FA0058E974 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
+		84C1D7F01C16C3FA0058E974 /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		84C1D7F11C16C3FA0058E974 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
+		84C1D7F21C16C3FA0058E974 /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
+		84C1D7F31C16C3FA0058E974 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
+		84C1D7F41C16C3FA0058E974 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
+		84C1D7F51C16C3FA0058E974 /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
+		84C1D7F61C16C3FA0058E974 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
+		84C1D7F71C16C3FA0058E974 /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
+		84C1D7F81C16C3FA0058E974 /* LVGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGestureRecognizer.m */; };
+		84C1D7F91C16C3FA0058E974 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
+		84C1D7FA1C16C3FA0058E974 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
+		84C1D7FB1C16C3FA0058E974 /* LVPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGestureRecognizer.m */; };
+		84C1D7FC1C16C3FA0058E974 /* LVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGestureRecognizer.m */; };
+		84C1D7FD1C16C3FA0058E974 /* LVSwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m */; };
+		84C1D7FE1C16C3FA0058E974 /* LVTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */; };
+		84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
+		84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
+		84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
+		84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
+		84C1D8031C16C3FA0058E974 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
+		84C1D8041C16C3FA0058E974 /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
+		84C1D8051C16C3FA0058E974 /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
+		84C1D8061C16C3FA0058E974 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
+		84C1D8071C16C3FA0058E974 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
+		84C1D8081C16C3FA0058E974 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
+		84C1D8091C16C3FA0058E974 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
+		84C1D80A1C16C3FA0058E974 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
+		84C1D80B1C16C3FA0058E974 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
+		84C1D80C1C16C3FA0058E974 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
+		84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
+		84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
+		84C1D80F1C16C3FA0058E974 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
+		84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
+		84C1D8111C16C3FA0058E974 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
+		84C1D8121C16C3FA0058E974 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3A81A5E704100158125 /* LuaViewSDK.m */; };
+		84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
+		84C1D8141C16C4070058E974 /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
+		84C1D8151C16C4070058E974 /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
+		84C1D8161C16C4070058E974 /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
+		84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
+		84C1D8181C16C4070058E974 /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
+		84C1D8191C16C4070058E974 /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
+		84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
+		84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
+		84C1D81C1C16C4070058E974 /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
+		84C1D81D1C16C4070058E974 /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
+		84C1D81E1C16C4070058E974 /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
+		84C1D81F1C16C4070058E974 /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
+		84C1D8201C16C4070058E974 /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
+		84C1D8211C16C4070058E974 /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
+		84C1D8221C16C4070058E974 /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
+		84C1D8231C16C4070058E974 /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
+		84C1D8241C16C4070058E974 /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
+		84C1D8251C16C4070058E974 /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
+		84C1D8261C16C4070058E974 /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
+		84C1D8271C16C4070058E974 /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
+		84C1D8281C16C4070058E974 /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
+		84C1D8291C16C4070058E974 /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
+		84C1D82A1C16C4070058E974 /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
+		84C1D82B1C16C4070058E974 /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
+		84C1D82C1C16C4070058E974 /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
+		84C1D82D1C16C4070058E974 /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
+		84C1D82E1C16C4070058E974 /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
+		84C1D82F1C16C4070058E974 /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
+		84C1D8301C16C4070058E974 /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
+		84C1D8311C16C4070058E974 /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
+		84C1D8321C16C4070058E974 /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
+		84C1D8331C16C4070058E974 /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
+		84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8351C16C4490058E974 /* LVInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F51AF7631C000A3911 /* LVInputStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8361C16C4490058E974 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8391C16C4490058E974 /* LVBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A81A64C61F00DE6204 /* LVBaseView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83A1C16C4490058E974 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 843447481B61DDED0039B98A /* UIView+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AA1A64C61F00DE6204 /* LVButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83D1C16C44A0058E974 /* LVImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AE1A64C61F00DE6204 /* LVImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83E1C16C44A0058E974 /* LVNinePatchImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83F1C16C44A0058E974 /* LVLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B01A64C61F00DE6204 /* LVLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8401C16C44A0058E974 /* LVTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B61A64C61F00DE6204 /* LVTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8411C16C44A0058E974 /* LVLoadingIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVLoadingIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8421C16C44A0058E974 /* LVPagerIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B21A64C61F00DE6204 /* LVPagerIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8431C16C44A0058E974 /* LVTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84264BE71A78DD3E008D833B /* LVTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8441C16C44A0058E974 /* LVTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84264BEC1A78E66F008D833B /* LVTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8451C16C44A0058E974 /* LVTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E05E1BD7AEF300FDFEEA /* LVTableViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8461C16C44A0058E974 /* LVPagerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF31BAFECA00070E214 /* LVPagerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8471C16C44A0058E974 /* LVPagerViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8481C16C44A0058E974 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8491C16C44A0058E974 /* LVCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA3621B29748800C70321 /* LVCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84A1C16C44A0058E974 /* LVCollectionViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84B1C16C44A0058E974 /* LVScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B41A64C61F00DE6204 /* LVScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84C1C16C44A0058E974 /* LVScrollViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84D1C16C44A0058E974 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84E1C16C44A0058E974 /* LVAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D726C1A6643DB00936AD2 /* LVAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84F1C16C44A0058E974 /* LVToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8468C96F1BDA177C002D4B1E /* LVToast.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8501C16C44A0058E974 /* LVAnimate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A61A64C61F00DE6204 /* LVAnimate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8511C16C44B0058E974 /* LVStyledString.h in Headers */ = {isa = PBXBuildFile; fileRef = 84342D8C1AE0E02B00ECB4EF /* LVStyledString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BA1A64C61F00DE6204 /* LVTransform3D.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8531C16C44B0058E974 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8541C16C44B0058E974 /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B81A64C61F00DE6204 /* LVTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 84185DBF1B451E28003E0ECE /* LVStruct.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8571C16C44B0058E974 /* LVGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9AE1A70A51C00B22E49 /* LVGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8581C16C44B0058E974 /* LVLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8591C16C44B0058E974 /* LVPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9A91A70A00400B22E49 /* LVPanGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85A1C16C44B0058E974 /* LVPinchGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85B1C16C44B0058E974 /* LVRotationGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E8E1AAD934D00107DFC /* LVRotationGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85C1C16C44C0058E974 /* LVSwipeGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 918B9F1B1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85D1C16C44C0058E974 /* LVTapGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DF1DA41A6F5BC9009F970A /* LVTapGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D13F1A7F732500774565 /* LVHttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D1441A7FA7A400774565 /* LVHttpResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8621C16C44C0058E974 /* LVDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 849708351A67653A00E913F4 /* LVDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8631C16C44C0058E974 /* LVDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8425324A1ADCBD3A003C05BF /* LVDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8641C16C44D0058E974 /* LVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84765E2B1ADE37A7002506CB /* LVFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8651C16C44D0058E974 /* LVNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DD8F871B560933001C83E9 /* LVNavigation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8661C16C44D0058E974 /* LVSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8497083A1A6765B000E913F4 /* LVSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8671C16C44D0058E974 /* LVExternalLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8681C16C44D0058E974 /* LVMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56781AEA15A500A49B36 /* LVMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56731AE9184000A49B36 /* LVNativeObjBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BC1A64C61F00DE6204 /* LVUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCF0391B44D91800AD723B /* LVTypeConvert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVRegisterManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AC1A64C61F00DE6204 /* LVHeads.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8701C16C44F0058E974 /* lV.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5AF1A63ED7C003E837D /* lV.h */; };
+		84C1D8711C16C44F0058E974 /* lVapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B11A63ED7C003E837D /* lVapi.h */; };
+		84C1D8721C16C44F0058E974 /* lVauxlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B31A63ED7C003E837D /* lVauxlib.h */; };
+		84C1D8731C16C44F0058E974 /* lVcode.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B71A63ED7C003E837D /* lVcode.h */; };
+		84C1D8741C16C44F0058E974 /* lVconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B81A63ED7C003E837D /* lVconf.h */; };
+		84C1D8751C16C4500058E974 /* lVdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BB1A63ED7C003E837D /* lVdebug.h */; };
+		84C1D8761C16C4500058E974 /* lVdo.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BD1A63ED7C003E837D /* lVdo.h */; };
+		84C1D8771C16C4500058E974 /* lVfunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C01A63ED7C003E837D /* lVfunc.h */; };
+		84C1D8781C16C4500058E974 /* lVgc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C21A63ED7C003E837D /* lVgc.h */; };
+		84C1D8791C16C4500058E974 /* lVlex.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C61A63ED7C003E837D /* lVlex.h */; };
+		84C1D87A1C16C4510058E974 /* lVlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C71A63ED7C003E837D /* lVlib.h */; };
+		84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C81A63ED7C003E837D /* lVlimits.h */; };
+		84C1D87C1C16C4510058E974 /* lVmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CB1A63ED7C003E837D /* lVmem.h */; };
+		84C1D87D1C16C4510058E974 /* lVobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CE1A63ED7C003E837D /* lVobject.h */; };
+		84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D01A63ED7C003E837D /* lVopcodes.h */; };
+		84C1D87F1C16C4520058E974 /* lVparser.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D31A63ED7C003E837D /* lVparser.h */; };
+		84C1D8801C16C4520058E974 /* lVstate.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D61A63ED7C003E837D /* lVstate.h */; };
+		84C1D8811C16C4520058E974 /* lVstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D81A63ED7C003E837D /* lVstring.h */; };
+		84C1D8821C16C4530058E974 /* lVtable.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DB1A63ED7D003E837D /* lVtable.h */; };
+		84C1D8831C16C4530058E974 /* lVtm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DE1A63ED7D003E837D /* lVtm.h */; };
+		84C1D8841C16C4530058E974 /* lVundump.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E01A63ED7D003E837D /* lVundump.h */; };
+		84C1D8851C16C4530058E974 /* lVvm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E21A63ED7D003E837D /* lVvm.h */; };
+		84C1D8861C16C4540058E974 /* lVzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E41A63ED7D003E837D /* lVzio.h */; };
+		84C1D8871C16C4540058E974 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8881C16C4540058E974 /* LuaViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8418E3A71A5E704100158125 /* LuaViewSDK.h */; };
+		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D88A1C16C4550058E974 /* LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D69C1C16B09D0058E974 /* LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D88B1C16C5780058E974 /* Foundation.framework */; };
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
-		84C3B72B1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
 		84CF566E1AE8EC3D00A49B36 /* LVExternalLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */; };
-		84CF566F1AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
 		84CF56701AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
 		84CF56751AE9184000A49B36 /* LVNativeObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56731AE9184000A49B36 /* LVNativeObjBox.h */; };
-		84CF56761AE9184000A49B36 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
 		84CF56771AE9184000A49B36 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
 		84CF567A1AEA15A500A49B36 /* LVMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56781AEA15A500A49B36 /* LVMethod.h */; };
-		84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
 		84CF567C1AEA15A500A49B36 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
 		84D446F21AF75BD8000A3911 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; };
-		84D446F31AF75BD8000A3911 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
 		84D446F41AF75BD8000A3911 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
 		84D446F71AF7631C000A3911 /* LVInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F51AF7631C000A3911 /* LVInputStream.h */; };
-		84D446F81AF7631C000A3911 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
 		84D446F91AF7631C000A3911 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
-		84D840A11B5F33D900BC59F3 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */; };
 		84DCB2B11B39349A00244C39 /* LVLuaObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */; };
-		84DCB2B21B39349A00244C39 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
 		84DCB2B31B39349A00244C39 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
 		84DCF03B1B44D91800AD723B /* LVTypeConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCF0391B44D91800AD723B /* LVTypeConvert.h */; };
-		84DCF03C1B44D91800AD723B /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
 		84DCF03D1B44D91800AD723B /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
 		84DD8F891B560933001C83E9 /* LVNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DD8F871B560933001C83E9 /* LVNavigation.h */; };
-		84DD8F8A1B560933001C83E9 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
 		84DD8F8B1B560933001C83E9 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
 		84DDB85D1B43BAEB006ACE9A /* LVPointerValueBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */; };
-		84DDB85E1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
 		84DDB85F1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
 		84DF1DA61A6F5BC9009F970A /* LVTapGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DF1DA41A6F5BC9009F970A /* LVTapGestureRecognizer.h */; };
-		84DF1DA71A6F5BC9009F970A /* LVTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */; };
 		84DF1DA81A6F5BC9009F970A /* LVTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */; };
-		84E04FBD1B9D6D7D009529EC /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E04FBC1B9D6D7D009529EC /* JHSLuaViewController.m */; };
 		84E446981AEE0655009C9A8A /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; };
-		84E446991AEE0655009C9A8A /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
 		84E4469A1AEE0655009C9A8A /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
 		84F4A01F1B4B9E600062A7B2 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; };
-		84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84F4A0211B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
 		84FC64D21BB399A500B6AF86 /* demoO_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D11BB399A500B6AF86 /* demoO_Timer.lua */; };
 		84FC64D41BB3A75100B6AF86 /* demoM_Navigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D31BB3A75100B6AF86 /* demoM_Navigation.lua */; };
 		84FC64D61BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D51BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua */; };
 		9171D4A41AADD0300040DAA3 /* LVLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */; };
-		9171D4A51AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
 		9171D4A61AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
 		91882E8B1AAD45A400107DFC /* LVPinchGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */; };
-		91882E8C1AAD45A400107DFC /* LVPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGestureRecognizer.m */; };
 		91882E8D1AAD45A400107DFC /* LVPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGestureRecognizer.m */; };
 		91882E901AAD934D00107DFC /* LVRotationGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E8E1AAD934D00107DFC /* LVRotationGestureRecognizer.h */; };
-		91882E911AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGestureRecognizer.m */; };
 		91882E921AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGestureRecognizer.m */; };
 		918B9F1D1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 918B9F1B1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.h */; };
-		918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m */; };
 		918B9F1F1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m */; };
 		91ACCE771AC531160034D9B3 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; };
-		91ACCE781AC531160034D9B3 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
 		91ACCE791AC531160034D9B3 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
 		E961449DAA11DF4DDE3E3C59 /* libPods-LuaViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84C1D6A71C16B09D0058E974 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848B5C161A0A4CA000F59678 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 848B5C1D1A0A4CA000F59678;
+			remoteInfo = Demo;
+		};
+		84C1D88D1C16C90D0058E974 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848B5C161A0A4CA000F59678 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84C1D7C31C16C3CD0058E974;
+			remoteInfo = LuaViewSDK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8418E33E1A5E67FC00158125 /* CopyFiles */ = {
@@ -387,6 +497,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D6B41C16B09E0058E974 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -643,6 +763,21 @@
 		84B58E391B65CC260048F33D /* LVLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingIndicator.m; sourceTree = "<group>"; };
 		84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebugConnection.h; path = lvdebug/LVDebugConnection.h; sourceTree = "<group>"; };
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
+		84C1D69C1C16B09D0058E974 /* LuaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaView.h; sourceTree = "<group>"; };
+		84C1D69E1C16B09D0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuaViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaViewTests.m; sourceTree = "<group>"; };
+		84C1D6AC1C16B09D0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84C1D7961C16B4370058E974 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		84C1D7981C16B46D0058E974 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = LuaViewSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C1D7C51C16C3CD0058E974 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
+		84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LuaViewSDK-Info.plist"; sourceTree = "<group>"; };
+		84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaViewSDK.h; sourceTree = "<group>"; };
+		84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaViewSDK.m; sourceTree = "<group>"; };
+		84C1D7D01C16C3CD0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84C1D88B1C16C5780058E974 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
 		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
@@ -711,6 +846,21 @@
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
 				539AD374E91F407031F9272B /* libPods-Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D6A01C16B09D0058E974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D7BF1C16C3CD0058E974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,6 +1245,9 @@
 				842ECCD41B71A3900034C3A2 /* TAGS_NOTES.md */,
 				8418E3AF1A5E804700158125 /* Demo */,
 				8418E3411A5E67FC00158125 /* LuaViewSDK */,
+				84C1D69B1C16B09D0058E974 /* LuaView */,
+				84C1D6A91C16B09D0058E974 /* LuaViewTests */,
+				84C1D7C71C16C3CD0058E974 /* LuaViewSDK */,
 				848B5C1F1A0A4CA000F59678 /* Products */,
 				CACC8D0F2D9A900CA53CA849 /* Pods */,
 				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
@@ -1107,6 +1260,8 @@
 			children = (
 				848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */,
 				8418E3401A5E67FC00158125 /* libLuaViewSDK.a */,
+				84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */,
+				84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1219,6 +1374,36 @@
 			name = RSA;
 			sourceTree = "<group>";
 		};
+		84C1D69B1C16B09D0058E974 /* LuaView */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D69C1C16B09D0058E974 /* LuaView.h */,
+				84C1D69E1C16B09D0058E974 /* Info.plist */,
+			);
+			path = LuaView;
+			sourceTree = "<group>";
+		};
+		84C1D6A91C16B09D0058E974 /* LuaViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */,
+				84C1D6AC1C16B09D0058E974 /* Info.plist */,
+			);
+			path = LuaViewTests;
+			sourceTree = "<group>";
+		};
+		84C1D7C71C16C3CD0058E974 /* LuaViewSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */,
+				84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */,
+				84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */,
+				84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */,
+				84C1D7D01C16C3CD0058E974 /* Info.plist */,
+			);
+			path = LuaViewSDK;
+			sourceTree = "<group>";
+		};
 		84CF566B1AE8EC0B00A49B36 /* externalLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,6 +1435,9 @@
 		8DF50822C3B250E24CAD9EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84C1D88B1C16C5780058E974 /* Foundation.framework */,
+				84C1D7981C16B46D0058E974 /* libz.1.1.3.tbd */,
+				84C1D7961C16B4370058E974 /* libz.1.2.5.tbd */,
 				84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */,
 				84A63D6D1B958B9F0048CBD3 /* libz.dylib */,
 				84B1E3841AEF2ED90054B9F1 /* Security.framework */,
@@ -1259,6 +1447,7 @@
 				A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */,
 				D1D7913A587AD4124F9407CC /* libPods-Demo.a */,
 				C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */,
+				84C1D7C51C16C3CD0058E974 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1384,12 +1573,108 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84C1D7C01C16C3CD0058E974 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */,
+				84C1D8351C16C4490058E974 /* LVInputStream.h in Headers */,
+				84C1D8361C16C4490058E974 /* LVRSA.h in Headers */,
+				84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */,
+				84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */,
+				84C1D8391C16C4490058E974 /* LVBaseView.h in Headers */,
+				84C1D83A1C16C4490058E974 /* UIScrollView+LuaView.h in Headers */,
+				84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */,
+				84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */,
+				84C1D83D1C16C44A0058E974 /* LVImage.h in Headers */,
+				84C1D83E1C16C44A0058E974 /* LVNinePatchImage.h in Headers */,
+				84C1D83F1C16C44A0058E974 /* LVLabel.h in Headers */,
+				84C1D8401C16C44A0058E974 /* LVTextField.h in Headers */,
+				84C1D8411C16C44A0058E974 /* LVLoadingIndicator.h in Headers */,
+				84C1D8421C16C44A0058E974 /* LVPagerIndicator.h in Headers */,
+				84C1D8431C16C44A0058E974 /* LVTableView.h in Headers */,
+				84C1D8441C16C44A0058E974 /* LVTableViewCell.h in Headers */,
+				84C1D8451C16C44A0058E974 /* LVTableViewDelegate.h in Headers */,
+				84C1D8461C16C44A0058E974 /* LVPagerView.h in Headers */,
+				84C1D8471C16C44A0058E974 /* LVPagerViewCell.h in Headers */,
+				84C1D8481C16C44A0058E974 /* LVCollectionView.h in Headers */,
+				84C1D8491C16C44A0058E974 /* LVCollectionViewCell.h in Headers */,
+				84C1D84A1C16C44A0058E974 /* LVCollectionViewDelegate.h in Headers */,
+				84C1D84B1C16C44A0058E974 /* LVScrollView.h in Headers */,
+				84C1D84C1C16C44A0058E974 /* LVScrollViewDelegate.h in Headers */,
+				84C1D84D1C16C44A0058E974 /* LVCustomPanel.h in Headers */,
+				84C1D84E1C16C44A0058E974 /* LVAlert.h in Headers */,
+				84C1D84F1C16C44A0058E974 /* LVToast.h in Headers */,
+				84C1D8501C16C44A0058E974 /* LVAnimate.h in Headers */,
+				84C1D8511C16C44B0058E974 /* LVStyledString.h in Headers */,
+				84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */,
+				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
+				84C1D8541C16C44B0058E974 /* LVDate.h in Headers */,
+				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
+				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
+				84C1D8571C16C44B0058E974 /* LVGestureRecognizer.h in Headers */,
+				84C1D8581C16C44B0058E974 /* LVLongPressGestureRecognizer.h in Headers */,
+				84C1D8591C16C44B0058E974 /* LVPanGestureRecognizer.h in Headers */,
+				84C1D85A1C16C44B0058E974 /* LVPinchGestureRecognizer.h in Headers */,
+				84C1D85B1C16C44B0058E974 /* LVRotationGestureRecognizer.h in Headers */,
+				84C1D85C1C16C44C0058E974 /* LVSwipeGestureRecognizer.h in Headers */,
+				84C1D85D1C16C44C0058E974 /* LVTapGestureRecognizer.h in Headers */,
+				84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */,
+				84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */,
+				84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */,
+				84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */,
+				84C1D8621C16C44C0058E974 /* LVDB.h in Headers */,
+				84C1D8631C16C44C0058E974 /* LVDownloader.h in Headers */,
+				84C1D8641C16C44D0058E974 /* LVFile.h in Headers */,
+				84C1D8651C16C44D0058E974 /* LVNavigation.h in Headers */,
+				84C1D8661C16C44D0058E974 /* LVSystem.h in Headers */,
+				84C1D8671C16C44D0058E974 /* LVExternalLinker.h in Headers */,
+				84C1D8681C16C44D0058E974 /* LVMethod.h in Headers */,
+				84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */,
+				84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */,
+				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
+				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
+				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
+				84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */,
+				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
+				84C1D8891C16C4550058E974 /* LVBlock.h in Headers */,
+				84C1D88A1C16C4550058E974 /* LuaView.h in Headers */,
+				84C1D8871C16C4540058E974 /* LView.h in Headers */,
+				84C1D7CD1C16C3CD0058E974 /* LuaViewSDK.h in Headers */,
+				84C1D8701C16C44F0058E974 /* lV.h in Headers */,
+				84C1D8711C16C44F0058E974 /* lVapi.h in Headers */,
+				84C1D8721C16C44F0058E974 /* lVauxlib.h in Headers */,
+				84C1D8731C16C44F0058E974 /* lVcode.h in Headers */,
+				84C1D8741C16C44F0058E974 /* lVconf.h in Headers */,
+				84C1D8751C16C4500058E974 /* lVdebug.h in Headers */,
+				84C1D8761C16C4500058E974 /* lVdo.h in Headers */,
+				84C1D8771C16C4500058E974 /* lVfunc.h in Headers */,
+				84C1D8781C16C4500058E974 /* lVgc.h in Headers */,
+				84C1D8791C16C4500058E974 /* lVlex.h in Headers */,
+				84C1D87A1C16C4510058E974 /* lVlib.h in Headers */,
+				84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */,
+				84C1D87C1C16C4510058E974 /* lVmem.h in Headers */,
+				84C1D87D1C16C4510058E974 /* lVobject.h in Headers */,
+				84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */,
+				84C1D87F1C16C4520058E974 /* lVparser.h in Headers */,
+				84C1D8801C16C4520058E974 /* lVstate.h in Headers */,
+				84C1D8811C16C4520058E974 /* lVstring.h in Headers */,
+				84C1D8821C16C4530058E974 /* lVtable.h in Headers */,
+				84C1D8831C16C4530058E974 /* lVtm.h in Headers */,
+				84C1D8841C16C4530058E974 /* lVundump.h in Headers */,
+				84C1D8851C16C4530058E974 /* lVvm.h in Headers */,
+				84C1D8861C16C4540058E974 /* lVzio.h in Headers */,
+				84C1D8881C16C4540058E974 /* LuaViewSDK.h in Headers */,
+				84C1D7C91C16C3CD0058E974 /* LuaViewSDK-Prefix.pch in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8418E33F1A5E67FC00158125 /* LuaViewSDK */ = {
+		8418E33F1A5E67FC00158125 /* temp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */;
+			buildConfigurationList = 8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "temp" */;
 			buildPhases = (
 				2486D7F982CC2283902F5259 /* Check Pods Manifest.lock */,
 				8418E33C1A5E67FC00158125 /* Sources */,
@@ -1402,7 +1687,7 @@
 			);
 			dependencies = (
 			);
-			name = LuaViewSDK;
+			name = temp;
 			productName = LVSDK;
 			productReference = 8418E3401A5E67FC00158125 /* libLuaViewSDK.a */;
 			productType = "com.apple.product-type.library.static";
@@ -1416,15 +1701,54 @@
 				848B5C1B1A0A4CA000F59678 /* Frameworks */,
 				848B5C1C1A0A4CA000F59678 /* Resources */,
 				69CC6A6DF47C8503DB94DAE1 /* Copy Pods Resources */,
+				84C1D6B41C16B09E0058E974 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84C1D88E1C16C90D0058E974 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = lua5.1.4;
 			productReference = 848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */;
 			productType = "com.apple.product-type.application";
+		};
+		84C1D6A21C16B09D0058E974 /* LuaViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C1D6B51C16B09E0058E974 /* Build configuration list for PBXNativeTarget "LuaViewTests" */;
+			buildPhases = (
+				84C1D69F1C16B09D0058E974 /* Sources */,
+				84C1D6A01C16B09D0058E974 /* Frameworks */,
+				84C1D6A11C16B09D0058E974 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84C1D6A81C16B09D0058E974 /* PBXTargetDependency */,
+			);
+			name = LuaViewTests;
+			productName = LuaViewTests;
+			productReference = 84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		84C1D7C31C16C3CD0058E974 /* LuaViewSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C1D7D11C16C3CD0058E974 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */;
+			buildPhases = (
+				84C1D7BE1C16C3CD0058E974 /* Sources */,
+				84C1D7BF1C16C3CD0058E974 /* Frameworks */,
+				84C1D7C01C16C3CD0058E974 /* Headers */,
+				84C1D7C11C16C3CD0058E974 /* Resources */,
+				84C1D7C21C16C3CD0058E974 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LuaViewSDK;
+			productName = LuaViewSDK;
+			productReference = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */;
+			productType = "com.apple.product-type.framework.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -1442,6 +1766,13 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = XN6U3EV979;
 					};
+					84C1D6A21C16B09D0058E974 = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 848B5C1D1A0A4CA000F59678;
+					};
+					84C1D7C31C16C3CD0058E974 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 				};
 			};
 			buildConfigurationList = 848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */;
@@ -1458,7 +1789,9 @@
 			projectRoot = "";
 			targets = (
 				848B5C1D1A0A4CA000F59678 /* Demo */,
-				8418E33F1A5E67FC00158125 /* LuaViewSDK */,
+				8418E33F1A5E67FC00158125 /* temp */,
+				84C1D6A21C16B09D0058E974 /* LuaViewTests */,
+				84C1D7C31C16C3CD0058E974 /* LuaViewSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -1547,6 +1880,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84C1D6A11C16B09D0058E974 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D7C11C16C3CD0058E974 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1578,6 +1926,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84C1D7C21C16C3CD0058E974 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "# TAG: BUILD SCRIPT (do not remove this comment)\n# Build script generated using https://github.com/kstenerud/iOS-Universal-Framework Mk 8 (beta 2012-06-16)\nimport logging\n\n\n##############################################################################\n#\n# Configuration\n#\n##############################################################################\n\n# Select which kind of framework to build.\n#\n# Note: Due to issues with Xcode's build process, if you select\n#       'embeddedframework', it will still show the regular framework\n#       (as a symlink) along side of the embedded framework. Be sure to\n#       instruct your users to copy/move the embedded framework in this case!\n#\n# If your framework contains resources such as images, nibs, momds, plists,\n# zipfiles and such, choose 'embeddedframework'.\n#\n# If your framework contains no resources, choose 'framework'.\n#\nconfig_framework_type = 'framework'\n#config_framework_type = 'embeddedframework'\n\n# Open the build directory in Finder when the universal framework is\n# successfully built.\n#\n# This value can be overridden by setting the UFW_OPEN_BUILD_DIR env variable\n# to True or False.\n#\n# Recommended setting: True\n#\nconfig_open_build_dir = False\n\n# If true, ensures that all public headers are stored in the framework under\n# the same directory hierarchy as they were in the source tree.\n#\n# Xcode by default places all headers at the same top level, but every other\n# build tool in the known universe preserves directory structure. For simple\n# libraries it doesn't really matter much, but for ports of existing software\n# packages or for bigger libraries, it makes sense to have more structure.\n#\n# The default is set to \"False\" since that's what most Xcode users are used to.\n#\n# Recommended setting: True for deep hierarchy projects, False otherwise.\n#\nconfig_deep_header_hierarchy = False\n\n# Specify where the top of the public header hierarchy is. This path is\n# relative to the project's dir (PROJECT_DIR). You can reference environment\n# variables using templating syntax (e.g. \"${TARGET_NAME}/Some/Subdir\")\n#\n# NOTE: Only used if config_deep_header_hierarchy is True.\n#\n# If this is set to None, the script will attempt to figure out for itself\n# where the top of the header hierarchy is by looking for common path prefixes\n# in the public header files. This process can fail if:\n# - You only have one public header file.\n# - Your source header files don't all have a common root.\n#\n# A common approach is to use \"${TARGET_NAME}\", working under the assumption\n# that all of your header files share the common root of a directory under\n# your project with the same name as your target (which is the Xcode default).\n#\n# Recommended setting: \"${TARGET_NAME}\"\n#\nconfig_deep_header_top = \"${TARGET_NAME}\"\n\n# Warn when \"DerivedData\" is detected in any of the header, library, or\n# framework search paths. In almost all cases, references to directories under\n# DerivedData are added as a result of an Xcode bug and must be manually\n# removed.\n#\n# Recommended setting: True\n#\nconfig_warn_derived_data = True\n\n# Warn if no headers were marked public in this framework.\n#\n# Recommended setting: True\n#\nconfig_warn_no_public_headers = False\n\n# Cause the build to fail if any warnings are issued.\n#\n# Recommended setting: True\n#\nconfig_fail_on_warnings = True\n\n# Minimum log level\n#\n# Recommended setting: logging.INFO\n#\nconfig_log_level = logging.INFO\n\n\n##############################################################################\n#\n# Don't touch anything below here unless you know what you're doing.\n#\n##############################################################################\n\nimport collections\nimport json\nimport os\nimport re\nimport shlex\nimport shutil\nimport string\nimport subprocess\nimport sys\nimport time\nimport traceback\n\n\n##############################################################################\n#\n# Globals\n#\n##############################################################################\n\nlog = logging.getLogger('UFW')\n\nissued_warnings = False\n\n\n##############################################################################\n#\n# Classes\n#\n##############################################################################\n\n# Allows the slave build to communicate with the master build.\n#\nclass BuildState:\n\n    def __init__(self):\n        self.reload()\n\n    def reset(self):\n        self.slave_platform = None\n        self.slave_architectures = []\n        self.slave_linked_archive_paths = []\n        self.slave_built_fw_path = None\n        self.slave_built_embedded_fw_path = None\n\n    def set_slave_properties(self, architectures,\n                             linked_archive_paths,\n                             built_fw_path,\n                             built_embedded_fw_path):\n        self.slave_platform = os.environ['PLATFORM_NAME']\n        self.slave_architectures = architectures\n        self.slave_linked_archive_paths = linked_archive_paths\n        self.slave_built_fw_path = built_fw_path\n        self.slave_built_embedded_fw_path = built_embedded_fw_path\n\n    def get_save_path(self):\n        return os.path.join(os.environ['PROJECT_TEMP_DIR'], \"ufw_build_state.json\")\n\n    def persist(self):\n        filename = self.get_save_path()\n        parent = os.path.dirname(filename)\n        if not os.path.isdir(parent):\n            os.makedirs(parent)\n        with open(filename, \"w\") as f:\n            f.write(json.dumps(self.__dict__))\n\n    def reload(self):\n        self.reset()\n        filename = self.get_save_path()\n        if os.path.exists(filename):\n            with open(filename, \"r\") as f:\n                new_dict = json.loads(f.read())\n                if new_dict is not None:\n                    self.__dict__ = dict(self.__dict__.items() + new_dict.items())\n\n\n# Holds information about the current project and build environment.\n#\nclass Project:\n\n    def __init__(self, filename):\n        sourcecode_types = ['sourcecode.c.c',\n                            'sourcecode.c.objc',\n                            'sourcecode.cpp.cpp',\n                            'sourcecode.cpp.objcpp',\n                            'sourcecode.asm.asm',\n                            'sourcecode.asm.llvm',\n                            'sourcecode.nasm']\n\n        self.build_state = BuildState()\n        self.project_data = self.load_from_file(filename)\n        self.target = filter(lambda x: x['name'] == os.environ['TARGET_NAME'], self.project_data['targets'])[0]\n        self.public_headers = self.get_build_phase_files('PBXHeadersBuildPhase', lambda x: x.get('settings', False) and x['settings'].get('ATTRIBUTES', False) and 'Public' in x['settings']['ATTRIBUTES'])\n        self.static_libraries = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'archive.ar' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.static_frameworks = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'wrapper.framework' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.compilable_sources = self.get_build_phase_files('PBXSourcesBuildPhase', lambda x: x['fileRef']['fileType'] in sourcecode_types)\n        self.header_paths = [os.path.join(*x['pathComponents']) for x in self.public_headers]\n\n        self.headers_dir = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['CONTENTS_FOLDER_PATH'], 'Headers')\n        self.libtool_path = os.path.join(os.environ['DT_TOOLCHAIN_DIR'], 'usr', 'bin', 'libtool')\n        self.project_filename = os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\")\n        self.local_exe_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])\n        self.local_architectures = os.environ['ARCHS'].split(' ')\n        self.local_built_fw_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['WRAPPER_NAME'])\n        self.local_built_embedded_fw_path = os.path.splitext(self.local_built_fw_path)[0] + \".embeddedframework\"\n        self.local_linked_archive_paths = [self.get_linked_ufw_archive_path(arch) for arch in self.local_architectures]\n        self.local_platform = os.environ['PLATFORM_NAME']\n        other_platforms = os.environ['SUPPORTED_PLATFORMS'].split(' ')\n        other_platforms.remove(self.local_platform)\n        self.other_platform = other_platforms[0]\n\n        sdk_name = os.environ['SDK_NAME']\n        if not sdk_name.startswith(self.local_platform):\n            raise Exception(\"%s didn't start with %s\" % (sdk_name, self.local_platform))\n        self.sdk_version = sdk_name[len(self.local_platform):]\n\n    # Load an Xcode project file.\n    #\n    def load_from_file(self, filename):\n        project_file = json.loads(subprocess.check_output([\"plutil\", \"-convert\", \"json\", \"-o\", \"-\", filename]))\n        all_objects = project_file['objects']\n        del project_file['objects']\n        for obj in all_objects.values():\n            self.fix_keys(obj)\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, project_file))\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, all_objects.values()))\n        project_data = project_file['rootObject']\n        self.build_full_paths(project_data, splitpath(os.environ['SOURCE_ROOT']))\n        return project_data\n\n    def is_key(self, obj):        \n        return isinstance(obj, basestring) and len(obj) == 24 and re.search('^[0-9a-fA-F]+$', obj) is not None\n    \n    def build_dereference_list(self, all_objects, parent, key, obj):\n        deref_list = []\n        if self.is_key(obj):\n            dereferenced = all_objects.get(obj, obj)\n            if dereferenced is not obj:\n                deref_list.append((parent, key, obj, dereferenced))\n        elif isinstance(obj, collections.Mapping):\n            for k, v in obj.iteritems():\n                deref_list += self.build_dereference_list(all_objects, obj, k, v)\n        elif isinstance(obj, collections.Iterable) and not isinstance(obj, basestring):\n            for item in obj:\n                deref_list += self.build_dereference_list(all_objects, obj, None, item)\n        return deref_list\n    \n    def unpack_objects(self, deref_list):\n        for parent, key, orig, obj in deref_list:\n            if key is None:\n                parent.remove(orig)\n                parent.append(obj)\n            else:\n                parent[key] = obj\n\n    # Store the full path, separated into components, to a node inside the node\n    # as \"pathComponents\". Also recurse into that node if it's a group.\n    #\n    def build_full_paths(self, node, base_path):\n        # Some nodes are relative to a different source tree, specified as an\n        # env variable.\n        if node.get('sourceTree', '<group>') != '<group>':\n            new_base_path = os.environ.get(node['sourceTree'], None)\n            if new_base_path:\n                base_path = splitpath(new_base_path)\n        # Add the current node's path, if any.\n        if node.get('path', False):\n            base_path = base_path + splitpath(node['path'])\n        node['pathComponents'] = base_path\n        # Recurse if this is a group.\n        if node['isa'] == 'PBXGroup':\n            for child in node['children']:\n                self.build_full_paths(child, base_path)\n        elif node['isa'] == 'PBXProject':\n            self.build_full_paths(node['mainGroup'], base_path)\n            self.build_full_paths(node['productRefGroup'], base_path)\n            for child in node['targets']:\n                self.build_full_paths(child, base_path)\n            projectRefs = node.get('projectReferences', None)\n            if projectRefs is not None and len(projectRefs) > 0:\n                for child in projectRefs[0].values():\n                    self.build_full_paths(child, base_path)\n\n    # Fix up any inconvenient keys.\n    #\n    def fix_keys(self, obj):\n        key_remappings = {'lastKnownFileType': 'fileType', 'explicitFileType': 'fileType'}\n        for key in list(set(key_remappings.keys()) & set(obj.keys())):\n            obj[key_remappings[key]] = obj[key]\n            del obj[key]\n\n    # Get the files from a build phase.\n    #\n    def get_build_phase_files(self, build_phase_name, filter_func):\n        build_phase = filter(lambda x: x['isa'] == build_phase_name, self.target['buildPhases'])[0]\n        build_files = filter(filter_func, build_phase['files'])\n        return [x['fileRef'] for x in build_files]\n\n    # Get the truncated paths of all headers that start with the specified\n    # relative path. Paths are read and returned as fully separated lists.\n    # e.g. ['Some', 'Path', 'To', 'A', 'Header'] with relative_path of\n    # ['Some', 'Path'] gets truncated to ['To', 'A', 'Header']\n    #\n    def movable_headers_relative_to(self, relative_path):\n        rel_path_length = len(relative_path)\n        result = filter(lambda path: len(path) >= rel_path_length and\n                                     path[:rel_path_length] == relative_path, self.header_paths)\n        return [path[rel_path_length:] for path in result]\n\n    # Get the full path to where a linkable archive (library or framework)\n    # is supposed to be.\n    #\n    def get_linked_archive_path(self, architecture):\n        return os.path.join(os.environ['OBJECT_FILE_DIR_%s' % os.environ['CURRENT_VARIANT']],\n                            architecture,\n                            os.environ['EXECUTABLE_NAME'])\n\n    # Get the full path to our custom linked archive of the project.\n    #\n    def get_linked_ufw_archive_path(self, architecture):\n        return self.get_linked_archive_path(architecture) + \".ufwbuild\"\n\n    # Get the full path to the executable of an archive.\n    #\n    def get_exe_path(self, node):\n        path = os.path.join(*node['pathComponents'])\n        if node['fileType'] == 'wrapper.framework':\n            # Frameworks are directories, so go one deeper\n            path = os.path.join(path, os.path.splitext(node['pathComponents'][-1])[0])\n        return path\n\n    # Get the path to the directory containing the archive.\n    #\n    def get_containing_path(self, node):\n        return os.path.join(*node['pathComponents'])\n    \n    def get_archive_search_paths(self):\n        log.info(\"Search paths = %s\" % set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries]))\n        return set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries])\n\n    # Command to link all objects of a single architecture.\n    #\n    def get_single_arch_link_command(self, architecture):\n        cmd = [self.libtool_path,\n               \"-static\",\n               \"-arch_only\", architecture,\n               \"-syslibroot\", os.environ['SDKROOT'],\n               \"-L%s\" % os.environ['TARGET_BUILD_DIR'],\n               \"-filelist\", os.environ['LINK_FILE_LIST_%s_%s' % (os.environ['CURRENT_VARIANT'], architecture)]]\n        if os.environ.get('OTHER_LDFLAGS', False):\n            cmd += [os.environ['OTHER_LDFLAGS']]\n        if os.environ.get('WARNING_LDFLAGS', False):\n            cmd += [os.environ['WARNING_LDFLAGS']]\n#        cmd += [\"-L%s\" % libpath for libpath in self.get_archive_search_paths()]\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", self.get_linked_ufw_archive_path(architecture)]\n        return cmd\n\n    # Command to link all local architectures for the current configuration\n    # into an archive. This reads all libraries + the UFW-built archives and\n    # overwrites the final product.\n    #\n    def get_local_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Command to link all architectures into a universal archive.\n    # This reads all UFW-built archives and overwrites the final product.\n    #\n    def get_all_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths + self.build_state.slave_linked_archive_paths\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Build up an environment for the slave process. This uses BUILD_ROOT\n    # and TEMP_ROOT to convert all environment variables to values suitable\n    # for the slave build environment so that xcodebuild doesn't try to build\n    # in the project directory under \"build\".\n    #\n    def get_slave_environment(self):\n        ignored = ['LD_MAP_FILE_PATH',\n        'HEADER_SEARCH_PATHS',\n        'LIBRARY_SEARCH_PATHS',\n        'FRAMEWORK_SEARCH_PATHS']\n        build_root = os.environ['BUILD_ROOT']\n        temp_root = os.environ['TEMP_ROOT']\n        newenv = {}\n        for key, value in os.environ.items():\n            if key not in ignored and not key.startswith('LINK_FILE_LIST_') and not key.startswith('LD_DEPENDENCY_'):\n                if build_root in value or temp_root in value:\n                    newenv[key] = value.replace(self.local_platform, self.other_platform)\n        return newenv\n\n    # Command to invoke xcodebuild on the slave platform.\n    #\n    def get_slave_project_build_command(self):\n        cmd = [\"xcodebuild\",\n               \"-project\",\n               os.environ['PROJECT_FILE_PATH'],\n               \"-target\",\n               os.environ['TARGET_NAME'],\n               \"-configuration\",\n               os.environ['CONFIGURATION'],\n               \"-sdk\",\n               self.other_platform + self.sdk_version]\n        cmd += [\"%s=%s\" % (key, value) for key, value in self.get_slave_environment().items()]\n        cmd += [\"UFW_MASTER_PLATFORM=\" + os.environ['PLATFORM_NAME']]\n        cmd += [os.environ['ACTION']]\n        return cmd\n\n\n\n##############################################################################\n#\n# Utility Functions\n#\n##############################################################################\n\n# Split a path into a list of path components.\n#\ndef splitpath(path, maxdepth=20):\n     (head, tail) = os.path.split(path)\n     return splitpath(head, maxdepth - 1) + [tail] if maxdepth and head and head != path else [ head or tail ]\n\n# Remove all subdirectories under a path.\n#\ndef remove_subdirs(path, ignore_files):\n    if os.path.exists(path):\n        for filename in filter(lambda x: x not in ignore_files, os.listdir(path)):\n            fullpath = os.path.join(path, filename)\n            if os.path.isdir(fullpath):\n                log.info(\"Remove %s\" % fullpath)\n                shutil.rmtree(fullpath)\n\n# Make whatever parent paths are necessary for a path to exist.\n#\ndef ensure_path_exists(path):\n    if not os.path.isdir(path):\n        os.makedirs(path)\n\n# Make whatever parent paths are necessary for a path's parent to exist.\n#\ndef ensure_parent_exists(path):\n    parent = os.path.dirname(path)\n    if not os.path.isdir(parent):\n        os.makedirs(parent)\n\n# Remove a file or dir if it exists.\n#\ndef remove_path(path):\n    if os.path.exists(path):\n        if os.path.isdir(path) and not os.path.islink(path):\n            shutil.rmtree(path)\n        else:\n            os.remove(path)\n\n# Move a file or dir, replacing the destination if it exists.\n#\ndef move_file(src, dst):\n    if src == dst:\n        return\n    log.info(\"Move %s to %s\" % (src, dst))\n    ensure_parent_exists(dst)\n    remove_path(dst)\n    shutil.move(src, dst)\n\n# Copy a file or dir, replacing the destination if it exists already.\n#\ndef copy_overwrite(src, dst):\n    if src != dst:\n        remove_path(dst)\n        ensure_parent_exists(dst)\n        shutil.copytree(src, dst, symlinks=True)\n\n# Attempt to symlink link_path -> link_to.\n# link_to must be a path relative to link_path's parent and must exist.\n# If link_path already exists, do nothing.\n#\ndef attempt_symlink(link_path, link_to):\n    # Only allow linking to an existing file\n    os.stat(os.path.abspath(os.path.join(link_path, \"..\", link_to)))\n\n    # Only make the link if it hasn't already been made\n    if not os.path.exists(link_path):\n        log.info(\"Symlink %s -> %s\" % (link_path, link_to))\n        os.symlink(link_to, link_path)\n\n# Takes the last entry in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef top_level_file_path(base_path, path_list):\n    return os.path.join(base_path, os.path.split(path_list[-1])[-1])\n\n# Takes all entries in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef full_file_path(base_path, path_list):\n    return os.path.join(*([base_path] + path_list))\n\n# Print a command before executing it.\n# Also print out all output from the command to STDOUT.\n#\ndef print_and_call(cmd):\n    log.info(\"Cmd \" + \" \".join(cmd))\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0]\n    if len(result) > 0:\n        log.info(result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Special print-and-call command for the slave build that strips out\n# xcodebuild's spammy list of environment variables.\n#\ndef print_and_call_slave_build(cmd, other_platform):\n    separator = '=== BUILD NATIVE TARGET '\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0].split(separator)\n    if len(result) == 1:\n        result = result[0]\n    else:\n        result = separator + result[1]\n    log.info(\"Cmd \" + \" \".join(cmd) + \"\\n\" + result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Issue a warning and record that a warning has been issued.\n#\ndef issue_warning(msg, *args, **kwargs):\n    global issued_warnings\n    issued_warnings = True\n    log.warn(msg, *args, **kwargs)\n\n\n\n##############################################################################\n#\n# Main Application\n#\n##############################################################################\n\n# Check if we are running as master.\n#\ndef is_master():\n    return os.environ.get('UFW_MASTER_PLATFORM', os.environ['PLATFORM_NAME']) == os.environ['PLATFORM_NAME']\n\n# DerivedData should almost never appear in any framework, library, or header\n# search paths. However, Xcode will sometimes add them in, so we check to make\n# sure.\n#\ndef check_for_derived_data_in_search_paths(project):\n    search_path_keys = [\"FRAMEWORK_SEARCH_PATHS\", \"LIBRARY_SEARCH_PATHS\", \"HEADER_SEARCH_PATHS\"]\n    build_configs = project.target['buildConfigurationList']['buildConfigurations']\n    build_settings = filter(lambda x: x['name'] == os.environ['CONFIGURATION'], build_configs)[0]['buildSettings']\n    \n    found_something = False\n    for path_key in filter(lambda x: x in build_settings, search_path_keys):\n        path = build_settings[path_key]\n        if \"DerivedData\" in path:\n            found_something = True\n            log.warn(\"Derived data in %s\" % path)\n            issue_warning(\"'%s' contains reference to 'DerivedData'.\" % path_key)\n    if found_something:\n        log.warn(\"Check your build settings and remove any entries that contain paths inside the DerivedData folder.\")\n        log.warn(\"Otherwise you can disable this warning by changing 'config_warn_derived_data' in this script.\")\n\n# Link local architectures into their respective archives.\n#\ndef link_local_archs(project):\n    for arch in project.local_architectures:\n        print_and_call(project.get_single_arch_link_command(arch))\n\n# Link only the local architectures into the final product, not the slave\n# architectures. For iphoneos, this will be armv6, armv7. For simulator, this\n# will be i386.\n#\ndef link_combine_local_archs(project):\n    print_and_call(project.get_local_archs_link_command())\n\n# Link all architectures into the final product.\n#\ndef link_combine_all_archs(project):\n    print_and_call(project.get_all_archs_link_command())\n\n# Check if we should open the build directory after a successful build.\n#\ndef should_open_build_dir():\n    env_setting = os.environ.get('UFW_OPEN_BUILD_DIR', None)\n    if env_setting is not None:\n        return env_setting\n\n    return config_open_build_dir\n\n# Open the build dir in Finder.\n#\ndef open_build_dir():\n    print_and_call(['open', os.environ['TARGET_BUILD_DIR']])\n\n# Check if the build was started by selecting \"Archive\" under \"Product\" in\n# Xcode.\n#\ndef is_archive_build():\n    # ACTION is always 'build', but perhaps Apple will fix this someday?\n    archive_build = os.environ['ACTION'] == 'archive'\n\n    if not archive_build:\n        # This can be passed in as an env variable when building from command line.\n        archive_build = os.environ.get('UFW_ACTION', None) == 'archive'\n\n    build_dir = splitpath(os.environ['BUILD_DIR'])\n    if not archive_build:\n        # This partial path is used when you select \"archive\" from within Xcode.\n        archive_build = 'ArchiveIntermediates' in build_dir\n\n    # It only counts as a full archive build if this target is being built into\n    # its own build dir (not being built as a dependency of another target)\n    #if archive_build:\n        #archive_build = os.environ['TARGET_NAME'] in build_dir\n    \n    return archive_build\n\n# Xcode by default throws all public headers into the top level directory.\n# This function moves them to their expected deep hierarchy.\n#\ndef build_deep_header_hierarchy(project):\n    header_path_top = config_deep_header_top\n    if not header_path_top:\n        header_path_top = os.path.commonprefix(project.header_paths)\n    else:\n        header_path_top = splitpath(header_path_top)\n\n    built_headers_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['PUBLIC_HEADERS_FOLDER_PATH'])\n    movable_headers = project.movable_headers_relative_to(header_path_top)\n\n    # Remove subdirs if they only contain files that have been rebuilt\n    ignore_headers = filter(lambda x: not os.path.isfile(top_level_file_path(built_headers_path, x)), movable_headers)\n    remove_subdirs(built_headers_path, [file[0] for file in ignore_headers])\n\n    # Move rebuilt headers into their proper subdirs\n    for header in movable_headers:\n        move_file(top_level_file_path(built_headers_path, header), full_file_path(built_headers_path, header))\n\ndef tb_get_file_name(path):\n    f_list = os.listdir(path)\n    log.debug(f_list)\n    dest_list = []\n    for key in f_list:\n        if key == 'Headers' or key == 'Resources' or key == 'Versions' or key == os.environ['TARGET_NAME']:\n            log.debug(\"do no thing\")\n        else:\n            dest_list.append(key)\n    return dest_list\ndef tb_compare_version(version1, version2):\n    int_ver1 = int(version1)\n    int_ver2 = int(version2)\n    if int_ver2 >= int_ver1:\n        return True\n    return False\n#Source directory and files is\n\n\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# |--MyFramework\n# So this is not standard file structure, this function do make files and directory to the standard files structure\n# Dest directory and files is\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# `--Versions\n#     |--A\n#     |  |--MyFramework\n#     |  |--Headers\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\ndef tb_format_file_and_directory(project):\n    base_dir = project.local_built_fw_path\n    log.debug(base_dir)\n\n    resource_files = tb_get_file_name(base_dir)\n\n    versions_path = os.path.join(base_dir, \"Versions\")\n    log.debug(versions_path)\n    ensure_path_exists(versions_path)\n\n    framework_version_path = os.path.join(versions_path, os.environ['FRAMEWORK_VERSION'])\n    ensure_path_exists(framework_version_path)\n\n    dest_headers_path = os.path.join(framework_version_path, \"Headers\")\n    ensure_path_exists(dest_headers_path)\n\n    #Moves Headers to Versions/A/Headers\n    src_headers_path = os.path.join(base_dir, \"Headers\")\n    if os.path.isdir(src_headers_path):\n        if not os.path.islink(src_headers_path):\n            move_file(src_headers_path, dest_headers_path)\n\n#Moves Resource files to Versions/A/Resources\n    des_res_path = os.path.join(framework_version_path, \"Resources\")\n    ensure_path_exists(des_res_path)\n    for i in resource_files :\n        dest_res_file_path = os.path.join(des_res_path, i)\n        src_res_file_path  = os.path.join(base_dir, i)\n        move_file(src_res_file_path, dest_res_file_path)\n\n    #Moves MyFramework to Versions/A/MyFramework\n    src_framework_path = os.path.join(base_dir, os.environ['TARGET_NAME'])\n    dest_framework_path= os.path.join(framework_version_path,  os.environ['TARGET_NAME'])\n    move_file(src_framework_path, dest_framework_path)\n    \n    \n# Add all symlinks needed to make a full framework structure:\n#\n# MyFramework.framework\n# |-- MyFramework -> Versions/Current/MyFramework\n# |-- Headers -> Versions/Current/Headers\n# |-- Resources -> Versions/Current/Resources\n# `-- Versions\n#     |-- A\n#     |   |-- MyFramework\n#     |   |-- Headers\n#     |   |   `-- MyFramework.h\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\n#     `-- Current -> A\n#\ndef add_symlinks_to_framework(project):\n    base_dir = project.local_built_fw_path\n    attempt_symlink(os.path.join(base_dir, \"Versions\", \"Current\"), os.environ['FRAMEWORK_VERSION'])\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Headers\")):\n        attempt_symlink(os.path.join(base_dir, \"Headers\"), os.path.join(\"Versions\", \"Current\", \"Headers\"))\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Resources\")):\n        attempt_symlink(os.path.join(base_dir, \"Resources\"), os.path.join(\"Versions\", \"Current\", \"Resources\"))\n    attempt_symlink(os.path.join(base_dir, os.environ['EXECUTABLE_NAME']), os.path.join(\"Versions\", \"Current\", os.environ['EXECUTABLE_NAME']))\n\n# Build an embedded framework structure.\n# An embedded framework contains the actual framework, plus a \"Resources\"\n# directory containing symlinks to all resources found in the actual framework,\n# with the exception of \"Info.plist\" and anything ending in \".lproj\":\n#\n# MyFramework.embeddedframework\n# |-- MyFramework.framework\n# |   |-- MyFramework -> Versions/Current/MyFramework\n# |   |-- Headers -> Versions/Current/Headers\n# |   |-- Resources -> Versions/Current/Resources\n# |   `-- Versions\n# |       |-- A\n# |       |   |-- MyFramework\n# |       |   |-- Headers\n# |       |   |   `-- MyFramework.h\n# |       |   `-- Resources\n# |       |       |-- Info.plist\n# |       |       |-- MyViewController.nib\n# |       |       `-- en.lproj\n# |       |           `-- InfoPlist.strings\n# |       `-- Current -> A\n# `-- Resources\n#     `-- MyViewController.nib -> ../MyFramework.framework/Resources/MyViewController.nib\n#\ndef build_embedded_framework(project):\n    fw_path = project.local_built_fw_path\n    embedded_path = project.local_built_embedded_fw_path\n    fw_name = os.environ['WRAPPER_NAME']\n\n    if (os.path.islink(fw_path)):\n        # If the framework path is a link, the build result already in embeddedframework.\n        # Just recreate embeddedframework's Resources\n        remove_path(os.path.join(embedded_path, \"Resources\"))\n    else:\n        remove_path(embedded_path)\n        ensure_path_exists(embedded_path)\n        copy_overwrite(fw_path, os.path.join(embedded_path, fw_name))\n\n    # Create embeddedframework's Resources        \n    ensure_path_exists(os.path.join(embedded_path, \"Resources\"))\n    symlink_source = os.path.join(\"..\", fw_name, \"Resources\")\n    symlink_path = os.path.join(embedded_path, \"Resources\")\n    if os.path.isdir(os.path.join(fw_path, \"Resources\")):\n        for file in filter(lambda x: x != \"Info.plist\" and not x.endswith(\".lproj\"), os.listdir(os.path.join(fw_path, \"Resources\"))):\n            attempt_symlink(os.path.join(symlink_path, file), os.path.join(symlink_source, file))\n\n    # Remove the normal framework and replace it with a symlink to the copy\n    # in the embedded framework. This is needed because Xcode runs its strip\n    # phase AFTER the script runs.\n    embed_fw_wrapper = os.path.splitext(os.environ['WRAPPER_NAME'])[0] + \".embeddedframework\"\n    remove_path(fw_path)\n    attempt_symlink(fw_path, os.path.join(embed_fw_wrapper, os.environ['WRAPPER_NAME']))\n\n\n# Run the build process in slave mode to build the other configuration\n# (device/simulator).\n#\ndef run_slave_build(project):\n    print_and_call_slave_build(project.get_slave_project_build_command(), project.other_platform)\n\n# Run the build process.\n#\ndef run_build():\n    project = Project(os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\"))\n\n    # Issue warnings only if we're master.\n    if is_master():\n        if len(project.compilable_sources) == 0:\n            raise Exception(\"No compilable sources found. Please add at least one source file to build target %s.\" % os.environ['TARGET_NAME'])\n\n        if config_warn_derived_data:\n            check_for_derived_data_in_search_paths(project)\n        if config_warn_no_public_headers and len(project.public_headers) == 0:\n            issue_warning('No headers in build target %s were marked public. Please move at least one header to \"Public\" in the \"Copy Headers\" build phase.' % os.environ['TARGET_NAME'])\n\n    # Only build slave if this is an archive build.\n    if is_archive_build():\n        if is_master():\n            log.debug(\"Building as MASTER\")\n            # The slave-side linker tries to include this (nonexistent) path as\n            # a library path.\n            ensure_path_exists(project.get_slave_environment()['BUILT_PRODUCTS_DIR'])\n            project.build_state.persist()\n            run_slave_build(project)\n            project.build_state.reload()\n        else:\n            log.debug(\"Building as SLAVE\")\n            project.build_state.reload()\n            project.build_state.set_slave_properties(project.local_architectures,\n                                                     project.local_linked_archive_paths,\n                                                     project.local_built_fw_path,\n                                                     project.local_built_embedded_fw_path)\n            project.build_state.persist()\n\n    link_local_archs(project)\n    \n    # Only do a universal binary when building an archive.\n    if is_archive_build() and is_master():\n        link_combine_all_archs(project)\n    else:\n        link_combine_local_archs(project)\n\n    if config_deep_header_hierarchy:\n        build_deep_header_hierarchy(project)\n\n    xcode_version = os.environ['XCODE_VERSION_MAJOR']\n\n    if tb_compare_version('0700', xcode_version):\n        tb_format_file_and_directory(project)\n\n    add_symlinks_to_framework(project)\n    \n    if is_master():\n        if config_framework_type == 'embeddedframework':\n            build_embedded_framework(project)\n        elif config_framework_type != 'framework':\n            raise Exception(\"%s: Unknown framework type for config_framework_type\" % config_framework_type)\n\n\nif __name__ == \"__main__\":\n    log_handler = logging.StreamHandler()\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n    log.addHandler(log_handler)\n    log.setLevel(config_log_level)\n\n    error_code = 0\n    prefix = \"M\" if is_master() else \"S\"\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + prefix + \" \" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n\n    log.debug(\"Begin build process\")\n\n    if config_deep_header_top:\n        config_deep_header_top = string.Template(config_deep_header_top).substitute(os.environ)\n\n    try:\n        run_build()\n        if issued_warnings:\n            if config_fail_on_warnings:\n                error_code = 1\n            log.warn(\"Build completed with warnings\")\n        else:\n            log.info(\"Build completed\")\n        if not is_archive_build():\n            log.info(\"Note: This is *NOT* a universal framework build. To build as a universal framework, do an archive build.\")\n            log.info(\"To do an archive build from command line, use \\\"xcodebuild -configuration Release UFW_ACTION=archive clean build\\\"\")\n    except Exception:\n        traceback.print_exc(file=sys.stdout)\n        error_code = 1\n        log.error(\"Build failed\")\n    finally:\n        if error_code == 0 and is_archive_build() and is_master():\n            log.info(\"Built framework is in \" + os.environ['TARGET_BUILD_DIR'])\n            if should_open_build_dir():\n                open_build_dir()\n        sys.exit(error_code)\n";
 			showEnvVarsInLog = 0;
 		};
 		B2580C5FCEEB8B0B0970BD23 /* Check Pods Manifest.lock */ = {
@@ -1720,116 +2082,145 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D446F31AF75BD8000A3911 /* LVPkgManager.m in Sources */,
-				840AD5F21A63ED7D003E837D /* lVcode.c in Sources */,
-				9171D4A51AADD0300040DAA3 /* LVLongPressGestureRecognizer.m in Sources */,
-				84264BEF1A78E66F008D833B /* LVTableViewCell.m in Sources */,
-				846481C21A64C61F00DE6204 /* LVBaseView.m in Sources */,
-				840AD6081A63ED7D003E837D /* lViolib.c in Sources */,
-				840AD5EB1A63ED7D003E837D /* lVauxlib.c in Sources */,
-				84B58E3B1B65CC270048F33D /* LVLoadingIndicator.m in Sources */,
-				84470B171B5E66FF00980E31 /* JHSLVCustomError.m in Sources */,
-				84DDB85E1B43BAEB006ACE9A /* LVPointerValueBox.m in Sources */,
-				840AD6031A63ED7D003E837D /* lVgc.c in Sources */,
-				840AD6261A63ED7D003E837D /* lVstring.c in Sources */,
-				846481D71A64C61F00DE6204 /* LVTextField.m in Sources */,
-				84C3B72B1A84622A00923404 /* LVData.m in Sources */,
-				842142A31ACD3427001FD0ED /* LVDebugLua.m in Sources */,
-				840AD6291A63ED7D003E837D /* lVstrlib.c in Sources */,
-				840AD5FE1A63ED7D003E837D /* lVdump.c in Sources */,
-				846481DA1A64C61F00DE6204 /* LVTimer.m in Sources */,
-				84799AF61BAFECA00070E214 /* LVPagerView.m in Sources */,
-				848CA3651B29748800C70321 /* LVCollectionViewCell.m in Sources */,
-				840AD6161A63ED7D003E837D /* lVobject.c in Sources */,
-				840AD62E1A63ED7D003E837D /* lVtablib.c in Sources */,
-				8410D9B11A70A51C00B22E49 /* LVGestureRecognizer.m in Sources */,
-				840AD6191A63ED7D003E837D /* lVopcodes.c in Sources */,
-				84E446991AEE0655009C9A8A /* LVBlock.m in Sources */,
-				848CA3601B29669A00C70321 /* LVCollectionView.m in Sources */,
-				84DCB2B21B39349A00244C39 /* LVLuaObjBox.m in Sources */,
-				846481DD1A64C61F00DE6204 /* LVTransform3D.m in Sources */,
-				8425324D1ADCBD3A003C05BF /* LVDownloader.m in Sources */,
-				8481E0611BD7AEF300FDFEEA /* LVTableViewDelegate.m in Sources */,
-				840AD5E51A63ED7D003E837D /* lV.c in Sources */,
-				840AD62B1A63ED7D003E837D /* lVtable.c in Sources */,
-				84E04FBD1B9D6D7D009529EC /* JHSLuaViewController.m in Sources */,
-				840AD6001A63ED7D003E837D /* lVfunc.c in Sources */,
-				846481CE1A64C61F00DE6204 /* LVLabel.m in Sources */,
-				84CF566F1AE8EC3D00A49B36 /* LVExternalLinker.m in Sources */,
-				840AD5FB1A63ED7D003E837D /* lVdo.c in Sources */,
-				840AD5EE1A63ED7D003E837D /* lVbaselib.c in Sources */,
-				91ACCE781AC531160034D9B3 /* LVDebuger.m in Sources */,
-				84056E731B5CA5990078F9D6 /* LVCustomPanel.m in Sources */,
-				84799AFB1BAFEFDA0070E214 /* LVPagerViewCell.m in Sources */,
-				8481E0661BD7B29100FDFEEA /* LVCollectionViewDelegate.m in Sources */,
-				8497083D1A6765B000E913F4 /* LVSystem.m in Sources */,
-				843447501B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m in Sources */,
-				91882E911AAD934D00107DFC /* LVRotationGestureRecognizer.m in Sources */,
-				8454D1471A7FA7A400774565 /* LVHttpResponse.m in Sources */,
-				848F3C371B96EA9800D5D510 /* JHSLVButton.m in Sources */,
-				846481D11A64C61F00DE6204 /* LVPagerIndicator.m in Sources */,
-				840AD5F61A63ED7D003E837D /* lVdblib.c in Sources */,
-				840AD6111A63ED7D003E837D /* lVmem.c in Sources */,
-				846481BF1A64C61F00DE6204 /* LVAnimate.m in Sources */,
-				840AD6141A63ED7D003E837D /* lVoadlib.c in Sources */,
-				840AD6361A63ED7D003E837D /* lVvm.c in Sources */,
-				840AD6331A63ED7D003E837D /* lVundump.c in Sources */,
-				840AD5F81A63ED7D003E837D /* lVdebug.c in Sources */,
-				846481C81A64C61F00DE6204 /* LVHeads.m in Sources */,
-				842532481ADCB7C0003C05BF /* LVAudioPlayer.m in Sources */,
-				84D446F81AF7631C000A3911 /* LVInputStream.m in Sources */,
-				846E879C1A653DEC000D14DA /* LVDate.m in Sources */,
-				844F9F5B1B96A0AF00E24A24 /* JHSLVTableView.m in Sources */,
-				840AD6061A63ED7D003E837D /* lVinit.c in Sources */,
-				842D726F1A6643DB00936AD2 /* LVAlert.m in Sources */,
-				846481C51A64C61F00DE6204 /* LVButton.m in Sources */,
-				840AD6211A63ED7D003E837D /* lVprint.c in Sources */,
-				840AD6231A63ED7D003E837D /* lVstate.c in Sources */,
-				84264BEA1A78DD3E008D833B /* LVTableView.m in Sources */,
-				840AD61C1A63ED7D003E837D /* lVoslib.c in Sources */,
-				84DCF03C1B44D91800AD723B /* LVTypeConvert.m in Sources */,
-				91882E8C1AAD45A400107DFC /* LVPinchGestureRecognizer.m in Sources */,
-				840AD61E1A63ED7D003E837D /* lVparser.c in Sources */,
-				8454D1421A7F732500774565 /* LVHttp.m in Sources */,
-				849708381A67653A00E913F4 /* LVDB.m in Sources */,
-				8446F15E1BDF57F2007E4064 /* LVNinePatchImage.m in Sources */,
-				840AD5E81A63ED7D003E837D /* lVapi.c in Sources */,
-				848F3C381B96EA9800D5D510 /* JHSLVImage.m in Sources */,
-				84342D8F1AE0E02B00ECB4EF /* LVStyledString.m in Sources */,
-				844F9F581B969E4300E24A24 /* JHSLVCollectionView.m in Sources */,
-				842D726A1A6639A200936AD2 /* LVRegisterManager.m in Sources */,
-				840AD6391A63ED7D003E837D /* lVzio.c in Sources */,
-				84B1E3821AEF24480054B9F1 /* LVRSA.m in Sources */,
-				840AD5C91A5EB78D0075CB58 /* LView.m in Sources */,
-				840AD5CB1A5EB78D0075CB58 /* LuaViewSDK.m in Sources */,
-				84DD8F8A1B560933001C83E9 /* LVNavigation.m in Sources */,
-				84DF1DA71A6F5BC9009F970A /* LVTapGestureRecognizer.m in Sources */,
-				84185DC21B451E28003E0ECE /* LVStruct.m in Sources */,
-				8410D9AC1A70A00400B22E49 /* LVPanGestureRecognizer.m in Sources */,
-				846481D41A64C61F00DE6204 /* LVScrollView.m in Sources */,
-				8434474B1B61DDED0039B98A /* UIView+LuaView.m in Sources */,
-				84D840A11B5F33D900BC59F3 /* JHSLVCustomLoading.m in Sources */,
-				84F4A0201B4B9E600062A7B2 /* UIScrollView+LuaView.m in Sources */,
-				8418E3C61A5E804700158125 /* ViewController.m in Sources */,
-				8481E05C1BD7AC8000FDFEEA /* LVScrollViewDelegate.m in Sources */,
-				84BC62211BA95A3F0019B02E /* LVDebugConnection.m in Sources */,
-				84CF567B1AEA15A500A49B36 /* LVMethod.m in Sources */,
-				8468C9721BDA177C002D4B1E /* LVToast.m in Sources */,
-				8418E3BE1A5E804700158125 /* AppDelegate.m in Sources */,
-				918B9F1E1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m in Sources */,
-				8418E3C31A5E804700158125 /* main.m in Sources */,
-				840AD6301A63ED7D003E837D /* lVtm.c in Sources */,
-				846481CB1A64C61F00DE6204 /* LVImage.m in Sources */,
-				840AD5F01A63ED7D003E837D /* lVc.c in Sources */,
-				84CF56761AE9184000A49B36 /* LVNativeObjBox.m in Sources */,
-				840AD60A1A63ED7D003E837D /* lVlex.c in Sources */,
-				84765E2E1ADE37A7002506CB /* LVFile.m in Sources */,
-				840AD60F1A63ED7D003E837D /* lVmathlib.c in Sources */,
-				846481E01A64C61F00DE6204 /* LVUtil.m in Sources */,
+				84C1D79D1C16BAF70058E974 /* JHSLVImage.m in Sources */,
+				84C1D79E1C16BAF70058E974 /* JHSLVButton.m in Sources */,
+				84C1D79F1C16BAF70058E974 /* JHSLVTableView.m in Sources */,
+				84C1D7A01C16BAF70058E974 /* JHSLVCollectionView.m in Sources */,
+				84C1D7A11C16BAF70058E974 /* JHSLVCustomError.m in Sources */,
+				84C1D7A21C16BAF70058E974 /* JHSLVCustomLoading.m in Sources */,
+				84C1D7A31C16BAF70058E974 /* JHSLuaViewController.m in Sources */,
+				84C1D7A41C16BAF70058E974 /* main.m in Sources */,
+				84C1D7A51C16BAF70058E974 /* AppDelegate.m in Sources */,
+				84C1D7A61C16BAF70058E974 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D69F1C16B09D0058E974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D7BE1C16C3CD0058E974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D8141C16C4070058E974 /* lV.c in Sources */,
+				84C1D8151C16C4070058E974 /* lVapi.c in Sources */,
+				84C1D8161C16C4070058E974 /* lVauxlib.c in Sources */,
+				84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */,
+				84C1D8181C16C4070058E974 /* lVc.c in Sources */,
+				84C1D8191C16C4070058E974 /* lVcode.c in Sources */,
+				84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */,
+				84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */,
+				84C1D81C1C16C4070058E974 /* lVdo.c in Sources */,
+				84C1D81D1C16C4070058E974 /* lVdump.c in Sources */,
+				84C1D81E1C16C4070058E974 /* lVfunc.c in Sources */,
+				84C1D81F1C16C4070058E974 /* lVgc.c in Sources */,
+				84C1D8201C16C4070058E974 /* lVinit.c in Sources */,
+				84C1D8211C16C4070058E974 /* lViolib.c in Sources */,
+				84C1D8221C16C4070058E974 /* lVlex.c in Sources */,
+				84C1D8231C16C4070058E974 /* lVmathlib.c in Sources */,
+				84C1D8241C16C4070058E974 /* lVmem.c in Sources */,
+				84C1D8251C16C4070058E974 /* lVoadlib.c in Sources */,
+				84C1D8261C16C4070058E974 /* lVobject.c in Sources */,
+				84C1D8271C16C4070058E974 /* lVopcodes.c in Sources */,
+				84C1D8281C16C4070058E974 /* lVoslib.c in Sources */,
+				84C1D8291C16C4070058E974 /* lVparser.c in Sources */,
+				84C1D82A1C16C4070058E974 /* lVprint.c in Sources */,
+				84C1D82B1C16C4070058E974 /* lVstate.c in Sources */,
+				84C1D82C1C16C4070058E974 /* lVstring.c in Sources */,
+				84C1D82D1C16C4070058E974 /* lVstrlib.c in Sources */,
+				84C1D82E1C16C4070058E974 /* lVtable.c in Sources */,
+				84C1D82F1C16C4070058E974 /* lVtablib.c in Sources */,
+				84C1D8301C16C4070058E974 /* lVtm.c in Sources */,
+				84C1D8311C16C4070058E974 /* lVundump.c in Sources */,
+				84C1D8321C16C4070058E974 /* lVvm.c in Sources */,
+				84C1D8331C16C4070058E974 /* lVzio.c in Sources */,
+				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
+				84C1D7D51C16C3F90058E974 /* LVInputStream.m in Sources */,
+				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
+				84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */,
+				84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */,
+				84C1D7D91C16C3FA0058E974 /* LVDebugConnection.m in Sources */,
+				84C1D7DA1C16C3FA0058E974 /* LVBaseView.m in Sources */,
+				84C1D7DB1C16C3FA0058E974 /* UIScrollView+LuaView.m in Sources */,
+				84C1D7DC1C16C3FA0058E974 /* UIView+LuaView.m in Sources */,
+				84C1D7DD1C16C3FA0058E974 /* LVButton.m in Sources */,
+				84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */,
+				84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */,
+				84C1D7E01C16C3FA0058E974 /* LVLabel.m in Sources */,
+				84C1D7E11C16C3FA0058E974 /* LVTextField.m in Sources */,
+				84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */,
+				84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */,
+				84C1D7E41C16C3FA0058E974 /* LVTableView.m in Sources */,
+				84C1D7E51C16C3FA0058E974 /* LVTableViewCell.m in Sources */,
+				84C1D7E61C16C3FA0058E974 /* LVTableViewDelegate.m in Sources */,
+				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
+				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,
+				84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */,
+				84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */,
+				84C1D7EB1C16C3FA0058E974 /* LVCollectionViewDelegate.m in Sources */,
+				84C1D7EC1C16C3FA0058E974 /* LVScrollView.m in Sources */,
+				84C1D7ED1C16C3FA0058E974 /* LVScrollViewDelegate.m in Sources */,
+				84C1D7EE1C16C3FA0058E974 /* LVCustomPanel.m in Sources */,
+				84C1D7EF1C16C3FA0058E974 /* LVAlert.m in Sources */,
+				84C1D7F01C16C3FA0058E974 /* LVToast.m in Sources */,
+				84C1D7F11C16C3FA0058E974 /* LVAnimate.m in Sources */,
+				84C1D7F21C16C3FA0058E974 /* LVStyledString.m in Sources */,
+				84C1D7F31C16C3FA0058E974 /* LVTransform3D.m in Sources */,
+				84C1D7F41C16C3FA0058E974 /* LVData.m in Sources */,
+				84C1D7F51C16C3FA0058E974 /* LVDate.m in Sources */,
+				84C1D7F61C16C3FA0058E974 /* LVTimer.m in Sources */,
+				84C1D7F71C16C3FA0058E974 /* LVStruct.m in Sources */,
+				84C1D7F81C16C3FA0058E974 /* LVGestureRecognizer.m in Sources */,
+				84C1D7F91C16C3FA0058E974 /* LVLongPressGestureRecognizer.m in Sources */,
+				84C1D7FA1C16C3FA0058E974 /* LVPanGestureRecognizer.m in Sources */,
+				84C1D7FB1C16C3FA0058E974 /* LVPinchGestureRecognizer.m in Sources */,
+				84C1D7FC1C16C3FA0058E974 /* LVRotationGestureRecognizer.m in Sources */,
+				84C1D7FD1C16C3FA0058E974 /* LVSwipeGestureRecognizer.m in Sources */,
+				84C1D7FE1C16C3FA0058E974 /* LVTapGestureRecognizer.m in Sources */,
+				84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */,
+				84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */,
+				84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */,
+				84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */,
+				84C1D8031C16C3FA0058E974 /* LVDB.m in Sources */,
+				84C1D8041C16C3FA0058E974 /* LVDownloader.m in Sources */,
+				84C1D8051C16C3FA0058E974 /* LVFile.m in Sources */,
+				84C1D8061C16C3FA0058E974 /* LVNavigation.m in Sources */,
+				84C1D8071C16C3FA0058E974 /* LVSystem.m in Sources */,
+				84C1D8081C16C3FA0058E974 /* LVExternalLinker.m in Sources */,
+				84C1D8091C16C3FA0058E974 /* LVMethod.m in Sources */,
+				84C1D80A1C16C3FA0058E974 /* LVNativeObjBox.m in Sources */,
+				84C1D80B1C16C3FA0058E974 /* LVLuaObjBox.m in Sources */,
+				84C1D80C1C16C3FA0058E974 /* LVPointerValueBox.m in Sources */,
+				84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */,
+				84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */,
+				84C1D80F1C16C3FA0058E974 /* LVRegisterManager.m in Sources */,
+				84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */,
+				84C1D8111C16C3FA0058E974 /* LView.m in Sources */,
+				84C1D8121C16C3FA0058E974 /* LuaViewSDK.m in Sources */,
+				84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */,
+				84C1D7CF1C16C3CD0058E974 /* LuaViewSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84C1D6A81C16B09D0058E974 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 848B5C1D1A0A4CA000F59678 /* Demo */;
+			targetProxy = 84C1D6A71C16B09D0058E974 /* PBXContainerItemProxy */;
+		};
+		84C1D88E1C16C90D0058E974 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84C1D7C31C16C3CD0058E974 /* LuaViewSDK */;
+			targetProxy = 84C1D88D1C16C90D0058E974 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8418E3B21A5E804700158125 /* LaunchScreen.xib */ = {
@@ -2011,10 +2402,81 @@
 			};
 			name = Release;
 		};
+		84C1D6B61C16B09E0058E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LuaViewTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuaViewSDK.app/LuaViewSDK";
+			};
+			name = Debug;
+		};
+		84C1D6B71C16B09E0058E974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LuaViewTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuaViewSDK.app/LuaViewSDK";
+			};
+			name = Release;
+		};
+		84C1D7D21C16C3CD0058E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LuaViewSDK/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		84C1D7D31C16C3CD0058E974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LuaViewSDK/Info.plist;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */ = {
+		8418E3511A5E67FC00158125 /* Build configuration list for PBXNativeTarget "temp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8418E3521A5E67FC00158125 /* Debug */,
@@ -2037,6 +2499,24 @@
 			buildConfigurations = (
 				848B5C421A0A4CA000F59678 /* Debug */,
 				848B5C431A0A4CA000F59678 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84C1D6B51C16B09E0058E974 /* Build configuration list for PBXNativeTarget "LuaViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C1D6B61C16B09E0058E974 /* Debug */,
+				84C1D6B71C16B09E0058E974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84C1D7D11C16C3CD0058E974 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C1D7D21C16C3CD0058E974 /* Debug */,
+				84C1D7D31C16C3CD0058E974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
