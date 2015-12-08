@@ -429,8 +429,8 @@
 		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D88A1C16C4550058E974 /* LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D69C1C16B09D0058E974 /* LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D88B1C16C5780058E974 /* Foundation.framework */; };
-		84C1D89B1C16CB820058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D89A1C16CB820058E974 /* Dummy.h */; };
-		84C1D89D1C16CB820058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D89C1C16CB820058E974 /* Dummy.m */; };
+		84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D8911C16CA540058E974 /* Dummy.h */; };
+		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
@@ -517,7 +517,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				84C1D89B1C16CB820058E974 /* Dummy.h in CopyFiles */,
+				84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,8 +794,6 @@
 		84C1D8911C16CA540058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
 		84C1D8921C16CA540058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		84C1D8981C16CB820058E974 /* libDummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		84C1D89A1C16CB820058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
-		84C1D89C1C16CB820058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
 		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
@@ -1273,7 +1271,6 @@
 				84C1D69B1C16B09D0058E974 /* LuaView */,
 				84C1D6A91C16B09D0058E974 /* LuaViewTests */,
 				84C1D7C71C16C3CD0058E974 /* LuaViewSDK */,
-				84C1D8991C16CB820058E974 /* Dummy */,
 				848B5C1F1A0A4CA000F59678 /* Products */,
 				CACC8D0F2D9A900CA53CA849 /* Pods */,
 				84C1D88F1C16CA540058E974 /* Dummy */,
@@ -1448,15 +1445,6 @@
 				84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */,
 			);
 			name = "Support Files";
-			sourceTree = "<group>";
-		};
-		84C1D8991C16CB820058E974 /* Dummy */ = {
-			isa = PBXGroup;
-			children = (
-				84C1D89A1C16CB820058E974 /* Dummy.h */,
-				84C1D89C1C16CB820058E974 /* Dummy.m */,
-			);
-			path = Dummy;
 			sourceTree = "<group>";
 		};
 		84CF566B1AE8EC0B00A49B36 /* externalLink */ = {
@@ -2287,7 +2275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C1D89D1C16CB820058E974 /* Dummy.m in Sources */,
+				84C1D8A21C16CC930058E974 /* Dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
