@@ -1,4 +1,11 @@
 
+if( LuaViewInited ) then
+	return;
+end
+
+LuaViewInited = true;
+
+
 SCR_W, SCR_H = System.screenSize();
 
 
@@ -10,7 +17,15 @@ window.enabled(true);
 -- bg.image("jhs.png");
 -- bg.frame(0,0,SCR_W, SCR_H);
 -- bg.alpha(0.5)
-
+window.alpha(0);
+Animate(
+	function()
+		window.alpha(1)
+	end,
+	function ()
+		window.alpha(1)
+	end
+	);
 -------------------------------
 function snowCreater(fileName, x0, y0)
 	local snow = {};
@@ -68,11 +83,11 @@ end
 -------------------------------------
 snowArr = {};
 index = 1;
-DXY = 80
-NUM = 9
+DXY = 70
+NUM = 10
 for i=1, NUM do
 	for j=1, NUM do
-		local dx = -DXY*NUM/2+i*DXY;
+		local dx = -SCR_W/2+i*DXY + DXY/2;
 		local dy = -DXY*(NUM+1) + j*DXY;
 		if( index%2==0 ) then
 			if( math:random(0,10)>4 ) then
@@ -85,31 +100,53 @@ for i=1, NUM do
 	end
 end
 
+function ut_jump(title, url)
+    local dic = {
+        title = title,
+        url = url
+    };
+    viewController.utName_dic("LUAVIEW_BTN_JUMP", dic);
+end
+
+function ut_close(title)
+    local dic = {
+        title = title
+    };
+    viewController.utName_dic("LUAVIEW_BTN", dic);
+end
 
 ------------
 function showEnterButton()
+	view = View();
+	view.size(SCR_W,SCR_H);
 	local small = SCR_W/375;
 	enterButton = Image();
-	enterButton.image("enter.png");
+	view.addView(enterButton)
+	local date  = Date();
+	local dateString = date.format("yyyy-MM-dd");
+	print("time", dateString );
+	if( dataString=="2015-12-11") then
+		enterButton.image("enter11.png");
+	else
+		enterButton.image("enter10.png");
+	end
 	enterButton.adjustSize();
 	local imageW,imageH = enterButton.size();
 	enterButton.size(imageW/3*small, imageH/3*small);
 
 	enterButton.callback(function ()
-		viewController.openUrl("https://ju.taobao.com/m/jusp/my/main/mtp.htm");--12.8
-		-- viewController.openUrl("https://ju.taobao.com/m/jusp/nv/juczmd/mtp.htm?hongbao=true");--12.10
+		local url = "https://ju.taobao.com/m/jusp/my/main/mtp.htm";--12.8
+		-- local url = "https://ju.taobao.com/m/jusp/nv/juczmd/mtp.htm?hongbao=true";--12.10
+		ut_jump("RED_BOX_RAIN_ENTER", url)
+		viewController.openUrl(url);
+		window.release();
 	end);
-	enterButton.center( SCR_W*0.5, SCR_H*0.4 );
-	enterButton.scale( 0, 0)
-	Animate( 1, 0, 0.5,0,
-		function(){
-			enterButton.scale(1,1);
-		}, 
-		function ()
-		end)
+	enterButton.center( SCR_W*0.5, SCR_H*0.5 );
+	view.center( SCR_W*0.5, SCR_H*0.5 );
 
 
 	closeButton = Image();
+	view.addView(closeButton)
 	closeButton.image("close.png");
 	closeButton.adjustSize();
 	local imageW,imageH = closeButton.size();
@@ -117,8 +154,22 @@ function showEnterButton()
 	closeButton.bottom(enterButton.top());
 	closeButton.right(enterButton.right());
 	closeButton.callback(function ()
+		ut_close("RED_BOX_RAIN_BT_CLOSE");
 		closeApp();
 	end);
+
+	view.scale(0,0)
+
+	Animate( 1, 0, 0.5,0,
+		function(){
+			view.scale(1,1);
+		}, 
+		function ()
+			view.callback(function ()
+				ut_close("RED_BOX_RAIN_BG_CLOSE");
+				closeApp();
+			end);
+		end)
 end
 
 snowTimer = Timer(
