@@ -2,8 +2,8 @@
 //  Dummy.m
 //  Dummy
 //
-//  Created by yingfang on 15/11/23.
-//  Copyright © 2015年 yingfang. All rights reserved.
+//  Created by dongxicheng on 12/8/15.
+//  Copyright © 2015 dongxicheng. All rights reserved.
 //
 
 #import "Dummy.h"

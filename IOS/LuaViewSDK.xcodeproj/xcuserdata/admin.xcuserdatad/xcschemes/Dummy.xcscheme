@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-               BuildableName = "LuaViewSDK.framework"
-               BlueprintName = "LuaViewSDK"
+               BlueprintIdentifier = "84C1D8971C16CB820058E974"
+               BuildableName = "libDummy.a"
+               BlueprintName = "Dummy"
                ReferencedContainer = "container:LuaViewSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,7 +33,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-            BuildableName = "LuaViewSDK.framework"
-            BlueprintName = "LuaViewSDK"
+            BlueprintIdentifier = "84C1D8971C16CB820058E974"
+            BuildableName = "libDummy.a"
+            BlueprintName = "Dummy"
             ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84C1D7C31C16C3CD0058E974"
-            BuildableName = "LuaViewSDK.framework"
-            BlueprintName = "LuaViewSDK"
+            BlueprintIdentifier = "84C1D8971C16CB820058E974"
+            BuildableName = "libDummy.a"
+            BlueprintName = "Dummy"
             ReferencedContainer = "container:LuaViewSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

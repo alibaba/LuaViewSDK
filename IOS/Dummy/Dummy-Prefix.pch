@@ -14,7 +14,26 @@
 
 #ifdef __OBJC__
 
-    #import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CFNetwork/CFNetwork.h>
+#import <TargetConditionals.h>
+#import <sys/socket.h>
+#import <netinet/in.h>
+#import <arpa/inet.h>
+#import <sys/ioctl.h>
+#import <net/if.h>
+#import <netdb.h>
+#import <objc/runtime.h>
+#import <Accelerate/Accelerate.h>
+#import <objc/message.h>
+#import <Security/Security.h>
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonCryptor.h>
+#import <Security/SecItem.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 #endif
 

@@ -429,6 +429,8 @@
 		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D88A1C16C4550058E974 /* LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D69C1C16B09D0058E974 /* LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D88B1C16C5780058E974 /* Foundation.framework */; };
+		84C1D89B1C16CB820058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D89A1C16CB820058E974 /* Dummy.h */; };
+		84C1D89D1C16CB820058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D89C1C16CB820058E974 /* Dummy.m */; };
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
@@ -507,6 +509,16 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D8961C16CB820058E974 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				84C1D89B1C16CB820058E974 /* Dummy.h in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -778,6 +790,12 @@
 		84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaViewSDK.m; sourceTree = "<group>"; };
 		84C1D7D01C16C3CD0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C1D88B1C16C5780058E974 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dummy-Prefix.pch"; sourceTree = "<group>"; };
+		84C1D8911C16CA540058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
+		84C1D8921C16CA540058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
+		84C1D8981C16CB820058E974 /* libDummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C1D89A1C16CB820058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
+		84C1D89C1C16CB820058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
 		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
@@ -861,6 +879,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D8951C16CB820058E974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1248,8 +1273,10 @@
 				84C1D69B1C16B09D0058E974 /* LuaView */,
 				84C1D6A91C16B09D0058E974 /* LuaViewTests */,
 				84C1D7C71C16C3CD0058E974 /* LuaViewSDK */,
+				84C1D8991C16CB820058E974 /* Dummy */,
 				848B5C1F1A0A4CA000F59678 /* Products */,
 				CACC8D0F2D9A900CA53CA849 /* Pods */,
+				84C1D88F1C16CA540058E974 /* Dummy */,
 				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
 				846481E21A64F0EB00DE6204 /* Documentation */,
 			);
@@ -1262,6 +1289,7 @@
 				8418E3401A5E67FC00158125 /* libLuaViewSDK.a */,
 				84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */,
 				84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */,
+				84C1D8981C16CB820058E974 /* libDummy.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1402,6 +1430,33 @@
 				84C1D7D01C16C3CD0058E974 /* Info.plist */,
 			);
 			path = LuaViewSDK;
+			sourceTree = "<group>";
+		};
+		84C1D88F1C16CA540058E974 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D8931C16CA660058E974 /* Support Files */,
+				84C1D8911C16CA540058E974 /* Dummy.h */,
+				84C1D8921C16CA540058E974 /* Dummy.m */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		84C1D8931C16CA660058E974 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		84C1D8991C16CB820058E974 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D89A1C16CB820058E974 /* Dummy.h */,
+				84C1D89C1C16CB820058E974 /* Dummy.m */,
+			);
+			path = Dummy;
 			sourceTree = "<group>";
 		};
 		84CF566B1AE8EC0B00A49B36 /* externalLink */ = {
@@ -1750,6 +1805,23 @@
 			productReference = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
+		84C1D8971C16CB820058E974 /* Dummy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C1D89E1C16CB820058E974 /* Build configuration list for PBXNativeTarget "Dummy" */;
+			buildPhases = (
+				84C1D8941C16CB820058E974 /* Sources */,
+				84C1D8951C16CB820058E974 /* Frameworks */,
+				84C1D8961C16CB820058E974 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dummy;
+			productName = Dummy;
+			productReference = 84C1D8981C16CB820058E974 /* libDummy.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1773,6 +1845,9 @@
 					84C1D7C31C16C3CD0058E974 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					84C1D8971C16CB820058E974 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 				};
 			};
 			buildConfigurationList = 848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */;
@@ -1792,6 +1867,7 @@
 				8418E33F1A5E67FC00158125 /* temp */,
 				84C1D6A21C16B09D0058E974 /* LuaViewTests */,
 				84C1D7C31C16C3CD0058E974 /* LuaViewSDK */,
+				84C1D8971C16CB820058E974 /* Dummy */,
 			);
 		};
 /* End PBXProject section */
@@ -2207,6 +2283,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84C1D8941C16CB820058E974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D89D1C16CB820058E974 /* Dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2473,6 +2557,34 @@
 			};
 			name = Release;
 		};
+		84C1D89F1C16CB820058E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		84C1D8A01C16CB820058E974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2520,6 +2632,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		84C1D89E1C16CB820058E974 /* Build configuration list for PBXNativeTarget "Dummy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C1D89F1C16CB820058E974 /* Debug */,
+				84C1D8A01C16CB820058E974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
