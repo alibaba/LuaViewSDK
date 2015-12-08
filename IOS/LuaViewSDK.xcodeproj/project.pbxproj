@@ -431,6 +431,7 @@
 		84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D88B1C16C5780058E974 /* Foundation.framework */; };
 		84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D8911C16CA540058E974 /* Dummy.h */; };
 		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
+		84C1D8A31C16CEBB0058E974 /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */; };
 		84C3B72A1A84622A00923404 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; };
 		84C3B72C1A84622A00923404 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
@@ -858,6 +859,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C1D8A31C16CEBB0058E974 /* LuaViewSDK.framework in Frameworks */,
 				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
 				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
@@ -2452,6 +2454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.taobao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LuaViewSDK;
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 x86_64 i386 armv7";
 			};
 			name = Debug;
 		};
@@ -2471,6 +2474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.taobao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LuaViewSDK;
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 x86_64 i386 armv7";
 			};
 			name = Release;
 		};
@@ -2516,7 +2520,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = LuaViewSDK/Info.plist;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
