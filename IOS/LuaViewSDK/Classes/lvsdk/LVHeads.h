@@ -10,11 +10,11 @@
 #define JU_LVHeads_h
 //--------------------------------------------------------------------------------
 
-//#import "lV.h"
-//#import "lVauxlib.h"
-//#import "lVlib.h"
-//#import "lVstate.h"
-//#import "lVgc.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 #define lvL_reg	lvL_Reg
 typedef struct lvL_Reg lvL_Reg;
