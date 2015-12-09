@@ -151,4 +151,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//-(void) lv_setNavigationItemTitleView:(UIView*) view{
+//    
+//}
+//-(void) lv_setNavigationItemTitle:(NSString*) title{
+//    
+//}
+//-(void) lv_setNavigationItemLeftBarButtonItems:(NSArray*) items{
+//    
+//}
+//-(void) lv_setNavigationItemRightBarButtonItems:(NSArray*) items{
+//    
+//}
+//-(void) lv_setNavigationBarBackgroundImage:(UIImage*) image{
+//    
+//}
 @end
