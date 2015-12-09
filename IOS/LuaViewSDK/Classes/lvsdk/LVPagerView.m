@@ -12,7 +12,11 @@
 #import "LVScrollView.h"
 #import "LVPagerViewCell.h"
 #import "LVPagerIndicator.h"
-
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 static inline NSInteger mapPageIdx(NSInteger pageIdx){
     return pageIdx + 1;

@@ -9,6 +9,8 @@
 #import "LVTypeConvert.h"
 #import "LVHeads.h"
 #import "LVStruct.h"
+#import "lVapi.h"
+#import "lV.h"
 
 @implementation LVTypeConvert
 

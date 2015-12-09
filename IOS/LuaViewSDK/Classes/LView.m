@@ -19,6 +19,11 @@
 #import "LVDebugConnection.h"
 #import "LVCustomPanel.h"
 #import <objc/runtime.h>
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 
 @interface LView ()

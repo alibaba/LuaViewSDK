@@ -13,6 +13,11 @@
 #import "LVScrollView.h"
 #import "UIScrollView+LuaView.h"
 #import "LVCollectionViewDelegate.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 
 // lua 对应的数据 key

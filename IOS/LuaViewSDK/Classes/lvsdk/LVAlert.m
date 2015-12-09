@@ -10,6 +10,11 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVToast.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVAlert ()
 @property(nonatomic,strong) NSArray* cmdArray;

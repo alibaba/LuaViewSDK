@@ -8,6 +8,11 @@
 
 #import "LVBlock.h"
 #import "LView.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVBlock ()
 @property (nonatomic,weak) LView* lview;

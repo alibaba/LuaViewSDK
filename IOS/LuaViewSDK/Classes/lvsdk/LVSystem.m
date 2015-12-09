@@ -10,6 +10,11 @@
 #import "LView.h"
 #import "LVPkgManager.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @implementation LVSystem
 

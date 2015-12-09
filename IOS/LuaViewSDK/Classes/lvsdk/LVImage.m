@@ -13,6 +13,11 @@
 //#import <TBCDNImage.h>
 #import <Accelerate/Accelerate.h>
 #import "LVNinePatchImage.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;

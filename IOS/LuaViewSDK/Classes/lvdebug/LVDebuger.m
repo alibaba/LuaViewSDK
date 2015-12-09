@@ -11,6 +11,11 @@
 #import "LVDebugConnection.h"
 #import "LView.h"
 
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @implementation LVDebuger
 

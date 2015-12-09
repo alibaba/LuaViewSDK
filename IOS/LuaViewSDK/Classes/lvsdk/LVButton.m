@@ -13,6 +13,11 @@
 #import "LView.h"
 #import "LVStyledString.h"
 #import "UIView+LuaView.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface  LVButton()
 @end

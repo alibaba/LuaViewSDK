@@ -9,6 +9,11 @@
 #import "LVTimer.h"
 #import "LView.h"
 #import "LVHeads.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 
 @implementation LVTimer{

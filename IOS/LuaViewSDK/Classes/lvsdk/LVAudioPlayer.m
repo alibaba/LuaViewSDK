@@ -9,6 +9,11 @@
 #import "LVAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 #import "LView.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @implementation LVAudioPlayer{
     AVAudioPlayer* audioPlayer;

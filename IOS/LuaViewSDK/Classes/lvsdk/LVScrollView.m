@@ -12,6 +12,11 @@
 #import "LVUtil.h"
 #import "UIScrollView+LuaView.h"
 #import "LVScrollViewDelegate.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVScrollView ()
 @property (nonatomic,strong) LVScrollViewDelegate* scrollViewDelegate;

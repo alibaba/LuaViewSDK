@@ -9,6 +9,7 @@
 #import "LVCollectionViewCell.h"
 #import "LVHeads.h"
 #import "LView.h"
+#import "lVapi.h"
 
 @interface LVCollectionViewCell ()
 @property (nonatomic,weak) LView* lv_lview;

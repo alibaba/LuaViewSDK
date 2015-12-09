@@ -14,6 +14,11 @@
 #import "LVLuaObjBox.h"
 #import "LVPointerValueBox.h"
 #import "LVDebuger.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @implementation LVUtil
 

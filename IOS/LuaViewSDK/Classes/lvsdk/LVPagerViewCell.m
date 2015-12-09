@@ -8,6 +8,7 @@
 
 #import "LVPagerViewCell.h"
 #import "LView.h"
+#import "lVapi.h"
 
 @interface LVPagerViewCell ()
 @property (nonatomic,weak) LView* lv_lview;

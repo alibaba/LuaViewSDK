@@ -8,6 +8,12 @@
 
 #import "LVStruct.h"
 #import "LVTypeConvert.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
+
 
 @implementation LVStruct
 

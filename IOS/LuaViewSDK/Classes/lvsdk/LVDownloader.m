@@ -10,6 +10,11 @@
 #import "LVUtil.h"
 #import "LVData.h"
 #import "LView.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVDownloader ()
 @property(nonatomic,strong) NSData* data;

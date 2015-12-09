@@ -7,6 +7,11 @@
 //
 
 #import "LVStyledString.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVStyledString ()
 @end

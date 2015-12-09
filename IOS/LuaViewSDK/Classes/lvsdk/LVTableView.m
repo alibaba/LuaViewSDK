@@ -14,7 +14,11 @@
 #import "UIScrollView+LuaView.h"
 #import "LVScrollViewDelegate.h"
 #import "LVTableViewDelegate.h"
-
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVTableView ()
 @property(nonatomic,strong) LVTableViewDelegate* tableViewDelegate;

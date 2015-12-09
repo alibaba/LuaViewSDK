@@ -9,6 +9,11 @@
 #import "LVNavigation.h"
 #import "LView.h"
 #import "LVStyledString.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @implementation LVNavigation
 
@@ -27,6 +32,7 @@ static int setTitle (lv_State *L) {
                 UILabel* label = [[UILabel alloc] init];
                 LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
                 [label setAttributedText:attString.mutableStyledString];
+                [label sizeToFit];
                 vc.navigationItem.titleView = label;
                 return 0;
             }

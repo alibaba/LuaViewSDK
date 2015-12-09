@@ -10,6 +10,11 @@
 #import <objc/runtime.h>
 #import "LView.h"
 #import "LVTypeConvert.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 @interface LVLuaObjBox ()
 @property (nonatomic, strong) NSMutableArray* protocolArray;

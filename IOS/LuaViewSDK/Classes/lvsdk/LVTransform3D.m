@@ -8,6 +8,11 @@
 
 #import "LVTransform3D.h"
 #import "LVHeads.h"
+#import "lV.h"
+#import "lVauxlib.h"
+#import "lVlib.h"
+#import "lVstate.h"
+#import "lVgc.h"
 
 
 
