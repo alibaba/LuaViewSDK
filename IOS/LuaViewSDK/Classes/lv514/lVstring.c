@@ -23,7 +23,7 @@ void lvS_resize (lv_State *L, int newsize) {
   GCObject **newhash;
   stringtable *tb;
   int i;
-  if (G(L)->gcstate == GCSsweepstring)
+  if (G(L)->gcstate == LV_GCSsweepstring)
     return;  /* cannot resize during GC traverse */
   newhash = lvM_newvector(L, newsize, GCObject *);
   tb = &G(L)->strt;

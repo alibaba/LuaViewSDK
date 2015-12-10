@@ -14,11 +14,11 @@
 /*
 ** Possible states of the Garbage Collector
 */
-#define GCSpause	0
-#define GCSpropagate	1
-#define GCSsweepstring	2
-#define GCSsweep	3
-#define GCSfinalize	4
+#define LV_GCSpause	0
+#define LV_GCSpropagate	1
+#define LV_GCSsweepstring	2
+#define LV_GCSsweep	3
+#define LV_GCSfinalize	4
 
 
 /*

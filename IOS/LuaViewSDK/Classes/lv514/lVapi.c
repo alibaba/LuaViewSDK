@@ -994,7 +994,7 @@ LV_API int lv_gc (lv_State *L, int what, int data) {
                 g->GCthreshold = 0;
             while (g->GCthreshold <= g->totalbytes) {
                 lvC_step(L);
-                if (g->gcstate == GCSpause) {  /* end of cycle? */
+                if (g->gcstate == LV_GCSpause) {  /* end of cycle? */
                     res = 1;  /* signal it */
                     break;
                 }

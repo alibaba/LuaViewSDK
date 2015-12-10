@@ -166,7 +166,7 @@ LV_API lv_State *lv_newstate (lv_Alloc f, void *ud) {
   setnilvalue(registry(L));
   lvZ_initbuffer(L, &g->buff);
   g->panic = NULL;
-  g->gcstate = GCSpause;
+  g->gcstate = LV_GCSpause;
   g->rootgc = obj2gco(L);
   g->sweepstrgc = 0;
   g->sweepgc = &g->rootgc;

@@ -2527,6 +2527,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					LV_USE_APICHECK,
+					"lv_assert=assert",
+				);
 				INFOPLIST_FILE = LuaViewSDK/Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;

@@ -510,7 +510,7 @@ static void markroot (lv_State *L) {
   markvalue(g, gt(g->mainthread));
   markvalue(g, registry(L));
   markmt(g);
-  g->gcstate = GCSpropagate;
+  g->gcstate = LV_GCSpropagate;
 }
 
 
@@ -550,7 +550,7 @@ static void atomic (lv_State *L) {
   g->currentwhite = cast_byte(otherwhite(g));
   g->sweepstrgc = 0;
   g->sweepgc = &g->rootgc;
-  g->gcstate = GCSsweepstring;
+  g->gcstate = LV_GCSsweepstring;
   g->estimate = g->totalbytes - udsize;  /* first estimate */
 }
 
@@ -559,11 +559,11 @@ static l_mem singlestep (lv_State *L) {
   global_State *g = G(L);
   /*lv_checkmemory(L);*/
   switch (g->gcstate) {
-    case GCSpause: {
+    case LV_GCSpause: {
       markroot(L);  /* start a new collection */
       return 0;
     }
-    case GCSpropagate: {
+    case LV_GCSpropagate: {
       if (g->gray)
         return propagatemark(g);
       else {  /* no more `gray' objects */
@@ -571,27 +571,27 @@ static l_mem singlestep (lv_State *L) {
         return 0;
       }
     }
-    case GCSsweepstring: {
+    case LV_GCSsweepstring: {
       lu_mem old = g->totalbytes;
       sweepwholelist(L, &g->strt.hash[g->sweepstrgc++]);
       if (g->sweepstrgc >= g->strt.size)  /* nothing more to sweep? */
-        g->gcstate = GCSsweep;  /* end sweep-string phase */
+        g->gcstate = LV_GCSsweep;  /* end sweep-string phase */
       lv_assert(old >= g->totalbytes);
       g->estimate -= old - g->totalbytes;
       return GCSWEEPCOST;
     }
-    case GCSsweep: {
+    case LV_GCSsweep: {
       lu_mem old = g->totalbytes;
       g->sweepgc = sweeplist(L, g->sweepgc, GCSWEEPMAX);
       if (*g->sweepgc == NULL) {  /* nothing more to sweep? */
         checkSizes(L);
-        g->gcstate = GCSfinalize;  /* end sweep phase */
+        g->gcstate = LV_GCSfinalize;  /* end sweep phase */
       }
       lv_assert(old >= g->totalbytes);
       g->estimate -= old - g->totalbytes;
       return GCSWEEPMAX*GCSWEEPCOST;
     }
-    case GCSfinalize: {
+    case LV_GCSfinalize: {
       if (g->tmudata) {
         GCTM(L);
         if (g->estimate > GCFINALIZECOST)
@@ -599,7 +599,7 @@ static l_mem singlestep (lv_State *L) {
         return GCFINALIZECOST;
       }
       else {
-        g->gcstate = GCSpause;  /* end collection */
+        g->gcstate = LV_GCSpause;  /* end collection */
         g->gcdept = 0;
         return 0;
       }
@@ -617,10 +617,10 @@ void lvC_step (lv_State *L) {
   g->gcdept += g->totalbytes - g->GCthreshold;
   do {
     lim -= singlestep(L);
-    if (g->gcstate == GCSpause)
+    if (g->gcstate == LV_GCSpause)
       break;
   } while (lim > 0);
-  if (g->gcstate != GCSpause) {
+  if (g->gcstate != LV_GCSpause) {
     if (g->gcdept < GCSTEPSIZE)
       g->GCthreshold = g->totalbytes + GCSTEPSIZE;  /* - lim/g->gcstepmul;*/
     else {
@@ -637,7 +637,7 @@ void lvC_step (lv_State *L) {
 
 void lvC_fullgc (lv_State *L) {
   global_State *g = G(L);
-  if (g->gcstate <= GCSpropagate) {
+  if (g->gcstate <= LV_GCSpropagate) {
     /* reset sweep marks to sweep all elements (returning them to white) */
     g->sweepstrgc = 0;
     g->sweepgc = &g->rootgc;
@@ -645,16 +645,16 @@ void lvC_fullgc (lv_State *L) {
     g->gray = NULL;
     g->grayagain = NULL;
     g->weak = NULL;
-    g->gcstate = GCSsweepstring;
+    g->gcstate = LV_GCSsweepstring;
   }
-  lv_assert(g->gcstate != GCSpause && g->gcstate != GCSpropagate);
+  lv_assert(g->gcstate != LV_GCSpause && g->gcstate != LV_GCSpropagate);
   /* finish any pending sweep phase */
-  while (g->gcstate != GCSfinalize) {
-    lv_assert(g->gcstate == GCSsweepstring || g->gcstate == GCSsweep);
+  while (g->gcstate != LV_GCSfinalize) {
+    lv_assert(g->gcstate == LV_GCSsweepstring || g->gcstate == LV_GCSsweep);
     singlestep(L);
   }
   markroot(L);
-  while (g->gcstate != GCSpause) {
+  while (g->gcstate != LV_GCSpause) {
     singlestep(L);
   }
   setthreshold(g);
@@ -664,10 +664,10 @@ void lvC_fullgc (lv_State *L) {
 void lvC_barrierf (lv_State *L, GCObject *o, GCObject *v) {
   global_State *g = G(L);
   lv_assert(isblack(o) && iswhite(v) && !isdead(g, v) && !isdead(g, o));
-  lv_assert(g->gcstate != GCSfinalize && g->gcstate != GCSpause);
+  lv_assert(g->gcstate != LV_GCSfinalize && g->gcstate != LV_GCSpause);
   lv_assert(ttype(&o->gch) != LV_TTABLE);
   /* must keep invariant? */
-  if (g->gcstate == GCSpropagate)
+  if (g->gcstate == LV_GCSpropagate)
     reallymarkobject(g, v);  /* restore invariant */
   else  /* don't mind */
     makewhite(g, o);  /* mark as white just to avoid other barriers */
@@ -678,7 +678,7 @@ void lvC_barrierback (lv_State *L, Table *t) {
   global_State *g = G(L);
   GCObject *o = obj2gco(t);
   lv_assert(isblack(o) && !isdead(g, o));
-  lv_assert(g->gcstate != GCSfinalize && g->gcstate != GCSpause);
+  lv_assert(g->gcstate != LV_GCSfinalize && g->gcstate != LV_GCSpause);
   black2gray(o);  /* make table gray (again) */
   t->gclist = g->grayagain;
   g->grayagain = o;
@@ -700,13 +700,13 @@ void lvC_linkupval (lv_State *L, UpVal *uv) {
   o->gch.next = g->rootgc;  /* link upvalue into `rootgc' list */
   g->rootgc = o;
   if (isgray(o)) { 
-    if (g->gcstate == GCSpropagate) {
+    if (g->gcstate == LV_GCSpropagate) {
       gray2black(o);  /* closed upvalues need barrier */
       lvC_barrier(L, uv, uv->v);
     }
     else {  /* sweep phase: sweep it (turning it into white) */
       makewhite(g, o);
-      lv_assert(g->gcstate != GCSfinalize && g->gcstate != GCSpause);
+      lv_assert(g->gcstate != LV_GCSfinalize && g->gcstate != LV_GCSpause);
     }
   }
 }
