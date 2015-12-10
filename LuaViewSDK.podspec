@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LuaViewSDK"
-  s.version  = "2.0.0.5-SNAPSHOT"
+  s.version  = "2.0.0.6-SNAPSHOT"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
