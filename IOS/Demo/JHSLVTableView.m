@@ -20,6 +20,7 @@
     refreshHeader.refreshingBlock = ^(){
         [self lv_refreshHeaderToRefresh];
     };
+    self.lvScrollViewDelegate = self;
 }
 
 - (void) lv_hiddenRefreshHeader:(BOOL) hidden{
@@ -36,5 +37,14 @@
 
 - (BOOL) lv_isRefreshing{// 是否正在刷新
     return self.header.isRefreshing;
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"scrollViewDidScroll");
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSLog(@"scrollViewDidEndDragging");
 }
 @end
