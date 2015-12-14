@@ -360,28 +360,28 @@ static inline NSInteger mapSection(NSInteger section){
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"Scrolling"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidScroll:) withObject:scrollView];
+        [self.delegate scrollViewDidScroll:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollBegin"];
     if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
-        [self.delegate performSelector:@selector(scrollViewWillBeginDragging:) withObject:scrollView];
+        [self.delegate scrollViewWillBeginDragging:scrollView];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndDecelerating:) withObject:scrollView];
+        [self.delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView];
+        [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
@@ -390,7 +390,7 @@ static inline NSInteger mapSection(NSInteger section){
         [self callWithScrollArgsForKey:@"ScrollEnd"];
     }
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withObject:scrollView withObject:@(decelerate)];
+        [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
 }
 @end

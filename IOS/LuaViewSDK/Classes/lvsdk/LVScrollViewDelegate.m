@@ -23,34 +23,34 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"Scrolling"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidScroll:) withObject:scrollView];
+        [self.delegate scrollViewDidScroll:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
     if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)] ) {
-        [self.delegate performSelector:@selector(scrollViewWillBeginDecelerating:) withObject:scrollView];
+        [self.delegate scrollViewWillBeginDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndDecelerating:) withObject:scrollView];
+        [self.delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView];
+        [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"ScrollBegin"];
     if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
-        [self.delegate performSelector:@selector(scrollViewWillBeginDragging:) withObject:scrollView];
+        [self.delegate scrollViewWillBeginDragging:scrollView];
     }
 }
 
@@ -60,7 +60,7 @@
         [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     }
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
-        [self.delegate performSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withObject:scrollView withObject:@(decelerate)];
+        [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
 }
 
