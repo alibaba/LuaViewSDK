@@ -39,6 +39,11 @@
     return self;
 }
 
+-(void) setLvScrollViewDelegate:(id)lvScrollViewDelegate{
+    _lvScrollViewDelegate = lvScrollViewDelegate;
+    self.scrollViewDelegate.delegate = lvScrollViewDelegate;
+}
+
 -(void) dealloc{
 }
 

@@ -12,6 +12,7 @@
 @interface LVScrollViewDelegate : NSObject<UIScrollViewDelegate>
 
 @property(nonatomic,weak) UIView* owner;
+@property(nonatomic,weak) id delegate;
 
 -(id) init:(UIView*) view;
 

@@ -359,23 +359,38 @@ static inline NSInteger mapSection(NSInteger section){
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"Scrolling"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidScroll:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollBegin"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
+        [self.delegate performSelector:@selector(scrollViewWillBeginDragging:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndDecelerating:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self callWithScrollArgsForKey:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if( !decelerate ) {
         [self callWithScrollArgsForKey:@"ScrollEnd"];
+    }
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withObject:scrollView withObject:@(decelerate)];
     }
 }
 @end

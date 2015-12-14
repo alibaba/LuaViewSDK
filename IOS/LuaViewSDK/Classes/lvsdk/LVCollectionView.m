@@ -51,6 +51,12 @@
     return self;
 }
 
+-(void) setLvScrollViewDelegate:(id)lvScrollViewDelegate{
+    _lvScrollViewDelegate = lvScrollViewDelegate;
+    self.collectionViewDelegate.delegate = lvScrollViewDelegate;
+}
+
+
 -(void) registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier{
     [super registerClass:cellClass forCellWithReuseIdentifier:identifier];
     if( self.collectionViewDelegate.identifierDic == nil ) {

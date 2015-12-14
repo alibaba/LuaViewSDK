@@ -28,4 +28,6 @@
 
 + (void) setDefaultStyle:(Class) c;
 
+@property(nonatomic,weak) id lvScrollViewDelegate;
+
 @end

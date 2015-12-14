@@ -42,6 +42,11 @@
 -(void) dealloc{
 }
 
+-(void) setLvScrollViewDelegate:(id)lvScrollViewDelegate{
+    _lvScrollViewDelegate = lvScrollViewDelegate;
+    self.tableViewDelegate.delegate = lvScrollViewDelegate;
+}
+
 -(void) layoutSubviews{
     [super layoutSubviews];
     

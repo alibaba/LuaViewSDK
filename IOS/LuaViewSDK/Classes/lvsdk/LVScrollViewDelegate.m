@@ -22,20 +22,36 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"Scrolling"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidScroll:) withObject:scrollView];
+    }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollBegin"];
-}
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)] ) {
+        [self.delegate performSelector:@selector(scrollViewWillBeginDecelerating:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndDecelerating:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self.owner lv_callLuaByKey1:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.owner lv_callLuaByKey1:@"ScrollBegin"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
+        [self.delegate performSelector:@selector(scrollViewWillBeginDragging:) withObject:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -43,6 +59,10 @@
     if( !decelerate ) {
         [self.owner lv_callLuaByKey1:@"ScrollEnd"];
     }
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
+        [self.delegate performSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withObject:scrollView withObject:@(decelerate)];
+    }
 }
+
 
 @end
