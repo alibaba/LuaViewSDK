@@ -214,10 +214,6 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 +(BOOL) sha256Check:(NSData*) data ret:(NSString*) string{
-    if( string== nil ) {
-        // 如果服务端没有配置SHA256完整验证信息, 默认是ok的
-        return YES;
-    }
     NSData* temp = lv_SHA256HashBytes(data);
     const unsigned char* bytes = temp.bytes;
     NSMutableString* buffer = [[NSMutableString alloc] init];
