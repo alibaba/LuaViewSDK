@@ -223,7 +223,7 @@ static const unsigned int PKG_VERSION = (102010 );
     NSMutableString* buffer = [[NSMutableString alloc] init];
     for( int i=0; i<temp.length; i++ ) {
         int temp = bytes[i];
-        [buffer appendFormat:@"%x",temp];
+        [buffer appendFormat:@"%02x",temp];
     }
     if( [string isEqualToString:buffer] ) {
         return YES;
