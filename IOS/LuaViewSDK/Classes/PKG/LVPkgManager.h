@@ -13,7 +13,7 @@
 
 #define LV_PKGINFO_PROPERTY_URL      @"url"
 #define LV_PKGINFO_PROPERTY_TIME     @"time"
-#define LV_PKGINFO_SHA256            @"SHA256"
+#define LV_PKGINFO_SHA256            @"sha256"
 
 
 

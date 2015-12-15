@@ -208,7 +208,7 @@ static NSString *g_publicKeyFilePath = nil;
     
 }
 
-NSData *LV_AES256DecryptDatmeaWithKey(NSData *data, NSData* key){
+NSData *LV_AES256DecryptDataWithKey(NSData *data, NSData* key){
     if( data.length>0 && key.length>0 ) {
         NSUInteger dataLength = [data length];
         
