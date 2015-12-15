@@ -208,7 +208,7 @@ static NSString *g_publicKeyFilePath = nil;
     
 }
 
-NSData *LV_AES256DecryptDataWithKey(NSData *data, NSData* key){
+NSData *LV_AES256DecryptDatmeaWithKey(NSData *data, NSData* key){
     if( data.length>0 && key.length>0 ) {
         NSUInteger dataLength = [data length];
         
@@ -257,6 +257,30 @@ NSData* lv_SHA1HashBytes(NSData *fileData){
     hash = [NSData dataWithBytes:(const void *)hashBytes length:(NSUInteger)kChosenDigestLength];
     if (hashBytes) free(hashBytes);
     
+    return hash;
+}
+
+
+NSData* lv_SHA256HashBytes(NSData *fileData){
+    CC_SHA256_CTX ctx;
+    uint8_t * hashBytes = NULL;
+    NSData * hash = nil;
+    
+    // Malloc a buffer to hold hash.
+    hashBytes = malloc( CC_SHA256_DIGEST_LENGTH * sizeof(uint8_t) );
+    memset((void *)hashBytes, 0x0, CC_SHA256_DIGEST_LENGTH);
+    // Initialize the context.
+    CC_SHA256_Init(&ctx);
+    // Perform the hash.
+    CC_SHA256_Update(&ctx, (void *)[fileData bytes], (CC_LONG)[fileData length]);
+    // Finalize the output.
+    CC_SHA256_Final(hashBytes, &ctx);
+    
+    // Build up the SHA256 blob.
+    hash = [NSData dataWithBytes:(const void *)hashBytes length:(NSUInteger)CC_SHA256_DIGEST_LENGTH];
+    if ( hashBytes ) {
+        free(hashBytes);
+    }
     return hash;
 }
 

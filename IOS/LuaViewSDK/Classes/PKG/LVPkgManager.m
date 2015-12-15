@@ -213,9 +213,28 @@ static const unsigned int PKG_VERSION = (102010 );
     return -1;
 }
 
++(BOOL) sha256Check:(NSData*) data ret:(NSString*) string{
+    if( string== nil ) {
+        // 如果服务端没有配置SHA256完整验证信息, 默认是ok的
+        return YES;
+    }
+    NSData* temp = lv_SHA256HashBytes(data);
+    const unsigned char* bytes = temp.bytes;
+    NSMutableString* buffer = [[NSMutableString alloc] init];
+    for( int i=0; i<temp.length; i++ ) {
+        int temp = bytes[i];
+        [buffer appendFormat:@"%x",temp];
+    }
+    if( [string isEqualToString:buffer] ) {
+        return YES;
+    }
+    return NO;
+}
+
 +(void) doDownLoadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     NSString* url  = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_URL];
     NSString* time = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_TIME];
+    NSString* sha256 = [LVPkgManager safe_string:info forKey:LV_PKGINFO_SHA256];// SHA256完整性验证
     
     if ( callback == nil ){// 回调一定不是空
         callback = ^(NSDictionary* dic, NSString* erro ){
@@ -225,7 +244,8 @@ static const unsigned int PKG_VERSION = (102010 );
     if( pkgName.length>0 && url.length>0 && time.length>0){
         [LVUtil download:url callback:^(NSData *data) {
             if( data ){
-                if( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ){// 解包成功
+                BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
+                if( sha256Check && [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ){// 解包成功
                     if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
                         callback(info, nil);
                         return ;

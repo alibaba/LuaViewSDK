@@ -26,4 +26,6 @@
  */
 + (void) setPublicKeyFilePath:(NSString*) filePath;
 
+NSData* lv_SHA256HashBytes(NSData *fileData);
+
 @end
