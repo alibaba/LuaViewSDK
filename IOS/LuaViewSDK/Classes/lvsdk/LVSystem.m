@@ -42,6 +42,17 @@ static int android (lv_State *L) {
     return 1;
 }
 
+
++(NSString*) netWorkType{
+    return nil;
+}
+
+static int netWorkType (lv_State *L) {
+    NSString* type = [LVSystem netWorkType];
+    lv_pushstring(L, type.UTF8String);
+    return 1;
+}
+
 static int scale (lv_State *L) {
     CGFloat s = [UIScreen mainScreen].scale;
     lv_pushnumber( L, s);
@@ -122,6 +133,7 @@ static int tableToString(lv_State*L){
             {"device",device},
             {"ios", ios},
             {"android", android},
+            {"network", netWorkType},
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);
