@@ -230,6 +230,7 @@
 		84B58E3C1B65CC270048F33D /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
 		84BC62201BA95A3F0019B02E /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; };
 		84BC62221BA95A3F0019B02E /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		84BE192D1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */; };
 		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
 		84C1D79D1C16BAF70058E974 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C361B96EA9800D5D510 /* JHSLVImage.m */; };
 		84C1D79E1C16BAF70058E974 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C341B96EA9800D5D510 /* JHSLVButton.m */; };
@@ -778,6 +779,7 @@
 		84B58E391B65CC260048F33D /* LVLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingIndicator.m; sourceTree = "<group>"; };
 		84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebugConnection.h; path = lvdebug/LVDebugConnection.h; sourceTree = "<group>"; };
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
+		84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC2_IconFontLabel.lua; sourceTree = "<group>"; };
 		84C1D69C1C16B09D0058E974 /* LuaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaView.h; sourceTree = "<group>"; };
 		84C1D69E1C16B09D0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuaViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1206,6 +1208,7 @@
 				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
 				8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */,
 				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
+				84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */,
 				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
 				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
 				84799AC51BAFDDA00070E214 /* demoG_TableView.lua */,
@@ -1917,6 +1920,7 @@
 				84799AEC1BAFDDA00070E214 /* demoZ1_luabox.lua in Resources */,
 				84799ADE1BAFDDA00070E214 /* demoZ_testunit.lua in Resources */,
 				84799AE61BAFDDA00070E214 /* snow.png in Resources */,
+				84BE192D1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua in Resources */,
 				84799AEA1BAFDDA00070E214 /* demoG_TableView.lua in Resources */,
 				84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */,
 				84799AE41BAFDDA00070E214 /* lazhu.png in Resources */,

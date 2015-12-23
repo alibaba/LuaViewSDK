@@ -152,15 +152,17 @@ static int textColor (lv_State *L) {
 }
 
 static int font (lv_State *L) {
+    LView* luaView = (__bridge LView *)(L->lView);
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user ){
+    if( luaView && user ){
         LVLabel* view = (__bridge LVLabel *)(user->view);
         if( [view isKindOfClass:[LVLabel class]] ){
             if( lv_gettop(L)>=2 ) {
                 if( lv_gettop(L)>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
                     float fontSize = lv_tonumber(L, 3);
-                    view.font = [UIFont fontWithName:fontName size:fontSize];
+                    UIFont* font = [LVUtil fontWithName:fontName size:fontSize package:luaView.packageName];
+                    view.font = font;
                 } else {
                     float fontSize = lv_tonumber(L, 2);
                     view.font = [UIFont systemFontOfSize:fontSize];

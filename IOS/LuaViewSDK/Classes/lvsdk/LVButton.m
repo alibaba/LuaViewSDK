@@ -221,6 +221,7 @@ static int titleColor (lv_State *L) {
 }
 
 static int font (lv_State *L) {
+    LView* luaView = (__bridge LView *)(L->lView);
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
     if( user ){
         LVButton* view = (__bridge LVButton *)(user->view);
@@ -230,7 +231,7 @@ static int font (lv_State *L) {
                 if( num>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
                     float fontSize = lv_tonumber(L, 3);
-                    view.titleLabel.font = [UIFont fontWithName:fontName size:fontSize];
+                    view.titleLabel.font = [LVUtil fontWithName:fontName size:fontSize package:luaView.packageName];
                 } else {
                     float fontSize = lv_tonumber(L, 2);
                     view.titleLabel.font = [UIFont systemFontOfSize:fontSize];

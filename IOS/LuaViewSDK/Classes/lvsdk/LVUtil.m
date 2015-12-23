@@ -19,6 +19,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import <CoreText/CTFontManager.h>
 
 @implementation LVUtil
 
@@ -320,6 +321,8 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
                                }
                            }];
 }
+
+#pragma file data
 
 +(BOOL) saveData:(NSData*) data  toFile:(NSString*) fileName{
     NSString* path = [LVUtil PathForCachesResource:fileName];
@@ -763,6 +766,39 @@ int lv_callbackFunction(lv_State* L, const char* functionName){
         }
     }
     return 0;
+}
+
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(NSString*)package{
+    UIFont* font = [UIFont fontWithName:fontName size:fontSize];
+    if( font == nil ) {
+        [LVUtil loadFont:fontName package:package];
+        font = [UIFont fontWithName:fontName size:fontSize];
+    }
+    return font;
+}
+
++(int) loadFont:(NSString*) fileName package:(NSString*)package{
+    int ret = 0;
+    if( [fileName.lowercaseString hasSuffix:@".ttf"]==NO ) {
+        fileName = [NSString stringWithFormat:@"%@.ttf",fileName];
+    }
+    NSData *inData =  [LVUtil dataReadFromFile:fileName package:package];/* your font-file data */;
+    CFErrorRef error;
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
+    CGFontRef font = CGFontCreateWithDataProvider(provider);
+    if (! CTFontManagerRegisterGraphicsFont(font, &error)) {
+        CFStringRef errorDescription = CFErrorCopyDescription(error);
+        NSLog(@"Failed to load font: %@", errorDescription);
+        CFRelease(errorDescription);
+        ret = -1;
+    }
+    if( font ) {
+        CFRelease(font);
+    }
+    if( provider ) {
+        CFRelease(provider);
+    }
+    return ret;
 }
 
 void LVLog( NSString* format, ... ){

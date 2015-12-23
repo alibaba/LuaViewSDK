@@ -190,12 +190,16 @@ UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 +(BOOL) ios8;
 
 
++ (int) loadFont:(NSString*) fileName package:(NSString*)package;
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(NSString*)package;
 
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
 //----------------------------------------
 int lv_callbackFunction(lv_State* l, const char* functionName);
+
+
 
 @end
 

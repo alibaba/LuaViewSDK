@@ -12,6 +12,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import "LView.h"
 
 @interface LVStyledString ()
 @end
@@ -44,10 +45,10 @@ static int __attributedString_gc (lv_State *L) {
     return 0;
 }
 
-static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWeigth, NSString* fontStyle){
+static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWeigth, NSString* fontStyle, NSString* package){
     if ( fontSize ) {
         if( [fontName isKindOfClass:[NSString class]] ){
-            return [UIFont fontWithName:fontName size:fontSize.floatValue];
+            return [LVUtil fontWithName:fontName size:fontSize.floatValue package:package];
         }
         if ( [fontStyle isKindOfClass:[NSString class]] &&
             [fontStyle compare:@"italic" options:NSCaseInsensitiveSearch]==NSOrderedSame ) {
@@ -63,12 +64,12 @@ static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWei
 }
 
 // 设置字体
-static void resetFont(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
+static void resetFont(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range, NSString* package){
     NSString* fontName = dic[@"fontName"];
     NSNumber* fontSize = dic[@"fontSize"];
     NSString* fontWeight = dic[@"fontWeight"];
     NSString* fontStyle = dic[@"fontStyle"];
-    UIFont* font = getFont(fontName, fontSize, fontWeight, fontStyle);
+    UIFont* font = getFont(fontName, fontSize, fontWeight, fontStyle,package);
     if( font ) {
         [attString addAttribute:NSFontAttributeName value:font range:range];
     }
@@ -153,8 +154,8 @@ static void resetLineSpace(NSMutableAttributedString* attString, NSDictionary* d
 }
 
 
-static void resetAttributedString(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range){
-    resetFont(attString, dic, range);
+static void resetAttributedString(NSMutableAttributedString* attString, NSDictionary* dic, NSRange range ,NSString* package){
+    resetFont(attString, dic, range, package);
     resetForegroundColor(attString, dic, range);
     resetBackgroundColor(attString, dic, range);
     resetStriketrhroughSytle(attString, dic, range);
@@ -164,8 +165,9 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
 }
 
 static int lvNewAttributedString (lv_State *L) {
+    LView* luaView = (__bridge LView *)(L->lView);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
-    if( lv_gettop(L)>=2 ) {
+    if( luaView && lv_gettop(L)>=2 ) {
         if( lv_type(L, 1)==LV_TSTRING && lv_type(L, 2)==LV_TTABLE ){
             NSString* s = lv_paramString(L, 1);
             attString.mutableStyledString = [[NSMutableAttributedString alloc] initWithString:s];
@@ -174,7 +176,7 @@ static int lvNewAttributedString (lv_State *L) {
             NSRange range = {0};
             range.location = 0;
             range.length = s.length;
-            resetAttributedString(attString.mutableStyledString, dic, range);
+            resetAttributedString(attString.mutableStyledString, dic, range, luaView.packageName);
         }
     }
     
