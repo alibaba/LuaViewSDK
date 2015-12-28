@@ -272,8 +272,8 @@ static int cancel (lv_State *L) {
             {"__tostring", __tostring },
             
             {"data", data },
-            {"statusCode", responseStatusCode },
-            {"headerFields", responseHeaderFields },
+            {"code", responseStatusCode },
+            {"header", responseHeaderFields },
             
             {"get", get },
             {"post", post },
