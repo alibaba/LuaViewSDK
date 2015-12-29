@@ -48,7 +48,7 @@
     retType:(int) retType{
     if( l ){
         if( lv_type(l, -1)==LV_TNIL ){
-            return nil;
+            return @"LVUtil: call nil function";
         } else if( lv_type(l, -1)==LV_TTABLE && key1){//table
             lv_getfield(l, -1, key1);
             lv_remove(l, -2);
@@ -65,13 +65,13 @@
         }
         int type = lv_type(l, -1);
         if ( type==retType && nret==1 ) {
-            return 0;
+            return nil;
         }
         if( type == LV_TFUNCTION ){//function
             return lv_runFunctionWithArgs(l, nargs, nret);
         }
     }
-    return nil;
+    return @"LVUtil:lv_State is nil";
 }
 
 NSString* lv_runFunction(lv_State* l){
@@ -95,7 +95,7 @@ NSString* lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
         }
         return nil;
     }
-    return nil;
+    return @"function is nil error";
 }
 
 #define api_incr_top(L)   {api_check(L, L->top < L->ci->top); L->top++;}
