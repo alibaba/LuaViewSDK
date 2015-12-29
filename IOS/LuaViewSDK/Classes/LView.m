@@ -109,7 +109,7 @@
     self.packageName = packageName;
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
-    if( ret==0 && self.l ) {
+    if( ret==nil && self.l ) {
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
             lv_pushNativeObject( self.l, obj );
@@ -218,9 +218,8 @@ extern char g_debug_lua[];
 #endif
         return [NSString stringWithFormat:@"%s",s];
     } else {
-        lv_runFunction(self.l);
+        return lv_runFunction(self.l);
     }
-    return nil;
 }
 
 -(int) globalNumber:(const char*) globalName{
@@ -513,7 +512,7 @@ extern char g_debug_lua[];
 }
 
 #pragma mark - call lua global function
--(void) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args{
+-(NSString*) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args{
     if( self.l ){
         lv_checkstack(self.l, 8 + (int)args.count*2);
         self.conentView = environment;
@@ -531,17 +530,19 @@ extern char g_debug_lua[];
             lv_pushNativeObject(self.l,obj);
         }
         lv_getglobal(self.l, functionName.UTF8String);// function
-        lv_runFunctionWithArgs(self.l, (int)args.count+1, 0);
+        NSString* ret = lv_runFunctionWithArgs(self.l, (int)args.count+1, 0);
         self.conentView = nil;
         self.contentViewIsWindow = NO;
+        return ret;
     }
+    return nil;
 }
 
--(void) callLua:(NSString*) functionName environment:(UIView*) environment args:(NSArray*) args{
-    [self callLua:functionName tag:environment environment:environment args:args];
+-(NSString*) callLua:(NSString*) functionName environment:(UIView*) environment args:(NSArray*) args{
+    return [self callLua:functionName tag:environment environment:environment args:args];
 }
 
--(void) callLua:(NSString*) functionName args:(NSArray*) args{
+-(NSString*) callLua:(NSString*) functionName args:(NSArray*) args{
     if( self.l ){
         lv_checkstack(self.l, (int)args.count*2 + 2);
         self.conentView = nil;
@@ -552,8 +553,9 @@ extern char g_debug_lua[];
             lv_pushNativeObject(self.l,obj);
         }
         lv_getglobal(self.l, functionName.UTF8String);// function
-        lv_runFunctionWithArgs(self.l, (int)args.count, 0);
+        return lv_runFunctionWithArgs(self.l, (int)args.count, 0);
     }
+    return nil;
 }
 
 -(LVBlock*) getLuaBlock:(NSString*) name{

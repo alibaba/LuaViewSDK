@@ -79,7 +79,7 @@
     }
 }
 
-- (void) callWithArgs:(NSArray*) args{
+- (NSString*) callWithArgs:(NSArray*) args{
     lv_State* L = self.lview.l;
     if( L ) {
         lv_checkstack(L, (int)args.count*2+2 );
@@ -93,7 +93,7 @@
         
         [LVUtil pushRegistryValue:L key:self.retainKey];
         
-        lv_runFunctionWithArgs(L, (int)args.count, self.returnValueNum);
+        NSString* ret = lv_runFunctionWithArgs(L, (int)args.count, self.returnValueNum);
         
         NSMutableArray* values = [[NSMutableArray alloc] init];
         int newStackNum = lv_gettop(L);
@@ -108,7 +108,9 @@
             self.returnValues = nil;
         }
         //lv_settop(L, oldStackNum);
+        return ret;
     }
+    return nil;
 }
 
 -(void) pushFunctionToStack{

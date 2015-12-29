@@ -82,9 +82,9 @@
  *调用lua脚本, functionName:lua的function名称,  environment:运行窗口,  args:传递参数
  *
  */
--(void) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args;
--(void) callLua:(NSString*) functionName environment:(UIView*) environment args:(NSArray*) args;
--(void) callLua:(NSString*) functionName args:(NSArray*) args;
+-(NSString*) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args;
+-(NSString*) callLua:(NSString*) functionName environment:(UIView*) environment args:(NSArray*) args;
+-(NSString*) callLua:(NSString*) functionName args:(NSArray*) args;
 -(LVBlock*) getLuaBlock:(NSString*) name;
 
 /**

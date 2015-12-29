@@ -16,7 +16,7 @@
 - (id) initWith:(lv_State*)L statckID:(int) idx;
 - (id) initWith:(lv_State*)L globalName:(NSString*) globalName;
 
-- (void) callWithArgs:(NSArray*) args;
+- (NSString*) callWithArgs:(NSArray*) args;
 
 - (void) pushFunctionToStack;
 
