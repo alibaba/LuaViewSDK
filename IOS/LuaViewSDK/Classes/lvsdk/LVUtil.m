@@ -28,7 +28,7 @@
     return [url hasPrefix:@"https://"] || [url hasPrefix:@"http://"];
 }
 
-+(int) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
++(NSString*) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
     if( l ){
         lv_checkStack32(l);
         lv_pushlightuserdata(l, (__bridge void *)lightUserData);// key=view
@@ -36,19 +36,19 @@
         
         return [LVUtil call:l key1:key1 key2:key2 nargs:nargs nrets:0];
     }
-    return -1;
+    return nil;
 }
 
-+(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
++(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
     return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret retType:-8];
 }
 
-+(int) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
++(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
       nargs:(int)nargs nrets:(int)nret
     retType:(int) retType{
     if( l ){
         if( lv_type(l, -1)==LV_TNIL ){
-            return -1;
+            return nil;
         } else if( lv_type(l, -1)==LV_TTABLE && key1){//table
             lv_getfield(l, -1, key1);
             lv_remove(l, -2);
@@ -71,14 +71,14 @@
             return lv_runFunctionWithArgs(l, nargs, nret);
         }
     }
-    return -1;
+    return nil;
 }
 
-int lv_runFunction(lv_State* l){
+NSString* lv_runFunction(lv_State* l){
     return lv_runFunctionWithArgs(l, 0, 0);
 }
 
-int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
+NSString* lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
     if( l && lv_type(l, -1) == LV_TFUNCTION ) {
         if( nargs>0 ){
             lv_insert(l, -nargs-1);
@@ -91,10 +91,11 @@ int lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
             NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
             lv_printToServer(l, string.UTF8String, 0);
 #endif
+            return [NSString stringWithFormat:@"%s",s];
         }
-        return errorCode;
+        return nil;
     }
-    return -1;
+    return nil;
 }
 
 #define api_incr_top(L)   {api_check(L, L->top < L->ci->top); L->top++;}

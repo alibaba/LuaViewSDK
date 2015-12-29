@@ -86,29 +86,29 @@
 }
 
 #pragma mark - run
--(int) runFile:(NSString*) fileName{
+-(NSString*) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
     NSData* code = [LVUtil dataReadFromFile:fileName package:self.packageName];
-    int error = [self runData:code fileName:fileName];
+    NSString* error = [self runData:code fileName:fileName];
     return error;
 }
 
--(int) runSignFile:(NSString*) fileName{
+-(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
     NSData* code = [LVPkgManager readLuaFile:fileName package:self.packageName];
-    int error = [self runData:code fileName:fileName];
+    NSString* error = [self runData:code fileName:fileName];
     return error;
 }
 
--(int) runPackage:(NSString*) packageName {
+-(NSString*) runPackage:(NSString*) packageName {
     return [self runPackage:packageName args:nil];
 }
 
--(int) runPackage:(NSString*) packageName args:(NSArray*) args{
+-(NSString*) runPackage:(NSString*) packageName args:(NSArray*) args{
     self.runInSignModel = TRUE;
     self.packageName = packageName;
     NSString* fileName = @"main.lv";
-    int ret = [self runSignFile:fileName];
+    NSString* ret = [self runSignFile:fileName];
     if( ret==0 && self.l ) {
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
@@ -134,7 +134,7 @@
 #ifdef DEBUG
 extern char g_debug_lua[];
 
--(int) loadDebugModel{
+-(NSString*) loadDebugModel{
     NSData* data = [[NSData alloc] initWithBytes:g_debug_lua length:strlen(g_debug_lua)];
     return [self runData:data fileName:@"debug.lua"];
 }
@@ -189,10 +189,10 @@ extern char g_debug_lua[];
     }
 }
 
--(int) runData:(NSData *)data fileName:(NSString*)fileName{
+-(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
     if( self.l==NULL ){
         LVError( @"Lua State is released !!!");
-        return -1;
+        return @"Lua State is released !!!";
     }
     if( fileName==nil ){
         static int i = 0;
@@ -200,7 +200,7 @@ extern char g_debug_lua[];
     }
     if( data.length<=0 ){
         LVError( @"running chars == NULL");
-        return -1;
+        return @"running chars == NULL";
     }
 #ifdef DEBUG
     [self checkDeuggerIsRunningToLoadDebugModel];
@@ -216,10 +216,11 @@ extern char g_debug_lua[];
         NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
         lv_printToServer(self.l, string.UTF8String, 0);
 #endif
+        return [NSString stringWithFormat:@"%s",s];
     } else {
         lv_runFunction(self.l);
     }
-    return error;
+    return nil;
 }
 
 -(int) globalNumber:(const char*) globalName{

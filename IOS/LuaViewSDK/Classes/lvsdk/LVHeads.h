@@ -138,8 +138,8 @@ typedef struct _LVUserDataGesture {
 NSString* lv_paramString(lv_State* L, int idx );
 
 // run
-int  lv_runFunction(lv_State* l);
-int  lv_runFunctionWithArgs(lv_State* l, int nargs, int nret);
+NSString*  lv_runFunction(lv_State* l);
+NSString*  lv_runFunctionWithArgs(lv_State* l, int nargs, int nret);
 
 
 

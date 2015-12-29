@@ -36,7 +36,7 @@
  *
  *  @return 返回运行结果
  */
--(int) runFile:(NSString*) fileName;
+-(NSString*) runFile:(NSString*) fileName;
 
 /**
  *  运行一个包, main.lv是主入口
@@ -45,7 +45,7 @@
  *
  *  @return 返回运行结果
  */
--(int) runPackage:(NSString*) packageName;
+-(NSString*) runPackage:(NSString*) packageName;
 
 /**
  *  运行一个包, main.lv是主入口
@@ -55,7 +55,7 @@
  *
  *  @return 返回运行结果
  */
--(int) runPackage:(NSString*) packageName args:(NSArray*) args;
+-(NSString*) runPackage:(NSString*) packageName args:(NSArray*) args;
 
 /**
  *  运行签名的脚本文件
@@ -64,7 +64,7 @@
  *
  *  @return 返回运行结果
  */
--(int) runSignFile:(NSString*) fileName;
+-(NSString*) runSignFile:(NSString*) fileName;
 
 /**
  *   load and run script
@@ -75,7 +75,7 @@
  *
  *  @return 运行结果
  */
--(int) runData:(NSData*) data fileName:(NSString*) fileName;
+-(NSString*) runData:(NSData*) data fileName:(NSString*) fileName;
 
 /*
  *

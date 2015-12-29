@@ -220,7 +220,7 @@ static int requireMethodForLuaView (lv_State *L) {
     if( fileName ){
         LView* lview = (__bridge LView *)(L->lView);
         if( lview ) {
-            int ret = 0;
+            NSString* ret = nil;
             if ( lview.runInSignModel ) {
                 fileName = [NSString stringWithFormat:@"%@.lv",fileName];
                 ret = [lview runSignFile:fileName];
@@ -228,7 +228,7 @@ static int requireMethodForLuaView (lv_State *L) {
                 fileName = [NSString stringWithFormat:@"%@.lua",fileName];
                 ret =[lview runFile:fileName];
             }
-            lv_pushnumber(L, ret);
+            lv_pushstring(L, ret.UTF8String);
             return 1;
         }
     }
