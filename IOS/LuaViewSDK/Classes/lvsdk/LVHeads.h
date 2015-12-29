@@ -66,6 +66,7 @@ extern const char* LVType_LVUserDataDate;
 extern const char* LVType_LVUserDataHttp;
 extern const char* LVType_LVUserDataTimer;
 extern const char* LVType_LVUserDataTransform3D;
+extern const char* LVType_LVUserDataAnimator;
 extern const char* LVType_LVUserDataGesture;
 extern const char* LVType_LVUserDataDownloader;
 extern const char* LVType_LVUserDataAudioPlayer;
@@ -125,6 +126,7 @@ typedef struct _LVUserDataGesture {
 #define META_TABLE_UIPageView       "UI.PagerView"
 #define META_TABLE_UIAlertView      "UI.AlertView"
 #define META_TABLE_Transform3D      "UI.Transfrom3D"
+#define META_TABLE_Animator         "UI.Animator"
 #define META_TABLE_Struct           "UI.Struct"
 #define META_TABLE_Downloader       "LV.Downloader"
 #define META_TABLE_AudioPlayer      "LV.AudioPlayer"

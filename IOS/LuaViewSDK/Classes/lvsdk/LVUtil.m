@@ -769,6 +769,10 @@ int lv_callbackFunction(lv_State* L, const char* functionName){
     return 0;
 }
 
+BOOL lv_objcEqual(id obj1, id obj2) {
+    return obj1 == obj2 || [obj1 isEqual:obj2];
+}
+
 + (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(NSString*)package{
     UIFont* font = [UIFont fontWithName:fontName size:fontSize];
     if( font == nil ) {

@@ -19,6 +19,7 @@
  const char* LVType_LVUserDataHttp = "LVType_UserDataHttp";
  const char* LVType_LVUserDataTimer = "LVType_UserDataTimer";
  const char* LVType_LVUserDataTransform3D = "LVType_UserDataTransform3D";
+ const char* LVType_LVUserDataAnimator = "LVType_UserDataAnimator";
  const char* LVType_LVUserDataGesture = "LVType_UserDataGesture";
  const char* LVType_LVUserDataDownloader = "LVType_UserDataDownloader";
  const char* LVType_LVUserDataAudioPlayer = "LVType_UserDataAudioPlayer";

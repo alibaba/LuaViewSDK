@@ -21,6 +21,7 @@
 #import "LVTransform3D.h"
 #import "LVTextField.h"
 #import "LVAnimate.h"
+#import "LVAnimator.h"
 #import "LVDate.h"
 #import "LVAlert.h"
 #import "LVSystem.h"
@@ -105,6 +106,7 @@
     [LVPagerIndicator classDefine:L];
     [LVCustomPanel classDefine:L];
     [LVTransform3D classDefine:L];
+    [LVAnimator classDefine:L];
     [LVTextField classDefine:L];
     [LVAnimate classDefine:L];
     [LVDate classDefine:L];

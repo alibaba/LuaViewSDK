@@ -199,7 +199,7 @@ void LVError( NSString* format, ... );
 //----------------------------------------
 int lv_callbackFunction(lv_State* l, const char* functionName);
 
-
+BOOL lv_objcEqual(id obj1, id obj2);
 
 @end
 

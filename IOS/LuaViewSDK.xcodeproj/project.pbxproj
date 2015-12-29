@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C02D1D71C31106E00213386 /* LVAnimator.h */; };
+		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
+		3C02D1DC1C31281C00213386 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */; };
 		539AD374E91F407031F9272B /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
 		84056E721B5CA5990078F9D6 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; };
 		84056E741B5CA5990078F9D6 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
@@ -529,6 +532,9 @@
 
 /* Begin PBXFileReference section */
 		1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
+		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
+		3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZB1_Animator.lua; sourceTree = "<group>"; };
 		54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
@@ -1110,6 +1116,8 @@
 			children = (
 				846481A61A64C61F00DE6204 /* LVAnimate.h */,
 				846481A71A64C61F00DE6204 /* LVAnimate.m */,
+				3C02D1D71C31106E00213386 /* LVAnimator.h */,
+				3C02D1D81C31106E00213386 /* LVAnimator.m */,
 			);
 			name = animate;
 			sourceTree = "<group>";
@@ -1238,6 +1246,7 @@
 				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
 				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
 				84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */,
+				3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */,
 				84799AF11BAFDF370070E214 /* lv_kit.lua */,
 				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
 				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
@@ -1688,6 +1697,7 @@
 				84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */,
 				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
 				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
+				3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */,
 				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
 				84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */,
 				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
@@ -1892,6 +1902,7 @@
 				8468C9691BDA11BE002D4B1E /* testUITextFieldView.lua in Resources */,
 				84799AE81BAFDDA00070E214 /* demoP_System.lua in Resources */,
 				84799AEB1BAFDDA00070E214 /* demoL_Alert.lua in Resources */,
+				3C02D1DC1C31281C00213386 /* demoZB1_Animator.lua in Resources */,
 				84799AE51BAFDDA00070E214 /* demoW1_shake.lua in Resources */,
 				84799AE11BAFDDA00070E214 /* demoY2_flxNode.lua in Resources */,
 				8480F0B71BFC1880005DB2AE /* demoA_ImageAnimate.lua in Resources */,
@@ -2235,6 +2246,7 @@
 				84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */,
 				84C1D7E41C16C3FA0058E974 /* LVTableView.m in Sources */,
 				84C1D7E51C16C3FA0058E974 /* LVTableViewCell.m in Sources */,
+				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E61C16C3FA0058E974 /* LVTableViewDelegate.m in Sources */,
 				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
 				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,

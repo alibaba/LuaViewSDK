@@ -9,6 +9,7 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVTransform3D.h"
+#import "LVAnimator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LVStruct.h"
 #import "lV.h"
@@ -1091,6 +1092,40 @@ static int transform3D (lv_State *L) {
     return 0;
 }
 
+static int startAnimation(lv_State *L) {
+    LVUserDataView* vdata = (LVUserDataView *)lv_touserdata(L, 1);
+    if( vdata ){
+        LVUserDataAnimator *adata = NULL;
+        LVAnimator *animator = nil;
+        for (int i = 1; i < lv_gettop(L); ++i) {
+            adata = lv_touserdata(L, -i);
+            if (!LVIsType(adata, LVUserDataAnimator)) {
+                continue;
+            }
+            
+            animator = (__bridge LVAnimator *)(adata->animator);
+            if (animator == nil) {
+                continue;
+            }
+            
+            animator.target = (__bridge UIView *)(vdata->view);
+            [animator startWithKey:LVAnimatorGetAnimationKey(adata)];
+        }
+    }
+    
+    return 0;
+}
+
+static int stopAnimation(lv_State *L) {
+    LVUserDataView* user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->view);
+        [view.layer removeAllAnimations];
+    }
+    
+    return 0;
+}
+
 #pragma -mark anchorPoint
 static int anchorPoint (lv_State *L) {
     LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -1339,6 +1374,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"cancelFocus",    resignFirstResponder },
     
     {"transform3D",    transform3D },
+    
+    {"startAnimation", startAnimation },
+    {"stopAnimation", stopAnimation },
     
     {"release",     releaseObject},
     
