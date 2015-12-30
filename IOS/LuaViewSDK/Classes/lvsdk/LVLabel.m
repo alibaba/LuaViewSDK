@@ -161,7 +161,7 @@ static int font (lv_State *L) {
                 if( lv_gettop(L)>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
                     float fontSize = lv_tonumber(L, 3);
-                    UIFont* font = [LVUtil fontWithName:fontName size:fontSize package:luaView.packageName];
+                    UIFont* font = [LVUtil fontWithName:fontName size:fontSize package:luaView.package];
                     view.font = font;
                 } else {
                     float fontSize = lv_tonumber(L, 2);

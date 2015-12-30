@@ -25,6 +25,7 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import "LVRSA.h"
+#import "LVPackage.h"
 
 
 @interface LView ()
@@ -82,6 +83,7 @@
                                                object:nil];
     self.lv_lview = self;
     self.rsa = [[LVRSA alloc] init];
+    self.package = [[LVPackage alloc] init];
 }
 
 -(void) dealloc{
@@ -92,14 +94,14 @@
 #pragma mark - run
 -(NSString*) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
-    NSData* code = [LVUtil dataReadFromFile:fileName package:self.packageName];
+    NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
     NSString* error = [self runData:code fileName:fileName];
     return error;
 }
 
 -(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
-    NSData* code = [LVPkgManager readLuaFile:fileName package:self.packageName rsa:self.rsa];
+    NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
     NSString* error = [self runData:code fileName:fileName];
     return error;
 }
@@ -110,7 +112,7 @@
 
 -(NSString*) runPackage:(NSString*) packageName args:(NSArray*) args{
     self.runInSignModel = TRUE;
-    self.packageName = packageName;
+    self.package.packageName = packageName;
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
     if( ret==nil && self.l ) {
@@ -646,15 +648,12 @@ extern char g_debug_lua[];
     return 0;
 }
 
-
-static NSArray* g_boundlePaths = nil;
-
-+(void) setBundleSearchPath:(NSArray*) path{
-    g_boundlePaths = path;
+-(void) setBundleSearchPath:(NSArray*) path{
+    self.package.bundleSearchPath = path;
 }
 
-+(NSArray*) bundleSearchPath{
-    return g_boundlePaths;
+-(NSArray*) bundleSearchPath{
+    return self.package.bundleSearchPath;
 }
 
 -(NSString*) description{

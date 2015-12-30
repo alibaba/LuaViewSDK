@@ -43,7 +43,7 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
     return self;
 }
 
--(void) setPlayFileName0:(NSString*) fileName package:(NSString*) package{
+-(void) setPlayFileName0:(NSString*) fileName package:(LVPackage*) package{
     NSString* path = [LVUtil cachesPath:fileName package:package];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
@@ -51,7 +51,7 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
     }
 }
 
--(void) setPlayFileName:(NSString*) fileName package:(NSString*) package{
+-(void) setPlayFileName:(NSString*) fileName package:(LVPackage*) package{
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
@@ -83,7 +83,7 @@ static int lvNewAudioPlayer (lv_State *L) {
         LVAudioPlayer* player = [[LVAudioPlayer alloc] init:L];
         LView* lview = (__bridge LView *)(L->lView);
         NSString* fileName = lv_paramString(L, 1);
-        [player setPlayFileName:fileName package:lview.packageName];
+        [player setPlayFileName:fileName package:lview.package];
         
         {
             NEW_USERDATA(userData, LVUserDataAudioPlayer);

@@ -334,7 +334,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return NO;
 }
 
-+(NSData*) dataReadFromFile:(NSString*) fileName package:(NSString *)package{
++(NSData*) dataReadFromFile:(NSString*) fileName package:(LVPackage *)package{
     NSString* path = [LVUtil cachesPath:fileName package:package];
     if( path ){
         NSFileManager* fm = [NSFileManager defaultManager];
@@ -353,7 +353,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return NO;
 }
 
-+(NSString*) cachesPath:(NSString*) fileName package:(NSString *)package{
++(NSString*) cachesPath:(NSString*) fileName package:(LVPackage *)package{
     NSString* path = nil;
     path = [LVUtil PathForLuaViewResource:fileName package:package];
     if( [self exist:path] ){
@@ -371,7 +371,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     if( [self exist:path] ){
         return path;
     }
-    NSArray* bundlePaths = [LView bundleSearchPath];
+    NSArray* bundlePaths = [package bundleSearchPath];
     for( NSString* bundleName in bundlePaths ) {
         NSString* name = [NSString stringWithFormat:@"%@/%@", bundleName, fileName];
         path = [LVUtil PathForBundle:nil  relativePath:name];
@@ -382,7 +382,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return nil;
 }
 
-+(UIImage*) cachesImage:(NSString*) imageName package:(NSString *)package{
++(UIImage*) cachesImage:(NSString*) imageName package:(LVPackage *)package{
     NSString* path = [LVUtil cachesPath:imageName package:package];
     if( path ){
         return [UIImage imageWithContentsOfFile:path];
@@ -391,7 +391,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     if( image ){
         return image;
     }
-    NSArray* bundlePaths = [LView bundleSearchPath];
+    NSArray* bundlePaths = [package bundleSearchPath];
     for( NSString* bundleName in bundlePaths ) {
         NSString* name = [NSString stringWithFormat:@"%@/%@", bundleName, imageName];
         UIImage* image =  [UIImage imageNamed:name];
@@ -425,7 +425,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return [cachesPath stringByAppendingPathComponent:relativePath];
 }
 
-+ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(NSString*) package{
++ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(LVPackage*) package{
     {// 首次初始化目录
         static int inited = NO;
         if( !inited ){
@@ -433,8 +433,8 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
             [LVUtil createPath:LUAVIEW_ROOT_PATH];
         }
     }
-    if( package.length>0 ) {
-        relativePath = [NSString stringWithFormat:@"%@/%@",package,relativePath];
+    if( package.packageName.length>0 ) {
+        relativePath = [NSString stringWithFormat:@"%@/%@",package.packageName,relativePath];
     }
     return [LVUtil PathForCachesResource:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,relativePath]];
 }
@@ -773,7 +773,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return obj1 == obj2 || [obj1 isEqual:obj2];
 }
 
-+ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(NSString*)package{
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(LVPackage*)package{
     UIFont* font = [UIFont fontWithName:fontName size:fontSize];
     if( font == nil ) {
         [LVUtil loadFont:fontName package:package];
@@ -782,7 +782,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return font;
 }
 
-+(int) loadFont:(NSString*) fileName package:(NSString*)package{
++(int) loadFont:(NSString*) fileName package:(LVPackage*)package{
     int ret = 0;
     if( [fileName.lowercaseString hasSuffix:@".ttf"]==NO ) {
         fileName = [NSString stringWithFormat:@"%@.ttf",fileName];

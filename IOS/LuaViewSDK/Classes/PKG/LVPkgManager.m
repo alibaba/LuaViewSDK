@@ -43,9 +43,9 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 
-+(NSString*) timeOfPackage:(NSString*)packageName{
++(NSString*) timeOfPackage:(LVPackage*)package{
     NSString* fileName = [LVPkgManager timefileNameOfPackage];
-    NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
+    NSData* data = [LVUtil dataReadFromFile:fileName package:package];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
@@ -65,7 +65,7 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 
-+(NSString*) timeOfLocalPackage:(NSString*)packageName{
++(NSString*) timeOfLocalPackage:(LVPackage*)packageName{
     NSString* fileName = [LVPkgManager timefileNameOfLocalPackage];
     NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
     if( data ) {
@@ -295,7 +295,7 @@ static const unsigned int PKG_VERSION = (102010 );
     return nil;
 }
 
-+(NSData*) readLuaFile:(NSString*) fileName package:(NSString *)package rsa:(LVRSA*)rsa{
++(NSData*) readLuaFile:(NSString*) fileName package:(LVPackage *)package rsa:(LVRSA*)rsa{
     NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
     NSData* signData = [LVUtil dataReadFromFile:signfileName package:package];
     NSData* encodedfileData = [LVUtil dataReadFromFile:fileName package:package];

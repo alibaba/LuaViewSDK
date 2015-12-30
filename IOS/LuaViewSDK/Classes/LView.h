@@ -14,6 +14,7 @@
 @class LView;
 @class LVBlock;
 @protocol LVProtocal;
+@class LVPackage;
 
 #pragma mark - LuaView窗口大小变动回调
 @protocol LVCallback <NSObject>
@@ -101,19 +102,19 @@
 /** 
  * 设置 图片资源bundle查询路径
  */
-+(void) setBundleSearchPath:(NSArray*) path;
+-(void) setBundleSearchPath:(NSArray*) path;
 
 
 /** 
  * 获取 图片资源bundle查询路径
  */
-+(NSArray*) bundleSearchPath;
+-(NSArray*) bundleSearchPath;
 
 /*
  * packageName: 包名  比如:"ppt"
  * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/3.2.12/ppt4.4.0.js" , "time":"2015-11-18 09:53"}
  */
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*)info;
++(void) downLoadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
 
 
 @end
@@ -174,7 +175,7 @@
 #pragma mark - Property 系统使用的, 基本上不用关心细节
 @interface LView ()
 @property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
-@property (nonatomic,copy) NSString* packageName;
+@property (nonatomic,strong) LVPackage* package;
 
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view
 @property (nonatomic, weak)   LView* lv_lview;

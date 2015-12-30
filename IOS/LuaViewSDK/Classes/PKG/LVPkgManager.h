@@ -17,6 +17,8 @@
 
 #import "LVRSA.h"
 
+@class LVPackage;
+
 typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 
 @interface LVPkgManager : NSObject
@@ -28,7 +30,7 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
 
-+(NSData*) readLuaFile:(NSString*) fileName package:(NSString*) package rsa:(LVRSA*) rsa;
++(NSData*) readLuaFile:(NSString*) fileName package:(LVPackage*) package rsa:(LVRSA*) rsa;
 
 +(NSString*) timeOfPackage:(NSString*)packageName;
 +(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time;

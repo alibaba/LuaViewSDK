@@ -49,7 +49,7 @@ static int file_read(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        NSData* data = [LVUtil dataReadFromFile:fileName package:lview.packageName];
+        NSData* data = [LVUtil dataReadFromFile:fileName package:lview.package];
         if( data ){
             [LVData createDataObject:L data:data];
             return 1;
@@ -62,7 +62,7 @@ static int file_exist(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        if(  [LVUtil cachesPath:fileName package:lview.packageName] ){
+        if(  [LVUtil cachesPath:fileName package:lview.package] ){
             lv_pushboolean(L, 1);
             return 1;
         }

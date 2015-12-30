@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
+#import "LVPackage.h"
 
 typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 
@@ -42,21 +43,21 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 /*
  * 文件 -> NSData
  */
-+(NSData*) dataReadFromFile:(NSString*) fileName package:(NSString*) package;
++(NSData*) dataReadFromFile:(NSString*) fileName package:(LVPackage*) package;
 
 /**
  *  获取可能的文件路径
  *
  *  @param fileName
  */
-+(NSString*) cachesPath:(NSString*) fileName package:(NSString*) package;
++(NSString*) cachesPath:(NSString*) fileName package:(LVPackage*) package;
 
 /**
  *  创建图片
  *
  *  @param imageName
  */
-+(UIImage*) cachesImage:(NSString*) imageName package:(NSString*) package;
++(UIImage*) cachesImage:(NSString*) imageName package:(LVPackage*) package;
 
 
 /*
@@ -67,7 +68,7 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 /*
  * luaview专用目录: 相对路径 -> 绝对路径
  */
-+ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(NSString*) package;
++ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(LVPackage*) package;
 
 /*
  * NSDocumentDirectory: 相对路径 -> 绝对路径
@@ -190,8 +191,8 @@ UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 +(BOOL) ios8;
 
 
-+ (int) loadFont:(NSString*) fileName package:(NSString*)package;
-+ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(NSString*)package;
++ (int) loadFont:(NSString*) fileName package:(LVPackage*)package;
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(LVPackage*)package;
 
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
