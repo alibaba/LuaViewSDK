@@ -10,13 +10,6 @@
 
 @interface LVRSA : NSObject
 
-// 测试
--(void) test;
-
-// 解密
-+(NSData*) decrypt:(NSData*) data;
-
-
 +(BOOL) verifyData:(NSData*)data withSignedData:(NSData*) sign;
 
 +(NSData*) aesKeyBytes;
