@@ -10,14 +10,14 @@
 
 @interface LVRSA : NSObject
 
-+(BOOL) verifyData:(NSData*)data withSignedData:(NSData*) sign;
+-(BOOL) verifyData:(NSData*)data withSignedData:(NSData*) sign;
 
-+(NSData*) aesKeyBytes;
+-(NSData*) aesKeyBytes;
 
 /*
  * 设置证书名
  */
-+ (void) setPublicKeyFilePath:(NSString*) filePath;
+- (void) setPublicKeyFilePath:(NSString*) filePath;
 
 NSData* lv_SHA256HashBytes(NSData *fileData);
 

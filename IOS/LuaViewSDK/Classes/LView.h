@@ -184,5 +184,8 @@
 
 -(void) containerAddSubview:(UIView *)view;
 
+// 设置证书地址
+- (void) setPublicKeyFilePath:(NSString*) filePath;
+
 @end
 

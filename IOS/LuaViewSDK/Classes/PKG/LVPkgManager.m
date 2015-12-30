@@ -294,14 +294,15 @@ static const unsigned int PKG_VERSION = (102010 );
     }
     return nil;
 }
-+(NSData*) readLuaFile:(NSString*) fileName package:(NSString *)package{
+
++(NSData*) readLuaFile:(NSString*) fileName package:(NSString *)package rsa:(LVRSA*)rsa{
     NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
     NSData* signData = [LVUtil dataReadFromFile:signfileName package:package];
     NSData* encodedfileData = [LVUtil dataReadFromFile:fileName package:package];
-    NSData* fileData0 = LV_AES256DecryptDataWithKey(encodedfileData, [LVRSA aesKeyBytes]);
+    NSData* fileData0 = LV_AES256DecryptDataWithKey(encodedfileData, [rsa aesKeyBytes]);
     NSData* fileData = [LVPkgManager gzipUnpack:fileData0];
     // LVLog(@"%@",[[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding]);
-    if(  [LVRSA verifyData:encodedfileData withSignedData:signData] ){
+    if(  [rsa verifyData:encodedfileData withSignedData:signData] ){
         return fileData;
     }
     return nil;

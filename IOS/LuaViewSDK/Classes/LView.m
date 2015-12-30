@@ -24,6 +24,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import "LVRSA.h"
 
 
 @interface LView ()
@@ -31,6 +32,8 @@
 @property (nonatomic,assign) BOOL stateInited;
 @property (nonatomic,assign) BOOL loadedDebugScript;
 @property (atomic,assign) NSInteger callLuaTimes;
+
+@property (nonatomic,strong) LVRSA* rsa;
 @end
 
 @implementation LView
@@ -78,6 +81,7 @@
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
     self.lv_lview = self;
+    self.rsa = [[LVRSA alloc] init];
 }
 
 -(void) dealloc{
@@ -95,7 +99,7 @@
 
 -(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
-    NSData* code = [LVPkgManager readLuaFile:fileName package:self.packageName];
+    NSData* code = [LVPkgManager readLuaFile:fileName package:self.packageName rsa:self.rsa];
     NSString* error = [self runData:code fileName:fileName];
     return error;
 }
@@ -669,5 +673,10 @@ static NSArray* g_boundlePaths = nil;
     }
 }
 
+// 证书
+
+- (void) setPublicKeyFilePath:(NSString*) filePath{
+    [self.rsa setPublicKeyFilePath:filePath];
+}
 
 @end

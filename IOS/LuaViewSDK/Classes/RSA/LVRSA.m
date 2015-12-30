@@ -14,12 +14,23 @@
 #import <Security/SecItem.h>
 #import "LVUtil.h"
 
-@implementation LVRSA
+@implementation LVRSA {
+    NSData* g_keyBytes;
+    SecKeyRef g_publicKey;
+    NSString* g_publicKeyFilePath;
+}
+
+-(void) dealloc{
+    if( g_publicKey ) {
+        CFRelease(g_publicKey);
+        g_publicKey = NULL;
+    }
+}
 
 NSError* lv_verifySignSHA1WithRSA(NSData *fileData, SecKeyRef pubKeyRef, NSData *signedData);
 
-+(BOOL) verifyData:(NSData*)data withSignedData:(NSData*) signedData{
-    SecKeyRef key = [LVRSA getPublicKey];
+-(BOOL) verifyData:(NSData*)data withSignedData:(NSData*) signedData{
+    SecKeyRef key = [self getPublicKey];
     NSError* error = lv_verifySignSHA1WithRSA(data, key, signedData);
     if( error == nil ){
         return YES;
@@ -28,31 +39,27 @@ NSError* lv_verifySignSHA1WithRSA(NSData *fileData, SecKeyRef pubKeyRef, NSData 
     return NO;
 }
 
-+(NSData*) aesKeyBytes{
-    static NSData* g_keyBytes = nil;
+-(NSData*) aesKeyBytes{
     if( g_keyBytes==nil ) {
-        NSData *certificateData = [LVRSA publickKeyData];
+        NSData *certificateData = [self publickKeyData];
         g_keyBytes = [LVUtil MD5HashDataFromData:certificateData];
     }
     return g_keyBytes;
 }
 
 //公共秘钥的引用：
-+ (SecKeyRef)getPublicKey{
-    static SecKeyRef g_publicKey = NULL;
+- (SecKeyRef)getPublicKey{
     if( g_publicKey == NULL ){
-        g_publicKey = [LVRSA getPublicKey0];
+        g_publicKey = [self getPublicKey0];
     }
     return g_publicKey;
 }
 
-static NSString *g_publicKeyFilePath = nil;
-
-+ (void) setPublicKeyFilePath:(NSString*) filePath{
+- (void) setPublicKeyFilePath:(NSString*) filePath{
     g_publicKeyFilePath = filePath;
 }
 
-+(NSData*) publickKeyData{
+-(NSData*) publickKeyData{
     if( g_publicKeyFilePath==nil )
         g_publicKeyFilePath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@"der"];
     
@@ -63,9 +70,9 @@ static NSString *g_publicKeyFilePath = nil;
     return certificateData;
 }
 
-+ (SecKeyRef)getPublicKey0
+- (SecKeyRef)getPublicKey0
 {
-    NSData *certificateData = [LVRSA publickKeyData];
+    NSData *certificateData = [self publickKeyData];
     if ( certificateData==nil ){
         return NULL;
     }
@@ -93,7 +100,7 @@ static NSString *g_publicKeyFilePath = nil;
 }
 
 //加密：
-+ (NSData*)rsaEncryptWithData:(NSData*)data usingKey:(SecKeyRef)key{
+- (NSData*)rsaEncryptWithData:(NSData*)data usingKey:(SecKeyRef)key{
     
     size_t cipherBufferSize = SecKeyGetBlockSize(key);
     uint8_t *cipherBuffer = malloc(cipherBufferSize * sizeof(uint8_t));
@@ -131,7 +138,7 @@ static NSString *g_publicKeyFilePath = nil;
 }
 
 //解密：
-+ (NSData*)rsaDecryptWithData:(NSData*)data usingKey:(SecKeyRef)key{
+- (NSData*)rsaDecryptWithData:(NSData*)data usingKey:(SecKeyRef)key{
     NSData *wrappedSymmetricKey = data;
     
     size_t cipherBufferSize = SecKeyGetBlockSize(key);
