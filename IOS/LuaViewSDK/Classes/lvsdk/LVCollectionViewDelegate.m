@@ -262,5 +262,66 @@ static inline NSInteger mapSection(NSInteger section){
     }
 }
 
+-(void) callWithScrollArgsForKey:(NSString*) functionName{
+    UICollectionView* tableView = (UICollectionView*)self.owner;
+    NSArray<NSIndexPath *>* indexPaths = [tableView indexPathsForVisibleItems];
+    int visibleCount = 0;
+    NSIndexPath* indexPath0 = nil;
+    
+    for( NSIndexPath* indexPath in indexPaths ) {
+        visibleCount ++;
+        if( indexPath0== nil ) {
+            indexPath0 = indexPath;
+        }
+    }
+    lv_State* L = self.owner.lv_lview.l;
+    if( L && indexPath0 ) {
+        NSInteger section = indexPath0.section;
+        NSInteger row = indexPath0.row;
+        
+        lv_settop(L, 0);
+        lv_pushnumber(L, mapSection(section) );
+        lv_pushnumber(L, mapRow(row) );
+        lv_pushnumber(L, visibleCount );
+        [self.owner lv_callLuaByKey1:functionName key2:nil argN:3];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self callWithScrollArgsForKey:@"Scrolling"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
+        [self.delegate scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self callWithScrollArgsForKey:@"ScrollBegin"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
+        [self.delegate scrollViewWillBeginDragging:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self callWithScrollArgsForKey:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
+        [self.delegate scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self callWithScrollArgsForKey:@"ScrollEnd"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
+        [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if( !decelerate ) {
+        [self callWithScrollArgsForKey:@"ScrollEnd"];
+    }
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
+        [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
 
 @end

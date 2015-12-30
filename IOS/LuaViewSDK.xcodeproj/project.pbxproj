@@ -52,7 +52,7 @@
 		84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */; };
 		84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */; };
 		84799AD71BAFDDA00070E214 /* demoZ2_callOC.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */; };
-		84799AD81BAFDDA00070E214 /* demoY2_CollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB31BAFDDA00070E214 /* demoY2_CollectionView.lua */; };
+		84799AD81BAFDDA00070E214 /* demoH2_CollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */; };
 		84799AD91BAFDDA00070E214 /* color1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB41BAFDDA00070E214 /* color1.png */; };
 		84799ADA1BAFDDA00070E214 /* color2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB51BAFDDA00070E214 /* color2.png */; };
 		84799ADB1BAFDDA00070E214 /* demoO_coroutineDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB61BAFDDA00070E214 /* demoO_coroutineDemo.lua */; };
@@ -524,7 +524,7 @@
 		84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@2x.png"; sourceTree = "<group>"; };
 		84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@3x.png"; sourceTree = "<group>"; };
 		84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ2_callOC.lua; sourceTree = "<group>"; };
-		84799AB31BAFDDA00070E214 /* demoY2_CollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoY2_CollectionView.lua; sourceTree = "<group>"; };
+		84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoH2_CollectionView.lua; sourceTree = "<group>"; };
 		84799AB41BAFDDA00070E214 /* color1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color1.png; sourceTree = "<group>"; };
 		84799AB51BAFDDA00070E214 /* color2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color2.png; sourceTree = "<group>"; };
 		84799AB61BAFDDA00070E214 /* demoO_coroutineDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_coroutineDemo.lua; sourceTree = "<group>"; };
@@ -1018,6 +1018,7 @@
 				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
 				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
 				84799AC51BAFDDA00070E214 /* demoG_TableView.lua */,
+				84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */,
 				84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */,
 				8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */,
 				84799AC61BAFDDA00070E214 /* demoL_Alert.lua */,
@@ -1033,7 +1034,6 @@
 				849832111BCB682F0032BF05 /* demoV1_Customloading.lua */,
 				84799AC01BAFDDA00070E214 /* demoW1_shake.lua */,
 				84799ABB1BAFDDA00070E214 /* demoW2_AudioPlayer.lua */,
-				84799AB31BAFDDA00070E214 /* demoY2_CollectionView.lua */,
 				84799ABC1BAFDDA00070E214 /* demoY2_flxNode.lua */,
 				84799ABA1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua */,
 				840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */,
@@ -1567,7 +1567,7 @@
 			files = (
 				8468C95E1BDA11BE002D4B1E /* testSystem.lua in Resources */,
 				84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */,
-				84799AD81BAFDDA00070E214 /* demoY2_CollectionView.lua in Resources */,
+				84799AD81BAFDDA00070E214 /* demoH2_CollectionView.lua in Resources */,
 				8468C96B1BDA11BE002D4B1E /* testUITextView2.lua in Resources */,
 				8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */,
 				84799ADA1BAFDDA00070E214 /* color2.png in Resources */,

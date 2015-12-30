@@ -108,15 +108,15 @@ collectionView = RefreshCollectionView {
 		}
 	},
 	Callback = {
-		Scrolling = function()
-			print("scrolling");
-		end,
-		ScrollBegin = function()
-			print("scrolling begin");
-		end,
-		ScrollEnd = function()
-			print("scrolling end");
-		end
+			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+			end,
+			ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+			end,
+			ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+				print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+			end
 	}
 };
 
