@@ -10,6 +10,8 @@
 
 @interface LVPackage : NSObject
 
+- (id) initWithPackageName:(NSString*) packageName;
+
 @property (nonatomic,copy) NSString* packageName;
 @property (nonatomic,copy) NSArray* bundleSearchPath;
 

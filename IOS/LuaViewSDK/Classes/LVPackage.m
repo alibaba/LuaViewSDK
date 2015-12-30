@@ -10,4 +10,12 @@
 
 @implementation LVPackage
 
+- (id) initWithPackageName:(NSString*) packageName{
+    self = [super init];
+    if( self ) {
+        self.packageName = packageName;
+    }
+    return self;
+}
+
 @end

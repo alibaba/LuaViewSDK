@@ -32,11 +32,11 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 
 +(NSData*) readLuaFile:(NSString*) fileName package:(LVPackage*) package rsa:(LVRSA*) rsa;
 
-+(NSString*) timeOfPackage:(NSString*)packageName;
-+(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time;
++(NSString*) timeOfPackage:(LVPackage*)package;
++(BOOL) wirteTimeForPackage:(LVPackage*)packageName time:(NSString*) time;
 
-+(NSString*) timeOfLocalPackage:(NSString*)packageName;
-+(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time;
++(NSString*) timeOfLocalPackage:(LVPackage*)package ;
++(BOOL) wirteTimeForLocalPackage:(LVPackage*)package time:(NSString*) time;
 
 // 返回值说明   0:本地和线上版本一样;   -1:错误或者不相等
 +(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;

@@ -35,11 +35,11 @@ static const unsigned int PKG_VERSION = (102010 );
     return [NSString stringWithFormat:@"___time___"];
 }
 
-+(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time{
++(BOOL) wirteTimeForPackage:(LVPackage*)package time:(NSString*) time{
     // time file
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     NSString* fileName = [LVPkgManager timefileNameOfPackage];
-    return [LVPkgManager writeFile:timeBytes packageName:packageName fileName:fileName];
+    return [LVPkgManager writeFile:timeBytes packageName:package.packageName fileName:fileName];
 }
 
 
@@ -57,17 +57,17 @@ static const unsigned int PKG_VERSION = (102010 );
     return [NSString stringWithFormat:@"___time__local__"];
 }
 
-+(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time{
++(BOOL) wirteTimeForLocalPackage:(LVPackage*)package time:(NSString*) time{
     // time file
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     NSString* fileName = [LVPkgManager timefileNameOfLocalPackage];
-    return [LVPkgManager writeFile:timeBytes packageName:packageName fileName:fileName];
+    return [LVPkgManager writeFile:timeBytes packageName:package.packageName fileName:fileName];
 }
 
 
-+(NSString*) timeOfLocalPackage:(LVPackage*)packageName{
++(NSString*) timeOfLocalPackage:(LVPackage*)package {
     NSString* fileName = [LVPkgManager timefileNameOfLocalPackage];
-    NSData* data = [LVUtil dataReadFromFile:fileName package:packageName];
+    NSData* data = [LVUtil dataReadFromFile:fileName package:package ];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
@@ -105,6 +105,7 @@ static const unsigned int PKG_VERSION = (102010 );
 }
 
 +(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime localMode:(BOOL) localMode{
+    LVPackage* package = [[LVPackage alloc] initWithPackageName:packageName];
     if( pkgData && [LVUtil createPath:LUAVIEW_ROOT_PATH]
        && [LVUtil createPath:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,packageName]]  ){
         if( pkgData && pkgData.length>0 ) {
@@ -119,18 +120,18 @@ static const unsigned int PKG_VERSION = (102010 );
             if( checkTime ){
                 NSString* oldTime = nil;
                 if( localMode ) {
-                    oldTime = [LVPkgManager timeOfLocalPackage:packageName];
+                    oldTime = [LVPkgManager timeOfLocalPackage:package];
                 } else {
-                    oldTime = [LVPkgManager timeOfPackage:packageName];
+                    oldTime = [LVPkgManager timeOfPackage:package];
                 }
                 if( time.length>0 && oldTime.length>0 && [time isEqualToString:oldTime] ){
                     LVLog(@" Not Need unpackage, %@, %@",packageName,time);
                     return NO;
                 } else {
                     if( localMode ) {
-                        [LVPkgManager wirteTimeForLocalPackage:packageName time:time];
+                        [LVPkgManager wirteTimeForLocalPackage:package time:time];
                     } else {
-                        [LVPkgManager wirteTimeForPackage:packageName time:time];
+                        [LVPkgManager wirteTimeForPackage:package time:time];
                     }
                 }
             }
@@ -184,10 +185,11 @@ static const unsigned int PKG_VERSION = (102010 );
     return nil;
 }
 
-+(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info{
++(int) compareLocalInfoOfPackage:(NSString*)packageName withServerInfo:(NSDictionary*) info{
     NSDictionary* dic = info;
     if( dic ){
-        NSString* time1 = [LVPkgManager timeOfPackage:name];
+        LVPackage* package = [[LVPackage alloc] initWithPackageName:packageName];
+        NSString* time1 = [LVPkgManager timeOfPackage:package];
         NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
         if( time1 && time2 &&
            [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
@@ -242,7 +244,8 @@ static const unsigned int PKG_VERSION = (102010 );
             if( data ){
                 BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
                 if( sha256Check && [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ){// 解包成功
-                    if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
+                    LVPackage* package = [[LVPackage alloc] initWithPackageName:pkgName];
+                    if(  [LVPkgManager wirteTimeForPackage:package time:time] ){// 写标记成功
                         callback(info, nil);
                         return ;
                     }
