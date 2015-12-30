@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LVHeads.h"
+#import "LView.h"
+#import "LVBlock.h"
+
 @interface LuaViewSDK : NSObject
 
 @end
