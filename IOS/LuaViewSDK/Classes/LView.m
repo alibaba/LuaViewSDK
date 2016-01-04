@@ -187,6 +187,7 @@ extern char g_debug_lua[];
         lvopen_table(self.l); /* opens the table library */
         lvopen_debug(self.l); // debug
         //lvopen_io(L);        /* opens the I/O library */
+        lvopen_os(self.l);
         lvopen_string(self.l); /* opens the string lib. */
         lvopen_math(self.l);   /* opens the math lib. */
         

@@ -20,3 +20,10 @@ print( "params" , params )
 
 print(decodeURI(url));
 
+
+local t = os:date( "*t" );
+t.hour = 10;
+t.min = 0;
+t.sec = 0;
+local ostime = os:time(t);
+print(ostime)
