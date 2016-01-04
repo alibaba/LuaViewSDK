@@ -290,6 +290,7 @@
 		84C1D8A61C17055C0058E974 /* enter10.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A41C17055C0058E974 /* enter10.png */; };
 		84C1D8A71C17055C0058E974 /* enter11.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A51C17055C0058E974 /* enter11.png */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
+		84DAB9C61C3A616800943A48 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */; };
 		84E85C1A1C33B84B007DE3DF /* LVPackage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVPackage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84E85C1C1C33B84B007DE3DF /* LVPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVPackage.m */; };
 		84FC64D21BB399A500B6AF86 /* demoO_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D11BB399A500B6AF86 /* demoO_Timer.lua */; };
@@ -626,6 +627,7 @@
 		84D446F61AF7631C000A3911 /* LVInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVInputStream.m; path = PKG/LVInputStream.m; sourceTree = "<group>"; };
 		84D8409F1B5F33D900BC59F3 /* JHSLVCustomLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomLoading.h; sourceTree = "<group>"; };
 		84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
+		84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_decodeUrl.lua; sourceTree = "<group>"; };
 		84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLuaObjBox.h; sourceTree = "<group>"; };
 		84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLuaObjBox.m; sourceTree = "<group>"; };
 		84DCF0391B44D91800AD723B /* LVTypeConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTypeConvert.h; sourceTree = "<group>"; };
@@ -1040,6 +1042,7 @@
 				84799AB91BAFDDA00070E214 /* demoZ_testunit.lua */,
 				84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */,
 				84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */,
+				84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */,
 				84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */,
 				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
 				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
@@ -1603,6 +1606,7 @@
 				84799ADB1BAFDDA00070E214 /* demoO_coroutineDemo.lua in Resources */,
 				8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */,
 				8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */,
+				84DAB9C61C3A616800943A48 /* demoZ_decodeUrl.lua in Resources */,
 				84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */,
 				847BE9071C0E97AF008776E9 /* line.png in Resources */,
 				84FC64D61BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua in Resources */,
