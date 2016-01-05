@@ -128,7 +128,7 @@ static inline NSInteger mapSection(NSInteger section){
         CGSize size = [self retSizeCallKey1:"Cell" key2:identifier.UTF8String key3:"Size" mapedSection:mapSection(section) mapedRow:mapRow(row) ];
         return size;
     } else {
-        return CGSizeMake(20, 20);
+        return CGSizeMake(self.owner.frame.size.width, 1);
     }
 }
 //定义每个UICollectionView 的间距
@@ -211,7 +211,7 @@ static inline NSInteger mapSection(NSInteger section){
             return size;
         }
     }
-    return CGSizeMake(0, 0);
+    return CGSizeMake(self.owner.frame.size.width, 1);
 }
 - (UIEdgeInsets) retInsetCallKey1:(const char*) key1 key2:(const char*)key2
                      mapedSection:(NSInteger) mapSection mapedRow:(NSInteger)mapedRow {
