@@ -12,7 +12,7 @@ collectionView = RefreshCollectionView {
 		SectionCount = 2,
 
 		RowCount = function(section)
-			return 4;
+			return 10;
 		end,
 		-- Spacing = function(section )
 		-- 	return 0;
@@ -60,6 +60,7 @@ collectionView = RefreshCollectionView {
                 print(section, row);
                 collectionView.stopRefreshing();
 				System.gc();
+				collectionView.scrollToCell(section, row);
 			end
 		},
 		ImageAndLabel2 = {

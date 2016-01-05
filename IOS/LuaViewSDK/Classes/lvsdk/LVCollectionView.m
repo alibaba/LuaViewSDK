@@ -181,6 +181,56 @@ static int scrollDirection (lv_State *L) {
     return 0;
 }
 
+static int scrollToCell (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( LVIsType(user,LVUserDataView) ){
+        LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->view);
+        if( [collectionView isKindOfClass:[LVCollectionView class]] ) {
+            int nargs = lv_gettop(L);
+            if( nargs>=3 ){
+                int section = lv_tonumber(L, 2);
+                int row = lv_tonumber(L, 3);
+                CGFloat offsetY = 0;
+                BOOL animation = YES;
+                for( int i=4; i<=nargs; i++ ) {
+                    if( nargs>=i && lv_type(L, i)==LV_TNUMBER ) {
+                        offsetY = lv_tonumber(L, i);
+                    }
+                    if( nargs>=i && lv_type(L, i)==LV_TBOOLEAN ) {
+                        animation = lv_toboolean(L, i);
+                    }
+                }
+                
+                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row-1 inSection:section-1];
+                UICollectionViewLayoutAttributes* att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
+                CGRect r = [att frame];
+                if( att && r.size.height>0 ) {
+                    CGFloat y =  r.origin.y + offsetY;
+                    [collectionView setContentOffset:CGPointMake(0, y) animated:animation];
+                }
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
+static int scrollToTop(lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( LVIsType(user,LVUserDataView) ){
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+        if( [tableView isKindOfClass:[LVCollectionView class]] ) {
+            BOOL animation = YES;
+            if( lv_gettop(L)>=2 ) {
+                animation = lv_tonumber(L, 2);
+            }
+            [tableView scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animation];
+            return 0;
+        }
+    }
+    return 0;
+}
+
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewCollectionView);
@@ -196,6 +246,10 @@ static int scrollDirection (lv_State *L) {
         {"miniSpacing", miniSpacing},
         
         {"scrollDirection", scrollDirection},
+        
+        
+        {"scrollToCell", scrollToCell},
+        {"scrollToTop",  scrollToTop},
         {NULL, NULL}
     };
     
