@@ -54,6 +54,10 @@
     }
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self.owner lv_callLuaByKey1:@"DragEnd"];
+}
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self.owner lv_callLuaByKey1:@"DragEnd"];
     if( !decelerate ) {

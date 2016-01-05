@@ -131,7 +131,19 @@ static int contentOffset (lv_State *L) {
                     CGRect r = view.frame;
                     r.origin.x = x;
                     r.origin.y = y;
-                    [view scrollRectToVisible:r animated:yes];
+                    if( x > view.contentSize.width-view.frame.size.width ) {
+                        x = view.contentSize.width-view.frame.size.width;
+                    }
+                    if( x < 0 ) {
+                        x = 0;
+                    }
+                    if( y > view.contentSize.height-view.frame.size.height ) {
+                        y = view.contentSize.height-view.frame.size.height;
+                    }
+                    if( y < 0 ) {
+                        y = 0;
+                    }
+                    [view setContentOffset:CGPointMake(x, y) animated:yes];
                 }
                 return 0;
             }
