@@ -276,26 +276,26 @@ static int setImage (lv_State *L) {
 //}
 
 
-//static int setContentMode (lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user ){
-//        LVImage* imageView = (__bridge LVImage *)(user->view);
-//        if ( [imageView isKindOfClass:[LVImage class]] ) {
-//            if( lv_gettop(L)>=2 ) {
-//                int model = lv_tonumber(L, 2);// 2
-//                [imageView setContentMode:model];
-//                return 0;
-//            } else {
-//                UIViewContentMode model = imageView.contentMode;
-//                lv_pushnumber(L, model);
-//                return 1;
-//            }
-//        }
-//    }
-//    return 0;
-//}
-//
-//
+static int scaleType (lv_State *L) {
+    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    if( user ){
+        LVImage* imageView = (__bridge LVImage *)(user->view);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
+            if( lv_gettop(L)>=2 ) {
+                int model = lv_tonumber(L, 2);// 2
+                [imageView setContentMode:model];
+                return 0;
+            } else {
+                UIViewContentMode model = imageView.contentMode;
+                lv_pushnumber(L, model);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+
 //static int render (lv_State *L) {
 //    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
 //    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
@@ -396,7 +396,7 @@ static int isAnimating (lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"image",  setImage},
-//        {"contentMode",  setContentMode},
+        {"scaleType",  scaleType},
         
         {"startAnimation",  startAnimating},
         {"stopAnimation",  stopAnimating},
