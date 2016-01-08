@@ -110,7 +110,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
     [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
 }
 
--(id) lvNativeObject{
+-(id) lv_nativeObject{
     return self;
 }
 

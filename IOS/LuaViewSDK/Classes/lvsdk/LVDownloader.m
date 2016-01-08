@@ -40,7 +40,7 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
     releaseUserDataDownloader(_lv_userData);
 }
 
--(id) lvNativeObject{
+-(id) lv_nativeObject{
     return nil;
 }
 

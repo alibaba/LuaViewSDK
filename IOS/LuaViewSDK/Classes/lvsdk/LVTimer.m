@@ -64,7 +64,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
     timer = nil;
 }
 
--(id) lvNativeObject{
+-(id) lv_nativeObject{
     return timer;
 }
 

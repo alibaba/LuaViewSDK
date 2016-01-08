@@ -25,7 +25,7 @@
 - (void) setLv_userData:(LVUserDataInfo*)userData{
 }
 
-- (id) lvNativeObject{
+- (id) lv_nativeObject{
     return self;
 }
 

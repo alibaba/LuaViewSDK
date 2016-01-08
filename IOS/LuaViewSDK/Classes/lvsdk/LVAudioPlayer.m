@@ -75,7 +75,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     [audioPlayer stop];
 }
 
-- (id) lvNativeObject{
+- (id) lv_nativeObject{
     return audioPlayer;
 }
 

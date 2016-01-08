@@ -18,7 +18,7 @@
 
 @implementation LVTransform3D
 
--(id) lvNativeObject{
+-(id) lv_nativeObject{
     return nil;
 }
 

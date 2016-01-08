@@ -542,7 +542,11 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
         case LV_TUSERDATA: {
             LVUserDataInfo* user =  (LVUserDataInfo*)lv_touserdata(L, idx);
             id<LVProtocal> obj =  (__bridge id<LVProtocal>)(user->object);
-            return [obj lvNativeObject];
+            if( [obj respondsToSelector:@selector(lv_nativeObject)] ){
+                return [obj lv_nativeObject];
+            }
+            LVError(@"lv_luaValueToNativeObject.1");
+            return nil;
         }
         case LV_TLIGHTUSERDATA:{
             LVPointerValueBox* box = [[LVPointerValueBox alloc] init];
@@ -569,7 +573,7 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
             return [[LVBlock alloc] initWith:L statckID:idx];
         }
         default: {
-            LVError(@"lv_luaObjectToNativeObject");
+            LVError(@"lv_luaObjectToNativeObject.2");
             return nil;
         }
     }
@@ -627,7 +631,7 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
     
     NEW_USERDATA(userData, NativeObject);
     userData->object = CFBridgingRetain(nativeObjBox);
-    nativeObjBox.userData = userData;
+    nativeObjBox.lv_userData = userData;
     lvL_getmetatable(L, META_TABLE_NativeObject );
     lv_setmetatable(L, -2);
 }

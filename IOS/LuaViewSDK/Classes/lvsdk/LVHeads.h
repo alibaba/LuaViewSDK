@@ -81,7 +81,7 @@ typedef struct _LVUserDataInfo {
 @required
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
-- (id) lvNativeObject; // 返回native对象
+- (id) lv_nativeObject; // 返回native对象
 @end
 
 

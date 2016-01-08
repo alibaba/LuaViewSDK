@@ -37,7 +37,7 @@
     return data;
 }
 
--(id) lvNativeObject{
+-(id) lv_nativeObject{
     return self;
 }
 

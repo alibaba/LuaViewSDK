@@ -23,7 +23,7 @@
 -(id) init:(lv_State*) l  nativeObject:(id)nativeObject{
     self = [super init];
     if( self ){
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
         self.realObject = nativeObject;
         self.methods = [[NSMutableDictionary alloc] init];
     }
@@ -47,6 +47,10 @@
 
 - (id) realObject{
     return _realObject ? _realObject : _realObjectWeak;
+}
+
+- (id) lv_nativeObject{
+    return [self realObject];
 }
 
 -(void) addMethod:(LVMethod*) method {
@@ -76,8 +80,8 @@ static void releaseNativeObject(LVUserDataInfo* user){
         LVNativeObjBox* data = CFBridgingRelease(user->object);
         user->object = NULL;
         if( data ){
-            data.userData = nil;
-            data.lview = nil;
+            data.lv_userData = nil;
+            data.lv_lview = nil;
             data.realObject = nil;
         }
     }
@@ -122,7 +126,7 @@ static int __gc (lv_State *L) {
         
         NEW_USERDATA(userData, NativeObject);
         userData->object = CFBridgingRetain(nativeObjBox);
-        nativeObjBox.userData = userData;
+        nativeObjBox.lv_userData = userData;
         lvL_getmetatable(L, META_TABLE_NativeObject );
         lv_setmetatable(L, -2);
         
