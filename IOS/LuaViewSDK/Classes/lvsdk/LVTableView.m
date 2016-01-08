@@ -61,8 +61,8 @@
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         [LVUtil call:l key1:key.UTF8String key2:NULL key3:NULL nargs:0 nrets:1 retType:LV_TNONE];
         if( lv_type(l, -1)==LV_TUSERDATA ) {
-            LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
-            if( LVIsType(user, LVUserDataView) ) {
+            LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(l, -1);
+            if( LVIsType(user, View) ) {
                 
                 // 绑定 tableHeaderView
                 lv_pushUserdata(l, self.lv_userData);
@@ -73,7 +73,7 @@
                 lv_settable(l, -3);// registry[&Key] = tableView
                 
                 lv_settop(l, num);
-                return (__bridge UIView *)(user->view);
+                return (__bridge UIView *)(user->object);
             }
         }
         lv_settop(l, num);
@@ -100,8 +100,8 @@ static int createTableView (lv_State *L , BOOL haveRefreshHead) {
     }
     LVTableView* tableView = [[g_class alloc] init:L];
     {
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(tableView);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(tableView);
         tableView.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UITableView );
@@ -133,9 +133,9 @@ static int lvCreateTableViewHaveRefresh (lv_State *L) {
 
 
 static int reload (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVTableView* tableView = (__bridge LVTableView *)(user->view);
+        LVTableView* tableView = (__bridge LVTableView *)(user->object);
         [tableView reloadData];
         lv_pushvalue(L, 1);
         return 1;
@@ -144,12 +144,12 @@ static int reload (lv_State *L) {
 }
 
 static int setTableHeaderView (lv_State *L) {
-    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-    if( LVIsType(user1,LVUserDataView) && LVIsType(user2,LVUserDataView)  ){
-        LVTableView* tableView = (__bridge LVTableView *)(user1->view);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( LVIsType(user1, View) && LVIsType(user2, View)  ){
+        LVTableView* tableView = (__bridge LVTableView *)(user1->object);
         if( [tableView isKindOfClass:[LVTableView class]] ) {
-            UIView* head = (__bridge LVTableView *)(user2->view);
+            UIView* head = (__bridge LVTableView *)(user2->object);
             
             // 绑定 tableHeaderView
             lv_pushvalue(L, 1);
@@ -167,12 +167,12 @@ static int setTableHeaderView (lv_State *L) {
 }
 
 static int setTableFooterView (lv_State *L) {
-    LVUserDataView * user1 = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-    if( LVIsType(user1,LVUserDataView) && LVIsType(user2,LVUserDataView)  ){
-        LVTableView* tableView = (__bridge LVTableView *)(user1->view);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( LVIsType(user1, View) && LVIsType(user2, View)  ){
+        LVTableView* tableView = (__bridge LVTableView *)(user1->object);
         if( [tableView isKindOfClass:[LVTableView class]] ) {
-            UIView* head = (__bridge LVTableView *)(user2->view);
+            UIView* head = (__bridge LVTableView *)(user2->object);
             
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
@@ -189,9 +189,9 @@ static int setTableFooterView (lv_State *L) {
 }
 
 static int scrollToCell (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVTableView* tableView = (__bridge LVTableView *)(user->view);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, View) ){
+        LVTableView* tableView = (__bridge LVTableView *)(user->object);
         if( [tableView isKindOfClass:[LVTableView class]] ) {
             int nargs = lv_gettop(L);
             if( nargs>=3 ){
@@ -222,9 +222,9 @@ static int scrollToCell (lv_State *L) {
 }
 
 static int scrollToTop(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVTableView* tableView = (__bridge LVTableView *)(user->view);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, View) ){
+        LVTableView* tableView = (__bridge LVTableView *)(user->object);
         if( [tableView isKindOfClass:[LVTableView class]] ) {
             BOOL animation = YES;
             if( lv_gettop(L)>=2 ) {
@@ -238,9 +238,9 @@ static int scrollToTop(lv_State *L) {
 }
 
 static int dividerHeight (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataView) ){
-        LVTableView* tableView = (__bridge LVTableView *)(user->view);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, View) ){
+        LVTableView* tableView = (__bridge LVTableView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
             CGFloat h = lv_tonumber(L, 2);
             tableView.tableViewDelegate.dividerHeight = h;

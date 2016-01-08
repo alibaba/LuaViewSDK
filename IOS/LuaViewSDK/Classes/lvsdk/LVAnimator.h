@@ -10,12 +10,8 @@
 #import "LVHeads.h"
 #import "lVtable.h"
 
-typedef struct _LVUserDataAnimator {
-    LVUserDataCommonHead;
-    const void* animator;
-} LVUserDataAnimator;
 
-extern NSString *LVAnimatorGetAnimationKey(LVUserDataAnimator *animator);
+extern NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator);
 
 @interface LVAnimator : NSObject <NSCopying, NSMutableCopying>
 
@@ -29,7 +25,7 @@ extern NSString *LVAnimatorGetAnimationKey(LVUserDataAnimator *animator);
 
 @property(nonatomic, weak) UIView *target;
 
-@property(nonatomic, assign) LVUserDataAnimator *userData;
+@property(nonatomic, assign) LVUserDataInfo *userData;
 @property(nonatomic, assign) lv_State *lvState;
 
 +(int) classDefine:(lv_State *)L ;

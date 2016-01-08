@@ -25,26 +25,30 @@
 @implementation LVDownloader
 
 
-static void releaseUserDataDownloader(LVUserDataDownloader* user){
-    if( user && user->downloader ){
-        LVDownloader* downloader = CFBridgingRelease(user->downloader);
-        user->downloader = NULL;
+static void releaseUserDataDownloader(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVDownloader* downloader = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( downloader ){
-            downloader.userData = nil;
-            downloader.lview = nil;
+            downloader.lv_userData = nil;
+            downloader.lv_lview = nil;
         }
     }
 }
 
 -(void) dealloc{
-    releaseUserDataDownloader(_userData);
+    releaseUserDataDownloader(_lv_userData);
+}
+
+-(id) lvNativeObject{
+    return nil;
 }
 
 -(id) init:(lv_State*) l{
     self = [super init];
     if( self ){
         self.luaObjRetainKey = [[NSMutableString alloc] init];
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
         self.strongSelf = self;
     }
     return self;
@@ -63,9 +67,9 @@ static int download (lv_State *L) {
         }
         
         {
-            NEW_USERDATA(userData, LVUserDataDownloader);
-            userData->downloader = CFBridgingRetain(downloader);
-            downloader.userData = userData;
+            NEW_USERDATA(userData, Downloader);
+            userData->object = CFBridgingRetain(downloader);
+            downloader.lv_userData = userData;
             
             lvL_getmetatable(L, META_TABLE_Downloader );
             lv_setmetatable(L, -2);
@@ -84,7 +88,7 @@ static int download (lv_State *L) {
 }
 
 -(void) didFileLoaded{
-    lv_State* L = self.lview.l;
+    lv_State* L = self.lv_lview.l;
     if( L ){
         if( self.data ) {
             [LVData createDataObject:L data:self.data];
@@ -100,15 +104,15 @@ static int download (lv_State *L) {
 }
 
  static int __gc (lv_State *L) {
-    LVUserDataDownloader * user = (LVUserDataDownloader *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataDownloader(user);
     return 0;
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataDownloader * user = (LVUserDataDownloader *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVDownloader* downloader =  (__bridge LVDownloader *)(user->downloader);
+        LVDownloader* downloader =  (__bridge LVDownloader *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataDownloader: %@", downloader ];
         lv_pushstring(L, s.UTF8String);
         return 1;

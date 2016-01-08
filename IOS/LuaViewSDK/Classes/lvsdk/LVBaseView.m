@@ -36,10 +36,10 @@
     return self;
 }
 
-static void releaseUserDataView(LVUserDataView* userdata){
-    if( userdata && userdata->view ){
-        UIView<LVProtocal>* view = CFBridgingRelease(userdata->view);
-        userdata->view = NULL;
+static void releaseUserDataView(LVUserDataInfo* userdata){
+    if( userdata && userdata->object ){
+        UIView<LVProtocal>* view = CFBridgingRelease(userdata->object);
+        userdata->object = NULL;
         if( view ){
             view.lv_userData = nil;
             view.lv_lview = nil;
@@ -53,16 +53,19 @@ static void releaseUserDataView(LVUserDataView* userdata){
 
 #pragma -mark center
 static int center (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGPoint center = view.center;
             if ( lv_gettop(L)>=2  ) {
                 if ( lv_isuserdata(L, 2) ) {
-                    LVUserDataStruct* user = lv_touserdata(L, 2);
-                    if ( LVIsType(user, LVUserDataStruct) ) {
-                        memcpy(&center, user->data, sizeof(CGPoint));
+                    LVUserDataInfo* user = lv_touserdata(L, 2);
+                    if ( LVIsType(user, Struct) ) {
+                        LVStruct* stru = (__bridge LVStruct *)(user->object);
+                        if( [stru dataPointer] ) {
+                            memcpy(&center, [stru dataPointer], sizeof(CGPoint));
+                        }
                     } else {
                         LVError(@"LVBaseView.setCenter1");
                     }
@@ -92,9 +95,9 @@ static int center (lv_State *L) {
 }
 
 static int centerX(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGPoint center = view.center;
             if ( lv_gettop(L)>=2  ) {
@@ -117,9 +120,9 @@ static int centerX(lv_State *L) {
 }
 
 static int centerY(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGPoint center = view.center;
             if ( lv_gettop(L)>=2  ) {
@@ -143,16 +146,19 @@ static int centerY(lv_State *L) {
 
 #pragma -mark frame
 static int frame (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if( lv_gettop(L)>=2 ) {
                 if ( lv_isuserdata(L, 2) ) {
-                    LVUserDataStruct* user = lv_touserdata(L, 2);
-                    if ( LVIsType(user, LVUserDataStruct) ) {
-                        memcpy(&r, user->data, sizeof(CGRect));
+                    LVUserDataInfo* user = lv_touserdata(L, 2);
+                    if ( LVIsType(user, Struct) ) {
+                        LVStruct* stru = (__bridge LVStruct *)(user->object);
+                        if( [stru dataPointer] ) {
+                            memcpy(&r, [stru dataPointer], sizeof(CGRect));
+                        }
                     } else {
                         LVError(@"LVBaseView.setFrame1");
                     }
@@ -191,16 +197,19 @@ static int frame (lv_State *L) {
 
 #pragma -mark frame
 static int size (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
                 if ( lv_isuserdata(L, 2) ) {
-                    LVUserDataStruct* user = lv_touserdata(L, 2);
-                    if ( LVIsType(user, LVUserDataStruct) ) {
-                        memcpy(&r.size, user->data, sizeof(CGSize));
+                    LVUserDataInfo* user = lv_touserdata(L, 2);
+                    if ( LVIsType(user, Struct) ) {
+                        LVStruct* stru = (__bridge LVStruct *)(user->object);
+                        if( [stru dataPointer] ) {
+                            memcpy(&r.size, [stru dataPointer], sizeof(CGSize));
+                        }
                     } else {
                         LVError(@"LVBaseView.setSize1");
                     }
@@ -229,16 +238,19 @@ static int size (lv_State *L) {
 }
 
 static int origin (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
                 if ( lv_isuserdata(L, 2) ) {
-                    LVUserDataStruct* user = lv_touserdata(L, 2);
-                    if ( LVIsType(user, LVUserDataStruct) ) {
-                        memcpy(&r.origin, user->data, sizeof(CGPoint));
+                    LVUserDataInfo* user = lv_touserdata(L, 2);
+                    if ( LVIsType(user, Struct) ) {
+                        LVStruct* stru = (__bridge LVStruct *)(user->object);
+                        if( [stru dataPointer] ) {
+                            memcpy(&r.origin, [stru dataPointer], sizeof(CGPoint));
+                        }
                     } else {
                         LVError(@"LVBaseView.setOrigin1");
                     }
@@ -268,9 +280,9 @@ static int origin (lv_State *L) {
 }
 
 static int x (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -384,9 +396,9 @@ static int x (lv_State *L) {
 
 
 static int y (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -408,9 +420,9 @@ static int y (lv_State *L) {
 }
 
 static int bottom (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -432,9 +444,9 @@ static int bottom (lv_State *L) {
 }
 
 static int right (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -456,9 +468,9 @@ static int right (lv_State *L) {
 }
 
 static int width (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -479,9 +491,9 @@ static int width (lv_State *L) {
 }
 
 static int height (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
@@ -502,11 +514,11 @@ static int height (lv_State *L) {
 }
 
 static int addGestureRecognizer (lv_State *L) {
-    LVUserDataView * userDataView = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataGesture * userDataGesture = (LVUserDataGesture *)lv_touserdata(L, 2);
-    if( userDataView && LVIsType(userDataGesture,LVUserDataGesture) ){
-        UIView* view = (__bridge UIView *)(userDataView->view);
-        UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userDataGesture->gesture);
+    LVUserDataInfo * userDataView = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * userDataGesture = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( userDataView && LVIsType(userDataGesture, Gesture) ){
+        UIView* view = (__bridge UIView *)(userDataView->object);
+        UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userDataGesture->object);
         if( view && gesture ){
             [view addGestureRecognizer:gesture];
             lv_pushvalue(L,1);
@@ -517,11 +529,11 @@ static int addGestureRecognizer (lv_State *L) {
 }
 
 static int removeGestureRecognizer (lv_State *L) {
-    LVUserDataView * userDataView = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataGesture * userDataGesture = (LVUserDataGesture *)lv_touserdata(L, 2);
-    if( userDataView && LVIsType(userDataGesture,LVUserDataGesture) ){
-        UIView* view = (__bridge UIView *)(userDataView->view);
-        UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userDataGesture->gesture);
+    LVUserDataInfo * userDataView = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * userDataGesture = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( userDataView && LVIsType(userDataGesture, Gesture) ){
+        UIView* view = (__bridge UIView *)(userDataView->object);
+        UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userDataGesture->object);
         if( view && gesture ){
             [view removeGestureRecognizer:gesture];
             lv_pushvalue(L,1);
@@ -532,11 +544,11 @@ static int removeGestureRecognizer (lv_State *L) {
 }
 
 static int addSubview (lv_State *L) {
-    LVUserDataView * father = (LVUserDataView *)lv_touserdata(L, 1);
-    LVUserDataView * son = (LVUserDataView *)lv_touserdata(L, 2);
-    if( father &&  LVIsType(son,LVUserDataView) ){
-        UIView* viewRoot = (__bridge UIView *)(father->view);
-        UIView* viewSub = (__bridge UIView *)(son->view);
+    LVUserDataInfo * father = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * son = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( father &&  LVIsType(son, View) ){
+        UIView* viewRoot = (__bridge UIView *)(father->object);
+        UIView* viewSub = (__bridge UIView *)(son->object);
         if( viewRoot && viewSub ){
             if ( viewSub.superview!= viewRoot ) {
                 [viewSub removeFromSuperview];
@@ -552,9 +564,9 @@ static int addSubview (lv_State *L) {
 }
 
 static int removeFromSuperview (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             [view removeFromSuperview];
             lv_pushvalue(L,1);
@@ -565,9 +577,9 @@ static int removeFromSuperview (lv_State *L) {
 }
 
 static int removeAllSubviews (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             while (view.subviews.count) {
                 UIView* child = view.subviews.lastObject;
@@ -582,9 +594,9 @@ static int removeAllSubviews (lv_State *L) {
 
 #pragma -mark hidden
 static int hidden(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if ( lv_gettop(L)>=2 ) {
                 BOOL yes = lvL_checkbool(L, 2);
@@ -600,9 +612,9 @@ static int hidden(lv_State *L) {
 }
 
 static int hide(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             view.hidden = YES;
             return 0;
@@ -612,9 +624,9 @@ static int hide(lv_State *L) {
 }
 
 static int show(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             view.hidden = NO;
             return 0;
@@ -624,9 +636,9 @@ static int show(lv_State *L) {
 }
 
 static int isShow(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             lv_pushboolean(L, !view.hidden );
             return 1;
@@ -636,9 +648,9 @@ static int isShow(lv_State *L) {
 }
 
 static int isHide(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             lv_pushboolean(L, view.hidden );
             return 1;
@@ -648,9 +660,9 @@ static int isHide(lv_State *L) {
 }
 
 static int becomeFirstResponder(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if( view.canBecomeFirstResponder )
                 [view becomeFirstResponder];
@@ -663,9 +675,9 @@ static int becomeFirstResponder(lv_State *L) {
 }
 
 static int resignFirstResponder(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if( view.canResignFirstResponder)
                 [view resignFirstResponder];
@@ -678,9 +690,9 @@ static int resignFirstResponder(lv_State *L) {
 }
 
 static int isFirstResponder(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             lv_pushboolean(L, view.isFirstResponder?1:0 );
             return 1;
@@ -691,9 +703,9 @@ static int isFirstResponder(lv_State *L) {
 
 #pragma -mark userInteractionEnabled
 static int userInteractionEnabled(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if ( lv_gettop(L)>=2 ) {
                 BOOL yes = lvL_checkbool(L, 2);
@@ -710,9 +722,9 @@ static int userInteractionEnabled(lv_State *L) {
 
 #pragma -mark backgroundColor
 static int backgroundColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( [view isKindOfClass:[UIView class]] ){
             if( lv_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
@@ -735,9 +747,9 @@ static int backgroundColor (lv_State *L) {
 
 #pragma -mark alpha
 static int alpha (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
             double alpha = lv_tonumber(L, 2);// 2
             view.alpha = alpha;
@@ -753,9 +765,9 @@ static int alpha (lv_State *L) {
 
 #pragma -mark cornerRadius
 static int cornerRadius (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double r = lv_tonumber(L, 2);// 2
             view.layer.cornerRadius = r;
@@ -771,9 +783,9 @@ static int cornerRadius (lv_State *L) {
 
 #pragma -mark borderWidth
 static int borderWidth (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double width = lv_tonumber(L, 2);// 2
             view.layer.borderWidth = width;
@@ -789,9 +801,9 @@ static int borderWidth (lv_State *L) {
 
 #pragma -mark shadow
 static int setShadowPath (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         [view layer].shadowPath =[UIBezierPath bezierPathWithRect:view.bounds].CGPath;
         lv_pushvalue(L,1);
         return 1;
@@ -799,10 +811,10 @@ static int setShadowPath (lv_State *L) {
     return 0;
 }
 static int setMasksToBounds (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     BOOL masksToBounds = lvL_checkbool(L, 2);// 2
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         view.layer.masksToBounds = masksToBounds;
         lv_pushvalue(L,1);
         return 1;
@@ -811,11 +823,11 @@ static int setMasksToBounds (lv_State *L) {
 }
 
 static int setShadowOffset (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float x = lv_tonumber(L, 2);// 2
     float y = lv_tonumber(L, 3);// 2
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowOffset:CGSizeMake(x, y)];
         lv_pushvalue(L,1);
         return 1;
@@ -824,10 +836,10 @@ static int setShadowOffset (lv_State *L) {
 }
 
 static int setShadowRadius (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float radius = lv_tonumber(L, 2);// 2
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowRadius:radius];
         lv_pushvalue(L,1);
         return 1;
@@ -836,10 +848,10 @@ static int setShadowRadius (lv_State *L) {
 }
 
 static int setShadowOpacity (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float opacity = lv_tonumber(L, 2);// 2
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowOpacity:opacity];
         lv_pushvalue(L,1);
         return 1;
@@ -848,9 +860,9 @@ static int setShadowOpacity (lv_State *L) {
 }
 
 static int setShadowColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user && lv_gettop(L)>=2 ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         UIColor* color = lv_getColorFromStack(L, 2);
         [view.layer setShadowColor:color.CGColor];
         lv_pushvalue(L,1);
@@ -872,9 +884,9 @@ UIColor* lv_UIColorFromRGBA(NSInteger rgbValue, float alphaValue){
 }
 
 static int borderColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
             UIColor* color = lv_getColorFromStack(L, 2);
             view.layer.borderColor = color.CGColor;
@@ -914,9 +926,9 @@ static int borderColor (lv_State *L) {
 //}
 
 static int adjustSize(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             [view sizeToFit];
         }
@@ -963,9 +975,9 @@ static CATransform3D transformRotationAndScale(UIView* view){
 }
 
 static int rotationZ (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double angle = lv_tonumber(L, 2);
             view.lv_rotation = angle;
@@ -980,9 +992,9 @@ static int rotationZ (lv_State *L) {
 }
 
 static int rotationX (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double angle = lv_tonumber(L, 2);
             view.lv_rotationX = angle;
@@ -997,9 +1009,9 @@ static int rotationX (lv_State *L) {
 }
 
 static int rotationY (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double angle = lv_tonumber(L, 2);
             view.lv_rotationY = angle;
@@ -1014,9 +1026,9 @@ static int rotationY (lv_State *L) {
 }
 
 static int scale (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         int argNum = lv_gettop(L);
         if ( argNum >=2 ) {
             double scaleX = lv_tonumber(L, 2);
@@ -1040,9 +1052,9 @@ static int scale (lv_State *L) {
 }
 
 static int scaleX (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
             double scaleX = lv_tonumber(L, 2);
             view.lv_scaleX = scaleX;
@@ -1057,9 +1069,9 @@ static int scaleX (lv_State *L) {
 }
 
 static int scaleY (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double scaleY = lv_tonumber(L, 2);
             view.lv_scaleY = scaleY;
@@ -1074,13 +1086,14 @@ static int scaleY (lv_State *L) {
 }
 
 static int transform3D (lv_State *L) {
-    LVUserDataView* user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo* user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
-            LVUserDataTransform3D* transform = (LVUserDataTransform3D *)lv_touserdata(L, 2);
-            if ( LVIsType(transform, LVUserDataTransform3D)) {
-                view.layer.transform = transform->transform;
+            LVUserDataInfo* userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+            if ( LVIsType(userdata, Transform3D)) {
+                LVTransform3D* tran = (__bridge LVTransform3D *)(userdata->object);
+                view.layer.transform = tran.transform;
                 return 0;
             }
         } else {
@@ -1093,22 +1106,22 @@ static int transform3D (lv_State *L) {
 }
 
 static int startAnimation(lv_State *L) {
-    LVUserDataView* vdata = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo* vdata = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( vdata ){
-        LVUserDataAnimator *adata = NULL;
+        LVUserDataInfo *adata = NULL;
         LVAnimator *animator = nil;
         for (int i = 1; i < lv_gettop(L); ++i) {
             adata = lv_touserdata(L, -i);
-            if (!LVIsType(adata, LVUserDataAnimator)) {
+            if (!LVIsType(adata, Animator)) {
                 continue;
             }
             
-            animator = (__bridge LVAnimator *)(adata->animator);
+            animator = (__bridge LVAnimator *)(adata->object);
             if (animator == nil) {
                 continue;
             }
             
-            animator.target = (__bridge UIView *)(vdata->view);
+            animator.target = (__bridge UIView *)(vdata->object);
             [animator startWithKey:LVAnimatorGetAnimationKey(adata)];
         }
     }
@@ -1117,9 +1130,9 @@ static int startAnimation(lv_State *L) {
 }
 
 static int stopAnimation(lv_State *L) {
-    LVUserDataView* user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo* user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         [view.layer removeAllAnimations];
     }
     
@@ -1128,9 +1141,9 @@ static int stopAnimation(lv_State *L) {
 
 #pragma -mark anchorPoint
 static int anchorPoint (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double x = lv_tonumber(L, 2);// 2
             double y = lv_tonumber(L, 3);// 3
@@ -1147,10 +1160,10 @@ static int anchorPoint (lv_State *L) {
 }
 
 static int callback (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
-            UIView* view = (__bridge UIView *)(user->view);
+            UIView* view = (__bridge UIView *)(user->object);
             [view lv_callbackAddClickGesture];// 检测是否添加手势
             lv_checkstack(L, 8);
             lv_pushvalue(L, 1);
@@ -1183,15 +1196,15 @@ static int callback (lv_State *L) {
 
 #pragma -mark __gc
 static int __gc (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataView(user);
     return 0;
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView<LVProtocal>* view = (__bridge UIView<LVProtocal> *)(user->view);
+        UIView<LVProtocal>* view = (__bridge UIView<LVProtocal> *)(user->object);
         if( view ){
             NSString* s = [NSString stringWithFormat:@"%@",view];
             lv_pushstring(L, s.UTF8String);
@@ -1207,10 +1220,10 @@ static int __tostring (lv_State *L) {
 }
 
 static int releaseObject(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
             L->lView = NULL;
@@ -1241,9 +1254,9 @@ static int releaseObject(lv_State *L) {
 
 
 static int align (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             int argNum = lv_gettop(L);
             if ( argNum>=2 ) {
@@ -1264,9 +1277,9 @@ static int align (lv_State *L) {
 }
 
 static int alignInfo (lv_State *L, int align) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIView* view = (__bridge UIView *)(user->view);
+        UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             view.lv_align = align;
             [view lv_alignSelfWithSuperRect:view.superview.frame];
@@ -1412,8 +1425,8 @@ static const struct lvL_reg luaViewMemberFunctions [] = {
 static int lvNewView (lv_State *L) {
     LVBaseView* view = [[LVBaseView alloc] init:L];
     {
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(view);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(view);
         view.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UIView );

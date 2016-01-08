@@ -88,8 +88,8 @@
 static int lvNewTextField (lv_State *L) {
     LVTextField* textFiled = [[LVTextField alloc] init:L];
     {
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(textFiled);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(textFiled);
         textFiled.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UITextField );
@@ -103,15 +103,15 @@ static int lvNewTextField (lv_State *L) {
 }
 
 static int text (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVTextField* view = (__bridge LVTextField *)(user->view);
+        LVTextField* view = (__bridge LVTextField *)(user->object);
         if( [view isKindOfClass:[LVTextField class]] ){
             if ( lv_gettop(L)>=2 ) {
                 if( lv_type(L, 2)==LV_TUSERDATA ) {
-                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
-                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                    LVUserDataInfo * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, StyledString) ) {
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                         view.attributedText = attString.mutableStyledString;
                     }
                 } else if( lv_type(L, 2)==LV_TSTRING ) {
@@ -132,9 +132,9 @@ static int text (lv_State *L) {
                     attString.mutableStyledString = [[NSMutableAttributedString alloc] init];
                     [attString.mutableStyledString appendAttributedString:att];
                     
-                    NEW_USERDATA(userData, LVUserDataStyledString);
-                    userData->styledString = CFBridgingRetain(attString);
-                    attString.userData = userData;
+                    NEW_USERDATA(userData, StyledString);
+                    userData->object = CFBridgingRetain(attString);
+                    attString.lv_userData = userData;
                     
                     lvL_getmetatable(L, META_TABLE_AttributedString );
                     lv_setmetatable(L, -2);
@@ -150,18 +150,18 @@ static int text (lv_State *L) {
 }
 
 static int placeholder (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVTextField* view = (__bridge LVTextField *)(user->view);
+        LVTextField* view = (__bridge LVTextField *)(user->object);
         if( [view isKindOfClass:[LVTextField class]] ){
             if ( lv_gettop(L)>=2 ) {
                 if( lv_type(L, 2)==LV_TSTRING ) {
                     NSString* text = lv_paramString(L, 2);// 2
                     view.placeholder = text;
                 } else if( lv_type(L, 2)==LV_TUSERDATA ) {
-                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
-                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                    LVUserDataInfo * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, StyledString) ) {
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                         view.attributedPlaceholder = attString.mutableStyledString;
                     }
                 }

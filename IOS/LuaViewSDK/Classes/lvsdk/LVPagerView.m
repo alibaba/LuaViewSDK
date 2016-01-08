@@ -250,8 +250,8 @@ static int lvNewPageView (lv_State *L) {
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
         LVPagerView* pageView = [[g_class alloc] init:L];
         
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(pageView);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(pageView);
         pageView.lv_userData = userData;
         lvL_getmetatable(L, META_TABLE_UIPageView );
         lv_setmetatable(L, -2);
@@ -279,9 +279,9 @@ static int lvNewPageView (lv_State *L) {
 }
 
 static int reload (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerView* pageView = (__bridge LVPagerView *)(user->view);
+        LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
         [pageView reloadData];
         lv_pushvalue(L, 1);
         return 1;
@@ -290,9 +290,9 @@ static int reload (lv_State *L) {
 }
 
 static int showScrollBar(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+        UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 BOOL yes1 = lv_toboolean(L, 2);
@@ -308,9 +308,9 @@ static int showScrollBar(lv_State *L) {
 }
 
 static int setCurrentPage(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerView* view = (__bridge LVPagerView *)(user->view);
+        LVPagerView* view = (__bridge LVPagerView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 int luaPageIdx = lv_tonumber(L, 2);
@@ -332,9 +332,9 @@ static int setCurrentPage(lv_State *L) {
 }
 
 static int indicator(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerView* view = (__bridge LVPagerView *)(user->view);
+        LVPagerView* view = (__bridge LVPagerView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             if ( lv_type(L, 2)==LV_TNIL ) {
                 view.pagerIndicator = nil;
@@ -344,9 +344,9 @@ static int indicator(lv_State *L) {
                 lv_pushnil(L);// value
                 lv_setfield(L, -2, "Indicator");
             } else {
-                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, 2);
-                if( LVIsType(user2, LVUserDataView) ) {
-                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
+                LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+                if( LVIsType(user2, View) ) {
+                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->object);
                     if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
                         [view setIndicator:pagerIndicator];// 设置Indicator
                         lv_pushvalue(L, 1);

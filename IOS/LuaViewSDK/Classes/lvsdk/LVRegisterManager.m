@@ -168,8 +168,8 @@
 
 // 注册系统对象 window
 +(void) registryWindow:(lv_State*)L  lView:(LView*)lView{
-    NEW_USERDATA(userData, LVUserDataView);
-    userData->view = CFBridgingRetain(lView);
+    NEW_USERDATA(userData, View);
+    userData->object = CFBridgingRetain(lView);
     lView.lv_userData = userData;
     
     lvL_getmetatable(L, META_TABLE_LuaView );

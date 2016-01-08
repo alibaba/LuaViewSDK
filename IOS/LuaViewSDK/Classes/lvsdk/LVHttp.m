@@ -26,13 +26,13 @@
 
 @implementation LVHttp
 
-static void releaseUserDataHttp(LVUserDataHttp* user){
-    if( user && user->http ){
-        LVHttp* http = CFBridgingRelease(user->http);
-        user->http = NULL;
+static void releaseUserDataHttp(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVHttp* http = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( http ){
-            http.userData = NULL;
-            http.lview = nil;
+            http.lv_userData = NULL;
+            http.lv_lview = nil;
         }
     }
 }
@@ -43,7 +43,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
 -(id) init:(lv_State*) l{
     self = [super init];
     if( self ){
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
         self.mySelf = self;
         self.function = [[NSMutableString alloc] init];
         self.response = [[LVHttpResponse alloc] init];
@@ -53,7 +53,7 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
 }
 
 -(void) requesetEndToDo{
-    lv_State* l = self.lview.l;
+    lv_State* l = self.lv_lview.l;
     if( l ){
         lv_checkStack32(l);
         [LVUtil pushRegistryValue:l key:self];
@@ -110,12 +110,16 @@ static void releaseUserDataHttp(LVUserDataHttp* user){
     [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
 }
 
+-(id) lvNativeObject{
+    return self;
+}
+
 static int lvNewHttpObject (lv_State *L ) {
     LVHttp* http = [[LVHttp alloc] init:L];
     {
-        NEW_USERDATA(userData, LVUserDataHttp);
-        userData->http = CFBridgingRetain(http);
-        http.userData = userData;
+        NEW_USERDATA(userData, Http);
+        userData->object = CFBridgingRetain(http);
+        http.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Http );
         lv_setmetatable(L, -2);
@@ -127,9 +131,9 @@ static int lvNewHttpObject (lv_State *L ) {
 static int get (lv_State *L) {
     int argN = lv_gettop(L);
     if( argN>=2 ){
-        LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-        if(  LVIsType(user,LVUserDataHttp) ) {
-            LVHttp* http = (__bridge LVHttp *)(user->http);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        if(  LVIsType(user, Http) ) {
+            LVHttp* http = (__bridge LVHttp *)(user->object);
             NSString* urlStr = lv_paramString(L, 2);
             
             if( lv_type(L, 3) != LV_TNIL ) {
@@ -152,11 +156,11 @@ static int get (lv_State *L) {
 static int post (lv_State *L) {
     int argN = lv_gettop(L);
     if( argN>=3 ){
-        LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-        if(  LVIsType(user,LVUserDataHttp) ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        if(  LVIsType(user, Http) ) {
             // 1:url    2:heads   3:data   4:callback
             NSString* urlStr = lv_paramString(L, 2);
-            LVHttp* http = (__bridge LVHttp *)(user->http);
+            LVHttp* http = (__bridge LVHttp *)(user->object);
             NSDictionary* dic = nil;
             NSData* data = nil;
             for( int i=3 ; i<=argN ; i++ ) {
@@ -203,15 +207,15 @@ static int post (lv_State *L) {
 }
 
 static int __gc (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataHttp(user);
     return 0;
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataHttp) ){
-        LVHttp* http =  (__bridge LVHttp *)(user->http);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, Http) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataHttp: %@\n response.data.length=%ld\n error:%@",
                        http.response.response,
                        (long)http.response.data.length,
@@ -223,9 +227,9 @@ static int __tostring (lv_State *L) {
 }
 
 static int data (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataHttp) ){
-        LVHttp* http =  (__bridge LVHttp *)(user->http);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, Http) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->object);
         //        NSString* s = [NSString stringWithFormat:@"LVUserDataHttp: %@\n response.data.length=%ld\n error:%@",
         //                       http.response.response,
         //                       http.response.data.length,
@@ -235,9 +239,9 @@ static int data (lv_State *L) {
     return 0;
 }
 static int responseStatusCode (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataHttp) ){
-        LVHttp* http =  (__bridge LVHttp *)(user->http);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, Http) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSHTTPURLResponse* httpResponse = http.response.httpResponse;
         lv_pushnumber(L, httpResponse.statusCode);
         return 1;
@@ -245,9 +249,9 @@ static int responseStatusCode (lv_State *L) {
     return 0;
 }
 static int responseHeaderFields (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataHttp) ){
-        LVHttp* http =  (__bridge LVHttp *)(user->http);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, Http) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSHTTPURLResponse* response = http.response.httpResponse;
         lv_pushNativeObject(L,response.allHeaderFields);
         return 1;
@@ -255,9 +259,9 @@ static int responseHeaderFields (lv_State *L) {
     return 0;
 }
 static int cancel (lv_State *L) {
-    LVUserDataHttp * user = (LVUserDataHttp *)lv_touserdata(L, 1);
-    if( user && LVIsType(user, LVUserDataHttp) ){
-        LVHttp* http =  (__bridge LVHttp *)(user->http);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user && LVIsType(user, Http) ){
+        LVHttp* http =  (__bridge LVHttp *)(user->object);
         [http.connection cancel];
         return 0;
     }

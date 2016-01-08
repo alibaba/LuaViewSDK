@@ -438,9 +438,12 @@ double lv_getValueWithType(void* p, int index, int type ){
                 return 1;
             }
             case LVTypeID_struct: {
-                LVUserDataStruct* user = lv_touserdata(L, stackID);
-                if ( LVIsType(user, LVUserDataStruct) ) {
-                    [invocation setArgument:user->data atIndex:index];
+                LVUserDataInfo* user = lv_touserdata(L, stackID);
+                if ( LVIsType(user, Struct) ) {
+                    LVStruct* stru = (__bridge LVStruct *)(user->object);
+                    if( [stru dataPointer] ) {
+                        [invocation setArgument:[stru dataPointer] atIndex:index];
+                    }
                 }
                 return 1;
             }
@@ -556,9 +559,12 @@ double lv_getValueWithType(void* p, int index, int type ){
                 return nil;
             }
             case LVTypeID_struct: {
-                LVUserDataStruct* user = lv_touserdata(L,stackID);
-                if ( LVIsType(user, LVUserDataStruct) ) {
-                    [invocation setReturnValue:user->data];
+                LVUserDataInfo* user = lv_touserdata(L,stackID);
+                if ( LVIsType(user, Struct) ) {
+                    LVStruct* stru = (__bridge LVStruct *)(user->object);
+                    if( [stru dataPointer] ) {
+                        [invocation setReturnValue: [stru dataPointer]];
+                    }
                 }
                 return nil;
             }

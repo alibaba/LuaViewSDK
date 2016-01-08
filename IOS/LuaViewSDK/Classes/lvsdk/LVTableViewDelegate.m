@@ -271,7 +271,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    LVUserDataView* user = [self retUserDataCallKey1:"Section" key2:"Header" mapedSection:mapSection(section) ];
+    LVUserDataInfo* user = [self retUserDataCallKey1:"Section" key2:"Header" mapedSection:mapSection(section) ];
     lv_State* l = self.owner.lv_lview.l;
     if( l && self.owner.lv_userData ){
         // 绑定 tableHeaderView
@@ -288,13 +288,13 @@ static inline NSInteger mapSection(NSInteger section){
         lv_settable(l, -3);// registry[&Key] = tableView
     }
     if( user ){
-        return (__bridge UIView *)(user->view);
+        return (__bridge UIView *)(user->object);
     }
     return nil;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    LVUserDataView* user = [self retUserDataCallKey1:"Section" key2:"Footer" mapedSection:mapSection(section) ];
+    LVUserDataInfo* user = [self retUserDataCallKey1:"Section" key2:"Footer" mapedSection:mapSection(section) ];
     lv_State* l = self.owner.lv_lview.l;
     if( l && self.owner.lv_userData){
         lv_pushUserdata(l, self.owner.lv_userData);
@@ -305,13 +305,13 @@ static inline NSInteger mapSection(NSInteger section){
         lv_settable(l, -3);// registry[&Key] = tableView
     }
     if( user ){
-        return (__bridge UIView *)(user->view);
+        return (__bridge UIView *)(user->object);
     }
     return nil;
 }
 
 // 回调脚本返回一个用户数据
-- (LVUserDataView *) retUserDataCallKey1:(const char*) key1 key2:(const char*)key2 mapedSection:(NSInteger) mapedSection {
+- (LVUserDataInfo *) retUserDataCallKey1:(const char*) key1 key2:(const char*)key2 mapedSection:(NSInteger) mapedSection {
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
@@ -321,7 +321,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:1 nrets:1 retType:LV_TUSERDATA] ==0 ) {
             if( lv_type(l, -1)==LV_TUSERDATA ) {
-                LVUserDataView * user = (LVUserDataView *)lv_touserdata(l, -1);
+                LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(l, -1);
                 return user;
             }
         }

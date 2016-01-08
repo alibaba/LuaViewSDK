@@ -10,17 +10,10 @@
 #import "LVHeads.h"
 
 
-typedef struct _LVUserDataTimer {
-    LVUserDataCommonHead;
-    const void* timer;
-} LVUserDataTimer;
+@interface LVTimer : NSObject<LVProtocal>
 
-
-
-@interface LVTimer : NSObject
-
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataTimer* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

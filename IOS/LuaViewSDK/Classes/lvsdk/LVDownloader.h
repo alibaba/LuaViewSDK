@@ -9,17 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-typedef struct _LVUserDataDownloader {
-    LVUserDataCommonHead;
-    const void* downloader;
-} LVUserDataDownloader;
 
+@interface LVDownloader : NSObject<LVProtocal>
 
-
-@interface LVDownloader : NSObject
-
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataDownloader* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic,copy) id luaObjRetainKey;
 

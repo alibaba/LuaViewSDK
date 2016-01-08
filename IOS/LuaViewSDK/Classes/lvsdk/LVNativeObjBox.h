@@ -11,18 +11,11 @@
 #import "LVMethod.h"
 
 
-
-typedef struct _LVUserDataNativeObject {
-    LVUserDataCommonHead;
-    const void* realObjBox;
-} LVUserDataNativeObject;
-
-
 //LVData
 @interface LVNativeObjBox : NSObject
 
 @property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataNativeObject* userData;
+@property(nonatomic,assign) LVUserDataInfo* userData;
 
 @property(nonatomic,assign) BOOL weakMode;
 @property(nonatomic,strong) id realObject;

@@ -15,15 +15,43 @@
 #import "lVgc.h"
 
 
-@implementation LVStruct
+
+@implementation LVStruct{
+    CGFloat data[LV_STRUCT_MAX_LEN];
+}
+
+-(void) setIndex:(NSInteger)index byValue:(CGFloat) value{
+    if( index>=0 && index<LV_STRUCT_MAX_LEN ) {
+        data[index] = value;
+    }
+}
+
+-(CGFloat) getValueByIndex:(NSInteger)index{
+    if( index>=0 && index<LV_STRUCT_MAX_LEN ) {
+        return data[index];
+    }
+    return 0;
+}
+
+-(CGFloat*) dataPointer{
+    return data;
+}
+
+-(id) lvNativeObject{
+    return self;
+}
 
 static int lvNewStruct (lv_State *L) {
-    NEW_USERDATA(userData, LVUserDataStruct);
+    NEW_USERDATA(userData, Struct);
+    LVStruct* lvstruct = [[LVStruct alloc] init];
+    userData->object = CFBridgingRetain(lvstruct);
+    lvstruct.lv_userData = userData;
+    
     int num = lv_gettop(L);
     
     for (int i=1,index=0; (i<=num) && (index<LV_STRUCT_MAX_LEN); i++ ) {
         CGFloat value = lv_tonumber(L, i);
-        userData->data[index++] = value;
+        [lvstruct setIndex:index++ byValue:value];
     }
     
     lvL_getmetatable(L, META_TABLE_Struct );
@@ -32,8 +60,12 @@ static int lvNewStruct (lv_State *L) {
 }
 
 +(int) pushStructToLua:(lv_State*)L data:(void*)data{
-    NEW_USERDATA(userData, LVUserDataStruct);
-    memcpy(userData->data, data, sizeof(userData->data) );
+    NEW_USERDATA(userData, Struct);
+    LVStruct* lvstruct = [[LVStruct alloc] init];
+    userData->object = CFBridgingRetain(lvstruct);
+    lvstruct.lv_userData = userData;
+    
+    memcpy( [lvstruct dataPointer], data, LV_STRUCT_MAX_LEN*sizeof(CGFloat) );
     lvL_getmetatable(L, META_TABLE_Struct );
     lv_setmetatable(L, -2);
     return 1;
@@ -43,19 +75,22 @@ static int lvNewStruct (lv_State *L) {
 static int setValue (lv_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=3 ) {
-        LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         unsigned int index = lv_tonumber(L, 2);
         CGFloat value = lv_tonumber(L, 3);
         if ( index>=LV_STRUCT_MAX_LEN ) {
             LVError(@"LVStruct.set index:%d", index );
             return 0;
         }
-        if( LVIsType(user,LVUserDataStruct) ){
+        if( LVIsType(user, Struct) ){
+            LVStruct* lvstruct = (__bridge LVStruct *)(user->object);
             if ( argNum>=4 ) {
                 int type = lv_tonumber(L, 4);
-                lv_setValueWithType(user->data, index, value, type);
+                if( [lvstruct dataPointer] ) {
+                    lv_setValueWithType( [lvstruct dataPointer], index, value, type);
+                }
             } else {
-                user->data[index] = value;
+                [lvstruct setIndex:index byValue:value];
             }
             return 0;
         }
@@ -66,20 +101,21 @@ static int setValue (lv_State *L) {
 static int getValue (lv_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=2 ) {
-        LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         unsigned int index = lv_tonumber(L, 2);
         if ( index>=LV_STRUCT_MAX_LEN ) {
             LVError(@"LVStruct.get index:%d", index );
             return 0;
         }
-        if( LVIsType(user,LVUserDataStruct) ){
+        if( LVIsType(user, Struct) ){
+            LVStruct* stru = (__bridge LVStruct *)(user->object);
             if ( argNum>=3 ) {
                 int type = lv_tonumber(L, 3);
-                CGFloat value = lv_getValueWithType(user->data, index, type);
+                CGFloat value = lv_getValueWithType(  [stru dataPointer], index, type);
                 lv_pushnumber(L, value);
                 return 1;
             } else {
-                CGFloat value = user->data[index];
+                CGFloat value = [stru getValueByIndex:index];
                 lv_pushnumber(L, value);
                 return 1;
             }
@@ -90,11 +126,16 @@ static int getValue (lv_State *L) {
 
 static int __eq (lv_State *L) {
     if( lv_gettop(L)==2 ) {
-        LVUserDataStruct * user1 = (LVUserDataStruct *)lv_touserdata(L, 1);
-        LVUserDataStruct * user2 = (LVUserDataStruct *)lv_touserdata(L, 2);
-        if( LVIsType(user1,LVUserDataStruct) && LVIsType(user2,LVUserDataStruct) ){
-            int size = sizeof(user1->data);
-            BOOL yes = !memcmp(user1->data, user2->data, size);
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+        if( LVIsType(user1, Struct) && LVIsType(user2, Struct) ){
+            LVStruct* s1 = (__bridge LVStruct *)(user1->object);
+            LVStruct* s2 = (__bridge LVStruct *)(user2->object);
+            int size = LV_STRUCT_MAX_LEN;
+            BOOL yes = NO;
+            if( [s1 dataPointer] && [s2 dataPointer] ) {
+                yes = !memcmp( [s1 dataPointer], [s2 dataPointer], size);
+            }
             lv_pushboolean(L, (yes?1:0) );
             return 1;
         }
@@ -103,8 +144,8 @@ static int __eq (lv_State *L) {
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataStruct) ){
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, Struct) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataStruct: %d", (int)user ];
         lv_pushstring(L, s.UTF8String);
         return 1;
@@ -113,7 +154,7 @@ static int __tostring (lv_State *L) {
 }
 
 static int __index (lv_State *L) {
-    LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_type(L, 2)==LV_TNUMBER ) {
             return  getValue(L);
@@ -133,7 +174,7 @@ static int __index (lv_State *L) {
 }
 
 static int __newindex (lv_State *L) {
-    LVUserDataStruct * user = (LVUserDataStruct *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if( lv_type(L, 2)==LV_TNUMBER ){
             return setValue(L);

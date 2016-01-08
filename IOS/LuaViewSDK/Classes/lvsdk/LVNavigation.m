@@ -53,10 +53,10 @@ static int setTitle (lv_State *L) {
             }
             return 0;
         } else if( lv_type(L, 1)== LV_TUSERDATA ) {//第二种: 复合文本
-            LVUserDataStyledString * user2 = lv_touserdata(L, 1);
-            if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
+            LVUserDataInfo * user2 = lv_touserdata(L, 1);
+            if( user2 && LVIsType(user2, StyledString) ) {
                 UILabel* label = [[UILabel alloc] init];
-                LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                 [label setAttributedText:attString.mutableStyledString];
                 [label sizeToFit];
                 setViewControllerTitleView(vc, label);

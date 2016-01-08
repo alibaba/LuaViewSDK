@@ -49,9 +49,9 @@ static int lvNewGestureRecognizer (lv_State *L) {
         }
         
         {
-            NEW_USERDATA(userData, LVUserDataGesture);
+            NEW_USERDATA(userData, Gesture);
             gesture.lv_userData = userData;
-            userData->gesture = CFBridgingRetain(gesture);
+            userData->object = CFBridgingRetain(gesture);
             
             lvL_getmetatable(L, META_TABLE_SwipeGesture );
             lv_setmetatable(L, -2);
@@ -61,9 +61,9 @@ static int lvNewGestureRecognizer (lv_State *L) {
 }
 
 static int touchCount (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataGesture) ){
-        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, Gesture) ){
+        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->object);
         if( lv_gettop(L)>=2 ) {
             float num = lv_tonumber(L, 2);
             gesture.numberOfTouchesRequired = num;
@@ -78,9 +78,9 @@ static int touchCount (lv_State *L) {
 }
 
 static int direction (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataGesture) ){
-        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->gesture);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, Gesture) ){
+        LVSwipeGestureRecognizer* gesture =  (__bridge LVSwipeGestureRecognizer *)(user->object);
         if ( lv_gettop(L)>=2 ) {
             float num = lv_tonumber(L, 2);
             gesture.direction = num;

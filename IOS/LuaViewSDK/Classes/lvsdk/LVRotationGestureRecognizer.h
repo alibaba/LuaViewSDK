@@ -12,7 +12,7 @@
 @interface LVRotationGestureRecognizer : UIRotationGestureRecognizer
 
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataGesture* lv_userData;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

@@ -19,26 +19,26 @@
     AVAudioPlayer* audioPlayer;
 }
 
-static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
-    if( user && user->player ){
-        LVAudioPlayer* palyer = CFBridgingRelease(user->player);
-        user->player = NULL;
+static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVAudioPlayer* palyer = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( palyer ){
             [palyer stop];
-            palyer.userData = NULL;
-            palyer.lview = nil;
+            palyer.lv_userData = NULL;
+            palyer.lv_lview = nil;
         }
     }
 }
 
 -(void) dealloc{
-    releaseUserDataAudioPlayer(_userData);
+    releaseUserDataAudioPlayer(_lv_userData);
 }
 
 -(id) init:(lv_State*) l{
     self = [super init];
     if( self ){
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
     }
     return self;
 }
@@ -75,6 +75,10 @@ static void releaseUserDataAudioPlayer(LVUserDataAudioPlayer* user){
     [audioPlayer stop];
 }
 
+- (id) lvNativeObject{
+    return audioPlayer;
+}
+
 
 #pragma -mark AudioPlayer
 
@@ -86,9 +90,9 @@ static int lvNewAudioPlayer (lv_State *L) {
         [player setPlayFileName:fileName package:lview.package];
         
         {
-            NEW_USERDATA(userData, LVUserDataAudioPlayer);
-            userData->player = CFBridgingRetain(player);
-            player.userData = userData;
+            NEW_USERDATA(userData, AudioPlayer);
+            userData->object = CFBridgingRetain(player);
+            player.lv_userData = userData;
             
             lvL_getmetatable(L, META_TABLE_AudioPlayer );
             lv_setmetatable(L, -2);
@@ -99,10 +103,10 @@ static int lvNewAudioPlayer (lv_State *L) {
 }
 
 static int play (lv_State *L) {
-    LVUserDataAudioPlayer * user = (LVUserDataAudioPlayer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     
-    if( user && LVIsType(user,LVUserDataAudioPlayer) ){
-        LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->player);
+    if( user && LVIsType(user, AudioPlayer) ){
+        LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
         if( player ){
             [player play];
             lv_pushvalue(L,1);
@@ -113,9 +117,9 @@ static int play (lv_State *L) {
 }
 
 static int stop (lv_State *L) {
-    LVUserDataAudioPlayer * user = (LVUserDataAudioPlayer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->player);
+        LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
         if( player ){
             [player stop];
         }
@@ -124,15 +128,15 @@ static int stop (lv_State *L) {
 }
 
 static int __gc (lv_State *L) {
-    LVUserDataAudioPlayer * user = (LVUserDataAudioPlayer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataAudioPlayer(user);
     return 0;
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataAudioPlayer * user = (LVUserDataAudioPlayer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVAudioPlayer* player =  (__bridge LVAudioPlayer *)(user->player);
+        LVAudioPlayer* player =  (__bridge LVAudioPlayer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataAudioPlayer: %@", player ];
         lv_pushstring(L, s.UTF8String);
         return 1;

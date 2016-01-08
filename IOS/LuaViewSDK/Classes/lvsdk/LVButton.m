@@ -78,8 +78,8 @@ static int lvNewButton (lv_State *L) {
     {
         LVButton* button = [[g_class alloc] init:L];
         {
-            NEW_USERDATA(userData, LVUserDataView);
-            userData->view = CFBridgingRetain(button);
+            NEW_USERDATA(userData, View);
+            userData->object = CFBridgingRetain(button);
             button.lv_userData = userData;
             
             lvL_getmetatable(L, META_TABLE_UIButton );
@@ -94,9 +94,9 @@ static int lvNewButton (lv_State *L) {
 }
 
 static int selected (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* button = (__bridge LVButton *)(user->view);
+        LVButton* button = (__bridge LVButton *)(user->object);
         if( button ){
             if ( lv_gettop(L)>=2 ) {
                 BOOL yes = lvL_checkbool(L, 2);
@@ -112,9 +112,9 @@ static int selected (lv_State *L) {
 }
 
 static int enabled (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* button = (__bridge LVButton *)(user->view);
+        LVButton* button = (__bridge LVButton *)(user->object);
         if ( lv_gettop(L)>=2 ){
             BOOL yes = lvL_checkbool(L, 2);
             button.enabled = yes;
@@ -150,9 +150,9 @@ static int enabled (lv_State *L) {
 
 static const UIControlState g_states[] = {UIControlStateNormal,UIControlStateHighlighted,UIControlStateDisabled,UIControlStateSelected};
 static int title (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* button = (__bridge LVButton *)(user->view);
+        LVButton* button = (__bridge LVButton *)(user->object);
         if( [button isKindOfClass:[LVButton class]] ){
             int num = lv_gettop(L);
             if ( num>=2 ) {// setValue
@@ -163,9 +163,9 @@ static int title (lv_State *L) {
                             [button setTitle:text1 forState:g_states[j++]];
                         }
                     } else if( lv_type(L, 2)==LV_TUSERDATA ){
-                        LVUserDataStyledString * user2 = lv_touserdata(L, 2);
-                        if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                            LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                        LVUserDataInfo * user2 = lv_touserdata(L, 2);
+                        if( user2 && LVIsType(user2, StyledString) ) {
+                            LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                             [button setAttributedTitle:attString.mutableStyledString forState:g_states[j++]  ];
                             [button.titleLabel sizeToFit];
                         }
@@ -188,9 +188,9 @@ static int title (lv_State *L) {
 }
 
 static int titleColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* button = (__bridge LVButton *)(user->view);
+        LVButton* button = (__bridge LVButton *)(user->object);
         if( [button isKindOfClass:[LVButton class]] ){
             int num = lv_gettop(L);
             if ( num>=2 ) {
@@ -222,9 +222,9 @@ static int titleColor (lv_State *L) {
 
 static int font (lv_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* view = (__bridge LVButton *)(user->view);
+        LVButton* view = (__bridge LVButton *)(user->object);
         if( [view isKindOfClass:[LVButton class]] ){
             int num = lv_gettop(L);
             if( num>=2 ) {
@@ -249,9 +249,9 @@ static int font (lv_State *L) {
 }
 
 static int fontSize (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVButton* view = (__bridge LVButton *)(user->view);
+        LVButton* view = (__bridge LVButton *)(user->object);
         if( [view isKindOfClass:[LVButton class]] ){
             int num = lv_gettop(L);
             if( num>=2 ) {

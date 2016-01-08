@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
+#import "UIGestureRecognizer+LuaView.h"
 
 @interface LVSwipeGestureRecognizer : UISwipeGestureRecognizer
 
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataGesture* lv_userData;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

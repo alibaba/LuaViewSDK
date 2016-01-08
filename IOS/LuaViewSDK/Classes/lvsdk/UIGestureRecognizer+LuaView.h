@@ -12,7 +12,7 @@
 @interface UIGestureRecognizer(UIGestureRecognizerLuaView)<LVProtocal>
 
 @property (nonatomic, weak) LView* lv_lview;
-@property (nonatomic, assign) LVUserDataView* lv_userData;
+@property (nonatomic, assign) LVUserDataInfo* lv_userData;
 
 
 @end

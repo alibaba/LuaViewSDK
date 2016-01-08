@@ -76,8 +76,8 @@ static int lvNewCustomPanelView (lv_State *L) {
     }
     LVCustomPanel* errorNotice = [[tempClass alloc] initWithFrame:r];
     {
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(errorNotice);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(errorNotice);
         errorNotice.lv_userData = userData;
         errorNotice.lv_lview = (__bridge LView *)(L->lView);
         

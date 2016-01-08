@@ -11,17 +11,16 @@
 
 #define LV_STRUCT_MAX_LEN 16
 
-typedef struct _LVUserDataStruct {
-    LVUserDataCommonHead;
-    CGFloat data[LV_STRUCT_MAX_LEN];
-} LVUserDataStruct;
+@interface LVStruct : NSObject<LVProtocal>
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
+- (id) lvNativeObject; // 返回native对象
 
-
-
-@interface LVStruct : NSObject
 
 +(int) classDefine:(lv_State *)L ;
 
 +(int) pushStructToLua:(lv_State*)L data:(void*)data;
+
+-(CGFloat*) dataPointer;
 
 @end

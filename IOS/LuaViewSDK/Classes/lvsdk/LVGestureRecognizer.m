@@ -16,10 +16,10 @@
 @implementation LVGestureRecognizer
 
 
-static void releaseUserData(LVUserDataGesture * user){
-    if( user && user->gesture ){
-        UIGestureRecognizer<LVProtocal>* gesture = CFBridgingRelease(user->gesture);
-        user->gesture = NULL;
+static void releaseUserData(LVUserDataInfo * user){
+    if( user && user->object ){
+        UIGestureRecognizer<LVProtocal>* gesture = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( gesture ){
             gesture.lv_lview = nil;
             gesture.lv_userData = NULL;
@@ -28,16 +28,16 @@ static void releaseUserData(LVUserDataGesture * user){
 }
 
 static int __GC (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserData(user);
     return 0;
 }
 
 
 static int __tostring (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->gesture);
+        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataGesture: %@", gesture ];
         lv_pushstring(L, s.UTF8String);
         return 1;
@@ -46,9 +46,9 @@ static int __tostring (lv_State *L) {
 }
 
 static int location (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->gesture);
+        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         CGPoint p = [gesture locationInView:gesture.view];
         lv_pushnumber(L, p.x);
         lv_pushnumber(L, p.y);
@@ -58,9 +58,9 @@ static int location (lv_State *L) {
 }
 
 static int state (lv_State *L) {
-    LVUserDataGesture * user = (LVUserDataGesture *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->gesture);
+        UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         NSInteger state = gesture.state;
         lv_pushnumber(L, state);
         return 1;
@@ -79,7 +79,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
 +(const lvL_reg*) baseMemberFunctions{
     return baseMemberFunctions;
 }
-+(void) releaseUD:(LVUserDataGesture *) user{
++(void) releaseUD:(LVUserDataInfo *) user{
     releaseUserData(user);
 }
 +(int) classDefine:(lv_State *)L {

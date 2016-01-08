@@ -13,7 +13,7 @@
 
 
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataGesture* userData;
+@property(nonatomic,assign) LVUserDataInfo* userData;
 
 -(id) init:(lv_State*) l;
 

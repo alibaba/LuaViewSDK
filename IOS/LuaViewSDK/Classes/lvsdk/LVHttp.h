@@ -10,20 +10,10 @@
 #import "LVHeads.h"
 
 
+@interface LVHttp : NSObject<LVProtocal>
 
-typedef struct _LVUserDataHttp {
-    LVUserDataCommonHead;
-    const void* http;
-} LVUserDataHttp;
-
-
-
-
-
-@interface LVHttp : NSObject
-
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataHttp* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

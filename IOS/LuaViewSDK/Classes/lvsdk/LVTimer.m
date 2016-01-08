@@ -20,34 +20,34 @@
     NSTimer* timer;
 }
 
-static void releaseUserDataTimer(LVUserDataTimer* user){
-    if( user && user->timer ){
-        LVTimer* timer = CFBridgingRelease(user->timer);
-        user->timer = NULL;
+static void releaseUserDataTimer(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVTimer* timer = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( timer ){
             [timer cancel];
-            timer.userData = nil;
-            timer.lview = nil;
+            timer.lv_userData = nil;
+            timer.lv_lview = nil;
         }
     }
 }
 
 -(void) dealloc{
-    releaseUserDataTimer(_userData);
+    releaseUserDataTimer(_lv_userData);
 }
 
 -(id) init:(lv_State*) l{
     self = [super init];
     if( self ){
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
     }
     return self;
 }
 
 -(void) timerCallBack{
-    lv_State* l = self.lview.l;
-    if( l && self.userData ){
-        lv_pushUserdata(l, self.userData);
+    lv_State* l = self.lv_lview.l;
+    if( l && self.lv_userData ){
+        lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE );
         lv_runFunction(l);
     }
@@ -64,15 +64,19 @@ static void releaseUserDataTimer(LVUserDataTimer* user){
     timer = nil;
 }
 
+-(id) lvNativeObject{
+    return timer;
+}
+
 
 #pragma -mark Timer
 
 static int lvNewTimer (lv_State *L) {
     LVTimer* timer = [[LVTimer alloc] init:L];
     {
-        NEW_USERDATA(userData, LVUserDataTimer);
-        userData->timer = CFBridgingRetain(timer);
-        timer.userData = userData;
+        NEW_USERDATA(userData, Timer);
+        userData->object = CFBridgingRetain(timer);
+        timer.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Timer );
         lv_setmetatable(L, -2);
@@ -95,14 +99,14 @@ static int setCallback (lv_State *L) {
 }
 
 static int start (lv_State *L) {
-    LVUserDataTimer * user = (LVUserDataTimer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     double time = lv_tonumber(L, 2);
     BOOL repeat = NO;
     if( lv_gettop(L)>=3 ) {
         repeat = lv_toboolean(L, 3);
     }
     if( user ){
-        LVTimer* timer = (__bridge LVTimer *)(user->timer);
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
             [timer startTimer:time repeat:repeat];
             lv_pushvalue(L,1);
@@ -113,9 +117,9 @@ static int start (lv_State *L) {
 }
 
 static int cancel (lv_State *L) {
-    LVUserDataTimer * user = (LVUserDataTimer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVTimer* timer = (__bridge LVTimer *)(user->timer);
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
             [timer cancel];
         }
@@ -124,15 +128,15 @@ static int cancel (lv_State *L) {
 }
 
 static int __gc (lv_State *L) {
-    LVUserDataTimer * user = (LVUserDataTimer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataTimer(user);
     return 0;
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataTimer * user = (LVUserDataTimer *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVTimer* timer =  (__bridge LVTimer *)(user->timer);
+        LVTimer* timer =  (__bridge LVTimer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataTimer: %@", timer ];
         lv_pushstring(L, s.UTF8String);
         return 1;

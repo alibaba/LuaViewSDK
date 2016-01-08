@@ -46,8 +46,8 @@ static int lvNewLabel(lv_State *L) {
         LVLabel* label = [[LVLabel alloc] init:text l:L];
         
         {
-            NEW_USERDATA(userData, LVUserDataView);
-            userData->view = CFBridgingRetain(label);
+            NEW_USERDATA(userData, View);
+            userData->object = CFBridgingRetain(label);
             label.lv_userData = userData;
             
             lvL_getmetatable(L, META_TABLE_UILabel );
@@ -62,9 +62,9 @@ static int lvNewLabel(lv_State *L) {
 }
 
 static int text (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ) {
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if ( [view isKindOfClass:[LVLabel class]] ) {
             if( lv_gettop(L)>=2 ) {
                 if( lv_type(L, 2)==LV_TNUMBER ){
@@ -76,10 +76,10 @@ static int text (lv_State *L) {
                     view.text = text;
                     return 0;
                 } else if( lv_type(L, 2)==LV_TUSERDATA ){
-                    LVUserDataStyledString * user2 = lv_touserdata(L, 2);// 2
-                    if( user2 && LVIsType(user2, LVUserDataStyledString) ) {
-                        LVLabel* view = (__bridge LVLabel *)(user->view);
-                        LVStyledString* attString = (__bridge LVStyledString *)(user2->styledString);
+                    LVUserDataInfo * user2 = lv_touserdata(L, 2);// 2
+                    if( user2 && LVIsType(user2, StyledString) ) {
+                        LVLabel* view = (__bridge LVLabel *)(user->object);
+                        LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                         [view setAttributedText:attString.mutableStyledString];
                         return 0;
                     }
@@ -95,9 +95,9 @@ static int text (lv_State *L) {
 }
 
 static int lineCount(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
             int number = lv_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
@@ -113,10 +113,10 @@ static int lineCount(lv_State *L) {
 }
 
 static int adjustFontSize(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         BOOL yes = lv_toboolean(L, 2);// 2
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( [view isKindOfClass:[LVLabel class]] ){
             view.adjustsFontSizeToFitWidth = yes;
             
@@ -128,9 +128,9 @@ static int adjustFontSize(lv_State *L) {
 }
 
 static int textColor (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
             if( [view isKindOfClass:[LVLabel class]] ){
                 UIColor* color = lv_getColorFromStack(L, 2);
@@ -153,9 +153,9 @@ static int textColor (lv_State *L) {
 
 static int font (lv_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( luaView && user ){
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( [view isKindOfClass:[LVLabel class]] ){
             if( lv_gettop(L)>=2 ) {
                 if( lv_gettop(L)>=3 && lv_type(L, 2)==LV_TSTRING ) {
@@ -183,9 +183,9 @@ static int font (lv_State *L) {
 
 
 static int fontSize (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( [view isKindOfClass:[LVLabel class]] ){
             if( lv_gettop(L)>=2 ) {
                 float fontSize = lv_tonumber(L, 2);
@@ -203,9 +203,9 @@ static int fontSize (lv_State *L) {
 }
 
 static int textAlignment (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->view);
+        LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
             NSInteger align = lv_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){

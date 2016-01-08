@@ -101,8 +101,8 @@ static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
         [tableView lv_initRefreshHeader];
     }
 
-    NEW_USERDATA(userData, LVUserDataView);
-    userData->view = CFBridgingRetain(tableView);
+    NEW_USERDATA(userData, View);
+    userData->object = CFBridgingRetain(tableView);
     tableView.lv_userData = userData;
     lvL_getmetatable(L, META_TABLE_UICollectionView );
     lv_setmetatable(L, -2);
@@ -128,9 +128,9 @@ static int lvNewRefreshCollectionView (lv_State *L) {
 }
 
 static int reload (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         [tableView reloadData];
         lv_pushvalue(L, 1);
         return 1;
@@ -139,9 +139,9 @@ static int reload (lv_State *L) {
 }
 
 static int miniSpacing (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=3 ) {
             CGFloat value1 = lv_tonumber(L, 2);
             CGFloat value2 = lv_tonumber(L, 3);
@@ -165,9 +165,9 @@ static int miniSpacing (lv_State *L) {
 }
 
 static int scrollDirection (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             int value1 = lv_tonumber(L, 2);
             tableView.flowLayout.scrollDirection = value1;
@@ -182,9 +182,9 @@ static int scrollDirection (lv_State *L) {
 }
 
 static int scrollToCell (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->view);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, View) ){
+        LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->object);
         if( [collectionView isKindOfClass:[LVCollectionView class]] ) {
             int nargs = lv_gettop(L);
             if( nargs>=3 ){
@@ -216,9 +216,9 @@ static int scrollToCell (lv_State *L) {
 }
 
 static int scrollToTop(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataView) ){
-        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->view);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, View) ){
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( [tableView isKindOfClass:[LVCollectionView class]] ) {
             BOOL animation = YES;
             if( lv_gettop(L)>=2 ) {

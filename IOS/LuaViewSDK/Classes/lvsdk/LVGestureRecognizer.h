@@ -13,7 +13,7 @@
 
 +(const lvL_reg*) baseMemberFunctions;
 
-+(void) releaseUD:(LVUserDataGesture *) user;
++(void) releaseUD:(LVUserDataInfo *) user;
 
 +(int) classDefine:(lv_State *)L;
 

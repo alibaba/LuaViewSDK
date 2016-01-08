@@ -39,8 +39,8 @@ static int lvNewPageControl (lv_State *L) {
         LVPagerIndicator* pageControl = [[LVPagerIndicator alloc] init:L];
         
         {
-            NEW_USERDATA(userData, LVUserDataView);
-            userData->view = CFBridgingRetain(pageControl);
+            NEW_USERDATA(userData, View);
+            userData->object = CFBridgingRetain(pageControl);
             
             lvL_getmetatable(L, META_TABLE_UIPageControl );
             lv_setmetatable(L, -2);
@@ -72,9 +72,9 @@ static int lvNewPageControl (lv_State *L) {
 //}
 
 static int setCurrentPage(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 int currentPage = lv_tonumber(L, 2);
@@ -91,9 +91,9 @@ static int setCurrentPage(lv_State *L) {
 }
 
 static int pageIndicatorTintColor(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
@@ -115,9 +115,9 @@ static int pageIndicatorTintColor(lv_State *L) {
 }
 
 static int currentPageIndicatorTintColor(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
+        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);

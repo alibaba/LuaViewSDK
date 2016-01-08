@@ -540,16 +540,9 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
             return nil;
         }
         case LV_TUSERDATA: {
-            LVUserDataNativeObject* user =  (LVUserDataNativeObject*)lv_touserdata(L, idx);
-            if ( LVIsType(user, LVUserDataNativeObject) ) {
-                LVNativeObjBox* objBox = (__bridge LVNativeObjBox *)(user->realObjBox);
-                return objBox.realObject;
-            } else if ( LVIsType(user, LVUserDataView) ) {
-                LVUserDataView* viewBox = (LVUserDataView*)user;
-                UIView* view = (__bridge UIView *)(viewBox->view);
-                return view;
-            }
-            return nil;
+            LVUserDataInfo* user =  (LVUserDataInfo*)lv_touserdata(L, idx);
+            id<LVProtocal> obj =  (__bridge id<LVProtocal>)(user->object);
+            return [obj lvNativeObject];
         }
         case LV_TLIGHTUSERDATA:{
             LVPointerValueBox* box = [[LVPointerValueBox alloc] init];
@@ -632,8 +625,8 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
     LVNativeObjBox* nativeObjBox = [[LVNativeObjBox alloc] init:L nativeObject:nativeObject];
     nativeObjBox.openAllMethod = YES;// 所有api都开放
     
-    NEW_USERDATA(userData, LVUserDataNativeObject);
-    userData->realObjBox = CFBridgingRetain(nativeObjBox);
+    NEW_USERDATA(userData, NativeObject);
+    userData->object = CFBridgingRetain(nativeObjBox);
     nativeObjBox.userData = userData;
     lvL_getmetatable(L, META_TABLE_NativeObject );
     lv_setmetatable(L, -2);
@@ -721,8 +714,8 @@ void lv_udataUnref(lv_State* L, int key) {
 void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell){
     lv_pushstring(L, "window");
     
-    NEW_USERDATA(userData, LVUserDataView);
-    userData->view = CFBridgingRetain(cell);
+    NEW_USERDATA(userData, View);
+    userData->object = CFBridgingRetain(cell);
     
     lvL_getmetatable(L, META_TABLE_UIView );
     lv_setmetatable(L, -2);
@@ -746,7 +739,7 @@ void lv_luaTableRemoveKeys(lv_State* L, const char** keys){
 
 
 int lv_callbackFunction(lv_State* L, const char* functionName){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
             lv_pushvalue(L, 1);

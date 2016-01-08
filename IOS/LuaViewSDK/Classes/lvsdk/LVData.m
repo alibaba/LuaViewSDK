@@ -27,10 +27,10 @@
     return self;
 }
 
-static void releaseUserDataData(LVUserDataData* user){
-    if( user && user->data ){
-        LVData* data = CFBridgingRelease(user->data);
-        user->data = NULL;
+static void releaseUserDataData(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVData* data = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( data ){
             data.userData = NULL;
             data.lview = nil;
@@ -40,7 +40,7 @@ static void releaseUserDataData(LVUserDataData* user){
 }
 
 static int lvDataGC (lv_State *L) {
-    LVUserDataData * user = (LVUserDataData *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
@@ -62,8 +62,8 @@ static int lvNewData (lv_State *L) {
     }
     
     {
-        NEW_USERDATA(userData, LVUserDataData);
-        userData->data = CFBridgingRetain(data);
+        NEW_USERDATA(userData, Data);
+        userData->object = CFBridgingRetain(data);
         data.userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Data );
@@ -79,8 +79,8 @@ static int lvNewData (lv_State *L) {
     }
     
     {
-        NEW_USERDATA(userData, LVUserDataData);
-        userData->data = CFBridgingRetain(ldata);
+        NEW_USERDATA(userData, Data);
+        userData->object = CFBridgingRetain(ldata);
         ldata.userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Data );
@@ -90,9 +90,9 @@ static int lvNewData (lv_State *L) {
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataData * user = (LVUserDataData *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVData* data =  (__bridge LVData *)(user->data);
+        LVData* data =  (__bridge LVData *)(user->object);
         NSStringEncoding encode = NSUTF8StringEncoding;
         if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
             encode = lv_tonumber(L, 2);
@@ -108,8 +108,8 @@ static int __tostring (lv_State *L) {
 }
 
 static int __index (lv_State *L) {
-    LVUserDataData * user = (LVUserDataData *)lv_touserdata(L, 1);
-    LVData* lvData = (__bridge LVData *)(user->data);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
@@ -137,8 +137,8 @@ static int __index (lv_State *L) {
 }
 
 static int __newindex (lv_State *L) {
-    LVUserDataData * user = (LVUserDataData *)lv_touserdata(L, 1);
-    LVData* lvData = (__bridge LVData *)(user->data);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
@@ -166,11 +166,11 @@ static int __newindex (lv_State *L) {
 }
 
 static int __add (lv_State *L) {
-    LVUserDataData * user1 = (LVUserDataData *)lv_touserdata(L, 1);
-    LVUserDataData * user2 = (LVUserDataData *)lv_touserdata(L, 2);
-    LVData* lvData1 = (__bridge LVData *)(user1->data);
-    LVData* lvData2 = (__bridge LVData *)(user2->data);
-    if( LVIsType(user1,LVUserDataData) && LVIsType(user2,LVUserDataData) && lvData1.data && lvData2.data ){
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVData* lvData1 = (__bridge LVData *)(user1->object);
+    LVData* lvData2 = (__bridge LVData *)(user2->object);
+    if( LVIsType(user1, Data) && LVIsType(user2, Data) && lvData1.data && lvData2.data ){
         [lvData1.data appendData:lvData2.data];
         return 1;
     }

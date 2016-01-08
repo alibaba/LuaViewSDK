@@ -48,9 +48,9 @@ static int lvNewGestureRecognizer (lv_State *L) {
         }
         
         {
-            NEW_USERDATA(userData, LVUserDataGesture);
+            NEW_USERDATA(userData, Gesture);
             gesture.lv_userData = userData;
-            userData->gesture = CFBridgingRetain(gesture);
+            userData->object = CFBridgingRetain(gesture);
             
             lvL_getmetatable(L, META_TABLE_PanGesture );
             lv_setmetatable(L, -2);

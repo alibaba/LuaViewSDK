@@ -13,7 +13,7 @@
 @interface LVTextField : UITextField<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataView* lv_userData;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 @property(nonatomic,assign) CGFloat lv_rotation;
 @property(nonatomic,assign) CGFloat lv_rotationX;
 @property(nonatomic,assign) CGFloat lv_rotationY;

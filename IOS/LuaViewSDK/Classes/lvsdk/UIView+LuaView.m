@@ -23,11 +23,11 @@
 - (void) setLv_lview:(LView *)lview{
 }
 
-- (LVUserDataView*)lv_userData{
+- (LVUserDataInfo*)lv_userData{
     return nil;
 }
 
-- (void) setLv_userData:(LVUserDataView *)userData{
+- (void) setLv_userData:(LVUserDataInfo *)userData{
 }
 
 - (void) lv_callLuaByKey1:(NSString*) key1{
@@ -155,6 +155,10 @@
             self.frame = r;
         }
     }
+}
+
+- (id) lvNativeObject{
+    return self;
 }
 
 

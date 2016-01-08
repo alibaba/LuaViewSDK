@@ -10,17 +10,10 @@
 #import "LVHeads.h"
 
 
-typedef struct _LVUserDataAudioPlayer {
-    LVUserDataCommonHead;
-    const void* player;
-} LVUserDataAudioPlayer;
+@interface LVAudioPlayer : NSObject<LVProtocal>
 
-
-
-@interface LVAudioPlayer : NSObject
-
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataAudioPlayer* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

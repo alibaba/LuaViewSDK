@@ -10,18 +10,11 @@
 #import "LVHeads.h"
 
 
-
-typedef struct _LVUserDataStyledString {
-    LVUserDataCommonHead;
-    const void* styledString;
-} LVUserDataStyledString;
-
-
 //LVData
-@interface LVStyledString : NSObject
+@interface LVStyledString : NSObject<LVProtocal>
 
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataStyledString* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic,strong) NSMutableAttributedString* mutableStyledString;//真实的数据
 

@@ -18,10 +18,16 @@
 
 @implementation LVTransform3D
 
+-(id) lvNativeObject{
+    return nil;
+}
+
 static int lvNewTransform3D (lv_State *L) {
     {
-        NEW_USERDATA(userData, LVUserDataTransform3D);
-        userData->transform = CATransform3DIdentity;
+        NEW_USERDATA(userData, Transform3D);
+        LVTransform3D* trans = [[LVTransform3D alloc] init];
+        userData->object = CFBridgingRetain(trans);
+        trans.transform = CATransform3DIdentity;
         lvL_getmetatable(L, META_TABLE_Transform3D );
         lv_setmetatable(L, -2);
     }
@@ -30,8 +36,10 @@ static int lvNewTransform3D (lv_State *L) {
 
 +(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t{
     {
-        NEW_USERDATA(userData, LVUserDataTransform3D);
-        userData->transform = t;
+        NEW_USERDATA(userData, Transform3D);
+        LVTransform3D* trans = [[LVTransform3D alloc] init];
+        userData->object = CFBridgingRetain(trans);
+        trans.transform = t;
         lvL_getmetatable(L, META_TABLE_Transform3D );
         lv_setmetatable(L, -2);
     }
@@ -41,12 +49,13 @@ static int lvNewTransform3D (lv_State *L) {
 
 static int translation (lv_State *L) {
     if( lv_gettop(L)==4 ) {
-        LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double x = lv_tonumber(L, 2);// 2
         double y = lv_tonumber(L, 3);// 3
         double z = lv_tonumber(L, 4);// 4
-        if( LVIsType(user,LVUserDataTransform3D) ){
-            user->transform = CATransform3DTranslate(user->transform, x, y, z);
+        if( LVIsType(user, Transform3D) ){
+            LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
+            tran.transform = CATransform3DTranslate(tran.transform, x, y, z);
             lv_pushvalue(L,1);
             return 1;
         }
@@ -56,12 +65,13 @@ static int translation (lv_State *L) {
 
 static int scale (lv_State *L) {
     if( lv_gettop(L)==4 ) {
-        LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double x = lv_tonumber(L, 2);// 2
         double y = lv_tonumber(L, 3);// 3
         double z = lv_tonumber(L, 4);// 4
-        if( LVIsType(user,LVUserDataTransform3D) ){
-            user->transform = CATransform3DScale(user->transform, x, y, z);
+        if( LVIsType(user, Transform3D) ){
+            LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
+            tran.transform = CATransform3DScale(tran.transform, x, y, z);
             lv_pushvalue(L,1);
             return 1;
         }
@@ -71,13 +81,14 @@ static int scale (lv_State *L) {
 
 static int rotate (lv_State *L) {
     if( lv_gettop(L)==5 ) {
-        LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double angle = lv_tonumber(L, 2);
         double x = lv_tonumber(L, 3);
         double y = lv_tonumber(L, 4);
         double z = lv_tonumber(L, 5);
-        if( LVIsType(user,LVUserDataTransform3D) ){
-            user->transform = CATransform3DRotate(user->transform, angle, x, y, z);
+        if( LVIsType(user, Transform3D) ){
+            LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
+            tran.transform = CATransform3DRotate(tran.transform, angle, x, y, z);
             lv_pushvalue(L,1);
             return 1;
         }
@@ -87,9 +98,10 @@ static int rotate (lv_State *L) {
 
 static int isIdentity (lv_State *L) {
     if( lv_gettop(L)==1 ) {
-        LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        if( LVIsType(user,LVUserDataTransform3D) ){
-            BOOL yes = CATransform3DIsIdentity(user->transform );
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        if( LVIsType(user, Transform3D) ){
+            LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
+            BOOL yes = CATransform3DIsIdentity(tran.transform );
             int ret = (yes ? 1 : 0);
             lv_pushboolean(L, ret);
             return 1;
@@ -100,9 +112,10 @@ static int isIdentity (lv_State *L) {
 
 static int reset (lv_State *L) {
     if( lv_gettop(L)==1 ) {
-        LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        if( LVIsType(user,LVUserDataTransform3D) ){
-            user->transform = CATransform3DIdentity;
+        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        if( LVIsType(user, Transform3D) ){
+            LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
+            tran.transform = CATransform3DIdentity;
             lv_pushvalue(L,1);
             return 1;
         }
@@ -112,10 +125,12 @@ static int reset (lv_State *L) {
 
 static int transform_set (lv_State *L) {
     if( lv_gettop(L)==2 ) {
-        LVUserDataTransform3D * user1 = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        LVUserDataTransform3D * user2 = (LVUserDataTransform3D *)lv_touserdata(L, 2);
-        if( LVIsType(user1,LVUserDataTransform3D) && LVIsType(user2,LVUserDataTransform3D) ){
-            user1->transform = user2->transform;
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+        if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
+            LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
+            LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
+            tran1.transform = tran2.transform;
             lv_pushvalue(L,1);
             return 1;
         }
@@ -125,10 +140,12 @@ static int transform_set (lv_State *L) {
 
 static int concat (lv_State *L) {
     if( lv_gettop(L)==2 ) {
-        LVUserDataTransform3D * user1 = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        LVUserDataTransform3D * user2 = (LVUserDataTransform3D *)lv_touserdata(L, 2);
-        if( LVIsType(user1,LVUserDataTransform3D) && LVIsType(user2,LVUserDataTransform3D) ){
-            user1->transform = CATransform3DConcat(user1->transform, user2->transform);
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+        if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
+            LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
+            LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
+            tran1.transform = CATransform3DConcat(tran1.transform, tran2.transform);
             
             lv_pushvalue(L,1);
             return 1;
@@ -139,16 +156,21 @@ static int concat (lv_State *L) {
 
 static int __mul (lv_State *L) {
     if( lv_gettop(L)==2 ) {
-        LVUserDataTransform3D * user1 = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        LVUserDataTransform3D * user2 = (LVUserDataTransform3D *)lv_touserdata(L, 2);
-        if( LVIsType(user1,LVUserDataTransform3D) && LVIsType(user2,LVUserDataTransform3D) ){
-            NEW_USERDATA(user, LVUserDataTransform3D);
-            user->transform = CATransform3DIdentity;
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+        if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
+            LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
+            LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
+            NEW_USERDATA(user, Transform3D);
+            
+            LVTransform3D* trans = [[LVTransform3D alloc] init];
+            user->object = CFBridgingRetain(trans);
+
+            trans.transform = CATransform3DIdentity;
             lvL_getmetatable(L, META_TABLE_Transform3D );
             lv_setmetatable(L, -2);
             
-            user->transform = CATransform3DConcat(user1->transform, user2->transform);
-            
+            trans.transform = CATransform3DConcat(tran1.transform, tran2.transform);
             return 1;
         }
     }
@@ -157,10 +179,12 @@ static int __mul (lv_State *L) {
 
 static int __eq (lv_State *L) {
     if( lv_gettop(L)==2 ) {
-        LVUserDataTransform3D * user1 = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-        LVUserDataTransform3D * user2 = (LVUserDataTransform3D *)lv_touserdata(L, 2);
-        if( LVIsType(user1,LVUserDataTransform3D) && LVIsType(user2,LVUserDataTransform3D) ){
-            BOOL yes =  CATransform3DEqualToTransform( user1->transform, user2->transform);
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+        if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
+            LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
+            LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
+            BOOL yes =  CATransform3DEqualToTransform( tran1.transform, tran2.transform);
             lv_pushboolean(L, (yes?1:0) );
             return 1;
         }
@@ -169,8 +193,8 @@ static int __eq (lv_State *L) {
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataTransform3D * user = (LVUserDataTransform3D *)lv_touserdata(L, 1);
-    if( LVIsType(user,LVUserDataTransform3D) ){
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( LVIsType(user, Transform3D) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataTransform3D: %d", (int)user ];
         lv_pushstring(L, s.UTF8String);
         return 1;

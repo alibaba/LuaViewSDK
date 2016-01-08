@@ -22,15 +22,15 @@ typedef NS_ENUM(int, LVAnimatorCallback) {
 
 @implementation LVAnimator
 
-NSString *LVAnimatorGetAnimationKey(LVUserDataAnimator *animator) {
+NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator) {
     return animator ? [NSString stringWithFormat:@"<LVAnimator: %p>", animator] : @"";
 }
 
 static int lvNewAnimator(lv_State *L) {
     LVAnimator *animator = [LVAnimator new];
 
-    NEW_USERDATA(userData, LVUserDataAnimator);
-    userData->animator = CFBridgingRetain(animator);
+    NEW_USERDATA(userData, Animator);
+    userData->object = CFBridgingRetain(animator);
     
     animator.userData = userData;
     animator.lvState = L;
@@ -42,12 +42,12 @@ static int lvNewAnimator(lv_State *L) {
 }
 
 static int __gc(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    if (LVIsType(data, LVUserDataAnimator) && data->animator) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if (LVIsType(data, Animator) && data->object) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
 
         CFBridgingRelease((__bridge CFTypeRef)(animator));
-        data->animator = nil;
+        data->object = nil;
         
         animator.userData = NULL;
     }
@@ -56,9 +56,9 @@ static int __gc(lv_State *L) {
 }
 
 static int __tostring(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         NSString *s = [NSString stringWithFormat:@"Animator<%@>: %@", animator.keyPath, animator.toValue];
         lv_pushstring(L, s.UTF8String);
         
@@ -69,12 +69,12 @@ static int __tostring(lv_State *L) {
 }
 
 static int __eq(lv_State *L) {
-    LVUserDataAnimator *data1 = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    LVUserDataAnimator *data2 = (LVUserDataAnimator *)lv_touserdata(L, 2);
+    LVUserDataInfo *data1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     
-    if (LVIsType(data1, LVUserDataAnimator) && LVIsType(data2, LVUserDataAnimator)) {
-        LVAnimator *a1 = (__bridge LVAnimator *)data1->animator;
-        LVAnimator *a2 = (__bridge LVAnimator *)data2->animator;
+    if (LVIsType(data1, Animator) && LVIsType(data2, Animator)) {
+        LVAnimator *a1 = (__bridge LVAnimator *)data1->object;
+        LVAnimator *a2 = (__bridge LVAnimator *)data2->object;
         
         BOOL eq = [a1 isEqual:a2];
         lv_pushboolean(L, eq);
@@ -86,12 +86,12 @@ static int __eq(lv_State *L) {
 }
 
 static int clone(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = [(__bridge LVAnimator *)data->animator copy];
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = [(__bridge LVAnimator *)data->object copy];
         
-        NEW_USERDATA(userData, LVUserDataAnimator);
-        userData->animator = CFBridgingRetain(animator);
+        NEW_USERDATA(userData, Animator);
+        userData->object = CFBridgingRetain(animator);
         
         animator.userData = userData;
         animator.lvState = L;
@@ -106,12 +106,12 @@ static int clone(lv_State *L) {
 }
 
 static int with(lv_State *L) {
-    LVUserDataAnimator *adata = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    LVUserDataView *vdata = (LVUserDataView *)lv_touserdata(L, 2);
+    LVUserDataInfo *adata = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *vdata = (LVUserDataInfo *)lv_touserdata(L, 2);
 
-    if (LVIsType(adata, LVUserDataAnimator) && LVIsType(vdata, LVUserDataView)) {
-        LVAnimator *animator = (__bridge LVAnimator *)adata->animator;
-        animator.target = (__bridge UIView *)vdata->view;
+    if (LVIsType(adata, Animator) && LVIsType(vdata, View)) {
+        LVAnimator *animator = (__bridge LVAnimator *)adata->object;
+        animator.target = (__bridge UIView *)vdata->object;
     }
     
     lv_pushUserdata(L, adata);
@@ -120,10 +120,10 @@ static int with(lv_State *L) {
 }
 
 static int start(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         [animator startWithKey:LVAnimatorGetAnimationKey(data)];
     }
     
@@ -134,11 +134,11 @@ static int start(lv_State *L) {
 
 
 static int duration(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_tonumber(L, 2);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         
         animator.duration = value;
     }
@@ -149,11 +149,11 @@ static int duration(lv_State *L) {
 }
 
 static int delay(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_tonumber(L, 2);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         
         animator.delay = value;
     }
@@ -164,11 +164,11 @@ static int delay(lv_State *L) {
 }
 
 static int repeatCount(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     int value = (int)lv_tointeger(L, 2);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         
         animator.repeatCount = value;
     }
@@ -179,11 +179,11 @@ static int repeatCount(lv_State *L) {
 }
 
 static int autoreverses(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     BOOL autoreverses = !!lv_toboolean(L, 2);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         
         animator.autoreverses = autoreverses;
     }
@@ -194,9 +194,9 @@ static int autoreverses(lv_State *L) {
 }
 
 static int setCallback(lv_State *L, int idx) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
-    if (LVIsType(data, LVUserDataAnimator)) {
+    if (LVIsType(data, Animator)) {
         lv_pushvalue(L, 1);
         if (lv_type(L, 2) == LV_TFUNCTION) {
             lv_pushvalue(L, 2);
@@ -225,8 +225,8 @@ static int onCancel(lv_State *L) {
 }
 
 static int callback(lv_State *L) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
-    if (LVIsType(data, LVUserDataAnimator) && lv_type(L, 2) == LV_TTABLE) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if (LVIsType(data, Animator) && lv_type(L, 2) == LV_TTABLE) {
         lv_pushvalue(L, 2);
         lv_pushnil(L);
         
@@ -266,11 +266,11 @@ static int callback(lv_State *L) {
 }
 
 static int updateAnimator(lv_State *L, NSString *keyPath) {
-    LVUserDataAnimator *data = (LVUserDataAnimator *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_gettop(L) >= 2 ? lv_tonumber(L, 2) : 0;
     
-    if (LVIsType(data, LVUserDataAnimator)) {
-        LVAnimator *animator = (__bridge LVAnimator *)data->animator;
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
         if (keyPath) {
             animator.keyPath = keyPath;
         }

@@ -72,8 +72,8 @@ static int lvNewScrollView (lv_State *L) {
         LVScrollView* scrollView = [[g_class alloc] init:L];
         
         
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(scrollView);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(scrollView);
         scrollView.lv_userData = userData;
         
         //创建delegate用的事件存储器
@@ -92,9 +92,9 @@ static int lvNewScrollView (lv_State *L) {
 }
 
 static int contentSize (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+        UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 double w = lv_tonumber(L, 2);// 2
@@ -116,9 +116,9 @@ static int contentSize (lv_State *L) {
 }
 
 static int contentOffset (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+        UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             double x = lv_tonumber(L, 2);// 2
             double y = lv_tonumber(L, 3);// 3
@@ -158,9 +158,9 @@ static int contentOffset (lv_State *L) {
 }
 
 static int contentInset (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+        UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             int num = lv_gettop(L);
             if( num>=2 ) {
@@ -210,9 +210,9 @@ static int contentInset (lv_State *L) {
 //}
 
 static int showScrollIndicator (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        UIScrollView* view = (__bridge UIScrollView *)(user->view);
+        UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
                 BOOL yes1 = lv_toboolean(L, 2);
@@ -240,27 +240,27 @@ static int showScrollIndicator (lv_State *L) {
 //}
 
 static int startHeaderRefreshing (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+        LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         [scrollView lv_beginRefreshing];
     }
     return 0;
 }
 
 static int stopHeaderRefreshing (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+        LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         [scrollView lv_endRefreshing];
     }
     return 0;
 }
 
 static int isHeaderRefreshing (lv_State *L){
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
+        LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         BOOL yes = [scrollView lv_isRefreshing];
         lv_pushboolean(L, yes);
         return 1;

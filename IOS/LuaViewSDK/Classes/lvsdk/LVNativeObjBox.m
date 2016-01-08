@@ -71,10 +71,10 @@
     return 0;
 }
 
-static void releaseNativeObject(LVUserDataNativeObject* user){
-    if( user && user->realObjBox ){
-        LVNativeObjBox* data = CFBridgingRelease(user->realObjBox);
-        user->realObjBox = NULL;
+static void releaseNativeObject(LVUserDataInfo* user){
+    if( user && user->object ){
+        LVNativeObjBox* data = CFBridgingRelease(user->object);
+        user->object = NULL;
         if( data ){
             data.userData = nil;
             data.lview = nil;
@@ -84,7 +84,7 @@ static void releaseNativeObject(LVUserDataNativeObject* user){
 }
 
 static int __gc (lv_State *L) {
-    LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseNativeObject(user);
     return 0;
 }
@@ -100,9 +100,9 @@ static int __gc (lv_State *L) {
         
         LVNativeObjBox* nativeObjBox = nil;
         if( lv_type(L, -1)==LV_TUSERDATA ) {
-            LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, -1);
-            if( LVIsType(user, LVUserDataNativeObject) ){
-                LVNativeObjBox* temp = (__bridge LVNativeObjBox *)(user->realObjBox);
+            LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, -1);
+            if( LVIsType(user, NativeObject) ){
+                LVNativeObjBox* temp = (__bridge LVNativeObjBox *)(user->object);
                 if( temp.realObject==nativeObject ){
                     nativeObjBox = temp;
                 }
@@ -120,8 +120,8 @@ static int __gc (lv_State *L) {
         }
         nativeObjBox.weakMode = weakMode;
         
-        NEW_USERDATA(userData, LVUserDataNativeObject);
-        userData->realObjBox = CFBridgingRetain(nativeObjBox);
+        NEW_USERDATA(userData, NativeObject);
+        userData->object = CFBridgingRetain(nativeObjBox);
         nativeObjBox.userData = userData;
         lvL_getmetatable(L, META_TABLE_NativeObject );
         lv_setmetatable(L, -2);
@@ -143,9 +143,9 @@ static int __gc (lv_State *L) {
 }
 
 static int __tostring (lv_State *L) {
-    LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->realObjBox);
+        LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->object);
         NSString* s = [[NSString alloc] initWithFormat:@"{ UserDataType=NativeObject, %@ }",nativeObjBox.realObject];
         lv_pushstring(L, s.UTF8String);
         return 1;
@@ -167,9 +167,9 @@ static void ifNotEnoughArgmentTagAppendIt(NSMutableString* funcName, int luaArgs
 }
 
 static int callNativeObjectFunction (lv_State *L) {
-    LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, lv_upvalueindex(1));
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, lv_upvalueindex(1));
     if ( user ) {
-        LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->realObjBox);
+        LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
         NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
         int luaArgsNum = lv_gettop(L);
 
@@ -185,10 +185,10 @@ static int callNativeObjectFunction (lv_State *L) {
 
 
 static int __index (lv_State *L) {
-    LVUserDataNativeObject * user = (LVUserDataNativeObject *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     NSString* functionName = lv_paramString(L, 2);
     
-    LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->realObjBox);
+    LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
     id object = nativeObjBox.realObject;
     if( nativeObjBox && object && functionName ){
         lv_pushcclosure(L, callNativeObjectFunction, 2);

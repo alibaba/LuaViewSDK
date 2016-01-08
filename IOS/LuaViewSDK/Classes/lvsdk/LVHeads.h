@@ -42,57 +42,46 @@ typedef struct lv_State lv_State;
 #define LVUserDataCommonHead  const char* type;
 
 //---------------创建用户数据-------------------------------------------------------
-#define NEW_USERDATA(var, T)    \
-    T* var = ( (T*)lv_newuserdata( L, sizeof(T)) ); \
+#define NEW_USERDATA(var, typeName)    \
+    LVUserDataInfo* var = ( (LVUserDataInfo*)lv_newuserdata( L, sizeof(LVUserDataInfo)) ); \
     lv_createUDataLuatable(L,-1);\
-    var->type = LVType_##T; \
+    var->type = LVType_##typeName; \
 //
 
-#define NEW_USERDATA2(var, T, typeName)    \
-    T* var = ( (T*)lv_newuserdata( L, sizeof(T)) ); \
-    lv_createUDataLuatable(L,-1);\
-    var->type = typeName; \
-//
 
-//----------------用户数据的类型检查-------------------------------------------------
+//----------------用户数据的类型检查-----i--------------------------------------------
 #define LVIsType( user,T)  (user && user->type==LVType_##T)
-#define LVIsType2(user,T)  (user && user->type==T)
 
 //----------------用户数据类型 ID---------------------------------------------------
 
-extern const char* LVType_LVUserDataView;
-extern const char* LVType_LVUserDataData;
-extern const char* LVType_LVUserDataDate;
-extern const char* LVType_LVUserDataHttp;
-extern const char* LVType_LVUserDataTimer;
-extern const char* LVType_LVUserDataTransform3D;
-extern const char* LVType_LVUserDataAnimator;
-extern const char* LVType_LVUserDataGesture;
-extern const char* LVType_LVUserDataDownloader;
-extern const char* LVType_LVUserDataAudioPlayer;
-extern const char* LVType_LVUserDataStyledString;
-extern const char* LVType_LVUserDataNativeObject;
-extern const char* LVType_LVUserDataStruct;
+extern const char* LVType_View;
+extern const char* LVType_Data;
+extern const char* LVType_Date;
+extern const char* LVType_Http;
+extern const char* LVType_Timer;
+extern const char* LVType_Transform3D;
+extern const char* LVType_Animator;
+extern const char* LVType_Gesture;
+extern const char* LVType_Downloader;
+extern const char* LVType_AudioPlayer;
+extern const char* LVType_StyledString;
+extern const char* LVType_NativeObject;
+extern const char* LVType_Struct;
 
 
 //----------------View的用户数据结构------------------------------------------------
-typedef struct _LVUserDataView {
+typedef struct _LVUserDataInfo {
     LVUserDataCommonHead;
-    const void* view;
-} LVUserDataView;
-
-//----------------手势的用户数据结构-------------------------------------------------
-typedef struct _LVUserDataGesture {
-    LVUserDataCommonHead;
-    const void* gesture;
-} LVUserDataGesture;
+    const void* object;
+} LVUserDataInfo;
 
 //--------------------------------------------------------------------------------
 @class LView;
 @protocol LVProtocal <NSObject>
 @required
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataView* lv_userData;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
+- (id) lvNativeObject; // 返回native对象
 @end
 
 

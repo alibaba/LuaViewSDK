@@ -39,8 +39,8 @@ static int lvNewActivityIndicator (lv_State *L) {
         LVLoadingIndicator* pageControl = [[LVLoadingIndicator alloc] init:L];
         
         {
-            NEW_USERDATA(userData, LVUserDataView);
-            userData->view = CFBridgingRetain(pageControl);
+            NEW_USERDATA(userData, View);
+            userData->object = CFBridgingRetain(pageControl);
             
             lvL_getmetatable(L, META_TABLE_UIActivityIndicatorView );
             lv_setmetatable(L, -2);
@@ -54,9 +54,9 @@ static int lvNewActivityIndicator (lv_State *L) {
 }
 
 static int startAnimating(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
             [view startAnimating];
         }
@@ -65,9 +65,9 @@ static int startAnimating(lv_State *L) {
 }
 
 static int stopAnimating(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
             [view stopAnimating];
         }
@@ -76,9 +76,9 @@ static int stopAnimating(lv_State *L) {
 }
 
 static int isAnimating(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
             lv_pushboolean(L, view.isAnimating);
             return 1;
@@ -88,9 +88,9 @@ static int isAnimating(lv_State *L) {
 }
 
 static int color(lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->view);
+        LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);

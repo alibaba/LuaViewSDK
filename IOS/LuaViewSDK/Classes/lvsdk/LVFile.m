@@ -21,19 +21,19 @@
 static int file_save (lv_State *L) {
     int num = lv_gettop(L);
     if( num>=2 ) {
-        LVUserDataData * userData = NULL;
+        LVUserDataInfo * userData = NULL;
         NSString* fileName = nil;
         for( int i=1; i<=num; i++ ) {
             if( lv_type(L, i)==LV_TUSERDATA  && userData==nil ) {
-                userData = (LVUserDataData *)lv_touserdata(L, i);
+                userData = (LVUserDataInfo *)lv_touserdata(L, i);
             }
             if( lv_type(L, i)==LV_TSTRING  && fileName==nil ) {
                fileName = lv_paramString(L, i);
             }
         }
         if ( userData ) {
-            LVData* lvData1 = (__bridge LVData *)(userData->data);
-            if( fileName && LVIsType(userData,LVUserDataData) && lvData1.data){
+            LVData* lvData1 = (__bridge LVData *)(userData->object);
+            if( fileName && LVIsType(userData, Data) && lvData1.data){
                 if(  [LVUtil saveData:lvData1.data toFile:fileName] ){
                     lv_pushboolean(L, 1);
                     return 1;

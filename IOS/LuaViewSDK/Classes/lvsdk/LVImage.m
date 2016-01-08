@@ -101,9 +101,9 @@
 }
 
 -(void) dealloc{
-    LVUserDataView* userData = self.lv_userData;
+    LVUserDataInfo* userData = self.lv_userData;
     if( userData ){
-        userData->view = NULL;
+        userData->object = NULL;
     }
 }
 
@@ -200,8 +200,8 @@ static int lvNewImageView(lv_State *L) {
     LVImage* imageView = [[g_class alloc] init:L];
     [imageView setImageByName:imageName];
     {
-        NEW_USERDATA(userData, LVUserDataView);
-        userData->view = CFBridgingRetain(imageView);
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(imageView);
         imageView.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_UIImageView );
@@ -215,9 +215,9 @@ static int lvNewImageView(lv_State *L) {
 }
 
 static int setImage (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
+        LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView cancelImageLoadAndClearCallback:L];
             if( lv_type(L, 3) == LV_TFUNCTION ) {
@@ -234,9 +234,9 @@ static int setImage (lv_State *L) {
                     return 1;
                 }
             } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-                LVUserDataData * userdata = (LVUserDataData *)lv_touserdata(L, 2);
-                LVData* lvdata = (__bridge LVData *)(userdata->data);
-                if( LVIsType(userdata,LVUserDataData) ) {
+                LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+                LVData* lvdata = (__bridge LVData *)(userdata->object);
+                if( LVIsType(userdata, Data) ) {
                     [imageView setImageByData:lvdata.data];
                     lv_pushvalue(L,1);
                     return 1;
@@ -277,9 +277,9 @@ static int setImage (lv_State *L) {
 
 
 static int scaleType (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
+        LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             if( lv_gettop(L)>=2 ) {
                 int model = lv_tonumber(L, 2);// 2
@@ -333,9 +333,9 @@ static int scaleType (lv_State *L) {
 //}
 
 static int startAnimating (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( L && user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
+        LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             NSArray* urlArray = lv_luaTableToArray(L,2);
             float repeatCount = 1;
@@ -365,9 +365,9 @@ static int startAnimating (lv_State *L) {
 }
 
 static int stopAnimating (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
+        LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView stopAnimating];
             return 0;
@@ -377,9 +377,9 @@ static int stopAnimating (lv_State *L) {
 }
 
 static int isAnimating (lv_State *L) {
-    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->view);
+        LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             lv_pushboolean(L, imageView.isAnimating?1:0);
             return 1;

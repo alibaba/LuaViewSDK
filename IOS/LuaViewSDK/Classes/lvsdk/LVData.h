@@ -10,18 +10,11 @@
 #import "LVHeads.h"
 
 
-
-typedef struct _LVUserDataData {
-    LVUserDataCommonHead;
-    const void* data;
-} LVUserDataData;
-
-
 //LVData
 @interface LVData : NSObject
 
 @property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataData* userData;
+@property(nonatomic,assign) LVUserDataInfo* userData;
 
 @property(nonatomic,strong) NSMutableData* data;//真实的数据
 
