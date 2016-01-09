@@ -546,7 +546,7 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
                 return [obj lv_nativeObject];
             }
             LVError(@"lv_luaValueToNativeObject.1");
-            return nil;
+            return obj;
         }
         case LV_TLIGHTUSERDATA:{
             LVPointerValueBox* box = [[LVPointerValueBox alloc] init];
