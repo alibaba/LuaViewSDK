@@ -13,7 +13,7 @@
 
 extern NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator);
 
-@interface LVAnimator : NSObject <NSCopying, NSMutableCopying>
+@interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
 @property(nonatomic, copy) NSNumber *toValue;
@@ -25,8 +25,9 @@ extern NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator);
 
 @property(nonatomic, weak) UIView *target;
 
-@property(nonatomic, assign) LVUserDataInfo *userData;
-@property(nonatomic, assign) lv_State *lvState;
+
+@property(nonatomic, weak) LView* lv_lview;
+@property(nonatomic, assign) LVUserDataInfo* lv_userData;
 
 +(int) classDefine:(lv_State *)L ;
 

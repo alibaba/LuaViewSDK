@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
+#import "UIGestureRecognizer+LuaView.h"
 
-@interface LVLongPressGestureRecognizer : UILongPressGestureRecognizer
+@interface LVLongPressGestureRecognizer : UILongPressGestureRecognizer<LVProtocal>
 
 
 @property(nonatomic,weak) LView* lv_lview;
-@property(nonatomic,assign) LVUserDataInfo* userData;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l;
 

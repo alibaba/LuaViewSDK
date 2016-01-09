@@ -21,10 +21,14 @@
 -(id) init:(lv_State *)l{
     self = [super init];
     if( self ){
-        self.lview = (__bridge LView *)(l->lView);
+        self.lv_lview = (__bridge LView *)(l->lView);
         self.data = [[NSMutableData alloc] init];
     }
     return self;
+}
+
+-(id) lv_nativeObject{
+    return self.data;
 }
 
 static void releaseUserDataData(LVUserDataInfo* user){
@@ -32,8 +36,8 @@ static void releaseUserDataData(LVUserDataInfo* user){
         LVData* data = CFBridgingRelease(user->object);
         user->object = NULL;
         if( data ){
-            data.userData = NULL;
-            data.lview = nil;
+            data.lv_userData = NULL;
+            data.lv_lview = nil;
             data.data = nil;
         }
     }
@@ -64,7 +68,7 @@ static int lvNewData (lv_State *L) {
     {
         NEW_USERDATA(userData, Data);
         userData->object = CFBridgingRetain(data);
-        data.userData = userData;
+        data.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Data );
         lv_setmetatable(L, -2);
@@ -81,7 +85,7 @@ static int lvNewData (lv_State *L) {
     {
         NEW_USERDATA(userData, Data);
         userData->object = CFBridgingRetain(ldata);
-        ldata.userData = userData;
+        ldata.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Data );
         lv_setmetatable(L, -2);

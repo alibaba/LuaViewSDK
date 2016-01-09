@@ -38,9 +38,6 @@ typedef struct lv_State lv_State;
 #define USERDATA_KEY_CALLBACK   2
 #define USERDATA_FLEX_DELEGATE  8
 
-//---------------用户数据包含的公用头信息---------------------------------------------
-#define LVUserDataCommonHead  const char* type;
-
 //---------------创建用户数据-------------------------------------------------------
 #define NEW_USERDATA(var, typeName)    \
     LVUserDataInfo* var = ( (LVUserDataInfo*)lv_newuserdata( L, sizeof(LVUserDataInfo)) ); \
@@ -71,8 +68,8 @@ extern const char* LVType_Struct;
 
 //----------------View的用户数据结构------------------------------------------------
 typedef struct _LVUserDataInfo {
-    LVUserDataCommonHead;
-    const void* object;
+    const char* type;// 用户类型
+    const void* object;// 真实的用户对象
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------

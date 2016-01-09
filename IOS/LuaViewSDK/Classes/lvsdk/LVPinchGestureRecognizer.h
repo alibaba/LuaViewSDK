@@ -10,7 +10,7 @@
 #import "UIGestureRecognizer+LuaView.h"
 #import "LVHeads.h"
 
-@interface LVPinchGestureRecognizer : UIPinchGestureRecognizer
+@interface LVPinchGestureRecognizer : UIPinchGestureRecognizer<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

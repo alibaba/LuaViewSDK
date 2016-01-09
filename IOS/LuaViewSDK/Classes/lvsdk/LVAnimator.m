@@ -12,6 +12,7 @@
 #import "lVauxlib.h"
 #import "LVHeads.h"
 #import "LVUtil.h"
+#import "LView.h"
 #import <QuartzCore/CoreAnimation.h>
 
 typedef NS_ENUM(int, LVAnimatorCallback) {
@@ -21,6 +22,10 @@ typedef NS_ENUM(int, LVAnimatorCallback) {
 };
 
 @implementation LVAnimator
+
+-(id) lv_nativeObject{
+    return self;
+}
 
 NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator) {
     return animator ? [NSString stringWithFormat:@"<LVAnimator: %p>", animator] : @"";
@@ -32,8 +37,8 @@ static int lvNewAnimator(lv_State *L) {
     NEW_USERDATA(userData, Animator);
     userData->object = CFBridgingRetain(animator);
     
-    animator.userData = userData;
-    animator.lvState = L;
+    animator.lv_userData = userData;
+    animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
     
     lvL_getmetatable(L, META_TABLE_Animator);
     lv_setmetatable(L, -2);
@@ -49,7 +54,7 @@ static int __gc(lv_State *L) {
         CFBridgingRelease((__bridge CFTypeRef)(animator));
         data->object = nil;
         
-        animator.userData = NULL;
+        animator.lv_userData = NULL;
     }
     
     return 0;
@@ -93,8 +98,8 @@ static int clone(lv_State *L) {
         NEW_USERDATA(userData, Animator);
         userData->object = CFBridgingRetain(animator);
         
-        animator.userData = userData;
-        animator.lvState = L;
+        animator.lv_userData = userData;
+        animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
         
         lvL_getmetatable(L, META_TABLE_Animator);
         lv_setmetatable(L, -2);
@@ -450,9 +455,9 @@ static int value(lv_State *L) {
 }
 
 - (void)animationDidStart:(CAAnimation *)anim {
-    lv_State* l = self.lvState;
-    if( l && self.userData ){
-        lv_pushUserdata(l, self.userData);
+    lv_State* l = self.lv_lview.l;
+    if( l && self.lv_userData ){
+        lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, kLVAnimatorCallbackOnStart);
         lv_runFunction(l);
     }
@@ -464,9 +469,9 @@ static int value(lv_State *L) {
         return;
     }
     
-    lv_State* l = self.lvState;
-    if( l && self.userData ){
-        lv_pushUserdata(l, self.userData);
+    lv_State* l = self.lv_lview.l;
+    if( l && self.lv_userData ){
+        lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel);
         lv_runFunction(l);
     }

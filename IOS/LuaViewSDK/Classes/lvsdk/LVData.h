@@ -11,10 +11,10 @@
 
 
 //LVData
-@interface LVData : NSObject
+@interface LVData : NSObject<LVProtocal>
 
-@property(nonatomic,weak) LView* lview;
-@property(nonatomic,assign) LVUserDataInfo* userData;
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic,strong) NSMutableData* data;//真实的数据
 

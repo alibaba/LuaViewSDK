@@ -20,7 +20,7 @@
 
 -(void) dealloc{
     LVLog(@"LVLongPressGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_userData];
+    [LVGestureRecognizer releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -35,10 +35,11 @@
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
-        lv_pushUserdata(l,self.userData);
+        lv_pushUserdata(l,self.lv_userData);
         [LVUtil call:l lightUserData:self key1:"callback" key2:NULL nargs:1];
     }
 }
+
 
 static int lvNewGestureRecognizer (lv_State *L) {
     {
@@ -50,7 +51,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
         
         {
             NEW_USERDATA(userData, Gesture);
-            gesture.userData = userData;
+            gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
             lvL_getmetatable(L, META_TABLE_LongPressGesture );
