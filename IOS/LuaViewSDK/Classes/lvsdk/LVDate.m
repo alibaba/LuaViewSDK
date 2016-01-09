@@ -14,10 +14,20 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
+
+
 @implementation LVDate
 
--(id) lv_nativeObject{
+-(id) init:(NSDate*) d{
+    self = [super init];
+    if( self ) {
+        self.date = d;
+    }
     return self;
+}
+
+-(id) lv_nativeObject{
+    return self.date;
 }
 
 static NSString* string09(NSString* s, NSUInteger len){
@@ -59,8 +69,9 @@ static int lvNewDate (lv_State *L) {
             date = [dateformatter dateFromString:string];
         }
         {
+            LVDate* d = [[LVDate alloc] init:date];
             NEW_USERDATA(userData, Date );
-            userData->object = CFBridgingRetain(date);
+            userData->object = CFBridgingRetain(d);
             
             lvL_getmetatable(L, META_TABLE_Date );
             lv_setmetatable(L, -2);
@@ -82,8 +93,8 @@ static int __GC (lv_State *L) {
 static int __tostring (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Date) ){
-        NSDate* date =  (__bridge NSDate *)(user->object);
-        NSString* s = [NSString stringWithFormat:@"%@", date ];
+        LVDate* date =  (__bridge LVDate *)(user->object);
+        NSString* s = [NSString stringWithFormat:@"%@", date.date ];
         lv_pushstring(L, s.UTF8String);
         return 1;
     }
@@ -100,9 +111,9 @@ static int format (lv_State *L) {
             if( formatString ){
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:formatString];
-                ret = [formatter stringFromDate:date];
+                ret = [formatter stringFromDate:date.date];
             } else {
-                ret = [NSString stringWithFormat:@"%@", date ];
+                ret = [NSString stringWithFormat:@"%@", date.date ];
             }
             lv_pushstring(L, ret.UTF8String);
             return 1;
@@ -115,9 +126,9 @@ static int __sub (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
-        NSDate* date1 = (__bridge NSDate *)(user1->object);
-        NSDate* date2 = (__bridge NSDate *)(user2->object);
-        double time = [date1 timeIntervalSinceDate:date2];
+        LVDate* date1 = (__bridge LVDate *)(user1->object);
+        LVDate* date2 = (__bridge LVDate *)(user2->object);
+        double time = [date1.date timeIntervalSinceDate:date2.date];
         lv_pushnumber(L, time);
         return 1;
     }
@@ -128,9 +139,9 @@ static int __eq (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
-        NSDate* date1 = (__bridge NSDate *)(user1->object);
-        NSDate* date2 = (__bridge NSDate *)(user2->object);
-        BOOL yes = [date1 isEqualToDate:date2];
+        LVDate* date1 = (__bridge LVDate *)(user1->object);
+        LVDate* date2 = (__bridge LVDate *)(user2->object);
+        BOOL yes = [date1.date isEqualToDate:date2.date];
         lv_pushboolean(L, (yes?1:0) );
         return 1;
     }
@@ -140,8 +151,8 @@ static int __eq (lv_State *L) {
 static int timeInterval (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user1, Date) ){
-        NSDate* date1 = (__bridge NSDate *)(user1->object);
-        double time = [date1 timeIntervalSince1970];
+        LVDate* date1 = (__bridge LVDate *)(user1->object);
+        double time = [date1.date timeIntervalSince1970];
         lv_pushnumber(L, time);
         return 1;
     }

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LVDate : NSDate<LVProtocal>
+@interface LVDate : NSObject<LVProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
+
+@property(nonatomic,strong) NSDate* date;
+
 - (id) lv_nativeObject; // 返回native对象
 
 +(int) classDefine:(lv_State *) L ;
