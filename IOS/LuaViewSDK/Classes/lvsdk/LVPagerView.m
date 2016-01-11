@@ -73,8 +73,13 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             [self.cellArray addObject:view];
         }
     }
+    for( UIView* view in self.cellArray ) {
+        [view removeFromSuperview];
+    }
     [self resetCellFrame];
     self.pagerIndicator.numberOfPages = self.cellArray.count;
+    
+    [self checkCellVisible];
 }
 
 -(void) resetCellFrame{
