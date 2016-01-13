@@ -25,7 +25,7 @@ LuaView 是一种运行在一个 ViewController/Activity 中，可以灵活加�
 	- 页面间跳转，具备开发完整 APP 能力相关的功能。
 
 # 2. 入门
-## 2.1 新手入门 - iOS
+## 2.1 [新手入门 - iOS](IOS/Documentation/新手入门-iOS/新手入门 - iOS.md) 
 ## 2.2 新手入门 - Android
 ## 2.3 LuaView Todo Demo
 ## 2.4 如何获得帮助
