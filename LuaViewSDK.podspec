@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   #
 
   s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-  s.libraries = 'libz'
+  s.libraries = 'z'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
