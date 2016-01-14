@@ -95,15 +95,15 @@
 -(NSString*) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
     NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
-    NSString* error = [self runData:code fileName:fileName];
-    return error;
+
+    return [self runData:code fileName:fileName];
 }
 
 -(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
     NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
-    NSString* error = [self runData:code fileName:fileName];
-    return error;
+
+    return [self runData:code fileName:fileName];
 }
 
 -(NSString*) runPackage:(NSString*) packageName {
@@ -135,6 +135,24 @@
         
         [self.debugConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
+}
+
+- (int)loadFile:(NSString *)fileName {
+    NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
+    return [self loadData:code fileName:fileName];
+}
+
+- (int)loadSignFile:(NSString *)fileName {
+    NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
+    return [self loadData:code fileName:fileName];
+}
+
+- (int)loadData:(NSData *)data fileName:(NSString *)fileName {
+    if (!data || !data.length || !fileName || !fileName.length) {
+        return -1;
+    }
+    
+    return lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
 }
 
 #ifdef DEBUG
@@ -183,13 +201,7 @@ extern char g_debug_lua[];
     if( !self.stateInited ) {
         self.stateInited = YES;
         self.l =  lvL_newstate();//lv_open();  /* opens */
-        lvopen_base(self.l);  /* opens the basic library */
-        lvopen_table(self.l); /* opens the table library */
-        lvopen_debug(self.l); // debug
-        //lvopen_io(L);        /* opens the I/O library */
-        lvopen_os(self.l);
-        lvopen_string(self.l); /* opens the string lib. */
-        lvopen_math(self.l);   /* opens the math lib. */
+        lvL_openlibs(self.l);
         
         [LVRegisterManager registryApi:self.l lView:self];
         self.l->lView = (__bridge void *)(self);

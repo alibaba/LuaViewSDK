@@ -78,7 +78,25 @@
  */
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName;
 
-/*
+/**
+ * 加载签名的脚本文件，读取文件并调用lvL_loadbuffer
+ *
+ * @param fileName 本地文件名
+ *
+ * @return 返回lvL_loadbuffer的返回值
+ */
+-(int) loadSignFile:(NSString *)fileName;
+
+/**
+ * 加载脚本文件，读取文件并调用lvL_loadbuffer
+ *
+ * @param fileName 本地文件名
+ *
+ * @return 返回lvL_loadbuffer的返回值
+ */
+-(int) loadFile:(NSString *)fileName;
+
+/**
  *
  *调用lua脚本, functionName:lua的function名称,  environment:运行窗口,  args:传递参数
  *

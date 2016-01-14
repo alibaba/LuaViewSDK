@@ -63,19 +63,25 @@
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
 +(void) registryStaticMethod:(lv_State *)L lView:(LView *)lView{
-    {
-        lv_pushcfunction(L, loadJson);
-        lv_setglobal(L, "loadJson");
+    lv_pushcfunction(L, loadJson);
+    lv_setglobal(L, "loadJson");
+    
+    lv_pushcfunction(L, unicode);
+    lv_setglobal(L, "Unicode");
+    
+    // 替换pakcage.loaders中的loader_lv
+    
+    lv_getglobal(L, LV_LOADLIBNAME);
+    lv_getfield(L, 1, "loaders");
+    if (!lv_istable(L, -1)) {
+        return;
     }
-    {
-        lv_pushcfunction(L, requireMethodForLuaView);
-        lv_setglobal(L, "require");
-    }
-    {
-        lv_pushcfunction(L, unicode);
-        lv_setglobal(L, "Unicode");
-    }
+    
+    lv_pushnumber(L, 2);
+    lv_pushcfunction(L, requireMethodForLuaView);
+    lv_settable(L, -3);
 }
+
 // 注册函数
 +(void) registryApi:(lv_State*)L  lView:(LView*)lView{
     //清理栈
@@ -220,21 +226,21 @@ static int unicode(lv_State *L) {
 static int requireMethodForLuaView (lv_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName ){
+        // submodule
+        fileName = [fileName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
+        
         LView* lview = (__bridge LView *)(L->lView);
         if( lview ) {
-            NSString* ret = nil;
             if ( lview.runInSignModel ) {
                 fileName = [NSString stringWithFormat:@"%@.lv",fileName];
-                ret = [lview runSignFile:fileName];
+                return [lview loadSignFile:fileName] == 0 ? 1 : 0;
             } else {
                 fileName = [NSString stringWithFormat:@"%@.lua",fileName];
-                ret =[lview runFile:fileName];
+                return [lview loadFile:fileName] == 0 ? 1 : 0;
             }
-            lv_pushstring(L, ret.UTF8String);
-            return 1;
         }
     }
-    return 0; /* number of results */
+    return 0;
 }
 
 

@@ -85,11 +85,11 @@
 ** In Windows, any exclamation mark ('!') in the path is replaced by the
 ** path of the directory of the executable file of the current process.
 */
-#define LV_LDIR	"!\\lv\\"
+#define LV_LDIR	"!\\lua\\"
 #define LV_CDIR	"!\\"
 #define LV_PATH_DEFAULT  \
-		".\\?.lv;"  LV_LDIR"?.lv;"  LV_LDIR"?\\init.lv;" \
-		             LV_CDIR"?.lv;"  LV_CDIR"?\\init.lv"
+		".\\?.lua;"  LV_LDIR"?.lua;"  LV_LDIR"?\\init.lua;" \
+		             LV_CDIR"?.lua;"  LV_CDIR"?\\init.lua"
 #define LV_CPATH_DEFAULT \
 	".\\?.dll;"  LV_CDIR"?.dll;" LV_CDIR"loadall.dll"
 
@@ -98,8 +98,8 @@
 #define LV_LDIR	LV_ROOT "share/lv/5.1/"
 #define LV_CDIR	LV_ROOT "lib/lv/5.1/"
 #define LV_PATH_DEFAULT  \
-		"./?.lv;"  LV_LDIR"?.lv;"  LV_LDIR"?/init.lv;" \
-		            LV_CDIR"?.lv;"  LV_CDIR"?/init.lv"
+		"./?.lua;"  LV_LDIR"?.lua;"  LV_LDIR"?/init.lua;" \
+		            LV_CDIR"?.lua;"  LV_CDIR"?/init.lua"
 #define LV_CPATH_DEFAULT \
 	"./?.so;"  LV_CDIR"?.so;" LV_CDIR"loadall.so"
 #endif
