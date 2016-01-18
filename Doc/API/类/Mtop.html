@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LuaView SDK</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LuaView SDK</h1>
+
+<ul>
+  <li><a href="../index.html">首页</a></li>
+</ul>
+
+<!--dongxicheng
+<h2>Contents</h2>
+<ul>
+<li><a href="#全局函数">全局函数</a></li>
+<li><a href="#实例方法">实例方法</a></li>
+</ul>
+
+
+-->
+
+<!--
+-->
+<h2>全局函数</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../全局函数/Align.html">Align</a></li>
+  <li><a href="../全局函数/FontStyle.html">FontStyle</a></li>
+  <li><a href="../全局函数/FontWeight.html">FontWeight</a></li>
+  <li><a href="../全局函数/System.html">System</a></li>
+  <li><a href="../全局函数/TextAlign.html">TextAlign</a></li>
+  <li><a href="../全局函数/math.html">math</a></li>
+  <li><a href="../全局函数/table.html">table</a></li>
+</ul>
+<h2>类</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../类/Alert.html">Alert</a></li>
+  <li><a href="../类/Animate.html">Animate</a></li>
+  <li><a href="../类/AudioPlayer.html">AudioPlayer</a></li>
+  <li><a href="../类/Button.html">Button</a></li>
+  <li><a href="../类/CollectionView.html">CollectionView</a></li>
+  <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
+  <li><a href="../类/DB.html">DB</a></li>
+  <li><a href="../类/Data.html">Data</a></li>
+  <li><a href="../类/Date.html">Date</a></li>
+  <li><a href="../类/Downloader.html">Downloader</a></li>
+  <li><a href="../类/File.html">File</a></li>
+  <li><a href="../类/Image.html">Image</a></li>
+  <li><a href="../类/Label.html">Label</a></li>
+  <li><a href="../类/LoadingIndicator.html">LoadingIndicator</a></li>
+  <li><font color=#777777><strong>Mtop</strong></font></li>
+  <li><a href="../类/Navigation.html">Navigation</a></li>
+  <li><a href="../类/PagerIndicator.html">PagerIndicator</a></li>
+  <li><a href="../类/PageView.html">PageView</a></li>
+  <li><a href="../类/ScrollView.html">ScrollView</a></li>
+  <li><a href="../类/StyledString.html">StyledString</a></li>
+  <li><a href="../类/TableView.html">TableView</a></li>
+  <li><a href="../类/TextField.html">TextField</a></li>
+  <li><a href="../类/Timer.html">Timer</a></li>
+  <li><a href="../类/Toast.html">Toast</a></li>
+  <li><a href="../类/Transform3D.html">Transform3D</a></li>
+  <li><a href="../类/View.html">View</a></li>
+  <li><a href="../类/string.html">string</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+
+<div id="content">
+
+<h1>Class <code>Mtop</code></h1>
+<p>Mtop请求接口</p>
+<p>
+
+</p>
+
+
+<h2><a href="#全局函数">全局函数</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Mtop">Mtop (params, callback)</a></td>
+	<td class="summary">创建Mtop对象</td>
+	</tr>
+</table>
+<h2><a href="#实例方法">实例方法</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#request">request ()</a></td>
+	<td class="summary">发起请求</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cancel">cancel ()</a></td>
+	<td class="summary">取消mtop请求</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#responseData">responseData ()</a></td>
+	<td class="summary">获取得到的数据</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#responseHeaders">responseHeaders ()</a></td>
+	<td class="summary">获取得到的头信息</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="全局函数"></a>全局函数</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Mtop"></a>
+    <strong>Mtop (params, callback)</strong>
+    </dt>
+    <dd>
+    创建Mtop对象
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">params</span>
+            <span class="types"><a class="type" href="../全局函数/table.html">table</a></span>
+         Mtop请求参数 (可选)
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         (可选)
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ Mtop(
+     {
+         method = <span class="string">"mtop.ju.block.optionminisite.get"</span>,
+         version= <span class="string">"1.0"</span>,
+         params = {
+             platformId = <span class="string">"8001"</span>,
+             page = <span class="number">1</span>,
+             pageSize = <span class="number">10000</span>,
+             optStr = self.optStr
+            },
+     },
+     ^( data, error){
+         self.isLoading = <span class="keyword">false</span>;
+         <span class="keyword">if</span>( data ) {
+             <span class="keyword">local</span> model = data.model;
+             <span class="keyword">if</span>( self.extend==<span class="keyword">nil</span> )
+                 self.extend = {};
+             self.extend.syncOutput = model;
+             self.haveItems = <span class="keyword">true</span>;
+             <span class="global">print</span>(self.displayName, self.optStr, <span class="string">"loaded: "</span>);
+         } <span class="keyword">else</span> {
+             <span class="global">print</span>(self.displayName, self.optStr, <span class="string">"error: "</span>, error);
+         }
+         <span class="keyword">if</span>( callback ) {
+            callback(option);
+         }
+         self.hiddenLoadingView();
+     }
+ );</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="实例方法"></a>实例方法</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "request"></a>
+    <strong>request ()</strong>
+    </dt>
+    <dd>
+    发起请求
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "cancel"></a>
+    <strong>cancel ()</strong>
+    </dt>
+    <dd>
+    取消mtop请求
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "responseData"></a>
+    <strong>responseData ()</strong>
+    </dt>
+    <dd>
+    获取得到的数据
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "responseHeaders"></a>
+    <strong>responseHeaders ()</strong>
+    </dt>
+    <dd>
+    获取得到的头信息
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>Copyright © 2010-2015 Juhuasuan.com 版权所有</i>
+<i style="float:right;"><a href="javascript:scroll(0,0)">返回顶部</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

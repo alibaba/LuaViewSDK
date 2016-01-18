@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LuaView SDK</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LuaView SDK</h1>
+
+<ul>
+  <li><a href="../index.html">首页</a></li>
+</ul>
+
+<!--dongxicheng
+<h2>Contents</h2>
+<ul>
+<li><a href="#全局函数">全局函数</a></li>
+<li><a href="#实例方法">实例方法</a></li>
+</ul>
+
+
+-->
+
+<!--
+-->
+<h2>全局函数</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../全局函数/System.html">System</a></li>
+  <li><a href="../全局函数/math.html">math</a></li>
+  <li><a href="../全局函数/table.html">table</a></li>
+</ul>
+<h2>类</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../类/Alert.html">Alert</a></li>
+  <li><a href="../类/Animate.html">Animate</a></li>
+  <li><a href="../类/AudioPlayer.html">AudioPlayer</a></li>
+  <li><a href="../类/Button.html">Button</a></li>
+  <li><font color=#777777><strong>UICollectionView</strong></font></li>
+  <li><a href="../类/DB.html">DB</a></li>
+  <li><a href="../类/Data.html">Data</a></li>
+  <li><a href="../类/Date.html">Date</a></li>
+  <li><a href="../类/Downloader.html">Downloader</a></li>
+  <li><a href="../类/UIErrorView.html">UIErrorView</a></li>
+  <li><a href="../类/File.html">File</a></li>
+  <li><a href="../类/Image.html">Image</a></li>
+  <li><a href="../类/Label.html">Label</a></li>
+  <li><a href="../类/LoadingIndicator.html">LoadingIndicator</a></li>
+  <li><a href="../类/Mtop.html">Mtop</a></li>
+  <li><a href="../类/Navigation.html">Navigation</a></li>
+  <li><a href="../类/PagerIndicator.html">PagerIndicator</a></li>
+  <li><a href="../类/UIPageView.html">UIPageView</a></li>
+  <li><a href="../类/UIScrollView.html">UIScrollView</a></li>
+  <li><a href="../类/StyledString.html">StyledString</a></li>
+  <li><a href="../类/TableView.html">TableView</a></li>
+  <li><a href="../类/UITextField.html">UITextField</a></li>
+  <li><a href="../类/Timer.html">Timer</a></li>
+  <li><a href="../类/Transform3D.html">Transform3D</a></li>
+  <li><a href="../类/View.html">View</a></li>
+  <li><a href="../类/string.html">string</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+
+<div id="content">
+
+<h1>Class <code>UICollectionView</code></h1>
+<p>UICollectionView
+ 类似于Cell大小任意的TableView</p>
+<p> UICollectionView的父类是<a href="./UIScrollView.html">UIScrollView</a></p>
+
+
+<h2><a href="#全局函数">全局函数</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#UICollectionView">UICollectionView ()</a></td>
+	<td class="summary">通过这个方法创建一个UICollectionView对象</td>
+	</tr>
+</table>
+<h2><a href="#实例方法">实例方法</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#setDelegate">setDelegate (delegate)</a></td>
+	<td class="summary">设置Collection代理</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reloadData">reloadData ()</a></td>
+	<td class="summary">重新加载刷新UICollectionView</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rectForSection">rectForSection (section, row)</a></td>
+	<td class="summary">获取给定section row 所在区域的位置大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setMiniSpacing">setMiniSpacing (miniSpacing)</a></td>
+	<td class="summary">设置最小间距</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#miniSpacing">miniSpacing ()</a></td>
+	<td class="summary">获取最小间距</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="全局函数"></a>全局函数</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "UICollectionView"></a>
+    <strong>UICollectionView ()</strong>
+    </dt>
+    <dd>
+    通过这个方法创建一个UICollectionView对象
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../类/UICollectionView.html#">UICollectionView</a></span>
+        view
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UICollectionView();</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="实例方法"></a>实例方法</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "setDelegate"></a>
+    <strong>setDelegate (delegate)</strong>
+    </dt>
+    <dd>
+    设置Collection代理
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">delegate</span>
+            <span class="types"><a class="type" href="../全局函数/table.html">table</a></span>
+         代理
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <li><pre class="example"> <span class="comment">-- 例子一:
+</span> <span class="keyword">local</span> collectionView = UICollectionView();
+ collectionView.setDelegate( {
+        <span class="comment">-- code
+</span>    } );
+ 或者:
+ <span class="keyword">local</span> collectionView = UICollectionView();
+ collectionView.delegate( {
+        <span class="comment">-- code
+</span>    } );
+ 或者:
+ <span class="keyword">local</span> collectionView = UICollectionView();
+ collectionView.delegate =  {
+        <span class="comment">-- code
+</span>    };
+ 或者:
+ <span class="keyword">local</span> collectionView = UICollectionView(  {
+        <span class="comment">-- code
+</span>    } );
+
+ 或者:
+ <span class="keyword">local</span> collectionView = UICollectionView{
+        <span class="comment">-- code
+</span>    };
+     </pre></li>
+        <li><pre class="example">  <span class="comment">-- 例子二:
+</span> <span class="keyword">local</span> collectionView = UICollectionView();
+     collectionView.delegate = {
+         Section = {
+             NumberOfSections = <span class="number">3</span>, <span class="comment">-- section 数量
+</span>
+             NumberOfRows = ^(section){ <span class="comment">-- 每个section对应的行数
+</span>                 <span class="keyword">if</span> ( section == <span class="number">0</span> ){
+                     <span class="comment">-- 广告栏
+</span>                     <span class="keyword">return</span> <span class="number">0</span>;
+                 } <span class="keyword">else</span> <span class="keyword">if</span>( section==<span class="number">1</span> ) {
+                     <span class="comment">-- 十点上新提示
+</span>                     <span class="keyword">local</span> theBrandMind = getOptionTheBrandMind(i);
+                     <span class="keyword">if</span>( theBrandMind ) {
+                         <span class="keyword">return</span> <span class="number">1</span>;
+                     } <span class="keyword">else</span> {
+                         <span class="keyword">return</span> <span class="number">0</span>;
+                     }
+                 }
+                 <span class="comment">-- 品牌团坑位
+</span>                 <span class="keyword">return</span> getOptionItemsNum(i, section);
+             },
+             <span class="comment">--Spacing = ^(section ){ -- 行间距
+</span>             <span class="comment">--    return 0;
+</span>             <span class="comment">--},
+</span>             <span class="comment">--EdgeInsets = ^(section ){-- cell边距
+</span>             <span class="comment">--   return 0,0,0,0;
+</span>             <span class="comment">--}
+</span>
+         },
+         Cell = {
+             Identifier = <span class="keyword">function</span> ( section, row ){ <span class="comment">-- cell唯一标识
+</span>                 <span class="keyword">if</span>( section == <span class="number">0</span> ) {
+                     <span class="keyword">return</span> <span class="string">"广告栏"</span>;
+                 } <span class="keyword">else</span> <span class="keyword">if</span>( section == <span class="number">1</span> ) {
+                     <span class="keyword">return</span> <span class="string">"十点上新"</span>;
+                 } <span class="keyword">else</span> {
+                     <span class="keyword">return</span> <span class="string">"品牌团"</span>;
+                 }
+             }
+             <span class="string">"品牌团"</span> = { <span class="comment">-- 品牌团cell样式
+</span>                 Size = ^(section, row){ <span class="comment">-- 每个Cell 尺寸
+</span>                     <span class="keyword">return</span> scrW , (<span class="number">178</span> * scrW / <span class="number">375</span>);
+                 },
+                 Init = ^(cell){
+                    BrandCellInit(cell);
+                    cell.loading = UIActivityIndicatorView();
+                 },
+                 Layout = ^(cell , section, row){
+                     <span class="keyword">local</span> model = getOptionModel( i, section, row);
+                     <span class="keyword">if</span> ( model ) {
+                         BrandCellLayout(cell, model );
+                     }
+                     cell.loading.startAnimating();
+                     cell.loading.center(<span class="number">160</span>,<span class="number">50</span>);
+                 },
+                 Select = ^(section, row){
+                     <span class="global">print</span>(section, row);
+                     System.gc();
+                 }
+             },
+             <span class="string">"十点上新"</span> = { <span class="comment">-- 十点上新 cell 样式
+</span>                 Size = ^(section, row){ <span class="comment">-- 每个Cell 尺寸
+</span>                     <span class="keyword">return</span> scrW , NOTICE_CELL_H;
+                 },
+                 Init = ^(cell){
+                    <span class="keyword">local</span> cellW, cellH = window.size();
+
+                    cell.line = UILabel();
+                    cell.line.setFrame(<span class="number">0</span>,<span class="number">0</span>,scrW-<span class="number">20</span>,<span class="number">1</span>);
+                    cell.line.center(cellW/<span class="number">2</span>, cellH/<span class="number">2</span>);
+                    cell.line.setBackgroundColor(<span class="number">0x333333</span>);
+
+                    cell.label = UILabel();
+                    cell.label.setFrame(<span class="number">0</span>, <span class="number">0</span>, cellW, cellH);
+                    cell.label.setFont(<span class="number">14</span>);
+                    cell.label.setTextAlignment(TextAlignmentCenter);
+                    window.setBackgroundColor(<span class="number">0xeeeeee</span>);
+                    cell.label.setBackgroundColor(<span class="number">0xeeeeee</span>);
+                 },
+                 Layout = ^(cell , section, row){
+                     <span class="keyword">local</span> cellW, cellH = window.size();
+                     <span class="keyword">local</span> theBrandMind = getOptionTheBrandMind(i);
+                     cell.label.setText(theBrandMind );
+                     cell.label.sizeToFit();
+                     <span class="keyword">local</span> w,h = cell.label.size();
+                     w = w + <span class="number">20</span>*<span class="number">2</span>;
+                     cell.label.size(w,h);
+                     cell.label.center(cellW/<span class="number">2</span>, cellH/<span class="number">2</span>);
+                 },
+                 Select = ^(section, row){
+                     <span class="global">print</span>(section, row);
+                     System.gc();
+                 }
+             }
+         },
+         HeaderBeginRefreshing = ^(){ <span class="comment">-- 开始下拉刷新回调
+</span>             <span class="global">print</span>(<span class="string">"HeaderRefresh"</span>);
+             option.requestItems(^(){
+                     <span class="keyword">local</span> collectionView = tableViewArray[i];
+                     collectionView.reloadData();
+                     collectionView.headerEndRefreshing();
+                 });
+         },
+         FooterBeginRefreshing = ^(){ <span class="comment">-- 加载更多回调
+</span>             <span class="global">print</span>(<span class="string">"FooterRefresh"</span>);
+         }
+     };
+     collectionView.setMiniSpacing(<span class="number">5</span>); <span class="comment">-- 设置最小间距
+</span>     <span class="keyword">local</span> barH = <span class="number">40</span>;
+     collectionView.setFrame( (i-<span class="number">1</span>)*scrW, barH, scrW, scrH-barH);
+     collectionView.backgroundColor(<span class="number">0xeeeeee</span>);
+     collectionView.initRefreshHeader();
+
+    </pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "reloadData"></a>
+    <strong>reloadData ()</strong>
+    </dt>
+    <dd>
+    重新加载刷新UICollectionView
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "rectForSection"></a>
+    <strong>rectForSection (section, row)</strong>
+    </dt>
+    <dd>
+    获取给定section row 所在区域的位置大小
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">section</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">row</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        x x坐标</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        y y坐标</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        w 宽</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        h 高</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setMiniSpacing"></a>
+    <strong>setMiniSpacing (miniSpacing)</strong>
+    </dt>
+    <dd>
+    设置最小间距
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">miniSpacing</span>
+            <span class="types"><span class="type">number</span></span>
+         最小间距
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "miniSpacing"></a>
+    <strong>miniSpacing ()</strong>
+    </dt>
+    <dd>
+    获取最小间距
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        miniSpacing 最小间距
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>Copyright © 2010-2015 Juhuasuan.com 版权所有</i>
+<i style="float:right;"><a href="javascript:scroll(0,0)">返回顶部</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
