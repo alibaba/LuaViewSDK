@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LuaView SDK</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LuaView SDK</h1>
+
+<ul>
+  <li><a href="../index.html">首页</a></li>
+</ul>
+
+<!--dongxicheng
+<h2>Contents</h2>
+<ul>
+<li><a href="#全局函数">全局函数</a></li>
+<li><a href="#实例方法">实例方法</a></li>
+</ul>
+
+
+-->
+
+<!--
+-->
+<h2>全局函数</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../全局函数/System.html">System</a></li>
+  <li><a href="../全局函数/math.html">math</a></li>
+  <li><a href="../全局函数/table.html">table</a></li>
+</ul>
+<h2>类</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../类/AttributedString.html">AttributedString</a></li>
+  <li><a href="../类/AudioPlayer.html">AudioPlayer</a></li>
+  <li><a href="../类/DB.html">DB</a></li>
+  <li><a href="../类/Data.html">Data</a></li>
+  <li><a href="../类/Date.html">Date</a></li>
+  <li><a href="../类/Downloader.html">Downloader</a></li>
+  <li><a href="../类/File.html">File</a></li>
+  <li><a href="../类/Mtop.html">Mtop</a></li>
+  <li><a href="../类/Navigation.html">Navigation</a></li>
+  <li><a href="../类/Timer.html">Timer</a></li>
+  <li><a href="../类/Transform3D.html">Transform3D</a></li>
+  <li><font color=#777777><strong>UIActivityIndicatorView</strong></font></li>
+  <li><a href="../类/UIAlertView.html">UIAlertView</a></li>
+  <li><a href="../类/UIAnimate.html">UIAnimate</a></li>
+  <li><a href="../类/UIButton.html">UIButton</a></li>
+  <li><a href="../类/UICollectionView.html">UICollectionView</a></li>
+  <li><a href="../类/UIErrorView.html">UIErrorView</a></li>
+  <li><a href="../类/UIImageView.html">UIImageView</a></li>
+  <li><a href="../类/UILabel.html">UILabel</a></li>
+  <li><a href="../类/UILoadingView.html">UILoadingView</a></li>
+  <li><a href="../类/UINotice.html">UINotice</a></li>
+  <li><a href="../类/UIPageControl.html">UIPageControl</a></li>
+  <li><a href="../类/UIScrollView.html">UIScrollView</a></li>
+  <li><a href="../类/UITableView.html">UITableView</a></li>
+  <li><a href="../类/UITextField.html">UITextField</a></li>
+  <li><a href="../类/UIView.html">UIView</a></li>
+  <li><a href="../类/string.html">string</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+
+<div id="content">
+
+<h1>Class <code>UIActivityIndicatorView</code></h1>
+<p>菊花, 活动状体指示器</p>
+<p> UIActivityIndicatorView的父类是<a href="UIView.html">UIView</a></p>
+
+
+<h2><a href="#全局函数">全局函数</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#UIActivityIndicatorView">UIActivityIndicatorView ()</a></td>
+	<td class="summary">创建一个UIActivityIndicatorView对象</td>
+	</tr>
+</table>
+<h2><a href="#实例方法">实例方法</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#startAnimating">startAnimating ()</a></td>
+	<td class="summary">菊花开始转动</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stopAnimating">stopAnimating ()</a></td>
+	<td class="summary">菊花停止转动</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isAnimating">isAnimating ()</a></td>
+	<td class="summary">菊花是否转动中</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setColor">setColor (color, alpha)</a></td>
+	<td class="summary">设置菊花颜色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#color">color ()</a></td>
+	<td class="summary">获取菊花颜色</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="全局函数"></a>全局函数</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "UIActivityIndicatorView"></a>
+    <strong>UIActivityIndicatorView ()</strong>
+    </dt>
+    <dd>
+    创建一个UIActivityIndicatorView对象
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../类/UIActivityIndicatorView.html#">UIActivityIndicatorView</a></span>
+        view
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIActivityIndicatorView();</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="实例方法"></a>实例方法</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "startAnimating"></a>
+    <strong>startAnimating ()</strong>
+    </dt>
+    <dd>
+    菊花开始转动
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "stopAnimating"></a>
+    <strong>stopAnimating ()</strong>
+    </dt>
+    <dd>
+    菊花停止转动
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isAnimating"></a>
+    <strong>isAnimating ()</strong>
+    </dt>
+    <dd>
+    菊花是否转动中
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setColor"></a>
+    <strong>setColor (color, alpha)</strong>
+    </dt>
+    <dd>
+    设置菊花颜色
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "color"></a>
+    <strong>color ()</strong>
+    </dt>
+    <dd>
+    获取菊花颜色
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+        color</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        alpha</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>Copyright © 2010-2015 Juhuasuan.com 版权所有</i>
+<i style="float:right;"><a href="javascript:scroll(0,0)">返回顶部</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
