@@ -105,6 +105,7 @@ collectionView = RefreshCollectionView {
 				print(section, row);
                 collectionView.stopRefreshing();
 				System.gc();
+				collectionView.scrollToCell(section, row);
 			end
 		}
 	},
