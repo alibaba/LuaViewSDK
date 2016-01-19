@@ -201,12 +201,28 @@ static int scrollToCell (lv_State *L) {
                     }
                 }
                 
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row-1 inSection:section-1];
-                UICollectionViewLayoutAttributes* att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
-                CGRect r = [att frame];
-                if( att && r.size.height>0 ) {
-                    CGFloat y =  r.origin.y + offsetY;
-                    [collectionView setContentOffset:CGPointMake(0, y) animated:animation];
+                int nativeSection = section-1;
+                int nativeRow = row-1 ;
+                if( 0<=nativeSection && nativeSection<collectionView.numberOfSections &&
+                   0<=nativeRow && nativeRow<[collectionView numberOfItemsInSection:nativeSection] ) {
+                    // 判断是否合法的section和row 再跳转就不会crash
+                    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:nativeRow inSection:nativeSection];
+                    
+                    UICollectionViewLayoutAttributes* att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
+                    CGRect r = [att frame];
+                    if( att && r.size.height>0 ) {
+                        CGFloat y =  r.origin.y + offsetY;
+                        CGSize contentSize = collectionView.contentSize;
+                        CGRect bounds = collectionView.bounds;
+                        // 越界检查
+                        if( y + bounds.size.height > contentSize.height ) {
+                            y = contentSize.height - bounds.size.height;
+                        }
+                        if( y < 0 ) {
+                            y = 0;
+                        }
+                        [collectionView setContentOffset:CGPointMake(0, y) animated:animation];
+                    }
                 }
                 return 0;
             }

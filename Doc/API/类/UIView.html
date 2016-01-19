@@ -1,0 +1,2546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LuaView SDK</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LuaView SDK</h1>
+
+<ul>
+  <li><a href="../index.html">首页</a></li>
+</ul>
+
+<!--dongxicheng
+<h2>Contents</h2>
+<ul>
+<li><a href="#全局函数">全局函数</a></li>
+<li><a href="#实例方法">实例方法</a></li>
+</ul>
+
+
+-->
+
+<!--
+-->
+<h2>全局函数</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../全局函数/System.html">System</a></li>
+  <li><a href="../全局函数/math.html">math</a></li>
+  <li><a href="../全局函数/table.html">table</a></li>
+</ul>
+<h2>类</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../类/AttributedString.html">AttributedString</a></li>
+  <li><a href="../类/AudioPlayer.html">AudioPlayer</a></li>
+  <li><a href="../类/DB.html">DB</a></li>
+  <li><a href="../类/Data.html">Data</a></li>
+  <li><a href="../类/Date.html">Date</a></li>
+  <li><a href="../类/Downloader.html">Downloader</a></li>
+  <li><a href="../类/File.html">File</a></li>
+  <li><a href="../类/Mtop.html">Mtop</a></li>
+  <li><a href="../类/Navigation.html">Navigation</a></li>
+  <li><a href="../类/Timer.html">Timer</a></li>
+  <li><a href="../类/Transform3D.html">Transform3D</a></li>
+  <li><a href="../类/UIAlert.html">UIAlert</a></li>
+  <li><a href="../类/UIAnimate.html">UIAnimate</a></li>
+  <li><a href="../类/UIButton.html">UIButton</a></li>
+  <li><a href="../类/UICollectionView.html">UICollectionView</a></li>
+  <li><a href="../类/UIErrorView.html">UIErrorView</a></li>
+  <li><a href="../类/UIImageView.html">UIImageView</a></li>
+  <li><a href="../类/UILabel.html">UILabel</a></li>
+  <li><a href="../类/UILoadingPage.html">UILoadingPage</a></li>
+  <li><a href="../类/UILoadingView.html">UILoadingView</a></li>
+  <li><a href="../类/UINotice.html">UINotice</a></li>
+  <li><a href="../类/UIPageControl.html">UIPageControl</a></li>
+  <li><a href="../类/UIPageView.html">UIPageView</a></li>
+  <li><a href="../类/UIScrollView.html">UIScrollView</a></li>
+  <li><a href="../类/UITableView.html">UITableView</a></li>
+  <li><a href="../类/UITextField.html">UITextField</a></li>
+  <li><font color=#777777><strong>UIView</strong></font></li>
+  <li><a href="../类/string.html">string</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+
+<div id="content">
+
+<h1>Class <code>UIView</code></h1>
+<p>UIView
+ 所有UI控件的基类</p>
+<p>
+
+</p>
+
+
+<h2><a href="#全局函数">全局函数</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#UIView">UIView ()</a></td>
+	<td class="summary">通过这个方法创建一个UIView对象</td>
+	</tr>
+</table>
+<h2><a href="#实例方法">实例方法</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#setFrame">setFrame (x, y, w, h)</a></td>
+	<td class="summary">设置View的位置和大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#frame">frame ()</a></td>
+	<td class="summary">获取View的位置和大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBackgroundColor">setBackgroundColor (color, alpha)</a></td>
+	<td class="summary">设置View的背景色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#backgroundColor">backgroundColor ()</a></td>
+	<td class="summary">获取View的背景色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setSize">setSize (w, h)</a></td>
+	<td class="summary">设置View的大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#size">size ()</a></td>
+	<td class="summary">获取View的大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setOrigin">setOrigin (x, y)</a></td>
+	<td class="summary">设置View的位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#orgrin">orgrin ()</a></td>
+	<td class="summary">获取View的位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setCenter">setCenter (x, y)</a></td>
+	<td class="summary">设置View的中心点位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#center">center ()</a></td>
+	<td class="summary">获取View的中心点位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setX">setX (x)</a></td>
+	<td class="summary">设置View的x坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#x">x ()</a></td>
+	<td class="summary">获取View的x坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setY">setY (y)</a></td>
+	<td class="summary">设置View的y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#y">y ()</a></td>
+	<td class="summary">获取View的y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setTop">setTop (y)</a></td>
+	<td class="summary">设置View的y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#top">top ()</a></td>
+	<td class="summary">获取View的y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setLeft">setLeft (x)</a></td>
+	<td class="summary">设置View的x位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#left">left ()</a></td>
+	<td class="summary">获取View的x坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBottom">setBottom (bottom)</a></td>
+	<td class="summary">设置View的bottom坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#bottom">bottom ()</a></td>
+	<td class="summary">获取View的bottom坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setRight">setRight (right)</a></td>
+	<td class="summary">设置View的right位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rigth">rigth ()</a></td>
+	<td class="summary">获取View的right坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setWidth">setWidth (w)</a></td>
+	<td class="summary">设置View的宽</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#width">width ()</a></td>
+	<td class="summary">获取View的宽</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setHeight">setHeight (h)</a></td>
+	<td class="summary">设置View的高</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#height">height ()</a></td>
+	<td class="summary">获取View的高</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setCenterX">setCenterX (x)</a></td>
+	<td class="summary">设置View的中心点x坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#centerX">centerX ()</a></td>
+	<td class="summary">获取View的中心点x坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setCenterY">setCenterY (y)</a></td>
+	<td class="summary">设置View的中心点y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#centerY">centerY ()</a></td>
+	<td class="summary">获取View的中心点y坐标</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setHidden">setHidden (hidden)</a></td>
+	<td class="summary">设置可见状态</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hidden">hidden ()</a></td>
+	<td class="summary">获取可见状态</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setEnabled">setEnabled (enable)</a></td>
+	<td class="summary">设置View enable控制是否收触摸事件</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#enabled">enabled ()</a></td>
+	<td class="summary">获取View enable状态</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setAlpha">setAlpha (alpha)</a></td>
+	<td class="summary">设置alpha值</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#alpha">alpha ()</a></td>
+	<td class="summary">获取alpha值</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setCornerRadius">setCornerRadius (radius)</a></td>
+	<td class="summary">设置边框圆角半径</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cornerRadius">cornerRadius ()</a></td>
+	<td class="summary">获取边框圆角半径</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBorderWidth">setBorderWidth (borderWidth)</a></td>
+	<td class="summary">设置边框粗细</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#borderWidth">borderWidth ()</a></td>
+	<td class="summary">获取边框粗细</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBorderColor">setBorderColor (color, alpha)</a></td>
+	<td class="summary">设置边框颜色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#borderColor">borderColor ()</a></td>
+	<td class="summary">获取边框颜色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setClipsToBounds">setClipsToBounds (clipsToBounds)</a></td>
+	<td class="summary">设置View边框是否剪接</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#clipsToBounds">clipsToBounds ()</a></td>
+	<td class="summary">获取View边框是否剪接</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setShadowPath">setShadowPath (shadowPath)</a></td>
+	<td class="summary">设置 只对边框外部加阴影</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setMasksToBounds">setMasksToBounds (masksToBounds)</a></td>
+	<td class="summary">设置边框是否裁剪</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setShadowOffset">setShadowOffset (x, y)</a></td>
+	<td class="summary">设置View阴影偏移位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setShadowRadius">setShadowRadius (r)</a></td>
+	<td class="summary">设置View阴影高斯模糊半径</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setShadowOpacity">setShadowOpacity (alpha)</a></td>
+	<td class="summary">设置View阴影透明度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setShadowColor">setShadowColor (color, alpha)</a></td>
+	<td class="summary">设置View阴影颜色</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sizeToFit">sizeToFit ()</a></td>
+	<td class="summary">适应View内容的大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addGestureRecognizer">addGestureRecognizer (gestureRecognizer)</a></td>
+	<td class="summary">添加手势</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeGestureRecognizer">removeGestureRecognizer (gestureRecognizer)</a></td>
+	<td class="summary">移除手势</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addView">addView (view)</a></td>
+	<td class="summary">添加子类</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeFromSuper">removeFromSuper ()</a></td>
+	<td class="summary">从父类中移除自身</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeAllViews">removeAllViews ()</a></td>
+	<td class="summary">移除所有子类</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setRotation">setRotation (angle)</a></td>
+	<td class="summary">设置view 绕Z轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rotation">rotation (angle)</a></td>
+	<td class="summary">获取view绕Z轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setRotationX">setRotationX (angle)</a></td>
+	<td class="summary">设置view 绕X轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rotationX">rotationX (angle)</a></td>
+	<td class="summary">获取view绕X轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setRotationY">setRotationY (angle)</a></td>
+	<td class="summary">设置view 绕Y轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rotationY">rotationY (angle)</a></td>
+	<td class="summary">获取view绕Y轴旋转弧度</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setScale">setScale (scaleX, scaleY)</a></td>
+	<td class="summary">设置view缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#scale">scale ()</a></td>
+	<td class="summary">获取view X轴 Y轴 缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setScaleX">setScaleX (scaleX)</a></td>
+	<td class="summary">设置view X轴缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#scaleX">scaleX ()</a></td>
+	<td class="summary">获取view缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setScaleY">setScaleY (scaleY)</a></td>
+	<td class="summary">设置view Y轴缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#scaleY">scaleY ()</a></td>
+	<td class="summary">获取view缩放</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setTransform3D">setTransform3D (transform3D)</a></td>
+	<td class="summary">设置3D变换矩阵</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setAnchorPoint">setAnchorPoint (x, y)</a></td>
+	<td class="summary">设置中心点位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#anchorPoint">anchorPoint ()</a></td>
+	<td class="summary">获取中心点位置</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setDelegate">setDelegate (delegate)</a></td>
+	<td class="summary">设置delegate</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isFirstResponder">isFirstResponder ()</a></td>
+	<td class="summary">是否FirstResponder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#becomeFirstResponder">becomeFirstResponder ()</a></td>
+	<td class="summary">设置为FirstResponder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#resignFirstResponder">resignFirstResponder ()</a></td>
+	<td class="summary">取消FirstResponder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasFocus">hasFocus ()</a></td>
+	<td class="summary">是否 Focus</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#requestFocus">requestFocus ()</a></td>
+	<td class="summary">focus</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cancelFocus">cancelFocus ()</a></td>
+	<td class="summary">取消 focus</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="全局函数"></a>全局函数</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "UIView"></a>
+    <strong>UIView ()</strong>
+    </dt>
+    <dd>
+    通过这个方法创建一个UIView对象
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../类/UIView.html#">UIView</a></span>
+        view
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="实例方法"></a>实例方法</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "setFrame"></a>
+    <strong>setFrame (x, y, w, h)</strong>
+    </dt>
+    <dd>
+    设置View的位置和大小
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x坐标
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y坐标
+        </li>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         宽
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         高
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setFrame(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.frame(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.frame(<span class="number">10</span>,<span class="number">10</span>); <span class="comment">--如果只是传递两个值宽高保持原值
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "frame"></a>
+    <strong>frame ()</strong>
+    </dt>
+    <dd>
+    获取View的位置和大小
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        x</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        y</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        w</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        h</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x,y,w,h = view.frame();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setBackgroundColor"></a>
+    <strong>setBackgroundColor (color, alpha)</strong>
+    </dt>
+    <dd>
+    设置View的背景色
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">int</span></span>
+         颜色值
+        </li>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         透明度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setFrame(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.frame(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.frame(<span class="number">10</span>,<span class="number">10</span>); <span class="comment">--如果只是传递两个值宽高保持原值
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "backgroundColor"></a>
+    <strong>backgroundColor ()</strong>
+    </dt>
+    <dd>
+    获取View的背景色
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+        color 颜色值(例如0xff0000)</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        alpha 透明度(0~1)</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> color, alpha = view.backgroundColor();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setSize"></a>
+    <strong>setSize (w, h)</strong>
+    </dt>
+    <dd>
+    设置View的大小
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         宽
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         高
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setSize(<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.size(<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.size(<span class="number">100</span>,<span class="number">100</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "size"></a>
+    <strong>size ()</strong>
+    </dt>
+    <dd>
+    获取View的大小
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        w</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        h</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> w,h = view.size();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setOrigin"></a>
+    <strong>setOrigin (x, y)</strong>
+    </dt>
+    <dd>
+    设置View的位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x坐标
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setOrigin(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.orgrin(<span class="number">10</span>,<span class="number">10</span> );
+ <span class="comment">--或者
+</span> view.orgrin(<span class="number">10</span>,<span class="number">10</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "orgrin"></a>
+    <strong>orgrin ()</strong>
+    </dt>
+    <dd>
+    获取View的位置
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        x</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        y</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x,y = view.orgrin();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setCenter"></a>
+    <strong>setCenter (x, y)</strong>
+    </dt>
+    <dd>
+    设置View的中心点位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         中心坐标x
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         中心坐标y
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setCenter(<span class="number">100</span>,<span class="number">100</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "center"></a>
+    <strong>center ()</strong>
+    </dt>
+    <dd>
+    获取View的中心点位置
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="../类/UIView.html#x">x</a></span>
+        x中心坐标</li>
+        <li>
+           <span class="types"><a class="type" href="../类/UIView.html#y">y</a></span>
+        y中心坐标</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x,y = view.center();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setX"></a>
+    <strong>setX (x)</strong>
+    </dt>
+    <dd>
+    设置View的x坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setX(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.x(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.x = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "x"></a>
+    <strong>x ()</strong>
+    </dt>
+    <dd>
+    获取View的x坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        x
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x= view.x();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setY"></a>
+    <strong>setY (y)</strong>
+    </dt>
+    <dd>
+    设置View的y坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setY(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.y(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.y = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "y"></a>
+    <strong>y ()</strong>
+    </dt>
+    <dd>
+    获取View的y坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        y
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> y = view.y();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setTop"></a>
+    <strong>setTop (y)</strong>
+    </dt>
+    <dd>
+    设置View的y坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setTop(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.top(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.top = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "top"></a>
+    <strong>top ()</strong>
+    </dt>
+    <dd>
+    获取View的y坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        y
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> y = view.top();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setLeft"></a>
+    <strong>setLeft (x)</strong>
+    </dt>
+    <dd>
+    设置View的x位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setLeft(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.left(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.left = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "left"></a>
+    <strong>left ()</strong>
+    </dt>
+    <dd>
+    获取View的x坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        x
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x= view.left();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setBottom"></a>
+    <strong>setBottom (bottom)</strong>
+    </dt>
+    <dd>
+    设置View的bottom坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">number</span></span>
+         bottom坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setBottom(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.bottom(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.bottom = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "bottom"></a>
+    <strong>bottom ()</strong>
+    </dt>
+    <dd>
+    获取View的bottom坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        bottom
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> botom = view.bottom();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setRight"></a>
+    <strong>setRight (right)</strong>
+    </dt>
+    <dd>
+    设置View的right位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">number</span></span>
+         right坐标
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setRight(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.right(<span class="number">10</span>);
+ <span class="comment">--或者
+</span> view.right = <span class="number">10</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "rigth"></a>
+    <strong>rigth ()</strong>
+    </dt>
+    <dd>
+    获取View的right坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        right
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> right = view.right();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setWidth"></a>
+    <strong>setWidth (w)</strong>
+    </dt>
+    <dd>
+    设置View的宽
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         宽
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setWidth(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.width(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.width(<span class="number">100</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "width"></a>
+    <strong>width ()</strong>
+    </dt>
+    <dd>
+    获取View的宽
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        w
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> w = view.width();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setHeight"></a>
+    <strong>setHeight (h)</strong>
+    </dt>
+    <dd>
+    设置View的高
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         高
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setHeight(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.height(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.height(<span class="number">100</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "height"></a>
+    <strong>height ()</strong>
+    </dt>
+    <dd>
+    获取View的高
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        h
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> h = view.height();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setCenterX"></a>
+    <strong>setCenterX (x)</strong>
+    </dt>
+    <dd>
+    设置View的中心点x坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         中心坐标x
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setCenterX(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.centerX = <span class="number">100</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "centerX"></a>
+    <strong>centerX ()</strong>
+    </dt>
+    <dd>
+    获取View的中心点x坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        x x中心坐标
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x = view.centerX();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setCenterY"></a>
+    <strong>setCenterY (y)</strong>
+    </dt>
+    <dd>
+    设置View的中心点y坐标
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         中心坐标y
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setCenterY(<span class="number">100</span>);
+ <span class="comment">--或者
+</span> view.centerY = <span class="number">100</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "centerY"></a>
+    <strong>centerY ()</strong>
+    </dt>
+    <dd>
+    获取View的中心点y坐标
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        y y中心坐标
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> y = view.centerX();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setHidden"></a>
+    <strong>setHidden (hidden)</strong>
+    </dt>
+    <dd>
+    设置可见状态
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">hidden</span>
+            <span class="types"><span class="type">bool</span></span>
+         true: 隐藏   false:可见
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setHidden(<span class="keyword">false</span>);
+ <span class="comment">--或者
+</span> view.hidden = <span class="keyword">false</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "hidden"></a>
+    <strong>hidden ()</strong>
+    </dt>
+    <dd>
+    获取可见状态
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        是否隐藏
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">view.hidden();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setEnabled"></a>
+    <strong>setEnabled (enable)</strong>
+    </dt>
+    <dd>
+    设置View enable控制是否收触摸事件
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">enable</span>
+            <span class="types"><span class="type">bool</span></span>
+         true/false
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setUserInteractionEnabled(<span class="keyword">false</span>);
+ <span class="comment">--或者
+</span> view.userInteractionEnabled(<span class="keyword">false</span>);
+ <span class="comment">--或者
+</span> view.userInteractionEnabled = <span class="keyword">false</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "enabled"></a>
+    <strong>enabled ()</strong>
+    </dt>
+    <dd>
+    获取View enable状态
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        true/false
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> ret = view.userInteractionEnabled();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setAlpha"></a>
+    <strong>setAlpha (alpha)</strong>
+    </dt>
+    <dd>
+    设置alpha值
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         透明度(0~1.0)
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setAlpha(<span class="number">0.5</span>);
+ <span class="comment">--或者:
+</span> view.alpha(<span class="number">0.5</span>);
+ <span class="comment">--或者:
+</span> view.alpha = <span class="number">0.5</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "alpha"></a>
+    <strong>alpha ()</strong>
+    </dt>
+    <dd>
+    获取alpha值
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        alpha值
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> alpha = view.alpha();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setCornerRadius"></a>
+    <strong>setCornerRadius (radius)</strong>
+    </dt>
+    <dd>
+    设置边框圆角半径
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
+         半径
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setCornerRadius(<span class="number">8</span>);
+ <span class="comment">--或者
+</span> view.cornerRadius(<span class="number">8</span>);
+ <span class="comment">--或者
+</span> view.cornerRadius = <span class="number">8</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "cornerRadius"></a>
+    <strong>cornerRadius ()</strong>
+    </dt>
+    <dd>
+    获取边框圆角半径
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        radius 半径
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> r = view.cornerRadius();
+ --或者 view.cornerRadius(<span class="number">8</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setBorderWidth"></a>
+    <strong>setBorderWidth (borderWidth)</strong>
+    </dt>
+    <dd>
+    设置边框粗细
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">borderWidth</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setBorderWidth(<span class="number">3</span>);
+ <span class="comment">--或者
+</span> view.borderWidth(<span class="number">3</span>);
+ <span class="comment">--或者
+</span> view.borderWidth = <span class="number">3</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "borderWidth"></a>
+    <strong>borderWidth ()</strong>
+    </dt>
+    <dd>
+    获取边框粗细
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        borderWidth
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> borderWidth = view.borderWidth();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setBorderColor"></a>
+    <strong>setBorderColor (color, alpha)</strong>
+    </dt>
+    <dd>
+    设置边框颜色
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">int</span></span>
+         颜色值
+        </li>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         透明度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setBorderColor(<span class="number">0x0000ff</span>); <span class="comment">-- alpha省缺默认是1
+</span> <span class="comment">--或者
+</span> view.borderColor(<span class="number">0x0000ff</span>,<span class="number">0.5</span>);
+ <span class="comment">--或者
+</span> view.borderColor = <span class="number">0x0000ff</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "borderColor"></a>
+    <strong>borderColor ()</strong>
+    </dt>
+    <dd>
+    获取边框颜色
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+        color 颜色值</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        alpha 透明度</li>
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> color,alpha = view.borderColor();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setClipsToBounds"></a>
+    <strong>setClipsToBounds (clipsToBounds)</strong>
+    </dt>
+    <dd>
+    设置View边框是否剪接
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">clipsToBounds</span>
+            <span class="types"><span class="type">bool</span></span>
+         是否边框剪切
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setClipsToBounds(<span class="keyword">true</span>);
+ <span class="comment">--或者
+</span> view.clipsToBounds(<span class="keyword">true</span>);
+ <span class="comment">--或者
+</span> view.clipsToBounds = <span class="keyword">true</span>;</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "clipsToBounds"></a>
+    <strong>clipsToBounds ()</strong>
+    </dt>
+    <dd>
+    获取View边框是否剪接
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        clipsToBounds 是否边框剪切
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span>  ret = view.clipsToBounds();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setShadowPath"></a>
+    <strong>setShadowPath (shadowPath)</strong>
+    </dt>
+    <dd>
+    设置 只对边框外部加阴影
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">shadowPath</span>
+            <span class="types"><span class="type">bool</span></span>
+         只对边框外部加阴影
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setShadowPath(<span class="keyword">true</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setMasksToBounds"></a>
+    <strong>setMasksToBounds (masksToBounds)</strong>
+    </dt>
+    <dd>
+    设置边框是否裁剪
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">masksToBounds</span>
+            <span class="types"><span class="type">bool</span></span>
+         是否边框剪切
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setMasksToBounds(<span class="keyword">true</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setShadowOffset"></a>
+    <strong>setShadowOffset (x, y)</strong>
+    </dt>
+    <dd>
+    设置View阴影偏移位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x偏移
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y偏移
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setShadowOffset(<span class="number">2</span>,<span class="number">2</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setShadowRadius"></a>
+    <strong>setShadowRadius (r)</strong>
+    </dt>
+    <dd>
+    设置View阴影高斯模糊半径
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">r</span>
+            <span class="types"><span class="type">number</span></span>
+         模糊半径
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setShadowRadius(<span class="number">3</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setShadowOpacity"></a>
+    <strong>setShadowOpacity (alpha)</strong>
+    </dt>
+    <dd>
+    设置View阴影透明度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         透明度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setShadowOpacity(<span class="number">0.5</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setShadowColor"></a>
+    <strong>setShadowColor (color, alpha)</strong>
+    </dt>
+    <dd>
+    设置View阴影颜色
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">int</span></span>
+         颜色值
+        </li>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         透明度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIView();
+ view.setShadowColor(<span class="number">0xff0000</span>, <span class="number">0.5</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "sizeToFit"></a>
+    <strong>sizeToFit ()</strong>
+    </dt>
+    <dd>
+    适应View内容的大小
+
+
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> label = UILabel();
+ label.setText(<span class="string">"测试"</span>);
+ label.sizeToFit();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "addGestureRecognizer"></a>
+    <strong>addGestureRecognizer (gestureRecognizer)</strong>
+    </dt>
+    <dd>
+    添加手势
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">gestureRecognizer</span>
+            <span class="types"><span class="type">UIGestureRecognizer</span></span>
+         手势
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> g = UISwipeGestureRecognizer(^(gesture){
+     <span class="keyword">if</span>( gesture.state()==UIGestureRecognizerStateEnded ) <span class="keyword">then</span>
+          <span class="global">print</span>( <span class="string">"两个手势向左滑动"</span> );
+     <span class="keyword">end</span>
+ });
+ g.setNumberOfTouchesRequired(<span class="number">2</span>); <span class="comment">-- 两个手指才出发
+</span> g.setDirection(UISwipeGestureRecognizerDirectionLeft); <span class="comment">-- 手势方向
+</span> window.addGestureRecognizer(g);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeGestureRecognizer"></a>
+    <strong>removeGestureRecognizer (gestureRecognizer)</strong>
+    </dt>
+    <dd>
+    移除手势
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">gestureRecognizer</span>
+            <span class="types"><span class="type">UIGestureRecognizer</span></span>
+         手势
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">view.addGestureRecognizer( gestureRecognizer );</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "addView"></a>
+    <strong>addView (view)</strong>
+    </dt>
+    <dd>
+    添加子类
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">view</span>
+            <span class="types"><a class="type" href="../类/UIView.html#">UIView</a></span>
+         view
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ <span class="keyword">local</span> button = UIButton();
+ view.addSubview(button);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeFromSuper"></a>
+    <strong>removeFromSuper ()</strong>
+    </dt>
+    <dd>
+    从父类中移除自身
+
+
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">button.removeFromSuper();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeAllViews"></a>
+    <strong>removeAllViews ()</strong>
+    </dt>
+    <dd>
+    移除所有子类
+
+
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">button.removeAllViews();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setRotation"></a>
+    <strong>setRotation (angle)</strong>
+    </dt>
+    <dd>
+    设置view 绕Z轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setRotation(<span class="number">3.14</span>);
+ <span class="comment">--或者:
+</span> view.rotation(<span class="number">3.14</span> );
+ </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "rotation"></a>
+    <strong>rotation (angle)</strong>
+    </dt>
+    <dd>
+    获取view绕Z轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setRotationX"></a>
+    <strong>setRotationX (angle)</strong>
+    </dt>
+    <dd>
+    设置view 绕X轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setRotationX(<span class="number">3.14</span>);
+ <span class="comment">--或者:
+</span> view.rotationX(<span class="number">3.14</span> );
+ </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "rotationX"></a>
+    <strong>rotationX (angle)</strong>
+    </dt>
+    <dd>
+    获取view绕X轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setRotationY"></a>
+    <strong>setRotationY (angle)</strong>
+    </dt>
+    <dd>
+    设置view 绕Y轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setRotationY(<span class="number">3.14</span>);
+ <span class="comment">--或者:
+</span> view.rotation(<span class="number">3.14</span> );
+ </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "rotationY"></a>
+    <strong>rotationY (angle)</strong>
+    </dt>
+    <dd>
+    获取view绕Y轴旋转弧度
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+         UIView逆时针绕中心点旋转的弧度
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setScale"></a>
+    <strong>setScale (scaleX, scaleY)</strong>
+    </dt>
+    <dd>
+    设置view缩放
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">scaleX</span>
+            <span class="types"><span class="type">number</span></span>
+         x轴缩放大小
+        </li>
+        <li><span class="parameter">scaleY</span>
+            <span class="types"><span class="type">number</span></span>
+         y轴缩放大小
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setScale(<span class="number">0.8</span>, <span class="number">0.8</span>);
+ <span class="comment">--或者:
+</span> view.scale(<span class="number">0.5</span> ); <span class="comment">-- scaleY默认是1
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "scale"></a>
+    <strong>scale ()</strong>
+    </dt>
+    <dd>
+    获取view X轴 Y轴 缩放
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        scaleX x轴缩放大小</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        scaleY y轴缩放大小</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setScaleX"></a>
+    <strong>setScaleX (scaleX)</strong>
+    </dt>
+    <dd>
+    设置view X轴缩放
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">scaleX</span>
+            <span class="types"><span class="type">number</span></span>
+         x轴缩放大小
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setScaleX(<span class="number">0.8</span>, <span class="number">0.8</span>);
+ <span class="comment">--或者:
+</span> view.scaleX(<span class="number">0.5</span> );
+ </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "scaleX"></a>
+    <strong>scaleX ()</strong>
+    </dt>
+    <dd>
+    获取view缩放
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        scaleX x轴缩放大小
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setScaleY"></a>
+    <strong>setScaleY (scaleY)</strong>
+    </dt>
+    <dd>
+    设置view Y轴缩放
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">scaleY</span>
+            <span class="types"><span class="type">number</span></span>
+         y轴缩放大小
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> view = UIView();
+ view.setScaleY(<span class="number">0.8</span>);
+ <span class="comment">--或者:
+</span> view.scaleY(<span class="number">0.5</span> );
+ </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "scaleY"></a>
+    <strong>scaleY ()</strong>
+    </dt>
+    <dd>
+    获取view缩放
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        scaleY y轴缩放大小
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setTransform3D"></a>
+    <strong>setTransform3D (transform3D)</strong>
+    </dt>
+    <dd>
+    设置3D变换矩阵
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">transform3D</span>
+            <span class="types"><a class="type" href="../类/Transform3D.html#">Transform3D</a></span>
+         变换矩阵
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setAnchorPoint"></a>
+    <strong>setAnchorPoint (x, y)</strong>
+    </dt>
+    <dd>
+    设置中心点位置
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         数值区间: 0~1
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         数值区间: 0~1
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">view.anchorPoint(<span class="number">0.5</span>, <span class="number">0.5</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "anchorPoint"></a>
+    <strong>anchorPoint ()</strong>
+    </dt>
+    <dd>
+    获取中心点位置
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        x 数值区间: 0~1</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        y 数值区间: 0~1</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setDelegate"></a>
+    <strong>setDelegate (delegate)</strong>
+    </dt>
+    <dd>
+    设置delegate
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">delegate</span>
+            <span class="types"><span class="type">function</span></span>
+         代理方法
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> view.setDelegate( <span class="keyword">function</span>(){
+     <span class="comment">-- code
+</span> } );
+
+ <span class="comment">--或者:
+</span> view.delegate( <span class="keyword">function</span>(){
+    <span class="comment">-- code
+</span> } );
+
+ <span class="comment">--或者:
+</span> view.delegate = <span class="keyword">function</span>(){
+     <span class="comment">-- code
+</span> };</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "isFirstResponder"></a>
+    <strong>isFirstResponder ()</strong>
+    </dt>
+    <dd>
+    是否FirstResponder
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "becomeFirstResponder"></a>
+    <strong>becomeFirstResponder ()</strong>
+    </dt>
+    <dd>
+    设置为FirstResponder
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "resignFirstResponder"></a>
+    <strong>resignFirstResponder ()</strong>
+    </dt>
+    <dd>
+    取消FirstResponder
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasFocus"></a>
+    <strong>hasFocus ()</strong>
+    </dt>
+    <dd>
+    是否 Focus
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "requestFocus"></a>
+    <strong>requestFocus ()</strong>
+    </dt>
+    <dd>
+    focus
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "cancelFocus"></a>
+    <strong>cancelFocus ()</strong>
+    </dt>
+    <dd>
+    取消 focus
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        yes
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>Copyright © 2010-2015 Juhuasuan.com 版权所有</i>
+<i style="float:right;"><a href="javascript:scroll(0,0)">返回顶部</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

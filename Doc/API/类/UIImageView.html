@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LuaView SDK</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LuaView SDK</h1>
+
+<ul>
+  <li><a href="../index.html">首页</a></li>
+</ul>
+
+<!--dongxicheng
+<h2>Contents</h2>
+<ul>
+<li><a href="#全局函数">全局函数</a></li>
+<li><a href="#实例方法">实例方法</a></li>
+</ul>
+
+
+-->
+
+<!--
+-->
+<h2>全局函数</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../全局函数/System.html">System</a></li>
+  <li><a href="../全局函数/math.html">math</a></li>
+  <li><a href="../全局函数/table.html">table</a></li>
+</ul>
+<h2>类</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../类/Alert.html">Alert</a></li>
+  <li><a href="../类/Animate.html">Animate</a></li>
+  <li><a href="../类/AudioPlayer.html">AudioPlayer</a></li>
+  <li><a href="../类/Button.html">Button</a></li>
+  <li><a href="../类/UICollectionView.html">UICollectionView</a></li>
+  <li><a href="../类/DB.html">DB</a></li>
+  <li><a href="../类/Data.html">Data</a></li>
+  <li><a href="../类/Date.html">Date</a></li>
+  <li><a href="../类/Downloader.html">Downloader</a></li>
+  <li><a href="../类/UIErrorView.html">UIErrorView</a></li>
+  <li><a href="../类/File.html">File</a></li>
+  <li><font color=#777777><strong>UIImageView</strong></font></li>
+  <li><a href="../类/UILabel.html">UILabel</a></li>
+  <li><a href="../类/LoadingIndicator.html">LoadingIndicator</a></li>
+  <li><a href="../类/Mtop.html">Mtop</a></li>
+  <li><a href="../类/Navigation.html">Navigation</a></li>
+  <li><a href="../类/PagerIndicator.html">PagerIndicator</a></li>
+  <li><a href="../类/UIPageView.html">UIPageView</a></li>
+  <li><a href="../类/UIScrollView.html">UIScrollView</a></li>
+  <li><a href="../类/StyledString.html">StyledString</a></li>
+  <li><a href="../类/TableView.html">TableView</a></li>
+  <li><a href="../类/UITextField.html">UITextField</a></li>
+  <li><a href="../类/Timer.html">Timer</a></li>
+  <li><a href="../类/Transform3D.html">Transform3D</a></li>
+  <li><a href="../类/View.html">View</a></li>
+  <li><a href="../类/string.html">string</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+
+<div id="content">
+
+<h1>Class <code>UIImageView</code></h1>
+<p>UIImageView
+ 放图片的View</p>
+<p> UIImageView的父类是<a href="./UIView.html">UIView</a></p>
+
+
+<h2><a href="#全局函数">全局函数</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#UIImageView">UIImageView ()</a></td>
+	<td class="summary">通过这个方法创建一个UIImageView对象</td>
+	</tr>
+</table>
+<h2><a href="#实例方法">实例方法</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#setImage">setImage (url)</a></td>
+	<td class="summary">设置ImageView的图片url</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setContentMode">setContentMode (contentMode)</a></td>
+	<td class="summary">设置图片的缩放模式</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#startAnimating">startAnimating (images, duration, repeatCount)</a></td>
+	<td class="summary">开始帧动画</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stopAnimating">stopAnimating ()</a></td>
+	<td class="summary">停止帧动画</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isAnimating">isAnimating ()</a></td>
+	<td class="summary">是否正在播放帧动画</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="全局函数"></a>全局函数</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "UIImageView"></a>
+    <strong>UIImageView ()</strong>
+    </dt>
+    <dd>
+    通过这个方法创建一个UIImageView对象
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../类/UIImageView.html#">UIImageView</a></span>
+        view
+    </ol>
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIImageView();</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="实例方法"></a>实例方法</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "setImage"></a>
+    <strong>setImage (url)</strong>
+    </dt>
+    <dd>
+    设置ImageView的图片url
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+            <span class="types"><a class="type" href="../类/string.html#">string</a></span>
+         image url
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> view = UIImageView();
+ view.setImage(<span class="string">"https://gju2.alicdn.com/bao/uploaded/TB25bF4eFXXXXbzXpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg"</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setContentMode"></a>
+    <strong>setContentMode (contentMode)</strong>
+    </dt>
+    <dd>
+    设置图片的缩放模式
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">contentMode</span>
+            <span class="types"><span class="type">int</span></span>
+         填充模式
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ <span class="comment">-- UIViewContentModeScaleToFill = 0,
+</span> <span class="comment">-- UIViewContentModeScaleAspectFit = 1, -- contents scaled to fit with fixed aspect. remainder is transparent
+</span> <span class="comment">-- UIViewContentModeScaleAspectFill = 2,
+</span> <span class="keyword">local</span> view = UIImageView();
+ view.setContentMode(<span class="number">1</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "startAnimating"></a>
+    <strong>startAnimating (images, duration, repeatCount)</strong>
+    </dt>
+    <dd>
+    开始帧动画
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">images</span>
+            <span class="types"><span class="type">array</span></span>
+         帧图片数组
+        </li>
+        <li><span class="parameter">duration</span>
+            <span class="types"><span class="type">number</span></span>
+         动画时间
+        </li>
+        <li><span class="parameter">repeatCount</span>
+            <span class="types"><span class="type">int</span></span>
+         重复次数
+        </li>
+    </ul>
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ w,h = System.screenSize();
+ window.setFrame(<span class="number">0</span>, <span class="number">0</span>, w, h);
+ window.setUserInteractionEnabled(<span class="keyword">true</span>);
+ window.setBackgroundColor(<span class="number">0xffffff</span>,<span class="number">1</span>);
+ imageView = UIImageView();
+ imageView.setFrame(<span class="number">0</span>,<span class="number">30</span>,<span class="number">100</span>,<span class="number">100</span>);
+ imageView.setBackgroundColor(<span class="number">0xff0000</span>,<span class="number">1</span>);
+ names = {};
+ <span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">16</span> <span class="keyword">do</span>
+ 	  names[i] = <span class="string">""</span> .. i .. <span class="string">".tiff"</span>
+ <span class="keyword">end</span>
+ imageView.setImage(<span class="string">"16.tiff"</span>);
+ imageView.startAnimating( names, <span class="number">3.0</span>, <span class="number">1</span>);</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "stopAnimating"></a>
+    <strong>stopAnimating ()</strong>
+    </dt>
+    <dd>
+    停止帧动画
+
+
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">imageView.stopAnimating();</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "isAnimating"></a>
+    <strong>isAnimating ()</strong>
+    </dt>
+    <dd>
+    是否正在播放帧动画
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        是否正在播放帧动画
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>Copyright © 2010-2015 Juhuasuan.com 版权所有</i>
+<i style="float:right;"><a href="javascript:scroll(0,0)">返回顶部</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
