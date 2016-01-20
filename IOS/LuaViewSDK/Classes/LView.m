@@ -152,6 +152,11 @@
         return -1;
     }
     
+#ifdef DEBUG
+    [self checkDeuggerIsRunningToLoadDebugModel];
+    [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
+#endif
+    
     return lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
 }
 
