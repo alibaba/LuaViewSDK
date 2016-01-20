@@ -83,18 +83,18 @@
  *
  * @param fileName 本地文件名
  *
- * @return 返回lvL_loadbuffer的返回值
+ * @return 返回错误描述
  */
--(int) loadSignFile:(NSString *)fileName;
+-(NSString*) loadSignFile:(NSString *)fileName;
 
 /**
  * 加载脚本文件，读取文件并调用lvL_loadbuffer
  *
  * @param fileName 本地文件名
  *
- * @return 返回lvL_loadbuffer的返回值
+ * @return 返回错误描述
  */
--(int) loadFile:(NSString *)fileName;
+-(NSString*) loadFile:(NSString *)fileName;
 
 /**
  *
