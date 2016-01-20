@@ -137,19 +137,20 @@
     }
 }
 
-- (int)loadFile:(NSString *)fileName {
+- (NSString*)loadFile:(NSString *)fileName {
     NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
     return [self loadData:code fileName:fileName];
 }
 
-- (int)loadSignFile:(NSString *)fileName {
+- (NSString*)loadSignFile:(NSString *)fileName {
     NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
     return [self loadData:code fileName:fileName];
 }
 
-- (int)loadData:(NSData *)data fileName:(NSString *)fileName {
+- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
     if (!data || !data.length || !fileName || !fileName.length) {
-        return -1;
+        LVError( @"running chars == NULL");
+        return @"running chars == NULL";
     }
     
 #ifdef DEBUG
@@ -157,7 +158,18 @@
     [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
 #endif
     
-    return lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
+    int error = lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
+    if (error) {
+        const char* s = lv_tostring(self.l, -1);
+        LVError( @"%s", s );
+#ifdef DEBUG
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
+        lv_printToServer(self.l, string.UTF8String, 0);
+#endif
+        return [NSString stringWithFormat:@"%s",s];
+    } else {
+        return nil;
+    }
 }
 
 #ifdef DEBUG
@@ -237,7 +249,7 @@ extern char g_debug_lua[];
         const char* s = lv_tostring(self.l, -1);
         LVError( @"%s", s );
 #ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
         lv_printToServer(self.l, string.UTF8String, 0);
 #endif
         return [NSString stringWithFormat:@"%s",s];

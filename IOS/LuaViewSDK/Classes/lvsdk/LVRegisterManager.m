@@ -233,10 +233,10 @@ static int requireMethodForLuaView (lv_State *L) {
         if( lview ) {
             if ( lview.runInSignModel ) {
                 fileName = [NSString stringWithFormat:@"%@.lv",fileName];
-                return [lview loadSignFile:fileName] == 0 ? 1 : 0;
+                return [lview loadSignFile:fileName] == nil ? 1 : 0;
             } else {
                 fileName = [NSString stringWithFormat:@"%@.lua",fileName];
-                return [lview loadFile:fileName] == 0 ? 1 : 0;
+                return [lview loadFile:fileName] == nil ? 1 : 0;
             }
         }
     }
