@@ -11,9 +11,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct lv_State lv_State;
-extern void lv_clearFirstTableValue(lv_State* l);
-
 #define lstrlib_c
 #define LV_LIB
 
@@ -21,6 +18,8 @@ extern void lv_clearFirstTableValue(lv_State* l);
 
 #include "lVauxlib.h"
 #include "lVlib.h"
+
+extern void lv_clearFirstTableValue(lv_State* l);
 
 
 /* macro to `unsign' a character */
