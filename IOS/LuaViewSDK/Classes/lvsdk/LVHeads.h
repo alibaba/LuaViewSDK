@@ -17,8 +17,6 @@
 #import "lVgc.h"
 
 #define lvL_reg	lvL_Reg
-typedef struct lvL_Reg lvL_Reg;
-typedef struct lv_State lv_State;
 
 #import "LVUtil.h"
 //--------------------------------------------------------------------------------
