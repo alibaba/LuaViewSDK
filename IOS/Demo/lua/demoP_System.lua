@@ -26,3 +26,11 @@ myprint("System.scale = ", System.scale() )	--获取屏幕分辨率
 myprint("System.device = ", System.device() )	--获取设备信息
 myprint("System.screenSize() = ", System.screenSize() );
 myprint("---end---",nil);
+
+window.callback({
+        ViewDidAppear = function ()
+            System.keepScreenOn(true);-- 屏幕常亮
+        end,
+        ViewDidDisAppear = function ()
+            System.keepScreenOn(false);-- 屏幕不常亮
+        end})
