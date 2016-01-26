@@ -53,6 +53,15 @@ static int netWorkType (lv_State *L) {
     return 1;
 }
 
+// 屏幕常亮
+static int keepScreenOn (lv_State *L) {
+    if( lv_gettop(L)>0 ){
+        BOOL yes = lv_toboolean(L, -1);
+        [[UIApplication sharedApplication] setIdleTimerDisabled:yes] ;
+    }
+    return 0;
+}
+
 static int scale (lv_State *L) {
     CGFloat s = [UIScreen mainScreen].scale;
     lv_pushnumber( L, s);
@@ -134,6 +143,7 @@ static int tableToString(lv_State*L){
             {"ios", ios},
             {"android", android},
             {"network", netWorkType},
+            {"keepScreenOn", keepScreenOn},// 保持屏幕常亮接口
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);
