@@ -288,6 +288,9 @@
 		84C1D8A61C17055C0058E974 /* enter10.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A41C17055C0058E974 /* enter10.png */; };
 		84C1D8A71C17055C0058E974 /* enter11.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A51C17055C0058E974 /* enter11.png */; };
 		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
+		84CCB7F71C578EFD00584CF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */; };
+		84CCB7F81C578F5000584CF5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845F377C1C578D9A00DD38EA /* AudioToolbox.framework */; };
+		84CCB7FA1C578F8900584CF5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CCB7F91C578F8900584CF5 /* Accelerate.framework */; };
 		84DAB9C61C3A616800943A48 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */; };
 		84E85C1A1C33B84B007DE3DF /* LVPackage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVPackage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84E85C1C1C33B84B007DE3DF /* LVPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVPackage.m */; };
@@ -458,6 +461,7 @@
 		8454D1401A7F732500774565 /* LVHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttp.m; sourceTree = "<group>"; };
 		8454D1441A7FA7A400774565 /* LVHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttpResponse.h; sourceTree = "<group>"; };
 		8454D1451A7FA7A400774565 /* LVHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttpResponse.m; sourceTree = "<group>"; };
+		845F377C1C578D9A00DD38EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		846481A61A64C61F00DE6204 /* LVAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimate.h; sourceTree = "<group>"; };
 		846481A71A64C61F00DE6204 /* LVAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimate.m; sourceTree = "<group>"; };
 		846481A81A64C61F00DE6204 /* LVBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBaseView.h; sourceTree = "<group>"; };
@@ -611,6 +615,11 @@
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
 		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
+		84CCB7F01C578E0F00584CF5 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		84CCB7F21C578E3B00584CF5 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		84CCB7F41C578E4D00584CF5 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		84CCB7F91C578F8900584CF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExternalLinker.h; sourceTree = "<group>"; };
 		84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExternalLinker.m; sourceTree = "<group>"; };
 		84CF56731AE9184000A49B36 /* LVNativeObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNativeObjBox.h; sourceTree = "<group>"; };
@@ -667,6 +676,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CCB7FA1C578F8900584CF5 /* Accelerate.framework in Frameworks */,
+				84CCB7F81C578F5000584CF5 /* AudioToolbox.framework in Frameworks */,
+				84CCB7F71C578EFD00584CF5 /* AVFoundation.framework in Frameworks */,
 				84C1D8A31C16CEBB0058E974 /* LuaViewSDK.framework in Frameworks */,
 				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
 				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
@@ -1292,6 +1304,12 @@
 		8DF50822C3B250E24CAD9EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84CCB7F91C578F8900584CF5 /* Accelerate.framework */,
+				84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */,
+				84CCB7F41C578E4D00584CF5 /* CoreAudioKit.framework */,
+				84CCB7F21C578E3B00584CF5 /* AudioUnit.framework */,
+				84CCB7F01C578E0F00584CF5 /* CoreAudio.framework */,
+				845F377C1C578D9A00DD38EA /* AudioToolbox.framework */,
 				84C1D88B1C16C5780058E974 /* Foundation.framework */,
 				84C1D7981C16B46D0058E974 /* libz.1.1.3.tbd */,
 				84C1D7961C16B4370058E974 /* libz.1.2.5.tbd */,
@@ -1969,6 +1987,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1997,6 +2016,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
