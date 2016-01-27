@@ -110,6 +110,23 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
     [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
 }
 
+-(void) connectionDidReceiveData:(NSData *)data{
+    if( self.response.data == nil ) {
+        self.response.data = [[NSMutableData alloc] init];
+    }
+    [self.response.data appendData:data];
+}
+
+-(void) connectionDidReceiveResponse:(NSURLResponse *)response{
+    self.response.response = response;
+    if( [response isKindOfClass:[NSHTTPURLResponse class]] ){
+        self.response.httpResponse = (NSHTTPURLResponse*)response;
+    }
+}
+-(void) connectionDidFinishLoading{
+    [self performSelectorOnMainThread:@selector(requesetEndToDo) withObject:nil waitUntilDone:NO];
+}
+
 -(id) lv_nativeObject{
     return self;
 }
@@ -145,9 +162,12 @@ static int get (lv_State *L) {
             [request setTimeoutInterval:http.timeout];
             
             NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-            http.connection = [[NSURLConnection alloc] initWithRequest:request delegate:http];
-            [http.connection setDelegateQueue:queue];
-            [http.connection start];
+            __weak LVHttp* weakHttp = http;
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                [weakHttp connectionDidReceiveResponse:response];
+                [weakHttp connectionDidReceiveData:data];
+                [weakHttp connectionDidFinishLoading];
+            }];
         }
     }
     return 0; /* new userdatum is already on the stack */
@@ -198,9 +218,12 @@ static int post (lv_State *L) {
             }
             
             NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-            http.connection = [[NSURLConnection alloc] initWithRequest:request delegate:http];
-            [http.connection setDelegateQueue:queue];
-            [http.connection start];
+            __weak LVHttp* weakHttp = http;
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                [weakHttp connectionDidReceiveResponse:response];
+                [weakHttp connectionDidReceiveData:data];
+                [weakHttp connectionDidFinishLoading];
+            }];
         }
     }
     return 0; /* new userdatum is already on the stack */
