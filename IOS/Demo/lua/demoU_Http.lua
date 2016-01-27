@@ -5,8 +5,8 @@ http.get(
 	"http://tmsprepub.alicdn.com/market/3c/quanqiutms.php",
 
 	function(response)
-		print( "responseStatusCode:",response.statusCode() );
-		print( "headerFields:",response.headerFields() );
+		print( "responseStatusCode:",response.code() );
+		print( "headerFields:",response.header() );
 		data = response.data();
 		print("ok: " .. tostring(data) )
 	end
