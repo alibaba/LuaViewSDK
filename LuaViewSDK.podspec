@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LuaViewSDK"
-  s.version  = "2.0.0.7"
+  s.version  = "2.0.0.12"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    * LuaView
                    DESC
 
-  s.homepage     = "http://gitlab.alibaba-inc.com/juhuasuanwireless/LuaViewSDK"
+  s.homepage     = "https://github.com/alibaba/LuaViewSDK"
 
 
   s.license      = { :type => 'GNU General Public Licence (GPL), Version 2.0', :file => 'LICENSE.txt' }
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "git@gitlab.alibaba-inc.com:juhuasuanwireless/LuaViewSDK.git", :tag => "2.0.0.0" }
+  s.source       = { :git => "https://github.com/alibaba/LuaViewSDK.git", :tag => "2.0.0.12" }
 
   s.source_files  = "LuaViewSDK/Classes", "IOS/LuaViewSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
