@@ -52,6 +52,7 @@
         
         return [LVTypeConvert pushInvocationReturnValue:invocation toLua:L];
     }
+    LVError(@"Not found Method: %@.%@",[self.nativeObject class], self.selectName );
     return 0;
 }
 
