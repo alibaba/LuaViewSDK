@@ -791,15 +791,11 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     if (! CTFontManagerRegisterGraphicsFont(font, &error)) {
         CFStringRef errorDescription = CFErrorCopyDescription(error);
         NSLog(@"Failed to load font: %@", errorDescription);
-        CFRelease(errorDescription);
+        LVReleaseAndNull(errorDescription);
         ret = -1;
     }
-    if( font ) {
-        CFRelease(font);
-    }
-    if( provider ) {
-        CFRelease(provider);
-    }
+    LVReleaseAndNull(font);
+    LVReleaseAndNull(provider);
     return ret;
 }
 

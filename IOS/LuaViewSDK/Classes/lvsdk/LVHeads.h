@@ -29,6 +29,7 @@
 #define LV_ALIGN_BOTTOM     (32)
 
 //------------------------------
+#define LVReleaseAndNull( a ) if(a) { CFRelease(a); a = NULL; }
 //------------------------------
 
 

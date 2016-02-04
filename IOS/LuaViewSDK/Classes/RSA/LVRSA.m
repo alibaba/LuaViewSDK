@@ -21,10 +21,7 @@
 }
 
 -(void) dealloc{
-    if( g_publicKey ) {
-        CFRelease(g_publicKey);
-        g_publicKey = NULL;
-    }
+    LVReleaseAndNull(g_publicKey);
 }
 
 NSError* lv_verifySignSHA1WithRSA(NSData *fileData, SecKeyRef pubKeyRef, NSData *signedData);
@@ -79,23 +76,21 @@ NSError* lv_verifySignSHA1WithRSA(NSData *fileData, SecKeyRef pubKeyRef, NSData 
     SecCertificateRef myCertificate = NULL;
     myCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, (__bridge CFDataRef)certificateData);
     SecPolicyRef myPolicy = SecPolicyCreateBasicX509();
-    SecTrustRef myTrust;
+    SecTrustRef myTrust = NULL;
     OSStatus status = SecTrustCreateWithCertificates(myCertificate,myPolicy,&myTrust);
     SecTrustResultType trustResult;
     if (status == noErr) {
         status = SecTrustEvaluate(myTrust, &trustResult);
         if( status == noErr ){
-            CFRelease(myPolicy);
-            if( myCertificate ) {
-                CFRelease(myCertificate);
-            }
-            return SecTrustCopyPublicKey(myTrust);
+            LVReleaseAndNull(myPolicy);
+            LVReleaseAndNull(myCertificate);
+            SecKeyRef ret = SecTrustCopyPublicKey(myTrust);
+            LVReleaseAndNull(myTrust);
+            return ret;
         }
     }
-    CFRelease(myPolicy);
-    if( myCertificate ) {
-        CFRelease(myCertificate);
-    }
+    LVReleaseAndNull(myPolicy);
+    LVReleaseAndNull(myCertificate);
     return NULL;
 }
 

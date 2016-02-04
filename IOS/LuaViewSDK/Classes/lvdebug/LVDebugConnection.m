@@ -143,8 +143,8 @@ static int SERVER_PORT = 9876;
     CFRunLoopRef cfrl = CFRunLoopGetCurrent();   // 获取当前运行循环
     CFRunLoopSourceRef  source = CFSocketCreateRunLoopSource(kCFAllocatorDefault,_socket,0);//定义循环对象
     CFRunLoopAddSource(cfrl,source,kCFRunLoopCommonModes); //将循环对象加入当前循环中
-    CFRelease(source);
-    CFRelease(address);
+    LVReleaseAndNull(source);
+    LVReleaseAndNull(address);
 }
 
 -(void) closeAll{
@@ -154,8 +154,7 @@ static int SERVER_PORT = 9876;
     if (_socket != NULL)
     {
         CFSocketInvalidate(_socket);
-        CFRelease(_socket);
-        _socket = NULL;
+        LVReleaseAndNull(_socket);
     }
     
     if( !self.myThread.isCancelled ) {
