@@ -80,22 +80,6 @@ demoArray = {
 	end,
 
 	function()
-		Http:post(
-		"https://login-test.alibaba-inc.com/authorize/login.do",--url
-		nil,--http头信息
-		{--http post数据
-			appcode="123456",
-			name="taobao-hz\xicheng.dxc",
-			password="dxc123",
-			authtype="system"
-		},
-			function(request)--http 返回的数据
-			  print(request.data() );
-			end
-		);	
-	end,
-
-	function()
 		imageView = Image();
 		imageView.image(imageUrl);
 		imageView.frame(200,0,64,64);
