@@ -9,29 +9,6 @@ loading.size(200, 200)
 loading.alignCenter()
 loading.show()
 
---获取数据
-local mtop = Mtop({
-    method = "mtop.ju.block.optionminisite.get",
-    version = "1.0",
-    params = {
-        platformId = "8001",
-        page = 1,
-        pageSize = 1000
-    }
-},
-    function(data, error)
-        blockData = data
-        --        print(table:getn(blockData.model))
-        printTable(blockData.model[1].materials)
-        --        printTable(blockData)
-        if (tableView) then
-            tableView.reload()
-        end
-
-        loading.hide()
-    end)
-
-mtop.request()
 
 tableView = TableView {
     Section = {
