@@ -481,7 +481,10 @@ static int ll_require (lv_State *L) {
   lv_pushlightuserdata(L, sentinel);
   lv_setfield(L, 2, name);  /* _LOADED[name] = sentinel */
   lv_pushstring(L, name);  /* pass name as argument to module */
-  lv_call(L, 1, 1);  /* run loaded module */
+  int status = lv_pcall(L, 1, 1, 0);  /* run loaded module */
+  /* error occured? */
+  if (status != 0)
+    return 0;  /* return nil */
   if (!lv_isnil(L, -1))  /* non-nil return? */
     lv_setfield(L, 2, name);  /* _LOADED[name] = returned value */
   lv_getfield(L, 2, name);
