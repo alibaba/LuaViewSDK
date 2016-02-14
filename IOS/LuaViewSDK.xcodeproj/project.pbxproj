@@ -9,96 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C02D1D71C31106E00213386 /* LVAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
-		3C02D1DC1C31281C00213386 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */; };
-		3CB5B1621C489CF700E66C91 /* candle in Resources */ = {isa = PBXBuildFile; fileRef = 3CB5B1611C489CF700E66C91 /* candle */; };
-		539AD374E91F407031F9272B /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7913A587AD4124F9407CC /* libPods-Demo.a */; };
-		840870851BE9DB47004CADB7 /* demoZ_2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */; };
-		840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B41A5E804700158125 /* Main.storyboard */; };
-		840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B21A5E804700158125 /* LaunchScreen.xib */; };
-		8418E3C11A5E804700158125 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418E3B61A5E804700158125 /* Images.xcassets */; };
-		84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84232D441AE4F55B00C9ED93 /* AdSupport.framework */; };
-		8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */; };
-		8468C95C1BDA11BE002D4B1E /* testLuaLang.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9491BDA11BE002D4B1E /* testLuaLang.lua */; };
-		8468C95D1BDA11BE002D4B1E /* testNavigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94A1BDA11BE002D4B1E /* testNavigation.lua */; };
-		8468C95E1BDA11BE002D4B1E /* testSystem.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94B1BDA11BE002D4B1E /* testSystem.lua */; };
-		8468C95F1BDA11BE002D4B1E /* testTimer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94C1BDA11BE002D4B1E /* testTimer.lua */; };
-		8468C9601BDA11BE002D4B1E /* testUIAlert.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94D1BDA11BE002D4B1E /* testUIAlert.lua */; };
-		8468C9611BDA11BE002D4B1E /* testUIButton.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94E1BDA11BE002D4B1E /* testUIButton.lua */; };
-		8468C9621BDA11BE002D4B1E /* testUIHorizontalScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C94F1BDA11BE002D4B1E /* testUIHorizontalScrollView.lua */; };
-		8468C9631BDA11BE002D4B1E /* testUIImageView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9501BDA11BE002D4B1E /* testUIImageView.lua */; };
-		8468C9641BDA11BE002D4B1E /* testUILoadingDialog.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9511BDA11BE002D4B1E /* testUILoadingDialog.lua */; };
-		8468C9651BDA11BE002D4B1E /* testUILoadingView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9521BDA11BE002D4B1E /* testUILoadingView.lua */; };
-		8468C9661BDA11BE002D4B1E /* testUINoticeView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9531BDA11BE002D4B1E /* testUINoticeView.lua */; };
-		8468C9671BDA11BE002D4B1E /* testUIRefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9541BDA11BE002D4B1E /* testUIRefreshTableView.lua */; };
-		8468C9681BDA11BE002D4B1E /* testUITableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9551BDA11BE002D4B1E /* testUITableView.lua */; };
-		8468C9691BDA11BE002D4B1E /* testUITextFieldView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9561BDA11BE002D4B1E /* testUITextFieldView.lua */; };
-		8468C96A1BDA11BE002D4B1E /* testUITextView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9571BDA11BE002D4B1E /* testUITextView.lua */; };
-		8468C96B1BDA11BE002D4B1E /* testUITextView2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9581BDA11BE002D4B1E /* testUITextView2.lua */; };
-		8468C96C1BDA11BE002D4B1E /* testUIView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C9591BDA11BE002D4B1E /* testUIView.lua */; };
-		8468C96D1BDA11BE002D4B1E /* testViewPager.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95A1BDA11BE002D4B1E /* testViewPager.lua */; };
-		8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */; };
-		846A4E7B1C1067BC000B98C5 /* jhs.png in Resources */ = {isa = PBXBuildFile; fileRef = 846A4E7A1C1067BC000B98C5 /* jhs.png */; };
-		8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */; };
-		84799ACA1BAFDDA00070E214 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA51BAFDDA00070E214 /* img1.tiff */; };
-		84799ACB1BAFDDA00070E214 /* img10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA61BAFDDA00070E214 /* img10.tiff */; };
-		84799ACC1BAFDDA00070E214 /* img13.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA71BAFDDA00070E214 /* img13.tiff */; };
-		84799ACD1BAFDDA00070E214 /* img16.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA81BAFDDA00070E214 /* img16.tiff */; };
-		84799ACE1BAFDDA00070E214 /* img4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AA91BAFDDA00070E214 /* img4.tiff */; };
-		84799ACF1BAFDDA00070E214 /* img7.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAA1BAFDDA00070E214 /* img7.tiff */; };
-		84799AD01BAFDDA00070E214 /* demoZA1_AnimateFire.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */; };
-		84799AD11BAFDDA00070E214 /* demoZA2_AnimateFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */; };
-		84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */; };
-		84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */; };
-		84799AD41BAFDDA00070E214 /* demoC_Label.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AAF1BAFDDA00070E214 /* demoC_Label.lua */; };
-		84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */; };
-		84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */; };
-		84799AD71BAFDDA00070E214 /* demoZ2_callOC.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */; };
-		84799AD81BAFDDA00070E214 /* demoH2_CollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */; };
-		84799ADB1BAFDDA00070E214 /* demoO_coroutineDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB61BAFDDA00070E214 /* demoO_coroutineDemo.lua */; };
-		84799ADD1BAFDDA00070E214 /* demoE_Button.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB81BAFDDA00070E214 /* demoE_Button.lua */; };
-		84799ADE1BAFDDA00070E214 /* demoZ_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AB91BAFDDA00070E214 /* demoZ_testunit.lua */; };
-		84799ADF1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABA1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua */; };
-		84799AE01BAFDDA00070E214 /* demoW2_AudioPlayer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABB1BAFDDA00070E214 /* demoW2_AudioPlayer.lua */; };
-		84799AE11BAFDDA00070E214 /* demoY2_flxNode.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABC1BAFDDA00070E214 /* demoY2_flxNode.lua */; };
-		84799AE21BAFDDA00070E214 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABD1BAFDDA00070E214 /* demoA_Image.lua */; };
-		84799AE31BAFDDA00070E214 /* JHSIconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */; };
-		84799AE51BAFDDA00070E214 /* demoW1_shake.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC01BAFDDA00070E214 /* demoW1_shake.lua */; };
-		84799AE61BAFDDA00070E214 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC11BAFDDA00070E214 /* snow.png */; };
-		84799AE71BAFDDA00070E214 /* demoP_string.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC21BAFDDA00070E214 /* demoP_string.lua */; };
-		84799AE81BAFDDA00070E214 /* demoP_System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC31BAFDDA00070E214 /* demoP_System.lua */; };
-		84799AE91BAFDDA00070E214 /* demoO_table.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC41BAFDDA00070E214 /* demoO_table.lua */; };
-		84799AEA1BAFDDA00070E214 /* demoG_TableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC51BAFDDA00070E214 /* demoG_TableView.lua */; };
-		84799AEB1BAFDDA00070E214 /* demoL_Alert.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC61BAFDDA00070E214 /* demoL_Alert.lua */; };
-		84799AEC1BAFDDA00070E214 /* demoZ1_luabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */; };
-		84799AF01BAFDDCA0070E214 /* demoK_PagerView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */; };
-		84799AF21BAFDF370070E214 /* lv_kit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84799AF11BAFDF370070E214 /* lv_kit.lua */; };
-		847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9011C0E95C5008776E9 /* demoZ_1212.lua */; };
-		847BE9061C0E97AF008776E9 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9031C0E97AF008776E9 /* enter.png */; };
-		847BE9071C0E97AF008776E9 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9041C0E97AF008776E9 /* line.png */; };
-		847BE9081C0E97AF008776E9 /* hongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9051C0E97AF008776E9 /* hongbao.png */; };
-		847BE90A1C0EA493008776E9 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 847BE9091C0EA493008776E9 /* close.png */; };
-		8480F0B71BFC1880005DB2AE /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */; };
-		8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */; };
-		8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */; };
-		849832121BCB682F0032BF05 /* demoV1_CustomError.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849832101BCB682F0032BF05 /* demoV1_CustomError.lua */; };
-		849832131BCB682F0032BF05 /* demoV1_Customloading.lua in Resources */ = {isa = PBXBuildFile; fileRef = 849832111BCB682F0032BF05 /* demoV1_Customloading.lua */; };
-		84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1E3841AEF2ED90054B9F1 /* Security.framework */; };
-		84BE192D1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */; };
 		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
-		84C1D79D1C16BAF70058E974 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C361B96EA9800D5D510 /* JHSLVImage.m */; };
-		84C1D79E1C16BAF70058E974 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F3C341B96EA9800D5D510 /* JHSLVButton.m */; };
-		84C1D79F1C16BAF70058E974 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */; };
-		84C1D7A01C16BAF70058E974 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */; };
-		84C1D7A11C16BAF70058E974 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 84470B161B5E66FF00980E31 /* JHSLVCustomError.m */; };
-		84C1D7A21C16BAF70058E974 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */; };
-		84C1D7A31C16BAF70058E974 /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E04FBC1B9D6D7D009529EC /* JHSLuaViewController.m */; };
-		84C1D7A41C16BAF70058E974 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B81A5E804700158125 /* main.m */; };
-		84C1D7A51C16BAF70058E974 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3B11A5E804700158125 /* AppDelegate.m */; };
-		84C1D7A61C16BAF70058E974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418E3BD1A5E804700158125 /* ViewController.m */; };
-		84C1D7C91C16C3CD0058E974 /* LuaViewSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */; };
 		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
-		84C1D7CD1C16C3CD0058E974 /* LuaViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D7CF1C16C3CD0058E974 /* LuaViewSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */; };
 		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
 		84C1D7D51C16C3F90058E974 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
 		84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
@@ -279,53 +191,13 @@
 		84C1D8861C16C4540058E974 /* lVzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E41A63ED7D003E837D /* lVzio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8871C16C4540058E974 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D88A1C16C4550058E974 /* LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C1D69C1C16B09D0058E974 /* LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D88B1C16C5780058E974 /* Foundation.framework */; };
 		84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D8911C16CA540058E974 /* Dummy.h */; };
 		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
-		84C1D8A31C16CEBB0058E974 /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */; };
-		84C1D8A61C17055C0058E974 /* enter10.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A41C17055C0058E974 /* enter10.png */; };
-		84C1D8A71C17055C0058E974 /* enter11.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D8A51C17055C0058E974 /* enter11.png */; };
-		84CC63801BB16AF300613B74 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 84CC637F1BB16AF300613B74 /* fire.zip */; };
-		84CCB7F71C578EFD00584CF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */; };
-		84CCB7F81C578F5000584CF5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845F377C1C578D9A00DD38EA /* AudioToolbox.framework */; };
-		84CCB7FA1C578F8900584CF5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CCB7F91C578F8900584CF5 /* Accelerate.framework */; };
-		84DAB9C61C3A616800943A48 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */; };
 		84E85C1A1C33B84B007DE3DF /* LVPackage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVPackage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84E85C1C1C33B84B007DE3DF /* LVPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVPackage.m */; };
-		84FC64D21BB399A500B6AF86 /* demoO_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D11BB399A500B6AF86 /* demoO_Timer.lua */; };
-		84FC64D41BB3A75100B6AF86 /* demoM_Navigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D31BB3A75100B6AF86 /* demoM_Navigation.lua */; };
-		84FC64D61BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84FC64D51BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		84C1D6A71C16B09D0058E974 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 848B5C161A0A4CA000F59678 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 848B5C1D1A0A4CA000F59678;
-			remoteInfo = Demo;
-		};
-		84C1D88D1C16C90D0058E974 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 848B5C161A0A4CA000F59678 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 84C1D7C31C16C3CD0058E974;
-			remoteInfo = LuaViewSDK;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		84C1D6B41C16B09E0058E974 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		84C1D8961C16CB820058E974 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -339,17 +211,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
-		3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZB1_Animator.lua; sourceTree = "<group>"; };
-		3CB5B1611C489CF700E66C91 /* candle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = candle; sourceTree = "<group>"; };
-		54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
-		840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_2015_testunit.lua; sourceTree = "<group>"; };
 		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
 		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
 		840AD5AE1A63ED7C003E837D /* lV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lV.c; sourceTree = "<group>"; };
@@ -414,20 +280,8 @@
 		84185DBF1B451E28003E0ECE /* LVStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVStruct.h; sourceTree = "<group>"; };
 		84185DC01B451E28003E0ECE /* LVStruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStruct.m; sourceTree = "<group>"; };
 		8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
-		8418E3AA1A5E704100158125 /* LVSDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = LVSDK.xcconfig; sourceTree = "<group>"; };
-		8418E3B01A5E804700158125 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		8418E3B11A5E804700158125 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8418E3B31A5E804700158125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		8418E3B51A5E804700158125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8418E3B61A5E804700158125 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8418E3B71A5E804700158125 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8418E3B81A5E804700158125 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8418E3BC1A5E804700158125 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8418E3BD1A5E804700158125 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		842142A21ACD3427001FD0ED /* LVDebugLua.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugLua.m; path = lvdebug/LVDebugLua.m; sourceTree = "<group>"; };
 		842142A51ACD3E2C001FD0ED /* debug.lua */ = {isa = PBXFileReference; lastKnownFileType = text; name = debug.lua; path = lvdebug/debug.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		84232D421AE4F4E300C9ED93 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		84232D441AE4F55B00C9ED93 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		842532451ADCB7C0003C05BF /* LVAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAudioPlayer.h; sourceTree = "<group>"; };
 		842532461ADCB7C0003C05BF /* LVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAudioPlayer.m; sourceTree = "<group>"; };
 		8425324A1ADCBD3A003C05BF /* LVDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDownloader.h; sourceTree = "<group>"; };
@@ -449,18 +303,10 @@
 		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
 		8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNinePatchImage.h; sourceTree = "<group>"; };
 		8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNinePatchImage.m; sourceTree = "<group>"; };
-		8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
-		84470B151B5E66FF00980E31 /* JHSLVCustomError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomError.h; sourceTree = "<group>"; };
-		84470B161B5E66FF00980E31 /* JHSLVCustomError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomError.m; sourceTree = "<group>"; };
-		844F9F561B969E4300E24A24 /* JHSLVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCollectionView.h; sourceTree = "<group>"; };
-		844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCollectionView.m; sourceTree = "<group>"; };
-		844F9F591B96A0AF00E24A24 /* JHSLVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVTableView.h; sourceTree = "<group>"; };
-		844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVTableView.m; sourceTree = "<group>"; };
 		8454D13F1A7F732500774565 /* LVHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttp.h; sourceTree = "<group>"; };
 		8454D1401A7F732500774565 /* LVHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttp.m; sourceTree = "<group>"; };
 		8454D1441A7FA7A400774565 /* LVHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttpResponse.h; sourceTree = "<group>"; };
 		8454D1451A7FA7A400774565 /* LVHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttpResponse.m; sourceTree = "<group>"; };
-		845F377C1C578D9A00DD38EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		846481A61A64C61F00DE6204 /* LVAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimate.h; sourceTree = "<group>"; };
 		846481A71A64C61F00DE6204 /* LVAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimate.m; sourceTree = "<group>"; };
 		846481A81A64C61F00DE6204 /* LVBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBaseView.h; sourceTree = "<group>"; };
@@ -487,137 +333,48 @@
 		846481BD1A64C61F00DE6204 /* LVUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVUtil.m; sourceTree = "<group>"; };
 		846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Lua中文教程.pdf"; sourceTree = "<group>"; };
 		846481E41A64F0EB00DE6204 /* lua源码分析.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "lua源码分析.pdf"; sourceTree = "<group>"; };
-		8468C9491BDA11BE002D4B1E /* testLuaLang.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testLuaLang.lua; sourceTree = "<group>"; };
-		8468C94A1BDA11BE002D4B1E /* testNavigation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testNavigation.lua; sourceTree = "<group>"; };
-		8468C94B1BDA11BE002D4B1E /* testSystem.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testSystem.lua; sourceTree = "<group>"; };
-		8468C94C1BDA11BE002D4B1E /* testTimer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testTimer.lua; sourceTree = "<group>"; };
-		8468C94D1BDA11BE002D4B1E /* testUIAlert.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIAlert.lua; sourceTree = "<group>"; };
-		8468C94E1BDA11BE002D4B1E /* testUIButton.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIButton.lua; sourceTree = "<group>"; };
-		8468C94F1BDA11BE002D4B1E /* testUIHorizontalScrollView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIHorizontalScrollView.lua; sourceTree = "<group>"; };
-		8468C9501BDA11BE002D4B1E /* testUIImageView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIImageView.lua; sourceTree = "<group>"; };
-		8468C9511BDA11BE002D4B1E /* testUILoadingDialog.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUILoadingDialog.lua; sourceTree = "<group>"; };
-		8468C9521BDA11BE002D4B1E /* testUILoadingView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUILoadingView.lua; sourceTree = "<group>"; };
-		8468C9531BDA11BE002D4B1E /* testUINoticeView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUINoticeView.lua; sourceTree = "<group>"; };
-		8468C9541BDA11BE002D4B1E /* testUIRefreshTableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIRefreshTableView.lua; sourceTree = "<group>"; };
-		8468C9551BDA11BE002D4B1E /* testUITableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUITableView.lua; sourceTree = "<group>"; };
-		8468C9561BDA11BE002D4B1E /* testUITextFieldView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUITextFieldView.lua; sourceTree = "<group>"; };
-		8468C9571BDA11BE002D4B1E /* testUITextView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUITextView.lua; sourceTree = "<group>"; };
-		8468C9581BDA11BE002D4B1E /* testUITextView2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUITextView2.lua; sourceTree = "<group>"; };
-		8468C9591BDA11BE002D4B1E /* testUIView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testUIView.lua; sourceTree = "<group>"; };
-		8468C95A1BDA11BE002D4B1E /* testViewPager.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testViewPager.lua; sourceTree = "<group>"; };
-		8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testViewPagerIndicator.lua; sourceTree = "<group>"; };
 		8468C96F1BDA177C002D4B1E /* LVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVToast.h; sourceTree = "<group>"; };
 		8468C9701BDA177C002D4B1E /* LVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVToast.m; sourceTree = "<group>"; };
-		846A4E7A1C1067BC000B98C5 /* jhs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jhs.png; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
 		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
 		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
 		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
-		84799AA51BAFDDA00070E214 /* img1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img1.tiff; sourceTree = "<group>"; };
-		84799AA61BAFDDA00070E214 /* img10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img10.tiff; sourceTree = "<group>"; };
-		84799AA71BAFDDA00070E214 /* img13.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img13.tiff; sourceTree = "<group>"; };
-		84799AA81BAFDDA00070E214 /* img16.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img16.tiff; sourceTree = "<group>"; };
-		84799AA91BAFDDA00070E214 /* img4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img4.tiff; sourceTree = "<group>"; };
-		84799AAA1BAFDDA00070E214 /* img7.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img7.tiff; sourceTree = "<group>"; };
-		84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA1_AnimateFire.lua; sourceTree = "<group>"; };
-		84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA2_AnimateFire2.lua; sourceTree = "<group>"; };
-		84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA3_AnimateLiZi.lua; sourceTree = "<group>"; };
-		84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA4_AnimateSnow.lua; sourceTree = "<group>"; };
-		84799AAF1BAFDDA00070E214 /* demoC_Label.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC_Label.lua; sourceTree = "<group>"; };
-		84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@2x.png"; sourceTree = "<group>"; };
-		84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@3x.png"; sourceTree = "<group>"; };
-		84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ2_callOC.lua; sourceTree = "<group>"; };
-		84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoH2_CollectionView.lua; sourceTree = "<group>"; };
-		84799AB61BAFDDA00070E214 /* demoO_coroutineDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_coroutineDemo.lua; sourceTree = "<group>"; };
-		84799AB81BAFDDA00070E214 /* demoE_Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoE_Button.lua; sourceTree = "<group>"; };
-		84799AB91BAFDDA00070E214 /* demoZ_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_testunit.lua; sourceTree = "<group>"; };
-		84799ABA1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoY5_DownloadAndFile.lua; sourceTree = "<group>"; };
-		84799ABB1BAFDDA00070E214 /* demoW2_AudioPlayer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoW2_AudioPlayer.lua; sourceTree = "<group>"; };
-		84799ABC1BAFDDA00070E214 /* demoY2_flxNode.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoY2_flxNode.lua; sourceTree = "<group>"; };
-		84799ABD1BAFDDA00070E214 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_Image.lua; sourceTree = "<group>"; };
-		84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JHSIconfont.ttf; sourceTree = "<group>"; };
-		84799AC01BAFDDA00070E214 /* demoW1_shake.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoW1_shake.lua; sourceTree = "<group>"; };
-		84799AC11BAFDDA00070E214 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
-		84799AC21BAFDDA00070E214 /* demoP_string.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_string.lua; sourceTree = "<group>"; };
-		84799AC31BAFDDA00070E214 /* demoP_System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_System.lua; sourceTree = "<group>"; };
-		84799AC41BAFDDA00070E214 /* demoO_table.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_table.lua; sourceTree = "<group>"; };
-		84799AC51BAFDDA00070E214 /* demoG_TableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoG_TableView.lua; sourceTree = "<group>"; };
-		84799AC61BAFDDA00070E214 /* demoL_Alert.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL_Alert.lua; sourceTree = "<group>"; };
-		84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ1_luabox.lua; sourceTree = "<group>"; };
-		84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_PagerView.lua; sourceTree = "<group>"; };
-		84799AF11BAFDF370070E214 /* lv_kit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lv_kit.lua; sourceTree = "<group>"; };
 		84799AF31BAFECA00070E214 /* LVPagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerView.h; sourceTree = "<group>"; };
 		84799AF41BAFECA00070E214 /* LVPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerView.m; sourceTree = "<group>"; };
 		84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerViewCell.h; sourceTree = "<group>"; };
 		84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerViewCell.m; sourceTree = "<group>"; };
-		847BE9011C0E95C5008776E9 /* demoZ_1212.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_1212.lua; sourceTree = "<group>"; };
-		847BE9031C0E97AF008776E9 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
-		847BE9041C0E97AF008776E9 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
-		847BE9051C0E97AF008776E9 /* hongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hongbao.png; sourceTree = "<group>"; };
-		847BE9091C0EA493008776E9 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
-		8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
-		8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoG_RefreshTableView.lua; sourceTree = "<group>"; };
-		8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_ScrollView.lua; sourceTree = "<group>"; };
 		8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVScrollViewDelegate.h; sourceTree = "<group>"; };
 		8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVScrollViewDelegate.m; sourceTree = "<group>"; };
 		8481E05E1BD7AEF300FDFEEA /* LVTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTableViewDelegate.h; sourceTree = "<group>"; };
 		8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTableViewDelegate.m; sourceTree = "<group>"; };
 		8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewDelegate.h; sourceTree = "<group>"; };
 		8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewDelegate.m; sourceTree = "<group>"; };
-		848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaViewSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
 		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
 		848CA3621B29748800C70321 /* LVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewCell.h; sourceTree = "<group>"; };
 		848CA3631B29748800C70321 /* LVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewCell.m; sourceTree = "<group>"; };
-		848F3C331B96EA9800D5D510 /* JHSLVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVButton.h; sourceTree = "<group>"; };
-		848F3C341B96EA9800D5D510 /* JHSLVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVButton.m; sourceTree = "<group>"; };
-		848F3C351B96EA9800D5D510 /* JHSLVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVImage.h; sourceTree = "<group>"; };
-		848F3C361B96EA9800D5D510 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
 		849708351A67653A00E913F4 /* LVDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDB.h; sourceTree = "<group>"; };
 		849708361A67653A00E913F4 /* LVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDB.m; sourceTree = "<group>"; };
 		8497083A1A6765B000E913F4 /* LVSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSystem.h; sourceTree = "<group>"; };
 		8497083B1A6765B000E913F4 /* LVSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSystem.m; sourceTree = "<group>"; };
-		849832101BCB682F0032BF05 /* demoV1_CustomError.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoV1_CustomError.lua; sourceTree = "<group>"; };
-		849832111BCB682F0032BF05 /* demoV1_Customloading.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoV1_Customloading.lua; sourceTree = "<group>"; };
-		84A63D6D1B958B9F0048CBD3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		84B1E37F1AEF24480054B9F1 /* LVRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVRSA.h; path = RSA/LVRSA.h; sourceTree = "<group>"; };
 		84B1E3801AEF24480054B9F1 /* LVRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVRSA.m; path = RSA/LVRSA.m; sourceTree = "<group>"; };
-		84B1E3841AEF2ED90054B9F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		84B58E381B65CC260048F33D /* LVLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLoadingIndicator.h; sourceTree = "<group>"; };
 		84B58E391B65CC260048F33D /* LVLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingIndicator.m; sourceTree = "<group>"; };
 		84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebugConnection.h; path = lvdebug/LVDebugConnection.h; sourceTree = "<group>"; };
 		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
-		84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC2_IconFontLabel.lua; sourceTree = "<group>"; };
-		84C1D69C1C16B09D0058E974 /* LuaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaView.h; sourceTree = "<group>"; };
-		84C1D69E1C16B09D0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuaViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaViewTests.m; sourceTree = "<group>"; };
 		84C1D6AC1C16B09D0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84C1D7961C16B4370058E974 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
-		84C1D7981C16B46D0058E974 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = LuaViewSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84C1D7C51C16C3CD0058E974 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
 		84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LuaViewSDK-Info.plist"; sourceTree = "<group>"; };
-		84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaViewSDK.h; sourceTree = "<group>"; };
-		84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaViewSDK.m; sourceTree = "<group>"; };
 		84C1D7D01C16C3CD0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84C1D88B1C16C5780058E974 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dummy-Prefix.pch"; sourceTree = "<group>"; };
 		84C1D8911C16CA540058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
 		84C1D8921C16CA540058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		84C1D8981C16CB820058E974 /* libDummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		84C1D8A41C17055C0058E974 /* enter10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter10.png; sourceTree = "<group>"; };
-		84C1D8A51C17055C0058E974 /* enter11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter11.png; sourceTree = "<group>"; };
 		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
 		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
-		84CC637F1BB16AF300613B74 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
-		84CCB7F01C578E0F00584CF5 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		84CCB7F21C578E3B00584CF5 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		84CCB7F41C578E4D00584CF5 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
-		84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		84CCB7F91C578F8900584CF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		84CF566C1AE8EC3D00A49B36 /* LVExternalLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExternalLinker.h; sourceTree = "<group>"; };
 		84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExternalLinker.m; sourceTree = "<group>"; };
 		84CF56731AE9184000A49B36 /* LVNativeObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNativeObjBox.h; sourceTree = "<group>"; };
@@ -628,9 +385,6 @@
 		84D446F11AF75BD8000A3911 /* LVPkgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgManager.m; path = PKG/LVPkgManager.m; sourceTree = "<group>"; };
 		84D446F51AF7631C000A3911 /* LVInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVInputStream.h; path = PKG/LVInputStream.h; sourceTree = "<group>"; };
 		84D446F61AF7631C000A3911 /* LVInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVInputStream.m; path = PKG/LVInputStream.m; sourceTree = "<group>"; };
-		84D8409F1B5F33D900BC59F3 /* JHSLVCustomLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomLoading.h; sourceTree = "<group>"; };
-		84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
-		84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_decodeUrl.lua; sourceTree = "<group>"; };
 		84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLuaObjBox.h; sourceTree = "<group>"; };
 		84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLuaObjBox.m; sourceTree = "<group>"; };
 		84DCF0391B44D91800AD723B /* LVTypeConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTypeConvert.h; sourceTree = "<group>"; };
@@ -641,17 +395,12 @@
 		84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPointerValueBox.m; sourceTree = "<group>"; };
 		84DF1DA41A6F5BC9009F970A /* LVTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTapGestureRecognizer.h; sourceTree = "<group>"; };
 		84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTapGestureRecognizer.m; sourceTree = "<group>"; };
-		84E04FBB1B9D6D7D009529EC /* JHSLuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaViewController.h; sourceTree = "<group>"; };
-		84E04FBC1B9D6D7D009529EC /* JHSLuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaViewController.m; sourceTree = "<group>"; };
 		84E446961AEE0655009C9A8A /* LVBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBlock.h; sourceTree = "<group>"; };
 		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
 		84E85C181C33B84B007DE3DF /* LVPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPackage.h; sourceTree = "<group>"; };
 		84E85C191C33B84B007DE3DF /* LVPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPackage.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
-		84FC64D11BB399A500B6AF86 /* demoO_Timer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_Timer.lua; sourceTree = "<group>"; };
-		84FC64D31BB3A75100B6AF86 /* demoM_Navigation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoM_Navigation.lua; sourceTree = "<group>"; };
-		84FC64D51BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL_LoadingIndicator.lua; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -662,29 +411,9 @@
 		918B9F1C1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSwipeGestureRecognizer.m; sourceTree = "<group>"; };
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
 		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
-		A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LVSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuaViewSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1D7913A587AD4124F9407CC /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		DDB7491AED7D3B6086D18263 /* Pods-LuaViewSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		848B5C1B1A0A4CA000F59678 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				84CCB7FA1C578F8900584CF5 /* Accelerate.framework in Frameworks */,
-				84CCB7F81C578F5000584CF5 /* AudioToolbox.framework in Frameworks */,
-				84CCB7F71C578EFD00584CF5 /* AVFoundation.framework in Frameworks */,
-				84C1D8A31C16CEBB0058E974 /* LuaViewSDK.framework in Frameworks */,
-				8478D7DB1B9DA80E00DE9EFF /* libz.1.2.5.dylib in Frameworks */,
-				84B1E3851AEF2ED90054B9F1 /* Security.framework in Frameworks */,
-				84232D451AE4F55B00C9ED93 /* AdSupport.framework in Frameworks */,
-				539AD374E91F407031F9272B /* libPods-Demo.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		84C1D6A01C16B09D0058E974 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -696,7 +425,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C1D88C1C16C5780058E974 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,27 +500,6 @@
 			path = lv514;
 			sourceTree = "<group>";
 		};
-		84160C461B9591CA008E967E /* delegate */ = {
-			isa = PBXGroup;
-			children = (
-				848F3C351B96EA9800D5D510 /* JHSLVImage.h */,
-				848F3C361B96EA9800D5D510 /* JHSLVImage.m */,
-				848F3C331B96EA9800D5D510 /* JHSLVButton.h */,
-				848F3C341B96EA9800D5D510 /* JHSLVButton.m */,
-				844F9F591B96A0AF00E24A24 /* JHSLVTableView.h */,
-				844F9F5A1B96A0AF00E24A24 /* JHSLVTableView.m */,
-				844F9F561B969E4300E24A24 /* JHSLVCollectionView.h */,
-				844F9F571B969E4300E24A24 /* JHSLVCollectionView.m */,
-				84470B151B5E66FF00980E31 /* JHSLVCustomError.h */,
-				84470B161B5E66FF00980E31 /* JHSLVCustomError.m */,
-				84D8409F1B5F33D900BC59F3 /* JHSLVCustomLoading.h */,
-				84D840A01B5F33D900BC59F3 /* JHSLVCustomLoading.m */,
-				84E04FBB1B9D6D7D009529EC /* JHSLuaViewController.h */,
-				84E04FBC1B9D6D7D009529EC /* JHSLuaViewController.m */,
-			);
-			name = delegate;
-			sourceTree = "<group>";
-		};
 		8418E3411A5E67FC00158125 /* LuaViewSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,29 +531,10 @@
 			isa = PBXGroup;
 			children = (
 				8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */,
-				8418E3AA1A5E704100158125 /* LVSDK.xcconfig */,
+				84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */,
+				84C1D7D01C16C3CD0058E974 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8418E3AF1A5E804700158125 /* Demo */ = {
-			isa = PBXGroup;
-			children = (
-				84160C461B9591CA008E967E /* delegate */,
-				84799AA41BAFDDA00070E214 /* lua */,
-				847BE9001C0E95C5008776E9 /* lua_animate */,
-				8468C9481BDA11BE002D4B1E /* test */,
-				8418E3B61A5E804700158125 /* Images.xcassets */,
-				8418E3B71A5E804700158125 /* Info.plist */,
-				8418E3B21A5E804700158125 /* LaunchScreen.xib */,
-				8418E3B81A5E804700158125 /* main.m */,
-				8418E3B41A5E804700158125 /* Main.storyboard */,
-				8418E3B01A5E804700158125 /* AppDelegate.h */,
-				8418E3B11A5E804700158125 /* AppDelegate.m */,
-				8418E3BC1A5E804700158125 /* ViewController.h */,
-				8418E3BD1A5E804700158125 /* ViewController.m */,
-			);
-			path = Demo;
 			sourceTree = "<group>";
 		};
 		8443179F1BC6191500968368 /* items */ = {
@@ -990,113 +678,13 @@
 			path = Documentation;
 			sourceTree = "<group>";
 		};
-		8468C9481BDA11BE002D4B1E /* test */ = {
-			isa = PBXGroup;
-			children = (
-				8468C9491BDA11BE002D4B1E /* testLuaLang.lua */,
-				8468C94A1BDA11BE002D4B1E /* testNavigation.lua */,
-				8468C94B1BDA11BE002D4B1E /* testSystem.lua */,
-				8468C94C1BDA11BE002D4B1E /* testTimer.lua */,
-				8468C94D1BDA11BE002D4B1E /* testUIAlert.lua */,
-				8468C94E1BDA11BE002D4B1E /* testUIButton.lua */,
-				8468C94F1BDA11BE002D4B1E /* testUIHorizontalScrollView.lua */,
-				8468C9501BDA11BE002D4B1E /* testUIImageView.lua */,
-				8468C9511BDA11BE002D4B1E /* testUILoadingDialog.lua */,
-				8468C9521BDA11BE002D4B1E /* testUILoadingView.lua */,
-				8468C9531BDA11BE002D4B1E /* testUINoticeView.lua */,
-				8468C9541BDA11BE002D4B1E /* testUIRefreshTableView.lua */,
-				8468C9551BDA11BE002D4B1E /* testUITableView.lua */,
-				8468C9561BDA11BE002D4B1E /* testUITextFieldView.lua */,
-				8468C9571BDA11BE002D4B1E /* testUITextView.lua */,
-				8468C9581BDA11BE002D4B1E /* testUITextView2.lua */,
-				8468C9591BDA11BE002D4B1E /* testUIView.lua */,
-				8468C95A1BDA11BE002D4B1E /* testViewPager.lua */,
-				8468C95B1BDA11BE002D4B1E /* testViewPagerIndicator.lua */,
-			);
-			path = test;
-			sourceTree = "<group>";
-		};
-		84799AA41BAFDDA00070E214 /* lua */ = {
-			isa = PBXGroup;
-			children = (
-				3CB5B1611C489CF700E66C91 /* candle */,
-				84799ABD1BAFDDA00070E214 /* demoA_Image.lua */,
-				8480F0B61BFC1880005DB2AE /* demoA_ImageAnimate.lua */,
-				84799AAF1BAFDDA00070E214 /* demoC_Label.lua */,
-				84BE192C1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua */,
-				84799AB81BAFDDA00070E214 /* demoE_Button.lua */,
-				8481E0501BD5DADD00FDFEEA /* demoG_RefreshTableView.lua */,
-				84799AC51BAFDDA00070E214 /* demoG_TableView.lua */,
-				84799AB31BAFDDA00070E214 /* demoH2_CollectionView.lua */,
-				84799AEF1BAFDDCA0070E214 /* demoK_PagerView.lua */,
-				8481E0521BD6690A00FDFEEA /* demoK_ScrollView.lua */,
-				84799AC61BAFDDA00070E214 /* demoL_Alert.lua */,
-				84FC64D51BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua */,
-				84FC64D31BB3A75100B6AF86 /* demoM_Navigation.lua */,
-				84799AB61BAFDDA00070E214 /* demoO_coroutineDemo.lua */,
-				84799AC41BAFDDA00070E214 /* demoO_table.lua */,
-				84FC64D11BB399A500B6AF86 /* demoO_Timer.lua */,
-				84799AC21BAFDDA00070E214 /* demoP_string.lua */,
-				84799AC31BAFDDA00070E214 /* demoP_System.lua */,
-				849832101BCB682F0032BF05 /* demoV1_CustomError.lua */,
-				849832111BCB682F0032BF05 /* demoV1_Customloading.lua */,
-				84799AC01BAFDDA00070E214 /* demoW1_shake.lua */,
-				84799ABB1BAFDDA00070E214 /* demoW2_AudioPlayer.lua */,
-				84799ABC1BAFDDA00070E214 /* demoY2_flxNode.lua */,
-				84799ABA1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua */,
-				840870841BE9DB47004CADB7 /* demoZ_2015_testunit.lua */,
-				84799AB91BAFDDA00070E214 /* demoZ_testunit.lua */,
-				84799AC71BAFDDA00070E214 /* demoZ1_luabox.lua */,
-				84799AB21BAFDDA00070E214 /* demoZ2_callOC.lua */,
-				84DAB9C51C3A616800943A48 /* demoZ_decodeUrl.lua */,
-				84799AAB1BAFDDA00070E214 /* demoZA1_AnimateFire.lua */,
-				84799AAC1BAFDDA00070E214 /* demoZA2_AnimateFire2.lua */,
-				84799AAD1BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua */,
-				84799AAE1BAFDDA00070E214 /* demoZA4_AnimateSnow.lua */,
-				3C02D1DB1C31281C00213386 /* demoZB1_Animator.lua */,
-				84799AF11BAFDF370070E214 /* lv_kit.lua */,
-				84799AB01BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png */,
-				84799AB11BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png */,
-				8446F1601BDF5B54007E4064 /* bt_catebrand_more.9.png */,
-				84799AC11BAFDDA00070E214 /* snow.png */,
-				84799AA51BAFDDA00070E214 /* img1.tiff */,
-				84799AA91BAFDDA00070E214 /* img4.tiff */,
-				84799AAA1BAFDDA00070E214 /* img7.tiff */,
-				84799AA61BAFDDA00070E214 /* img10.tiff */,
-				84799AA71BAFDDA00070E214 /* img13.tiff */,
-				84799AA81BAFDDA00070E214 /* img16.tiff */,
-				84799ABE1BAFDDA00070E214 /* JHSIconfont.ttf */,
-				84CC637F1BB16AF300613B74 /* fire.zip */,
-			);
-			path = lua;
-			sourceTree = "<group>";
-		};
-		847BE9001C0E95C5008776E9 /* lua_animate */ = {
-			isa = PBXGroup;
-			children = (
-				847BE9091C0EA493008776E9 /* close.png */,
-				847BE9011C0E95C5008776E9 /* demoZ_1212.lua */,
-				847BE9031C0E97AF008776E9 /* enter.png */,
-				84C1D8A41C17055C0058E974 /* enter10.png */,
-				84C1D8A51C17055C0058E974 /* enter11.png */,
-				847BE9041C0E97AF008776E9 /* line.png */,
-				847BE9051C0E97AF008776E9 /* hongbao.png */,
-				846A4E7A1C1067BC000B98C5 /* jhs.png */,
-			);
-			path = lua_animate;
-			sourceTree = "<group>";
-		};
 		848B5C151A0A4CA000F59678 = {
 			isa = PBXGroup;
 			children = (
 				842ECCD41B71A3900034C3A2 /* TAGS_NOTES.md */,
-				8418E3AF1A5E804700158125 /* Demo */,
 				8418E3411A5E67FC00158125 /* LuaViewSDK */,
-				84C1D69B1C16B09D0058E974 /* LuaView */,
 				84C1D6A91C16B09D0058E974 /* LuaViewTests */,
-				84C1D7C71C16C3CD0058E974 /* LuaViewSDK */,
 				848B5C1F1A0A4CA000F59678 /* Products */,
-				CACC8D0F2D9A900CA53CA849 /* Pods */,
 				84C1D88F1C16CA540058E974 /* Dummy */,
 				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
 				846481E21A64F0EB00DE6204 /* Documentation */,
@@ -1106,7 +694,6 @@
 		848B5C1F1A0A4CA000F59678 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */,
 				84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */,
 				84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */,
 				84C1D8981C16CB820058E974 /* libDummy.a */,
@@ -1222,15 +809,6 @@
 			name = RSA;
 			sourceTree = "<group>";
 		};
-		84C1D69B1C16B09D0058E974 /* LuaView */ = {
-			isa = PBXGroup;
-			children = (
-				84C1D69C1C16B09D0058E974 /* LuaView.h */,
-				84C1D69E1C16B09D0058E974 /* Info.plist */,
-			);
-			path = LuaView;
-			sourceTree = "<group>";
-		};
 		84C1D6A91C16B09D0058E974 /* LuaViewTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,18 +816,6 @@
 				84C1D6AC1C16B09D0058E974 /* Info.plist */,
 			);
 			path = LuaViewTests;
-			sourceTree = "<group>";
-		};
-		84C1D7C71C16C3CD0058E974 /* LuaViewSDK */ = {
-			isa = PBXGroup;
-			children = (
-				84C1D7C81C16C3CD0058E974 /* LuaViewSDK-Prefix.pch */,
-				84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */,
-				84C1D7CC1C16C3CD0058E974 /* LuaViewSDK.h */,
-				84C1D7CE1C16C3CD0058E974 /* LuaViewSDK.m */,
-				84C1D7D01C16C3CD0058E974 /* Info.plist */,
-			);
-			path = LuaViewSDK;
 			sourceTree = "<group>";
 		};
 		84C1D88F1C16CA540058E974 /* Dummy */ = {
@@ -1301,25 +867,6 @@
 		8DF50822C3B250E24CAD9EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84CCB7F91C578F8900584CF5 /* Accelerate.framework */,
-				84CCB7F61C578EFD00584CF5 /* AVFoundation.framework */,
-				84CCB7F41C578E4D00584CF5 /* CoreAudioKit.framework */,
-				84CCB7F21C578E3B00584CF5 /* AudioUnit.framework */,
-				84CCB7F01C578E0F00584CF5 /* CoreAudio.framework */,
-				845F377C1C578D9A00DD38EA /* AudioToolbox.framework */,
-				84C1D88B1C16C5780058E974 /* Foundation.framework */,
-				84C1D7981C16B46D0058E974 /* libz.1.1.3.tbd */,
-				84C1D7961C16B4370058E974 /* libz.1.2.5.tbd */,
-				84A63D6F1B958BAB0048CBD3 /* libz.1.2.5.dylib */,
-				84A63D6D1B958B9F0048CBD3 /* libz.dylib */,
-				84B1E3841AEF2ED90054B9F1 /* Security.framework */,
-				84232D441AE4F55B00C9ED93 /* AdSupport.framework */,
-				84232D421AE4F4E300C9ED93 /* iAd.framework */,
-				1E3ED106663D694D5F509BA6 /* libPods-LVSDKDemo.a */,
-				A71A31E8A92CF6811E803B7A /* libPods-LVSDK.a */,
-				D1D7913A587AD4124F9407CC /* libPods-Demo.a */,
-				C732A52C5E88D13F29F6564E /* libPods-LuaViewSDK.a */,
-				84C1D7C51C16C3CD0058E974 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1335,17 +882,6 @@
 				84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */,
 			);
 			name = lvdebug;
-			sourceTree = "<group>";
-		};
-		CACC8D0F2D9A900CA53CA849 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */,
-				778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */,
-				54B6EDD5D78058D3F68F371A /* Pods-LuaViewSDK.debug.xcconfig */,
-				DDB7491AED7D3B6086D18263 /* Pods-LuaViewSDK.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1416,9 +952,7 @@
 				84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */,
 				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
 				84C1D8891C16C4550058E974 /* LVBlock.h in Headers */,
-				84C1D88A1C16C4550058E974 /* LuaView.h in Headers */,
 				84C1D8871C16C4540058E974 /* LView.h in Headers */,
-				84C1D7CD1C16C3CD0058E974 /* LuaViewSDK.h in Headers */,
 				84C1D8701C16C44F0058E974 /* lV.h in Headers */,
 				84C1D8711C16C44F0058E974 /* lVapi.h in Headers */,
 				84C1D8721C16C44F0058E974 /* lVauxlib.h in Headers */,
@@ -1444,34 +978,12 @@
 				3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */,
 				84E85C1A1C33B84B007DE3DF /* LVPackage.h in Headers */,
 				84C1D8861C16C4540058E974 /* lVzio.h in Headers */,
-				84C1D7C91C16C3CD0058E974 /* LuaViewSDK-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		848B5C1D1A0A4CA000F59678 /* Demo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "Demo" */;
-			buildPhases = (
-				B2580C5FCEEB8B0B0970BD23 /* Check Pods Manifest.lock */,
-				848B5C1A1A0A4CA000F59678 /* Sources */,
-				848B5C1B1A0A4CA000F59678 /* Frameworks */,
-				848B5C1C1A0A4CA000F59678 /* Resources */,
-				69CC6A6DF47C8503DB94DAE1 /* Copy Pods Resources */,
-				84C1D6B41C16B09E0058E974 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				84C1D88E1C16C90D0058E974 /* PBXTargetDependency */,
-			);
-			name = Demo;
-			productName = lua5.1.4;
-			productReference = 848B5C1E1A0A4CA000F59678 /* LuaViewSDK.app */;
-			productType = "com.apple.product-type.application";
-		};
 		84C1D6A21C16B09D0058E974 /* LuaViewTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C1D6B51C16B09E0058E974 /* Build configuration list for PBXNativeTarget "LuaViewTests" */;
@@ -1483,7 +995,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				84C1D6A81C16B09D0058E974 /* PBXTargetDependency */,
 			);
 			name = LuaViewTests;
 			productName = LuaViewTests;
@@ -1535,10 +1046,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = dongxicheng;
 				TargetAttributes = {
-					848B5C1D1A0A4CA000F59678 = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = XN6U3EV979;
-					};
 					84C1D6A21C16B09D0058E974 = {
 						CreatedOnToolsVersion = 7.1.1;
 						TestTargetID = 848B5C1D1A0A4CA000F59678;
@@ -1564,7 +1071,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				848B5C1D1A0A4CA000F59678 /* Demo */,
 				84C1D6A21C16B09D0058E974 /* LuaViewTests */,
 				84C1D7C31C16C3CD0058E974 /* LuaViewSDK */,
 				84C1D8971C16CB820058E974 /* Dummy */,
@@ -1573,91 +1079,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		848B5C1C1A0A4CA000F59678 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8468C95E1BDA11BE002D4B1E /* testSystem.lua in Resources */,
-				84799AD21BAFDDA00070E214 /* demoZA3_AnimateLiZi.lua in Resources */,
-				84799AD81BAFDDA00070E214 /* demoH2_CollectionView.lua in Resources */,
-				8468C96B1BDA11BE002D4B1E /* testUITextView2.lua in Resources */,
-				8446F1611BDF5B54007E4064 /* bt_catebrand_more.9.png in Resources */,
-				8468C9651BDA11BE002D4B1E /* testUILoadingView.lua in Resources */,
-				84CC63801BB16AF300613B74 /* fire.zip in Resources */,
-				84C1D8A71C17055C0058E974 /* enter11.png in Resources */,
-				8468C96D1BDA11BE002D4B1E /* testViewPager.lua in Resources */,
-				84799AD51BAFDDA00070E214 /* bg_home_category_right_shadow@2x.png in Resources */,
-				849832121BCB682F0032BF05 /* demoV1_CustomError.lua in Resources */,
-				84799AE31BAFDDA00070E214 /* JHSIconfont.ttf in Resources */,
-				8468C9691BDA11BE002D4B1E /* testUITextFieldView.lua in Resources */,
-				84799AE81BAFDDA00070E214 /* demoP_System.lua in Resources */,
-				84799AEB1BAFDDA00070E214 /* demoL_Alert.lua in Resources */,
-				3C02D1DC1C31281C00213386 /* demoZB1_Animator.lua in Resources */,
-				84799AE51BAFDDA00070E214 /* demoW1_shake.lua in Resources */,
-				84799AE11BAFDDA00070E214 /* demoY2_flxNode.lua in Resources */,
-				8480F0B71BFC1880005DB2AE /* demoA_ImageAnimate.lua in Resources */,
-				8468C95F1BDA11BE002D4B1E /* testTimer.lua in Resources */,
-				84799AF21BAFDF370070E214 /* lv_kit.lua in Resources */,
-				8468C9621BDA11BE002D4B1E /* testUIHorizontalScrollView.lua in Resources */,
-				84799ACF1BAFDDA00070E214 /* img7.tiff in Resources */,
-				84799AE01BAFDDA00070E214 /* demoW2_AudioPlayer.lua in Resources */,
-				846A4E7B1C1067BC000B98C5 /* jhs.png in Resources */,
-				84799ACA1BAFDDA00070E214 /* img1.tiff in Resources */,
-				84C1D8A61C17055C0058E974 /* enter10.png in Resources */,
-				847BE9021C0E95C5008776E9 /* demoZ_1212.lua in Resources */,
-				84799AE71BAFDDA00070E214 /* demoP_string.lua in Resources */,
-				8468C9641BDA11BE002D4B1E /* testUILoadingDialog.lua in Resources */,
-				84799AE91BAFDDA00070E214 /* demoO_table.lua in Resources */,
-				84FC64D21BB399A500B6AF86 /* demoO_Timer.lua in Resources */,
-				84799AD71BAFDDA00070E214 /* demoZ2_callOC.lua in Resources */,
-				3CB5B1621C489CF700E66C91 /* candle in Resources */,
-				84799ADB1BAFDDA00070E214 /* demoO_coroutineDemo.lua in Resources */,
-				8481E0531BD6690A00FDFEEA /* demoK_ScrollView.lua in Resources */,
-				8468C96E1BDA11BE002D4B1E /* testViewPagerIndicator.lua in Resources */,
-				84DAB9C61C3A616800943A48 /* demoZ_decodeUrl.lua in Resources */,
-				84799AD61BAFDDA00070E214 /* bg_home_category_right_shadow@3x.png in Resources */,
-				847BE9071C0E97AF008776E9 /* line.png in Resources */,
-				84FC64D61BB3AD4000B6AF86 /* demoL_LoadingIndicator.lua in Resources */,
-				8468C9671BDA11BE002D4B1E /* testUIRefreshTableView.lua in Resources */,
-				84799AEC1BAFDDA00070E214 /* demoZ1_luabox.lua in Resources */,
-				84799ADE1BAFDDA00070E214 /* demoZ_testunit.lua in Resources */,
-				84799AE61BAFDDA00070E214 /* snow.png in Resources */,
-				84BE192D1C2AA4DB00EE9E41 /* demoC2_IconFontLabel.lua in Resources */,
-				84799AEA1BAFDDA00070E214 /* demoG_TableView.lua in Resources */,
-				84799AD31BAFDDA00070E214 /* demoZA4_AnimateSnow.lua in Resources */,
-				840870851BE9DB47004CADB7 /* demoZ_2015_testunit.lua in Resources */,
-				8468C9661BDA11BE002D4B1E /* testUINoticeView.lua in Resources */,
-				84799ADD1BAFDDA00070E214 /* demoE_Button.lua in Resources */,
-				84799AE21BAFDDA00070E214 /* demoA_Image.lua in Resources */,
-				840AD5D11A5EB9D30075CB58 /* LaunchScreen.xib in Resources */,
-				8468C9601BDA11BE002D4B1E /* testUIAlert.lua in Resources */,
-				84799ACB1BAFDDA00070E214 /* img10.tiff in Resources */,
-				847BE9061C0E97AF008776E9 /* enter.png in Resources */,
-				8468C95C1BDA11BE002D4B1E /* testLuaLang.lua in Resources */,
-				84799ADF1BAFDDA00070E214 /* demoY5_DownloadAndFile.lua in Resources */,
-				84799AF01BAFDDCA0070E214 /* demoK_PagerView.lua in Resources */,
-				84799ACC1BAFDDA00070E214 /* img13.tiff in Resources */,
-				8468C9631BDA11BE002D4B1E /* testUIImageView.lua in Resources */,
-				8468C9611BDA11BE002D4B1E /* testUIButton.lua in Resources */,
-				84799AD11BAFDDA00070E214 /* demoZA2_AnimateFire2.lua in Resources */,
-				8468C96C1BDA11BE002D4B1E /* testUIView.lua in Resources */,
-				84FC64D41BB3A75100B6AF86 /* demoM_Navigation.lua in Resources */,
-				847BE9081C0E97AF008776E9 /* hongbao.png in Resources */,
-				847BE90A1C0EA493008776E9 /* close.png in Resources */,
-				8468C96A1BDA11BE002D4B1E /* testUITextView.lua in Resources */,
-				84799ACE1BAFDDA00070E214 /* img4.tiff in Resources */,
-				84799ACD1BAFDDA00070E214 /* img16.tiff in Resources */,
-				840AD5D01A5EB9CF0075CB58 /* Main.storyboard in Resources */,
-				8468C95D1BDA11BE002D4B1E /* testNavigation.lua in Resources */,
-				849832131BCB682F0032BF05 /* demoV1_Customloading.lua in Resources */,
-				8481E0511BD5DADD00FDFEEA /* demoG_RefreshTableView.lua in Resources */,
-				84799AD01BAFDDA00070E214 /* demoZA1_AnimateFire.lua in Resources */,
-				8418E3C11A5E804700158125 /* Images.xcassets in Resources */,
-				8468C9681BDA11BE002D4B1E /* testUITableView.lua in Resources */,
-				84799AD41BAFDDA00070E214 /* demoC_Label.lua in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		84C1D6A11C16B09D0058E974 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1676,21 +1097,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		69CC6A6DF47C8503DB94DAE1 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		84C1D7C21C16C3CD0058E974 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1705,41 +1111,9 @@
 			shellScript = "# TAG: BUILD SCRIPT (do not remove this comment)\n# Build script generated using https://github.com/kstenerud/iOS-Universal-Framework Mk 8 (beta 2012-06-16)\nimport logging\n\n\n##############################################################################\n#\n# Configuration\n#\n##############################################################################\n\n# Select which kind of framework to build.\n#\n# Note: Due to issues with Xcode's build process, if you select\n#       'embeddedframework', it will still show the regular framework\n#       (as a symlink) along side of the embedded framework. Be sure to\n#       instruct your users to copy/move the embedded framework in this case!\n#\n# If your framework contains resources such as images, nibs, momds, plists,\n# zipfiles and such, choose 'embeddedframework'.\n#\n# If your framework contains no resources, choose 'framework'.\n#\nconfig_framework_type = 'framework'\n#config_framework_type = 'embeddedframework'\n\n# Open the build directory in Finder when the universal framework is\n# successfully built.\n#\n# This value can be overridden by setting the UFW_OPEN_BUILD_DIR env variable\n# to True or False.\n#\n# Recommended setting: True\n#\nconfig_open_build_dir = False\n\n# If true, ensures that all public headers are stored in the framework under\n# the same directory hierarchy as they were in the source tree.\n#\n# Xcode by default places all headers at the same top level, but every other\n# build tool in the known universe preserves directory structure. For simple\n# libraries it doesn't really matter much, but for ports of existing software\n# packages or for bigger libraries, it makes sense to have more structure.\n#\n# The default is set to \"False\" since that's what most Xcode users are used to.\n#\n# Recommended setting: True for deep hierarchy projects, False otherwise.\n#\nconfig_deep_header_hierarchy = False\n\n# Specify where the top of the public header hierarchy is. This path is\n# relative to the project's dir (PROJECT_DIR). You can reference environment\n# variables using templating syntax (e.g. \"${TARGET_NAME}/Some/Subdir\")\n#\n# NOTE: Only used if config_deep_header_hierarchy is True.\n#\n# If this is set to None, the script will attempt to figure out for itself\n# where the top of the header hierarchy is by looking for common path prefixes\n# in the public header files. This process can fail if:\n# - You only have one public header file.\n# - Your source header files don't all have a common root.\n#\n# A common approach is to use \"${TARGET_NAME}\", working under the assumption\n# that all of your header files share the common root of a directory under\n# your project with the same name as your target (which is the Xcode default).\n#\n# Recommended setting: \"${TARGET_NAME}\"\n#\nconfig_deep_header_top = \"${TARGET_NAME}\"\n\n# Warn when \"DerivedData\" is detected in any of the header, library, or\n# framework search paths. In almost all cases, references to directories under\n# DerivedData are added as a result of an Xcode bug and must be manually\n# removed.\n#\n# Recommended setting: True\n#\nconfig_warn_derived_data = True\n\n# Warn if no headers were marked public in this framework.\n#\n# Recommended setting: True\n#\nconfig_warn_no_public_headers = False\n\n# Cause the build to fail if any warnings are issued.\n#\n# Recommended setting: True\n#\nconfig_fail_on_warnings = True\n\n# Minimum log level\n#\n# Recommended setting: logging.INFO\n#\nconfig_log_level = logging.INFO\n\n\n##############################################################################\n#\n# Don't touch anything below here unless you know what you're doing.\n#\n##############################################################################\n\nimport collections\nimport json\nimport os\nimport re\nimport shlex\nimport shutil\nimport string\nimport subprocess\nimport sys\nimport time\nimport traceback\n\n\n##############################################################################\n#\n# Globals\n#\n##############################################################################\n\nlog = logging.getLogger('UFW')\n\nissued_warnings = False\n\n\n##############################################################################\n#\n# Classes\n#\n##############################################################################\n\n# Allows the slave build to communicate with the master build.\n#\nclass BuildState:\n\n    def __init__(self):\n        self.reload()\n\n    def reset(self):\n        self.slave_platform = None\n        self.slave_architectures = []\n        self.slave_linked_archive_paths = []\n        self.slave_built_fw_path = None\n        self.slave_built_embedded_fw_path = None\n\n    def set_slave_properties(self, architectures,\n                             linked_archive_paths,\n                             built_fw_path,\n                             built_embedded_fw_path):\n        self.slave_platform = os.environ['PLATFORM_NAME']\n        self.slave_architectures = architectures\n        self.slave_linked_archive_paths = linked_archive_paths\n        self.slave_built_fw_path = built_fw_path\n        self.slave_built_embedded_fw_path = built_embedded_fw_path\n\n    def get_save_path(self):\n        return os.path.join(os.environ['PROJECT_TEMP_DIR'], \"ufw_build_state.json\")\n\n    def persist(self):\n        filename = self.get_save_path()\n        parent = os.path.dirname(filename)\n        if not os.path.isdir(parent):\n            os.makedirs(parent)\n        with open(filename, \"w\") as f:\n            f.write(json.dumps(self.__dict__))\n\n    def reload(self):\n        self.reset()\n        filename = self.get_save_path()\n        if os.path.exists(filename):\n            with open(filename, \"r\") as f:\n                new_dict = json.loads(f.read())\n                if new_dict is not None:\n                    self.__dict__ = dict(self.__dict__.items() + new_dict.items())\n\n\n# Holds information about the current project and build environment.\n#\nclass Project:\n\n    def __init__(self, filename):\n        sourcecode_types = ['sourcecode.c.c',\n                            'sourcecode.c.objc',\n                            'sourcecode.cpp.cpp',\n                            'sourcecode.cpp.objcpp',\n                            'sourcecode.asm.asm',\n                            'sourcecode.asm.llvm',\n                            'sourcecode.nasm']\n\n        self.build_state = BuildState()\n        self.project_data = self.load_from_file(filename)\n        self.target = filter(lambda x: x['name'] == os.environ['TARGET_NAME'], self.project_data['targets'])[0]\n        self.public_headers = self.get_build_phase_files('PBXHeadersBuildPhase', lambda x: x.get('settings', False) and x['settings'].get('ATTRIBUTES', False) and 'Public' in x['settings']['ATTRIBUTES'])\n        self.static_libraries = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'archive.ar' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.static_frameworks = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'wrapper.framework' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.compilable_sources = self.get_build_phase_files('PBXSourcesBuildPhase', lambda x: x['fileRef']['fileType'] in sourcecode_types)\n        self.header_paths = [os.path.join(*x['pathComponents']) for x in self.public_headers]\n\n        self.headers_dir = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['CONTENTS_FOLDER_PATH'], 'Headers')\n        self.libtool_path = os.path.join(os.environ['DT_TOOLCHAIN_DIR'], 'usr', 'bin', 'libtool')\n        self.project_filename = os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\")\n        self.local_exe_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])\n        self.local_architectures = os.environ['ARCHS'].split(' ')\n        self.local_built_fw_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['WRAPPER_NAME'])\n        self.local_built_embedded_fw_path = os.path.splitext(self.local_built_fw_path)[0] + \".embeddedframework\"\n        self.local_linked_archive_paths = [self.get_linked_ufw_archive_path(arch) for arch in self.local_architectures]\n        self.local_platform = os.environ['PLATFORM_NAME']\n        other_platforms = os.environ['SUPPORTED_PLATFORMS'].split(' ')\n        other_platforms.remove(self.local_platform)\n        self.other_platform = other_platforms[0]\n\n        sdk_name = os.environ['SDK_NAME']\n        if not sdk_name.startswith(self.local_platform):\n            raise Exception(\"%s didn't start with %s\" % (sdk_name, self.local_platform))\n        self.sdk_version = sdk_name[len(self.local_platform):]\n\n    # Load an Xcode project file.\n    #\n    def load_from_file(self, filename):\n        project_file = json.loads(subprocess.check_output([\"plutil\", \"-convert\", \"json\", \"-o\", \"-\", filename]))\n        all_objects = project_file['objects']\n        del project_file['objects']\n        for obj in all_objects.values():\n            self.fix_keys(obj)\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, project_file))\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, all_objects.values()))\n        project_data = project_file['rootObject']\n        self.build_full_paths(project_data, splitpath(os.environ['SOURCE_ROOT']))\n        return project_data\n\n    def is_key(self, obj):        \n        return isinstance(obj, basestring) and len(obj) == 24 and re.search('^[0-9a-fA-F]+$', obj) is not None\n    \n    def build_dereference_list(self, all_objects, parent, key, obj):\n        deref_list = []\n        if self.is_key(obj):\n            dereferenced = all_objects.get(obj, obj)\n            if dereferenced is not obj:\n                deref_list.append((parent, key, obj, dereferenced))\n        elif isinstance(obj, collections.Mapping):\n            for k, v in obj.iteritems():\n                deref_list += self.build_dereference_list(all_objects, obj, k, v)\n        elif isinstance(obj, collections.Iterable) and not isinstance(obj, basestring):\n            for item in obj:\n                deref_list += self.build_dereference_list(all_objects, obj, None, item)\n        return deref_list\n    \n    def unpack_objects(self, deref_list):\n        for parent, key, orig, obj in deref_list:\n            if key is None:\n                parent.remove(orig)\n                parent.append(obj)\n            else:\n                parent[key] = obj\n\n    # Store the full path, separated into components, to a node inside the node\n    # as \"pathComponents\". Also recurse into that node if it's a group.\n    #\n    def build_full_paths(self, node, base_path):\n        # Some nodes are relative to a different source tree, specified as an\n        # env variable.\n        if node.get('sourceTree', '<group>') != '<group>':\n            new_base_path = os.environ.get(node['sourceTree'], None)\n            if new_base_path:\n                base_path = splitpath(new_base_path)\n        # Add the current node's path, if any.\n        if node.get('path', False):\n            base_path = base_path + splitpath(node['path'])\n        node['pathComponents'] = base_path\n        # Recurse if this is a group.\n        if node['isa'] == 'PBXGroup':\n            for child in node['children']:\n                self.build_full_paths(child, base_path)\n        elif node['isa'] == 'PBXProject':\n            self.build_full_paths(node['mainGroup'], base_path)\n            self.build_full_paths(node['productRefGroup'], base_path)\n            for child in node['targets']:\n                self.build_full_paths(child, base_path)\n            projectRefs = node.get('projectReferences', None)\n            if projectRefs is not None and len(projectRefs) > 0:\n                for child in projectRefs[0].values():\n                    self.build_full_paths(child, base_path)\n\n    # Fix up any inconvenient keys.\n    #\n    def fix_keys(self, obj):\n        key_remappings = {'lastKnownFileType': 'fileType', 'explicitFileType': 'fileType'}\n        for key in list(set(key_remappings.keys()) & set(obj.keys())):\n            obj[key_remappings[key]] = obj[key]\n            del obj[key]\n\n    # Get the files from a build phase.\n    #\n    def get_build_phase_files(self, build_phase_name, filter_func):\n        build_phase = filter(lambda x: x['isa'] == build_phase_name, self.target['buildPhases'])[0]\n        build_files = filter(filter_func, build_phase['files'])\n        return [x['fileRef'] for x in build_files]\n\n    # Get the truncated paths of all headers that start with the specified\n    # relative path. Paths are read and returned as fully separated lists.\n    # e.g. ['Some', 'Path', 'To', 'A', 'Header'] with relative_path of\n    # ['Some', 'Path'] gets truncated to ['To', 'A', 'Header']\n    #\n    def movable_headers_relative_to(self, relative_path):\n        rel_path_length = len(relative_path)\n        result = filter(lambda path: len(path) >= rel_path_length and\n                                     path[:rel_path_length] == relative_path, self.header_paths)\n        return [path[rel_path_length:] for path in result]\n\n    # Get the full path to where a linkable archive (library or framework)\n    # is supposed to be.\n    #\n    def get_linked_archive_path(self, architecture):\n        return os.path.join(os.environ['OBJECT_FILE_DIR_%s' % os.environ['CURRENT_VARIANT']],\n                            architecture,\n                            os.environ['EXECUTABLE_NAME'])\n\n    # Get the full path to our custom linked archive of the project.\n    #\n    def get_linked_ufw_archive_path(self, architecture):\n        return self.get_linked_archive_path(architecture) + \".ufwbuild\"\n\n    # Get the full path to the executable of an archive.\n    #\n    def get_exe_path(self, node):\n        path = os.path.join(*node['pathComponents'])\n        if node['fileType'] == 'wrapper.framework':\n            # Frameworks are directories, so go one deeper\n            path = os.path.join(path, os.path.splitext(node['pathComponents'][-1])[0])\n        return path\n\n    # Get the path to the directory containing the archive.\n    #\n    def get_containing_path(self, node):\n        return os.path.join(*node['pathComponents'])\n    \n    def get_archive_search_paths(self):\n        log.info(\"Search paths = %s\" % set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries]))\n        return set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries])\n\n    # Command to link all objects of a single architecture.\n    #\n    def get_single_arch_link_command(self, architecture):\n        cmd = [self.libtool_path,\n               \"-static\",\n               \"-arch_only\", architecture,\n               \"-syslibroot\", os.environ['SDKROOT'],\n               \"-L%s\" % os.environ['TARGET_BUILD_DIR'],\n               \"-filelist\", os.environ['LINK_FILE_LIST_%s_%s' % (os.environ['CURRENT_VARIANT'], architecture)]]\n        if os.environ.get('OTHER_LDFLAGS', False):\n            cmd += [os.environ['OTHER_LDFLAGS']]\n        if os.environ.get('WARNING_LDFLAGS', False):\n            cmd += [os.environ['WARNING_LDFLAGS']]\n#        cmd += [\"-L%s\" % libpath for libpath in self.get_archive_search_paths()]\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", self.get_linked_ufw_archive_path(architecture)]\n        return cmd\n\n    # Command to link all local architectures for the current configuration\n    # into an archive. This reads all libraries + the UFW-built archives and\n    # overwrites the final product.\n    #\n    def get_local_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Command to link all architectures into a universal archive.\n    # This reads all UFW-built archives and overwrites the final product.\n    #\n    def get_all_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths + self.build_state.slave_linked_archive_paths\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Build up an environment for the slave process. This uses BUILD_ROOT\n    # and TEMP_ROOT to convert all environment variables to values suitable\n    # for the slave build environment so that xcodebuild doesn't try to build\n    # in the project directory under \"build\".\n    #\n    def get_slave_environment(self):\n        ignored = ['LD_MAP_FILE_PATH',\n        'HEADER_SEARCH_PATHS',\n        'LIBRARY_SEARCH_PATHS',\n        'FRAMEWORK_SEARCH_PATHS']\n        build_root = os.environ['BUILD_ROOT']\n        temp_root = os.environ['TEMP_ROOT']\n        newenv = {}\n        for key, value in os.environ.items():\n            if key not in ignored and not key.startswith('LINK_FILE_LIST_') and not key.startswith('LD_DEPENDENCY_'):\n                if build_root in value or temp_root in value:\n                    newenv[key] = value.replace(self.local_platform, self.other_platform)\n        return newenv\n\n    # Command to invoke xcodebuild on the slave platform.\n    #\n    def get_slave_project_build_command(self):\n        cmd = [\"xcodebuild\",\n               \"-project\",\n               os.environ['PROJECT_FILE_PATH'],\n               \"-target\",\n               os.environ['TARGET_NAME'],\n               \"-configuration\",\n               os.environ['CONFIGURATION'],\n               \"-sdk\",\n               self.other_platform + self.sdk_version]\n        cmd += [\"%s=%s\" % (key, value) for key, value in self.get_slave_environment().items()]\n        cmd += [\"UFW_MASTER_PLATFORM=\" + os.environ['PLATFORM_NAME']]\n        cmd += [os.environ['ACTION']]\n        return cmd\n\n\n\n##############################################################################\n#\n# Utility Functions\n#\n##############################################################################\n\n# Split a path into a list of path components.\n#\ndef splitpath(path, maxdepth=20):\n     (head, tail) = os.path.split(path)\n     return splitpath(head, maxdepth - 1) + [tail] if maxdepth and head and head != path else [ head or tail ]\n\n# Remove all subdirectories under a path.\n#\ndef remove_subdirs(path, ignore_files):\n    if os.path.exists(path):\n        for filename in filter(lambda x: x not in ignore_files, os.listdir(path)):\n            fullpath = os.path.join(path, filename)\n            if os.path.isdir(fullpath):\n                log.info(\"Remove %s\" % fullpath)\n                shutil.rmtree(fullpath)\n\n# Make whatever parent paths are necessary for a path to exist.\n#\ndef ensure_path_exists(path):\n    if not os.path.isdir(path):\n        os.makedirs(path)\n\n# Make whatever parent paths are necessary for a path's parent to exist.\n#\ndef ensure_parent_exists(path):\n    parent = os.path.dirname(path)\n    if not os.path.isdir(parent):\n        os.makedirs(parent)\n\n# Remove a file or dir if it exists.\n#\ndef remove_path(path):\n    if os.path.exists(path):\n        if os.path.isdir(path) and not os.path.islink(path):\n            shutil.rmtree(path)\n        else:\n            os.remove(path)\n\n# Move a file or dir, replacing the destination if it exists.\n#\ndef move_file(src, dst):\n    if src == dst:\n        return\n    log.info(\"Move %s to %s\" % (src, dst))\n    ensure_parent_exists(dst)\n    remove_path(dst)\n    shutil.move(src, dst)\n\n# Copy a file or dir, replacing the destination if it exists already.\n#\ndef copy_overwrite(src, dst):\n    if src != dst:\n        remove_path(dst)\n        ensure_parent_exists(dst)\n        shutil.copytree(src, dst, symlinks=True)\n\n# Attempt to symlink link_path -> link_to.\n# link_to must be a path relative to link_path's parent and must exist.\n# If link_path already exists, do nothing.\n#\ndef attempt_symlink(link_path, link_to):\n    # Only allow linking to an existing file\n    os.stat(os.path.abspath(os.path.join(link_path, \"..\", link_to)))\n\n    # Only make the link if it hasn't already been made\n    if not os.path.exists(link_path):\n        log.info(\"Symlink %s -> %s\" % (link_path, link_to))\n        os.symlink(link_to, link_path)\n\n# Takes the last entry in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef top_level_file_path(base_path, path_list):\n    return os.path.join(base_path, os.path.split(path_list[-1])[-1])\n\n# Takes all entries in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef full_file_path(base_path, path_list):\n    return os.path.join(*([base_path] + path_list))\n\n# Print a command before executing it.\n# Also print out all output from the command to STDOUT.\n#\ndef print_and_call(cmd):\n    log.info(\"Cmd \" + \" \".join(cmd))\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0]\n    if len(result) > 0:\n        log.info(result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Special print-and-call command for the slave build that strips out\n# xcodebuild's spammy list of environment variables.\n#\ndef print_and_call_slave_build(cmd, other_platform):\n    separator = '=== BUILD NATIVE TARGET '\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0].split(separator)\n    if len(result) == 1:\n        result = result[0]\n    else:\n        result = separator + result[1]\n    log.info(\"Cmd \" + \" \".join(cmd) + \"\\n\" + result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Issue a warning and record that a warning has been issued.\n#\ndef issue_warning(msg, *args, **kwargs):\n    global issued_warnings\n    issued_warnings = True\n    log.warn(msg, *args, **kwargs)\n\n\n\n##############################################################################\n#\n# Main Application\n#\n##############################################################################\n\n# Check if we are running as master.\n#\ndef is_master():\n    return os.environ.get('UFW_MASTER_PLATFORM', os.environ['PLATFORM_NAME']) == os.environ['PLATFORM_NAME']\n\n# DerivedData should almost never appear in any framework, library, or header\n# search paths. However, Xcode will sometimes add them in, so we check to make\n# sure.\n#\ndef check_for_derived_data_in_search_paths(project):\n    search_path_keys = [\"FRAMEWORK_SEARCH_PATHS\", \"LIBRARY_SEARCH_PATHS\", \"HEADER_SEARCH_PATHS\"]\n    build_configs = project.target['buildConfigurationList']['buildConfigurations']\n    build_settings = filter(lambda x: x['name'] == os.environ['CONFIGURATION'], build_configs)[0]['buildSettings']\n    \n    found_something = False\n    for path_key in filter(lambda x: x in build_settings, search_path_keys):\n        path = build_settings[path_key]\n        if \"DerivedData\" in path:\n            found_something = True\n            log.warn(\"Derived data in %s\" % path)\n            issue_warning(\"'%s' contains reference to 'DerivedData'.\" % path_key)\n    if found_something:\n        log.warn(\"Check your build settings and remove any entries that contain paths inside the DerivedData folder.\")\n        log.warn(\"Otherwise you can disable this warning by changing 'config_warn_derived_data' in this script.\")\n\n# Link local architectures into their respective archives.\n#\ndef link_local_archs(project):\n    for arch in project.local_architectures:\n        print_and_call(project.get_single_arch_link_command(arch))\n\n# Link only the local architectures into the final product, not the slave\n# architectures. For iphoneos, this will be armv6, armv7. For simulator, this\n# will be i386.\n#\ndef link_combine_local_archs(project):\n    print_and_call(project.get_local_archs_link_command())\n\n# Link all architectures into the final product.\n#\ndef link_combine_all_archs(project):\n    print_and_call(project.get_all_archs_link_command())\n\n# Check if we should open the build directory after a successful build.\n#\ndef should_open_build_dir():\n    env_setting = os.environ.get('UFW_OPEN_BUILD_DIR', None)\n    if env_setting is not None:\n        return env_setting\n\n    return config_open_build_dir\n\n# Open the build dir in Finder.\n#\ndef open_build_dir():\n    print_and_call(['open', os.environ['TARGET_BUILD_DIR']])\n\n# Check if the build was started by selecting \"Archive\" under \"Product\" in\n# Xcode.\n#\ndef is_archive_build():\n    # ACTION is always 'build', but perhaps Apple will fix this someday?\n    archive_build = os.environ['ACTION'] == 'archive'\n\n    if not archive_build:\n        # This can be passed in as an env variable when building from command line.\n        archive_build = os.environ.get('UFW_ACTION', None) == 'archive'\n\n    build_dir = splitpath(os.environ['BUILD_DIR'])\n    if not archive_build:\n        # This partial path is used when you select \"archive\" from within Xcode.\n        archive_build = 'ArchiveIntermediates' in build_dir\n\n    # It only counts as a full archive build if this target is being built into\n    # its own build dir (not being built as a dependency of another target)\n    #if archive_build:\n        #archive_build = os.environ['TARGET_NAME'] in build_dir\n    \n    return archive_build\n\n# Xcode by default throws all public headers into the top level directory.\n# This function moves them to their expected deep hierarchy.\n#\ndef build_deep_header_hierarchy(project):\n    header_path_top = config_deep_header_top\n    if not header_path_top:\n        header_path_top = os.path.commonprefix(project.header_paths)\n    else:\n        header_path_top = splitpath(header_path_top)\n\n    built_headers_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['PUBLIC_HEADERS_FOLDER_PATH'])\n    movable_headers = project.movable_headers_relative_to(header_path_top)\n\n    # Remove subdirs if they only contain files that have been rebuilt\n    ignore_headers = filter(lambda x: not os.path.isfile(top_level_file_path(built_headers_path, x)), movable_headers)\n    remove_subdirs(built_headers_path, [file[0] for file in ignore_headers])\n\n    # Move rebuilt headers into their proper subdirs\n    for header in movable_headers:\n        move_file(top_level_file_path(built_headers_path, header), full_file_path(built_headers_path, header))\n\ndef tb_get_file_name(path):\n    f_list = os.listdir(path)\n    log.debug(f_list)\n    dest_list = []\n    for key in f_list:\n        if key == 'Headers' or key == 'Resources' or key == 'Versions' or key == os.environ['TARGET_NAME']:\n            log.debug(\"do no thing\")\n        else:\n            dest_list.append(key)\n    return dest_list\ndef tb_compare_version(version1, version2):\n    int_ver1 = int(version1)\n    int_ver2 = int(version2)\n    if int_ver2 >= int_ver1:\n        return True\n    return False\n#Source directory and files is\n\n\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# |--MyFramework\n# So this is not standard file structure, this function do make files and directory to the standard files structure\n# Dest directory and files is\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# `--Versions\n#     |--A\n#     |  |--MyFramework\n#     |  |--Headers\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\ndef tb_format_file_and_directory(project):\n    base_dir = project.local_built_fw_path\n    log.debug(base_dir)\n\n    resource_files = tb_get_file_name(base_dir)\n\n    versions_path = os.path.join(base_dir, \"Versions\")\n    log.debug(versions_path)\n    ensure_path_exists(versions_path)\n\n    framework_version_path = os.path.join(versions_path, os.environ['FRAMEWORK_VERSION'])\n    ensure_path_exists(framework_version_path)\n\n    dest_headers_path = os.path.join(framework_version_path, \"Headers\")\n    ensure_path_exists(dest_headers_path)\n\n    #Moves Headers to Versions/A/Headers\n    src_headers_path = os.path.join(base_dir, \"Headers\")\n    if os.path.isdir(src_headers_path):\n        if not os.path.islink(src_headers_path):\n            move_file(src_headers_path, dest_headers_path)\n\n#Moves Resource files to Versions/A/Resources\n    des_res_path = os.path.join(framework_version_path, \"Resources\")\n    ensure_path_exists(des_res_path)\n    for i in resource_files :\n        dest_res_file_path = os.path.join(des_res_path, i)\n        src_res_file_path  = os.path.join(base_dir, i)\n        move_file(src_res_file_path, dest_res_file_path)\n\n    #Moves MyFramework to Versions/A/MyFramework\n    src_framework_path = os.path.join(base_dir, os.environ['TARGET_NAME'])\n    dest_framework_path= os.path.join(framework_version_path,  os.environ['TARGET_NAME'])\n    move_file(src_framework_path, dest_framework_path)\n    \n    \n# Add all symlinks needed to make a full framework structure:\n#\n# MyFramework.framework\n# |-- MyFramework -> Versions/Current/MyFramework\n# |-- Headers -> Versions/Current/Headers\n# |-- Resources -> Versions/Current/Resources\n# `-- Versions\n#     |-- A\n#     |   |-- MyFramework\n#     |   |-- Headers\n#     |   |   `-- MyFramework.h\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\n#     `-- Current -> A\n#\ndef add_symlinks_to_framework(project):\n    base_dir = project.local_built_fw_path\n    attempt_symlink(os.path.join(base_dir, \"Versions\", \"Current\"), os.environ['FRAMEWORK_VERSION'])\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Headers\")):\n        attempt_symlink(os.path.join(base_dir, \"Headers\"), os.path.join(\"Versions\", \"Current\", \"Headers\"))\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Resources\")):\n        attempt_symlink(os.path.join(base_dir, \"Resources\"), os.path.join(\"Versions\", \"Current\", \"Resources\"))\n    attempt_symlink(os.path.join(base_dir, os.environ['EXECUTABLE_NAME']), os.path.join(\"Versions\", \"Current\", os.environ['EXECUTABLE_NAME']))\n\n# Build an embedded framework structure.\n# An embedded framework contains the actual framework, plus a \"Resources\"\n# directory containing symlinks to all resources found in the actual framework,\n# with the exception of \"Info.plist\" and anything ending in \".lproj\":\n#\n# MyFramework.embeddedframework\n# |-- MyFramework.framework\n# |   |-- MyFramework -> Versions/Current/MyFramework\n# |   |-- Headers -> Versions/Current/Headers\n# |   |-- Resources -> Versions/Current/Resources\n# |   `-- Versions\n# |       |-- A\n# |       |   |-- MyFramework\n# |       |   |-- Headers\n# |       |   |   `-- MyFramework.h\n# |       |   `-- Resources\n# |       |       |-- Info.plist\n# |       |       |-- MyViewController.nib\n# |       |       `-- en.lproj\n# |       |           `-- InfoPlist.strings\n# |       `-- Current -> A\n# `-- Resources\n#     `-- MyViewController.nib -> ../MyFramework.framework/Resources/MyViewController.nib\n#\ndef build_embedded_framework(project):\n    fw_path = project.local_built_fw_path\n    embedded_path = project.local_built_embedded_fw_path\n    fw_name = os.environ['WRAPPER_NAME']\n\n    if (os.path.islink(fw_path)):\n        # If the framework path is a link, the build result already in embeddedframework.\n        # Just recreate embeddedframework's Resources\n        remove_path(os.path.join(embedded_path, \"Resources\"))\n    else:\n        remove_path(embedded_path)\n        ensure_path_exists(embedded_path)\n        copy_overwrite(fw_path, os.path.join(embedded_path, fw_name))\n\n    # Create embeddedframework's Resources        \n    ensure_path_exists(os.path.join(embedded_path, \"Resources\"))\n    symlink_source = os.path.join(\"..\", fw_name, \"Resources\")\n    symlink_path = os.path.join(embedded_path, \"Resources\")\n    if os.path.isdir(os.path.join(fw_path, \"Resources\")):\n        for file in filter(lambda x: x != \"Info.plist\" and not x.endswith(\".lproj\"), os.listdir(os.path.join(fw_path, \"Resources\"))):\n            attempt_symlink(os.path.join(symlink_path, file), os.path.join(symlink_source, file))\n\n    # Remove the normal framework and replace it with a symlink to the copy\n    # in the embedded framework. This is needed because Xcode runs its strip\n    # phase AFTER the script runs.\n    embed_fw_wrapper = os.path.splitext(os.environ['WRAPPER_NAME'])[0] + \".embeddedframework\"\n    remove_path(fw_path)\n    attempt_symlink(fw_path, os.path.join(embed_fw_wrapper, os.environ['WRAPPER_NAME']))\n\n\n# Run the build process in slave mode to build the other configuration\n# (device/simulator).\n#\ndef run_slave_build(project):\n    print_and_call_slave_build(project.get_slave_project_build_command(), project.other_platform)\n\n# Run the build process.\n#\ndef run_build():\n    project = Project(os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\"))\n\n    # Issue warnings only if we're master.\n    if is_master():\n        if len(project.compilable_sources) == 0:\n            raise Exception(\"No compilable sources found. Please add at least one source file to build target %s.\" % os.environ['TARGET_NAME'])\n\n        if config_warn_derived_data:\n            check_for_derived_data_in_search_paths(project)\n        if config_warn_no_public_headers and len(project.public_headers) == 0:\n            issue_warning('No headers in build target %s were marked public. Please move at least one header to \"Public\" in the \"Copy Headers\" build phase.' % os.environ['TARGET_NAME'])\n\n    # Only build slave if this is an archive build.\n    if is_archive_build():\n        if is_master():\n            log.debug(\"Building as MASTER\")\n            # The slave-side linker tries to include this (nonexistent) path as\n            # a library path.\n            ensure_path_exists(project.get_slave_environment()['BUILT_PRODUCTS_DIR'])\n            project.build_state.persist()\n            run_slave_build(project)\n            project.build_state.reload()\n        else:\n            log.debug(\"Building as SLAVE\")\n            project.build_state.reload()\n            project.build_state.set_slave_properties(project.local_architectures,\n                                                     project.local_linked_archive_paths,\n                                                     project.local_built_fw_path,\n                                                     project.local_built_embedded_fw_path)\n            project.build_state.persist()\n\n    link_local_archs(project)\n    \n    # Only do a universal binary when building an archive.\n    if is_archive_build() and is_master():\n        link_combine_all_archs(project)\n    else:\n        link_combine_local_archs(project)\n\n    if config_deep_header_hierarchy:\n        build_deep_header_hierarchy(project)\n\n    xcode_version = os.environ['XCODE_VERSION_MAJOR']\n\n    if tb_compare_version('0700', xcode_version):\n        tb_format_file_and_directory(project)\n\n    add_symlinks_to_framework(project)\n    \n    if is_master():\n        if config_framework_type == 'embeddedframework':\n            build_embedded_framework(project)\n        elif config_framework_type != 'framework':\n            raise Exception(\"%s: Unknown framework type for config_framework_type\" % config_framework_type)\n\n\nif __name__ == \"__main__\":\n    log_handler = logging.StreamHandler()\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n    log.addHandler(log_handler)\n    log.setLevel(config_log_level)\n\n    error_code = 0\n    prefix = \"M\" if is_master() else \"S\"\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + prefix + \" \" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n\n    log.debug(\"Begin build process\")\n\n    if config_deep_header_top:\n        config_deep_header_top = string.Template(config_deep_header_top).substitute(os.environ)\n\n    try:\n        run_build()\n        if issued_warnings:\n            if config_fail_on_warnings:\n                error_code = 1\n            log.warn(\"Build completed with warnings\")\n        else:\n            log.info(\"Build completed\")\n        if not is_archive_build():\n            log.info(\"Note: This is *NOT* a universal framework build. To build as a universal framework, do an archive build.\")\n            log.info(\"To do an archive build from command line, use \\\"xcodebuild -configuration Release UFW_ACTION=archive clean build\\\"\")\n    except Exception:\n        traceback.print_exc(file=sys.stdout)\n        error_code = 1\n        log.error(\"Build failed\")\n    finally:\n        if error_code == 0 and is_archive_build() and is_master():\n            log.info(\"Built framework is in \" + os.environ['TARGET_BUILD_DIR'])\n            if should_open_build_dir():\n                open_build_dir()\n        sys.exit(error_code)\n";
 			showEnvVarsInLog = 0;
 		};
-		B2580C5FCEEB8B0B0970BD23 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		848B5C1A1A0A4CA000F59678 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				84C1D79D1C16BAF70058E974 /* JHSLVImage.m in Sources */,
-				84C1D79E1C16BAF70058E974 /* JHSLVButton.m in Sources */,
-				84C1D79F1C16BAF70058E974 /* JHSLVTableView.m in Sources */,
-				84C1D7A01C16BAF70058E974 /* JHSLVCollectionView.m in Sources */,
-				84C1D7A11C16BAF70058E974 /* JHSLVCustomError.m in Sources */,
-				84C1D7A21C16BAF70058E974 /* JHSLVCustomLoading.m in Sources */,
-				84C1D7A31C16BAF70058E974 /* JHSLuaViewController.m in Sources */,
-				84C1D7A41C16BAF70058E974 /* main.m in Sources */,
-				84C1D7A51C16BAF70058E974 /* AppDelegate.m in Sources */,
-				84C1D7A61C16BAF70058E974 /* ViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		84C1D69F1C16B09D0058E974 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1849,7 +1223,6 @@
 				84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */,
 				84C1D8111C16C3FA0058E974 /* LView.m in Sources */,
 				84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */,
-				84C1D7CF1C16C3CD0058E974 /* LuaViewSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1862,38 +1235,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		84C1D6A81C16B09D0058E974 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 848B5C1D1A0A4CA000F59678 /* Demo */;
-			targetProxy = 84C1D6A71C16B09D0058E974 /* PBXContainerItemProxy */;
-		};
-		84C1D88E1C16C90D0058E974 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 84C1D7C31C16C3CD0058E974 /* LuaViewSDK */;
-			targetProxy = 84C1D88D1C16C90D0058E974 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8418E3B21A5E804700158125 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8418E3B31A5E804700158125 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		8418E3B41A5E804700158125 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8418E3B51A5E804700158125 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		848B5C3F1A0A4CA000F59678 /* Debug */ = {
@@ -1974,56 +1315,6 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7s armv7";
-			};
-			name = Release;
-		};
-		848B5C421A0A4CA000F59678 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9C20F8DECF49DDF8020BE9D /* Pods-Demo.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"$(inherited)",
-					"OSX=1",
-					LV_USE_APICHECK,
-					"lv_assert=assert",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.taobao.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LuaViewSDK;
-				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "arm64 x86_64 i386 armv7";
-			};
-			name = Debug;
-		};
-		848B5C431A0A4CA000F59678 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 778CF8AEA1F4013D47A3BD6E /* Pods-Demo.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.taobao.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LuaViewSDK;
-				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "arm64 x86_64 i386 armv7";
 			};
 			name = Release;
 		};
@@ -2144,15 +1435,6 @@
 			buildConfigurations = (
 				848B5C3F1A0A4CA000F59678 /* Debug */,
 				848B5C401A0A4CA000F59678 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		848B5C411A0A4CA000F59678 /* Build configuration list for PBXNativeTarget "Demo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				848B5C421A0A4CA000F59678 /* Debug */,
-				848B5C431A0A4CA000F59678 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

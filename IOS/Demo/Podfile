@@ -1,0 +1,14 @@
+# Uncomment this line to define a global platform for your project
+
+platform :ios, "7.0"
+
+def demo_pods
+    pod 'MJRefresh'
+    pod 'SDWebImage', '3.7.5'
+end
+
+target 'Demo' do
+    platform :ios, '7.0'
+    demo_pods
+end
+
