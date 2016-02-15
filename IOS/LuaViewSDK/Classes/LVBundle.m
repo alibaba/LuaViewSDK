@@ -6,20 +6,20 @@
 //  Copyright © 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVPackage.h"
+#import "LVBundle.h"
 #import "LVPkgManager.h"
 #import "LVUtil.h"
 #import "LVHeads.h"
 #import "LView.h"
 
-@interface LVPackage () {
+@interface LVBundle () {
     NSMutableArray *_scriptPaths, *_resourcePaths;
     NSFileManager *_fileManager;
 }
 
 @end
 
-@implementation LVPackage
+@implementation LVBundle
 
 @dynamic resourcePaths, scriptPaths;
 @dynamic currentPath;

@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "LVPackage.h"
+
+@class LVBundle;
 
 typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 
@@ -178,8 +179,8 @@ UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
 +(BOOL) ios8;
 
 
-+ (int) loadFont:(NSString*) fileName package:(LVPackage*)package;
-+ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(LVPackage*)package;
++ (int) loadFont:(NSString*) fileName package:(LVBundle*)bundle;
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize bundle:(LVBundle*)bundle;
 
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );

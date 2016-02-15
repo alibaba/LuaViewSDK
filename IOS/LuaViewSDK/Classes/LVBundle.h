@@ -12,7 +12,7 @@
 
 @class LVRSA;
 
-@interface LVPackage : NSObject
+@interface LVBundle : NSObject
 
 @property (nonatomic, readonly) NSArray* scriptPaths;
 @property (nonatomic, readonly) NSArray* resourcePaths;

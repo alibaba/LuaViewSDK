@@ -15,9 +15,7 @@
 #define LV_PKGINFO_PROPERTY_TIME     @"time"
 #define LV_PKGINFO_SHA256            @"sha256"
 
-#import "LVRSA.h"
-
-@class LVPackage;
+@class LVRSA;
 
 typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 

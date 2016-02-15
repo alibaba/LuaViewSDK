@@ -704,21 +704,21 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return obj1 == obj2 || [obj1 isEqual:obj2];
 }
 
-+ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize package:(LVPackage*)package{
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize bundle:(LVBundle*)bundle{
     UIFont* font = [UIFont fontWithName:fontName size:fontSize];
     if( font == nil ) {
-        [LVUtil loadFont:fontName package:package];
+        [LVUtil loadFont:fontName package:bundle];
         font = [UIFont fontWithName:fontName size:fontSize];
     }
     return font;
 }
 
-+(int) loadFont:(NSString*) fileName package:(LVPackage*)package{
++(int) loadFont:(NSString*) fileName package:(LVBundle*)bundle{
     int ret = 0;
     if( [fileName.lowercaseString hasSuffix:@".ttf"]==NO ) {
         fileName = [NSString stringWithFormat:@"%@.ttf",fileName];
     }
-    NSData *inData =  [package resourceWithName:fileName];/* your font-file data */;
+    NSData *inData =  [bundle resourceWithName:fileName];/* your font-file data */;
     CFErrorRef error;
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
     CGFontRef font = CGFontCreateWithDataProvider(provider);

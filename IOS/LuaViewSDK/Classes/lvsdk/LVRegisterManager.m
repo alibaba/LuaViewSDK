@@ -237,7 +237,7 @@ static int loaderForLuaView (lv_State *L) {
             BOOL(^findFile)() = ^BOOL() { // set fullName and return YES if found
                 NSString *name = [NSString stringWithFormat:format, moduleName, ext];
                 
-                if( [lview.package scriptPathWithName:name] ) {
+                if( [lview.bundle scriptPathWithName:name] ) {
                     fullName = name;
                     return YES;
                 } else {

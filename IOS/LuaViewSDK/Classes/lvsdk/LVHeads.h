@@ -185,6 +185,6 @@ typedef void(^LVLoadFinished)(id errorInfo);
 
 #import "UIView+LuaView.h"
 #import "UIScrollView+LuaView.h"
-#import "LVPackage.h"
+#import "LVBundle.h"
 
 #endif

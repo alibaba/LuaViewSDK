@@ -49,7 +49,7 @@ static int file_read(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        NSData* data = [lview.package resourceWithName:fileName];
+        NSData* data = [lview.bundle resourceWithName:fileName];
         if( data ){
             [LVData createDataObject:L data:data];
             return 1;
@@ -62,7 +62,7 @@ static int file_exist(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        if(  [lview.package resourcePathWithName:fileName] ){
+        if(  [lview.bundle resourcePathWithName:fileName] ){
             lv_pushboolean(L, 1);
             return 1;
         }

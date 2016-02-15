@@ -56,8 +56,8 @@
         [self setWebImageUrl:url forState:state finished:nil];
     } else {
         if( url ) {
-            LVPackage* package = self.lv_lview.package;
-            [self setImage:[package imageWithName:url] forState:state];
+            LVBundle* bundle = self.lv_lview.bundle;
+            [self setImage:[bundle imageWithName:url] forState:state];
         }
     }
 }
@@ -231,7 +231,7 @@ static int font (lv_State *L) {
                 if( num>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
                     float fontSize = lv_tonumber(L, 3);
-                    view.titleLabel.font = [LVUtil fontWithName:fontName size:fontSize package:luaView.package];
+                    view.titleLabel.font = [LVUtil fontWithName:fontName size:fontSize bundle:luaView.bundle];
                 } else {
                     float fontSize = lv_tonumber(L, 2);
                     view.titleLabel.font = [UIFont systemFontOfSize:fontSize];

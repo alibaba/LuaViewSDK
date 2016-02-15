@@ -25,7 +25,7 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import "LVRSA.h"
-#import "LVPackage.h"
+#import "LVBundle.h"
 
 
 @interface LView ()
@@ -83,7 +83,7 @@
                                                object:nil];
     self.lv_lview = self;
     self.rsa = [[LVRSA alloc] init];
-    self.package = [[LVPackage alloc] init];
+    self.bundle = [[LVBundle alloc] init];
 }
 
 -(void) dealloc{
@@ -94,14 +94,14 @@
 #pragma mark - run
 -(NSString*) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
-    NSData* code = [self.package scriptWithName:fileName];
+    NSData* code = [self.bundle scriptWithName:fileName];
 
     return [self runData:code fileName:fileName];
 }
 
 -(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
-    NSData* code = [self.package signedScriptWithName:fileName rsa:self.rsa];
+    NSData* code = [self.bundle signedScriptWithName:fileName rsa:self.rsa];
 
     return [self runData:code fileName:fileName];
 }
@@ -114,8 +114,8 @@
     self.runInSignModel = TRUE;
     
     NSString *packagePath = [LVPkgManager rootDirectoryOfPackage:packageName];
-    [self.package addScriptPath:packagePath];
-    [self.package addResourcePath:packagePath];
+    [self.bundle addScriptPath:packagePath];
+    [self.bundle addResourcePath:packagePath];
     
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
@@ -142,12 +142,12 @@
 }
 
 - (NSString*)loadFile:(NSString *)fileName {
-    NSData* code = [self.package scriptWithName:fileName];
+    NSData* code = [self.bundle scriptWithName:fileName];
     return [self loadData:code fileName:fileName];
 }
 
 - (NSString*)loadSignFile:(NSString *)fileName {
-    NSData* code = [self.package signedScriptWithName:fileName rsa:self.rsa];
+    NSData* code = [self.bundle signedScriptWithName:fileName rsa:self.rsa];
     return [self loadData:code fileName:fileName];
 }
 
@@ -684,12 +684,12 @@ extern char g_debug_lua[];
 
 -(void) setBundleSearchPath:(NSArray*) paths{
     for (NSString *path in paths) {
-        [self.package addResourcePath:path];
+        [self.bundle addResourcePath:path];
     }
 }
 
 -(NSArray*) bundleSearchPath{
-    return self.package.resourcePaths;
+    return self.bundle.resourcePaths;
 }
 
 -(NSString*) description{
