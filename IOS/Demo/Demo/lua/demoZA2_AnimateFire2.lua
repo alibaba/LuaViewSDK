@@ -1,4 +1,4 @@
-local candle = require("candle.init")
+local candle = require("candle")
 
 function addSwitch(instance)
     instance.onOff = false

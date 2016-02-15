@@ -49,7 +49,7 @@
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
 #import "LVPagerView.h"
-#import "LVPackage.h"
+#import "LVHeads.h"
 #import "lV.h"
 #import "lVauxlib.h"
 #import "lVlib.h"
@@ -79,7 +79,7 @@
     }
     
     lv_pushnumber(L, 2);
-    lv_pushcfunction(L, requireMethodForLuaView);
+    lv_pushcfunction(L, loaderForLuaView);
     lv_settable(L, -3);
 }
 
@@ -223,28 +223,47 @@ static int unicode(lv_State *L) {
     return 0; /* number of results */
 }
 
-int requireMethodForLuaView (lv_State *L) {
-    NSString* fileName = lv_paramString(L, 1);
-    if( fileName ){
+static int loaderForLuaView (lv_State *L) {
+    static NSString *pathFormats[] = { @"%@.%@", @"%@/init.%@" };
+
+    NSString* moduleName = lv_paramString(L, 1);
+    if( moduleName ){
         // submodule
-        fileName = [fileName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
+        moduleName = [moduleName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
         
         LView* lview = (__bridge LView *)(L->lView);
         if( lview ) {
-            NSString *fullName = nil;
+            __block NSString *fullName = nil, *format = nil, *ext = nil;
+            BOOL(^findFile)() = ^BOOL() { // set fullName and return YES if found
+                NSString *name = [NSString stringWithFormat:format, moduleName, ext];
+                
+                if( [lview.package scriptPathWithName:name] ) {
+                    fullName = name;
+                    return YES;
+                } else {
+                    return NO;
+                }
+            };
 
-            if ( lview.runInSignModel ) {
-                fullName = [fileName stringByAppendingPathExtension:LVScriptExts[LVSignedScriptExtIndex]];
-                // return if succeeded
-                if ([lview loadSignFile:fullName] == nil) {
-                    return 1;
+            for( int i = 0; i < sizeof(pathFormats) / sizeof(pathFormats[0]); ++i ) {
+                format = pathFormats[i];
+                
+                if( lview.runInSignModel ) {
+                    ext = LVScriptExts[LVSignedScriptExtIndex];
+                    if (findFile()) {
+                        return [lview loadSignFile:fullName] == nil ? 1 : 0;
+                    }
+                }
+                
+                ext = LVScriptExts[!LVSignedScriptExtIndex];
+                if (findFile()) {
+                    return [lview loadFile:fullName] == nil ? 1 : 0;
                 }
             }
-            
-            fullName = [fileName stringByAppendingPathExtension:LVScriptExts[!LVSignedScriptExtIndex]];
-            return [lview loadFile:fullName] == nil ? 1 : 0;
         }
     }
+    
+    // not found
     return 0;
 }
 
