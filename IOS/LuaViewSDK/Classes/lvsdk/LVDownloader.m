@@ -123,7 +123,7 @@ static int __tostring (lv_State *L) {
 static int PathOfResource (lv_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     LView* lview = (__bridge LView *)(L->lView);
-    NSString* path = [LVUtil cachesPath:fileName package:lview.package];
+    NSString* path = [lview.package resourcePathWithName:fileName];
     lv_pushstring(L, path.UTF8String);
     return 1;
 }

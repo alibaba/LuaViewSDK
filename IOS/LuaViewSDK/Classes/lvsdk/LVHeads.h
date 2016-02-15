@@ -10,6 +10,8 @@
 #define JU_LVHeads_h
 //--------------------------------------------------------------------------------
 
+#import <Foundation/Foundation.h>
+
 #import "lV.h"
 #import "lVauxlib.h"
 #import "lVlib.h"
@@ -17,6 +19,16 @@
 #import "lVgc.h"
 
 #define lvL_reg	lvL_Reg
+
+/**
+ * the index of signed scripts' extionsion(@"lv") in LVScriptExts[]
+ */
+extern const int LVSignedScriptExtIndex;
+
+/**
+ * supported script extensions: { @"lv", @"lua" }
+ */
+extern NSString * const LVScriptExts[2];
 
 #import "LVUtil.h"
 //--------------------------------------------------------------------------------

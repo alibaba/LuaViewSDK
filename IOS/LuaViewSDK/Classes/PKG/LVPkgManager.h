@@ -23,6 +23,9 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 
 @interface LVPkgManager : NSObject
 
++ (NSString *)rootDirectoryOfPackage:(NSString *)packageName;
++ (NSString *)pathForFileName:(NSString *)fileName package:(NSString *)packageName;
+
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
@@ -30,13 +33,13 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
 
-+(NSData*) readLuaFile:(NSString*) fileName package:(LVPackage*) package rsa:(LVRSA*) rsa;
++(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*) rsa;
 
-+(NSString*) timeOfPackage:(LVPackage*)package;
-+(BOOL) wirteTimeForPackage:(LVPackage*)packageName time:(NSString*) time;
++(NSString*) timeOfPackage:(NSString*)packageName;
++(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time;
 
-+(NSString*) timeOfLocalPackage:(LVPackage*)package ;
-+(BOOL) wirteTimeForLocalPackage:(LVPackage*)package time:(NSString*) time;
++(NSString*) timeOfLocalPackage:(NSString*)packageName;
++(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time;
 
 // 返回值说明   0:本地和线上版本一样;   -1:错误或者不相等
 +(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;

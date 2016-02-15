@@ -44,7 +44,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 }
 
 -(void) setPlayFileName0:(NSString*) fileName package:(LVPackage*) package{
-    NSString* path = [LVUtil cachesPath:fileName package:package];
+    NSString* path = [package resourcePathWithName:fileName];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];//使用本地URL创建
@@ -55,10 +55,11 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
+        // fixme: 构造完成后调用play()无效，下载完成后没有回调
         [LVUtil download:fileName callback:^(NSData *fileData) {
             NSData* theFileNameData = [fileName dataUsingEncoding:NSUTF8StringEncoding];
             NSString* md5Path = [LVUtil MD5HashFromData:theFileNameData];
-            if(  [LVUtil saveData:fileData toFile:md5Path] ) {
+            if(  [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
                 [self setPlayFileName0:md5Path package:package];
             }
         }];

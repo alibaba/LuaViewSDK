@@ -192,7 +192,7 @@
 
 #pragma mark - Property 系统使用的, 基本上不用关心细节
 @interface LView ()
-@property (nonatomic,assign) BOOL runInSignModel;// 加密脚本/明文脚本
+@property (nonatomic,assign) BOOL runInSignModel;// 加密模式，优先加载加密脚本
 @property (nonatomic,strong) LVPackage* package;
 
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view

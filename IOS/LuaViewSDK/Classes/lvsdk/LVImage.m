@@ -74,7 +74,7 @@
         }];
     } else {
         // local Image
-        UIImage* image = [LVUtil cachesImage:imageName package:self.lv_lview.package];
+        UIImage* image = [self.lv_lview.package imageWithName:imageName];
         if ( [LVNinePatchImage isNinePathImageName:imageName] ) {
             image = [LVNinePatchImage createNinePatchImage:image];
             [self setImage:image];
@@ -350,7 +350,7 @@ static int startAnimating (lv_State *L) {
             LVPackage* package = lview.package;
             NSMutableArray  *arrayM=[NSMutableArray array];
             for (NSString* url in urlArray) {
-                UIImage* image = [LVUtil cachesImage:url package:package];
+                UIImage* image = [package imageWithName:url];
                 if( image ) {
                     [arrayM addObject:image];
                 }

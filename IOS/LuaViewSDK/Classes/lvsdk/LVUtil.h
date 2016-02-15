@@ -43,22 +43,7 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 /*
  * 文件 -> NSData
  */
-+(NSData*) dataReadFromFile:(NSString*) fileName package:(LVPackage*) package;
-
-/**
- *  获取可能的文件路径
- *
- *  @param fileName
- */
-+(NSString*) cachesPath:(NSString*) fileName package:(LVPackage*) package;
-
-/**
- *  创建图片
- *
- *  @param imageName
- */
-+(UIImage*) cachesImage:(NSString*) imageName package:(LVPackage*) package;
-
++(NSData*) dataReadFromFile:(NSString*) fileName;
 
 /*
  * NSCachesDirectory: 相对路径 -> 绝对路径
@@ -66,19 +51,21 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 + (NSString*) PathForCachesResource:(NSString* )relativePath ;
 
 /*
- * luaview专用目录: 相对路径 -> 绝对路径
- */
-+ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(LVPackage*) package;
-
-/*
  * NSDocumentDirectory: 相对路径 -> 绝对路径
  */
 + (NSString*) PathForDocumentsResource:(NSString*) relativePath;
 
 /*
+ * 
+ */
++ (NSString*) PathForBundle:(NSBundle*) bundle  relativePath:(NSString*) relativePath;
+
+/*
  * 创建目录
  */
 +(BOOL) createPath:(NSString*) path;
+
++(BOOL) exist:(NSString*) path;
 
 /*
  * json解析

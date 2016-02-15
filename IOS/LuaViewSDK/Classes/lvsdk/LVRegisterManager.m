@@ -49,6 +49,7 @@
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
 #import "LVPagerView.h"
+#import "LVPackage.h"
 #import "lV.h"
 #import "lVauxlib.h"
 #import "lVlib.h"
@@ -221,9 +222,8 @@ static int unicode(lv_State *L) {
     }
     return 0; /* number of results */
 }
-//------------------------------------------------------------------------
 
-static int requireMethodForLuaView (lv_State *L) {
+int requireMethodForLuaView (lv_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName ){
         // submodule
@@ -231,17 +231,21 @@ static int requireMethodForLuaView (lv_State *L) {
         
         LView* lview = (__bridge LView *)(L->lView);
         if( lview ) {
+            NSString *fullName = nil;
+
             if ( lview.runInSignModel ) {
-                fileName = [NSString stringWithFormat:@"%@.lv",fileName];
-                return [lview loadSignFile:fileName] == nil ? 1 : 0;
-            } else {
-                fileName = [NSString stringWithFormat:@"%@.lua",fileName];
-                return [lview loadFile:fileName] == nil ? 1 : 0;
+                fullName = [fileName stringByAppendingPathExtension:LVScriptExts[LVSignedScriptExtIndex]];
+                // return if succeeded
+                if ([lview loadSignFile:fullName] == nil) {
+                    return 1;
+                }
             }
+            
+            fullName = [fileName stringByAppendingPathExtension:LVScriptExts[!LVSignedScriptExtIndex]];
+            return [lview loadFile:fullName] == nil ? 1 : 0;
         }
     }
     return 0;
 }
-
 
 @end

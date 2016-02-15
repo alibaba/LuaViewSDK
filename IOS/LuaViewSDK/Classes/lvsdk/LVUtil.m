@@ -325,8 +325,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
 
 #pragma file data
 
-+(BOOL) saveData:(NSData*) data  toFile:(NSString*) fileName{
-    NSString* path = [LVUtil PathForCachesResource:fileName];
++(BOOL) saveData:(NSData*) data  toFile:(NSString*) path{
     if( path ){
         BOOL ret = [data writeToFile:path atomically:YES];
         return ret;
@@ -334,8 +333,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return NO;
 }
 
-+(NSData*) dataReadFromFile:(NSString*) fileName package:(LVPackage *)package{
-    NSString* path = [LVUtil cachesPath:fileName package:package];
++(NSData*) dataReadFromFile:(NSString*)path {
     if( path ){
         NSFileManager* fm = [NSFileManager defaultManager];
         NSData* data = [fm contentsAtPath:path];
@@ -351,55 +349,6 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
         return YES;
     }
     return NO;
-}
-
-+(NSString*) cachesPath:(NSString*) fileName package:(LVPackage *)package{
-    NSString* path = nil;
-    path = [LVUtil PathForLuaViewResource:fileName package:package];
-    if( [self exist:path] ){
-        return path;
-    }
-    path = [LVUtil PathForCachesResource:fileName];
-    if( [self exist:path] ){
-        return path;
-    }
-    path = [LVUtil PathForDocumentsResource:fileName];
-    if( [self exist:path] ){
-        return path;
-    }
-    path = [LVUtil PathForBundle:nil  relativePath:fileName];
-    if( [self exist:path] ){
-        return path;
-    }
-    NSArray* bundlePaths = [package bundleSearchPath];
-    for( NSString* bundleName in bundlePaths ) {
-        NSString* name = [NSString stringWithFormat:@"%@/%@", bundleName, fileName];
-        path = [LVUtil PathForBundle:nil  relativePath:name];
-        if( [self exist:path] ){
-            return path;
-        }
-    }
-    return nil;
-}
-
-+(UIImage*) cachesImage:(NSString*) imageName package:(LVPackage *)package{
-    NSString* path = [LVUtil cachesPath:imageName package:package];
-    if( path ){
-        return [UIImage imageWithContentsOfFile:path];
-    }
-    UIImage* image =  [UIImage imageNamed:imageName];
-    if( image ){
-        return image;
-    }
-    NSArray* bundlePaths = [package bundleSearchPath];
-    for( NSString* bundleName in bundlePaths ) {
-        NSString* name = [NSString stringWithFormat:@"%@/%@", bundleName, imageName];
-        UIImage* image =  [UIImage imageNamed:name];
-        if( image ){
-            return image;
-        }
-    }
-    return nil;
 }
 
 + (NSString*) PathForBundle:(NSBundle*) bundle  relativePath:(NSString*) relativePath {
@@ -425,22 +374,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return [cachesPath stringByAppendingPathComponent:relativePath];
 }
 
-+ (NSString*) PathForLuaViewResource:(NSString* )relativePath package:(LVPackage*) package{
-    {// 首次初始化目录
-        static int inited = NO;
-        if( !inited ){
-            inited = YES;
-            [LVUtil createPath:LUAVIEW_ROOT_PATH];
-        }
-    }
-    if( package.packageName.length>0 ) {
-        relativePath = [NSString stringWithFormat:@"%@/%@",package.packageName,relativePath];
-    }
-    return [LVUtil PathForCachesResource:[NSString stringWithFormat:@"%@/%@",LUAVIEW_ROOT_PATH,relativePath]];
-}
-
 +(BOOL) createPath:(NSString*) path{
-    path = [LVUtil PathForCachesResource:path];
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ( ![fileManage fileExistsAtPath:path] ) {
         NSError* error = nil;
@@ -784,7 +718,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     if( [fileName.lowercaseString hasSuffix:@".ttf"]==NO ) {
         fileName = [NSString stringWithFormat:@"%@.ttf",fileName];
     }
-    NSData *inData =  [LVUtil dataReadFromFile:fileName package:package];/* your font-file data */;
+    NSData *inData =  [package resourceWithName:fileName];/* your font-file data */;
     CFErrorRef error;
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
     CGFontRef font = CGFontCreateWithDataProvider(provider);

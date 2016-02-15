@@ -34,7 +34,7 @@ static int file_save (lv_State *L) {
         if ( userData ) {
             LVData* lvData1 = (__bridge LVData *)(userData->object);
             if( fileName && LVIsType(userData, Data) && lvData1.data){
-                if(  [LVUtil saveData:lvData1.data toFile:fileName] ){
+                if(  [LVUtil saveData:lvData1.data toFile:[LVUtil PathForCachesResource:fileName]] ){
                     lv_pushboolean(L, 1);
                     return 1;
                 }
@@ -49,7 +49,7 @@ static int file_read(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        NSData* data = [LVUtil dataReadFromFile:fileName package:lview.package];
+        NSData* data = [lview.package resourceWithName:fileName];
         if( data ){
             [LVData createDataObject:L data:data];
             return 1;
@@ -62,7 +62,7 @@ static int file_exist(lv_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, 1);
         LView* lview = (__bridge LView *)(L->lView);
-        if(  [LVUtil cachesPath:fileName package:lview.package] ){
+        if(  [lview.package resourcePathWithName:fileName] ){
             lv_pushboolean(L, 1);
             return 1;
         }

@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 ju.taobao.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
 
 @implementation LVHeads
 
+ NSString * const LVScriptExts[] = {@"lv", @"lua"};
+ const int LVSignedScriptExtIndex = 0;
 
  const char* LVType_View = "LVType_UserDataView";
  const char* LVType_Data = "LVType_UserDataData";

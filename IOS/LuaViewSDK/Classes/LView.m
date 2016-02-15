@@ -94,14 +94,14 @@
 #pragma mark - run
 -(NSString*) runFile:(NSString*) fileName{
     self.runInSignModel = FALSE;
-    NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
+    NSData* code = [self.package scriptWithName:fileName];
 
     return [self runData:code fileName:fileName];
 }
 
 -(NSString*) runSignFile:(NSString*) fileName{
     self.runInSignModel = TRUE;
-    NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
+    NSData* code = [self.package signedScriptWithName:fileName rsa:self.rsa];
 
     return [self runData:code fileName:fileName];
 }
@@ -112,7 +112,11 @@
 
 -(NSString*) runPackage:(NSString*) packageName args:(NSArray*) args{
     self.runInSignModel = TRUE;
-    self.package.packageName = packageName;
+    
+    NSString *packagePath = [LVPkgManager rootDirectoryOfPackage:packageName];
+    [self.package addScriptPath:packagePath];
+    [self.package addResourcePath:packagePath];
+    
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
     if( ret==nil && self.l ) {
@@ -138,12 +142,12 @@
 }
 
 - (NSString*)loadFile:(NSString *)fileName {
-    NSData* code = [LVUtil dataReadFromFile:fileName package:self.package];
+    NSData* code = [self.package scriptWithName:fileName];
     return [self loadData:code fileName:fileName];
 }
 
 - (NSString*)loadSignFile:(NSString *)fileName {
-    NSData* code = [LVPkgManager readLuaFile:fileName package:self.package rsa:self.rsa];
+    NSData* code = [self.package signedScriptWithName:fileName rsa:self.rsa];
     return [self loadData:code fileName:fileName];
 }
 
@@ -678,12 +682,14 @@ extern char g_debug_lua[];
     return 0;
 }
 
--(void) setBundleSearchPath:(NSArray*) path{
-    self.package.bundleSearchPath = path;
+-(void) setBundleSearchPath:(NSArray*) paths{
+    for (NSString *path in paths) {
+        [self.package addResourcePath:path];
+    }
 }
 
 -(NSArray*) bundleSearchPath{
-    return self.package.bundleSearchPath;
+    return self.package.resourcePaths;
 }
 
 -(NSString*) description{

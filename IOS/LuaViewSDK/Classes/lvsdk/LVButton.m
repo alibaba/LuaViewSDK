@@ -57,7 +57,7 @@
     } else {
         if( url ) {
             LVPackage* package = self.lv_lview.package;
-            [self setImage:[LVUtil cachesImage:url package:package] forState:state];
+            [self setImage:[package imageWithName:url] forState:state];
         }
     }
 }
