@@ -682,16 +682,6 @@ extern char g_debug_lua[];
     return 0;
 }
 
--(void) setBundleSearchPath:(NSArray*) paths{
-    for (NSString *path in paths) {
-        [self.bundle addResourcePath:path];
-    }
-}
-
--(NSArray*) bundleSearchPath{
-    return self.bundle.resourcePaths;
-}
-
 -(NSString*) description{
     return [NSString stringWithFormat:@"<View(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }

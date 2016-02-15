@@ -117,23 +117,13 @@
 #pragma mark -  设置资源搜索路径
 @interface LView ()
 
-/** 
- * 设置 图片资源bundle查询路径
- */
--(void) setBundleSearchPath:(NSArray*) path;
-
-
-/** 
- * 获取 图片资源bundle查询路径
- */
--(NSArray*) bundleSearchPath;
+@property (nonatomic,strong) LVBundle* bundle;
 
 /*
  * packageName: 包名  比如:"ppt"
  * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/3.2.12/ppt4.4.0.js" , "time":"2015-11-18 09:53"}
  */
 +(void) downLoadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
-
 
 @end
 
@@ -193,7 +183,6 @@
 #pragma mark - Property 系统使用的, 基本上不用关心细节
 @interface LView ()
 @property (nonatomic,assign) BOOL runInSignModel;// 加密模式，优先加载加密脚本
-@property (nonatomic,strong) LVBundle* bundle;
 
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view
 @property (nonatomic, weak)   LView* lv_lview;
