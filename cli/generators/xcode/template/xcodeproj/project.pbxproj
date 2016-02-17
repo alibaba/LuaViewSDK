@@ -450,7 +450,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../lv-sdk/IOS/LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = <%= @proj_name %>/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -463,7 +466,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../lv-sdk/IOS/LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = <%= @proj_name %>/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
