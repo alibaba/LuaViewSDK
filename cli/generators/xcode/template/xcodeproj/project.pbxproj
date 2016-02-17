@@ -16,8 +16,8 @@
 		3CF0CAB31C4F527000873E6C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0CAB21C4F527000873E6C /* AVFoundation.framework */; };
 		3CF0CAB51C4F527500873E6C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0CAB41C4F527500873E6C /* Accelerate.framework */; };
 		3CF0CAB71C4F527900873E6C /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0CAB61C4F527900873E6C /* libz.1.2.5.tbd */; };
-		3CF0CACC1C4F553E00873E6C /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0CAC91C4F553100873E6C /* LuaViewSDK.framework */; };
 		3CFD574B1C4F6D1E002C53F6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD574A1C4F6D1E002C53F6 /* main.lua */; };
+		3CFF78311C7476DB00847C05 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78301C7476D700847C05 /* libLuaViewLib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,13 +27,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3CF0CA751C4F520100873E6C;
 			remoteInfo = <%= @proj_name %>;
-		};
-		3CF0CAC41C4F553100873E6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CF0CAA01C4F525B00873E6C /* LuaViewSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 848B5C1E1A0A4CA000F59678;
-			remoteInfo = Demo;
 		};
 		3CF0CAC61C4F553100873E6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -55,6 +48,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 84C1D8981C16CB820058E974;
 			remoteInfo = Dummy;
+		};
+		3CFF782F1C7476D700847C05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CF0CAA01C4F525B00873E6C /* LuaViewSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3CFF77A91C7473A800847C05;
+			remoteInfo = LuaViewLib;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CF0CACC1C4F553E00873E6C /* LuaViewSDK.framework in Frameworks */,
+				3CFF78311C7476DB00847C05 /* libLuaViewLib.a in Frameworks */,
 				3CF0CAB71C4F527900873E6C /* libz.1.2.5.tbd in Frameworks */,
 				3CF0CAB51C4F527500873E6C /* Accelerate.framework in Frameworks */,
 				3CF0CAB31C4F527000873E6C /* AVFoundation.framework in Frameworks */,
@@ -173,10 +173,10 @@
 		3CF0CABE1C4F553100873E6C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3CF0CAC51C4F553100873E6C /* LuaViewSDK.app */,
 				3CF0CAC71C4F553100873E6C /* LuaViewTests.xctest */,
 				3CF0CAC91C4F553100873E6C /* LuaViewSDK.framework */,
 				3CF0CACB1C4F553100873E6C /* libDummy.a */,
+				3CFF78301C7476D700847C05 /* libLuaViewLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = juhuasuan;
+				ORGANIZATIONNAME = luaview;
 				TargetAttributes = {
 					3CF0CA751C4F520100873E6C = {
 						CreatedOnToolsVersion = 7.2;
@@ -273,13 +273,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3CF0CAC51C4F553100873E6C /* LuaViewSDK.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = LuaViewSDK.app;
-			remoteRef = 3CF0CAC41C4F553100873E6C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		3CF0CAC71C4F553100873E6C /* LuaViewTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -299,6 +292,13 @@
 			fileType = archive.ar;
 			path = libDummy.a;
 			remoteRef = 3CF0CACA1C4F553100873E6C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3CFF78301C7476D700847C05 /* libLuaViewLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLuaViewLib.a;
+			remoteRef = 3CFF782F1C7476D700847C05 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -451,7 +451,7 @@
 				INFOPLIST_FILE = <%= @proj_name %>/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan..<%= @proj_name %>;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -464,7 +464,7 @@
 				INFOPLIST_FILE = <%= @proj_name %>/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan..<%= @proj_name %>;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -475,7 +475,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = <%= @proj_name %>Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan..<%= @proj_name %>Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/<%= @proj_name %>.app/<%= @proj_name %>";
 			};
@@ -487,7 +487,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = <%= @proj_name %>Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan..<%= @proj_name %>Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luaview.<%= @proj_name %>Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/<%= @proj_name %>.app/<%= @proj_name %>";
 			};
