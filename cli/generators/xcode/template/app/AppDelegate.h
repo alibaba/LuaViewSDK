@@ -21,10 +21,6 @@ extern NSString * const LVReloadPackageNotification;
 
 @property (strong, nonatomic) UIWindow *window;
 
-#if TARGET_IPHONE_SIMULATOR
-
-- (NSString *)lvSourcePath;
-
-#endif
++ (NSString *)lvSourcePath;
 
 @end

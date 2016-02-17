@@ -101,16 +101,16 @@ NSString * const LVReloadPackageNotification = @"LVReloadPackageNotification";
 
 #endif // ENABLE_NETWORK_DEBUG || ENABLE_LOCAL_DEBUG
 
++ (NSString *)lvSourcePath {
 #if TARGET_IPHONE_SIMULATOR
-
-- (NSString *)lvSourcePath {
     NSString *filePath = [NSString stringWithUTF8String:__FILE__];
     NSMutableArray *paths = [[filePath componentsSeparatedByString:@"/"] mutableCopy];
     NSRange range = NSMakeRange([paths count] - 3, 3);
     [paths removeObjectsInRange:range];
     return [[paths componentsJoinedByString:@"/"] stringByAppendingPathComponent:@"lv-src"];
-}
-
+#else
+	return [[NSBundle mainBundle] resourcePath];
 #endif
+}
 
 @end
