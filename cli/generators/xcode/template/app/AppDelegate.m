@@ -54,6 +54,12 @@ NSString * const LVReloadPackageNotification = @"LVReloadPackageNotification";
 
 #if ENABLE_NETWORK_DEBUG || ENABLE_LOCAL_DEBUG
 
+/*
+ * Cmd + r 没有刷新时需要做如下设置:
+ * simulator -> Hardware -> Keyboard -> Connect Hardware Keyboard
+ *
+ * https://github.com/facebook/react-native/issues/306#issuecomment-86834162
+ */
 - (NSArray<UIKeyCommand *> *)keyCommands {
     UIKeyCommand *reloadKeyCommand = [UIKeyCommand
         keyCommandWithInput:@"r"
