@@ -48,15 +48,7 @@ NSString * const LVReloadPackageNotification = @"LVReloadPackageNotification";
     self.lv = [[LView alloc] initWithFrame:self.window.bounds];
 
 #if ENABLE_LOCAL_DEBUG
-    NSString *localSrcPath = [self lvSourcePath];
-    NSMutableArray *paths = [self.lv.bundleSearchPath mutableCopy] ?: [NSMutableArray array];
-    if (paths.count == 0) {
-        [paths addObject:localSrcPath];
-    } else {
-        [paths insertObject:localSrcPath atIndex:0];
-    }
-    
-    [self.lv setBundleSearchPath:paths];
+    [self.lv.bundle addScriptPath:[self lvSourcePath]];
 #endif // ENABLE_LOCAL_DEBUG
 }
 
