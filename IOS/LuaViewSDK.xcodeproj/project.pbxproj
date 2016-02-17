@@ -11,6 +11,104 @@
 		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
 		3C98A53A1C7C0C100001508E /* LViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C98A5381C7C0C100001508E /* LViewController.h */; };
 		3C98A53B1C7C0C100001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
+		3C98A5421C7C56270001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
+		3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
+		3CFF77B31C74740800847C05 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
+		3CFF77B41C74740800847C05 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
+		3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
+		3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
+		3CFF77B71C74740800847C05 /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		3CFF77B81C74740800847C05 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
+		3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
+		3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
+		3CFF77BB1C74740800847C05 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
+		3CFF77BC1C74740800847C05 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
+		3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
+		3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
+		3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
+		3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
+		3CFF77C21C74740800847C05 /* LVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BE81A78DD3E008D833B /* LVTableView.m */; };
+		3CFF77C31C74740800847C05 /* LVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84264BED1A78E66F008D833B /* LVTableViewCell.m */; };
+		3CFF77C41C74740800847C05 /* LVTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05F1BD7AEF300FDFEEA /* LVTableViewDelegate.m */; };
+		3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
+		3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
+		3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
+		3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
+		3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
+		3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
+		3CFF77CB1C74740800847C05 /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
+		3CFF77CC1C74740800847C05 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
+		3CFF77CD1C74740800847C05 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
+		3CFF77CE1C74740800847C05 /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		3CFF77CF1C74740800847C05 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
+		3CFF77D01C74740800847C05 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
+		3CFF77D11C74740800847C05 /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
+		3CFF77D21C74740800847C05 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
+		3CFF77D31C74740800847C05 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
+		3CFF77D41C74740800847C05 /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
+		3CFF77D51C74740800847C05 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
+		3CFF77D61C74740800847C05 /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
+		3CFF77D71C74740900847C05 /* LVGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGestureRecognizer.m */; };
+		3CFF77D81C74740900847C05 /* LVLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */; };
+		3CFF77D91C74740900847C05 /* LVPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGestureRecognizer.m */; };
+		3CFF77DA1C74740900847C05 /* LVPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGestureRecognizer.m */; };
+		3CFF77DB1C74740900847C05 /* LVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGestureRecognizer.m */; };
+		3CFF77DC1C74740900847C05 /* LVSwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGestureRecognizer.m */; };
+		3CFF77DD1C74740900847C05 /* LVTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGestureRecognizer.m */; };
+		3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
+		3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
+		3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
+		3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
+		3CFF77E21C74740900847C05 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
+		3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
+		3CFF77E41C74740900847C05 /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
+		3CFF77E51C74740900847C05 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
+		3CFF77E61C74740900847C05 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
+		3CFF77E71C74740900847C05 /* LVExternalLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */; };
+		3CFF77E81C74740900847C05 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
+		3CFF77E91C74740900847C05 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
+		3CFF77EA1C74740900847C05 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
+		3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
+		3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
+		3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
+		3CFF77EE1C74740900847C05 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
+		3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
+		3CFF77F01C74740900847C05 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
+		3CFF77F11C74740900847C05 /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
+		3CFF77F21C74740900847C05 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
+		3CFF77F31C74741400847C05 /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
+		3CFF77F41C74741400847C05 /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
+		3CFF77F51C74741400847C05 /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
+		3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
+		3CFF77F71C74741400847C05 /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
+		3CFF77F81C74741400847C05 /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
+		3CFF77F91C74741400847C05 /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
+		3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
+		3CFF77FB1C74741400847C05 /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
+		3CFF77FC1C74741400847C05 /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
+		3CFF77FD1C74741400847C05 /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
+		3CFF77FE1C74741400847C05 /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
+		3CFF77FF1C74741400847C05 /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
+		3CFF78001C74741400847C05 /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
+		3CFF78011C74741400847C05 /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
+		3CFF78021C74741400847C05 /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
+		3CFF78031C74741400847C05 /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
+		3CFF78041C74741400847C05 /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
+		3CFF78051C74741400847C05 /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
+		3CFF78061C74741400847C05 /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
+		3CFF78071C74741400847C05 /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
+		3CFF78081C74741400847C05 /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
+		3CFF78091C74741400847C05 /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
+		3CFF780A1C74741400847C05 /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
+		3CFF780B1C74741400847C05 /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
+		3CFF780C1C74741400847C05 /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
+		3CFF780D1C74741400847C05 /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
+		3CFF780E1C74741400847C05 /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
+		3CFF780F1C74741400847C05 /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
+		3CFF78101C74741400847C05 /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
+		3CFF78111C74741400847C05 /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
+		3CFF78121C74741400847C05 /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
 		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
 		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
@@ -200,6 +298,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3CFF77A71C7473A800847C05 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84C1D8961C16CB820058E974 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +324,7 @@
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
 		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
 		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
+		3CFF77A91C7473A800847C05 /* libLuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
@@ -418,6 +526,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3CFF77A61C7473A800847C05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84C1D6A01C16B09D0058E974 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -703,6 +818,7 @@
 				84C1D6A31C16B09D0058E974 /* LuaViewTests.xctest */,
 				84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */,
 				84C1D8981C16CB820058E974 /* libDummy.a */,
+				3CFF77A91C7473A800847C05 /* libLuaViewLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -991,6 +1107,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3CFF77A81C7473A800847C05 /* LuaViewLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CFF77B11C7473A800847C05 /* Build configuration list for PBXNativeTarget "LuaViewLib" */;
+			buildPhases = (
+				3CFF77A51C7473A800847C05 /* Sources */,
+				3CFF77A61C7473A800847C05 /* Frameworks */,
+				3CFF77A71C7473A800847C05 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LuaViewLib;
+			productName = LuaViewLib;
+			productReference = 3CFF77A91C7473A800847C05 /* libLuaViewLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		84C1D6A21C16B09D0058E974 /* LuaViewTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C1D6B51C16B09E0058E974 /* Build configuration list for PBXNativeTarget "LuaViewTests" */;
@@ -1053,6 +1186,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = dongxicheng;
 				TargetAttributes = {
+					3CFF77A81C7473A800847C05 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					84C1D6A21C16B09D0058E974 = {
 						CreatedOnToolsVersion = 7.1.1;
 						TestTargetID = 848B5C1D1A0A4CA000F59678;
@@ -1081,6 +1217,7 @@
 				84C1D6A21C16B09D0058E974 /* LuaViewTests */,
 				84C1D7C31C16C3CD0058E974 /* LuaViewSDK */,
 				84C1D8971C16CB820058E974 /* Dummy */,
+				3CFF77A81C7473A800847C05 /* LuaViewLib */,
 			);
 		};
 /* End PBXProject section */
@@ -1121,6 +1258,111 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3CFF77A51C7473A800847C05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CFF77F31C74741400847C05 /* lV.c in Sources */,
+				3CFF77F41C74741400847C05 /* lVapi.c in Sources */,
+				3CFF77F51C74741400847C05 /* lVauxlib.c in Sources */,
+				3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */,
+				3CFF77F71C74741400847C05 /* lVc.c in Sources */,
+				3CFF77F81C74741400847C05 /* lVcode.c in Sources */,
+				3CFF77F91C74741400847C05 /* lVdblib.c in Sources */,
+				3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */,
+				3CFF77FB1C74741400847C05 /* lVdo.c in Sources */,
+				3CFF77FC1C74741400847C05 /* lVdump.c in Sources */,
+				3CFF77FD1C74741400847C05 /* lVfunc.c in Sources */,
+				3CFF77FE1C74741400847C05 /* lVgc.c in Sources */,
+				3CFF77FF1C74741400847C05 /* lVinit.c in Sources */,
+				3CFF78001C74741400847C05 /* lViolib.c in Sources */,
+				3CFF78011C74741400847C05 /* lVlex.c in Sources */,
+				3CFF78021C74741400847C05 /* lVmathlib.c in Sources */,
+				3CFF78031C74741400847C05 /* lVmem.c in Sources */,
+				3CFF78041C74741400847C05 /* lVoadlib.c in Sources */,
+				3CFF78051C74741400847C05 /* lVobject.c in Sources */,
+				3CFF78061C74741400847C05 /* lVopcodes.c in Sources */,
+				3CFF78071C74741400847C05 /* lVoslib.c in Sources */,
+				3CFF78081C74741400847C05 /* lVparser.c in Sources */,
+				3CFF78091C74741400847C05 /* lVprint.c in Sources */,
+				3C98A5421C7C56270001508E /* LViewController.m in Sources */,
+				3CFF780A1C74741400847C05 /* lVstate.c in Sources */,
+				3CFF780B1C74741400847C05 /* lVstring.c in Sources */,
+				3CFF780C1C74741400847C05 /* lVstrlib.c in Sources */,
+				3CFF780D1C74741400847C05 /* lVtable.c in Sources */,
+				3CFF780E1C74741400847C05 /* lVtablib.c in Sources */,
+				3CFF780F1C74741400847C05 /* lVtm.c in Sources */,
+				3CFF78101C74741400847C05 /* lVundump.c in Sources */,
+				3CFF78111C74741400847C05 /* lVvm.c in Sources */,
+				3CFF78121C74741400847C05 /* lVzio.c in Sources */,
+				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
+				3CFF77B31C74740800847C05 /* LVInputStream.m in Sources */,
+				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
+				3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */,
+				3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */,
+				3CFF77B71C74740800847C05 /* LVDebugConnection.m in Sources */,
+				3CFF77B81C74740800847C05 /* LVBaseView.m in Sources */,
+				3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */,
+				3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */,
+				3CFF77BB1C74740800847C05 /* LVButton.m in Sources */,
+				3CFF77BC1C74740800847C05 /* LVImage.m in Sources */,
+				3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */,
+				3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */,
+				3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */,
+				3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */,
+				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
+				3CFF77C21C74740800847C05 /* LVTableView.m in Sources */,
+				3CFF77C31C74740800847C05 /* LVTableViewCell.m in Sources */,
+				3CFF77C41C74740800847C05 /* LVTableViewDelegate.m in Sources */,
+				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
+				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
+				3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */,
+				3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */,
+				3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */,
+				3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */,
+				3CFF77CB1C74740800847C05 /* LVScrollViewDelegate.m in Sources */,
+				3CFF77CC1C74740800847C05 /* LVCustomPanel.m in Sources */,
+				3CFF77CD1C74740800847C05 /* LVAlert.m in Sources */,
+				3CFF77CE1C74740800847C05 /* LVToast.m in Sources */,
+				3CFF77CF1C74740800847C05 /* LVAnimate.m in Sources */,
+				3CFF77D01C74740800847C05 /* LVAnimator.m in Sources */,
+				3CFF77D11C74740800847C05 /* LVStyledString.m in Sources */,
+				3CFF77D21C74740800847C05 /* LVTransform3D.m in Sources */,
+				3CFF77D31C74740800847C05 /* LVData.m in Sources */,
+				3CFF77D41C74740800847C05 /* LVDate.m in Sources */,
+				3CFF77D51C74740800847C05 /* LVTimer.m in Sources */,
+				3CFF77D61C74740800847C05 /* LVStruct.m in Sources */,
+				3CFF77D71C74740900847C05 /* LVGestureRecognizer.m in Sources */,
+				3CFF77D81C74740900847C05 /* LVLongPressGestureRecognizer.m in Sources */,
+				3CFF77D91C74740900847C05 /* LVPanGestureRecognizer.m in Sources */,
+				3CFF77DA1C74740900847C05 /* LVPinchGestureRecognizer.m in Sources */,
+				3CFF77DB1C74740900847C05 /* LVRotationGestureRecognizer.m in Sources */,
+				3CFF77DC1C74740900847C05 /* LVSwipeGestureRecognizer.m in Sources */,
+				3CFF77DD1C74740900847C05 /* LVTapGestureRecognizer.m in Sources */,
+				3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */,
+				3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */,
+				3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */,
+				3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */,
+				3CFF77E21C74740900847C05 /* LVDB.m in Sources */,
+				3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */,
+				3CFF77E41C74740900847C05 /* LVFile.m in Sources */,
+				3CFF77E51C74740900847C05 /* LVNavigation.m in Sources */,
+				3CFF77E61C74740900847C05 /* LVSystem.m in Sources */,
+				3CFF77E71C74740900847C05 /* LVExternalLinker.m in Sources */,
+				3CFF77E81C74740900847C05 /* LVMethod.m in Sources */,
+				3CFF77E91C74740900847C05 /* LVNativeObjBox.m in Sources */,
+				3CFF77EA1C74740900847C05 /* LVLuaObjBox.m in Sources */,
+				3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */,
+				3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */,
+				3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */,
+				3CFF77EE1C74740900847C05 /* LVRegisterManager.m in Sources */,
+				3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */,
+				3CFF77F01C74740900847C05 /* LView.m in Sources */,
+				3CFF77F11C74740900847C05 /* LVBundle.m in Sources */,
+				3CFF77F21C74740900847C05 /* LVBlock.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84C1D69F1C16B09D0058E974 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1245,6 +1487,34 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		3CFF77AF1C7473A800847C05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3CFF77B01C7473A800847C05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		848B5C3F1A0A4CA000F59678 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1438,6 +1708,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3CFF77B11C7473A800847C05 /* Build configuration list for PBXNativeTarget "LuaViewLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CFF77AF1C7473A800847C05 /* Debug */,
+				3CFF77B01C7473A800847C05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
