@@ -7,16 +7,9 @@
 
 #import "AppDelegate.h"
 #import "LView.h"
-#import "LVPkgManager.h"
-
-NSString * const LVReloadPackageNotification = @"LVReloadPackageNotification";
+#import "ViewController.h"
 
 @interface AppDelegate ()
-
-#if ENABLE_NETWORK_DEBUG
-@property(nonatomic, copy) NSString *packageURL;
-#endif
-@property(nonatomic, strong) LView *lv;
 
 @end
 
@@ -29,77 +22,11 @@ NSString * const LVReloadPackageNotification = @"LVReloadPackageNotification";
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [self rebuildLView];
-    UIViewController *vc = [UIViewController new];
-    vc.view = self.lv;
+    ViewController *vc = [ViewController new];
     self.window.rootViewController = vc;
-    
-#if ENABLE_NETWORK_DEBUG
-    self.packageURL = @"";
-    [self reloadPackage];
-#else
-    [self.lv runFile:@"main.lua"];
-#endif
     
     return YES;
 }
-
-- (void)rebuildLView {
-    self.lv = [[LView alloc] initWithFrame:self.window.bounds];
-
-#if ENABLE_LOCAL_DEBUG
-    [self.lv.bundle addScriptPath:[self lvSourcePath]];
-#endif // ENABLE_LOCAL_DEBUG
-}
-
-#if ENABLE_NETWORK_DEBUG || ENABLE_LOCAL_DEBUG
-
-/*
- * Cmd + r 没有刷新时需要做如下设置:
- * simulator -> Hardware -> Keyboard -> Connect Hardware Keyboard
- *
- * https://github.com/facebook/react-native/issues/306#issuecomment-86834162
- */
-- (NSArray<UIKeyCommand *> *)keyCommands {
-    UIKeyCommand *reloadKeyCommand = [UIKeyCommand
-        keyCommandWithInput:@"r"
-        modifierFlags:UIKeyModifierCommand
-        action:@selector(reloadPackage)];
-    
-    return @[reloadKeyCommand];
-}
-
-- (void)reloadPackage {
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:LVReloadPackageNotification object:nil];
-    
-#if ENABLE_NETWORK_DEBUG
-
-    [LVUtil download:self.packageURL callback:^(NSData *data) {
-        if (!data) {
-            return;
-        }
-        
-        NSString *pkgName = @"Main";
-        [LVPkgManager unpackageData:data packageName:pkgName localMode:NO];
-        
-        [self rebuildLView];
-        self.window.rootViewController.view = self.lv;
-        
-        [self.lv runPackage:@"Main"];
-    }];
-    
-#else
-
-    [self rebuildLView];
-    self.window.rootViewController.view = self.lv;
-    
-    [self.lv runFile:@"main.lua"];
-    
-#endif // ENABLE_NETWORK_DEBUG
-}
-
-#endif // ENABLE_NETWORK_DEBUG || ENABLE_LOCAL_DEBUG
 
 + (NSString *)lvSourcePath {
 #if TARGET_IPHONE_SIMULATOR
