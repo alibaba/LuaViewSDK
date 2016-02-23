@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C02D1D71C31106E00213386 /* LVAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
+		3C98A53A1C7C0C100001508E /* LViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C98A5381C7C0C100001508E /* LViewController.h */; };
+		3C98A53B1C7C0C100001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
 		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
 		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
 		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
@@ -213,6 +215,8 @@
 /* Begin PBXFileReference section */
 		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
+		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
+		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 				840AD5AD1A63ED7C003E837D /* lv514 */,
 				840AD5311A5EAB4A0075CB58 /* LView.h */,
 				840AD5321A5EAB4A0075CB58 /* LView.m */,
+				3C98A5381C7C0C100001508E /* LViewController.h */,
+				3C98A5391C7C0C100001508E /* LViewController.m */,
 				84E85C181C33B84B007DE3DF /* LVBundle.h */,
 				84E85C191C33B84B007DE3DF /* LVBundle.m */,
 				84E446961AEE0655009C9A8A /* LVBlock.h */,
@@ -925,6 +931,7 @@
 				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
 				84C1D8541C16C44B0058E974 /* LVDate.h in Headers */,
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
+				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
 				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
 				84C1D8571C16C44B0058E974 /* LVGestureRecognizer.h in Headers */,
 				84C1D8581C16C44B0058E974 /* LVLongPressGestureRecognizer.h in Headers */,
@@ -1149,6 +1156,7 @@
 				84C1D8281C16C4070058E974 /* lVoslib.c in Sources */,
 				84C1D8291C16C4070058E974 /* lVparser.c in Sources */,
 				84C1D82A1C16C4070058E974 /* lVprint.c in Sources */,
+				3C98A53B1C7C0C100001508E /* LViewController.m in Sources */,
 				84C1D82B1C16C4070058E974 /* lVstate.c in Sources */,
 				84C1D82C1C16C4070058E974 /* lVstring.c in Sources */,
 				84C1D82D1C16C4070058E974 /* lVstrlib.c in Sources */,

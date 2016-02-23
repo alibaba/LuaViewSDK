@@ -55,6 +55,8 @@
     // Test package
     [LVPkgManager unpackageFile:@"fire.zip" packageName:@"fire" checkTime:YES];
     [LVPkgManager clearCachesPath];
+    
+    [LViewController disableReloadKeyCommand:YES];
 }
 
 
@@ -79,7 +81,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* name =  self.names[indexPath.row];
-    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithSource:name];
+    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:name];
     [self.navigationController pushViewController:c animated:YES];
 }
 

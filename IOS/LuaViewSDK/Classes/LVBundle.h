@@ -19,6 +19,8 @@
 
 @property (nonatomic, readonly) NSString *currentPath;
 
+- (void)changeCurrentPath:(NSString *)path;
+
 /**
  * 可以是绝对路径也可以是相对bundle根目录的相对路径
  */

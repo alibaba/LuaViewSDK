@@ -40,6 +40,10 @@
     return [_fileManager currentDirectoryPath];
 }
 
+- (void)changeCurrentPath:(NSString *)path {
+    [_fileManager changeCurrentDirectoryPath:path];
+}
+
 - (NSArray *)resourcePaths {
     return [_resourcePaths copy];
 }

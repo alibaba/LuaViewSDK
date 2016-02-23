@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LViewController.h"
 
-@interface JHSLuaViewController : UIViewController
-
-- (id)initWithSource:(NSString*) source;
+@interface JHSLuaViewController : LViewController
 
 @end
