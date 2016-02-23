@@ -15,7 +15,7 @@ def exec_init(name)
         f.write('print ("hello world!")')
     }
 
-#    `git clone --bare https://github.com/alibaba/LuaViewSDK.git lv-sdk`
+#    `git clone https://github.com/alibaba/LuaViewSDK.git lv-sdk`
     `cp -R ~/WorkSpace/LuaViewSDK lv-sdk`
     
     require "./lv-sdk/cli/generators/xcode"
