@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C98A55A1C7D5B310001508E /* LaunchScreen.storyboard */; };
 		3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F81E1C706B1D00D1E0B7 /* main.m */; };
 		3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */; };
 		3CC2F8251C706B1D00D1E0B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8241C706B1D00D1E0B7 /* ViewController.m */; };
@@ -75,7 +76,6 @@
 		3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8951C706BFA00D1E0B7 /* line.png */; };
 		3CC2F8D21C706C0500D1E0B7 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */; };
 		3CC2F8E31C706C3700D1E0B7 /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */; };
-		3CC2F8F41C70712700D1E0B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8F21C70712700D1E0B7 /* LaunchScreen.storyboard */; };
 		3CC2F9091C70758000D1E0B7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9081C70758000D1E0B7 /* Accelerate.framework */; };
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
@@ -118,6 +118,7 @@
 /* Begin PBXFileReference section */
 		1D91B87B0C382EBA586DA7E1 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		3C98A55B1C7D5B310001508E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CC2F81A1C706B1D00D1E0B7 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC2F81E1C706B1D00D1E0B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -198,7 +199,6 @@
 		3CC2F8951C706BFA00D1E0B7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaViewSDK.xcodeproj; path = ../LuaViewSDK.xcodeproj; sourceTree = "<group>"; };
-		3CC2F8F31C70712700D1E0B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../../../TestProj/ios/TestProj/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CC2F9081C70758000D1E0B7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -262,7 +262,7 @@
 				3CC2F8231C706B1D00D1E0B7 /* ViewController.h */,
 				3CC2F8241C706B1D00D1E0B7 /* ViewController.m */,
 				3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */,
-				3CC2F8F21C70712700D1E0B7 /* LaunchScreen.storyboard */,
+				3C98A55A1C7D5B310001508E /* LaunchScreen.storyboard */,
 				3CC2F82E1C706B1D00D1E0B7 /* Info.plist */,
 				3CC2F81D1C706B1D00D1E0B7 /* Supporting Files */,
 			);
@@ -536,7 +536,7 @@
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
 				3CC2F8AD1C706BFA00D1E0B7 /* demoP_string.lua in Resources */,
 				3CC2F8C11C706BFA00D1E0B7 /* img10.tiff in Resources */,
-				3CC2F8F41C70712700D1E0B7 /* LaunchScreen.storyboard in Resources */,
+				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
 				3CC2F8B11C706BFA00D1E0B7 /* demoW1_shake.lua in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
 				3CC2F9191C70BB8E00D1E0B7 /* candle in Resources */,
@@ -676,10 +676,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3CC2F8F21C70712700D1E0B7 /* LaunchScreen.storyboard */ = {
+		3C98A55A1C7D5B310001508E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3CC2F8F31C70712700D1E0B7 /* Base */,
+				3C98A55B1C7D5B310001508E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
