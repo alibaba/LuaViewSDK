@@ -550,18 +550,33 @@ static int addSubview (lv_State *L) {
         UIView* viewRoot = (__bridge UIView *)(father->object);
         UIView* viewSub = (__bridge UIView *)(son->object);
         if( viewRoot && viewSub ){
-            if ( viewSub.superview!= viewRoot ) {
-                [viewSub removeFromSuperview];
-                [viewRoot addSubview:viewSub];
-                
-                [viewSub lv_alignSelfWithSuperRect:viewRoot.frame];
-            }
+            [viewSub removeFromSuperview];
+            [viewRoot addSubview:viewSub];
+            
+            [viewSub lv_alignSelfWithSuperRect:viewRoot.frame];
             lv_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
+
+#pragma -mark 运行环境
+static int children (lv_State *L) {
+    LView* lview = (__bridge LView *)(L->lView);
+    UIView* oldContent = lview.conentView;
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    UIView* newContentView = (__bridge UIView *)(user->object);
+    if ( lview && newContentView && lv_type(L, 2)==LV_TFUNCTION ) {
+        lv_settop(L, 2);
+        lview.conentView = newContentView;
+        lv_runFunctionWithArgs(L, 1, 0);
+    }
+    lview.conentView = oldContent;
+    return 0;
+}
+
 
 static int removeFromSuperview (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1365,7 +1380,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"removeGesture",       removeGestureRecognizer },
     
     {"addView",          addSubview },
+    {"children", children },
     {"removeFromSuper", removeFromSuperview },
+    {"removeFromParent", removeFromSuperview },
     {"removeAllViews", removeAllSubviews },
     
     {"rotation",  rotationZ },
@@ -1410,6 +1427,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"alignTop", alignTop},
     {"alignBottom", alignBottom},
     {"alignCenter", alignCenter},
+    
     {NULL, NULL}
 };
 
