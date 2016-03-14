@@ -47,6 +47,7 @@
         for( NSString* identifier in identifierArray ){
             [self registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
         }
+        self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
     }
     return self;
 }

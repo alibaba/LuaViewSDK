@@ -34,8 +34,18 @@ imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
 	end);
 
 imageView3 = Image();
-imageView3.frame(X0,Y0+w+Y0,w,w);
-imageView3.image("bt_catebrand_more.9");
+imageView3.frame(0,Y0+w+Y0,w,w);
+imageView3.image("bt_catebrand_more.9.png");
+
+imageView4 = Image();
+imageView4.backgroundColor(0xff00FF)
+imageView4.frame(150,300,200,200);
+imageView4.image("jhs.png");
+local saleType = 0;
+imageView4.callback(function ()
+	imageView4.scaleType(saleType)
+	saleType = saleType + 1;
+end)
 
 label.backgroundColor(0xFF);
 
