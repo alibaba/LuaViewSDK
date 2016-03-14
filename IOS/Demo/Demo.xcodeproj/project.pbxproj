@@ -81,6 +81,7 @@
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
 		3CC2F9191C70BB8E00D1E0B7 /* candle in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F9181C70BB8E00D1E0B7 /* candle */; };
+		8486B6011C96897500A82BA1 /* demoP_Json.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8486B6001C96897500A82BA1 /* demoP_Json.lua */; };
 		84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */; };
 		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
 		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
@@ -207,6 +208,7 @@
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3CC2F9181C70BB8E00D1E0B7 /* candle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = candle; sourceTree = "<group>"; };
+		8486B6001C96897500A82BA1 /* demoP_Json.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_Json.lua; sourceTree = "<group>"; };
 		84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ViewChildren.lua; sourceTree = "<group>"; };
 		84F9A0451C92CA7300481334 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button0.png; sourceTree = "<group>"; };
 		84F9A0461C92CA7300481334 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				3CC2F8701C706BFA00D1E0B7 /* demoO_Timer.lua */,
 				3CC2F8711C706BFA00D1E0B7 /* demoP_string.lua */,
 				3CC2F8721C706BFA00D1E0B7 /* demoP_System.lua */,
+				8486B6001C96897500A82BA1 /* demoP_Json.lua */,
 				3CC2F8731C706BFA00D1E0B7 /* demoV1_CustomError.lua */,
 				3CC2F8741C706BFA00D1E0B7 /* demoV1_Customloading.lua */,
 				3CC2F8751C706BFA00D1E0B7 /* demoW1_shake.lua */,
@@ -568,6 +571,7 @@
 				3CC2F8A31C706BFA00D1E0B7 /* demoG_TableView.lua in Resources */,
 				3CC2F8C51C706BFA00D1E0B7 /* img7.tiff in Resources */,
 				3CC2F8B71C706BFA00D1E0B7 /* demoZ_2015_testunit.lua in Resources */,
+				8486B6011C96897500A82BA1 /* demoP_Json.lua in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
 				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
