@@ -1,0 +1,42 @@
+function createButton(text, x, y, w, h, callback)
+    local button = Button();
+    button.frame(x, y, w, h);
+    button.text(text);
+    button.backgroundColor(0xfa0000);
+    button.callback(function()
+        if (callback) then
+            callback();
+        end
+    end);
+    button.adjustSize()
+    return button;
+end
+
+button1 = createButton("123456中文", 10, 10, 1000, 60);
+
+button2 = Image();
+button2.frame(10, 100 + 80, 100, 100);
+button2.image("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png");
+
+button2.callback(function()
+    print("我是图片按钮");
+    button2.adjustSize();
+end);
+
+obj = {};
+
+function obj.test(a)
+    print(self, a);
+end
+
+obj.test "good";
+
+
+button3 = Button()
+button3.frame(150, 180, 100, 100)
+--button3.image("http://img.article.pchome.net/00/37/78/46/pic_lib/wm/IconsLand_041.JPG", "http://online.sccnn.com/icon/517/actionIcons_006.png")
+button3.image("animate2", "http://online.sccnn.com/icon/517/actionIcons_006.png")
+--button3.image("animate2", "animate1")
+button3.callback(function()
+    print("button3 clicked")
+end)

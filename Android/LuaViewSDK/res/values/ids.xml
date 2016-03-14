@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="lv_viewpager" type="id" />
+
+    <!--通用tag-->
+    <item name="lv_tag" type="id" />
+
+    <!--初始化标记-->
+    <item name="lv_tag_init" type="id" />
+
+    <!--url-->
+    <item name="lv_tag_url" type="id" />
+
+    <!--callback-->
+    <item name="lv_tag_callback" type="id" />
+</resources>

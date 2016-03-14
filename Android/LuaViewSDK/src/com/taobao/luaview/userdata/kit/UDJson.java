@@ -1,0 +1,82 @@
+package com.taobao.luaview.userdata.kit;
+
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.userdata.base.BaseLuaTable;
+import com.taobao.luaview.util.JsonUtil;
+import com.taobao.luaview.util.LuaUtil;
+
+import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
+import org.luaj.vm2.lib.VarArgFunction;
+
+/**
+ * Json 用户数据封装
+ *
+ * @author song
+ * @date 15/9/6
+ */
+public class UDJson extends BaseLuaTable {
+
+    public UDJson(Globals globals, LuaValue metatable) {
+        super(globals, metatable);
+        init();
+    }
+
+    private void init() {
+        set("toTable", new toTable());
+        set("isValid", new isValid());
+    }
+
+    class isValid extends VarArgFunction {
+
+        @Override
+        public Varargs invoke(Varargs args) {
+            LuaValue target = args.arg(2);
+            if (target instanceof UDData) {
+                return valueOf(JsonUtil.isJson(((UDData) target).toJson(UDData.DEFAULT_ENCODE)));
+            } else if (LuaUtil.isString(target)) {
+                return valueOf(JsonUtil.isJson(target.optjstring(null)));
+            }
+            return LuaValue.FALSE;
+        }
+    }
+
+    class toTable extends VarArgFunction {
+
+        @Override
+        public Varargs invoke(Varargs args) {
+            final LuaValue target = args.arg(2);
+            final LuaValue callback = LuaUtil.getFunction(args, 3);
+            if (callback != null) {//通过callback来处理toTable
+                new SimpleTask1<LuaValue>() {
+                    @Override
+                    protected LuaValue doInBackground(Object... params) {
+                        return toTable(target);
+                    }
+
+                    @Override
+                    protected void onPostExecute(LuaValue result) {
+                        LuaUtil.callFunction(callback, result);
+                    }
+                }.execute();
+                return NIL;
+            } else {
+                return toTable(target);
+            }
+        }
+
+        private LuaValue toTable(LuaValue target) {
+            if (target instanceof UDData) {
+                return ((UDData) target).toTable(UDData.DEFAULT_ENCODE);
+            } else if (LuaUtil.isString(target)) {
+                return JsonUtil.toLuaTable(target.optjstring(null));
+            } else if (LuaUtil.isTable(target)) {
+                return target;
+            }
+            return NIL;
+        }
+    }
+
+
+}

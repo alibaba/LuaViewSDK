@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.taobao.android.luaview"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <!--internet-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--write file-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--network state-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--phone state-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--settings-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--audio-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--shake-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-sdk android:minSdkVersion="14" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        tools:replace="android:allowBackup,android:label">
+        <activity android:name="com.taobao.luaview.activity.LuaViewActivity" />
+    </application>
+
+    <!--config for Glide-->
+    <meta-data android:name="com.taobao.luaview.view.imageview.GlideConfiguration" android:value="GlideModule"/>
+
+</manifest>
