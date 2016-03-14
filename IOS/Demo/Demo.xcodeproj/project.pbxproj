@@ -76,6 +76,7 @@
 		3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8951C706BFA00D1E0B7 /* line.png */; };
 		3CC2F8D21C706C0500D1E0B7 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */; };
 		3CC2F8E31C706C3700D1E0B7 /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */; };
+		3CC2F8F41C70712700D1E0B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8F21C70712700D1E0B7 /* LaunchScreen.storyboard */; };
 		3CC2F9091C70758000D1E0B7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9081C70758000D1E0B7 /* Accelerate.framework */; };
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
@@ -85,6 +86,7 @@
 		84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */; };
 		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
 		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
+		3CFF78191C74743F00847C05 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +118,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 84C1D8981C16CB820058E974;
 			remoteInfo = Dummy;
+		};
+		3CFF78171C74743C00847C05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3CFF77A91C7473A800847C05;
+			remoteInfo = LuaViewLib;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -220,11 +229,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFF78191C74743F00847C05 /* libLuaViewLib.a in Frameworks */,
 				3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */,
 				3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */,
 				3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */,
 				3CC2F9091C70758000D1E0B7 /* Accelerate.framework in Frameworks */,
-				3CC2F8E31C706C3700D1E0B7 /* LuaViewSDK.framework in Frameworks */,
 				DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +396,7 @@
 				3CC2F8DA1C706C2300D1E0B7 /* LuaViewTests.xctest */,
 				3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */,
 				3CC2F8DE1C706C2300D1E0B7 /* libDummy.a */,
+				3CFF78181C74743C00847C05 /* libLuaViewLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,6 +534,13 @@
 			fileType = archive.ar;
 			path = libDummy.a;
 			remoteRef = 3CC2F8DD1C706C2300D1E0B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3CFF78181C74743C00847C05 /* libLuaViewLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLuaViewLib.a;
+			remoteRef = 3CFF78171C74743C00847C05 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
