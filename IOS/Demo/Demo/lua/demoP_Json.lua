@@ -3,4 +3,5 @@ object = Json.toTable( '{"a":false, "b":true, "c":{}, "d":0, "f":1 }' );
 print(object);
 
 -- 测试Lua对象转成native
-viewController.testJson(object);
+dic = viewController.testJson(object);
+print(dic)

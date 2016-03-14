@@ -114,6 +114,9 @@ void lv_pushUserdata(lv_State* L, void* p){///是否正确 ????????
 }
 
 NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
+    if( lv_type(L, index)!=LV_TTABLE ) {
+        return nil;
+    }
     lv_checkstack(L, 128);
     NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     //lv_settop(L, 8);
@@ -135,7 +138,7 @@ NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
         } else if( lv_type(L, -1)==LV_TTABLE ){
             value = lv_luaTableToDictionary(L,-1);
         } else if( lv_type(L, -1)==LV_TBOOLEAN ){
-            value = @(lv_toboolean(L, -1) );
+            value = @( ((BOOL)lv_toboolean(L, -1)) );
         }
         // stack now contains: -1 => value; -2 => key; -3 => table
         if( value && key ) {
@@ -146,10 +149,7 @@ NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
     }
     lv_pop(L, 1);
     // Stack is now the same as it was on entry to this function
-    if( dic.count>0 ){
-        return dic;
-    }
-    return nil;
+    return dic;
 }
 
 NSArray* lv_luaTableKeys(lv_State* L, int index){

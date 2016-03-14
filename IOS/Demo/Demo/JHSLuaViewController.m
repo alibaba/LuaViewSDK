@@ -88,7 +88,8 @@
 //    
 //}
 
--(void) testJson:(NSDictionary*) dic{
+-(NSDictionary*) testJson:(NSDictionary*) dic{
     NSLog(@"%@", dic);
+    return dic;
 }
 @end
