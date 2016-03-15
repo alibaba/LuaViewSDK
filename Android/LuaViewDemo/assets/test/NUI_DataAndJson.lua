@@ -1,5 +1,11 @@
 require("kit/lv_kit")
 
+
+local label = Label()
+label.text("请看日志输出")
+label.frame(0, 0, System.screenSize())
+
+
 data = Data(97, "abc", "def")
 print("1", data)
 

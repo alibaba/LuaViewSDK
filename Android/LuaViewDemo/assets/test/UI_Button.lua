@@ -31,12 +31,9 @@ end
 
 obj.test "good";
 
-
 button3 = Button()
 button3.frame(150, 180, 100, 100)
---button3.image("http://img.article.pchome.net/00/37/78/46/pic_lib/wm/IconsLand_041.JPG", "http://online.sccnn.com/icon/517/actionIcons_006.png")
 button3.image("animate2", "http://online.sccnn.com/icon/517/actionIcons_006.png")
---button3.image("animate2", "animate1")
 button3.callback(function()
     print("button3 clicked")
 end)
