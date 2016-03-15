@@ -2,4 +2,8 @@
 # IntelliJ project files
 .idea
 .gradle
-.build
+build
+gradle
+Android.iml
+local.properties
+LuaViewAndroid.iml
