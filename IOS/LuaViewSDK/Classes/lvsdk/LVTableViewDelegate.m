@@ -134,6 +134,7 @@ static inline NSInteger mapSection(NSInteger section){
         if(  [LVUtil call:l key1:"Section" key2:"SectionCount" key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
+                num = (num>0 ? num : 0);
                 return num;
             }
         }
@@ -153,6 +154,7 @@ static inline NSInteger mapSection(NSInteger section){
         if(  [LVUtil call:l key1:"Section" key2:"RowCount" key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
                 NSInteger num = lv_tonumber(l, -1);
+                num = (num>0 ? num : 0);
                 return num*2;
             }
         }
