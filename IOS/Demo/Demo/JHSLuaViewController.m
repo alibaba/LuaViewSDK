@@ -87,4 +87,9 @@
 //-(void) lv_setNavigationBarBackgroundImage:(UIImage*) image{
 //    
 //}
+
+-(NSDictionary*) testJson:(NSDictionary*) dic{
+    NSLog(@"%@", dic);
+    return dic;
+}
 @end

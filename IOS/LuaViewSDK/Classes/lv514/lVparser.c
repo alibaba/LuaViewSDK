@@ -1306,11 +1306,11 @@ static void ifstat (LexState *ls, int line) {
             lvK_concat(fs, &escapelist, lvK_jump(fs));
             lvK_patchtohere(fs, flist);
             flist = test_cond_then_block(ls,&javaMode);  /* ELSEIF cond THEN block */
-        } else if(  ls->t.token == TK_ELSE && ls->lookahead.token==TK_IF ){//新加语法 elseif == else if
-            lvX_next(ls);  /* skip IF */
-            lvK_concat(fs, &escapelist, lvK_jump(fs));
-            lvK_patchtohere(fs, flist);
-            flist = test_cond_then_block(ls,&javaMode);  /* ELSEIF cond THEN block */
+//        } else if(  ls->t.token == TK_ELSE && ls->lookahead.token==TK_IF ){//新加语法 elseif == else if
+//            lvX_next(ls);  /* skip IF */
+//            lvK_concat(fs, &escapelist, lvK_jump(fs));
+//            lvK_patchtohere(fs, flist);
+//            flist = test_cond_then_block(ls,&javaMode);  /* ELSEIF cond THEN block */
         } else {
             break;
         }
