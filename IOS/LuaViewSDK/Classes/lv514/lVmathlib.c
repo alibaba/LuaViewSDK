@@ -271,6 +271,7 @@ static const lvL_Reg mathlib[] = {
     {"sqrt",  math_sqrt},
     {"tanh",   math_tanh},
     {"tan",   math_tan},
+    {LUAVIEW_SYS_TABLE_KEY,   math_abs},
     {NULL, NULL}
 };
 

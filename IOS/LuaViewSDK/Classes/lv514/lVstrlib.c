@@ -855,6 +855,7 @@ static const lvL_Reg strlib[] = {
     {"reverse", str_reverse},
     {"sub", str_sub},
     {"upper", str_upper},
+    {LUAVIEW_SYS_TABLE_KEY, str_len},
     {NULL, NULL}
 };
 

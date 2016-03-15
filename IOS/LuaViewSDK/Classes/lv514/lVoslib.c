@@ -230,6 +230,7 @@ static const lvL_Reg syslib[] = {
   {"setlocale", os_setlocale},
   {"time",      os_time},
   {"tmpname",   os_tmpname},
+  {LUAVIEW_SYS_TABLE_KEY, os_time},
   {NULL, NULL}
 };
 

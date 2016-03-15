@@ -244,8 +244,16 @@ void lv_checkStack32(lv_State* l){
 }
 
 void lv_clearFirstTableValue(lv_State* L){
-    if( L && lv_gettop(L)>0 && lv_type(L, 1)==LV_TTABLE ) {
-        lv_remove(L, 1);
+    int num = lv_gettop(L);
+    if( num>1 && lv_type(L, 1)==LV_TTABLE ) {
+        lv_checkstack(L, 4);
+        lv_getfield(L, 1, LUAVIEW_SYS_TABLE_KEY);
+        if( lv_isnil(L, -1) ) {
+            lv_settop(L, num);
+        } else {
+            lv_settop(L, num);
+            lv_remove(L, 1);
+        }
     }
 }
 
