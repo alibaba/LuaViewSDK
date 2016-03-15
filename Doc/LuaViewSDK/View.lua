@@ -664,8 +664,8 @@ end
 
 
 --- 开始动画
- -- @tparam Animation animation 动画 
- -- @usage 简单动画
+-- @tparam Animation animation 动画 
+-- @usage 简单动画
 -- btn = Button();
 -- btn.size(60, 120)
 -- btn.text("按钮");
