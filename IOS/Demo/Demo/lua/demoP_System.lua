@@ -34,3 +34,32 @@ window.callback({
         ViewDidDisAppear = function ()
             System.keepScreenOn(false);-- 屏幕不常亮
         end})
+t = {1,2,3,a = 1 , b = 2}
+
+print( table.getn(t), table.getn(t) )
+
+print( math.abs(-1), math:abs(-1) )
+
+print( string.len("123"), string:len("123") )
+
+
+
+local t = os:date( "*t" );
+t.hour = 10;
+t.min = 0;
+t.sec = 0;
+local ostime = os:time(t);
+print(ostime)
+
+
+
+local t = os.date( "*t" );
+t.hour = 10;
+t.min = 0;
+t.sec = 0;
+local ostime = os.time(t);
+print(ostime)
+
+
+
+

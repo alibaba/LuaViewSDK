@@ -15,11 +15,13 @@
 #include "lVauxlib.h"
 #include "lVlib.h"
 
+void lv_clearFirstTableValue(lv_State* l);
 
 #define aux_getn(L,n)	(lvL_checktype(L, n, LV_TTABLE), lvL_getn(L, n))
 
 
 static int foreachi (lv_State *L) {
+  lv_clearFirstTableValue(L);
   int i;
   int n = aux_getn(L, 1);
   lvL_checktype(L, 2, LV_TFUNCTION);
@@ -37,6 +39,7 @@ static int foreachi (lv_State *L) {
 
 
 static int foreach (lv_State *L) {
+  lv_clearFirstTableValue(L);
   lvL_checktype(L, 1, LV_TTABLE);
   lvL_checktype(L, 2, LV_TFUNCTION);
   lv_pushnil(L);  /* first key */
@@ -54,6 +57,7 @@ static int foreach (lv_State *L) {
 
 
 static int maxn (lv_State *L) {
+  lv_clearFirstTableValue(L);
   lv_Number max = 0;
   lvL_checktype(L, 1, LV_TTABLE);
   lv_pushnil(L);  /* first key */
@@ -70,12 +74,14 @@ static int maxn (lv_State *L) {
 
 
 static int getn (lv_State *L) {
+  lv_clearFirstTableValue(L);
   lv_pushinteger(L, aux_getn(L, 1));
   return 1;
 }
 
 
 static int setn (lv_State *L) {
+  lv_clearFirstTableValue(L);
   lvL_checktype(L, 1, LV_TTABLE);
 #ifndef lvL_setn
   lvL_setn(L, 1, lvL_checkint(L, 2));
@@ -88,6 +94,7 @@ static int setn (lv_State *L) {
 
 
 static int tinsert (lv_State *L) {
+  lv_clearFirstTableValue(L);
   int e = aux_getn(L, 1) + 1;  /* first empty element */
   int pos;  /* where to insert new element */
   switch (lv_gettop(L)) {
@@ -116,6 +123,7 @@ static int tinsert (lv_State *L) {
 
 
 static int tremove (lv_State *L) {
+  lv_clearFirstTableValue(L);
   int e = aux_getn(L, 1);
   int pos = lvL_optint(L, 2, e);
   if (!(1 <= pos && pos <= e))  /* position is outside bounds? */
@@ -142,6 +150,7 @@ static void addfield (lv_State *L, lvL_Buffer *b, int i) {
 
 
 static int tconcat (lv_State *L) {
+  lv_clearFirstTableValue(L);
   lvL_Buffer b;
   size_t lsep;
   int i, last;
@@ -254,6 +263,7 @@ static void auxsort (lv_State *L, int l, int u) {
 }
 
 static int sort (lv_State *L) {
+  lv_clearFirstTableValue(L);
   int n = aux_getn(L, 1);
   lvL_checkstack(L, 40, "");  /* assume array is smaller than 2^40 */
   if (!lv_isnoneornil(L, 2))  /* is there a 2nd argument? */
@@ -276,6 +286,7 @@ static const lvL_Reg tab_funcs[] = {
   {"remove", tremove},
   {"setn", setn},
   {"sort", sort},
+  {LUAVIEW_SYS_TABLE_KEY, getn},
   {NULL, NULL}
 };
 
