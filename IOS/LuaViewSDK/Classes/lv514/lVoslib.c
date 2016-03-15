@@ -18,6 +18,7 @@
 
 #include "lVauxlib.h"
 #include "lVlib.h"
+void lv_clearFirstTableValue(lv_State* L);
 
 
 static int os_pushresult (lv_State *L, int i, const char *filename) {
@@ -36,6 +37,7 @@ static int os_pushresult (lv_State *L, int i, const char *filename) {
 
 
 static int os_execute (lv_State *L) {
+    lv_clearFirstTableValue(L);
     //lv_pushinteger(L, system(lvL_optstring(L, 1, NULL)));
     lv_pushinteger(L, 0);
     return 1;
@@ -43,12 +45,14 @@ static int os_execute (lv_State *L) {
 
 
 static int os_remove (lv_State *L) {
+    lv_clearFirstTableValue(L);
   const char *filename = lvL_checkstring(L, 1);
   return os_pushresult(L, remove(filename) == 0, filename);
 }
 
 
 static int os_rename (lv_State *L) {
+    lv_clearFirstTableValue(L);
   const char *fromname = lvL_checkstring(L, 1);
   const char *toname = lvL_checkstring(L, 2);
   return os_pushresult(L, rename(fromname, toname) == 0, fromname);
@@ -56,6 +60,7 @@ static int os_rename (lv_State *L) {
 
 
 static int os_tmpname (lv_State *L) {
+    lv_clearFirstTableValue(L);
     //  char buff[LV_TMPNAMBUFSIZE];
     //  int err;
     //  lv_tmpnam(buff, err);
@@ -67,12 +72,14 @@ static int os_tmpname (lv_State *L) {
 
 
 static int os_getenv (lv_State *L) {
+    lv_clearFirstTableValue(L);
   lv_pushstring(L, getenv(lvL_checkstring(L, 1)));  /* if NULL push nil */
   return 1;
 }
 
 
 static int os_clock (lv_State *L) {
+    lv_clearFirstTableValue(L);
   lv_pushnumber(L, ((lv_Number)clock())/(lv_Number)CLOCKS_PER_SEC);
   return 1;
 }
@@ -123,6 +130,7 @@ static int getfield (lv_State *L, const char *key, int d) {
 
 
 static int os_date (lv_State *L) {
+    lv_clearFirstTableValue(L);
   const char *s = lvL_optstring(L, 1, "%c");
   time_t t = lvL_opt(L, (time_t)lvL_checknumber, 2, time(NULL));
   struct tm *stm;
@@ -169,6 +177,7 @@ static int os_date (lv_State *L) {
 
 
 static int os_time (lv_State *L) {
+    lv_clearFirstTableValue(L);
   time_t t;
   if (lv_isnoneornil(L, 1))  /* called without args? */
     t = time(NULL);  /* get current time */
@@ -194,6 +203,7 @@ static int os_time (lv_State *L) {
 
 
 static int os_difftime (lv_State *L) {
+    lv_clearFirstTableValue(L);
   lv_pushnumber(L, difftime((time_t)(lvL_checknumber(L, 1)),
                              (time_t)(lvL_optnumber(L, 2, 0))));
   return 1;
@@ -203,6 +213,7 @@ static int os_difftime (lv_State *L) {
 
 
 static int os_setlocale (lv_State *L) {
+    lv_clearFirstTableValue(L);
   static const int cat[] = {LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY,
                       LC_NUMERIC, LC_TIME};
   static const char *const catnames[] = {"all", "collate", "ctype", "monetary",
@@ -215,6 +226,7 @@ static int os_setlocale (lv_State *L) {
 
 
 static int os_exit (lv_State *L) {
+    lv_clearFirstTableValue(L);
   exit(lvL_optint(L, 1, EXIT_SUCCESS));
 }
 
