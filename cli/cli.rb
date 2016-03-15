@@ -2,6 +2,7 @@
 
 SDK_DIR = 'lv-sdk'
 SRC_DIR = 'lv-src'
+PUBLIC_REPO = 'https://github.com/alibaba/LuaViewSDK.git'
 
 def exec_init(name)
     if Dir.exist? name then
@@ -15,12 +16,34 @@ def exec_init(name)
         f.write('print ("hello world!")')
     }
 
-#    `git clone https://github.com/alibaba/LuaViewSDK.git lv-sdk`
-    `cp -R ~/WorkSpace/LuaViewSDK lv-sdk`
+    `git clone #{PUBLIC_REPO} #{SDK_DIR}`
     
-    require "./lv-sdk/cli/generators/xcode"
+    require "./#{SDK_DIR}/cli/generators/xcode"
 
     Generator::Xcode.generate(name)
+end
+
+def local_update(path)
+	dest = SDK_DIR
+
+	if Dir.exist? dest then
+		`rm -rf #{dest}/*`
+	else
+		Dir.mkdir dest
+	end
+
+	`cp -R #{path}/* #{dest}`
+end
+
+def remote_update(path)
+	dest = SDK_DIR
+	if path == nil then
+		path = PUBLIC_REPO
+	end
+
+	`rm -rf #{dest}`
+
+	`git clone #{path} #{dest}`
 end
 
 command = ARGV[0]
@@ -37,5 +60,24 @@ when 'init' then
     else
         exec_init params[0]
     end
+when 'update' then
+	local = false
+	path = nil
+	if params[0] == '-l' then
+		local = true
+		path = params[1]
+		if path == nil then
+			puts 'Error: need specify sdk path'
+			exit
+		end
+	else
+		path = params[0]
+	end
+
+	if local then
+		local_update(path)
+	else
+		remote_update(path)
+	end
 else puts 'Usage: lv-cli <command> [<args>]'
 end
