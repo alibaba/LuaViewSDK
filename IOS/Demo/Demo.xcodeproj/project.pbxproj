@@ -56,7 +56,6 @@
 		3CC2F8BC1C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */; };
 		3CC2F8BD1C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */; };
 		3CC2F8BE1C706BFA00D1E0B7 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */; };
-		3CC2F8BF1C706BFA00D1E0B7 /* fire.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8831C706BFA00D1E0B7 /* fire.zip */; };
 		3CC2F8C01C706BFA00D1E0B7 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8841C706BFA00D1E0B7 /* img1.tiff */; };
 		3CC2F8C11C706BFA00D1E0B7 /* img10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8851C706BFA00D1E0B7 /* img10.tiff */; };
 		3CC2F8C21C706BFA00D1E0B7 /* img13.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8861C706BFA00D1E0B7 /* img13.tiff */; };
@@ -74,7 +73,6 @@
 		3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8931C706BFA00D1E0B7 /* hongbao.png */; };
 		3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8941C706BFA00D1E0B7 /* jhs.png */; };
 		3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8951C706BFA00D1E0B7 /* line.png */; };
-		3CC2F8D21C706C0500D1E0B7 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */; };
 		3CC2F9091C70758000D1E0B7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9081C70758000D1E0B7 /* Accelerate.framework */; };
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
@@ -191,7 +189,6 @@
 		3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA3_AnimateLiZi.lua; sourceTree = "<group>"; };
 		3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA4_AnimateSnow.lua; sourceTree = "<group>"; };
 		3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZB1_Animator.lua; sourceTree = "<group>"; };
-		3CC2F8831C706BFA00D1E0B7 /* fire.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = fire.zip; sourceTree = "<group>"; };
 		3CC2F8841C706BFA00D1E0B7 /* img1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img1.tiff; sourceTree = "<group>"; };
 		3CC2F8851C706BFA00D1E0B7 /* img10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img10.tiff; sourceTree = "<group>"; };
 		3CC2F8861C706BFA00D1E0B7 /* img13.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img13.tiff; sourceTree = "<group>"; };
@@ -209,7 +206,6 @@
 		3CC2F8931C706BFA00D1E0B7 /* hongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hongbao.png; sourceTree = "<group>"; };
 		3CC2F8941C706BFA00D1E0B7 /* jhs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jhs.png; sourceTree = "<group>"; };
 		3CC2F8951C706BFA00D1E0B7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
-		3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaViewSDK.xcodeproj; path = ../LuaViewSDK.xcodeproj; sourceTree = "<group>"; };
 		3CC2F9081C70758000D1E0B7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -289,7 +285,6 @@
 		3CC2F81D1C706B1D00D1E0B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */,
 				3CC2F81E1C706B1D00D1E0B7 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -360,7 +355,6 @@
 				3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */,
 				3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */,
 				3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */,
-				3CC2F8831C706BFA00D1E0B7 /* fire.zip */,
 				3CC2F8841C706BFA00D1E0B7 /* img1.tiff */,
 				3CC2F8851C706BFA00D1E0B7 /* img10.tiff */,
 				3CC2F8861C706BFA00D1E0B7 /* img13.tiff */,
@@ -555,7 +549,6 @@
 				3CC2F8B01C706BFA00D1E0B7 /* demoV1_Customloading.lua in Resources */,
 				3CC2F8A51C706BFA00D1E0B7 /* demoK_PagerView.lua in Resources */,
 				3CC2F8AA1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua in Resources */,
-				3CC2F8D21C706C0500D1E0B7 /* yw_1222.jpg in Resources */,
 				3CC2F8B91C706BFA00D1E0B7 /* demoZ_testunit.lua in Resources */,
 				3CC2F8A71C706BFA00D1E0B7 /* demoL_Alert.lua in Resources */,
 				3CC2F8AE1C706BFA00D1E0B7 /* demoP_System.lua in Resources */,
@@ -604,7 +597,6 @@
 				848645CD1CAB785D004F4FD8 /* demoP_Http.lua in Resources */,
 				3CC2F8C21C706BFA00D1E0B7 /* img13.tiff in Resources */,
 				3CC2F8BC1C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua in Resources */,
-				3CC2F8BF1C706BFA00D1E0B7 /* fire.zip in Resources */,
 				3CC2F8B51C706BFA00D1E0B7 /* demoZ1_luabox.lua in Resources */,
 				3CC2F8AC1C706BFA00D1E0B7 /* demoO_Timer.lua in Resources */,
 				3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */,
