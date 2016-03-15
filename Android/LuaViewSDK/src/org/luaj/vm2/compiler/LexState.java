@@ -2087,9 +2087,6 @@ public class LexState {
             this.lookahead();
             if (t.token == TK_ELSEIF) {
                 test_then_block(escapelist,javaMode);  /* ELSEIF cond THEN block */
-            } else if (t.token == TK_ELSE && lookahead.token==TK_IF) {// 支持 else if
-                this.next();//skip
-                test_then_block(escapelist,javaMode);  /* ELSEIF cond THEN block */
             } else {
                 break;
             }

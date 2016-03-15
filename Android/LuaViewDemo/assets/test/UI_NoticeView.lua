@@ -5,12 +5,12 @@ local width = System.screenSize()
 
 btn1 = Button()
 btn1.setCallback(function()
-    Notice(StyledString("测试一下Toast", {fontColor=0xffff0000, backgroundColor=0xff00ff00, fontSize=50}))
+    Toast(StyledString("测试一下Toast", {fontColor=0xffff0000, backgroundColor=0xff00ff00, fontSize=50}))
 end)
 
 btn2 = Button()
 btn2.callback(function()
-    local notice = Notice();
+    local notice = Toast();
     notice.show("xx")
 end)
 

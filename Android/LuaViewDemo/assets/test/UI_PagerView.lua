@@ -3,7 +3,7 @@ require "kit/lv_kit"
 
 local width, height = System.screenSize()
 
-local vp = ViewPager({
+local vp = PagerView({
     PageCount = 12,
     Indicator = function()
 --        活动指示器
