@@ -162,74 +162,107 @@
     <h3>例子:</h3>
     <ul>
         <pre class="example">
- tableView = TableView{
-     Section = {
-         SectionCount = <span class="number">2</span>, <span class="comment">-- section数量
-</span>
-         RowCount = ^(section){ <span class="comment">-- 每个section的行数
-</span>             <span class="keyword">return</span> <span class="number">10</span>;
-         }
-     },
-
-     Cell = {
-         Id = ^( section, row ){ <span class="comment">-- 指定section和row对应的Cell类型唯一识别号
-</span>             <span class="keyword">return</span>  <span class="string">"图片+文字"</span>;
-         }
-         <span class="string">"图片+文字"</span> = { <span class="comment">-- cell 具体样式
-</span>             Height = ^( section, row ){ <span class="comment">-- 指定section和row 对应的高度
-</span>                 <span class="keyword">return</span> cellHeight;
-             }
-             Init = ^(cell, section, row){ <span class="comment">-- 初始化cell
-</span>                 cell.icon = Image();
-                 cell.title = Label();
-                 <span class="global">print</span>(<span class="string">"构造Cell"</span>);
-             },
-             Layout = ^(cell, section, row){ <span class="comment">-- cell复用时调用
-</span>                 cell.icon.frame(<span class="number">0</span>, <span class="number">0</span>, cellHeight, cellHeight);
-                 cell.icon.image(imageUrl1);
-
-                 cell.title.frame(cellHeight, <span class="number">0</span>, w-cellHeight, cellHeight);
-                cell.title.yext(<span class="string">"测试"</span>..section ..<span class="string">"--"</span> .. row);
-             },
-             Callack = ^(cell, section, row ){ <span class="comment">-- 用户点击了section和row
-</span>                 <span class="global">print</span>(section, row);
-                 tableView.reload();
-                 System.gc();
-             }
-     },
-     Callback = {
-         PullDown=^(){
-             <span class="comment">-- 开始下拉刷新回调
-</span>         },
-         PullUp = ^(){
-             <span class="comment">-- 开始上拉刷新回调
-</span>         },
-         Scrolling=^(){
-             <span class="comment">-- 滚动中
-</span>         },
-         ScrollBegin = ^(){
-             <span class="comment">-- 开始滚动
-</span>         },
-         ScrollEnd=^(){
-             <span class="comment">-- 结束滚动
-</span>         }
-     }
-  };
-
- tableView.frame(<span class="number">0</span>,<span class="number">50</span>,w,h-<span class="number">100</span>);
+ w,h = System.screenSize();
+ window.backgroundColor(<span class="number">0</span>,<span class="number">1</span>);
+ cellHeight = <span class="number">100</span>
+ imageUrl1 = <span class="string">"http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"</span>
+ imageUrl2 = <span class="string">"http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"</span>
+ <span class="keyword">function</span> createTableView( )
+ 	<span class="keyword">local</span> tv = <span class="keyword">nil</span>;
+ 	tv = TableView {
+ 		Section = {
+ 			SectionCount = <span class="number">2</span>,
+ 			RowCount = <span class="keyword">function</span>(section)
+ 				<span class="keyword">return</span> <span class="number">10</span>;
+ 			<span class="keyword">end</span>
+ 		},
+ 		Cell = {
+ 			Id = <span class="keyword">function</span>( section, row )
+ 				<span class="keyword">if</span> ( section==<span class="number">1</span>  ) <span class="keyword">then</span>
+ 					<span class="keyword">return</span>  <span class="string">"ImageAndLabel"</span>;
+ 				<span class="keyword">else</span>
+ 					<span class="keyword">return</span> <span class="string">"ImageAndImage"</span>;
+ 				<span class="keyword">end</span>
+ 			<span class="keyword">end</span>,
+ 			ImageAndLabel = {
+ 				Size = <span class="keyword">function</span>( section, row )
+ 					<span class="keyword">return</span> cellHeight;
+ 				<span class="keyword">end</span>,
+ 				Init = <span class="keyword">function</span>(cell, section, row)
+ 					cell.icon = Image();
+ 					cell.title = Label();
+ 					<span class="global">print</span>(<span class="string">"构造Cell"</span>);
+ 					<span class="global">print</span>(cell.window);
+ 				<span class="keyword">end</span>,
+ 				Layout = <span class="keyword">function</span>(cell, section, row)
+ 					cell.icon.frame(<span class="number">0</span>, <span class="number">0</span>, cellHeight, cellHeight);
+ 					cell.icon.image(imageUrl1);
+ 					cell.title.frame(cellHeight, <span class="number">0</span>, w-cellHeight, cellHeight);
+ 					cell.title.text(<span class="string">"测试"</span>..section ..<span class="string">"--"</span> .. row);
+ 				<span class="keyword">end</span>,
+ 				Callback = <span class="keyword">function</span>(cell, section, row )
+ 					<span class="global">print</span>(section, row);
+ 					tv.stopRefreshing();
+ 					System.gc();
+ 				<span class="keyword">end</span>
+ 			},
+ 			ImageAndImage = {
+ 				Size = <span class="keyword">function</span>( section, row )
+ 					<span class="keyword">return</span> cellHeight;
+ 				<span class="keyword">end</span>,
+ 				Init = <span class="keyword">function</span>(cell, section, row)
+ 					cell.icon = Image();
+ 					cell.icon2 = Image();
+ 				<span class="keyword">end</span>,
+ 				Layout = <span class="keyword">function</span>(cell, section, row)
+ 					<span class="global">print</span>(window);
+ 					<span class="keyword">local</span> cellWdith, cellHeight = cell.window.size();
+ 					cell.icon.frame(<span class="number">0</span>, <span class="number">0</span>, cellHeight, cellHeight);
+ 					cell.icon.image(imageUrl1);
+ 					cell.icon2.frame(cellHeight+<span class="number">10</span>, <span class="number">0</span>, cellHeight, cellHeight);
+ 					cell.icon2.image(imageUrl1);
+ 				<span class="keyword">end</span>,
+ 				Callback = <span class="keyword">function</span>( cell, section, row )
+ 					<span class="global">print</span>(tv, section, row);
+ 					tv.stopRefreshing();
+ 					System.gc();
+ 					<span class="keyword">if</span>( row%<span class="number">2</span>==<span class="number">1</span> ) <span class="keyword">then</span>
+ 						tv.scrollToCell(<span class="number">1</span>,<span class="number">2</span>);
+ 					<span class="keyword">else</span>
+ 						tv.scrollToTop();
+ 					<span class="keyword">end</span>
+ 				<span class="keyword">end</span>
+ 			}
+ 		},
+ 		Callback = {
+ 			Scrolling = <span class="keyword">function</span>( firstVisibleSection, firstVisibleRow, visibleCellCount )
+ 				<span class="global">print</span>(<span class="string">"scrolling"</span>, firstVisibleSection,<span class="string">"---"</span> ,firstVisibleRow, <span class="string">"---"</span>, visibleCellCount);
+ 			<span class="keyword">end</span>,
+ 			ScrollBegin = <span class="keyword">function</span>(firstVisibleSection, firstVisibleRow, visibleCellCount )
+ 				<span class="global">print</span>(<span class="string">"scrolling begin"</span>, firstVisibleSection,<span class="string">"---"</span> ,firstVisibleRow, <span class="string">"---"</span>, visibleCellCount);
+ 			<span class="keyword">end</span>,
+ 			ScrollEnd = <span class="keyword">function</span>(firstVisibleSection, firstVisibleRow, visibleCellCount )
+ 				<span class="global">print</span>(<span class="string">"scrolling end"</span>, firstVisibleSection,<span class="string">"---"</span> ,firstVisibleRow, <span class="string">"---"</span>, visibleCellCount);
+ 			<span class="keyword">end</span>
+ 		}
+ 	};
+ 	<span class="keyword">return</span> tv;
+ <span class="keyword">end</span>
+ tableView = createTableView();
+ tableView.dividerHeight(<span class="number">20</span>);
+ loading = <span class="keyword">false</span>;
+ tableView.frame(<span class="number">0</span>,<span class="number">0</span>,w,h-<span class="number">64</span>);
  tableView.backgroundColor(<span class="number">0xffFFFF</span>);
-
- <span class="keyword">local</span> head = Button();
- head.title(<span class="string">"我是头"</span>);
- head.frame(<span class="number">0</span>,<span class="number">0</span>,w,<span class="number">100</span>);
- head.backgroundColor(<span class="number">0xff</span>);
- tableView.header( head );
-
- <span class="keyword">local</span> foot = Button();
- foot.title(<span class="string">"我是结尾"</span>);
- foot.frame(<span class="number">0</span>,<span class="number">0</span>,w,<span class="number">100</span>);
- foot.backgroundColor(<span class="number">0xff0000</span>);
- tableView.footer( foot );
+ header = Button();
+ header.title(<span class="string">"我是头"</span>);
+ header.frame(<span class="number">0</span>,<span class="number">0</span>,w,<span class="number">100</span>);
+ header.backgroundColor(<span class="number">0xff</span>);
+ tableView.header(header);
+ footer = Button();
+ footer.title(<span class="string">"我是结尾"</span>);
+ footer.frame(<span class="number">0</span>,<span class="number">0</span>,w,<span class="number">100</span>);
+ footer.backgroundColor(<span class="number">0xff0000</span>);
+ tableView.footer(footer);
     </pre>
     </ul>
 
