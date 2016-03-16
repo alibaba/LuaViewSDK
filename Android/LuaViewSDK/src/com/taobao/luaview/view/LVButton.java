@@ -2,6 +2,7 @@ package com.taobao.luaview.view;
 
 import android.widget.Button;
 
+import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDButton;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.view.interfaces.ILVView;
@@ -22,6 +23,7 @@ public class LVButton extends Button implements ILVView {
     public LVButton(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.context);
         this.mLuaUserdata = new UDButton(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.setTextSize(UDFontSize.FONTSIZE_SMALL);
     }
 
     @Override

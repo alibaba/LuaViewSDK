@@ -2,6 +2,7 @@ package com.taobao.luaview.view;
 
 import android.widget.EditText;
 
+import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDEditText;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.view.interfaces.ILVView;
@@ -22,6 +23,7 @@ public class LVEditText extends EditText implements ILVView {
     public LVEditText(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.context);
         this.mLuaUserdata = new UDEditText(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.setTextSize(UDFontSize.FONTSIZE_SMALL);
     }
 
     @Override

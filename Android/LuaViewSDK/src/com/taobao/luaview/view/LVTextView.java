@@ -3,6 +3,7 @@ package com.taobao.luaview.view;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.view.interfaces.ILVView;
@@ -26,6 +27,7 @@ public class LVTextView extends TextView implements ILVView {
         this.setIncludeFontPadding(false);//设置默认TextView不包含字体的padding，否则adjustSize的时候拿到的高度有问题
         this.setGravity(Gravity.CENTER_VERTICAL);//默认竖直居中
         this.setLines(1);//默认一行
+        this.setTextSize(UDFontSize.FONTSIZE_SMALL);
 //        this.setEllipsize(TextUtils.TruncateAt.END);//默认在最后有3个点
     }
 
