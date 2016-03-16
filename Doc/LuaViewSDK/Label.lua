@@ -46,14 +46,38 @@ end
 function font()
 end
 
+--- 设置Label字体大小
+-- @number fontSize
+function fontSize ()
+end
+
+--- 获取Label字体大小
+-- @treturn number fontSize
+function fontSize()
+end
+
+--- 设置Label字体大小
+-- @number fontSize
+function textSize ()
+end
+
+--- 获取Label字体大小
+-- @treturn number fontSize
+function textSize()
+end
+
 
 --- 设置Label文本对齐方式
 -- @int align 可选参数
 -- @usage TextAlignment
--- NSTextAlignmentLeft      = 0,    -- Visually left aligned
--- NSTextAlignmentCenter    = 1,    -- Visually centered
--- NSTextAlignmentRight     = 2,    -- Visually right aligned
---      
+-- TextAlign.LEFT -- 左对齐,上下居中
+-- TextAlign.RIGHT -- 右对齐,上下居中
+-- TextAlign.CENTER -- 左右居中,上下居中
+-- cell.nameLabel = Label()
+-- cell.nameLabel.lineCount(2)
+-- cell.nameLabel.textAlign(TextAlign.LEFT)
+-- cell.nameLabel.backgroundColor(self.colors.white, 0)
+-- 
 function textAlign()
 end
 
@@ -65,6 +89,15 @@ end
 
 --- 设置Label最多行数
 -- @int num 行数
+-- @usage TextAlignment
+-- TextAlign.LEFT -- 左对齐,上下居中
+-- TextAlign.RIGHT -- 右对齐,上下居中
+-- TextAlign.CENTER -- 左右居中,上下居中
+-- cell.nameLabel = Label()
+-- cell.nameLabel.lineCount(2)
+-- cell.nameLabel.textAlign(TextAlign.LEFT)
+-- cell.nameLabel.backgroundColor(self.colors.white, 0)
+-- 
 function lineCount ()
 end
 
@@ -75,6 +108,13 @@ end
 
 
 --- 让Label字体大小适应宽度, 设置的字体为最大字体, 如果文字超出会缩小字体.
+-- @bool yes 是否自适应字体大小(Label的边框固定,如果字数太多字体会缩小保证显示完整)
+-- @usage 
+-- cell.infoRight = Label();
+-- cell.infoRight.frame( cellW-labelW-dx, y0, labelW, barH);
+-- cell.infoRight.adjustFontSize(true);
+-- cell.infoBackground.backgroundColor(0xfff1d1);
+-- cell.infoRight.textAlign(TextAlign.RIGHT);
 function adjustFontSize()
 end
 

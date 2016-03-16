@@ -132,6 +132,22 @@
 	<td class="summary">获取Label字体</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#fontSize">fontSize (fontSize)</a></td>
+	<td class="summary">设置Label字体大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fontSize">fontSize ()</a></td>
+	<td class="summary">获取Label字体大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#textSize">textSize (fontSize)</a></td>
+	<td class="summary">设置Label字体大小</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#textSize">textSize ()</a></td>
+	<td class="summary">获取Label字体大小</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#textAlign">textAlign (align)</a></td>
 	<td class="summary">设置Label文本对齐方式</td>
 	</tr>
@@ -148,7 +164,7 @@
 	<td class="summary">获取Label最多行数</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#adjustFontSize">adjustFontSize ()</a></td>
+	<td class="name" nowrap><a href="#adjustFontSize">adjustFontSize (yes)</a></td>
 	<td class="summary">让Label字体大小适应宽度, 设置的字体为最大字体, 如果文字超出会缩小字体.</td>
 	</tr>
 </table>
@@ -330,6 +346,92 @@
 
 </dd>
     <dt>
+    <a name = "fontSize"></a>
+    <strong>fontSize (fontSize)</strong>
+    </dt>
+    <dd>
+    设置Label字体大小
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">fontSize</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fontSize"></a>
+    <strong>fontSize ()</strong>
+    </dt>
+    <dd>
+    获取Label字体大小
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        fontSize
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "textSize"></a>
+    <strong>textSize (fontSize)</strong>
+    </dt>
+    <dd>
+    设置Label字体大小
+
+
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">fontSize</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "textSize"></a>
+    <strong>textSize ()</strong>
+    </dt>
+    <dd>
+    获取Label字体大小
+
+
+
+    <h3>返回值:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        fontSize
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "textAlign"></a>
     <strong>textAlign (align)</strong>
     </dt>
@@ -351,10 +453,14 @@
     <h3>例子:</h3>
     <ul>
         <pre class="example"> TextAlignment
- NSTextAlignmentLeft      = <span class="number">0</span>,    <span class="comment">-- Visually left aligned
-</span> NSTextAlignmentCenter    = <span class="number">1</span>,    <span class="comment">-- Visually centered
-</span> NSTextAlignmentRight     = <span class="number">2</span>,    <span class="comment">-- Visually right aligned
-</span>      </pre>
+ TextAlign.LEFT <span class="comment">-- 左对齐,上下居中
+</span> TextAlign.RIGHT <span class="comment">-- 右对齐,上下居中
+</span> TextAlign.CENTER <span class="comment">-- 左右居中,上下居中
+</span> cell.nameLabel = Label()
+ cell.nameLabel.lineCount(<span class="number">2</span>)
+ cell.nameLabel.textAlign(TextAlign.LEFT)
+ cell.nameLabel.backgroundColor(self.colors.white, <span class="number">0</span>)
+ </pre>
     </ul>
 
 </dd>
@@ -397,6 +503,18 @@
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> TextAlignment
+ TextAlign.LEFT <span class="comment">-- 左对齐,上下居中
+</span> TextAlign.RIGHT <span class="comment">-- 右对齐,上下居中
+</span> TextAlign.CENTER <span class="comment">-- 左右居中,上下居中
+</span> cell.nameLabel = Label()
+ cell.nameLabel.lineCount(<span class="number">2</span>)
+ cell.nameLabel.textAlign(TextAlign.LEFT)
+ cell.nameLabel.backgroundColor(self.colors.white, <span class="number">0</span>)
+ </pre>
+    </ul>
 
 </dd>
     <dt>
@@ -421,16 +539,32 @@
 </dd>
     <dt>
     <a name = "adjustFontSize"></a>
-    <strong>adjustFontSize ()</strong>
+    <strong>adjustFontSize (yes)</strong>
     </dt>
     <dd>
     让Label字体大小适应宽度, 设置的字体为最大字体, 如果文字超出会缩小字体.
 
 
+    <h3>参数:</h3>
+    <ul>
+        <li><span class="parameter">yes</span>
+            <span class="types"><span class="type">bool</span></span>
+         是否自适应字体大小(Label的边框固定,如果字数太多字体会缩小保证显示完整)
+        </li>
+    </ul>
 
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ cell.infoRight = Label();
+ cell.infoRight.frame( cellW-labelW-dx, y0, labelW, barH);
+ cell.infoRight.adjustFontSize(<span class="keyword">true</span>);
+ cell.infoBackground.backgroundColor(<span class="number">0xfff1d1</span>);
+ cell.infoRight.textAlign(TextAlign.RIGHT);</pre>
+    </ul>
 
 </dd>
 </dl>
