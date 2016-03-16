@@ -44,16 +44,16 @@ end
 
 --- 设置delegate
 -- @tparam function delegate 代理方法
--- @usage button.callback( 
+-- @usage textField.callback( 
 --    {
---         BeginEditing = ^(){ --开始编辑
---         },
---         EndEditing = ^(){ -- 结束编辑
---         },
---         Clear = ^(){ -- 清理
---         },
---         Return = ^(){ --返回
---         }
+--         BeginEditing = function() --开始编辑
+--         end,
+--         EndEditing = function() -- 结束编辑
+--         end,
+--         Clear = function() -- 清理
+--         end,
+--         Return = function() --返回
+--         end
 --    } 
 -- );
 --

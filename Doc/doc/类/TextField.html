@@ -316,16 +316,16 @@
 
     <h3>例子:</h3>
     <ul>
-        <pre class="example"> button.callback(
+        <pre class="example"> textField.callback(
     {
-         BeginEditing = ^(){ <span class="comment">--开始编辑
-</span>         },
-         EndEditing = ^(){ <span class="comment">-- 结束编辑
-</span>         },
-         Clear = ^(){ <span class="comment">-- 清理
-</span>         },
-         Return = ^(){ <span class="comment">--返回
-</span>         }
+         BeginEditing = <span class="keyword">function</span>() <span class="comment">--开始编辑
+</span>         <span class="keyword">end</span>,
+         EndEditing = <span class="keyword">function</span>() <span class="comment">-- 结束编辑
+</span>         <span class="keyword">end</span>,
+         Clear = <span class="keyword">function</span>() <span class="comment">-- 清理
+</span>         <span class="keyword">end</span>,
+         Return = <span class="keyword">function</span>() <span class="comment">--返回
+</span>         <span class="keyword">end</span>
     }
  );</pre>
     </ul>
