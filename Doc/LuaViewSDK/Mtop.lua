@@ -7,35 +7,26 @@
 -- @table params Mtop请求参数 (可选)
 -- @tparam function callback (可选)
 -- @usage 
--- Mtop( 
---     {
---         method = "mtop.ju.block.optionminisite.get",
---         version= "1.0",
---         params = {
---             platformId = "8001",
---             page = 1,
---             pageSize = 10000,
---             optStr = self.optStr
---            },
---     },
---     ^( data, error){
---         self.isLoading = false;
---         if( data ) {
---             local model = data.model;
---             if( self.extend==nil )
---                 self.extend = {};
---             self.extend.syncOutput = model;
---             self.haveItems = true;
---             print(self.displayName, self.optStr, "loaded: ");
---         } else {
---             print(self.displayName, self.optStr, "error: ", error);
---         }
---         if( callback ) {
---            callback(option);
---         }
---         self.hiddenLoadingView();
---     }
--- );
+-- function net.updateOptionBanner()
+-- 	local mtop  = Mtop( 
+-- 		  {
+-- 				method = "mtop.options.get",
+-- 				version= "1.0",
+-- 				params = {
+-- 							platformId = "7101",
+-- 							page = 1,
+-- 							pageSize = 1000,
+-- 						 },
+-- 		  },
+-- 		  function( data, error) 
+-- 		  		if ( data ) then
+-- 			  			print("updateOptionBanner", data);
+-- 		  		end
+-- 		  end
+-- 	);
+-- 	mtop.request();
+-- end
+-- 
 function Mtop()
 end
 

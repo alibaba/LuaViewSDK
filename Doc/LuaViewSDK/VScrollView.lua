@@ -1,12 +1,12 @@
---- HScrollView 
--- 水平滚动的View 
+--- VScrollView 
+-- 垂直滚动的View 
 --
--- HScrollView的父类是[View](./View.html)
--- @classmod HScrollView
+-- VScrollView的父类是[View](./View.html), 子类有[TableView](./TableView.html), [CollectionView](./CollectionView.html)
+-- @classmod VScrollView
 
 
---- 通过这个方法创建一个HScrollView对象
--- @treturn HScrollView view
+--- 通过这个方法创建一个VScrollView对象
+-- @treturn VScrollView view
 -- @usage 
 -- Cell
 -- local scrW, scrH = System.screenSize();
@@ -21,7 +21,7 @@
 --     function cell.init()
 --         if (self.cellInited == false ) then
 --             self.cellInited = true;
---             self.scrollView = HScrollView();
+--             self.scrollView = VScrollView();
 --             self.scrollView.frame( 0, 0, cellW, cellH );
 --             self.items = {};
 --             for i=1,3 do
@@ -49,7 +49,7 @@
 --     cell.init();
 --     return cell;
 -- end
-function HScrollView()
+function VScrollView()
 end
 
 --- 设置ContentSize大小

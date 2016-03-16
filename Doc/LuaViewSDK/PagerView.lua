@@ -1,20 +1,20 @@
---- PageView
+--- PagerView
 -- 横向分页滚动的View
 --
--- PageView的父类是[View](View.html)
--- @classmod PageView
+-- PagerView的父类是[HScrollView](./HScrollView.html)
+-- @classmod PagerView
 
 
 
---- 创建一个PageView对象
+--- 创建一个PagerView对象
 -- @tparam table delegate 参数
--- @treturn PageView pageView
--- @usage local pageView = PageView();
+-- @treturn PagerView pageView
+-- @usage local pageView = PagerView();
 -- require "lv_kit"
 -- 
 -- local width, height= System.screenSize()
 -- 
--- pageView = PageView({
+-- pageView = PagerView({
 --     PageCount = 12,
 --     Pages = {
 --         Init = function(page, pos)
@@ -40,7 +40,7 @@
 -- 
 -- windowWidth , windowHeight = window.size();
 -- pageView.frame(0,0,windowWidth,windowHeight-64)
-function PageView()
+function PagerView()
 end
 
 --- 设置当前页面
@@ -52,7 +52,7 @@ end
 function currentPage( )
 end
 
---- 重新加载PageView
+--- 重新加载PagerView
 function reload()
 end
 

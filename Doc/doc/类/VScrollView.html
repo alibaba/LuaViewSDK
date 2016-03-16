@@ -61,7 +61,7 @@
   <li><a href="../类/CollectionView.html">CollectionView</a></li>
   <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
   <li><a href="../类/Data.html">Data</a></li>
-  <li><font color=#777777><strong>HScrollView</strong></font></li>
+  <li><a href="../类/HScrollView.html">HScrollView</a></li>
   <li><a href="../类/Image.html">Image</a></li>
   <li><a href="../类/Label.html">Label</a></li>
   <li><a href="../类/LoadingIndicator.html">LoadingIndicator</a></li>
@@ -75,7 +75,7 @@
   <li><a href="../类/Timer.html">Timer</a></li>
   <li><a href="../类/Toast.html">Toast</a></li>
   <li><a href="../类/Transform3D.html">Transform3D</a></li>
-  <li><a href="../类/VScrollView.html">VScrollView</a></li>
+  <li><font color=#777777><strong>VScrollView</strong></font></li>
   <li><a href="../类/View.html">View</a></li>
   <li><a href="../类/string.html">string</a></li>
 </ul>
@@ -89,17 +89,17 @@
 
 <div id="content">
 
-<h1>Class <code>HScrollView</code></h1>
-<p>HScrollView
- 水平滚动的View</p>
-<p> HScrollView的父类是<a href="./View.html">View</a></p>
+<h1>Class <code>VScrollView</code></h1>
+<p>VScrollView
+ 垂直滚动的View</p>
+<p> VScrollView的父类是<a href="./View.html">View</a>, 子类有<a href="./TableView.html">TableView</a>, <a href="./CollectionView.html">CollectionView</a></p>
 
 
 <h2><a href="#全局函数">全局函数</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#HScrollView">HScrollView ()</a></td>
-	<td class="summary">通过这个方法创建一个HScrollView对象</td>
+	<td class="name" nowrap><a href="#VScrollView">VScrollView ()</a></td>
+	<td class="summary">通过这个方法创建一个VScrollView对象</td>
 	</tr>
 </table>
 <h2><a href="#实例方法">实例方法</a></h2>
@@ -146,18 +146,18 @@
 
     <dl class="function">
     <dt>
-    <a name = "HScrollView"></a>
-    <strong>HScrollView ()</strong>
+    <a name = "VScrollView"></a>
+    <strong>VScrollView ()</strong>
     </dt>
     <dd>
-    通过这个方法创建一个HScrollView对象
+    通过这个方法创建一个VScrollView对象
 
 
 
     <h3>返回值:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../类/HScrollView.html#">HScrollView</a></span>
+           <span class="types"><a class="type" href="../类/VScrollView.html#">VScrollView</a></span>
         view
     </ol>
 
@@ -179,7 +179,7 @@
      <span class="keyword">function</span> cell.init()
          <span class="keyword">if</span> (self.cellInited == <span class="keyword">false</span> ) <span class="keyword">then</span>
              self.cellInited = <span class="keyword">true</span>;
-             self.scrollView = HScrollView();
+             self.scrollView = VScrollView();
              self.scrollView.frame( <span class="number">0</span>, <span class="number">0</span>, cellW, cellH );
              self.items = {};
              <span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">3</span> <span class="keyword">do</span>
