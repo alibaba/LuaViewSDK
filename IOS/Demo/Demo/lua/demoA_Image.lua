@@ -18,7 +18,7 @@ for i=1,16 do
 	names[i] = "img" .. i .. ".tiff"
 end
 imageView.image("img16.tiff");
-imageView.startAnimation( names, 3.0, 1000);
+imageView.startAnimationImages( names, 3.0, 1000);
 
 
 label = Label();

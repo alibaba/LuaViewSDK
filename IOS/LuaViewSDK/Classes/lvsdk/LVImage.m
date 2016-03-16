@@ -398,9 +398,9 @@ static int isAnimating (lv_State *L) {
         {"image",  setImage},
         {"scaleType",  scaleType},
         
-        {"startAnimation",  startAnimating},
-        {"stopAnimation",  stopAnimating},
-        {"isAnimating",  isAnimating},
+        {"startAnimationImages",  startAnimating},
+        {"stopAnimationImages",  stopAnimating},
+        {"isAnimationImages",  isAnimating},
         
 //        {"render",  render},
 //        {"renderSystemApi",  renderSystemApi},
