@@ -167,6 +167,36 @@
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ banner.callbackTimes = <span class="number">0</span>;
+ banner.index0 = <span class="number">0</span>;
+ banner.moveRight = <span class="keyword">true</span>;
+ banner.timer = Timer(<span class="keyword">function</span>()
+ 		<span class="keyword">if</span>( banner.num&lt;=<span class="number">1</span> ) <span class="keyword">then</span>
+ 			<span class="keyword">return</span>;
+ 		<span class="keyword">end</span>
+ 		<span class="keyword">local</span> currentPage = banner.pagerView.currentPage();
+ 		<span class="keyword">if</span> (  currentPage == <span class="number">1</span> ) <span class="keyword">then</span>
+ 			banner.moveRight = <span class="keyword">true</span>
+ 		<span class="keyword">end</span>
+ 		<span class="keyword">if</span> (  currentPage == banner.num ) <span class="keyword">then</span>
+ 			banner.moveRight = <span class="keyword">false</span>
+ 		<span class="keyword">end</span>
+ 		<span class="keyword">if</span>( banner.callbackTimes &gt; <span class="number">1</span>) <span class="keyword">then</span>
+ 			<span class="keyword">if</span>( banner.moveRight ) <span class="keyword">then</span>
+ 				banner.pagerView.currentPage(currentPage+<span class="number">1</span>);
+ 			<span class="keyword">else</span>
+ 				banner.pagerView.currentPage(currentPage-<span class="number">1</span>);
+ 			<span class="keyword">end</span>
+ 			banner.callbackTimes = <span class="number">0</span>;
+ 		<span class="keyword">else</span>
+ 			banner.callbackTimes = banner.callbackTimes+<span class="number">1</span>;
+ 		<span class="keyword">end</span>
+ 	<span class="keyword">end</span>);
+ banner.timer.start(<span class="number">2.1</span>,<span class="keyword">true</span>);</pre>
+    </ul>
 
 </dd>
 </dl>
@@ -231,6 +261,15 @@
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ timer = Timer();
+ timer.callback( <span class="keyword">function</span>()
+ 		<span class="global">print</span>(<span class="string">"timer"</span>)
+ 	<span class="keyword">end</span>);
+ timer.start(<span class="number">2.1</span>,<span class="keyword">true</span>);</pre>
+    </ul>
 
 </dd>
 </dl>
