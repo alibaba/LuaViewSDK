@@ -35,6 +35,7 @@
         self.alwaysBounceVertical = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
+        self.scrollsToTop = NO;
     }
     return self;
 }

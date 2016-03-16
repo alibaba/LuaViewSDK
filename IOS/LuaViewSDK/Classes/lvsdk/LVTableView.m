@@ -36,6 +36,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
+        self.scrollsToTop = NO;
     }
     return self;
 }

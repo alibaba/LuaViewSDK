@@ -55,6 +55,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.pageIdx = 0;
+        self.scrollsToTop = NO;
     }
     return self;
 }
