@@ -1,6 +1,6 @@
 --- Toast
 -- 弹出提示框
--- @classmod Toast
+-- @classmodOther Toast
 
 
 --- 弹出一个提示框(3秒自动消失的)

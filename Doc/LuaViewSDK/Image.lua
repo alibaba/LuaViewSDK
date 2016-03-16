@@ -1,8 +1,8 @@
 --- Image 
 -- 放图片的View
 --
--- Image的父类是[View](./View.html)
--- @classmod Image
+-- Image的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem Image
 
 
 --- summary.

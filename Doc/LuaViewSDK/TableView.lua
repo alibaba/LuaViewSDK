@@ -2,7 +2,7 @@
 -- 每行高度样式可定制和重复利用的列表
 --
 -- TableView的父类是[VScrollView](./VScrollView.html)
--- @classmod TableView
+-- @classmodUIView TableView
 
 
 --- 设置TableView代理

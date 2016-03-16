@@ -27,7 +27,16 @@ local known_tags = {
    fixme = 'S', todo = 'S', warning = 'S', raise = 'S', charset = 'S',
    ['local'] = 'N', export = 'N', private = 'N', constructor = 'N', static = 'N',include = 'S',
    -- project-level
-   module = 'T', script = 'T', example = 'T', topic = 'T', submodule='T', classmod='T', file='T',
+   module = 'T', script = 'T', example = 'T', topic = 'T', submodule='T', 
+   classmodUIItem='T', 
+   classmodUIView='T', 
+   classmodOther='T', 
+   classmodAnimation='T', 
+   classmodAudio='T', 
+   classmodNet='T', 
+   classmodNavigation='T',  
+   classmod='T', 
+   file='T',
    -- module-level
    ['function'] = 'T', lfunction = 'T', table = 'T', section = 'T', type = 'T',
    annotation = 'T', factory = 'T';
@@ -41,6 +50,13 @@ known_tags._project_level = {
    topic = true,
    submodule = true,
    classmod = true,
+   classmodUIItem = true,
+   classmodUIView = true,
+   classmodOther = true,
+   classmodAnimation = true,
+   classmodAudio = true,
+   classmodNet = true,
+   classmodNavigation = true,
    file = true,
 }
 
@@ -48,10 +64,24 @@ known_tags._code_types = {
    module = true,
    script = true,
    classmod = true,
+   classmodUIItem = true,
+   classmodUIView = true,
+   classmodOther = true,
+   classmodAnimation = true,
+   classmodAudio = true,
+   classmodNet = true,
+   classmodNavigation = true,
 }
 
 known_tags._presentation_names = {
-   classmod = 'Class',
+   classmod = 'Class',   
+   classmodUIItem = 'Class', 
+   classmodUIView = 'Class', 
+   classmodOther = 'Class',
+   classmodAnimation = 'Class',
+   classmodAudio = 'Class',
+   classmodNet = 'Class',
+   classmodNavigation = 'Class',
 }
 
 known_tags._module_info = {
@@ -239,7 +269,7 @@ function File:finish()
       elseif doc.project_level(item.type) then
          this_mod = item
          local package,mname,submodule
-         if item.type == 'module' or item.type == 'classmod' then
+         if item.type == 'module' or item.type == 'classmod'  or string.find(item.type,'classmod') then
             -- if name is 'package.mod', then mod_name is 'mod'
             package,mname = split_dotted_name(this_mod.name)
             if self.args.merge then
@@ -330,7 +360,7 @@ function File:finish()
 
             -- right, this item was within a section or a 'class'
             local section_description
-            local classmod = this_mod.type == 'classmod'
+            local classmod = (this_mod.type == 'classmod' or string.find(this_mod.type,'classmod') )
             if this_mod.section or classmod then
                local stype
                local this_section = this_mod.section
@@ -1105,7 +1135,7 @@ function Module:process_see_reference (s,modules,istype)
       if item == nil then return false end
       if not istype then return true
       else
-         return item.type == 'classmod'
+         return item.type == 'classmod' or  string.find(item.type, 'classmod')
       end
    end
 

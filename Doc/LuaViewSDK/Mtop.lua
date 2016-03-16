@@ -1,6 +1,6 @@
 ----
 -- Mtop请求接口
--- @classmod Mtop
+-- @classmodNet Mtop
 
 
 --- 创建Mtop对象

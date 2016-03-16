@@ -1,6 +1,6 @@
 --- View 
 -- 所有UI控件的基类
--- @classmod View
+-- @classmodUIView View
 
  --- summary.
  -- Description; this can extend over

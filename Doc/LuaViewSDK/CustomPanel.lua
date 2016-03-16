@@ -2,7 +2,7 @@
 -- native可定制
 --
 -- CustomPanel的父类是[View](View.html)
--- @classmod CustomPanel
+-- @classmodUIView CustomPanel
 
 
 

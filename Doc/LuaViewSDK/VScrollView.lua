@@ -2,7 +2,7 @@
 -- 垂直滚动的View 
 --
 -- VScrollView的父类是[View](./View.html), 子类有[TableView](./TableView.html), [CollectionView](./CollectionView.html)
--- @classmod VScrollView
+-- @classmodUIView VScrollView
 
 
 --- 通过这个方法创建一个VScrollView对象

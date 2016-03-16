@@ -1,6 +1,6 @@
 --- Navigation
 -- 导航栏菜单控制器
--- @classmod Navigation
+-- @classmodNavigation Navigation
 
 --- 设置导航栏 标题
 -- @View view 标题view

@@ -1,5 +1,5 @@
 --- 动画API
--- @classmod Animate
+-- @classmodAnimation Animate
 
 
 --- 通过这个方法 设置动画的时间,延时,最终状态,结束回调

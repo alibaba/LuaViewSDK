@@ -2,7 +2,7 @@
 -- 横向分页滚动的View
 --
 -- PagerView的父类是[HScrollView](./HScrollView.html)
--- @classmod PagerView
+-- @classmodUIView PagerView
 
 
 

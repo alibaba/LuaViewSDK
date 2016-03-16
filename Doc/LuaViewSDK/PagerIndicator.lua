@@ -1,8 +1,8 @@
 --- PagerIndicator
 -- banner滚动第几页的小圆点
 --
--- PagerIndicator的父类是[View](View.html)
--- @classmod PagerIndicator
+-- PagerIndicator的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem PagerIndicator
 
 
 --- 创建一个PagerIndicator对象

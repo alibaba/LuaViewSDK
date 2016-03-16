@@ -1,8 +1,8 @@
 --- TextField
 -- 文本输入框
 --
--- TextField的父类是[View](View.html)
--- @classmod TextField
+-- TextField的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem TextField
 
 
 --- 通过这个方法创建一个TextField对象

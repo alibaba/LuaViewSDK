@@ -1,6 +1,6 @@
 --- Alert
 -- 弹出系统自带的提示框
--- @classmod Alert
+-- @classmodOther Alert
 
 
 --- 弹出一个提示框

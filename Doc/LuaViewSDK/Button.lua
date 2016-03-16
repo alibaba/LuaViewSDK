@@ -1,8 +1,8 @@
 --- Button
 -- 按钮控件
 --
--- Button的父类是[View](View.html)
--- @classmod Button
+-- Button的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem Button
 
 
 --- 通过这个方法可以创建一个Button对象

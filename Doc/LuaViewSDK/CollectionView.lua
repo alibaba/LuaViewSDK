@@ -2,7 +2,7 @@
 -- 类似于Cell大小任意的TableView
 --
 -- CollectionView的父类是[VScrollView](./VScrollView.html)
--- @classmod CollectionView
+-- @classmodUIView CollectionView
 
 
 --- 通过这个方法创建一个CollectionView对象

@@ -2,7 +2,7 @@
 -- 水平滚动的View 
 --
 -- HScrollView的父类是[View](./View.html)
--- @classmod HScrollView
+-- @classmodUIView HScrollView
 
 
 --- 通过这个方法创建一个HScrollView对象

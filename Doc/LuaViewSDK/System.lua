@@ -1,6 +1,6 @@
 --- System
 -- 系统信息获取
--- @module System
+-- @classmodOther System
 
 --- ios 系统返回true/否则返回nil(false)
 -- @treturn bool 是否

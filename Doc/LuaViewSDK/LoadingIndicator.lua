@@ -1,7 +1,7 @@
 --- 菊花, 活动状体指示器
 --
--- LoadingIndicator的父类是[View](View.html)
--- @classmod LoadingIndicator
+-- LoadingIndicator的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem LoadingIndicator
 
 
 --- 创建一个LoadingIndicator对象

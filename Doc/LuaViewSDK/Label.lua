@@ -1,8 +1,8 @@
 ---- Label
 -- 放文本的View, 类似安卓的TextView
 --
--- Label的父类是[View](./View.html)
--- @classmod Label
+-- Label的父类是[View](./../ui容器/View.html)
+-- @classmodUIItem Label
 
 --- 通过这个全局静态函数 构建一个新的Label对象
 -- @treturn Label label
