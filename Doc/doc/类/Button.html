@@ -62,7 +62,6 @@
   <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
   <li><a href="../类/DB.html">DB</a></li>
   <li><a href="../类/Data.html">Data</a></li>
-  <li><a href="../类/Date.html">Date</a></li>
   <li><a href="../类/Downloader.html">Downloader</a></li>
   <li><a href="../类/File.html">File</a></li>
   <li><a href="../类/Image.html">Image</a></li>
@@ -601,9 +600,15 @@
 
     <h3>例子:</h3>
     <ul>
-        <pre class="example"> button.callback( <span class="keyword">function</span>(){
-     <span class="comment">-- code
-</span> } );</pre>
+        <pre class="example">
+ button = Button();
+ button.frame( <span class="number">10</span>, <span class="number">320</span>, w, <span class="number">60</span> );
+ button.backgroundColor(<span class="number">0xeeDDee</span>);
+ button.title(<span class="string">"按钮"</span>);
+ button.callback(<span class="keyword">function</span>()
+		lable3.adjustSize();
+ 		button.title(att1+att2);
+ <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>

@@ -62,7 +62,6 @@
   <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
   <li><a href="../类/DB.html">DB</a></li>
   <li><a href="../类/Data.html">Data</a></li>
-  <li><a href="../类/Date.html">Date</a></li>
   <li><a href="../类/Downloader.html">Downloader</a></li>
   <li><a href="../类/File.html">File</a></li>
   <li><a href="../类/Image.html">Image</a></li>
@@ -113,6 +112,14 @@
 	<tr>
 	<td class="name" nowrap><a href="#stop">stop ()</a></td>
 	<td class="summary">菊花停止转动</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#show">show ()</a></td>
+	<td class="summary">显示菊花并开始转动</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hide">hide ()</a></td>
+	<td class="summary">菊花停止转动, 并隐藏</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#isAnimating">isAnimating ()</a></td>
@@ -175,6 +182,37 @@
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example"> TextAlignment
+ Cell_JZGD = {
+     <span class="comment">--加载更多的Cell
+</span>     Init = <span class="keyword">function</span>(cell)
+         cell.loadingmore = LoadingIndicator();
+         cell.window.backgroundColor(BG_COLOR);
+     <span class="keyword">end</span>,
+     Layout = <span class="keyword">function</span>(cell, section, row)
+         <span class="keyword">local</span> cellW, cellH = cell.window.size();
+         cell.loadingmore.size(cellH, cellH);
+         cell.loadingmore.center(cellW / <span class="number">2</span>, cellH / <span class="number">2</span>);
+         <span class="keyword">if</span> (option.nomore) <span class="keyword">then</span>
+             cell.loadingmore.stop();
+         <span class="keyword">else</span>
+             cell.loadingmore.start();
+             option.requestMoreItems(<span class="keyword">function</span>()
+                 <span class="keyword">local</span> index = option.index;
+                 <span class="keyword">local</span> tv = tableViewArray[index];
+                 tv.reload();
+                 tv.stopRefreshing();
+                 cell.loadingmore.stop();
+             <span class="keyword">end</span>);
+         <span class="keyword">end</span>
+     <span class="keyword">end</span>,
+     Size = <span class="keyword">function</span>(section, row)
+         <span class="keyword">return</span> scrW, <span class="number">30</span>;
+     <span class="keyword">end</span>
+ }</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -183,6 +221,34 @@
     </dt>
     <dd>
     菊花停止转动
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "show"></a>
+    <strong>show ()</strong>
+    </dt>
+    <dd>
+    显示菊花并开始转动
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hide"></a>
+    <strong>hide ()</strong>
+    </dt>
+    <dd>
+    菊花停止转动, 并隐藏
 
 
 

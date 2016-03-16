@@ -61,7 +61,6 @@
   <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
   <li><a href="../类/DB.html">DB</a></li>
   <li><a href="../类/Data.html">Data</a></li>
-  <li><a href="../类/Date.html">Date</a></li>
   <li><a href="../类/Downloader.html">Downloader</a></li>
   <li><a href="../类/File.html">File</a></li>
   <li><a href="../类/Image.html">Image</a></li>
@@ -128,7 +127,25 @@
 
     <h3>例子:</h3>
     <ul>
-        <pre class="example">Toast(<span class="string">"提示信息"</span>);</pre>
+        <pre class="example">
+ <span class="keyword">local</span> callback = <span class="keyword">function</span>(location)
+     <span class="keyword">if</span> location == <span class="keyword">nil</span> <span class="keyword">then</span>
+         Toast(<span class="string">"获取地理位置错误"</span>)
+         <span class="keyword">return</span>
+     <span class="keyword">end</span>
+     <span class="keyword">local</span> str = <span class="string">"地理位置\n"</span>
+     <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(location) <span class="keyword">do</span>
+         str = str .. k .. <span class="string">": "</span> .. <span class="global">tostring</span>(v) .. <span class="string">"\n"</span>
+     <span class="keyword">end</span>
+     Toast(str)
+     <span class="comment">--[[
+     星号表示字符串类型，其他为number
+     经纬度 longitude latitude
+     水平精度 accuracy
+     城市编码和名字 cityCode* cityName*
+     --]]</span>
+ <span class="keyword">end</span>
+ bridge.location(callback)</pre>
     </ul>
 
 </dd>

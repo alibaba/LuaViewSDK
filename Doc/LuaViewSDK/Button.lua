@@ -101,10 +101,16 @@ function enabled()
 end
 
 --- 设置callback
- -- @tparam function callback 代理方法
- -- @usage button.callback( function(){
- --     -- code
- -- } );
+-- @tparam function callback 代理方法
+-- @usage 
+-- button = Button();
+-- button.frame( 10, 320, w, 60 );
+-- button.backgroundColor(0xeeDDee);
+-- button.title("按钮");
+-- button.callback(function()
+--		lable3.adjustSize();
+-- 		button.title(att1+att2);
+-- end)
 --
 function callback()
 end
