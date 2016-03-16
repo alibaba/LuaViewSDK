@@ -59,10 +59,7 @@
   <li><a href="../类/Button.html">Button</a></li>
   <li><a href="../类/CollectionView.html">CollectionView</a></li>
   <li><a href="../类/CustomPanel.html">CustomPanel</a></li>
-  <li><a href="../类/DB.html">DB</a></li>
   <li><a href="../类/Data.html">Data</a></li>
-  <li><a href="../类/Downloader.html">Downloader</a></li>
-  <li><a href="../类/File.html">File</a></li>
   <li><a href="../类/HScrollView.html">HScrollView</a></li>
   <li><a href="../类/Image.html">Image</a></li>
   <li><a href="../类/Label.html">Label</a></li>
@@ -134,15 +131,57 @@
     <h3>例子:</h3>
     <ul>
         <pre class="example">
- Alert(<span class="string">"标题"</span>, <span class="string">"内容"</span>,
-                <span class="string">"确定"</span>,<span class="string">"取消"</span>, <span class="comment">-- 按钮个数支持0~10个
-</span>                 ^(index){
-                        <span class="global">print</span>(<span class="string">"按钮ID:"</span>,index)
-                        <span class="keyword">if</span> index==<span class="number">0</span> <span class="keyword">then</span>
-                            window.release();
-                        <span class="keyword">end</span>
-                 }
-            );</pre>
+ scrW,scrH = System.screenSize();
+ btnH = scrH / <span class="number">12</span>;
+ <span class="keyword">function</span> createButton( text, x,y,w,h, callback)
+     <span class="keyword">local</span> button = Button();
+     button.frame( x, y, w, h);
+     button.title( <span class="string">"按钮 "</span> .. text );
+     button.backgroundColor(<span class="number">0x777777</span>,<span class="number">1</span>);
+     button.callback(
+      <span class="keyword">function</span>()
+         <span class="keyword">if</span>( callback ) <span class="keyword">then</span>
+             callback();
+         <span class="keyword">end</span>
+     <span class="keyword">end</span> );
+     <span class="keyword">return</span> button;
+ <span class="keyword">end</span>
+ button1 = createButton(<span class="string">"关闭1"</span>, <span class="number">0</span>, btnH*<span class="number">1</span>, scrW, btnH,
+     <span class="keyword">function</span>()
+         Alert(<span class="string">"标题"</span>, <span class="string">"内容"</span>,
+                     <span class="string">"确定"</span>,
+                         <span class="keyword">function</span>(index)
+                             <span class="global">print</span>(<span class="string">"按钮ID:"</span>,index)
+                         <span class="keyword">end</span>
+                     );
+     <span class="keyword">end</span> );
+ button2 = createButton(<span class="string">"关闭2"</span>, <span class="number">20</span>, btnH*<span class="number">3</span>, scrW-<span class="number">40</span>, btnH,
+     <span class="keyword">function</span>()
+         Alert(<span class="string">"标题"</span>, <span class="string">"内容"</span>,
+                     <span class="string">"确定"</span>,<span class="string">"取消"</span>,
+                         <span class="keyword">function</span>(index)
+                             <span class="global">print</span>(<span class="string">"按钮ID:"</span>,index)
+                         <span class="keyword">end</span>
+                     );
+     <span class="keyword">end</span> );
+ button3 = createButton(<span class="string">"关闭3"</span>, <span class="number">0</span>, btnH*<span class="number">5</span>, scrW, btnH,
+     <span class="keyword">function</span>()
+         Alert(<span class="string">"标题"</span>, <span class="keyword">nil</span>,
+                     <span class="string">"确定"</span>,<span class="string">"取消"</span>,
+                         <span class="keyword">function</span>(index)
+                             <span class="global">print</span>(<span class="string">"按钮ID:"</span>,index)
+                         <span class="keyword">end</span>
+                     );
+     <span class="keyword">end</span> );
+ button4 = createButton(<span class="string">"关闭4"</span>, <span class="number">0</span>, btnH*<span class="number">7</span>, scrW, btnH,
+     <span class="keyword">function</span>()
+         Alert(<span class="keyword">nil</span>, <span class="string">"内容"</span>,
+                     <span class="string">"确定"</span>,<span class="string">"取消"</span>,
+                         <span class="keyword">function</span>(index)
+                             <span class="global">print</span>(<span class="string">"按钮ID:"</span>,index)
+                         <span class="keyword">end</span>
+                     );
+     <span class="keyword">end</span> );</pre>
     </ul>
 
 </dd>
