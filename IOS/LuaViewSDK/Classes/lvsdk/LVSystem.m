@@ -204,6 +204,26 @@ static int tableToString(lv_State*L){
         lv_setfield(L, -2, "CENTER");// 上下左右都居中
     }
     {
+        // TextAlign常量. LEFT RIGHT CENTER
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "Ellipsize", lib);// 文本太多 "..." 出现的问题
+        
+        lv_pushnumber(L, UILineBreakModeHeadTruncation);
+        lv_setfield(L, -2, "START");
+        
+        lv_pushnumber(L, UILineBreakModeMiddleTruncation);
+        lv_setfield(L, -2, "MIDDLE");
+        
+        lv_pushnumber(L, UILineBreakModeTailTruncation);
+        lv_setfield(L, -2, "END");
+        
+        lv_pushnumber(L, UILineBreakModeCharacterWrap);
+        lv_setfield(L, -2, "MARQUEE");
+    }
+    {
         lv_settop(L, 0);
         const struct lvL_reg lib [] = {
             {NULL, NULL}

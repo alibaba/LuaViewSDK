@@ -68,7 +68,9 @@ static int text (lv_State *L) {
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if ( [view isKindOfClass:[LVLabel class]] ) {
             if( lv_gettop(L)>=2 ) {
-                if( lv_type(L, 2)==LV_TNUMBER ){
+                if ( lv_isnoneornil(L, 2 ) ) {
+                    view.text = nil;
+                } else if( lv_type(L, 2)==LV_TNUMBER ){
                     CGFloat text = lv_tonumber(L, 2);// 2
                     view.text = [NSString stringWithFormat:@"%f",text];
                     return 0;
@@ -222,6 +224,25 @@ static int textAlignment (lv_State *L) {
     return 0;
 }
 
+static int ellipsize (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVLabel* view = (__bridge LVLabel *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            NSInteger lineBreakMode = lv_tonumber(L, 2);// 2
+            if( [view isKindOfClass:[LVLabel class]] ){
+                view.lineBreakMode = lineBreakMode;
+                return 0;
+            }
+        } else {
+            int lineBreakMode = view.lineBreakMode;
+            lv_pushnumber(L, lineBreakMode );
+            return 1;
+        }
+    }
+    return 0;
+}
+
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewLabel);
@@ -236,6 +257,7 @@ static int textAlignment (lv_State *L) {
         {"fontSize",    fontSize},
         {"textSize",    fontSize},
         
+        {"ellipsize",    ellipsize},
         {"textAlign",    textAlignment},
         {"gravity",    textAlignment},
         

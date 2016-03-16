@@ -31,6 +31,7 @@ lable3.textAlign(TextAlign.CENTER)
 lable3.callback(
     function()
         print("lable3");
+        lable3.text(nil);
     end
 );
 
