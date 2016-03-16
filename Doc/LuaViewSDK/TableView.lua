@@ -1,7 +1,7 @@
 --- TableView
 -- 每行高度样式可定制和重复利用的列表
 --
--- TableView的父类是[ScrollView](./ScrollView.html)
+-- TableView的父类是[HScrollView](./HScrollView.html)
 -- @classmod TableView
 
 

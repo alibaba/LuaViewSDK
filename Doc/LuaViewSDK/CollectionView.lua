@@ -1,7 +1,7 @@
 --- CollectionView
 -- 类似于Cell大小任意的TableView
 --
--- CollectionView的父类是[ScrollView](./ScrollView.html)
+-- CollectionView的父类是[HScrollView](./HScrollView.html)
 -- @classmod CollectionView
 
 
