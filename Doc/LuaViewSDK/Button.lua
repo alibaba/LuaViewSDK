@@ -41,6 +41,20 @@ end
 function font ()
 end
 
+--- 设置按钮字体大小
+ -- @string fontName 可选参数
+ -- @number fontSize
+ -- @usage local btn = Button();
+function fontSize()
+end
+
+--- 设置按钮字体大小
+ -- @string fontName 可选参数
+ -- @number fontSize
+ -- @usage local btn = Button();
+function textSize()
+end
+
 --- 获取按钮title字体
  -- @treturn string fontName
  -- @treturn number fontSize
@@ -60,6 +74,20 @@ end
  -- @treturn number alpha 透明度
  -- @usage local btn = Button();
 function titleColor()
+end
+
+--- 设置按钮title颜色
+ -- @int titleColor 颜色值
+ -- @number alpha 透明度
+ -- @usage local btn = Button();
+function textColor ()
+end
+
+--- 获取按钮title颜色
+ -- @treturn int color 颜色值
+ -- @treturn number alpha 透明度
+ -- @usage local btn = Button();
+function textColor()
 end
 
 --- 设置按钮是否enabled

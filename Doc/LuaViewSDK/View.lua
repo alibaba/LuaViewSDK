@@ -441,9 +441,49 @@ end
 function addView(); 
 end
 
+---构造容器的子View
+ -- @function func funtion
+ -- @usage scrW, scrH = System.screenSize();
+-- window.backgroundColor(0x777777,1);
+-- w = scrW/3;
+-- X0 = scrW/10;
+-- Y0 = scrH/5;
+-- view = View();
+-- view.backgroundColor(0xff);
+-- view.frame(0,0,200,200);
+-- view.children( function ()
+-- 	subView = View();
+-- 	subView.frame(50,50,100,100)
+-- 	subView.backgroundColor(0xff00)
+-- 	subView.children( function ()
+-- 		subsubView1 = View();
+-- 		subsubView1.frame(25,25,50,50)
+-- 		subsubView1.backgroundColor(0xff0000)
+-- 		subsubView1.children( function ()
+-- 			-- body
+-- 		end)
+-- 		subsubView2 = View();
+-- 		subsubView2.frame(0,75+25/2,50,2)
+-- 		subsubView2.backgroundColor(0xff0000)
+-- 	end)
+-- 	subView2 = View();
+-- 	subView2.frame(0,175,100,2)
+-- 	subView2.backgroundColor(0xff00)
+-- end)
+-- view2 = View();
+-- view2.backgroundColor(0xff00FF);
+-- view2.frame(0,200,200,200);
+function children(); 
+end
+
 ---从父类中移除自身
  -- @usage button.removeFromSuper();
 function removeFromSuper();
+end
+
+---从父类中移除自身
+ -- @usage button.removeFromSuper();
+function removeFromParent();
 end
 
 ---移除所有子类
@@ -620,6 +660,39 @@ end
 -- Align.LEFT Align.RIGHT .TOP .BOTTOM .H_CENTER .V_CENTER
  -- @usage view.anchorPoint();
 function align()
+end
+
+
+--- 开始动画
+-- @tparam Animation animation 动画 
+-- @usage 简单动画
+-- btn = Button();
+-- btn.size(60, 120)
+-- btn.text("按钮");
+-- btn.callback({
+--     onShow = function()
+--         print("show")
+--     end,
+--     onHide = function()
+--         print("hide")
+--     end
+--   })
+-- btn2 = Button();
+-- btn2.text("按钮2")
+-- btn2.size(60, 120)
+-- btn2.xy(100, 300)
+-- animator1 = Animation().alpha(0.1).duration(3);
+-- animator2 = Animation().translationX(100).duration(2).delay(1);
+-- animator3 = Animation().rotation().value(100).duration(2);
+-- btn.startAnimation(animator1, animator2, animator3)
+-- btn2.startAnimation(animator1, animator2, animator3)
+-- 
+function startAnimation()
+end
+
+--- 停止动画
+ -- @tparam Animation animation 动画
+function stopAnimation()
 end
 
 

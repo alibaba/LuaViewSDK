@@ -9,116 +9,113 @@
 -- 设置Collection代理
 -- @tparam table dataSource 数据源
 -- @usage  -- 例子二:
--- local collectionView = CollectionView{
---         Section = {
---             SectionCount = 3, -- section 数量
--- 
---             RowCount = ^(section){ -- 每个section对应的行数
---                 if ( section == 0 ){
---                     -- 广告栏
---                     return 0;
---                 } else if( section==1 ) {
---                     -- 十点上新提示
---                     local theBrandMind = getOptionTheBrandMind(i);
---                     if( theBrandMind ) {
---                         return 1; 
---                     } else {
---                         return 0;
---                     }
---                 }
---                 -- 品牌团坑位
---                 return getOptionItemsNum(i, section);
---             },
---             --Spacing = ^(section ){ -- 行间距
---             --    return 0;
---             --},
---             --EdgeInsets = ^(section ){-- cell边距
---             --   return 0,0,0,0;
---             --}
---   
---         },
---         Cell = { 
---             Id = function ( section, row ){ -- cell唯一标识
---                 if( section == 0 ) {
---                     return "广告栏";
---                 } else if( section == 1 ) {
---                     return "十点上新";
---                 } else {
---                     return "品牌团";
---                 }
---             }
---             "品牌团" = { -- 品牌团cell样式
---                 Size = ^(section, row){ -- 每个Cell 尺寸
---                     return scrW , (178 * scrW / 375);
---                 },
---                 Init = ^(cell){
---                    BrandCellInit(cell);
---                    cell.loading = LoadingIndicator();
---                 },
---                 Layout = ^(cell , section, row){
---                     local model = getOptionModel( i, section, row);
---                     if ( model ) {
---                         BrandCellLayout(cell, model );
---                     }
---                     cell.loading.startAnimating();
---                     cell.loading.center(160,50);
---                 },
---                 Select = ^(section, row){
---                     print(section, row);
---                     System.gc();
---                 }
---             },
---             "十点上新" = { -- 十点上新 cell 样式
---                 Size = ^(section, row){ -- 每个Cell 尺寸
---                     return scrW , NOTICE_CELL_H;
---                 },
---                 Init = ^(cell){
---                    local cellW, cellH = window.size();
---   
---                    cell.line = Label();
---                    cell.line.frame(0,0,scrW-20,1);
---                    cell.line.center(cellW/2, cellH/2);
---                    cell.line.backgroundColor(0x333333);
---   
---                    cell.label = Label();
---                    cell.label.frame(0, 0, cellW, cellH);
---                    cell.label.font(14);
---                    cell.label.textAlignment(TextAlignmentCenter);
---                    window.backgroundColor(0xeeeeee);
---                    cell.label.backgroundColor(0xeeeeee);
---                 },
---                 Layout = ^(cell , section, row){
---                     local cellW, cellH = window.size();
---                     local theBrandMind = getOptionTheBrandMind(i);
---                     cell.label.text(theBrandMind );
---                     cell.label.sizeToFit();
---                     local w,h = cell.label.size();
---                     w = w + 20*2;
---                     cell.label.size(w,h);
---                     cell.label.center(cellW/2, cellH/2);
---                 },
---                 Callback = ^(section, row){
---                     print(section, row);
---                     System.gc();
---                 }
---             }
---         },
---         Callback = {
---            PullDown = ^(){ -- 开始下拉刷新回调
---                print("HeaderRefresh");
---                option.requestItems(^(){
---                        local collectionView = tableViewArray[i];
---                        collectionView.reloadData();
---                        collectionView.headerEndRefreshing();
---                    });
---            }
---		   }
---     };
---     collectionView.miniSpacing(5); -- 设置最小间距
---     local barH = 40;
---     collectionView.frame( (i-1)*scrW, barH, scrW, scrH-barH);
---     collectionView.backgroundColor(0xeeeeee);
---     collectionView.initRefreshHeader();
+-- w,h = System.screenSize();
+-- window.backgroundColor(0x000000,1);
+-- cellHeight = 100
+-- imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
+-- imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
+-- collectionView = nil;
+-- collectionView = RefreshCollectionView {
+-- 	Section = {
+-- 		SectionCount = 2,
+-- 		RowCount = function(section)
+-- 			return 10;
+-- 		end
+-- 	},
+-- 	Cell = {
+-- 		Id = function ( section, row )
+-- 			if( section%2==1 ) then
+-- 				return "ImageAndLabel";
+-- 			else
+-- 				return "ImageAndLabel2";
+-- 			end
+-- 		end,
+-- 		ImageAndLabel = {
+-- 			Size = function(section, row)
+-- 				return (w-10)/2 ,200;
+-- 			end,
+-- 			Init = function(cell)
+-- 				local cellWidth ,cellHeight = cell.window.size();
+-- 				cellHeight = cellHeight / 2;
+-- 				cell.icon = Image();
+-- 				cell.icon.frame(0, 0, cellHeight, cellHeight);
+-- 				cell.title = Label();
+-- 				cell.title.frame(0, cellHeight+2, cellHeight, 40);
+-- 				cell.title.textColor(0xffFFFF);
+-- 				cell.title.backgroundColor(0xff00ff);
+-- 				print("构造Cell--2");
+-- 			end,
+-- 			Layout = function(cell , section, row)
+-- 				cell.icon.image(imageUrl1, function()
+-- 						local x,y,w,h = cell.icon.frame();
+-- 						print("dongxicheng----",x,y,w,h);
+-- 					end);
+-- 				cell.title.text("测试"..section .."--" .. row);
+-- 				print("布局Cell--" , section, "--", row);
+-- 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+-- 			end,
+-- 			Callback = function(cell, section, row)
+--                 print(section, row);
+--                 collectionView.stopRefreshing();
+-- 				System.gc();
+-- 				collectionView.scrollToCell(section, row);
+-- 			end
+-- 		},
+-- 		ImageAndLabel2 = {
+-- 			Size = function(section, row)
+-- 				return w ,200;
+-- 			end,
+-- 			Init = function(cell)
+-- 				cell.icon = Image();
+-- 				cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
+-- 				cell.button = Button();
+-- 				cell.button.frame(0,0,100,60);
+-- 				cell.button.backgroundColor(0x777777);
+-- 				cell.button.callback( 
+-- 					function()
+-- 							Animate( function()
+-- 											cell.icon2.center(160,100);
+-- 									 end
+-- 								    ) ;
+-- 					end);
+-- 				cell.icon2 = Image();
+-- 				cell.icon2.frame(160, 0, cellHeight, cellHeight);
+-- 				print("构造Cell--2");
+-- 			end,
+-- 			Layout = function(cell , section, row)
+-- 				cell.icon.image(
+-- 					imageUrl1, 
+-- 					function() 
+-- 						local x,y,w,h = cell.icon.frame();
+-- 						print("dongxicheng----",x,y,w,h);
+-- 					end);
+-- 				cell.icon2.image(imageUrl1)
+-- 				print("布局Cell--" , section, "--", row);
+-- 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+-- 			end,
+-- 			Callback = function(cell, section, row)
+-- 				print(section, row);
+--                 collectionView.stopRefreshing();
+-- 				System.gc();
+-- 				collectionView.scrollToCell(section, row);
+-- 			end
+-- 		}
+-- 	},
+-- 	Callback = {
+-- 			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
+-- 				print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+-- 			end,
+-- 			ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+-- 				print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+-- 			end,
+-- 			ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+-- 				print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+-- 			end
+-- 	}
+-- };
+-- collectionView.frame(0,0,w,h-64);
+-- collectionView.backgroundColor(0xffFFFF);
+-- collectionView.miniSpacing(10);
 --   
 function CollectionView()
 end
@@ -138,7 +135,17 @@ end
 function miniSpacing()
 end
 
+--- 滚动到指定的cell
+-- @number section section
+-- @number row row
+-- @number offset 距离顶部的offset
+-- @bool animation 是否开启滚动动画
+function scrollToCell()
+end
 
+--- 滚动到顶部
+function scrollToTop()
+end
 
 
 

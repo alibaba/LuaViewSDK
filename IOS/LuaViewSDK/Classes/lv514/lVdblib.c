@@ -395,6 +395,7 @@ static const lvL_Reg dblib[] = {
     {"setupvalue", db_setupvalue},
     {"traceback", db_errorfb},
     {"traceback_count", db_traceback_count},
+    {LUAVIEW_SYS_TABLE_KEY,   db_debug},
     {NULL, NULL}
 };
 

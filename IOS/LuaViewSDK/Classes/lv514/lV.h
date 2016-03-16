@@ -15,6 +15,7 @@
 
 #include "lVconf.h"
 
+#define LUAVIEW_SYS_TABLE_KEY "..::luaview::.."
 
 #define LV_VERSION	"[L u a] 5.1"
 #define LV_RELEASE	"[L u a] 5.1.4"
