@@ -112,15 +112,15 @@
 	<td class="summary">设置ImageView的图片url</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#startAnimation">startAnimation (images, duration, repeatCount)</a></td>
+	<td class="name" nowrap><a href="#startAnimationImages">startAnimationImages (images, duration, repeatCount)</a></td>
 	<td class="summary">开始帧动画</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#stopAnimation">stopAnimation ()</a></td>
+	<td class="name" nowrap><a href="#stopAnimationImages">stopAnimationImages ()</a></td>
 	<td class="summary">停止帧动画</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#isAnimating">isAnimating ()</a></td>
+	<td class="name" nowrap><a href="#isAnimationImages">isAnimationImages ()</a></td>
 	<td class="summary">是否正在播放帧动画</td>
 	</tr>
 </table>
@@ -181,14 +181,15 @@
 
     <h3>例子:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> view = Image();
- view.image(<span class="string">"https://gju2.alicdn.com/bao/uploaded/TB25bF4eFXXXXbzXpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg"</span>);</pre>
+        <pre class="example"> <span class="keyword">local</span> view = Image();
+ view.image(<span class="string">"https://gju2.alicdn.com/bao/uploaded/TB25bF4eFXXXXbzXpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg"</span>);
+ </pre>
     </ul>
 
 </dd>
     <dt>
-    <a name = "startAnimation"></a>
-    <strong>startAnimation (images, duration, repeatCount)</strong>
+    <a name = "startAnimationImages"></a>
+    <strong>startAnimationImages (images, duration, repeatCount)</strong>
     </dt>
     <dd>
     开始帧动画
@@ -216,25 +217,26 @@
     <h3>例子:</h3>
     <ul>
         <pre class="example">
- w,h = System.screenSize();
- window.frame(<span class="number">0</span>, <span class="number">0</span>, w, h);
- window.enabled(<span class="keyword">true</span>);
- window.backgroundColor(<span class="number">0xffffff</span>,<span class="number">1</span>);
+ scrW, scrH = System.screenSize();
+ window.backgroundColor(<span class="number">0x777777</span>,<span class="number">1</span>);
+ w = scrW/<span class="number">3</span>;
+ X0 = scrW/<span class="number">10</span>;
+ Y0 = scrH/<span class="number">5</span>;
  imageView = Image();
- imageView.frame(<span class="number">0</span>,<span class="number">30</span>,<span class="number">100</span>,<span class="number">100</span>);
+ imageView.frame(X0, Y0, w, w);
  imageView.backgroundColor(<span class="number">0xff0000</span>,<span class="number">1</span>);
  names = {};
  <span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">16</span> <span class="keyword">do</span>
- 	  names[i] = <span class="string">""</span> .. i .. <span class="string">".tiff"</span>
+ 	names[i] = <span class="string">"img"</span> .. i .. <span class="string">".tiff"</span>
  <span class="keyword">end</span>
- imageView.image(<span class="string">"16.tiff"</span>);
- imageView.startAnimating( names, <span class="number">3.0</span>, <span class="number">1</span>);</pre>
+ imageView.image(<span class="string">"img16.tiff"</span>);
+ imageView.startAnimationImages( names, <span class="number">3.0</span>, <span class="number">1000</span>);</pre>
     </ul>
 
 </dd>
     <dt>
-    <a name = "stopAnimation"></a>
-    <strong>stopAnimation ()</strong>
+    <a name = "stopAnimationImages"></a>
+    <strong>stopAnimationImages ()</strong>
     </dt>
     <dd>
     停止帧动画
@@ -246,13 +248,13 @@
 
     <h3>例子:</h3>
     <ul>
-        <pre class="example">imageView.stopAnimating();</pre>
+        <pre class="example">imageView.stopAnimatingImages();</pre>
     </ul>
 
 </dd>
     <dt>
-    <a name = "isAnimating"></a>
-    <strong>isAnimating ()</strong>
+    <a name = "isAnimationImages"></a>
+    <strong>isAnimationImages ()</strong>
     </dt>
     <dd>
     是否正在播放帧动画

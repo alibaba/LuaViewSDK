@@ -37,6 +37,7 @@ end
 -- @string url image url
 -- @usage local view = Image(); 
 -- view.image("https://gju2.alicdn.com/bao/uploaded/TB25bF4eFXXXXbzXpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg");
+-- 
 function image()
 end
 
@@ -46,31 +47,32 @@ end
 -- @number duration 动画时间
 -- @int repeatCount 重复次数
 -- @usage 
--- w,h = System.screenSize();
--- window.frame(0, 0, w, h);
--- window.enabled(true);
--- window.backgroundColor(0xffffff,1);
+-- scrW, scrH = System.screenSize();
+-- window.backgroundColor(0x777777,1);
+-- w = scrW/3;
+-- X0 = scrW/10;
+-- Y0 = scrH/5;
 -- imageView = Image();
--- imageView.frame(0,30,100,100);
+-- imageView.frame(X0, Y0, w, w);
 -- imageView.backgroundColor(0xff0000,1);
 -- names = {};
 -- for i=1,16 do
--- 	  names[i] = "" .. i .. ".tiff"
+-- 	names[i] = "img" .. i .. ".tiff"
 -- end
--- imageView.image("16.tiff");
--- imageView.startAnimating( names, 3.0, 1);
-function startAnimation()
+-- imageView.image("img16.tiff");
+-- imageView.startAnimationImages( names, 3.0, 1000);
+function startAnimationImages()
 end
 
 --- 停止帧动画
 -- @usage 
--- imageView.stopAnimating();
-function stopAnimation()
+-- imageView.stopAnimatingImages();
+function stopAnimationImages()
 end
 
 --- 是否正在播放帧动画
 -- @treturn bool 是否正在播放帧动画
-function isAnimating()
+function isAnimationImages()
 end
 
 -- {"render",  render},
