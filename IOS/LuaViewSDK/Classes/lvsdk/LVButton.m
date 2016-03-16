@@ -33,6 +33,7 @@
         // 默认黑色字
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.clipsToBounds = YES;
+        self.titleLabel.font = [UIFont systemFontOfSize:14];// 默认字体大小
     }
     return self;
 }

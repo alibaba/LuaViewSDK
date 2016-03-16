@@ -32,6 +32,7 @@
         self.textAlignment = NSTextAlignmentLeft;
         self.lv_isCallbackAddClickGesture = YES;
         self.clipsToBounds = YES;
+        self.font = [UIFont systemFontOfSize:14];// 默认字体大小
     }
     return self;
 }

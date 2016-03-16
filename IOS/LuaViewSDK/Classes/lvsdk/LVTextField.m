@@ -30,6 +30,7 @@
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
+        self.font = [UIFont systemFontOfSize:14];// 默认字体大小
     }
     return self;
 }
