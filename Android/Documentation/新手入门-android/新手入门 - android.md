@@ -19,7 +19,7 @@ LuaViewSDK 基于 LuaJ 和 LuaC 完成，所以有着与 Native 一样强大的�
 
 LuaViewSDK 可以通过 Lua 脚本桥接所有 Native 的功能，所以具有与 Native 一样丰富的性能。
 
-最关键的是 LuaViewSDK 已经开源了，可以在 https://github.com/alibaba/luaviewsdk 查看 LuaViewSDK 的全部代码(目前Android仅添加luaj虚拟机，后续代码陆续添加中)。
+最关键的是 LuaViewSDK 已经开源了，可以在 https://github.com/alibaba/luaviewsdk 查看 LuaViewSDK 的全部代码。
 
 说的这么好，有没有什么证明呢？请看**聚划算客户端的量贩团、品牌团**页面。
 
@@ -124,7 +124,7 @@ dependencies {
 }
 ```
 
-LuaviewSDK目录下的build.gradle文件添加或修改
+LuaViewSDK目录下的build.gradle文件添加或修改
 
 ```Gradle
 compileSdkVersion 21
