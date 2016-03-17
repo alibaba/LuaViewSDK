@@ -33,7 +33,7 @@ LuaViewSDK 可以通过 Lua 脚本桥接所有 Native 的功能，所以具有�
 # 3.大纲
 - 环境安装（ Android Studio 和 Android SDK ）
 - Android Studio 建立Android工程（new Android Studio project）
-- 通过 build.gradle 添加 alibaba maven 库，导入 LuaViewSDK 依赖
+- 通过 import module方式，导入 LuaViewSDK 依赖
 - 使用 Lua 编写业务脚本
 - 在 Activity Java 代码中加载 Lua 业务脚本
 - 在模拟器中运行
@@ -60,7 +60,7 @@ Android SDK 在 Android Studio中已经包含，但是只是一个最新版的�
 主要步骤为：
 
 1. 新建Androd工程
-2. 通过 build.gradle 添加 alibaba maven 库，导入 LuaViewSDK 依赖
+2. 添加LuaViewSDK Module
 3. 编写 Lua 脚本
 4. 在Activity中加载 Lua 脚本
 5. 在模拟器中运行
