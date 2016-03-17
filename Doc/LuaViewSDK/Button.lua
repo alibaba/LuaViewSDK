@@ -42,15 +42,25 @@ function font ()
 end
 
 --- 设置按钮字体大小
- -- @string fontName 可选参数
  -- @number fontSize
  -- @usage local btn = Button();
 function fontSize()
 end
 
+--- 获取按钮字体大小
+ -- @treturn number fontSize
+ -- @usage local btn = Button();
+function fontSize()
+end
+
 --- 设置按钮字体大小
- -- @string fontName 可选参数
  -- @number fontSize
+ -- @usage local btn = Button();
+function textSize()
+end
+
+--- 获取按钮字体大小
+ -- @treturn number fontSize
  -- @usage local btn = Button();
 function textSize()
 end
