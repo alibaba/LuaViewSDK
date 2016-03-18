@@ -657,6 +657,15 @@ public class LexState {
                         return TK_GE;
                     }
                 }
+                case '!': { // 城西支持 类java的不等于号 "!="
+                    nextChar();
+                    if (current != '=')
+                        return '!';
+                    else {
+                        nextChar();
+                        return TK_NE;
+                    }
+                }
                 case '~': {
                     nextChar();
                     if (current != '=')
