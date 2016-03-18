@@ -242,7 +242,8 @@ static int setImage (lv_State *L) {
                     return 1;
                 }
             } else {
-                
+                // 清理图片
+                imageView.image = nil;
             }
         }
     }
