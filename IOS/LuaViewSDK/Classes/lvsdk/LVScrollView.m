@@ -55,6 +55,7 @@
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
+    [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
 static Class g_class = nil;

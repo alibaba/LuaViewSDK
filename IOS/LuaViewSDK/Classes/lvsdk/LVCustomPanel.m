@@ -34,6 +34,10 @@
     }
 }
 
+-(void) layoutSubviews{
+    [self lv_runCallBack:STR_ON_LAYOUT];
+}
+
 static int lvNewCustomPanelView (lv_State *L) ;
 
 static NSMutableDictionary* g_classDic = nil;

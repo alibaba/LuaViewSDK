@@ -32,6 +32,19 @@ view.children( function ()
 
 end)
 
+view.onClick( function()
+        print("onClick")
+        local x,y,w,h = view.frame();
+        view.frame(x+1,y+1,w-1,h-1);
+end);
+
+view.onLayout( function()
+        print("onLayout")
+    end)
+
+local c = view.callback();
+print(c)
+
 
 view2 = View();
 view2.backgroundColor(0xff00FF);

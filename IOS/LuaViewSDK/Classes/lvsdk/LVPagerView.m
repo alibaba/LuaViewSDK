@@ -118,7 +118,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     
     [self checkCellVisible];
     
-    [self lv_callLuaByKey1:@"LayoutSubviews"];
+    [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
 -(void) dealloc{

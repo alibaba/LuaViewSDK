@@ -1174,12 +1174,14 @@ static int anchorPoint (lv_State *L) {
     return 0;
 }
 
-static int callback (lv_State *L) {
+static int callbackByKey(lv_State *L, const char* key, BOOL addGesture) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
             UIView* view = (__bridge UIView *)(user->object);
-            [view lv_callbackAddClickGesture];// 检测是否添加手势
+            if( addGesture ) {
+                [view lv_callbackAddClickGesture];// 检测是否添加手势
+            }
             lv_checkstack(L, 8);
             lv_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
@@ -1194,19 +1196,44 @@ static int callback (lv_State *L) {
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             }
             lv_pushvalue(L, 2);
-            lv_setfield(L, -2, STR_CALLBACK);
+            if( lv_type(L, -1) == LV_TTABLE ) {
+                // 如果是表格 设置每个Key
+                lv_pushnil(L);
+                while (lv_next(L, -2))
+                {
+                    NSString* key   = lv_paramString(L, -2);
+                    lv_setfield(L, -4, key.UTF8String);
+                }
+            } else {
+                // 如果是方法设置默认key
+                lv_setfield(L, -2, (key ? key:STR_ON_CLICK) );
+            }
             return 0;
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            if ( lv_type(L, -1)==LV_TTABLE ) {
-                lv_getfield(L, -1, STR_CALLBACK);
-            } else {
-                lv_pushnil(L);
+            if ( key ) {
+                if ( lv_type(L, -1)==LV_TTABLE ) {
+                    lv_getfield(L, -1, key);
+                } else {
+                    lv_pushnil(L);
+                }
             }
             return 1;
         }
     }
     return 0;
+}
+
+static int callback (lv_State *L) {
+    return callbackByKey(L, NULL, YES);
+}
+
+static int onLayout (lv_State *L) {
+    return callbackByKey(L, STR_ON_LAYOUT, NO);
+}
+
+static int onClick (lv_State *L) {
+    return callbackByKey(L, STR_ON_CLICK, YES);
 }
 
 #pragma -mark __gc
@@ -1232,6 +1259,7 @@ static int __tostring (lv_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
+    [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
 static int releaseObject(lv_State *L) {
@@ -1396,8 +1424,9 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"anchorPoint",     anchorPoint },
     
-    // {"delegate",     delegate },
     {"callback",     callback },
+    {"onLayout",     onLayout },
+    {"onClick",     onClick },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },

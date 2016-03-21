@@ -51,8 +51,7 @@
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    
-    [self lv_callLuaByKey1:@"LayoutSubviews"];
+    [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
 - (UIView*) lv_getViewFromLuaByKey:(NSString*)key{

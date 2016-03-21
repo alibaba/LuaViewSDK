@@ -132,6 +132,8 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_System           "LV.System"
 
 #define STR_CALLBACK "Callback"
+#define STR_ON_LAYOUT "onLayout"
+#define STR_ON_CLICK "onClick"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );

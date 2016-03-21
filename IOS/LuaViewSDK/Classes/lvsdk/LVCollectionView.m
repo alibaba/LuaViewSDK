@@ -73,7 +73,7 @@
 -(void) layoutSubviews{
     [super layoutSubviews];
     
-    [self lv_callLuaByKey1:@"LayoutSubviews"];
+    [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
 static Class g_class = nil;
