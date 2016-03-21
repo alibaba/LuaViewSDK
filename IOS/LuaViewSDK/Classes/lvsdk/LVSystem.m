@@ -211,16 +211,16 @@ static int tableToString(lv_State*L){
         };
         lvL_register(L, "Ellipsize", lib);// 文本太多 "..." 出现的问题
         
-        lv_pushnumber(L, UILineBreakModeHeadTruncation);
+        lv_pushnumber(L, NSLineBreakByTruncatingHead);
         lv_setfield(L, -2, "START");
         
-        lv_pushnumber(L, UILineBreakModeMiddleTruncation);
+        lv_pushnumber(L, NSLineBreakByTruncatingMiddle);
         lv_setfield(L, -2, "MIDDLE");
         
-        lv_pushnumber(L, UILineBreakModeTailTruncation);
+        lv_pushnumber(L, NSLineBreakByTruncatingTail);
         lv_setfield(L, -2, "END");
         
-        lv_pushnumber(L, UILineBreakModeCharacterWrap);
+        lv_pushnumber(L, NSLineBreakByCharWrapping);
         lv_setfield(L, -2, "MARQUEE");
     }
     {
