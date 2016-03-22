@@ -123,7 +123,7 @@
     
     NSData *data = [self resourceWithName:name];
     if (data == nil) {
-        return nil;
+        return [UIImage imageNamed:name];
     }
     
     return [UIImage imageWithData:data];
