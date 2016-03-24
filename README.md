@@ -1,5 +1,7 @@
 # 1. 介绍
 ## 1.1 我们是谁
+
+[![Join the chat at https://gitter.im/alibaba/LuaViewSDK](https://badges.gitter.im/alibaba/LuaViewSDK.svg)](https://gitter.im/alibaba/LuaViewSDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 我们是聚划算无线开发团队，主要负责聚划算独立客户端，手机淘宝、手机天猫中的聚划算模块，以及俪人购客户端。
 
 ## 1.2 为什么会有 LuaView 
