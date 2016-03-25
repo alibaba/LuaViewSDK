@@ -17,7 +17,7 @@
 
 -(id) init:(lv_State*) l;
 
--(void) startTimer:(NSTimeInterval) time repeat:(BOOL) repeat;
+-(void) startTimer;
 -(void) cancel;
 
 

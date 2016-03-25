@@ -15,6 +15,11 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
+@interface LVTimer ()
+@property(nonatomic,assign) BOOL repeat;
+@property(nonatomic,assign) NSTimeInterval delay;
+@property(nonatomic,assign) NSTimeInterval interval;
+@end
 
 @implementation LVTimer{
     NSTimer* timer;
@@ -40,6 +45,9 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.delay = 0;     // 默认延时
+        self.repeat = NO;   // 默认重复次数
+        self.interval = 1;  // 默认间隔1秒
     }
     return self;
 }
@@ -54,9 +62,9 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 }
 
 
--(void) startTimer:(NSTimeInterval) timeInterval repeat:(BOOL) repeat {
+-(void) startTimer{
     [self cancel];
-    timer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(timerCallBack) userInfo:nil repeats:repeat];
+    timer = [NSTimer scheduledTimerWithTimeInterval:self.interval target:self selector:@selector(timerCallBack) userInfo:nil repeats:self.repeat];
 }
 
 -(void) cancel {
@@ -100,15 +108,16 @@ static int setCallback (lv_State *L) {
 
 static int start (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    double time = lv_tonumber(L, 2);
-    BOOL repeat = NO;
+    LVTimer* timer = (__bridge LVTimer *)(user->object);
+    if( lv_gettop(L)>=2 ) {
+        timer.interval = lv_tonumber(L, 2);
+    }
     if( lv_gettop(L)>=3 ) {
-        repeat = lv_toboolean(L, 3);
+        timer.repeat = lv_toboolean(L, 3);
     }
     if( user ){
-        LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
-            [timer startTimer:time repeat:repeat];
+            [timer startTimer];
             lv_pushvalue(L,1);
             return 1;
         }
@@ -122,6 +131,48 @@ static int cancel (lv_State *L) {
         LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
             [timer cancel];
+        }
+    }
+    return 0;
+}
+
+static int delay (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    double delay = lv_tonumber(L, 2);
+    if( user ){
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
+        if( timer ){
+            timer.delay = delay;
+            lv_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int repeat (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    BOOL repeat = lv_toboolean(L, 2);
+    if( user ){
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
+        if( timer ){
+            timer.repeat = repeat;
+            lv_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int interval (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    double interval = lv_tonumber(L, 2);
+    if( user ){
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
+        if( timer ){
+            timer.interval = interval;
+            lv_pushvalue(L,1);
+            return 1;
         }
     }
     return 0;
@@ -155,6 +206,11 @@ static int __tostring (lv_State *L) {
         {"start", start },
         {"cancel", cancel },
         {"stop", cancel },
+        
+        
+        {"delay", delay },
+        {"repeat", repeat },
+        {"interval", interval },
         
         {"__gc", __gc },
         
