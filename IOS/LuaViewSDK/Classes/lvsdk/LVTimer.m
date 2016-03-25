@@ -64,7 +64,13 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 
 -(void) startTimer{
     [self cancel];
-    timer = [NSTimer scheduledTimerWithTimeInterval:self.interval target:self selector:@selector(timerCallBack) userInfo:nil repeats:self.repeat];
+    if( self.delay>0 ) {
+        NSDate* date = [[NSDate alloc] initWithTimeIntervalSinceNow:self.delay];
+        timer = [[NSTimer alloc] initWithFireDate:date interval:self.interval target:self selector:@selector(timerCallBack) userInfo:nil repeats:self.repeat];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    } else {
+        timer = [NSTimer scheduledTimerWithTimeInterval:self.interval target:self selector:@selector(timerCallBack) userInfo:nil repeats:self.repeat];
+    }
 }
 
 -(void) cancel {

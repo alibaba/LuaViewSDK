@@ -40,3 +40,18 @@ timer3 = Timer(function()
 end)
 timer3.start(10)
 
+
+
+--4
+timer4 = Timer()
+timer4.delay(5);
+timer4.interval(1);
+timer4.callback(
+    function()
+    	myprint("Timer4 Run")
+    	timer4 = nil;
+    	System.gc();
+    end
+)
+timer4.start()
+
