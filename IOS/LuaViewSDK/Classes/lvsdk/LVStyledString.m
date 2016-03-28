@@ -127,6 +127,9 @@ static void resetStriketrhroughSytle(NSMutableAttributedString* attString, NSDic
     NSNumber* value = dic[@"strikethrough"];
     if( value && isNotZeroOrFalse(value) ){
         [attString addAttribute:NSStrikethroughStyleAttributeName value:value range:range];
+    } else {
+        // IOS 8 系统bugfix( 有中划线和我无中划线都要设置属性, 否则有中划线不会出现 )
+        [attString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleNone) range:range];
     }
 }
 
