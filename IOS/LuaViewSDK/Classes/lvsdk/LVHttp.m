@@ -190,7 +190,7 @@ static int post (lv_State *L) {
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }
                 if( type==LV_TTABLE ) {// 数据
-                    NSDictionary* tempDic = lv_luaTableToDictionary(L, i);
+                    id tempDic = lv_luaTableToDictionary(L, i);
                     NSString* s = [LVUtil objectToString:tempDic];
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }

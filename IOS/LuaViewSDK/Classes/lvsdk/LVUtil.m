@@ -113,12 +113,13 @@ void lv_pushUserdata(lv_State* L, void* p){///是否正确 ????????
     }
 }
 
-NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
+id lv_luaTableToDictionary(lv_State* L ,int index){
     if( lv_type(L, index)!=LV_TTABLE ) {
         return nil;
     }
     lv_checkstack(L, 128);
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* dic = nil;
+    NSMutableArray* array = nil;
     //lv_settop(L, 8);
     // Push another reference to the table on top of the stack (so we know
     // where it is, and this function can work for negative, positive and
@@ -129,7 +130,8 @@ NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
     // stack now contains: -1 => nil; -2 => table
     while (lv_next(L, -2))
     {
-        NSString* key   = lv_paramString(L, -2);
+        int keyType = lv_type(L, -2);
+        
         id value = nil;
         if( lv_type(L, -1)==LV_TSTRING ){
             value = lv_paramString(L, -1);
@@ -141,13 +143,34 @@ NSMutableDictionary* lv_luaTableToDictionary(lv_State* L ,int index){
             value = @( ((BOOL)lv_toboolean(L, -1)) );
         }
         // stack now contains: -1 => value; -2 => key; -3 => table
-        if( value && key ) {
-            [dic setObject:value forKey:key];
+        if( value ) {
+            if( keyType== LV_TNUMBER ) {
+                // number key
+                if( array == nil ) {
+                    array = [[NSMutableArray alloc] init];
+                }
+                [array addObject:value];
+            } else { // string
+                NSString* key   = lv_paramString(L, -2);
+                if( key ) {
+                    if( dic == nil ) {
+                        dic = [[NSMutableDictionary alloc] init];
+                    }
+                    [dic setObject:value forKey:key];
+                }
+            }
         }
         lv_pop(L, 1);
         // stack now contains: -1 => key; -2 => table
     }
     lv_pop(L, 1);
+    
+    if( [dic count]>0 ) {
+        return dic;
+    }
+    if ( array.count>0 ) {
+        return array;
+    }
     // Stack is now the same as it was on entry to this function
     return dic;
 }

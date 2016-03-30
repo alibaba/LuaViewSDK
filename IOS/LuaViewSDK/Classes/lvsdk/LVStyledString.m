@@ -183,7 +183,9 @@ static int lvNewAttributedString (lv_State *L) {
             NSRange range = {0};
             range.location = 0;
             range.length = s.length;
-            resetAttributedString(attString.mutableStyledString, dic, range, luaView.bundle);
+            if( [dic isKindOfClass:[NSDictionary class]] ) {
+                resetAttributedString(attString.mutableStyledString, dic, range, luaView.bundle);
+            }
         }
     }
     

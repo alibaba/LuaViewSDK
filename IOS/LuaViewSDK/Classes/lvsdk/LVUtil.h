@@ -105,7 +105,7 @@ void lv_pushUserdata(lv_State* L, void* p);
 /*
  * table -> NSDictionary
  */
-NSMutableDictionary* lv_luaTableToDictionary(lv_State* L, int index);
+id lv_luaTableToDictionary(lv_State* L, int index);
 
 /*
  * table -> NSArray
