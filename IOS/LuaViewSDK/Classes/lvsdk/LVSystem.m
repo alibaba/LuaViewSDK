@@ -253,6 +253,45 @@ static int tableToString(lv_State*L){
         lv_setfield(L, -2, "BOLD");
     }
     {
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "ScaleType", lib);
+        
+        //ScaleType.CENTER 按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
+        lv_pushnumber(L, UIViewContentModeCenter);
+        lv_setfield(L, -2, "CENTER");
+        
+        //ScaleType.CENTER_CROP 按比例扩大图片的size居中显示，使得图片长 (宽)等于或大于View的长(宽)
+        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
+        lv_setfield(L, -2, "CENTER_CROP");
+        
+        //ScaleType.CENTER_INSIDE 将图片的内容完整居中显示，通过按比例缩小或原来的size使得图片长(宽)等于或小于View的长(宽)
+        lv_pushnumber(L, UIViewContentModeScaleAspectFit);
+        lv_setfield(L, -2, "CENTER_INSIDE");
+        
+        //ScaleType.FIT_CENTER 把图片按比例扩大(缩小)到View的宽度，居中显示
+        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
+        lv_setfield(L, -2, "FIT_CENTER");
+        
+        //ScaleType.FIT_END 把图片按比例扩大(缩小)到View的宽度，显示在View的下部分位置
+        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
+        lv_setfield(L, -2, "FIT_END");
+        
+        //ScaleType.FIT_START 把图片按比例扩大(缩小)到View的宽度，显示在View的上部分位置
+        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
+        lv_setfield(L, -2, "FIT_START");
+        
+        //ScaleType.FIT_XY 把图片按照指定的大小在View中显示
+        lv_pushnumber(L, UIViewContentModeScaleToFill);
+        lv_setfield(L, -2, "FIT_XY");
+        
+        //ScaleType.MATRIX 用matrix来绘制
+        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
+        lv_setfield(L, -2, "MATRIX");
+    }
+    {
         // 震动
         lv_pushcfunction(L, vibrate);
         lv_setglobal(L, "Vibrate");

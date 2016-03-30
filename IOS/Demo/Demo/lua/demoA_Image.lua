@@ -41,10 +41,27 @@ imageView4 = Image();
 imageView4.backgroundColor(0xff00FF)
 imageView4.frame(150,300,200,200);
 imageView4.image("jhs.png");
-local saleType = 0;
+local scaleType = 0;
 imageView4.callback(function ()
-	imageView4.scaleType(saleType)
-	saleType = saleType + 1;
+	if( scaleType == 0 ) then
+		imageView4.scaleType(ScaleType.CENTER)
+	elseif( scaleType == 1 ) then
+		imageView4.scaleType(ScaleType.CENTER_CROP)
+	elseif( scaleType==2 ) then
+		imageView4.scaleType(ScaleType.CENTER_INSIDE)
+	elseif( scaleType==3 ) then
+		imageView4.scaleType(ScaleType.FIT_CENTER)
+	elseif( scaleType==4 ) then
+		imageView4.scaleType(ScaleType.FIT_XY)
+	elseif( scaleType==5 ) then
+		imageView4.scaleType(ScaleType.FIT_START)
+	elseif( scaleType==6 ) then
+		imageView4.scaleType(ScaleType.FIT_END)
+	elseif( scaleType==7 ) then
+		imageView4.scaleType(ScaleType.MATRIX)
+	elseif( scaleType==8 ) then
+	end
+	scaleType = scaleType + 1;
 end)
 
 label.backgroundColor(0xFF);
