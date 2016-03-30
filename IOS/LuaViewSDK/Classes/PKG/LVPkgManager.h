@@ -12,7 +12,8 @@
 #define LUAVIEW_VERSION   "5.0.0"
 
 #define LV_PKGINFO_PROPERTY_URL      @"url"
-#define LV_PKGINFO_PROPERTY_TIME     @"time"
+//#define LV_PKGINFO_PROPERTY_TIME     @"time"
+#define LV_PKGINFO_PROPERTY_TIME     @"url"  // url 作为时间戳的唯一标识, url变了就从新下发
 #define LV_PKGINFO_SHA256            @"sha256"
 
 @class LVRSA;
