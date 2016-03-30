@@ -44,9 +44,9 @@
 <h2>静态方法和常量</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../静态方法和常量/Align.html">Align</a></li>
-  <li><font color=#777777><strong>FontStyle</strong></font></li>
+  <li><a href="../静态方法和常量/FontStyle.html">FontStyle</a></li>
   <li><a href="../静态方法和常量/FontWeight.html">FontWeight</a></li>
-  <li><a href="../静态方法和常量/ScaleType.html">ScaleType</a></li>
+  <li><font color=#777777><strong>ScaleType</strong></font></li>
   <li><a href="../静态方法和常量/TextAlign.html">TextAlign</a></li>
   <li><a href="../静态方法和常量/math.html">math</a></li>
   <li><a href="../静态方法和常量/table.html">table</a></li>
@@ -110,9 +110,9 @@
 
 <div id="content">
 
-<h1>Module <code>FontStyle</code></h1>
-<p>FontStyle
- 文字样式</p>
+<h1>Module <code>ScaleType</code></h1>
+<p>ScaleType
+ 图片的缩放方式</p>
 <p>
 
 </p>
@@ -121,16 +121,20 @@
 <h2><a href="#常量">常量</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#FontStyle.NORMAL">FontStyle.NORMAL</a></td>
-	<td class="summary">正常字体</td>
+	<td class="name" nowrap><a href="#ScaleType.CENTER">ScaleType.CENTER</a></td>
+	<td class="summary">ScaleType.CENTER 按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#FontStyle.ITALIC">FontStyle.ITALIC</a></td>
-	<td class="summary">斜体</td>
+	<td class="name" nowrap><a href="#ScaleType.CENTER_CROP">ScaleType.CENTER_CROP</a></td>
+	<td class="summary">ScaleType.CENTER_CROP 按比例扩大图片的size居中显示，使得图片长 (宽)等于或大于View的长(宽)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#FontStyle.OBLIQUE">FontStyle.OBLIQUE</a></td>
-	<td class="summary">倾斜文字</td>
+	<td class="name" nowrap><a href="#ScaleType.CENTER_INSIDE">ScaleType.CENTER_INSIDE</a></td>
+	<td class="summary">ScaleType.CENTER_INSIDE 将图片的内容完整居中显示，通过按比例缩小或原来的size使得图片长(宽)等于或小于View的长(宽)</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ScaleType.FIT_XY">ScaleType.FIT_XY</a></td>
+	<td class="summary">ScaleType.FIT_XY 把图片按照指定的大小在View中显示(拉伸填充View模式)</td>
 	</tr>
 </table>
 
@@ -142,11 +146,11 @@
 
     <dl class="function">
     <dt>
-    <a name = "FontStyle.NORMAL"></a>
-    <strong>FontStyle.NORMAL</strong>
+    <a name = "ScaleType.CENTER"></a>
+    <strong>ScaleType.CENTER</strong>
     </dt>
     <dd>
-    正常字体
+    ScaleType.CENTER 按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
 
 
 
@@ -156,31 +160,69 @@
 
 </dd>
     <dt>
-    <a name = "FontStyle.ITALIC"></a>
-    <strong>FontStyle.ITALIC</strong>
+    <a name = "ScaleType.CENTER_CROP"></a>
+    <strong>ScaleType.CENTER_CROP</strong>
     </dt>
     <dd>
-    斜体
+    ScaleType.CENTER_CROP 按比例扩大图片的size居中显示，使得图片长 (宽)等于或大于View的长(宽)
 
 
 
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ image = Image();
+ image.image(<span class="string">"temp.png"</span>)
+ image.scaleType(ScaleType.CENTER_CROP) <span class="comment">-- 图片等比缩放, 且填充满整个ImageView, 可能被裁剪
+</span>  </pre>
+    </ul>
 
 </dd>
     <dt>
-    <a name = "FontStyle.OBLIQUE"></a>
-    <strong>FontStyle.OBLIQUE</strong>
+    <a name = "ScaleType.CENTER_INSIDE"></a>
+    <strong>ScaleType.CENTER_INSIDE</strong>
     </dt>
     <dd>
-    倾斜文字
+    ScaleType.CENTER_INSIDE 将图片的内容完整居中显示，通过按比例缩小或原来的size使得图片长(宽)等于或小于View的长(宽)
 
 
 
 
 
 
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ image = Image();
+ image.image(<span class="string">"temp.png"</span>)
+ image.scaleType(ScaleType.CENTER_INSIDE) <span class="comment">-- 图片等比缩放且全部可见, 图片尽可能大且不被裁剪
+</span>  </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ScaleType.FIT_XY"></a>
+    <strong>ScaleType.FIT_XY</strong>
+    </dt>
+    <dd>
+    ScaleType.FIT_XY 把图片按照指定的大小在View中显示(拉伸填充View模式)
+
+
+
+
+
+
+    <h3>例子:</h3>
+    <ul>
+        <pre class="example">
+ image = Image();
+ image.image(<span class="string">"temp.png"</span>)
+ image.scaleType(ScaleType.FIT_XY) <span class="comment">-- 图片填充满整个ImageView, 图片不被裁剪, 很可能被拉伸
+</span>  </pre>
+    </ul>
 
 </dd>
 </dl>
