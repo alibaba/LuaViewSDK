@@ -60,10 +60,7 @@ NSError* lv_verifySignSHA1WithRSA(NSData *fileData, SecKeyRef pubKeyRef, NSData 
     if( g_publicKeyFilePath==nil )
         g_publicKeyFilePath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@"der"];
     
-    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSString* longPath = [resourcePath stringByAppendingPathComponent:g_publicKeyFilePath];
-    
-    NSData *certificateData = [NSData dataWithContentsOfFile:longPath];
+    NSData *certificateData = [NSData dataWithContentsOfFile:g_publicKeyFilePath];
     return certificateData;
 }
 
