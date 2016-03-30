@@ -319,7 +319,14 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 
+static int callback (lv_State *L) {
+    return lv_setCallbackByKey(L, STR_CALLBACK, YES);
+}
+
+
 static const struct lvL_reg memberFunctions [] = {
+    {"callback",     callback },// 回调
+    
     {"contentSize",     contentSize },//TODO
     {"offset",     contentOffset },//TODO
     

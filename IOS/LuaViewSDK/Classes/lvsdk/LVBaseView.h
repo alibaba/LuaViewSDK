@@ -27,3 +27,9 @@
 +(int) classDefine: (lv_State *)L ;
 
 @end
+
+
+/**
+ * callback回调统一处理API
+ */
+extern int lv_setCallbackByKey(lv_State *L, const char* key, BOOL addGesture);

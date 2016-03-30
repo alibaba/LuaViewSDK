@@ -1174,7 +1174,7 @@ static int anchorPoint (lv_State *L) {
     return 0;
 }
 
-static int callbackByKey(lv_State *L, const char* key, BOOL addGesture) {
+int lv_setCallbackByKey(lv_State *L, const char* key, BOOL addGesture) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
@@ -1196,7 +1196,7 @@ static int callbackByKey(lv_State *L, const char* key, BOOL addGesture) {
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             }
             lv_pushvalue(L, 2);
-            if( lv_type(L, -1) == LV_TTABLE ) {
+            if( key==NULL && lv_type(L, -1) == LV_TTABLE ) {
                 // 如果是表格 设置每个Key
                 lv_pushnil(L);
                 while (lv_next(L, -2))
@@ -1225,15 +1225,15 @@ static int callbackByKey(lv_State *L, const char* key, BOOL addGesture) {
 }
 
 static int callback (lv_State *L) {
-    return callbackByKey(L, NULL, YES);
+    return lv_setCallbackByKey(L, NULL, YES);
 }
 
 static int onLayout (lv_State *L) {
-    return callbackByKey(L, STR_ON_LAYOUT, NO);
+    return lv_setCallbackByKey(L, STR_ON_LAYOUT, NO);
 }
 
 static int onClick (lv_State *L) {
-    return callbackByKey(L, STR_ON_CLICK, YES);
+    return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
 #pragma -mark __gc

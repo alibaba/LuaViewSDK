@@ -3,7 +3,7 @@ require "lv_kit"
 
 local scrW, scrH= System.screenSize()
 
-scrollView = ScrollView ();
+scrollView = HScrollView ();
 buttons = {};
 
 scrollView.frame(0, scrH/5, scrW, scrH/5 )

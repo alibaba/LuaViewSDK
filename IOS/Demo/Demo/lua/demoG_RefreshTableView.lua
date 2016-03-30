@@ -95,6 +95,24 @@ loading = false;
 tableView.frame(0,0,w,h-64);
 tableView.backgroundColor(0xffFFFF);
 
+-- tableView.callback({
+-- 		Scrolling = function()
+-- 			print("scrolling222");
+-- 		end,
+-- 		ScrollBegin = function()
+-- 			print("scrolling222 begin");
+-- 		end,
+-- 		ScrollEnd = function()
+-- 			print("scrolling22 end");
+-- 		end,
+-- 	    PullDown = function()
+-- 	    	print("PullDown222");
+-- 		end,
+-- 	    PullUp = function()
+-- 	    	print("PullUp222");
+-- 		end
+-- 	})
+
 
 
 header = Button();
