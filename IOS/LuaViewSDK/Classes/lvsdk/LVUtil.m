@@ -172,7 +172,7 @@ id lv_luaTableToDictionary(lv_State* L ,int index){
         return array;
     }
     // Stack is now the same as it was on entry to this function
-    return dic;
+    return @{};
 }
 
 NSArray* lv_luaTableKeys(lv_State* L, int index){
