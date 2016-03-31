@@ -75,8 +75,6 @@
 		3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8941C706BFA00D1E0B7 /* jhs.png */; };
 		3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8951C706BFA00D1E0B7 /* line.png */; };
 		3CC2F8D21C706C0500D1E0B7 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8D11C706C0500D1E0B7 /* yw_1222.jpg */; };
-		3CC2F8E31C706C3700D1E0B7 /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */; };
-		3CC2F8F41C70712700D1E0B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8F21C70712700D1E0B7 /* LaunchScreen.storyboard */; };
 		3CC2F9091C70758000D1E0B7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9081C70758000D1E0B7 /* Accelerate.framework */; };
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
@@ -86,7 +84,8 @@
 		84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */; };
 		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
 		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
-		3CFF78191C74743F00847C05 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
+		BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
+		BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +220,7 @@
 		84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ViewChildren.lua; sourceTree = "<group>"; };
 		84F9A0451C92CA7300481334 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button0.png; sourceTree = "<group>"; };
 		84F9A0461C92CA7300481334 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
+		BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_FlexBox.lua; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -229,7 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CFF78191C74743F00847C05 /* libLuaViewLib.a in Frameworks */,
+				BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */,
 				3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */,
 				3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */,
 				3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */,
@@ -323,6 +323,7 @@
 				3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */,
 				3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */,
 				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
+				BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */,
 				84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */,
 				3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */,
 				3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */,
@@ -612,6 +613,7 @@
 				3CC2F89F1C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua in Resources */,
 				3CC2F8A41C706BFA00D1E0B7 /* demoH2_CollectionView.lua in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
+				BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */,
 				3CC2F8C31C706BFA00D1E0B7 /* img16.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

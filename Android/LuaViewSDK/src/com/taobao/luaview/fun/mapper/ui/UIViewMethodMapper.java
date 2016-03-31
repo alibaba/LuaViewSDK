@@ -7,6 +7,7 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -1586,5 +1587,28 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public LuaValue isAnimating(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
+    }
+
+    public LuaValue flexCss(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setFlexCss(view, varargs);
+        } else {
+            return getFlexCss(view, varargs);
+        }
+    }
+
+    public LuaValue flxLayout(U view, Varargs varargs) {
+        // Android doing nothing here
+
+        return view;
+    }
+
+    private LuaValue setFlexCss(U view, Varargs varargs) {
+        final String css = LuaUtil.getString(varargs, 2);
+        return view.setFlexCss(css);
+    }
+
+    private LuaValue getFlexCss(U view, Varargs varargs) {
+        return valueOf(view.getFlexCss());
     }
 }

@@ -13,6 +13,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+
 /**
  * LuaView - Refresh TableView
  *
@@ -98,5 +100,10 @@ public class LVRefreshListView extends SwipeRefreshLayout implements ILVListView
         if (mListView != null) {
             mListView.removeFooter();
         }
+    }
+
+    @Override
+    public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
+
     }
 }
