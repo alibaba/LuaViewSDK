@@ -365,6 +365,17 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
                                    error:nil];
             [fm setAttributes:attrs ofItemAtPath:fileName error:NULL];
         } else {
+            NSString *dir = [fileName stringByDeletingLastPathComponent];
+            if ([dir length] > 0) {
+                BOOL isDir = NO;
+                if (![fm fileExistsAtPath:dir isDirectory:&isDir]) {
+                    [fm createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+                } else if (!isDir) {
+                    [fm removeItemAtPath:dir error:NULL];
+                    [fm createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+                }
+            }
+            
             [fm createFileAtPath:fileName contents:inflatedData attributes:attrs];
         }
     }
@@ -414,7 +425,7 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
 }
 
 - (BOOL)isDirectory {
-    return cdheader_isDirecotry(&_internalHeader);
+    return cdheader_isDirecotry(&_internalHeader) || [[self fileName] hasSuffix:@"/"];
 }
 
 - (BOOL)isSymlink {
