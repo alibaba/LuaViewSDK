@@ -8,10 +8,14 @@ import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptFileNode;
 import com.taobao.luaview.util.FileUtil;
+import com.taobao.luaview.util.LogUtil;
 
-import java.io.DataInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +77,12 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ArrayList
             final String url = (String) params[0];
             final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
             final InputStream inputStream = params.length > 1 ? (InputStream) params[1] : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
-            return unpackBundle(url, inputStream);
+
+            try {
+                return unpackBundle(url, inputStream);
+            } catch (IOException e) {
+                return null;
+            }
         }
         return null;
     }
@@ -85,79 +94,57 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ArrayList
      * @param url
      * @return
      */
-    private static ArrayList<ScriptFileNode> unpackBundle(final String url, final InputStream inputStream) {
-        final ArrayList<ScriptFileNode> result = new ArrayList<ScriptFileNode>();
-        if (inputStream != null) {
-            //read and save to multiple file
-            final DataInputStream dataInputStream = new DataInputStream(inputStream);
-            try {
-                dataInputStream.readInt();//tag
-                dataInputStream.readInt();//version
-                dataInputStream.readUTF();//时间
+    private static ArrayList<ScriptFileNode> unpackBundle(final String url, final InputStream inputStream) throws IOException {
+        if (inputStream == null || url == null) {
+            return null;
+        }
 
-                //1. 读取文件信息
-                final Map<String, ScriptFileNode> luaScripts = new HashMap<String, ScriptFileNode>();
-                final int fileCount = dataInputStream.readInt();//file count
-                final String scriptBundleFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
-                for (int i = 0; i < fileCount; i++) {
-                    //1.1 读取文件
-                    String fileName = dataInputStream.readUTF();
-                    int fileLength = dataInputStream.readInt();
-                    byte[] fileData = new byte[fileLength];
-                    dataInputStream.read(fileData);//file data, lua script (is encrypted) or resource (raw data)
+        final ZipInputStream zipStream = new ZipInputStream(inputStream);
+        final String scriptBundleFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
+        final Map<String, ScriptFileNode> luaScripts = new HashMap<String, ScriptFileNode>();
+        final Map<String, byte[]> luaSigns = new HashMap<String, byte[]>();
+        final byte[] buffer = new byte[8 * 1024];
 
-                    //1.2 保存文件
-                    final ScriptFileNode fileNode = new ScriptFileNode(fileName, fileData, null);
-                    final String filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);//save file
-                    FileUtil.save(filePath, fileData);
+        ZipEntry entry;
+        while ((entry = zipStream.getNextEntry()) != null) {
+            String fileName = entry.getName();
+            String filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);
 
-                    //1.3 添加到返回数据中(有需要处理返回值的情况才处理)
-                    if (fileNode.isLuaScript) {
-                        luaScripts.put(fileName, fileNode);
-                    }
+            if (entry.isDirectory()) {
+                File dir = new File(filePath);
+                if (!dir.exists()) {
+                    dir.mkdir();
                 }
-
-                //2. 读取签名信息
-                dataInputStream.readInt();//签名信息数组长度
-                int signCount = dataInputStream.readInt();//签名信息个数
-                for (int i = 0; i < signCount; i++) {
-                    //2.1 读取签名文件
-                    String fileName = dataInputStream.readUTF();
-                    int signLength = dataInputStream.readInt();
-                    byte[] signData = new byte[signLength];
-                    dataInputStream.read(signData);
-
-                    //2.2 保存签名文件
-                    final String signFilePath = FileUtil.buildPath(scriptBundleFolderPath, fileName + LuaScriptManager.POSTFIX_SIGN).toString();//sign file
-                    FileUtil.save(signFilePath, signData);
-
-                    //2.3 将签名信息存到返回值里
-                    if (LuaScriptManager.isLuaEncryptScript(fileName)) {
-                        ScriptFileNode fileNode = luaScripts.get(fileName);
-                        fileNode.signBytes = signData;
-                    }
+            } else {
+                final ByteArrayOutputStream out = new ByteArrayOutputStream();
+                int len;
+                while ((len = zipStream.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
                 }
+                final byte[] fileData = out.toByteArray();
+                FileUtil.save(filePath, fileData);
+                LogUtil.i(fileName, fileData.length);
 
-                dataInputStream.readInt();// tag
-
-                //3. 将结果保存到result中
-                for (Map.Entry<String, ScriptFileNode> entry : luaScripts.entrySet()) {
-                    result.add(entry.getValue());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    dataInputStream.close();
-                    inputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (LuaScriptManager.isLuaEncryptScript(fileName)) {
+                    final ScriptFileNode node = new ScriptFileNode(fileName, fileData, null);
+                    luaScripts.put(fileName, node);
+                } else if (LuaScriptManager.isLuaSignFile(fileName)) {
+                    final String scriptName = fileName.substring(0, fileName.length() - LuaScriptManager.POSTFIX_SIGN.length());
+                    luaSigns.put(scriptName, fileData);
                 }
             }
         }
+
+        zipStream.close();
+
+        final ArrayList<ScriptFileNode> result = new ArrayList<ScriptFileNode>();
+        for (Map.Entry<String, ScriptFileNode> node : luaScripts.entrySet()) {
+            node.getValue().signBytes = luaSigns.get(node.getValue().fileName);
+            result.add(node.getValue());
+        }
+
         return result;
     }
-
 
     @Override
     protected void onPostExecute(ArrayList<ScriptFileNode> files) {
