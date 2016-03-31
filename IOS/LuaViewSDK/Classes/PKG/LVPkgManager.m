@@ -135,7 +135,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 }
 
 +(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
-    return [NSString stringWithFormat:@"%@.sign___",fileName];
+    return [NSString stringWithFormat:@"%@.sign",fileName];
 }
 
 +(NSString*) safe_string:(NSDictionary*) dic forKey:(NSString*) key{
