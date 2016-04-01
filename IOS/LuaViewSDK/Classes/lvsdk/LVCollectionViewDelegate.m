@@ -326,4 +326,12 @@ static inline NSInteger mapSection(NSInteger section){
     }
 }
 
+// IOS 特有事件, 状态栏回顶
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
+    [self callWithScrollArgsForKey:@"ScrollToTop"];
+    if( [self.delegate respondsToSelector:@selector(scrollViewDidScrollToTop:)] ) {
+        [self.delegate scrollViewDidScrollToTop:scrollView];
+    }
+}
+
 @end
