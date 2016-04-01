@@ -1,6 +1,6 @@
 --1. 普通设置url，size，center，contentmode等
 
-as0 = StyledString("测试一啊12345", { fontColor = 0xffff0000 })
+as0 = StyledString("测试一啊12345", { fontColor = 0xffffff })
 as1 = StyledString("测试一啊12345", { fontColor = 0xffff0000, fontWeight = 600})
 as11 = StyledString("测试一啊12345", { fontColor = 0xffff0000, fontStyle = "bold" })
 as2 = StyledString("测试2", { backgroundColor = 0xaa00ff00, fontSize = 10 })
@@ -10,6 +10,7 @@ as4 = StyledString(Unicode(0xe607), { fontColor = 0xff00aaff, fontSize = 40 })
 
 label0 = Label()
 label0.text(as0)
+print(label0.textColor())
 
 label = Label()
 label.xy(0, 20)

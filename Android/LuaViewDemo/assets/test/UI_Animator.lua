@@ -60,3 +60,7 @@ tipsView.startAnimation(anim1, anim2);
 
 print("load finish")
 
+
+
+image = Image()
+image.url("")

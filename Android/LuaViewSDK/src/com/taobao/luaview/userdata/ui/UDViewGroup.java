@@ -21,6 +21,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private LuaValue mOnShow;
     private LuaValue mOnHide;
     private LuaValue mOnBack;
+    private LuaValue mOnLayout;
 
     public UDViewGroup(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
         super(view, globals, metatable, initParams);
@@ -28,7 +29,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     }
 
     private void init() {
-
     }
 
     @Override
@@ -38,7 +38,12 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
             mOnShow = LuaUtil.getFunction(mCallback, "onShow", "OnShow");
             mOnHide = LuaUtil.getFunction(mCallback, "onHide", "OnHide");
             mOnBack = LuaUtil.getFunction(mCallback, "onBack", "OnBack");
+            mOnLayout = LuaUtil.getFunction(mCallback, "onLayout", "OnLayout");
             //是否需要统一成OnShow, OnHide?
+            if (mOnBack != null && getView() != null) {
+                getView().setFocusableInTouchMode(true);
+                getView().setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+            }
         }
         return this;
     }
@@ -48,14 +53,35 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
+    public LuaValue getOnShowCallback(){
+        return this.mOnShow;
+    }
+
     public UDViewGroup setOnHideCallback(final LuaValue callback) {
         mOnHide = callback;
         return this;
     }
 
+    public LuaValue getOnHideCallback(){
+        return this.mOnHide;
+    }
+
     public UDViewGroup setOnBackCallback(final LuaValue callback) {
         mOnBack = callback;
         return this;
+    }
+
+    public LuaValue getOnBackCallback(){
+        return this.mOnBack;
+    }
+
+    public UDViewGroup setOnLayoutCallback(final LuaValue callback) {
+        mOnLayout = callback;
+        return this;
+    }
+
+    public LuaValue getOnLayoutCallback(){
+        return this.mOnLayout;
     }
 
     public LuaValue callOnShow() {
@@ -69,6 +95,11 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     public LuaValue callOnBack() {
         return LuaUtil.callFunction(mOnBack);
     }
+
+    public LuaValue callOnLayout() {
+        return LuaUtil.callFunction(mOnLayout);
+    }
+
 
     /**
      * add a subview

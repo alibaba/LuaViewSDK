@@ -15,33 +15,6 @@ Timer(function()
     print("Timer--" .. System.network())
 end).start(1, true)
 
-
-window.callback({
-    onShow = function()
-        print("onShow")
-    end,
-    onHide = function()
-        print("onHide")
-    end,
-    onBack = function()
-        print("onBack")
-        return false
-    end,
-    onWifiConnected = function()
-        print("onWifiConnected")
-        print(System.network())
-    end,
-    onMobileConnected = function()
-        print("onMobileConnected")
-        print(System.network())
-    end,
-    onConnectionClosed = function()
-        print("onConnectionClosed")
-        print(System.network())
-    end
-})
-
-
 System.gc()
 
 

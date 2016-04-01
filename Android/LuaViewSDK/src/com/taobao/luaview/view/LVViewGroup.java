@@ -1,5 +1,7 @@
 package com.taobao.luaview.view;
 
+import android.graphics.Canvas;
+import android.graphics.Region;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,11 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
         super(globals.context);
         this.mGlobals = globals;
         this.mLuaUserdata = new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
-        this.setFocusableInTouchMode(true);//需要设置，否则onKeyUp等事件无法监听，排查是否会带来其他问题
+        //改在UDViewGroup中设置，减少影响面
+//        this.setFocusableInTouchMode(true);//需要设置，否则onKeyUp等事件无法监听，排查是否会带来其他问题(点击的时候需要点击两下)
+//        this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
+        this.setWillNotDraw(true);
+        this.setClipChildren(false);
     }
 
     @Override
@@ -51,8 +57,10 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
         LVViewGroup.this.setVisibility(View.GONE);
     }
 
-    public LuaValue callCallback(final String name) {
-        return mLuaUserdata != null ? mLuaUserdata.callCallback(name) : LuaValue.NIL;
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.clipRect(0, 0, getWidth(), getHeight(), Region.Op.DIFFERENCE);
+        super.onDraw(canvas);
     }
 
     //-------------------------------------------显示回调--------------------------------------------
@@ -73,5 +81,13 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
             return result != null && result.optboolean(false);
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if(mLuaUserdata != null){
+            mLuaUserdata.callOnLayout();
+        }
     }
 }

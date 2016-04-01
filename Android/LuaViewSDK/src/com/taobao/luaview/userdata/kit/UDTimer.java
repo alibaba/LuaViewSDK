@@ -24,6 +24,15 @@ public class UDTimer extends BaseCacheUserdata {
 
     private Runnable mTimerRunnable;
 
+    //启动延时，默认为0
+    private long mDelay = 0L;
+
+    //是否重复，默认为false
+    private boolean mRepeat = false;
+
+    //间隔，重复间隔，默认为1秒
+    private long mInterval = 1000L;
+
     public UDTimer(Globals globals, LuaValue metatable, Varargs varargs) {
         super(new Handler(), globals, metatable, varargs);
         init();
@@ -54,12 +63,68 @@ public class UDTimer extends BaseCacheUserdata {
     }
 
     /**
+     * 设置delay
+     *
+     * @param delay
+     * @return
+     */
+    public UDTimer setDelay(long delay) {
+        this.mDelay = delay;
+        return this;
+    }
+
+    public long getDelay() {
+        return mDelay;
+    }
+
+    /**
+     * 设置repeat
+     *
+     * @param repeat
+     * @return
+     */
+    public UDTimer setRepeat(boolean repeat) {
+        this.mRepeat = repeat;
+        return this;
+    }
+
+    public boolean isRepeat() {
+        return mRepeat;
+    }
+
+    /**
+     * 设置intervale
+     *
+     * @param interval
+     * @return
+     */
+    public UDTimer setInterval(long interval) {
+        if(interval >= 0) {
+            this.mInterval = interval;
+        }
+        return this;
+    }
+
+    public long getInterval() {
+        return mInterval;
+    }
+
+
+
+    /**
      * start a timer
      *
      * @param interval
      * @param repeat
      */
-    public UDTimer start(final long interval, final boolean repeat) {
+    public UDTimer start(final Long interval, final Boolean repeat) {
+        if (interval != null) {
+            mInterval = interval;
+            mDelay = interval;
+        }
+        if (repeat != null) {
+            mRepeat = repeat;
+        }
         mTimerRunnable = new Runnable() {
             @Override
             public void run() {
@@ -69,12 +134,12 @@ public class UDTimer extends BaseCacheUserdata {
                         LuaUtil.callFunction(mCallback);
                     }
                 });
-                if (repeat && mTimerHandler != null) {
-                    mTimerHandler.postDelayed(this, interval);
+                if (mRepeat && mTimerHandler != null) {
+                    mTimerHandler.postDelayed(this, mInterval);
                 }
             }
         };
-        this.mTimerHandler.postDelayed(mTimerRunnable, interval);
+        this.mTimerHandler.postDelayed(mTimerRunnable, mDelay);
         return this;
     }
 

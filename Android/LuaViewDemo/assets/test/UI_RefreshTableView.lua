@@ -32,7 +32,9 @@ tableView = RefreshTableView {
             end,
             Layout = function(cell, section, row)
                 cell.icon.frame(0, 0, cellHeight, cellHeight);
-                cell.icon.image(imageUrl1);
+                cell.icon.image(imageUrl1, function()
+                    print("imageLoaded-ImageAndLabel", section, row)
+                end);
 
                 cell.title.frame(cellHeight, 0, w - cellHeight, cellHeight);
                 cell.title.text("测试" .. section .. "--" .. row);
@@ -55,11 +57,15 @@ tableView = RefreshTableView {
                 print(window);
                 local cellWdith, cellHeight = cell.window.size();
                 cell.icon.frame(0, 0, cellHeight, cellHeight);
-                cell.icon.image(imageUrl1);
+                cell.icon.image(imageUrl1, function()
+                    print("imageLoaded-ImageAndImage-1", section, row)
+                end);
 
 
                 cell.icon2.frame(cellHeight + 10, 0, cellHeight, cellHeight);
-                cell.icon2.image(imageUrl1);
+                cell.icon2.image(imageUrl1, function()
+                    print("imageLoaded-ImageAndImage-2", section, row)
+                end);
             end,
             Callback = function(section, row)
                 print(section, row);

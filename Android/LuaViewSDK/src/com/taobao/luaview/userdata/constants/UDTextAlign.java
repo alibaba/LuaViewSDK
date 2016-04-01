@@ -32,6 +32,18 @@ public class UDTextAlign extends BaseLuaTable {
         set("LEFT", Gravity.LEFT | Gravity.CENTER_VERTICAL);//默认竖直居中，ios不支持居上
         set("CENTER", Gravity.CENTER);
         set("RIGHT", Gravity.RIGHT | Gravity.CENTER_VERTICAL);//默认竖直居中，ios不支持居上
+
+
+        //以下在两端统一后开启
+        /*
+        set("LEFT", Gravity.LEFT);
+        set("RIGHT", Gravity.RIGHT);
+        set("TOP", Gravity.TOP);
+        set("BOTTOM", Gravity.BOTTOM);
+        set("CENTER", Gravity.CENTER);
+        set("HCENTER", Gravity.CENTER_HORIZONTAL);
+        set("VCENTER", Gravity.CENTER_VERTICAL);
+        */
     }
 
 }

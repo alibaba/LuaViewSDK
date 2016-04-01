@@ -3,10 +3,14 @@ package com.taobao.luaview.fun.mapper.ui;
 import android.animation.ValueAnimator;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.VmVersion;
+import com.taobao.luaview.userdata.constants.UDInterpolator;
 import com.taobao.luaview.userdata.ui.UDAnimator;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.DimenUtil;
+import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.ParamUtil;
 
 import org.luaj.vm2.LuaTable;
@@ -80,6 +84,35 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
     public LuaValue repeatCount(U udAnimator, Varargs varargs) {
         final int repeatCount = varargs.optint(2, 0);
         return udAnimator.setRepeatCount(repeatCount);
+    }
+
+    /**
+     * 插值器，可以控制不同值
+     *
+     * @param udAnimator
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue interpolator(U udAnimator, Varargs varargs) {
+        final Integer type = LuaUtil.getInt(varargs, 2);
+        final Float cycles = LuaUtil.getFloat(varargs, 3, 2);
+        return udAnimator.setInterpolator(UDInterpolator.parse(type, cycles));
+    }
+
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue cancel(U udAnimator, Varargs varargs) {
+        return udAnimator.cancel();
+    }
+
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue pause(U udAnimator, Varargs varargs) {
+        return udAnimator.pause();
+    }
+
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue resume(U udAnimator, Varargs varargs) {
+        return udAnimator.resume();
     }
 
     /**

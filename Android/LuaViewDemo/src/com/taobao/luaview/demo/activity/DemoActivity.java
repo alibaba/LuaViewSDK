@@ -8,8 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.taobao.luaview.global.Constants;
+import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
+import com.taobao.luaview.scriptbundle.ScriptBundle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +23,14 @@ public class DemoActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new LuaScriptLoader(this).load("", new LuaScriptLoader.ScriptLoaderCallback() {
+            @Override
+            public void onScriptLoaded(ScriptBundle bundle) {
+
+            }
+        });
+
         //初始化
         init();
 

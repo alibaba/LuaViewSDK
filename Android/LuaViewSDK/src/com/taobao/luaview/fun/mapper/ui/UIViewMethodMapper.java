@@ -7,7 +7,9 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
+import com.taobao.luaview.util.LuaUtil;
 
+import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -1526,6 +1528,52 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public LuaValue getCallback(U view, Varargs varargs) {
         return view.getCallback();
+    }
+
+    /**
+     * 点击
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue onClick(U view, Varargs varargs){
+        if(varargs.narg() > 1) {
+            return setOnClick(view, varargs);
+        } else {
+            return getOnClick(view, varargs);
+        }
+    }
+
+    public LuaValue setOnClick(U view, Varargs varargs){
+        final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
+        return view.setOnClickCallback(callback);
+    }
+
+    public LuaValue getOnClick(U view, Varargs varargs){
+        return view.getOnClickCallback();
+    }
+
+    /**
+     * 长按
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue onLongClick(U view, Varargs varargs){
+        if(varargs.narg() > 1){
+            return setOnLongClick(view, varargs);
+        } else {
+            return getOnLongClick(view, varargs);
+        }
+    }
+
+    public LuaValue setOnLongClick(U view, Varargs varargs){
+        final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
+        return view.setOnLongClickCallback(callback);
+    }
+
+    public LuaValue getOnLongClick(U view, Varargs varargs){
+        return view.getOnLongClickCallback();
     }
 
     /**

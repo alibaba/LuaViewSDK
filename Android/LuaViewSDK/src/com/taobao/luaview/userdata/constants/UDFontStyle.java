@@ -18,7 +18,7 @@ public class UDFontStyle extends BaseLuaTable {
 
     public static final String STYLE_NORMAL = "normal";
     public static final String STYLE_ITALIC = "italic";
-    public static final String STYLE_BOLD = "BOLD";
+    public static final String STYLE_BOLD = "bold";
 
     public UDFontStyle(Globals globals, LuaValue metatable) {
         super(globals, metatable);

@@ -27,7 +27,7 @@ public class FileUtil {
      */
     public static boolean isContainsFolderPath(final String filePath, final String folderPath) {
         if (filePath != null && folderPath != null) {//filePath本身是folder，并且包含folderPath
-            if(folderPath.charAt(folderPath.length() - 1) == '/'){//本身是路径
+            if (folderPath.charAt(folderPath.length() - 1) == '/') {//本身是路径
                 filePath.startsWith(folderPath);
             } else {
                 return filePath.startsWith(folderPath + "/");
@@ -144,7 +144,20 @@ public class FileUtil {
         } else if (filePath.lastIndexOf(File.separatorChar) != -1) {
             return filePath.substring(0, filePath.lastIndexOf(File.separatorChar));
         }
-        return filePath;
+        return "";
+    }
+
+    /**
+     * 得到Asset的目录路径
+     *
+     * @param assetFilePath
+     * @return
+     */
+    public static String getAssetFolderPath(final String assetFilePath) {
+        if (assetFilePath != null && assetFilePath.lastIndexOf(File.separatorChar) != -1) {
+            return assetFilePath.substring(0, assetFilePath.lastIndexOf(File.separatorChar));
+        }
+        return "";
     }
 
     /**

@@ -54,33 +54,37 @@ public class UDInterpolator extends BaseLuaTable {
 //        set("PATH", 12);
     }
 
-    public Interpolator parse(int type, float circle) {
-        switch (type) {
-            case 0:
-                return new AccelerateDecelerateInterpolator();
-            case 1:
-                return new AccelerateInterpolator();
-            case 2:
-                return new AnticipateInterpolator();
-            case 3:
-                return new AnticipateOvershootInterpolator();
-            case 4:
-                return new BounceInterpolator();
-            case 5:
-                return new CycleInterpolator(circle);
-            case 6:
-                return new DecelerateInterpolator();
-            case 7:
-                return new LinearInterpolator();
-            case 8:
-                return new OvershootInterpolator();
-            //暂时不支持的
+    public static Interpolator parse(Integer type, Float cycles) {
+        if (type != null) {
+            switch (type) {
+                case 0:
+                    return new AccelerateDecelerateInterpolator();
+                case 1:
+                    return new AccelerateInterpolator();
+                case 2:
+                    return new AnticipateInterpolator();
+                case 3:
+                    return new AnticipateOvershootInterpolator();
+                case 4:
+                    return new BounceInterpolator();
+                case 5:
+                    return new CycleInterpolator((cycles != null && cycles > 0) ? cycles : 1f);
+                case 6:
+                    return new DecelerateInterpolator();
+                case 7:
+                    return new LinearInterpolator();
+                case 8:
+                    return new OvershootInterpolator();
+                //暂时不支持的
 //            case 7: return new FastOutLinearInterplator();
 //            case 8: return new FastOutSlowInInterplator();
 //            case 10: return new LinearOutSlowInInterplator();
 //            case 12: return new PathInterplator();
-            default:
-                return new LinearInterpolator();
+                default:
+                    return new LinearInterpolator();
+            }
+        } else {
+            return new LinearInterpolator();
         }
     }
 

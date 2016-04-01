@@ -148,7 +148,7 @@ public class HttpMethodMapper<U extends UDHttp> extends BaseMethodMapper<U> {
      * @return
      */
     public LuaValue callback(U http, Varargs varargs) {
-        if (varargs.narg() > 2) {
+        if (varargs.narg() > 1) {
             return setCallback(http, varargs);
         } else {
             return getCallback(http, varargs);

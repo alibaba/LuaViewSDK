@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.kit;
 
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -20,6 +21,7 @@ import org.luaj.vm2.lib.ZeroArgFunction;
  * @date 15/9/6
  */
 public class UDSystem extends BaseLuaTable {
+
     public UDSystem(Globals globals, LuaValue metatable) {
         super(globals, metatable);
         init();
@@ -56,7 +58,7 @@ public class UDSystem extends BaseLuaTable {
     class vmVersion extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            return valueOf("4.5.2");
+            return valueOf(VmVersion.getCurrent());
         }
     }
 

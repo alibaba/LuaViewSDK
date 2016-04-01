@@ -2,13 +2,13 @@ package com.taobao.luaview.global;
 
 import android.content.Context;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
-import com.taobao.luaview.fun.base.BaseFunctionBinder;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
@@ -16,6 +16,7 @@ import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.EncryptUtil;
 import com.taobao.luaview.util.LogUtil;
@@ -23,6 +24,7 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 import com.taobao.luaview.view.LVViewGroup;
+import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
@@ -46,15 +48,21 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     //缓存的数据，需要在退出的时候清空
     private Map<Class, List<WeakReference<CacheableObject>>> mCachedObjects;
 
+    //需要渲染的Target
+    private ILVViewGroup mRenderTarget;
+
     //缓存数据管理器
     public interface CacheableObject {
         void onCacheClear();
+    }
+
+    public interface CreatedCallback {
+        void onCreated(LuaView luaView);
     }
     //---------------------------------------静态方法------------------------------------------------
 
     /**
      * create a luaview
-     * TODO 这个方法可以异步执行
      *
      * @param context
      * @return
@@ -63,12 +71,56 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         //初始化
         init(context);
 
-        Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
-        globals.context = context;
-
-        LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
+        //create globals
+        final Globals globals = createGlobals(context);
 
         //设置metaTable
+        return createLuaView(context, globals);
+    }
+
+
+    /**
+     * create LuaView async
+     *
+     * @param context
+     * @param createdCallback
+     */
+    public static void createAsync(final Context context, final CreatedCallback createdCallback) {
+        new SimpleTask1<Globals>() {
+            @Override
+            protected Globals doInBackground(Object... params) {
+                //init
+                Constants.init(context);
+                LuaScriptManager.init(context);
+
+                //create globals
+                final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+                globals.context = context;
+                LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
+                return globals;
+            }
+
+            @Override
+            protected void onPostExecute(Globals globals) {
+                //create luaview
+                final LuaView luaView = createLuaView(context, globals);
+                if (createdCallback != null) {
+                    createdCallback.onCreated(luaView);
+                }
+            }
+        }.execute();
+    }
+
+    @NonNull
+    private static Globals createGlobals(final Context context) {
+        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+        globals.context = context;
+        LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
+        return globals;
+    }
+
+    @NonNull
+    private static LuaView createLuaView(final Context context, final Globals globals) {
         final LuaView luaView = new LuaView(globals, createMetaTableForLuaView());
         globals.finder = new LuaResourceFinder(context);
         globals.luaView = luaView;
@@ -117,6 +169,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param urlOrFileOrScript
      * @return
      */
+    public LuaView load(final String urlOrFileOrScript, final String sha256) {
+        return load(urlOrFileOrScript, sha256, null);
+    }
+
     public LuaView load(final String urlOrFileOrScript, final String sha256, final LuaScriptLoader.ScriptLoaderCallback callback) {
         if (!TextUtils.isEmpty(urlOrFileOrScript)) {
             if (URLUtil.isNetworkUrl(urlOrFileOrScript)) {//url, http:// or https://
@@ -151,6 +207,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param url http://[xxx] or https://[xxx]
      * @return
      */
+    public LuaView loadUrl(final String url, final String sha256) {
+        return loadUrl(url, sha256, null);
+    }
+
     public LuaView loadUrl(final String url, final String sha256, final LuaScriptLoader.ScriptLoaderCallback callback) {
         updateUri(url);
         if (!TextUtils.isEmpty(url)) {
@@ -189,7 +249,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     private LuaView loadFile(final String luaFileName) {
         updateUri(luaFileName);
         if (!TextUtils.isEmpty(luaFileName)) {
-            mGlobals.saveContainer(this);
+            mGlobals.saveContainer(getRenderTarget());
             mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
             this.loadFileInternal(luaFileName);//加载文件
             mGlobals.restoreContainer();
@@ -205,9 +265,25 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     public LuaView loadScript(final String script) {
         if (!TextUtils.isEmpty(script)) {
-            mGlobals.saveContainer(this);
+            mGlobals.saveContainer(getRenderTarget());
             mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
             this.loadScriptInternal(EncryptUtil.md5Hex(script), script);
+            mGlobals.restoreContainer();
+        }
+        return this;
+    }
+
+    /**
+     * 加载script bundle
+     *
+     * @param scriptFile
+     * @return
+     */
+    private LuaView loadScript(final ScriptFile scriptFile) {
+        if (scriptFile != null) {
+            mGlobals.saveContainer(getRenderTarget());
+            mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
+            this.loadScriptInternal(scriptFile.fileName, scriptFile.script);
             mGlobals.restoreContainer();
         }
         return this;
@@ -242,27 +318,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }
         return this;
     }
-
-    /**
-     * 加载script bundle
-     *
-     * @param scriptFile
-     * @return
-     */
-    private LuaView loadScript(final ScriptFile scriptFile) {
-        if (scriptFile != null) {
-            mGlobals.saveContainer(this);
-            mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
-            this.loadScriptInternal(scriptFile.fileName, scriptFile.script);
-            mGlobals.restoreContainer();
-        }
-        return this;
-    }
-
     //---------------------------------------注册函数------------------------------------------------
 
     /**
      * 加载一个binder，可以用作覆盖老功能
+     * Lib 必须注解上 LuaViewLib
      *
      * @param binders
      * @return
@@ -286,11 +346,15 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     public LuaView register(final String luaName, final Object obj) {
         if (!TextUtils.isEmpty(luaName)) {
             final LuaValue value = mGlobals.get(luaName);
+            if (obj != value) {
+                mGlobals.set(luaName, CoerceJavaToLua.coerce(obj));
+            }
+            /* -- 判断是否为null
             if (value == null || value.isnil()) {
                 mGlobals.set(luaName, CoerceJavaToLua.coerce(obj));
             } else {
                 LogUtil.d("name " + luaName + " is already registered!");
-            }
+            }*/
         } else {
             LogUtil.d("name " + luaName + " is invalid!");
         }
@@ -471,6 +535,37 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }
     }
 
+    //----------------------------------------getter and setter-------------------------------------
+
+    /**
+     * create a default render target (viewgroup)
+     *
+     * @return
+     */
+    public ILVViewGroup createDefaultRenderTarget() {
+        return new LVViewGroup(mGlobals, createMetaTableForLuaView(), null);
+    }
+
+    /**
+     * set render target
+     *
+     * @param viewGroup
+     * @return
+     */
+    public LuaView setRenderTarget(ILVViewGroup viewGroup) {
+        this.mRenderTarget = viewGroup;
+        return this;
+    }
+
+    /**
+     * get render target
+     *
+     * @return
+     */
+    private ILVViewGroup getRenderTarget() {
+        return mRenderTarget != null ? mRenderTarget : this;
+    }
+
     //----------------------------------------cached object 管理-------------------------------------
 
     /**
@@ -496,6 +591,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     /**
      * 清理所有缓存的对象
+     * TODO 需要在onShow的时候恢复所有cache后的对象
      */
     private void clearCachedObjects() {
         if (mCachedObjects != null && mCachedObjects.size() > 0) {

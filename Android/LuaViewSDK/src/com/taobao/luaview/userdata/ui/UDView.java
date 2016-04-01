@@ -23,13 +23,19 @@ import java.util.List;
 
 /**
  * View 数据封装
- * @author song
+ *
  * @param <T>
+ * @author song
  */
 public class UDView<T extends View> extends BaseUserdata {
     public LuaValue initParams = LuaValue.NIL;
     //回调
     public LuaValue mCallback;
+
+    //点击
+    private LuaValue mOnClick;
+    private LuaValue mOnLongClick;
+
     private AnimatorSet mAnimatorSet;
 
     public UDView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
@@ -761,35 +767,61 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setCallback(final LuaValue callbacks) {
         this.mCallback = callbacks;
         if (this.mCallback != null) {
-            if (this.mCallback.isfunction()) {
-                setOnClickListener();
-            } else if (this.mCallback.istable()) {
-                setOnClickListener();
-                setOnLongClickListener();
-            }
+            mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");
+            mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;
+
+            //setup listener
+            setOnClickListener();
+            setOnLongClickListener();
         }
         return this;
     }
 
-    public LuaValue callCallback(final String name) {
-        if (this.mCallback != null) {
-            return LuaUtil.callFunction(this.mCallback.get(name));
-        }
-        return LuaValue.NIL;
+    /**
+     * 设置点击事件
+     *
+     * @param callback
+     * @return
+     */
+    public UDView setOnClickCallback(final LuaValue callback) {
+        this.mOnClick = callback;
+        setOnClickListener();
+        return this;
+    }
+
+    public UDView setOnLongClickCallback(final LuaValue callback) {
+        this.mOnLongClick = callback;
+        setOnLongClickListener();
+        return this;
+    }
+
+    /**
+     * 点击
+     *
+     * @return
+     */
+    public LuaValue callOnClick() {
+        return LuaUtil.callFunction(this.mOnClick);
+    }
+
+    public boolean callOnLongClick() {
+        return LuaUtil.callFunction(this.mOnLongClick).optboolean(false);
     }
 
     /**
      * 点击
      */
     private void setOnClickListener() {
-        final T view = getView();
-        if (view != null) {
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callClickCallback();
-                }
-            });
+        if (LuaUtil.isValid(this.mOnClick)) {
+            final T view = getView();
+            if (view != null) {
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callOnClick();
+                    }
+                });
+            }
         }
     }
 
@@ -797,43 +829,17 @@ public class UDView<T extends View> extends BaseUserdata {
      * 长按
      */
     private void setOnLongClickListener() {
-        final T view = getView();
-        if (view != null) {
-            view.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return callLongClickCallback();
-                }
-            });
-        }
-    }
-
-    /**
-     * call click
-     *
-     * @return
-     */
-    public UDView callClickCallback() {
-        if (mCallback != null) {
-            if (mCallback.isfunction()) {
-                LuaUtil.callFunction(mCallback);
-            } else if (mCallback.istable()) {
-                LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "Click", "click"));
+        if (LuaUtil.isValid(this.mOnLongClick)) {
+            final T view = getView();
+            if (view != null) {
+                view.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        return callOnLongClick();
+                    }
+                });
             }
         }
-        return this;
-    }
-
-    /**
-     * call long click
-     *
-     * @return
-     */
-    public boolean callLongClickCallback() {
-        if (mCallback != null && mCallback.istable()) {
-            return LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "LongClick", "longClick")).optboolean(false);
-        }
-        return false;
     }
 
     /**
@@ -844,6 +850,13 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public LuaValue getCallback() {
         return mCallback != null ? mCallback : LuaValue.NIL;
+    }
+
+    public LuaValue getOnClickCallback(){
+        return this.mOnClick;
+    }
+    public LuaValue getOnLongClickCallback(){
+        return this.mOnLongClick;
     }
 
     /**

@@ -28,8 +28,8 @@ public class UDFontWeight extends BaseLuaTable {
     }
 
     private void init() {
-        this.set("NORMAL", Typeface.NORMAL);
-        this.set("BOLD", Typeface.BOLD);
+        this.set("NORMAL", WEIGHT_NORMAL_INT);
+        this.set("BOLD", WEIGHT_BOLD_INT);
     }
 
     public static int getValue(final String name) {

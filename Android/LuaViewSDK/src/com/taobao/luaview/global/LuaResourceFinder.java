@@ -51,7 +51,7 @@ public class LuaResourceFinder implements ResourceFinder {
     public void setUri(String uri) {
         mUri = uri;
         mBasePath = LuaScriptManager.buildScriptBundleFolderPath(uri);
-        mBaseAssetPath = FileUtil.getFolderPath(uri);//脚本默认放在asset目录下
+        mBaseAssetPath = FileUtil.getAssetFolderPath(uri);//脚本默认放在asset目录下
     }
 
     /**
@@ -83,6 +83,7 @@ public class LuaResourceFinder implements ResourceFinder {
     /**
      * 在 res 或者 asset 或者 文件系统 找drawable
      * TODO 异步
+     *
      * @param nameOrPath
      * @return
      */
@@ -173,6 +174,7 @@ public class LuaResourceFinder implements ResourceFinder {
     /**
      * 在 文件系统 或者 asset下 找资源
      * TODO 异步
+     *
      * @param nameOrPath
      * @return
      */

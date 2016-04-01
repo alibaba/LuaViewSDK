@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class LuaUtil {
 
+
     //-------------------------------------get value------------------------------------------------
 
     /**
@@ -30,6 +31,10 @@ public class LuaUtil {
      */
     public static Boolean getBoolean(final Varargs varargs, int... poslist) {
         return (Boolean) getValue(LuaValue.TBOOLEAN, varargs, poslist);
+    }
+
+    public static Boolean getBoolean(final Varargs varargs, Boolean defaultValue, int... poslist) {
+        return (Boolean) getValue(LuaValue.TBOOLEAN, varargs, defaultValue, poslist);
     }
 
     /**
@@ -56,6 +61,11 @@ public class LuaUtil {
         return number != null ? number.checklong() : null;
     }
 
+    public static Long getLong(final Varargs varargs, Long defaultValue, int... poslist) {
+        final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, defaultValue, poslist);
+        return number != null ? number.checklong() : null;
+    }
+
     /**
      * 获取double
      *
@@ -66,6 +76,18 @@ public class LuaUtil {
     public static Double getDouble(final Varargs varargs, int... poslist) {
         final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
         return number != null ? number.checkdouble() : null;
+    }
+
+    /**
+     * 获取float
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Float getFloat(final Varargs varargs, int... poslist) {
+        final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
+        return number != null ? (float) number.checkdouble() : null;
     }
 
     /**
@@ -164,6 +186,7 @@ public class LuaUtil {
 
     /**
      * get value from table
+     *
      * @param type
      * @param valueList
      * @param keylist
@@ -319,7 +342,15 @@ public class LuaUtil {
         return target != null && target.type() == LuaValue.TNONE;
     }
 
-
+    /**
+     * 判断是否空或者nil
+     *
+     * @param target
+     * @return
+     */
+    public static boolean isValid(final LuaValue target) {
+        return target != null && target.type() != LuaValue.TNIL;
+    }
     //------------------------------------function call---------------------------------------------
 
     /**

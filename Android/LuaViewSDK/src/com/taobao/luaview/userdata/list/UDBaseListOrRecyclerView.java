@@ -1,16 +1,15 @@
 package com.taobao.luaview.userdata.list;
 
 import android.graphics.Point;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
-import com.taobao.android.luaview.R;
+import com.bumptech.glide.Glide;
 import com.taobao.luaview.extend.SparseCache;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.AndroidUtil;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
-import com.taobao.luaview.view.LVImageView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -527,13 +526,11 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      */
     protected void updateAllChildScrollState(ViewGroup view, int scrollState) {
         if (this.mLazyLoad && view != null) {
-            final int childCount = view.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = view.getChildAt(i);
-                if (child instanceof LVImageView && child.getTag(R.id.lv_tag_url) != null) {//ImageView，并且是网络图片才设置scrollState, TODO 修改LVBaseImageView setImageUrl，使得本地跟网络使用相同的处理逻辑
-//                    ((LVImageView) child).setScrollState(scrollState);
-                } else if (child instanceof ViewGroup) {
-                    updateAllChildScrollState((ViewGroup) child, scrollState);
+            if (scrollState >= AbsListView.OnScrollListener.SCROLL_STATE_FLING) {//手滑动的时候
+                Glide.with(getContext()).pauseRequests();
+            } else {
+                if (Glide.with(getContext()).isPaused()) {
+                    Glide.with(getContext()).resumeRequests();
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.taobao.luaview.userdata.ui;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Build;
@@ -15,12 +16,15 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Animator 数据封装
  *
  * @author song
  */
-public class UDAnimator extends BaseUserdata {
+public class UDAnimatorSet extends BaseUserdata {
     private LuaValue mOnStartCallback;
     private LuaValue mOnEndCallback;
     private LuaValue mOnCancelCallback;
@@ -29,22 +33,32 @@ public class UDAnimator extends BaseUserdata {
     private LuaValue mOnResumeCallback;
     private LuaValue mOnUpdateCallback;
 
-    public UDAnimator(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(new ObjectAnimator(), globals, metaTable, varargs);
+    private List<ObjectAnimator> mAnimators;
+    private UDView mTarget;
+    private int mRepeatCount;
+    private int mRepeatMode;
+    private float[] mFloatValues;
+    private int[] mIntValues;
+
+    public UDAnimatorSet(Globals globals, LuaValue metaTable, Varargs varargs) {
+        super(new AnimatorSet(), globals, metaTable, varargs);
         init();
     }
 
-    private ObjectAnimator getAnimator() {
-        return (ObjectAnimator) userdata();
+    private AnimatorSet getAnimatorSet() {
+        return (AnimatorSet) userdata();
     }
 
     private void init() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                animator.setAutoCancel(true);
-            }
+        mAnimators = new ArrayList<ObjectAnimator>();
+    }
+
+    private ObjectAnimator createAnimator() {
+        final ObjectAnimator animator = new ObjectAnimator();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            animator.setAutoCancel(true);
         }
+        return animator;
     }
 
     /**
@@ -53,16 +67,12 @@ public class UDAnimator extends BaseUserdata {
      * @param udView
      * @return
      */
-    public UDAnimator with(UDView udView) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && udView != null && udView.getView() != null) {
-            animator.setTarget(udView.getView());
-        }
-
+    public UDAnimatorSet with(UDView udView) {
+        this.mTarget = udView;
         return this;
     }
 
-    public UDAnimator setCallback(LuaTable callbacks) {
+    public UDAnimatorSet setCallback(LuaTable callbacks) {
         if (callbacks != null) {
             mOnStartCallback = LuaUtil.getFunction(callbacks, "onStart", "OnStart");
             mOnEndCallback = LuaUtil.getFunction(callbacks, "onEnd", "OnEnd");
@@ -75,37 +85,37 @@ public class UDAnimator extends BaseUserdata {
         return this;
     }
 
-    public UDAnimator setOnStartCallback(LuaValue mOnStartCallback) {
+    public UDAnimatorSet setOnStartCallback(LuaValue mOnStartCallback) {
         this.mOnStartCallback = mOnStartCallback;
         return this;
     }
 
-    public UDAnimator setOnEndCallback(LuaValue mOnEndCallback) {
+    public UDAnimatorSet setOnEndCallback(LuaValue mOnEndCallback) {
         this.mOnEndCallback = mOnEndCallback;
         return this;
     }
 
-    public UDAnimator setOnCancelCallback(LuaValue mOnCancelCallback) {
+    public UDAnimatorSet setOnCancelCallback(LuaValue mOnCancelCallback) {
         this.mOnCancelCallback = mOnCancelCallback;
         return this;
     }
 
-    public UDAnimator setOnRepeatCallback(LuaValue mOnRepeatCallback) {
+    public UDAnimatorSet setOnRepeatCallback(LuaValue mOnRepeatCallback) {
         this.mOnRepeatCallback = mOnRepeatCallback;
         return this;
     }
 
-    public UDAnimator setOnPauseCallback(LuaValue mOnPauseCallback) {
+    public UDAnimatorSet setOnPauseCallback(LuaValue mOnPauseCallback) {
         this.mOnPauseCallback = mOnPauseCallback;
         return this;
     }
 
-    public UDAnimator setOnResumeCallback(LuaValue mOnResumeCallback) {
+    public UDAnimatorSet setOnResumeCallback(LuaValue mOnResumeCallback) {
         this.mOnResumeCallback = mOnResumeCallback;
         return this;
     }
 
-    public UDAnimator setOnUpdateCallback(LuaValue mOnUpdateCallback) {
+    public UDAnimatorSet setOnUpdateCallback(LuaValue mOnUpdateCallback) {
         this.mOnUpdateCallback = mOnUpdateCallback;
         return this;
     }
@@ -117,13 +127,14 @@ public class UDAnimator extends BaseUserdata {
      * @param name
      * @return
      */
-    public UDAnimator ofProperty(final String name, float... values) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && TextUtils.isEmpty(name) == false) {
+    public UDAnimatorSet ofProperty(final String name, float... values) {
+        if (mAnimators != null && TextUtils.isEmpty(name) == false) {
+            final ObjectAnimator animator = createAnimator();
             animator.setPropertyName(name);
             if (values != null && values.length > 0) {
                 animator.setFloatValues(values);
             }
+            mAnimators.add(animator);
         }
         return this;
     }
@@ -135,10 +146,10 @@ public class UDAnimator extends BaseUserdata {
      * @param duration
      * @return
      */
-    public UDAnimator setDuration(long duration) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && duration >= 0) {
-            animator.setDuration(duration);
+    public UDAnimatorSet setDuration(long duration) {
+        final AnimatorSet animatorSet = getAnimatorSet();
+        if (animatorSet != null && duration >= 0) {
+            animatorSet.setDuration(duration);
         }
         return this;
     }
@@ -149,8 +160,8 @@ public class UDAnimator extends BaseUserdata {
      * @param delay
      * @return
      */
-    public UDAnimator setStartDelay(long delay) {
-        final ObjectAnimator animator = getAnimator();
+    public UDAnimatorSet setStartDelay(long delay) {
+        final AnimatorSet animator = getAnimatorSet();
         if (animator != null && delay >= 0) {
             animator.setStartDelay(delay);
         }
@@ -163,15 +174,8 @@ public class UDAnimator extends BaseUserdata {
      * @param repeatCount
      * @return
      */
-    public UDAnimator setRepeatCount(int repeatCount) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
-            if (repeatCount >= 0) {
-                animator.setRepeatCount(repeatCount);
-            } else {
-                animator.setRepeatMode(ValueAnimator.INFINITE);
-            }
-        }
+    public UDAnimatorSet setRepeatCount(int repeatCount) {
+        this.mRepeatCount = repeatCount;
         return this;
     }
 
@@ -181,11 +185,8 @@ public class UDAnimator extends BaseUserdata {
      * @param repeatMode
      * @return
      */
-    public UDAnimator setRepeatMode(int repeatMode) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
-            animator.setRepeatMode(repeatMode);
-        }
+    public UDAnimatorSet setRepeatMode(int repeatMode) {
+        this.mRepeatMode = repeatMode;
         return this;
     }
 
@@ -195,11 +196,8 @@ public class UDAnimator extends BaseUserdata {
      * @param values
      * @return
      */
-    public UDAnimator setFloatValues(float... values) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && values != null && values.length > 0) {
-            animator.setFloatValues(values);
-        }
+    public UDAnimatorSet setFloatValues(float... values) {
+        mFloatValues = values;
         return this;
     }
 
@@ -209,11 +207,8 @@ public class UDAnimator extends BaseUserdata {
      * @param values
      * @return
      */
-    public UDAnimator setIntValues(int... values) {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && values != null && values.length > 0) {
-            animator.setIntValues(values);
-        }
+    public UDAnimatorSet setIntValues(int... values) {
+        mIntValues = values;
         return this;
     }
 
@@ -237,8 +232,8 @@ public class UDAnimator extends BaseUserdata {
      * @param interpolator
      * @return
      */
-    public UDAnimator setInterpolator(final Interpolator interpolator) {
-        final ObjectAnimator animator = getAnimator();
+    public UDAnimatorSet setInterpolator(final Interpolator interpolator) {
+        final AnimatorSet animator = getAnimatorSet();
         if (animator != null && interpolator != null) {
             animator.setInterpolator(interpolator);
         }
@@ -250,11 +245,11 @@ public class UDAnimator extends BaseUserdata {
      *
      * @return
      */
-    public UDAnimator start() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && animator.getTarget() != null && animator.isStarted() == false) {
-            setupListeners(animator);
-            animator.start();
+    public UDAnimatorSet start() {
+        final AnimatorSet animatorSet = getAnimatorSet();
+        if (animatorSet != null && mTarget != null && animatorSet.isStarted() == false) {
+            setup(animatorSet);
+            animatorSet.start();
         }
         return this;
     }
@@ -264,10 +259,10 @@ public class UDAnimator extends BaseUserdata {
      *
      * @return
      */
-    public UDAnimator cancel() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && animator.isStarted()) {
-            animator.cancel();
+    public UDAnimatorSet cancel() {
+        final AnimatorSet animatorSet = getAnimatorSet();
+        if (animatorSet != null && animatorSet.isStarted()) {
+            animatorSet.cancel();
         }
         return this;
     }
@@ -277,12 +272,12 @@ public class UDAnimator extends BaseUserdata {
      *
      * @return
      */
-    public UDAnimator pause() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
+    public UDAnimatorSet pause() {
+        final AnimatorSet animatorSet = getAnimatorSet();
+        if (animatorSet != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (animator.isPaused() == false) {
-                    animator.pause();
+                if (animatorSet.isPaused() == false) {
+                    animatorSet.pause();
                 }
             }
         }
@@ -294,12 +289,32 @@ public class UDAnimator extends BaseUserdata {
      *
      * @return
      */
-    public UDAnimator resume() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
+    public UDAnimatorSet resume() {
+        final AnimatorSet animatorSet = getAnimatorSet();
+        if (animatorSet != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (animator.isPaused()) {
-                    animator.resume();
+                if (animatorSet.isPaused()) {
+                    animatorSet.resume();
+                }
+            }
+        }
+        return this;
+    }
+
+    public UDAnimatorSet setup(Animator animator) {
+        setupValues(animator);
+        setupListeners(animator);
+        return this;
+    }
+
+    public UDAnimatorSet setupValues(Animator animator) {
+        if (mAnimators != null) {
+            for (Animator anim : mAnimators) {
+                anim.setTarget(mTarget);
+                if (anim instanceof ObjectAnimator) {
+                    ((ObjectAnimator) anim).setRepeatCount(mRepeatCount);
+                    ((ObjectAnimator) anim).setRepeatMode(mRepeatMode);
+                    //TODO
                 }
             }
         }
@@ -312,7 +327,7 @@ public class UDAnimator extends BaseUserdata {
      * @param animator
      * @return
      */
-    public UDAnimator setupListeners(ObjectAnimator animator) {
+    public UDAnimatorSet setupListeners(Animator animator) {
         if (animator != null) {
             addAnimatorListener(animator);
             addOnPauseListener(animator);
@@ -327,12 +342,12 @@ public class UDAnimator extends BaseUserdata {
      * @return
      */
     public Animator build() {
-        UDAnimator animator = setupListeners(getAnimator());
-        return animator.getAnimator().clone();//克隆一份
+        UDAnimatorSet animator = setup(getAnimatorSet());
+        return animator.getAnimatorSet().clone();//克隆一份
     }
     //----------------------------------------listeners---------------------------------------------
 
-    private void addAnimatorListener(ObjectAnimator animator) {
+    private void addAnimatorListener(Animator animator) {
         if (animator != null && (mOnStartCallback != null || mOnEndCallback != null || mOnCancelCallback != null || mOnRepeatCallback != null)) {
             animator.addListener(new Animator.AnimatorListener() {//add a listener
                 @Override
@@ -358,7 +373,7 @@ public class UDAnimator extends BaseUserdata {
         }
     }
 
-    private void addOnPauseListener(ObjectAnimator animator) {
+    private void addOnPauseListener(Animator animator) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (animator != null && (mOnPauseCallback != null || mOnResumeCallback != null)) {
                 animator.addPauseListener(new Animator.AnimatorPauseListener() {
@@ -376,14 +391,16 @@ public class UDAnimator extends BaseUserdata {
         }
     }
 
-    private void addOnUpdateListener(ObjectAnimator animator) {
-        if (animator != null && mOnUpdateCallback != null) {
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    LuaUtil.callFunction(mOnUpdateCallback);
-                }
-            });
+    private void addOnUpdateListener(Animator animator) {
+        if (mOnUpdateCallback != null) {
+            if (animator instanceof ObjectAnimator) {
+                ((ObjectAnimator) animator).addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        LuaUtil.callFunction(mOnUpdateCallback);
+                    }
+                });
+            }
         }
     }
 }
