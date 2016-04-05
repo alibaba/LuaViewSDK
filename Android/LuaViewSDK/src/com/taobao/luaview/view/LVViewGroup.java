@@ -1,7 +1,6 @@
 package com.taobao.luaview.view;
 
 import android.graphics.Canvas;
-import android.graphics.Region;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.RelativeLayout;
 import com.facebook.csslayout.CSSLayoutContext;
 import com.facebook.csslayout.CSSNode;
 import com.facebook.csslayout.Spacing;
-import com.taobao.luaview.layout.FlexboxNodeView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -90,7 +88,8 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.clipRect(0, 0, getWidth(), getHeight(), Region.Op.DIFFERENCE);
+        // TODO: 16/4/5 @野松，待和iOS的统一，目前影响flexbox的布局
+//        canvas.clipRect(0, 0, getWidth(), getHeight(), Region.Op.DIFFERENCE);
         super.onDraw(canvas);
     }
 
