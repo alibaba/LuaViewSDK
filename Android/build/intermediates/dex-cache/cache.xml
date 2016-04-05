@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.0.0-alpha1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1f1c7067e22acf05bddbca9f94422050cd848a86">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-a175b3082fe3d239eed17134130f78da6cb2770d.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0-alpha1/jars/libs/internal_impl-24.0.0-alpha1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e57fba0a2d57d3501d8f4ff44c23092978804845">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/internal_impl-24.0.0-alpha1-3d75b5ed7a4216a22e6aabe38a4da799c747cb6d.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/glide-3.7.0-0b31c487599359f143b478f3e512afd548814f56.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0-alpha1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9aaaea3a89040f8176f810c85e288fc74d5d1f12">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-04e5c3c0479d763dda27d18ba167a6935660992d.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.0.0-alpha1/support-annotations-24.0.0-alpha1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b8062546971a3d196343232a19a3c0016272ba47">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/support-annotations-24.0.0-alpha1-aaceddb65e995b7213cb272acf8eefbe636383b2.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d007a67d9b206b4725cba041f81a3e5276d55005">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-6fb590f3ec180f783d1e98ca80f3ace7be008da3.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/.gradle/caches/modules-2/files-2.1/org.apache.bcel/bcel/5.2/96b2cefeb067c08c31225d48e2a689f814baae25/bcel-5.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="96b2cefeb067c08c31225d48e2a689f814baae25">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/bcel-5.2-4a077a2c605dca692d199e3cf7deb035747fd5a9.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/libs/infer-annotations-1.5.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0b5e946b76cdb1f00b18f2981e7d997141a66c9f">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/infer-annotations-1.5-bfbe4b05d5ac4bbc31c0065215bda39a9e950b8a.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/jsr305-3.0.0-18c195049d4472cdcd910601e025f0d0372f063f.jar" />
+    </item>
+    <item
+        jar="/Users/xiekaiwei/.gradle/caches/modules-2/files-2.1/jakarta-regexp/jakarta-regexp/1.4/ea514a179ac1dd7e81c7e6594468b9b9910d298/jakarta-regexp-1.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0ea514a179ac1dd7e81c7e6594468b9b9910d298">
+        <dex dex="/Users/xiekaiwei/Ali/LuaViewSDK-JU/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/jakarta-regexp-1.4-2fe787d608a30d24bc97f52df564c461c54cba29.jar" />
+    </item>
+
+</items>

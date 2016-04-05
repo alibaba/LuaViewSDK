@@ -3,7 +3,11 @@ package com.taobao.luaview.view.interfaces;
 
 import android.view.View;
 
+import com.taobao.luaview.userdata.ui.UDView;
+
 import org.luaj.vm2.Varargs;
+
+import java.util.ArrayList;
 
 /**
  * ViewGroup interface
@@ -13,4 +17,5 @@ import org.luaj.vm2.Varargs;
  */
 public interface ILVViewGroup extends ILVView {
     void addLVView(View view, Varargs varargs);
+    void setChildNodeViews(ArrayList<UDView> childNodeViews);
 }

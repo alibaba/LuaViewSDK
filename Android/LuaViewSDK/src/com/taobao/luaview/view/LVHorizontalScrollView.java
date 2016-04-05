@@ -13,6 +13,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+
 /**
  * LuaView - HorizontalScrollView
  *
@@ -50,4 +52,8 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
         mContainer.addView(LuaViewUtil.removeFromParent(view), layoutParams);
     }
 
+    @Override
+    public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
+
+    }
 }

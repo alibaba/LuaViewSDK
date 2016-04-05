@@ -21,6 +21,10 @@ dependencies {
     compile 'org.apache.bcel:bcel:5.2'
     //glide for imageview
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.google.code.findbugs:jsr305:3.0.0'
+
+    compile fileTree(dir: 'third-party/java/infer-annotations/', include: ['*.jar'])
 }
 
 /*
@@ -33,7 +37,7 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java.srcDirs = ['src', 'src-csslayout']
             resources.srcDirs = ['src']
             aidl.srcDirs = ['src']
             renderscript.srcDirs = ['src']
