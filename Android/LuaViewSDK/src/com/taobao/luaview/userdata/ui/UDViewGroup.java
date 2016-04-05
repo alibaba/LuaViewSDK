@@ -3,6 +3,8 @@ package com.taobao.luaview.userdata.ui;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.csslayout.CSSNode;
+import com.taobao.luaview.layout.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
@@ -10,6 +12,8 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
+
+import java.util.ArrayList;
 
 /**
  * 容器类
@@ -162,4 +166,16 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
+
+
+    public UDViewGroup setChildNodeViews(ArrayList<UDView> childNodeViews) {
+        final ViewGroup viewGroup = getView();
+        if (viewGroup != null && childNodeViews != null) {
+            if (viewGroup instanceof ILVViewGroup) {
+                ((ILVViewGroup) viewGroup).setChildNodeViews(childNodeViews);
+            }
+        }
+
+        return this;
+    }
 }

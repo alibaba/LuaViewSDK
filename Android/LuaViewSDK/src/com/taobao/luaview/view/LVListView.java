@@ -18,6 +18,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+
 /**
  * LuaView - ListView
  *
@@ -100,6 +102,11 @@ public class LVListView extends ListView implements ILVListView {
     @Override
     public void addLVView(View view, Varargs varargs) {
         //TODO 这里不做操作，因为ListView不应该加子view
+    }
+
+    @Override
+    public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
+
     }
 
     @Override

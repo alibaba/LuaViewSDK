@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.facebook.csslayout.CSSNode;
+import com.taobao.luaview.layout.FlexboxCSSParser;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 
 import org.luaj.vm2.Globals;
@@ -37,6 +40,40 @@ public class UDView<T extends View> extends BaseUserdata {
     private LuaValue mOnLongClick;
 
     private AnimatorSet mAnimatorSet;
+
+    /**
+     * Flexbox layout
+     */
+    private CSSNode mCssNode;
+    private String mFlexCss;
+
+    public CSSNode getCssNode() {
+        if (mCssNode == null) {
+            View view = getView();
+            if (view instanceof LVViewGroup) {
+                LVViewGroup group = (LVViewGroup) view;
+                return group.getCssNode();
+            } else {
+                mCssNode = new CSSNode();
+            }
+        }
+
+        return mCssNode;
+    }
+
+    public UDView setFlexCss(String cssString) {
+        if (mFlexCss == null || !mFlexCss.equals(cssString)) {
+            CSSNode node = getCssNode();
+            FlexboxCSSParser.parseFlexNodeCSS(node, cssString);
+            mFlexCss = cssString;
+        }
+
+        return this;
+    }
+
+    public String getFlexCss() {
+        return mFlexCss;
+    }
 
     public UDView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
         super(view, globals, metatable);
@@ -265,6 +302,11 @@ public class UDView<T extends View> extends BaseUserdata {
             layoutParams.width = width;
             layoutParams.height = height;
             view.setLayoutParams(layoutParams);
+
+            // flexbox needs know the style
+            getCssNode().setStyleWidth(width);
+            getCssNode().setStyleHeight(height);
+
         } else {
             //TODO 其他Layout处理
         }

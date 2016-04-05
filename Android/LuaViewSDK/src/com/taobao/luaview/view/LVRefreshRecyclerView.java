@@ -13,6 +13,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+
 /**
  * LuaView - Refresh Recycler View
  *
@@ -72,5 +74,10 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
     @Override
     public RecyclerView.Adapter getLVAdapter() {
         return mRecyclerView != null ? mRecyclerView.getLVAdapter() : null;
+    }
+
+    @Override
+    public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
+
     }
 }

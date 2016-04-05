@@ -272,13 +272,15 @@ public class UDTextView<T extends TextView> extends UDView<T> {
      * @return
      */
     public UDTextView setMaxLines(int lines) {
-        if (lines > 0) {
-            final T view = getView();
-            if (view != null) {
-                mMaxLines = lines;
-                view.setMaxLines(lines);
+        final T view = getView();
+        if (view != null) {
+            mMaxLines = lines;
+            if (lines <= 0) {
+                mMaxLines = Integer.MAX_VALUE;
             }
+            view.setMaxLines(mMaxLines);
         }
+
         return this;
     }
 

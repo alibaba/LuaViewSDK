@@ -6,8 +6,11 @@ import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
+
+import java.util.ArrayList;
 
 /**
  * View 接口封装
@@ -166,5 +169,37 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
     public LuaValue children(U view, Varargs varargs) {
         final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
         return view.children(callback);
+    }
+
+    /**
+     * Flexbox 设置childViews
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue flexChildren(U view, Varargs varargs) {
+        ArrayList<UDView> flexChildren = new ArrayList<UDView>();
+        for (int i = 2; i <= varargs.narg(); i++) {
+            LuaValue luaValue = varargs.optvalue(i, null);
+            if (luaValue != null && luaValue instanceof UDView) {
+                flexChildren.add((UDView)luaValue);
+            }
+        }
+        view.setChildNodeViews(flexChildren);
+
+//        final LuaTable children = LuaUtil.getTable(varargs, 2);
+//        if (children != null) {
+//            ArrayList<UDView> flexChildren = new ArrayList<UDView>();
+//            for(int i = 0; i < children.length(); i++){
+//                LuaValue child = children.get(i + 1);
+//                if(child != null && child instanceof UDView){
+//                    flexChildren.add((UDView)child);
+//                }
+//            }
+//            view.setChildNodeViews(flexChildren);
+//        }
+
+        return view;
     }
 }

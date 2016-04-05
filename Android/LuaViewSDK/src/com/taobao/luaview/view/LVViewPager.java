@@ -18,6 +18,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
+
 /**
  * LuaView-ViewPager
  * 容器类
@@ -135,6 +137,11 @@ public class LVViewPager extends ViewPager implements ILVViewGroup {
     @Override
     public void addLVView(View view, Varargs a) {
         this.addView(view);
+    }
+
+    @Override
+    public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
+
     }
 
     //-----------------------------------View Pager Touch事件---------------------------------------
