@@ -6,4 +6,4 @@ build
 gradle
 Android.iml
 local.properties
-LuaViewAndroid.iml
+*.iml

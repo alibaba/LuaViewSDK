@@ -22,6 +22,7 @@ dependencies {
     //glide for imageview
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    //for flex-layout
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 }
 
