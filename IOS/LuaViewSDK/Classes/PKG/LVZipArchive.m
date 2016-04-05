@@ -216,7 +216,18 @@ static NSInteger cdheader_getPermissions(struct LVZipCDHeader *header) {
 }
 
 static NSDate *cdheader_getLastModDate(struct LVZipCDHeader *header) {
-    return [NSDate dateWithTimeIntervalSince1970:header->lastModDate];
+    // convert dos time
+    UInt32 dtime = header->lastModDate;
+    
+    NSDateComponents *comps = [NSDateComponents new];
+    comps.year = (int)(((dtime >> 25) & 0x7f) + 1980);
+    comps.month = (int)((dtime >> 21) & 0x0f);
+    comps.day = (int)((dtime >> 16) & 0x1f);
+    comps.hour = (int)((dtime >> 11) & 0x1f);
+    comps.minute = (int)((dtime >> 5) & 0x3f);
+    comps.second = (int)((dtime << 1) & 0x3e);
+    
+    return [[NSCalendar currentCalendar] dateFromComponents:comps];
 }
 
 static NSInteger cdheader_getFileType(struct LVZipCDHeader *header) {
