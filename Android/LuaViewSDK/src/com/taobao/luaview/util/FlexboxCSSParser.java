@@ -1,6 +1,5 @@
-package com.taobao.luaview.layout;
+package com.taobao.luaview.util;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.csslayout.CSSAlign;
@@ -9,22 +8,15 @@ import com.facebook.csslayout.CSSJustify;
 import com.facebook.csslayout.CSSNode;
 import com.facebook.csslayout.CSSPositionType;
 import com.facebook.csslayout.CSSWrap;
-import com.facebook.csslayout.FloatUtil;
 import com.facebook.csslayout.Spacing;
 import com.taobao.luaview.util.DimenUtil;
 
-import org.luaj.vm2.ast.Str;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.annotation.concurrent.Immutable;
 
 /**
  * Created by xiekaiwei on 16/3/17.
@@ -322,7 +314,7 @@ public class FlexboxCSSParser {
                 } else {
                     resultMap.put(keyAndValue.get(0), keyAndValue.get(1));
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, "getInlineMap: wrong", e);
                 continue;
             }
@@ -335,6 +327,7 @@ public class FlexboxCSSParser {
     }
 
     private static final Set<String> validCssKeys;
+
     static {
         validCssKeys = new HashSet<String>(Arrays.asList(
                 POSITION,
@@ -370,6 +363,7 @@ public class FlexboxCSSParser {
     }
 
     private static final Map<String, CSSFlexDirection> directionMap;
+
     static {
         directionMap = new HashMap<String, CSSFlexDirection>();
         directionMap.put(FLEXDIRECTIONCOLUMN, CSSFlexDirection.COLUMN);
@@ -379,6 +373,7 @@ public class FlexboxCSSParser {
     }
 
     private static final Map<String, CSSAlign> alignMap;
+
     static {
         alignMap = new HashMap<String, CSSAlign>();
         alignMap.put(ALIGNAUTO, CSSAlign.AUTO);
@@ -389,6 +384,7 @@ public class FlexboxCSSParser {
     }
 
     private static final Map<String, CSSJustify> justifyMap;
+
     static {
         justifyMap = new HashMap<String, CSSJustify>();
         justifyMap.put(JUSTIFYCONTENTAROUND, CSSJustify.SPACE_AROUND);
