@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
-import com.taobao.luaview.layout.FlexboxCSSParser;
+import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
