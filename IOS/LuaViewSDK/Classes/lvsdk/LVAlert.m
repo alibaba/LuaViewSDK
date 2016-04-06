@@ -70,7 +70,8 @@
     lv_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
-        [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key1:NULL key2:NULL nargs:0];
+        lv_pushnumber(l, buttonIndex);
+        [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key1:NULL key2:NULL nargs:1];
         self.lv_lview = nil;
     }
 }
