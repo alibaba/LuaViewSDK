@@ -37,6 +37,10 @@
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
 }
 
+- (void) dealloc{
+    [self.lv releaseLuaView];
+}
+
 - (void)willCreateLuaView {
     [super willCreateLuaView];
     
