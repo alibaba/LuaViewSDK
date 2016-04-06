@@ -163,7 +163,7 @@ NSData *LV_AES256DecryptDataWithKey(NSData *data, NSData* key){
         bzero(buffer, sizeof(bufferSize));
         
         size_t numBytesDecrypted = 0;
-        CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionECBMode,
+        CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding,
                                               key.bytes, key.length,
                                               NULL /* initialization vector (optional) */,
                                               [data bytes], dataLength, /* input */
