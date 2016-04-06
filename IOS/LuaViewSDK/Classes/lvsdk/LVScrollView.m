@@ -320,7 +320,7 @@ static int isHeaderRefreshing (lv_State *L){
 //}
 
 static int callback (lv_State *L) {
-    return lv_setCallbackByKey(L, STR_CALLBACK, YES);
+    return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
 
 

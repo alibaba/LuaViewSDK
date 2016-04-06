@@ -61,6 +61,15 @@
     return UIStatusBarStyleDefault;
 }
 
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.lv viewDidAppear];
+}
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.lv viewDidDisAppear];
+}
+
 /**
  * openUrl API, 暴露给脚本调用
  */

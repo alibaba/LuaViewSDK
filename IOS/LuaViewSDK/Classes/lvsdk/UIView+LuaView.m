@@ -42,7 +42,11 @@
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if( lv_type(l, -1) == LV_TTABLE ) {
             lv_getfield(l, -1, STR_CALLBACK);
-            lv_remove(l, -2);
+            if( lv_type(l, -1)==LV_TNIL ) {
+                lv_remove(l, -1);
+            } else {
+                lv_remove(l, -2);
+            }
         }
         [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String key3:NULL nargs:argN nrets:0 retType:LV_TNONE];
     }

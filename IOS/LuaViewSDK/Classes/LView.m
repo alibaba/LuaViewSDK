@@ -333,7 +333,7 @@ extern char g_debug_lua[];
 -(void) viewDidAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"ViewDidAppear"];
+        [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
     }
 }
 
@@ -347,7 +347,7 @@ extern char g_debug_lua[];
 -(void) viewDidDisAppear{
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"ViewDidDisAppear"];
+        [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
     }
 }
 

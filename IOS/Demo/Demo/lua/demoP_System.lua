@@ -33,6 +33,12 @@ window.callback({
         end,
         ViewDidDisAppear = function ()
             System.keepScreenOn(false);-- 屏幕不常亮
+        end,
+        onShow = function ()
+            System.keepScreenOn(true);-- 屏幕常亮
+        end,
+        onHide = function ()
+            System.keepScreenOn(false);-- 屏幕不常亮
         end})
 t = {1,2,3,a = 1 , b = 2}
 
