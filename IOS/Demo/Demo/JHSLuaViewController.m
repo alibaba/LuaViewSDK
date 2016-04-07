@@ -105,4 +105,8 @@
     NSLog(@"%@", dic);
     return dic;
 }
+
+-(void) test:(id) object{
+    NSLog(@"%@", object);
+}
 @end

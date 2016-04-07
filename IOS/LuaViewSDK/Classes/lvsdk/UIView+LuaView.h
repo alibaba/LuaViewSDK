@@ -36,4 +36,6 @@
 
 -(void) lv_callbackAddClickGesture;// 回调添加
 
+-(id) lv_getNativeView;
+
 @end

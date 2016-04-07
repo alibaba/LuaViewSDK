@@ -177,4 +177,9 @@
 }
 
 
+-(id) lv_getNativeView{
+    return self;
+}
+
+
 @end

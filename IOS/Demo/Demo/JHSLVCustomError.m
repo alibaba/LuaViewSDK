@@ -43,4 +43,8 @@
     bg.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
 }
 
+-(id)lv_getNativeView{
+    return bg;
+}
+
 @end
