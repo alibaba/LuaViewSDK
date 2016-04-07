@@ -21,14 +21,12 @@ typedef NS_ENUM(int, LVAnimatorCallback) {
     kLVAnimatorCallbackOnCancel,
 };
 
-@implementation LVAnimator
+@implementation LVAnimator {
+    NSString *_animationKey;
+}
 
 -(id) lv_nativeObject{
     return self;
-}
-
-NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator) {
-    return animator ? [NSString stringWithFormat:@"<LVAnimator: %p>", animator] : @"";
 }
 
 static int lvNewAnimator(lv_State *L) {
@@ -129,7 +127,11 @@ static int start(lv_State *L) {
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
-        [animator startWithKey:LVAnimatorGetAnimationKey(data)];
+        if (animator.running) {
+            LVLog(@"Animation of key:%@ is running!", animator.keyPath);
+        } else {
+            [animator start];
+        }
     }
     
     lv_pushUserdata(L, data);
@@ -137,6 +139,18 @@ static int start(lv_State *L) {
     return 1;
 }
 
+static int cancel(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        [animator cancel];
+    }
+    
+    lv_pushUserdata(L, data);
+    
+    return 1;
+}
 
 static int duration(lv_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -336,6 +350,7 @@ static int value(lv_State *L) {
         { "clone", clone },
         
         { "with", with },
+        { "cancel", cancel },
         { "start", start },
         { "duration", duration },
         { "delay", delay },
@@ -445,14 +460,37 @@ static int value(lv_State *L) {
     return animation;
 }
 
-- (void)startWithKey:(NSString *)key {
-    CABasicAnimation *animation = nil;
+- (void)start {
+    if (self.running) {
+        LVLog(@"Animator(%p keyPath:%@) is running!", self.lv_userData, self.keyPath);
+        return;
+    }
+    if (self.keyPath.length == 0 || self.toValue == nil) {
+        LVLog(@"Animator keyPath and value cannot be nil!");
+        return;
+    }
     
+    _animationKey = [NSString stringWithFormat:@"LVAnimator:%@", self.keyPath];
+    if ([self.target.layer animationForKey:_animationKey]) {
+        LVLog(@"warning: Animation of keyPath:%@ is running", self.keyPath);
+    }
+    
+    CABasicAnimation *animation = nil;
     if (self.target != nil && (animation = [self buildAnimation])) {
         [self.target.layer setValue:animation.toValue forKeyPath:animation.keyPath];
-        [self.target.layer addAnimation:animation forKey:key];
+        [self.target.layer addAnimation:animation forKey:_animationKey];
     }
 }
+
+- (void)cancel {
+    [self.target.layer removeAnimationForKey:_animationKey];
+}
+
+- (BOOL)isRunning {
+    return _animationKey;
+}
+
+#pragma mark - animation delegate
 
 - (void)animationDidStart:(CAAnimation *)anim {
     lv_State* l = self.lv_lview.l;
@@ -465,16 +503,16 @@ static int value(lv_State *L) {
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     CALayer *layer = self.target.layer;
-    if (layer == nil) {
-        return;
+    if (layer != nil) {
+        lv_State* l = self.lv_lview.l;
+        if( l && self.lv_userData ){
+            lv_pushUserdata(l, self.lv_userData);
+            lv_pushUDataRef(l, flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel);
+            lv_runFunction(l);
+        }
     }
     
-    lv_State* l = self.lv_lview.l;
-    if( l && self.lv_userData ){
-        lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel);
-        lv_runFunction(l);
-    }
+    _animationKey = nil;
 }
 
 @end

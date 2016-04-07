@@ -10,9 +10,6 @@
 #import "LVHeads.h"
 #import "lVtable.h"
 
-
-extern NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator);
-
 @interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
@@ -25,12 +22,14 @@ extern NSString *LVAnimatorGetAnimationKey(LVUserDataInfo *animator);
 
 @property(nonatomic, weak) UIView *target;
 
-
 @property(nonatomic, weak) LView* lv_lview;
 @property(nonatomic, assign) LVUserDataInfo* lv_userData;
 
-+(int) classDefine:(lv_State *)L ;
+@property(nonatomic, readonly, getter=isRunning) BOOL running;
 
-- (void)startWithKey:(NSString *)key;
++ (int)classDefine:(lv_State *)L;
+
+- (void)start;
+- (void)cancel;
 
 @end

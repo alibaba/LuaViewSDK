@@ -1151,7 +1151,7 @@ static int startAnimation(lv_State *L) {
             }
             
             animator.target = (__bridge UIView *)(vdata->object);
-            [animator startWithKey:LVAnimatorGetAnimationKey(adata)];
+            [animator start];
         }
     }
     
