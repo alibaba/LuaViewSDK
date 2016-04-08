@@ -637,8 +637,14 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
         return;
     }
     
-    NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
-    [layer setValue:current forKeyPath:self.keyPath];
+    NSString *keyPath = nil;
+    if ([self.keyPath isEqualToString:@"opacity"]) {
+        keyPath = @"opacity";
+    } else {
+        keyPath = @"transform";
+    }
+    NSValue *current = [layer.presentationLayer valueForKeyPath:keyPath];
+    [layer setValue:current forKeyPath:keyPath];
 }
 
 - (void)start {
