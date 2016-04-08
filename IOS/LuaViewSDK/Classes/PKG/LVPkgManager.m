@@ -109,7 +109,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
             NSDictionary *attrs = [[NSFileManager defaultManager]
                                    attributesOfItemAtPath:mainFile error:NULL];
             NSDate *date = attrs[NSFileModificationDate];
-            NSString *timeStr = [NSString stringWithFormat:@"%lf", [date timeIntervalSince1970]];
+            NSString *timeStr = [NSString stringWithFormat:@"%ll", (long long)([date timeIntervalSince1970] * 1000)];
             
             NSString* oldTime = nil;
             if( localMode ) {
