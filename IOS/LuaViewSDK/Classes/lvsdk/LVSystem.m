@@ -16,6 +16,7 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import "LVNetworkStatus.h"
+#import "LVAnimator.h"
 
 @implementation LVSystem
 
@@ -291,6 +292,34 @@ static int tableToString(lv_State*L){
         //ScaleType.MATRIX 用matrix来绘制
         lv_pushnumber(L, UIViewContentModeScaleAspectFill);
         lv_setfield(L, -2, "MATRIX");
+    }
+    {
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "Interpolator", lib);
+        
+        lv_pushnumber(L, LVLinearInterpolator);
+        lv_setfield(L, -2, "LINEAR");
+        
+        lv_pushnumber(L, LVAccelerateInterpolator);
+        lv_setfield(L, -2, "ACCELERATE");
+        
+        lv_pushnumber(L, LVDecelerateInterpolator);
+        lv_setfield(L, -2, "DECELERATE");
+        
+        lv_pushnumber(L, LVAccelerateDecelerateInterpolator);
+        lv_setfield(L, -2, "ACCELERATE_DECELERATE");
+        
+        lv_pushnumber(L, LVAnticipateInterpolator);
+        lv_setfield(L, -2, "ANTICIPATE");
+        
+        lv_pushnumber(L, LVOvershootInterpolator);
+        lv_setfield(L, -2, "OVERSHOOT");
+        
+        lv_pushnumber(L, LVAnticipateOvershootInterpolator);
+        lv_setfield(L, -2, "ANTICIPATE_OVERSHOOT");
     }
     {
         // 震动

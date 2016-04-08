@@ -475,7 +475,6 @@ static int value(lv_State *L) {
 - (instancetype)init {
     if (self = [super init]) {
         _autoreverses = YES;
-        _interpolator = -1;
     }
     
     return self;
@@ -523,6 +522,12 @@ static int value(lv_State *L) {
 
 - (CAMediaTimingFunction *)buildTimingFunction:(LVAniamtorInterpolator)interpolator {
     switch (interpolator) {
+        case LVAnticipateInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.6 :0.75 :0.5];
+        case LVAnticipateOvershootInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.55 :0.5 :1.55];
+        case LVOvershootInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.3 :0.9 :0.75 :1.3];
         case LVAccelerateDecelerateInterpolator:
             return [CAMediaTimingFunction functionWithName:@"easeInEaseOut"];
         case LVAccelerateInterpolator:
@@ -530,13 +535,6 @@ static int value(lv_State *L) {
         case LVDecelerateInterpolator:
             return [CAMediaTimingFunction functionWithName:@"easeOut"];
         case LVLinearInterpolator:
-            return [CAMediaTimingFunction functionWithName:@"linear"];
-        case LVAnticipateInterpolator:
-            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.6 :0.75 :0.5];
-        case LVAnticipateOvershootInterpolator:
-            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.55 :0.5 :1.55];
-        case LVOvershootInterpolator:
-            return [CAMediaTimingFunction functionWithControlPoints:0.3 :0.9 :0.75 :1.3];
         default:
             return [CAMediaTimingFunction functionWithName:@"linear"];
     }
