@@ -13,6 +13,7 @@
 #import "LVHeads.h"
 #import "LVUtil.h"
 #import "LView.h"
+#import "LVTransform3D.h"
 #import <QuartzCore/CoreAnimation.h>
 
 typedef NS_ENUM(int, LVAnimatorCallback) {
@@ -366,58 +367,76 @@ static int callback(lv_State *L) {
     return 1;
 }
 
-static int updateAnimator(lv_State *L, NSString *keyPath) {
+static int updateValue(lv_State *L, NSString *keyPath, id value) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float value = lv_gettop(L) >= 2 ? lv_tonumber(L, 2) : 0;
-    
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
         if (keyPath) {
             animator.keyPath = keyPath;
         }
         
-        animator.toValue = @(value);
+        animator.toValue = value;
     }
     
-    lv_pushUserdata(L, data);
+    lv_settop(L, 1);
     
     return 1;
 }
 
+static int updateFloat(lv_State *L, NSString *keyPath) {
+    float value = lv_tonumber(L, 2);
+    
+    return updateValue(L, keyPath, @(value));
+}
+
+static int updatePoint(lv_State *L, NSString *keyPath) {
+    float x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
+    NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
+    
+    return updateValue(L, keyPath, point);
+}
+
+static int updateSize(lv_State *L, NSString *keyPath) {
+    float w = lv_tonumber(L, 2), h = lv_tonumber(L, 3);
+    NSValue *size = [NSValue valueWithCGSize:CGSizeMake(w, h)];
+    
+    return updateValue(L, keyPath, size);
+}
+
 static int alpha(lv_State *L) {
-    return updateAnimator(L, @"opacity");
+    return updateFloat(L, @"opacity");
 }
 
 static int rotation(lv_State *L) {
-    return updateAnimator(L, @"transform.rotation");
+    return updateFloat(L, @"transform.rotation");
 }
 
 static int scale(lv_State *L) {
-    return updateAnimator(L, @"transform.scale");
+    return updatePoint(L, @"transform.scale");
 }
 
 static int scaleX(lv_State *L) {
-    return updateAnimator(L, @"transform.scale.x");
+    return updateFloat(L, @"transform.scale.x");
 }
 
 static int scaleY(lv_State *L) {
-    return updateAnimator(L, @"transform.scale.y");
+    return updateFloat(L, @"transform.scale.y");
 }
 
 static int translation(lv_State *L) {
-    return updateAnimator(L, @"transform.translation");
+    return updatePoint(L, @"transform.translation");
 }
 
 static int translationX(lv_State *L) {
-    return updateAnimator(L, @"transform.translation.x");
+    return updateFloat(L, @"transform.translation.x");
 }
 
 static int translationY(lv_State *L) {
-    return updateAnimator(L, @"transform.translation.y");
+    return updateFloat(L, @"transform.translation.y");
 }
 
 static int value(lv_State *L) {
-    return updateAnimator(L, nil);
+    return updateFloat(L, nil);
 }
 
 +(int)classDefine:(lv_State *)L {
@@ -540,17 +559,44 @@ static int value(lv_State *L) {
     }
 }
 
-- (CABasicAnimation *)buildAnimation {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:self.keyPath];
-    animation.delegate = self;
+
+
+- (CAAnimation *)buildAnimation {
+    CAAnimation *animation = nil;
+    CALayer *layer = self.target.layer;
     
-    animation.fromValue = [self.target.layer valueForKeyPath:self.keyPath];
-    
-    if ([self.keyPath isEqualToString:@"transform.rotation"]) {
-        animation.toValue = @(self.toValue.floatValue * M_PI / 180.0);
+    if ([self.keyPath isEqualToString:@"transform.scale"]) {
+        CGPoint point = [self.toValue CGPointValue];
+        
+        NSString *kx = @"transform.scale.x";
+        CABasicAnimation *ax = [CABasicAnimation animationWithKeyPath:kx];
+        ax.fromValue = [layer valueForKeyPath:kx];
+        ax.toValue = @(point.x);
+        
+        NSString *ky = @"transform.scale.y";
+        CABasicAnimation *ay = [CABasicAnimation animationWithKeyPath:ky];
+        ay.fromValue = [layer valueForKeyPath:ky];
+        ay.toValue = @(point.y);
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        group.animations = @[ax, ay];
+        
+        animation = group;
+    } else if ([self.keyPath isEqualToString:@"transform.rotation"]) {
+        CABasicAnimation *a = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        a.fromValue = [layer valueForKeyPath:@"transform.rotation"];
+        a.toValue = @(((NSNumber *)self.toValue).floatValue * M_PI / 180.0);
+        
+        animation = a;
     } else {
-        animation.toValue = self.toValue;
+        CABasicAnimation *a = [CABasicAnimation animationWithKeyPath:self.keyPath];
+        a.fromValue = [layer valueForKeyPath:self.keyPath];
+        a.toValue = self.toValue;
+        
+        animation = a;
     }
+    
+    animation.delegate = self;
     animation.duration = self.duration;
     animation.fillMode = @"both";
     
@@ -571,6 +617,30 @@ static int value(lv_State *L) {
     return animation;
 }
 
+static void syncValue(CAAnimation *animation, CALayer *layer) {
+    if (!animation || !layer) {
+        return;
+    }
+    
+    if ([animation isKindOfClass:[CAAnimationGroup class]]) {
+        for (CAAnimation *a in ((CAAnimationGroup *)animation).animations) {
+            syncValue(a, layer);
+        }
+    } else if ([animation isKindOfClass:[CABasicAnimation class]]) {
+        CABasicAnimation *a = (CABasicAnimation *)animation;
+        [layer setValue:a.toValue forKeyPath:a.keyPath];
+    }
+}
+
+- (void)syncAnimatingValue:(CALayer *)layer {
+    if (!layer.presentationLayer) {
+        return;
+    }
+    
+    NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
+    [layer setValue:current forKeyPath:self.keyPath];
+}
+
 - (void)start {
     if (self.running) {
         LVLog(@"Animator(%p keyPath:%@) is running!", self.lv_userData, self.keyPath);
@@ -581,16 +651,17 @@ static int value(lv_State *L) {
         return;
     }
     
-    _animationKey = [NSString stringWithFormat:@"LVAnimator:%@", self.keyPath];
-    if ([self.target.layer animationForKey:_animationKey]) {
-        LVLog(@"warning: Animation of keyPath:%@ is running", self.keyPath);
-    }
-    
-    CABasicAnimation *animation = nil;
+    CAAnimation *animation = nil;
     if (self.target != nil && (animation = [self buildAnimation])) {
-        [self.target.layer setValue:animation.toValue forKeyPath:animation.keyPath];
-        [self.target.layer addAnimation:animation forKey:_animationKey];
+        _animationKey = [NSString stringWithFormat:@"LVAnimator:%@", self.keyPath];
         
+        CALayer *layer = self.target.layer;
+        if ([layer animationForKey:_animationKey]) {
+            LVLog(@"warning: Animation of keyPath:%@ is running", self.keyPath);
+        }
+        
+        syncValue(animation, layer);
+        [layer addAnimation:animation forKey:_animationKey];
         [self callback:kLVAnimatorCallbackOnStart];
     }
 }
@@ -608,9 +679,7 @@ static int value(lv_State *L) {
         [self callback:kLVAnimatorCallbackOnCancel];
     } else {
         CALayer *layer = self.target.layer;
-        NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
-        [layer setValue:current forKeyPath:self.keyPath];
-        
+        [self syncAnimatingValue:layer];
         [layer removeAnimationForKey:_animationKey];
     }
 }
@@ -630,8 +699,7 @@ static int value(lv_State *L) {
     }
     
     CALayer *layer = self.target.layer;
-    NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
-    [layer setValue:current forKeyPath:self.keyPath];
+    [self syncAnimatingValue:layer];
     
     _pausedAnimation = [[layer animationForKey:_animationKey] copy];
     _timeOffset = CACurrentMediaTime() - _pausedAnimation.beginTime;

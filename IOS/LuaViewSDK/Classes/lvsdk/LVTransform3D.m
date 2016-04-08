@@ -14,8 +14,6 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-
-
 @implementation LVTransform3D
 
 -(id) lv_nativeObject{
@@ -231,5 +229,28 @@ static int __tostring (lv_State *L) {
     return 1;
 }
 
-
 @end
+
+void CATransform3DSetScaleX(CATransform3D *t, CGFloat v) {
+    t->m11 = v;
+}
+
+void CATransform3DSetScaleY(CATransform3D *t, CGFloat v) {
+    t->m22 = v;
+}
+
+void CATransform3DSetScaleZ(CATransform3D *t, CGFloat v) {
+    t->m33 = v;
+}
+
+void CATransform3DSetTranslationX(CATransform3D *t, CGFloat v) {
+    t->m41 = v;
+}
+
+void CATransform3DSetTranslationY(CATransform3D *t, CGFloat v) {
+    t->m42 = v;
+}
+
+void CATransform3DSetTranslationZ(CATransform3D *t, CGFloat v) {
+    t->m43 = v;
+}

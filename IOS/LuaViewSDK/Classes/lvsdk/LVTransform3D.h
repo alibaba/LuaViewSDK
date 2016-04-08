@@ -17,9 +17,16 @@
 
 @property(nonatomic,assign) CATransform3D transform;
 
-
 +(int) classDefine:(lv_State *)L ;
 
 +(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t;
 
 @end
+
+extern void CATransform3DSetScaleX(CATransform3D *t, CGFloat v);
+extern void CATransform3DSetScaleY(CATransform3D *t, CGFloat v);
+extern void CATransform3DSetScaleZ(CATransform3D *t, CGFloat v);
+
+extern void CATransform3DSetTranslationX(CATransform3D *t, CGFloat v);
+extern void CATransform3DSetTranslationY(CATransform3D *t, CGFloat v);
+extern void CATransform3DSetTranslationZ(CATransform3D *t, CGFloat v);

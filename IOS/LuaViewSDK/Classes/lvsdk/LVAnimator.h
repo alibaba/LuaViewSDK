@@ -23,7 +23,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
 @interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
-@property(nonatomic, copy) NSNumber *toValue;
+@property(nonatomic, copy) NSValue *toValue;
 
 @property(nonatomic, assign) float duration;
 @property(nonatomic, assign) float delay;
