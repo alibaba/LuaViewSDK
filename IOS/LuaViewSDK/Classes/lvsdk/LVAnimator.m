@@ -272,6 +272,21 @@ static int autoreverses(lv_State *L) {
     return 1;
 }
 
+static int interpolator(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVAniamtorInterpolator interpolator = lv_tonumber(L, 2);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        
+        animator.interpolator = interpolator;
+    }
+    
+    lv_pushUserdata(L, data);
+    
+    return 1;
+}
+
 static int setCallback(lv_State *L, int idx) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
@@ -421,6 +436,7 @@ static int value(lv_State *L) {
         { "delay", delay },
         { "repeatCount", repeatCount },
         { "reverses", autoreverses },
+        { "interpolator", interpolator },
         
         { "cancel", cancel },
         { "start", start },
@@ -459,6 +475,7 @@ static int value(lv_State *L) {
 - (instancetype)init {
     if (self = [super init]) {
         _autoreverses = YES;
+        _interpolator = -1;
     }
     
     return self;
@@ -504,6 +521,27 @@ static int value(lv_State *L) {
         self.autoreverses == a1.autoreverses;
 }
 
+- (CAMediaTimingFunction *)buildTimingFunction:(LVAniamtorInterpolator)interpolator {
+    switch (interpolator) {
+        case LVAccelerateDecelerateInterpolator:
+            return [CAMediaTimingFunction functionWithName:@"easeInEaseOut"];
+        case LVAccelerateInterpolator:
+            return [CAMediaTimingFunction functionWithName:@"easeIn"];
+        case LVDecelerateInterpolator:
+            return [CAMediaTimingFunction functionWithName:@"easeOut"];
+        case LVLinearInterpolator:
+            return [CAMediaTimingFunction functionWithName:@"linear"];
+        case LVAnticipateInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.6 :0.75 :0.5];
+        case LVAnticipateOvershootInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.5 :-0.55 :0.5 :1.55];
+        case LVOvershootInterpolator:
+            return [CAMediaTimingFunction functionWithControlPoints:0.3 :0.9 :0.75 :1.3];
+        default:
+            return [CAMediaTimingFunction functionWithName:@"linear"];
+    }
+}
+
 - (CABasicAnimation *)buildAnimation {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:self.keyPath];
     animation.delegate = self;
@@ -516,7 +554,6 @@ static int value(lv_State *L) {
         animation.toValue = self.toValue;
     }
     animation.duration = self.duration;
-    
     animation.fillMode = @"both";
     
     if (self.repeatCount > 0) {
@@ -530,6 +567,7 @@ static int value(lv_State *L) {
         animation.autoreverses = self.autoreverses;
     }
     
+    animation.timingFunction = [self buildTimingFunction:self.interpolator];
     animation.beginTime = CACurrentMediaTime() + self.delay;
     
     return animation;

@@ -10,6 +10,16 @@
 #import "LVHeads.h"
 #import "lVtable.h"
 
+typedef NS_ENUM(int, LVAniamtorInterpolator) {
+    LVAccelerateDecelerateInterpolator = 0,
+    LVAccelerateInterpolator = 1,
+    LVAnticipateInterpolator = 2,
+    LVAnticipateOvershootInterpolator = 3,
+    LVDecelerateInterpolator = 6,
+    LVLinearInterpolator = 7,
+    LVOvershootInterpolator = 8,
+};
+
 @interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
@@ -19,6 +29,7 @@
 @property(nonatomic, assign) float delay;
 @property(nonatomic, assign) int repeatCount;
 @property(nonatomic, assign) BOOL autoreverses;
+@property(nonatomic, assign) LVAniamtorInterpolator interpolator;
 
 @property(nonatomic, weak) UIView *target;
 
