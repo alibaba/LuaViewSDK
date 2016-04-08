@@ -1139,8 +1139,9 @@ static int startAnimation(lv_State *L) {
     if( vdata ){
         LVUserDataInfo *adata = NULL;
         LVAnimator *animator = nil;
-        for (int i = 1; i < lv_gettop(L); ++i) {
-            adata = lv_touserdata(L, -i);
+        int top = lv_gettop(L);
+        for (int i = 2; i <= top; ++i) {
+            adata = lv_touserdata(L, i);
             if (!LVIsType(adata, Animator)) {
                 continue;
             }

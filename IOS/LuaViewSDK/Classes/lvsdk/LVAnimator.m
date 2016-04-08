@@ -676,9 +676,15 @@ static int value(lv_State *L) {
 - (void)callback:(LVAnimatorCallback)idx {
     lv_State* l = self.lv_lview.l;
     if (l && self.lv_userData) {
+        int stackIndex = lv_gettop(l);
+
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, idx);
         lv_runFunction(l);
+        
+        if (lv_gettop(l) > stackIndex) {
+            lv_settop(l, stackIndex);
+        }
     }
 }
 
