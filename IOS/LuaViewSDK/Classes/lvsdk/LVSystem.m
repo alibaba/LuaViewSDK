@@ -15,6 +15,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import "LVNetworkStatus.h"
 
 @implementation LVSystem
 
@@ -44,7 +45,7 @@ static int android (lv_State *L) {
 
 
 +(NSString*) netWorkType{
-    return nil;
+    return [[LVNetworkStatus shareInstance] currentNetworkStatusString];
 }
 
 static int netWorkType (lv_State *L) {

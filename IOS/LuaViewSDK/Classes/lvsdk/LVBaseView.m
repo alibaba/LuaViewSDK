@@ -561,6 +561,20 @@ static int addSubview (lv_State *L) {
     return 0;
 }
 
+
+static int getNativeView (lv_State *L) {
+    LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( userData ){
+        UIView* view = (__bridge UIView *)(userData->object);
+        if( view ){
+            id object = [view lv_getNativeView];
+            lv_pushNativeObjectWithBox(L, object);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 #pragma -mark 运行环境
 static int children (lv_State *L) {
     LView* lview = (__bridge LView *)(L->lView);
@@ -1457,6 +1471,8 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"alignBottom", alignBottom},
     {"alignCenter", alignCenter},
     
+    // getNativeView
+    {"getNativeView", getNativeView},
     {NULL, NULL}
 };
 

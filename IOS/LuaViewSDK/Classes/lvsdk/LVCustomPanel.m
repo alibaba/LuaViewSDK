@@ -42,6 +42,11 @@
     [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
+-(id)lv_getNativeView{
+    NSArray* subviews = self.subviews;
+    return subviews.firstObject;
+}
+
 static int lvNewCustomPanelView (lv_State *L) ;
 
 static NSMutableDictionary* g_classDic = nil;
