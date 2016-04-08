@@ -31,4 +31,5 @@ public class CustomLoading extends LVCustomPanel {
         lvLoadingView.setVisibility(View.VISIBLE);
         addView(lvLoadingView, relativeLayout);
     }
+
 }

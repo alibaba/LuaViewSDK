@@ -1,7 +1,6 @@
 package com.taobao.luaview.userdata.ui;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
-import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.userdata.base.BaseUserdata;
+import com.taobao.luaview.util.AnimatorUtil;
+import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
@@ -39,7 +39,8 @@ public class UDView<T extends View> extends BaseUserdata {
     private LuaValue mOnClick;
     private LuaValue mOnLongClick;
 
-    private AnimatorSet mAnimatorSet;
+    //动画列表
+    private List<Animator> mAnimators;
 
     /**
      * Flexbox layout
@@ -894,10 +895,11 @@ public class UDView<T extends View> extends BaseUserdata {
         return mCallback != null ? mCallback : LuaValue.NIL;
     }
 
-    public LuaValue getOnClickCallback(){
+    public LuaValue getOnClickCallback() {
         return this.mOnClick;
     }
-    public LuaValue getOnLongClickCallback(){
+
+    public LuaValue getOnLongClickCallback() {
         return this.mOnLongClick;
     }
 
@@ -1048,6 +1050,7 @@ public class UDView<T extends View> extends BaseUserdata {
 
     /**
      * 开始动画
+     * TODO 这里的start／stop需要跟 UDAnimator的保持同步
      *
      * @param animators
      * @return
@@ -1055,33 +1058,84 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView startAnimation(LuaValue[] animators) {
         final View view = getView();
         if (view != null && animators.length > 0) {
-            final List<Animator> animatorList = new ArrayList<Animator>();
-            for (LuaValue animator : animators) {
-                if (animator instanceof UDAnimator) {
-                    ((UDAnimator) animator).with(this);
+            if (isAnimating() == false) {//不在动画中才可以动画
+                if (mAnimators != null) {
+                    AnimatorUtil.cancel(mAnimators);
+                    mAnimators.clear();
+                } else {
+                    mAnimators = new ArrayList<Animator>();
                 }
-                animatorList.add(((UDAnimator) animator).build());
-            }
-            if (animatorList.size() > 0) {
-                mAnimatorSet = new AnimatorSet();//每次创建一个新的, 或者有清空方法
-                mAnimatorSet.playTogether(animatorList);
-                mAnimatorSet.start();
+
+                for (LuaValue animator : animators) {
+                    if (animator instanceof UDAnimator) {
+                        final Animator anim = ((UDAnimator) animator).with(this).build();
+                        mAnimators.add(anim);
+                    }
+                }
+
+                startAnimation();
             }
         }
         return this;
     }
-
 
     /**
      * 开始动画
      *
      * @return
      */
-    public UDView stopAnimation() {
-        if (mAnimatorSet != null) {
-            mAnimatorSet.cancel();
-        }
+    public UDView startAnimation() {
+        AnimatorUtil.start(mAnimators);
         return this;
+    }
+
+    /**
+     * 停止动画，回到终点位置
+     * 返回是否结束成功
+     *
+     * @return
+     */
+    public boolean cancelAnimation() {
+        return AnimatorUtil.cancel(mAnimators);
+    }
+
+    /**
+     * pause animation
+     *
+     * @return
+     */
+    public UDView pauseAnimation() {
+        AnimatorUtil.pause(mAnimators);
+        return this;
+    }
+
+    /**
+     * resume animation
+     *
+     * @return
+     */
+    public UDView resumeAnimation() {
+        AnimatorUtil.resume(mAnimators);
+        return this;
+    }
+
+
+    /**
+     * end and call function
+     *
+     * @return
+     */
+    public boolean endAnimation() {
+        return AnimatorUtil.end(mAnimators);
+    }
+
+    /**
+     * 是否暂停
+     *
+     * @return
+     */
+    public boolean isAnimationPaused() {
+        return AnimatorUtil.isPaused(mAnimators);
     }
 
     /**
@@ -1090,9 +1144,6 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public boolean isAnimating() {
-        if (mAnimatorSet != null) {
-            return mAnimatorSet.isRunning();
-        }
-        return false;
+        return AnimatorUtil.isRunning(mAnimators);
     }
 }

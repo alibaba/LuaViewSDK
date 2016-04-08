@@ -1,13 +1,14 @@
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.animation.ValueAnimator;
+import android.view.ViewPropertyAnimator;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.constants.UDInterpolator;
-import com.taobao.luaview.userdata.ui.UDAnimator;
+import com.taobao.luaview.userdata.ui.UDAnimatorSet;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
@@ -24,7 +25,7 @@ import org.luaj.vm2.Varargs;
  * @date 15/8/21
  */
 @LuaViewLib
-public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapper<U> {
+public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMethodMapper<U> {
 
     public LuaValue with(U udAnimator, Varargs varargs) {
         final UDView udView = (varargs.narg() > 1 && varargs.arg(2) instanceof UDView) ? (UDView) varargs.arg(2) : null;
@@ -45,6 +46,7 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
         return udAnimator.ofProperty("rotation", ParamUtil.getFloatValues(varargs, 2));
     }
 
+    @LuaViewApi(revisions = VmVersion.V_500)
     public LuaValue scale(U udAnimator, Varargs varargs) {
         udAnimator.ofProperty("scaleX", LuaUtil.getFloat(varargs, 2));
         return udAnimator.ofProperty("scaleY", LuaUtil.getFloat(varargs, 3, 2));
@@ -58,6 +60,7 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
         return udAnimator.ofProperty("scaleY", ParamUtil.getFloatValues(varargs, 2));
     }
 
+    @LuaViewApi(revisions = VmVersion.V_500)
     public LuaValue translation(U udAnimator, Varargs varargs) {
         udAnimator.ofProperty("translationX", DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 2)));
         return udAnimator.ofProperty("translationY", DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 3)));
@@ -111,16 +114,6 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
     }
 
     @LuaViewApi(since = VmVersion.V_500)
-    public LuaValue isPaused(U udAnimator, Varargs varargs) {
-        return valueOf(udAnimator.isPaused());
-    }
-
-    @LuaViewApi(since = VmVersion.V_500)
-    public LuaValue isRunning(U udAnimator, Varargs varargs) {
-        return valueOf(udAnimator.isRunning());
-    }
-
-    @LuaViewApi(since = VmVersion.V_500)
     public LuaValue resume(U udAnimator, Varargs varargs) {
         return udAnimator.resume();
     }
@@ -147,7 +140,6 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
         final LuaTable callback = varargs.opttable(2, null);
         return udAnimator.setCallback(callback);
     }
-
 
     public LuaValue onStart(U udAnimator, Varargs varargs) {
         final LuaValue callback = varargs.optvalue(2, NIL);

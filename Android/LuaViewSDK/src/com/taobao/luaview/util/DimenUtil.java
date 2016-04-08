@@ -7,6 +7,7 @@ import org.luaj.vm2.LuaValue;
 
 /**
  * Dimension
+ *
  * @author song
  */
 public class DimenUtil {
@@ -54,11 +55,21 @@ public class DimenUtil {
      * @param dpi
      * @return
      */
+    public static float dpiToPxF(float dpi) {
+        return (dpi * Constants.sScale);
+    }
+
+    /**
+     * convert dpi to px，返回给Android系统的必须是整数
+     *
+     * @param dpi
+     * @return
+     */
     public static float[] dpiToPxF(float[] dpi) {
         if (dpi != null) {
             final float[] result = new float[dpi.length];
             for (int i = 0; i < dpi.length; i++) {
-                result[i] = (int) (dpi[i] * Constants.sScale);
+                result[i] = (dpi[i] * Constants.sScale);
             }
             return result;
         }

@@ -2,18 +2,23 @@ package com.taobao.luaview.userdata.ui;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.animation.Interpolator;
 
 import com.taobao.luaview.userdata.base.BaseUserdata;
+import com.taobao.luaview.util.AnimatorUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Animator 数据封装
@@ -28,6 +33,8 @@ public class UDAnimator extends BaseUserdata {
     private LuaValue mOnPauseCallback;
     private LuaValue mOnResumeCallback;
     private LuaValue mOnUpdateCallback;
+
+    private UDView mTarget;
 
     public UDAnimator(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(new ObjectAnimator(), globals, metaTable, varargs);
@@ -56,9 +63,9 @@ public class UDAnimator extends BaseUserdata {
     public UDAnimator with(UDView udView) {
         final ObjectAnimator animator = getAnimator();
         if (animator != null && udView != null && udView.getView() != null) {
+            mTarget = udView;
             animator.setTarget(udView.getView());
         }
-
         return this;
     }
 
@@ -120,14 +127,17 @@ public class UDAnimator extends BaseUserdata {
     public UDAnimator ofProperty(final String name, float... values) {
         final ObjectAnimator animator = getAnimator();
         if (animator != null && TextUtils.isEmpty(name) == false) {
-            animator.setPropertyName(name);
-            if (values != null && values.length > 0) {
-                animator.setFloatValues(values);
+            PropertyValuesHolder[] valuesHolders = null;
+            if (animator.getValues() != null && animator.getValues().length > 0) {
+                valuesHolders = Arrays.copyOf(animator.getValues(), animator.getValues().length + 1);
+            } else {
+                valuesHolders = new PropertyValuesHolder[1];
             }
+            valuesHolders[valuesHolders.length - 1] = PropertyValuesHolder.ofFloat(name, values);
+            animator.setValues(valuesHolders);
         }
         return this;
     }
-
 
     /**
      * 时长
@@ -252,9 +262,10 @@ public class UDAnimator extends BaseUserdata {
      */
     public UDAnimator start() {
         final ObjectAnimator animator = getAnimator();
-        if (animator != null && animator.getTarget() != null && animator.isStarted() == false) {
-            setupListeners(animator);
-            animator.start();
+        setupListeners(animator);
+        AnimatorUtil.start(animator);
+        if (mTarget != null) {
+            mTarget.startAnimation();
         }
         return this;
     }
@@ -265,9 +276,9 @@ public class UDAnimator extends BaseUserdata {
      * @return
      */
     public UDAnimator cancel() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null && animator.isStarted()) {
-            animator.cancel();
+        AnimatorUtil.cancel(getAnimator());
+        if (mTarget != null) {
+            mTarget.cancelAnimation();
         }
         return this;
     }
@@ -278,13 +289,9 @@ public class UDAnimator extends BaseUserdata {
      * @return
      */
     public UDAnimator pause() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (animator.isPaused() == false) {
-                    animator.pause();
-                }
-            }
+        AnimatorUtil.pause(getAnimator());
+        if (mTarget != null) {
+            mTarget.pauseAnimation();
         }
         return this;
     }
@@ -295,15 +302,42 @@ public class UDAnimator extends BaseUserdata {
      * @return
      */
     public UDAnimator resume() {
-        final ObjectAnimator animator = getAnimator();
-        if (animator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (animator.isPaused()) {
-                    animator.resume();
-                }
-            }
+        AnimatorUtil.resume(getAnimator());
+        if (mTarget != null) {
+            mTarget.resumeAnimation();
         }
         return this;
+    }
+
+    /**
+     * end animator
+     *
+     * @return
+     */
+    public UDAnimator end() {
+        AnimatorUtil.end(getAnimator());
+        if (mTarget != null) {
+            mTarget.endAnimation();
+        }
+        return this;
+    }
+
+    /**
+     * is paused
+     *
+     * @return
+     */
+    public boolean isPaused() {
+        return AnimatorUtil.isPaused(getAnimator()) || (mTarget != null && mTarget.isAnimationPaused());
+    }
+
+    /**
+     * is running
+     *
+     * @return
+     */
+    public boolean isRunning() {
+        return AnimatorUtil.isRunning(getAnimator()) || (mTarget != null && mTarget.isAnimating());
     }
 
     /**
@@ -314,6 +348,8 @@ public class UDAnimator extends BaseUserdata {
      */
     public UDAnimator setupListeners(ObjectAnimator animator) {
         if (animator != null) {
+            animator.removeAllListeners();//删除所有listener, pause listener
+            animator.removeAllUpdateListeners();//删除所有update listener
             addAnimatorListener(animator);
             addOnPauseListener(animator);
             addOnUpdateListener(animator);
@@ -327,8 +363,32 @@ public class UDAnimator extends BaseUserdata {
      * @return
      */
     public Animator build() {
-        UDAnimator animator = setupListeners(getAnimator());
-        return animator.getAnimator().clone();//克隆一份
+        //这种方式clone出来的animator不能重复播放
+        /*final ObjectAnimator result = getAnimator().clone();//克隆一份
+        setupListeners(result);
+        result.setupStartValues();
+        return result;*/
+
+        final ObjectAnimator self = this.getAnimator();
+        final ObjectAnimator anim = new ObjectAnimator();
+        anim.setTarget(self.getTarget());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            anim.setAutoCancel(true);
+        }
+        if (self.getValues() != null) {
+            anim.setValues(self.getValues());
+        }
+        anim.setInterpolator(self.getInterpolator());
+        anim.setDuration(self.getDuration());
+        anim.setStartDelay(self.getStartDelay());
+        anim.setRepeatCount(self.getRepeatCount());
+        anim.setRepeatMode(self.getRepeatMode());
+        setupListeners(anim);
+        return anim;
+    }
+
+    public List<PropertyValuesHolder> getPropertyValuesHolder() {
+        return Arrays.asList(getAnimator().getValues());
     }
     //----------------------------------------listeners---------------------------------------------
 

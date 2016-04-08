@@ -24,13 +24,6 @@ public class DemoActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new LuaScriptLoader(this).load("", new LuaScriptLoader.ScriptLoaderCallback() {
-            @Override
-            public void onScriptLoaded(ScriptBundle bundle) {
-
-            }
-        });
-
         //初始化
         init();
 

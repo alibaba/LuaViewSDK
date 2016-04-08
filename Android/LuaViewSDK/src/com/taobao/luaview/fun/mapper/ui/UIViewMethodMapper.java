@@ -3,7 +3,9 @@ package com.taobao.luaview.fun.mapper.ui;
 import android.widget.RelativeLayout;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -17,8 +19,9 @@ import java.util.ArrayList;
 
 /**
  * 所有view 接口封装
- * @author song
+ *
  * @param <U>
+ * @author song
  */
 @LuaViewLib
 public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
@@ -1172,7 +1175,10 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     public LuaValue removeFromSuper(U view, Varargs varargs) {
         return view.removeFromParent();
     }
-    public LuaValue removeFromParent(U view, Varargs varargs){return view.removeFromParent();}
+
+    public LuaValue removeFromParent(U view, Varargs varargs) {
+        return view.removeFromParent();
+    }
 
     /**
      * 是否有焦点
@@ -1273,8 +1279,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setScale(U view, Varargs varargs) {
-        final float scaleX = (float) varargs.optdouble(2, 0.0);
-        final float scaleY = (float) varargs.optdouble(3, 0.0);
+        final float scaleX = LuaUtil.getFloat(varargs, 0f, 2);
+        final float scaleY = LuaUtil.getFloat(varargs, 0f, 3, 2);
         return view.setScale(scaleX, scaleY);
     }
 
@@ -1532,47 +1538,49 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     /**
      * 点击
+     *
      * @param view
      * @param varargs
      * @return
      */
-    public LuaValue onClick(U view, Varargs varargs){
-        if(varargs.narg() > 1) {
+    public LuaValue onClick(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
             return setOnClick(view, varargs);
         } else {
             return getOnClick(view, varargs);
         }
     }
 
-    public LuaValue setOnClick(U view, Varargs varargs){
+    public LuaValue setOnClick(U view, Varargs varargs) {
         final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
         return view.setOnClickCallback(callback);
     }
 
-    public LuaValue getOnClick(U view, Varargs varargs){
+    public LuaValue getOnClick(U view, Varargs varargs) {
         return view.getOnClickCallback();
     }
 
     /**
      * 长按
+     *
      * @param view
      * @param varargs
      * @return
      */
-    public LuaValue onLongClick(U view, Varargs varargs){
-        if(varargs.narg() > 1){
+    public LuaValue onLongClick(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
             return setOnLongClick(view, varargs);
         } else {
             return getOnLongClick(view, varargs);
         }
     }
 
-    public LuaValue setOnLongClick(U view, Varargs varargs){
+    public LuaValue setOnLongClick(U view, Varargs varargs) {
         final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
         return view.setOnLongClickCallback(callback);
     }
 
-    public LuaValue getOnLongClick(U view, Varargs varargs){
+    public LuaValue getOnLongClick(U view, Varargs varargs) {
         return view.getOnLongClickCallback();
     }
 
@@ -1628,14 +1636,17 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.startAnimation(animators);
     }
 
+    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API"})
     public LuaValue stopAnimation(U view, Varargs varargs) {
-        return view.stopAnimation();
+        view.cancelAnimation();
+        return view;
     }
 
     public LuaValue isAnimating(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
 
+    @LuaViewApi(since = VmVersion.V_500)
     public LuaValue flexCss(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setFlexCss(view, varargs);
@@ -1644,17 +1655,20 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         }
     }
 
+    @LuaViewApi(since = VmVersion.V_500)
     public LuaValue flxLayout(U view, Varargs varargs) {
         // Android doing nothing here
 
         return view;
     }
 
+    @LuaViewApi(since = VmVersion.V_500)
     private LuaValue setFlexCss(U view, Varargs varargs) {
         final String css = LuaUtil.getString(varargs, 2);
         return view.setFlexCss(css);
     }
 
+    @LuaViewApi(since = VmVersion.V_500)
     private LuaValue getFlexCss(U view, Varargs varargs) {
         return valueOf(view.getFlexCss());
     }

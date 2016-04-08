@@ -91,6 +91,19 @@ public class LuaUtil {
     }
 
     /**
+     * 获取float
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Float getFloat(final Varargs varargs, Float defaultValue, int... poslist) {
+        final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, defaultValue, poslist);
+        return number != null ? (float) number.checkdouble() : null;
+    }
+
+
+    /**
      * 获取string
      *
      * @param varargs

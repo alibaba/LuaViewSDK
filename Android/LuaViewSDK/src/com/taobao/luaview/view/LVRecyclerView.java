@@ -55,7 +55,7 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         super(context, attrs);
     }
 
-    public LVRecyclerView init(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView){
+    public LVRecyclerView init(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         LuaViewUtil.setId(this);
         this.mGlobals = globals;
         this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
@@ -77,6 +77,20 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         this.setLayoutManager(mLayoutManager);
         mLuaUserdata.initOnScrollCallback(this);
         this.setHasFixedSize(true);
+        initViewHolderPool();
+    }
+
+    /**
+     * 初始化ViewHolder缓存池
+     */
+    private void initViewHolderPool() {
+        //设置ViewHolder缓存的数
+        final RecycledViewPool pool = getRecycledViewPool();
+        if (pool != null) {
+            for (int i = 0; i < 100; i++) {
+                pool.setMaxRecycledViews(i, 10);
+            }
+        }
     }
 
     /**
