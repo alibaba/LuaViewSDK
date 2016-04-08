@@ -26,10 +26,14 @@
 @property(nonatomic, assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic, readonly, getter=isRunning) BOOL running;
+@property(nonatomic, readonly, getter=isPaused) BOOL paused;
 
 + (int)classDefine:(lv_State *)L;
 
 - (void)start;
 - (void)cancel;
+
+- (void)pause;
+- (void)resume;
 
 @end

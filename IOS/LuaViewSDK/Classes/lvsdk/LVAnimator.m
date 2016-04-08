@@ -19,11 +19,19 @@ typedef NS_ENUM(int, LVAnimatorCallback) {
     kLVAnimatorCallbackOnStart = 1,
     kLVAnimatorCallbackOnEnd,
     kLVAnimatorCallbackOnCancel,
+    kLVAnimatorCallbackOnPause,
+    kLVAnimatorCallbackOnResume,
 };
+
+static char *callbackKeys[] = { "", "onStart", "onEnd", "onCancel", "onPause", "onResume" };
 
 @implementation LVAnimator {
     NSString *_animationKey;
+    CABasicAnimation *_pausedAnimation;
+    NSTimeInterval _timeOffset;
 }
+
+@dynamic running, paused;
 
 -(id) lv_nativeObject{
     return self;
@@ -152,6 +160,58 @@ static int cancel(lv_State *L) {
     return 1;
 }
 
+static int isRunning(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        lv_pushboolean(L, animator.running);
+    } else {
+        lv_pushboolean(L, 0);
+    }
+    
+    return 1;
+}
+
+static int pauseAnimator(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        [animator pause];
+    }
+    
+    lv_pushUserdata(L, data);
+    
+    return 1;
+}
+
+static int resumeAnimator(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        [animator resume];
+    }
+    
+    lv_pushUserdata(L, data);
+    
+    return 1;
+}
+
+static int isPaused(lv_State *L) {
+    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    
+    if (LVIsType(data, Animator)) {
+        LVAnimator *animator = (__bridge LVAnimator *)data->object;
+        lv_pushboolean(L, animator.paused);
+    } else {
+        lv_pushboolean(L, 0);
+    }
+    
+    return 1;
+}
+
 static int duration(lv_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_tonumber(L, 2);
@@ -243,6 +303,14 @@ static int onCancel(lv_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnCancel);
 }
 
+static int onPause(lv_State *L) {
+    return setCallback(L, kLVAnimatorCallbackOnPause);
+}
+
+static int onResume(lv_State *L) {
+    return setCallback(L, kLVAnimatorCallbackOnResume);
+}
+
 static int callback(lv_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator) && lv_type(L, 2) == LV_TTABLE) {
@@ -255,12 +323,11 @@ static int callback(lv_State *L) {
             }
             const char* key = lv_tostring(L, -2);
             int idx = 0;
-            if (strcmp(key, "onStart") == 0) {
-                idx = kLVAnimatorCallbackOnStart;
-            } else if (strcmp(key, "onEnd") == 0) {
-                idx = kLVAnimatorCallbackOnEnd;
-            } else if (strcmp(key, "onCancel") == 0) {
-                idx = kLVAnimatorCallbackOnCancel;
+            for (int i = 0; i < sizeof(callbackKeys) / sizeof(callbackKeys[0]); ++i) {
+                if (strcmp(key, callbackKeys[i]) == 0) {
+                    idx = i;
+                    break;
+                }
             }
             
             if (idx != 0) {
@@ -350,17 +417,25 @@ static int value(lv_State *L) {
         { "clone", clone },
         
         { "with", with },
-        { "cancel", cancel },
-        { "start", start },
         { "duration", duration },
         { "delay", delay },
         { "repeatCount", repeatCount },
         { "reverses", autoreverses },
         
+        { "cancel", cancel },
+        { "start", start },
+        { "isRunning", isRunning },
+        
+        { "pause", pauseAnimator },
+        { "resume", resumeAnimator },
+        { "isPaused", isPaused },
+        
         { "callback", callback },
-        { "onStart", onStart },
-        { "onEnd", onEnd },
-        { "onCancel", onCancel },
+        { callbackKeys[kLVAnimatorCallbackOnStart], onStart },
+        { callbackKeys[kLVAnimatorCallbackOnEnd], onEnd },
+        { callbackKeys[kLVAnimatorCallbackOnCancel], onCancel },
+        { callbackKeys[kLVAnimatorCallbackOnPause], onPause },
+        { callbackKeys[kLVAnimatorCallbackOnResume], onResume },
 
         { "alpha", alpha },
         { "rotation", rotation },
@@ -479,40 +554,94 @@ static int value(lv_State *L) {
     if (self.target != nil && (animation = [self buildAnimation])) {
         [self.target.layer setValue:animation.toValue forKeyPath:animation.keyPath];
         [self.target.layer addAnimation:animation forKey:_animationKey];
+        
+        [self callback:kLVAnimatorCallbackOnStart];
     }
 }
 
 - (void)cancel {
-    [self.target.layer removeAnimationForKey:_animationKey];
+    if (!self.running) {
+        LVLog(@"warning: Animation of keyPath:%@ is not running", self.keyPath);
+        return;
+    }
+    
+    if (self.paused) {
+        _animationKey = nil;
+        _pausedAnimation = nil;
+        _timeOffset = 0.0;
+        [self callback:kLVAnimatorCallbackOnCancel];
+    } else {
+        CALayer *layer = self.target.layer;
+        NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
+        [layer setValue:current forKeyPath:self.keyPath];
+        
+        [layer removeAnimationForKey:_animationKey];
+    }
 }
 
 - (BOOL)isRunning {
     return _animationKey;
 }
 
+- (void)pause {
+    if (!self.running) {
+        LVLog(@"Animator(%p) is not running!", self.lv_userData);
+        return;
+    }
+    if (self.paused) {
+        LVLog(@"Animator(%p) is already paused!", self.lv_userData);
+        return;
+    }
+    
+    CALayer *layer = self.target.layer;
+    NSValue *current = [layer.presentationLayer valueForKeyPath:self.keyPath];
+    [layer setValue:current forKeyPath:self.keyPath];
+    
+    _pausedAnimation = [[layer animationForKey:_animationKey] copy];
+    _timeOffset = CACurrentMediaTime() - _pausedAnimation.beginTime;
+    
+    [layer removeAnimationForKey:_animationKey];
+}
+
+- (void)resume {
+    CALayer *layer = self.target.layer;
+    
+    _pausedAnimation.beginTime = CACurrentMediaTime() - _timeOffset;
+    
+    [layer setValue:_pausedAnimation.toValue forKeyPath:self.keyPath];
+    [layer addAnimation:_pausedAnimation forKey:_animationKey];
+    
+    _timeOffset = 0.0;
+    _pausedAnimation = nil;
+    
+    [self callback:kLVAnimatorCallbackOnResume];
+}
+
+- (BOOL)isPaused {
+    return _pausedAnimation != nil;
+}
+
 #pragma mark - animation delegate
 
-- (void)animationDidStart:(CAAnimation *)anim {
-    lv_State* l = self.lv_lview.l;
-    if( l && self.lv_userData ){
-        lv_pushUserdata(l, self.lv_userData);
-        lv_pushUDataRef(l, kLVAnimatorCallbackOnStart);
-        lv_runFunction(l);
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    if (self.paused) {
+        [self callback:kLVAnimatorCallbackOnPause];
+    } else {
+        _animationKey = nil;
+        _pausedAnimation = nil;
+        _timeOffset = 0.0;
+        
+        [self callback:flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel];
     }
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    CALayer *layer = self.target.layer;
-    if (layer != nil) {
-        lv_State* l = self.lv_lview.l;
-        if( l && self.lv_userData ){
-            lv_pushUserdata(l, self.lv_userData);
-            lv_pushUDataRef(l, flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel);
-            lv_runFunction(l);
-        }
+- (void)callback:(LVAnimatorCallback)idx {
+    lv_State* l = self.lv_lview.l;
+    if (l && self.lv_userData) {
+        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUDataRef(l, idx);
+        lv_runFunction(l);
     }
-    
-    _animationKey = nil;
 }
 
 @end
