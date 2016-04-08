@@ -35,7 +35,14 @@ imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
 
 imageView3 = Image();
 imageView3.frame(0,Y0+w+Y0,w,w);
+imageView3.scaleType(0)
 imageView3.image("bt_catebrand_more.9.png");
+
+
+imageView31 = Image();
+imageView31.frame(20,100,100,50);
+imageView31.scaleType(0)
+imageView31.image("tags2.9.png");
 
 imageView4 = Image();
 imageView4.backgroundColor(0xff00FF)
