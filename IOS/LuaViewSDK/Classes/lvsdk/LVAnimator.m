@@ -711,7 +711,7 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
     
     _pausedAnimation.beginTime = CACurrentMediaTime() - _timeOffset;
     
-    [layer setValue:_pausedAnimation.toValue forKeyPath:self.keyPath];
+    syncValue(_pausedAnimation, layer);
     [layer addAnimation:_pausedAnimation forKey:_animationKey];
     
     _timeOffset = 0.0;
