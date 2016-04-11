@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -20,7 +22,12 @@ import javax.crypto.spec.SecretKeySpec;
  * @date 15/11/10
  */
 public class DecryptUtil {
-    public static final String ALGORITHM_AES = "AES";
+    public static final String ALGORITHM_AES = "AES/CBC/PKCS5Padding";
+    public static final byte[] cIv = new byte[16];
+
+    static {
+        Arrays.fill(cIv, (byte)0);
+    }
 
     /**
      * 使用aes256进行解密
@@ -57,8 +64,11 @@ public class DecryptUtil {
     public static byte[] aes(final byte[] keys, final byte[] encrypted) {
         try {
             final SecretKeySpec skeySpec = new SecretKeySpec(keys, ALGORITHM_AES);
-            Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+            final IvParameterSpec ivParameterSpec = new IvParameterSpec(cIv);
+            final Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
+
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
+
             return cipher.doFinal(encrypted);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -8,12 +8,8 @@
 
 #import "LVPkgManager.h"
 #import "LVUtil.h"
-#import "LVInputStream.h"
 #import "LVRSA.h"
-#import "zlib.h"
-
-static const unsigned int PKG_TAG = 0xFA030201;
-static const unsigned int PKG_VERSION = (102010 );
+#import "LVZipArchive.h"
 
 static NSString * const PACKAGE_TIME_FILE_NAME = @"___time___";
 static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
@@ -76,7 +72,6 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
                           fileName:LOCAL_PACKAGE_TIME_FILE_NAME];
 }
 
-
 +(NSString*) timeOfLocalPackage:(NSString*)packageName {
     NSString* fileName = [LVPkgManager timefileNameOfLocalPackage:packageName];
     NSData* data = [LVUtil dataReadFromFile:fileName];
@@ -101,90 +96,46 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return NO;
 }
 
-+(void) unpkgSignFiles:(NSData*)data packageName:(NSString*) packageName{
-    LVInputStream* is = [[LVInputStream alloc] initWithData:data];
-    int num = [is readInt];
-    for( int i=0; i<num; i++ ){
-        NSString* fileName = [is readUTF];
-        NSInteger length = [is readInt];
-        NSData* data = [is readData:length];
-        
-        NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
-        [LVPkgManager writeFile:data packageName:packageName fileName:signfileName];
-    }
-}
-
 +(BOOL) unpackageData:(NSData*) data packageName:(NSString*) packageName  localMode:(BOOL) localMode{
     return [LVPkgManager unpackageData:data packageName:packageName checkTime:NO localMode:localMode];
 }
 
 +(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime localMode:(BOOL) localMode{
-    if( pkgData && [LVUtil createPath:[self rootDirectoryOfPackage:packageName]] ){
-        if( pkgData && pkgData.length>0 ) {
-            LVInputStream* is = [[LVInputStream alloc] initWithData:pkgData];
-            unsigned int pkgTag = [is readInt];
-            unsigned int version = [is readInt];
-            if( PKG_TAG!=pkgTag || PKG_VERSION!=version ){
-                LVLog(@"Not unpackage :pkgTag=%x, version:%d",pkgTag,version);
+    NSString *path = [self rootDirectoryOfPackage:packageName];
+    if( pkgData && [LVUtil createPath:path] ){
+        
+        if( checkTime ){
+            NSString *mainFile = [self pathForFileName:@"main.lv" package:packageName];
+            NSDictionary *attrs = [[NSFileManager defaultManager]
+                                   attributesOfItemAtPath:mainFile error:NULL];
+            NSDate *date = attrs[NSFileModificationDate];
+            NSString *timeStr = [NSString stringWithFormat:@"%ll", (long long)([date timeIntervalSince1970] * 1000)];
+            
+            NSString* oldTime = nil;
+            if( localMode ) {
+                oldTime = [LVPkgManager timeOfLocalPackage:packageName];
+            } else {
+                oldTime = [LVPkgManager timeOfPackage:packageName];
+            }
+            if( timeStr.length>0 && oldTime.length>0 && [timeStr isEqualToString:oldTime] ){
+                LVLog(@" Not Need unpackage, %@, %@",packageName,timeStr);
                 return NO;
-            }
-            NSString* time = [is readUTF];
-            if( checkTime ){
-                NSString* oldTime = nil;
+            } else {
                 if( localMode ) {
-                    oldTime = [LVPkgManager timeOfLocalPackage:packageName];
+                    [LVPkgManager wirteTimeForLocalPackage:packageName time:timeStr];
                 } else {
-                    oldTime = [LVPkgManager timeOfPackage:packageName];
+                    [LVPkgManager wirteTimeForPackage:packageName time:timeStr];
                 }
-                if( time.length>0 && oldTime.length>0 && [time isEqualToString:oldTime] ){
-                    LVLog(@" Not Need unpackage, %@, %@",packageName,time);
-                    return NO;
-                } else {
-                    if( localMode ) {
-                        [LVPkgManager wirteTimeForLocalPackage:packageName time:time];
-                    } else {
-                        [LVPkgManager wirteTimeForPackage:packageName time:time];
-                    }
-                }
-            }
-            
-            NSInteger fileNum = [is readInt];
-            for( int i=0; i<fileNum; i++ ){
-                NSString* fileName = [is readUTF];
-                NSInteger length = [is readInt];
-                NSData* data = [is readData:length];
-                [LVPkgManager writeFile:data packageName:packageName fileName:fileName];
-            }
-            // sign file
-            NSInteger signBytesLength = [is readInt];
-            NSData* signBytes = [is readData:signBytesLength];
-            [LVPkgManager unpkgSignFiles:signBytes packageName:packageName];
-            
-            if( PKG_TAG==[is readInt] ){
-                return YES;
             }
         }
+        
+        [LVZipArchive unzipData:pkgData toDirectory:path];
     }
     return NO;
 }
 
 +(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
-    return [NSString stringWithFormat:@"%@.sign___",fileName];
-}
-
-
-
-+(NSInteger) versionToInteger:(NSString*) version{
-    NSArray* stringArray = [version componentsSeparatedByString:@"."];
-    NSInteger ret = 0;
-    for( int i=0; i<stringArray.count; i++ ){
-        NSString* v = stringArray[i];
-        ret *= 1000;
-        if( v.length>0 ){
-            ret += [v integerValue];
-        }
-    }
-    return ret;
+    return [NSString stringWithFormat:@"%@.sign",fileName];
 }
 
 +(NSString*) safe_string:(NSDictionary*) dic forKey:(NSString*) key{
@@ -268,60 +219,19 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     }
 }
 
-+ (NSData *)gzipUnpack:(NSData*) data
-{
-    if ([data length] == 0) return data;
-    
-    NSInteger full_length = [data length];
-    NSInteger half_length = [data length] / 2;
-    
-    NSMutableData *decompressed = [NSMutableData dataWithLength: full_length +     half_length];
-    BOOL done = NO;
-    int status;
-    
-    z_stream strm;
-    strm.next_in = (Bytef *)[data bytes];
-    strm.avail_in = (unsigned int)[data length];
-    strm.total_out = 0;
-    strm.zalloc = Z_NULL;
-    strm.zfree = Z_NULL;
-    
-    if (inflateInit2(&strm, (15+32)) != Z_OK) return nil;
-    while (!done){
-        if (strm.total_out >= [decompressed length])
-            [decompressed increaseLengthBy: half_length];
-        strm.next_out = [decompressed mutableBytes] + strm.total_out;
-        strm.avail_out = (unsigned int)( [decompressed length] - strm.total_out );
-        
-        // Inflate another chunk.
-        status = inflate (&strm, Z_SYNC_FLUSH);
-        if (status == Z_STREAM_END) done = YES;
-        else if (status != Z_OK) break;
-    }
-    if (inflateEnd (&strm) != Z_OK) return nil;
-    
-    // Set real length.
-    if (done){
-        [decompressed setLength: strm.total_out];
-        return [NSData dataWithData: decompressed];
-    }
-    return nil;
-}
-
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*)rsa{
     NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
     NSData* signData = [LVUtil dataReadFromFile:signfileName];
     NSData* encodedfileData = [LVUtil dataReadFromFile:fileName];
-    NSData* fileData0 = LV_AES256DecryptDataWithKey(encodedfileData, [rsa aesKeyBytes]);
-    NSData* fileData = [LVPkgManager gzipUnpack:fileData0];
     // LVLog(@"%@",[[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding]);
     if(  [rsa verifyData:encodedfileData withSignedData:signData] ){
+        NSData* fileData = LV_AES256DecryptDataWithKey(encodedfileData, [rsa aesKeyBytes]);
         return fileData;
     }
     return nil;
 }
 
-+(void) clearCachesPath{
++(void) clearCachesPath {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString* rootPath = [LVUtil PathForCachesResource:LUAVIEW_ROOT_PATH];
     if( rootPath ) {
@@ -337,4 +247,5 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
         }
     }
 }
+
 @end

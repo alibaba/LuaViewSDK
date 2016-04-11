@@ -12,7 +12,6 @@ import com.taobao.luaview.util.DecryptUtil;
 import com.taobao.luaview.util.FileUtil;
 import com.taobao.luaview.util.IOUtil;
 import com.taobao.luaview.util.VerifyUtil;
-import com.taobao.luaview.util.ZipUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -48,7 +47,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
     public static InputStream loadEncryptScript(final Context context, final String scriptFilePath) {
         final InputStream inputStream = FileUtil.open(scriptFilePath);
         if (inputStream != null) {
-            final InputStream result = new ByteArrayInputStream(ZipUtil.unzip(DecryptUtil.aes(context, IOUtil.toBytes(inputStream))));
+            final InputStream result = new ByteArrayInputStream(DecryptUtil.aes(context, IOUtil.toBytes(inputStream)));
             try {
                 inputStream.close();
             } catch (Exception e) {//close input
@@ -66,7 +65,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
      */
     public static InputStream loadEncryptScript(final Context context, final InputStream inputStream) {
         if (inputStream != null) {
-            InputStream result = new ByteArrayInputStream(ZipUtil.unzip(DecryptUtil.aes(context, IOUtil.toBytes(inputStream))));
+            InputStream result = new ByteArrayInputStream(DecryptUtil.aes(context, IOUtil.toBytes(inputStream)));
             try {
                 inputStream.close();
             } catch (Exception e) {//close input, 这里需要注意，外面不能使用该inputStream
@@ -84,7 +83,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
      * @return
      */
     public static byte[] loadEncryptScript(final Context context, final byte[] script) {
-        return ZipUtil.unzip(DecryptUtil.aes(context, script));
+        return DecryptUtil.aes(context, script);
     }
 
     /**
@@ -99,7 +98,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
         if (!verifyScript(context, script, signBytes)) {//有任意一个文件验证失败，返回null
             return null;
         } else {
-            return ZipUtil.unzip(DecryptUtil.aes(context, script));
+            return DecryptUtil.aes(context, script);
         }
     }
 

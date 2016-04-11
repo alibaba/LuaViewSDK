@@ -12,8 +12,10 @@
 		3C98A53A1C7C0C100001508E /* LViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C98A5381C7C0C100001508E /* LViewController.h */; };
 		3C98A53B1C7C0C100001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
 		3C98A5421C7C56270001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
+		3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */; };
+		3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */; };
+		3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */; };
 		3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
-		3CFF77B31C74740800847C05 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
 		3CFF77B41C74740800847C05 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
 		3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
@@ -115,7 +117,6 @@
 		84C1D6AB1C16B09D0058E974 /* LuaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D6AA1C16B09D0058E974 /* LuaViewTests.m */; };
 		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
 		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
-		84C1D7D51C16C3F90058E974 /* LVInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F61AF7631C000A3911 /* LVInputStream.m */; };
 		84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
 		84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
 		84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
@@ -210,7 +211,6 @@
 		84C1D8321C16C4070058E974 /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
 		84C1D8331C16C4070058E974 /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8351C16C4490058E974 /* LVInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F51AF7631C000A3911 /* LVInputStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8361C16C4490058E974 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -362,6 +362,8 @@
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
 		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
 		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
+		3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVZipArchive.h; path = PKG/LVZipArchive.h; sourceTree = "<group>"; };
+		3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVZipArchive.m; path = PKG/LVZipArchive.m; sourceTree = "<group>"; };
 		3CFF77A91C7473A800847C05 /* libLuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
@@ -535,8 +537,6 @@
 		84CF56791AEA15A500A49B36 /* LVMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVMethod.m; sourceTree = "<group>"; };
 		84D446F01AF75BD8000A3911 /* LVPkgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgManager.h; path = PKG/LVPkgManager.h; sourceTree = "<group>"; };
 		84D446F11AF75BD8000A3911 /* LVPkgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgManager.m; path = PKG/LVPkgManager.m; sourceTree = "<group>"; };
-		84D446F51AF7631C000A3911 /* LVInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVInputStream.h; path = PKG/LVInputStream.h; sourceTree = "<group>"; };
-		84D446F61AF7631C000A3911 /* LVInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVInputStream.m; path = PKG/LVInputStream.m; sourceTree = "<group>"; };
 		84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLuaObjBox.h; sourceTree = "<group>"; };
 		84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLuaObjBox.m; sourceTree = "<group>"; };
 		84DCF0391B44D91800AD723B /* LVTypeConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTypeConvert.h; sourceTree = "<group>"; };
@@ -1041,8 +1041,8 @@
 			children = (
 				84D446F01AF75BD8000A3911 /* LVPkgManager.h */,
 				84D446F11AF75BD8000A3911 /* LVPkgManager.m */,
-				84D446F51AF7631C000A3911 /* LVInputStream.h */,
-				84D446F61AF7631C000A3911 /* LVInputStream.m */,
+				3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */,
+				3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */,
 			);
 			name = PKG;
 			sourceTree = "<group>";
@@ -1103,7 +1103,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */,
-				84C1D8351C16C4490058E974 /* LVInputStream.h in Headers */,
 				84C1D8361C16C4490058E974 /* LVRSA.h in Headers */,
 				84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */,
 				84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */,
@@ -1142,6 +1141,7 @@
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
 				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
 				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
+				3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */,
 				84C1D8571C16C44B0058E974 /* LVGestureRecognizer.h in Headers */,
 				84C1D8581C16C44B0058E974 /* LVLongPressGestureRecognizer.h in Headers */,
 				BEEB28D11CA90EC200EC2D86 /* JUFLXNode.h in Headers */,
@@ -1366,6 +1366,7 @@
 				3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */,
 				3CFF77F71C74741400847C05 /* lVc.c in Sources */,
 				3CFF77F81C74741400847C05 /* lVcode.c in Sources */,
+				3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */,
 				3CFF77F91C74741400847C05 /* lVdblib.c in Sources */,
 				3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */,
 				3CFF77FB1C74741400847C05 /* lVdo.c in Sources */,
@@ -1396,7 +1397,6 @@
 				3CFF78111C74741400847C05 /* lVvm.c in Sources */,
 				3CFF78121C74741400847C05 /* lVzio.c in Sources */,
 				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
-				3CFF77B31C74740800847C05 /* LVInputStream.m in Sources */,
 				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
 				3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */,
 				BEEB28E01CA91B8900EC2D86 /* JUFLXNode.m in Sources */,
@@ -1499,6 +1499,7 @@
 				84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */,
 				84C1D8181C16C4070058E974 /* lVc.c in Sources */,
 				84C1D8191C16C4070058E974 /* lVcode.c in Sources */,
+				3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */,
 				84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */,
 				84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */,
 				84C1D81C1C16C4070058E974 /* lVdo.c in Sources */,
@@ -1530,7 +1531,6 @@
 				84C1D8321C16C4070058E974 /* lVvm.c in Sources */,
 				84C1D8331C16C4070058E974 /* lVzio.c in Sources */,
 				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
-				84C1D7D51C16C3F90058E974 /* LVInputStream.m in Sources */,
 				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
 				BEEB28D21CA90EC200EC2D86 /* JUFLXNode.m in Sources */,
 				84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */,
