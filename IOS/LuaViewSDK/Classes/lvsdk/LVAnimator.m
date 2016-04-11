@@ -405,6 +405,10 @@ static int rotation(lv_State *L) {
 }
 
 static int scale(lv_State *L) {
+    // default y = x
+    if (lv_gettop(L) == 2) {
+        lv_pushnumber(L, lv_tonumber(L, 2));
+    }
     return updatePoint(L, @"transform.scale");
 }
 
