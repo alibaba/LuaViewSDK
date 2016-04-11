@@ -3,10 +3,10 @@ package com.taobao.luaview.util;
 import android.content.Context;
 import android.graphics.Typeface;
 
-import com.taobao.luaview.extend.WeakCache;
+import com.taobao.luaview.extend.SimpleCache;
 
 /**
- * 字体处理
+ * 字体处理，字体使用SimpleCache，全局缓存
  *
  * @author song
  * @date 15/11/6
@@ -22,7 +22,7 @@ public class TypefaceUtil {
      * @return
      */
     public static String getTypefaceName(Typeface typeface) {
-        final String name = WeakCache.getCache(TAG_TYPEFACE_NAME).get(typeface);
+        final String name = SimpleCache.getCache(TAG_TYPEFACE_NAME).get(typeface);
         return name != null ? name : "unknown";
     }
 
@@ -34,7 +34,7 @@ public class TypefaceUtil {
      * @return
      */
     public static Typeface create(final Context context, final String name) {
-        Typeface result = WeakCache.getCache(TAG).get(name);
+        Typeface result = SimpleCache.getCache(TAG).get(name);
         if (result == null) {
             final String fontNameOrAssetPathOrFilePath = ParamUtil.getFileNameWithPostfix(name, "ttf");
             result = createFromAsset(context, fontNameOrAssetPathOrFilePath);
@@ -45,8 +45,8 @@ public class TypefaceUtil {
                 result = createByName(fontNameOrAssetPathOrFilePath);
             }
         }
-        WeakCache.getCache(TAG_TYPEFACE_NAME).put(result, name);//cache name
-        return WeakCache.getCache(TAG).put(name, result);
+        SimpleCache.getCache(TAG_TYPEFACE_NAME).put(result, name);//cache name
+        return SimpleCache.getCache(TAG).put(name, result);
     }
 
     /**
@@ -56,7 +56,7 @@ public class TypefaceUtil {
      * @return
      */
     public static Typeface create(final String name) {
-        Typeface result = WeakCache.getCache(TAG).get(name);
+        Typeface result = SimpleCache.getCache(TAG).get(name);
         if (result == null) {
             final String fontNameOrFilePath = ParamUtil.getFileNameWithPostfix(name, "ttf");
             result = createFromFile(fontNameOrFilePath);
@@ -64,8 +64,8 @@ public class TypefaceUtil {
                 result = createByName(fontNameOrFilePath);
             }
         }
-        WeakCache.getCache(TAG_TYPEFACE_NAME).put(result, name);//cache name
-        return WeakCache.getCache(TAG).put(name, result);
+        SimpleCache.getCache(TAG_TYPEFACE_NAME).put(result, name);//cache name
+        return SimpleCache.getCache(TAG).put(name, result);
     }
 
     /**

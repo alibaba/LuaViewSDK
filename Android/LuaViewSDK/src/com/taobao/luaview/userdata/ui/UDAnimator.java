@@ -126,7 +126,7 @@ public class UDAnimator extends BaseUserdata {
      */
     public UDAnimator ofProperty(final String name, float... values) {
         final ObjectAnimator animator = getAnimator();
-        if (animator != null && TextUtils.isEmpty(name) == false) {
+        if (animator != null && TextUtils.isEmpty(name) == false && values != null) {
             PropertyValuesHolder[] valuesHolders = null;
             if (animator.getValues() != null && animator.getValues().length > 0) {
                 valuesHolders = Arrays.copyOf(animator.getValues(), animator.getValues().length + 1);

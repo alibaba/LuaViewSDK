@@ -9,6 +9,7 @@ import android.webkit.URLUtil;
 
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
+import com.taobao.luaview.extend.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
@@ -32,12 +33,6 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * LuaView 实现类
  *
@@ -45,16 +40,13 @@ import java.util.Map;
  * @date 15/8/20
  */
 public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadcastReceiver.OnConnectionChangeListener {
-    //缓存的数据，需要在退出的时候清空
-    private Map<Class, List<WeakReference<CacheableObject>>> mCachedObjects;
+
+    //cache
+    private LuaCache mLuaCache;
 
     //需要渲染的Target
     private ILVViewGroup mRenderTarget;
 
-    //缓存数据管理器
-    public interface CacheableObject {
-        void onCacheClear();
-    }
 
     public interface CreatedCallback {
         void onCreated(LuaView luaView);
@@ -430,6 +422,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     private LuaView(Globals globals, LuaValue metaTable) {
         super(globals, metaTable, LuaValue.NIL);
+        this.mLuaCache = new LuaCache();
     }
 
     /**
@@ -495,14 +488,28 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        if (visibility == View.VISIBLE) {
+        if (visibility == View.VISIBLE) {//onShow
             NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
         }
         super.onWindowVisibilityChanged(visibility);
-        if (visibility != View.VISIBLE) {
+        if (visibility != View.VISIBLE) {//onHide
             NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
-            clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
+            if (mLuaCache != null) {
+                mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
+            }
         }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        onAttached();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        onDetached();
     }
 
     @Override
@@ -568,48 +575,20 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     //----------------------------------------cached object 管理-------------------------------------
 
-    /**
-     * 缓存对象
-     *
-     * @param type
-     * @param obj
-     */
-    public void cacheObject(Class type, CacheableObject obj) {
-        if (mCachedObjects == null) {
-            mCachedObjects = new HashMap<Class, List<WeakReference<CacheableObject>>>();
-        }
-        List<WeakReference<CacheableObject>> cache = mCachedObjects.get(type);
-        if (cache == null) {
-            cache = new ArrayList<WeakReference<CacheableObject>>();
-            mCachedObjects.put(type, cache);
-        }
+    private void onAttached() {
 
-        if (!cache.contains(obj)) {
-            cache.add(new WeakReference<CacheableObject>(obj));
-        }
     }
 
     /**
-     * 清理所有缓存的对象
-     * TODO 需要在onShow的时候恢复所有cache后的对象
+     * 在onDetached的时候清空cache
      */
-    private void clearCachedObjects() {
-        if (mCachedObjects != null && mCachedObjects.size() > 0) {
-            for (final Class type : mCachedObjects.keySet()) {
-                List<WeakReference<CacheableObject>> cache = mCachedObjects.get(type);
-                if (cache != null) {
-                    for (int i = 0; i < cache.size(); i++) {
-                        final WeakReference<CacheableObject> obj = cache.get(i);
-                        if (obj != null && obj.get() != null) {
-                            obj.get().onCacheClear();
-                        }
-                        cache.set(i, null);
-                    }
-                }
-                mCachedObjects.put(type, null);
-            }
-            mCachedObjects.clear();
+    private void onDetached() {
+        LuaCache.clear();
+    }
+
+    public void cacheObject(Class type, LuaCache.CacheableObject obj){
+        if(mLuaCache != null){
+            mLuaCache.cacheObject(type, obj);
         }
-        mCachedObjects = null;
     }
 }

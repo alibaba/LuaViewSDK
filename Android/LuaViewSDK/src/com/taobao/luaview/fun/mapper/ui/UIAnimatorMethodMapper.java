@@ -59,8 +59,14 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
     }
 
     public LuaValue translation(U udAnimator, Varargs varargs) {
-        udAnimator.ofProperty("translationX", DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 2)));
-        return udAnimator.ofProperty("translationY", DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 3)));
+        final Float translationX = LuaUtil.getFloat(varargs, 2);
+        final Float translationY = LuaUtil.getFloat(varargs, 3);
+        if (translationY != null) {
+            udAnimator.ofProperty("translationX", DimenUtil.dpiToPxF(translationX));
+            return udAnimator.ofProperty("translationY", DimenUtil.dpiToPxF(translationY));
+        } else {
+            return udAnimator.ofProperty("translationX", DimenUtil.dpiToPxF(translationX));
+        }
     }
 
     public LuaValue translationX(U udAnimator, Varargs varargs) {
