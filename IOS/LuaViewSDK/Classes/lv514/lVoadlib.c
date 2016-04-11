@@ -483,8 +483,10 @@ static int ll_require (lv_State *L) {
   lv_pushstring(L, name);  /* pass name as argument to module */
   int status = lv_pcall(L, 1, 1, 0);  /* run loaded module */
   /* error occured? */
-  if (status != 0)
+  if (status != 0) {
+    printf("require %s error: %s\n", name, lv_tostring(L, lv_gettop(L))); /* dirty code */
     return 0;  /* return nil */
+  }
   if (!lv_isnil(L, -1))  /* non-nil return? */
     lv_setfield(L, 2, name);  /* _LOADED[name] = returned value */
   lv_getfield(L, 2, name);
