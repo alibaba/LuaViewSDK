@@ -396,13 +396,6 @@ static int updatePoint(lv_State *L, NSString *keyPath) {
     return updateValue(L, keyPath, point);
 }
 
-static int updateSize(lv_State *L, NSString *keyPath) {
-    float w = lv_tonumber(L, 2), h = lv_tonumber(L, 3);
-    NSValue *size = [NSValue valueWithCGSize:CGSizeMake(w, h)];
-    
-    return updateValue(L, keyPath, size);
-}
-
 static int alpha(lv_State *L) {
     return updateFloat(L, @"opacity");
 }
@@ -691,7 +684,7 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
 }
 
 - (BOOL)isRunning {
-    return _animationKey;
+    return _animationKey != nil;
 }
 
 - (void)pause {

@@ -13,7 +13,6 @@ static const UInt32 kCDHeaderMagicNumber = 0x02014B50;
 static const UInt32 kCDHeaderFixedDataLength = 46;
 
 static const UInt32 kCDTrailerMagicNumber = 0x06054B50;
-static const UInt32 kCDTrailerFixedDataLength = 22;
 
 static const UInt32 kLFHeaderMagicNumber = 0x04034B50;
 static const UInt32 kLFHeaderFixedDataLength = 30;
@@ -32,13 +31,6 @@ static bool buffer_initWithData(struct LVZipBuffer *buffer, NSData *data, NSUInt
     return true;
 }
 
-static UInt8 buffer_readInt8(struct LVZipBuffer *buffer) {
-    UInt8 result = *(UInt8 *)(buffer->bytes + buffer->offset);
-    buffer->offset++;
-    
-    return result;
-}
-
 static UInt16 buffer_readInt16(struct LVZipBuffer *buffer) {
     UInt16 result = CFSwapInt16LittleToHost(*(UInt16 *)(buffer->bytes + buffer->offset));
     buffer->offset += 2;
@@ -49,13 +41,6 @@ static UInt16 buffer_readInt16(struct LVZipBuffer *buffer) {
 static UInt32 buffer_readInt32(struct LVZipBuffer *buffer) {
     UInt32 result = CFSwapInt32LittleToHost(*(UInt32 *)(buffer->bytes + buffer->offset));
     buffer->offset += 4;
-    
-    return result;
-}
-
-static UInt64 buffer_readInt64(struct LVZipBuffer *buffer) {
-    UInt64 result = CFSwapInt64LittleToHost(*(UInt64 *)(buffer->bytes + buffer->offset));
-    buffer->offset += 8;
     
     return result;
 }
@@ -405,8 +390,8 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
         return;
     }
     
-    NSUInteger location = entry.internalHeader.localHeaderOffset + lfheader_getLength(&lfHeader);
-    NSUInteger length = entry.internalHeader.compressedSize;
+    NSUInteger location = (NSUInteger)entry.internalHeader.localHeaderOffset + lfheader_getLength(&lfHeader);
+    NSUInteger length = (NSUInteger)entry.internalHeader.compressedSize;
     entry.data = [self.data subdataWithRange:NSMakeRange(location, length)];
 }
 
