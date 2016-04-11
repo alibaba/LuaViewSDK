@@ -1,81 +1,108 @@
 -- 简单动画
-btn = Button();
-btn.text("按钮");
-btn.xy(0, 0)
+startBtn = Button();
+startBtn.frame(10, 10, 60, 120)
 
-btn.callback(function()
-    Toast("btn1 clicked")
-    local anim = Animation().translationX(100).duration(2).delay(1);
-    btn.startAnimation(anim)
-end)
+resumeBtn = Button()
+resumeBtn.frame(80, 10, 60, 120)
 
-animator1 = Animation().alpha(0.3).duration(3);
-animator2 = Animation().translationX(100).duration(2).delay(1);
-animator3 = Animation().rotation(100).duration(2);
+stateLabel = Label()
+stateLabel.frame(150, 10, 60, 120)
 
-btn2 = Button();
-btn2.text("按钮2")
-btn2.xy(0, 100)
-btn2.callback(function()
-    btn2.startAnimation(animator1, animator2, animator3)
-    Toast("btn2 clicked")
-end)
+local function isRunning()
+    return translation.isRunning()
+end
 
+local function isPaused()
+    return translation.isPaused()
+end
 
-local anim1 = Animation().duration(2).scale(0.3, 0.5).alpha(1).callback({
-    onStart=function()
-        print("anim1-start")
+local function updateControlBtns()
+    local running, paused = isRunning(), isPaused()
+    print(running, paused)
+
+    startBtn.text(running and "Cancel" or "Start")
+    resumeBtn.enabled(running)
+    resumeBtn.text(paused and "Resume" or "Pause")
+end
+
+translation = Animation().translation(100, 100).duration(3).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
+    onStart = function()
+        stateLabel.text("Running")
     end,
-    onEnd=function()
-        print("anim1-end")
+    onCancel = function()
+        stateLabel.text("Canceled")
+        updateControlBtns()
+    end,
+    onEnd = function()
+        stateLabel.text("End")
+        updateControlBtns()
+    end,
+    onPause = function()
+        stateLabel.text("Paused")
+    end,
+    onResume = function()
+        stateLabel.text("Running")
+    end,
+})
+scale = Animation().scale(2, 0.5).duration(2).delay(1)
+
+local startAnimations, cancelAnimations, pauseAnimations, resumeAnimations
+
+function startAnimations()
+    if animationView then
+        animationView.removeFromSuper()
+    end
+    if isRunning() then
+        cancelAnimations()
+    end
+
+    animationView = View()
+    animationView.frame(50, 300, 100, 100)
+    animationView.backgroundColor(0xff0000, 1)
+
+    translation.with(animationView).start()
+    scale.with(animationView).start()
+end
+
+function cancelAnimations()
+    translation.cancel()
+    scale.cancel()
+end
+
+function pauseAnimations()
+    if isRunning() and not isPaused() then
+        translation.pause()
+        scale.pause()
+    end
+end
+
+function resumeAnimations()
+    if isRunning() and isPaused() then
+        translation.resume()
+        scale.resume()
+    end
+end
+
+startBtn.callback({
+    onClick = function()
+        if isRunning() then
+            cancelAnimations()
+        else
+            startAnimations()
+        end
+        updateControlBtns()
     end
 })
-local anim2 = Animation().delay(1).duration(2).translation(100, 150).alpha(0.5).interpolator(Interpolator.ANTICIPATE).callback({
-    onStart=function()
-        print("anim2-start")
-    end,
-    onEnd=function()
-        print("anim2-end")
-    end,
-    onCancel=function()
-        print("anim2-cancel")
-    end,
-    onPause=function()
-        print("anim2-pause")
-    end,
-    onResume=function()
-        print("anim2-resume")
+
+resumeBtn.callback({
+    onClick = function()
+        if isPaused() then
+            resumeAnimations()
+        else
+            pauseAnimations()
+        end
+        updateControlBtns()
     end
 })
 
-btn3 = View()
-btn3.backgroundColor(0xff0000)
-btn3.frame(0, 200, 50, 50)
-btn3.callback(function()
---    anim2.with(btn3)
---    anim2.start()
-    btn3.startAnimation(anim2)
-end)
-
-btn4 = Button()
-btn4.xy(50, 200)
-btn4.text("stop")
-btn4.onClick(function()
---    anim1.with(btn3)
---    anim1.start()
---    anim2.cancel()
-    print(btn3.x())
-    print(btn3.alpha())
-    btn3.stopAnimation()
-end)
-
-btn5 = Button()
-btn5.xy(150, 200)
-btn5.text("pause/resume")
-btn5.onClick(function()
-    if(anim2.isPaused())then
-        anim2.resume()
-    else
-        anim2.pause()
-    end
-end)
+updateControlBtns()
