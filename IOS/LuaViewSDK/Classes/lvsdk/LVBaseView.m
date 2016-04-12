@@ -967,7 +967,7 @@ static int adjustSize(lv_State *L) {
 
 #pragma -mark transformRoteAndScale
 
-typedef void (TransformSetter)(CATransform3D *, double);
+typedef void (TransformSetter)(CATransform3D *, CGFloat);
 typedef double (TransformGetter)(CATransform3D *);
 
 static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGetter getter) {
@@ -1033,7 +1033,7 @@ inline static double radianToDegree(double r) {
     return r / M_PI * 180;
 }
 
-static void transform3DSetDegreeRotation(CATransform3D *t, double v) {
+static void transform3DSetDegreeRotation(CATransform3D *t, CGFloat v) {
     double r = degreeToRadian(v);
     CATransform3DSetRotation(t, r);
 }
