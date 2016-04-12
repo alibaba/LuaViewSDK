@@ -16,6 +16,9 @@
 #define LV_PKGINFO_PROPERTY_TIME     @"url"  // url 作为时间戳的唯一标识, url变了就从新下发
 #define LV_PKGINFO_SHA256            @"sha256"
 
+extern NSString * const LV_PACKAGE_TIME_FILE_NAME;
+extern NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME;
+
 @class LVRSA;
 
 typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);

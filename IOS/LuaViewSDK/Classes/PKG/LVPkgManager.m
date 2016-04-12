@@ -11,8 +11,8 @@
 #import "LVRSA.h"
 #import "LVZipArchive.h"
 
-static NSString * const PACKAGE_TIME_FILE_NAME = @"___time___";
-static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
+NSString * const LV_PACKAGE_TIME_FILE_NAME = @"___time___";
+NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 
 @implementation LVPkgManager
 
@@ -38,7 +38,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 }
 
 +(NSString*) timefileNameOfPackage:(NSString *)packageName {
-    return [self pathForFileName:PACKAGE_TIME_FILE_NAME package:packageName];
+    return [self pathForFileName:LV_PACKAGE_TIME_FILE_NAME package:packageName];
 }
 
 +(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time{
@@ -46,7 +46,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     return [LVPkgManager writeFile:timeBytes
                        packageName:packageName
-                          fileName:PACKAGE_TIME_FILE_NAME];
+                          fileName:LV_PACKAGE_TIME_FILE_NAME];
 }
 
 
@@ -61,7 +61,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 }
 
 +(NSString*) timefileNameOfLocalPackage:(NSString *)packageName {
-    return [self pathForFileName:LOCAL_PACKAGE_TIME_FILE_NAME package:packageName];
+    return [self pathForFileName:LV_LOCAL_PACKAGE_TIME_FILE_NAME package:packageName];
 }
 
 +(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time{
@@ -69,7 +69,7 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
     return [LVPkgManager writeFile:timeBytes
                        packageName:packageName
-                          fileName:LOCAL_PACKAGE_TIME_FILE_NAME];
+                          fileName:LV_LOCAL_PACKAGE_TIME_FILE_NAME];
 }
 
 +(NSString*) timeOfLocalPackage:(NSString*)packageName {
@@ -124,8 +124,6 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
                 } else {
                     if( localMode ) {
                         [LVPkgManager wirteTimeForLocalPackage:packageName time:timeStr];
-                    } else {
-                        [LVPkgManager wirteTimeForPackage:packageName time:timeStr];
                     }
                 }
             }
