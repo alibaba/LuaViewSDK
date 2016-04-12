@@ -58,6 +58,12 @@ function startAnimations()
     animationView = View()
     animationView.frame(50, 300, 100, 100)
     animationView.backgroundColor(0xff0000, 1)
+    animationView.callback({
+        onClick = function()
+            print("scale:", animationView.scale())
+            print("translation:", animationView.translation())
+        end
+    })
 
     translation.with(animationView).start()
     scale.with(animationView).start()
