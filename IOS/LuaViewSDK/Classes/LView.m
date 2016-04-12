@@ -153,8 +153,8 @@
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
     if (!data || !data.length || !fileName || !fileName.length) {
-        LVError( @"running chars == NULL");
-        return @"running chars == NULL";
+        LVError( @"running chars == NULL, file:%@", fileName);
+        return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
     }
     
 #ifdef DEBUG
@@ -239,8 +239,8 @@ extern char g_debug_lua[];
         fileName = [NSString stringWithFormat:@"%d.lua",i];
     }
     if( data.length<=0 ){
-        LVError( @"running chars == NULL");
-        return @"running chars == NULL";
+        LVError(@"running chars == NULL, file:%@",fileName);
+        return [NSString stringWithFormat:@"running chars == NULL, file%@",fileName];
     }
 #ifdef DEBUG
     [self checkDeuggerIsRunningToLoadDebugModel];
