@@ -231,26 +231,82 @@ static int __tostring (lv_State *L) {
 
 @end
 
+void CATransform3DSetRotation(CATransform3D *t, CGFloat v) {
+    double scaleX = CATransform3DGetScaleX(t), scaleY = CATransform3DGetScaleY(t);
+    t->m11 = scaleX * cos(v);
+    t->m12 = scaleX * sin(v);
+    t->m21 = -(scaleY * sin(v));
+    t->m22 = scaleY * cos(v);
+}
+
+double CATransform3DGetRotation(CATransform3D *t) {
+    return atan2(t->m12, t->m11);
+}
+
 void CATransform3DSetScaleX(CATransform3D *t, CGFloat v) {
-    t->m11 = v;
+    double r = CATransform3DGetRotation(t);
+    t->m11 = v * cos(r);
+    t->m12 = v * sin(r);
+}
+
+double CATransform3DGetScaleX(CATransform3D *t) {
+    double r = CATransform3DGetRotation(t);
+    
+    if (t->m11 != 0) {
+        return t->m11 / cos(r);
+    } else if (t->m12 != 0) {
+        return t->m12 / sin(r);
+    } else {
+        return 0;
+    }
 }
 
 void CATransform3DSetScaleY(CATransform3D *t, CGFloat v) {
-    t->m22 = v;
+    double r = CATransform3DGetRotation(t);
+    t->m21 = -(v * sin(r));
+    t->m22 = v * cos(r);
+}
+
+double CATransform3DGetScaleY(CATransform3D *t) {
+    double r = CATransform3DGetRotation(t);
+
+    if (t->m21 != 0) {
+        return -(t->m21 / sin(r));
+    } else if (t->m22 != 0) {
+        return t->m22 / cos(r);
+    } else {
+        return 0;
+    }
 }
 
 void CATransform3DSetScaleZ(CATransform3D *t, CGFloat v) {
     t->m33 = v;
 }
 
+double CATransform3DGetScaleZ(CATransform3D *t) {
+    return t->m33;
+}
+
 void CATransform3DSetTranslationX(CATransform3D *t, CGFloat v) {
     t->m41 = v;
+}
+
+double CATransform3DGetTranslationX(CATransform3D *t) {
+    return t->m41;
 }
 
 void CATransform3DSetTranslationY(CATransform3D *t, CGFloat v) {
     t->m42 = v;
 }
 
+double CATransform3DGetTranslationY(CATransform3D *t) {
+    return t->m42;
+}
+
 void CATransform3DSetTranslationZ(CATransform3D *t, CGFloat v) {
     t->m43 = v;
+}
+
+double CATransform3DGetTranslationZ(CATransform3D *t) {
+    return t->m43;
 }

@@ -95,41 +95,6 @@
     }
 }
 
-// rotation
-- (CGFloat) lv_rotation{
-    return 0;
-}
-- (void) setLv_rotation:(CGFloat)f{
-}
-
-// rotationX
-- (CGFloat) lv_rotationX{
-    return 0;
-}
-- (void) setLv_rotationX:(CGFloat)f{
-}
-
-// rotationY
-- (CGFloat) lv_rotationY{
-    return 0;
-}
-- (void) setLv_rotationY:(CGFloat)f{
-}
-
-// scaleX
-- (CGFloat) lv_scaleX{
-    return 1.0;
-}
--(void) setLv_scaleX:(CGFloat)f{
-}
-
-// scaleY
-- (CGFloat) lv_scaleY{
-    return 1.0;
-}
--(void) setLv_scaleY:(CGFloat)f{
-}
-
 // align
 
 -(NSUInteger) lv_align{

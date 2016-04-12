@@ -23,10 +23,24 @@
 
 @end
 
+/* rotation和scale函数只适用于没有x、y轴rotation的矩阵 */
+
+extern void CATransform3DSetRotation(CATransform3D *t, CGFloat v); /* z-axis */
+
+extern double CATransform3DGetRotation(CATransform3D *t); /* returns 0 - 2 * M_PI */
+
 extern void CATransform3DSetScaleX(CATransform3D *t, CGFloat v);
 extern void CATransform3DSetScaleY(CATransform3D *t, CGFloat v);
 extern void CATransform3DSetScaleZ(CATransform3D *t, CGFloat v);
 
+extern double CATransform3DGetScaleX(CATransform3D *t);
+extern double CATransform3DGetScaleY(CATransform3D *t);
+extern double CATransform3DGetScaleZ(CATransform3D *t);
+
 extern void CATransform3DSetTranslationX(CATransform3D *t, CGFloat v);
 extern void CATransform3DSetTranslationY(CATransform3D *t, CGFloat v);
 extern void CATransform3DSetTranslationZ(CATransform3D *t, CGFloat v);
+
+extern double CATransform3DGetTranslationX(CATransform3D *t);
+extern double CATransform3DGetTranslationY(CATransform3D *t);
+extern double CATransform3DGetTranslationZ(CATransform3D *t);

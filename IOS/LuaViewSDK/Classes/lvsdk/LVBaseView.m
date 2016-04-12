@@ -966,58 +966,86 @@ static int adjustSize(lv_State *L) {
 }
 
 #pragma -mark transformRoteAndScale
-//static int transformRoteAndScale (lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    double angle = lv_tonumber(L, 2);
-//    double scaleX = 1;
-//    double scaleY = 1;
-//    if( user ){
-//        if( lv_isnumber(L, 3) ){
-//            scaleX = lv_tonumber(L, 3);
-//        } else {
-//            scaleX = 1;
-//        }
-//        if( lv_isnumber(L, 4) ){
-//            scaleY = lv_tonumber(L, 4);
-//        } else {
-//            scaleY = 1;
-//        }
-//        UIView* view = (__bridge UIView *)(user->view);
-//        CGAffineTransform tran1 = CGAffineTransformMakeScale(scaleX, scaleY);
-//        CGAffineTransform tran2 = CGAffineTransformMakeRotation(angle);
-//        view.transform = CGAffineTransformConcat(tran1, tran2);
-//        lv_pushvalue(L,1);
-//        return 1;
-//    }
-//    return 0;
-//}
 
-static CATransform3D transformRotationAndScale(UIView* view){
-    CATransform3D tX = CATransform3DMakeRotation(view.lv_rotationX, 1, 0, 0);
-    CATransform3D tY = CATransform3DMakeRotation(view.lv_rotationY, 0, 1, 0);
-    CATransform3D tZ = CATransform3DMakeRotation(view.lv_rotation, 0, 0, 1);
-    CATransform3D tScale = CATransform3DMakeScale(view.lv_scaleX, view.lv_scaleY, 0);
-    CATransform3D r = CATransform3DConcat(tScale, tX);
-    r = CATransform3DConcat(r, tY);
-    r = CATransform3DConcat(r, tZ);
-    return r;
-}
+typedef void (TransformSetter)(CATransform3D *, double);
+typedef double (TransformGetter)(CATransform3D *);
 
-static int rotationZ (lv_State *L) {
+static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGetter getter) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    CALayer* layer = ((__bridge UIView *)(user->object)).layer;
+    
     if( user ){
-        UIView* view = (__bridge UIView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            double angle = lv_tonumber(L, 2);
-            view.lv_rotation = angle;
-            view.layer.transform = transformRotationAndScale(view);
-            return 0;
+        if ( lv_gettop(L) > 1 ) {
+            double x = lv_tonumber(L, 2);
+            CATransform3D t = layer.transform;
+            setter(&t, x);
+            
+            layer.transform = t;
+            
+            lv_pop(L, 1);
+            return 1;
         } else {
-            lv_pushnumber(L, view.lv_rotationX);
+            CATransform3D t = layer.transform;
+            double x = getter(&t);
+            
+            lv_pushnumber(L, x);
             return 1;
         }
     }
     return 0;
+}
+
+static int transformFuncTwoArg(lv_State *L,
+                                 TransformSetter xsetter, TransformSetter ysetter,
+                                 TransformGetter xgetter, TransformGetter ygetter) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    CALayer* layer = ((__bridge UIView *)(user->object)).layer;
+    
+    if( user ){
+        int argNum = lv_gettop(L);
+        if ( argNum > 1 ) {
+            double x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
+            CATransform3D t = layer.transform;
+            xsetter(&t, x);
+            ysetter(&t, y);
+            
+            layer.transform = t;
+            
+            lv_pop(L, 1);
+            return 1;
+        } else {
+            CATransform3D t = layer.transform;
+            double x = xgetter(&t), y = ygetter(&t);
+            
+            lv_pushnumber(L, x);
+            lv_pushnumber(L, y);
+            return 2;
+        }
+    }
+    return 0;
+}
+
+inline static double degreeToRadian(double d) {
+    return d * M_PI / 180;
+}
+
+inline static double radianToDegree(double r) {
+    return r / M_PI * 180;
+}
+
+static void transform3DSetDegreeRotation(CATransform3D *t, double v) {
+    double r = degreeToRadian(v);
+    CATransform3DSetRotation(t, r);
+}
+
+static double transform3DGetDegreeRotation(CATransform3D *t) {
+    double r = CATransform3DGetRotation(t);
+    return radianToDegree(r);
+}
+
+static int rotationZ (lv_State *L) {
+    return transformFuncOneArg(L, transform3DSetDegreeRotation,
+                               transform3DGetDegreeRotation);
 }
 
 static int rotationX (lv_State *L) {
@@ -1025,12 +1053,14 @@ static int rotationX (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double angle = lv_tonumber(L, 2);
-            view.lv_rotationX = angle;
-            view.layer.transform = transformRotationAndScale(view);
-            return 0;
+            double angle = degreeToRadian(lv_tonumber(L, 2));
+            view.layer.transform = CATransform3DMakeRotation(angle, 1, 0, 0);
+            
+            lv_pop(L, 1);
+            return 1;
         } else {
-            lv_pushnumber(L, view.lv_rotationX);
+            double angle = [[view.layer valueForKeyPath:@"transform.rotation.x"] doubleValue];
+            lv_pushnumber(L, angle);
             return 1;
         }
     }
@@ -1042,12 +1072,14 @@ static int rotationY (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double angle = lv_tonumber(L, 2);
-            view.lv_rotationY = angle;
-            view.layer.transform = transformRotationAndScale(view);
-            return 0;
+            double angle = degreeToRadian(lv_tonumber(L, 2));
+            view.layer.transform = CATransform3DMakeRotation(angle, 0, 1, 0);
+            
+            lv_pop(L, 1);
+            return 1;
         } else {
-            lv_pushnumber(L, view.lv_rotationY);
+            double angle = [[view.layer valueForKeyPath:@"transform.rotation.y"] doubleValue];
+            lv_pushnumber(L, angle);
             return 1;
         }
     }
@@ -1055,63 +1087,32 @@ static int rotationY (lv_State *L) {
 }
 
 static int scale (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->object);
-        int argNum = lv_gettop(L);
-        if ( argNum >=2 ) {
-            double scaleX = lv_tonumber(L, 2);
-            view.lv_scaleX = scaleX;
-            if( argNum>=3 ) {
-                double scaleY = lv_tonumber(L, 3);
-                view.lv_scaleY = scaleY;
-            }
-            CGAffineTransform tran1 = CGAffineTransformMakeScale(view.lv_scaleX, view.lv_scaleY);
-            CGAffineTransform tran2 = CGAffineTransformMakeRotation(view.lv_rotation);
-            view.transform = CGAffineTransformConcat(tran1, tran2);
-            lv_pushvalue(L,1);
-            return 1;
-        } else {
-            lv_pushnumber(L, view.lv_scaleX);
-            lv_pushnumber(L, view.lv_scaleY);
-            return 2;
-        }
+    if (lv_gettop(L) == 2) {
+        lv_pushnumber(L, lv_tonumber(L, 2));
     }
-    return 0;
+    return transformFuncTwoArg(L, CATransform3DSetScaleX, CATransform3DSetScaleY,
+                                 CATransform3DGetScaleX, CATransform3DGetScaleY);
 }
 
 static int scaleX (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->object);
-        if ( lv_gettop(L)>=2 ) {
-            double scaleX = lv_tonumber(L, 2);
-            view.lv_scaleX = scaleX;
-            view.layer.transform = transformRotationAndScale(view);
-            return 0;
-        } else {
-            lv_pushnumber(L, view.lv_scaleX);
-            return 1;
-        }
-    }
-    return 0;
+    return transformFuncOneArg(L, CATransform3DSetScaleX, CATransform3DGetScaleX);
 }
 
 static int scaleY (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        UIView* view = (__bridge UIView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            double scaleY = lv_tonumber(L, 2);
-            view.lv_scaleY = scaleY;
-            view.layer.transform = transformRotationAndScale(view);
-            return 0;
-        } else {
-            lv_pushnumber(L, view.lv_scaleY);
-            return 1;
-        }
-    }
-    return 0;
+    return transformFuncOneArg(L, CATransform3DSetScaleY, CATransform3DGetScaleY);
+}
+
+static int translation (lv_State *L) {
+    return transformFuncTwoArg(L, CATransform3DSetTranslationX, CATransform3DSetTranslationY,
+                                 CATransform3DGetTranslationX, CATransform3DGetTranslationY);
+}
+
+static int translationX (lv_State *L) {
+    return transformFuncOneArg(L, CATransform3DSetTranslationX, CATransform3DGetTranslationX);
+}
+
+static int translationY (lv_State *L) {
+    return transformFuncOneArg(L, CATransform3DSetTranslationY, CATransform3DGetTranslationY);
 }
 
 static int transform3D (lv_State *L) {
@@ -1436,6 +1437,10 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"scale", scale },
     {"scaleX", scaleX },
     {"scaleY", scaleY },
+    
+    {"translation", translation },
+    {"translationX", translationX },
+    {"translationY", translationY },
     
     {"anchorPoint",     anchorPoint },
     
