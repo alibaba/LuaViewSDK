@@ -103,33 +103,37 @@ static NSString * const LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 +(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime localMode:(BOOL) localMode{
     NSString *path = [self rootDirectoryOfPackage:packageName];
     if( pkgData && [LVUtil createPath:path] ){
+        LVZipArchive *archive = [LVZipArchive archiveWithData:pkgData];
         
         if( checkTime ){
-            NSString *mainFile = [self pathForFileName:@"main.lv" package:packageName];
-            NSDictionary *attrs = [[NSFileManager defaultManager]
-                                   attributesOfItemAtPath:mainFile error:NULL];
-            NSDate *date = attrs[NSFileModificationDate];
-            NSString *timeStr = [NSString stringWithFormat:@"%lld", (long long)([date timeIntervalSince1970] * 1000)];
-            
-            NSString* oldTime = nil;
-            if( localMode ) {
-                oldTime = [LVPkgManager timeOfLocalPackage:packageName];
-            } else {
-                oldTime = [LVPkgManager timeOfPackage:packageName];
-            }
-            if( timeStr.length>0 && oldTime.length>0 && [timeStr isEqualToString:oldTime] ){
-                LVLog(@" Not Need unpackage, %@, %@",packageName,timeStr);
-                return NO;
-            } else {
+            NSDate *date = [archive.entries.firstObject lastModDate];
+            if (date != nil) {
+                long long ms = (long long)([date timeIntervalSince1970] * 1000);
+                NSString *timeStr = [NSString stringWithFormat:@"%lld", ms];
+                
+                NSString* oldTime = nil;
                 if( localMode ) {
-                    [LVPkgManager wirteTimeForLocalPackage:packageName time:timeStr];
+                    oldTime = [LVPkgManager timeOfLocalPackage:packageName];
                 } else {
-                    [LVPkgManager wirteTimeForPackage:packageName time:timeStr];
+                    oldTime = [LVPkgManager timeOfPackage:packageName];
+                }
+                
+                if( timeStr.length>0 && oldTime.length>0 && [timeStr isEqualToString:oldTime] ){
+                    LVLog(@" Not Need unpackage, %@, %@",packageName,timeStr);
+                    return NO;
+                } else {
+                    if( localMode ) {
+                        [LVPkgManager wirteTimeForLocalPackage:packageName time:timeStr];
+                    } else {
+                        [LVPkgManager wirteTimeForPackage:packageName time:timeStr];
+                    }
                 }
             }
         }
         
-        [LVZipArchive unzipData:pkgData toDirectory:path];
+        [archive unzipToDirectory:path];
+        
+        return YES;
     }
     return NO;
 }
