@@ -1288,6 +1288,93 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return varargsOf(valueOf(view.getScaleX()), valueOf(view.getScaleY()));
     }
 
+    public Varargs scaleX(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setScaleX(view, varargs);
+        } else {
+            return getScaleX(view, varargs);
+        }
+    }
+
+    public LuaValue setScaleX(U view, Varargs varargs) {
+        final float scaleX = LuaUtil.getFloat(varargs, 0f, 2);
+        return view.setScaleX(scaleX);
+    }
+
+    public Varargs getScaleX(U view, Varargs varargs) {
+        return valueOf(view.getScaleX());
+    }
+
+    public Varargs scaleY(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setScaleY(view, varargs) ;
+        } else {
+            return getScaleY(view, varargs);
+        }
+    }
+
+    public LuaValue setScaleY(U view, Varargs varargs) {
+        final float scaleY = LuaUtil.getFloat(varargs, 0f, 2);
+        return view.setScaleY(scaleY);
+    }
+
+    public Varargs getScaleY(U view, Varargs varargs) {
+        return valueOf(view.getScaleY());
+    }
+
+    public Varargs translation(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setTranslation(view, varargs);
+        } else {
+            return getTranslation(view, varargs);
+        }
+    }
+
+    public LuaValue setTranslation(U view, Varargs varargs) {
+        final float translationX = LuaUtil.getFloat(varargs, 0f, 2);
+        final float translationY = LuaUtil.getFloat(varargs, 0f, 3);
+        return view.setTranslation(DimenUtil.dpiToPx(translationX), DimenUtil.dpiToPx(translationY));
+    }
+
+    public Varargs getTranslation(U view, Varargs varargs) {
+        final float translationX = view.getTranslationX();
+        final float translationY = view.getTranslationY();
+        return varargsOf(valueOf(DimenUtil.pxToDpi(translationX)), valueOf(DimenUtil.pxToDpi(translationY)));
+    }
+
+    public Varargs translationX(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setTranslationX(view, varargs);
+        } else {
+            return getTranslationX(view, varargs);
+        }
+    }
+
+    public LuaValue setTranslationX(U view, Varargs varargs) {
+        final float translationX = LuaUtil.getFloat(varargs, 0f, 2);
+        return view.setTranslationX(DimenUtil.dpiToPx(translationX));
+    }
+
+    public Varargs getTranslationX(U view, Varargs varargs) {
+        return valueOf(DimenUtil.pxToDpi(view.getTranslationX()));
+    }
+
+    public Varargs translationY(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setTranslationY(view, varargs);
+        } else {
+            return getTranslationY(view, varargs);
+        }
+    }
+
+    public LuaValue setTranslationY(U view, Varargs varargs) {
+        final float translationY = LuaUtil.getFloat(varargs, 0f, 2);
+        return view.setTranslationY(DimenUtil.dpiToPx(translationY));
+    }
+
+    public Varargs getTranslationY(U view, Varargs varargs) {
+        return valueOf(DimenUtil.pxToDpi(view.getTranslationY()));
+    }
 
     /**
      * 将view设置到前台

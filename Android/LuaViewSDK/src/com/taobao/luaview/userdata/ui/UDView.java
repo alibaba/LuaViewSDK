@@ -794,12 +794,61 @@ public class UDView<T extends View> extends BaseUserdata {
         return this;
     }
 
+    public UDView setScaleX(float scaleX) {
+        final View view = getView();
+        if (view != null) {
+            view.setScaleX(scaleX);
+        }
+        return this;
+    }
+
     public float getScaleX() {
         return getView() != null ? getView().getScaleX() : 0f;
     }
 
+    public UDView setScaleY(float scaleY) {
+        final View view = getView();
+        if (view != null) {
+            view.setScaleY(scaleY);
+        }
+        return this;
+    }
+
     public float getScaleY() {
         return getView() != null ? getView().getScaleY() : 0f;
+    }
+
+    public UDView setTranslation(float translationX, float translationY) {
+        final View view = getView();
+        if (view != null) {
+            view.setTranslationX(translationX);
+            view.setTranslationY(translationY);
+        }
+        return this;
+    }
+
+    public UDView setTranslationX(float translationX) {
+        final View view = getView();
+        if (view != null) {
+            view.setTranslationX(translationX);
+        }
+        return this;
+    }
+
+    public float getTranslationX() {
+        return getView() != null ? getView().getTranslationX() : 0f;
+    }
+
+    public UDView setTranslationY(float translationY) {
+        final View view = getView();
+        if (view != null) {
+            view.setTranslationY(translationY);
+        }
+        return this;
+    }
+
+    public float getTranslationY() {
+        return getView() != null ? getView().getTranslationY() : 0f;
     }
 
     /**
