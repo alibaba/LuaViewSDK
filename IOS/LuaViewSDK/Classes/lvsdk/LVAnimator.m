@@ -556,8 +556,6 @@ static int value(lv_State *L) {
     }
 }
 
-
-
 - (CAAnimation *)buildAnimation {
     CAAnimation *animation = nil;
     CALayer *layer = self.target.layer;
@@ -685,6 +683,8 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
         [self syncAnimatingValue:layer];
         [layer removeAnimationForKey:_animationKey];
     }
+    // call onEnd, same as Android SDK
+    [self callback:kLVAnimatorCallbackOnEnd];
 }
 
 - (BOOL)isRunning {
