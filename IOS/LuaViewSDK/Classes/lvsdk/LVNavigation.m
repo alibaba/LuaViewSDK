@@ -151,6 +151,7 @@ static int setStatusBarStyle (lv_State *L) {
         {"right", setRightButton},
         {"background", setBackground},
         {"statusBarStyle", setStatusBarStyle},
+        {LUAVIEW_SYS_TABLE_KEY, setBackground},
         {NULL, NULL}
     };
     lvL_openlib(L, "Navigation", fs, 0);

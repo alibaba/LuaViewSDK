@@ -86,6 +86,7 @@ static int db_set (lv_State *L) {
     const struct lvL_reg functions [] = {
         {"get",  db_get},
         {"set",  db_set},
+        {LUAVIEW_SYS_TABLE_KEY, db_set},
         {NULL,   NULL}
     };
     lvL_openlib(l, "DB", functions, 0);
