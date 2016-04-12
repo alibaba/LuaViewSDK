@@ -1479,6 +1479,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     // getNativeView
     {"getNativeView", getNativeView},
+    {"nativeView", getNativeView},
     {NULL, NULL}
 };
 
