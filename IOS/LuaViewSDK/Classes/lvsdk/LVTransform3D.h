@@ -27,7 +27,7 @@
 
 extern void CATransform3DSetRotation(CATransform3D *t, CGFloat v); /* z-axis */
 
-extern double CATransform3DGetRotation(CATransform3D *t); /* returns 0 - 2 * M_PI */
+extern double CATransform3DGetRotation(CATransform3D *t); /* returns [-M_PI, M_PI] */
 
 extern void CATransform3DSetScaleX(CATransform3D *t, CGFloat v);
 extern void CATransform3DSetScaleY(CATransform3D *t, CGFloat v);
