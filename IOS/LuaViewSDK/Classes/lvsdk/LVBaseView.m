@@ -780,11 +780,17 @@ static int alpha (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if ( lv_gettop(L)>=2 ) {
+            CALayer* layer = view.layer;
+
             double alpha = lv_tonumber(L, 2);// 2
-            view.alpha = alpha;
-            return 0;
+            layer.opacity = alpha;
+            
+            lv_pop(L, 1);
+            return 1;
         } else {
-            float alpha = view.alpha;
+            CALayer* layer = view.layer.presentationLayer ?: view.layer;
+
+            float alpha = layer.opacity;
             lv_pushnumber(L, alpha );
             return 1;
         }
@@ -972,10 +978,12 @@ typedef double (TransformGetter)(CATransform3D *);
 
 static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGetter getter) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    CALayer* layer = ((__bridge UIView *)(user->object)).layer;
+    UIView *view = (__bridge UIView *)(user->object);
     
     if( user ){
         if ( lv_gettop(L) > 1 ) {
+            CALayer* layer = view.layer;
+
             double x = lv_tonumber(L, 2);
             CATransform3D t = layer.transform;
             setter(&t, x);
@@ -985,6 +993,8 @@ static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGet
             lv_pop(L, 1);
             return 1;
         } else {
+            CALayer* layer = view.layer.presentationLayer ?: view.layer;
+
             CATransform3D t = layer.transform;
             double x = getter(&t);
             
@@ -999,11 +1009,13 @@ static int transformFuncTwoArg(lv_State *L,
                                  TransformSetter xsetter, TransformSetter ysetter,
                                  TransformGetter xgetter, TransformGetter ygetter) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    CALayer* layer = ((__bridge UIView *)(user->object)).layer;
+    UIView *view = (__bridge UIView *)(user->object);
     
     if( user ){
         int argNum = lv_gettop(L);
         if ( argNum > 1 ) {
+            CALayer* layer = view.layer;
+
             double x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
             CATransform3D t = layer.transform;
             xsetter(&t, x);
@@ -1014,6 +1026,8 @@ static int transformFuncTwoArg(lv_State *L,
             lv_pop(L, 1);
             return 1;
         } else {
+            CALayer* layer = view.layer.presentationLayer ?: view.layer;
+
             CATransform3D t = layer.transform;
             double x = xgetter(&t), y = ygetter(&t);
             
@@ -1053,13 +1067,17 @@ static int rotationX (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
+            CALayer *layer = view.layer;
+
             double angle = degreeToRadian(lv_tonumber(L, 2));
-            view.layer.transform = CATransform3DMakeRotation(angle, 1, 0, 0);
+            layer.transform = CATransform3DMakeRotation(angle, 1, 0, 0);
             
             lv_pop(L, 1);
             return 1;
         } else {
-            double angle = [[view.layer valueForKeyPath:@"transform.rotation.x"] doubleValue];
+            CALayer *layer = view.layer.presentationLayer ?: view.layer;
+            
+            double angle = [[layer valueForKeyPath:@"transform.rotation.x"] doubleValue];
             lv_pushnumber(L, angle);
             return 1;
         }
@@ -1072,13 +1090,17 @@ static int rotationY (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
+            CALayer *layer = view.layer;
+
             double angle = degreeToRadian(lv_tonumber(L, 2));
-            view.layer.transform = CATransform3DMakeRotation(angle, 0, 1, 0);
+            layer.transform = CATransform3DMakeRotation(angle, 0, 1, 0);
             
             lv_pop(L, 1);
             return 1;
         } else {
-            double angle = [[view.layer valueForKeyPath:@"transform.rotation.y"] doubleValue];
+            CALayer *layer = view.layer.presentationLayer ?: view.layer;
+
+            double angle = [[layer valueForKeyPath:@"transform.rotation.y"] doubleValue];
             lv_pushnumber(L, angle);
             return 1;
         }
@@ -1122,12 +1144,18 @@ static int transform3D (lv_State *L) {
         if ( lv_gettop(L)>=2 ) {
             LVUserDataInfo* userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
             if ( LVIsType(userdata, Transform3D)) {
+                CALayer *layer = view.layer;
+
                 LVTransform3D* tran = (__bridge LVTransform3D *)(userdata->object);
-                view.layer.transform = tran.transform;
-                return 0;
+                layer.transform = tran.transform;
+                
+                lv_pop(L, 1);
+                return 1;
             }
         } else {
-            CATransform3D t = view.layer.transform;
+            CALayer *layer = view.layer.presentationLayer ?: view.layer;
+
+            CATransform3D t = layer.transform;
             [LVTransform3D pushTransform3D:L transform3d:t];
             return 1;
         }

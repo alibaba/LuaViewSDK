@@ -558,7 +558,7 @@ static int value(lv_State *L) {
 
 - (CAAnimation *)buildAnimation {
     CAAnimation *animation = nil;
-    CALayer *layer = self.target.layer;
+    CALayer *layer = self.target.layer.presentationLayer ?: self.target.layer;
     
     if ([self.keyPath isEqualToString:@"transform.scale"]) {
         CGPoint point = [self.toValue CGPointValue];
@@ -678,13 +678,14 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
         _pausedAnimation = nil;
         _timeOffset = 0.0;
         [self callback:kLVAnimatorCallbackOnCancel];
+        
+        // call onEnd, same as Android SDK
+        [self callback:kLVAnimatorCallbackOnEnd];
     } else {
         CALayer *layer = self.target.layer;
         [self syncAnimatingValue:layer];
         [layer removeAnimationForKey:_animationKey];
     }
-    // call onEnd, same as Android SDK
-    [self callback:kLVAnimatorCallbackOnEnd];
 }
 
 - (BOOL)isRunning {
@@ -738,7 +739,12 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
         _pausedAnimation = nil;
         _timeOffset = 0.0;
         
-        [self callback:flag ? kLVAnimatorCallbackOnEnd : kLVAnimatorCallbackOnCancel];
+        if (!flag) {
+            [self callback:kLVAnimatorCallbackOnCancel];
+        }
+        
+        // call onEnd, same as Android SDK
+        [self callback:kLVAnimatorCallbackOnEnd];
     }
 }
 
