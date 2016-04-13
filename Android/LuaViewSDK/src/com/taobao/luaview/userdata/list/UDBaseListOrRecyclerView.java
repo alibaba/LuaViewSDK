@@ -4,8 +4,9 @@ import android.graphics.Point;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.bumptech.glide.Glide;
 import com.taobao.luaview.extend.SparseCache;
+import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.AndroidUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -527,10 +528,14 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     protected void updateAllChildScrollState(ViewGroup view, int scrollState) {
         if (this.mLazyLoad && view != null) {
             if (scrollState >= AbsListView.OnScrollListener.SCROLL_STATE_FLING) {//手滑动的时候
-                Glide.with(getContext()).pauseRequests();
+                final ImageProvider provider = LuaView.getImageProvider();
+                if (provider != null) {
+                    provider.pauseRequests(view, getContext());
+                }
             } else {
-                if (Glide.with(getContext()).isPaused()) {
-                    Glide.with(getContext()).resumeRequests();
+                final ImageProvider provider = LuaView.getImageProvider();
+                if (provider != null) {
+                    provider.resumeRequests(view, getContext());
                 }
             }
         }

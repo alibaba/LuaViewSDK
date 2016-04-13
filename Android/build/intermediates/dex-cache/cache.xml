@@ -2,24 +2,10 @@
 <items version="2" >
 
     <item
-        jar="/Users/song/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/jsr305-3.0.0-7d27d2eb9de9ce01fb5f5aed62f72c6e6f61426b.jar" />
-    </item>
-    <item
-        jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/libs/infer-annotations-1.5.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="0b5e946b76cdb1f00b18f2981e7d997141a66c9f">
-        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/infer-annotations-1.5-d940028e8571fb9b33933f6a62644c9992d9afa6.jar" />
-    </item>
-    <item
         jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="c5044e4b2bcad7a668afd9a429fa5b270a209336">
+        sha1="782e17902182c5ca24e08894f09c99d5a6a7092f">
         <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-e97368caa11d3df2fb363f5e3a2504bef3be0ecd.jar" />
     </item>
 

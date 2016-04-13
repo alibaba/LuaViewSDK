@@ -8,7 +8,7 @@
  */
 package com.facebook.csslayout;
 
-import javax.annotation.Nullable;
+import com.taobao.luaview.annotations.Nullable;
 
 import java.util.Arrays;
 

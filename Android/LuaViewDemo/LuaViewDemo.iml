@@ -80,7 +80,6 @@
     <orderEntry type="library" exported="" name="jakarta-regexp-1.4" level="project" />
     <orderEntry type="library" exported="" name="bcel-5.2" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
-    <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
     <orderEntry type="module" module-name="LuaViewSDK" exported="" />
   </component>
 </module>

@@ -1,41 +1,34 @@
-int attr lvAnimResId 0x7f010003
-int attr lvDefaultImage 0x7f010006
-int attr lvErrorImage 0x7f010007
-int attr lvInnerShadowColor 0x7f010009
-int attr lvInnerShadowWidth 0x7f010008
-int attr lvRoundCorners 0x7f010005
-int attr lvShowAsCircle 0x7f010004
-int attr lv_centered1 0x7f010010
-int attr lv_clipPadding 0x7f01001b
-int attr lv_fadeDelay 0x7f010027
-int attr lv_fadeLength 0x7f010028
-int attr lv_fades 0x7f010026
-int attr lv_fillColor 0x7f010014
-int attr lv_footerColor 0x7f01001c
-int attr lv_footerIndicatorHeight 0x7f01001f
-int attr lv_footerIndicatorStyle 0x7f01001e
-int attr lv_footerIndicatorUnderlinePadding 0x7f010020
-int attr lv_footerLineHeight 0x7f01001d
-int attr lv_footerPadding 0x7f010021
-int attr lv_gapWidth 0x7f01001a
-int attr lv_linePosition 0x7f010022
-int attr lv_lineWidth 0x7f010019
-int attr lv_pageColor 0x7f010015
-int attr lv_radius1 0x7f010016
-int attr lv_selectedBold 0x7f010023
-int attr lv_selectedColor 0x7f010011
-int attr lv_snap 0x7f010017
-int attr lv_strokeColor 0x7f010018
-int attr lv_strokeWidth 0x7f010012
-int attr lv_titlePadding 0x7f010024
-int attr lv_topPadding 0x7f010025
-int attr lv_unselectedColor 0x7f010013
-int attr lv_vpiCirclePageIndicatorStyle 0x7f01000a
-int attr lv_vpiIconPageIndicatorStyle 0x7f01000b
-int attr lv_vpiLinePageIndicatorStyle 0x7f01000c
-int attr lv_vpiTabPageIndicatorStyle 0x7f01000e
-int attr lv_vpiTitlePageIndicatorStyle 0x7f01000d
-int attr lv_vpiUnderlinePageIndicatorStyle 0x7f01000f
+int attr lv_centered1 0x7f010009
+int attr lv_clipPadding 0x7f010014
+int attr lv_fadeDelay 0x7f010020
+int attr lv_fadeLength 0x7f010021
+int attr lv_fades 0x7f01001f
+int attr lv_fillColor 0x7f01000d
+int attr lv_footerColor 0x7f010015
+int attr lv_footerIndicatorHeight 0x7f010018
+int attr lv_footerIndicatorStyle 0x7f010017
+int attr lv_footerIndicatorUnderlinePadding 0x7f010019
+int attr lv_footerLineHeight 0x7f010016
+int attr lv_footerPadding 0x7f01001a
+int attr lv_gapWidth 0x7f010013
+int attr lv_linePosition 0x7f01001b
+int attr lv_lineWidth 0x7f010012
+int attr lv_pageColor 0x7f01000e
+int attr lv_radius1 0x7f01000f
+int attr lv_selectedBold 0x7f01001c
+int attr lv_selectedColor 0x7f01000a
+int attr lv_snap 0x7f010010
+int attr lv_strokeColor 0x7f010011
+int attr lv_strokeWidth 0x7f01000b
+int attr lv_titlePadding 0x7f01001d
+int attr lv_topPadding 0x7f01001e
+int attr lv_unselectedColor 0x7f01000c
+int attr lv_vpiCirclePageIndicatorStyle 0x7f010003
+int attr lv_vpiIconPageIndicatorStyle 0x7f010004
+int attr lv_vpiLinePageIndicatorStyle 0x7f010005
+int attr lv_vpiTabPageIndicatorStyle 0x7f010007
+int attr lv_vpiTitlePageIndicatorStyle 0x7f010006
+int attr lv_vpiUnderlinePageIndicatorStyle 0x7f010008
 int attr minTextSize 0x7f010000
 int attr precision 0x7f010001
 int attr sizeToFit 0x7f010002
@@ -116,15 +109,7 @@ int[] styleable AutofitTextView { 0x7f010000, 0x7f010001, 0x7f010002 }
 int styleable AutofitTextView_minTextSize 0
 int styleable AutofitTextView_precision 1
 int styleable AutofitTextView_sizeToFit 2
-int[] styleable LVBaseImageView { 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009 }
-int styleable LVBaseImageView_lvAnimResId 0
-int styleable LVBaseImageView_lvDefaultImage 3
-int styleable LVBaseImageView_lvErrorImage 4
-int styleable LVBaseImageView_lvInnerShadowColor 6
-int styleable LVBaseImageView_lvInnerShadowWidth 5
-int styleable LVBaseImageView_lvRoundCorners 2
-int styleable LVBaseImageView_lvShowAsCircle 1
-int[] styleable LVCirclePageIndicator { 0x010100c4, 0x010100d4, 0x7f010010, 0x7f010012, 0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018 }
+int[] styleable LVCirclePageIndicator { 0x010100c4, 0x010100d4, 0x7f010009, 0x7f01000b, 0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010, 0x7f010011 }
 int styleable LVCirclePageIndicator_android_background 1
 int styleable LVCirclePageIndicator_android_orientation 0
 int styleable LVCirclePageIndicator_lv_centered1 2
@@ -134,7 +119,7 @@ int styleable LVCirclePageIndicator_lv_radius1 6
 int styleable LVCirclePageIndicator_lv_snap 7
 int styleable LVCirclePageIndicator_lv_strokeColor 8
 int styleable LVCirclePageIndicator_lv_strokeWidth 3
-int[] styleable LVLinePageIndicator { 0x010100d4, 0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013, 0x7f010019, 0x7f01001a }
+int[] styleable LVLinePageIndicator { 0x010100d4, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f010012, 0x7f010013 }
 int styleable LVLinePageIndicator_android_background 0
 int styleable LVLinePageIndicator_lv_centered1 1
 int styleable LVLinePageIndicator_lv_gapWidth 6
@@ -142,7 +127,7 @@ int styleable LVLinePageIndicator_lv_lineWidth 5
 int styleable LVLinePageIndicator_lv_selectedColor 2
 int styleable LVLinePageIndicator_lv_strokeWidth 3
 int styleable LVLinePageIndicator_lv_unselectedColor 4
-int[] styleable LVTitlePageIndicator { 0x01010095, 0x01010098, 0x010100d4, 0x7f010011, 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025 }
+int[] styleable LVTitlePageIndicator { 0x01010095, 0x01010098, 0x010100d4, 0x7f01000a, 0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e }
 int styleable LVTitlePageIndicator_android_background 2
 int styleable LVTitlePageIndicator_android_textColor 1
 int styleable LVTitlePageIndicator_android_textSize 0
@@ -158,13 +143,13 @@ int styleable LVTitlePageIndicator_lv_selectedBold 12
 int styleable LVTitlePageIndicator_lv_selectedColor 3
 int styleable LVTitlePageIndicator_lv_titlePadding 13
 int styleable LVTitlePageIndicator_lv_topPadding 14
-int[] styleable LVUnderlinePageIndicator { 0x010100d4, 0x7f010011, 0x7f010026, 0x7f010027, 0x7f010028 }
+int[] styleable LVUnderlinePageIndicator { 0x010100d4, 0x7f01000a, 0x7f01001f, 0x7f010020, 0x7f010021 }
 int styleable LVUnderlinePageIndicator_android_background 0
 int styleable LVUnderlinePageIndicator_lv_fadeDelay 3
 int styleable LVUnderlinePageIndicator_lv_fadeLength 4
 int styleable LVUnderlinePageIndicator_lv_fades 2
 int styleable LVUnderlinePageIndicator_lv_selectedColor 1
-int[] styleable LVViewPagerIndicator { 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f }
+int[] styleable LVViewPagerIndicator { 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008 }
 int styleable LVViewPagerIndicator_lv_vpiCirclePageIndicatorStyle 0
 int styleable LVViewPagerIndicator_lv_vpiIconPageIndicatorStyle 1
 int styleable LVViewPagerIndicator_lv_vpiLinePageIndicatorStyle 2

@@ -77,8 +77,8 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup 
 
     //获取native view
     public View getNativeView() {
-        if (getUserdata() != null) {
-            return getUserdata().getView();
+        if (getChildCount() > 0 && getChildAt(0) != null) {
+            return getChildAt(0);
         }
         return null;
     }

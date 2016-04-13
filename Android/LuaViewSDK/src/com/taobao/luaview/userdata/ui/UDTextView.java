@@ -13,8 +13,9 @@ import org.luaj.vm2.LuaValue;
 
 /**
  * Label 数据封装
- * @author song
+ *
  * @param <T>
+ * @author song
  */
 public class UDTextView<T extends TextView> extends UDView<T> {
     private int mMaxLines = 1;
@@ -274,10 +275,7 @@ public class UDTextView<T extends TextView> extends UDView<T> {
     public UDTextView setMaxLines(int lines) {
         final T view = getView();
         if (view != null) {
-            mMaxLines = lines;
-            if (lines <= 0) {
-                mMaxLines = Integer.MAX_VALUE;
-            }
+            this.mMaxLines = lines <= 0 ? Integer.MAX_VALUE : lines;
             view.setMaxLines(mMaxLines);
         }
 

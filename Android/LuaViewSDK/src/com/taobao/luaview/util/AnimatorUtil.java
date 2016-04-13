@@ -165,6 +165,9 @@ public class AnimatorUtil {
      * @return
      */
     public static boolean isRunning(Animator animator) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            LogUtil.d(animator.isStarted(), animator.isPaused(), animator.isRunning());
+        }
         return animator != null && animator.isRunning();
     }
 

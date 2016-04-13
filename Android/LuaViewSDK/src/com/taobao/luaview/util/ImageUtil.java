@@ -6,11 +6,9 @@ import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.taobao.luaview.global.LuaResourceFinder;
+import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.view.imageview.BaseImageView;
 
 import java.util.HashMap;
@@ -51,23 +49,10 @@ public class ImageUtil {
     public static void fetch(Context context, final LuaResourceFinder finder, final String url, final BaseImageView.LoadCallback callback) {
         if (context != null && !TextUtils.isEmpty(url)) {
             if (URLUtil.isNetworkUrl(url)) {//network
-                Glide.with(context).load(url).listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        if (callback != null) {
-                            callback.onLoadResult(null);
-                        }
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        if (callback != null) {
-                            callback.onLoadResult(resource);
-                        }
-                        return false;
-                    }
-                }).preload();
+                final ImageProvider provider = LuaView.getImageProvider();
+                if (provider != null) {
+                    provider.preload(context, url, callback);
+                }
             } else {//local
                 if (callback != null && finder != null) {
                     callback.onLoadResult(finder.findDrawable(url));
@@ -89,21 +74,16 @@ public class ImageUtil {
             final Map<String, Drawable> result = new HashMap<String, Drawable>();
             for (final String url : urls) {
                 if (URLUtil.isNetworkUrl(url)) {//network
-                    Glide.with(context).load(url).listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            result.put(url, null);
-                            callCallback(count, callback, result);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            result.put(url, resource);
-                            callCallback(count, callback, result);
-                            return false;
-                        }
-                    }).preload();
+                    final ImageProvider imageProvider = LuaView.getImageProvider();
+                    if (imageProvider != null) {
+                        imageProvider.preload(context, url, new BaseImageView.LoadCallback() {
+                            @Override
+                            public void onLoadResult(Drawable drawable) {
+                                result.put(url, drawable);
+                                callCallback(count, callback, result);
+                            }
+                        });
+                    }
                 } else {//TODO 优化成异步
                     if (finder != null) {
                         result.put(url, finder.findDrawable(url));
