@@ -148,6 +148,9 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         
         {"pageColor",     pageIndicatorTintColor },
         {"currentPageColor",     currentPageIndicatorTintColor },
+        
+        {"unselectedColor",     pageIndicatorTintColor },
+        {"selectedColor",     currentPageIndicatorTintColor },
         {NULL, NULL}
     };
     
