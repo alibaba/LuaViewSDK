@@ -7,6 +7,7 @@
 //
 
 #import "LVZipArchive.h"
+#import "LVUtil.h"
 #import <zlib.h>
 
 static const UInt32 kCDHeaderMagicNumber = 0x02014B50;
@@ -335,6 +336,7 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
     
     NSFileManager *fm = [NSFileManager new];
     if (![fm createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL]) {
+        LVLog(@"create directory(%@) error!", path);
         return NO;
     }
     
@@ -343,36 +345,68 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
     NSDictionary *attrs = nil;
     NSData *inflatedData = nil;
     NSString *fileName = nil;
+    NSError *error = nil;
     for (LVZipEntry *entry in self.entries) {
+        error = nil;
         attrs = [self attributes:entry];
         inflatedData = entry.inflatedData;
         fileName = entry.fileName;
-
+        
         if ([entry isDirectory]) {
-            [fm createDirectoryAtPath:fileName
-          withIntermediateDirectories:YES
-                           attributes:attrs
-                                error:NULL];
+            BOOL r = [fm createDirectoryAtPath:fileName
+                   withIntermediateDirectories:YES
+                                    attributes:attrs
+                                         error:&error];
+            if (!r) {
+                LVLog(@"create directory(%@) entry error:", fileName, error);
+                return NO;
+            }
         } else if ([entry isSymlink]) {
             NSString *dest = [[NSString alloc] initWithData:inflatedData
                                                    encoding:NSUTF8StringEncoding];
-            [fm createSymbolicLinkAtPath:fileName
-                     withDestinationPath:dest
-                                   error:nil];
+            BOOL r = [fm createSymbolicLinkAtPath:fileName
+                              withDestinationPath:dest
+                                            error:&error];
+            if (!r) {
+                LVLog(@"create symlink(%@) entry error:", fileName, error);
+                return NO;
+            }
             [fm setAttributes:attrs ofItemAtPath:fileName error:NULL];
         } else {
             NSString *dir = [fileName stringByDeletingLastPathComponent];
             if ([dir length] > 0) {
-                BOOL isDir = NO;
+                BOOL isDir = NO, r = NO;
                 if (![fm fileExistsAtPath:dir isDirectory:&isDir]) {
-                    [fm createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+                    r = [fm createDirectoryAtPath:dir
+                      withIntermediateDirectories:YES
+                                       attributes:nil
+                                            error:&error];
+                    if (!r) {
+                        LVLog(@"create file(%@)'s parent directory error:%@", fileName, error);
+                        return NO;
+                    }
                 } else if (!isDir) {
-                    [fm removeItemAtPath:dir error:NULL];
-                    [fm createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+                    r = [fm removeItemAtPath:dir error:&error];
+                    if (!r) {
+                        LVLog(@"remove exist file(%@) error:%@", dir, error);
+                        return NO;
+                    }
+                    r = [fm createDirectoryAtPath:dir
+                      withIntermediateDirectories:YES
+                                       attributes:nil
+                                            error:NULL];
+                    if (!r) {
+                        LVLog(@"create file(%@)'s parent directory error:%@", fileName, error);
+                        return NO;
+                    }
                 }
             }
             
-            [fm createFileAtPath:fileName contents:inflatedData attributes:attrs];
+            BOOL r = [fm createFileAtPath:fileName contents:inflatedData attributes:attrs];
+            if (!r) {
+                LVLog(@"create file(%@) entry error", fileName);
+                return NO;
+            }
         }
     }
     

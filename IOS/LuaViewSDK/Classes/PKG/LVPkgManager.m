@@ -129,9 +129,8 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
             }
         }
         
-        [archive unzipToDirectory:path];
-        
-        return YES;
+        BOOL result = [archive unzipToDirectory:path];
+        return result;
     }
     return NO;
 }
