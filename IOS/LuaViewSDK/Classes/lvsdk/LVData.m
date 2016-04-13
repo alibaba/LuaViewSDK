@@ -103,7 +103,11 @@ static int __tostring (lv_State *L) {
         }
         NSString* s = [[NSString alloc] initWithData:data.data encoding:encode];
         if( s==nil ){
-            s = [[NSString alloc] initWithFormat:@"{ UserDataType=data, length=%ld }",(long)data.data.length];
+            NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            s = [[NSString alloc] initWithData:data.data encoding:gbkEncoding];
+            if ( s==nil ) {
+                s = [[NSString alloc] initWithFormat:@"{ UserDataType=data, length=%ld }",(long)data.data.length];
+            }
         }
         lv_pushstring(L, s.UTF8String);
         return 1;
