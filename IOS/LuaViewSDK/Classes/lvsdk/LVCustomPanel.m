@@ -18,10 +18,17 @@
 @implementation LVCustomPanel
 
 - (void) callLuaWithArgument:(NSString*) info {
+    [self callLuaWithArguments:@[ (info?info:@"") ]];
+}
+
+- (void) callLuaWithArguments:(NSArray*) args{
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
+        lv_checkstack(L,32);
         int num = lv_gettop(L);
-        lv_pushstring(L, info.UTF8String);
+        for( int i=0; i<args.count; i++ ) {
+            lv_pushNativeObject(L, args[i]);
+        }
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
         
@@ -33,7 +40,7 @@
             }
             lv_remove(L, -2);
         }
-        lv_runFunctionWithArgs(L, 1, 0);
+        lv_runFunctionWithArgs(L, args.count, 0);
         lv_settop(L, num);
     }
 }

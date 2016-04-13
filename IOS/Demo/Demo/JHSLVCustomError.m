@@ -35,7 +35,8 @@
 }
 
 -(void) refleshButtonCall{
-    [self callLuaWithArgument:@"reflesh"];
+    [self callLuaWithArguments:@[@"reflesh",@"test",@"temp" ] ];
+    [self callLuaWithArgument:@"refleshend"];
 }
 
 -(void) layoutSubviews{
