@@ -209,22 +209,25 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     
     if( pkgName.length>0 && url.length>0 && time.length>0){
         [LVUtil download:url callback:^(NSData *data) {
-            if( data ){
-                BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
-                if( sha256Check ){
-                    [LVPkgManager deleteFileOfTimePackage:pkgName];// 开始解包, 删除时间戳文件
-                    if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
-                        // 解包成功
-                        if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
-                            callback(info, nil);
-                            return ;
+            // 解包过程放在主线程执行!!!!
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if( data ){
+                    BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
+                    if( sha256Check ){
+                        [LVPkgManager deleteFileOfTimePackage:pkgName];// 开始解包, 删除时间戳文件
+                        if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
+                            // 解包成功
+                            if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
+                                callback(info, nil);
+                                return ;
+                            }
                         }
                     }
+                } else {
+                    LVError(@"[downLoadPackage] error: url=%@",url);
                 }
-            } else {
-                LVError(@"[downLoadPackage] error: url=%@",url);
-            }
-            callback(info, @"error");
+                callback(info, @"error");
+            });
         }];
     }
 }
