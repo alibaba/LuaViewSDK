@@ -373,6 +373,16 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return nil;
 }
 
++(BOOL) deleteFile:(NSString*)path {
+    if( [self exist:path] ){
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSError* err;
+        [fm removeItemAtPath:path error:&err];
+        return err==nil;
+    }
+    return YES;
+}
+
 +(BOOL) exist:(NSString*) path{
     BOOL directory = NO;
     NSFileManager *fileManage = [NSFileManager defaultManager];

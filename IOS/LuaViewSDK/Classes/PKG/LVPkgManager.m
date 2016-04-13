@@ -60,6 +60,11 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     }
 }
 
++(BOOL) deleteFileOfTimePackage:(NSString*) packageName{
+    NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
+    return [LVUtil deleteFile:fileName];
+}
+
 +(NSString*) timefileNameOfLocalPackage:(NSString *)packageName {
     return [self pathForFileName:LV_LOCAL_PACKAGE_TIME_FILE_NAME package:packageName];
 }
@@ -206,10 +211,14 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
         [LVUtil download:url callback:^(NSData *data) {
             if( data ){
                 BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
-                if( sha256Check && [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ){// 解包成功
-                    if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
-                        callback(info, nil);
-                        return ;
+                if( sha256Check ){
+                    [LVPkgManager deleteFileOfTimePackage:pkgName];// 开始解包, 删除时间戳文件
+                    if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
+                        // 解包成功
+                        if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
+                            callback(info, nil);
+                            return ;
+                        }
                     }
                 }
             } else {

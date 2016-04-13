@@ -46,6 +46,12 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  */
 +(NSData*) dataReadFromFile:(NSString*) fileName;
 
+
+/*
+ * 删除文件
+ */
++(BOOL) deleteFile:(NSString*)path;
+
 /*
  * NSCachesDirectory: 相对路径 -> 绝对路径
  */
