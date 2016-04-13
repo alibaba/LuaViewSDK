@@ -207,6 +207,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return varargsOf(valueOf(DimenUtil.pxToDpi(view.getX())), valueOf(DimenUtil.pxToDpi(view.getY())));
     }
 
+
+
     /**
      * 设置位于
      *
@@ -1322,6 +1324,14 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return valueOf(view.getScaleY());
     }
 
+
+    /**
+     * 获取translation
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
     public Varargs translation(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTranslation(view, varargs);
@@ -1330,19 +1340,24 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         }
     }
 
-    public LuaValue setTranslation(U view, Varargs varargs) {
-        final float translationX = LuaUtil.getFloat(varargs, 0f, 2);
-        final float translationY = LuaUtil.getFloat(varargs, 0f, 3);
-        return view.setTranslation(DimenUtil.dpiToPx(translationX), DimenUtil.dpiToPx(translationY));
+    public Varargs setTranslation(U view, Varargs varargs) {
+        final float translationX = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 2));
+        final float translationY = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 3));
+        return view.setTranslation(translationX, translationY);
     }
 
     public Varargs getTranslation(U view, Varargs varargs) {
-        final float translationX = view.getTranslationX();
-        final float translationY = view.getTranslationY();
-        return varargsOf(valueOf(DimenUtil.pxToDpi(translationX)), valueOf(DimenUtil.pxToDpi(translationY)));
+        return varargsOf(valueOf(DimenUtil.pxToDpi(view.getTranslationX())), valueOf(DimenUtil.pxToDpi(view.getTranslationY())));
     }
 
-    public Varargs translationX(U view, Varargs varargs) {
+    /**
+     * 获取translationX
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue translationX(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTranslationX(view, varargs);
         } else {
@@ -1351,15 +1366,22 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setTranslationX(U view, Varargs varargs) {
-        final float translationX = LuaUtil.getFloat(varargs, 0f, 2);
-        return view.setTranslationX(DimenUtil.dpiToPx(translationX));
+        final float translationX = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 2));
+        return view.setTranslation(translationX, null);
     }
 
-    public Varargs getTranslationX(U view, Varargs varargs) {
+    public LuaValue getTranslationX(U view, Varargs varargs) {
         return valueOf(DimenUtil.pxToDpi(view.getTranslationX()));
     }
 
-    public Varargs translationY(U view, Varargs varargs) {
+    /**
+     * 获取translationX
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue translationY(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTranslationY(view, varargs);
         } else {
@@ -1368,13 +1390,14 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setTranslationY(U view, Varargs varargs) {
-        final float translationY = LuaUtil.getFloat(varargs, 0f, 2);
-        return view.setTranslationY(DimenUtil.dpiToPx(translationY));
+        final float translationY = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 2));
+        return view.setTranslation(null, translationY);
     }
 
-    public Varargs getTranslationY(U view, Varargs varargs) {
-        return valueOf(DimenUtil.pxToDpi(view.getTranslationY()));
+    public LuaValue getTranslationY(U view, Varargs varargs) {
+        return valueOf(DimenUtil.pxToDpi(view.getTranslationX()));
     }
+
 
     /**
      * 将view设置到前台

@@ -8,6 +8,7 @@ import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -33,7 +34,9 @@ public class CustomError extends LVCustomPanel {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                callLuaCallback("Error");
+                LuaTable table = new LuaTable();
+                table.insert(1, LuaValue.valueOf(1.4));
+                callLuaCallback("Message", "Error", 100, new Object(), table);
             }
         });
     }

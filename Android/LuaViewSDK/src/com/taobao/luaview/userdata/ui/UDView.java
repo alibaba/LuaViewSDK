@@ -410,6 +410,62 @@ public class UDView<T extends View> extends BaseUserdata {
         return 0;
     }
 
+    /**
+     * 设置Translation X, Y
+     *
+     * @param tx
+     * @param ty
+     * @return
+     */
+    public UDView setTranslation(Float tx, Float ty) {
+        final View view = getView();
+        if (view != null) {
+            if(tx != null) {
+                view.setTranslationX(tx);
+            }
+            if(ty != null) {
+                view.setTranslationY(ty);
+            }
+        }
+        return this;
+    }
+
+    public UDView setTranslation(float translationX, float translationY) {
+        final View view = getView();
+        if (view != null) {
+            view.setTranslationX(translationX);
+            view.setTranslationY(translationY);
+        }
+        return this;
+    }
+
+
+    /**
+     * 获取TranslationX
+     *
+     * @return
+     */
+    public float getTranslationX() {
+        final View view = getView();
+        if (view != null) {
+            return view.getTranslationX();
+        }
+        return 0;
+    }
+
+    /**
+     * 获取TranslationY
+     *
+     * @return
+     */
+    public float getTranslationY() {
+        final View view = getView();
+        if (view != null) {
+            return view.getTranslationY();
+        }
+        return 0;
+    }
+
 
     /**
      * 获取宽度
@@ -816,39 +872,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public float getScaleY() {
         return getView() != null ? getView().getScaleY() : 0f;
-    }
-
-    public UDView setTranslation(float translationX, float translationY) {
-        final View view = getView();
-        if (view != null) {
-            view.setTranslationX(translationX);
-            view.setTranslationY(translationY);
-        }
-        return this;
-    }
-
-    public UDView setTranslationX(float translationX) {
-        final View view = getView();
-        if (view != null) {
-            view.setTranslationX(translationX);
-        }
-        return this;
-    }
-
-    public float getTranslationX() {
-        return getView() != null ? getView().getTranslationX() : 0f;
-    }
-
-    public UDView setTranslationY(float translationY) {
-        final View view = getView();
-        if (view != null) {
-            view.setTranslationY(translationY);
-        }
-        return this;
-    }
-
-    public float getTranslationY() {
-        return getView() != null ? getView().getTranslationY() : 0f;
     }
 
     /**

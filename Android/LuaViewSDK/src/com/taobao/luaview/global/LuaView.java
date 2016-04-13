@@ -13,6 +13,7 @@ import com.taobao.luaview.extend.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
@@ -40,6 +41,9 @@ import org.luaj.vm2.lib.jse.JsePlatform;
  * @date 15/8/20
  */
 public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadcastReceiver.OnConnectionChangeListener {
+    //image provider clazz
+    private static Class<? extends ImageProvider> mImageProviderClazz;
+    private static ImageProvider mImageProvider;
 
     //cache
     private LuaCache mLuaCache;
@@ -397,6 +401,33 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return this;
     }
 
+    //----------------------------------------Image Provider----------------------------------------
+
+    /**
+     * 注册ImageProvider
+     */
+    public static void registerImageProvider(final Class<? extends ImageProvider> clazz) {
+        mImageProviderClazz = clazz;
+    }
+
+    /**
+     * 获取ImageProvider
+     *
+     * @return
+     */
+    public static ImageProvider getImageProvider() {
+        if(mImageProvider == null && mImageProviderClazz != null){
+            try {
+                mImageProvider = mImageProviderClazz.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return mImageProvider;
+    }
+
     //-------------------------------------------私有------------------------------------------------
 
     /**
@@ -586,8 +617,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         LuaCache.clear();
     }
 
-    public void cacheObject(Class type, LuaCache.CacheableObject obj){
-        if(mLuaCache != null){
+    public void cacheObject(Class type, LuaCache.CacheableObject obj) {
+        if (mLuaCache != null) {
             mLuaCache.cacheObject(type, obj);
         }
     }

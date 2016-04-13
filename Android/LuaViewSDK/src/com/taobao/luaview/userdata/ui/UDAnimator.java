@@ -34,7 +34,10 @@ public class UDAnimator extends BaseUserdata {
     private LuaValue mOnResumeCallback;
     private LuaValue mOnUpdateCallback;
 
+    private Boolean isRunning;
+
     private UDView mTarget;
+
 
     public UDAnimator(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(new ObjectAnimator(), globals, metaTable, varargs);
@@ -333,10 +336,13 @@ public class UDAnimator extends BaseUserdata {
 
     /**
      * is running
-     *
+     * TODO 这里的判断有问题
      * @return
      */
     public boolean isRunning() {
+        if (isRunning != null) {
+            return isRunning;
+        }
         return AnimatorUtil.isRunning(getAnimator()) || (mTarget != null && mTarget.isAnimating());
     }
 
@@ -397,16 +403,19 @@ public class UDAnimator extends BaseUserdata {
             animator.addListener(new Animator.AnimatorListener() {//add a listener
                 @Override
                 public void onAnimationStart(Animator animation) {
+                    isRunning = true;
                     LuaUtil.callFunction(mOnStartCallback);
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    isRunning = false;
                     LuaUtil.callFunction(mOnEndCallback);
                 }
 
                 @Override
                 public void onAnimationCancel(Animator animation) {
+                    isRunning = false;
                     LuaUtil.callFunction(mOnCancelCallback);
                 }
 

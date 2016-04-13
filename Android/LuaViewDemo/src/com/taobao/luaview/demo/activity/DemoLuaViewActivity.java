@@ -3,6 +3,7 @@ package com.taobao.luaview.demo.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.taobao.luaview.demo.provider.GlideImageProvider;
 import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
 import com.taobao.luaview.global.Constants;
@@ -39,6 +40,7 @@ public class DemoLuaViewActivity extends Activity {
                 }
             }
         });
+        LuaView.registerImageProvider(GlideImageProvider.class);
 
         mDialog = new LVLoadingDialog(this);
         mDialog.show();

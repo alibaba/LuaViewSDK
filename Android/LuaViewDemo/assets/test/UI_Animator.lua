@@ -1,12 +1,12 @@
 -- 简单动画
 startBtn = Button();
-startBtn.frame(10, 10, 60, 120)
+startBtn.frame(10, 10, 80, 50)
 
 resumeBtn = Button()
-resumeBtn.frame(80, 10, 60, 120)
+resumeBtn.frame(100, 10, 80, 50)
 
 stateLabel = Label()
-stateLabel.frame(150, 10, 60, 120)
+stateLabel.frame(200, 10, 100, 50)
 
 local function isRunning()
     return translation.isRunning()
@@ -18,7 +18,7 @@ end
 
 local function updateControlBtns()
     local running, paused = isRunning(), isPaused()
-    print(running, paused)
+    print("Running=", running, " Paused=", paused)
 
     startBtn.text(running and "Cancel" or "Start")
     resumeBtn.enabled(running)

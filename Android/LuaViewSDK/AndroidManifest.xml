@@ -30,7 +30,4 @@
         <activity android:name="com.taobao.luaview.activity.LuaViewActivity" />
     </application>
 
-    <!--config for Glide-->
-    <meta-data android:name="com.taobao.luaview.view.imageview.GlideConfiguration" android:value="GlideModule"/>
-
 </manifest>

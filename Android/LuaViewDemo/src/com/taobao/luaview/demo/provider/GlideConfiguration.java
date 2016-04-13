@@ -1,4 +1,4 @@
-package com.taobao.luaview.view.imageview;
+package com.taobao.luaview.demo.provider;
 
 import android.content.Context;
 

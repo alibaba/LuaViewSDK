@@ -6,10 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.DrawableTypeRequest;
-import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.load.resource.gifbitmap.GifBitmapWrapperTransformation;
-import com.bumptech.glide.request.GenericRequest;
 import com.taobao.android.luaview.R;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.userdata.ui.UDImageView;

@@ -9,47 +9,6 @@ package com.taobao.android.luaview;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static int lvAnimResId=0x7f010003;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static int lvDefaultImage=0x7f010006;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static int lvErrorImage=0x7f010007;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static int lvInnerShadowColor=0x7f010009;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static int lvInnerShadowWidth=0x7f010008;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static int lvRoundCorners=0x7f010005;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -57,15 +16,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lvShowAsCircle=0x7f010004;
-        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static int lv_centered1=0x7f010010;
+        public static int lv_centered1=0x7f010009;
         /**  Screen edge padding. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -76,7 +27,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_clipPadding=0x7f01001b;
+        public static int lv_clipPadding=0x7f010014;
         /**  Length of the delay to fade the indicator. 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -85,7 +36,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_fadeDelay=0x7f010027;
+        public static int lv_fadeDelay=0x7f010020;
         /**  Length of the indicator fade to transparent. 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -94,7 +45,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_fadeLength=0x7f010028;
+        public static int lv_fadeLength=0x7f010021;
         /**  Whether or not the selected indicator fades. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -103,7 +54,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_fades=0x7f010026;
+        public static int lv_fades=0x7f01001f;
         /**  Color of the filled circle that represents the current page. 
          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -113,7 +64,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_fillColor=0x7f010014;
+        public static int lv_fillColor=0x7f01000d;
         /**  Color of the footer line and indicator. 
          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -123,7 +74,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_footerColor=0x7f01001c;
+        public static int lv_footerColor=0x7f010015;
         /**  Height of the indicator above the footer line. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -134,7 +85,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_footerIndicatorHeight=0x7f01001f;
+        public static int lv_footerIndicatorHeight=0x7f010018;
         /**  Style of the indicator. Default is triangle. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -147,7 +98,7 @@ containing a value of this type.
 <tr><td><code>underline</code></td><td>2</td><td></td></tr>
 </table>
          */
-        public static int lv_footerIndicatorStyle=0x7f01001e;
+        public static int lv_footerIndicatorStyle=0x7f010017;
         /**  Left and right padding of the underline indicator. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -158,7 +109,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_footerIndicatorUnderlinePadding=0x7f010020;
+        public static int lv_footerIndicatorUnderlinePadding=0x7f010019;
         /**  Height of the footer line. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -169,7 +120,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_footerLineHeight=0x7f01001d;
+        public static int lv_footerLineHeight=0x7f010016;
         /**  Padding between the bottom of the title and the footer. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -180,7 +131,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_footerPadding=0x7f010021;
+        public static int lv_footerPadding=0x7f01001a;
         /**  Width of the gap between each indicator line. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -191,7 +142,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_gapWidth=0x7f01001a;
+        public static int lv_gapWidth=0x7f010013;
         /**  Position of the line. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -203,7 +154,7 @@ containing a value of this type.
 <tr><td><code>top</code></td><td>1</td><td></td></tr>
 </table>
          */
-        public static int lv_linePosition=0x7f010022;
+        public static int lv_linePosition=0x7f01001b;
         /**  Width of each indicator line. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -214,7 +165,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_lineWidth=0x7f010019;
+        public static int lv_lineWidth=0x7f010012;
         /**  Color of the filled circles that represents pages. 
          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -224,7 +175,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_pageColor=0x7f010015;
+        public static int lv_pageColor=0x7f01000e;
         /**  Radius of the circles. This is also the spacing between circles. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -235,7 +186,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_radius1=0x7f010016;
+        public static int lv_radius1=0x7f01000f;
         /**  Whether or not the selected item is displayed as bold. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -244,7 +195,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_selectedBold=0x7f010023;
+        public static int lv_selectedBold=0x7f01001c;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -253,7 +204,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_selectedColor=0x7f010011;
+        public static int lv_selectedColor=0x7f01000a;
         /**  Whether or not the selected indicator snaps to the circles. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -262,7 +213,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_snap=0x7f010017;
+        public static int lv_snap=0x7f010010;
         /**  Color of the open circles. 
          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -272,7 +223,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_strokeColor=0x7f010018;
+        public static int lv_strokeColor=0x7f010011;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -282,7 +233,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_strokeWidth=0x7f010012;
+        public static int lv_strokeWidth=0x7f01000b;
         /**  Padding between titles when bumping into each other. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -293,7 +244,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_titlePadding=0x7f010024;
+        public static int lv_titlePadding=0x7f01001d;
         /**  Padding between titles and the top of the View. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -304,7 +255,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_topPadding=0x7f010025;
+        public static int lv_topPadding=0x7f01001e;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -313,37 +264,37 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int lv_unselectedColor=0x7f010013;
+        public static int lv_unselectedColor=0x7f01000c;
         /**  Style of the circle indicator. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiCirclePageIndicatorStyle=0x7f01000a;
+        public static int lv_vpiCirclePageIndicatorStyle=0x7f010003;
         /**  Style of the icon indicator's views. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiIconPageIndicatorStyle=0x7f01000b;
+        public static int lv_vpiIconPageIndicatorStyle=0x7f010004;
         /**  Style of the line indicator. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiLinePageIndicatorStyle=0x7f01000c;
+        public static int lv_vpiLinePageIndicatorStyle=0x7f010005;
         /**  Style of the tab indicator's tabs. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiTabPageIndicatorStyle=0x7f01000e;
+        public static int lv_vpiTabPageIndicatorStyle=0x7f010007;
         /**  Style of the title indicator. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiTitlePageIndicatorStyle=0x7f01000d;
+        public static int lv_vpiTitlePageIndicatorStyle=0x7f010006;
         /**  Style of the underline indicator. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int lv_vpiUnderlinePageIndicatorStyle=0x7f01000f;
+        public static int lv_vpiUnderlinePageIndicatorStyle=0x7f010008;
         /**  Minimum size of the text. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -523,7 +474,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:minTextSize
         */
-        public static int AutofitTextView_minTextSize = 0;
+        public static final int AutofitTextView_minTextSize = 0;
         /**
           <p>
           @attr description
@@ -540,7 +491,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:precision
         */
-        public static int AutofitTextView_precision = 1;
+        public static final int AutofitTextView_precision = 1;
         /**
           <p>
           @attr description
@@ -556,124 +507,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:sizeToFit
         */
-        public static int AutofitTextView_sizeToFit = 2;
-        /** Attributes that can be used with a LVBaseImageView.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvAnimResId com.taobao.android.luaview:lvAnimResId}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvDefaultImage com.taobao.android.luaview:lvDefaultImage}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvErrorImage com.taobao.android.luaview:lvErrorImage}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvInnerShadowColor com.taobao.android.luaview:lvInnerShadowColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvInnerShadowWidth com.taobao.android.luaview:lvInnerShadowWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvRoundCorners com.taobao.android.luaview:lvRoundCorners}</code></td><td></td></tr>
-           <tr><td><code>{@link #LVBaseImageView_lvShowAsCircle com.taobao.android.luaview:lvShowAsCircle}</code></td><td></td></tr>
-           </table>
-           @see #LVBaseImageView_lvAnimResId
-           @see #LVBaseImageView_lvDefaultImage
-           @see #LVBaseImageView_lvErrorImage
-           @see #LVBaseImageView_lvInnerShadowColor
-           @see #LVBaseImageView_lvInnerShadowWidth
-           @see #LVBaseImageView_lvRoundCorners
-           @see #LVBaseImageView_lvShowAsCircle
-         */
-        public static final int[] LVBaseImageView = {
-            0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006,
-            0x7f010007, 0x7f010008, 0x7f010009
-        };
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvAnimResId}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.taobao.android.luaview:lvAnimResId
-        */
-        public static int LVBaseImageView_lvAnimResId = 0;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvDefaultImage}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.taobao.android.luaview:lvDefaultImage
-        */
-        public static int LVBaseImageView_lvDefaultImage = 3;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvErrorImage}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.taobao.android.luaview:lvErrorImage
-        */
-        public static int LVBaseImageView_lvErrorImage = 4;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvInnerShadowColor}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.taobao.android.luaview:lvInnerShadowColor
-        */
-        public static int LVBaseImageView_lvInnerShadowColor = 6;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvInnerShadowWidth}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.taobao.android.luaview:lvInnerShadowWidth
-        */
-        public static int LVBaseImageView_lvInnerShadowWidth = 5;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvRoundCorners}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.taobao.android.luaview:lvRoundCorners
-        */
-        public static int LVBaseImageView_lvRoundCorners = 2;
-        /**
-          <p>This symbol is the offset where the {@link com.taobao.android.luaview.R.attr#lvShowAsCircle}
-          attribute's value can be found in the {@link #LVBaseImageView} array.
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.taobao.android.luaview:lvShowAsCircle
-        */
-        public static int LVBaseImageView_lvShowAsCircle = 1;
+        public static final int AutofitTextView_sizeToFit = 2;
         /** Attributes that can be used with a LVCirclePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -701,9 +535,9 @@ containing a value of this type.
            @see #LVCirclePageIndicator_lv_strokeWidth
          */
         public static final int[] LVCirclePageIndicator = {
-            0x010100c4, 0x010100d4, 0x7f010010, 0x7f010012,
-            0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017,
-            0x7f010018
+            0x010100c4, 0x010100d4, 0x7f010009, 0x7f01000b,
+            0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010,
+            0x7f010011
         };
         /**
           <p>
@@ -713,7 +547,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static int LVCirclePageIndicator_android_background = 1;
+        public static final int LVCirclePageIndicator_android_background = 1;
         /**
           <p>
           @attr description
@@ -722,7 +556,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#orientation}.
           @attr name android:orientation
         */
-        public static int LVCirclePageIndicator_android_orientation = 0;
+        public static final int LVCirclePageIndicator_android_orientation = 0;
         /**
           <p>
           @attr description
@@ -738,7 +572,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_centered1
         */
-        public static int LVCirclePageIndicator_lv_centered1 = 2;
+        public static final int LVCirclePageIndicator_lv_centered1 = 2;
         /**
           <p>
           @attr description
@@ -755,7 +589,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_fillColor
         */
-        public static int LVCirclePageIndicator_lv_fillColor = 4;
+        public static final int LVCirclePageIndicator_lv_fillColor = 4;
         /**
           <p>
           @attr description
@@ -772,7 +606,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_pageColor
         */
-        public static int LVCirclePageIndicator_lv_pageColor = 5;
+        public static final int LVCirclePageIndicator_lv_pageColor = 5;
         /**
           <p>
           @attr description
@@ -790,7 +624,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_radius1
         */
-        public static int LVCirclePageIndicator_lv_radius1 = 6;
+        public static final int LVCirclePageIndicator_lv_radius1 = 6;
         /**
           <p>
           @attr description
@@ -806,7 +640,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_snap
         */
-        public static int LVCirclePageIndicator_lv_snap = 7;
+        public static final int LVCirclePageIndicator_lv_snap = 7;
         /**
           <p>
           @attr description
@@ -823,7 +657,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_strokeColor
         */
-        public static int LVCirclePageIndicator_lv_strokeColor = 8;
+        public static final int LVCirclePageIndicator_lv_strokeColor = 8;
         /**
           <p>
           @attr description
@@ -841,7 +675,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_strokeWidth
         */
-        public static int LVCirclePageIndicator_lv_strokeWidth = 3;
+        public static final int LVCirclePageIndicator_lv_strokeWidth = 3;
         /** Attributes that can be used with a LVLinePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -865,8 +699,8 @@ containing a value of this type.
            @see #LVLinePageIndicator_lv_unselectedColor
          */
         public static final int[] LVLinePageIndicator = {
-            0x010100d4, 0x7f010010, 0x7f010011, 0x7f010012,
-            0x7f010013, 0x7f010019, 0x7f01001a
+            0x010100d4, 0x7f010009, 0x7f01000a, 0x7f01000b,
+            0x7f01000c, 0x7f010012, 0x7f010013
         };
         /**
           <p>
@@ -876,7 +710,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static int LVLinePageIndicator_android_background = 0;
+        public static final int LVLinePageIndicator_android_background = 0;
         /**
           <p>
           @attr description
@@ -892,7 +726,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_centered1
         */
-        public static int LVLinePageIndicator_lv_centered1 = 1;
+        public static final int LVLinePageIndicator_lv_centered1 = 1;
         /**
           <p>
           @attr description
@@ -910,7 +744,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_gapWidth
         */
-        public static int LVLinePageIndicator_lv_gapWidth = 6;
+        public static final int LVLinePageIndicator_lv_gapWidth = 6;
         /**
           <p>
           @attr description
@@ -928,7 +762,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_lineWidth
         */
-        public static int LVLinePageIndicator_lv_lineWidth = 5;
+        public static final int LVLinePageIndicator_lv_lineWidth = 5;
         /**
           <p>
           @attr description
@@ -945,7 +779,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_selectedColor
         */
-        public static int LVLinePageIndicator_lv_selectedColor = 2;
+        public static final int LVLinePageIndicator_lv_selectedColor = 2;
         /**
           <p>
           @attr description
@@ -963,7 +797,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_strokeWidth
         */
-        public static int LVLinePageIndicator_lv_strokeWidth = 3;
+        public static final int LVLinePageIndicator_lv_strokeWidth = 3;
         /**
           <p>
           @attr description
@@ -980,7 +814,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_unselectedColor
         */
-        public static int LVLinePageIndicator_lv_unselectedColor = 4;
+        public static final int LVLinePageIndicator_lv_unselectedColor = 4;
         /** Attributes that can be used with a LVTitlePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1020,10 +854,10 @@ containing a value of this type.
            @see #LVTitlePageIndicator_lv_topPadding
          */
         public static final int[] LVTitlePageIndicator = {
-            0x01010095, 0x01010098, 0x010100d4, 0x7f010011,
-            0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e,
-            0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022,
-            0x7f010023, 0x7f010024, 0x7f010025
+            0x01010095, 0x01010098, 0x010100d4, 0x7f01000a,
+            0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017,
+            0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b,
+            0x7f01001c, 0x7f01001d, 0x7f01001e
         };
         /**
           <p>
@@ -1033,7 +867,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static int LVTitlePageIndicator_android_background = 2;
+        public static final int LVTitlePageIndicator_android_background = 2;
         /**
           <p>
           @attr description
@@ -1042,7 +876,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#textColor}.
           @attr name android:textColor
         */
-        public static int LVTitlePageIndicator_android_textColor = 1;
+        public static final int LVTitlePageIndicator_android_textColor = 1;
         /**
           <p>
           @attr description
@@ -1051,7 +885,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#textSize}.
           @attr name android:textSize
         */
-        public static int LVTitlePageIndicator_android_textSize = 0;
+        public static final int LVTitlePageIndicator_android_textSize = 0;
         /**
           <p>
           @attr description
@@ -1069,7 +903,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_clipPadding
         */
-        public static int LVTitlePageIndicator_lv_clipPadding = 4;
+        public static final int LVTitlePageIndicator_lv_clipPadding = 4;
         /**
           <p>
           @attr description
@@ -1086,7 +920,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerColor
         */
-        public static int LVTitlePageIndicator_lv_footerColor = 5;
+        public static final int LVTitlePageIndicator_lv_footerColor = 5;
         /**
           <p>
           @attr description
@@ -1104,7 +938,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerIndicatorHeight
         */
-        public static int LVTitlePageIndicator_lv_footerIndicatorHeight = 8;
+        public static final int LVTitlePageIndicator_lv_footerIndicatorHeight = 8;
         /**
           <p>
           @attr description
@@ -1124,7 +958,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerIndicatorStyle
         */
-        public static int LVTitlePageIndicator_lv_footerIndicatorStyle = 7;
+        public static final int LVTitlePageIndicator_lv_footerIndicatorStyle = 7;
         /**
           <p>
           @attr description
@@ -1142,7 +976,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerIndicatorUnderlinePadding
         */
-        public static int LVTitlePageIndicator_lv_footerIndicatorUnderlinePadding = 9;
+        public static final int LVTitlePageIndicator_lv_footerIndicatorUnderlinePadding = 9;
         /**
           <p>
           @attr description
@@ -1160,7 +994,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerLineHeight
         */
-        public static int LVTitlePageIndicator_lv_footerLineHeight = 6;
+        public static final int LVTitlePageIndicator_lv_footerLineHeight = 6;
         /**
           <p>
           @attr description
@@ -1178,7 +1012,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_footerPadding
         */
-        public static int LVTitlePageIndicator_lv_footerPadding = 10;
+        public static final int LVTitlePageIndicator_lv_footerPadding = 10;
         /**
           <p>
           @attr description
@@ -1197,7 +1031,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_linePosition
         */
-        public static int LVTitlePageIndicator_lv_linePosition = 11;
+        public static final int LVTitlePageIndicator_lv_linePosition = 11;
         /**
           <p>
           @attr description
@@ -1213,7 +1047,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_selectedBold
         */
-        public static int LVTitlePageIndicator_lv_selectedBold = 12;
+        public static final int LVTitlePageIndicator_lv_selectedBold = 12;
         /**
           <p>
           @attr description
@@ -1230,7 +1064,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_selectedColor
         */
-        public static int LVTitlePageIndicator_lv_selectedColor = 3;
+        public static final int LVTitlePageIndicator_lv_selectedColor = 3;
         /**
           <p>
           @attr description
@@ -1248,7 +1082,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_titlePadding
         */
-        public static int LVTitlePageIndicator_lv_titlePadding = 13;
+        public static final int LVTitlePageIndicator_lv_titlePadding = 13;
         /**
           <p>
           @attr description
@@ -1266,7 +1100,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_topPadding
         */
-        public static int LVTitlePageIndicator_lv_topPadding = 14;
+        public static final int LVTitlePageIndicator_lv_topPadding = 14;
         /** Attributes that can be used with a LVUnderlinePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1286,8 +1120,8 @@ containing a value of this type.
            @see #LVUnderlinePageIndicator_lv_selectedColor
          */
         public static final int[] LVUnderlinePageIndicator = {
-            0x010100d4, 0x7f010011, 0x7f010026, 0x7f010027,
-            0x7f010028
+            0x010100d4, 0x7f01000a, 0x7f01001f, 0x7f010020,
+            0x7f010021
         };
         /**
           <p>
@@ -1297,7 +1131,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static int LVUnderlinePageIndicator_android_background = 0;
+        public static final int LVUnderlinePageIndicator_android_background = 0;
         /**
           <p>
           @attr description
@@ -1313,7 +1147,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_fadeDelay
         */
-        public static int LVUnderlinePageIndicator_lv_fadeDelay = 3;
+        public static final int LVUnderlinePageIndicator_lv_fadeDelay = 3;
         /**
           <p>
           @attr description
@@ -1329,7 +1163,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_fadeLength
         */
-        public static int LVUnderlinePageIndicator_lv_fadeLength = 4;
+        public static final int LVUnderlinePageIndicator_lv_fadeLength = 4;
         /**
           <p>
           @attr description
@@ -1345,7 +1179,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_fades
         */
-        public static int LVUnderlinePageIndicator_lv_fades = 2;
+        public static final int LVUnderlinePageIndicator_lv_fades = 2;
         /**
           <p>
           @attr description
@@ -1362,7 +1196,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_selectedColor
         */
-        public static int LVUnderlinePageIndicator_lv_selectedColor = 1;
+        public static final int LVUnderlinePageIndicator_lv_selectedColor = 1;
         /** Attributes that can be used with a LVViewPagerIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1384,8 +1218,8 @@ containing a value of this type.
            @see #LVViewPagerIndicator_lv_vpiUnderlinePageIndicatorStyle
          */
         public static final int[] LVViewPagerIndicator = {
-            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
-            0x7f01000e, 0x7f01000f
+            0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006,
+            0x7f010007, 0x7f010008
         };
         /**
           <p>
@@ -1398,7 +1232,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiCirclePageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiCirclePageIndicatorStyle = 0;
+        public static final int LVViewPagerIndicator_lv_vpiCirclePageIndicatorStyle = 0;
         /**
           <p>
           @attr description
@@ -1410,7 +1244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiIconPageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiIconPageIndicatorStyle = 1;
+        public static final int LVViewPagerIndicator_lv_vpiIconPageIndicatorStyle = 1;
         /**
           <p>
           @attr description
@@ -1422,7 +1256,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiLinePageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiLinePageIndicatorStyle = 2;
+        public static final int LVViewPagerIndicator_lv_vpiLinePageIndicatorStyle = 2;
         /**
           <p>
           @attr description
@@ -1434,7 +1268,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiTabPageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiTabPageIndicatorStyle = 4;
+        public static final int LVViewPagerIndicator_lv_vpiTabPageIndicatorStyle = 4;
         /**
           <p>
           @attr description
@@ -1446,7 +1280,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiTitlePageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiTitlePageIndicatorStyle = 3;
+        public static final int LVViewPagerIndicator_lv_vpiTitlePageIndicatorStyle = 3;
         /**
           <p>
           @attr description
@@ -1458,6 +1292,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.taobao.android.luaview:lv_vpiUnderlinePageIndicatorStyle
         */
-        public static int LVViewPagerIndicator_lv_vpiUnderlinePageIndicatorStyle = 5;
+        public static final int LVViewPagerIndicator_lv_vpiUnderlinePageIndicatorStyle = 5;
     };
 }
