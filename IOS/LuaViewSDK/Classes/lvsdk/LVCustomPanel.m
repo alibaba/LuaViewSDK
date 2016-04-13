@@ -40,7 +40,7 @@
             }
             lv_remove(L, -2);
         }
-        lv_runFunctionWithArgs(L, args.count, 0);
+        lv_runFunctionWithArgs(L, (int)args.count, 0);
         lv_settop(L, num);
     }
 }
