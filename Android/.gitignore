@@ -4,6 +4,5 @@
 .gradle
 build
 gradle
-Android.iml
 local.properties
 *.iml
