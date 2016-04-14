@@ -44,8 +44,10 @@
 - (void)changeCurrentPath:(NSString *)path {
     NSAssert(path, @"current path could not be nil");
     BOOL isDir = NO;
-    NSAssert([_fileManager fileExistsAtPath:path isDirectory:&isDir], @"%@ not exists", path);
-    NSAssert(isDir, @"%@ is not a directory", path);
+    if (![_fileManager fileExistsAtPath:path isDirectory:&isDir] || !isDir) {
+        NSAssert(NO, @"%@ not exists or is not a directory", path);
+        return;
+    }
 
     _currentPath = path;
 }
