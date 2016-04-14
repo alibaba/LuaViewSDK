@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define LUAVIEW_ROOT_PATH  @"LUAVIEW500"
+#define LUAVIEW_ROOT_PATH  @"LUAVIEW_500"
 #define LUAVIEW_VERSION   "5.0.0"
 
 #define LV_PKGINFO_PROPERTY_URL      @"url"
