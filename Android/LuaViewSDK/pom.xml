@@ -20,21 +20,7 @@
         LuaView Android SDK, 2015.11.23 add by song
     </description>
 
-    <properties>
-        <app.releasemode>true</app.releasemode>
-        <pakageidsegment>36</pakageidsegment>
-        <packaging.type>aar</packaging.type>
-        <sign.keystore>${basedir}/package/keystore/test/debug.keystore</sign.keystore>
-        <sign.alias>androiddebugkey</sign.alias>
-        <sign.storepass>android</sign.storepass>
-        <sign.skip>true</sign.skip>
-        <android.signOnline>false</android.signOnline>
-        <project.build.Encoding>UTF-8</project.build.Encoding>
-        <android.compile.apilevel>18</android.compile.apilevel>
-    </properties>
-
     <build>
-
         <sourceDirectory>src</sourceDirectory>
         <plugins>
 
