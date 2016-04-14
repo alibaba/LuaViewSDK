@@ -1,7 +1,9 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.indicator.UDCircleViewPagerIndicator;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -35,6 +37,28 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
 
     public LuaValue getUnselectedColor(U view, Varargs varargs) {
         return getFileColor(view, varargs);
+    }
+
+    /**
+     * 设置选中颜色
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue selectedColor(U view, Varargs varargs) {
+        return pageColor(view, varargs);
+    }
+
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue setSelectedColor(U view, Varargs varargs) {
+        return setPageColor(view, varargs);
+    }
+
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue getSelectedColor(U view, Varargs varargs) {
+        return getPageColor(view, varargs);
     }
 
     /**
