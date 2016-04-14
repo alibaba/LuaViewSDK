@@ -1,0 +1,126 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.taobao.ju.android</groupId>
+    <artifactId>LuaViewSDK</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>aar</packaging>
+
+    <name>LuaView-Android SDK</name>
+
+    <description>
+        LuaView Android SDK, 2015.11.23 add by song
+    </description>
+
+    <build>
+
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.taobao.maven.plugins.android</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <!--<version>3.7.0</version>-->
+                <!--sdk打包-->
+                <inherited>true</inherited>
+                <extensions>true</extensions>
+                <configuration>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <sdk>
+                        <platform>18</platform>
+                    </sdk>
+                    <sourceDirectories>${project.basedir}/src</sourceDirectories>
+                    <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+                    <resourceDirectory>${project.basedir}/res</resourceDirectory>
+                    <assetsDirectory>${project.basedir}/assets</assetsDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://mvnrepo.alibaba-inc.com/mvn/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://mvnrepo.alibaba-inc.com/mvn/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencies>
+
+        <!-- android -->
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.4.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- support v4 -->
+        <dependency>
+            <groupId>com.android.support</groupId>
+            <artifactId>support-v4</artifactId>
+            <version>22.0.0</version>
+            <type>aar</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--recycler view-->
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>support-v7-recyclerview</artifactId>
+            <version>22</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- bcel -->
+        <dependency>
+            <groupId>org.apache.bcel</groupId>
+            <artifactId>bcel</artifactId>
+            <version>5.2</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <profiles>
+        <!-- 用于打bundle的awb-->
+        <profile>
+            <id>awb</id>
+            <properties>
+                <packaging.type>awb</packaging.type>
+                <scope.value>provided</scope.value>
+                <mergeManifests>false</mergeManifests>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>aar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <packaging.type>aar</packaging.type>
+                <scope.value>provided</scope.value>
+                <mergeManifests>false</mergeManifests>
+            </properties>
+        </profile>
+
+    </profiles>
+</project>
