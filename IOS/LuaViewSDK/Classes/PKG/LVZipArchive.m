@@ -334,26 +334,25 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
         return NO;
     }
     
-    NSFileManager *fm = [NSFileManager new];
+    NSFileManager *fm = [NSFileManager defaultManager];
     if (![fm createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL]) {
         LVLog(@"create directory(%@) error!", path);
         return NO;
     }
     
-    [fm changeCurrentDirectoryPath:path];
-    
     NSDictionary *attrs = nil;
     NSData *inflatedData = nil;
-    NSString *fileName = nil;
+    NSString *fileName = nil, *fullPath = nil;
     NSError *error = nil;
     for (LVZipEntry *entry in self.entries) {
         error = nil;
         attrs = [self attributes:entry];
         inflatedData = entry.inflatedData;
         fileName = entry.fileName;
+        fullPath = [path stringByAppendingPathComponent:fileName];
         
         if ([entry isDirectory]) {
-            BOOL r = [fm createDirectoryAtPath:fileName
+            BOOL r = [fm createDirectoryAtPath:fullPath
                    withIntermediateDirectories:YES
                                     attributes:attrs
                                          error:&error];
@@ -364,20 +363,21 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
         } else if ([entry isSymlink]) {
             NSString *dest = [[NSString alloc] initWithData:inflatedData
                                                    encoding:NSUTF8StringEncoding];
-            BOOL r = [fm createSymbolicLinkAtPath:fileName
+            BOOL r = [fm createSymbolicLinkAtPath:fullPath
                               withDestinationPath:dest
                                             error:&error];
             if (!r) {
                 LVLog(@"create symlink(%@) entry error:", fileName, error);
                 return NO;
             }
-            [fm setAttributes:attrs ofItemAtPath:fileName error:NULL];
+            [fm setAttributes:attrs ofItemAtPath:fullPath error:NULL];
         } else {
             NSString *dir = [fileName stringByDeletingLastPathComponent];
             if ([dir length] > 0) {
+                NSString *fullDirPath = [path stringByAppendingPathComponent:dir];
                 BOOL isDir = NO, r = NO;
-                if (![fm fileExistsAtPath:dir isDirectory:&isDir]) {
-                    r = [fm createDirectoryAtPath:dir
+                if (![fm fileExistsAtPath:fullDirPath isDirectory:&isDir]) {
+                    r = [fm createDirectoryAtPath:fullDirPath
                       withIntermediateDirectories:YES
                                        attributes:nil
                                             error:&error];
@@ -386,12 +386,12 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
                         return NO;
                     }
                 } else if (!isDir) {
-                    r = [fm removeItemAtPath:dir error:&error];
+                    r = [fm removeItemAtPath:fullDirPath error:&error];
                     if (!r) {
                         LVLog(@"remove exist file(%@) error:%@", dir, error);
                         return NO;
                     }
-                    r = [fm createDirectoryAtPath:dir
+                    r = [fm createDirectoryAtPath:fullDirPath
                       withIntermediateDirectories:YES
                                        attributes:nil
                                             error:NULL];
@@ -402,7 +402,7 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
                 }
             }
             
-            BOOL r = [fm createFileAtPath:fileName contents:inflatedData attributes:attrs];
+            BOOL r = [fm createFileAtPath:fullPath contents:inflatedData attributes:attrs];
             if (!r) {
                 LVLog(@"create file(%@) entry error", fileName);
                 return NO;

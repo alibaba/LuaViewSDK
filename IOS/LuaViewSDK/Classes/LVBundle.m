@@ -15,6 +15,7 @@
 @interface LVBundle () {
     NSMutableArray *_scriptPaths, *_resourcePaths;
     NSFileManager *_fileManager;
+    NSString *_currentPath;
 }
 
 @end
@@ -27,8 +28,8 @@
 - (id)init {
     self = [super init];
     if(self) {
-        _fileManager = [NSFileManager new];
-        [_fileManager changeCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
+        _fileManager = [NSFileManager defaultManager];
+        _currentPath = [[NSBundle mainBundle] resourcePath];
         
         _resourcePaths = [NSMutableArray arrayWithObjects:[LVUtil PathForCachesResource:nil], @".", nil];
         _scriptPaths = [NSMutableArray arrayWithObject:@"."];
@@ -37,11 +38,16 @@
 }
 
 - (NSString *)currentPath {
-    return [_fileManager currentDirectoryPath];
+    return _currentPath;
 }
 
 - (void)changeCurrentPath:(NSString *)path {
-    [_fileManager changeCurrentDirectoryPath:path];
+    NSAssert(path, @"current path could not be nil");
+    BOOL isDir = NO;
+    NSAssert([_fileManager fileExistsAtPath:path isDirectory:&isDir], @"%@ not exists", path);
+    NSAssert(isDir, @"%@ is not a directory", path);
+
+    _currentPath = path;
 }
 
 - (NSArray *)resourcePaths {
@@ -82,7 +88,7 @@
     } else if ([path hasPrefix:@"/"]) {
         return path;
     } else {
-        return [[_fileManager currentDirectoryPath] stringByAppendingPathComponent:path];
+        return [_currentPath stringByAppendingPathComponent:path];
     }
 }
 
@@ -93,16 +99,15 @@
     
     NSString *fullPath = nil;
     for (NSString *dir in _resourcePaths) {
-        fullPath = [dir stringByAppendingPathComponent:name];
+        fullPath = [self absolutePath:[dir stringByAppendingPathComponent:name]];
         if ([_fileManager fileExistsAtPath:fullPath]) {
-            return [self absolutePath:fullPath];
+            return fullPath;
         }
     }
     
     return nil;
 }
 
-// TODO: support signed resource
 - (NSData *)resourceWithName:(NSString *)name {
     if (name == nil) {
         return nil;
@@ -144,9 +149,9 @@
     
     NSString *fullPath = nil;
     for (NSString *dir in _scriptPaths) {
-        fullPath = [dir stringByAppendingPathComponent:name];
+        fullPath = [self absolutePath:[dir stringByAppendingPathComponent:name]];
         if ([_fileManager fileExistsAtPath:fullPath]) {
-            return [self absolutePath:fullPath];
+            return fullPath;
         }
     }
     
