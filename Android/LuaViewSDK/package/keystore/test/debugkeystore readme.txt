@@ -1,0 +1,2 @@
+alias：androiddebugkey 
+pwd：android

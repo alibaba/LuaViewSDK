@@ -2,16 +2,36 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.taobao.ju.android</groupId>
+        <artifactId>parent-pom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>com.taobao.ju.android</groupId>
     <artifactId>LuaViewSDK</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>aar</packaging>
+    <packaging>${packaging.type}</packaging>
 
     <name>LuaView-Android SDK</name>
 
     <description>
         LuaView Android SDK, 2015.11.23 add by song
     </description>
+
+    <properties>
+        <app.releasemode>true</app.releasemode>
+        <pakageidsegment>36</pakageidsegment>
+        <packaging.type>aar</packaging.type>
+        <sign.keystore>${basedir}/package/keystore/test/debug.keystore</sign.keystore>
+        <sign.alias>androiddebugkey</sign.alias>
+        <sign.storepass>android</sign.storepass>
+        <sign.skip>true</sign.skip>
+        <android.signOnline>false</android.signOnline>
+        <project.build.Encoding>UTF-8</project.build.Encoding>
+        <android.compile.apilevel>18</android.compile.apilevel>
+    </properties>
 
     <build>
 
