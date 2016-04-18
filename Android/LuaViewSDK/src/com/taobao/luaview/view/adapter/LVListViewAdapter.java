@@ -9,6 +9,7 @@ import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.LVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -87,7 +88,7 @@ public class LVListViewAdapter extends BaseAdapter {
         //数据封装
         UDLuaTable cellData = null;
         final boolean hasCellSize = this.mLuaUserData.hasCellSize(position);
-        if (convertView == null) {//在内部创建好Cell
+        if (convertView == null || !(convertView.getTag() instanceof UDLuaTable)) {//在内部创建好Cell
             UDView layout = new UDViewGroup(createLayout(), mGlobals, mLuaUserData.getmetatable(), null);
             //对外数据封装，必须使用LuaTable
             cellData = new UDLuaTable(layout);
@@ -106,7 +107,7 @@ public class LVListViewAdapter extends BaseAdapter {
         }
 
         if (hasCellSize) {//有Size的定义，每次更新size
-            initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题
+            initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
         }
 
         //绘制数据

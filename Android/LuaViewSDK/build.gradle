@@ -4,6 +4,7 @@ apply plugin: 'com.android.library'
 description = """LuaView-Android: 用lua写Android、iOS"""
 
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
 }

@@ -4,6 +4,7 @@ apply plugin: 'android'
 description = """LuaView-Android-Demo: 用lua写Android、iOS"""
 
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
 }
