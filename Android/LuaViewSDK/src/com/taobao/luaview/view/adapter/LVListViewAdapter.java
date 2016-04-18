@@ -96,6 +96,7 @@ public class LVListViewAdapter extends BaseAdapter {
             if (hasCellSize) {//有Size的定义
                 final LVViewGroup cellView = createLayout();
                 cellView.addView(layout.getView());
+                initCellSize(cellData, position);
                 convertView = cellView;
             } else {
                 convertView = layout.getView();
@@ -106,9 +107,9 @@ public class LVListViewAdapter extends BaseAdapter {
             cellData = (UDLuaTable) convertView.getTag();
         }
 
-        if (hasCellSize) {//有Size的定义，每次更新size
-            initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
-        }
+//        if (hasCellSize) {//有Size的定义，每次更新size
+//            initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
+//        }
 
         //绘制数据
         renderView(cellData, position);
