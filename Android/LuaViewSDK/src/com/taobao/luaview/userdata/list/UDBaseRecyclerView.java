@@ -7,6 +7,7 @@ import android.util.SparseIntArray;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVRecyclerView;
 
@@ -221,7 +222,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public boolean hasCellSize(int viewType) {
         final String id = getItemViewTypeName(viewType);
         if (id != null) {
-            return hasCellFunction("Size", id);
+            return hasCellFunction(id, "Size");
         }
         return false;
     }

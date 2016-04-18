@@ -16,7 +16,27 @@ local tableViewData = {
         local id = "Cell1" .. row
         print("Id", id)
         return id;
-        end
+        end,
+
+        Cell1 = {
+            Size = function(section, row)
+                print("Size", section, row, 10 + row * 2)
+                return 10 + row * 2
+            end,
+            Init = function(cell, section, row) -- 初始化cell
+            print("Init", section, row, 10 + row * 2)
+            cell.title = Label();
+            cell.title.backgroundColor(0xff0000)
+            end,
+            Layout = function(cell, section, row) -- cell复用时调用
+            print("Layout", section, row, 10 + row * 2)
+--            cell.title.frame(0, 0, s_width, 10 + row * 2)
+            cell.title.text(section .. '--' .. row)
+            end,
+            Callback = function(cell, section, row) -- 用户点击了section和row
+            Toast("Section " .. section .. ", Row " .. row .. cell.title.frame());
+            end
+        }
     }
 }
 
@@ -28,17 +48,17 @@ local cellData = function(_, key)
             return 10 + row * 2
         end,
         Init = function(cell, section, row) -- 初始化cell
-            print("Init", section, row, 10 + row * 2)
-            cell.title = Label();
-            cell.title.backgroundColor(0xff0000)
+        print("Init", section, row, 10 + row * 2)
+        cell.title = Label();
+        cell.title.backgroundColor(0xff0000)
         end,
         Layout = function(cell, section, row) -- cell复用时调用
-            print("Layout", section, row, 10 + row * 2)
-            cell.title.frame(0, 0, s_width, 10 + row * 2)
-            cell.title.text(section .. '--' .. row)
+        print("Layout", section, row, 10 + row * 2)
+        cell.title.frame(0, 0, s_width, 10 + row * 2)
+        cell.title.text(section .. '--' .. row)
         end,
         Callback = function(cell, section, row) -- 用户点击了section和row
-            Toast("Section " .. section .. ", Row " .. row .. cell.title.frame());
+        Toast("Section " .. section .. ", Row " .. row .. cell.title.frame());
         end
     }
 end

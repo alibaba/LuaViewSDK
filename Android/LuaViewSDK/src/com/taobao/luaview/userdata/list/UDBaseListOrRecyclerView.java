@@ -226,7 +226,7 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * @return
      */
     public boolean hasCellSize(int position) {
-        return hasCellFunction("Size", position);
+        return hasCellFunction(position, "Size");
     }
 
     /**
@@ -431,7 +431,7 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * @param position
      * @return
      */
-    private boolean hasCellFunction(String method, int position) {
+    private boolean hasCellFunction(int position, String method) {
         final int section = getSectionByPosition(position);
         final int row = getRowInSectionByPosition(position);
         final String id = getId(position, section, row);

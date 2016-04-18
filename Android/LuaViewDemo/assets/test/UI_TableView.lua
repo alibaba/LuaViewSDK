@@ -34,7 +34,7 @@ local cellData = function(_, key)
         end,
         Layout = function(cell, section, row) -- cell复用时调用
             print("Layout", section, row, 10 + row * 2)
-            cell.title.frame(0, 0, s_width, 10 + row * 2)
+--            cell.title.frame(0, 0, s_width, 10 + row * 2)
             cell.title.text(section .. '--' .. row)
         end,
         Callback = function(cell, section, row) -- 用户点击了section和row
