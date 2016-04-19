@@ -22,7 +22,7 @@ import org.luaj.vm2.LuaValue;
  * @date 15/8/31
  */
 public class LVListViewAdapter extends BaseAdapter {
-    private static final String KEY_POSITION = "_lv_key_position";
+    private static final String KEY_TYPE = "_lv_key_type";
     private UDBaseListView mLuaUserData;
     private Globals mGlobals;
 
@@ -91,7 +91,8 @@ public class LVListViewAdapter extends BaseAdapter {
         //数据封装
         UDLuaTable cellData = null;
         final boolean hasCellSize = this.mLuaUserData.hasCellSize(position);
-        if (convertView == null || ((UDLuaTable)convertView.getTag()).get(KEY_POSITION) != LuaValue.valueOf(position)) {//在内部创建好Cell
+        final int viewType = getItemViewType(position);
+        if (convertView == null || ((UDLuaTable)convertView.getTag()).get(KEY_TYPE) != LuaValue.valueOf(viewType)) {//在内部创建好Cell
             UDView layout = new UDViewGroup(createLayout(), mGlobals, mLuaUserData.getmetatable(), null);
             //对外数据封装，必须使用LuaTable
             cellData = new UDLuaTable(layout);
@@ -110,7 +111,7 @@ public class LVListViewAdapter extends BaseAdapter {
         }
 
         //更新position
-        cellData.set(KEY_POSITION, position);
+        cellData.set(KEY_TYPE, viewType);
 
         if (hasCellSize) {//有Size的定义，每次更新size
             initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
