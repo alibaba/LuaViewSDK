@@ -22,10 +22,6 @@ import org.luaj.vm2.LuaValue;
  */
 public class LVListViewAdapter extends BaseAdapter {
     private static final String KEY_VIEW_TYPE = "_lv_key_view_type";
-<<<<<<< 7d41a94c475117d9fb561d74f4abe122f63d1055
-=======
-
->>>>>>> bugfix: 修复ListViewAdapter cell重用的bug
     private UDBaseListView mLuaUserData;
     private Globals mGlobals;
 
@@ -115,10 +111,6 @@ public class LVListViewAdapter extends BaseAdapter {
 
         //更新position
         cellData.set(KEY_VIEW_TYPE, viewType);
-<<<<<<< 7d41a94c475117d9fb561d74f4abe122f63d1055
-=======
-
->>>>>>> bugfix: 修复ListViewAdapter cell重用的bug
         if (hasCellSize) {//有Size的定义，每次更新size
             initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
         }
