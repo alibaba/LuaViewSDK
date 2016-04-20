@@ -87,7 +87,7 @@ public class LVListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LogUtil.d("yesong", position, convertView, getItemViewType(position), getViewTypeCount());
+//        LogUtil.d("yesong", position, convertView, getItemViewType(position), getViewTypeCount());
         //数据封装
         UDLuaTable cellData = null;
         final boolean hasCellSize = this.mLuaUserData.hasCellSize(position);

@@ -86,19 +86,32 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             @Override
             protected Globals doInBackground(Object... params) {
                 //init
-                Constants.init(context);
-                LuaScriptManager.init(context);
+                initAsync();
 
                 //create globals
-                final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
-                globals.context = context;
-                LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
-                return globals;
+                return createGlobalsAsync();
             }
 
             @Override
             protected void onPostExecute(Globals globals) {
                 //create luaview
+                createViewAsync(globals);
+            }
+
+            //初始化
+            private void initAsync() {
+                Constants.init(context);
+                LuaScriptManager.init(context);
+            }
+
+            //创建globals
+            @NonNull
+            private Globals createGlobalsAsync() {
+                return createGlobals(context);
+            }
+
+            //创建view
+            private void createViewAsync(Globals globals) {
                 final LuaView luaView = createLuaView(context, globals);
                 if (createdCallback != null) {
                     createdCallback.onCreated(luaView);
@@ -416,7 +429,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public static ImageProvider getImageProvider() {
-        if(mImageProvider == null && mImageProviderClazz != null){
+        if (mImageProvider == null && mImageProviderClazz != null) {
             try {
                 mImageProvider = mImageProviderClazz.newInstance();
             } catch (InstantiationException e) {
