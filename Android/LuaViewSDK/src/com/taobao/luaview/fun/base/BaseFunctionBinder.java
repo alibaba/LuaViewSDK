@@ -10,6 +10,7 @@ import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @date 15/8/14
  */
 public abstract class BaseFunctionBinder extends TwoArgFunction {
+    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
     public String[] luaNames;
 
     public BaseFunctionBinder(String... name) {
@@ -54,8 +56,14 @@ public abstract class BaseFunctionBinder extends TwoArgFunction {
         return metaTable;
     }
 
+    /**
+     * 获取所有方法
+     *
+     * @param clazz
+     * @return
+     */
     private List<Method> getMapperMethods(final Class clazz) {
-        final Method[] methods = clazz != null ? clazz.getMethods() : null;
+        /*final Method[] methods = clazz != null ? clazz.getMethods() : null;
         if (methods != null && methods.length > 0) {
             final List<Method> result = new ArrayList<Method>();
             for (final Method method : methods) {
@@ -65,7 +73,24 @@ public abstract class BaseFunctionBinder extends TwoArgFunction {
             }
             return result;
         }
-        return null;
+        return null;*/
+        final List<Method> methods = new ArrayList<Method>();
+        getMapperMethodsByClazz(methods, clazz);
+        return methods.size() > 0 ? methods : null;
+    }
+
+    private void getMapperMethodsByClazz(final List<Method> result, final Class clazz) {
+        if (clazz != null && clazz.isAnnotationPresent(LuaViewLib.class)) {//XXXMapper
+            getMapperMethodsByClazz(result, clazz.getSuperclass());//处理super
+            final Method[] methods = clazz.getDeclaredMethods();
+            if (methods != null && methods.length > 0) {
+                for (final Method method : methods) {//add self
+                    if (method.getModifiers() == Modifier.PUBLIC) {//public 方法才行
+                        result.add(method);
+                    }
+                }
+            }
+        }
     }
 
     private LuaValue addNewIndex(LuaTable t) {
