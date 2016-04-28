@@ -1,8 +1,11 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.ui.UDViewPager;
 import com.taobao.luaview.util.LuaUtil;
+import com.taobao.luaview.view.viewpager.AutoScrollViewPager;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -93,6 +96,17 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
 
     public LuaValue getCurrentItem(U view, Varargs varargs) {
         return LuaUtil.toLuaInt(view.getCurrentItem());
+    }
+
+    /**
+     * 自动滚动
+     */
+    @LuaViewApi(since = VmVersion.V_5001)
+    public LuaValue autoScroll(U view, Varargs varargs) {
+        Integer duration = LuaUtil.getInt(varargs, 2);
+        duration = duration != null ? duration * 1000 : AutoScrollViewPager.DEFAULT_INTERVAL;
+        final boolean cycle = LuaUtil.getBoolean(varargs, AutoScrollViewPager.DEFAULT_CYCLE, 3, 2);
+        return view.setAutoScroll(duration, cycle);
     }
 
 }

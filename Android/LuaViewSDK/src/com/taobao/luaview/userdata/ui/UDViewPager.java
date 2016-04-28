@@ -1,6 +1,7 @@
 package com.taobao.luaview.userdata.ui;
 
 import com.taobao.luaview.util.LuaUtil;
+import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.LVViewPager;
 
 import org.luaj.vm2.Globals;
@@ -206,5 +207,24 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
      */
     public LuaValue getViewPagerIndicator() {
         return mViewPagerIndicator;
+    }
+
+    /**
+     * 自动滚动
+     */
+    public LuaValue setAutoScroll(int interval, boolean cycle){
+        final LVViewPager viewPager = getView();
+        if(viewPager != null){
+            viewPager.setCycle(cycle);
+            if(interval > 0) {
+                viewPager.setStopScrollWhenTouch(true);
+                viewPager.setInterval(interval);
+                viewPager.startAutoScroll();
+            } else {
+                viewPager.setStopScrollWhenTouch(false);
+                viewPager.stopAutoScroll();
+            }
+        }
+        return this;
     }
 }

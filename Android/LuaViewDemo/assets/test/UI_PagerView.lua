@@ -3,7 +3,7 @@ require "kit/lv_kit"
 
 local width, height = System.screenSize()
 
-local vp = PagerView({
+vp = PagerView({
     PageCount = 12,
     Pages = {
         Title = function(pos)
@@ -15,6 +15,15 @@ local vp = PagerView({
         Layout = function(page, pos)
             page.icon.text("测试按钮"..pos)
             page.icon.frame(0, 0, width, 200)
+            page.icon.callback(function()
+                if(pos % 2 ~= 0) then
+                    print("aaa")
+                    vp.autoScroll(3, false)
+                else
+                    print("bbb")
+                    vp.autoScroll(0)
+                end
+            end)
         end
     },
     Callback = {
