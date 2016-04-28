@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.View;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.debug.DebugConnection;
@@ -529,22 +530,15 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     /**
      * 当显示的时候调用
      */
-    /*@Override
+    @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        if (visibility == View.VISIBLE) {//onShow
-            NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
-        }
+        onShow(visibility);
         super.onWindowVisibilityChanged(visibility);
-        if (visibility != View.VISIBLE) {//onHide
-            NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
-            if (mLuaCache != null) {
-                mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
-            }
-        }
-    }*/
+        onHide(visibility);
+    }
 
     /**
-     * 显示的时候调用
+     * 创建的时候调用
      */
     @Override
     protected void onAttachedToWindow() {
@@ -622,20 +616,47 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return mRenderTarget != null ? mRenderTarget : this;
     }
 
-    //----------------------------------------cached object 管理-------------------------------------
+    //----------------------------------------显示的生命周期 管理-------------------------------------
 
+    /**
+     * View初始化的时候注册监听
+     */
     private void onAttached() {
-        NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
+    }
+
+    /**
+     * 显示
+     *
+     * @param visibility
+     */
+    private void onShow(int visibility) {
+        if (visibility == View.VISIBLE) {//onShow
+            NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
+        }
+    }
+
+    /**
+     * 隐藏
+     *
+     * @param visibility
+     */
+    private void onHide(int visibility) {
+        if (visibility != View.VISIBLE) {//onHide
+            NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
+        }
     }
 
     /**
      * 在onDetached的时候清空cache
      */
     private void onDetached() {
-        NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
+        if (mLuaCache != null) {//清空cache数据
+            mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
+        }
         LuaCache.clear();
     }
 
+    //----------------------------------------cached object 管理-------------------------------------
     public void cacheObject(Class type, LuaCache.CacheableObject obj) {
         if (mLuaCache != null) {
             mLuaCache.cacheObject(type, obj);
