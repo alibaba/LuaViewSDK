@@ -128,6 +128,12 @@ static inline NSInteger mapSection(NSInteger section){
     NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) ];
     if( identifier ) {
         CGSize size = [self retSizeCallKey1:"Cell" key2:identifier.UTF8String key3:"Size" mapedSection:mapSection(section) mapedRow:mapRow(row) ];
+        if( size.width<0 || isnan(size.width) ) {
+            size.width = 0;
+        }
+        if( size.height<0 || isnan(size.height) ) {
+            size.height = 0;
+        }
         return size;
     } else {
         return CGSizeMake(self.owner.frame.size.width, 1);
