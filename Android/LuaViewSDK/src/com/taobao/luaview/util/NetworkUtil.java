@@ -11,6 +11,7 @@ import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
 
 /**
  * Network Util
+ *
  * @author song
  */
 public class NetworkUtil {
@@ -79,8 +80,11 @@ public class NetworkUtil {
             try {
                 sConnectionBroadcastReceiver.removeOnConnectionChangeListener(listener);
                 context.unregisterReceiver(sConnectionBroadcastReceiver);
-                sConnectionBroadcastReceiver = null;
-            } catch (Exception e){//保护
+
+                if (sConnectionBroadcastReceiver.getListenerSize() == 0) {//没有listener的时候清空
+                    sConnectionBroadcastReceiver = null;
+                }
+            } catch (Exception e) {//保护
                 e.printStackTrace();
             }
         }
