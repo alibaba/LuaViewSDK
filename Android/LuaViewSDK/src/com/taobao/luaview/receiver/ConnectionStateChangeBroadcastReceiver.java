@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * 监听网络状态变化
+ *
  * @author song
  */
 public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
@@ -38,6 +39,14 @@ public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
         if (this.mOnConnectionChangeListeners != null && this.mOnConnectionChangeListeners.contains(listener)) {
             this.mOnConnectionChangeListeners.remove(listener);
         }
+    }
+
+    /**
+     * 获得listener size
+     * @return
+     */
+    public int getListenerSize() {
+        return mOnConnectionChangeListeners != null ? mOnConnectionChangeListeners.size() : 0;
     }
 
     @Override
