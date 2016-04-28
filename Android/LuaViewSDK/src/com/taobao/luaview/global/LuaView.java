@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.view.View;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.debug.DebugConnection;
@@ -530,7 +529,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     /**
      * 当显示的时候调用
      */
-    @Override
+    /*@Override
     protected void onWindowVisibilityChanged(int visibility) {
         if (visibility == View.VISIBLE) {//onShow
             NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
@@ -542,14 +541,20 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
             }
         }
-    }
+    }*/
 
+    /**
+     * 显示的时候调用
+     */
     @Override
     protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
         onAttached();
+        super.onAttachedToWindow();
     }
 
+    /**
+     * 离开的时候调用
+     */
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -620,13 +625,14 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     //----------------------------------------cached object 管理-------------------------------------
 
     private void onAttached() {
-
+        NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
     }
 
     /**
      * 在onDetached的时候清空cache
      */
     private void onDetached() {
+        NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
         LuaCache.clear();
     }
 
