@@ -532,32 +532,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     protected void onWindowVisibilityChanged(int visibility) {
         onShow(visibility);
         super.onWindowVisibilityChanged(visibility);
-<<<<<<< 8ffb38dbae75c0c006f3e893423adf2afa8f0e49
-<<<<<<< 4ccb78652a1e5faa97a07b58cad5a0e4a0a743f5
         onHide(visibility);
     }
 
     /**
      * 创建的时候调用
-=======
-        if (visibility != View.VISIBLE) {//onHide
-            NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
-            if (mLuaCache != null) {
-                mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
-            }
-        }
-    }*/
-
-    /**
-     * 显示的时候调用
->>>>>>> bugfix: 修复BroadcastReceiver 内存泄露的问题
-=======
-        onHide(visibility);
-    }
-
-    /**
-     * 创建的时候调用
->>>>>>> request update: 重构，同时在onHide时候的改到detached里面
      */
     @Override
     protected void onAttachedToWindow() {
