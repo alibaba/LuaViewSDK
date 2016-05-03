@@ -38,7 +38,7 @@ public class LuaViewUtil {
     public static void setId(View view) {
         if (view != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                try {
+                try {//samsung SM-N9009(4.3) crash here, so protected
                     view.setId(View.generateViewId());
                 } catch (Exception e) {
                     view.setId(generateViewId());
