@@ -6,36 +6,14 @@ import android.os.Message;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.animation.Interpolator;
+import android.view.View;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 
-/**
- * Auto Scroll View Pager
- * <ul>
- * <strong>Basic Setting and Usage</strong>
- * <li>{@link #startAutoScroll()} start auto scroll, or {@link #startAutoScroll(int)} start auto scroll delayed</li>
- * <li>{@link #stopAutoScroll()} stop auto scroll</li>
- * <li>{@link #setInterval(long)} set auto scroll time in milliseconds, default is {@link #DEFAULT_INTERVAL}</li>
- * </ul>
- * <ul>
- * <strong>Advanced Settings and Usage</strong>
- * <li>{@link #setDirection(int)} set auto scroll direction</li>
- * <li>{@link #setCycle(boolean)} set whether automatic cycle when auto scroll reaching the last or first item, default
- * is true</li>
- * <li>{@link #setSlideBorderMode(int)} set how to process when sliding at the last or first item</li>
- * <li>{@link #setStopScrollWhenTouch(boolean)} set whether stop auto scroll when touching, default is true</li>
- * </ul>
- *
- * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-12-30
- */
 public class AutoScrollViewPager extends ViewPager {
 
-    public static final int DEFAULT_INTERVAL = 1500;
-    public static final boolean DEFAULT_CYCLE = true;
+    public static final int DEFAULT_INTERVAL = 3000;
 
     public static final int LEFT = 0;
     public static final int RIGHT = 1;
@@ -62,10 +40,6 @@ public class AutoScrollViewPager extends ViewPager {
      **/
     private int direction = RIGHT;
     /**
-     * whether automatic cycle when auto scroll reaching the last or first item, default is true
-     **/
-    private boolean isCycle = DEFAULT_CYCLE;
-    /**
      * whether stop auto scroll when touching, default is true
      **/
     private boolean stopScrollWhenTouch = true;
@@ -88,9 +62,9 @@ public class AutoScrollViewPager extends ViewPager {
 
     private Handler handler;
     private boolean isAutoScroll = false;
+    private boolean isStopByUIChange = false;
     private boolean isStopByTouch = false;
     private float touchX = 0f, downX = 0f;
-    private CustomDurationScroller scroller = null;
 
     public static final int SCROLL_WHAT = 0;
 
@@ -99,14 +73,8 @@ public class AutoScrollViewPager extends ViewPager {
         init();
     }
 
-    public AutoScrollViewPager(Context paramContext, AttributeSet paramAttributeSet) {
-        super(paramContext, paramAttributeSet);
-        init();
-    }
-
     private void init() {
         handler = new MyHandler(this);
-        setViewPagerScroller();
     }
 
     /**
@@ -114,7 +82,7 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void startAutoScroll() {
         isAutoScroll = true;
-        sendScrollMessage((long) (interval + scroller.getDuration() / autoScrollFactor * swipeScrollFactor));
+        sendScrollMessage(interval);
     }
 
     /**
@@ -156,23 +124,6 @@ public class AutoScrollViewPager extends ViewPager {
     }
 
     /**
-     * set ViewPager scroller to change animation duration when sliding
-     */
-    private void setViewPagerScroller() {
-        try {
-            Field scrollerField = ViewPager.class.getDeclaredField("mScroller");
-            scrollerField.setAccessible(true);
-            Field interpolatorField = ViewPager.class.getDeclaredField("sInterpolator");
-            interpolatorField.setAccessible(true);
-
-            scroller = new CustomDurationScroller(getContext(), (Interpolator) interpolatorField.get(null));
-            scrollerField.set(this, scroller);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * scroll only once
      */
     public void scrollOnce() {
@@ -185,13 +136,9 @@ public class AutoScrollViewPager extends ViewPager {
 
         int nextItem = (direction == LEFT) ? --currentItem : ++currentItem;
         if (nextItem < 0) {
-            if (isCycle) {
-                setCurrentItem(totalCount - 1, isBorderAnimation);
-            }
+            setCurrentItem(totalCount - 1, isBorderAnimation);
         } else if (nextItem == totalCount) {
-            if (isCycle) {
-                setCurrentItem(0, isBorderAnimation);
-            }
+            setCurrentItem(0, isBorderAnimation);
         } else {
             setCurrentItem(nextItem, true);
         }
@@ -264,10 +211,8 @@ public class AutoScrollViewPager extends ViewPager {
                 case SCROLL_WHAT:
                     AutoScrollViewPager pager = this.autoScrollViewPager.get();
                     if (pager != null) {
-                        pager.scroller.setScrollDurationFactor(pager.autoScrollFactor);
                         pager.scrollOnce();
-                        pager.scroller.setScrollDurationFactor(pager.swipeScrollFactor);
-                        pager.sendScrollMessage(pager.interval + pager.scroller.getDuration());
+                        pager.sendScrollMessage(pager.interval);
                     }
                 default:
                     break;
@@ -309,24 +254,6 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void setDirection(int direction) {
         this.direction = direction;
-    }
-
-    /**
-     * whether automatic cycle when auto scroll reaching the last or first item, default is true
-     *
-     * @return the isCycle
-     */
-    public boolean isCycle() {
-        return isCycle;
-    }
-
-    /**
-     * set whether automatic cycle when auto scroll reaching the last or first item, default is true
-     *
-     * @param isCycle the isCycle to set
-     */
-    public void setCycle(boolean isCycle) {
-        this.isCycle = isCycle;
     }
 
     /**
@@ -383,5 +310,25 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void setBorderAnimation(boolean isBorderAnimation) {
         this.isBorderAnimation = isBorderAnimation;
+    }
+
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        if (visibility == View.VISIBLE && isStopByUIChange) {
+            isStopByUIChange = false;
+            startAutoScroll();
+        }
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility != View.VISIBLE) {
+            isStopByUIChange = true;
+            stopAutoScroll();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        isStopByUIChange = true;
+        stopAutoScroll();
     }
 }

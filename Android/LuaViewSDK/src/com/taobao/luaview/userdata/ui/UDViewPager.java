@@ -212,10 +212,9 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
     /**
      * 自动滚动
      */
-    public LuaValue setAutoScroll(int interval, boolean cycle){
+    public LuaValue setAutoScroll(int interval){
         final LVViewPager viewPager = getView();
         if(viewPager != null){
-            viewPager.setCycle(cycle);
             if(interval > 0) {
                 viewPager.setStopScrollWhenTouch(true);
                 viewPager.setInterval(interval);

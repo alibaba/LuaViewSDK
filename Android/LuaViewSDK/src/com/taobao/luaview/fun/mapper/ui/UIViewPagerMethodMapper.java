@@ -101,12 +101,11 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
     /**
      * 自动滚动
      */
-    @LuaViewApi(since = VmVersion.V_5001)
+    @LuaViewApi(since = VmVersion.V_501)
     public LuaValue autoScroll(U view, Varargs varargs) {
         Integer duration = LuaUtil.getInt(varargs, 2);
         duration = duration != null ? duration * 1000 : AutoScrollViewPager.DEFAULT_INTERVAL;
-        final boolean cycle = LuaUtil.getBoolean(varargs, AutoScrollViewPager.DEFAULT_CYCLE, 3, 2);
-        return view.setAutoScroll(duration, cycle);
+        return view.setAutoScroll(duration);
     }
 
 }
