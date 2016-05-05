@@ -37,3 +37,9 @@ indicator = PagerIndicator();
 indicator.pageColor(0xff00FF);
 pageView.indicator( indicator );
 indicator.frame(0,10,scrW,100);
+
+
+pageView.autoScroll(1, false)
+
+
+
