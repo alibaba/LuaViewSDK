@@ -420,10 +420,10 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setTranslation(Float tx, Float ty) {
         final View view = getView();
         if (view != null) {
-            if(tx != null) {
+            if (tx != null) {
                 view.setTranslationX(tx);
             }
-            if(ty != null) {
+            if (ty != null) {
                 view.setTranslationY(ty);
             }
         }
@@ -589,16 +589,22 @@ public class UDView<T extends View> extends BaseUserdata {
     }
 
     /**
-     * setBackgroundResource,根据picName找到对应id
+     * setBackgroundResource
      *
      * @param picName String
      */
     public UDView setBackgroundResource(String picName) {
         final View view = getView();
         if (view != null) {
-            final int id = view.getResources().getIdentifier(picName, "drawable", view.getContext().getPackageName());
-            if (id != 0) {
-                view.setBackgroundResource(id);
+            if (getLuaResourceFinder() != null) {
+                Drawable drawable = getLuaResourceFinder().findDrawable(picName);
+                if (drawable != null) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        view.setBackground(drawable);
+                    } else {
+                        view.setBackgroundDrawable(drawable);
+                    }
+                }
             }
         }
         return this;
