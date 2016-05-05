@@ -50,17 +50,10 @@ public class AutoScrollViewPager extends ViewPager {
     /**
      * whether animating when auto scroll at the last or first item
      **/
-    private boolean isBorderAnimation = true;
-    /**
-     * scroll factor for auto scroll animation, default is 1.0
-     **/
-    private double autoScrollFactor = 1.0;
-    /**
-     * scroll factor for swipe scroll animation, default is 1.0
-     **/
-    private double swipeScrollFactor = 1.0;
+    private boolean isBorderAnimation = false;
 
     private Handler handler;
+    private boolean reverseDirection = true;
     private boolean isAutoScroll = false;
     private boolean isStopByUIChange = false;
     private boolean isStopByTouch = false;
@@ -103,24 +96,16 @@ public class AutoScrollViewPager extends ViewPager {
         handler.removeMessages(SCROLL_WHAT);
     }
 
-    /**
-     * set the factor by which the duration of sliding animation will change while swiping
-     */
-    public void setSwipeScrollDurationFactor(double scrollFactor) {
-        swipeScrollFactor = scrollFactor;
-    }
-
-    /**
-     * set the factor by which the duration of sliding animation will change while auto scrolling
-     */
-    public void setAutoScrollDurationFactor(double scrollFactor) {
-        autoScrollFactor = scrollFactor;
-    }
 
     private void sendScrollMessage(long delayTimeInMills) {
         /** remove messages before, keeps one message is running at most **/
         handler.removeMessages(SCROLL_WHAT);
         handler.sendEmptyMessageDelayed(SCROLL_WHAT, delayTimeInMills);
+    }
+
+    private int getCount(PagerAdapter adapter) {
+//        return adapter instanceof LoopPagerAdapterWrapper ? ((LoopPagerAdapterWrapper) adapter).getRealCount() : adapter.getCount();
+        return adapter.getCount();
     }
 
     /**
@@ -130,15 +115,24 @@ public class AutoScrollViewPager extends ViewPager {
         PagerAdapter adapter = getAdapter();
         int currentItem = getCurrentItem();
         int totalCount;
-        if (adapter == null || (totalCount = adapter.getCount()) <= 1) {
+        if (adapter == null || (totalCount = getCount(adapter)) <= 1) {
             return;
+        }
+
+        //调整方向
+        if (reverseDirection) {
+            if (direction == RIGHT && currentItem + 1 >= totalCount) {
+                direction = LEFT;
+            } else if (direction == LEFT && currentItem - 1 < 0) {
+                direction = RIGHT;
+            }
         }
 
         int nextItem = (direction == LEFT) ? --currentItem : ++currentItem;
         if (nextItem < 0) {
-            setCurrentItem(totalCount - 1, isBorderAnimation);
+            setCurrentItem(totalCount - 1);
         } else if (nextItem == totalCount) {
-            setCurrentItem(0, isBorderAnimation);
+            setCurrentItem(0);
         } else {
             setCurrentItem(nextItem, true);
         }
@@ -310,6 +304,10 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void setBorderAnimation(boolean isBorderAnimation) {
         this.isBorderAnimation = isBorderAnimation;
+    }
+
+    public void setReverseDirection(boolean reverseDirection) {
+        this.reverseDirection = reverseDirection;
     }
 
     @Override
