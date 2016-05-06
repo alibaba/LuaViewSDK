@@ -353,6 +353,13 @@ static int autoScroll(lv_State *L){
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
         if([view isKindOfClass: [UIScrollView class]]){
+            
+            int totalPages = view.cellArray.count;
+            
+            if(totalPages < 2){//小于两个没有效果
+                return 0;
+            }
+            
             if(lv_gettop(L) >= 2) {
                 float interval = lv_tonumber(L, 2);
                 
