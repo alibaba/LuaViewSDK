@@ -5,13 +5,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-public class AutoScrollViewPager extends ViewPager {
+public class AutoScrollViewPager extends LoopViewPager {
 
     public static final int DEFAULT_INTERVAL = 3000;
 
@@ -47,13 +46,9 @@ public class AutoScrollViewPager extends ViewPager {
      * how to process when sliding at the last or first item, default is {@link #SLIDE_BORDER_MODE_NONE}
      **/
     private int slideBorderMode = SLIDE_BORDER_MODE_NONE;
-    /**
-     * whether animating when auto scroll at the last or first item
-     **/
-    private boolean isBorderAnimation = false;
 
     private Handler handler;
-    private boolean reverseDirection = true;
+    private boolean reverseDirection = false;
     private boolean isAutoScroll = false;
     private boolean isStopByUIChange = false;
     private boolean isStopByTouch = false;
@@ -113,28 +108,32 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void scrollOnce() {
         PagerAdapter adapter = getAdapter();
-        int currentItem = getCurrentItem();
-        int totalCount;
-        if (adapter == null || (totalCount = getCount(adapter)) <= 1) {
+        int realPosition = getCurrentItem();
+        int realCount;
+        if (adapter == null || (realCount = getRealCount()) <= 1) {
             return;
         }
 
         //调整方向
         if (reverseDirection) {
-            if (direction == RIGHT && currentItem + 1 >= totalCount) {
+            if (direction == RIGHT && realPosition + 1 >= realCount) {
                 direction = LEFT;
-            } else if (direction == LEFT && currentItem - 1 < 0) {
+            } else if (direction == LEFT && realPosition - 1 < 0) {
                 direction = RIGHT;
             }
         }
 
-        int nextItem = (direction == LEFT) ? --currentItem : ++currentItem;
-        if (nextItem < 0) {
-            setCurrentItem(totalCount - 1);
-        } else if (nextItem == totalCount) {
-            setCurrentItem(0);
+        if (isLooping()) {
+            setCurrentItem(direction == LEFT ? (realPosition - 1) % getCount() : (realPosition + 1) % getCount(), true);
         } else {
-            setCurrentItem(nextItem, true);
+            int nextItem = (direction == LEFT) ? --realPosition : ++realPosition;
+            if (nextItem < 0) {
+                setCurrentItem(realCount - 1, true);
+            } else if (nextItem == realCount) {
+                setCurrentItem(0, true);
+            } else {
+                setCurrentItem(nextItem, true);
+            }
         }
     }
 
@@ -177,7 +176,7 @@ public class AutoScrollViewPager extends ViewPager {
                     getParent().requestDisallowInterceptTouchEvent(false);
                 } else {
                     if (pageCount > 1) {
-                        setCurrentItem(pageCount - currentItem - 1, isBorderAnimation);
+                        setCurrentItem(pageCount - currentItem - 1, false);
                     }
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
@@ -286,24 +285,6 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void setSlideBorderMode(int slideBorderMode) {
         this.slideBorderMode = slideBorderMode;
-    }
-
-    /**
-     * whether animating when auto scroll at the last or first item, default is true
-     *
-     * @return
-     */
-    public boolean isBorderAnimation() {
-        return isBorderAnimation;
-    }
-
-    /**
-     * set whether animating when auto scroll at the last or first item, default is true
-     *
-     * @param isBorderAnimation
-     */
-    public void setBorderAnimation(boolean isBorderAnimation) {
-        this.isBorderAnimation = isBorderAnimation;
     }
 
     public void setReverseDirection(boolean reverseDirection) {

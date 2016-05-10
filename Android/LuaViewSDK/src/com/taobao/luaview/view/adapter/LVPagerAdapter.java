@@ -10,6 +10,7 @@ import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.userdata.ui.UDViewPager;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
 
@@ -19,6 +20,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Pager Adapter
+ *
  * @author song
  * @date 15/9/17
  */
@@ -46,37 +48,52 @@ public class LVPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        final WeakReference<View> weakReference = mViews != null ? mViews.get(position) : null;
-        if (weakReference != null && weakReference.get() != null) {
-            return weakReference.get();
-        } else {
-            //View封装
-            final UDView page = new UDViewGroup(createPageLayout(), mGlobals, mInitProps.getmetatable(), null);
-            //对外数据封装，必须使用LuaTable
-            final UDLuaTable pageData = new UDLuaTable(page);
-            final View pageView = pageData.getView();
-            //添加view
-            container.addView(pageView);
-            //初始化View
-            initView(pageData, position);
-            //绘制数据
-            renderView(pageData, position);
+//        final WeakReference<View> weakReference = mViews != null ? mViews.get(position) : null;
+//        if (weakReference != null && weakReference.get() != null) {
+//            return weakReference.get();
+//        } else {
+            return newItem(container, position);
+//        }
+    }
 
-            //add to list
-            mViews.put(position, new WeakReference<View>(pageView));
-
-            return pageView;
-        }
+    public Object newItem(ViewGroup container, int position) {
+        LogUtil.d("yesong", "newItem", position);
+        //View封装
+        final UDView page = new UDViewGroup(createPageLayout(), mGlobals, mInitProps.getmetatable(), null);
+        //对外数据封装，必须使用LuaTable
+        final UDLuaTable pageData = new UDLuaTable(page);
+        final View pageView = pageData.getView();
+        //添加view
+        container.addView(pageView);
+        //初始化View
+        initView(pageData, position);
+        //绘制数据
+        renderView(pageData, position);
+        //add to list
+        mViews.put(position, new WeakReference<View>(pageView));
+        return pageView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        removeItem(container, position, object);
+    }
+
+    /**
+     * remove item from container
+     *
+     * @param container
+     * @param position
+     * @param object
+     */
+    private void removeItem(ViewGroup container, int position, Object object) {
+        LogUtil.d("yesong", "removeItem", position);
         if (object instanceof View) {
             container.removeView((View) object);
         }
-        if (mViews != null) {
-            mViews.put(position, null);
-        }
+//        if (mViews != null) {
+//            mViews.put(position, null);
+//        }
     }
 
     /**
