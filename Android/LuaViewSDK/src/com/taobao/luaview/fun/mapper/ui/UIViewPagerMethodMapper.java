@@ -105,18 +105,20 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
     public LuaValue autoScroll(U view, Varargs varargs) {
         Integer duration = LuaUtil.getInt(varargs, 2);
         duration = duration != null ? duration * 1000 : AutoScrollViewPager.DEFAULT_INTERVAL;
-        return view.setAutoScroll(duration);
+        final boolean reverseDirection = LuaUtil.getBoolean(varargs, false, 3);
+        return view.setAutoScroll(duration, reverseDirection);
     }
 
     /**
      * 是否循环滚动
+     *
      * @param view
      * @param varargs
      * @return
      */
     @LuaViewApi(since = VmVersion.V_501)
-    public LuaValue looping(U view, Varargs varargs){
-        if(varargs.narg() > 1){
+    public LuaValue looping(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
             return setLooping(view, varargs);
         } else {
             return isLooping(view, varargs);
@@ -124,13 +126,13 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
     }
 
     @LuaViewApi(since = VmVersion.V_501)
-    public LuaValue setLooping(U view, Varargs varargs){
+    public LuaValue setLooping(U view, Varargs varargs) {
         final boolean looping = LuaUtil.getBoolean(varargs, false, 2);
         return view.setLooping(looping);
     }
 
     @LuaViewApi(since = VmVersion.V_501)
-    public LuaValue isLooping(U view, Varargs varargs){
+    public LuaValue isLooping(U view, Varargs varargs) {
         return valueOf(view.isLooping());
     }
 }
