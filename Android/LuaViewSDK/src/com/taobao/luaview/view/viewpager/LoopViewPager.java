@@ -91,7 +91,7 @@ public class LoopViewPager extends ViewPager {
         final int currentFakeItem = super.getCurrentItem();
         LogUtil.d("yesong", "setCurrentItem", fakeItem, currentFakeItem);
         if (fakeItem != currentFakeItem) {
-            super.setCurrentItem(fakeItem, false);
+            super.setCurrentItem(fakeItem, smoothScroll);
         }
     }
 

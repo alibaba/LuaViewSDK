@@ -98,11 +98,6 @@ public class AutoScrollViewPager extends LoopViewPager {
         handler.sendEmptyMessageDelayed(SCROLL_WHAT, delayTimeInMills);
     }
 
-    private int getCount(PagerAdapter adapter) {
-//        return adapter instanceof LoopPagerAdapterWrapper ? ((LoopPagerAdapterWrapper) adapter).getRealCount() : adapter.getCount();
-        return adapter.getCount();
-    }
-
     /**
      * scroll only once
      */

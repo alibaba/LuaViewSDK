@@ -17,14 +17,20 @@ vp = PagerView({
             page.icon.text("测试按钮"..(pos-1))
             page.icon.frame(0, 0, width, 200)
             page.icon.callback(function()
-                if(pos % 2 ~= 0) then
-                    print("yesong", "aaa")
+                if(pos == 1) then
+                    print("yesong", "1111")
                     vp.looping(true)
                     vp.autoScroll(1)
-                else
-                    print("yesong", "bbb")
+                elseif(pos == 2) then
+                    print("yesong", "2222")
                     vp.looping(false)
                     vp.autoScroll(0)
+                elseif(pos == 3) then
+                    print("yesong", "3333")
+                    vp.autoScroll(1, true)
+                elseif(pos == 4) then
+                    vp.looping(true)
+                    print("yesong", "4444")
                 end
             end)
         end
