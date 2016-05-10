@@ -4,7 +4,7 @@ require "kit/lv_kit"
 local width, height = System.screenSize()
 
 vp = PagerView({
-    PageCount = 5,
+    PageCount = 4,
     Pages = {
         Title = function(pos)
             return "Title"
@@ -13,14 +13,17 @@ vp = PagerView({
             page.icon = Button()
         end,
         Layout = function(page, pos)
-            page.icon.text("测试按钮"..pos)
+--            print("yesong", "Layout", pos-1)
+            page.icon.text("测试按钮"..(pos-1))
             page.icon.frame(0, 0, width, 200)
             page.icon.callback(function()
                 if(pos % 2 ~= 0) then
-                    print("aaa")
+                    print("yesong", "aaa")
+                    vp.looping(true)
                     vp.autoScroll(1)
                 else
-                    print("bbb")
+                    print("yesong", "bbb")
+                    vp.looping(false)
                     vp.autoScroll(0)
                 end
             end)

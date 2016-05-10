@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.taobao.luaview.util.LogUtil;
+import com.taobao.luaview.view.adapter.LVLoopPagerAdapter;
 
 /**
  * A ViewPager subclass enabling infinte scrolling of the viewPager elements
@@ -26,73 +27,71 @@ import com.taobao.luaview.util.LogUtil;
  * [0->3, 1->0, 2->1, 3->2, 4->3, 5->0]
  */
 public class LoopViewPager extends ViewPager {
-
-
     private OnPageChangeListener mOuterPageChangeListener;
-    private LoopPagerAdapterWrapper mAdapter;
+    private LVLoopPagerAdapter mAdapter;
+
+    private float mPreviousOffset = -1;
+    private float mPreviousRealPosition = -1;
 
     public LoopViewPager(Context context) {
         super(context);
         init();
     }
 
-    /**
-     * helper function which may be used when implementing FragmentPagerAdapter
-     *
-     * @param position
-     * @param count
-     * @return (position-1)%count
-     */
-    public static int toRealPosition(int position, int count) {
-        position = position - 1;
-        if (position < 0) {
-            position += count;
-        } else {
-            position = position % count;
-        }
-        return position;
-    }
-
-    /**
-     * If set to true, the boundary views (i.e. first and last) will never be destroyed
-     * This may help to prevent "blinking" of some views
-     *
-     * @param flag
-     */
-    public void setBoundaryCaching(boolean flag) {
-        if (mAdapter != null) {
-            mAdapter.setBoundaryCaching(flag);
-        }
-    }
-
     @Override
     public void setAdapter(PagerAdapter adapter) {
-        mAdapter = new LoopPagerAdapterWrapper(adapter);
+        mAdapter = (LVLoopPagerAdapter) adapter;
         super.setAdapter(mAdapter);
         setCurrentItem(0, false);
     }
 
     @Override
     public PagerAdapter getAdapter() {
-        return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
+        return mAdapter;
+    }
+
+    public int getRealCount() {
+        return mAdapter != null ? mAdapter.getRealCount() : 0;
+    }
+
+    public int getCount() {
+        return mAdapter != null ? mAdapter.getCount() : 0;
+    }
+
+    public void setLooping(boolean looping) {
+        if (mAdapter != null && mAdapter.isLooping() != looping) {
+            final int currentPosition = super.getCurrentItem();
+            super.setAdapter(null);
+            mAdapter.setLooping(looping);
+            super.setAdapter(mAdapter);
+            if (looping) {
+                super.setCurrentItem(mAdapter.toFakePosition(currentPosition), false);
+            }
+            mPreviousRealPosition = -1;
+            mPreviousOffset = -1;
+        }
+    }
+
+    public boolean isLooping() {
+        return mAdapter != null && mAdapter.isLooping();
     }
 
     @Override
     public int getCurrentItem() {
-        return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : 0;
-    }
-
-    public void setCurrentItem(int item, boolean smoothScroll) {
-        LogUtil.d("yesong", "setCurrentItem", item, smoothScroll);
-        int realItem = mAdapter.toInnerPosition(item);
-        super.setCurrentItem(realItem, smoothScroll);
+        return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : super.getCurrentItem();
     }
 
     @Override
     public void setCurrentItem(int item) {
-        LogUtil.d("yesong", "setCurrentItem", item);
-        if (getCurrentItem() != item) {
-            setCurrentItem(item, true);
+        setCurrentItem(item, false);
+    }
+
+    public void setCurrentItem(int realItem, boolean smoothScroll) {
+        final int fakeItem = mAdapter.toFakePosition(realItem);
+        final int currentFakeItem = super.getCurrentItem();
+        LogUtil.d("yesong", "setCurrentItem", fakeItem, currentFakeItem);
+        if (fakeItem != currentFakeItem) {
+            super.setCurrentItem(fakeItem, false);
         }
     }
 
@@ -101,69 +100,79 @@ public class LoopViewPager extends ViewPager {
         mOuterPageChangeListener = listener;
     }
 
-    private void init() {
-        super.setOnPageChangeListener(onPageChangeListener);
+    private boolean isBoundaryPosition(int position) {
+        return position == 0 || (position == getCount() - 1);
     }
 
-    private OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
-        private float mPreviousOffset = -1;
-        private float mPreviousPosition = -1;
-
-        @Override
-        public void onPageSelected(int position) {
-
-            int realPosition = mAdapter.toRealPosition(position);
-            if (mPreviousPosition != realPosition) {
-                mPreviousPosition = realPosition;
-                if (mOuterPageChangeListener != null) {
-                    mOuterPageChangeListener.onPageSelected(realPosition);
-                }
-            }
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            int realPosition = position;
-            if (mAdapter != null) {
-                realPosition = mAdapter.toRealPosition(position);
-
-                LogUtil.d("yesong", "onPageScrolled", position, realPosition);
-                if (positionOffset == 0 && mPreviousOffset == 0 && (position == 0 || position == mAdapter.getCount() - 1)) {
-                    LogUtil.d("yesong", "onPageScrolled-true", realPosition);
-                    setCurrentItem(realPosition, false);
-                }
-            }
-
-            mPreviousOffset = positionOffset;
-            if (mOuterPageChangeListener != null) {
-                if (realPosition != mAdapter.getRealCount() - 1) {
-                    mOuterPageChangeListener.onPageScrolled(realPosition, positionOffset, positionOffsetPixels);
+    private void init() {
+        super.setOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                LogUtil.d("yesong", "onPageSelected", position);
+                if (mAdapter != null && mAdapter.shouldLooping()) {
+                    int fakePosition = position;
+                    int realPosition = mAdapter.toRealPosition(fakePosition);
+                    if (mPreviousRealPosition != realPosition) {
+                        mPreviousRealPosition = realPosition;
+                        if (mOuterPageChangeListener != null) {
+                            mOuterPageChangeListener.onPageSelected(realPosition);
+                        }
+                    }
                 } else {
-                    if (positionOffset > .5) {
-                        mOuterPageChangeListener.onPageScrolled(0, 0, 0);
-                    } else {
-                        mOuterPageChangeListener.onPageScrolled(realPosition, 0, 0);
+                    mPreviousRealPosition = position;
+                    if (mOuterPageChangeListener != null) {
+                        mOuterPageChangeListener.onPageSelected(position);
                     }
                 }
             }
-        }
 
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            if (mAdapter != null) {
-                int position = LoopViewPager.super.getCurrentItem();
-                int realPosition = mAdapter.toRealPosition(position);
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                LogUtil.d("yesong", "onPageScrolled－offset", position, positionOffset, positionOffsetPixels);
 
-                LogUtil.d("yesong", "onPageScrollStateChanged", position, realPosition);
-                if (state == ViewPager.SCROLL_STATE_IDLE && (position == 0 || position == mAdapter.getCount() - 1)) {
-                    LogUtil.d("yesong", "onPageScrollStateChanged-true", realPosition);
-                    setCurrentItem(realPosition, false);
+                if (mAdapter != null && mAdapter.shouldLooping()) {
+                    final int fakePosition = position;
+                    final int realPosition = mAdapter.toRealPosition(fakePosition);
+                    if (positionOffset == 0 && mPreviousOffset == 0 && isBoundaryPosition(fakePosition)) {
+                        LogUtil.d("yesong", "onPageScrolled", fakePosition, realPosition);
+                        setCurrentItem(realPosition, false);
+                    }
+                    mPreviousOffset = positionOffset;
+                    if (mOuterPageChangeListener != null) {
+                        if (realPosition == mAdapter.getRealCount() - 1) {
+                            if (positionOffset > 0.5) {
+                                mOuterPageChangeListener.onPageScrolled(0, 0, 0);
+                            } else {
+                                mOuterPageChangeListener.onPageScrolled(realPosition, 0, 0);
+                            }
+                        } else {
+                            mOuterPageChangeListener.onPageScrolled(realPosition, positionOffset, positionOffsetPixels);
+                        }
+                    }
+                } else {
+                    if (mOuterPageChangeListener != null) {
+                        mOuterPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
                 }
             }
-            if (mOuterPageChangeListener != null) {
-                mOuterPageChangeListener.onPageScrollStateChanged(state);
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                LogUtil.d("yesong", "onPageScrollStateChanged", state);
+                if (mAdapter != null && mAdapter.shouldLooping()) {
+                    int fakePosition = LoopViewPager.super.getCurrentItem();
+                    int realPosition = mAdapter.toRealPosition(fakePosition);
+
+                    if (state == ViewPager.SCROLL_STATE_IDLE && isBoundaryPosition(fakePosition)) {
+                        LogUtil.d("yesong", "onPageScrollStateChanged", fakePosition, realPosition);
+                        setCurrentItem(realPosition, false);
+                    }
+                }
+                if (mOuterPageChangeListener != null) {
+                    mOuterPageChangeListener.onPageScrollStateChanged(state);
+                }
             }
-        }
-    };
+        });
+    }
 
 }
