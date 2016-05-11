@@ -33,15 +33,14 @@ public class DemoLuaViewActivity extends Activity {
                     mDialog.cancel();
                 }
                 mLuaView = luaView;
-                setContentView(mLuaView);
                 if (mLuaView != null) {
                     registerNameBeforeLoad(mLuaView);
                     load(mLuaView);
+                    setContentView(mLuaView);
                 }
             }
         });
         LuaView.registerImageProvider(GlideImageProvider.class);
-
         mDialog = new LVLoadingDialog(this);
         mDialog.show();
     }
