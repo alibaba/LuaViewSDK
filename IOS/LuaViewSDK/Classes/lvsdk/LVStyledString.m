@@ -50,21 +50,19 @@ static int __attributedString_gc (lv_State *L) {
 }
 
 static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWeigth, NSString* fontStyle, LVBundle* bundle){
-    if ( fontSize ) {
-        if( [fontName isKindOfClass:[NSString class]] ){
-            return [LVUtil fontWithName:fontName size:fontSize.floatValue bundle:bundle];
-        }
-        if ( [fontStyle isKindOfClass:[NSString class]] &&
-            [fontStyle compare:@"italic" options:NSCaseInsensitiveSearch]==NSOrderedSame ) {
-            return [UIFont italicSystemFontOfSize:fontSize.floatValue];
-        }
-        if( [fontWeigth isKindOfClass:[NSString class]] &&
-           [fontWeigth compare:@"bold" options:NSCaseInsensitiveSearch]==NSOrderedSame ){
-            return [UIFont boldSystemFontOfSize:fontSize.floatValue];
-        }
-        return [UIFont systemFontOfSize:fontSize.floatValue];
+    fontSize = fontSize ? fontSize : @(14);// bugfix: 不设置字体大小, 只设置粗体斜体无效, 所以给定默认字体大小14
+    if( [fontName isKindOfClass:[NSString class]] ){
+        return [LVUtil fontWithName:fontName size:fontSize.floatValue bundle:bundle];
     }
-    return nil;
+    if ( [fontStyle isKindOfClass:[NSString class]] &&
+        [fontStyle compare:@"italic" options:NSCaseInsensitiveSearch]==NSOrderedSame ) {
+        return [UIFont italicSystemFontOfSize:fontSize.floatValue];
+    }
+    if( [fontWeigth isKindOfClass:[NSString class]] &&
+       [fontWeigth compare:@"bold" options:NSCaseInsensitiveSearch]==NSOrderedSame ){
+        return [UIFont boldSystemFontOfSize:fontSize.floatValue];
+    }
+    return [UIFont systemFontOfSize:fontSize.floatValue];
 }
 
 // 设置字体
