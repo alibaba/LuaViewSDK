@@ -22,26 +22,34 @@
 }
 
 - (void) callLuaWithArguments:(NSArray*) args{
-    lv_State* L = self.lv_lview.l;
-    if( L && self.lv_userData ){
-        lv_checkstack(L,32);
-        int num = lv_gettop(L);
-        for( int i=0; i<args.count; i++ ) {
-            lv_pushNativeObject(L, args[i]);
-        }
-        lv_pushUserdata(L, self.lv_userData);
-        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-        
-        if( lv_type(L, -1)==LV_TTABLE ) {
-            lv_getfield(L, -1, STR_CALLBACK);
-            if( lv_type(L, -1)==LV_TNIL ) {
-                lv_remove(L, -1);
-                lv_getfield(L, -1, STR_ON_CLICK);
+    // 外部回调脚本一定要在主线程调用
+    dispatch_block_t f = ^(){
+        lv_State* L = self.lv_lview.l;
+        if( L && self.lv_userData ){
+            lv_checkstack(L,32);
+            int num = lv_gettop(L);
+            for( int i=0; i<args.count; i++ ) {
+                lv_pushNativeObject(L, args[i]);
             }
-            lv_remove(L, -2);
+            lv_pushUserdata(L, self.lv_userData);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
+            
+            if( lv_type(L, -1)==LV_TTABLE ) {
+                lv_getfield(L, -1, STR_CALLBACK);
+                if( lv_type(L, -1)==LV_TNIL ) {
+                    lv_remove(L, -1);
+                    lv_getfield(L, -1, STR_ON_CLICK);
+                }
+                lv_remove(L, -2);
+            }
+            lv_runFunctionWithArgs(L, (int)args.count, 0);
+            lv_settop(L, num);
         }
-        lv_runFunctionWithArgs(L, (int)args.count, 0);
-        lv_settop(L, num);
+    };
+    if ([NSThread isMainThread]) {
+        f();
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), f);
     }
 }
 
