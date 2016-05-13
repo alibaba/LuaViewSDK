@@ -11,6 +11,7 @@
 #import "LVStruct.h"
 #import "lVapi.h"
 #import "lV.h"
+#import <objc/runtime.h>
 
 @implementation LVTypeConvert
 
@@ -20,12 +21,12 @@ static int typeIdx(const char* type){
         unsigned char c1 = type[1];
         if ( c1==0 ){
             return 256*0 + c0;
-        } else if ( c0=='r' ) {
+        } else if ( c0=='r' ) { // const
             return 256*1 + c1;
-        } else if ( c0=='^' ) {
+        } else if ( c0=='^' ) { // 指针
             return 256*2 + c1;
-        } else if ( c0=='{' ) {
-            return 256*3 + 0;// 结构体.
+        } else if ( c0=='{' ) { // 结构体
+            return 256*3 + 0;
         } else {
             LVError(@"LVUtil.typeIdx: %s", type);
             return 0;
@@ -85,28 +86,13 @@ LVTypeIDEnum lv_typeID(const char* type){
         typesDic[typeIdx(@encode(const void*))] = LVTypeID_voidP;
         typesDic[typeIdx("^{")] = LVTypeID_voidP;
         typesDic[typeIdx(@encode(id))] = LVTypeID_id;
+        typesDic[typeIdx(@encode(Class))] = LVTypeID_Class;
         
         typesDic[typeIdx(@encode(CGRect))] = LVTypeID_struct;
     }
     return typesDic[ typeIdx(type) ];
 }
 
-
-#define _C_BFLD     'b'
-#define _C_BOOL     'B'
-#define _C_VOID     'v'
-#define _C_UNDEF    '?'
-#define _C_PTR      '^'
-#define _C_CHARPTR  '*'
-#define _C_ATOM     '%'
-#define _C_ARY_B    '['
-#define _C_ARY_E    ']'
-#define _C_UNION_B  '('
-#define _C_UNION_E  ')'
-#define _C_STRUCT_B '{'
-#define _C_STRUCT_E '}'
-#define _C_VECTOR   '!'
-#define _C_CONST    'r'
 int lv_setValueWithType(void* p, int index, double value, int type ){
     if ( p ) {
         switch (type) {
@@ -237,6 +223,12 @@ double lv_getValueWithType(void* p, int index, int type ){
                 void* result = nil;
                 [invocation getReturnValue: &result];
                 lv_pushNativeObject(L,(__bridge id)result);
+                return 1;
+            }
+            case LVTypeID_Class: {
+                Class result = nil;
+                [invocation getReturnValue:&result];
+                lv_pushstring(L, class_getName(result));
                 return 1;
             }
             case LVTypeID_char: {

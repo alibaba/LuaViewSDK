@@ -170,6 +170,7 @@ typedef enum:int{
     LVTypeID_charP,
     LVTypeID_voidP,
     LVTypeID_id,
+    LVTypeID_Class,
     LVTypeID_idP,
     LVTypeID_struct,
 }LVTypeIDEnum;
