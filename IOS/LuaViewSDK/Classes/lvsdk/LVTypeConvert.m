@@ -219,16 +219,11 @@ double lv_getValueWithType(void* p, int index, int type ){
                 lv_pushboolean(L, result);
                 return 1;
             }
+            case LVTypeID_Class:
             case LVTypeID_id: {
                 void* result = nil;
                 [invocation getReturnValue: &result];
                 lv_pushNativeObject(L,(__bridge id)result);
-                return 1;
-            }
-            case LVTypeID_Class: {
-                Class result = nil;
-                [invocation getReturnValue:&result];
-                lv_pushstring(L, class_getName(result));
                 return 1;
             }
             case LVTypeID_char: {
@@ -349,6 +344,7 @@ double lv_getValueWithType(void* p, int index, int type ){
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
+            case LVTypeID_Class:
             case LVTypeID_id: {
                 id nativeObject = lv_luaValueToNativeObject(L, stackID);
                 [invocation setArgument:&nativeObject atIndex:index];
@@ -470,6 +466,7 @@ double lv_getValueWithType(void* p, int index, int type ){
                 [invocation setReturnValue: &result];
                 return nil;
             }
+            case LVTypeID_Class:
             case LVTypeID_id: {
                 id object =  lv_luaValueToNativeObject(L, stackID);
                 [invocation setReturnValue:&object];
@@ -583,6 +580,7 @@ double lv_getValueWithType(void* p, int index, int type ){
             lv_pushnumber(L, value);
             return 1;
         }
+        case LVTypeID_Class:
         case LVTypeID_id: {
             void* value = nil;
             [invocation getArgument:&value atIndex:index];

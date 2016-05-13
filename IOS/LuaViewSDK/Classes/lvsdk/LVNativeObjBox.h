@@ -22,12 +22,12 @@
 @property(nonatomic,weak)   id realObjectWeak;
 @property(nonatomic,assign) BOOL openAllMethod;
 
-
 -(id) init:(lv_State*) l  nativeObject:(id)nativeObject;
 -(void) addMethod:(LVMethod*) method;
 -(int) performMethod:(NSString*) methodName L:(lv_State*)L;
 
-
+- (NSString *)className;
+- (BOOL)isOCClass;
 
 +(int) classDefine:(lv_State *)L ;
 

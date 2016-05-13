@@ -12,6 +12,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import <objc/runtime.h>
 
 @interface LVNativeObjBox ()
 @property (nonatomic,strong) NSMutableDictionary* methods;
@@ -28,6 +29,26 @@
         self.methods = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+- (BOOL) isEqual:(LVNativeObjBox *)another{
+    if (![another isMemberOfClass:[self class]]) {
+        return false;
+    }
+    
+    return self.realObject == another.realObject || [self.realObject isEqual:another.realObject];
+}
+
+- (NSUInteger)hash {
+    return [self.realObject hash];
+}
+
+- (BOOL) isOCClass{
+    return self.realObject && class_isMetaClass(object_getClass(self.realObject));
+}
+
+- (NSString *)className {
+    return NSStringFromClass([self.realObject class]);
 }
 
 - (void) setWeakMode:(BOOL)weakMode{
@@ -201,19 +222,33 @@ static int __index (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
+static int __eq (lv_State *L) {
+    if (lv_gettop(L) < 2) {
+        return 0;
+    }
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * another = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if (another != NULL) {
+        LVNativeObjBox * box1 = (__bridge LVNativeObjBox *)(user->object);
+        LVNativeObjBox * box2 = (__bridge LVNativeObjBox *)(user->object);
+        lv_pushboolean(L, [box1 isEqual:box2]);
+        return 1;
+    }
+    return 0;
+}
+
 +(int) classDefine:(lv_State *)L {
     const struct lvL_reg memberFunctions [] = {
-        {"__index", __index },
-        
         {"__gc", __gc },
-        
         {"__tostring", __tostring },
+        {"__eq", __eq },
+        {"__index", __index },
         {NULL, NULL}
     };
     
     lv_createClassMetaTable(L, META_TABLE_NativeObject);
-    
     lvL_openlib(L, NULL, memberFunctions, 0);
+    
     return 0;
 }
 
