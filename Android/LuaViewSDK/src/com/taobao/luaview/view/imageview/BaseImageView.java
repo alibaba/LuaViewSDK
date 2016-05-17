@@ -11,12 +11,6 @@ import android.widget.ImageView;
  * @date 16/3/9
  */
 public abstract class BaseImageView extends ImageView {
-    protected boolean mAttachedWindow = false;
-    protected boolean isNetworkMode = false;
-
-    public void setIsNetworkMode(boolean isNetworkMode) {
-        this.isNetworkMode = isNetworkMode;
-    }
 
     /**
      * 图片加载回调
@@ -28,18 +22,6 @@ public abstract class BaseImageView extends ImageView {
 
     public BaseImageView(Context context) {
         super(context);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        mAttachedWindow = true;
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mAttachedWindow = false;
     }
 
     public abstract void loadUrl(final String url, final LoadCallback callback);

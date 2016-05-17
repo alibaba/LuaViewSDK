@@ -1,7 +1,6 @@
 package com.taobao.luaview.view.imageview;
 
 import android.content.Context;
-import android.view.View;
 
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
@@ -33,28 +32,5 @@ public class LVBaseImageView extends BaseImageView {
         return mUrl;
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-        if (isNetworkMode) { // 清空内存
-            if (visibility == View.VISIBLE && mAttachedWindow) {
-                restoreImage();
-            } else {
-                releaseBitmap();
-            }
-        }
-    }
-
-    private void restoreImage() {// 恢复被清空的image
-        if (isNetworkMode) {
-            loadUrl(mUrl, null);
-        }
-    }
-
-    private void releaseBitmap() {// 释放图片内存
-        if (isNetworkMode) {
-            setImageDrawable(null);
-        }
-    }
 
 }
