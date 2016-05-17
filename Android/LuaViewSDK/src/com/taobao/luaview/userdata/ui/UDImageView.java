@@ -45,6 +45,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
             if (!TextUtils.isEmpty(urlOrName)) {
                 if (URLUtil.isNetworkUrl(urlOrName)) {//network
                     imageView.setTag(R.id.lv_tag_url, urlOrName);//需要设置tag，防止callback在回调的时候调用错误
+                    imageView.setIsNetworkMode(true);
                     imageView.loadUrl(urlOrName, callback == null ? null : new BaseImageView.LoadCallback() {
                         @Override
                         public void onLoadResult(Drawable drawable) {
@@ -55,7 +56,8 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                             }
                         }
                     });
-                } else {//同步加载本地图片，TODO 处理成异步的
+                } else {
+                    imageView.setIsNetworkMode(false);
                     imageView.setTag(R.id.lv_tag_url, null);
                     Drawable drawable = null;
                     if (getLuaResourceFinder() != null) {
@@ -68,6 +70,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
 //                    setImageUrlAsync(imageView, urlOrName, callback);//异步加载图片，需要改现有代码，先hold
                 }
             } else {//设置null
+                imageView.setIsNetworkMode(false);
                 imageView.loadUrl(null, null);//如果不设置null是否可以被调用 TODO
                 if (callback != null) {//本地图片直接调用callback
                     LuaUtil.callFunction(callback, LuaBoolean.TRUE);
