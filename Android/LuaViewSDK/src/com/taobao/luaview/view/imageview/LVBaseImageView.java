@@ -33,7 +33,9 @@ public class LVBaseImageView extends BaseImageView {
 
                 @Override
                 public void onActivityStarted(Activity activity) {
-                    restoreImage();
+                    if(activity == getContext()) {
+                        restoreImage();
+                    }
                 }
 
                 @Override
@@ -48,7 +50,9 @@ public class LVBaseImageView extends BaseImageView {
 
                 @Override
                 public void onActivityStopped(Activity activity) {
-                    releaseBitmap();
+                    if(activity == getContext()) {
+                        releaseBitmap();
+                    }
                 }
 
                 @Override
@@ -58,7 +62,9 @@ public class LVBaseImageView extends BaseImageView {
 
                 @Override
                 public void onActivityDestroyed(Activity activity) {
-                    ((Activity) getContext()).getApplication().unregisterActivityLifecycleCallbacks(this);
+                    if(activity == getContext()) {
+                        ((Activity) getContext()).getApplication().unregisterActivityLifecycleCallbacks(this);
+                    }
                 }
             });
         }
