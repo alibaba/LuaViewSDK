@@ -1,7 +1,14 @@
 package com.taobao.luaview.view.imageview;
 
 import android.app.Activity;
+<<<<<<< 80a9a4783fbe01a071f8a419bd188f4f4914a7f3
 import android.content.Context;
+=======
+import android.app.Application;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+>>>>>>> request update: 修改获取图片
 
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
