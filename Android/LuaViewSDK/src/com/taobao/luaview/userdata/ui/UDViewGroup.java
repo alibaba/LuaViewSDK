@@ -33,6 +33,10 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private void init() {
     }
 
+    public ViewGroup getContainer(){
+        return getView();
+    }
+
     @Override
     public UDViewGroup setCallback(LuaValue callbacks) {
         super.setCallback(callbacks);
@@ -42,9 +46,9 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
             mOnBack = LuaUtil.getFunction(mCallback, "onBack", "OnBack");
             mOnLayout = LuaUtil.getFunction(mCallback, "onLayout", "OnLayout");
             //是否需要统一成OnShow, OnHide?
-            if (mOnBack != null && getView() != null) {
-                getView().setFocusableInTouchMode(true);
-                getView().setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+            if (mOnBack != null && getContainer() != null) {
+                getContainer().setFocusableInTouchMode(true);
+                getContainer().setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
             }
         }
         return this;
@@ -110,7 +114,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      * @return
      */
     public UDViewGroup addView(UDView subView) {
-        final ViewGroup viewGroup = getView();
+        final ViewGroup viewGroup = getContainer();
         if (viewGroup != null && subView != null && subView.getView() != null) {
             final View view = subView.getView();
             if (viewGroup instanceof ILVViewGroup) {
@@ -130,7 +134,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      * @return
      */
     public UDViewGroup removeView(UDView subView) {
-        final ViewGroup viewGroup = getView();
+        final ViewGroup viewGroup = getContainer();
         if (viewGroup != null && subView != null && subView.getView() != null) {
             final View view = subView.getView();
             LuaViewUtil.removeView(viewGroup, view);//TODO 这里需要排查一下，是否直接移除没有问题？
@@ -144,7 +148,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      * @return
      */
     public UDViewGroup removeAllViews() {
-        final ViewGroup viewGroup = getView();
+        final ViewGroup viewGroup = getContainer();
         LuaViewUtil.removeAllViews(viewGroup);
         return this;
     }
@@ -167,7 +171,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
 
 
     public UDViewGroup setChildNodeViews(ArrayList<UDView> childNodeViews) {
-        final ViewGroup viewGroup = getView();
+        final ViewGroup viewGroup = getContainer();
         if (viewGroup != null && childNodeViews != null) {
             if (viewGroup instanceof ILVViewGroup) {
                 ((ILVViewGroup) viewGroup).setChildNodeViews(childNodeViews);
