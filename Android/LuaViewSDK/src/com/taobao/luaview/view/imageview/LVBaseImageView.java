@@ -1,10 +1,7 @@
 package com.taobao.luaview.view.imageview;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
 
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
@@ -24,49 +21,8 @@ public class LVBaseImageView extends BaseImageView {
     }
 
     private void initRecycler(Context context) {
-        if(context instanceof Activity){
-            ((Activity) context).getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-                @Override
-                public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
-                }
-
-                @Override
-                public void onActivityStarted(Activity activity) {
-                    if(activity == getContext()) {
-                        restoreImage();
-                    }
-                }
-
-                @Override
-                public void onActivityResumed(Activity activity) {
-
-                }
-
-                @Override
-                public void onActivityPaused(Activity activity) {
-
-                }
-
-                @Override
-                public void onActivityStopped(Activity activity) {
-                    if(activity == getContext()) {
-                        releaseBitmap();
-                    }
-                }
-
-                @Override
-                public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
-                }
-
-                @Override
-                public void onActivityDestroyed(Activity activity) {
-                    if(activity == getContext()) {
-                        ((Activity) getContext()).getApplication().unregisterActivityLifecycleCallbacks(this);
-                    }
-                }
-            });
+        if (context instanceof Activity) {
+            ((Activity) context).getApplication().registerActivityLifecycleCallbacks(new ImageActivityLifeCycle(this));
         }
     }
 
@@ -96,13 +52,13 @@ public class LVBaseImageView extends BaseImageView {
 //        }
 //    }
 
-    private void restoreImage() {// 恢复被清空的image
+    public void restoreImage() {// 恢复被清空的image
         if (isNetworkMode) {
             loadUrl(mUrl, null);
         }
     }
 
-    private void releaseBitmap() {// 释放图片内存
+    public void releaseBitmap() {// 释放图片内存
         if (isNetworkMode) {
             setImageDrawable(null);
         }
