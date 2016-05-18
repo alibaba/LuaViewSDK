@@ -63,4 +63,8 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     public LVViewGroup getContainer(){
         return mContainer;
     }
+
+    public LVViewGroup getContainer(){
+        return mContainer;
+    }
 }
