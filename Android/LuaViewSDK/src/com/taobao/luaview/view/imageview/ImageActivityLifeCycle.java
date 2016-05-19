@@ -5,27 +5,43 @@ import android.app.Application;
 import android.os.Bundle;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 /**
  * activity堆叠的时候释放资源处理
  */
 public class ImageActivityLifeCycle implements Application.ActivityLifecycleCallbacks {
-    private WeakReference<LVBaseImageView> weakReference;
+    private static ImageActivityLifeCycle instance;
+    private ArrayList<WeakReference<LVBaseImageView>> weakReferenceList = new ArrayList<WeakReference<LVBaseImageView>>();
 
-    public ImageActivityLifeCycle(LVBaseImageView imageView) {
-        weakReference = new WeakReference<LVBaseImageView>(imageView);
+    public static ImageActivityLifeCycle getInstance(Application application) {
+        if (instance == null) {
+            instance = new ImageActivityLifeCycle();
+            application.registerActivityLifecycleCallbacks(instance);
+        }
+        return instance;
+    }
+
+    public void watch(LVBaseImageView imageView) {
+        weakReferenceList.add(new WeakReference<LVBaseImageView>(imageView));
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        LVBaseImageView imageView = weakReference.get();
-        if (imageView != null && imageView.getContext() == activity) {
-            imageView.restoreImage();
+        int size = weakReferenceList.size();
+        for (int i = size - 1; i >= 0; i--) {
+            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            if (imageView == null) {
+                weakReferenceList.remove(i);
+            } else {
+                if (imageView.getContext() == activity) {
+                    imageView.restoreImage();
+                }
+            }
         }
     }
 
@@ -41,9 +57,16 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
 
     @Override
     public void onActivityStopped(Activity activity) {
-        LVBaseImageView imageView = weakReference.get();
-        if (imageView != null && imageView.getContext() == activity) {
-            imageView.releaseBitmap();
+        int size = weakReferenceList.size();
+        for (int i = size - 1; i >= 0; i--) {
+            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            if (imageView == null) {
+                weakReferenceList.remove(i);
+            } else {
+                if (imageView.getContext() == activity) {
+                    imageView.releaseBitmap();
+                }
+            }
         }
     }
 
@@ -54,9 +77,16 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        LVBaseImageView imageView = weakReference.get();
-        if (imageView != null && imageView.getContext() == activity) {
-            ((Activity) imageView.getContext()).getApplication().unregisterActivityLifecycleCallbacks(this);
+        int size = weakReferenceList.size();
+        for (int i = size - 1; i >= 0; i--) {
+            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            if (imageView == null) {
+                weakReferenceList.remove(i);
+            } else {
+                if (imageView.getContext() == activity) {
+                    imageView.releaseBitmap();
+                }
+            }
         }
     }
 }
