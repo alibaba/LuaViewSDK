@@ -40,17 +40,12 @@ public class LVBaseImageView extends BaseImageView {
         return mUrl;
     }
 
-//    @Override
-//    protected void onWindowVisibilityChanged(int visibility) {
-//        super.onWindowVisibilityChanged(visibility);
-//        if (isNetworkMode) { // 清空内存
-//            if (visibility == View.VISIBLE && mAttachedWindow) {
-//                restoreImage();
-//            } else {
-//                releaseBitmap();
-//            }
-//        }
-//    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        releaseBitmap();
+    }
 
     public void restoreImage() {// 恢复被清空的image
         if (isNetworkMode) {
