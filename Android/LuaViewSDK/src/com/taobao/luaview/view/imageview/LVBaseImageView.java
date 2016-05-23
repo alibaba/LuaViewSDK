@@ -40,6 +40,11 @@ public class LVBaseImageView extends BaseImageView {
         return mUrl;
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        restoreImage();
+    }
 
     @Override
     protected void onDetachedFromWindow() {
