@@ -14,13 +14,17 @@ public class DebugConnection extends Socket {
 
     private static final String EMULATOR_LOCALHOST = "10.0.2.2";
     private static final String GENYMOTION_LOCALHOST = "10.0.3.2";
-    private static final String DEVICE_LOCALHOST = "localhost";
+    private static String DEVICE_LOCALHOST = "localhost";
     private static final int PORT = 9876;
 
     private DataInputStream input = null;
     private DataOutputStream output = null;
 
     public boolean sendingEnabled = true;
+	
+	public static void setDeviceLocalhost(String deviceLocalhost) {
+		DEVICE_LOCALHOST = deviceLocalhost;
+	}
 
     private static String getDebugServerHost() {
         // Since genymotion runs in vbox it use different hostname to refer to adb host.
