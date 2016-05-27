@@ -26,7 +26,7 @@ public class BaseLib {
 
     public void extend(LuaValue env) {
         env.set("printLV", new printLV(baseLib));
-		env.set("log", new log(baseLib));
+		env.set("printLog", new printLog(baseLib));
     }
 
     // "print", // (...) -> void
@@ -58,8 +58,8 @@ public class BaseLib {
         }
     }
 	
-	// "log(fileName, messsage)", send log info to LuaViewDebugger
-	final class log extends TwoArgFunction {
+	// "printLog(fileName, messsage)", send log info to LuaViewDebugger
+	final class printLog extends TwoArgFunction {
 		final org.luaj.vm2.lib.BaseLib baseLib;
 
 		public log(org.luaj.vm2.lib.BaseLib baseLib) {
