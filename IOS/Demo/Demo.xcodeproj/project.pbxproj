@@ -821,7 +821,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7e5974f-071e-4df1-a7b5-43c90677f5a6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -836,7 +836,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7e5974f-071e-4df1-a7b5-43c90677f5a6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
