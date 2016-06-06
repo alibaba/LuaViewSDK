@@ -7,7 +7,7 @@ print(System.vmVersion())
 print(System.osVersion())
 print(System.platform())
 print(System.scale())
-print(System.device())
+printTable(System.device())
 print(System.screenSize())
 
 -- network
