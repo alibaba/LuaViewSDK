@@ -1,14 +1,20 @@
 package com.taobao.luaview.userdata.kit;
 
+import android.content.Context;
+import android.hardware.display.DisplayManager;
+import android.telephony.TelephonyManager;
+
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
+import com.taobao.luaview.util.AnimatorUtil;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaBoolean;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
@@ -86,7 +92,24 @@ public class UDSystem extends BaseLuaTable {
     class device extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            return valueOf("TODO设备信息（Phone、Pad）等信息");
+            LuaTable table = new LuaTable();
+            table.set("device", AndroidUtil.getDevice());
+            table.set("brand", AndroidUtil.getBrand());
+            table.set("product", AndroidUtil.getProduct());
+            table.set("manufacturer", AndroidUtil.getManufacturer());
+
+            //window size
+            int[] windowSize = AndroidUtil.getWindowSize(getContext());
+            table.set("window_width", windowSize[0]);
+            table.set("window_height", windowSize[1]);
+
+            //screen size
+            int[] screenSize = AndroidUtil.getWindowSizeInDp(getContext());
+            table.set("screen_width", screenSize[0]);
+            table.set("screen_height", screenSize[1]);
+
+            return table;
+//            return valueOf("TODO设备信息（Phone、Pad）等信息");
         }
     }
 
