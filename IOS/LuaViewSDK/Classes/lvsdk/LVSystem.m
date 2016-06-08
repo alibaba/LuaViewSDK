@@ -106,8 +106,13 @@ static int vibrate(lv_State*L){
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     return 1;
 }
-
-
+// create oc class
+static int class(lv_State*L){
+    NSString* s = lv_paramString(L, -1);
+    id obj = NSClassFromString(s);
+    lv_pushNativeObject(L, obj);
+    return 1;
+}
 
 static int stringToTable(lv_State*L){
     if( lv_type(L, -1) == LV_TSTRING ) {
@@ -325,6 +330,11 @@ static int tableToString(lv_State*L){
         // 震动
         lv_pushcfunction(L, vibrate);
         lv_setglobal(L, "Vibrate");
+    }
+    {
+        // create class api
+        lv_pushcfunction(L, class);
+        lv_setglobal(L, "__class__");
     }
     return 0;
 }
