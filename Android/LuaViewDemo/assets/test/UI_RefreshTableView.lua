@@ -80,20 +80,6 @@ tableView = RefreshTableView {
             end
         }
     },
-    Header = function()
-        local head = Button();
-        head.title("我是头");
-        head.frame(0, 0, w, 100);
-        head.backgroundColor(0xff);
-        return head;
-    end,
-    Footer = function()
-        local foot = Button();
-        foot.title("我是结尾");
-        foot.frame(0, 0, w, 100);
-        foot.backgroundColor(0xff0000);
-        return foot;
-    end,
     Callback = {
         Scrolling = function()
             print("scrolling");
@@ -104,11 +90,8 @@ tableView = RefreshTableView {
         ScrollEnd = function()
             print("scrolling end");
         end,
-        PullDownRefresh = function()
+        PullDown = function()
             print("PullDown");
-        end,
-        PullUpRefresh = function()
-            print("PullUp");
         end
     }
 };
