@@ -113,6 +113,7 @@ static int SERVER_PORT = 9876;
 
 -(void)Connect:(NSString*) ip port:(NSUInteger)port
 {
+#ifdef DEBUG
     //////////////////////创建套接字//////////////
     CFSocketContext socketConent = {0,NULL,NULL,NULL,NULL};
     socketConent.info = (__bridge void *)(self);
@@ -145,6 +146,7 @@ static int SERVER_PORT = 9876;
     CFRunLoopAddSource(cfrl,source,kCFRunLoopCommonModes); //将循环对象加入当前循环中
     LVReleaseAndNull(source);
     LVReleaseAndNull(address);
+#endif
 }
 
 -(void) closeAll{
