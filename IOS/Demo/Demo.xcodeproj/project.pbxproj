@@ -51,10 +51,6 @@
 		3CC2F8B71C706BFA00D1E0B7 /* demoZ_2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */; };
 		3CC2F8B81C706BFA00D1E0B7 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */; };
 		3CC2F8B91C706BFA00D1E0B7 /* demoZ_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */; };
-		3CC2F8BA1C706BFA00D1E0B7 /* demoZA1_AnimateFire.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87E1C706BFA00D1E0B7 /* demoZA1_AnimateFire.lua */; };
-		3CC2F8BB1C706BFA00D1E0B7 /* demoZA2_AnimateFire2.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87F1C706BFA00D1E0B7 /* demoZA2_AnimateFire2.lua */; };
-		3CC2F8BC1C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */; };
-		3CC2F8BD1C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */; };
 		3CC2F8BE1C706BFA00D1E0B7 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */; };
 		3CC2F8C01C706BFA00D1E0B7 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8841C706BFA00D1E0B7 /* img1.tiff */; };
 		3CC2F8C11C706BFA00D1E0B7 /* img10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8851C706BFA00D1E0B7 /* img10.tiff */; };
@@ -188,10 +184,6 @@
 		3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_2015_testunit.lua; sourceTree = "<group>"; };
 		3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_decodeUrl.lua; sourceTree = "<group>"; };
 		3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_testunit.lua; sourceTree = "<group>"; };
-		3CC2F87E1C706BFA00D1E0B7 /* demoZA1_AnimateFire.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA1_AnimateFire.lua; sourceTree = "<group>"; };
-		3CC2F87F1C706BFA00D1E0B7 /* demoZA2_AnimateFire2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA2_AnimateFire2.lua; sourceTree = "<group>"; };
-		3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA3_AnimateLiZi.lua; sourceTree = "<group>"; };
-		3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZA4_AnimateSnow.lua; sourceTree = "<group>"; };
 		3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZB1_Animator.lua; sourceTree = "<group>"; };
 		3CC2F8841C706BFA00D1E0B7 /* img1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img1.tiff; sourceTree = "<group>"; };
 		3CC2F8851C706BFA00D1E0B7 /* img10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img10.tiff; sourceTree = "<group>"; };
@@ -362,10 +354,6 @@
 				3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */,
 				3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */,
 				3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */,
-				3CC2F87E1C706BFA00D1E0B7 /* demoZA1_AnimateFire.lua */,
-				3CC2F87F1C706BFA00D1E0B7 /* demoZA2_AnimateFire2.lua */,
-				3CC2F8801C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua */,
-				3CC2F8811C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua */,
 				3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */,
 				3CC2F8841C706BFA00D1E0B7 /* img1.tiff */,
 				3CC2F8851C706BFA00D1E0B7 /* img10.tiff */,
@@ -580,7 +568,6 @@
 				3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */,
 				3CC2F8AF1C706BFA00D1E0B7 /* demoV1_CustomError.lua in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
-				3CC2F8BB1C706BFA00D1E0B7 /* demoZA2_AnimateFire2.lua in Resources */,
 				3CC2F8C41C706BFA00D1E0B7 /* img4.tiff in Resources */,
 				84F9A0481C92CA7300481334 /* button1.png in Resources */,
 				3CC2F8A21C706BFA00D1E0B7 /* demoG_RefreshTableView.lua in Resources */,
@@ -600,18 +587,15 @@
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
 				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
 				840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */,
-				3CC2F8BA1C706BFA00D1E0B7 /* demoZA1_AnimateFire.lua in Resources */,
 				3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */,
 				3CC2F8971C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png in Resources */,
 				3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */,
 				84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */,
-				3CC2F8BD1C706BFA00D1E0B7 /* demoZA4_AnimateSnow.lua in Resources */,
 				3CC2F8B21C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua in Resources */,
 				840412871CCE351100B34D28 /* demoD_requestFromHttp.lua in Resources */,
 				3CC2F8C01C706BFA00D1E0B7 /* img1.tiff in Resources */,
 				848645CD1CAB785D004F4FD8 /* demoP_Http.lua in Resources */,
 				3CC2F8C21C706BFA00D1E0B7 /* img13.tiff in Resources */,
-				3CC2F8BC1C706BFA00D1E0B7 /* demoZA3_AnimateLiZi.lua in Resources */,
 				3CC2F8B51C706BFA00D1E0B7 /* demoZ1_luabox.lua in Resources */,
 				3CC2F8AC1C706BFA00D1E0B7 /* demoO_Timer.lua in Resources */,
 				3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */,
@@ -821,7 +805,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7e5974f-071e-4df1-a7b5-43c90677f5a6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -836,7 +820,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7e5974f-071e-4df1-a7b5-43c90677f5a6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

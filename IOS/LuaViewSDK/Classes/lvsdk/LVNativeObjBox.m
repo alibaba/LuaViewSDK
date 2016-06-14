@@ -16,6 +16,7 @@
 
 @interface LVNativeObjBox ()
 @property (nonatomic,strong) NSMutableDictionary* methods;
+@property (nonatomic,strong) NSMutableDictionary* apiHashtable;
 @end
 
 
@@ -94,6 +95,31 @@
         }
     }
     return 0;
+}
+
+// 检查API是否纯在
+- (BOOL) isApiExist:(NSString*) methodName{
+    if( self.apiHashtable == nil ){
+        self.apiHashtable = [[NSMutableDictionary alloc] init];
+    }
+    NSNumber* ret = self.apiHashtable[methodName];
+    if( ret ) {
+        return ret.boolValue;
+    } else {
+        NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
+        [ocMethodName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,ocMethodName.length)];
+        id nativeObj = self.realObject;
+        for ( int i=0; i<5; i++ ) {
+            SEL sel = NSSelectorFromString(ocMethodName);
+            if( [nativeObj respondsToSelector:sel] ){
+                self.apiHashtable[methodName] = @(YES);
+                return YES;
+            }
+            [ocMethodName appendString:@":"];
+        }
+    }
+    self.apiHashtable[methodName] = @(NO);
+    return NO;
 }
 
 static void releaseNativeObject(LVUserDataInfo* user){
@@ -215,7 +241,7 @@ static int __index (lv_State *L) {
     
     LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
     id object = nativeObjBox.realObject;
-    if( nativeObjBox && object && functionName ){
+    if( nativeObjBox && object && [nativeObjBox isApiExist:functionName] ){
         lv_pushcclosure(L, callNativeObjectFunction, 2);
         return 1;
     }

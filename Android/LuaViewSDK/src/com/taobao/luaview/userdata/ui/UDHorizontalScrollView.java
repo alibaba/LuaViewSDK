@@ -1,9 +1,11 @@
 package com.taobao.luaview.userdata.ui;
 
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVHorizontalScrollView;
+import com.taobao.luaview.view.LVViewGroup;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -18,6 +20,14 @@ public class UDHorizontalScrollView extends UDViewGroup<LVHorizontalScrollView> 
 
     public UDHorizontalScrollView(LVHorizontalScrollView view, Globals globals, LuaValue metaTable, LuaValue initParams) {
         super(view, globals, metaTable, initParams);
+    }
+
+    /**
+     * 获取容器view
+     * @return
+     */
+    public ViewGroup getContainer(){
+        return getView() != null ? getView().getContainer() : null;
     }
 
     /**
