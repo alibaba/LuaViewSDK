@@ -12,9 +12,11 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import <objc/runtime.h>
 
 @interface LVNativeObjBox ()
 @property (nonatomic,strong) NSMutableDictionary* methods;
+@property (nonatomic,strong) NSMutableDictionary* apiHashtable;
 @end
 
 
@@ -28,6 +30,26 @@
         self.methods = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+- (BOOL) isEqual:(LVNativeObjBox *)another{
+    if (![another isMemberOfClass:[self class]]) {
+        return false;
+    }
+    
+    return self.realObject == another.realObject || [self.realObject isEqual:another.realObject];
+}
+
+- (NSUInteger)hash {
+    return [self.realObject hash];
+}
+
+- (BOOL) isOCClass{
+    return self.realObject && class_isMetaClass(object_getClass(self.realObject));
+}
+
+- (NSString *)className {
+    return NSStringFromClass([self.realObject class]);
 }
 
 - (void) setWeakMode:(BOOL)weakMode{
@@ -73,6 +95,31 @@
         }
     }
     return 0;
+}
+
+// 检查API是否纯在
+- (BOOL) isApiExist:(NSString*) methodName{
+    if( self.apiHashtable == nil ){
+        self.apiHashtable = [[NSMutableDictionary alloc] init];
+    }
+    NSNumber* ret = self.apiHashtable[methodName];
+    if( ret ) {
+        return ret.boolValue;
+    } else {
+        NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
+        [ocMethodName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,ocMethodName.length)];
+        id nativeObj = self.realObject;
+        for ( int i=0; i<5; i++ ) {
+            SEL sel = NSSelectorFromString(ocMethodName);
+            if( [nativeObj respondsToSelector:sel] ){
+                self.apiHashtable[methodName] = @(YES);
+                return YES;
+            }
+            [ocMethodName appendString:@":"];
+        }
+    }
+    self.apiHashtable[methodName] = @(NO);
+    return NO;
 }
 
 static void releaseNativeObject(LVUserDataInfo* user){
@@ -194,26 +241,40 @@ static int __index (lv_State *L) {
     
     LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
     id object = nativeObjBox.realObject;
-    if( nativeObjBox && object && functionName ){
+    if( nativeObjBox && object && [nativeObjBox isApiExist:functionName] ){
         lv_pushcclosure(L, callNativeObjectFunction, 2);
         return 1;
     }
     return 0; /* new userdatum is already on the stack */
 }
 
+static int __eq (lv_State *L) {
+    if (lv_gettop(L) < 2) {
+        return 0;
+    }
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * another = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if (another != NULL) {
+        LVNativeObjBox * box1 = (__bridge LVNativeObjBox *)(user->object);
+        LVNativeObjBox * box2 = (__bridge LVNativeObjBox *)(user->object);
+        lv_pushboolean(L, [box1 isEqual:box2]);
+        return 1;
+    }
+    return 0;
+}
+
 +(int) classDefine:(lv_State *)L {
     const struct lvL_reg memberFunctions [] = {
-        {"__index", __index },
-        
         {"__gc", __gc },
-        
         {"__tostring", __tostring },
+        {"__eq", __eq },
+        {"__index", __index },
         {NULL, NULL}
     };
     
     lv_createClassMetaTable(L, META_TABLE_NativeObject);
-    
     lvL_openlib(L, NULL, memberFunctions, 0);
+    
     return 0;
 }
 

@@ -18,7 +18,7 @@
 
 + (int) classDefine: (lv_State *)L ;
 
-- (id) init:(lv_State*) l identifierArray:(NSArray*) identifierArray;
+- (id) init:(lv_State*) l;
 
 + (void) setDefaultStyle:(Class) c;
 
