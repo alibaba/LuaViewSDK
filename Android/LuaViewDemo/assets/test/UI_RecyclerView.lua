@@ -6,14 +6,18 @@ local tableView
 
 local tableViewData = {
     Section = {
-        SectionCount = 1, -- section数量
+        SectionCount = 2, -- section数量
         RowCount = function(section)
-            return 50
+            if(section == 1) then
+                return 50
+            else
+                return 50
+            end
         end
     },
     Cell = {
         Id = function(section, row) -- 指定section和row对应的Cell类型唯一识别号
-        local id = "Cell1" .. row
+        local id = "Cell1" .. section .. row
         print("Id", id)
         return id;
         end,
@@ -26,7 +30,7 @@ local tableViewData = {
             Init = function(cell, section, row) -- 初始化cell
             print("Init", section, row, 10 + row * 2)
             cell.title = Label();
-            cell.title.backgroundColor(0xff0000)
+            cell.title.backgroundColor(section == 1 and 0xff0000 or 0x00ff00)
             end,
             Layout = function(cell, section, row) -- cell复用时调用
             print("Layout", section, row, 10 + row * 2)
@@ -34,7 +38,7 @@ local tableViewData = {
             cell.title.text(section .. '--' .. row)
             end,
             Callback = function(cell, section, row) -- 用户点击了section和row
-            Toast("Section " .. section .. ", Row " .. row .. cell.title.frame());
+            Toast("Section " .. section .. ", Row " .. row);
             end
         }
     }
@@ -50,7 +54,7 @@ local cellData = function(_, key)
         Init = function(cell, section, row) -- 初始化cell
         print("Init", section, row, 10 + row * 2)
         cell.title = Label();
-        cell.title.backgroundColor(0xff0000)
+        cell.title.backgroundColor(section == 1 and 0xff0000 or 0x00ff00)
         end,
         Layout = function(cell, section, row) -- cell复用时调用
         print("Layout", section, row, 10 + row * 2)
@@ -58,7 +62,7 @@ local cellData = function(_, key)
         cell.title.text(section .. '--' .. row)
         end,
         Callback = function(cell, section, row) -- 用户点击了section和row
-        Toast("Section " .. section .. ", Row " .. row .. cell.title.frame());
+        Toast("Section " .. section .. ", Row " .. row);
         end
     }
 end

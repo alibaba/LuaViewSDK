@@ -1,8 +1,6 @@
 package com.taobao.luaview.userdata.ui;
 
 
-import android.graphics.Color;
-
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.view.LVLoadingDialog;
 

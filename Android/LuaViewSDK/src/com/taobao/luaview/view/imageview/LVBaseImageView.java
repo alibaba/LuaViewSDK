@@ -1,5 +1,6 @@
 package com.taobao.luaview.view.imageview;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.taobao.luaview.global.LuaView;
@@ -16,6 +17,13 @@ public class LVBaseImageView extends BaseImageView {
 
     public LVBaseImageView(Context context) {
         super(context);
+        initRecycler(context);
+    }
+
+    private void initRecycler(Context context) {
+        if (context instanceof Activity) {
+            ImageActivityLifeCycle.getInstance(((Activity) context).getApplication()).watch(this);
+        }
     }
 
     @Override
@@ -32,5 +40,28 @@ public class LVBaseImageView extends BaseImageView {
         return mUrl;
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        restoreImage();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        releaseBitmap();
+    }
+
+    public void restoreImage() {// 恢复被清空的image
+        if (isNetworkMode) {
+            loadUrl(mUrl, null);
+        }
+    }
+
+    public void releaseBitmap() {// 释放图片内存
+        if (isNetworkMode) {
+            setImageDrawable(null);
+        }
+    }
 
 }
