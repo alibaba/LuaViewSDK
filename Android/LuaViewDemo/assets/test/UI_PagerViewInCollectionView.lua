@@ -3,12 +3,9 @@ require "kit/lv_kit"
 
 w, h = System.screenSize()
 
-window.backgroundColor(0, 1)
-
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
-
 
 
 local vp = PagerView({
@@ -86,8 +83,8 @@ local vp = PagerView({
                                 }
                             })
 
-                            vp.setBackgroundColor(0xaaaa0000)
-                            vp.setFrame(0, 0, w, 100)
+                            vp.backgroundColor(0xaaaa0000)
+                            vp.frame(0, 0, w, 100)
 
                             cell.container = vp
                         end,
@@ -119,7 +116,6 @@ local vp = PagerView({
                 }
             }
             tableView.frame(0, 0, w, h - 64)
-            tableView.backgroundColor(0xffFFFF)
 
             page.view = tableView
 
@@ -129,8 +125,8 @@ local vp = PagerView({
     }
 })
 
-vp.setBackgroundColor(0xaaaa0000)
-vp.setFrame(0, 0, w, h)
+vp.backgroundColor(0xaaaa0000)
+vp.frame(0, 0, w, h)
 
 
 
