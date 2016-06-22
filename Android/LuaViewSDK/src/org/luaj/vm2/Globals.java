@@ -23,10 +23,12 @@ package org.luaj.vm2;
 
 import android.content.Context;
 
+import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
-import com.taobao.luaview.debug.DebugConnection;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
+import com.taobao.luaview.vm.extend.GlobalsExtender;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
@@ -117,6 +119,8 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
+
+    public GlobalsExtender mExtender = new GlobalsExtender();
 
     /**
      * Android context
@@ -297,6 +301,8 @@ public class Globals extends LuaTable {
             }
 
             Prototype p = loadPrototype(is, chunkname, mode);
+
+            lazyLoad(p);
 
             return loader.load(p, chunkname, env);
         } catch (LuaError l) {
@@ -527,6 +533,44 @@ public class Globals extends LuaTable {
         public synchronized void reset() throws IOException {
             i = 0;
         }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * 延迟加载库
+     *
+     * @param binder
+     */
+    public void tryLazyLoad(final LuaValue binder) {
+        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {
+            mExtender.lazyLoad(binder);
+        } else {
+            load(binder);//load directly
+        }
+    }
+
+    /**
+     * lazy load p's labels
+     *
+     * @param p
+     */
+    public boolean lazyLoad(Prototype p) {
+        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {//lazy load, add by song
+            return mExtender.doLoad(this, p);
+        }
+        return false;
+    }
+
+    /**
+     * lazy load given name
+     * @param name
+     */
+    public LuaValue lazyLoad(String name) {
+        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null){//lazy load given name
+            return mExtender.doLoad(this, name);
+        }
+        return null;
     }
 
     /**

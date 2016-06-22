@@ -47,7 +47,7 @@ public class JsonUtil {
                         }
                     }
                 } catch (JSONException e) {
-                    LogUtil.e("[LuaView Error-toJSONObject]-Json Parse Failed, Reason: Invalid Format!");
+                    LogUtil.e("[LuaView Error-toJSONObject]-Json Parse Failed, Reason: Invalid Format!", e);
                 }
             }
         }
@@ -91,7 +91,7 @@ public class JsonUtil {
             try {
                 luaTable = toLuaTable(new JSONArray(jsonString));
             } catch (JSONException ex1) {
-                LogUtil.e("[LuaView Error-toLuaTable]-Json Parse Failed, Reason: Invalid Format!");
+                LogUtil.e("[LuaView Error-toLuaTable]-Json Parse Failed, Reason: Invalid Format!", ex1);
             }
         }
         return luaTable;
@@ -110,7 +110,7 @@ public class JsonUtil {
             try {
                 new JSONArray(jsonString);
             } catch (JSONException ex1) {
-                LogUtil.e("[LuaView Error-isJson]-Json Parse Failed, Reason: Invalid Format!");
+                LogUtil.e("[LuaView Error-isJson]-Json Parse Failed, Reason: Invalid Format!", ex1);
                 return false;
             }
         }

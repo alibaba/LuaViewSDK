@@ -47,6 +47,7 @@ public class DemoActivity extends ListActivity {
     private void init() {
         LuaViewConfig.setDebug(true);
         LuaViewConfig.setOpenDebugger(false);
+        LuaViewConfig.setLibsLazyLoad(true);
     }
 
     private List<String> getData() {
