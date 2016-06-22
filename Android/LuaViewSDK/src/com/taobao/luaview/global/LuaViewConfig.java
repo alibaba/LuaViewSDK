@@ -1,6 +1,7 @@
 package com.taobao.luaview.global;
 
 import android.os.Build;
+
 import com.taobao.android.luaview.BuildConfig;
 
 /**
