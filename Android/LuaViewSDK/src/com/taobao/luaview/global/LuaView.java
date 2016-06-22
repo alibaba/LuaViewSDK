@@ -122,7 +122,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     @NonNull
     private static Globals createGlobals(final Context context) {
-        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+        final Globals globals = LuaViewConfig.isDebug() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
         globals.context = context;
         LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
         return globals;
@@ -134,7 +134,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         globals.finder = new LuaResourceFinder(context);
         globals.luaView = luaView;
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
-            luaView.turnDebug();
+            luaView.openDebugger();
         }
         return luaView;
     }
@@ -470,9 +470,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     /**
-     * 开启debug
+     * 开启debugger
      */
-    private void turnDebug() {
+    private void openDebugger() {
         loadFile("debug.lua");
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket
