@@ -28,6 +28,10 @@ public abstract class BaseFunctionBinder extends TwoArgFunction {
         this.luaNames = name;
     }
 
+    public String[] getLuaNames() {
+        return luaNames;
+    }
+
     @Override
     public LuaValue call(LuaValue modname, LuaValue env) {
         return call(env, getMapperClass());

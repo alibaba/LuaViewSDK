@@ -1,5 +1,7 @@
 package org.luaj.vm2.luajc;
 
+import com.taobao.luaview.util.LogUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ public class JavaLoader extends ClassLoader {
 			v.initupvalue1(env);
 			return v;
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			LogUtil.d("[LuaView error]", "JavaLoader load failed", e);
 			throw new IllegalStateException("bad class gen: "+e);
 		}
 	}

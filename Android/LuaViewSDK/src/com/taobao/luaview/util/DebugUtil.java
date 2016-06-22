@@ -25,7 +25,9 @@ public class DebugUtil {
      * time end
      * @param method
      */
-    public static void te(String method) {
-        LogUtil.d("[Debug-time]", method, Debug.threadCpuTimeNanos() - tsTime);
+    public static long te(String method) {
+        long nanoTime = Debug.threadCpuTimeNanos() - tsTime;
+        LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
+        return nanoTime;
     }
 }

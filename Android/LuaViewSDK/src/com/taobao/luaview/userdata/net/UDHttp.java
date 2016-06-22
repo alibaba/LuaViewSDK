@@ -299,7 +299,7 @@ public class UDHttp extends BaseUserdata {
                     udHttpResponse.setHeaders(connection.getHeaderFields());
 
                 } catch (Exception e) {
-                    LogUtil.e("[Http error] ", e.toString());
+                    LogUtil.e("[Http error] ", e);
                     e.printStackTrace();
                     udHttpResponse.setResponseMsg(e.toString());
                 } finally {
