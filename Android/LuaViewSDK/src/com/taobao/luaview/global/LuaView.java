@@ -122,9 +122,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     @NonNull
     private static Globals createGlobals(final Context context) {
-        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+        final Globals globals = LuaViewManager.createGlobals();
         globals.context = context;
-        LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
         return globals;
     }
 
@@ -339,7 +338,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     public LuaView registerLibs(LuaValue... binders) {
         if (mGlobals != null && binders != null) {
             for (LuaValue binder : binders) {
-                mGlobals.load(binder);
+                mGlobals.tryLazyLoad(binder);
             }
         }
         return this;
@@ -391,7 +390,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         if (!TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
             final LuaValue value = mGlobals.get(luaName);
             if (value == null || value.isnil()) {
-                mGlobals.load(new UICustomPanelBinder(clazz, luaName));
+                mGlobals.tryLazyLoad(new UICustomPanelBinder(clazz, luaName));
             } else {
                 LogUtil.d("panel name " + luaName + " is already registered!");
             }
