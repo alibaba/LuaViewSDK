@@ -1,7 +1,5 @@
 w, h = System.screenSize();
 
-window.backgroundColor(0, 1);
-
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
@@ -93,7 +91,6 @@ tableView = RefreshCollectionView {
 loading = false;
 
 tableView.frame(0, 0, w, h - 64);
-tableView.backgroundColor(0xffFFFF);
 
 
 

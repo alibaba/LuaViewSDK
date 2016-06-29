@@ -19,7 +19,7 @@ tf.callback({
 
 local btn1 = Button()
 btn1.callback(function()
-    tf.setText("点击了")
+    tf.text("点击了")
 end)
 
 
