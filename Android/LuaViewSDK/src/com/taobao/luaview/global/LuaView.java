@@ -459,8 +459,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     private static LuaTable createMetaTableForLuaView() {
-        final LuaTable libOfLuaViews = LuaViewManager.bind(UIViewGroupMethodMapper.class, UIViewGroupMethodMapper.class.getMethods());
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
+        return LuaViewManager.createMetatable(UIViewGroupMethodMapper.class);
+//        final LuaTable libOfLuaViews = LuaViewManager.bind(UIViewGroupMethodMapper.class, UIViewGroupMethodMapper.class.getMethods());
+//        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
     }
 
     private LuaView(Globals globals, LuaValue metaTable) {
