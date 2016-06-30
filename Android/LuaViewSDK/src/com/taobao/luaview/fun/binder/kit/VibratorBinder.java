@@ -29,7 +29,7 @@ public class VibratorBinder extends BaseFunctionBinder {
 
     @Override
     public LuaValue createCreator(LuaValue env, final LuaValue metaTable) {
-        return new BaseVarArgCreator(env.checkglobals(), metaTable) {
+        return new BaseVarArgCreator(env.checkglobals(), metaTable, getMapperClass()) {
             @Override
             public LuaValue createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
                 return new UDVibrator(globals, metaTable, varargs);

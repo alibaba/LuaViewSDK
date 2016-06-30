@@ -1,6 +1,7 @@
 package com.taobao.luaview.util;
 
 import android.content.Context;
+import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 /**
  * Log Util
+ *
  * @author song
  */
 public class LogUtil {
@@ -45,7 +47,7 @@ public class LogUtil {
                 map.put(TIMES, 0l);
                 mAvgTime.put(tag, map);
             }
-            map.put(LAST_TIME, System.nanoTime());//每次都更新最新时间
+            map.put(LAST_TIME, Debug.threadCpuTimeNanos());//每次都更新最新时间
         }
     }
 
@@ -60,7 +62,7 @@ public class LogUtil {
             Map map = mAvgTime.get(tag);
             if (map != null) {//已经开始
                 long lastTime = Long.valueOf(String.valueOf(map.get(LAST_TIME)));
-                long totalTime = Long.valueOf(String.valueOf(map.get(TOTAL_TIME))) + System.nanoTime() - lastTime;
+                long totalTime = Long.valueOf(String.valueOf(map.get(TOTAL_TIME))) + Debug.threadCpuTimeNanos() - lastTime;
                 map.put(TOTAL_TIME, totalTime);//总时间
                 long printInterval = Long.valueOf(String.valueOf(map.get(PRINT_INTERVAL)));
                 long times = Long.valueOf(String.valueOf(map.get(TIMES))) + 1;//总次数
@@ -79,7 +81,7 @@ public class LogUtil {
      */
     public static void timeStart(Object... msg) {
         if (LuaViewConfig.isDebug()) {
-            time = System.nanoTime();
+            time = Debug.threadCpuTimeNanos();
             Log.d(DEFAULT_PREFIX, "[start] " + getMsg(msg));
         }
     }
@@ -89,7 +91,7 @@ public class LogUtil {
      */
     public static void timeEnd(Object... msg) {
         if (LuaViewConfig.isDebug()) {
-            Log.d(DEFAULT_PREFIX, "[end] " + (System.nanoTime() - time) + " " + getMsg(msg));
+            Log.d(DEFAULT_PREFIX, "[end] " + (Debug.threadCpuTimeNanos() - time) / 1000000 + " " + (Debug.threadCpuTimeNanos() - time) + " " + getMsg(msg));
         }
     }
 

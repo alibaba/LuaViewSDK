@@ -1,8 +1,8 @@
 package com.taobao.luaview.global;
 
 import android.os.Build;
+import android.support.v4.BuildConfig;
 
-import com.taobao.android.luaview.BuildConfig;
 
 /**
  * LuaView 系统设置，设置是否debug，是否可以调试等
@@ -26,11 +26,11 @@ public class LuaViewConfig {
         return isOpenDebugger;
     }
 
-    public static boolean isLibsLazyLoad(){
+    public static boolean isLibsLazyLoad() {
         return isLibsLazyLoad;
     }
 
-    public static boolean isIsUseLuaJC(){
+    public static boolean isIsUseLuaJC() {
         return isUseLuaJC;
     }
 
@@ -89,16 +89,17 @@ public class LuaViewConfig {
 
     /**
      * 是否延迟加载libs，如果设置为true的话则会在运行的时候才会加载用户lib，而不是初始化虚拟机的时候加载
+     *
      * @param lazyLoad
      */
-    public static void setLibsLazyLoad(boolean lazyLoad){
-       isLibsLazyLoad = lazyLoad;
+    public static void setLibsLazyLoad(boolean lazyLoad) {
+        isLibsLazyLoad = lazyLoad;
     }
 
     /**
      * 是否使用LuaJC Loader，可以直接lua to java bytecode
      */
-    public static void setUserLuaJC(boolean userLuaJC){
+    public static void setUseLuaJC(boolean userLuaJC) {
         isUseLuaJC = userLuaJC;
     }
 }
