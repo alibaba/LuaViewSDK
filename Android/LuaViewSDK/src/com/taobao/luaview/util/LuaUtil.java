@@ -24,6 +24,30 @@ public class LuaUtil {
     //-------------------------------------get value------------------------------------------------
 
     /**
+     * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Long getTimeLong(final Varargs varargs, int...poslist){
+        Float timeOfFloat = getFloat(varargs, poslist);
+        return timeOfFloat != null ? (long)(timeOfFloat * 1000) : null;
+    }
+
+    /**
+     * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     * @param varargs
+     * @param defaultSeconds
+     * @param poslist
+     * @return
+     */
+    public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int...poslist){
+        Float timeOfFloat = getFloat(varargs, poslist);
+        return timeOfFloat != null ? (long)(timeOfFloat * 1000) : (defaultSeconds != null ? (long)(defaultSeconds * 1000) : null);
+    }
+
+
+    /**
      * 获取boolean
      *
      * @param varargs
@@ -77,6 +101,18 @@ public class LuaUtil {
     public static Double getDouble(final Varargs varargs, int... poslist) {
         final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
         return number != null ? number.checkdouble() : null;
+    }
+
+    /**
+     * 获取double
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Double getDouble(final Varargs varargs, Double defaultValue, int... poslist) {
+        final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
+        return number != null ? number.checkdouble() : defaultValue;
     }
 
     /**
