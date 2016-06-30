@@ -29,8 +29,7 @@ public class LuaUtil {
      * @return
      */
     public static Long getTimeLong(final Varargs varargs, int...poslist){
-        Float timeOfFloat = getFloat(varargs, poslist);
-        return timeOfFloat != null ? (long)(timeOfFloat * 1000) : null;
+        return getTimeLong(varargs, null, poslist);
     }
 
     /**
@@ -41,7 +40,7 @@ public class LuaUtil {
      * @return
      */
     public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int...poslist){
-        Float timeOfFloat = getFloat(varargs, poslist);
+        final Float timeOfFloat = getFloat(varargs, poslist);
         return timeOfFloat != null ? (long)(timeOfFloat * 1000) : (defaultSeconds != null ? (long)(defaultSeconds * 1000) : null);
     }
 
