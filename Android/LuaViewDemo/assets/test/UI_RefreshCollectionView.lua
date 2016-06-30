@@ -1,7 +1,5 @@
 w, h = System.screenSize();
 
-window.backgroundColor(0, 1);
-
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
@@ -74,20 +72,6 @@ tableView = RefreshCollectionView {
             end
         }
     },
-    Header = function()
-        local head = Button();
-        head.title("我是头");
-        head.frame(0, 0, w, 100);
-        head.backgroundColor(0xff);
-        return head;
-    end,
-    Footer = function()
-        local foot = Button();
-        foot.title("我是结尾");
-        foot.frame(0, 0, w, 100);
-        foot.backgroundColor(0xff0000);
-        return foot;
-    end,
     Callback = {
         Scrolling = function()
             print("scrolling");
@@ -98,11 +82,8 @@ tableView = RefreshCollectionView {
         ScrollEnd = function()
             print("scrolling end");
         end,
-        PullDownRefresh = function()
+        PullDown = function()
             print("PullDown");
-        end,
-        PullUpRefresh = function()
-            print("PullUp");
         end
     }
 };
@@ -110,7 +91,6 @@ tableView = RefreshCollectionView {
 loading = false;
 
 tableView.frame(0, 0, w, h - 64);
-tableView.backgroundColor(0xffFFFF);
 
 
 

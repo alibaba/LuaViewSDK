@@ -14,8 +14,10 @@
 -(void) lv_initRefreshHeader{// 初始化下拉刷新功能
     MJRefreshNormalHeader* refreshHeader = [[MJRefreshNormalHeader alloc] init];
     self.mj_header = refreshHeader;
+    
+    __weak typeof(self) weakSelf = self;
     refreshHeader.refreshingBlock = ^(){
-        [self lv_refreshHeaderToRefresh];
+        [weakSelf lv_refreshHeaderToRefresh];
     };
 }
 
@@ -33,6 +35,9 @@
 
 - (BOOL) lv_isRefreshing{// 是否正在刷新
     return self.mj_header.isRefreshing;
+}
+
+-(void) dealloc{
 }
 
 @end

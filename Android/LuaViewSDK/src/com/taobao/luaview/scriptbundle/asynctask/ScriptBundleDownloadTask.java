@@ -59,7 +59,7 @@ public class ScriptBundleDownloadTask extends AsyncTask<String, Integer, String>
             String destFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
 
             //check sha256
-            final String sha256 = params.length > 2 ? params[2] : null;
+            final String sha256 = params.length > 1 ? params[1] : null;
             final byte[] fileData = IOUtil.toBytes(input);
             if (sha256 != null && !sha256.equalsIgnoreCase(HexUtil.bytesToHex(EncryptUtil.sha256(fileData)))) {//验证脚本的完整性
                 return null;

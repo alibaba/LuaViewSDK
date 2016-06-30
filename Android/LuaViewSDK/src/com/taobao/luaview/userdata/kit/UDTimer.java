@@ -125,6 +125,11 @@ public class UDTimer extends BaseCacheUserdata {
         if (repeat != null) {
             mRepeat = repeat;
         }
+
+        if(mTimerRunnable != null){//start新的时候新停掉老的
+            cancel();
+        }
+
         mTimerRunnable = new Runnable() {
             @Override
             public void run() {

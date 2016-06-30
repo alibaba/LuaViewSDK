@@ -13,6 +13,4 @@
 
 @interface LVCollectionViewDelegate : LVScrollViewDelegate<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic,strong) NSMutableDictionary* identifierDic;
-
 @end

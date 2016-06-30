@@ -29,19 +29,31 @@ static inline NSInteger mapSection(NSInteger section){
 
 @interface LVCollectionViewDelegate ()
 
+@property(nonatomic, strong) NSMutableSet *registeredIds;
+
 @end
 
 
 @implementation LVCollectionViewDelegate
 
+- (void)tryRegisterId:(NSString *)id inCollectionView:(UICollectionView *)view {
+    if (self.registeredIds == nil) {
+        self.registeredIds = [NSMutableSet set];
+    }
+    if (![self.registeredIds containsObject:id]) {
+        [view registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:id];
+        [self.registeredIds addObject:id];
+    }
+}
+
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row)];
-    identifier = self.identifierDic[identifier];
     if( identifier == nil ){
         identifier = DEFAULT_CELL_IDENTIFIER;
     }
+    [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     LView* lview = self.owner.lv_lview;
     lv_State* l = lview.l;

@@ -1,11 +1,15 @@
 
 viewController.externalApiDemo_number("dongxicheng",123);
-viewController.externalApiDemo();
+viewController.externalApiDemo_number("dongxicheng",123);
+if( viewController.externalApiDemo ) then
+	viewController.externalApiDemo();
+else
+	print("viewController.externalApiDemo not exist !!!");
+end
 
 
 function testNativeObjectArgs(view, vc, str, intvalue)
     print(str,intvalue);
-	vc.externalApiDemo();
 	vc.externalApiDemo_number("测试",8787);
 	local s = vc.string("可以嘛");
 	print(s .. "结果");

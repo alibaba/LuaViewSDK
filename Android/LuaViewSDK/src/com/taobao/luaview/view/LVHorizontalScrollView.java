@@ -56,4 +56,8 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
 
     }
+
+    public LVViewGroup getContainer(){
+        return mContainer;
+    }
 }

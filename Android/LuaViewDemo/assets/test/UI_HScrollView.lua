@@ -37,7 +37,7 @@ end)
 for i = 0, 10, 1 do
     local btn = Label()
     btn.text("BTN" .. i)
-    btn.frame(i * 40, 0, 39, 19)
+    btn.frame(i * 60, 10, 59, 80)
     btn.backgroundColor(0xff00ff00)
     scrollView.addView(btn)
 end

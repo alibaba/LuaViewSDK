@@ -113,6 +113,7 @@ static int SERVER_PORT = 9876;
 
 -(void)Connect:(NSString*) ip port:(NSUInteger)port
 {
+#ifdef DEBUG
     //////////////////////创建套接字//////////////
     CFSocketContext socketConent = {0,NULL,NULL,NULL,NULL};
     socketConent.info = (__bridge void *)(self);
@@ -145,6 +146,7 @@ static int SERVER_PORT = 9876;
     CFRunLoopAddSource(cfrl,source,kCFRunLoopCommonModes); //将循环对象加入当前循环中
     LVReleaseAndNull(source);
     LVReleaseAndNull(address);
+#endif
 }
 
 -(void) closeAll{
@@ -162,7 +164,7 @@ static int SERVER_PORT = 9876;
     }
 }
 
-
+#ifdef DEBUG
 static void ServerConnectCallBack( CFSocketRef socket,
                                   CFSocketCallBackType type,
                                   CFDataRef address,
@@ -207,6 +209,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
         }
     }
 }
+#endif
 
 -(void) sendOneData{
     NSData* data = self.sendArray.lastObject;
@@ -222,6 +225,8 @@ static void ServerConnectCallBack( CFSocketRef socket,
 }
 
 ///////////////////监听来自服务器的信息///////////////////
+
+#ifdef DEBUG
 static NSString* readString(CFSocketRef socket)
 {
     unsigned char head[4] = {0};
@@ -250,6 +255,7 @@ static NSString* readString(CFSocketRef socket)
     NSString* ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return ret;
 }
+#endif
 /////////////////////////发送信息给服务器////////////////////////
 - (void) sendString:(NSString *)string
 {

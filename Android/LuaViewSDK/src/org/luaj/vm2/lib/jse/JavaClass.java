@@ -100,9 +100,13 @@ public class JavaClass extends JavaInstance implements CoerceJavaToLua.Coercion 
 				if ( Modifier.isPublic( mi.getModifiers()) ) {
 					String name = mi.getName();
 					List list = (List) namedlists.get(name);
-					if ( list == null )
+					if ( list == null ) {
 						namedlists.put(name, list = new ArrayList());
-					list.add( JavaMethod.forMethod(mi) );
+					}
+					JavaMethod method = JavaMethod.forMethod(mi);
+					if(method != null) {//FIXME by song, 做保护
+						list.add(method);
+					}
 				}
 			}
 			Map map = new HashMap();

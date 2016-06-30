@@ -13,7 +13,7 @@ static inline BOOL isValidFloatString(NSString *floatString) {
     BOOL valid = NO;
     if (floatString && [floatString isKindOfClass:[NSString class]]) {
         CGFloat fv = [floatString floatValue];
-        valid = fv >= 0 && fv != NSNotFound;
+        valid = fv != NSNotFound;
     }
     
     return valid;

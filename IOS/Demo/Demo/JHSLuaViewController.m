@@ -109,4 +109,9 @@
 -(void) test:(id) object{
     NSLog(@"%@", object);
 }
+
+-(void) externalApiDemo:(NSString*) s number:(NSInteger) number{
+    NSLog(@"externalApiDemo,%@,%d",s, (int)number);
+}
+
 @end

@@ -11,6 +11,7 @@ import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
 
 /**
  * Network Util
+ *
  * @author song
  */
 public class NetworkUtil {
@@ -60,12 +61,12 @@ public class NetworkUtil {
         if (context != null) {
             if (sConnectionBroadcastReceiver == null) {
                 sConnectionBroadcastReceiver = new ConnectionStateChangeBroadcastReceiver();
-                sConnectionBroadcastReceiver.addOnConnectionChangeListener(listener);
+                IntentFilter filter = new IntentFilter();
+                filter.addAction(Intent.ACTION_SHUTDOWN);
+                filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+                context.getApplicationContext().registerReceiver(sConnectionBroadcastReceiver, filter);
             }
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(Intent.ACTION_SHUTDOWN);
-            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-            context.registerReceiver(sConnectionBroadcastReceiver, filter);
+            sConnectionBroadcastReceiver.addOnConnectionChangeListener(listener);
         }
     }
 
@@ -78,9 +79,11 @@ public class NetworkUtil {
         if (context != null && sConnectionBroadcastReceiver != null) {
             try {
                 sConnectionBroadcastReceiver.removeOnConnectionChangeListener(listener);
-                context.unregisterReceiver(sConnectionBroadcastReceiver);
-                sConnectionBroadcastReceiver = null;
-            } catch (Exception e){//保护
+                if (sConnectionBroadcastReceiver.getListenerSize() == 0) {
+                    context.getApplicationContext().unregisterReceiver(sConnectionBroadcastReceiver);
+                    sConnectionBroadcastReceiver = null;
+                }
+            } catch (Exception e) {//保护
                 e.printStackTrace();
             }
         }
