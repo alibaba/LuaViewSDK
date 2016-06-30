@@ -301,9 +301,6 @@ public class Globals extends LuaTable {
             }
 
             Prototype p = loadPrototype(is, chunkname, mode);
-
-            lazyLoad(p);
-
             return loader.load(p, chunkname, env);
         } catch (LuaError l) {
             throw l;
@@ -543,11 +540,12 @@ public class Globals extends LuaTable {
      * @param binder
      */
     public void tryLazyLoad(final LuaValue binder) {
-        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {
-            mExtender.lazyLoad(binder);
-        } else {
-            load(binder);//load directly
-        }
+        load(binder);//load directly
+//        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {
+//            mExtender.lazyLoad(binder);
+//        } else {
+//            load(binder);//load directly
+//        }
     }
 
     /**

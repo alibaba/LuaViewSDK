@@ -28,7 +28,7 @@ public class UnicodeBinder extends BaseFunctionBinder {
 
     @Override
     public LuaValue createCreator(LuaValue env, final LuaValue metaTable) {
-        return new BaseVarArgCreator(env.checkglobals(), metaTable) {
+        return new BaseVarArgCreator(env.checkglobals(), metaTable, getMapperClass()) {
             @Override
             public LuaValue createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
                 return new UDUnicode(globals, metaTable, varargs).getUnicode();//直接返回一个string，而不是对象，这样就可以在代码中直接加了

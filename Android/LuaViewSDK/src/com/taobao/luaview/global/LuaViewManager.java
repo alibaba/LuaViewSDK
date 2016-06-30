@@ -37,16 +37,21 @@ import com.taobao.luaview.fun.binder.ui.UITextViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIToastBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewGroupBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
+import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.util.DebugUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.jse.JsePlatform;
 import org.luaj.vm2.luajc.LuaJC;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,6 +137,7 @@ public class LuaViewManager {
         DebugUtil.te("loadLuaViewLibs");
     }
 
+
     /**
      * bind lua function
      *
@@ -167,6 +173,50 @@ public class LuaViewManager {
             throw new LuaError("[Bind Failed] " + e);
         } finally {
             return env;
+        }
+    }
+
+
+    //-----------------------------------------metatable--------------------------------------------
+
+    /**
+     * create metatable for libs
+     *
+     * @return
+     */
+    public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
+        final LuaTable libTable = LuaViewManager.bind(libClass, getMapperMethods(libClass));
+        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    }
+
+    public static LuaTable createMetatable(Class<? extends LibFunction> libClass, Method[] methods) {
+        final LuaTable libTable = LuaViewManager.bind(libClass, methods);
+        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    }
+
+    /**
+     * 获取所有方法
+     *
+     * @param clazz
+     * @return
+     */
+    private static List<Method> getMapperMethods(final Class clazz) {
+        final List<Method> methods = new ArrayList<Method>();
+        getMapperMethodsByClazz(methods, clazz);
+        return methods.size() > 0 ? methods : null;
+    }
+
+    private static void getMapperMethodsByClazz(final List<Method> result, final Class clazz) {
+        if (clazz != null && clazz.isAnnotationPresent(LuaViewLib.class)) {//XXXMapper
+            getMapperMethodsByClazz(result, clazz.getSuperclass());//处理super
+            final Method[] methods = clazz.getDeclaredMethods();
+            if (methods != null && methods.length > 0) {
+                for (final Method method : methods) {//add self
+                    if (method.getModifiers() == Modifier.PUBLIC) {//public 方法才行
+                        result.add(method);
+                    }
+                }
+            }
         }
     }
 

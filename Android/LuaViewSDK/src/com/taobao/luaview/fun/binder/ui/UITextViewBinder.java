@@ -28,7 +28,7 @@ public class UITextViewBinder extends BaseFunctionBinder {
 
     @Override
     public LuaValue createCreator(LuaValue env, LuaValue metaTable) {
-        return new BaseVarArgUICreator(env.checkglobals(), metaTable) {
+        return new BaseVarArgUICreator(env.checkglobals(), metaTable, getMapperClass()) {
             @Override
             public ILVView createView(Globals globals, LuaValue metaTable, Varargs varargs) {
                 return new LVTextView(globals, metaTable, varargs);
