@@ -18,7 +18,7 @@ end
 timer1 = Timer(function()
     myprint("Timer1 Run")
 end);
-timer1 = timer1.start(1.0, false);
+timer1 = timer1.start(0.1, false);
 
 --2
 index2 = 1;
