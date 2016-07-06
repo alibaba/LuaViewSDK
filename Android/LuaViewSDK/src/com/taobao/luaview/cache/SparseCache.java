@@ -1,4 +1,4 @@
-package com.taobao.luaview.extend;
+package com.taobao.luaview.cache;
 
 import android.util.SparseArray;
 

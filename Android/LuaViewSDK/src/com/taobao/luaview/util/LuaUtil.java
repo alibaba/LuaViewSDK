@@ -8,6 +8,7 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -587,5 +588,24 @@ public class LuaUtil {
             e.printStackTrace();
             return LuaValue.NIL;
         }
+    }
+
+    /**
+     * convert a table to map
+     *
+     * @param table
+     * @return
+     */
+    public static Map<String, String> toMap(LuaTable table) {
+        if (table != null) {
+            final Map<String, String> result = new HashMap<String, String>();
+            final LuaValue[] keys = table.keys();
+            LuaValue value = null;
+            for (LuaValue key : keys) {
+                value = table.get(key);
+                result.put(key.optjstring(null), value.optjstring(null));
+            }
+        }
+        return null;
     }
 }

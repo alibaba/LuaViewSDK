@@ -1,6 +1,6 @@
 package com.taobao.luaview.userdata.base;
 
-import com.taobao.luaview.extend.LuaCache;
+import com.taobao.luaview.cache.LuaCache;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;

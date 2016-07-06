@@ -1,11 +1,11 @@
-package com.taobao.luaview.extend;
+package com.taobao.luaview.cache;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Weak Reference Cache
+ * Weak Reference Cache，在退出的时候会清空
  *
  * @author song
  * @date 16/1/27

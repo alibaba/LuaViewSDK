@@ -28,11 +28,32 @@ public class UDJson extends BaseLuaTable {
         set("isValid", new isValid());
     }
 
+    //is vaild
     class isValid extends VarArgFunction {
 
         @Override
-        public Varargs invoke(Varargs args) {
-            LuaValue target = args.arg(2);
+        public LuaValue invoke(Varargs args) {
+            final LuaValue target = args.arg(2);
+            final LuaValue callback = LuaUtil.getFunction(args, 3);
+            if(callback != null){//通过callback来处理
+                new SimpleTask1<LuaValue>() {
+                    @Override
+                    protected LuaValue doInBackground(Object... params) {
+                        return isValid(target);
+                    }
+
+                    @Override
+                    protected void onPostExecute(LuaValue result) {
+                        LuaUtil.callFunction(callback, result);
+                    }
+                }.execute();
+                return LuaValue.NIL;
+            } else {
+                return isValid(target);
+            }
+        }
+
+        private LuaValue isValid(LuaValue target){
             if (target instanceof UDData) {
                 return valueOf(JsonUtil.isJson(((UDData) target).toJson(UDData.DEFAULT_ENCODE)));
             } else if (LuaUtil.isString(target)) {
@@ -42,6 +63,8 @@ public class UDJson extends BaseLuaTable {
         }
     }
 
+
+    //to table
     class toTable extends VarArgFunction {
 
         @Override
