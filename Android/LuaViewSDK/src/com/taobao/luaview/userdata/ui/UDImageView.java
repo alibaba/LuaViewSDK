@@ -8,6 +8,7 @@ import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -63,10 +64,10 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                         drawable = getLuaResourceFinder().findDrawable(urlOrName);
                         imageView.setImageDrawable(drawable);
                     }
-
                     if (callback != null) {//本地图片直接调用callback
                         LuaUtil.callFunction(callback, drawable != null ? LuaBoolean.TRUE : LuaBoolean.FALSE);
                     }
+//                    setImageUrlAsync(imageView, urlOrName, callback);//异步加载图片，需要改现有代码，先hold
                 }
             } else {//设置null
                 imageView.setIsNetworkMode(false);
@@ -77,6 +78,30 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
             }
         }
         return this;
+    }
+
+    private void setImageUrlAsync(final T imageView, final String urlOrName, final LuaFunction callback){
+        if (getLuaResourceFinder() != null) {//异步加载图片
+            getLuaResourceFinder().findDrawable(urlOrName, new LuaResourceFinder.DrawableFindCallback() {
+                @Override
+                public void onStart(String urlOrPath) {
+                    if (imageView != null && urlOrName != null) {
+                        imageView.setTag(R.id.lv_tag_url, urlOrName);
+                    }
+                }
+
+                @Override
+                public void onFinish(Drawable drawable) {
+                    if (imageView != null && urlOrName != null && urlOrName.equals(imageView.getTag(R.id.lv_tag_url))) {
+                        imageView.setImageDrawable(drawable);
+                    }
+
+                    if (callback != null) {//本地图片直接调用callback
+                        LuaUtil.callFunction(callback, drawable != null ? LuaBoolean.TRUE : LuaBoolean.FALSE);
+                    }
+                }
+            });
+        }
     }
 
     /**

@@ -9,9 +9,8 @@ import android.webkit.URLUtil;
 
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
-import com.taobao.luaview.extend.LuaCache;
+import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
-import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
@@ -32,7 +31,6 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import org.luaj.vm2.lib.jse.JsePlatform;
 
 /**
  * LuaView 实现类

@@ -119,9 +119,6 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-
-    public GlobalsExtender mExtender = new GlobalsExtender();
-
     /**
      * Android context
      */
@@ -541,34 +538,6 @@ public class Globals extends LuaTable {
      */
     public void tryLazyLoad(final LuaValue binder) {
         load(binder);//load directly
-//        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {
-//            mExtender.lazyLoad(binder);
-//        } else {
-//            load(binder);//load directly
-//        }
-    }
-
-    /**
-     * lazy load p's labels
-     *
-     * @param p
-     */
-    public boolean lazyLoad(Prototype p) {
-        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null) {//lazy load, add by song
-            return mExtender.doLoad(this, p);
-        }
-        return false;
-    }
-
-    /**
-     * lazy load given name
-     * @param name
-     */
-    public LuaValue lazyLoad(String name) {
-        if (LuaViewConfig.isLibsLazyLoad() && mExtender != null){//lazy load given name
-            return mExtender.doLoad(this, name);
-        }
-        return null;
     }
 
     /**

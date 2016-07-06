@@ -11,7 +11,7 @@ import java.io.InputStream;
  * @date 15/11/10
  */
 public class IOUtil {
-    private static final int BUFFER_SIZE = 1024 * 8; //8k
+    private static final int BUFFER_SIZE = 1024 * 8; //8Byte
 
     /**
      * convert a inputstream to bytes

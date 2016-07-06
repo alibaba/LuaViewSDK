@@ -1,4 +1,4 @@
-package com.taobao.luaview.extend;
+package com.taobao.luaview.cache;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * XXX
+ * 所有LuaView级别的cache管理
  *
  * @author song
  * @date 16/4/11
