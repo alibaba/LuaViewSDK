@@ -1,8 +1,7 @@
 package com.taobao.luaview.global;
 
 import android.os.Build;
-import android.support.v4.BuildConfig;
-
+import com.taobao.android.luaview.BuildConfig;
 
 /**
  * LuaView 系统设置，设置是否debug，是否可以调试等
