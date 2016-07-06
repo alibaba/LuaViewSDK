@@ -2,6 +2,11 @@ local label = Label()
 label.text("请看日志输出")
 label.frame(0, 0, System.screenSize())
 
+
+bridge.testParams({"a", "b"})
+
+bridge.testParams({aa="a", bb="b"})
+
 -- 从Native注册一个bridge对象给lua，并在lua中调用native函数
 print("Map", type(bridge.testMap()), bridge.testMap(), bridge.testMap().get("key1"))
 print("List", type(bridge.testList()), bridge.testList(), bridge.testList().get(1))

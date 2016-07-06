@@ -40,6 +40,7 @@ import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.util.DebugUtil;
+import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaError;
@@ -71,8 +72,8 @@ public class LuaViewManager {
      */
     public static Globals createGlobals() {
         final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
-        if (LuaViewConfig.isIsUseLuaJC()) {
-            LuaJC.install(globals);
+        if (LuaViewConfig.isUseLuaDC()) {
+            LuaDC.install(globals);
         }
         loadLuaViewLibs(globals);//加载用户lib
         return globals;

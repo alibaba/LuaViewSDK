@@ -3,7 +3,7 @@ package com.taobao.luaview.util;
 import android.content.Context;
 import android.graphics.Typeface;
 
-import com.taobao.luaview.extend.SimpleCache;
+import com.taobao.luaview.cache.SimpleCache;
 
 /**
  * 字体处理，字体使用SimpleCache，全局缓存
