@@ -8,7 +8,12 @@ import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
 import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.util.JsonUtil;
+import com.taobao.luaview.util.LogUtil;
+import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVLoadingDialog;
+
+import org.luaj.vm2.LuaTable;
 
 /**
  * 通过LuaView、注入bridge对象，实现Lua-Java通信
@@ -59,6 +64,13 @@ public class DemoLuaViewActivity extends Activity {
      */
     public void load(final LuaView luaView) {
         luaView.load(getLuaUri());
+
+
+        //测试调用 lua function
+        LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
+        LogUtil.d("call-lua-function return:", JsonUtil.toString((LuaTable)luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
+        LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun1", 3, "c", 0.3));
+        LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun2", 4, "d", 0.4));
     }
 
     /**

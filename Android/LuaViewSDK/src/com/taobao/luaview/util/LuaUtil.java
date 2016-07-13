@@ -408,6 +408,25 @@ public class LuaUtil {
         }
     }
 
+    public static Varargs callFunction(LuaValue target, Object... objs){
+        if (target != null && target.isfunction()) {
+            LuaValue[] args = null;
+            if (objs != null && objs.length > 0) {
+                args = new LuaValue[objs.length];
+
+                for (int i = 0; i < objs.length; i++) {
+                    args[i] = CoerceJavaToLua.coerce(objs[i]);
+                }
+            }
+            if (args != null) {
+                return target.invoke(LuaValue.varargsOf(args));
+            } else {
+                return target.call();
+            }
+        }
+        return LuaValue.NIL;
+    }
+
     /**
      * call lua function ( return multiple values)
      *
