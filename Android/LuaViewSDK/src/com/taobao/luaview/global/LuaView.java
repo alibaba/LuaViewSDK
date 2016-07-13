@@ -444,7 +444,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             final UDView userdata = getUserdata();
             if (userdata != null) {
                 final LuaValue callbacks = userdata.getCallback();
-                if (callbacks != null) {
+                if (LuaUtil.isValid(callbacks)) {
                     return LuaUtil.callFunction(callbacks.get(funName), objs);
                 }
             }

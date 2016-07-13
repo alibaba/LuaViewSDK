@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 /**
  * Json 处理
+ *
  * @author song
  * @date 15/9/6
  */
@@ -29,6 +30,13 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return obj.toString();
+    }
+
+    public static String toString(Object object) {
+        if (object instanceof LuaTable) {
+            return toString((LuaTable) object);
+        }
+        return LuaValue.NIL.toString();
     }
 
     public static JSONObject toJSONObject(LuaTable table) {

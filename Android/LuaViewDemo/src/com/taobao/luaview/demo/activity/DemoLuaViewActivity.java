@@ -68,7 +68,7 @@ public class DemoLuaViewActivity extends Activity {
 
         //测试调用 lua function
         LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
-        LogUtil.d("call-lua-function return:", JsonUtil.toString((LuaTable)luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
+        LogUtil.d("call-lua-function return:", JsonUtil.toString(luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
         LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun1", 3, "c", 0.3));
         LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun2", 4, "d", 0.4));
     }
