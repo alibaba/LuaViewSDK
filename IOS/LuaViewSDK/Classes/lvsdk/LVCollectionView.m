@@ -63,6 +63,16 @@
     [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
+// 重载以实现可能的定制需求
+- (void) luaviewSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated{
+    [self setContentOffset:contentOffset animated:animated];
+}
+
+// 制定区域可见
+- (void) luaviewScrollRectToVisible:(CGRect)rect animated:(BOOL)animated{
+    [self scrollRectToVisible:rect animated:animated];
+}
+
 static Class g_class = nil;
 
 + (void) setDefaultStyle:(Class) c{
@@ -202,7 +212,7 @@ static int scrollToCell (lv_State *L) {
                         if( y < 0 ) {
                             y = 0;
                         }
-                        [collectionView setContentOffset:CGPointMake(0, y) animated:animation];
+                        [collectionView luaviewSetContentOffset:CGPointMake(0, y) animated:animation];
                     }
                 }
                 return 0;
@@ -221,7 +231,7 @@ static int scrollToTop(lv_State *L) {
             if( lv_gettop(L)>=2 ) {
                 animation = lv_tonumber(L, 2);
             }
-            [tableView scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animation];
+            [tableView luaviewScrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animation];
             return 0;
         }
     }
