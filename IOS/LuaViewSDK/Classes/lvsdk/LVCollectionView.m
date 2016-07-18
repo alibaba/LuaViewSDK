@@ -63,14 +63,19 @@
     [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
-// 重载以实现可能的定制需求
+// 重载以实现可能的定制需求, contentOffset
 - (void) luaviewSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated{
     [self setContentOffset:contentOffset animated:animated];
 }
 
-// 制定区域可见
+// 重载以实现可能的定制需求, RectToVisible
 - (void) luaviewScrollRectToVisible:(CGRect)rect animated:(BOOL)animated{
     [self scrollRectToVisible:rect animated:animated];
+}
+
+// 重载以实现可能的定制需求, scrollToTop
+- (void) luaviewScrollToTopWithAnimated:(BOOL)animated{
+    [self scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animated];
 }
 
 static Class g_class = nil;
@@ -231,7 +236,7 @@ static int scrollToTop(lv_State *L) {
             if( lv_gettop(L)>=2 ) {
                 animation = lv_tonumber(L, 2);
             }
-            [tableView luaviewScrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animation];
+            [tableView luaviewScrollToTopWithAnimated:animation];
             return 0;
         }
     }
