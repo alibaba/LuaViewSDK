@@ -14,7 +14,7 @@ public class LuaViewConfig {
     private static boolean isDebug = BuildConfig.DEBUG;
     private static boolean isOpenDebugger = isEmulator();//目前只支持模拟器下断点调试Lua，不支持真机，真机环境关闭该功能
     private static String sTtid = null;
-    private static boolean isRefreshEnabled = false;
+    private static boolean isRefreshEnabled = true;
 
     public static boolean isDebug() {
         return isDebug;
