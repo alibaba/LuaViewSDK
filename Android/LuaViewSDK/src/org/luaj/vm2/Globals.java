@@ -23,10 +23,12 @@ package org.luaj.vm2;
 
 import android.content.Context;
 
+import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
-import com.taobao.luaview.debug.DebugConnection;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
+import com.taobao.luaview.vm.extend.GlobalsExtender;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
@@ -117,7 +119,6 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-
     /**
      * Android context
      */
@@ -297,7 +298,6 @@ public class Globals extends LuaTable {
             }
 
             Prototype p = loadPrototype(is, chunkname, mode);
-
             return loader.load(p, chunkname, env);
         } catch (LuaError l) {
             throw l;
@@ -527,6 +527,17 @@ public class Globals extends LuaTable {
         public synchronized void reset() throws IOException {
             i = 0;
         }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * 延迟加载库
+     *
+     * @param binder
+     */
+    public void tryLazyLoad(final LuaValue binder) {
+        load(binder);//load directly
     }
 
     /**

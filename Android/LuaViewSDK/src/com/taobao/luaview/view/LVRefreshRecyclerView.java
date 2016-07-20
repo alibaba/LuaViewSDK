@@ -39,7 +39,12 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
         mGlobals.saveContainer(mRecyclerView);
         this.addView(mRecyclerView, LuaViewUtil.createRelativeLayoutParamsMM());
         mGlobals.restoreContainer();
-        ((UDRefreshRecyclerView) getUserdata()).initPullRefresh();
+
+        if (mGlobals.luaView == null || mGlobals.luaView.isRefreshContainerEnable() == false) {
+            this.setEnabled(false);
+        } else {
+            ((UDRefreshRecyclerView) getUserdata()).initPullRefresh();
+        }
     }
 
     /**

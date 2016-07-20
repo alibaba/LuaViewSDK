@@ -4,7 +4,7 @@ import android.graphics.Point;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.taobao.luaview.extend.SparseCache;
+import com.taobao.luaview.cache.SparseCache;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.userdata.ui.UDViewGroup;

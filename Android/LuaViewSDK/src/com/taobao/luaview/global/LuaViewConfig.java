@@ -1,7 +1,6 @@
 package com.taobao.luaview.global;
 
 import android.os.Build;
-
 import com.taobao.android.luaview.BuildConfig;
 
 /**
@@ -13,6 +12,9 @@ import com.taobao.android.luaview.BuildConfig;
 public class LuaViewConfig {
     private static boolean isDebug = BuildConfig.DEBUG;
     private static boolean isOpenDebugger = isEmulator();//目前只支持模拟器下断点调试Lua，不支持真机，真机环境关闭该功能
+    private static boolean isLibsLazyLoad = false;//是否延迟加载Libs，如果延迟加载则只会加载用到的libs，并且只会在用到的时候才加载，不用到不加载
+    private static boolean isUseLuaDC = false;//是否使用LuaDC Compiler，直接将lua代码编译成dex文件，能够加速虚拟机执行
+
     private static String sTtid = null;
 
     public static boolean isDebug() {
@@ -21,6 +23,14 @@ public class LuaViewConfig {
 
     public static boolean isOpenDebugger() {
         return isOpenDebugger;
+    }
+
+    public static boolean isLibsLazyLoad() {
+        return isLibsLazyLoad;
+    }
+
+    public static boolean isUseLuaDC() {
+        return isUseLuaDC;
     }
 
     /**
@@ -74,5 +84,21 @@ public class LuaViewConfig {
      */
     public static void setOpenDebugger(boolean openDebugger) {
         isOpenDebugger = openDebugger;
+    }
+
+    /**
+     * 是否延迟加载libs，如果设置为true的话则会在运行的时候才会加载用户lib，而不是初始化虚拟机的时候加载
+     *
+     * @param lazyLoad
+     */
+    public static void setLibsLazyLoad(boolean lazyLoad) {
+        isLibsLazyLoad = lazyLoad;
+    }
+
+    /**
+     * 是否使用LuaDC Loader，可以直接lua to dex bytecode
+     */
+    public static void setUseLuaDC(boolean useLuaDC) {
+        isUseLuaDC = useLuaDC;
     }
 }

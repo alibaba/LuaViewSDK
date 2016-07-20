@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
-import com.taobao.luaview.extend.WeakCache;
+import com.taobao.luaview.cache.WeakCache;
 
 /**
  * drawable相关的util
@@ -67,7 +67,11 @@ public class DrawableUtil {
             if (context != null && name != null) {
                 final Resources resources = context.getResources();
                 final int resourceId = resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
-                drawable = resources.getDrawable(resourceId);
+                try {
+                    drawable = resources.getDrawable(resourceId);
+                } catch (Exception e){
+                    LogUtil.e("[DrawableUtil-getByName Failed]", e);
+                }
             }
         }
         return WeakCache.getCache(TAG).put(name, drawable);

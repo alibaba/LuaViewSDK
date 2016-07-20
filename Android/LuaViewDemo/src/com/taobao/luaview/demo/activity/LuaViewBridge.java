@@ -2,6 +2,10 @@ package com.taobao.luaview.demo.activity;
 
 import android.app.Activity;
 
+import com.taobao.luaview.util.LogUtil;
+
+import org.luaj.vm2.LuaTable;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -71,5 +75,8 @@ public class LuaViewBridge {
 
     public Boolean testBoolean2() {
         return false;
+    }
+
+    public void testParams(LuaTable value){
     }
 }

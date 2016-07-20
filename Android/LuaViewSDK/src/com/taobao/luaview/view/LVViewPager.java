@@ -10,9 +10,10 @@ import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewPager;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaViewUtil;
-import com.taobao.luaview.view.adapter.LVPagerAdapter;
+import com.taobao.luaview.view.adapter.LVLoopPagerAdapter;
 import com.taobao.luaview.view.indicator.circle.PageIndicator;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
+import com.taobao.luaview.view.viewpager.AutoScrollViewPager;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewPager extends ViewPager implements ILVViewGroup {
+public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
     public Globals mGlobals;
     private LuaValue mInitParams;
     private UDViewPager mLuaUserdata;
@@ -56,7 +57,7 @@ public class LVViewPager extends ViewPager implements ILVViewGroup {
         } else {
             this.setAdapter(new LVPagerAdapter(mGlobals, mLuaUserdata));
         }*/
-        this.setAdapter(new LVPagerAdapter(mGlobals, mLuaUserdata));
+        this.setAdapter(new LVLoopPagerAdapter(mGlobals, mLuaUserdata));
         this.setCurrentItem(0);//TODO 可以定制
         initOnPageChangeListener();//初始化页面监听
     }

@@ -216,7 +216,10 @@ public class PackageLib extends TwoArgFunction {
                 if (result == _SENTINEL)
                     error("loop or previous error loading module '" + name + "'");
                 return result;
-            }
+            }/* else if (globals != null && (result = globals.lazyLoad(name.checkjstring())) != null){//TODO add by song, 如果是加载自定义的内容则使用globals加载
+                loaded.set(name, _SENTINEL);
+                return result;
+            }*/
 
 			/* else must load it; iterate over available loaders */
             LuaTable tbl = package_.get(_SEARCHERS).checktable();
@@ -247,7 +250,7 @@ public class PackageLib extends TwoArgFunction {
 
                 return result;
             } catch (Exception e){
-                LogUtil.e("[PackageLib]", name, "load failed!");
+                LogUtil.e("[PackageLib]", name, "load failed!", e);
                 return NIL;
             }
         }

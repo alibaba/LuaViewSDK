@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
@@ -58,21 +59,7 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup 
      */
     public void callLuaCallback(Object... objs) {
         final LuaValue callback = this.mLuaUserdata.getCallback();
-        if (callback != null && callback.isfunction()) {
-            LuaValue[] args = null;
-            if (objs != null && objs.length > 0) {
-                args = new LuaValue[objs.length];
-
-                for (int i = 0; i < objs.length; i++) {
-                    args[i] = CoerceJavaToLua.coerce(objs[i]);
-                }
-            }
-            if (args != null) {
-                callback.invoke(LuaValue.varargsOf(args));
-            } else {
-                callback.call();
-            }
-        }
+        LuaUtil.callFunction(callback, objs);
     }
 
     //获取native view
