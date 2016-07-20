@@ -30,6 +30,7 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 /**
@@ -411,11 +412,49 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return this;
     }
 
+    //----------------------------------------call lua function-------------------------------------
+
+    /**
+     * 调用lua的某个全局函数
+     *
+     * @param funName
+     * @param objs
+     * @return
+     */
+    public Object callLuaFunction(String funName, Object... objs) {
+        if (mGlobals != null && funName != null) {
+            final LuaValue callback = mGlobals.get(funName);
+            return LuaUtil.callFunction(callback, objs);
+        }
+        return LuaValue.NIL;
+    }
+
+    /**
+     * 调用window.callback下的某个函数
+     *
+     * @param funName
+     * @param objs
+     * @return
+     */
+    public Varargs callWindowFunction(String funName, Object... objs) {
+        if (funName != null) {
+            final UDView userdata = getUserdata();
+            if (userdata != null) {
+                final LuaValue callbacks = userdata.getCallback();
+                if (LuaUtil.isValid(callbacks)) {
+                    return LuaUtil.callFunction(callbacks.get(funName), objs);
+                }
+            }
+        }
+        return LuaValue.NIL;
+    }
+
     //----------------------------------------Image Provider----------------------------------------
 
     /**
      * 注册ImageProvider
      */
+
     public static void registerImageProvider(final Class<? extends ImageProvider> clazz) {
         mImageProviderClazz = clazz;
     }
