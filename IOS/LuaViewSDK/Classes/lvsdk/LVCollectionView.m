@@ -31,7 +31,7 @@
 
 @implementation LVCollectionView
 
--(id) init:(lv_State*) l identifierArray:(NSArray*) identifierArray {
+-(id) init:(lv_State*) l {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
@@ -43,10 +43,6 @@
         
         self.flowLayout = flowLayout;
         
-        [self registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:DEFAULT_CELL_IDENTIFIER];
-        for( NSString* identifier in identifierArray ){
-            [self registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
-        }
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
         self.scrollsToTop = NO;
     }
@@ -58,15 +54,6 @@
     self.collectionViewDelegate.delegate = lvScrollViewDelegate;
 }
 
-
--(void) registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier{
-    [super registerClass:cellClass forCellWithReuseIdentifier:identifier];
-    if( self.collectionViewDelegate.identifierDic == nil ) {
-        self.collectionViewDelegate.identifierDic = [[NSMutableDictionary alloc] init];
-    }
-    [self.collectionViewDelegate.identifierDic setValue:identifier forKey:identifier];
-}
-
 -(void) dealloc{
 }
 
@@ -74,6 +61,21 @@
     [super layoutSubviews];
     
     [self lv_runCallBack:STR_ON_LAYOUT];
+}
+
+// 重载以实现可能的定制需求, contentOffset
+- (void) luaviewSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated{
+    [self setContentOffset:contentOffset animated:animated];
+}
+
+// 重载以实现可能的定制需求, RectToVisible
+- (void) luaviewScrollRectToVisible:(CGRect)rect animated:(BOOL)animated{
+    [self scrollRectToVisible:rect animated:animated];
+}
+
+// 重载以实现可能的定制需求, scrollToTop
+- (void) luaviewScrollToTopWithAnimated:(BOOL)animated{
+    [self scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animated];
 }
 
 static Class g_class = nil;
@@ -89,16 +91,8 @@ static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
     if( g_class == nil ) {
         g_class = [LVCollectionView class];
     }
-    BOOL haveArgs = NO;
-    NSArray* identifierArray = nil;
-    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
-        haveArgs = YES;
-    }
-    if( haveArgs ) {
-        lv_getfield(L, 1, "Cell");
-        identifierArray = lv_luaTableKeys(L, -1);
-    }
-    LVCollectionView* tableView = [[g_class alloc] init:L identifierArray:identifierArray];
+
+    LVCollectionView* tableView = [[g_class alloc] init:L];
     if( refresh ) {
         [tableView lv_initRefreshHeader];
     }
@@ -109,7 +103,7 @@ static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
     lvL_getmetatable(L, META_TABLE_UICollectionView );
     lv_setmetatable(L, -2);
     
-    if ( haveArgs ) {
+    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
         lv_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
@@ -223,7 +217,7 @@ static int scrollToCell (lv_State *L) {
                         if( y < 0 ) {
                             y = 0;
                         }
-                        [collectionView setContentOffset:CGPointMake(0, y) animated:animation];
+                        [collectionView luaviewSetContentOffset:CGPointMake(0, y) animated:animation];
                     }
                 }
                 return 0;
@@ -242,7 +236,7 @@ static int scrollToTop(lv_State *L) {
             if( lv_gettop(L)>=2 ) {
                 animation = lv_tonumber(L, 2);
             }
-            [tableView scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animation];
+            [tableView luaviewScrollToTopWithAnimated:animation];
             return 0;
         }
     }
