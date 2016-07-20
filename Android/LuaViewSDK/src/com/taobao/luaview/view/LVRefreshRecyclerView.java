@@ -4,7 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.list.UDRefreshRecyclerView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -41,7 +40,7 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
         this.addView(mRecyclerView, LuaViewUtil.createRelativeLayoutParamsMM());
         mGlobals.restoreContainer();
 
-        if(mGlobals.luaView == null || mGlobals.luaView.isRefreshContainerEnable() == false) {
+        if (mGlobals.luaView == null || mGlobals.luaView.isRefreshContainerEnable() == false) {
             this.setEnabled(false);
         } else {
             ((UDRefreshRecyclerView) getUserdata()).initPullRefresh();

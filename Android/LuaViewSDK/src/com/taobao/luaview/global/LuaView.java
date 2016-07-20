@@ -454,7 +454,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
-     * @param enable
      */
     public boolean isRefreshContainerEnable(){
         return this.isRefreshContainerEnable;
