@@ -44,6 +44,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     //image provider clazz
     private static Class<? extends ImageProvider> mImageProviderClazz;
     private static ImageProvider mImageProvider;
+    private boolean isRefreshContainerEnable = true;
 
     //cache
     private LuaCache mLuaCache;
@@ -439,6 +440,24 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
         }
         return mImageProvider;
+    }
+
+    //----------------------------------------setup functions---------------------------------------
+
+    /**
+     * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     * @param enable
+     */
+    public void setRefreshContainerEnable(boolean enable){
+        this.isRefreshContainerEnable = enable;
+    }
+
+    /**
+     * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     * @param enable
+     */
+    public boolean isRefreshContainerEnable(){
+        return this.isRefreshContainerEnable;
     }
 
     //-------------------------------------------私有------------------------------------------------

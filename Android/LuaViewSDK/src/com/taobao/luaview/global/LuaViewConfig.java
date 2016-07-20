@@ -14,7 +14,6 @@ public class LuaViewConfig {
     private static boolean isDebug = BuildConfig.DEBUG;
     private static boolean isOpenDebugger = isEmulator();//目前只支持模拟器下断点调试Lua，不支持真机，真机环境关闭该功能
     private static String sTtid = null;
-    private static boolean isRefreshEnabled = true;
 
     public static boolean isDebug() {
         return isDebug;
@@ -39,10 +38,6 @@ public class LuaViewConfig {
 
     private static boolean isRunningOnStockEmulator() {
         return Build.FINGERPRINT.contains("generic");
-    }
-
-    public static boolean isRefreshEnabled(){
-        return isRefreshEnabled;
     }
 
     /**
@@ -79,13 +74,5 @@ public class LuaViewConfig {
      */
     public static void setOpenDebugger(boolean openDebugger) {
         isOpenDebugger = openDebugger;
-    }
-
-    /**
-     * 是否可以刷新
-     * @param enable
-     */
-    public static void setRefreshEnable(boolean enable){
-        isRefreshEnabled = enable;
     }
 }
