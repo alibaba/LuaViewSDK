@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewPager;
@@ -34,6 +36,9 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
     private UDViewPager mLuaUserdata;
     private OnPageChangeListener mOnPageChangeListener;
 
+    private double downX = 0f, downY = 0f, touchX = 0f, touchY = 0f;
+    private int touchSlop;
+
     public LVViewPager(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.context);
         this.mGlobals = globals;
@@ -47,6 +52,7 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
         this.mGlobals.saveContainer(this);
         initData();
         this.mGlobals.restoreContainer();
+        this.touchSlop = ViewConfiguration.get(mGlobals.context).getScaledTouchSlop();
     }
 
     private void initData() {
@@ -147,28 +153,23 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
 
     //-----------------------------------View Pager Touch事件---------------------------------------
 
-    /*@Override
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction() == MotionEvent.ACTION_SCROLL) {
-            super.requestDisallowInterceptTouchEvent(true);
+        touchX = ev.getX();
+        touchY = ev.getY();
+        if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+            downX = touchX;
+            downY = touchY;
+        }
+
+        double deltaX = Math.abs(touchX - downX);
+        double deltaY = Math.abs(touchY - downY);
+
+        if(deltaX > deltaY && deltaX > touchSlop){
+            if(getParent() != null) {
+                getParent().requestDisallowInterceptTouchEvent(true);
+            }
         }
         return super.dispatchTouchEvent(ev);
-    }*/
-
-    /*@Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean ret = super.onInterceptTouchEvent(ev);
-        if (ret)
-            getParent().requestDisallowInterceptTouchEvent(true);
-        return ret;
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        boolean ret = super.onTouchEvent(ev);
-        if (ret)
-            getParent().requestDisallowInterceptTouchEvent(true);
-        return ret;
-    }*/
-
 }
