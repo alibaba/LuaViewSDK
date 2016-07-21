@@ -153,7 +153,7 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
 
     //-----------------------------------View Pager Touch事件---------------------------------------
 
-    @Override
+    /*@Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         touchX = ev.getX();
         touchY = ev.getY();
@@ -171,5 +171,5 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
             }
         }
         return super.dispatchTouchEvent(ev);
-    }
+    }*/
 }
