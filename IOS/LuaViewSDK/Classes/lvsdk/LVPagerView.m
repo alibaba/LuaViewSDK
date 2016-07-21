@@ -354,7 +354,7 @@ static int autoScroll(lv_State *L){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
         if([view isKindOfClass: [UIScrollView class]]){
             
-            int totalPages = view.cellArray.count;
+            NSInteger totalPages = view.cellArray.count;
             
             if(totalPages < 2){//小于两个没有效果
                 return 0;
@@ -383,8 +383,8 @@ static int autoScroll(lv_State *L){
 }
 
 - (void) scrollTimer:(NSTimer *) timer {
-    int pageIdx = self.pageIdx;
-    int totalPages = self.cellArray.count;
+    NSInteger pageIdx = self.pageIdx;
+    NSInteger totalPages = self.cellArray.count;
     
     //更改方向
     if (self.reverseDirection) {
@@ -395,7 +395,7 @@ static int autoScroll(lv_State *L){
         }
     }
     
-    int newPageIdx = (self.scrollDirection == SCROLL_DIRECTION_LEFT) ? (pageIdx - 1) : (pageIdx + 1);
+    NSInteger newPageIdx = (self.scrollDirection == SCROLL_DIRECTION_LEFT) ? (pageIdx - 1) : (pageIdx + 1);
     
     [self setCurrentPageIdx:newPageIdx % totalPages animation:YES];
 }
@@ -442,7 +442,7 @@ static int indicator(lv_State *L) {
     }
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
-        //{"showScrollBar",     showScrollBar }, 基类已经实现，不需要实现
+        {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
         {"autoScroll", autoScroll},
         {"indicator", indicator},

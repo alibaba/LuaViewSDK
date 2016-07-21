@@ -118,6 +118,7 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
         NSNumber* alpha = topBarRgba[i];
         if ( alpha.floatValue < 1) {
             LVLog(@"The 9-patch PNG format is not support. 1");
+            break;
         }
     }
     count = (int) leftBarRgba.count;
@@ -141,6 +142,7 @@ inline static CGFloat getImageAphaAtPoint(const unsigned char* rawData, NSIntege
         NSNumber* alpha = leftBarRgba[i];
         if ( alpha.floatValue == 0) {
             LVLog(@"The 9-patch PNG format is not support.2");
+            break;
         }
     }
     if ( top>=0 && left>=0 && bottom>=0 && right>=0 ) {

@@ -164,7 +164,7 @@ static int SERVER_PORT = 9876;
     }
 }
 
-
+#ifdef DEBUG
 static void ServerConnectCallBack( CFSocketRef socket,
                                   CFSocketCallBackType type,
                                   CFDataRef address,
@@ -209,6 +209,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
         }
     }
 }
+#endif
 
 -(void) sendOneData{
     NSData* data = self.sendArray.lastObject;
@@ -224,6 +225,8 @@ static void ServerConnectCallBack( CFSocketRef socket,
 }
 
 ///////////////////监听来自服务器的信息///////////////////
+
+#ifdef DEBUG
 static NSString* readString(CFSocketRef socket)
 {
     unsigned char head[4] = {0};
@@ -252,6 +255,7 @@ static NSString* readString(CFSocketRef socket)
     NSString* ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return ret;
 }
+#endif
 /////////////////////////发送信息给服务器////////////////////////
 - (void) sendString:(NSString *)string
 {
