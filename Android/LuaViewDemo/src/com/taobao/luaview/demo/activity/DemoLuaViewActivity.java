@@ -31,6 +31,10 @@ public class DemoLuaViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         LuaView.createAsync(this, new LuaView.CreatedCallback() {
             @Override
             public void onCreated(LuaView luaView) {

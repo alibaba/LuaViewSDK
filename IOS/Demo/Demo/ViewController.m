@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"LuaView 测试demo";
+    self.title = @"LuaView";
     
     CGRect r = self.view.bounds;
     //    r.origin.y = 64;

@@ -25,7 +25,7 @@ local function updateControlBtns()
     resumeBtn.text(paused and "Resume" or "Pause")
 end
 
-translation = Animation().translation(100, 100).duration(3).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
+translation = Animation().translation(100, -100).duration(3).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
     onStart = function()
         stateLabel.text("Running")
     end,
@@ -59,6 +59,11 @@ function startAnimations()
     animationView = View()
     animationView.frame(50, 300, 100, 100)
     animationView.backgroundColor(0xff0000, 1)
+    child = Label()
+    child.frame(10, 10, 80, 80)
+    child.backgroundColor(0x00ff00)
+    child.text("child view")
+    animationView.addView(child)
     animationView.callback({
         onClick = function()
             print("scale:", animationView.scale())
