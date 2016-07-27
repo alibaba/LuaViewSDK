@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.net;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -80,6 +81,7 @@ public class UDHttp extends BaseUserdata {
         setMethod(method);
         setParams(params);
         setCallback(callback);
+        disableConnectionReuseIfNecessary();
     }
 
     /**
@@ -261,6 +263,10 @@ public class UDHttp extends BaseUserdata {
                     connection.setRequestMethod(mMethod);
                     //timeout
                     connection.setConnectTimeout(mTimeout * 1000);
+
+                    //请求的cookie
+                    CookieManager.handleRequestCookies(connection, mUrl);
+
                     if (mParams != null) {
                         for (LuaValue key : mParams.keys()) {
                             final LuaValue value = mParams.get(key);
@@ -275,7 +281,7 @@ public class UDHttp extends BaseUserdata {
                     //连接服务器
                     connection.connect();
 
-                    //301重定向
+                    //301重定向&重定向cookie
                     connection = handle301Redirect(connection);
 
                     //code
@@ -299,6 +305,8 @@ public class UDHttp extends BaseUserdata {
                     //header
                     udHttpResponse.setHeaders(connection.getHeaderFields());
 
+                    //response cookie
+                    CookieManager.handleResponseCookies(connection, mUrl);
                 } catch (Exception e) {
                     LogUtil.e("[Http error] ", e);
                     e.printStackTrace();
@@ -345,11 +353,11 @@ public class UDHttp extends BaseUserdata {
                 String newUrl = connection.getHeaderField("Location");
 
                 // get the cookie if need, for login
-                String cookies = connection.getHeaderField("Set-Cookie");
+                String cookies = connection.getHeaderField(com.taobao.luaview.userdata.net.CookieManager.COOKIES_HEADER);
 
                 // open the new connnection again
                 connection = (HttpURLConnection) new URL(newUrl).openConnection();
-                connection.setRequestProperty("Cookie", cookies);
+                connection.setRequestProperty(com.taobao.luaview.userdata.net.CookieManager.COOKIE, cookies);
 
                 //连接服务器
                 connection.connect();
@@ -367,7 +375,7 @@ public class UDHttp extends BaseUserdata {
             if (contentType != null) {
                 final String[] values = contentType.split(";"); // values.length should be 2
                 String charset = null;
-                if(values != null) {
+                if (values != null) {
                     for (String value : values) {
                         value = value.trim();
                         if (value != null && value.toLowerCase().startsWith("charset=")) {
@@ -379,5 +387,12 @@ public class UDHttp extends BaseUserdata {
             }
         }
         return null;
+    }
+
+    private void disableConnectionReuseIfNecessary() {
+        // Work around pre-Froyo bugs in HTTP connection reuse.
+        if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO) {
+            System.setProperty("http.keepAlive", "false");
+        }
     }
 }
