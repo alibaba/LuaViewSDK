@@ -266,7 +266,7 @@ public class UDHttp extends BaseUserdata {
                             final LuaValue value = mParams.get(key);
                             final String requestKey = key != null ? key.optjstring(null) : null;
                             final String requestValue = value != null ? value.optjstring(null) : null;
-                            if (TextUtils.isEmpty(requestKey) && TextUtils.isEmpty(requestValue)) {
+                            if (!TextUtils.isEmpty(requestKey) && !TextUtils.isEmpty(requestValue)) {
                                 connection.setRequestProperty(requestKey, requestValue);
                             }
                         }
@@ -290,7 +290,8 @@ public class UDHttp extends BaseUserdata {
                     }
 
                     input = connection.getInputStream();
-                    final byte[] fileData = IOUtil.toBytes(input);
+
+                    final byte[] fileData = IOUtil.toBytes(input, getContentCharset(connection));
 
                     //data
                     udHttpResponse.setData(fileData);
@@ -358,5 +359,25 @@ public class UDHttp extends BaseUserdata {
             }
         }
         return connection;
+    }
+
+    private String getContentCharset(HttpURLConnection connection) {
+        if (connection != null) {
+            final String contentType = connection.getContentType();
+            if (contentType != null) {
+                final String[] values = contentType.split(";"); // values.length should be 2
+                String charset = null;
+                if(values != null) {
+                    for (String value : values) {
+                        value = value.trim();
+                        if (value != null && value.toLowerCase().startsWith("charset=")) {
+                            charset = value.substring("charset=".length());
+                        }
+                    }
+                }
+                return charset;
+            }
+        }
+        return null;
     }
 }
