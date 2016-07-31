@@ -160,6 +160,14 @@ public class UDHttp extends BaseUserdata {
     }
 
     /**
+     * 清空net cookies
+     */
+    public UDHttp clearNetCookies() {
+        CookieManager.clearNetCookies();
+        return this;
+    }
+
+    /**
      * 回调
      *
      * @param luaFunction

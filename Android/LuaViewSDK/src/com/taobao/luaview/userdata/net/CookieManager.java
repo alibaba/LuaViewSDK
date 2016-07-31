@@ -35,6 +35,17 @@ public class CookieManager {
     }
 
     /**
+     * clear net cookies
+     */
+    public static void clearNetCookies(){
+        java.net.CookieManager cookieManager = getCookieManager();
+        CookieStore cookieStore = cookieManager.getCookieStore();
+        if(cookieStore != null) {
+            cookieStore.removeAll();
+        }
+    }
+
+    /**
      * 处理请求的cookie
      *
      * @param connection
@@ -42,9 +53,21 @@ public class CookieManager {
     public static void handleRequestCookies(HttpURLConnection connection, String requestUrl) {
         if (connection != null) {
             final StringBuffer cookie = new StringBuffer();
+            final String netCookies = getNetRequestCookies();
+            if(netCookies != null){
+                cookie.append(netCookies).append(";");
+            }
             final String webkitCookie = getWebkitRequestCookies(requestUrl);
             if (webkitCookie != null) {
                 cookie.append(webkitCookie);
+            }
+            final String webkitCookieJu = getWebkitRequestCookies("ju.taobao.com");
+            if(webkitCookieJu != null){
+                cookie.append(";").append(webkitCookieJu);
+            }
+            final String webkitCookieTao = getWebkitRequestCookies("www.taobao.com");
+            if(webkitCookieTao != null) {
+                cookie.append(";").append(webkitCookieTao);
             }
             if (cookie.length() > 0) {
                 connection.setRequestProperty(COOKIE, cookie.toString());
@@ -93,8 +116,10 @@ public class CookieManager {
             final Map<String, List<String>> headerFields = connection.getHeaderFields();
             if (headerFields != null && headerFields.containsKey(COOKIES_HEADER)) {
                 final List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                //wirte net cookie
+                updateNetResponseCookies(cookiesHeader);
                 //write webkit cookie
-                updateWebkitResponseCookies(cookiesHeader, url);
+//                updateWebkitResponseCookies(cookiesHeader, url);
             }
         }
     }
