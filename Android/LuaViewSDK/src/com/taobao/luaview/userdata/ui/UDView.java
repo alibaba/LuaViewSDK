@@ -17,9 +17,11 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
+import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +86,18 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public T getView() {
         return (T) userdata();
+    }
+
+    /**
+     * get native view
+     * @return
+     */
+    public LuaValue getNativeView(){
+        View view = getView();
+        if(view instanceof ILVNativeViewProvider){
+            view = ((ILVNativeViewProvider)view).getNativeView();
+        }
+        return view != null ? CoerceJavaToLua.coerce(view) : LuaValue.NIL;
     }
 
     public Context getContext() {
