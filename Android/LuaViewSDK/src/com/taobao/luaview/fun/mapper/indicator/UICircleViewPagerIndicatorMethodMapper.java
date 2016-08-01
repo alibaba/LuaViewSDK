@@ -11,14 +11,67 @@ import com.taobao.luaview.util.DimenUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * method mapper for PagerIndicator
+ *
  * @param <U>
  */
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
+    private static List<String> sFunctionNames = null;
 
+    @Override
+    public List<String> getFunctionNames() {
+        if (sFunctionNames == null) {
+            sFunctionNames = getFunctionNames(super.getFunctionNames(),
+                    Arrays.asList(new String[]{
+                            "unselectedColor",//0
+                            "selectedColor",//1
+                            "fillColor",//2
+                            "pageColor",//3
+                            "strokeWidth",//4
+                            "strokeColor",//5
+                            "radius",//6
+                            "snap",//7
+                            "currentPage",//8
+                            "currentItem"//9
+                    }));
+        }
+        return sFunctionNames;
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int opcode = code - getFirstFunctionOpcode();
+        switch (opcode) {
+            case 0:
+                return unselectedColor(target, varargs);
+            case 1:
+                return selectedColor(target, varargs);
+            case 2:
+                return fillColor(target, varargs);
+            case 3:
+                return pageColor(target, varargs);
+            case 4:
+                return strokeWidth(target, varargs);
+            case 5:
+                return strokeColor(target, varargs);
+            case 6:
+                return radius(target, varargs);
+            case 7:
+                return snap(target, varargs);
+            case 8:
+                return currentPage(target, varargs);
+            case 9:
+                return currentItem(target, varargs);
+            default:
+                return super.invoke(code, target, varargs);
+        }
+    }
 
     /**
      * 设置未选中颜色

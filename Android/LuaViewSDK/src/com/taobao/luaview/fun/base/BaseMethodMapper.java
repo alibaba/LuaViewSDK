@@ -6,6 +6,10 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 基础多参数函数
  *
@@ -24,7 +28,11 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      */
     public Varargs invoke(Varargs args) {
         try {
-            return (Varargs) method.invoke(this, getUD(args), args);
+            if (opcode != -1) {
+                return invoke(opcode, getUD(args), args);
+            } else {
+                return (Varargs) method.invoke(this, getUD(args), args);
+            }
         } catch (Exception e) {
             LogUtil.e("[----Method Invoke Error Start----]");
             LogUtil.e("[Class]", getClass());
@@ -46,4 +54,62 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
     public U getUD(Varargs varargs) {
         return (U) varargs.arg1();
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * get function names
+     *
+     * @param supernames
+     * @param names
+     * @return
+     */
+    public List<String> getFunctionNames(final List<String> supernames, final String[] names) {
+        return getFunctionNames(supernames, Arrays.asList(names));
+    }
+
+    /**
+     * get FunctionNames
+     */
+    public List<String> getFunctionNames(final List<String> supernames, final List<String> names) {
+        final List<String> result = new ArrayList<String>();
+        if (supernames != null) {
+            result.addAll(supernames);
+        }
+        if (supernames != null && names != null) {
+            result.addAll(supernames.size(), names);
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有函数名称，供子类调用
+     *
+     * @return
+     */
+    public List<String> getFunctionNames() {
+        return new ArrayList<String>();
+    }
+
+    /**
+     * 获取第一个函数的optcode
+     *
+     * @return
+     */
+    public final int getFirstFunctionOpcode() {
+        return getFunctionNames().size();
+    }
+
+    /**
+     * 调用子类
+     *
+     * @param optcode
+     * @param target
+     * @param varargs
+     * @return
+     */
+    public Varargs invoke(int optcode, U target, Varargs varargs) {
+        return LuaValue.NIL;
+    }
+
 }

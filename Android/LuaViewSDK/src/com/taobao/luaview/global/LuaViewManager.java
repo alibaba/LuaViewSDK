@@ -1,5 +1,6 @@
 package com.taobao.luaview.global;
 
+import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.binder.constants.AlignBinder;
 import com.taobao.luaview.fun.binder.constants.EllipsizeBinder;
 import com.taobao.luaview.fun.binder.constants.FontStyleBinder;
@@ -48,7 +49,6 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.jse.JsePlatform;
-import org.luaj.vm2.luajc.LuaJC;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -140,7 +140,7 @@ public class LuaViewManager {
 
 
     /**
-     * bind lua function
+     * bind lua function using methods
      *
      * @param factory
      * @param methods
@@ -153,7 +153,7 @@ public class LuaViewManager {
     }
 
     /**
-     * bind lua functions
+     * bind lua functions using method
      *
      * @param factory
      * @param methods
@@ -165,8 +165,35 @@ public class LuaViewManager {
             if (methods != null) {
                 for (int i = 0; i < methods.size(); i++) {
                     LibFunction f = factory.newInstance();
+                    f.opcode = -1;
                     f.method = methods.get(i);
                     f.name = methods.get(i).getName();
+                    env.set(f.name, f);
+                }
+            }
+        } catch (Exception e) {
+            throw new LuaError("[Bind Failed] " + e);
+        } finally {
+            return env;
+        }
+    }
+
+    /**
+     * bind lua functions using opcode
+     *
+     * @param factory
+     * @param methods
+     * @return
+     */
+    public static LuaTable bind(Class<? extends LibFunction> factory, String[] methods) {
+        LuaTable env = new LuaTable();
+        try {
+            if (methods != null) {
+                for (int i = 0; i < methods.length; i++) {
+                    LibFunction f = factory.newInstance();
+                    f.opcode = i;
+                    f.method = null;
+                    f.name = methods[i];
                     env.set(f.name, f);
                 }
             }
@@ -186,13 +213,28 @@ public class LuaViewManager {
      * @return
      */
     public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
-        final LuaTable libTable = LuaViewManager.bind(libClass, getMapperMethods(libClass));
+        final LuaTable libTable = LuaViewConfig.isUseNoReflection()
+                ? LuaViewManager.bind(libClass, getMapperMethodNames(libClass))
+                : LuaViewManager.bind(libClass, getMapperMethods(libClass));
         return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
     }
 
-    public static LuaTable createMetatable(Class<? extends LibFunction> libClass, Method[] methods) {
-        final LuaTable libTable = LuaViewManager.bind(libClass, methods);
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    /**
+     * 获取所有方法的名字
+     *
+     * @param clazz
+     * @return
+     */
+    private static String[] getMapperMethodNames(final Class clazz) {
+        try {
+            Object obj = clazz.newInstance();
+            if (obj instanceof BaseMethodMapper) {
+                ((BaseMethodMapper) obj).getFunctionNames();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

@@ -94,7 +94,7 @@ public class CookieManager {
             if (headerFields != null && headerFields.containsKey(COOKIES_HEADER)) {
                 final List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
                 //write webkit cookie
-                updateWebkitResponseCookies(cookiesHeader, url);
+//                updateWebkitResponseCookies(cookiesHeader, url);
             }
         }
     }
