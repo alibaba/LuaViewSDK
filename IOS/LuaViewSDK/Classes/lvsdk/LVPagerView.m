@@ -299,7 +299,7 @@ static int reload (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
-        [pageView reloadData];
+        [pageView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         lv_pushvalue(L, 1);
         return 1;
     }
