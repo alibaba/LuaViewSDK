@@ -314,7 +314,7 @@ public class UDHttp extends BaseUserdata {
                     udHttpResponse.setHeaders(connection.getHeaderFields());
 
                     //response cookie
-                    CookieManager.handleResponseCookies(connection, mUrl);
+//                    CookieManager.handleResponseCookies(connection, mUrl);
                 } catch (Exception e) {
                     LogUtil.e("[Http error] ", e);
                     e.printStackTrace();
