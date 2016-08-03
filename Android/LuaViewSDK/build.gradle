@@ -14,12 +14,10 @@ configurations {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:22.0.0'
-
     //recycler view
     compile 'com.android.support:recyclerview-v7:+'
-
     //bcel for LuaJ
     compile 'org.apache.bcel:bcel:5.2'
 }
@@ -28,8 +26,8 @@ dependencies {
   定义android插件
 */
 android {
-    compileSdkVersion 19
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
