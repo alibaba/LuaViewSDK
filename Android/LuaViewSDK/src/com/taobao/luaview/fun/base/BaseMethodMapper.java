@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.base;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.util.LogUtil;
 
 import org.luaj.vm2.LuaValue;
@@ -17,6 +18,7 @@ import java.util.List;
  * @date 15/8/14
  */
 public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunction {
+    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
 
     /**
      * 该函数使用反射，调用方法，并且被调用方法签名必须为：fun(UIView, Varargs)格式，否则不被支持
@@ -58,22 +60,47 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
     //----------------------------------------------------------------------------------------------
 
     /**
-     * get function names
-     *
+     * merge function names with cache tag
+     * @param tag
      * @param supernames
      * @param names
      * @return
      */
-    public List<String> getFunctionNames(final List<String> supernames, final String[] names) {
-        return getFunctionNames(supernames, Arrays.asList(names));
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final String[] names){
+        List<String> result = AppCache.getCache(TAG).get(tag);
+        if(result == null){
+            result = mergeFunctionNames(supernames, names);
+            AppCache.getCache(TAG).put(tag, result);
+        }
+        return result;
+    }
+
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final List<String> names){
+        List<String> result = AppCache.getCache(TAG).get(tag);
+        if(result == null){
+            result = mergeFunctionNames(supernames, names);
+            AppCache.getCache(TAG).put(tag, result);
+        }
+        return result;
+    }
+    /**
+     * merge function names
+     * 将names拼接在supernames之后
+     * @param supernames
+     * @param names
+     * @return
+     */
+    public List<String> mergeFunctionNames(final List<String> supernames, final String[] names) {
+        return mergeFunctionNames(supernames, Arrays.asList(names));
     }
 
     /**
-     * get FunctionNames
+     * merge FunctionNames
+     * 将自己的names拼接在supernames之后
      */
-    public List<String> getFunctionNames(final List<String> supernames, final List<String> names) {
+    public List<String> mergeFunctionNames(final List<String> supernames, final List<String> names) {
         final List<String> result = new ArrayList<String>();
-        if (supernames != null) {
+        if (supernames != null && supernames.size() > 0) {
             result.addAll(supernames);
         }
         if (supernames != null && names != null) {
@@ -87,7 +114,7 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      *
      * @return
      */
-    public List<String> getFunctionNames() {
+    public List<String> getAllFunctionNames() {
         return new ArrayList<String>();
     }
 
@@ -97,18 +124,18 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      * @return
      */
     public final int getFirstFunctionOpcode() {
-        return getFunctionNames().size();
+        return getAllFunctionNames().size();
     }
 
     /**
      * 调用子类
      *
-     * @param optcode
+     * @param code
      * @param target
      * @param varargs
      * @return
      */
-    public Varargs invoke(int optcode, U target, Varargs varargs) {
+    public Varargs invoke(int code, U target, Varargs varargs) {
         return LuaValue.NIL;
     }
 

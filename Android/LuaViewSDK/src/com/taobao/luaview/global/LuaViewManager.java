@@ -229,7 +229,7 @@ public class LuaViewManager {
         try {
             Object obj = clazz.newInstance();
             if (obj instanceof BaseMethodMapper) {
-                ((BaseMethodMapper) obj).getFunctionNames();
+                ((BaseMethodMapper) obj).getAllFunctionNames();
             }
         } catch (Exception e) {
             e.printStackTrace();

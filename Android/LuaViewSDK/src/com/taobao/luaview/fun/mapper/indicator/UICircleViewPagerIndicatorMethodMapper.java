@@ -1,5 +1,7 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
+import com.taobao.luaview.cache.AppCache;
+import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
@@ -22,26 +24,22 @@ import java.util.List;
  */
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
-    private static List<String> sFunctionNames = null;
+    private static final String TAG = UICircleViewPagerIndicatorMethodMapper.class.getSimpleName();
 
     @Override
-    public List<String> getFunctionNames() {
-        if (sFunctionNames == null) {
-            sFunctionNames = getFunctionNames(super.getFunctionNames(),
-                    Arrays.asList(new String[]{
-                            "unselectedColor",//0
-                            "selectedColor",//1
-                            "fillColor",//2
-                            "pageColor",//3
-                            "strokeWidth",//4
-                            "strokeColor",//5
-                            "radius",//6
-                            "snap",//7
-                            "currentPage",//8
-                            "currentItem"//9
-                    }));
-        }
-        return sFunctionNames;
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(),  new String[]{
+                "unselectedColor",//0
+                "selectedColor",//1
+                "fillColor",//2
+                "pageColor",//3
+                "strokeWidth",//4
+                "strokeColor",//5
+                "radius",//6
+                "snap",//7
+                "currentPage",//8
+                "currentItem"//9
+        });
     }
 
     @Override
