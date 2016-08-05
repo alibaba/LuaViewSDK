@@ -6,6 +6,7 @@ import android.view.View;
 import com.taobao.android.luaview.R;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 
 import org.luaj.vm2.Globals;
 
@@ -66,6 +67,8 @@ public class LVRecyclerViewHolder extends RecyclerView.ViewHolder {
                     return mLuaUserData.onCellLongClicked(cellData, position);
                 }
             });
+
+            ForegroundDelegate.setupDefaultForeground(itemView);
         }
     }
 

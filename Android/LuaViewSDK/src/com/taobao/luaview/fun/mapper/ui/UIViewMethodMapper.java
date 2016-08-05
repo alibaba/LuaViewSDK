@@ -1756,6 +1756,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return valueOf(view.isAnimating());
     }
 
+    /**
+     * 设置flex css属性
+     * @param view
+     * @param varargs
+     * @return
+     */
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue flexCss(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
@@ -1766,20 +1772,52 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     @LuaViewApi(since = VmVersion.V_500)
-    public LuaValue flxLayout(U view, Varargs varargs) {
-        // Android doing nothing here
-
-        return view;
-    }
-
-    @LuaViewApi(since = VmVersion.V_500)
-    private LuaValue setFlexCss(U view, Varargs varargs) {
+    public LuaValue setFlexCss(U view, Varargs varargs) {
         final String css = LuaUtil.getString(varargs, 2);
         return view.setFlexCss(css);
     }
 
     @LuaViewApi(since = VmVersion.V_500)
-    private LuaValue getFlexCss(U view, Varargs varargs) {
+    public LuaValue getFlexCss(U view, Varargs varargs) {
         return valueOf(view.getFlexCss());
+    }
+
+    /**
+     * 设置flex layout
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_500)
+    public LuaValue flxLayout(U view, Varargs varargs) {
+        // Android doing nothing here
+        return view;
+    }
+
+
+    /**
+     * 设置View的特殊效果，如果为-1，则取消所有view的特效
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_510)
+    public LuaValue effects(U view, Varargs varargs){
+        if(varargs.narg() > 1){
+            return setEffects(view, varargs);
+        } else {
+            return getEffects(view, varargs);
+        }
+    }
+
+    @LuaViewApi(since = VmVersion.V_510)
+    public LuaValue setEffects(U view, Varargs varargs){
+        final Integer effects = LuaUtil.getInt(varargs, 2);
+        return view.setEffects(effects);
+    }
+
+    @LuaViewApi(since = VmVersion.V_510)
+    public LuaValue getEffects(U view, Varargs varargs){
+        return valueOf(view.getEffects());
     }
 }

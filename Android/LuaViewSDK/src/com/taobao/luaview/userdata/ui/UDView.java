@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.AnimatorUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
@@ -18,7 +17,7 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
-import com.taobao.luaview.view.foreground.IForeground;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -44,11 +43,12 @@ public class UDView<T extends View> extends BaseUserdata {
     //动画列表
     private List<Animator> mAnimators;
 
-    /**
-     * Flexbox layout
-     */
+    //Flexbox layout
     private CSSNode mCssNode;
     private String mFlexCss;
+
+    //effects
+    private Integer mEffects;
 
     public CSSNode getCssNode() {
         if (mCssNode == null) {
@@ -896,6 +896,8 @@ public class UDView<T extends View> extends BaseUserdata {
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
+        } else {
+            ForegroundDelegate.clearDefaultForeground(this.getView());
         }
         return this;
     }
@@ -940,7 +942,7 @@ public class UDView<T extends View> extends BaseUserdata {
             if (view != null) {
 
                 //设置点击的ripple效果
-                setupRippleEffect(view);
+                ForegroundDelegate.setupDefaultForeground(view);
 
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -949,17 +951,8 @@ public class UDView<T extends View> extends BaseUserdata {
                     }
                 });
             }
-        }
-    }
-
-    /**
-     * 设置点击效果
-     *
-     * @param view
-     */
-    private void setupRippleEffect(T view) {
-        if (view instanceof IForeground) {
-            ((IForeground) view).setForeground(getContext().getDrawable(R.drawable.lv_click_foreground));
+        } else {//清除
+            ForegroundDelegate.clearDefaultForeground(getView());
         }
     }
 
@@ -1240,5 +1233,28 @@ public class UDView<T extends View> extends BaseUserdata {
      */
     public boolean isAnimating() {
         return AnimatorUtil.isRunning(mAnimators);
+    }
+
+
+    /**
+     * 设置View的effects
+     * 无特效 <= -1
+     * 点击特效 1
+     *
+     * @param effects
+     * @return
+     */
+    public UDView setEffects(Integer effects) {
+        this.mEffects = effects;
+        if(this.mEffects == null || this.mEffects <= -1){
+            ForegroundDelegate.clearDefaultForeground(getView());
+        } else {
+            //TODO effects
+        }
+        return this;
+    }
+
+    public Integer getEffects() {
+        return this.mEffects;
     }
 }

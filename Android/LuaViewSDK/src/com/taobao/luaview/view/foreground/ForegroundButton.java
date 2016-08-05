@@ -48,6 +48,7 @@ public class ForegroundButton extends Button implements IForeground {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate = new ForegroundDelegate(this);
             mForegroundDelegate.init(context, attrs, defStyle, 0);
+            this.setClickable(true);
         }
     }
 

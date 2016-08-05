@@ -32,6 +32,7 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate = new ForegroundDelegate(this);
             mForegroundDelegate.init(context, attrs, defStyleAttr, defStyleRes);
+            this.setClickable(true);
         }
     }
 

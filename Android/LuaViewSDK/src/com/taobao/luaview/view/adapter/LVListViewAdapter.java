@@ -10,6 +10,7 @@ import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.view.LVViewGroup;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -118,6 +119,8 @@ public class LVListViewAdapter extends BaseAdapter {
         //绘制数据
         renderView(cellData, position);
 
+        setupClickEffects(convertView);
+
         return convertView;
     }
 
@@ -197,6 +200,10 @@ public class LVListViewAdapter extends BaseAdapter {
         this.mGlobals.saveContainer(cell.getLVViewGroup());
         this.mLuaUserData.callCellLayout(cell, position);
         this.mGlobals.restoreContainer();
+    }
+
+    private void setupClickEffects(View view){
+        ForegroundDelegate.setupDefaultForeground(view);
     }
 
 }

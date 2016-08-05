@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 
+import com.taobao.android.luaview.R;
+
 /**
  * Delegate that actually does the foreground things, so that the logic can be shared between views
  * and so that others can easily create views that support a foreground
@@ -32,6 +34,24 @@ public class ForegroundDelegate {
 
     public ForegroundDelegate(View view) {
         mView = view;
+    }
+
+    public static void setupDefaultForeground(View view) {
+        setupDefaultForeground(view, view.getContext().getDrawable(R.drawable.lv_click_foreground));
+    }
+
+    public static void setupDefaultForeground(View view, Drawable drawable) {
+        if (view instanceof IForeground) {
+            ((IForeground) view).setForeground(drawable);
+        } else {
+            if (view != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                view.setForeground(drawable);
+            }
+        }
+    }
+
+    public static void clearDefaultForeground(View view) {
+        setupDefaultForeground(view, null);
     }
 
     public void init(Context context, AttributeSet attrs, int defStyle, int defStyleRes) {
