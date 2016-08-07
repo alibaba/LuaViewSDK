@@ -19,7 +19,7 @@ public class LVImageView extends LVBaseImageView implements ILVView {
     private UDImageView mLuaUserdata;
 
     public LVImageView(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mLuaUserdata = new UDImageView(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
         init();
     }

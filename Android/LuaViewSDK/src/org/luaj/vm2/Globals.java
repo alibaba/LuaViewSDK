@@ -26,9 +26,7 @@ import android.content.Context;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
-import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
-import com.taobao.luaview.vm.extend.GlobalsExtender;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
@@ -119,11 +117,6 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-    /**
-     * Android context
-     */
-    public Context context;
-
     /**
      * Android parent view
      */
@@ -554,6 +547,10 @@ public class Globals extends LuaTable {
             this.container = viewGroup;
         }
 //        this.set("window", container.getUserdata());//TODO 优化到其他地方?，设置window对象
+    }
+
+    public Context getContext() {
+        return luaView != null ? luaView.getContext() : null;
     }
 
     /**

@@ -40,7 +40,7 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
     private int touchSlop;
 
     public LVViewPager(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDViewPager(this, globals, metaTable, this.mInitParams);
@@ -52,7 +52,7 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
         this.mGlobals.saveContainer(this);
         initData();
         this.mGlobals.restoreContainer();
-        this.touchSlop = ViewConfiguration.get(mGlobals.context).getScaledTouchSlop();
+        this.touchSlop = ViewConfiguration.get(mGlobals.getContext()).getScaledTouchSlop();
     }
 
     private void initData() {
