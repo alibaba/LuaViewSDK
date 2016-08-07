@@ -2,7 +2,6 @@ package com.taobao.luaview.global;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
@@ -105,7 +104,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
 
             //创建globals
-            @NonNull
             private Globals createGlobalsAsync() {
                 return createGlobals(context);
             }
@@ -120,16 +118,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }.execute();
     }
 
-    @NonNull
     private static Globals createGlobals(final Context context) {
         final Globals globals = LuaViewManager.createGlobals();
-        globals.context = context;
         return globals;
     }
 
-    @NonNull
     private static LuaView createLuaView(final Context context, final Globals globals) {
-        final LuaView luaView = new LuaView(globals, createMetaTableForLuaView());
+        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
         globals.finder = new LuaResourceFinder(context);
         globals.luaView = luaView;
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
@@ -519,8 +514,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 //        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
     }
 
-    private LuaView(Globals globals, LuaValue metaTable) {
-        super(globals, metaTable, LuaValue.NIL);
+    private LuaView(Context context, Globals globals, LuaValue metaTable) {
+        super(context, globals, metaTable, LuaValue.NIL);
         this.mLuaCache = new LuaCache();
     }
 

@@ -49,6 +49,6 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     }
 
     public Context getContext() {
-        return getGlobals() != null ? getGlobals().context : null;
+        return getGlobals() != null ? getGlobals().getContext() : null;
     }
 }
