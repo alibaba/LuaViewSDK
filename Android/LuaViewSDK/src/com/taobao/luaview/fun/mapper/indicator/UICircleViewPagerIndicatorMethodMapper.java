@@ -1,7 +1,5 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
-import com.taobao.luaview.cache.AppCache;
-import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
@@ -13,7 +11,6 @@ import com.taobao.luaview.util.DimenUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,7 +25,7 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(),  new String[]{
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
                 "unselectedColor",//0
                 "selectedColor",//1
                 "fillColor",//2
@@ -44,7 +41,7 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
 
     @Override
     public Varargs invoke(int code, U target, Varargs varargs) {
-        final int opcode = code - getFirstFunctionOpcode();
+        final int opcode = code - super.getAllFunctionNames().size();
         switch (opcode) {
             case 0:
                 return unselectedColor(target, varargs);
@@ -66,10 +63,11 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
                 return currentPage(target, varargs);
             case 9:
                 return currentItem(target, varargs);
-            default:
-                return super.invoke(code, target, varargs);
         }
+        return super.invoke(code, target, varargs);
     }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 设置未选中颜色

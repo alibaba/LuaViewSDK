@@ -9,6 +9,8 @@ import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * 自定义面板
  *
@@ -17,6 +19,27 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
+
+    private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "nativeView"//0
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return nativeView(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
 
     /**

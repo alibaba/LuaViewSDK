@@ -11,6 +11,8 @@ import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * timer 接口封装
  *
@@ -19,6 +21,41 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
+    private static final String TAG = TimerMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "delay",//0
+                "repeat",//1
+                "interval",//2
+                "start",//3
+                "callback",//4
+                "cancel"//5
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode){
+            case 0:
+                return delay(target, varargs);
+            case 1:
+                return repeat(target, varargs);
+            case 2:
+                return interval(target, varargs);
+            case 3:
+                return start(target, varargs);
+            case 4:
+                return callback(target, varargs);
+            case 5:
+                return cancel(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 启动延时

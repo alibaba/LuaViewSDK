@@ -38,6 +38,7 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
         } catch (Exception e) {
             LogUtil.e("[----Method Invoke Error Start----]");
             LogUtil.e("[Class]", getClass());
+            LogUtil.e("[Opcode]", opcode);
             LogUtil.e("[Method] ", method);
             LogUtil.e("[Arguments] ", args);
             LogUtil.e("[Error] ", e);
@@ -90,7 +91,7 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      * @param names
      * @return
      */
-    public List<String> mergeFunctionNames(final List<String> supernames, final String[] names) {
+    private List<String> mergeFunctionNames(final List<String> supernames, final String[] names) {
         return mergeFunctionNames(supernames, Arrays.asList(names));
     }
 
@@ -98,7 +99,7 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      * merge FunctionNames
      * 将自己的names拼接在supernames之后
      */
-    public List<String> mergeFunctionNames(final List<String> supernames, final List<String> names) {
+    private List<String> mergeFunctionNames(final List<String> supernames, final List<String> names) {
         final List<String> result = new ArrayList<String>();
         if (supernames != null && supernames.size() > 0) {
             result.addAll(supernames);
@@ -116,15 +117,6 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      */
     public List<String> getAllFunctionNames() {
         return new ArrayList<String>();
-    }
-
-    /**
-     * 获取第一个函数的optcode
-     *
-     * @return
-     */
-    public final int getFirstFunctionOpcode() {
-        return getAllFunctionNames().size();
     }
 
     /**

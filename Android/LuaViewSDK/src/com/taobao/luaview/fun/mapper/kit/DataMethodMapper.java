@@ -7,6 +7,8 @@ import com.taobao.luaview.userdata.kit.UDData;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Data 接口封装，二进制数据处理
  *
@@ -15,6 +17,36 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class DataMethodMapper<U extends UDData> extends BaseMethodMapper<U> {
+
+    private static final String TAG = DataMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "append",//0
+                "toString",//1
+                "toJson",//2
+                "toTable",//3
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode){
+            case 0:
+                return append(target, varargs);
+            case 1:
+                return toString(target, varargs);
+            case 2:
+                return toJson(target, varargs);
+            case 3:
+                return toTable(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 新增一部分数据，防止新建一个对象

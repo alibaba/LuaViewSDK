@@ -16,6 +16,7 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 所有view 接口封装
@@ -25,6 +26,326 @@ import java.util.ArrayList;
  */
 @LuaViewLib
 public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
+    private static final String TAG = UIViewMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "initParams",//0
+                "invalidate",//1
+                "padding",//2
+                "frame",//3
+                "backgroundColor",//4
+                "size",//5
+                "xy",//6
+                "align",//7
+                "alignLeft",//8
+                "alignTop",//9
+                "alignRight",//10
+                "alignBottom",//11
+                "alignLeftTop",//12
+                "alignTopLeft",//13
+                "alignCenterTop",//14
+                "alignTopCenter",//15
+                "alignRightTop",//16
+                "alignTopRight",//17
+                "alignLeftBottom",//18
+                "alignBottomLeft",//19
+                "alignCenterBottom",//20
+                "alignBottomCenter",//21
+                "alignRightBottom",//22
+                "alignBottomRight",//23
+                "alignCenter",//24
+                "alignLeftCenter",//25
+                "alignCenterLeft",//26
+                "alignRightCenter",//27
+                "alignCenterRight",//28
+                "alignCenterHorizontal",//29
+                "alignHorizontalCenter",//30
+                "alignCenterVertical",//31
+                "alignVerticalCenter",//32
+                "center",//33
+                "x",//34
+                "y",//35
+                "left",//36
+                "top",//37
+                "right",//38
+                "bottom",//39
+                "width",//40
+                "minWidth",//41
+                "height",//42
+                "centerX",//43
+                "centerY",//44
+                "visible",//45
+                "hidden",//46
+                "show",//47
+                "isShow",//48
+                "hide",//49
+                "isHide",//50
+                "enabled",//51
+                "alpha",//52
+                "borderWidth",//53
+                "borderColor",//54
+                "clipsToBounds",//55
+                "shadowPath",//56
+                "masksToBounds",//57
+                "shadowOffset",//58
+                "shadowRadius",//59
+                "shadowOpacity",//60
+                "shadowColor",//61
+                "sizeToFit",//62
+                "addGestureRecognizer",//63
+                "removeGestureRecognizer",//64
+                "transform3D",//65
+                "anchorPoint",//66
+                "removeFromSuper",//67
+                "removeFromParent",//68
+                "hasFocus",//69
+                "requestFocus",//70
+                "clearFocus",//71
+                "rotation",//72
+                "rotationXY",//73
+                "scale",//74
+                "scaleX",//75
+                "scaleY",//76
+                "translation",//77
+                "translationX",//78
+                "translationY",//79
+                "bringToFront",//80
+                "scrollTo",//81
+                "scrollBy",//82
+                "scrollX",//83
+                "offsetX",//84
+                "scrollY",//85
+                "offsetY",//86
+                "scrollXY",//87
+                "offsetXY",//88
+                "offset",//89
+                "showScrollIndicator",//90
+                "callback",//91
+                "onClick",//92
+                "onLongClick",//93
+                "adjustSize",//94
+                "cornerRadius",//95
+                "startAnimation",//96
+                "stopAnimation",//97
+                "isAnimating",//98
+                "flexCss",//99
+                "flxLayout",//100
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return initParams(target, varargs);
+            case 1:
+                return invalidate(target, varargs);
+            case 2:
+                return padding(target, varargs);
+            case 3:
+                return frame(target, varargs);
+            case 4:
+                return backgroundColor(target, varargs);
+            case 5:
+                return size(target, varargs);
+            case 6:
+                return xy(target, varargs);
+            case 7:
+                return align(target, varargs);
+            case 8:
+                return alignLeft(target, varargs);
+            case 9:
+                return alignTop(target, varargs);
+            case 10:
+                return alignRight(target, varargs);
+            case 11:
+                return alignBottom(target, varargs);
+            case 12:
+                return alignLeftTop(target, varargs);
+            case 13:
+                return alignTopLeft(target, varargs);
+            case 14:
+                return alignCenterTop(target, varargs);
+            case 15:
+                return alignTopCenter(target, varargs);
+            case 16:
+                return alignRightTop(target, varargs);
+            case 17:
+                return alignTopRight(target, varargs);
+            case 18:
+                return alignLeftBottom(target, varargs);
+            case 19:
+                return alignBottomLeft(target, varargs);
+            case 20:
+                return alignCenterBottom(target, varargs);
+            case 21:
+                return alignBottomCenter(target, varargs);
+            case 22:
+                return alignRightBottom(target, varargs);
+            case 23:
+                return alignBottomRight(target, varargs);
+            case 24:
+                return alignCenter(target, varargs);
+            case 25:
+                return alignLeftCenter(target, varargs);
+            case 26:
+                return alignCenterLeft(target, varargs);
+            case 27:
+                return alignRightCenter(target, varargs);
+            case 28:
+                return alignCenterRight(target, varargs);
+            case 29:
+                return alignCenterHorizontal(target, varargs);
+            case 30:
+                return alignHorizontalCenter(target, varargs);
+            case 31:
+                return alignCenterVertical(target, varargs);
+            case 32:
+                return alignVerticalCenter(target, varargs);
+            case 33:
+                return center(target, varargs);
+            case 34:
+                return x(target, varargs);
+            case 35:
+                return y(target, varargs);
+            case 36:
+                return left(target, varargs);
+            case 37:
+                return top(target, varargs);
+            case 38:
+                return right(target, varargs);
+            case 39:
+                return bottom(target, varargs);
+            case 40:
+                return width(target, varargs);
+            case 41:
+                return minWidth(target, varargs);
+            case 42:
+                return height(target, varargs);
+            case 43:
+                return centerX(target, varargs);
+            case 44:
+                return centerY(target, varargs);
+            case 45:
+                return visible(target, varargs);
+            case 46:
+                return hidden(target, varargs);
+            case 47:
+                return show(target, varargs);
+            case 48:
+                return isShow(target, varargs);
+            case 49:
+                return hide(target, varargs);
+            case 50:
+                return isHide(target, varargs);
+            case 51:
+                return enabled(target, varargs);
+            case 52:
+                return alpha(target, varargs);
+            case 53:
+                return borderWidth(target, varargs);
+            case 54:
+                return borderColor(target, varargs);
+            case 55:
+                return clipsToBounds(target, varargs);
+            case 56:
+                return shadowPath(target, varargs);
+            case 57:
+                return masksToBounds(target, varargs);
+            case 58:
+                return shadowOffset(target, varargs);
+            case 59:
+                return shadowRadius(target, varargs);
+            case 60:
+                return shadowOpacity(target, varargs);
+            case 61:
+                return shadowColor(target, varargs);
+            case 62:
+                return sizeToFit(target, varargs);
+            case 63:
+                return addGestureRecognizer(target, varargs);
+            case 64:
+                return removeGestureRecognizer(target, varargs);
+            case 65:
+                return transform3D(target, varargs);
+            case 66:
+                return anchorPoint(target, varargs);
+            case 67:
+                return removeFromSuper(target, varargs);
+            case 68:
+                return removeFromParent(target, varargs);
+            case 69:
+                return hasFocus(target, varargs);
+            case 70:
+                return requestFocus(target, varargs);
+            case 71:
+                return clearFocus(target, varargs);
+            case 72:
+                return rotation(target, varargs);
+            case 73:
+                return rotationXY(target, varargs);
+            case 74:
+                return scale(target, varargs);
+            case 75:
+                return scaleX(target, varargs);
+            case 76:
+                return scaleY(target, varargs);
+            case 77:
+                return translation(target, varargs);
+            case 78:
+                return translationX(target, varargs);
+            case 79:
+                return translationY(target, varargs);
+            case 80:
+                return bringToFront(target, varargs);
+            case 81:
+                return scrollTo(target, varargs);
+            case 82:
+                return scrollBy(target, varargs);
+            case 83:
+                return scrollX(target, varargs);
+            case 84:
+                return offsetX(target, varargs);
+            case 85:
+                return scrollY(target, varargs);
+            case 86:
+                return offsetY(target, varargs);
+            case 87:
+                return scrollXY(target, varargs);
+            case 88:
+                return offsetXY(target, varargs);
+            case 89:
+                return offset(target, varargs);
+            case 90:
+                return showScrollIndicator(target, varargs);
+            case 91:
+                return callback(target, varargs);
+            case 92:
+                return onClick(target, varargs);
+            case 93:
+                return onLongClick(target, varargs);
+            case 94:
+                return adjustSize(target, varargs);
+            case 95:
+                return cornerRadius(target, varargs);
+            case 96:
+                return startAnimation(target, varargs);
+            case 97:
+                return stopAnimation(target, varargs);
+            case 98:
+                return isAnimating(target, varargs);
+            case 99:
+                return flexCss(target, varargs);
+            case 100:
+                return flxLayout(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
 
     /**
@@ -206,7 +527,6 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     public Varargs getXY(U view, Varargs varargs) {
         return varargsOf(valueOf(DimenUtil.pxToDpi(view.getX())), valueOf(DimenUtil.pxToDpi(view.getY())));
     }
-
 
 
     /**
@@ -1309,7 +1629,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public Varargs scaleY(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
-            return setScaleY(view, varargs) ;
+            return setScaleY(view, varargs);
         } else {
             return getScaleY(view, varargs);
         }
@@ -1746,7 +2066,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.startAnimation(animators);
     }
 
-    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API"})
+    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API" })
     public LuaValue stopAnimation(U view, Varargs varargs) {
         view.cancelAnimation();
         return view;

@@ -10,6 +10,8 @@ import com.taobao.luaview.util.LuaUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Recycler View or List View
  *
@@ -18,6 +20,50 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup> extends UIViewGroupMethodMapper<U> {
+    private static final String TAG = UIBaseListOrRecyclerViewMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "reload",//0
+                "contentSize",//1
+                "contentOffset",//2
+                "contentInset",//3
+                "showScrollIndicator",//4
+                "scrollToTop",//5
+                "scrollToCell",//6
+                "miniSpacing",//7
+                "lazyLoad"//8
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode){
+            case 0:
+                return reload(target, varargs);
+            case 1:
+                return contentSize(target, varargs);
+            case 2:
+                return contentOffset(target, varargs);
+            case 3:
+                return contentInset(target, varargs);
+            case 4:
+                return showScrollIndicator(target, varargs);
+            case 5:
+                return scrollToTop(target, varargs);
+            case 6:
+                return scrollToCell(target, varargs);
+            case 7:
+                return miniSpacing(target, varargs);
+            case 8:
+                return lazyLoad(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     public abstract UDBaseListOrRecyclerView getUDBaseListOrRecyclerView(Varargs varargs);
 

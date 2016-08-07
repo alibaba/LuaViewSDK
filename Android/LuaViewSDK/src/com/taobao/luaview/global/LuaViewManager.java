@@ -138,16 +138,16 @@ public class LuaViewManager {
         DebugUtil.te("loadLuaViewLibs");
     }
 
-
+    //----------------------------------------bind methods------------------------------------------
     /**
      * bind lua function using methods
      *
      * @param factory
      * @param methods
      */
-    public static LuaTable bind(Class<? extends LibFunction> factory, Method[] methods) {
+    public static LuaTable bindMethods(Class<? extends LibFunction> factory, Method[] methods) {
         if (methods != null) {
-            return bind(factory, Arrays.asList(methods));
+            return bindMethods(factory, Arrays.asList(methods));
         }
         return new LuaTable();
     }
@@ -159,7 +159,7 @@ public class LuaViewManager {
      * @param methods
      * @return
      */
-    public static LuaTable bind(Class<? extends LibFunction> factory, List<Method> methods) {
+    public static LuaTable bindMethods(Class<? extends LibFunction> factory, List<Method> methods) {
         LuaTable env = new LuaTable();
         try {
             if (methods != null) {
@@ -168,6 +168,32 @@ public class LuaViewManager {
                     f.opcode = -1;
                     f.method = methods.get(i);
                     f.name = methods.get(i).getName();
+                    env.set(f.name, f);
+                }
+            }
+        } catch (Exception e) {
+            throw new LuaError("[Bind Failed] " + e);
+        } finally {
+            return env;
+        }
+    }
+
+    /**
+     * bind lua functions using opcode
+     *
+     * @param factory
+     * @param methods
+     * @return
+     */
+    public static LuaTable bind(Class<? extends LibFunction> factory, List<String> methods) {
+        LuaTable env = new LuaTable();
+        try {
+            if (methods != null) {
+                for (int i = 0; i < methods.size(); i++) {
+                    LibFunction f = factory.newInstance();
+                    f.opcode = i;
+                    f.method = null;
+                    f.name = methods.get(i);
                     env.set(f.name, f);
                 }
             }
@@ -203,8 +229,6 @@ public class LuaViewManager {
             return env;
         }
     }
-
-
     //-----------------------------------------metatable--------------------------------------------
 
     /**
@@ -213,9 +237,14 @@ public class LuaViewManager {
      * @return
      */
     public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
-        final LuaTable libTable = LuaViewConfig.isUseNoReflection()
-                ? LuaViewManager.bind(libClass, getMapperMethodNames(libClass))
-                : LuaViewManager.bind(libClass, getMapperMethods(libClass));
+        LuaTable libTable = null;
+        if(LuaViewConfig.isUseNoReflection()){
+            final List<String> methodNames = getMapperMethodNames(libClass);
+            libTable = LuaViewManager.bind(libClass, methodNames);
+        } else {
+            final List<Method> methods = getMapperMethods(libClass);
+            libTable = LuaViewManager.bindMethods(libClass, methods);
+        }
         return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
     }
 
@@ -225,11 +254,13 @@ public class LuaViewManager {
      * @param clazz
      * @return
      */
-    private static String[] getMapperMethodNames(final Class clazz) {
+    private static List<String> getMapperMethodNames(final Class clazz) {
         try {
-            Object obj = clazz.newInstance();
-            if (obj instanceof BaseMethodMapper) {
-                ((BaseMethodMapper) obj).getAllFunctionNames();
+            if(clazz != null) {
+                Object obj = clazz.newInstance();
+                if (obj instanceof BaseMethodMapper) {
+                    return ((BaseMethodMapper) obj).getAllFunctionNames();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

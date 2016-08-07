@@ -1,13 +1,8 @@
 package com.taobao.luaview.userdata.kit;
 
-import android.content.Context;
-import android.hardware.display.DisplayManager;
-import android.telephony.TelephonyManager;
-
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
-import com.taobao.luaview.util.AnimatorUtil;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;

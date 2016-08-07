@@ -7,6 +7,8 @@ import com.taobao.luaview.util.ColorUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Loading View 接口封装
  * @author song
@@ -14,6 +16,46 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGroupMethodMapper<U> {
+
+    private static final String TAG = UILoadingViewMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "start",//0
+                "isStart",//1
+                "startAnimating",//2
+                "isAnimating",//3
+                "stop",//4
+                "stopAnimating",//5
+                "color"//6
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return start(target, varargs);
+            case 1:
+                return isStart(target, varargs);
+            case 2:
+                return startAnimating(target, varargs);
+            case 3:
+                return isAnimating(target, varargs);
+            case 4:
+                return stop(target, varargs);
+            case 5:
+                return stopAnimating(target, varargs);
+            case 6:
+                return color(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     /**
      * 菊花开始转动

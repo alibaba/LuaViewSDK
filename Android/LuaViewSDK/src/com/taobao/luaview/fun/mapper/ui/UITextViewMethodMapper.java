@@ -11,8 +11,75 @@ import com.taobao.luaview.util.LuaViewUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 @LuaViewLib
 public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMapper<U> {
+
+    private static final String TAG = UITextViewMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "text",//0
+                "textColor",//1
+                "textSize",//2
+                "fontSize",//3
+                "fontName",//4
+                "font",//5
+                "gravity",//6
+                "textAlign",//7
+                "lines",//8
+                "maxLines",//9
+                "lineCount",//10
+                "minLines",//11
+                "ellipsize",//12
+                "adjustTextSize",//13
+                "adjustFontSize"//14
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return text(target, varargs);
+            case 1:
+                return textColor(target, varargs);
+            case 2:
+                return textSize(target, varargs);
+            case 3:
+                return fontSize(target, varargs);
+            case 4:
+                return fontName(target, varargs);
+            case 5:
+                return font(target, varargs);
+            case 6:
+                return gravity(target, varargs);
+            case 7:
+                return textAlign(target, varargs);
+            case 8:
+                return lines(target, varargs);
+            case 9:
+                return maxLines(target, varargs);
+            case 10:
+                return lineCount(target, varargs);
+            case 11:
+                return minLines(target, varargs);
+            case 12:
+                return ellipsize(target, varargs);
+            case 13:
+                return adjustTextSize(target, varargs);
+            case 14:
+                return adjustFontSize(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
+
 
     /**
      * 获得文本

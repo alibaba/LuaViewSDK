@@ -5,7 +5,7 @@
         jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="14d234372aea2306cfdfb2c0a0393f2e805778d6">
+        sha1="ea0be8e8ba5dd934cd48eb3b7ab2706756c2660b">
         <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-e97368caa11d3df2fb363f5e3a2504bef3be0ecd.jar" />
     </item>
 

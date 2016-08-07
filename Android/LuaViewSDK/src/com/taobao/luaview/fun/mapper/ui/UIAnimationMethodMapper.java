@@ -10,6 +10,8 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Animation 接口封装
  *
@@ -19,6 +21,61 @@ import org.luaj.vm2.Varargs;
 @Deprecated
 @LuaViewLib
 public class UIAnimationMethodMapper<U extends UDAnimation> extends BaseMethodMapper<U> {
+
+    private static final String TAG = UIAnimationMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "alpha",//0
+                "rotate",//1
+                "scale",//2
+                "translate",//3
+                "duration",//4
+                "startDelay",//5
+                "repeatCount",//6
+                "to",//7
+                "callback",//8
+                "onStartCallback",//9
+                "onEndCallback",//10
+                "onRepeatCallback"//11
+        });
+    }
+
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return alpha(target, varargs);
+            case 1:
+                return rotate(target, varargs);
+            case 2:
+                return scale(target, varargs);
+            case 3:
+                return translate(target, varargs);
+            case 4:
+                return duration(target, varargs);
+            case 5:
+                return startDelay(target, varargs);
+            case 6:
+                return repeatCount(target, varargs);
+            case 7:
+                return to(target, varargs);
+            case 8:
+                return callback(target, varargs);
+            case 9:
+                return onStartCallback(target, varargs);
+            case 10:
+                return onEndCallback(target, varargs);
+            case 11:
+                return onRepeatCallback(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
 
     public LuaValue alpha(U udAnimation, Varargs varargs) {

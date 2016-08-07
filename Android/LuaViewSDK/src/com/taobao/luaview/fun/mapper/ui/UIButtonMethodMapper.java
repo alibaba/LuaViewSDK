@@ -6,6 +6,8 @@ import com.taobao.luaview.userdata.ui.UDButton;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 
 /**
  * Button 接口封装
@@ -14,6 +16,36 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMapper<U> {
+    private static final String TAG = UIButtonMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "title",//0
+                "titleColor",//1
+                "image",//2
+                "showsTouchWhenHighlighted"//3
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return title(target, varargs);
+            case 1:
+                return titleColor(target, varargs);
+            case 2:
+                return image(target, varargs);
+            case 3:
+                return showsTouchWhenHighlighted(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     /**
      * setText

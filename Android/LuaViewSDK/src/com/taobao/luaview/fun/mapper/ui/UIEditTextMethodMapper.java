@@ -7,6 +7,8 @@ import com.taobao.luaview.util.LuaViewUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 
 /**
  * EditText 接口封装
@@ -15,6 +17,30 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMethodMapper<U> {
+
+    private static final String TAG = UIEditTextMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "hint",//0
+                "placeholder"//1
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return hint(target, varargs);
+            case 1:
+                return placeholder(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
 
     /**

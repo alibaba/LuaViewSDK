@@ -1,7 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.animation.ValueAnimator;
-import android.view.ViewPropertyAnimator;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
@@ -18,6 +17,8 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * animator 接口封装
  *
@@ -26,6 +27,106 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMethodMapper<U> {
+
+    private static final String TAG = UIAnimatorSetMethodMapper.class.getSimpleName();
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
+                "with",//0
+                "start",//1
+                "alpha",//2
+                "rotation",//3
+                "scale",//4
+                "scaleX",//5
+                "scaleY",//6
+                "translation",//7
+                "translationX",//8
+                "translationY",//9
+                "duration",//10
+                "delay",//11
+                "repeatCount",//12
+                "interpolator",//13
+                "cancel",//14
+                "pause",//15
+                "resume",//16
+                "reverses",//17
+                "values",//18
+                "callback",//19
+                "onStart",//20
+                "onEnd",//21
+                "onRepeat",//22
+                "onCancel",//23
+                "onPause",//24
+                "onUpdate",//25
+                "onResume"//26
+        });
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return with(target, varargs);
+            case 1:
+                return start(target, varargs);
+            case 2:
+                return alpha(target, varargs);
+            case 3:
+                return rotation(target, varargs);
+            case 4:
+                return scale(target, varargs);
+            case 5:
+                return scaleX(target, varargs);
+            case 6:
+                return scaleY(target, varargs);
+            case 7:
+                return translation(target, varargs);
+            case 8:
+                return translationX(target, varargs);
+            case 9:
+                return translationY(target, varargs);
+            case 10:
+                return duration(target, varargs);
+            case 11:
+                return delay(target, varargs);
+            case 12:
+                return repeatCount(target, varargs);
+            case 13:
+                return interpolator(target, varargs);
+            case 14:
+                return cancel(target, varargs);
+            case 15:
+                return pause(target, varargs);
+            case 16:
+                return resume(target, varargs);
+            case 17:
+                return reverses(target, varargs);
+            case 18:
+                return values(target, varargs);
+            case 19:
+                return callback(target, varargs);
+            case 20:
+                return onStart(target, varargs);
+            case 21:
+                return onEnd(target, varargs);
+            case 22:
+                return onRepeat(target, varargs);
+            case 23:
+                return onCancel(target, varargs);
+            case 24:
+                return onPause(target, varargs);
+            case 25:
+                return onUpdate(target, varargs);
+            case 26:
+                return onResume(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     public LuaValue with(U udAnimator, Varargs varargs) {
         final UDView udView = (varargs.narg() > 1 && varargs.arg(2) instanceof UDView) ? (UDView) varargs.arg(2) : null;

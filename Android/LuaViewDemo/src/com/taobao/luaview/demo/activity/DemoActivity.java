@@ -48,6 +48,7 @@ public class DemoActivity extends ListActivity {
         LuaViewConfig.setDebug(true);
         LuaViewConfig.setOpenDebugger(false);
         LuaViewConfig.setLibsLazyLoad(true);
+        LuaViewConfig.setUseNoReflection(true);
 //        LuaViewConfig.setUseLuaDC(true);
     }
 

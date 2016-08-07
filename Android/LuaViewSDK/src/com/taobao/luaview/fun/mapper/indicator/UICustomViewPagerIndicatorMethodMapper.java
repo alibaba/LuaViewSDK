@@ -8,7 +8,6 @@ import com.taobao.luaview.util.LuaUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,17 +30,17 @@ public class UICustomViewPagerIndicatorMethodMapper<U extends UDCustomViewPagerI
 
     @Override
     public Varargs invoke(int code, U target, Varargs varargs) {
-        final int opcode = code - getFirstFunctionOpcode();
+        final int opcode = code - super.getAllFunctionNames().size();
         switch (opcode) {
             case 0:
                 return currentPage(target, varargs);
             case 1:
                 return currentItem(target, varargs);
-            default:
-                return super.invoke(code, target, varargs);
         }
+        return super.invoke(code, target, varargs);
     }
 
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 滚动到第几页面
