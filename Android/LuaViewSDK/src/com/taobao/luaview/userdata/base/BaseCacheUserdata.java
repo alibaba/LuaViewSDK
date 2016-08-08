@@ -36,8 +36,8 @@ public abstract class BaseCacheUserdata extends BaseUserdata implements LuaCache
     }
 
     private void cacheObject() {
-        if (getGlobals() != null && getGlobals().luaView != null) {
-            getGlobals().luaView.cacheObject(getClass(), this);
+        if (getGlobals() != null && getGlobals().getLuaView() != null) {
+            getGlobals().getLuaView().cacheObject(getClass(), this);
         }
     }
 
