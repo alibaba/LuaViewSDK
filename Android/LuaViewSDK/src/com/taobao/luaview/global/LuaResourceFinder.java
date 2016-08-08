@@ -49,7 +49,9 @@ public class LuaResourceFinder implements ResourceFinder {
     }
 
     public LuaResourceFinder(Context context) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
     }
 
     public void setScriptBundle(ScriptBundle scriptBundle) {

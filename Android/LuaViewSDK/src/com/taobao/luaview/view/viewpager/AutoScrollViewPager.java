@@ -58,8 +58,8 @@ public class AutoScrollViewPager extends LoopViewPager {
 
     public static final int SCROLL_WHAT = 0;
 
-    public AutoScrollViewPager(Context paramContext) {
-        super(paramContext);
+    public AutoScrollViewPager(Context context) {
+        super(context);
         init();
     }
 
