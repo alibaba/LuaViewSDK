@@ -18,7 +18,9 @@ public class LuaScriptLoader {
     private Context mContext;
 
     public LuaScriptLoader(final Context context) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
         LuaScriptManager.init(context);
     }
 
