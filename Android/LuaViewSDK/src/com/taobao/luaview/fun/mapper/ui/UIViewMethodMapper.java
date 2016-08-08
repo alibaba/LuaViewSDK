@@ -131,7 +131,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 "stopAnimation",//97
                 "isAnimating",//98
                 "flexCss",//99
-                "flxLayout",//100
+                "flxLayout"//100
         });
     }
 

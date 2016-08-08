@@ -27,7 +27,7 @@ public class UIRefreshListViewMethodMapper<U extends UDRefreshListView> extends 
                 "initRefreshing",//1
                 "isRefreshing",//2
                 "startRefreshing",//3
-                "stopRefreshing",//4
+                "stopRefreshing"//4
         });
     }
 

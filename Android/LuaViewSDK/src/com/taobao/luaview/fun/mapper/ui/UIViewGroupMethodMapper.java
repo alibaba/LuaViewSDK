@@ -35,7 +35,7 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
                 "removeView",//5
                 "removeAllViews",//6
                 "children",//7
-                "flexChildren",//8
+                "flexChildren"//8
         });
     }
 
