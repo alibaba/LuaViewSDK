@@ -124,7 +124,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private static LuaView createLuaView(final Context context, final Globals globals) {
-        globals.setContext(context);
         globals.finder = new LuaResourceFinder(context);
         globals.luaView = new LuaView(context, globals, createMetaTableForLuaView());
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试

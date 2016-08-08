@@ -117,8 +117,6 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-
-    private Context mContext;
     /**
      * Android parent view
      */
@@ -548,7 +546,6 @@ public class Globals extends LuaTable {
             this.tmpContainer = this.container;
             this.container = viewGroup;
         }
-//        this.set("window", container.getUserdata());//TODO 优化到其他地方?，设置window对象
     }
 
     /**
@@ -558,17 +555,11 @@ public class Globals extends LuaTable {
         this.container = this.tmpContainer;
     }
 
-    /**
-     * setup context
-     * @param context
-     */
-    public void setContext(Context context){
-        if(context != null){
-            mContext = context.getApplicationContext();
-        }
+    public Context getContext() {
+        return luaView != null ? luaView.getContext() : null;
     }
 
-    public Context getContext() {
-        return mContext;
+    public Context getAppContext(){
+        return getContext() != null ? getContext().getApplicationContext() : null;
     }
 }
