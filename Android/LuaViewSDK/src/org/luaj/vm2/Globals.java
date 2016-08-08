@@ -36,6 +36,7 @@ import org.luaj.vm2.lib.ResourceFinder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.ref.WeakReference;
 
 /**
  * Global environment used by luaj.  Contains global variables referenced by executing lua.
@@ -120,7 +121,7 @@ public class Globals extends LuaTable {
     /**
      * Android parent view
      */
-    public LuaView luaView;
+    private WeakReference<LuaView> mLuaView;
     public ILVViewGroup container;
     private ILVViewGroup tmpContainer;
 
@@ -555,7 +556,16 @@ public class Globals extends LuaTable {
         this.container = this.tmpContainer;
     }
 
+    public void setLuaView(LuaView luaView){
+        this.mLuaView = new WeakReference<LuaView>(luaView);
+    }
+
+    public LuaView getLuaView(){
+        return this.mLuaView != null ? this.mLuaView.get() : null;
+    }
+
     public Context getContext() {
+        final LuaView luaView = this.mLuaView != null ? this.mLuaView.get() : null;
         return luaView != null ? luaView.getContext() : null;
     }
 

@@ -6,9 +6,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
 
+import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
-import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
@@ -124,12 +124,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private static LuaView createLuaView(final Context context, final Globals globals) {
+        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
+        globals.setLuaView(luaView);
         globals.finder = new LuaResourceFinder(context);
-        globals.luaView = new LuaView(context, globals, createMetaTableForLuaView());
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
-            globals.luaView.openDebugger();
+            luaView.openDebugger();
         }
-        return globals.luaView;
+        return luaView;
     }
     //-----------------------------------------加载函数----------------------------------------------
 
@@ -476,16 +477,17 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     *
      * @param enable
      */
-    public void setRefreshContainerEnable(boolean enable){
+    public void setRefreshContainerEnable(boolean enable) {
         this.isRefreshContainerEnable = enable;
     }
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
      */
-    public boolean isRefreshContainerEnable(){
+    public boolean isRefreshContainerEnable() {
         return this.isRefreshContainerEnable;
     }
 
@@ -514,7 +516,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     /**
-     * @param context View级别的Context
+     * @param context   View级别的Context
      * @param globals
      * @param metaTable
      */
