@@ -117,6 +117,8 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
+
+    private Context mContext;
     /**
      * Android parent view
      */
@@ -549,14 +551,24 @@ public class Globals extends LuaTable {
 //        this.set("window", container.getUserdata());//TODO 优化到其他地方?，设置window对象
     }
 
-    public Context getContext() {
-        return luaView != null ? luaView.getContext() : null;
-    }
-
     /**
      * 使用保存的container恢复
      */
     public void restoreContainer() {
         this.container = this.tmpContainer;
+    }
+
+    /**
+     * setup context
+     * @param context
+     */
+    public void setContext(Context context){
+        if(context != null){
+            mContext = context.getApplicationContext();
+        }
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 }

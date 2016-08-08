@@ -124,13 +124,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private static LuaView createLuaView(final Context context, final Globals globals) {
-        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
+        globals.setContext(context);
         globals.finder = new LuaResourceFinder(context);
-        globals.luaView = luaView;
+        globals.luaView = new LuaView(context, globals, createMetaTableForLuaView());
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
-            luaView.openDebugger();
+            globals.luaView.openDebugger();
         }
-        return luaView;
+        return globals.luaView;
     }
     //-----------------------------------------加载函数----------------------------------------------
 
@@ -514,6 +514,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 //        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
     }
 
+    /**
+     * @param context View级别的Context
+     * @param globals
+     * @param metaTable
+     */
     private LuaView(Context context, Globals globals, LuaValue metaTable) {
         super(context, globals, metaTable, LuaValue.NIL);
         this.mLuaCache = new LuaCache();
