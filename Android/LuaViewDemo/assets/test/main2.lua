@@ -126,5 +126,5 @@ local vp = PagerView({
     }
 })
 
-vp.setBackgroundColor(0xaaaa0000)
-vp.setFrame(0, 0, width, height)
+vp.backgroundColor(0xaaaa0000)
+vp.frame(0, 0, width, height)

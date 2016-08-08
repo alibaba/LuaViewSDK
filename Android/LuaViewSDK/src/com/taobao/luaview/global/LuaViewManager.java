@@ -1,5 +1,6 @@
 package com.taobao.luaview.global;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.binder.constants.AlignBinder;
 import com.taobao.luaview.fun.binder.constants.EllipsizeBinder;
@@ -63,6 +64,7 @@ import java.util.List;
  * @date 15/8/14
  */
 public class LuaViewManager {
+    private static final String TAG = LuaViewManager.class.getSimpleName();
 
     /**
      * 创建Globals
@@ -139,6 +141,7 @@ public class LuaViewManager {
     }
 
     //----------------------------------------bind methods------------------------------------------
+
     /**
      * bind lua function using methods
      *
@@ -237,15 +240,23 @@ public class LuaViewManager {
      * @return
      */
     public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
-        LuaTable libTable = null;
-        if(LuaViewConfig.isUseNoReflection()){
-            final List<String> methodNames = getMapperMethodNames(libClass);
-            libTable = LuaViewManager.bind(libClass, methodNames);
-        } else {
-            final List<Method> methods = getMapperMethods(libClass);
-            libTable = LuaViewManager.bindMethods(libClass, methods);
+        LuaTable result = AppCache.getCache(TAG).get(libClass);//get from cache
+
+        if (result == null) {
+            LuaTable libTable = null;
+            if (LuaViewConfig.isUseNoReflection()) {
+                final List<String> methodNames = getMapperMethodNames(libClass);
+                libTable = LuaViewManager.bind(libClass, methodNames);
+            } else {
+                final List<Method> methods = getMapperMethods(libClass);
+                libTable = LuaViewManager.bindMethods(libClass, methods);
+            }
+            result = LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+
+            //update cache
+            AppCache.getCache(TAG).put(libClass, result);
         }
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+        return result;
     }
 
     /**
@@ -256,7 +267,7 @@ public class LuaViewManager {
      */
     private static List<String> getMapperMethodNames(final Class clazz) {
         try {
-            if(clazz != null) {
+            if (clazz != null) {
                 Object obj = clazz.newInstance();
                 if (obj instanceof BaseMethodMapper) {
                     return ((BaseMethodMapper) obj).getAllFunctionNames();

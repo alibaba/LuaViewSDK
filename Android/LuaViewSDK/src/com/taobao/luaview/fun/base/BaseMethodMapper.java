@@ -39,7 +39,7 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
             LogUtil.e("[----Method Invoke Error Start----]");
             LogUtil.e("[Class]", getClass());
             LogUtil.e("[Opcode]", opcode);
-            LogUtil.e("[Method] ", method);
+            LogUtil.e("[Method] ", method != null ? method : getMethodByOpcode(opcode));
             LogUtil.e("[Arguments] ", args);
             LogUtil.e("[Error] ", e);
             LogUtil.e("[----Method Invoke Error End----]");
@@ -117,6 +117,19 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      */
     public List<String> getAllFunctionNames() {
         return new ArrayList<String>();
+    }
+
+    /**
+     * 根据code获取函数名称
+     * @param optcode
+     * @return
+     */
+    public String getMethodByOpcode(int optcode){
+        List<String> allMethods = getAllFunctionNames();
+        if(allMethods != null && allMethods.size() > optcode && optcode >= 0){
+            return allMethods.get(optcode);
+        }
+        return null;
     }
 
     /**

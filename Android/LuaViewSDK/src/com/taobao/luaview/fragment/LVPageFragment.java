@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -36,7 +38,7 @@ public class LVPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //View封装
-        final UDView page = new UDViewGroup(createPageLayout(), mGlobals, mInitProps.getmetatable(), null);
+        final UDView page = new UDViewGroup(createPageLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
         //对外数据封装，必须使用LuaTable
         final UDLuaTable pageData = new UDLuaTable(page);
         final View pageView = pageData.getView();

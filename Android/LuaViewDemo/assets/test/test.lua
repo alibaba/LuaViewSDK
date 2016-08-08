@@ -22,10 +22,14 @@ local cv = CollectionView({
                 return 10 + row * 2
             end,
             Init = function(cell, section, row) -- 初始化cell
+            cell.label = Label()
             print("Init", section, row, 10 + row * 2)
             end,
             Layout = function(cell, section, row) -- cell复用时调用
-            print("Layout", section, row, 10 + row * 2)
+            local w,h = cell.window.size()
+            cell.label.frame(0, 0, 100, 20)
+            cell.label.text("Layout" .. section .. "-" .. row)
+            print("Layout", section, row, 10 + row * 2, w, h)
             end,
             Callback = function(cell, section, row) -- 用户点击了section和row
             Toast("Section " .. section .. ", Row " .. row);
