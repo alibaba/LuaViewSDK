@@ -2,9 +2,12 @@ package com.taobao.luaview.view.imageview;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.ImageView;
 
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
+
+import java.lang.ref.WeakReference;
 
 /**
  * ImageView Impl
@@ -31,7 +34,7 @@ public class LVBaseImageView extends BaseImageView {
         this.mUrl = url;
         final ImageProvider provider = LuaView.getImageProvider();
         if (provider != null) {
-            provider.load(this, url, callback);
+            provider.load(getContext(), new WeakReference<ImageView>(this), url, callback);
         }
     }
 

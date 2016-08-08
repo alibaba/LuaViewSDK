@@ -31,6 +31,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 // lua 对应的数据 key
 #define USERDATA_KEY_DELEGATE  1
 
+// 滚动方向
+#define SCROLL_DIRECTION_RIGHT 0
+#define SCROLL_DIRECTION_LEFT 1
+
 #define DEFAULT_CELL_IDENTIFIER  @"LVCollectionCell.default.identifier"
 
 @interface LVPagerView ()
@@ -40,6 +44,11 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 @property (nonatomic,assign) NSInteger pageIdx;
 @property (nonatomic,weak) LVPagerIndicator* pagerIndicator;
+
+@property (nonatomic,strong) NSTimer *timer;
+
+@property (nonatomic,assign) NSInteger scrollDirection;
+@property (nonatomic,assign) BOOL reverseDirection;
 @end
 
 
@@ -56,6 +65,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         self.delegate = self;
         self.pageIdx = 0;
         self.scrollsToTop = NO;
+        self.scrollDirection = SCROLL_DIRECTION_RIGHT;
+        self.reverseDirection = YES;
     }
     return self;
 }
@@ -288,7 +299,7 @@ static int reload (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
-        [pageView reloadData];
+        [pageView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         lv_pushvalue(L, 1);
         return 1;
     }
@@ -337,6 +348,58 @@ static int setCurrentPage(lv_State *L) {
     return 0;
 }
 
+static int autoScroll(lv_State *L){
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if(user){
+        LVPagerView * view = (__bridge LVPagerView *)(user -> object);
+        if([view isKindOfClass: [UIScrollView class]]){
+            
+            NSInteger totalPages = view.cellArray.count;
+            
+            if(totalPages < 2){//小于两个没有效果
+                return 0;
+            }
+            
+            if(lv_gettop(L) >= 2) {
+                float interval = lv_tonumber(L, 2);
+                
+                if(interval > 0) {//start timer
+                    if(view.timer != nil) {//stop old
+                        [view.timer invalidate];
+                    }
+                
+                    //create new timer
+                    view.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:view selector:@selector(scrollTimer:) userInfo:nil repeats:YES];
+                    
+                } else {//stop timer
+                    if(view.timer != nil){
+                        [view.timer invalidate];
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+- (void) scrollTimer:(NSTimer *) timer {
+    NSInteger pageIdx = self.pageIdx;
+    NSInteger totalPages = self.cellArray.count;
+    
+    //更改方向
+    if (self.reverseDirection) {
+        if (self.scrollDirection == SCROLL_DIRECTION_RIGHT && pageIdx + 1 >= totalPages) {
+            self.scrollDirection = SCROLL_DIRECTION_LEFT;
+        } else if (self.scrollDirection == SCROLL_DIRECTION_LEFT && pageIdx - 1 < 0) {
+            self.scrollDirection = SCROLL_DIRECTION_RIGHT;
+        }
+    }
+    
+    NSInteger newPageIdx = (self.scrollDirection == SCROLL_DIRECTION_LEFT) ? (pageIdx - 1) : (pageIdx + 1);
+    
+    [self setCurrentPageIdx:newPageIdx % totalPages animation:YES];
+}
+
 static int indicator(lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
@@ -381,6 +444,7 @@ static int indicator(lv_State *L) {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
+        {"autoScroll", autoScroll},
         {"indicator", indicator},
         {NULL, NULL}
     };

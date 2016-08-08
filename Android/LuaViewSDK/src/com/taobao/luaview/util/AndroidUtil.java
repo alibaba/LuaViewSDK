@@ -2,8 +2,12 @@ package com.taobao.luaview.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * 获取系统一些属性
@@ -50,6 +54,27 @@ public class AndroidUtil {
     }
 
     /**
+     * 系统品牌
+     *
+     * @return
+     */
+    public static String getBrand() {
+        return Build.BRAND;
+    }
+
+    public static String getProduct() {
+        return Build.PRODUCT;
+    }
+
+    public static String getDevice() {
+        return Build.DEVICE;
+    }
+
+    public static String getManufacturer() {
+        return Build.MANUFACTURER;
+    }
+
+    /**
      * get density of screen
      *
      * @param context Context
@@ -68,6 +93,7 @@ public class AndroidUtil {
     public static int getScreenWidth(Context context) {
         return context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
     }
+
 
     /**
      * get screen width
@@ -97,6 +123,51 @@ public class AndroidUtil {
      */
     public static int getScreenHeightInDp(Context context) {
         return (int) DimenUtil.pxToDpi(context.getApplicationContext().getResources().getDisplayMetrics().heightPixels);
+    }
+
+    /**
+     * 获取屏幕尺寸
+     *
+     * @param context
+     * @return
+     */
+    public static int[] getScreenSize(Context context) {
+        final DisplayMetrics displayMetrics = context.getApplicationContext().getResources().getDisplayMetrics();
+        return new int[]{displayMetrics.widthPixels, displayMetrics.heightPixels};
+    }
+
+    public static int[] getScreenSizeInDp(Context context) {
+        final int[] size = getScreenSize(context);
+        return new int[]{(int) DimenUtil.pxToDpi(size[0]), (int) DimenUtil.pxToDpi(size[1])};
+    }
+
+    /**
+     * 获取window的size
+     *
+     * @param context
+     * @return
+     */
+    public static int[] getWindowSize(Context context) {
+        final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final Display display = wm.getDefaultDisplay();
+        if (android.os.Build.VERSION.SDK_INT >= 13) {
+            Point point = new Point();
+            display.getSize(point);
+            return new int[]{point.x, point.y};
+        } else {
+            return new int[]{display.getWidth(), display.getHeight()};
+        }
+    }
+
+    /**
+     * 获取window的size
+     *
+     * @param context
+     * @return
+     */
+    public static int[] getWindowSizeInDp(Context context) {
+        final int[] size = getWindowSize(context);
+        return new int[]{(int) DimenUtil.pxToDpi(size[0]), (int) DimenUtil.pxToDpi(size[1])};
     }
 
 

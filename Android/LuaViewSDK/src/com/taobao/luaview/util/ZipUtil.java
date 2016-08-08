@@ -12,7 +12,7 @@ import java.util.zip.GZIPOutputStream;
  * @date 15/11/9
  */
 public class ZipUtil {
-    private static final int BUFFER_SIZE = 1024 * 8;//8k
+    private static final int BUFFER_SIZE = 1024 * 32;
 
     /**
      * 将原始数据压缩到zip中

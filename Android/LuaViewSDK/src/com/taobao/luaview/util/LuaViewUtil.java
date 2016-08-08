@@ -91,8 +91,8 @@ public class LuaViewUtil {
      * @return
      */
     public static ActionBar getActionBar(Globals globals) {
-        if (globals != null && globals.context instanceof Activity) {
-            return ((Activity) (globals.context)).getActionBar();
+        if (globals != null && globals.getContext() instanceof Activity) {
+            return ((Activity) (globals.getContext())).getActionBar();
         }
         return null;
     }

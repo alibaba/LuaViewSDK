@@ -207,4 +207,48 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
     public LuaValue getViewPagerIndicator() {
         return mViewPagerIndicator;
     }
+
+    /**
+     * 自动滚动
+     */
+    public LuaValue setAutoScroll(int interval, boolean reverseDirection) {
+        final LVViewPager viewPager = getView();
+        if (viewPager != null) {
+            if (interval > 0) {
+                viewPager.setCanAutoScroll(true);
+                viewPager.setStopScrollWhenTouch(true);
+                viewPager.setReverseDirection(reverseDirection);
+                viewPager.setInterval(interval);
+                viewPager.startAutoScroll();
+            } else {
+                viewPager.setCanAutoScroll(false);
+                viewPager.setStopScrollWhenTouch(false);
+                viewPager.stopAutoScroll();
+            }
+        }
+        return this;
+    }
+
+    /**
+     * 设置是否循环
+     *
+     * @param looping
+     * @return
+     */
+    public LuaValue setLooping(boolean looping) {
+        final LVViewPager viewPager = getView();
+        if (viewPager != null) {
+            viewPager.setLooping(looping);
+        }
+        return this;
+    }
+
+    /**
+     * 是否循环滚动
+     *
+     * @return
+     */
+    public boolean isLooping() {
+        return getView() != null && getView().isLooping();
+    }
 }

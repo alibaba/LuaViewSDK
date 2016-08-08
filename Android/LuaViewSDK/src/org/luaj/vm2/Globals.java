@@ -23,9 +23,9 @@ package org.luaj.vm2;
 
 import android.content.Context;
 
+import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
-import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.lib.BaseLib;
@@ -36,6 +36,7 @@ import org.luaj.vm2.lib.ResourceFinder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.ref.WeakReference;
 
 /**
  * Global environment used by luaj.  Contains global variables referenced by executing lua.
@@ -117,16 +118,10 @@ import java.io.Reader;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-
-    /**
-     * Android context
-     */
-    public Context context;
-
     /**
      * Android parent view
      */
-    public LuaView luaView;
+    private WeakReference<LuaView> mLuaView;
     public ILVViewGroup container;
     private ILVViewGroup tmpContainer;
 
@@ -297,7 +292,6 @@ public class Globals extends LuaTable {
             }
 
             Prototype p = loadPrototype(is, chunkname, mode);
-
             return loader.load(p, chunkname, env);
         } catch (LuaError l) {
             throw l;
@@ -529,6 +523,17 @@ public class Globals extends LuaTable {
         }
     }
 
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * 延迟加载库
+     *
+     * @param binder
+     */
+    public void tryLazyLoad(final LuaValue binder) {
+        load(binder);//load directly
+    }
+
     /**
      * 保存原有的container
      *
@@ -542,7 +547,6 @@ public class Globals extends LuaTable {
             this.tmpContainer = this.container;
             this.container = viewGroup;
         }
-//        this.set("window", container.getUserdata());//TODO 优化到其他地方?，设置window对象
     }
 
     /**
@@ -550,5 +554,22 @@ public class Globals extends LuaTable {
      */
     public void restoreContainer() {
         this.container = this.tmpContainer;
+    }
+
+    public void setLuaView(LuaView luaView){
+        this.mLuaView = new WeakReference<LuaView>(luaView);
+    }
+
+    public LuaView getLuaView(){
+        return this.mLuaView != null ? this.mLuaView.get() : null;
+    }
+
+    public Context getContext() {
+        final LuaView luaView = this.mLuaView != null ? this.mLuaView.get() : null;
+        return luaView != null ? luaView.getContext() : null;
+    }
+
+    public Context getAppContext(){
+        return getContext() != null ? getContext().getApplicationContext() : null;
     }
 }

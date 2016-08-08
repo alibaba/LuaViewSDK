@@ -8,6 +8,7 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,29 @@ public class LuaUtil {
 
 
     //-------------------------------------get value------------------------------------------------
+
+    /**
+     * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Long getTimeLong(final Varargs varargs, int...poslist){
+        return getTimeLong(varargs, null, poslist);
+    }
+
+    /**
+     * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     * @param varargs
+     * @param defaultSeconds
+     * @param poslist
+     * @return
+     */
+    public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int...poslist){
+        final Float timeOfFloat = getFloat(varargs, poslist);
+        return timeOfFloat != null ? (long)(timeOfFloat * 1000) : (defaultSeconds != null ? (long)(defaultSeconds * 1000) : null);
+    }
+
 
     /**
      * 获取boolean
@@ -76,6 +100,18 @@ public class LuaUtil {
     public static Double getDouble(final Varargs varargs, int... poslist) {
         final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
         return number != null ? number.checkdouble() : null;
+    }
+
+    /**
+     * 获取double
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Double getDouble(final Varargs varargs, Double defaultValue, int... poslist) {
+        final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, poslist);
+        return number != null ? number.checkdouble() : defaultValue;
     }
 
     /**
@@ -408,6 +444,25 @@ public class LuaUtil {
         }
     }
 
+    public static Varargs callFunction(LuaValue target, Object... objs){
+        if (target != null && target.isfunction()) {
+            LuaValue[] args = null;
+            if (objs != null && objs.length > 0) {
+                args = new LuaValue[objs.length];
+
+                for (int i = 0; i < objs.length; i++) {
+                    args[i] = CoerceJavaToLua.coerce(objs[i]);
+                }
+            }
+            if (args != null) {
+                return target.invoke(LuaValue.varargsOf(args));
+            } else {
+                return target.call();
+            }
+        }
+        return LuaValue.NIL;
+    }
+
     /**
      * call lua function ( return multiple values)
      *
@@ -587,5 +642,24 @@ public class LuaUtil {
             e.printStackTrace();
             return LuaValue.NIL;
         }
+    }
+
+    /**
+     * convert a table to map
+     *
+     * @param table
+     * @return
+     */
+    public static Map<String, String> toMap(LuaTable table) {
+        if (table != null) {
+            final Map<String, String> result = new HashMap<String, String>();
+            final LuaValue[] keys = table.keys();
+            LuaValue value = null;
+            for (LuaValue key : keys) {
+                value = table.get(key);
+                result.put(key.optjstring(null), value.optjstring(null));
+            }
+        }
+        return null;
     }
 }

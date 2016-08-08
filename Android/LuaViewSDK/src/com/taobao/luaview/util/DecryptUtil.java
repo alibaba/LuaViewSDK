@@ -2,7 +2,10 @@ package com.taobao.luaview.util;
 
 import android.content.Context;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.Constants;
+
+import org.luaj.vm2.ast.Exp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +29,7 @@ public class DecryptUtil {
     public static final byte[] cIv = new byte[16];
 
     static {
-        Arrays.fill(cIv, (byte)0);
+        Arrays.fill(cIv, (byte) 0);
     }
 
     /**
@@ -36,21 +39,21 @@ public class DecryptUtil {
      * @return
      */
     public static byte[] aes(final Context context, final byte[] encrypted) {
-        InputStream inputStream = null;
         try {
-            inputStream = context.getAssets().open(Constants.PUBLIC_KEY_PATH);
-            byte[] keys = IOUtil.toBytes(inputStream);
-            return aes(EncryptUtil.md5(keys), encrypted);
+            byte[] md5 = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH_MD5);//get md5
+            if (md5 == null) {
+                byte[] keys = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH);//get keys
+                if(keys == null) {
+                    final InputStream inputStream = context.getAssets().open(Constants.PUBLIC_KEY_PATH);
+                    keys = IOUtil.toBytes(inputStream);
+                    AppCache.getCache(Constants.PUBLIC_KEY_TAG).put(Constants.PUBLIC_KEY_PATH, keys);//cache keys
+                }
+                md5 = EncryptUtil.md5(keys);
+                AppCache.getCache(Constants.PUBLIC_KEY_TAG).put(Constants.PUBLIC_KEY_PATH_MD5, md5);//cache md5
+            }
+            return aes(md5, encrypted);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -63,12 +66,14 @@ public class DecryptUtil {
      */
     public static byte[] aes(final byte[] keys, final byte[] encrypted) {
         try {
-            final SecretKeySpec skeySpec = new SecretKeySpec(keys, ALGORITHM_AES);
-            final IvParameterSpec ivParameterSpec = new IvParameterSpec(cIv);
-            final Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
-
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
-
+            Cipher cipher = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH_CIPHER);//get cipher
+            if(cipher == null) {
+                final SecretKeySpec skeySpec = new SecretKeySpec(keys, ALGORITHM_AES);
+                final IvParameterSpec ivParameterSpec = new IvParameterSpec(cIv);
+                cipher = Cipher.getInstance(ALGORITHM_AES);
+                cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
+                AppCache.getCache(Constants.PUBLIC_KEY_TAG).put(Constants.PUBLIC_KEY_PATH_CIPHER, cipher);//cache cipher
+            }
             return cipher.doFinal(encrypted);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

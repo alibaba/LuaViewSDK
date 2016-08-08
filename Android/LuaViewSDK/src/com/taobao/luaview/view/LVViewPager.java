@@ -4,15 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewPager;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaViewUtil;
-import com.taobao.luaview.view.adapter.LVPagerAdapter;
+import com.taobao.luaview.view.adapter.LVLoopPagerAdapter;
 import com.taobao.luaview.view.indicator.circle.PageIndicator;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
+import com.taobao.luaview.view.viewpager.AutoScrollViewPager;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -27,14 +30,17 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewPager extends ViewPager implements ILVViewGroup {
+public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
     public Globals mGlobals;
     private LuaValue mInitParams;
     private UDViewPager mLuaUserdata;
     private OnPageChangeListener mOnPageChangeListener;
 
+    private double downX = 0f, downY = 0f, touchX = 0f, touchY = 0f;
+    private int touchSlop;
+
     public LVViewPager(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDViewPager(this, globals, metaTable, this.mInitParams);
@@ -46,6 +52,7 @@ public class LVViewPager extends ViewPager implements ILVViewGroup {
         this.mGlobals.saveContainer(this);
         initData();
         this.mGlobals.restoreContainer();
+        this.touchSlop = ViewConfiguration.get(mGlobals.getContext()).getScaledTouchSlop();
     }
 
     private void initData() {
@@ -56,7 +63,7 @@ public class LVViewPager extends ViewPager implements ILVViewGroup {
         } else {
             this.setAdapter(new LVPagerAdapter(mGlobals, mLuaUserdata));
         }*/
-        this.setAdapter(new LVPagerAdapter(mGlobals, mLuaUserdata));
+        this.setAdapter(new LVLoopPagerAdapter(mGlobals, mLuaUserdata));
         this.setCurrentItem(0);//TODO 可以定制
         initOnPageChangeListener();//初始化页面监听
     }
@@ -148,26 +155,21 @@ public class LVViewPager extends ViewPager implements ILVViewGroup {
 
     /*@Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction() == MotionEvent.ACTION_SCROLL) {
-            super.requestDisallowInterceptTouchEvent(true);
+        touchX = ev.getX();
+        touchY = ev.getY();
+        if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+            downX = touchX;
+            downY = touchY;
+        }
+
+        double deltaX = Math.abs(touchX - downX);
+        double deltaY = Math.abs(touchY - downY);
+
+        if(deltaX > deltaY && deltaX > touchSlop){
+            if(getParent() != null) {
+                getParent().requestDisallowInterceptTouchEvent(true);
+            }
         }
         return super.dispatchTouchEvent(ev);
     }*/
-
-    /*@Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean ret = super.onInterceptTouchEvent(ev);
-        if (ret)
-            getParent().requestDisallowInterceptTouchEvent(true);
-        return ret;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        boolean ret = super.onTouchEvent(ev);
-        if (ret)
-            getParent().requestDisallowInterceptTouchEvent(true);
-        return ret;
-    }*/
-
 }

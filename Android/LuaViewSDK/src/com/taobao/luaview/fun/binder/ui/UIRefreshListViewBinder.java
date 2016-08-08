@@ -30,7 +30,7 @@ public class UIRefreshListViewBinder extends BaseFunctionBinder {
 
     @Override
     public LuaValue createCreator(LuaValue env, LuaValue metaTable) {
-        return new BaseVarArgUICreator(env.checkglobals(), metaTable) {
+        return new BaseVarArgUICreator(env.checkglobals(), metaTable, getMapperClass()) {
             @Override
             public ILVView createView(Globals globals, LuaValue metaTable, Varargs varargs) {
                 return new LVRefreshListView(globals, metaTable, varargs);

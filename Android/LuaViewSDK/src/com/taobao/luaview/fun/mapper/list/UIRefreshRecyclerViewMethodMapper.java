@@ -3,6 +3,7 @@ package com.taobao.luaview.fun.mapper.list;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.list.UDRefreshRecyclerView;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -20,6 +21,18 @@ public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> 
         return getUD(varargs);
     }
 
+
+
+    /**
+     * 设置是否可以刷新
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public LuaValue refreshEnable(U view, Varargs varargs){
+        final boolean enable = LuaUtil.getBoolean(varargs, 2);
+        return view.setRefreshEnable(enable);
+    }
 
     /**
      * 初始化下拉刷新 for iOS，Android不需要

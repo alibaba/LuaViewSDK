@@ -29,7 +29,7 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     private LVViewGroup mContainer;
 
     public LVHorizontalScrollView(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mGlobals = globals;
         this.mLuaUserdata = new UDHorizontalScrollView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
         init();
@@ -54,7 +54,6 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
 
     @Override
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
-
     }
 
     public LVViewGroup getContainer(){

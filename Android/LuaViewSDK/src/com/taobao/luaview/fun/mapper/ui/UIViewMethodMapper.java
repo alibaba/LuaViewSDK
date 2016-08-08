@@ -1159,7 +1159,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     public LuaValue setAnchorPoint(U view, Varargs varargs) {
         //TODO oc实现跟这个不一样，oc会移动一下
         final float pivotX = (float) varargs.optdouble(2, 0.5f);
-        final float pivotY = (float) varargs.optdouble(2, 0.5f);
+        final float pivotY = (float) varargs.optdouble(3, 0.5f);
         return view.setPivot(pivotX, pivotY);
     }
 

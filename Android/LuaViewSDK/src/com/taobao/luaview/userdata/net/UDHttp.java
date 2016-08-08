@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.net;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -80,6 +81,7 @@ public class UDHttp extends BaseUserdata {
         setMethod(method);
         setParams(params);
         setCallback(callback);
+        disableConnectionReuseIfNecessary();
     }
 
     /**
@@ -155,6 +157,14 @@ public class UDHttp extends BaseUserdata {
 
     public int getTimeout() {
         return this.mTimeout;
+    }
+
+    /**
+     * 清空net cookies
+     */
+    public UDHttp clearNetCookies() {
+        CookieManager.clearNetCookies();
+        return this;
     }
 
     /**
@@ -261,12 +271,16 @@ public class UDHttp extends BaseUserdata {
                     connection.setRequestMethod(mMethod);
                     //timeout
                     connection.setConnectTimeout(mTimeout * 1000);
+
+                    //请求的cookie
+                    CookieManager.handleRequestCookies(connection, mUrl);
+
                     if (mParams != null) {
                         for (LuaValue key : mParams.keys()) {
                             final LuaValue value = mParams.get(key);
                             final String requestKey = key != null ? key.optjstring(null) : null;
                             final String requestValue = value != null ? value.optjstring(null) : null;
-                            if (TextUtils.isEmpty(requestKey) && TextUtils.isEmpty(requestValue)) {
+                            if (!TextUtils.isEmpty(requestKey) && !TextUtils.isEmpty(requestValue)) {
                                 connection.setRequestProperty(requestKey, requestValue);
                             }
                         }
@@ -275,7 +289,7 @@ public class UDHttp extends BaseUserdata {
                     //连接服务器
                     connection.connect();
 
-                    //301重定向
+                    //301重定向&重定向cookie
                     connection = handle301Redirect(connection);
 
                     //code
@@ -290,7 +304,8 @@ public class UDHttp extends BaseUserdata {
                     }
 
                     input = connection.getInputStream();
-                    final byte[] fileData = IOUtil.toBytes(input);
+
+                    final byte[] fileData = IOUtil.toBytes(input, getContentCharset(connection));
 
                     //data
                     udHttpResponse.setData(fileData);
@@ -298,8 +313,10 @@ public class UDHttp extends BaseUserdata {
                     //header
                     udHttpResponse.setHeaders(connection.getHeaderFields());
 
+                    //response cookie
+//                    CookieManager.handleResponseCookies(connection, mUrl);
                 } catch (Exception e) {
-                    LogUtil.e("[Http error] ", e.toString());
+                    LogUtil.e("[Http error] ", e);
                     e.printStackTrace();
                     udHttpResponse.setResponseMsg(e.toString());
                 } finally {
@@ -344,11 +361,11 @@ public class UDHttp extends BaseUserdata {
                 String newUrl = connection.getHeaderField("Location");
 
                 // get the cookie if need, for login
-                String cookies = connection.getHeaderField("Set-Cookie");
+                String cookies = connection.getHeaderField(com.taobao.luaview.userdata.net.CookieManager.COOKIES_HEADER);
 
                 // open the new connnection again
                 connection = (HttpURLConnection) new URL(newUrl).openConnection();
-                connection.setRequestProperty("Cookie", cookies);
+                connection.setRequestProperty(com.taobao.luaview.userdata.net.CookieManager.COOKIE, cookies);
 
                 //连接服务器
                 connection.connect();
@@ -358,5 +375,32 @@ public class UDHttp extends BaseUserdata {
             }
         }
         return connection;
+    }
+
+    private String getContentCharset(HttpURLConnection connection) {
+        if (connection != null) {
+            final String contentType = connection.getContentType();
+            if (contentType != null) {
+                final String[] values = contentType.split(";"); // values.length should be 2
+                String charset = null;
+                if (values != null) {
+                    for (String value : values) {
+                        value = value.trim();
+                        if (value != null && value.toLowerCase().startsWith("charset=")) {
+                            charset = value.substring("charset=".length());
+                        }
+                    }
+                }
+                return charset;
+            }
+        }
+        return null;
+    }
+
+    private void disableConnectionReuseIfNecessary() {
+        // Work around pre-Froyo bugs in HTTP connection reuse.
+        if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO) {
+            System.setProperty("http.keepAlive", "false");
+        }
     }
 }
