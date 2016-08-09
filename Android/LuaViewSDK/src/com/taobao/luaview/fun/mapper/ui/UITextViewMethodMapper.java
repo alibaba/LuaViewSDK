@@ -17,26 +17,27 @@ import java.util.List;
 public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = UITextViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "text",//0
+            "textColor",//1
+            "textSize",//2
+            "fontSize",//3
+            "fontName",//4
+            "font",//5
+            "gravity",//6
+            "textAlign",//7
+            "lines",//8
+            "maxLines",//9
+            "lineCount",//10
+            "minLines",//11
+            "ellipsize",//12
+            "adjustTextSize",//13
+            "adjustFontSize"//14
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "text",//0
-                "textColor",//1
-                "textSize",//2
-                "fontSize",//3
-                "fontName",//4
-                "font",//5
-                "gravity",//6
-                "textAlign",//7
-                "lines",//8
-                "maxLines",//9
-                "lineCount",//10
-                "minLines",//11
-                "ellipsize",//12
-                "adjustTextSize",//13
-                "adjustFontSize"//14
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

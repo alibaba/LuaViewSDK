@@ -20,20 +20,21 @@ import java.util.List;
 @LuaViewLib
 public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
     private static final String TAG = AudioMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "play",//0
+            "pause",//1
+            "resume",//2
+            "stop",//3
+            "seekTo",//4
+            "callback",//5
+            "playing",//8
+            "pausing",//9
+            "looping"//10
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "play",//0
-                "pause",//1
-                "resume",//2
-                "stop",//3
-                "seekTo",//4
-                "callback",//5
-                "playing",//8
-                "pausing",//9
-                "looping"//10
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

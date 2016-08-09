@@ -19,13 +19,14 @@ import java.util.List;
 @LuaViewLib
 public class UICustomViewPagerIndicatorMethodMapper<U extends UDCustomViewPagerIndicator> extends UIViewMethodMapper<U> {
     private static final String TAG = UICustomViewPagerIndicatorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "currentPage",//0
+            "currentItem"//1
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "currentPage",//0
-                "currentItem"//1
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

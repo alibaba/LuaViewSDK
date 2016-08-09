@@ -19,15 +19,16 @@ import java.util.List;
 public class DataMethodMapper<U extends UDData> extends BaseMethodMapper<U> {
 
     private static final String TAG = DataMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "append",//0
+            "toString",//1
+            "toJson",//2
+            "toTable",//3
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "append",//0
-                "toString",//1
-                "toJson",//2
-                "toTable",//3
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

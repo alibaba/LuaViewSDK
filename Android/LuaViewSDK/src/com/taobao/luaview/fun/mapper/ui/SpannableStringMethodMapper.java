@@ -19,12 +19,13 @@ import java.util.List;
 public class SpannableStringMethodMapper<U extends UDSpannableString> extends BaseMethodMapper<U> {
 
     private static final String TAG = SpannableStringMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "append"//0
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "append"//0
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

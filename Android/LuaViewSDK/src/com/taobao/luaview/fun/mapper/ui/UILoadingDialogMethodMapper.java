@@ -14,21 +14,22 @@ import java.util.List;
 public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends BaseMethodMapper<U> {
 
     private static final String TAG = UILoadingDialogMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "show",//0
+            "isShow",//1
+            "start",//2
+            "isStart",//3
+            "startAnimating",//4
+            "isAnimating",//5
+            "hide",//6
+            "stop",//7
+            "stopAnimating",//8
+            "color"//9
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "show",//0
-                "isShow",//1
-                "start",//2
-                "isStart",//3
-                "startAnimating",//4
-                "isAnimating",//5
-                "hide",//6
-                "stop",//7
-                "stopAnimating",//8
-                "color"//9
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

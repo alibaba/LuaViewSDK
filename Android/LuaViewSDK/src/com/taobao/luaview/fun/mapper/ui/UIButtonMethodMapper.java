@@ -17,15 +17,16 @@ import java.util.List;
 @LuaViewLib
 public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMapper<U> {
     private static final String TAG = UIButtonMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "title",//0
+            "titleColor",//1
+            "image",//2
+            "showsTouchWhenHighlighted"//3
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "title",//0
-                "titleColor",//1
-                "image",//2
-                "showsTouchWhenHighlighted"//3
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

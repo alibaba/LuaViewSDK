@@ -22,21 +22,22 @@ import java.util.List;
 public class HttpMethodMapper<U extends UDHttp> extends BaseMethodMapper<U> {
 
     private static final String TAG = HttpMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "url",//0
+            "method",//1
+            "retryTimes",//2
+            "timeout",//3
+            "params",//4
+            "callback",//5
+            "request",//6
+            "cancel",//7
+            "get",//8
+            "post"//9
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "url",//0
-                "method",//1
-                "retryTimes",//2
-                "timeout",//3
-                "params",//4
-                "callback",//5
-                "request",//6
-                "cancel",//7
-                "get",//8
-                "post"//9
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

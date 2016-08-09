@@ -22,21 +22,22 @@ import java.util.List;
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
     private static final String TAG = UICircleViewPagerIndicatorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods =  new String[]{
+            "unselectedColor",//0
+            "selectedColor",//1
+            "fillColor",//2
+            "pageColor",//3
+            "strokeWidth",//4
+            "strokeColor",//5
+            "radius",//6
+            "snap",//7
+            "currentPage",//8
+            "currentItem"//9
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "unselectedColor",//0
-                "selectedColor",//1
-                "fillColor",//2
-                "pageColor",//3
-                "strokeWidth",//4
-                "strokeColor",//5
-                "radius",//6
-                "snap",//7
-                "currentPage",//8
-                "currentItem"//9
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

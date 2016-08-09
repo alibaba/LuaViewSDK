@@ -29,40 +29,41 @@ import java.util.List;
 public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapper<U> {
 
     private static final String TAG = UIAnimatorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "with",//0
+            "start",//1
+            "alpha",//2
+            "rotation",//3
+            "scale",//4
+            "scaleX",//5
+            "scaleY",//6
+            "translation",//7
+            "translationX",//8
+            "translationY",//9
+            "duration",//10
+            "delay",//11
+            "repeatCount",//12
+            "interpolator",//13
+            "cancel",//14
+            "pause",//15
+            "isPaused",//16
+            "isRunning",//17
+            "resume",//18
+            "reverses",//19
+            "values",//20
+            "callback",//21
+            "onStart",//22
+            "onEnd",//23
+            "onRepeat",//24
+            "onCancel",//25
+            "onPause",//26
+            "onUpdate",//27
+            "onResume"//28
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "with",//0
-                "start",//1
-                "alpha",//2
-                "rotation",//3
-                "scale",//4
-                "scaleX",//5
-                "scaleY",//6
-                "translation",//7
-                "translationX",//8
-                "translationY",//9
-                "duration",//10
-                "delay",//11
-                "repeatCount",//12
-                "interpolator",//13
-                "cancel",//14
-                "pause",//15
-                "isPaused",//16
-                "isRunning",//17
-                "resume",//18
-                "reverses",//19
-                "values",//20
-                "callback",//21
-                "onStart",//22
-                "onEnd",//23
-                "onRepeat",//24
-                "onCancel",//25
-                "onPause",//26
-                "onUpdate",//27
-                "onResume"//28
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

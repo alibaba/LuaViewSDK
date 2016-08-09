@@ -21,12 +21,13 @@ import java.util.List;
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "nativeView"//0
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "nativeView"//0
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

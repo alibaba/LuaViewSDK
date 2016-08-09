@@ -19,12 +19,13 @@ import java.util.List;
 @LuaViewLib
 public class UIToastMethodMapper<U extends UDToast> extends BaseMethodMapper<U> {
     private static final String TAG = UIToastMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "show"//0
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "show"//0
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

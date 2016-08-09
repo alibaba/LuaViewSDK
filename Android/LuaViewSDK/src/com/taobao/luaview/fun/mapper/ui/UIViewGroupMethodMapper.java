@@ -23,20 +23,21 @@ import java.util.List;
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
 
     private static final String TAG = UIViewGroupMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "onShow",//0
+            "onHide",//1
+            "onBack",//2
+            "onLayout",//3
+            "addView",//4
+            "removeView",//5
+            "removeAllViews",//6
+            "children",//7
+            "flexChildren"//8
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "onShow",//0
-                "onHide",//1
-                "onBack",//2
-                "onLayout",//3
-                "addView",//4
-                "removeView",//5
-                "removeAllViews",//6
-                "children",//7
-                "flexChildren"//8
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

@@ -22,17 +22,18 @@ import java.util.List;
 @LuaViewLib
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     private static final String TAG = TimerMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "delay",//0
+            "repeat",//1
+            "interval",//2
+            "start",//3
+            "callback",//4
+            "cancel"//5
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "delay",//0
-                "repeat",//1
-                "interval",//2
-                "start",//3
-                "callback",//4
-                "cancel"//5
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

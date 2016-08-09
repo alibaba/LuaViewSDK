@@ -18,18 +18,19 @@ import java.util.List;
 public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = UILoadingViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "start",//0
+            "isStart",//1
+            "startAnimating",//2
+            "isAnimating",//3
+            "stop",//4
+            "stopAnimating",//5
+            "color"//6
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "start",//0
-                "isStart",//1
-                "startAnimating",//2
-                "isAnimating",//3
-                "stop",//4
-                "stopAnimating",//5
-                "color"//6
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

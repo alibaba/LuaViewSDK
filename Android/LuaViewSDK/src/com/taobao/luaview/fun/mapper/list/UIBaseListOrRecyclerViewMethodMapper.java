@@ -21,20 +21,21 @@ import java.util.List;
 @LuaViewLib
 public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup> extends UIViewGroupMethodMapper<U> {
     private static final String TAG = UIBaseListOrRecyclerViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "reload",//0
+            "contentSize",//1
+            "contentOffset",//2
+            "contentInset",//3
+            "showScrollIndicator",//4
+            "scrollToTop",//5
+            "scrollToCell",//6
+            "miniSpacing",//7
+            "lazyLoad"//8
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "reload",//0
-                "contentSize",//1
-                "contentOffset",//2
-                "contentInset",//3
-                "showScrollIndicator",//4
-                "scrollToTop",//5
-                "scrollToCell",//6
-                "miniSpacing",//7
-                "lazyLoad"//8
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

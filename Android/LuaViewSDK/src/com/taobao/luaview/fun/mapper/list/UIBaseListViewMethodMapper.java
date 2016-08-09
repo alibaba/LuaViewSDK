@@ -17,14 +17,15 @@ import java.util.List;
 @LuaViewLib
 public abstract class UIBaseListViewMethodMapper<U extends UDViewGroup> extends UIBaseListOrRecyclerViewMethodMapper<U> {
     private static final String TAG = UIBaseListViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "header",//0
+            "footer",//1
+            "dividerHeight"//2
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "header",//0
-                "footer",//1
-                "dividerHeight"//2
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

@@ -16,17 +16,18 @@ import java.util.List;
 public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = UIViewPagerMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "reload",//0
+            "indicator",//1
+            "currentPage",//2
+            "currentItem",//3
+            "autoScroll",//4
+            "looping"//5
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "reload",//0
-                "indicator",//1
-                "currentPage",//2
-                "currentItem",//3
-                "autoScroll",//4
-                "looping"//5
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

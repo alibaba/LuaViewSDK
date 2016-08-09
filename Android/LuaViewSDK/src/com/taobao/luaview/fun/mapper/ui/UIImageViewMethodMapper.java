@@ -22,17 +22,18 @@ import java.util.List;
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = UIImageViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "image",//0
+            "contentMode",//1
+            "scaleType",//2
+            "startAnimationImages",//3
+            "stopAnimationImages",//4
+            "isAnimationImages"//5
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "image",//0
-                "contentMode",//1
-                "scaleType",//2
-                "startAnimationImages",//3
-                "stopAnimationImages",//4
-                "isAnimationImages"//5
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

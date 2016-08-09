@@ -29,38 +29,39 @@ import java.util.List;
 public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMethodMapper<U> {
 
     private static final String TAG = UIAnimatorSetMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "with",//0
+            "start",//1
+            "alpha",//2
+            "rotation",//3
+            "scale",//4
+            "scaleX",//5
+            "scaleY",//6
+            "translation",//7
+            "translationX",//8
+            "translationY",//9
+            "duration",//10
+            "delay",//11
+            "repeatCount",//12
+            "interpolator",//13
+            "cancel",//14
+            "pause",//15
+            "resume",//16
+            "reverses",//17
+            "values",//18
+            "callback",//19
+            "onStart",//20
+            "onEnd",//21
+            "onRepeat",//22
+            "onCancel",//23
+            "onPause",//24
+            "onUpdate",//25
+            "onResume"//26
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "with",//0
-                "start",//1
-                "alpha",//2
-                "rotation",//3
-                "scale",//4
-                "scaleX",//5
-                "scaleY",//6
-                "translation",//7
-                "translationX",//8
-                "translationY",//9
-                "duration",//10
-                "delay",//11
-                "repeatCount",//12
-                "interpolator",//13
-                "cancel",//14
-                "pause",//15
-                "resume",//16
-                "reverses",//17
-                "values",//18
-                "callback",//19
-                "onStart",//20
-                "onEnd",//21
-                "onRepeat",//22
-                "onCancel",//23
-                "onPause",//24
-                "onUpdate",//25
-                "onResume"//26
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

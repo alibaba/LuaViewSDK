@@ -18,16 +18,17 @@ import java.util.List;
 public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> extends UIBaseRecyclerViewMethodMapper<U> {
 
     private static final String TAG = UIRefreshRecyclerViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "refreshEnable",//0
+            "initRefreshing",//1
+            "isRefreshing",//2
+            "startRefreshing",//3
+            "stopRefreshing"//4
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "refreshEnable",//0
-                "initRefreshing",//1
-                "isRefreshing",//2
-                "startRefreshing",//3
-                "stopRefreshing"//4
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

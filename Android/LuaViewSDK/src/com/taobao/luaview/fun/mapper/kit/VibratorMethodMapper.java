@@ -21,14 +21,15 @@ import java.util.List;
 @LuaViewLib
 public class VibratorMethodMapper<U extends UDVibrator> extends BaseMethodMapper<U> {
     private static final String TAG = VibratorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "hasVibrator",//0
+            "vibrate",//1
+            "cancel"//2
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "hasVibrator",//0
-                "vibrate",//1
-                "cancel"//2
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

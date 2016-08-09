@@ -23,23 +23,24 @@ import java.util.List;
 public class UIAnimationMethodMapper<U extends UDAnimation> extends BaseMethodMapper<U> {
 
     private static final String TAG = UIAnimationMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "alpha",//0
+            "rotate",//1
+            "scale",//2
+            "translate",//3
+            "duration",//4
+            "startDelay",//5
+            "repeatCount",//6
+            "to",//7
+            "callback",//8
+            "onStartCallback",//9
+            "onEndCallback",//10
+            "onRepeatCallback"//11
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "alpha",//0
-                "rotate",//1
-                "scale",//2
-                "translate",//3
-                "duration",//4
-                "startDelay",//5
-                "repeatCount",//6
-                "to",//7
-                "callback",//8
-                "onStartCallback",//9
-                "onEndCallback",//10
-                "onRepeatCallback"//11
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
 

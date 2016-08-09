@@ -16,20 +16,21 @@ import java.util.List;
 public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = UIHorizontalScrollViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "offset",//0
+            "scrollTo",//1
+            "offsetBy",//2
+            "scrollBy",//3
+            "smoothScrollTo",//4
+            "smoothScrollBy",//5
+            "pageScroll",//6
+            "fullScroll",//7
+            "contentSize"//8
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "offset",//0
-                "scrollTo",//1
-                "offsetBy",//2
-                "scrollBy",//3
-                "smoothScrollTo",//4
-                "smoothScrollBy",//5
-                "pageScroll",//6
-                "fullScroll",//7
-                "contentSize"//8
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override

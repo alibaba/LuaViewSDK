@@ -19,13 +19,14 @@ import java.util.List;
 public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMethodMapper<U> {
 
     private static final String TAG = UIEditTextMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "hint",//0
+            "placeholder"//1
+    };
 
     @Override
     public List<String> getAllFunctionNames() {
-        return mergeFunctionNames(TAG, super.getAllFunctionNames(), new String[]{
-                "hint",//0
-                "placeholder"//1
-        });
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
     }
 
     @Override
