@@ -26,9 +26,7 @@ import android.content.Context;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
-import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
-import com.taobao.luaview.vm.extend.GlobalsExtender;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
@@ -38,6 +36,7 @@ import org.luaj.vm2.lib.ResourceFinder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.ref.WeakReference;
 
 /**
  * Global environment used by luaj.  Contains global variables referenced by executing lua.
@@ -120,14 +119,9 @@ import java.io.Reader;
  */
 public class Globals extends LuaTable {
     /**
-     * Android context
-     */
-    public Context context;
-
-    /**
      * Android parent view
      */
-    public LuaView luaView;
+    private WeakReference<LuaView> mLuaView;
     public ILVViewGroup container;
     private ILVViewGroup tmpContainer;
 
@@ -553,7 +547,6 @@ public class Globals extends LuaTable {
             this.tmpContainer = this.container;
             this.container = viewGroup;
         }
-//        this.set("window", container.getUserdata());//TODO 优化到其他地方?，设置window对象
     }
 
     /**
@@ -561,5 +554,52 @@ public class Globals extends LuaTable {
      */
     public void restoreContainer() {
         this.container = this.tmpContainer;
+    }
+
+    /**
+     * 设置LuaView，对LuaView弱引用
+     *
+     * @param luaView
+     */
+    public void setLuaView(LuaView luaView) {
+        this.mLuaView = new WeakReference<LuaView>(luaView);
+    }
+
+    /**
+     * 获取LuaView
+     *
+     * @return
+     */
+    public LuaView getLuaView() {
+        return this.mLuaView != null ? this.mLuaView.get() : null;
+    }
+
+    /**
+     * 获取context
+     *
+     * @return
+     */
+    public Context getContext() {
+        final LuaView luaView = this.mLuaView != null ? this.mLuaView.get() : null;
+        return luaView != null ? luaView.getContext() : null;
+    }
+
+    /**
+     * 获取App级别的Context
+     *
+     * @return
+     */
+    public Context getAppContext() {
+        return getContext() != null ? getContext().getApplicationContext() : null;
+    }
+
+    /**
+     * 清除container缓存
+     */
+    public void onDestroy() {
+        finder = null;
+        mLuaView = null;
+        container = null;
+        tmpContainer = null;
     }
 }

@@ -54,15 +54,26 @@ public class AutoScrollViewPager extends LoopViewPager {
     private boolean isStopByTouch = false;
     private float touchX = 0f, downX = 0f;
 
+    private boolean canAutoScroll = false;
+
     public static final int SCROLL_WHAT = 0;
 
-    public AutoScrollViewPager(Context paramContext) {
-        super(paramContext);
+    public AutoScrollViewPager(Context context) {
+        super(context);
         init();
     }
 
     private void init() {
         handler = new MyHandler(this);
+    }
+
+    /**
+     * 设置是否可以自动滚动，所有自动滚动的逻辑都受该参数影响
+     *
+     * @param canAutoScroll
+     */
+    public void setCanAutoScroll(boolean canAutoScroll) {
+        this.canAutoScroll = canAutoScroll;
     }
 
     /**
@@ -141,6 +152,9 @@ public class AutoScrollViewPager extends LoopViewPager {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!canAutoScroll) {
+            return super.dispatchTouchEvent(ev);
+        }
         int action = MotionEventCompat.getActionMasked(ev);
 
         if (stopScrollWhenTouch) {
@@ -288,12 +302,12 @@ public class AutoScrollViewPager extends LoopViewPager {
 
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
-        if (visibility == View.VISIBLE && isStopByUIChange) {
+        if (canAutoScroll && visibility == View.VISIBLE && isStopByUIChange) {
             isStopByUIChange = false;
             startAutoScroll();
         }
         super.onVisibilityChanged(changedView, visibility);
-        if (visibility != View.VISIBLE) {
+        if (canAutoScroll && visibility != View.VISIBLE) {
             isStopByUIChange = true;
             stopAutoScroll();
         }
@@ -302,6 +316,9 @@ public class AutoScrollViewPager extends LoopViewPager {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        if (!canAutoScroll) {
+            return;
+        }
         isStopByUIChange = true;
         stopAutoScroll();
     }

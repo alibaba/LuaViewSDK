@@ -11,6 +11,8 @@ import com.bumptech.glide.request.target.Target;
 import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.view.imageview.BaseImageView;
 
+import java.lang.ref.WeakReference;
+
 /**
  * XXX
  *
@@ -37,32 +39,35 @@ public class GlideImageProvider implements ImageProvider {
     /**
      * load url
      *
-     * @param imageView
+     * @param referImageView
      * @param url
      * @param callback
      */
-    public void load(final ImageView imageView, final String url, final BaseImageView.LoadCallback callback) {
-        if (imageView != null) {
-            if (callback != null) {
-                Glide.with(imageView.getContext()).load(url).listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        if (callback != null) {
-                            callback.onLoadResult(null);
+    public void load(final Context context, final WeakReference<ImageView> referImageView, final String url, final BaseImageView.LoadCallback callback) {
+        if (referImageView != null) {
+            ImageView imageView = referImageView.get();
+            if (imageView != null) {
+                if (callback != null) {
+                    Glide.with(context).load(url).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            if (callback != null) {
+                                callback.onLoadResult(null);
+                            }
+                            return false;
                         }
-                        return false;
-                    }
 
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        if (callback != null) {
-                            callback.onLoadResult(resource.getCurrent());
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            if (callback != null) {
+                                callback.onLoadResult(resource.getCurrent());
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                }).into(imageView);
-            } else {
-                Glide.with(imageView.getContext()).load(url).into(imageView);
+                    }).into(imageView);
+                } else {
+                    Glide.with(context).load(url).into(imageView);
+                }
             }
         }
     }

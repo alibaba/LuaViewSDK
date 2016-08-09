@@ -85,7 +85,8 @@ public class UDView<T extends View> extends BaseUserdata {
     }
 
     public T getView() {
-        return (T) userdata();
+        Object userdata = userdata();
+        return userdata != null ? (T) userdata : null;
     }
 
     /**
@@ -310,7 +311,7 @@ public class UDView<T extends View> extends BaseUserdata {
      */
     public UDView setFrame(final int x, final int y, final int width, final int height) {
         final View view = getView();
-        if (view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+        if (view != null && view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
             layoutParams.leftMargin = x;
             layoutParams.topMargin = y;
