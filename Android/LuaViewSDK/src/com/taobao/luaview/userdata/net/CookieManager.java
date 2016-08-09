@@ -2,6 +2,8 @@ package com.taobao.luaview.userdata.net;
 
 import android.text.TextUtils;
 
+import com.taobao.luaview.util.LogUtil;
+
 import java.net.CookieHandler;
 import java.net.CookiePolicy;
 import java.net.CookieStore;
@@ -20,6 +22,7 @@ import java.util.Map;
  * 下午5:20 song XXX
  */
 public class CookieManager {
+    private static final String TAG = CookieManager.class.getSimpleName();
     public static final String COOKIE = "Cookie";
     public static final String COOKIES_HEADER = "Set-Cookie";
 
@@ -35,6 +38,17 @@ public class CookieManager {
     }
 
     /**
+     * clear net cookies
+     */
+    public static void clearNetCookies() {
+        java.net.CookieManager cookieManager = getCookieManager();
+        CookieStore cookieStore = cookieManager.getCookieStore();
+        if (cookieStore != null) {
+            cookieStore.removeAll();
+        }
+    }
+
+    /**
      * 处理请求的cookie
      *
      * @param connection
@@ -47,7 +61,8 @@ public class CookieManager {
                 cookie.append(webkitCookie);
             }
             if (cookie.length() > 0) {
-                connection.setRequestProperty(COOKIE, cookie.toString());
+                final String cookieStr = cookie.toString();
+                connection.setRequestProperty(COOKIE, cookieStr);
             }
         }
     }
@@ -60,7 +75,9 @@ public class CookieManager {
     private static String getWebkitRequestCookies(String requestUrl) {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
         if (cookieManager != null) {
-            return cookieManager.getCookie(requestUrl);
+            final String webkitCookie = cookieManager.getCookie(requestUrl);
+            LogUtil.d(TAG, "get-webkit", webkitCookie);
+            return webkitCookie;
         }
         return null;
     }
@@ -75,7 +92,9 @@ public class CookieManager {
             final List<HttpCookie> cookies = cookieStore.getCookies();
             if (cookies != null && cookies.size() > 0) {
                 //While joining the Cookies, use ',' or ';' as needed. Most of the server are using ';'
-                return TextUtils.join(";", cookies);
+                final String netCookie = TextUtils.join(";", cookies);
+                LogUtil.d(TAG, "get-net", netCookie);
+                return netCookie;
             }
         }
         return null;
@@ -113,7 +132,9 @@ public class CookieManager {
             }
             android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
             if (cookieManager != null && cookie.length() > 0) {
-                cookieManager.setCookie(requestUrl, cookie.toString());
+                String cookieStr = cookie.toString();
+                LogUtil.d(TAG, "write-webkit", cookieStr);
+                cookieManager.setCookie(requestUrl, cookieStr);
             }
         }
         return null;
@@ -128,11 +149,14 @@ public class CookieManager {
         //write net cookie
         final CookieStore cookieStore = getCookieManager().getCookieStore();
         if (cookieStore != null && cookiesHeader != null) {
+            HttpCookie cookieStr = null;
             for (String cookieHeader : cookiesHeader) {
                 if (cookieHeader != null) {
                     List<HttpCookie> cookies = HttpCookie.parse(cookieHeader);
                     if (cookies != null && cookies.size() > 0) {
-                        cookieStore.add(null, cookies.get(0));
+                        cookieStr = cookies.get(0);
+                        LogUtil.d(TAG, "write-net", cookieStr);
+                        cookieStore.add(null, cookieStr);
                     }
                 }
             }

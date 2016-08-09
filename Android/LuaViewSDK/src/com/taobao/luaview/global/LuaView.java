@@ -2,14 +2,13 @@ package com.taobao.luaview.global;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
 
+import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
-import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
@@ -105,7 +104,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
 
             //创建globals
-            @NonNull
             private Globals createGlobalsAsync() {
                 return createGlobals(context);
             }
@@ -120,18 +118,15 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }.execute();
     }
 
-    @NonNull
     private static Globals createGlobals(final Context context) {
         final Globals globals = LuaViewManager.createGlobals();
-        globals.context = context;
         return globals;
     }
 
-    @NonNull
     private static LuaView createLuaView(final Context context, final Globals globals) {
-        final LuaView luaView = new LuaView(globals, createMetaTableForLuaView());
+        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
+        globals.setLuaView(luaView);
         globals.finder = new LuaResourceFinder(context);
-        globals.luaView = luaView;
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
             luaView.openDebugger();
         }
@@ -482,16 +477,17 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     *
      * @param enable
      */
-    public void setRefreshContainerEnable(boolean enable){
+    public void setRefreshContainerEnable(boolean enable) {
         this.isRefreshContainerEnable = enable;
     }
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
      */
-    public boolean isRefreshContainerEnable(){
+    public boolean isRefreshContainerEnable() {
         return this.isRefreshContainerEnable;
     }
 
@@ -517,8 +513,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return LuaViewManager.createMetatable(UIViewGroupMethodMapper.class);
     }
 
-    private LuaView(Globals globals, LuaValue metaTable) {
-        super(globals, metaTable, LuaValue.NIL);
+    /**
+     * @param context   View级别的Context
+     * @param globals
+     * @param metaTable
+     */
+    private LuaView(Context context, Globals globals, LuaValue metaTable) {
+        super(context, globals, metaTable, LuaValue.NIL);
         this.mLuaCache = new LuaCache();
     }
 
@@ -707,6 +708,14 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
         }
         LuaCache.clear();
+    }
+
+
+    /**
+     * 销毁的时候从外部调用，清空所有外部引用
+     */
+    public void onDestroy(){
+        super.onDestroy();
     }
 
     //----------------------------------------cached object 管理-------------------------------------

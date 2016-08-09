@@ -26,7 +26,7 @@ public class LVCircleViewPagerIndicator extends CirclePageIndicator implements I
     private UDCircleViewPagerIndicator mLuaUserdata;
 
     public LVCircleViewPagerIndicator(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDCircleViewPagerIndicator(this, globals, metaTable, this.mInitParams);

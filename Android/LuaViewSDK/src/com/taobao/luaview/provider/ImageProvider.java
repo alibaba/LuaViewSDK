@@ -6,6 +6,8 @@ import android.widget.ImageView;
 
 import com.taobao.luaview.view.imageview.BaseImageView;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 提供图片下载功能，用作ImageView相关
  *
@@ -22,7 +24,7 @@ public interface ImageProvider {
      * @param url
      * @param callback
      */
-    void load(final ImageView imageView, final String url, final BaseImageView.LoadCallback callback);
+    void load(final Context context, final WeakReference<ImageView> imageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback);
 
     /**
      * 预下载图片

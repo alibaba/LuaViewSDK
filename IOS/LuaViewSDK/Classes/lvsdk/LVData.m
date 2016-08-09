@@ -77,15 +77,21 @@ static int lvNewData (lv_State *L) {
 }
 
 +(int) createDataObject:(lv_State *)L  data:(NSData*) data{
-    LVData* ldata = [[LVData alloc] init:L];
-    if( data ) {
-        [ldata.data setData:data];
+    return [self createDataObject:L data1:data data2:nil];
+}
+
++(int) createDataObject:(lv_State *)L  data1:(NSData*) data1 data2:(NSData*) data2{
+    LVData* lvdata = [[LVData alloc] init:L];
+    if( data1 ) {
+        [lvdata.data setData:data1];
     }
-    
+    if( data2 ) {
+        [lvdata.data appendData:data2];
+    }
     {
         NEW_USERDATA(userData, Data);
-        userData->object = CFBridgingRetain(ldata);
-        ldata.lv_userData = userData;
+        userData->object = CFBridgingRetain(lvdata);
+        lvdata.lv_userData = userData;
         
         lvL_getmetatable(L, META_TABLE_Data );
         lv_setmetatable(L, -2);
@@ -121,8 +127,8 @@ static int __index (lv_State *L) {
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2);
-            if( index>0 && index<data.length ){
+            int index = lv_tonumber(L, 2)-1;
+            if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 NSRange range;
                 range.length = 1;
@@ -150,9 +156,9 @@ static int __newindex (lv_State *L) {
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2);
+            int index = lv_tonumber(L, 2)-1;
             int value = lv_tonumber(L, 3);
-            if( index>0 && index<data.length ){
+            if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 cs[0] = value;
                 NSRange range;
@@ -179,7 +185,7 @@ static int __add (lv_State *L) {
     LVData* lvData1 = (__bridge LVData *)(user1->object);
     LVData* lvData2 = (__bridge LVData *)(user2->object);
     if( LVIsType(user1, Data) && LVIsType(user2, Data) && lvData1.data && lvData2.data ){
-        [lvData1.data appendData:lvData2.data];
+        [LVData createDataObject:L data1:lvData1.data data2:lvData2.data];
         return 1;
     }
     return 0;

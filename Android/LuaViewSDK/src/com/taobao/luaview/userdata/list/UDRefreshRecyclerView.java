@@ -24,7 +24,7 @@ public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerV
 
     @Override
     public LVRecyclerView getLVRecyclerView() {
-        return getView().getRecyclerView();
+        return getView() != null ? getView().getRecyclerView() : null;
     }
 
     //------------------------------------------Refresh---------------------------------------------

@@ -24,7 +24,7 @@ public class UDRefreshListView extends UDBaseListView<LVRefreshListView> impleme
 
     @Override
     public ListView getListView() {
-        return getView().getListView();
+        return getView() != null ? getView().getListView() : null;
     }
 
     //------------------------------------------Refresh---------------------------------------------

@@ -62,7 +62,9 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ArrayList
     }
 
     public ScriptBundleUnpackTask(final Context context, final LuaScriptLoader.ScriptLoaderCallback scriptLoaderCallback) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
         this.mScriptLoaderCallback = scriptLoaderCallback;
     }
 
