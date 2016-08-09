@@ -32,11 +32,11 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     }
 
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable) {
-        this(new WeakReference<Object>(obj), globals, metatable, NIL);
+        this(obj, globals, metatable, NIL);
     }
 
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable, Varargs varargs) {
-        super(obj, metatable);
+        super(new WeakReference<Object>(obj), metatable);
         this.mGlobals = globals;
         this.mVarargs = varargs;
     }
