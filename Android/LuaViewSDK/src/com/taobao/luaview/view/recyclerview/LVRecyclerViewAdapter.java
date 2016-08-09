@@ -49,7 +49,10 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         //View封装
         if (this.mLuaUserData.hasCellSize(viewType)) {//有Size的定义
             final LVViewGroup cellView = createLayout();
-            cellView.addView(layout.getView());
+            View tmpView = layout.getView();
+            if(tmpView != null) {
+                cellView.addView(tmpView);
+            }
             itemView = cellView;
         } else {
             itemView = layout.getView();

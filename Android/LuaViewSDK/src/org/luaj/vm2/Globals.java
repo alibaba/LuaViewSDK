@@ -556,20 +556,50 @@ public class Globals extends LuaTable {
         this.container = this.tmpContainer;
     }
 
-    public void setLuaView(LuaView luaView){
+    /**
+     * 设置LuaView，对LuaView弱引用
+     *
+     * @param luaView
+     */
+    public void setLuaView(LuaView luaView) {
         this.mLuaView = new WeakReference<LuaView>(luaView);
     }
 
-    public LuaView getLuaView(){
+    /**
+     * 获取LuaView
+     *
+     * @return
+     */
+    public LuaView getLuaView() {
         return this.mLuaView != null ? this.mLuaView.get() : null;
     }
 
+    /**
+     * 获取context
+     *
+     * @return
+     */
     public Context getContext() {
         final LuaView luaView = this.mLuaView != null ? this.mLuaView.get() : null;
         return luaView != null ? luaView.getContext() : null;
     }
 
-    public Context getAppContext(){
+    /**
+     * 获取App级别的Context
+     *
+     * @return
+     */
+    public Context getAppContext() {
         return getContext() != null ? getContext().getApplicationContext() : null;
+    }
+
+    /**
+     * 清除container缓存
+     */
+    public void onDestroy() {
+        finder = null;
+        mLuaView = null;
+        container = null;
+        tmpContainer = null;
     }
 }

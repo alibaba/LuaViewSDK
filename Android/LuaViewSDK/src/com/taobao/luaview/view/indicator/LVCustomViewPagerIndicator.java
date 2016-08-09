@@ -116,7 +116,10 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
         this.mGlobals.restoreContainer();
 
         //set tag
-        cellData.getView().setTag(R.id.lv_tag, cellData);
+        View view = cellData.getView();
+        if(view != null){
+            view.setTag(R.id.lv_tag, cellData);
+        }
         return cellData;
     }
 

@@ -30,7 +30,7 @@ public class LVLoadingView extends LVViewGroup implements ILVView {
     }
 
     private void init() {
-        mProgressBar = new ProgressBar(mGlobals.getContext(), null, android.R.attr.progressBarStyleSmallInverse);
+        mProgressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleSmallInverse);
         final LayoutParams layoutParams = LuaViewUtil.createRelativeLayoutParamsMM();
         this.addView(mProgressBar, layoutParams);
         this.setVisibility(View.GONE);
