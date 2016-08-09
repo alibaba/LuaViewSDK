@@ -99,7 +99,10 @@ public class LVListViewAdapter extends BaseAdapter {
             //View封装
             if (hasCellSize) {//有Size的定义
                 final LVViewGroup cellView = createLayout();
-                cellView.addView(layout.getView());
+                View tmp = layout.getView();
+                if(tmp != null) {
+                    cellView.addView(tmp);
+                }
                 convertView = cellView;
             } else {
                 convertView = layout.getView();

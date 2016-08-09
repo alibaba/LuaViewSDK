@@ -146,7 +146,9 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
 
     public ScriptBundleLoadTask(Context context, LuaScriptLoader.ScriptLoaderCallback scriptLoaderCallback) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
         this.mScriptLoaderCallback = scriptLoaderCallback;
     }
 

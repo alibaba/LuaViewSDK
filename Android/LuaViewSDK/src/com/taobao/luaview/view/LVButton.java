@@ -22,7 +22,7 @@ public class LVButton extends ForegroundButton implements ILVView {
     private UDView mLuaUserdata;
 
     public LVButton(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mLuaUserdata = new UDButton(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
         this.setTextSize(UDFontSize.FONTSIZE_SMALL);
         this.setGravity(Gravity.CENTER);//默认居中

@@ -42,12 +42,12 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
     private int mSpacing;//间隔
 
     public static LVRecyclerView createVerticalView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
-        final LVRecyclerView lvRecyclerView = (LVRecyclerView) LayoutInflater.from(globals.context).inflate(R.layout.lv_recyclerview_vertical, null);
+        final LVRecyclerView lvRecyclerView = (LVRecyclerView) LayoutInflater.from(globals.getContext()).inflate(R.layout.lv_recyclerview_vertical, null);
         return lvRecyclerView.init(globals, metaTable, varargs, udBaseRecyclerView);
     }
 
     private LVRecyclerView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
-        super(globals.context);
+        super(globals.getContext());
         init(globals, metaTable, varargs, udBaseRecyclerView);
     }
 

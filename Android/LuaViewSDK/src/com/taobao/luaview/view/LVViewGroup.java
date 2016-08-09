@@ -1,5 +1,6 @@
 package com.taobao.luaview.view;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.View;
@@ -41,7 +42,11 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
     private CSSLayoutContext mLayoutContext;
 
     public LVViewGroup(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        this(globals.getContext(), globals, metaTable, varargs);
+    }
+
+    public LVViewGroup(Context context, Globals globals, LuaValue metaTable, Varargs varargs) {
+        super(context);
         this.mGlobals = globals;
         this.mLuaUserdata = new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
         //改在UDViewGroup中设置，减少影响面
@@ -50,6 +55,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
         this.setWillNotDraw(true);
         this.setClipChildren(false);
     }
+
 
     public CSSNode getCssNode() {
         if (mCSSNode == null) {
@@ -70,6 +76,20 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
     @Override
     public UDView getUserdata() {
         return mLuaUserdata;
+    }
+
+    /**
+     * 销毁的时候调用
+     */
+    public void onDestroy(){
+        if(mGlobals != null) {
+            mGlobals.onDestroy();
+            mGlobals = null;
+        }
+        if(mLuaUserdata != null) {
+            mLuaUserdata.onDestroy();
+            mLuaUserdata = null;
+        }
     }
 
     @Override
