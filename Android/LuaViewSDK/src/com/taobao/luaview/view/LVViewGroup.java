@@ -78,6 +78,20 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
         return mLuaUserdata;
     }
 
+    /**
+     * 销毁的时候调用
+     */
+    public void onDestroy(){
+        if(mGlobals != null) {
+            mGlobals.onDestroy();
+            mGlobals = null;
+        }
+        if(mLuaUserdata != null) {
+            mLuaUserdata.onDestroy();
+            mLuaUserdata = null;
+        }
+    }
+
     @Override
     public void addLVView(final View view, Varargs a) {
         final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);

@@ -25,7 +25,7 @@ public class CustomLoading extends LVCustomPanel {
 
     @Override
     public void initPanel() {
-        final View lvLoadingView = new ProgressBar(mGlobals.getContext(), null, android.R.attr.progressBarStyleSmallInverse);
+        final View lvLoadingView = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleSmallInverse);
         LayoutParams relativeLayout = LuaViewUtil.createRelativeLayoutParamsWW();
         relativeLayout.addRule(RelativeLayout.CENTER_IN_PARENT);
         lvLoadingView.setVisibility(View.VISIBLE);

@@ -79,9 +79,12 @@ public class UDActionBar extends BaseLuaTable {
                     final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
                     if (actionBar != null) {
                         final View view = ((UDView) titleViewValue).getView();
-                        view.setTag(R.id.lv_tag, titleViewValue);
+                        if (view != null) {
+                            view.setTag(R.id.lv_tag, titleViewValue);
+                        }
                         actionBar.setDisplayShowCustomEnabled(true);
                         actionBar.setCustomView(LuaViewUtil.removeFromParent(view));
+
                     }
                 }
             }
