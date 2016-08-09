@@ -26,6 +26,8 @@ tableView = RefreshTableView {
                 cell.icon = Image();
                 cell.title = Label();
                 print("构造Cell");
+
+                cell.bg = Button()
             end,
             Layout = function(cell, section, row)
                 cell.icon.frame(20, 0, cellHeight, cellHeight);
@@ -35,6 +37,10 @@ tableView = RefreshTableView {
 
                 cell.title.frame(20 + cellHeight, 0, w - cellHeight, cellHeight);
                 cell.title.text("测试" .. section .. "--" .. row);
+
+
+                cell.bg.frame(0, 0, w, cellHeight)
+                cell.bg.image(nil, imageUrl1)
             end,
             Callback = function(section, row)
                 print(section, row);

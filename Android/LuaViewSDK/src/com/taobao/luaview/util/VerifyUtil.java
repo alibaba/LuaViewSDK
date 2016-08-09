@@ -2,6 +2,7 @@ package com.taobao.luaview.util;
 
 import android.content.Context;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.Constants;
 
 import java.io.ByteArrayInputStream;
@@ -42,10 +43,13 @@ public class VerifyUtil {
      * @return
      */
     public static boolean rsa(Context context, byte[] content, byte[] sign) {
-        final InputStream inputStream;
         try {
-            inputStream = context.getAssets().open(Constants.PUBLIC_KEY_PATH);
-            byte[] publicKeyFileData = IOUtil.toBytes(inputStream);
+            byte[] publicKeyFileData = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH);
+            if(publicKeyFileData == null) {
+                final InputStream inputStream;inputStream = context.getAssets().open(Constants.PUBLIC_KEY_PATH);
+                publicKeyFileData = IOUtil.toBytes(inputStream);
+                AppCache.getCache(TAG).put(Constants.PUBLIC_KEY_PATH, publicKeyFileData);
+            }
             return rsa(content, publicKeyFileData, sign);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,15 +68,18 @@ public class VerifyUtil {
     public static boolean rsa(byte[] content, byte[] publicKey, byte[] sign) {
         InputStream inputStream = null;
         try {
-            inputStream = new ByteArrayInputStream(publicKey);
-            final CertificateFactory certFactory = CertificateFactory.getInstance(DER_CERT_509);
-            final Certificate cert = certFactory.generateCertificate(inputStream);
-            final PublicKey pk = cert.getPublicKey();
+            PublicKey pk = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH_PK);//get public key
+            if(pk == null) {
+                inputStream = new ByteArrayInputStream(publicKey);
+                final CertificateFactory certFactory = CertificateFactory.getInstance(DER_CERT_509);
+                final Certificate cert = certFactory.generateCertificate(inputStream);
+                pk = cert.getPublicKey();
+                AppCache.getCache(Constants.PUBLIC_KEY_TAG).put(Constants.PUBLIC_KEY_PATH_PK, pk);//cache public key
+            }
             final Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM);
             sig.initVerify(pk);
             sig.update(content);
             if (sig.verify(sign)) {
-                LogUtil.d(TAG, "Verification OK");
                 return true;
             } else {
                 LogUtil.d(TAG, "Verification Error");

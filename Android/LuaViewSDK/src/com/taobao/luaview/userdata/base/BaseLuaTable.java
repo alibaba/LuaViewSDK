@@ -51,6 +51,6 @@ public class BaseLuaTable extends LuaTable implements Serializable {
     }
 
     public Context getContext() {
-        return getGlobals() != null ? getGlobals().context : null;
+        return getGlobals() != null ? getGlobals().getContext() : null;
     }
 }

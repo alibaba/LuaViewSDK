@@ -2,16 +2,14 @@ package com.taobao.luaview.global;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
 
+import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.exception.LuaViewException;
-import com.taobao.luaview.extend.LuaCache;
 import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
-import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
@@ -31,8 +29,8 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import org.luaj.vm2.lib.jse.JsePlatform;
 
 /**
  * LuaView 实现类
@@ -44,6 +42,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     //image provider clazz
     private static Class<? extends ImageProvider> mImageProviderClazz;
     private static ImageProvider mImageProvider;
+    private boolean isRefreshContainerEnable = true;
 
     //cache
     private LuaCache mLuaCache;
@@ -105,7 +104,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
 
             //创建globals
-            @NonNull
             private Globals createGlobalsAsync() {
                 return createGlobals(context);
             }
@@ -120,21 +118,17 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }.execute();
     }
 
-    @NonNull
     private static Globals createGlobals(final Context context) {
-        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
-        globals.context = context;
-        LuaViewManager.loadLuaViewLibs(globals);//加载用户lib
+        final Globals globals = LuaViewManager.createGlobals();
         return globals;
     }
 
-    @NonNull
     private static LuaView createLuaView(final Context context, final Globals globals) {
-        final LuaView luaView = new LuaView(globals, createMetaTableForLuaView());
+        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
+        globals.setLuaView(luaView);
         globals.finder = new LuaResourceFinder(context);
-        globals.luaView = luaView;
         if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
-            luaView.turnDebug();
+            luaView.openDebugger();
         }
         return luaView;
     }
@@ -339,7 +333,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     public LuaView registerLibs(LuaValue... binders) {
         if (mGlobals != null && binders != null) {
             for (LuaValue binder : binders) {
-                mGlobals.load(binder);
+                mGlobals.tryLazyLoad(binder);
             }
         }
         return this;
@@ -391,7 +385,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         if (!TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
             final LuaValue value = mGlobals.get(luaName);
             if (value == null || value.isnil()) {
-                mGlobals.load(new UICustomPanelBinder(clazz, luaName));
+                mGlobals.tryLazyLoad(new UICustomPanelBinder(clazz, luaName));
             } else {
                 LogUtil.d("panel name " + luaName + " is already registered!");
             }
@@ -414,11 +408,49 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return this;
     }
 
+    //----------------------------------------call lua function-------------------------------------
+
+    /**
+     * 调用lua的某个全局函数
+     *
+     * @param funName
+     * @param objs
+     * @return
+     */
+    public Object callLuaFunction(String funName, Object... objs) {
+        if (mGlobals != null && funName != null) {
+            final LuaValue callback = mGlobals.get(funName);
+            return LuaUtil.callFunction(callback, objs);
+        }
+        return LuaValue.NIL;
+    }
+
+    /**
+     * 调用window.callback下的某个函数
+     *
+     * @param funName
+     * @param objs
+     * @return
+     */
+    public Varargs callWindowFunction(String funName, Object... objs) {
+        if (funName != null) {
+            final UDView userdata = getUserdata();
+            if (userdata != null) {
+                final LuaValue callbacks = userdata.getCallback();
+                if (LuaUtil.isValid(callbacks)) {
+                    return LuaUtil.callFunction(callbacks.get(funName), objs);
+                }
+            }
+        }
+        return LuaValue.NIL;
+    }
+
     //----------------------------------------Image Provider----------------------------------------
 
     /**
      * 注册ImageProvider
      */
+
     public static void registerImageProvider(final Class<? extends ImageProvider> clazz) {
         mImageProviderClazz = clazz;
     }
@@ -441,6 +473,24 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return mImageProvider;
     }
 
+    //----------------------------------------setup functions---------------------------------------
+
+    /**
+     * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     *
+     * @param enable
+     */
+    public void setRefreshContainerEnable(boolean enable) {
+        this.isRefreshContainerEnable = enable;
+    }
+
+    /**
+     * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
+     */
+    public boolean isRefreshContainerEnable() {
+        return this.isRefreshContainerEnable;
+    }
+
     //-------------------------------------------私有------------------------------------------------
 
     /**
@@ -460,19 +510,25 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     private static LuaTable createMetaTableForLuaView() {
-        final LuaTable libOfLuaViews = LuaViewManager.bind(UIViewGroupMethodMapper.class, UIViewGroupMethodMapper.class.getMethods());
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
+        return LuaViewManager.createMetatable(UIViewGroupMethodMapper.class);
+//        final LuaTable libOfLuaViews = LuaViewManager.bind(UIViewGroupMethodMapper.class, UIViewGroupMethodMapper.class.getMethods());
+//        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libOfLuaViews, LuaValue.NEWINDEX, new NewIndexFunction(libOfLuaViews)});
     }
 
-    private LuaView(Globals globals, LuaValue metaTable) {
-        super(globals, metaTable, LuaValue.NIL);
+    /**
+     * @param context   View级别的Context
+     * @param globals
+     * @param metaTable
+     */
+    private LuaView(Context context, Globals globals, LuaValue metaTable) {
+        super(context, globals, metaTable, LuaValue.NIL);
         this.mLuaCache = new LuaCache();
     }
 
     /**
-     * 开启debug
+     * 开启debugger
      */
-    private void turnDebug() {
+    private void openDebugger() {
         loadFile("debug.lua");
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket

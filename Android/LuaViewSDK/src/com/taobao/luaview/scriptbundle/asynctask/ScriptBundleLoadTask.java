@@ -3,14 +3,17 @@ package com.taobao.luaview.scriptbundle.asynctask;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.ScriptFileNode;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.DecryptUtil;
 import com.taobao.luaview.util.FileUtil;
 import com.taobao.luaview.util.IOUtil;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.VerifyUtil;
 import com.taobao.luaview.util.ZipUtil;
 
@@ -31,6 +34,7 @@ import java.util.Map;
  * 2. 签名验证成功的文件，做unzip操作，获取需要返回的数据
  */
 public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundle> {
+    private static final String TAG = ScriptBundleLoadTask.class.getSimpleName();
     private Context mContext;
     //加载的脚本
     private LuaScriptLoader.ScriptLoaderCallback mScriptLoaderCallback;
@@ -142,7 +146,9 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
 
     public ScriptBundleLoadTask(Context context, LuaScriptLoader.ScriptLoaderCallback scriptLoaderCallback) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
         this.mScriptLoaderCallback = scriptLoaderCallback;
     }
 
@@ -154,28 +160,55 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
      */
     @Override
     protected ScriptBundle doInBackground(Object... params) {
+        DebugUtil.ts("lvperformance-loadTask");
+
         ArrayList<ScriptFileNode> luaScripts = (params != null && params.length > 0 && params[0] instanceof ArrayList) ? (ArrayList<ScriptFileNode>) params[0] : null;//首先判断脚本解析的列表是否存在（下载即加载的情形）
 
+        final String url = (params != null && params.length > 0 && params[0] instanceof String) ? (String) params[0] : null;
         if (luaScripts == null || luaScripts.size() == 0) {//下载不存在则读取文件再加载
-            final String url = (params != null && params.length > 0 && params[0] instanceof String) ? (String) params[0] : null;
+
+            ScriptBundle scriptBundle = AppCache.getCache(TAG).get(url);//TODO url判空
+            if (scriptBundle != null) {
+                DebugUtil.te("lvperformance-loadTask");
+                return scriptBundle;
+            }
+
             mDestFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
+            LogUtil.timeStart("lvperformance", "loadScriptsOfPath");
             luaScripts = loadScriptsOfPath(mDestFolderPath);
+            LogUtil.timeEnd("lvperformance", "loadScriptsOfPath");
         }
 
+        LogUtil.timeStart("lvperformance", "veryAllScripts");
         if (luaScripts != null && luaScripts.size() > 0 && verifyAllScripts(mContext, luaScripts)) {//强校验，如果脚本存在并且校验成功才返回
+            LogUtil.timeEnd("lvperformance", "veryAllScripts");
+
+            LogUtil.timeStart("lvperformance", "loadEncryptScript");
             for (final ScriptFileNode script : luaScripts) {
                 script.bytes = loadEncryptScript(mContext, script.bytes);
             }
+            LogUtil.timeEnd("lvperformance", "loadEncryptScript");
 
             final ScriptBundle result = new ScriptBundle();
             result.setBaseFilePath(mDestFolderPath);
+
+            LogUtil.timeStart("lvperformance", "addScript");
+
             for (final ScriptFileNode script : luaScripts) {
                 if (script.bytes != null) {
                     result.addScript(new ScriptFile(script.fileName, new String(script.bytes)));
                 }
             }
+
+            LogUtil.timeEnd("lvperformance", "addScript");
+
+            DebugUtil.te("lvperformance-loadTask");
+
+            //cache
+            AppCache.getCache(TAG).put(url, result);
             return result;
         } else {
+            DebugUtil.te("lvperformance-loadTask");
             return null;
         }
     }
@@ -190,7 +223,6 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
     @Override
     protected void onCancelled(ScriptBundle scriptBundle) {
         callLoaderCallback(scriptBundle);
-
     }
 
     @Override
@@ -220,8 +252,10 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
                     if (files != null && files.length > 0) {
                         HashMap<String, byte[]> dataFiles = new HashMap<String, byte[]>();
                         HashMap<String, byte[]> signFiles = new HashMap<String, byte[]>();
+
+                        String fileName;//file name
                         for (final File f : files) {
-                            String fileName = f.getName();
+                            fileName = f.getName();
                             if (LuaScriptManager.isLuaEncryptScript(fileName)) {//lua加密脚本
                                 dataFiles.put(fileName, FileUtil.readBytes(f));
                             } else if (LuaScriptManager.isLuaSignFile(fileName)) {//sign文件
@@ -230,12 +264,11 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
                         }
 
                         //根据读取的数据构建出文件node
+                        String signFileName;//sign name
                         for (Map.Entry<String, byte[]> entry : dataFiles.entrySet()) {
-                            final String fileName = entry.getKey();
-                            final String signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;
-                            byte[] dataBytes = entry.getValue();
-                            byte[] signBytes = signFiles.get(signFileName);
-                            result.add(new ScriptFileNode(fileName, dataBytes, signBytes));
+                            fileName = entry.getKey();
+                            signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;
+                            result.add(new ScriptFileNode(fileName, entry.getValue(), signFiles.get(signFileName)));
                         }
                     }
                 } else if (file.isFile()) {

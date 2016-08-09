@@ -22,7 +22,7 @@ public class LVTextView extends TextView implements ILVView {
     private UDView mLuaUserdata;
 
     public LVTextView(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mLuaUserdata = new UDTextView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
         this.setIncludeFontPadding(false);//设置默认TextView不包含字体的padding，否则adjustSize的时候拿到的高度有问题
         this.setGravity(Gravity.CENTER_VERTICAL);//默认竖直居中

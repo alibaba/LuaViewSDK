@@ -37,13 +37,22 @@ import com.taobao.luaview.fun.binder.ui.UITextViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIToastBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewGroupBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
+import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
+import com.taobao.luaview.util.DebugUtil;
+import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.LibFunction;
+import org.luaj.vm2.lib.jse.JsePlatform;
+import org.luaj.vm2.luajc.LuaJC;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,60 +65,79 @@ import java.util.List;
 public class LuaViewManager {
 
     /**
-     * load Android API lib
+     * 创建Globals
+     * 根据是否用lua-to-java bytecode来处理（如果使用LuaJC的话则会使用库bcel 533k)
+     *
+     * @return
+     */
+    public static Globals createGlobals() {
+        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+        if (LuaViewConfig.isUseLuaDC()) {
+            LuaDC.install(globals);
+        }
+        loadLuaViewLibs(globals);//加载用户lib
+        return globals;
+    }
+
+    /**
+     * tryLazyLoad Android API lib
      * TODO 能否做到按需加载，而不是首次进来加载全部binder
      *
      * @param globals
      */
     public static void loadLuaViewLibs(final Globals globals) {
+        DebugUtil.ts("loadLuaViewLibs");
         //ui
-        globals.load(new UITextViewBinder());
-        globals.load(new UIEditTextBinder());
-        globals.load(new UIButtonBinder());
-        globals.load(new UIImageViewBinder());
-        globals.load(new UIViewGroupBinder());
-        globals.load(new UIListViewBinder());
-        globals.load(new UIRecyclerViewBinder());
-        globals.load(new UIRefreshListViewBinder());
-        globals.load(new UIRefreshRecyclerViewBinder());
-        globals.load(new UIViewPagerBinder());
-        globals.load(new UICustomViewPagerIndicatorBinder());
-        globals.load(new UICircleViewPagerIndicatorBinder());
-        globals.load(new UIHorizontalScrollViewBinder());
-        globals.load(new UIAlertBinder());
+        globals.tryLazyLoad(new UITextViewBinder());
+        globals.tryLazyLoad(new UIEditTextBinder());
+        globals.tryLazyLoad(new UIButtonBinder());
+        globals.tryLazyLoad(new UIImageViewBinder());
+        globals.tryLazyLoad(new UIViewGroupBinder());
+        globals.tryLazyLoad(new UIListViewBinder());
+        globals.tryLazyLoad(new UIRecyclerViewBinder());
+        globals.tryLazyLoad(new UIRefreshListViewBinder());
+        globals.tryLazyLoad(new UIRefreshRecyclerViewBinder());
+        globals.tryLazyLoad(new UIViewPagerBinder());
+        globals.tryLazyLoad(new UICustomViewPagerIndicatorBinder());
+        globals.tryLazyLoad(new UICircleViewPagerIndicatorBinder());
+        globals.tryLazyLoad(new UIHorizontalScrollViewBinder());
+        globals.tryLazyLoad(new UIAlertBinder());
 
-        globals.load(new UILoadingViewBinder());
-        globals.load(new UILoadingDialogBinder());
-        globals.load(new UIToastBinder());
-        globals.load(new SpannableStringBinder());
+        globals.tryLazyLoad(new UILoadingViewBinder());
+        globals.tryLazyLoad(new UILoadingDialogBinder());
+        globals.tryLazyLoad(new UIToastBinder());
+        globals.tryLazyLoad(new SpannableStringBinder());
 
         //animation
-        globals.load(new UIAnimatorBinder());
+        globals.tryLazyLoad(new UIAnimatorBinder());
 
         //net
-        globals.load(new HttpBinder());
+        globals.tryLazyLoad(new HttpBinder());
 
         //kit
-        globals.load(new TimerBinder());
-        globals.load(new SystemBinder());
-        globals.load(new ActionBarBinder());
-        globals.load(new DownloaderBinder());
-        globals.load(new UnicodeBinder());
-        globals.load(new DataBinder());
-        globals.load(new JsonBinder());
-        globals.load(new AudioBinder());
-        globals.load(new VibratorBinder());
+        globals.tryLazyLoad(new TimerBinder());
+        globals.tryLazyLoad(new SystemBinder());
+        globals.tryLazyLoad(new ActionBarBinder());
+        globals.tryLazyLoad(new DownloaderBinder());
+        globals.tryLazyLoad(new UnicodeBinder());
+        globals.tryLazyLoad(new DataBinder());
+        globals.tryLazyLoad(new JsonBinder());
+        globals.tryLazyLoad(new AudioBinder());
+        globals.tryLazyLoad(new VibratorBinder());
 
         //常量
-        globals.load(new AlignBinder());
-        globals.load(new TextAlignBinder());
-        globals.load(new FontWeightBinder());
-        globals.load(new FontStyleBinder());
-        globals.load(new ScaleTypeBinder());
-        globals.load(new GravityBinder());
-        globals.load(new EllipsizeBinder());
-        globals.load(new InterpolatorBinder());
+        globals.tryLazyLoad(new AlignBinder());
+        globals.tryLazyLoad(new TextAlignBinder());
+        globals.tryLazyLoad(new FontWeightBinder());
+        globals.tryLazyLoad(new FontStyleBinder());
+        globals.tryLazyLoad(new ScaleTypeBinder());
+        globals.tryLazyLoad(new GravityBinder());
+        globals.tryLazyLoad(new EllipsizeBinder());
+        globals.tryLazyLoad(new InterpolatorBinder());
+
+        DebugUtil.te("loadLuaViewLibs");
     }
+
 
     /**
      * bind lua function
@@ -146,6 +174,50 @@ public class LuaViewManager {
             throw new LuaError("[Bind Failed] " + e);
         } finally {
             return env;
+        }
+    }
+
+
+    //-----------------------------------------metatable--------------------------------------------
+
+    /**
+     * create metatable for libs
+     *
+     * @return
+     */
+    public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
+        final LuaTable libTable = LuaViewManager.bind(libClass, getMapperMethods(libClass));
+        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    }
+
+    public static LuaTable createMetatable(Class<? extends LibFunction> libClass, Method[] methods) {
+        final LuaTable libTable = LuaViewManager.bind(libClass, methods);
+        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    }
+
+    /**
+     * 获取所有方法
+     *
+     * @param clazz
+     * @return
+     */
+    private static List<Method> getMapperMethods(final Class clazz) {
+        final List<Method> methods = new ArrayList<Method>();
+        getMapperMethodsByClazz(methods, clazz);
+        return methods.size() > 0 ? methods : null;
+    }
+
+    private static void getMapperMethodsByClazz(final List<Method> result, final Class clazz) {
+        if (clazz != null && clazz.isAnnotationPresent(LuaViewLib.class)) {//XXXMapper
+            getMapperMethodsByClazz(result, clazz.getSuperclass());//处理super
+            final Method[] methods = clazz.getDeclaredMethods();
+            if (methods != null && methods.length > 0) {
+                for (final Method method : methods) {//add self
+                    if (method.getModifiers() == Modifier.PUBLIC) {//public 方法才行
+                        result.add(method);
+                    }
+                }
+            }
         }
     }
 

@@ -111,7 +111,6 @@ public class LVListViewAdapter extends BaseAdapter {
 
         //更新position
         cellData.set(KEY_VIEW_TYPE, viewType);
-
         if (hasCellSize) {//有Size的定义，每次更新size
             initCellSize(cellData, position);//TODO 需要动态更新View的Size，需要在这里调用，否则移动到初始化的时候。这个暂时先去掉，会有问题，复用有问题
         }

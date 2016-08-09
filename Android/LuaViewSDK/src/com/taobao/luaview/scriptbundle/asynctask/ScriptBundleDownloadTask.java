@@ -28,7 +28,9 @@ public class ScriptBundleDownloadTask extends AsyncTask<String, Integer, String>
     private LuaScriptLoader.ScriptLoaderCallback mScriptLoaderCallback;
 
     public ScriptBundleDownloadTask(final Context context, LuaScriptLoader.ScriptLoaderCallback callback) {
-        mContext = context;
+        if(context != null) {
+            mContext = context.getApplicationContext();
+        }
         mScriptLoaderCallback = callback;
     }
 

@@ -99,7 +99,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      */
     public LuaValue startAnimationImages(U view, Varargs varargs) {
         final LuaTable imagesTable = varargs.opttable(2, null);
-        final double duration = varargs.optdouble(3, -1.0);
+        final double duration = varargs.optdouble(3, 1f);
         boolean repeat = false;
         if (varargs.isnumber(4)) {
             repeat = varargs.optint(4, -1) > 0;

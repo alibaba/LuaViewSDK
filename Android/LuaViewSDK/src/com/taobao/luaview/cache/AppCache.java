@@ -1,21 +1,21 @@
-package com.taobao.luaview.extend;
+package com.taobao.luaview.cache;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Simple Reference Cache
+ * App级别的引用cache，不会在退出的时候清空
  *
  * @author song
  * @date 16/1/27
  */
-public class SimpleCache {
+public class AppCache {
     //全局静态cache
-    private static Map<String, SimpleCache> mCachePool;
+    private static Map<String, AppCache> mCachePool;
 
     private Map<Object, Object> mCache;
 
-    private SimpleCache() {
+    private AppCache() {
         mCache = new HashMap<Object, Object>();
     }
 
@@ -25,12 +25,12 @@ public class SimpleCache {
      * @param cacheName
      * @return
      */
-    public static SimpleCache getCache(String cacheName) {
+    public static AppCache getCache(String cacheName) {
         if (mCachePool == null) {
-            mCachePool = new HashMap<String, SimpleCache>();
+            mCachePool = new HashMap<String, AppCache>();
         }
         if (!mCachePool.containsKey(cacheName)) {
-            final SimpleCache weakReferenceCache = new SimpleCache();
+            final AppCache weakReferenceCache = new AppCache();
             mCachePool.put(cacheName, weakReferenceCache);
             return weakReferenceCache;
         }

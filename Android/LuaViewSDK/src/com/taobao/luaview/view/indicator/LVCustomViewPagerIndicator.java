@@ -41,11 +41,11 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
     private int mSelectedIndex;
 
     public LVCustomViewPagerIndicator(Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(globals.context);
+        super(globals.getContext());
         this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDCustomViewPagerIndicator(this, globals, metaTable, this.mInitParams);
-        this.mLayout = new IcsLinearLayout(mGlobals.context, R.attr.lv_vpiIconPageIndicatorStyle);
+        this.mLayout = new IcsLinearLayout(mGlobals.getContext(), R.attr.lv_vpiIconPageIndicatorStyle);
         init();
     }
 

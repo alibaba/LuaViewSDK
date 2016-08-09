@@ -5,21 +5,23 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import com.taobao.android.luaview.R;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.DrawableUtil;
 import com.taobao.luaview.util.FileUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.ParamUtil;
 import com.taobao.luaview.util.TypefaceUtil;
+import com.taobao.luaview.view.imageview.BaseImageView;
 
 import org.luaj.vm2.lib.ResourceFinder;
 
 import java.io.InputStream;
-
 
 /**
  * 给定相对路径，找对应的资源（脚本、图片、字体等)
@@ -40,8 +42,16 @@ public class LuaResourceFinder implements ResourceFinder {
     private String mBasePath;//文件系统路径
     private String mBaseAssetPath;//asset下路径
 
+    public interface DrawableFindCallback {
+        public void onStart(String urlOrPath);
+
+        public void onFinish(Drawable result);
+    }
+
     public LuaResourceFinder(Context context) {
-        this.mContext = context;
+        if(context != null) {
+            this.mContext = context.getApplicationContext();
+        }
     }
 
     public void setScriptBundle(ScriptBundle scriptBundle) {
@@ -78,6 +88,69 @@ public class LuaResourceFinder implements ResourceFinder {
             }
             return inputStream;
         }
+    }
+
+
+    /**
+     * find drawable async
+     *
+     * @param nameOrPath
+     * @param callback
+     */
+    public void findDrawable(final String nameOrPath, final DrawableFindCallback callback) {
+        new SimpleTask1<Drawable>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (callback != null) {
+                    callback.onStart(nameOrPath);
+                }
+            }
+
+            @Override
+            protected Drawable doInBackground(Object... params) {
+                return findDrawable(nameOrPath);
+            }
+
+            @Override
+            protected void onPostExecute(Drawable drawable) {
+                super.onPostExecute(drawable);
+                if (callback != null) {
+                    callback.onFinish(drawable);
+                }
+            }
+        }.execute();
+    }
+
+    /**
+     * find drawable async
+     *
+     * @param imageView
+     * @param nameOrPath
+     */
+    public void findDrawable(final BaseImageView imageView, final String nameOrPath) {
+        new SimpleTask1<Drawable>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (imageView != null && nameOrPath != null) {
+                    imageView.setTag(R.id.lv_tag_url, nameOrPath);
+                }
+            }
+
+            @Override
+            protected Drawable doInBackground(Object... params) {
+                return findDrawable(nameOrPath);
+            }
+
+            @Override
+            protected void onPostExecute(Drawable drawable) {
+                super.onPostExecute(drawable);
+                if (imageView != null && nameOrPath != null && nameOrPath.equals(imageView.getTag(R.id.lv_tag_url))) {
+                    imageView.setImageDrawable(drawable);
+                }
+            }
+        }.execute();
     }
 
     /**

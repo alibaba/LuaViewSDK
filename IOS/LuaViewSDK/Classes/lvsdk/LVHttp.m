@@ -33,6 +33,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
         if( http ){
             http.lv_userData = NULL;
             http.lv_lview = nil;
+            http.mySelf = nil;
         }
     }
 }
