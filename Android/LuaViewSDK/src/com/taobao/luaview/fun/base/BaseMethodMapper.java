@@ -1,7 +1,9 @@
 package com.taobao.luaview.fun.base;
 
 import com.taobao.luaview.cache.AppCache;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.util.LogUtil;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -36,13 +38,15 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
                 return (Varargs) method.invoke(this, getUD(args), args);
             }
         } catch (Exception e) {
-            LogUtil.e("[----Method Invoke Error Start----]");
-            LogUtil.e("[Class]", getClass());
-            LogUtil.e("[Opcode]", opcode);
-            LogUtil.e("[Method] ", method != null ? method : getMethodByOpcode(opcode));
-            LogUtil.e("[Arguments] ", args);
-            LogUtil.e("[Error] ", e);
-            LogUtil.e("[----Method Invoke Error End----]");
+            if(LuaViewConfig.isDebug()) {
+                LogUtil.e("[----Method Invoke Error Start----]");
+                LogUtil.e("[Class]", getClass());
+                LogUtil.e("[Opcode]", opcode);
+                LogUtil.e("[Method] ", method != null ? method : getMethodByOpcode(opcode));
+                LogUtil.e("[Arguments] ", args);
+                LogUtil.e("[Error] ", e);
+                LogUtil.e("[----Method Invoke Error End----]");
+            }
             e.printStackTrace();
             return NONE;
         }

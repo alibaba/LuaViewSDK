@@ -175,7 +175,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
             mDestFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
             LogUtil.timeStart("lvperformance", "loadScriptsOfPath");
-            luaScripts = loadScriptsOfPath(mDestFolderPath);
+            luaScripts = loadScriptsOfPath(url, mDestFolderPath);
             LogUtil.timeEnd("lvperformance", "loadScriptsOfPath");
         }
 
@@ -196,7 +196,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
             for (final ScriptFileNode script : luaScripts) {
                 if (script.bytes != null) {
-                    result.addScript(new ScriptFile(script.fileName, new String(script.bytes)));
+                    result.addScript(new ScriptFile(script.url, script.destBaseFilePath, script.fileName, new String(script.bytes)));
                 }
             }
 
@@ -242,7 +242,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
      * @param destFilePath path or file
      * @return
      */
-    private ArrayList<ScriptFileNode> loadScriptsOfPath(final String destFilePath) {
+    private ArrayList<ScriptFileNode> loadScriptsOfPath(final String url, final String destFilePath) {
         ArrayList<ScriptFileNode> result = new ArrayList<ScriptFileNode>();
         if (destFilePath != null) {
             final File file = new File(destFilePath);
@@ -268,11 +268,11 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
                         for (Map.Entry<String, byte[]> entry : dataFiles.entrySet()) {
                             fileName = entry.getKey();
                             signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;
-                            result.add(new ScriptFileNode(fileName, entry.getValue(), signFiles.get(signFileName)));
+                            result.add(new ScriptFileNode(url, destFilePath, fileName, entry.getValue(), signFiles.get(signFileName)));
                         }
                     }
                 } else if (file.isFile()) {
-                    return loadScriptsOfPath(file.getParent());
+                    return loadScriptsOfPath(url, file.getParent());
                 }
             }
         }

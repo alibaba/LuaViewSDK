@@ -136,7 +136,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ArrayList
                 LogUtil.i(fileName, fileData.length);
 
                 if (LuaScriptManager.isLuaEncryptScript(fileName)) {
-                    final ScriptFileNode node = new ScriptFileNode(fileName, fileData, null);
+                    final ScriptFileNode node = new ScriptFileNode(url, scriptBundleFolderPath, fileName, fileData, null);
                     luaScripts.put(fileName, node);
                 } else if (LuaScriptManager.isLuaSignFile(fileName)) {
                     final String scriptName = fileName.substring(0, fileName.length() - LuaScriptManager.POSTFIX_SIGN.length());
