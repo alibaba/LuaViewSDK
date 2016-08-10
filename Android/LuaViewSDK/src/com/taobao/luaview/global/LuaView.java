@@ -706,20 +706,28 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * 在onDetached的时候清空cache
      */
     private void onDetached() {
-        if (mLuaCache != null) {//清空cache数据
-            mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
-        }
-        LuaCache.clear();
+        clearCache();
     }
-
 
     /**
      * 销毁的时候从外部调用，清空所有外部引用
      */
     public void onDestroy() {
+        clearCache();
         super.onDestroy();
     }
 
+    /**
+     * 清空cache
+     */
+    private void clearCache() {
+        if (mLuaCache != null) {//清空cache数据
+            mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
+        }
+        LuaCache.clear();
+        NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//反注册connection state change listener
+
+    }
     //----------------------------------------cached object 管理-------------------------------------
     public void cacheObject(Class type, LuaCache.CacheableObject obj) {
         if (mLuaCache != null) {
