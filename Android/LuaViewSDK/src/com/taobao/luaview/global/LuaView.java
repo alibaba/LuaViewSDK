@@ -370,7 +370,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 LogUtil.d("name " + luaName + " is already registered!");
             }*/
         } else {
-            LogUtil.d("name " + luaName + " is invalid!");
+            LogUtil.e("name " + luaName + " is invalid!");
         }
         return this;
     }
@@ -398,10 +398,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             if (value == null || value.isnil()) {
                 mGlobals.tryLazyLoad(new UICustomPanelBinder(clazz, luaName));
             } else {
-                LogUtil.d("panel name " + luaName + " is already registered!");
+                LogUtil.e("panel name " + luaName + " is already registered!");
             }
         } else {
-            LogUtil.d("name " + luaName + " is invalid or Class " + clazz + " is not subclass of " + LVCustomPanel.class.getSimpleName());
+            LogUtil.e("name " + luaName + " is invalid or Class " + clazz + " is not subclass of " + LVCustomPanel.class.getSimpleName());
         }
         return this;
     }
