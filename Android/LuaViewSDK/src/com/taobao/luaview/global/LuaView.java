@@ -251,7 +251,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     private LuaView loadFile(final String luaFileName) {
         updateUri(luaFileName);
-        if (!TextUtils.isEmpty(luaFileName)) {
+        if (mGlobals != null && !TextUtils.isEmpty(luaFileName)) {
             mGlobals.saveContainer(getRenderTarget());
             mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
             this.loadFileInternal(luaFileName);//加载文件
@@ -267,7 +267,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView loadScript(final String script) {
-        if (!TextUtils.isEmpty(script)) {
+        if (mGlobals != null && !TextUtils.isEmpty(script)) {
             mGlobals.saveContainer(getRenderTarget());
             mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
             this.loadScriptInternal(EncryptUtil.md5Hex(script), script);
@@ -283,7 +283,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     private LuaView loadScript(final ScriptFile scriptFile) {
-        if (scriptFile != null) {
+        if (mGlobals != null && scriptFile != null) {
             mGlobals.saveContainer(getRenderTarget());
             mGlobals.set("window", this.getUserdata());//TODO 优化到其他地方?，设置window对象
             this.loadScriptInternal(scriptFile.fileName, scriptFile.script);
@@ -347,17 +347,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView register(final String luaName, final Object obj) {
-        if (!TextUtils.isEmpty(luaName)) {
+        if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             final LuaValue value = mGlobals.get(luaName);
             if (obj != value) {
                 mGlobals.set(luaName, CoerceJavaToLua.coerce(obj));
             }
-            /* -- 判断是否为null
-            if (value == null || value.isnil()) {
-                mGlobals.set(luaName, CoerceJavaToLua.coerce(obj));
-            } else {
-                LogUtil.d("name " + luaName + " is already registered!");
-            }*/
         } else {
             LogUtil.d("name " + luaName + " is invalid!");
         }
@@ -382,7 +376,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
-        if (!TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
+        if (mGlobals != null && !TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
             final LuaValue value = mGlobals.get(luaName);
             if (value == null || value.isnil()) {
                 mGlobals.tryLazyLoad(new UICustomPanelBinder(clazz, luaName));
@@ -402,7 +396,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView unregister(final String luaName) {
-        if (!TextUtils.isEmpty(luaName)) {
+        if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             mGlobals.set(luaName, LuaValue.NIL);
         }
         return this;
@@ -530,10 +524,12 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     private void openDebugger() {
         loadFile("debug.lua");
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket
-                .build());
-        mGlobals.debugConnection = DebugConnection.create();
+        if (mGlobals != null) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket
+                    .build());
+            mGlobals.debugConnection = DebugConnection.create();
+        }
     }
 
     //-----------------------------------------私有load函数------------------------------------------
@@ -550,9 +546,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     private LuaView loadFileInternal(final String luaFileName) {
         try {
-            final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-            final LuaValue viewObj = CoerceJavaToLua.coerce(this);
-            mGlobals.loadfile(luaFileName).call(activity, viewObj);
+            if (mGlobals != null) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(this);
+                mGlobals.loadfile(luaFileName).call(activity, viewObj);
+            }
         } catch (Exception e) {
             LogUtil.e("[Load File Failed]", luaFileName, e);
             e.printStackTrace();
@@ -569,9 +567,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     private LuaView loadScriptInternal(final String fileName, final String luaScript) {
         try {
-            final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-            final LuaValue viewObj = CoerceJavaToLua.coerce(this);
-            mGlobals.load(luaScript, fileName).call(activity, viewObj);
+            if (mGlobals != null) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(this);
+                mGlobals.load(luaScript, fileName).call(activity, viewObj);
+            }
         } catch (Exception e) {
             LogUtil.e("[Load Script Failed]", fileName, e);
             e.printStackTrace();
@@ -716,7 +716,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     /**
      * 销毁的时候从外部调用，清空所有外部引用
      */
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
