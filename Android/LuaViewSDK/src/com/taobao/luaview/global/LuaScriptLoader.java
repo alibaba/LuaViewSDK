@@ -76,6 +76,7 @@ public class LuaScriptLoader {
 
     /**
      * clear invalid bundle of given url
+     * TODO 在脚本加载失败的时候调用清理函数
      * @param url
      */
     public static void clearInvalidBundle(final String url) {
