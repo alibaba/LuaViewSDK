@@ -25,10 +25,11 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     private static final String[] sMethods = new String[]{
             "delay",//0
             "repeat",//1
-            "interval",//2
-            "start",//3
-            "callback",//4
-            "cancel"//5
+            "repeatCount",//2
+            "interval",//3
+            "start",//4
+            "callback",//5
+            "cancel"//6
     };
 
     @Override
@@ -39,18 +40,20 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     @Override
     public Varargs invoke(int code, U target, Varargs varargs) {
         final int optcode = code - super.getAllFunctionNames().size();
-        switch (optcode){
+        switch (optcode) {
             case 0:
                 return delay(target, varargs);
             case 1:
                 return repeat(target, varargs);
             case 2:
-                return interval(target, varargs);
+                return repeatCount(target, varargs);
             case 3:
-                return start(target, varargs);
+                return interval(target, varargs);
             case 4:
-                return callback(target, varargs);
+                return start(target, varargs);
             case 5:
+                return callback(target, varargs);
+            case 6:
                 return cancel(target, varargs);
         }
         return super.invoke(code, target, varargs);
@@ -111,6 +114,34 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     public LuaValue getRepeat(U udTimer, Varargs varargs) {
         return valueOf(udTimer.isRepeat());
     }
+
+    /**
+     * 重复次数
+     * TODO 修改次数控制
+     * @param udTimer
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue repeatCount(U udTimer, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setRepeatCount(udTimer, varargs);
+        } else {
+            return getRepeatCount(udTimer, varargs);
+        }
+    }
+
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue setRepeatCount(U udTimer, Varargs varargs) {
+        final int repeat = LuaUtil.getInt(varargs, 0, 2);
+        return udTimer.setRepeat(repeat > 0);
+    }
+
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue getRepeatCount(U udTimer, Varargs varargs) {
+        return valueOf(udTimer.isRepeat());
+    }
+
 
     /**
      * 设置interval
