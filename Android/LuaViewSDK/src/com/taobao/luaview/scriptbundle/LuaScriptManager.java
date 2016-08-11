@@ -33,6 +33,7 @@ public class LuaScriptManager {
     public static final String POSTFIX_LOG = ".log";
     public static final String POSTFIX_LUA = ".lua";
     public static final String POSTFIX_LV = ".lv";//Lua加密脚本
+    public static final String POSTFIX_LV_BYTECODE = ".lvb";//Lua Bytecode
     public static final String POSTFIX_SIGN = ".sign";
 
     /**
@@ -185,6 +186,16 @@ public class LuaScriptManager {
      */
     public static boolean isLuaScriptBundle(final String fileName) {
         return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_SCRIPT_BUNDLE);
+    }
+
+    /**
+     * 是否是lua加密脚本
+     *
+     * @param fileName
+     * @return
+     */
+    public static boolean isLuaBytecodeScript(final String fileName) {
+        return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_LV_BYTECODE);
     }
 
     /**

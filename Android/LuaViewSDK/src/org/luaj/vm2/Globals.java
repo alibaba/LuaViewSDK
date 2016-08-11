@@ -28,6 +28,7 @@ import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.lib.BaseLib;
@@ -306,6 +307,25 @@ public class Globals extends LuaTable {
         } catch (LuaError l) {
             throw l;
         } catch (Exception e) {
+            return error("load " + chunkname + ": " + e);
+        }
+    }
+
+    /**
+     * 直接加载一个prototype
+     * @param prototype
+     * @param chunkname
+     * @return
+     */
+    public LuaValue load(Prototype prototype, String chunkname){
+        return load(prototype, chunkname, this);
+    }
+
+    public LuaValue load(Prototype prototype, String chunkname, LuaValue env){
+        try {
+            return loader.load(prototype, chunkname, env);
+        } catch (Exception e) {
+            LogUtil.d("[load prototype error]", chunkname, e);
             return error("load " + chunkname + ": " + e);
         }
     }

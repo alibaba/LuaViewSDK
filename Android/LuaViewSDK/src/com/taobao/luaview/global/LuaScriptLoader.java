@@ -1,13 +1,15 @@
 package com.taobao.luaview.global;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
-import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleDownloadTask;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
+import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleDownloadTask;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleUnpackTask;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.util.FileUtil;
 
 import org.luaj.vm2.LuaValue;
 
@@ -21,7 +23,7 @@ public class LuaScriptLoader {
     private Context mContext;
 
     public LuaScriptLoader(final Context context) {
-        if(context != null) {
+        if (context != null) {
             this.mContext = context.getApplicationContext();
         }
         LuaScriptManager.init(context);
@@ -37,6 +39,7 @@ public class LuaScriptLoader {
     public interface ScriptExecuteCallback {
         /**
          * 脚本准备完毕, 返回true，表示需要自己处理执行，onScriptCompiled，onScriptExecuted不会被执行，返回false表示系统继续执行
+         *
          * @param bundle
          * @return
          */
@@ -45,12 +48,14 @@ public class LuaScriptLoader {
         /**
          * 脚本编译完成，参数表示编译之后的结果，不保证一定被调用到
          * 返回true，表示需要自己处理执行，返回false，表示系统继续执行
+         *
          * @param value
          */
         boolean onScriptCompiled(LuaValue value, LuaValue context, LuaValue view);
 
         /**
          * 脚本执行完成，参数表示是否执行成功，保证一定被调用到
+         *
          * @param executedSuccess
          */
         void onScriptExecuted(boolean executedSuccess);
@@ -66,6 +71,23 @@ public class LuaScriptLoader {
     public void unpackAllAssetBundle(final String basePath) {
         if (basePath != null) {
             ScriptBundleUnpackTask.unpackAllAssetScripts(mContext, basePath);
+        }
+    }
+
+    /**
+     * clear invalid bundle of given url
+     * @param url
+     */
+    public static void clearInvalidBundle(final String url) {
+        if (!TextUtils.isEmpty(url)) {
+            new SimpleTask1<Void>() {
+                @Override
+                protected Void doInBackground(Object... params) {
+                    String folderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
+                    FileUtil.delete(folderPath);
+                    return null;
+                }
+            }.execute();
         }
     }
 

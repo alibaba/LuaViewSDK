@@ -219,9 +219,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             new LuaScriptLoader(getContext()).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback() {
                 @Override
                 public void onScriptLoaded(ScriptBundle bundle) {
-                    if(callback == null || callback.onScriptPrepared(bundle) == false){//脚本准备失败
+                    if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备失败
                         loadScriptBundle(bundle, callback);
-                    } else if (callback != null){
+                    } else if (callback != null) {
                         callback.onScriptExecuted(false);
                     }
                 }
@@ -275,7 +275,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     public LuaView loadScript(final String script, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (!TextUtils.isEmpty(script)) {
-            this.loadScriptInternal(EncryptUtil.md5Hex(script), script, callback);
+            this.loadScriptInternal(new ScriptFile(script, EncryptUtil.md5Hex(script)), callback);
         }
         return this;
     }
@@ -292,7 +292,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     private LuaView loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (scriptFile != null) {
-            this.loadScriptInternal(scriptFile.getFilePath(), scriptFile.script, callback);
+            this.loadScriptInternal(scriptFile, callback);
         } else {
             if (callback != null) {
                 callback.onScriptExecuted(false);
@@ -574,10 +574,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             @Override
             protected LuaValue doInBackground(Object... params) {
                 try {
-                    if(mGlobals != null) {
+                    if (mGlobals != null) {
                         return mGlobals.loadfile(luaFileName);
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     LogUtil.e("[Load Script Failed]", luaFileName, e);
                 }
@@ -586,7 +586,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
             @Override
             protected void onPostExecute(LuaValue value) {
-                if(callback == null || callback.onScriptCompiled(value, activity, viewObj) == false){
+                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
                     //执行脚本，在主线程
                     executeScript(value, activity, viewObj, callback);
                 }
@@ -598,28 +598,36 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     /**
      * 加载纯脚本
      *
-     * @param luaScript
+     * @param scriptFile
      */
-    private LuaView loadScriptInternal(final String filePath, final String luaScript, final LuaScriptLoader.ScriptExecuteCallback callback) {
+    private LuaView loadScriptInternal(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
         final LuaValue activity = CoerceJavaToLua.coerce(getContext());
         final LuaValue viewObj = CoerceJavaToLua.coerce(this);
         new SimpleTask1<LuaValue>() {//load async
             @Override
             protected LuaValue doInBackground(Object... params) {
-                try {
-                    if(mGlobals != null) {
-                        return mGlobals.load(luaScript, filePath);
+                if (scriptFile != null) {//prototype
+                    String luaScript = scriptFile.getScriptString();
+                    String filePath = scriptFile.getFilePath();
+                    if (mGlobals != null && scriptFile.prototype != null) {//prototype
+                        return mGlobals.load(scriptFile.prototype, filePath);
+                    } else {//source code
+                        try {
+                            if (mGlobals != null) {
+                                return mGlobals.load(luaScript, filePath);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            LogUtil.e("[Load Script Failed]", filePath, e);
+                        }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtil.e("[Load Script Failed]", filePath, e);
                 }
                 return null;
             }
 
             @Override
             protected void onPostExecute(LuaValue value) {
-                if(callback == null || callback.onScriptCompiled(value, activity, viewObj) == false){
+                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
                     //执行脚本，在主线程
                     executeScript(value, activity, viewObj, callback);
                 }
@@ -636,7 +644,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param viewObj
      * @param callback
      */
-    private void executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
+    private boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
         try {
             if (mGlobals != null && value != null) {
                 mGlobals.saveContainer(getRenderTarget());
@@ -646,7 +654,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 if (callback != null) {
                     callback.onScriptExecuted(true);
                 }
-                return;
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -655,6 +663,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         if (callback != null) {
             callback.onScriptExecuted(false);
         }
+        return false;
     }
 
     //-----------------------------------------网络回调----------------------------------------------
@@ -804,6 +813,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//反注册connection state change listener
 
     }
+
     //----------------------------------------cached object 管理-------------------------------------
     public void cacheObject(Class type, LuaCache.CacheableObject obj) {
         if (mLuaCache != null) {
