@@ -6,7 +6,8 @@ import android.content.Intent;
 
 import com.taobao.luaview.util.NetworkUtil;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.lang.ref.WeakReference;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 监听网络状态变化
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = ConnectionStateChangeBroadcastReceiver.class.getSimpleName();
-    private ConcurrentLinkedQueue<OnConnectionChangeListener> mOnConnectionChangeListeners;
+    private ConcurrentHashMap<Integer, WeakReference<OnConnectionChangeListener>> mOnConnectionChangeListeners;
 
     public interface OnConnectionChangeListener {
         void onConnectionClosed();//所有的连接都断开
@@ -26,23 +27,29 @@ public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
     }
 
     public ConnectionStateChangeBroadcastReceiver() {
-        this.mOnConnectionChangeListeners = new ConcurrentLinkedQueue<OnConnectionChangeListener>();
+        this.mOnConnectionChangeListeners = new ConcurrentHashMap<Integer, WeakReference<OnConnectionChangeListener>>();
     }
 
     public void addOnConnectionChangeListener(OnConnectionChangeListener listener) {
-        if (this.mOnConnectionChangeListeners != null && !this.mOnConnectionChangeListeners.contains(listener)) {
-            this.mOnConnectionChangeListeners.add(listener);
+        final Integer hashCode = listener != null ? listener.hashCode() : null;
+        if (hashCode != null) {//有效
+            WeakReference<OnConnectionChangeListener> onConnectionChangeListenerWeakReference = mOnConnectionChangeListeners != null ? mOnConnectionChangeListeners.get(hashCode) : null;
+            if (onConnectionChangeListenerWeakReference == null || onConnectionChangeListenerWeakReference.get() == null) {//没有加过
+                mOnConnectionChangeListeners.put(hashCode, new WeakReference<OnConnectionChangeListener>(listener));
+            }
         }
     }
 
     public void removeOnConnectionChangeListener(OnConnectionChangeListener listener) {
-        if (this.mOnConnectionChangeListeners != null && this.mOnConnectionChangeListeners.contains(listener)) {
-            this.mOnConnectionChangeListeners.remove(listener);
+        final Integer hashCode = listener != null ? listener.hashCode() : null;
+        if (hashCode != null && mOnConnectionChangeListeners != null) {
+            this.mOnConnectionChangeListeners.remove(hashCode);
         }
     }
 
     /**
      * 获得listener size
+     *
      * @return
      */
     public int getListenerSize() {
@@ -52,30 +59,46 @@ public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (this.mOnConnectionChangeListeners != null) {
+            WeakReference<OnConnectionChangeListener> listenerWeakReference = null;
             if (intent.getAction().equals(Intent.ACTION_SHUTDOWN)) {
-                for (final OnConnectionChangeListener listener : mOnConnectionChangeListeners) {
-                    listener.onConnectionClosed();
+                for (Integer key : mOnConnectionChangeListeners.keySet()) {
+                    listenerWeakReference = mOnConnectionChangeListeners.get(key);
+                    if (listenerWeakReference != null && listenerWeakReference.get() != null) {
+                        listenerWeakReference.get().onConnectionClosed();
+                    }
                 }
             } else {
                 final NetworkUtil.NetworkType currentNetworkType = NetworkUtil.getCurrentType(context);
                 switch (currentNetworkType) {
                     case NETWORK_2G:
                     case NETWORK_3G:
-                    case NETWORK_4G:
-                        for (final OnConnectionChangeListener listener : mOnConnectionChangeListeners) {
-                            listener.onMobileConnected();
+                    case NETWORK_4G: {
+                        for (Integer key : mOnConnectionChangeListeners.keySet()) {
+                            listenerWeakReference = mOnConnectionChangeListeners.get(key);
+                            if (listenerWeakReference != null && listenerWeakReference.get() != null) {
+                                listenerWeakReference.get().onMobileConnected();
+                            }
                         }
                         break;
-                    case NETWORK_WIFI:
-                        for (final OnConnectionChangeListener listener : mOnConnectionChangeListeners) {
-                            listener.onWifiConnected();
+                    }
+                    case NETWORK_WIFI: {
+                        for (Integer key : mOnConnectionChangeListeners.keySet()) {
+                            listenerWeakReference = mOnConnectionChangeListeners.get(key);
+                            if (listenerWeakReference != null && listenerWeakReference.get() != null) {
+                                listenerWeakReference.get().onWifiConnected();
+                            }
                         }
                         break;
-                    case NETWORK_NONE:
-                        for (final OnConnectionChangeListener listener : mOnConnectionChangeListeners) {
-                            listener.onConnectionClosed();
+                    }
+                    case NETWORK_NONE: {
+                        for (Integer key : mOnConnectionChangeListeners.keySet()) {
+                            listenerWeakReference = mOnConnectionChangeListeners.get(key);
+                            if (listenerWeakReference != null && listenerWeakReference.get() != null) {
+                                listenerWeakReference.get().onConnectionClosed();
+                            }
                         }
                         break;
+                    }
                     case NETWORK_UNKNOWN:
                         break;
                     default:

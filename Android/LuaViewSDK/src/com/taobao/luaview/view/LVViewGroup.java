@@ -2,7 +2,6 @@ package com.taobao.luaview.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     private CSSLayoutContext mLayoutContext;
 
     public LVViewGroup(Globals globals, LuaValue metaTable, Varargs varargs) {
-        this(globals.getContext(), globals, metaTable, varargs);
+        this(globals != null ? globals.getContext() : null, globals, metaTable, varargs);
     }
 
     public LVViewGroup(Context context, Globals globals, LuaValue metaTable, Varargs varargs) {
@@ -81,12 +80,12 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     /**
      * 销毁的时候调用
      */
-    public void onDestroy(){
-        if(mGlobals != null) {
+    public void onDestroy() {
+        if (mGlobals != null) {
             mGlobals.onDestroy();
             mGlobals = null;
         }
-        if(mLuaUserdata != null) {
+        if (mLuaUserdata != null) {
             mLuaUserdata.onDestroy();
             mLuaUserdata = null;
         }
@@ -140,12 +139,15 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
             mLuaUserdata.callOnLayout();
         }
     }
+
     /**
      * Flexbox account
      */
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
         // diff old and new
-        if (mChildNodeViews == childNodeViews) { return; }
+        if (mChildNodeViews == childNodeViews) {
+            return;
+        }
 
         // remove all the old views
         clearChildNodeViews();
@@ -158,7 +160,9 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     }
 
     private void clearChildNodeViews() {
-        if (mChildNodeViews == null) { return; }
+        if (mChildNodeViews == null) {
+            return;
+        }
 
         int childNodeViewsCount = mChildNodeViews.size();
         for (int i = 0; i < childNodeViewsCount; i++) {
@@ -171,7 +175,9 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     }
 
     private void generateNodeViewTree() {
-        if (mChildNodeViews == null) { return; }
+        if (mChildNodeViews == null) {
+            return;
+        }
 
         int childNodeViewsCount = mChildNodeViews.size();
         for (int i = 0; i < childNodeViewsCount; i++) {
@@ -206,7 +212,7 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
             CSSNode node = nodeView.getCssNode();
 
             if (node.getSizeToFit()) {
-                int margins = (int)(node.getMargin().get(Spacing.LEFT) + node.getMargin().get(Spacing.RIGHT));
+                int margins = (int) (node.getMargin().get(Spacing.LEFT) + node.getMargin().get(Spacing.RIGHT));
                 measureChild(view, widthMeasureSpec - margins, heightMeasureSpec);
 
                 node.setNoDirtyStyleWidth(view.getMeasuredWidth());
