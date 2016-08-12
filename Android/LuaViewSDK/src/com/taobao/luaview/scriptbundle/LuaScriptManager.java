@@ -33,7 +33,8 @@ public class LuaScriptManager {
     public static final String POSTFIX_LOG = ".log";
     public static final String POSTFIX_LUA = ".lua";
     public static final String POSTFIX_LV = ".lv";//Lua加密脚本
-    public static final String POSTFIX_LV_BYTECODE = ".lvb";//Lua Bytecode
+    public static final String POSTFIX_LV_BYTECODE_ZIP = ".bzip";//lua的二进制zip包
+    public static final String POSTFIX_LV_BYTECODE = ".blv";//Lua Bytecode二进制文件
     public static final String POSTFIX_SIGN = ".sign";
 
     /**
@@ -189,7 +190,17 @@ public class LuaScriptManager {
     }
 
     /**
-     * 是否是lua加密脚本
+     * 是否是lua 二进制zip包
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isLuaBytecodeUrl(final String url) {
+        return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_BYTECODE_ZIP);
+    }
+
+    /**
+     * 是否是lua二进制文件
      *
      * @param fileName
      * @return

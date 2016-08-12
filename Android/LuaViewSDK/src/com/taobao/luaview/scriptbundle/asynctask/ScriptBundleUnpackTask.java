@@ -77,7 +77,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
             final InputStream inputStream = params.length > 1 ? (InputStream) params[1] : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
 
             try {
-                ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeScript(url), true, url, inputStream);
+                ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);
 
                 DebugUtil.tei("lvperformance-unpackScripts");
 

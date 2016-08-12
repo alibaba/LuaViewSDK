@@ -97,7 +97,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
         Map<String, ScriptFile> files = bundle != null ? bundle.getScriptFileMap() : null;
         if (files != null) {
             for (final String key : files.keySet()) {
-                if (verifyScript(context, files.get(key)) == false) {
+                if (verifyScript(context, bundle.isBytecode(), files.get(key)) == false) {
                     return false;
                 }
             }
@@ -107,12 +107,22 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
     /**
      * 验证一个脚本
-     *
+     * @param isBytecode
      * @param script
      * @return
      */
-    private static boolean verifyScript(Context context, ScriptFile script) {
-        return script != null && VerifyUtil.rsa(context, script.scriptData, script.signData);
+    private static boolean verifyScript(Context context, boolean isBytecode, ScriptFile script) {
+        if(script != null){
+            if(isBytecode){//bytecode 模式下，如果没有signdata也算验证通过
+                if(script.signData != null && script.signData.length > 0){
+                    return VerifyUtil.rsa(context, script.scriptData, script.signData);
+                }
+                return true;
+            } else {
+                return VerifyUtil.rsa(context, script.scriptData, script.signData);
+            }
+        }
+        return false;
     }
 
 
@@ -143,7 +153,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             if (scriptBundle != null) {
                 return scriptBundle;
             } else {
-                scriptBundle = ScriptBundle.loadBundle(LuaScriptManager.isLuaBytecodeScript(url), url, scriptBundleFilePath);
+                scriptBundle = ScriptBundle.loadBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, scriptBundleFilePath);
             }
         }
 

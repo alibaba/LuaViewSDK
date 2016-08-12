@@ -17,6 +17,7 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.EncryptUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
@@ -28,8 +29,12 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Prototype;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * LuaView 实现类
@@ -332,6 +337,43 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }
         return this;
     }
+
+    /**
+     * load prototype (lua bytecode or sourcecode)
+     *
+     * @param inputStream
+     * @return
+     */
+    public LuaView loadPrototype(final InputStream inputStream, final String name, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        new SimpleTask1<LuaValue>() {
+            @Override
+            protected LuaValue doInBackground(Object... params) {
+                try {
+                    if (mGlobals != null) {
+                        Prototype prototype = mGlobals.loadPrototype(inputStream, name, "bt");
+                        if (prototype != null) {
+                            LuaValue result = mGlobals.load(prototype, name);
+                            return result;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(LuaValue value) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
+                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
+                    executeScript(value, activity, viewObj, null);
+                }
+            }
+        }.execute();
+        return this;
+    }
+
     //---------------------------------------注册函数------------------------------------------------
 
     /**
@@ -568,8 +610,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param luaFileName
      */
     private LuaView loadFileInternal(final String luaFileName, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-        final LuaValue viewObj = CoerceJavaToLua.coerce(this);
         new SimpleTask1<LuaValue>() {
             @Override
             protected LuaValue doInBackground(Object... params) {
@@ -586,6 +626,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
             @Override
             protected void onPostExecute(LuaValue value) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
                 if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
                     //执行脚本，在主线程
                     executeScript(value, activity, viewObj, callback);
@@ -601,8 +643,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param scriptFile
      */
     private LuaView loadScriptInternal(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-        final LuaValue viewObj = CoerceJavaToLua.coerce(this);
         new SimpleTask1<LuaValue>() {//load async
             @Override
             protected LuaValue doInBackground(Object... params) {
@@ -627,6 +667,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
             @Override
             protected void onPostExecute(LuaValue value) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
                 if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
                     //执行脚本，在主线程
                     executeScript(value, activity, viewObj, callback);
@@ -649,7 +691,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             if (mGlobals != null && value != null) {
                 mGlobals.saveContainer(getRenderTarget());
                 mGlobals.set("window", getUserdata());//TODO 优化到其他地方?，设置window对象
+                DebugUtil.tsi("Time-prototype-3");
                 value.call(activity, viewObj);
+                DebugUtil.tei("Time-prototype-3");
                 mGlobals.restoreContainer();
                 if (callback != null) {
                     callback.onScriptExecuted(true);
