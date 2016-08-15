@@ -1782,4 +1782,22 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     private LuaValue getFlexCss(U view, Varargs varargs) {
         return valueOf(view.getFlexCss());
     }
+
+
+    /**
+     * 获取native view
+     *
+     * @param customPanel
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_510, revisions = {"从UICustomPanelMethodMapper移过来（V500）"})
+    public LuaValue nativeView(U customPanel, Varargs varargs) {
+        return getNativeView(customPanel, varargs);
+    }
+
+    @LuaViewApi(since = VmVersion.V_510, revisions = {"从UICustomPanelMethodMapper移过来（V500）"})
+    public LuaValue getNativeView(U customPanel, Varargs varargs) {
+        return customPanel.getNativeView();
+    }
 }

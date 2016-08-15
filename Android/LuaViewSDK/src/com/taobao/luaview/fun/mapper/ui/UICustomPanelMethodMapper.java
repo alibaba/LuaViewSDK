@@ -17,8 +17,6 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
-
-
     /**
      * 获取native view
      *
@@ -26,12 +24,14 @@ public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGr
      * @param varargs
      * @return
      */
-    @LuaViewApi(since = VmVersion.V_500)
+    @Deprecated
+    @LuaViewApi(since = VmVersion.V_500, revisions = {"移动到 UIViewMethodMapper（V510）"})
     public LuaValue nativeView(U customPanel, Varargs varargs) {
         return getNativeView(customPanel, varargs);
     }
 
-    @LuaViewApi(since = VmVersion.V_500)
+    @Deprecated
+    @LuaViewApi(since = VmVersion.V_500, revisions = {"移动到 UIViewMethodMapper（V510）"})
     public LuaValue getNativeView(U customPanel, Varargs varargs) {
         return customPanel.getNativeView();
     }
