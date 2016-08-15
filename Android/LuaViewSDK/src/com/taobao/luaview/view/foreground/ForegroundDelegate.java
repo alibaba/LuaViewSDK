@@ -30,10 +30,7 @@ public class ForegroundDelegate {
 
     boolean mForegroundBoundsChanged = false;
 
-    private View mView;
-
-    public ForegroundDelegate(View view) {
-        mView = view;
+    public ForegroundDelegate() {
     }
 
     public static void setupDefaultForeground(View view) {
@@ -83,30 +80,32 @@ public class ForegroundDelegate {
      *
      * @param drawable The Drawable to be drawn on top of the children.
      */
-    public void setForeground(Drawable drawable) {
-        if (mForeground != drawable) {
-            if (mForeground != null) {
-                mForeground.setCallback(null);
-                mView.unscheduleDrawable(mForeground);
-            }
-
-            mForeground = drawable;
-
-            if (drawable != null) {
-                mView.setWillNotDraw(false);
-                drawable.setCallback(mView);
-                if (drawable.isStateful()) {
-                    drawable.setState(mView.getDrawableState());
+    public void setForeground(View view, Drawable drawable) {
+        if (view != null) {
+            if (mForeground != drawable) {
+                if (mForeground != null) {
+                    mForeground.setCallback(null);
+                    view.unscheduleDrawable(mForeground);
                 }
-                if (mForegroundGravity == Gravity.FILL) {
-                    Rect padding = new Rect();
-                    drawable.getPadding(padding);
+
+                mForeground = drawable;
+
+                if (drawable != null) {
+                    view.setWillNotDraw(false);
+                    drawable.setCallback(view);
+                    if (drawable.isStateful()) {
+                        drawable.setState(view.getDrawableState());
+                    }
+                    if (mForegroundGravity == Gravity.FILL) {
+                        Rect padding = new Rect();
+                        drawable.getPadding(padding);
+                    }
+                } else {
+                    view.setWillNotDraw(true);
                 }
-            } else {
-                mView.setWillNotDraw(true);
+                view.requestLayout();
+                view.invalidate();
             }
-            mView.requestLayout();
-            mView.invalidate();
         }
     }
 
@@ -114,24 +113,26 @@ public class ForegroundDelegate {
         return mForegroundGravity;
     }
 
-    public void setForegroundGravity(int foregroundGravity) {
-        if (mForegroundGravity != foregroundGravity) {
-            if ((foregroundGravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK) == 0) {
-                foregroundGravity |= Gravity.START;
+    public void setForegroundGravity(View view, int foregroundGravity) {
+        if (view != null) {
+            if (mForegroundGravity != foregroundGravity) {
+                if ((foregroundGravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK) == 0) {
+                    foregroundGravity |= Gravity.START;
+                }
+
+                if ((foregroundGravity & Gravity.VERTICAL_GRAVITY_MASK) == 0) {
+                    foregroundGravity |= Gravity.TOP;
+                }
+
+                mForegroundGravity = foregroundGravity;
+
+                if (mForegroundGravity == Gravity.FILL && mForeground != null) {
+                    Rect padding = new Rect();
+                    mForeground.getPadding(padding);
+                }
+
+                view.requestLayout();
             }
-
-            if ((foregroundGravity & Gravity.VERTICAL_GRAVITY_MASK) == 0) {
-                foregroundGravity |= Gravity.TOP;
-            }
-
-            mForegroundGravity = foregroundGravity;
-
-            if (mForegroundGravity == Gravity.FILL && mForeground != null) {
-                Rect padding = new Rect();
-                mForeground.getPadding(padding);
-            }
-
-            mView.requestLayout();
         }
     }
 
@@ -139,35 +140,39 @@ public class ForegroundDelegate {
         if (mForeground != null) mForeground.jumpToCurrentState();
     }
 
-    public void drawableStateChanged() {
-        if (mForeground != null && mForeground.isStateful()) {
-            mForeground.setState(mView.getDrawableState());
+    public void drawableStateChanged(View view) {
+        if (view != null) {
+            if (mForeground != null && mForeground.isStateful()) {
+                mForeground.setState(view.getDrawableState());
+            }
         }
     }
 
-    public void draw(Canvas canvas) {
-        if (mForeground != null) {
-            final Drawable foreground = mForeground;
+    public void draw(View view, Canvas canvas) {
+        if (view != null) {
+            if (mForeground != null) {
+                final Drawable foreground = mForeground;
 
-            if (mForegroundBoundsChanged) {
-                mForegroundBoundsChanged = false;
-                final Rect selfBounds = mSelfBounds;
-                final Rect overlayBounds = mOverlayBounds;
+                if (mForegroundBoundsChanged) {
+                    mForegroundBoundsChanged = false;
+                    final Rect selfBounds = mSelfBounds;
+                    final Rect overlayBounds = mOverlayBounds;
 
-                final int w = mView.getRight() - mView.getLeft();
-                final int h = mView.getBottom() - mView.getTop();
+                    final int w = view.getRight() - view.getLeft();
+                    final int h = view.getBottom() - view.getTop();
 
-                if (mForegroundInPadding) {
-                    selfBounds.set(0, 0, w, h);
-                } else {
-                    selfBounds.set(mView.getPaddingLeft(), mView.getPaddingTop(), w - mView.getPaddingRight(), h - mView.getPaddingBottom());
+                    if (mForegroundInPadding) {
+                        selfBounds.set(0, 0, w, h);
+                    } else {
+                        selfBounds.set(view.getPaddingLeft(), view.getPaddingTop(), w - view.getPaddingRight(), h - view.getPaddingBottom());
+                    }
+
+                    Gravity.apply(mForegroundGravity, foreground.getIntrinsicWidth(),
+                            foreground.getIntrinsicHeight(), selfBounds, overlayBounds);
+                    foreground.setBounds(overlayBounds);
                 }
-
-                Gravity.apply(mForegroundGravity, foreground.getIntrinsicWidth(),
-                        foreground.getIntrinsicHeight(), selfBounds, overlayBounds);
-                foreground.setBounds(overlayBounds);
+                foreground.draw(canvas);
             }
-            foreground.draw(canvas);
         }
     }
 

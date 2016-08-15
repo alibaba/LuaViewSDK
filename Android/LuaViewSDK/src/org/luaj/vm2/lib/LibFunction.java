@@ -129,7 +129,7 @@ abstract public class LibFunction extends LuaFunction {
      * <p/>
      * Subclass will typicall switch on this value to provide the specific behavior for each function.
      */
-    protected int opcode;
+    public int opcode;
 
     //反射方法
     public Method method;

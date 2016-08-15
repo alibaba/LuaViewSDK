@@ -51,11 +51,11 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * 初始化数据
      */
     public void init() {
-        if (!this.initParams.isnil()) {
+        if (LuaUtil.isValid(this.initParams)) {
             this.mIdCache = new SparseCache<String>();
-            this.mSectionDelegate = !this.initParams.isnil() ? this.initParams.get("Section") : NIL;
-            this.mCellDelegate = !this.initParams.isnil() ? this.initParams.get("Cell") : NIL;
-            this.mCallback = !this.initParams.isnil() ? this.initParams.get("Callback") : NIL;
+            this.mSectionDelegate = this.initParams.get("Section");
+            this.mCellDelegate = this.initParams.get("Cell");
+            this.mCallback = this.initParams.get("Callback");
             initSectionLength();
         }
     }

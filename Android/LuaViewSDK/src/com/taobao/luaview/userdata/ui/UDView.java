@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
 import com.taobao.luaview.userdata.base.BaseUserdata;
+import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
@@ -93,12 +94,13 @@ public class UDView<T extends View> extends BaseUserdata {
 
     /**
      * get native view
+     *
      * @return
      */
-    public LuaValue getNativeView(){
+    public LuaValue getNativeView() {
         View view = getView();
-        if(view instanceof ILVNativeViewProvider){
-            view = ((ILVNativeViewProvider)view).getNativeView();
+        if (view instanceof ILVNativeViewProvider) {
+            view = ((ILVNativeViewProvider) view).getNativeView();
         }
         return view != null ? CoerceJavaToLua.coerce(view) : LuaValue.NIL;
     }
@@ -911,8 +913,6 @@ public class UDView<T extends View> extends BaseUserdata {
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
-        } else {
-            ForegroundDelegate.clearDefaultForeground(this.getView());
         }
         return this;
     }
@@ -955,10 +955,6 @@ public class UDView<T extends View> extends BaseUserdata {
         if (LuaUtil.isValid(this.mOnClick)) {
             final T view = getView();
             if (view != null) {
-
-                //设置点击的ripple效果
-                ForegroundDelegate.setupDefaultForeground(view);
-
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -966,8 +962,6 @@ public class UDView<T extends View> extends BaseUserdata {
                     }
                 });
             }
-        } else {//清除
-            ForegroundDelegate.clearDefaultForeground(getView());
         }
     }
 
@@ -1261,10 +1255,17 @@ public class UDView<T extends View> extends BaseUserdata {
      */
     public UDView setEffects(Integer effects) {
         this.mEffects = effects;
-        if(this.mEffects == null || this.mEffects <= -1){
-            ForegroundDelegate.clearDefaultForeground(getView());
-        } else {
-            //TODO effects
+        if (this.mEffects != null) {
+            switch (this.mEffects) {
+                case UDViewEffect.EFFECT_NONE:
+                    ForegroundDelegate.clearDefaultForeground(getView());
+                    break;
+                case UDViewEffect.EFFECT_CLICK:
+                    if(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick)) {//设置点击的ripple效果
+                        ForegroundDelegate.setupDefaultForeground(getView());
+                    }
+                    break;
+            }
         }
         return this;
     }

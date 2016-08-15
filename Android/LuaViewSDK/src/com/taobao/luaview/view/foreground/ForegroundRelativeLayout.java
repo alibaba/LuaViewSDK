@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
  */
 public class ForegroundRelativeLayout extends RelativeLayout implements IForeground {
     private ForegroundDelegate mForegroundDelegate;
+    private boolean enableForeground;
 
     public ForegroundRelativeLayout(Context context) {
         this(context, null);
@@ -30,15 +31,15 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     public ForegroundRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            mForegroundDelegate = new ForegroundDelegate(this);
+            mForegroundDelegate = new ForegroundDelegate();
             mForegroundDelegate.init(context, attrs, defStyleAttr, defStyleRes);
-            this.setClickable(true);
         }
     }
 
+
     @Override
     public int getForegroundGravity() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return super.getForegroundGravity();
         }
         return mForegroundDelegate.getForegroundGravity();
@@ -46,16 +47,16 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
 
     @Override
     public void setForegroundGravity(int foregroundGravity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             super.setForegroundGravity(foregroundGravity);
         } else {
-            mForegroundDelegate.setForegroundGravity(foregroundGravity);
+            mForegroundDelegate.setForegroundGravity(this, foregroundGravity);
         }
     }
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return super.verifyDrawable(who) || (who == mForegroundDelegate.getForeground());
         } else {
             return super.verifyDrawable(who);
@@ -65,7 +66,7 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     public void jumpDrawablesToCurrentState() {
         super.jumpDrawablesToCurrentState();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.jumpDrawablesToCurrentState();
         }
     }
@@ -73,24 +74,25 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            mForegroundDelegate.drawableStateChanged();
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mForegroundDelegate.drawableStateChanged(this);
         }
     }
 
 
     @Override
     public void setForeground(Drawable foreground) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        enableForeground = foreground != null;
+        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             super.setForeground(foreground);
         } else {
-            mForegroundDelegate.setForeground(foreground);
+            mForegroundDelegate.setForeground(this, foreground);
         }
     }
 
     @Override
     public Drawable getForeground() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return super.getForeground();
         } else {
             return mForegroundDelegate.getForeground();
@@ -100,7 +102,7 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.onLayout(changed, left, top, right, bottom);
         }
     }
@@ -108,7 +110,7 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.onSizeChanged(w, h, oldw, oldh);
         }
     }
@@ -116,15 +118,15 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            mForegroundDelegate.draw(canvas);
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mForegroundDelegate.draw(this, canvas);
         }
     }
 
     @Override
     public void drawableHotspotChanged(float x, float y) {
         super.drawableHotspotChanged(x, y);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.drawableHotspotChanged(x, y);
         }
     }

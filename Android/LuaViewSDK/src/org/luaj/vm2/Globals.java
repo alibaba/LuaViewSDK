@@ -23,9 +23,13 @@ package org.luaj.vm2;
 
 import android.content.Context;
 
+import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.util.DebugUtil;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.lib.BaseLib;
@@ -118,6 +122,7 @@ import java.lang.ref.WeakReference;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
+    private static final String TAG = Globals.class.getSimpleName();
     /**
      * Android parent view
      */
@@ -285,17 +290,43 @@ public class Globals extends LuaTable {
 
                 byte[] bytes = new byte[is.available()];
                 is.read(bytes);
-
                 is.reset();
 
                 debugConnection.sendScript(bytes, chunkname);
             }
-
-            Prototype p = loadPrototype(is, chunkname, mode);
+            Prototype p = null;
+            if (LuaViewConfig.isCachePrototype() && chunkname != null) {//给prototype解析加cache
+                p = AppCache.getCache(TAG).get(chunkname);
+                if (p == null) {
+                    p = loadPrototype(is, chunkname, mode);
+                    AppCache.getCache(TAG).put(chunkname, p);
+                }
+            } else {
+                p = loadPrototype(is, chunkname, mode);
+            }
             return loader.load(p, chunkname, env);
         } catch (LuaError l) {
             throw l;
         } catch (Exception e) {
+            return error("load " + chunkname + ": " + e);
+        }
+    }
+
+    /**
+     * 直接加载一个prototype
+     * @param prototype
+     * @param chunkname
+     * @return
+     */
+    public LuaValue load(Prototype prototype, String chunkname){
+        return load(prototype, chunkname, this);
+    }
+
+    public LuaValue load(Prototype prototype, String chunkname, LuaValue env){
+        try {
+            return loader.load(prototype, chunkname, env);
+        } catch (Exception e) {
+            LogUtil.d("[load prototype error]", chunkname, e);
             return error("load " + chunkname + ": " + e);
         }
     }
@@ -312,7 +343,9 @@ public class Globals extends LuaTable {
             if (!is.markSupported())
                 is = new BufferedStream(is);
             is.mark(4);
+            DebugUtil.tsi("Time-prototype-xx");
             final Prototype p = undumper.undump(is, chunkname);
+            DebugUtil.tei("Time-prototype-xx");
             if (p != null)
                 return p;
             is.reset();

@@ -46,13 +46,13 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
     public void initOnScrollCallback(T view) {
         if (view instanceof ListView) {
             final ListView listview = (ListView) view;
-            if (!mCallback.isnil() || mLazyLoad) {
+            if (LuaUtil.isValid(mCallback) || mLazyLoad) {
                 listview.setOnScrollListener(new AbsListView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(AbsListView view, int scrollState) {
                         updateAllChildScrollState(view, scrollState);
 
-                        if (!mCallback.isnil()) {//callback
+                        if (LuaUtil.isValid(mCallback)) {//callback
                             switch (scrollState) {
                                 case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL: {
                                     final int itemPosition = listview.getFirstVisiblePosition() - listview.getHeaderViewsCount();
@@ -76,7 +76,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
 
                     @Override
                     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                        if (!mCallback.isnil()) {
+                        if (LuaUtil.isValid(mCallback)) {
                             final int itemPosition = firstVisibleItem - listview.getHeaderViewsCount();
                             final int section = getSectionByPosition(itemPosition);
                             final int row = getRowInSectionByPosition(itemPosition);

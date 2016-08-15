@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -42,7 +44,7 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
      * @return
      */
     private View createItemView(final int viewType) {
-        final UDViewGroup layout = new UDViewGroup(createLayout(), mGlobals, mLuaUserData.getmetatable(), null);
+        final UDViewGroup layout = new UDViewGroup(createLayout(), mGlobals, null);
         //对外数据封装，必须使用LuaTable
         final UDLuaTable cellData = new UDLuaTable(layout);
         View itemView = null;

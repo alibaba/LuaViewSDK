@@ -112,7 +112,8 @@ public class CookieManager {
             final Map<String, List<String>> headerFields = connection.getHeaderFields();
             if (headerFields != null && headerFields.containsKey(COOKIES_HEADER)) {
                 final List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-                updateWebkitResponseCookies(cookiesHeader, url);
+                //write webkit cookie
+//                updateWebkitResponseCookies(cookiesHeader, url);
             }
         }
     }

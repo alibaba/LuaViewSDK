@@ -183,6 +183,17 @@ public class LuaUtil {
         return (LuaFunction) getValueFromTable(LuaValue.TFUNCTION, valueList, keylist);
     }
 
+
+    /**
+     * 获取LuaValue
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static LuaValue getValue(final Varargs varargs, int... poslist) {
+        return (LuaValue) getValue(LuaValue.TVALUE, varargs, poslist);
+    }
+
     /**
      * 获取userdata
      *
@@ -296,6 +307,8 @@ public class LuaUtil {
             case LuaValue.TUSERDATA:
                 if (isUserdata(value)) return value.checkuserdata();
                 break;
+            case LuaValue.TVALUE:
+                return value;
         }
         return null;
     }

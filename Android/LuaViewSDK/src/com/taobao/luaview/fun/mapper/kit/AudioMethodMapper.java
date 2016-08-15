@@ -9,6 +9,8 @@ import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Audio 接口封装，声音处理
  *
@@ -17,6 +19,51 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
+    private static final String TAG = AudioMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "play",//0
+            "pause",//1
+            "resume",//2
+            "stop",//3
+            "seekTo",//4
+            "callback",//5
+            "playing",//8
+            "pausing",//9
+            "looping"//10
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return play(target, varargs);
+            case 1:
+                return pause(target, varargs);
+            case 2:
+                return resume(target, varargs);
+            case 3:
+                return stop(target, varargs);
+            case 4:
+                return seekTo(target, varargs);
+            case 5:
+                return callback(target, varargs);
+            case 6:
+                return playing(target, varargs);
+            case 7:
+                return pausing(target, varargs);
+            case 8:
+                return looping(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * play music
@@ -67,11 +114,12 @@ public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
 
     /**
      * 到某个位置
+     *
      * @param audio
      * @param varargs
      * @return
      */
-    public LuaValue seekTo(U audio, Varargs varargs){
+    public LuaValue seekTo(U audio, Varargs varargs) {
         final Integer msec = LuaUtil.getInt(varargs, 2);
         return audio.seekTo(msec);
     }
@@ -96,7 +144,7 @@ public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
         return audio.setCallback(callback);
     }
 
-    public LuaValue getCallback(U audio, Varargs varargs){
+    public LuaValue getCallback(U audio, Varargs varargs) {
         return audio.getCallback();
     }
 
