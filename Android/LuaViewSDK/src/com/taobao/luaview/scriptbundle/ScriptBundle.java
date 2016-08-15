@@ -207,12 +207,9 @@ public class ScriptBundle {
                 final byte[] fileData = out.toByteArray();
 
                 boolean shouldSaveFile = saveFile;
-                if (LuaScriptManager.isLuaBytecodeScript(fileName)) {//lua bytecode，不解压到文件系统
+                if (LuaScriptManager.isLuaEncryptScript(fileName)){//lua file (source or prototype)
                     scriptBundle.addScript(new ScriptFile(url, scriptBundleFolderPath, fileName, fileData, null));
-                    shouldSaveFile = false;
-                } else if (LuaScriptManager.isLuaEncryptScript(fileName)) {//lua source code
-                    scriptBundle.addScript(new ScriptFile(url, scriptBundleFolderPath, fileName, fileData, null));
-                    shouldSaveFile = true;
+                    shouldSaveFile = !isBytecode;//lua bytecode，不解压到文件系统
                 } else if (LuaScriptManager.isLuaSignFile(fileName)) {//签名文件，不解压到文件系统
                     luaSigns.put(fileName, fileData);
                     shouldSaveFile = !isBytecode;//非bytecode模式下签名文件存起来
