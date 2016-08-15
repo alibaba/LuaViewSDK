@@ -10,8 +10,47 @@ import com.taobao.luaview.view.viewpager.AutoScrollViewPager;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 @LuaViewLib
 public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupMethodMapper<U> {
+
+    private static final String TAG = UIViewPagerMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "reload",//0
+            "indicator",//1
+            "currentPage",//2
+            "currentItem",//3
+            "autoScroll",//4
+            "looping"//5
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return reload(target, varargs);
+            case 1:
+                return indicator(target, varargs);
+            case 2:
+                return currentPage(target, varargs);
+            case 3:
+                return currentItem(target, varargs);
+            case 4:
+                return autoScroll(target, varargs);
+            case 5:
+                return looping(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 重新更新数据

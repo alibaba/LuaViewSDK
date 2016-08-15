@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.ui.UDView;
@@ -92,7 +94,7 @@ public class LVListViewAdapter extends BaseAdapter {
         final int viewType = getItemViewType(position);
         final boolean hasCellSize = this.mLuaUserData.hasCellSize(position);
         if (convertView == null || ((UDLuaTable) convertView.getTag()).get(KEY_VIEW_TYPE) != LuaValue.valueOf(viewType)) {//在内部创建好Cell
-            UDView layout = new UDViewGroup(createLayout(), mGlobals, mLuaUserData.getmetatable(), null);
+            UDView layout = new UDViewGroup(createLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
             //对外数据封装，必须使用LuaTable
             cellData = new UDLuaTable(layout);
             //View封装

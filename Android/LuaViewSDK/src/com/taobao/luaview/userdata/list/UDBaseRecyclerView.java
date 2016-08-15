@@ -49,13 +49,13 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public void initOnScrollCallback(final T view) {
         if (view instanceof LVRecyclerView) {
             final LVRecyclerView lvRecyclerView = (LVRecyclerView) view;
-            if (!mCallback.isnil() || mLazyLoad) {
+            if (LuaUtil.isValid(mCallback) || mLazyLoad) {
                 lvRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
                         updateAllChildScrollState(recyclerView, scrollState);
 
-                        if (!mCallback.isnil()) {
+                        if (LuaUtil.isValid(mCallback)) {
                             switch (scrollState) {
                                 case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL: {
                                     final int itemPosition = lvRecyclerView.getFirstVisiblePosition();
@@ -79,7 +79,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        if (!mCallback.isnil()) {
+                        if (LuaUtil.isValid(mCallback)) {
                             final int itemPosition = lvRecyclerView.getFirstVisiblePosition();
                             final int section = getSectionByPosition(itemPosition);
                             final int row = getRowInSectionByPosition(itemPosition);

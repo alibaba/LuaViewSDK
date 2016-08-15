@@ -14,6 +14,8 @@ public class LuaViewConfig {
     private static boolean isOpenDebugger = isEmulator();//目前只支持模拟器下断点调试Lua，不支持真机，真机环境关闭该功能
     private static boolean isLibsLazyLoad = false;//是否延迟加载Libs，如果延迟加载则只会加载用到的libs，并且只会在用到的时候才加载，不用到不加载
     private static boolean isUseLuaDC = false;//是否使用LuaDC Compiler，直接将lua代码编译成dex文件，能够加速虚拟机执行
+    private static boolean isUseNoReflection = false;//是否不使用反射调用接口
+    private static boolean isCachePrototype = false;//是否缓存prototype，默认不缓存
 
     private static String sTtid = null;
 
@@ -100,5 +102,28 @@ public class LuaViewConfig {
      */
     public static void setUseLuaDC(boolean useLuaDC) {
         isUseLuaDC = useLuaDC;
+    }
+
+    /**
+     * 设置不使用反射
+     * @param useNoReflection
+     */
+    public static void setUseNoReflection(boolean useNoReflection) {
+        isUseNoReflection = useNoReflection;
+    }
+
+    public static boolean isUseNoReflection() {
+        return isUseNoReflection;
+    }
+
+    /**
+     * 是否缓存prototype
+     */
+    public static void setCachePrototype(boolean cachePrototype){
+        isCachePrototype = cachePrototype;
+    }
+
+    public static boolean isCachePrototype(){
+        return isCachePrototype;
     }
 }

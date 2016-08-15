@@ -8,14 +8,44 @@ import com.taobao.luaview.userdata.ui.UDViewGroup;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * ListView的方法映射
  * @author song
  */
 @LuaViewLib
 public abstract class UIBaseListViewMethodMapper<U extends UDViewGroup> extends UIBaseListOrRecyclerViewMethodMapper<U> {
+    private static final String TAG = UIBaseListViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "header",//0
+            "footer",//1
+            "dividerHeight"//2
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode){
+            case 0:
+                return header(target, varargs);
+            case 1:
+                return footer(target, varargs);
+            case 2:
+                return dividerHeight(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     public abstract UDBaseListView getUDBaseListView(Varargs varargs);
+
 
     @Override
     public UDBaseListOrRecyclerView getUDBaseListOrRecyclerView(Varargs varargs) {

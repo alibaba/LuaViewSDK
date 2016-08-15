@@ -10,6 +10,8 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Vibrate 接口封装，声音处理
  *
@@ -18,6 +20,33 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class VibratorMethodMapper<U extends UDVibrator> extends BaseMethodMapper<U> {
+    private static final String TAG = VibratorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "hasVibrator",//0
+            "vibrate",//1
+            "cancel"//2
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode){
+            case 0:
+                return hasVibrator(target, varargs);
+            case 1:
+                return vibrate(target, varargs);
+            case 2:
+                return cancel(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 是否存在震动组件
