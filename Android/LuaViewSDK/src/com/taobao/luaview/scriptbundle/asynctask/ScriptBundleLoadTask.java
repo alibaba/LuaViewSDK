@@ -14,6 +14,7 @@ import com.taobao.luaview.util.VerifyUtil;
 import com.taobao.luaview.util.ZipUtil;
 
 import org.luaj.vm2.LoadState;
+import org.luaj.vm2.LuaError;
 import org.luaj.vm2.Prototype;
 
 import java.io.ByteArrayInputStream;
@@ -51,7 +52,9 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
         if (LoadState.instance != null && scriptFile != null) {
             try {
                 return LoadState.instance.undump(new ByteArrayInputStream(scriptFile.scriptData), scriptFile.getFilePath());
-            } catch (IOException e) {
+            } catch (LuaError error){
+                error.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -74,6 +77,23 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             return result;
         }
         return inputStream;
+    }
+
+    /**
+     * 加载加密过的脚本
+     * @param context
+     * @param scriptFile
+     * @return
+     */
+    public static byte[] loadEncryptScript(final Context context, final ScriptFile scriptFile){
+        if(scriptFile != null){
+            if(scriptFile.signData != null && scriptFile.signData.length > 0){//加密过则进行解密并unzip
+                return ZipUtil.unzip(DecryptUtil.aes(context, scriptFile.scriptData));
+            } else {
+                return ZipUtil.unzip(scriptFile.scriptData);
+            }
+        }
+        return null;
     }
 
     /**
@@ -163,7 +183,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             ScriptFile scriptFile = null;
             for (String key : files.keySet()) {
                 scriptFile = files.get(key);
-                scriptFile.scriptData = loadEncryptScript(mContext, scriptFile.scriptData);
+                scriptFile.scriptData = loadEncryptScript(mContext, scriptFile);
                 if (scriptBundle.isBytecode()) {//如果是bytecode，则加载prototype
                     scriptFile.prototype = loadPrototype(mContext, scriptFile);
                 }
