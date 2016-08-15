@@ -42,7 +42,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
     private CSSLayoutContext mLayoutContext;
 
     public LVViewGroup(Globals globals, LuaValue metaTable, Varargs varargs) {
-        this(globals.getContext(), globals, metaTable, varargs);
+        this(globals != null ? globals.getContext() : null, globals, metaTable, varargs);
     }
 
     public LVViewGroup(Context context, Globals globals, LuaValue metaTable, Varargs varargs) {
@@ -81,12 +81,12 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
     /**
      * 销毁的时候调用
      */
-    public void onDestroy(){
-        if(mGlobals != null) {
+    public void onDestroy() {
+        if (mGlobals != null) {
             mGlobals.onDestroy();
             mGlobals = null;
         }
-        if(mLuaUserdata != null) {
+        if (mLuaUserdata != null) {
             mLuaUserdata.onDestroy();
             mLuaUserdata = null;
         }
