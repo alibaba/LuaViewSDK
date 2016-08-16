@@ -56,7 +56,11 @@ public class ScriptFile {
     }
 
     public String getFilePath() {
-        return new StringBuffer().append(baseFilePath).append(fileName).toString();
+        if(baseFilePath != null && baseFilePath.endsWith("/")) {
+            return new StringBuffer().append(baseFilePath).append(fileName).toString();
+        } else {
+            return new StringBuffer().append(baseFilePath).append("/").append(fileName).toString();
+        }
     }
 
     public InputStream getInputStream() {

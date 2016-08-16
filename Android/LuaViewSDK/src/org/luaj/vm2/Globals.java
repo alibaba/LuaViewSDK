@@ -242,7 +242,14 @@ public class Globals extends LuaTable {
      */
     public LuaValue loadfile(String filename) {
         try {
-            return load(finder.findResource(filename), "@" + filename, "bt", this);
+            LuaResourceFinder luaFinder = getLuaResourceFinder();
+            StringBuffer sb = new StringBuffer();
+            if (luaFinder != null) {
+                sb.append(luaFinder.getBasePath()).append(filename);
+            } else {
+                sb.append(this.hashCode()).append("@").append(filename);
+            }
+            return load(finder.findResource(filename), sb.toString(), "bt", this);
         } catch (Exception e) {
             return error("load " + filename + ": " + e);
         }
@@ -297,6 +304,7 @@ public class Globals extends LuaTable {
             Prototype p = null;
             if (LuaViewConfig.isCachePrototype() && chunkname != null) {//给prototype解析加cache
                 p = AppCache.getCache(TAG).get(chunkname);
+//                LogUtil.d("Prototype", chunkname, p != null);
                 if (p == null) {
                     p = loadPrototype(is, chunkname, mode);
                     AppCache.getCache(TAG).put(chunkname, p);
@@ -314,15 +322,16 @@ public class Globals extends LuaTable {
 
     /**
      * 直接加载一个prototype
+     *
      * @param prototype
      * @param chunkname
      * @return
      */
-    public LuaValue load(Prototype prototype, String chunkname){
+    public LuaValue load(Prototype prototype, String chunkname) {
         return load(prototype, chunkname, this);
     }
 
-    public LuaValue load(Prototype prototype, String chunkname, LuaValue env){
+    public LuaValue load(Prototype prototype, String chunkname, LuaValue env) {
         try {
             return loader.load(prototype, chunkname, env);
         } catch (Exception e) {

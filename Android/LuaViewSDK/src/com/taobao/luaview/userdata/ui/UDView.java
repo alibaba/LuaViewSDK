@@ -14,7 +14,9 @@ import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
@@ -914,7 +916,7 @@ public class UDView<T extends View> extends BaseUserdata {
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
-            
+
             //setup click effects
             setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick));
         }
@@ -922,6 +924,7 @@ public class UDView<T extends View> extends BaseUserdata {
     }
 
     private void setupClickEffects(boolean isValid) {
+        DebugUtil.tsi("Foreground-setupClickEffects");
         //setup effect
         if(LuaViewConfig.isAutoSetupClickEffects()){
             if(isValid){
@@ -930,6 +933,7 @@ public class UDView<T extends View> extends BaseUserdata {
                 setEffects(UDViewEffect.EFFECT_NONE);
             }
         }
+        DebugUtil.tei("Foreground-setupClickEffects");
     }
 
     /**

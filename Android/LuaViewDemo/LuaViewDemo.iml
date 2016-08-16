@@ -78,8 +78,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="jakarta-regexp-1.4" level="project" />
     <orderEntry type="library" exported="" name="bcel-5.2" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="module" module-name="LuaViewSDK" exported="" />
   </component>
 </module>

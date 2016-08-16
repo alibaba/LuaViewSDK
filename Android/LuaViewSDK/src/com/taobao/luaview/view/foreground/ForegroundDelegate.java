@@ -58,7 +58,8 @@ public class ForegroundDelegate {
     }
 
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        mForegroundBoundsChanged = changed;
+        mForegroundBoundsChanged = true;
+//        mForegroundBoundsChanged = changed;
     }
 
     public void onSizeChanged(int w, int h, int oldw, int oldh) {
