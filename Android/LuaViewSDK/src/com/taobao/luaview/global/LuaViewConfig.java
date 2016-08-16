@@ -16,6 +16,7 @@ public class LuaViewConfig {
     private static boolean isUseLuaDC = false;//是否使用LuaDC Compiler，直接将lua代码编译成dex文件，能够加速虚拟机执行
     private static boolean isUseNoReflection = false;//是否不使用反射调用接口
     private static boolean isCachePrototype = false;//是否缓存prototype，默认不缓存
+    private static boolean isAutoSetupClickEffects = false;//是否自动设置点击效果
 
     private static String sTtid = null;
 
@@ -125,5 +126,17 @@ public class LuaViewConfig {
 
     public static boolean isCachePrototype(){
         return isCachePrototype;
+    }
+
+    /**
+     * 是否自动设置ripple effects
+     * @param isAutoSetupClickEffects
+     */
+    public static void setAutoSetupClickEffects(boolean isAutoSetupClickEffects) {
+        LuaViewConfig.isAutoSetupClickEffects = isAutoSetupClickEffects;
+    }
+
+    public static boolean isAutoSetupClickEffects() {
+        return isAutoSetupClickEffects;
     }
 }

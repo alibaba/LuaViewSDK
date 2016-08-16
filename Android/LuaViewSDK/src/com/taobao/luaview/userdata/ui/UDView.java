@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
@@ -952,7 +953,8 @@ public class UDView<T extends View> extends BaseUserdata {
      * 点击
      */
     private void setOnClickListener() {
-        if (LuaUtil.isValid(this.mOnClick)) {
+        boolean isValid = LuaUtil.isValid(this.mOnClick);
+        if (isValid) {
             final T view = getView();
             if (view != null) {
                 view.setOnClickListener(new View.OnClickListener() {
@@ -963,13 +965,17 @@ public class UDView<T extends View> extends BaseUserdata {
                 });
             }
         }
+        setupClickEffects(isValid);
+
+
     }
 
     /**
      * 长按
      */
     private void setOnLongClickListener() {
-        if (LuaUtil.isValid(this.mOnLongClick)) {
+        boolean isValid = LuaUtil.isValid(this.mOnLongClick)
+        if (isValid) {
             final T view = getView();
             if (view != null) {
                 view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -978,6 +984,18 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnLongClick();
                     }
                 });
+            }
+        }
+        setupClickEffects(isValid);
+    }
+
+    private void setupClickEffects(boolean isValid) {
+        //setup effect
+        if(LuaViewConfig.isAutoSetupClickEffects()){
+            if(isValid){
+                setEffects(UDViewEffect.EFFECT_CLICK);
+            } else {
+                setEffects(UDViewEffect.EFFECT_NONE);
             }
         }
     }
