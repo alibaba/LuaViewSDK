@@ -45,10 +45,24 @@ public class ForegroundImageView extends ImageView implements IForeground {
     @Override
     public void setImageDrawable(Drawable drawable) {
         super.setImageDrawable(drawable);
+        updateForeground();
+    }
+
+    @Override
+    public void setImageResource(int resId) {
+        super.setImageResource(resId);
+        updateForeground();
+    }
+
+    /**
+     * update foreground when image updated
+     */
+    private void updateForeground() {
         if (enableForeground && mForegroundDelegate != null) {//bugfix 图片设置的时候会有ripple不出来的情况，这里处理一下
             mForegroundDelegate.updateBounds(this);
         }
     }
+
 
     @Override
     public int getForegroundGravity() {

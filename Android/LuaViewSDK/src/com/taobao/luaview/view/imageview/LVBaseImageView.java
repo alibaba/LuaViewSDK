@@ -39,7 +39,7 @@ public class LVBaseImageView extends BaseImageView {
     }
 
     @Override
-    public String getUrl() {
+    public String getUrl() {//TODO 本地图片的时候，获取的是空的
         return mUrl;
     }
 

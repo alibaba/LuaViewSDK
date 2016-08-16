@@ -5,7 +5,4 @@
             <solid android:color="#33000000"/>
         </shape>
     </item>
-
-    <item android:drawable="@android:color/transparent"/>
-
 </selector>

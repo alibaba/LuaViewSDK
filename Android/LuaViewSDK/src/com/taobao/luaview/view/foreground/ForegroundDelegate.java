@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.taobao.android.luaview.R;
-import com.taobao.luaview.util.LogUtil;
 
 /**
  * Delegate that actually does the foreground things, so that the logic can be shared between views
@@ -85,7 +84,6 @@ public class ForegroundDelegate {
      * @param drawable The Drawable to be drawn on top of the children.
      */
     public void setForeground(View view, Drawable drawable) {
-        LogUtil.d("Foreground", view, mForeground, drawable);
         if (view != null) {
             if (mForeground != drawable) {
                 if (mForeground != null) {
@@ -157,7 +155,6 @@ public class ForegroundDelegate {
     }
 
     public void draw(View view, Canvas canvas) {
-        LogUtil.d("Foreground", "draw");
         if (view != null) {
             if (mForeground != null) {
                 final Drawable foreground = mForeground;
@@ -172,31 +169,33 @@ public class ForegroundDelegate {
         }
     }
 
-    public void updateBounds(View view){
+    public void updateBounds(View view) {
         updateBounds(view, mForeground);
     }
 
     /**
      * 更新bounds
+     *
      * @param view
      * @param drawable
      */
     private void updateBounds(View view, Drawable drawable) {
-        LogUtil.d("Foreground", "updateBounds", drawable, mForegroundInPadding, mForegroundGravity, mForegroundBoundsChanged);
-        final Rect selfBounds = mSelfBounds;
-        final Rect overlayBounds = mOverlayBounds;
+        if (drawable != null) {
+            final Rect selfBounds = mSelfBounds;
+            final Rect overlayBounds = mOverlayBounds;
 
-        final int w = view.getRight() - view.getLeft();
-        final int h = view.getBottom() - view.getTop();
+            final int w = view.getRight() - view.getLeft();
+            final int h = view.getBottom() - view.getTop();
 
-        if (mForegroundInPadding) {
-            selfBounds.set(0, 0, w, h);
-        } else {
-            selfBounds.set(view.getPaddingLeft(), view.getPaddingTop(), w - view.getPaddingRight(), h - view.getPaddingBottom());
+            if (mForegroundInPadding) {
+                selfBounds.set(0, 0, w, h);
+            } else {
+                selfBounds.set(view.getPaddingLeft(), view.getPaddingTop(), w - view.getPaddingRight(), h - view.getPaddingBottom());
+            }
+
+            Gravity.apply(mForegroundGravity, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), selfBounds, overlayBounds);
+            drawable.setBounds(overlayBounds);
         }
-
-        Gravity.apply(mForegroundGravity, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), selfBounds, overlayBounds);
-        drawable.setBounds(overlayBounds);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
