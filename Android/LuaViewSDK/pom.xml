@@ -78,7 +78,7 @@
         <dependency>
             <groupId>com.android.support</groupId>
             <artifactId>support-v4</artifactId>
-            <version>22.0.0</version>
+            <version>23.0.1</version>
             <type>aar</type>
             <scope>provided</scope>
         </dependency>
@@ -94,10 +94,10 @@
 
         <!--recycler view-->
         <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>support-v7-recyclerview</artifactId>
-            <version>22</version>
-            <type>jar</type>
+            <groupId>com.android.support</groupId>
+            <artifactId>recyclerview-v7</artifactId>
+            <version>23.0.1</version>
+            <type>aar</type>
             <scope>provided</scope>
         </dependency>
 

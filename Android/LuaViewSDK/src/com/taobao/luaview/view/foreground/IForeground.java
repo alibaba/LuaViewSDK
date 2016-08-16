@@ -14,4 +14,6 @@ import android.graphics.drawable.Drawable;
 public interface IForeground {
 
     void setForeground(Drawable drawable);
+
+    void clearForeground();
 }

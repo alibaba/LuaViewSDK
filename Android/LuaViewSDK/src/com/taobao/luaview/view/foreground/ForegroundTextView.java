@@ -25,16 +25,17 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
- * Button can se foreground
+ * TextView can se foreground
  */
-public class ForegroundButton extends Button implements IForeground {
+public class ForegroundTextView extends TextView implements IForeground {
 
     private ForegroundDelegate mForegroundDelegate;
     private boolean enableForeground;
 
-    public ForegroundButton(Context context) {
+    public ForegroundTextView(Context context) {
         super(context);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate = new ForegroundDelegate();

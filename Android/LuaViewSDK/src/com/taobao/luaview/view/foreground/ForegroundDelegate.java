@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.util.LogUtil;
 
 /**
  * Delegate that actually does the foreground things, so that the logic can be shared between views
@@ -34,21 +35,24 @@ public class ForegroundDelegate {
     }
 
     public static void setupDefaultForeground(View view) {
-        setupDefaultForeground(view, view.getContext().getDrawable(R.drawable.lv_click_foreground));
-    }
-
-    public static void setupDefaultForeground(View view, Drawable drawable) {
-        if (view instanceof IForeground) {
-            ((IForeground) view).setForeground(drawable);
-        } else {
-            if (view != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                view.setForeground(drawable);
-            }
+        if (view != null && view.getContext() != null) {
+            setupForeground(view, view.getContext().getDrawable(R.drawable.lv_click_foreground));
         }
     }
 
-    public static void clearDefaultForeground(View view) {
-        setupDefaultForeground(view, null);
+    private static void setupForeground(View view, Drawable drawable) {
+        if (view instanceof IForeground) {
+            ((IForeground) view).setForeground(drawable);
+        }
+    }
+
+    public static void clearForeground(View view) {
+        if (view instanceof IForeground) {
+            ((IForeground) view).clearForeground();
+        }
+    }
+
+    public void init(Context context) {
     }
 
     public void init(Context context, AttributeSet attrs, int defStyle, int defStyleRes) {
@@ -81,6 +85,7 @@ public class ForegroundDelegate {
      * @param drawable The Drawable to be drawn on top of the children.
      */
     public void setForeground(View view, Drawable drawable) {
+        LogUtil.d("Foreground", view, mForeground, drawable);
         if (view != null) {
             if (mForeground != drawable) {
                 if (mForeground != null) {
@@ -100,6 +105,9 @@ public class ForegroundDelegate {
                         Rect padding = new Rect();
                         drawable.getPadding(padding);
                     }
+
+                    //update bounds
+                    updateBounds(view, drawable);//added by song
                 } else {
                     view.setWillNotDraw(true);
                 }
@@ -149,31 +157,46 @@ public class ForegroundDelegate {
     }
 
     public void draw(View view, Canvas canvas) {
+        LogUtil.d("Foreground", "draw");
         if (view != null) {
             if (mForeground != null) {
                 final Drawable foreground = mForeground;
 
                 if (mForegroundBoundsChanged) {
                     mForegroundBoundsChanged = false;
-                    final Rect selfBounds = mSelfBounds;
-                    final Rect overlayBounds = mOverlayBounds;
-
-                    final int w = view.getRight() - view.getLeft();
-                    final int h = view.getBottom() - view.getTop();
-
-                    if (mForegroundInPadding) {
-                        selfBounds.set(0, 0, w, h);
-                    } else {
-                        selfBounds.set(view.getPaddingLeft(), view.getPaddingTop(), w - view.getPaddingRight(), h - view.getPaddingBottom());
-                    }
-
-                    Gravity.apply(mForegroundGravity, foreground.getIntrinsicWidth(),
-                            foreground.getIntrinsicHeight(), selfBounds, overlayBounds);
-                    foreground.setBounds(overlayBounds);
+                    updateBounds(view, foreground);
                 }
+
                 foreground.draw(canvas);
             }
         }
+    }
+
+    public void updateBounds(View view){
+        updateBounds(view, mForeground);
+    }
+
+    /**
+     * 更新bounds
+     * @param view
+     * @param drawable
+     */
+    private void updateBounds(View view, Drawable drawable) {
+        LogUtil.d("Foreground", "updateBounds", drawable, mForegroundInPadding, mForegroundGravity, mForegroundBoundsChanged);
+        final Rect selfBounds = mSelfBounds;
+        final Rect overlayBounds = mOverlayBounds;
+
+        final int w = view.getRight() - view.getLeft();
+        final int h = view.getBottom() - view.getTop();
+
+        if (mForegroundInPadding) {
+            selfBounds.set(0, 0, w, h);
+        } else {
+            selfBounds.set(view.getPaddingLeft(), view.getPaddingTop(), w - view.getPaddingRight(), h - view.getPaddingBottom());
+        }
+
+        Gravity.apply(mForegroundGravity, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), selfBounds, overlayBounds);
+        drawable.setBounds(overlayBounds);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

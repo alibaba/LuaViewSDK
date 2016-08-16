@@ -962,6 +962,9 @@ public class UDView<T extends View> extends BaseUserdata {
                     }
                 });
             }
+            setEffects(UDViewEffect.EFFECT_CLICK);
+        } else {
+//            setEffects(UDViewEffect.EFFECT_NONE);
         }
     }
 
@@ -1254,23 +1257,24 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public UDView setEffects(Integer effects) {
-        this.mEffects = effects;
-        if (this.mEffects != null) {
-            switch (this.mEffects) {
-                case UDViewEffect.EFFECT_NONE:
-                    ForegroundDelegate.clearDefaultForeground(getView());
-                    break;
-                case UDViewEffect.EFFECT_CLICK:
-                    if(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick)) {//设置点击的ripple效果
-                        ForegroundDelegate.setupDefaultForeground(getView());
-                    }
-                    break;
+        final View view = getView();
+        if (view != null) {
+            this.mEffects = effects;
+            if (effects != null) {
+                switch (effects) {
+                    case UDViewEffect.EFFECT_NONE:
+                        ForegroundDelegate.clearForeground(view);
+                        break;
+                    case UDViewEffect.EFFECT_CLICK:
+                        ForegroundDelegate.setupDefaultForeground(view);
+                        break;
+                }
             }
         }
         return this;
     }
 
     public Integer getEffects() {
-        return this.mEffects;
+        return this.mEffects != null ? this.mEffects : UDViewEffect.EFFECT_NONE;
     }
 }

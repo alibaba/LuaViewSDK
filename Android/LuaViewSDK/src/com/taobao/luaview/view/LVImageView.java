@@ -2,6 +2,7 @@ package com.taobao.luaview.view;
 
 import com.taobao.luaview.userdata.ui.UDImageView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.imageview.LVBaseImageView;
 import com.taobao.luaview.view.interfaces.ILVView;
 

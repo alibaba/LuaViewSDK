@@ -1,11 +1,9 @@
 package com.taobao.luaview.view.foreground;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 /**
@@ -16,41 +14,27 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     private boolean enableForeground;
 
     public ForegroundRelativeLayout(Context context) {
-        this(context, null);
-    }
-
-    public ForegroundRelativeLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public ForegroundRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
-        this(context, attrs, defStyle, 0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ForegroundRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate = new ForegroundDelegate();
-            mForegroundDelegate.init(context, attrs, defStyleAttr, defStyleRes);
         }
     }
-
 
     @Override
     public int getForegroundGravity() {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return mForegroundDelegate.getForegroundGravity();
+        } else {
             return super.getForegroundGravity();
         }
-        return mForegroundDelegate.getForegroundGravity();
     }
 
     @Override
     public void setForegroundGravity(int foregroundGravity) {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.setForegroundGravity(foregroundGravity);
-        } else {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.setForegroundGravity(this, foregroundGravity);
+        } else {
+            super.setForegroundGravity(foregroundGravity);
         }
     }
 
@@ -83,19 +67,24 @@ public class ForegroundRelativeLayout extends RelativeLayout implements IForegro
     @Override
     public void setForeground(Drawable foreground) {
         enableForeground = foreground != null;
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.setForeground(foreground);
-        } else {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.setForeground(this, foreground);
+        } else {
+            super.setForeground(foreground);
         }
     }
 
     @Override
+    public void clearForeground() {
+        enableForeground = false;
+    }
+
+    @Override
     public Drawable getForeground() {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return super.getForeground();
-        } else {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return mForegroundDelegate.getForeground();
+        } else {
+            return super.getForeground();
         }
     }
 

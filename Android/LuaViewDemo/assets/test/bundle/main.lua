@@ -1,5 +1,5 @@
 --工具包引入
-require "kit/lv_kit"
+require "lv_kit"
 
 w, h = System.screenSize()
 

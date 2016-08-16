@@ -23,8 +23,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import com.taobao.luaview.util.LogUtil;
 
 /**
  * ImageView can set foreground
@@ -35,42 +36,43 @@ public class ForegroundImageView extends ImageView implements IForeground {
     private boolean enableForeground;
 
     public ForegroundImageView(Context context) {
-        this(context, null);
-    }
-
-    public ForegroundImageView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public ForegroundImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
+        super(context);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate = new ForegroundDelegate();
-            mForegroundDelegate.init(context, attrs, defStyle, 0);
+        }
+    }
+
+    @Override
+    public void setImageDrawable(Drawable drawable) {
+        super.setImageDrawable(drawable);
+        if (enableForeground && mForegroundDelegate != null) {//bugfix 图片设置的时候会有ripple不出来的情况，这里处理一下
+            mForegroundDelegate.updateBounds(this);
         }
     }
 
     @Override
     public int getForegroundGravity() {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return super.getForegroundGravity();
-        } else {
+        LogUtil.d("Foreground", "getForegroundGravity", enableForeground);
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return mForegroundDelegate.getForegroundGravity();
+        } else {
+            return super.getForegroundGravity();
         }
     }
 
     @Override
     public void setForegroundGravity(int foregroundGravity) {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.setForegroundGravity(foregroundGravity);
-        } else {
+        LogUtil.d("Foreground", "setForegroundGravity", foregroundGravity, enableForeground);
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.setForegroundGravity(this, foregroundGravity);
+        } else {
+            super.setForegroundGravity(foregroundGravity);
         }
     }
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
+        LogUtil.d("Foreground", "verifyDrawable", who, enableForeground, super.verifyDrawable(who), (who == mForegroundDelegate.getForeground()));
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return super.verifyDrawable(who) || (who == mForegroundDelegate.getForeground());
         } else {
@@ -80,6 +82,7 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     public void jumpDrawablesToCurrentState() {
+        LogUtil.d("Foreground", "jumpDrawablesToCurrentState", enableForeground);
         super.jumpDrawablesToCurrentState();
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.jumpDrawablesToCurrentState();
@@ -88,6 +91,7 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     protected void drawableStateChanged() {
+        LogUtil.d("Foreground", "drawableStateChanged", enableForeground);
         super.drawableStateChanged();
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.drawableStateChanged(this);
@@ -97,25 +101,34 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     public void setForeground(Drawable foreground) {
+        LogUtil.d("Foreground", "setForeground", enableForeground);
         enableForeground = foreground != null;
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.setForeground(foreground);
-        } else {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.setForeground(this, foreground);
+        } else {
+            super.setForeground(foreground);
         }
     }
 
     @Override
+    public void clearForeground() {
+        LogUtil.d("Foreground", "clearForeground");
+        enableForeground = false;
+    }
+
+    @Override
     public Drawable getForeground() {
-        if (!enableForeground || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return super.getForeground();
-        } else {
+        LogUtil.d("Foreground", "getForeground", enableForeground);
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return mForegroundDelegate.getForeground();
+        } else {
+            return super.getForeground();
         }
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        LogUtil.d("Foreground", "onLayout", enableForeground, changed);
         super.onLayout(changed, left, top, right, bottom);
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.onLayout(changed, left, top, right, bottom);
@@ -124,6 +137,7 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        LogUtil.d("Foreground", "onSizeChanged", enableForeground);
         super.onSizeChanged(w, h, oldw, oldh);
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.onSizeChanged(w, h, oldw, oldh);
@@ -132,6 +146,7 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     public void draw(Canvas canvas) {
+        LogUtil.d("Foreground", "draw", enableForeground);
         super.draw(canvas);
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.draw(this, canvas);
@@ -140,6 +155,7 @@ public class ForegroundImageView extends ImageView implements IForeground {
 
     @Override
     public void drawableHotspotChanged(float x, float y) {
+        LogUtil.d("Foreground", "drawableHotspotChanged", enableForeground);
         super.drawableHotspotChanged(x, y);
         if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mForegroundDelegate.drawableHotspotChanged(x, y);

@@ -12,6 +12,7 @@ import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.imageview.BaseImageView;
 
 import org.luaj.vm2.Globals;

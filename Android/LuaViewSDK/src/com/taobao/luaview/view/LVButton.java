@@ -6,6 +6,7 @@ import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDButton;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.view.foreground.ForegroundButton;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.interfaces.ILVView;
 
 import org.luaj.vm2.Globals;
