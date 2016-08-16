@@ -914,8 +914,22 @@ public class UDView<T extends View> extends BaseUserdata {
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
+            
+            //setup click effects
+            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick));
         }
         return this;
+    }
+
+    private void setupClickEffects(boolean isValid) {
+        //setup effect
+        if(LuaViewConfig.isAutoSetupClickEffects()){
+            if(isValid){
+                setEffects(UDViewEffect.EFFECT_CLICK);
+            } else {
+                setEffects(UDViewEffect.EFFECT_NONE);
+            }
+        }
     }
 
     /**
@@ -953,8 +967,7 @@ public class UDView<T extends View> extends BaseUserdata {
      * 点击
      */
     private void setOnClickListener() {
-        boolean isValid = LuaUtil.isValid(this.mOnClick);
-        if (isValid) {
+        if (LuaUtil.isValid(this.mOnClick)) {
             final T view = getView();
             if (view != null) {
                 view.setOnClickListener(new View.OnClickListener() {
@@ -965,17 +978,13 @@ public class UDView<T extends View> extends BaseUserdata {
                 });
             }
         }
-        setupClickEffects(isValid);
-
-
     }
 
     /**
      * 长按
      */
     private void setOnLongClickListener() {
-        boolean isValid = LuaUtil.isValid(this.mOnLongClick);
-        if (isValid) {
+        if (LuaUtil.isValid(this.mOnLongClick)) {
             final T view = getView();
             if (view != null) {
                 view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -984,18 +993,6 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnLongClick();
                     }
                 });
-            }
-        }
-        setupClickEffects(isValid);
-    }
-
-    private void setupClickEffects(boolean isValid) {
-        //setup effect
-        if(LuaViewConfig.isAutoSetupClickEffects()){
-            if(isValid){
-                setEffects(UDViewEffect.EFFECT_CLICK);
-            } else {
-                setEffects(UDViewEffect.EFFECT_NONE);
             }
         }
     }
