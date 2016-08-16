@@ -974,7 +974,7 @@ public class UDView<T extends View> extends BaseUserdata {
      * 长按
      */
     private void setOnLongClickListener() {
-        boolean isValid = LuaUtil.isValid(this.mOnLongClick)
+        boolean isValid = LuaUtil.isValid(this.mOnLongClick);
         if (isValid) {
             final T view = getView();
             if (view != null) {
