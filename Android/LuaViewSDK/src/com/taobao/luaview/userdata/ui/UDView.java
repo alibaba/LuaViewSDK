@@ -962,9 +962,6 @@ public class UDView<T extends View> extends BaseUserdata {
                     }
                 });
             }
-            setEffects(UDViewEffect.EFFECT_CLICK);
-        } else {
-//            setEffects(UDViewEffect.EFFECT_NONE);
         }
     }
 
