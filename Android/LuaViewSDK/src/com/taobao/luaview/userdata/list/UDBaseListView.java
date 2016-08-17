@@ -31,7 +31,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
 
 
     @Override
-    public UDBaseListOrRecyclerView reload() {
+    public UDBaseListOrRecyclerView reload(Integer section, Integer row) {
         final T lv = getView();
         if (lv instanceof ILVListView) {
             init();//重新初始化数据

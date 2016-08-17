@@ -227,7 +227,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备失败
                         loadScriptBundle(bundle, callback);
                     } else if (callback != null) {
-                        callback.onScriptExecuted(false);
+                        callback.onScriptExecuted(url, false);
                     }
                 }
             });
@@ -300,7 +300,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             this.loadScriptInternal(scriptFile, callback);
         } else {
             if (callback != null) {
-                callback.onScriptExecuted(false);
+                callback.onScriptExecuted(getUri(), false);
             }
         }
         return this;
@@ -332,7 +332,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
         } else {
             if (callback != null) {
-                callback.onScriptExecuted(false);
+                callback.onScriptExecuted(getUri(), false);
             }
         }
         return this;
@@ -538,6 +538,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return this.isRefreshContainerEnable;
     }
 
+
+    public String getUri(){
+        if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
+           return mGlobals.getLuaResourceFinder().getUri();
+        }
+        return null;
+    }
     //-------------------------------------------私有------------------------------------------------
 
     /**
@@ -586,7 +593,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             }
 
             @Override
-            public void onScriptExecuted(boolean executedSuccess) {
+            public void onScriptExecuted(String uri, boolean executedSuccess) {
                 if (executedSuccess && mGlobals != null) {
                     StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                             .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket
@@ -696,7 +703,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 DebugUtil.tei("Time-prototype-3");
                 mGlobals.restoreContainer();
                 if (callback != null) {
-                    callback.onScriptExecuted(true);
+                    callback.onScriptExecuted(getUri(), true);
                 }
                 return true;
             }
@@ -705,7 +712,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             LogUtil.e("[Executed Script Failed]", e);
         }
         if (callback != null) {
-            callback.onScriptExecuted(false);
+            callback.onScriptExecuted(getUri(), false);
         }
         return false;
     }

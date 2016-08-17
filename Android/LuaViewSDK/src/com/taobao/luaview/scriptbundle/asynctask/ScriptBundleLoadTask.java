@@ -18,7 +18,6 @@ import org.luaj.vm2.LuaError;
 import org.luaj.vm2.Prototype;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -52,7 +51,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
         if (LoadState.instance != null && scriptFile != null) {
             try {
                 return LoadState.instance.undump(new ByteArrayInputStream(scriptFile.scriptData), scriptFile.getFilePath());
-            } catch (LuaError error){
+            } catch (LuaError error) {
                 error.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -81,16 +80,25 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
     /**
      * 加载加密过的脚本
+     *
      * @param context
      * @param scriptFile
      * @return
      */
-    public static byte[] loadEncryptScript(final Context context, final ScriptFile scriptFile){
-        if(scriptFile != null){
-            if(scriptFile.signData != null && scriptFile.signData.length > 0){//加密过则进行解密并unzip
-                return ZipUtil.unzip(DecryptUtil.aes(context, scriptFile.scriptData));
+    public static byte[] loadEncryptScript(final Context context, final boolean isBytecode, final ScriptFile scriptFile) {
+        if (scriptFile != null) {
+            if (isBytecode) {//bytecode不进行unzip
+                if (scriptFile.signData != null && scriptFile.signData.length > 0) {//加密过则进行解密并unzip
+                    return DecryptUtil.aes(context, scriptFile.scriptData);
+                } else {
+                    return scriptFile.scriptData;
+                }
             } else {
-                return ZipUtil.unzip(scriptFile.scriptData);
+                if (scriptFile.signData != null && scriptFile.signData.length > 0) {//加密过则进行解密并unzip
+                    return ZipUtil.unzip(DecryptUtil.aes(context, scriptFile.scriptData));
+                } else {
+                    return ZipUtil.unzip(scriptFile.scriptData);
+                }
             }
         }
         return null;
@@ -127,14 +135,15 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
 
     /**
      * 验证一个脚本
+     *
      * @param isBytecode
      * @param script
      * @return
      */
     private static boolean verifyScript(Context context, boolean isBytecode, ScriptFile script) {
-        if(script != null){
-            if(isBytecode){//bytecode 模式下，如果没有signdata也算验证通过
-                if(script.signData != null && script.signData.length > 0){
+        if (script != null) {
+            if (isBytecode) {//bytecode 模式下，如果没有signdata也算验证通过
+                if (script.signData != null && script.signData.length > 0) {
                     return VerifyUtil.rsa(context, script.scriptData, script.signData);
                 }
                 return true;
@@ -183,7 +192,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             ScriptFile scriptFile = null;
             for (String key : files.keySet()) {
                 scriptFile = files.get(key);
-                scriptFile.scriptData = loadEncryptScript(mContext, scriptFile);
+                scriptFile.scriptData = loadEncryptScript(mContext, scriptBundle.isBytecode(), scriptFile);
                 if (scriptBundle.isBytecode()) {//如果是bytecode，则加载prototype
                     scriptFile.prototype = loadPrototype(mContext, scriptFile);
                 }

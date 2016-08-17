@@ -55,10 +55,10 @@ public class LuaScriptLoader {
 
         /**
          * 脚本执行完成，参数表示是否执行成功，保证一定被调用到
-         *
+         * @param uri 原始的加载url
          * @param executedSuccess
          */
-        void onScriptExecuted(boolean executedSuccess);
+        void onScriptExecuted(String uri, boolean executedSuccess);
     }
 
     //-----------------------------------------static methods---------------------------------------

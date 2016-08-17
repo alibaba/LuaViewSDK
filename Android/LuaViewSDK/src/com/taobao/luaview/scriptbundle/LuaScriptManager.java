@@ -171,7 +171,7 @@ public class LuaScriptManager {
      */
     public static boolean existsScriptBundle(final String uri) {
         if (!TextUtils.isEmpty(uri)) {
-            final String scriptFilePath = buildScriptBundleFolderPath(uri);
+            final String scriptFilePath = buildScriptBundleFilePath(uri);//bundle exists
             return FileUtil.exists(scriptFilePath);//这里只需要判断folder存在与否，如果folder存在则只需要用folder来判断即可
         }
         return false;
