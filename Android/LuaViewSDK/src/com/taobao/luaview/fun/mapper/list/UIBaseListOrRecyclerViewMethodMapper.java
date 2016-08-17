@@ -76,7 +76,9 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @return
      */
     public LuaValue reload(U view, Varargs varargs) {
-        return getUDBaseListOrRecyclerView(varargs).reload();
+        final Integer section = LuaUtil.toJavaInt(LuaUtil.getInt(varargs, 2));//get section
+        final Integer row = LuaUtil.toJavaInt(LuaUtil.getInt(varargs, 3));//get row
+        return getUDBaseListOrRecyclerView(varargs).reload(section, row);
     }
 
 

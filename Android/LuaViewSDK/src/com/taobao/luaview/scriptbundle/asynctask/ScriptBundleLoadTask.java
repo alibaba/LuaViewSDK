@@ -85,12 +85,20 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
      * @param scriptFile
      * @return
      */
-    public static byte[] loadEncryptScript(final Context context, final ScriptFile scriptFile) {
+    public static byte[] loadEncryptScript(final Context context, final boolean isBytecode, final ScriptFile scriptFile) {
         if (scriptFile != null) {
-            if (scriptFile.signData != null && scriptFile.signData.length > 0) {//加密过则进行解密并unzip
-                return ZipUtil.unzip(DecryptUtil.aes(context, scriptFile.scriptData));
+            if (isBytecode) {//bytecode不进行unzip
+                if (scriptFile.signData != null && scriptFile.signData.length > 0) {//加密过则进行解密并unzip
+                    return DecryptUtil.aes(context, scriptFile.scriptData);
+                } else {
+                    return scriptFile.scriptData;
+                }
             } else {
-                return ZipUtil.unzip(scriptFile.scriptData);
+                if (scriptFile.signData != null && scriptFile.signData.length > 0) {//加密过则进行解密并unzip
+                    return ZipUtil.unzip(DecryptUtil.aes(context, scriptFile.scriptData));
+                } else {
+                    return ZipUtil.unzip(scriptFile.scriptData);
+                }
             }
         }
         return null;
@@ -184,7 +192,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             ScriptFile scriptFile = null;
             for (String key : files.keySet()) {
                 scriptFile = files.get(key);
-                scriptFile.scriptData = loadEncryptScript(mContext, scriptFile);
+                scriptFile.scriptData = loadEncryptScript(mContext, scriptBundle.isBytecode(), scriptFile);
                 if (scriptBundle.isBytecode()) {//如果是bytecode，则加载prototype
                     scriptFile.prototype = loadPrototype(mContext, scriptFile);
                 }

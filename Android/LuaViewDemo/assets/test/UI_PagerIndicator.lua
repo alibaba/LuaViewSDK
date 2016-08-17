@@ -6,8 +6,9 @@ local SCREEN_WIDTH = System.screenSize()
 
 function createCircleIndicator()
     local indicator = PagerIndicator()
-    indicator.size(SCREEN_WIDTH / 2, 100)
-    indicator.alignCenter()
+--    indicator.size(SCREEN_WIDTH / 2, 100)
+--    indicator.alignCenter()
+    indicator.frame(10, 100, SCREEN_WIDTH / 2, 100)
     return indicator
 end
 
