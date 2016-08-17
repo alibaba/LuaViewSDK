@@ -34,8 +34,8 @@ public class ForegroundDelegate {
     }
 
     public static void setupDefaultForeground(View view) {
-        if (view != null && view.getContext() != null) {
-            setupForeground(view, view.getContext().getDrawable(R.drawable.lv_click_foreground));
+        if (view != null && view.getResources() != null) {
+            setupForeground(view, view.getResources().getDrawable(R.drawable.lv_click_foreground));
         }
     }
 

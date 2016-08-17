@@ -27,9 +27,9 @@ public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
             "stop",//3
             "seekTo",//4
             "callback",//5
-            "playing",//8
-            "pausing",//9
-            "looping"//10
+            "playing",//6
+            "pausing",//7
+            "looping"//8
     };
 
     @Override

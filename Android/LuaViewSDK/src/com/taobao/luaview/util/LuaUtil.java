@@ -44,10 +44,10 @@ public class LuaUtil {
      */
     public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int... poslist) {
         final Float timeOfFloat = getFloat(varargs, poslist);
-        if(timeOfFloat != null){
-            return (long)(timeOfFloat * 1000);
-        } else if (defaultSeconds != null){
-            return (long)(defaultSeconds * 1000);
+        if (timeOfFloat != null) {
+            return (long) (timeOfFloat * 1000);
+        } else if (defaultSeconds != null) {
+            return (long) (defaultSeconds * 1000);
         } else {
             return null;
         }
@@ -587,6 +587,15 @@ public class LuaUtil {
      */
     public static int toJavaInt(LuaValue pos) {
         return pos.optint(1) - 1;
+    }
+
+    /**
+     * convert a lua Int to java Int
+     * @param luaInt
+     * @return
+     */
+    public static Integer toJavaInt(Integer luaInt) {
+        return luaInt != null ? luaInt - 1 : null;
     }
 
 
