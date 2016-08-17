@@ -34,7 +34,7 @@ public class UDRefreshListView extends UDBaseListView<LVRefreshListView> impleme
      */
     public void initPullRefresh() {
         final LVRefreshListView view = getView();
-        if (view != null && !mCallback.isnil()) {
+        if (view != null && LuaUtil.isValid(mCallback)) {
             view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -64,12 +64,12 @@ public class UDRefreshListView extends UDBaseListView<LVRefreshListView> impleme
     @Override
     public void onRefresh(final Object param) {
         final LVRefreshListView view = getView();
-        if (view != null && !mCallback.isnil()) {
+        if (view != null && LuaUtil.isValid(mCallback)) {
             //这里必须放在handler中执行，否则会造成nullpointerexception(dispatchDraw的时候调用removeView出错) http://dashasalo.com/2013/09/16/android-removeview-crashes-animation-listener/
             view.post(new Runnable() {//下一帧回调，否则会造成view onDraw乱序。否则在同一帧调用的时候再调用addView, removeView会有bug
                 @Override
                 public void run() {
-                    if (!mCallback.isnil()) {
+                    if (LuaUtil.isValid(mCallback)) {
                         LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "PullDown", "pullDown"));
                     }
 

@@ -25,24 +25,32 @@ public class LuaUtil {
 
     /**
      * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     *
      * @param varargs
      * @param poslist
      * @return
      */
-    public static Long getTimeLong(final Varargs varargs, int...poslist){
+    public static Long getTimeLong(final Varargs varargs, int... poslist) {
         return getTimeLong(varargs, null, poslist);
     }
 
     /**
      * 获取时间，入参为秒(可以是小数)，输出为毫秒
+     *
      * @param varargs
      * @param defaultSeconds
      * @param poslist
      * @return
      */
-    public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int...poslist){
+    public static Long getTimeLong(final Varargs varargs, Float defaultSeconds, int... poslist) {
         final Float timeOfFloat = getFloat(varargs, poslist);
-        return timeOfFloat != null ? (long)(timeOfFloat * 1000) : (defaultSeconds != null ? (long)(defaultSeconds * 1000) : null);
+        if (timeOfFloat != null) {
+            return (long) (timeOfFloat * 1000);
+        } else if (defaultSeconds != null) {
+            return (long) (defaultSeconds * 1000);
+        } else {
+            return null;
+        }
     }
 
 
@@ -183,6 +191,18 @@ public class LuaUtil {
         return (LuaFunction) getValueFromTable(LuaValue.TFUNCTION, valueList, keylist);
     }
 
+
+    /**
+     * 获取LuaValue
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static LuaValue getValue(final Varargs varargs, int... poslist) {
+        return (LuaValue) getValue(LuaValue.TVALUE, varargs, poslist);
+    }
+
     /**
      * 获取userdata
      *
@@ -296,6 +316,8 @@ public class LuaUtil {
             case LuaValue.TUSERDATA:
                 if (isUserdata(value)) return value.checkuserdata();
                 break;
+            case LuaValue.TVALUE:
+                return value;
         }
         return null;
     }
@@ -444,7 +466,7 @@ public class LuaUtil {
         }
     }
 
-    public static Varargs callFunction(LuaValue target, Object... objs){
+    public static Varargs callFunction(LuaValue target, Object... objs) {
         if (target != null && target.isfunction()) {
             LuaValue[] args = null;
             if (objs != null && objs.length > 0) {
@@ -565,6 +587,15 @@ public class LuaUtil {
      */
     public static int toJavaInt(LuaValue pos) {
         return pos.optint(1) - 1;
+    }
+
+    /**
+     * convert a lua Int to java Int
+     * @param luaInt
+     * @return
+     */
+    public static Integer toJavaInt(Integer luaInt) {
+        return luaInt != null ? luaInt - 1 : null;
     }
 
 

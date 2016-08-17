@@ -216,6 +216,7 @@ static int __tostring (lv_State *L) {
         
         {"delay", delay },
         {"repeat", repeat },
+        {"repeatCount", repeat },
         {"interval", interval },
         
         {"__gc", __gc },

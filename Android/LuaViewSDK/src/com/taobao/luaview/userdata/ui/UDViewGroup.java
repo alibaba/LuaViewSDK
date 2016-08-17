@@ -3,6 +3,8 @@ package com.taobao.luaview.userdata.ui;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
@@ -24,6 +26,10 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private LuaValue mOnHide;
     private LuaValue mOnBack;
     private LuaValue mOnLayout;
+
+    public UDViewGroup(T view, Globals globals, LuaValue initParams) {
+        this(view, globals, LuaViewManager.createMetatable(UIViewGroupMethodMapper.class), initParams);
+    }
 
     public UDViewGroup(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
         super(view, globals, metatable, initParams);

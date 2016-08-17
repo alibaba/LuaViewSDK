@@ -7,11 +7,60 @@ import com.taobao.luaview.util.DimenUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * HorizontalScrollView的方法映射
  */
 @LuaViewLib
 public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView> extends UIViewGroupMethodMapper<U> {
+
+    private static final String TAG = UIHorizontalScrollViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "offset",//0
+            "scrollTo",//1
+            "offsetBy",//2
+            "scrollBy",//3
+            "smoothScrollTo",//4
+            "smoothScrollBy",//5
+            "pageScroll",//6
+            "fullScroll",//7
+            "contentSize"//8
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return offset(target, varargs);
+            case 1:
+                return scrollTo(target, varargs);
+            case 2:
+                return offsetBy(target, varargs);
+            case 3:
+                return scrollBy(target, varargs);
+            case 4:
+                return smoothScrollTo(target, varargs);
+            case 5:
+                return smoothScrollBy(target, varargs);
+            case 6:
+                return pageScroll(target, varargs);
+            case 7:
+                return fullScroll(target, varargs);
+            case 8:
+                return contentSize(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     /**
      * 滚动到某个位置

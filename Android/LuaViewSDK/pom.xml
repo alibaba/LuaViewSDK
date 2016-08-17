@@ -43,9 +43,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
-                    <sdk>
-                        <platform>18</platform>
-                    </sdk>
                     <sourceDirectories>${project.basedir}/src</sourceDirectories>
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                     <resourceDirectory>${project.basedir}/res</resourceDirectory>
@@ -73,7 +70,7 @@
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>4.4.2</version>
+            <version>r23</version>
             <scope>provided</scope>
         </dependency>
 
@@ -81,17 +78,26 @@
         <dependency>
             <groupId>com.android.support</groupId>
             <artifactId>support-v4</artifactId>
-            <version>22.0.0</version>
+            <version>23.0.1</version>
             <type>aar</type>
             <scope>provided</scope>
         </dependency>
 
+        <!-- app compat-->
+        <!--<dependency>
+            <groupId>com.android.support</groupId>
+            <artifactId>appcompat-v7</artifactId>
+            <version>22.2.0</version>
+            <type>aar</type>
+            <scope>provided</scope>
+        </dependency>-->
+
         <!--recycler view-->
         <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>support-v7-recyclerview</artifactId>
-            <version>22</version>
-            <type>jar</type>
+            <groupId>com.android.support</groupId>
+            <artifactId>recyclerview-v7</artifactId>
+            <version>23.0.1</version>
+            <type>aar</type>
             <scope>provided</scope>
         </dependency>
 

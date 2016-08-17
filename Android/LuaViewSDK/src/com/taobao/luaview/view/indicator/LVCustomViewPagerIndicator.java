@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.indicator.UDCustomViewPagerIndicator;
 import com.taobao.luaview.userdata.ui.UDView;
@@ -106,7 +108,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
     private LuaValue createView(int pos, int currentItem) {
         //View封装
         final LVViewGroup container = createCellLayout();
-        final UDViewGroup cell = new UDViewGroup(container, mGlobals, mInitParams.getmetatable(), null);
+        final UDViewGroup cell = new UDViewGroup(container, mGlobals, null);
         //对外数据封装，必须使用LuaTable
         final UDLuaTable cellData = new UDLuaTable(cell);
 

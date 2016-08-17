@@ -13,6 +13,8 @@ import com.facebook.csslayout.Spacing;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
+import com.taobao.luaview.view.foreground.ForegroundRelativeLayout;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
+public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGroup {
     public Globals mGlobals;
 
     private UDViewGroup mLuaUserdata;

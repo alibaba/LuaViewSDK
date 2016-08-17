@@ -7,12 +7,12 @@ import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
-import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 /**
  * LuaView-Container
@@ -21,7 +21,7 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
  * @author song
  * @date 15/8/20
  */
-public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup {
+public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup, ILVNativeViewProvider {
     private UDView mLuaUserdata;
 
     public LVCustomPanel(Globals globals, LuaValue metaTable, Varargs varargs) {
@@ -63,6 +63,7 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup 
     }
 
     //获取native view
+    @Override
     public View getNativeView() {
         if (getChildCount() > 0 && getChildAt(0) != null) {
             return getChildAt(0);

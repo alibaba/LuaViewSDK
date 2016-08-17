@@ -18,25 +18,15 @@ import java.io.Serializable;
  * @date 15/8/21
  */
 public class BaseLuaTable extends LuaTable implements Serializable {
-    private Object mObj;
     private Globals mGlobals;
     private LuaValue mMetatable;
     public Varargs mVarargs;
 
     public BaseLuaTable(Globals globals, LuaValue metatable) {
-        this(null, globals, metatable, NIL);
+        this(globals, metatable, NIL);
     }
 
     public BaseLuaTable(Globals globals, LuaValue metatable, Varargs varargs) {
-        this(null, globals, metatable, varargs);
-    }
-
-    public BaseLuaTable(Object obj, Globals globals, LuaValue metatable) {
-        this(obj, globals, metatable, NIL);
-    }
-
-    public BaseLuaTable(Object obj, Globals globals, LuaValue metatable, Varargs varargs) {
-        this.mObj = obj;
         this.mGlobals = globals;
         this.mMetatable = metatable;
         this.mVarargs = varargs;

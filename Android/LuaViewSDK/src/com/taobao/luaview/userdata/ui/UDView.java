@@ -10,16 +10,23 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.base.BaseUserdata;
+import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
+import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +49,12 @@ public class UDView<T extends View> extends BaseUserdata {
     //动画列表
     private List<Animator> mAnimators;
 
-    /**
-     * Flexbox layout
-     */
+    //Flexbox layout
     private CSSNode mCssNode;
     private String mFlexCss;
+
+    //effects
+    private Integer mEffects;
 
     public CSSNode getCssNode() {
         if (mCssNode == null) {
@@ -85,6 +93,19 @@ public class UDView<T extends View> extends BaseUserdata {
     public T getView() {
         Object userdata = userdata();
         return userdata != null ? (T) userdata : null;
+    }
+
+    /**
+     * get native view
+     *
+     * @return
+     */
+    public LuaValue getNativeView() {
+        View view = getView();
+        if (view instanceof ILVNativeViewProvider) {
+            view = ((ILVNativeViewProvider) view).getNativeView();
+        }
+        return view != null ? CoerceJavaToLua.coerce(view) : LuaValue.NIL;
     }
 
     public Context getContext() {
@@ -895,8 +916,24 @@ public class UDView<T extends View> extends BaseUserdata {
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
+
+            //setup click effects
+            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick));
         }
         return this;
+    }
+
+    private void setupClickEffects(boolean isValid) {
+        DebugUtil.tsi("Foreground-setupClickEffects");
+        //setup effect
+        if(LuaViewConfig.isAutoSetupClickEffects()){
+            if(isValid){
+                setEffects(UDViewEffect.EFFECT_CLICK);
+            } else {
+                setEffects(UDViewEffect.EFFECT_NONE);
+            }
+        }
+        DebugUtil.tei("Foreground-setupClickEffects");
     }
 
     /**
@@ -1224,5 +1261,36 @@ public class UDView<T extends View> extends BaseUserdata {
      */
     public boolean isAnimating() {
         return AnimatorUtil.isRunning(mAnimators);
+    }
+
+
+    /**
+     * 设置View的effects
+     * 无特效 <= -1
+     * 点击特效 1
+     *
+     * @param effects
+     * @return
+     */
+    public UDView setEffects(Integer effects) {
+        final View view = getView();
+        if (view != null) {
+            this.mEffects = effects;
+            if (effects != null) {
+                switch (effects) {
+                    case UDViewEffect.EFFECT_NONE:
+                        ForegroundDelegate.clearForeground(view);
+                        break;
+                    case UDViewEffect.EFFECT_CLICK:
+                        ForegroundDelegate.setupDefaultForeground(view);
+                        break;
+                }
+            }
+        }
+        return this;
+    }
+
+    public Integer getEffects() {
+        return this.mEffects != null ? this.mEffects : UDViewEffect.EFFECT_NONE;
     }
 }

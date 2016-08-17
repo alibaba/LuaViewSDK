@@ -53,6 +53,9 @@ local vp = PagerView({
                                 btn.text("BTN" .. i)
                                 btn.frame(i * 80, 0, 79, 100)
                                 btn.backgroundColor(0xff00ff00)
+                                btn.callback(function()
+                                    Toast(btn.text())
+                                end)
                                 scrollView.addView(btn)
                             end
                             scrollView.size(w, 100)
@@ -79,6 +82,9 @@ local vp = PagerView({
                                     Layout = function(page, pos)
                                         page.icon.text("测试按钮"..pos)
                                         page.icon.frame(0, 0, w, 100)
+                                        page.icon.callback(function()
+                                            Toast(page.icon.text())
+                                        end)
                                     end
                                 }
                             })
@@ -105,11 +111,17 @@ local vp = PagerView({
                             cell.icon.image(imageUrl1, function()
                                 print("imageLoaded-ImageAndImage-1", section, row)
                             end)
+                            cell.icon.callback(function()
+                                print("cell_icon1")
+                            end)
 
 
                             cell.icon2.frame(cellHeight + 10, 0, cellHeight, cellHeight)
                             cell.icon2.image(imageUrl1, function()
                                 print("imageLoaded-ImageAndImage-2", section, row)
+                            end)
+                            cell.icon2.callback(function()
+                                print("cell_icon2")
                             end)
                         end
                     }

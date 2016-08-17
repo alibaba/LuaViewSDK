@@ -46,7 +46,6 @@ public class ZipUtil {
         }
     }
 
-
     /**
      * 将zip过的数据解压缩出来
      *
@@ -56,16 +55,18 @@ public class ZipUtil {
     public static byte[] unzip(byte[] compressed) {
         ByteArrayInputStream is = null;
         GZIPInputStream gis = null;
+        ByteArrayOutputStream out = null;
         try {
             is = new ByteArrayInputStream(compressed);
             gis = new GZIPInputStream(is, BUFFER_SIZE);
-            StringBuilder sb = new StringBuilder();
+            out = new ByteArrayOutputStream();
             byte[] data = new byte[BUFFER_SIZE];
             int bytesRead;
             while ((bytesRead = gis.read(data)) != -1) {
-                sb.append(new String(data, 0, bytesRead));
+                out.write(data, 0, bytesRead);
             }
-            return sb.toString().getBytes();
+            out.flush();
+            return out.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -76,6 +77,9 @@ public class ZipUtil {
                 }
                 if (is != null) {
                     is.close();
+                }
+                if (out != null) {
+                    out.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
