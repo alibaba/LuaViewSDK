@@ -58,7 +58,9 @@ public class LVPagerAdapter extends PagerAdapter {
         final UDLuaTable pageData = new UDLuaTable(page);
         final View pageView = pageData.getView();
         //添加view
-        container.addView(pageView);
+        if(container != null) {
+            container.addView(pageView);
+        }
         //初始化View
         initView(pageData, position);
         //绘制数据
@@ -81,7 +83,7 @@ public class LVPagerAdapter extends PagerAdapter {
      * @param object
      */
     private void removeItem(ViewGroup container, int position, Object object) {
-        if (object instanceof View) {
+        if (container != null && object instanceof View) {
             container.removeView((View) object);
         }
     }
@@ -94,8 +96,10 @@ public class LVPagerAdapter extends PagerAdapter {
      */
     private RelativeLayout.LayoutParams createLayoutParams(ViewGroup container) {
         final RelativeLayout.LayoutParams layoutParams = LuaViewUtil.createRelativeLayoutParamsWM();
-        layoutParams.width = container.getMeasuredWidth();
-        layoutParams.height = container.getMeasuredHeight();
+        if(container != null) {
+            layoutParams.width = container.getMeasuredWidth();
+            layoutParams.height = container.getMeasuredHeight();
+        }
         return layoutParams;
     }
 
