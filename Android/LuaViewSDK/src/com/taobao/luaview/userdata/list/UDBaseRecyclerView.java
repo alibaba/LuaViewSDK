@@ -46,7 +46,14 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             recyclerView.updateMaxSpanCount();
             RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
             if (adapter != null) {
-                if (section == null || (section < 0 || section >= getSectionCount())) {//如果 section 无效则刷新所有
+                adapter.notifyDataSetChanged();
+            }
+        }
+        return this;
+    }
+
+    private void reload(){
+        /*if (section == null || (section < 0 || section >= getSectionCount())) {//如果 section 无效则刷新所有
                     adapter.notifyDataSetChanged();
                 } else {//如果传递了section，row，则表示要更新部分
                     final int newTotalCount = getRawTotalCount();
@@ -79,10 +86,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                             adapter.notifyDataSetChanged();
                         }
                     }
-                }
-            }
-        }
-        return this;
+                }*/
     }
 
     @Override
