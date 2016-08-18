@@ -22,7 +22,8 @@ public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGr
 
     private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
     private static final String[] sMethods = new String[]{
-            "nativeView"//0
+            "nativeView",//0
+            "getNativeView"//1
     };
 
     @Override
@@ -36,6 +37,8 @@ public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGr
         switch (optcode) {
             case 0:
                 return nativeView(target, varargs);
+            case 1:
+                return getNativeView(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
