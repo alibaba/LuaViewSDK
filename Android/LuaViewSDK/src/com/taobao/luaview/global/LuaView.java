@@ -342,7 +342,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 return this;
             }
         }
-
         //出错回调
         if (callback != null) {
             callback.onScriptExecuted(getUri(), false);
