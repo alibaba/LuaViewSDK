@@ -322,12 +322,17 @@ public class FileUtil {
     public static void delete(final String filePath) {
         if (filePath != null) {
             File file = new File(filePath);
-            delete(file);
+            try {
+                delete(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     /**
      * delete a file
+     *
      * @param file
      */
     public static void delete(File file) {
