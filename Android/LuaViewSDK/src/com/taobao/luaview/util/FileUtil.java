@@ -339,6 +339,7 @@ public class FileUtil {
                         delete(child);
                     }
                 }
+                file.delete();
             } else {
                 file.delete();
             }
