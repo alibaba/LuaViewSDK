@@ -204,6 +204,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     loadScript(urlOrFileOrScript);
                 }
             }*/
+        } else if (callback != null) {
+            callback.onScriptExecuted(null, false);
         }
         return this;
     }
@@ -231,6 +233,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     }
                 }
             });
+        } else if (callback != null) {
+            callback.onScriptExecuted(null, false);
         }
         return this;
     }
@@ -264,6 +268,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         updateUri(luaFileName);
         if (!TextUtils.isEmpty(luaFileName)) {
             this.loadFileInternal(luaFileName, callback);//加载文件
+        } else {
+            if (callback != null) {
+                callback.onScriptExecuted(getUri(), false);
+            }
         }
         return this;
     }
@@ -281,6 +289,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     public LuaView loadScript(final String script, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (!TextUtils.isEmpty(script)) {
             this.loadScriptInternal(new ScriptFile(script, EncryptUtil.md5Hex(script)), callback);
+        } else {
+            if (callback != null) {
+                callback.onScriptExecuted(getUri(), false);
+            }
         }
         return this;
     }
@@ -298,10 +310,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     private LuaView loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (scriptFile != null) {
             this.loadScriptInternal(scriptFile, callback);
-        } else {
-            if (callback != null) {
-                callback.onScriptExecuted(getUri(), false);
-            }
+        } else if (callback != null) {
+            callback.onScriptExecuted(getUri(), false);
         }
         return this;
     }
@@ -329,11 +339,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             if (scriptBundle.containsKey(mainScriptFileName)) {
                 final ScriptFile scriptFile = scriptBundle.getScriptFile(mainScriptFileName);
                 loadScript(scriptFile, callback);
+                return this;
             }
-        } else {
-            if (callback != null) {
-                callback.onScriptExecuted(getUri(), false);
-            }
+        }
+
+        //出错回调
+        if (callback != null) {
+            callback.onScriptExecuted(getUri(), false);
         }
         return this;
     }
@@ -539,9 +551,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
 
-    public String getUri(){
+    public String getUri() {
         if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
-           return mGlobals.getLuaResourceFinder().getUri();
+            return mGlobals.getLuaResourceFinder().getUri();
         }
         return null;
     }
