@@ -15,8 +15,9 @@ import java.util.List;
 
 /**
  * Image 接口封装
- * @author song
+ *
  * @param <U>
+ * @author song
  */
 @LuaViewLib
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
@@ -81,7 +82,8 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     }
 
     public LuaValue getImage(U view, Varargs varargs) {
-        return valueOf(view.getImageUrl());
+        String imageUrl = view.getImageUrl();
+        return imageUrl != null ? valueOf(imageUrl) : LuaValue.NIL;
     }
 
 
@@ -108,6 +110,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     /**
      * 设置图片的缩放模式
      * TODO 跟iOS统一常
+     *
      * @param view
      * @param varargs
      * @return
