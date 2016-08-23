@@ -22,25 +22,22 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecyclerView {
-    public Globals mGlobals;
-
     //adapter
     private LVRecyclerView mRecyclerView;
 
     public LVRefreshRecyclerView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
 //        this.mRecyclerView = new LVRecyclerView(mGlobals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
-        this.mRecyclerView = LVRecyclerView.createVerticalView(mGlobals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
-        init();
+        this.mRecyclerView = LVRecyclerView.createVerticalView(globals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
+        init(globals);
     }
 
-    private void init() {
-        mGlobals.saveContainer(mRecyclerView);
+    private void init(Globals globals) {
+        globals.saveContainer(mRecyclerView);
         this.addView(mRecyclerView, LuaViewUtil.createRelativeLayoutParamsMM());
-        mGlobals.restoreContainer();
+        globals.restoreContainer();
 
-        if (mGlobals.getLuaView() == null || mGlobals.getLuaView().isRefreshContainerEnable() == false) {
+        if (globals.getLuaView() == null || globals.getLuaView().isRefreshContainerEnable() == false) {
             this.setEnabled(false);
         } else {
             ((UDRefreshRecyclerView) getUserdata()).initPullRefresh();

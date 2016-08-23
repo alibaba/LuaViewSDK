@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.cache.LuaCache;
@@ -24,6 +25,7 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 import com.taobao.luaview.view.LVViewGroup;
+import com.taobao.luaview.view.interfaces.ILVView;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -54,6 +56,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     //需要渲染的Target
     private ILVViewGroup mRenderTarget;
 
+    //globals
+    public Globals mGlobals;
 
     public interface CreatedCallback {
         void onCreated(LuaView luaView);
@@ -557,6 +561,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }
         return null;
     }
+
+    public Globals getGlobals() {
+        return mGlobals;
+    }
     //-------------------------------------------私有------------------------------------------------
 
     /**
@@ -587,6 +595,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     private LuaView(Context context, Globals globals, LuaValue metaTable) {
         super(context, globals, metaTable, LuaValue.NIL);
         this.mLuaCache = new LuaCache();
+        this.mGlobals = globals;
     }
 
     /**
@@ -862,7 +871,10 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     public void onDestroy() {
         clearCache();
-        super.onDestroy();
+        if (mGlobals != null) {
+            mGlobals.onDestroy();
+            mGlobals = null;
+        }
     }
 
     /**

@@ -22,7 +22,6 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVHorizontalScrollView extends HorizontalScrollView implements ILVViewGroup {
-    public Globals mGlobals;
     private UDHorizontalScrollView mLuaUserdata;
 
     //root view
@@ -30,14 +29,13 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
 
     public LVHorizontalScrollView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
         this.mLuaUserdata = new UDHorizontalScrollView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
-        init();
+        init(globals);
     }
 
-    private void init() {
+    private void init(Globals globals) {
         this.setHorizontalScrollBarEnabled(false);//不显示滚动条
-        mContainer = new LVViewGroup(mGlobals, mLuaUserdata.initParams.getmetatable(), null);
+        mContainer = new LVViewGroup(globals, mLuaUserdata.initParams.getmetatable(), null);
         addView(mContainer, LuaViewUtil.createRelativeLayoutParamsMM());
     }
 
@@ -56,7 +54,7 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
     }
 
-    public LVViewGroup getContainer(){
+    public LVViewGroup getContainer() {
         return mContainer;
     }
 }

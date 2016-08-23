@@ -95,4 +95,10 @@ public class DemoLuaViewActivity extends Activity {
     public LuaView getLuaView() {
         return mLuaView;
     }
+
+    @Override
+    protected void onDestroy() {
+        LogUtil.d("yesong-onDestroy");
+        super.onDestroy();
+    }
 }

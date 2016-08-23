@@ -1,7 +1,6 @@
 package com.taobao.luaview.view;
 
 import android.view.Gravity;
-import android.widget.TextView;
 
 import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDTextView;

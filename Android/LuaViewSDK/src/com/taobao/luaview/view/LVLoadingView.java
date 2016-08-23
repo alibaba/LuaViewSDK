@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.taobao.luaview.userdata.ui.UDLoadingView;
-import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVView;
 
@@ -20,12 +20,10 @@ import org.luaj.vm2.Varargs;
  * @date 15/8/20
  */
 public class LVLoadingView extends LVViewGroup implements ILVView {
-    private UDView mLuaUserdata;
     private ProgressBar mProgressBar;
 
     public LVLoadingView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals, metaTable, varargs);
-        this.mLuaUserdata = new UDLoadingView(this, globals, metaTable, varargs);
         init();
     }
 
@@ -47,9 +45,8 @@ public class LVLoadingView extends LVViewGroup implements ILVView {
         }
     }
 
-
     @Override
-    public UDView getUserdata() {
-        return mLuaUserdata;
+    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDLoadingView(this, globals, metaTable, varargs);
     }
 }

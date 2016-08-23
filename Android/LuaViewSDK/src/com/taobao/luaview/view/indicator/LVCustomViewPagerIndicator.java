@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 
 import com.taobao.android.luaview.R;
-import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
-import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.indicator.UDCustomViewPagerIndicator;
 import com.taobao.luaview.userdata.ui.UDView;
@@ -31,7 +29,6 @@ import org.luaj.vm2.Varargs;
  * @date 15/8/20
  */
 public class LVCustomViewPagerIndicator extends HorizontalScrollView implements ILVView, PageIndicator {
-    public Globals mGlobals;
     private LuaValue mInitParams;
     private UDCustomViewPagerIndicator mLuaUserdata;
 
@@ -44,10 +41,9 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
 
     public LVCustomViewPagerIndicator(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDCustomViewPagerIndicator(this, globals, metaTable, this.mInitParams);
-        this.mLayout = new IcsLinearLayout(mGlobals.getContext(), R.attr.lv_vpiIconPageIndicatorStyle);
+        this.mLayout = new IcsLinearLayout(globals.getContext(), R.attr.lv_vpiIconPageIndicatorStyle);
         init();
     }
 
@@ -60,7 +56,6 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
     public UDView getUserdata() {
         return mLuaUserdata;
     }
-
 
     /**
      * 移动到某个位置
@@ -106,20 +101,22 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
      * @return
      */
     private LuaValue createView(int pos, int currentItem) {
+        Globals globals = this.mLuaUserdata.getGlobals();
         //View封装
         final LVViewGroup container = createCellLayout();
-        final UDViewGroup cell = new UDViewGroup(container, mGlobals, null);
+        final UDViewGroup cell = new UDViewGroup(container, globals, null);
         //对外数据封装，必须使用LuaTable
         final UDLuaTable cellData = new UDLuaTable(cell);
 
         //call init
-        this.mGlobals.saveContainer(container);
+
+        globals.saveContainer(container);
         this.mLuaUserdata.callCellInit(cellData, pos, currentItem);//初始化
-        this.mGlobals.restoreContainer();
+        globals.restoreContainer();
 
         //set tag
         View view = cellData.getView();
-        if(view != null){
+        if (view != null) {
             view.setTag(R.id.lv_tag, cellData);
         }
         return cellData;
@@ -132,7 +129,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
      * @return
      */
     private LVViewGroup createCellLayout() {
-        return new LVViewGroup(mGlobals, mInitParams.getmetatable(), null);
+        return new LVViewGroup(mLuaUserdata.getGlobals(), mInitParams.getmetatable(), null);
     }
 
     //-----------------------------------------page indicator方法------------------------------------

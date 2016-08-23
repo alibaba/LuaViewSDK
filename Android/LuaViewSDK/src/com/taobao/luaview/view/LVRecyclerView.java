@@ -32,7 +32,6 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
-    public Globals mGlobals;
     private UDBaseRecyclerView mLuaUserdata;
 
     //adapter
@@ -57,9 +56,8 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
 
     public LVRecyclerView init(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         LuaViewUtil.setId(this);
-        this.mGlobals = globals;
         this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
-        init();
+        init(globals);
         return this;
     }
 
@@ -70,8 +68,8 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         updateMaxSpanCount();
     }
 
-    private void init() {
-        mAdapter = new LVRecyclerViewAdapter(mGlobals, mLuaUserdata);
+    private void init(Globals globals) {
+        mAdapter = new LVRecyclerViewAdapter(globals, mLuaUserdata);
         this.setAdapter(mAdapter);
         mLayoutManager = new LVGridLayoutManager(this);
         this.setLayoutManager(mLayoutManager);

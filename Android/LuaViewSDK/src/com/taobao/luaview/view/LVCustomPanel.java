@@ -1,10 +1,12 @@
 package com.taobao.luaview.view;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
@@ -22,18 +24,17 @@ import org.luaj.vm2.Varargs;
  * @date 15/8/20
  */
 public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup, ILVNativeViewProvider {
-    private UDView mLuaUserdata;
 
     public LVCustomPanel(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals, metaTable, varargs);
-        this.mLuaUserdata = new UDCustomPanel(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
         initPanel();
     }
 
-    @Override
-    public UDView getUserdata() {
-        return mLuaUserdata;
+    @NonNull
+    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDCustomPanel(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
     }
+
 
     @Override
     public void addLVView(final View view, Varargs a) {
@@ -58,8 +59,11 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
      * 子类实现该方法，用于Lua回调该方法
      */
     public void callLuaCallback(Object... objs) {
-        final LuaValue callback = this.mLuaUserdata.getCallback();
-        LuaUtil.callFunction(callback, objs);
+        UDView userdata = getUserdata();
+        if(userdata != null) {
+            final LuaValue callback = userdata.getCallback();
+            LuaUtil.callFunction(callback, objs);
+        }
     }
 
     //获取native view

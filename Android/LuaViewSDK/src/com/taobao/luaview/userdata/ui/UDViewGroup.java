@@ -39,7 +39,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private void init() {
     }
 
-    public ViewGroup getContainer(){
+    public ViewGroup getContainer() {
         return getView();
     }
 
@@ -65,7 +65,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnShowCallback(){
+    public LuaValue getOnShowCallback() {
         return this.mOnShow;
     }
 
@@ -74,7 +74,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnHideCallback(){
+    public LuaValue getOnHideCallback() {
         return this.mOnHide;
     }
 
@@ -83,7 +83,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnBackCallback(){
+    public LuaValue getOnBackCallback() {
         return this.mOnBack;
     }
 
@@ -92,7 +92,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnLayoutCallback(){
+    public LuaValue getOnLayoutCallback() {
         return this.mOnLayout;
     }
 
@@ -167,13 +167,15 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      */
     public UDViewGroup children(LuaFunction callback) {
         if (getView() instanceof ILVViewGroup) {
-            getGlobals().saveContainer((ILVViewGroup) getView());
-            LuaUtil.callFunction(callback, this);
-            getGlobals().restoreContainer();
+            Globals globals = getGlobals();
+            if (globals != null) {
+                globals.saveContainer((ILVViewGroup) getView());
+                LuaUtil.callFunction(callback, this);
+                globals.restoreContainer();
+            }
         }
         return this;
     }
-
 
 
     public UDViewGroup setChildNodeViews(ArrayList<UDView> childNodeViews) {

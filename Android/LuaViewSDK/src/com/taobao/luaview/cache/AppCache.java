@@ -47,6 +47,14 @@ public class AppCache {
     }
 
     /**
+     * get cache
+     * @return
+     */
+    public Map<Object, Object> get(){
+        return mCache;
+    }
+
+    /**
      * get from cache
      *
      * @param key
