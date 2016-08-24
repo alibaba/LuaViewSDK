@@ -1,7 +1,6 @@
 package com.taobao.luaview.cache;
 
 import android.app.Application;
-import android.content.Context;
 import android.support.v4.util.LruCache;
 
 import java.util.HashMap;
@@ -66,7 +65,9 @@ public class AppCache {
 
     private AppCache(int size) {
         mCache = new HashMap<Object, Object>();
-        mLruCache = new LuaLruCache(size);
+        if (size > 0) {
+            mLruCache = new LuaLruCache(size);
+        }
     }
 
     /**
@@ -200,19 +201,25 @@ public class AppCache {
         }
 
         public void putWrap(Object key, Object value, Integer size) {
-            if (size != null) {
-                super.put(key, new WrapLruObject(value, size));
-            } else {
-                super.put(key, value);
+            if (key != null && value != null) {
+                if (size != null) {
+                    super.put(key, new WrapLruObject(value, size));
+                } else {
+                    super.put(key, value);
+                }
             }
         }
 
         public Object getWrap(Object key) {
-            Object result = super.get(key);
-            if (result instanceof WrapLruObject) {
-                return ((WrapLruObject) result).obj;
+            if (key != null) {
+                Object result = super.get(key);
+                if (result instanceof WrapLruObject) {
+                    return ((WrapLruObject) result).obj;
+                } else {
+                    return result;
+                }
             } else {
-                return result;
+                return null;
             }
         }
 
