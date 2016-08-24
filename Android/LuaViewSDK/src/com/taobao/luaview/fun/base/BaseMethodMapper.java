@@ -3,7 +3,6 @@ package com.taobao.luaview.fun.base;
 import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.util.LogUtil;
-import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -20,7 +19,8 @@ import java.util.List;
  * @date 15/8/14
  */
 public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunction {
-    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
+    private static final String TAG = BaseFunctionBinder.class.getSimpleName();;
+    private static final String CACHE_METHODS = AppCache.CACHE_METHODS;
 
     /**
      * 该函数使用反射，调用方法，并且被调用方法签名必须为：fun(UIView, Varargs)格式，否则不被支持
@@ -72,19 +72,19 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      * @return
      */
     public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final String[] names){
-        List<String> result = AppCache.getCache(TAG).get(tag);
+        List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
         if(result == null){
             result = mergeFunctionNames(supernames, names);
-            AppCache.getCache(TAG).put(tag, result);
+            AppCache.getCache(CACHE_METHODS).put(tag, result);
         }
         return result;
     }
 
     public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final List<String> names){
-        List<String> result = AppCache.getCache(TAG).get(tag);
+        List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
         if(result == null){
             result = mergeFunctionNames(supernames, names);
-            AppCache.getCache(TAG).put(tag, result);
+            AppCache.getCache(CACHE_METHODS).put(tag, result);
         }
         return result;
     }

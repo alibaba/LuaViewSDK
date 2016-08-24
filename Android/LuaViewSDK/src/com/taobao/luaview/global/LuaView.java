@@ -346,7 +346,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 return this;
             }
         }
-
         //出错回调
         if (callback != null) {
             callback.onScriptExecuted(getUri(), false);
@@ -886,7 +885,6 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }
         LuaCache.clear();
         NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//反注册connection state change listener
-
     }
 
     //----------------------------------------cached object 管理-------------------------------------

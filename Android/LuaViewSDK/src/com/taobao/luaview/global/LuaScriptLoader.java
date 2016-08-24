@@ -5,8 +5,8 @@ import android.text.TextUtils;
 
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
-import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleDownloadTask;
+import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleUnpackTask;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.util.FileUtil;
@@ -77,6 +77,7 @@ public class LuaScriptLoader {
     /**
      * clear invalid bundle of given url
      * TODO 在脚本加载失败的时候调用清理函数
+     *
      * @param url
      */
     public static void clearInvalidBundle(final String url) {
