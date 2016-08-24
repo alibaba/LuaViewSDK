@@ -66,6 +66,7 @@ import java.util.List;
  */
 public class LuaViewManager {
     private static final String TAG = LuaViewManager.class.getSimpleName();
+    private static final String CACHE_METATABLES = AppCache.CACHE_METATABLES;
 
     /**
      * 创建Globals
@@ -242,7 +243,7 @@ public class LuaViewManager {
      * @return
      */
     public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
-        LuaTable result = AppCache.getCache(TAG).get(libClass);//get from cache
+        LuaTable result = AppCache.getCache(CACHE_METATABLES).get(libClass);//get from cache
 
         if (result == null) {
             LuaTable libTable = null;
@@ -256,7 +257,7 @@ public class LuaViewManager {
             result = LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
 
             //update cache
-            AppCache.getCache(TAG).put(libClass, result);
+            AppCache.getCache(CACHE_METATABLES).put(libClass, result);
         }
         return result;
     }

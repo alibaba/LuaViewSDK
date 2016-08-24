@@ -32,6 +32,7 @@ import java.util.Map;
  */
 public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundle> {
     private static final String TAG = ScriptBundleLoadTask.class.getSimpleName();
+    private static final String CACHE_SCRIPTS = AppCache.CACHE_SCRIPTS;
     private Context mContext;
 
     //加载的脚本
@@ -178,7 +179,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             mDestFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
             String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
 
-            scriptBundle = AppCache.getCache(TAG).get(url);
+            scriptBundle = AppCache.getCache(CACHE_SCRIPTS).get(url);
             if (scriptBundle != null) {
                 return scriptBundle;
             } else {
@@ -202,7 +203,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             scriptBundle.setBaseFilePath(mDestFolderPath);
 
             //cache
-            AppCache.getCache(TAG).put(url, scriptBundle);
+            AppCache.getCache(CACHE_SCRIPTS).put(url, scriptBundle);
             return scriptBundle;
         } else {
             return null;

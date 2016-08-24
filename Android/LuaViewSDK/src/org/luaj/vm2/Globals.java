@@ -123,6 +123,7 @@ import java.lang.ref.WeakReference;
  */
 public class Globals extends LuaTable {
     private static final String TAG = Globals.class.getSimpleName();
+    private static final String CACHE_PROTOTYPE = AppCache.CACHE_PROTOTYPE;
 
     /**
      * Android parent view
@@ -304,11 +305,11 @@ public class Globals extends LuaTable {
             }
             Prototype p = null;
             if (LuaViewConfig.isCachePrototype() && chunkname != null) {//给prototype解析加cache
-                p = AppCache.getCache(TAG).get(chunkname);
+                p = AppCache.getCache(CACHE_PROTOTYPE).get(chunkname);
 //                LogUtil.d("Prototype", chunkname, p != null);
                 if (p == null) {
                     p = loadPrototype(is, chunkname, mode);
-                    AppCache.getCache(TAG).put(chunkname, p);
+                    AppCache.getCache(CACHE_PROTOTYPE).put(chunkname, p);
                 }
             } else {
                 p = loadPrototype(is, chunkname, mode);
