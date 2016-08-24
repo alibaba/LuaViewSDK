@@ -1,9 +1,11 @@
 package com.taobao.luaview.util;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Point;
-import android.os.Build;
+import android.os.*;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -16,6 +18,36 @@ import android.view.WindowManager;
  * @date 15/9/8
  */
 public class AndroidUtil {
+
+    /**
+     * 获取可用的内存大小(in k)
+     *
+     * @param context
+     * @return
+     */
+    public static Long getAvailMemorySize(Context context) {
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        activityManager.getMemoryInfo(mi);
+        return mi != null ? mi.availMem : null;
+    }
+
+    /**
+     * 获取所有的内存大小(in k)
+     * @param context
+     * @return
+     */
+    @TargetApi(16)
+    public static Long getTotalMemorySize(Context context) {
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        activityManager.getMemoryInfo(mi);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            return mi != null ? mi.totalMem : null;
+        } else {
+            return null;
+        }
+    }
 
     /**
      * 系统版本号

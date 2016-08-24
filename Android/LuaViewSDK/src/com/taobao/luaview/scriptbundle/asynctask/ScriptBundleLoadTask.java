@@ -179,7 +179,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             mDestFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
             String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
 
-            scriptBundle = AppCache.getCache(CACHE_SCRIPTS).get(url);
+            scriptBundle = AppCache.getCache(CACHE_SCRIPTS).getLru(url);
             if (scriptBundle != null) {
                 return scriptBundle;
             } else {
@@ -203,7 +203,7 @@ public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundl
             scriptBundle.setBaseFilePath(mDestFolderPath);
 
             //cache
-            AppCache.getCache(CACHE_SCRIPTS).put(url, scriptBundle);
+            AppCache.getCache(CACHE_SCRIPTS).putLru(url, scriptBundle);
             return scriptBundle;
         } else {
             return null;
