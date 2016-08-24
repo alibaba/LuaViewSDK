@@ -31,15 +31,15 @@ public class DestroyUtil {
                 UpValue upValue = null;
                 for (int i = 0; i < closure.upValues.length; i++) {
                     upValue = closure.upValues[i];
-                    if (upValue != null && upValue.array != null) {
-                        for (LuaValue value : upValue.array) {//destroy upvalues
-                            if (value instanceof BaseUserdata) {//userdata destory
-                                ((BaseUserdata) value).onDestroy();
-                            } else if (value instanceof LuaTable) {//destroy table
-                                onDestroyTable((LuaTable) value);
-                            }
-                        }
-                    }
+//                    if (upValue != null && upValue.array != null) {
+//                        for (LuaValue value : upValue.array) {//destroy upvalues
+//                            if (value instanceof BaseUserdata) {//userdata destory
+//                                ((BaseUserdata) value).onDestroy();
+//                            } else if (value instanceof LuaTable) {//destroy table
+//                                onDestroyTable((LuaTable) value);
+//                            }
+//                        }
+//                    }
                     closure.upValues[i] = null;
                 }
                 closure.upValues = null;
