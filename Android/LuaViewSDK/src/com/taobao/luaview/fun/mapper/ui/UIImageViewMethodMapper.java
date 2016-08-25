@@ -81,7 +81,8 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     }
 
     public LuaValue getImage(U view, Varargs varargs) {
-        return valueOf(view.getImageUrl());
+        String result = view.getImageUrl();
+        return result != null ? valueOf(result) : LuaValue.NIL;
     }
 
 
