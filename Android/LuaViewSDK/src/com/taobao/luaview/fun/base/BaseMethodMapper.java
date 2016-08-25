@@ -19,7 +19,7 @@ import java.util.List;
  * @date 15/8/14
  */
 public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunction {
-    private static final String TAG = BaseFunctionBinder.class.getSimpleName();;
+    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
     private static final String CACHE_METHODS = AppCache.CACHE_METHODS;
 
     /**
