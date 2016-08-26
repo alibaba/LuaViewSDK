@@ -2,6 +2,7 @@ package com.taobao.luaview.fun.base;
 
 import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.LogUtil;
 
 import org.luaj.vm2.LuaValue;
@@ -38,13 +39,14 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
                 return (Varargs) method.invoke(this, getUD(args), args);
             }
         } catch (Exception e) {
-            if(LuaViewConfig.isDebug()) {
+            if (LuaViewConfig.isDebug()) {
                 LogUtil.e("[----Method Invoke Error Start----]");
                 LogUtil.e("[Class]", getClass());
                 LogUtil.e("[Opcode]", opcode);
-                LogUtil.e("[Method] ", method != null ? method : getMethodByOpcode(opcode));
-                LogUtil.e("[Arguments] ", args);
-                LogUtil.e("[Error] ", e);
+                LogUtil.e("[Method]", method != null ? method : getMethodByOpcode(opcode));
+                LogUtil.e("[Arguments]", args);
+                LogUtil.e("[Target]", getTarget(args));
+                LogUtil.e("[Error]", e);
                 LogUtil.e("[----Method Invoke Error End----]");
             }
             e.printStackTrace();
@@ -62,35 +64,46 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
         return (U) varargs.arg1();
     }
 
+    public Object getTarget(Varargs varargs) {
+        U target = getUD(varargs);
+        if (target instanceof BaseUserdata) {
+            return ((BaseUserdata) target).userdata();
+        }
+        return target;
+    }
+
     //----------------------------------------------------------------------------------------------
 
     /**
      * merge function names with cache tag
+     *
      * @param tag
      * @param supernames
      * @param names
      * @return
      */
-    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final String[] names){
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final String[] names) {
         List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
-        if(result == null){
+        if (result == null) {
             result = mergeFunctionNames(supernames, names);
             AppCache.getCache(CACHE_METHODS).put(tag, result);
         }
         return result;
     }
 
-    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final List<String> names){
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final List<String> names) {
         List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
-        if(result == null){
+        if (result == null) {
             result = mergeFunctionNames(supernames, names);
             AppCache.getCache(CACHE_METHODS).put(tag, result);
         }
         return result;
     }
+
     /**
      * merge function names
      * 将names拼接在supernames之后
+     *
      * @param supernames
      * @param names
      * @return
@@ -125,12 +138,13 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
 
     /**
      * 根据code获取函数名称
+     *
      * @param optcode
      * @return
      */
-    public String getMethodByOpcode(int optcode){
+    public String getMethodByOpcode(int optcode) {
         List<String> allMethods = getAllFunctionNames();
-        if(allMethods != null && allMethods.size() > optcode && optcode >= 0){
+        if (allMethods != null && allMethods.size() > optcode && optcode >= 0) {
             return allMethods.get(optcode);
         }
         return null;

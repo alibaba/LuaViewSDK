@@ -17,9 +17,9 @@ public class UDLoadingView extends UDViewGroup<LVLoadingView> {
         super(view, globals, metaTable, (varargs != null ? varargs.arg1() : null));
     }
 
-    public UDLoadingView setColor(int color) {
+    public UDLoadingView setColor(Integer color) {
         final LVLoadingView view = getView();
-        if (view != null) {
+        if (view != null && color != null) {
             view.setColor(color);
         }
         return this;

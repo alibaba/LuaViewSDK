@@ -53,9 +53,9 @@ public class UDTextView<T extends TextView> extends UDView<T> {
      *
      * @param color int
      */
-    public UDView setTextColor(int color) {
+    public UDView setTextColor(Integer color) {
         final T view = getView();
-        if (view != null) {
+        if (view != null && color != null) {
             view.setTextColor(color);
         }
         return this;

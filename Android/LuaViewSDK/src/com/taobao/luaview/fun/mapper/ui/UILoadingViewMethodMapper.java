@@ -1,5 +1,7 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import android.graphics.Color;
+
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDLoadingView;
 import com.taobao.luaview.util.ColorUtil;
@@ -120,7 +122,7 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
     }
 
     public LuaValue setColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
         return view.setColor(color);
     }
 

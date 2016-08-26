@@ -3,6 +3,7 @@ package com.taobao.luaview.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 
 import com.taobao.luaview.cache.WeakCache;
 
@@ -69,7 +70,7 @@ public class DrawableUtil {
                 final int resourceId = resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
                 try {
                     drawable = resources.getDrawable(resourceId);
-                } catch (Exception e){
+                } catch (Exception e) {
                     LogUtil.e("[DrawableUtil-getByName Failed]", e);
                 }
             }
@@ -90,5 +91,36 @@ public class DrawableUtil {
             return resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
         }
         return 0;
+    }
+
+    /**
+     * create state list drawable
+     *
+     * @param context
+     * @param idNormal
+     * @param idPressed
+     * @param idFocused
+     * @param idUnable
+     * @return
+     */
+    public static StateListDrawable createStateListDrawable(Context context, int idNormal, int idPressed, int idFocused, int idUnable) {
+        StateListDrawable bg = new StateListDrawable();
+        Drawable normal = idNormal == -1 ? null : context.getResources().getDrawable(idNormal);
+        Drawable pressed = idPressed == -1 ? null : context.getResources().getDrawable(idPressed);
+        Drawable focused = idFocused == -1 ? null : context.getResources().getDrawable(idFocused);
+        Drawable unable = idUnable == -1 ? null : context.getResources().getDrawable(idUnable);
+        // View.PRESSED_ENABLED_STATE_SET
+        bg.addState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled}, pressed);
+        // View.ENABLED_FOCUSED_STATE_SET
+        bg.addState(new int[]{android.R.attr.state_enabled, android.R.attr.state_focused}, focused);
+        // View.ENABLED_STATE_SET
+        bg.addState(new int[]{android.R.attr.state_enabled}, normal);
+        // View.FOCUSED_STATE_SET
+        bg.addState(new int[]{android.R.attr.state_focused}, focused);
+        // View.WINDOW_FOCUSED_STATE_SET
+        bg.addState(new int[]{android.R.attr.state_window_focused}, unable);
+        // View.EMPTY_STATE_SET
+        bg.addState(new int[]{}, normal);
+        return bg;
     }
 }

@@ -18,13 +18,16 @@ public class ColorUtil {
      * @param colorValue
      * @return
      */
-    public static int parse(LuaValue colorValue) {
-        if (colorValue != null) {
-            if (colorValue.isnumber()) {//必须先判断int再判断string
-                int color = colorValue.toint();
-                return Color.argb(255, Color.red(color), Color.green(color), Color.blue(color));//去除alpha信息，alpha信息由函数传入
-            }
-            /*if (LuaUtil.isString(colorValue)) {//TODO 支持字符串
+    public static Integer parse(LuaValue colorValue) {
+        return parse(colorValue, null);
+    }
+
+    public static Integer parse(LuaValue colorValue, Integer defaultValue) {
+        if (LuaUtil.isNumber(colorValue)) {
+            int color = colorValue.toint();
+            return Color.argb(255, Color.red(color), Color.green(color), Color.blue(color));//去除alpha信息，alpha信息由函数传入
+        }
+        /*if (LuaUtil.isString(colorValue)) {//TODO 支持字符串
                 try {
                     return Color.parseColor(colorValue.toString());
                 } catch (Exception e) {
@@ -32,7 +35,6 @@ public class ColorUtil {
                     return -1;
                 }
             }*/
-        }
-        return Color.BLACK;//黑色
+        return defaultValue;
     }
 }

@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -123,7 +124,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     public LuaValue setTextColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
         return view.setTextColor(color);
     }
 

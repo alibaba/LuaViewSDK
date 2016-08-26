@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FileUtil;
 
 import java.io.File;
@@ -70,7 +69,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
      */
     @Override
     protected ScriptBundle doInBackground(Object... params) {
-        DebugUtil.tsi("lvperformance-unpackScripts");
+//        DebugUtil.tsi("lvperformance-unpackScripts");
         if (params != null && params.length > 0) {//一个参数，指定文件路径
             final String url = (String) params[0];
             final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
@@ -78,12 +77,10 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
 
             try {
                 ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);
-
-                DebugUtil.tei("lvperformance-unpackScripts");
-
+//                DebugUtil.tei("lvperformance-unpackScripts");
                 return result;
             } catch (IOException e) {
-                DebugUtil.tei("lvperformance-unpackScripts");
+//                DebugUtil.tei("lvperformance-unpackScripts");
                 return null;
             } finally {
                 if (params.length > 1) {//asset，copy原始文件到文件夹下
@@ -91,7 +88,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
                 }
             }
         }
-        DebugUtil.tei("lvperformance-unpackScripts");
+//        DebugUtil.tei("lvperformance-unpackScripts");
         return null;
     }
 

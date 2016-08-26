@@ -1,5 +1,7 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
+import android.graphics.Color;
+
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
@@ -127,7 +129,7 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setFillColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
         return view.setFillColor(color);
     }
 
@@ -152,7 +154,7 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setPageColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
         return view.setPageColor(color);
     }
 
@@ -200,7 +202,7 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setStrokeColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
         return view.setStrokeColor(color);
     }
 

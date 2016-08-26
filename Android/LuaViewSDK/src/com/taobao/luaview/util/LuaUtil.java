@@ -24,6 +24,28 @@ public class LuaUtil {
     //-------------------------------------get value------------------------------------------------
 
     /**
+     * 获取alpha
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static Integer getAlphaInt(final Varargs varargs, int... poslist) {
+        return getAlphaInt(varargs, null, poslist);
+    }
+
+    public static Integer getAlphaInt(final Varargs varargs, Double defaultAlpha, int... poslist) {
+        final Double alphaDouble = getDouble(varargs, poslist);
+        if (alphaDouble != null) {
+            return (int) (alphaDouble * 0xFF);
+        } else if (defaultAlpha != null) {
+            return (int) (defaultAlpha * 0xFF);
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * 获取时间，入参为秒(可以是小数)，输出为毫秒
      *
      * @param varargs
@@ -591,6 +613,7 @@ public class LuaUtil {
 
     /**
      * convert a lua Int to java Int
+     *
      * @param luaInt
      * @return
      */

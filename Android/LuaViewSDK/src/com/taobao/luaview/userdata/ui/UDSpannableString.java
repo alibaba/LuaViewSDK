@@ -64,7 +64,7 @@ public class UDSpannableString extends BaseUserdata {
             if (config != null && config.istable()) {
                 final int end = spannableStringBuilder.length();
                 final int fontSize = DimenUtil.spToPx(config.get("fontSize").optint(-1));
-                final int fontColor = ColorUtil.parse(config.get("fontColor"));
+                final Integer fontColor = ColorUtil.parse(config.get("fontColor"));
                 final String fontName = config.get("fontName").optjstring(null);
 
                 final LuaValue weightValue = config.get("fontWeight");
@@ -73,7 +73,7 @@ public class UDSpannableString extends BaseUserdata {
                 final LuaValue styleValue = config.get("fontStyle");
                 final int fontStyle = LuaUtil.isNumber(styleValue) ? styleValue.optint(Typeface.NORMAL) : UDFontStyle.getValue(styleValue.optjstring(UDFontStyle.STYLE_NORMAL));
 
-                final int backgroundColor = ColorUtil.parse(config.get("backgroundColor"));
+                final Integer backgroundColor = ColorUtil.parse(config.get("backgroundColor"));
                 final boolean strikethrough = config.get("strikethrough").optboolean(false);
                 final boolean underline = config.get("underline").optboolean(false);
 
@@ -81,7 +81,7 @@ public class UDSpannableString extends BaseUserdata {
                     spannableStringBuilder.setSpan(new AbsoluteSizeSpan(fontSize), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                if (fontColor != Color.BLACK) {//字体颜色
+                if (fontColor != null) {//字体颜色
                     spannableStringBuilder.setSpan(new ForegroundColorSpan(fontColor), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
@@ -97,7 +97,7 @@ public class UDSpannableString extends BaseUserdata {
                     spannableStringBuilder.setSpan(new StyleSpan(fontStyle), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                if (backgroundColor != Color.BLACK) {//背景色
+                if (backgroundColor != null) {//背景色
                     spannableStringBuilder.setSpan(new BackgroundColorSpan(backgroundColor), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 

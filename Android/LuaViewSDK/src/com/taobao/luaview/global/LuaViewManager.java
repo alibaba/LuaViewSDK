@@ -90,7 +90,6 @@ public class LuaViewManager {
      * @param globals
      */
     public static void loadLuaViewLibs(final Globals globals) {
-        DebugUtil.ts("loadLuaViewLibs");
         //ui
         globals.tryLazyLoad(new UITextViewBinder());
         globals.tryLazyLoad(new UIEditTextBinder());
@@ -139,8 +138,6 @@ public class LuaViewManager {
         globals.tryLazyLoad(new EllipsizeBinder());
         globals.tryLazyLoad(new InterpolatorBinder());
         globals.tryLazyLoad(new ViewEffectBinder());//view特效
-
-        DebugUtil.te("loadLuaViewLibs");
     }
 
     //----------------------------------------bind methods------------------------------------------
