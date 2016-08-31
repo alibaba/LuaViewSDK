@@ -37,9 +37,17 @@ public class SrcCodeCenter {
 			table.remove(fileName);
 		}
 		SrcCodeViewer viewer = new SrcCodeViewer(fileName, content, this.center);
-		tabbedPane.addTab(fileName, viewer);
+		tabbedPane.addTab(this.shortName(fileName), viewer);
 		table.put(fileName, viewer);
 		return viewer;
+	}
+
+	private String shortName(String s) {
+		int index = s.lastIndexOf('/');
+		if (index >= 0) {
+			s = s.substring(index + 1);
+		}
+		return s;
 	}
 
 	public void running(String fileName, String lineNumber) {
