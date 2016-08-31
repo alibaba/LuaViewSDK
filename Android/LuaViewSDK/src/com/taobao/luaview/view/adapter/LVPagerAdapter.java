@@ -58,7 +58,7 @@ public class LVPagerAdapter extends PagerAdapter {
         final UDLuaTable pageData = new UDLuaTable(page);
         final View pageView = pageData.getView();
         //添加view
-        if(container != null) {
+        if(container != null && pageView != null) {
             container.addView(pageView);
         }
         //初始化View
