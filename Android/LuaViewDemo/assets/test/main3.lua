@@ -54,3 +54,10 @@ dic = changeDic(dic, "spm")
 
 print("changeDic:result")
 printTable(dic)
+
+
+function stringEnds(String,End)
+    return End=='' or string:sub(String,-string:len(End))==End
+end
+
+print(stringEnds("abc", "c"))
