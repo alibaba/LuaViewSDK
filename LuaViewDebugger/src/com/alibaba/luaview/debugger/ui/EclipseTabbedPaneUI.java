@@ -89,7 +89,7 @@ public class EclipseTabbedPaneUI extends BasicTabbedPaneUI {
 	 */
 	@Override
 	protected int calculateTabHeight(int tabPlacement, int tabIndex, int fontHeight) {
-		return fontHeight + 10;
+		return fontHeight + 4;
 	}
 
 	@Override
