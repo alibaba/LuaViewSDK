@@ -71,7 +71,7 @@ public class EclipseTabbedPaneUI extends BasicTabbedPaneUI {
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
-		tabAreaInsets = new Insets(0, 100, 0, 0);
+		tabAreaInsets = new Insets(0, 0, 0, 0);
 		selectedTabPadInsets = new Insets(0, 0, 0, 0);
 		contentBorderInsets = new Insets(1, 0, 0, 0);
 	}
