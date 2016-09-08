@@ -14,9 +14,9 @@ import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
+import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
@@ -173,7 +173,7 @@ public class UDView<T extends View> extends BaseUserdata {
      *
      * @param color int
      */
-    public UDView setBackgroundColorAndAlpha(int color, float alpha) {
+    public UDView setBackgroundColorAndAlpha(Integer color, Double alpha) {
         setBackgroundColor(color);
         setBackgroundAlpha(alpha);
         return this;
@@ -184,13 +184,15 @@ public class UDView<T extends View> extends BaseUserdata {
      *
      * @param alpha 百分比的alpha 0-1
      */
-    public UDView setBackgroundAlpha(final float alpha) {
-        final T view = getView();
-        if (view != null) {
-            final Drawable drawable = view.getBackground() != null ? view.getBackground() : null;
-            if (drawable != null) {
-                drawable.setAlpha((int) (alpha * 0xFF));
-                LuaViewUtil.setBackground(view, drawable);
+    public UDView setBackgroundAlpha(final Double alpha) {
+        if (alpha != null) {
+            final T view = getView();
+            if (view != null) {
+                final Drawable drawable = view.getBackground() != null ? view.getBackground() : null;
+                if (drawable != null) {
+                    drawable.setAlpha((int) (alpha * 0xFF));
+                    LuaViewUtil.setBackground(view, drawable);
+                }
             }
         }
         return this;
@@ -215,12 +217,14 @@ public class UDView<T extends View> extends BaseUserdata {
      *
      * @param color int
      */
-    public UDView setBackgroundColor(int color) {
-        final View view = getView();
-        if (view != null) {
-            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
-            drawable.setColor(color);
-            LuaViewUtil.setBackground(view, drawable);
+    public UDView setBackgroundColor(Integer color) {
+        if (color != null) {
+            final View view = getView();
+            if (view != null) {
+                final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+                drawable.setColor(color);
+                LuaViewUtil.setBackground(view, drawable);
+            }
         }
         return this;
     }
@@ -289,12 +293,14 @@ public class UDView<T extends View> extends BaseUserdata {
      * @param borderColor
      * @return
      */
-    public UDView setBorderColor(final int borderColor) {
-        final T view = getView();
-        if (view != null) {
-            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
-            drawable.setStrokeColor(borderColor);
-            LuaViewUtil.setBackground(view, drawable);
+    public UDView setBorderColor(final Integer borderColor) {
+        if(borderColor != null) {
+            final T view = getView();
+            if (view != null) {
+                final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+                drawable.setStrokeColor(borderColor);
+                LuaViewUtil.setBackground(view, drawable);
+            }
         }
         return this;
     }
@@ -604,7 +610,7 @@ public class UDView<T extends View> extends BaseUserdata {
     /**
      * 设置背景和透明度
      */
-    public UDView setBackgroundResourceAndAlpha(String picName, float alpha) {
+    public UDView setBackgroundResourceAndAlpha(String picName, Double alpha) {
         setBackgroundResource(picName);
         setBackgroundAlpha(alpha);
         return this;
@@ -926,8 +932,8 @@ public class UDView<T extends View> extends BaseUserdata {
     private void setupClickEffects(boolean isValid) {
         DebugUtil.tsi("Foreground-setupClickEffects");
         //setup effect
-        if(LuaViewConfig.isAutoSetupClickEffects()){
-            if(isValid){
+        if (LuaViewConfig.isAutoSetupClickEffects()) {
+            if (isValid) {
                 setEffects(UDViewEffect.EFFECT_CLICK);
             } else {
                 setEffects(UDViewEffect.EFFECT_NONE);

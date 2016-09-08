@@ -43,6 +43,10 @@ public class LVBaseImageView extends BaseImageView {
         return mUrl;
     }
 
+    public void setUrl(String url) {
+        this.mUrl = url;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();

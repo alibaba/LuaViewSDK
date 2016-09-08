@@ -203,6 +203,10 @@ public class LuaUtil {
         return (LuaValue) getValue(LuaValue.TVALUE, varargs, poslist);
     }
 
+    public static LuaValue getValue(final LuaValue varargs, String... poslist) {
+        return (LuaValue) getValueFromTable(LuaValue.TVALUE, varargs, poslist);
+    }
+
     /**
      * 获取userdata
      *

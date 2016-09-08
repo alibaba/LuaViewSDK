@@ -6,6 +6,7 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDEllipsize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.util.ColorUtil;
+import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 
 import org.luaj.vm2.LuaValue;
@@ -123,12 +124,12 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     public LuaValue setTextColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setTextColor(color);
     }
 
     public LuaValue getTextColor(U view, Varargs varargs) {
-        return valueOf(view.getTextColor());
+        return valueOf(ColorUtil.getHexColor(view.getTextColor()));
     }
 
 
