@@ -7,6 +7,7 @@ import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.indicator.UDCircleViewPagerIndicator;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -22,7 +23,7 @@ import java.util.List;
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
     private static final String TAG = UICircleViewPagerIndicatorMethodMapper.class.getSimpleName();
-    private static final String[] sMethods =  new String[]{
+    private static final String[] sMethods = new String[]{
             "unselectedColor",//0
             "selectedColor",//1
             "fillColor",//2
@@ -127,12 +128,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setFillColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setFillColor(color);
     }
 
     public LuaValue getFileColor(U view, Varargs varargs) {
-        return valueOf(view.getFillColor());
+        return valueOf(ColorUtil.getHexColor(view.getFillColor()));
     }
 
 
@@ -152,12 +153,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setPageColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setPageColor(color);
     }
 
     public LuaValue getPageColor(U view, Varargs varargs) {
-        return valueOf(view.getPageColor());
+        return valueOf(ColorUtil.getHexColor(view.getPageColor()));
     }
 
     /**
@@ -200,12 +201,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setStrokeColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setStrokeColor(color);
     }
 
     public LuaValue getStrokeColor(U view, Varargs varargs) {
-        return valueOf(view.getStrokeColor());
+        return valueOf(ColorUtil.getHexColor(view.getStrokeColor()));
     }
 
     /**

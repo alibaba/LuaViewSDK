@@ -47,4 +47,6 @@ public abstract class BaseImageView extends ForegroundImageView {
 
     public abstract String getUrl();
 
+    public abstract void setUrl(String url);
+
 }

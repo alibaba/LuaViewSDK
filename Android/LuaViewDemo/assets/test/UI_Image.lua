@@ -7,12 +7,15 @@ view.backgroundColor(0xffaa0000)
 view.callback(function()
     print("Button Clicked")
 end)
-view.image("https://gju1.alicdn.com/bao/uploaded/i1/100000119234047241/TB2JnnKeVXXXXcpXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg")
+view.image("animate1")
+
+print("view-url", view.image())
 
 
 --2. 普通构造传url
 view2 = Image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg")
 view2.frame(150, 0, 150, 100)
+print("view2-url", view2.image())
 
 
 
