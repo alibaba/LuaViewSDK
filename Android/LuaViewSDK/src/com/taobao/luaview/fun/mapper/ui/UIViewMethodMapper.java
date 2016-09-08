@@ -463,19 +463,19 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setBackgroundColor(final U view, final Varargs args) {
-        if (args.isnumber(2)) {
-            final int color = ColorUtil.parse(args.optvalue(2, NIL));
-            final float alpha = (float) args.optdouble(3, 1);
+        if (args.isnumber(2)) {//TODO 支持8位颜色设置，以及alpha设置。同时支持获取
+            final Integer color = ColorUtil.parse(LuaUtil.getInt(args, 2));
+            Double alpha = LuaUtil.getDouble(args, 3);
             return view.setBackgroundColorAndAlpha(color, alpha);
         } else {
             final String pic = args.optjstring(2, "");
-            final float alpha = (float) args.optdouble(3, 1);
+            final Double alpha = LuaUtil.getDouble(args, 3);
             return view.setBackgroundResourceAndAlpha(pic, alpha);
         }
     }
 
     public Varargs getBackgroundColor(U view, Varargs varargs) {
-        return varargsOf(valueOf(view.getBackgroundColor()), valueOf(view.getBackgroundAlpha()));
+        return varargsOf(valueOf(ColorUtil.getHexColor(view.getBackgroundColor())), valueOf(view.getBackgroundAlpha()));
     }
 
 
@@ -1219,12 +1219,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setBorderColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setBorderColor(color);
     }
 
     public LuaValue getBorderColor(U view, Varargs varargs) {
-        return valueOf(view.getBorderColor());
+        return valueOf(ColorUtil.getHexColor(view.getBorderColor()));
     }
 
     /**
@@ -2073,7 +2073,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.startAnimation(animators);
     }
 
-    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API" })
+    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API"})
     public LuaValue stopAnimation(U view, Varargs varargs) {
         view.cancelAnimation();
         return view;
@@ -2085,6 +2085,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     /**
      * 设置flex css属性
+     *
      * @param view
      * @param varargs
      * @return
@@ -2111,6 +2112,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     /**
      * 设置flex layout
+     *
      * @param view
      * @param varargs
      * @return
@@ -2124,13 +2126,14 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     /**
      * 设置View的特殊效果，如果为-1，则取消所有view的特效
+     *
      * @param view
      * @param varargs
      * @return
      */
     @LuaViewApi(since = VmVersion.V_511)
-    public LuaValue effects(U view, Varargs varargs){
-        if(varargs.narg() > 1){
+    public LuaValue effects(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
             return setEffects(view, varargs);
         } else {
             return getEffects(view, varargs);
@@ -2138,13 +2141,13 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     @LuaViewApi(since = VmVersion.V_511)
-    public LuaValue setEffects(U view, Varargs varargs){
+    public LuaValue setEffects(U view, Varargs varargs) {
         final Integer effects = LuaUtil.getInt(varargs, 2);
         return view.setEffects(effects);
     }
 
     @LuaViewApi(since = VmVersion.V_511)
-    public LuaValue getEffects(U view, Varargs varargs){
+    public LuaValue getEffects(U view, Varargs varargs) {
         return valueOf(view.getEffects());
     }
 

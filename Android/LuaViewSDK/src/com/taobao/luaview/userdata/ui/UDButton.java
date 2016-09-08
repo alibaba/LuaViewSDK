@@ -7,7 +7,6 @@ import android.os.Build;
 import android.util.StateSet;
 import android.widget.Button;
 
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.util.ImageUtil;
 
 import org.luaj.vm2.Globals;
@@ -30,10 +29,12 @@ public class UDButton extends UDTextView<Button> {
      * @param highlightColor
      * @return
      */
-    public UDButton setHighlightColor(int highlightColor) {
-        final Button btn = getView();
-        if (btn != null) {
-            btn.setHighlightColor(highlightColor);
+    public UDButton setHighlightColor(Integer highlightColor) {
+        if (highlightColor != null) {
+            final Button btn = getView();
+            if (btn != null) {
+                btn.setHighlightColor(highlightColor);
+            }
         }
         return this;
     }
