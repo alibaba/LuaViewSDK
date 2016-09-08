@@ -12,7 +12,6 @@ import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
-import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.imageview.BaseImageView;
 
 import org.luaj.vm2.Globals;
@@ -60,6 +59,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 } else {
                     imageView.setIsNetworkMode(false);
                     imageView.setTag(R.id.lv_tag_url, null);
+                    imageView.setUrl(urlOrName);
                     Drawable drawable = null;
                     if (getLuaResourceFinder() != null) {
                         drawable = getLuaResourceFinder().findDrawable(urlOrName);

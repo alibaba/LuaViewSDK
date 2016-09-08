@@ -171,7 +171,7 @@ public class UDView<T extends View> extends BaseUserdata {
      *
      * @param color int
      */
-    public UDView setBackgroundColorAndAlpha(Integer color, Integer alpha) {
+    public UDView setBackgroundColorAndAlpha(Integer color, Double alpha) {
         setBackgroundColor(color);
         setBackgroundAlpha(alpha);
         return this;
@@ -182,13 +182,15 @@ public class UDView<T extends View> extends BaseUserdata {
      *
      * @param alpha 百分比的alpha 0-1
      */
-    public UDView setBackgroundAlpha(final Integer alpha) {
-        final T view = getView();
-        if (view != null && alpha != null) {
-            final Drawable drawable = view.getBackground() != null ? view.getBackground() : null;
-            if (drawable != null) {
-                drawable.setAlpha(alpha);
-                LuaViewUtil.setBackground(view, drawable);
+    public UDView setBackgroundAlpha(final Double alpha) {
+        if (alpha != null) {
+            final T view = getView();
+            if (view != null) {
+                final Drawable drawable = view.getBackground() != null ? view.getBackground() : null;
+                if (drawable != null) {
+                    drawable.setAlpha((int) (alpha * 0xFF));
+                    LuaViewUtil.setBackground(view, drawable);
+                }
             }
         }
         return this;
@@ -214,11 +216,13 @@ public class UDView<T extends View> extends BaseUserdata {
      * @param color int
      */
     public UDView setBackgroundColor(Integer color) {
-        final View view = getView();
-        if (view != null && color != null) {
-            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
-            drawable.setColor(color);
-            LuaViewUtil.setBackground(view, drawable);
+        if (color != null) {
+            final View view = getView();
+            if (view != null) {
+                final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+                drawable.setColor(color);
+                LuaViewUtil.setBackground(view, drawable);
+            }
         }
         return this;
     }
@@ -288,11 +292,13 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public UDView setBorderColor(final Integer borderColor) {
-        final T view = getView();
-        if (view != null && borderColor != null) {
-            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
-            drawable.setStrokeColor(borderColor);
-            LuaViewUtil.setBackground(view, drawable);
+        if(borderColor != null) {
+            final T view = getView();
+            if (view != null) {
+                final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+                drawable.setStrokeColor(borderColor);
+                LuaViewUtil.setBackground(view, drawable);
+            }
         }
         return this;
     }
@@ -602,7 +608,7 @@ public class UDView<T extends View> extends BaseUserdata {
     /**
      * 设置背景和透明度
      */
-    public UDView setBackgroundResourceAndAlpha(String picName, Integer alpha) {
+    public UDView setBackgroundResourceAndAlpha(String picName, Double alpha) {
         setBackgroundResource(picName);
         setBackgroundAlpha(alpha);
         return this;

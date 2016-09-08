@@ -149,13 +149,13 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
     }
 
     public LuaValue setColor(U view, Varargs varargs) {
-        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
-        final Integer alpha = LuaUtil.getAlphaInt(varargs, 3);
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
+        final Double alpha = LuaUtil.getDouble(varargs, 3);
         return view.setColorAndAlpha(color, alpha);
     }
 
     public Varargs getColor(U view, Varargs varargs) {
-        return varargsOf(valueOf(view.getColor()), valueOf(view.getAlpha()));
+        return varargsOf(valueOf(ColorUtil.getHexColor(view.getColor())), valueOf(view.getAlpha()));
     }
 
 

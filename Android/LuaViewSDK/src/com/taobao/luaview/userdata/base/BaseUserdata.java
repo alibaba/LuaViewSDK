@@ -70,4 +70,9 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     public void onDestroy() {
         m_instance = null;
     }
+
+    @Override
+    public String tojstring() {
+        return String.valueOf(userdata());
+    }
 }

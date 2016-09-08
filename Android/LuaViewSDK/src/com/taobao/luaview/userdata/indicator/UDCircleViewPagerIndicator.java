@@ -26,7 +26,7 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @return
      */
     public UDCircleViewPagerIndicator setFillColor(Integer color) {
-        if (getView() != null && color != null) {
+        if (color != null && getView() != null) {
             getView().setFillColor(color);
         }
         return this;
@@ -48,7 +48,7 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @return
      */
     public UDCircleViewPagerIndicator setPageColor(Integer color) {
-        if (getView() != null && color != null) {
+        if (color != null && getView() != null) {
             getView().setPageColor(color);
         }
         return this;
@@ -92,7 +92,7 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @return
      */
     public UDCircleViewPagerIndicator setStrokeColor(Integer color) {
-        if (getView() != null && color != null) {
+        if (color != null && getView() != null) {
             getView().setStrokeColor(color);
         }
         return this;

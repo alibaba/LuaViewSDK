@@ -464,19 +464,19 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setBackgroundColor(final U view, final Varargs args) {
-        if (args.isnumber(2)) {
-            final Integer color = ColorUtil.parse(args.optvalue(2, NIL), Color.BLACK);
-            final Integer alpha = LuaUtil.getAlphaInt(args, 1.0d, 3);
+        if (args.isnumber(2)) {//TODO 支持8位颜色设置，以及alpha设置。同时支持获取
+            final Integer color = ColorUtil.parse(LuaUtil.getInt(args, 2));
+            Double alpha = LuaUtil.getDouble(args, 3);
             return view.setBackgroundColorAndAlpha(color, alpha);
         } else {
             final String pic = args.optjstring(2, "");
-            final Integer alpha = LuaUtil.getAlphaInt(args, 1.0d, 3);
+            final Double alpha = LuaUtil.getDouble(args, 3);
             return view.setBackgroundResourceAndAlpha(pic, alpha);
         }
     }
 
     public Varargs getBackgroundColor(U view, Varargs varargs) {
-        return varargsOf(valueOf(view.getBackgroundColor()), valueOf(view.getBackgroundAlpha()));
+        return varargsOf(valueOf(ColorUtil.getHexColor(view.getBackgroundColor())), valueOf(view.getBackgroundAlpha()));
     }
 
 
@@ -1220,12 +1220,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setBorderColor(U view, Varargs varargs) {
-        final Integer color = ColorUtil.parse(varargs.optvalue(2, NIL), Color.BLACK);
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setBorderColor(color);
     }
 
     public LuaValue getBorderColor(U view, Varargs varargs) {
-        return valueOf(view.getBorderColor());
+        return valueOf(ColorUtil.getHexColor(view.getBorderColor()));
     }
 
     /**
