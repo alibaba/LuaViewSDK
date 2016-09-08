@@ -34,8 +34,13 @@ public class ImageUtil {
      */
     public static void adjustSize(ImageView imageView) {
         if (imageView != null && imageView.getLayoutParams() != null && imageView.getDrawable() != null) {
-            imageView.getLayoutParams().width = (imageView.getDrawable()).getIntrinsicWidth();
-            imageView.getLayoutParams().height = (imageView.getDrawable()).getIntrinsicHeight();
+            final int width = (imageView.getDrawable()).getIntrinsicWidth();
+            final int height = (imageView.getDrawable()).getIntrinsicHeight();
+            if (width != imageView.getLayoutParams().width || height != imageView.getLayoutParams().height) {
+                imageView.getLayoutParams().width = width;
+                imageView.getLayoutParams().height = height;
+                imageView.requestLayout();
+            }
         }
     }
 
