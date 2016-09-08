@@ -113,7 +113,6 @@ public class AndroidUtil {
      * @return
      */
     public static float getDensity(Context context) {
-        context.getApplicationContext().getResources().getConfiguration().orientation;
         return context.getApplicationContext().getResources().getDisplayMetrics().density;
     }
 
