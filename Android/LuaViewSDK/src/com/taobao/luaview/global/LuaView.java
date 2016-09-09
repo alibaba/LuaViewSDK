@@ -226,7 +226,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             new LuaScriptLoader(getContext()).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback() {
                 @Override
                 public void onScriptLoaded(ScriptBundle bundle) {
-                    if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备失败
+                    if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备完成，且不第三方自己执行
                         loadScriptBundle(bundle, callback);
                     } else if (callback != null) {
                         callback.onScriptExecuted(url, false);
