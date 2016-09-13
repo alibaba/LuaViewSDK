@@ -255,12 +255,14 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     }
 }
 
--(void) changeOffsetNoAnimation:(NSNumber*) value{
-    [self setContentOffset:self.nextOffset animated:NO];
-}
-
+// 有动画
 -(void) changeOffsetWithAnimation:(NSNumber*) value{
     [self setContentOffset:self.nextOffset animated:YES];
+}
+
+// 无动画
+-(void) changeOffsetNoAnimation:(NSNumber*) value{
+    [self setContentOffset:self.nextOffset animated:NO];
 }
 
 static Class g_class = nil;
