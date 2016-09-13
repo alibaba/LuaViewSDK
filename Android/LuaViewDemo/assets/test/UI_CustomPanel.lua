@@ -10,6 +10,6 @@ panel.callback(function(message, arg1, arg2, arg3, arg4)
     end
 end)
 
-print("rootView", panel.getNativeView().getAlpha())
+print("rootView", panel.nativeView().getAlpha())
 
 

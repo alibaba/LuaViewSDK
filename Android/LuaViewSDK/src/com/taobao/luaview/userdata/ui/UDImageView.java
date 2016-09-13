@@ -59,6 +59,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 } else {
                     imageView.setIsNetworkMode(false);
                     imageView.setTag(R.id.lv_tag_url, null);
+                    imageView.setUrl(urlOrName);
                     Drawable drawable = null;
                     if (getLuaResourceFinder() != null) {
                         drawable = getLuaResourceFinder().findDrawable(urlOrName);

@@ -3,9 +3,12 @@ package com.taobao.luaview.fun.mapper.ui;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDLoadingView;
 import com.taobao.luaview.util.ColorUtil;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
+
+import java.util.List;
 
 /**
  * Loading View 接口封装
@@ -14,6 +17,47 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGroupMethodMapper<U> {
+
+    private static final String TAG = UILoadingViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "start",//0
+            "isStart",//1
+            "startAnimating",//2
+            "isAnimating",//3
+            "stop",//4
+            "stopAnimating",//5
+            "color"//6
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return start(target, varargs);
+            case 1:
+                return isStart(target, varargs);
+            case 2:
+                return startAnimating(target, varargs);
+            case 3:
+                return isAnimating(target, varargs);
+            case 4:
+                return stop(target, varargs);
+            case 5:
+                return stopAnimating(target, varargs);
+            case 6:
+                return color(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     /**
      * 菊花开始转动
@@ -77,12 +121,12 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
     }
 
     public LuaValue setColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setColor(color);
     }
 
     public LuaValue getColor(U view, Varargs varargs) {
-        return view;
+        return valueOf(ColorUtil.getHexColor(view.getColor()));
     }
 
 }

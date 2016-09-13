@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * 文件操作类
@@ -282,6 +283,73 @@ public class FileUtil {
         return false;
     }
 
+    /**
+     * copy a input stream to given filepath
+     *
+     * @param input
+     * @param filePath
+     * @return
+     */
+    public static boolean copy(final InputStream input, final String filePath) {
+        try {
+            File file = new File(filePath);
+            OutputStream output = new FileOutputStream(file);
+            byte[] buffer = new byte[8 * 1024]; // or other buffer size
+            int read;
+            while ((read = input.read(buffer)) != -1) {
+                output.write(buffer, 0, read);
+            }
+            output.flush();
+            output.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                input.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * delete all files
+     *
+     * @param filePath
+     */
+    public static void delete(final String filePath) {
+        if (filePath != null) {
+            File file = new File(filePath);
+            try {
+                delete(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * delete a file
+     *
+     * @param file
+     */
+    public static void delete(File file) {
+        if (file != null && file.exists()) {
+            if (file.isDirectory()) {
+                File[] children = file.listFiles();
+                if (children != null) {
+                    for (File child : children) {
+                        delete(child);
+                    }
+                }
+                file.delete();
+            } else {
+                file.delete();
+            }
+        }
+    }
     //------------------------------------sdcard operations-----------------------------------------
 
     /**

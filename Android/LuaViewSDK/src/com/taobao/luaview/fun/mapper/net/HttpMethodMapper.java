@@ -10,6 +10,8 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * http 接口封装
  *
@@ -18,6 +20,55 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class HttpMethodMapper<U extends UDHttp> extends BaseMethodMapper<U> {
+
+    private static final String TAG = HttpMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "url",//0
+            "method",//1
+            "retryTimes",//2
+            "timeout",//3
+            "params",//4
+            "callback",//5
+            "request",//6
+            "cancel",//7
+            "get",//8
+            "post"//9
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return url(target, varargs);
+            case 1:
+                return method(target, varargs);
+            case 2:
+                return retryTimes(target, varargs);
+            case 3:
+                return timeout(target, varargs);
+            case 4:
+                return params(target, varargs);
+            case 5:
+                return callback(target, varargs);
+            case 6:
+                return request(target, varargs);
+            case 7:
+                return cancel(target, varargs);
+            case 8:
+                return get(target, varargs);
+            case 9:
+                return post(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
 
     /**

@@ -1,5 +1,7 @@
 package com.taobao.luaview.global;
 
+import com.taobao.luaview.cache.AppCache;
+import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.binder.constants.AlignBinder;
 import com.taobao.luaview.fun.binder.constants.EllipsizeBinder;
 import com.taobao.luaview.fun.binder.constants.FontStyleBinder;
@@ -8,6 +10,7 @@ import com.taobao.luaview.fun.binder.constants.GravityBinder;
 import com.taobao.luaview.fun.binder.constants.InterpolatorBinder;
 import com.taobao.luaview.fun.binder.constants.ScaleTypeBinder;
 import com.taobao.luaview.fun.binder.constants.TextAlignBinder;
+import com.taobao.luaview.fun.binder.constants.ViewEffectBinder;
 import com.taobao.luaview.fun.binder.indicator.UICircleViewPagerIndicatorBinder;
 import com.taobao.luaview.fun.binder.indicator.UICustomViewPagerIndicatorBinder;
 import com.taobao.luaview.fun.binder.kit.ActionBarBinder;
@@ -48,7 +51,6 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.jse.JsePlatform;
-import org.luaj.vm2.luajc.LuaJC;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -63,6 +65,8 @@ import java.util.List;
  * @date 15/8/14
  */
 public class LuaViewManager {
+    private static final String TAG = LuaViewManager.class.getSimpleName();
+    private static final String CACHE_METATABLES = AppCache.CACHE_METATABLES;
 
     /**
      * 创建Globals
@@ -134,37 +138,40 @@ public class LuaViewManager {
         globals.tryLazyLoad(new GravityBinder());
         globals.tryLazyLoad(new EllipsizeBinder());
         globals.tryLazyLoad(new InterpolatorBinder());
+        globals.tryLazyLoad(new ViewEffectBinder());//view特效
 
         DebugUtil.te("loadLuaViewLibs");
     }
 
+    //----------------------------------------bind methods------------------------------------------
 
     /**
-     * bind lua function
+     * bind lua function using methods
      *
      * @param factory
      * @param methods
      */
-    public static LuaTable bind(Class<? extends LibFunction> factory, Method[] methods) {
+    public static LuaTable bindMethods(Class<? extends LibFunction> factory, Method[] methods) {
         if (methods != null) {
-            return bind(factory, Arrays.asList(methods));
+            return bindMethods(factory, Arrays.asList(methods));
         }
         return new LuaTable();
     }
 
     /**
-     * bind lua functions
+     * bind lua functions using method
      *
      * @param factory
      * @param methods
      * @return
      */
-    public static LuaTable bind(Class<? extends LibFunction> factory, List<Method> methods) {
+    public static LuaTable bindMethods(Class<? extends LibFunction> factory, List<Method> methods) {
         LuaTable env = new LuaTable();
         try {
             if (methods != null) {
                 for (int i = 0; i < methods.size(); i++) {
                     LibFunction f = factory.newInstance();
+                    f.opcode = -1;
                     f.method = methods.get(i);
                     f.name = methods.get(i).getName();
                     env.set(f.name, f);
@@ -177,7 +184,57 @@ public class LuaViewManager {
         }
     }
 
+    /**
+     * bind lua functions using opcode
+     *
+     * @param factory
+     * @param methods
+     * @return
+     */
+    public static LuaTable bind(Class<? extends LibFunction> factory, List<String> methods) {
+        LuaTable env = new LuaTable();
+        try {
+            if (methods != null) {
+                for (int i = 0; i < methods.size(); i++) {
+                    LibFunction f = factory.newInstance();
+                    f.opcode = i;
+                    f.method = null;
+                    f.name = methods.get(i);
+                    env.set(f.name, f);
+                }
+            }
+        } catch (Exception e) {
+            throw new LuaError("[Bind Failed] " + e);
+        } finally {
+            return env;
+        }
+    }
 
+    /**
+     * bind lua functions using opcode
+     *
+     * @param factory
+     * @param methods
+     * @return
+     */
+    public static LuaTable bind(Class<? extends LibFunction> factory, String[] methods) {
+        LuaTable env = new LuaTable();
+        try {
+            if (methods != null) {
+                for (int i = 0; i < methods.length; i++) {
+                    LibFunction f = factory.newInstance();
+                    f.opcode = i;
+                    f.method = null;
+                    f.name = methods[i];
+                    env.set(f.name, f);
+                }
+            }
+        } catch (Exception e) {
+            throw new LuaError("[Bind Failed] " + e);
+        } finally {
+            return env;
+        }
+    }
     //-----------------------------------------metatable--------------------------------------------
 
     /**
@@ -186,13 +243,43 @@ public class LuaViewManager {
      * @return
      */
     public static LuaTable createMetatable(Class<? extends LibFunction> libClass) {
-        final LuaTable libTable = LuaViewManager.bind(libClass, getMapperMethods(libClass));
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+        LuaTable result = AppCache.getCache(CACHE_METATABLES).get(libClass);//get from cache
+
+        if (result == null) {
+            LuaTable libTable = null;
+            if (LuaViewConfig.isUseNoReflection()) {
+                final List<String> methodNames = getMapperMethodNames(libClass);
+                libTable = LuaViewManager.bind(libClass, methodNames);
+            } else {
+                final List<Method> methods = getMapperMethods(libClass);
+                libTable = LuaViewManager.bindMethods(libClass, methods);
+            }
+            result = LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+
+            //update cache
+            AppCache.getCache(CACHE_METATABLES).put(libClass, result);
+        }
+        return result;
     }
 
-    public static LuaTable createMetatable(Class<? extends LibFunction> libClass, Method[] methods) {
-        final LuaTable libTable = LuaViewManager.bind(libClass, methods);
-        return LuaValue.tableOf(new LuaValue[]{LuaValue.INDEX, libTable, LuaValue.NEWINDEX, new NewIndexFunction(libTable)});
+    /**
+     * 获取所有方法的名字
+     *
+     * @param clazz
+     * @return
+     */
+    private static List<String> getMapperMethodNames(final Class clazz) {
+        try {
+            if (clazz != null) {
+                Object obj = clazz.newInstance();
+                if (obj instanceof BaseMethodMapper) {
+                    return ((BaseMethodMapper) obj).getAllFunctionNames();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

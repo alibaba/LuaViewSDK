@@ -6,11 +6,11 @@ import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * View 接口封装
@@ -21,6 +21,54 @@ import java.util.ArrayList;
  */
 @LuaViewLib
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
+
+    private static final String TAG = UIViewGroupMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "onShow",//0
+            "onHide",//1
+            "onBack",//2
+            "onLayout",//3
+            "addView",//4
+            "removeView",//5
+            "removeAllViews",//6
+            "children",//7
+            "flexChildren"//8
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return onShow(target, varargs);
+            case 1:
+                return onHide(target, varargs);
+            case 2:
+                return onBack(target, varargs);
+            case 3:
+                return onLayout(target, varargs);
+            case 4:
+                return addView(target, varargs);
+            case 5:
+                return removeView(target, varargs);
+            case 6:
+                return removeAllViews(target, varargs);
+            case 7:
+                return children(target, varargs);
+            case 8:
+                return flexChildren(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
+
 
     /**
      * onShow

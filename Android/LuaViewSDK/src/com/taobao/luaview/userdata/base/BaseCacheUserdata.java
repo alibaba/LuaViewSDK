@@ -1,6 +1,7 @@
 package com.taobao.luaview.userdata.base;
 
 import com.taobao.luaview.cache.LuaCache;
+import com.taobao.luaview.global.LuaView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -36,8 +37,10 @@ public abstract class BaseCacheUserdata extends BaseUserdata implements LuaCache
     }
 
     private void cacheObject() {
-        if (getGlobals() != null && getGlobals().getLuaView() != null) {
-            getGlobals().getLuaView().cacheObject(getClass(), this);
+        final Globals globals = getGlobals();
+        final LuaView luaView = globals != null ? globals.getLuaView() : null;
+        if (luaView != null) {
+            luaView.cacheObject(getClass(), this);
         }
     }
 

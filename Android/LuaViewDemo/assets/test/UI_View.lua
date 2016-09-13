@@ -1,14 +1,20 @@
 view = View()
 view.frame(0, 10, 100, 100)
-view.backgroundColor(0x44aa0000)
+view.backgroundColor(0x11001100)
+view.borderColor(0x020304)
+view.borderWidth(0.3)
 local x, y = view.center();
 Toast("中心点位置: " .. x .. "," .. y)
 
+print("background-color", view.backgroundColor(), 0x11001100)
+--print("border-color", view.borderColor(), 0x020304)
+--print("border-width", view.borderWidth(), 0.3)
+
 
 view.backgroundColor(1)
-print(view.backgroundColor())
+--print(view.backgroundColor())
 
-view.backgroundColor(0x88000001)
+view.backgroundColor(0x12000001)
 print(view.backgroundColor())
 
 view.backgroundColor(0x000001, 0.5)
@@ -32,7 +38,7 @@ view.children(function(parent)
             print(parent)
             local child3 = View()
             child3.frame(2, 2, 60, 60)
-            child3.backgroundColor(0x0000ff)
+            child3.backgroundColor(0x770000ff)
         end)
     end)
 end)

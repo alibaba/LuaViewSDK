@@ -13,6 +13,7 @@ import com.facebook.csslayout.Spacing;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.foreground.ForegroundRelativeLayout;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -28,9 +29,7 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
-    public Globals mGlobals;
-
+public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGroup {
     private UDViewGroup mLuaUserdata;
 
     /**
@@ -46,8 +45,7 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
 
     public LVViewGroup(Context context, Globals globals, LuaValue metaTable, Varargs varargs) {
         super(context);
-        this.mGlobals = globals;
-        this.mLuaUserdata = new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        this.mLuaUserdata = createUserdata(globals, metaTable, varargs);
         //改在UDViewGroup中设置，减少影响面
 //        this.setFocusableInTouchMode(true);//需要设置，否则onKeyUp等事件无法监听，排查是否会带来其他问题(点击的时候需要点击两下)
 //        this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -72,23 +70,20 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
         return mLayoutContext;
     }
 
+    /**
+     * create user data
+     * @param globals
+     * @param metaTable
+     * @param varargs
+     * @return
+     */
+    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+    }
+
     @Override
     public UDView getUserdata() {
         return mLuaUserdata;
-    }
-
-    /**
-     * 销毁的时候调用
-     */
-    public void onDestroy() {
-        if (mGlobals != null) {
-            mGlobals.onDestroy();
-            mGlobals = null;
-        }
-        if (mLuaUserdata != null) {
-            mLuaUserdata.onDestroy();
-            mLuaUserdata = null;
-        }
     }
 
     @Override

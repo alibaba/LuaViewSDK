@@ -1,11 +1,11 @@
 package com.taobao.luaview.view;
 
 import android.view.Gravity;
-import android.widget.TextView;
 
 import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.view.foreground.ForegroundTextView;
 import com.taobao.luaview.view.interfaces.ILVView;
 
 import org.luaj.vm2.Globals;
@@ -18,7 +18,7 @@ import org.luaj.vm2.Varargs;
  * @author song
  * @date 15/8/20
  */
-public class LVTextView extends TextView implements ILVView {
+public class LVTextView extends ForegroundTextView implements ILVView {
     private UDView mLuaUserdata;
 
     public LVTextView(Globals globals, LuaValue metaTable, Varargs varargs) {

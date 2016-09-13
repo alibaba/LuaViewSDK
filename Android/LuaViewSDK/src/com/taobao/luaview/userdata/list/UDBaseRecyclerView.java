@@ -7,7 +7,6 @@ import android.util.SparseIntArray;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVRecyclerView;
 
@@ -32,30 +31,75 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
     public abstract LVRecyclerView getLVRecyclerView();
 
+    /**
+     * notify data changed (section, row) in java
+     *
+     * @param section
+     * @param row
+     * @return
+     */
     @Override
-    public UDBaseRecyclerView reload() {
+    public UDBaseRecyclerView reload(Integer section, Integer row) {
         final LVRecyclerView recyclerView = getLVRecyclerView();
         if (recyclerView != null) {
             init();//重新初始化数据
             recyclerView.updateMaxSpanCount();
-            if (recyclerView.getLVAdapter() != null) {
-                recyclerView.getLVAdapter().notifyDataSetChanged();
+            RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
             }
         }
         return this;
+    }
+
+    private void reload(){
+        /*if (section == null || (section < 0 || section >= getSectionCount())) {//如果 section 无效则刷新所有
+                    adapter.notifyDataSetChanged();
+                } else {//如果传递了section，row，则表示要更新部分
+                    final int newTotalCount = getRawTotalCount();
+                    final int currentTotalCount = getTotalCount();
+                    boolean isChanged = newTotalCount == currentTotalCount;
+                    boolean isInserted = newTotalCount > currentTotalCount;
+                    boolean isRemoved = newTotalCount < currentTotalCount;
+
+                    if (row == null) {//row is null, notify whole section
+                        final int start = getPositionBySectionAndRow(section, 0);
+                        final int count = getRawRowCount(section);
+                        if (isChanged) {
+                            adapter.notifyItemRangeChanged(start, count);
+                        } else if (isInserted) {
+                            adapter.notifyItemRangeInserted(start, count);
+                        } else if (isRemoved) {
+                            adapter.notifyItemRangeRemoved(start, count);
+                        } else {
+                            adapter.notifyDataSetChanged();
+                        }
+                    } else {//row not null, notify row
+                        final int pos = getPositionBySectionAndRow(section, row);
+                        if (isChanged) {
+                            adapter.notifyItemChanged(pos);
+                        } else if (isInserted) {
+                            adapter.notifyItemInserted(pos);
+                        } else if (isRemoved) {
+                            adapter.notifyItemRemoved(pos);
+                        } else {
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }*/
     }
 
     @Override
     public void initOnScrollCallback(final T view) {
         if (view instanceof LVRecyclerView) {
             final LVRecyclerView lvRecyclerView = (LVRecyclerView) view;
-            if (!mCallback.isnil() || mLazyLoad) {
+            if (LuaUtil.isValid(mCallback) || mLazyLoad) {
                 lvRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
                         updateAllChildScrollState(recyclerView, scrollState);
 
-                        if (!mCallback.isnil()) {
+                        if (LuaUtil.isValid(mCallback)) {
                             switch (scrollState) {
                                 case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL: {
                                     final int itemPosition = lvRecyclerView.getFirstVisiblePosition();
@@ -79,7 +123,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        if (!mCallback.isnil()) {
+                        if (LuaUtil.isValid(mCallback)) {
                             final int itemPosition = lvRecyclerView.getFirstVisiblePosition();
                             final int section = getSectionByPosition(itemPosition);
                             final int row = getRowInSectionByPosition(itemPosition);

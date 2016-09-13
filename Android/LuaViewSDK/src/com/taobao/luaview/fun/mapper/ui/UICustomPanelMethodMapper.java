@@ -9,6 +9,8 @@ import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * 自定义面板
  *
@@ -18,6 +20,30 @@ import org.luaj.vm2.Varargs;
 @LuaViewLib
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
 
+    private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "nativeView",//0
+            "getNativeView"//1
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return nativeView(target, varargs);
+            case 1:
+                return getNativeView(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 获取native view
@@ -26,12 +52,14 @@ public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGr
      * @param varargs
      * @return
      */
-    @LuaViewApi(since = VmVersion.V_500)
+    @Deprecated
+    @LuaViewApi(since = VmVersion.V_500, revisions = {"移动到 UIViewMethodMapper（V510）"})
     public LuaValue nativeView(U customPanel, Varargs varargs) {
         return getNativeView(customPanel, varargs);
     }
 
-    @LuaViewApi(since = VmVersion.V_500)
+    @Deprecated
+    @LuaViewApi(since = VmVersion.V_500, revisions = {"移动到 UIViewMethodMapper（V510）"})
     public LuaValue getNativeView(U customPanel, Varargs varargs) {
         return customPanel.getNativeView();
     }

@@ -1,10 +1,16 @@
 package com.taobao.luaview.fun.base;
 
+import com.taobao.luaview.cache.AppCache;
+import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.util.LogUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 基础多参数函数
@@ -13,6 +19,8 @@ import org.luaj.vm2.lib.VarArgFunction;
  * @date 15/8/14
  */
 public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunction {
+    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
+    private static final String CACHE_METHODS = AppCache.CACHE_METHODS;
 
     /**
      * 该函数使用反射，调用方法，并且被调用方法签名必须为：fun(UIView, Varargs)格式，否则不被支持
@@ -24,14 +32,21 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
      */
     public Varargs invoke(Varargs args) {
         try {
-            return (Varargs) method.invoke(this, getUD(args), args);
+            if (opcode != -1) {
+                return invoke(opcode, getUD(args), args);
+            } else {
+                return (Varargs) method.invoke(this, getUD(args), args);
+            }
         } catch (Exception e) {
-            LogUtil.e("[----Method Invoke Error Start----]");
-            LogUtil.e("[Class]", getClass());
-            LogUtil.e("[Method] ", method);
-            LogUtil.e("[Arguments] ", args);
-            LogUtil.e("[Error] ", e);
-            LogUtil.e("[----Method Invoke Error End----]");
+            if(LuaViewConfig.isDebug()) {
+                LogUtil.e("[----Method Invoke Error Start----]");
+                LogUtil.e("[Class]", getClass());
+                LogUtil.e("[Opcode]", opcode);
+                LogUtil.e("[Method] ", method != null ? method : getMethodByOpcode(opcode));
+                LogUtil.e("[Arguments] ", args);
+                LogUtil.e("[Error] ", e);
+                LogUtil.e("[----Method Invoke Error End----]");
+            }
             e.printStackTrace();
             return NONE;
         }
@@ -46,4 +61,91 @@ public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunctio
     public U getUD(Varargs varargs) {
         return (U) varargs.arg1();
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * merge function names with cache tag
+     * @param tag
+     * @param supernames
+     * @param names
+     * @return
+     */
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final String[] names){
+        List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
+        if(result == null){
+            result = mergeFunctionNames(supernames, names);
+            AppCache.getCache(CACHE_METHODS).put(tag, result);
+        }
+        return result;
+    }
+
+    public List<String> mergeFunctionNames(final String tag, final List<String> supernames, final List<String> names){
+        List<String> result = AppCache.getCache(CACHE_METHODS).get(tag);
+        if(result == null){
+            result = mergeFunctionNames(supernames, names);
+            AppCache.getCache(CACHE_METHODS).put(tag, result);
+        }
+        return result;
+    }
+    /**
+     * merge function names
+     * 将names拼接在supernames之后
+     * @param supernames
+     * @param names
+     * @return
+     */
+    private List<String> mergeFunctionNames(final List<String> supernames, final String[] names) {
+        return mergeFunctionNames(supernames, Arrays.asList(names));
+    }
+
+    /**
+     * merge FunctionNames
+     * 将自己的names拼接在supernames之后
+     */
+    private List<String> mergeFunctionNames(final List<String> supernames, final List<String> names) {
+        final List<String> result = new ArrayList<String>();
+        if (supernames != null && supernames.size() > 0) {
+            result.addAll(supernames);
+        }
+        if (supernames != null && names != null) {
+            result.addAll(supernames.size(), names);
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有函数名称，供子类调用
+     *
+     * @return
+     */
+    public List<String> getAllFunctionNames() {
+        return new ArrayList<String>();
+    }
+
+    /**
+     * 根据code获取函数名称
+     * @param optcode
+     * @return
+     */
+    public String getMethodByOpcode(int optcode){
+        List<String> allMethods = getAllFunctionNames();
+        if(allMethods != null && allMethods.size() > optcode && optcode >= 0){
+            return allMethods.get(optcode);
+        }
+        return null;
+    }
+
+    /**
+     * 调用子类
+     *
+     * @param code
+     * @param target
+     * @param varargs
+     * @return
+     */
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        return LuaValue.NIL;
+    }
+
 }

@@ -50,7 +50,7 @@ public class UDLoadingDialog extends BaseUserdata {
      * @param alpha
      * @return
      */
-    public UDLoadingDialog setColorAndAlpha(int color, int alpha) {
+    public UDLoadingDialog setColorAndAlpha(Integer color, Double alpha) {
         //TODO
         return this;
     }

@@ -64,7 +64,11 @@ public class NetworkUtil {
                 IntentFilter filter = new IntentFilter();
                 filter.addAction(Intent.ACTION_SHUTDOWN);
                 filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-                context.getApplicationContext().registerReceiver(sConnectionBroadcastReceiver, filter);
+                try {
+                    context.getApplicationContext().registerReceiver(sConnectionBroadcastReceiver, filter);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             sConnectionBroadcastReceiver.addOnConnectionChangeListener(listener);
         }

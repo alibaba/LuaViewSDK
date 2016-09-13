@@ -20,14 +20,12 @@ import org.luaj.vm2.Varargs;
  * @date 15/8/20
  */
 public class LVCircleViewPagerIndicator extends CirclePageIndicator implements ILVView {
-    public Globals mGlobals;
     private LuaValue mInitParams;
     private ViewPager mViewPager;
     private UDCircleViewPagerIndicator mLuaUserdata;
 
     public LVCircleViewPagerIndicator(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
         this.mInitParams = varargs != null ? varargs.arg1() : null;
         this.mLuaUserdata = new UDCircleViewPagerIndicator(this, globals, metaTable, this.mInitParams);
         this.setPadding(0, 2, 0, 0);

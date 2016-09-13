@@ -10,7 +10,6 @@ import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.userdata.ui.UDViewPager;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewGroup;
 
@@ -48,23 +47,20 @@ public class LVPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-//        final WeakReference<View> weakReference = mViews != null ? mViews.get(position) : null;
-//        if (weakReference != null && weakReference.get() != null) {
-//            return weakReference.get();
-//        } else {
-            return newItem(container, position);
-//        }
+        return newItem(container, position);
     }
 
     public Object newItem(ViewGroup container, int position) {
-        LogUtil.d("yesong", "newItem", position);
+//        LogUtil.d("yesong", "newItem", position);
         //View封装
-        final UDView page = new UDViewGroup(createPageLayout(), mGlobals, mInitProps.getmetatable(), null);
+        final UDView page = new UDViewGroup(createPageLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
         //对外数据封装，必须使用LuaTable
         final UDLuaTable pageData = new UDLuaTable(page);
         final View pageView = pageData.getView();
         //添加view
-        container.addView(pageView);
+        if(container != null) {
+            container.addView(pageView);
+        }
         //初始化View
         initView(pageData, position);
         //绘制数据
@@ -87,13 +83,9 @@ public class LVPagerAdapter extends PagerAdapter {
      * @param object
      */
     private void removeItem(ViewGroup container, int position, Object object) {
-        LogUtil.d("yesong", "removeItem", position);
-        if (object instanceof View) {
+        if (container != null && object instanceof View) {
             container.removeView((View) object);
         }
-//        if (mViews != null) {
-//            mViews.put(position, null);
-//        }
     }
 
     /**
@@ -104,8 +96,10 @@ public class LVPagerAdapter extends PagerAdapter {
      */
     private RelativeLayout.LayoutParams createLayoutParams(ViewGroup container) {
         final RelativeLayout.LayoutParams layoutParams = LuaViewUtil.createRelativeLayoutParamsWM();
-        layoutParams.width = container.getMeasuredWidth();
-        layoutParams.height = container.getMeasuredHeight();
+        if(container != null) {
+            layoutParams.width = container.getMeasuredWidth();
+            layoutParams.height = container.getMeasuredHeight();
+        }
         return layoutParams;
     }
 

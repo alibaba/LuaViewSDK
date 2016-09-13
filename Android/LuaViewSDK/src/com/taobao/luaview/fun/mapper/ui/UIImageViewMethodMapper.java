@@ -11,13 +11,54 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Image 接口封装
- * @author song
+ *
  * @param <U>
+ * @author song
  */
 @LuaViewLib
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
+
+    private static final String TAG = UIImageViewMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "image",//0
+            "contentMode",//1
+            "scaleType",//2
+            "startAnimationImages",//3
+            "stopAnimationImages",//4
+            "isAnimationImages"//5
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return image(target, varargs);
+            case 1:
+                return contentMode(target, varargs);
+            case 2:
+                return scaleType(target, varargs);
+            case 3:
+                return startAnimationImages(target, varargs);
+            case 4:
+                return stopAnimationImages(target, varargs);
+            case 5:
+                return isAnimationImages(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
+
 
     /**
      * 设置图片url
@@ -41,7 +82,8 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     }
 
     public LuaValue getImage(U view, Varargs varargs) {
-        return valueOf(view.getImageUrl());
+        String imageUrl = view.getImageUrl();
+        return imageUrl != null ? valueOf(imageUrl) : LuaValue.NIL;
     }
 
 
@@ -68,6 +110,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     /**
      * 设置图片的缩放模式
      * TODO 跟iOS统一常
+     *
      * @param view
      * @param varargs
      * @return

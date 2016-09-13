@@ -2,7 +2,8 @@ package com.taobao.luaview.view.imageview;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
+
+import com.taobao.luaview.view.foreground.ForegroundImageView;
 
 /**
  * Base ImageView
@@ -10,7 +11,7 @@ import android.widget.ImageView;
  * @author song
  * @date 16/3/9
  */
-public abstract class BaseImageView extends ImageView {
+public abstract class BaseImageView extends ForegroundImageView {
     protected boolean mAttachedWindow = false;
     protected boolean isNetworkMode = false;
 
@@ -45,5 +46,7 @@ public abstract class BaseImageView extends ImageView {
     public abstract void loadUrl(final String url, final LoadCallback callback);
 
     public abstract String getUrl();
+
+    public abstract void setUrl(String url);
 
 }

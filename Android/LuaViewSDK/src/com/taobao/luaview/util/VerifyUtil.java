@@ -30,6 +30,7 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class VerifyUtil {
     private static final String TAG = VerifyUtil.class.getSimpleName();
+    private static final String CACHE_PUBLIC_KEY = AppCache.CACHE_PUBLIC_KEY;
 
     public static final String ALGORITHM_RSA = "RSA";
     public static final String SIGNATURE_ALGORITHM = "SHA1WithRSA";// "MD5withRSA";
@@ -44,7 +45,7 @@ public class VerifyUtil {
      */
     public static boolean rsa(Context context, byte[] content, byte[] sign) {
         try {
-            byte[] publicKeyFileData = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH);
+            byte[] publicKeyFileData = AppCache.getCache(CACHE_PUBLIC_KEY).get(Constants.PUBLIC_KEY_PATH);
             if(publicKeyFileData == null) {
                 final InputStream inputStream;inputStream = context.getAssets().open(Constants.PUBLIC_KEY_PATH);
                 publicKeyFileData = IOUtil.toBytes(inputStream);
@@ -68,13 +69,13 @@ public class VerifyUtil {
     public static boolean rsa(byte[] content, byte[] publicKey, byte[] sign) {
         InputStream inputStream = null;
         try {
-            PublicKey pk = AppCache.getCache(Constants.PUBLIC_KEY_TAG).get(Constants.PUBLIC_KEY_PATH_PK);//get public key
+            PublicKey pk = AppCache.getCache(CACHE_PUBLIC_KEY).get(Constants.PUBLIC_KEY_PATH_PK);//get public key
             if(pk == null) {
                 inputStream = new ByteArrayInputStream(publicKey);
                 final CertificateFactory certFactory = CertificateFactory.getInstance(DER_CERT_509);
                 final Certificate cert = certFactory.generateCertificate(inputStream);
                 pk = cert.getPublicKey();
-                AppCache.getCache(Constants.PUBLIC_KEY_TAG).put(Constants.PUBLIC_KEY_PATH_PK, pk);//cache public key
+                AppCache.getCache(CACHE_PUBLIC_KEY).put(Constants.PUBLIC_KEY_PATH_PK, pk);//cache public key
             }
             final Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM);
             sig.initVerify(pk);

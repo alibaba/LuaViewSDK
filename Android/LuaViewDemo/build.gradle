@@ -27,8 +27,8 @@ dependencies {
   定义android插件
 */
 android {
-    compileSdkVersion 19
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']

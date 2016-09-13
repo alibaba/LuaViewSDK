@@ -64,6 +64,14 @@ public class LuaResourceFinder implements ResourceFinder {
         mBaseAssetPath = FileUtil.getAssetFolderPath(uri);//脚本默认放在asset目录下
     }
 
+    public String getUri(){
+        return mUri;
+    }
+
+    public String getBasePath(){
+        return mBasePath;
+    }
+
     /**
      * find Script in given name or path
      *

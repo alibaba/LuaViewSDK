@@ -7,12 +7,15 @@ view.backgroundColor(0xffaa0000)
 view.callback(function()
     print("Button Clicked")
 end)
-view.image("https://gju1.alicdn.com/bao/uploaded/i1/100000119234047241/TB2JnnKeVXXXXcpXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg")
+view.image("animate1")
+
+print("view-url", view.image())
 
 
 --2. 普通构造传url
 view2 = Image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg")
 view2.frame(150, 0, 150, 100)
+print("view2-url", view2.image())
 
 
 
@@ -61,10 +64,14 @@ imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
     end);
 
 
+
 -- gif
 imageView3 = Image()
 imageView3.image("http://static1.squarespace.com/static/552a5cc4e4b059a56a050501/565f6b57e4b0d9b44ab87107/565f6ddee4b0d9b44ab89215/1449098068446/NYCGifathon2.gif", function() end)
 imageView3.frame(scrW / 2 - 50, scrH / 2 + 100, 100, 100)
+imageView3.callback(function()
+    imageView3.adjustSize()
+end)
 
 
 
