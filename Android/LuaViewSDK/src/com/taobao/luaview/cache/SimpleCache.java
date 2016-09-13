@@ -42,6 +42,20 @@ public class SimpleCache {
      */
     public static void clear() {
         if (mCachePool != null) {
+            SimpleCache sc = null;
+            Object cacheObj = null;
+            for (String key : mCachePool.keySet()) {
+                sc = mCachePool.get(key);
+                if (sc != null && sc.mCache != null) {
+                    for (Object key2 : sc.mCache.keySet()) {
+                        cacheObj = sc.mCache.get(key2);
+                        if (cacheObj instanceof LuaCache.CacheableObject) {
+                            ((LuaCache.CacheableObject) cacheObj).onCacheClear();
+                        }
+                    }
+                    sc.mCache.clear();
+                }
+            }
             mCachePool.clear();
         }
     }

@@ -29,7 +29,7 @@ timer2.callback(
 		index2 = index2 + 1;
 	end
 	)
-timer2.start(2, true)
+timer2.start(0.2, true)
 
 --3
 timer3 = Timer(function()

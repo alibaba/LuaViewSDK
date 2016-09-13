@@ -10,6 +10,7 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 
 /**
  * 基础用户数据
@@ -35,9 +36,20 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     }
 
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable, Varargs varargs) {
-        super(obj, metatable);
+        super(new WeakReference<Object>(obj), metatable);
         this.mGlobals = globals;
         this.mVarargs = varargs;
+    }
+
+
+    @Override
+    public Object userdata() {
+        Object obj = super.userdata();
+        if (obj instanceof WeakReference) {
+            return ((WeakReference) obj).get();
+        } else {
+            return obj;
+        }
     }
 
     public Globals getGlobals() {
@@ -50,5 +62,12 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
 
     public Context getContext() {
         return getGlobals() != null ? getGlobals().getContext() : null;
+    }
+
+    /**
+     * 销毁的时候置空
+     */
+    public void onDestroy() {
+        m_instance = null;
     }
 }

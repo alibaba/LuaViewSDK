@@ -38,7 +38,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue setDelay(U udTimer, Varargs varargs) {
-        final long delay = LuaUtil.getLong(varargs, 0L, 2) * 1000;
+        final long delay = LuaUtil.getTimeLong(varargs, 0f, 2);
         return udTimer.setDelay(delay);
     }
 
@@ -92,7 +92,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue setInterval(U udTimer, Varargs varargs) {
-        final long interval = LuaUtil.getLong(varargs, 1L, 2) * 1000;
+        final long interval = LuaUtil.getTimeLong(varargs, 1f, 2);
         return udTimer.setInterval(interval);
     }
 
@@ -109,9 +109,9 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
      * @return
      */
     public LuaValue start(U udTimer, Varargs varargs) {
-        final Long interval = LuaUtil.getLong(varargs, 2);
+        final Long interval = LuaUtil.getTimeLong(varargs, 2);
         final Boolean repeat = LuaUtil.getBoolean(varargs, 3);
-        return udTimer.start(interval != null ? interval * 1000 : null, repeat);
+        return udTimer.start(interval, repeat);
     }
 
     /**
