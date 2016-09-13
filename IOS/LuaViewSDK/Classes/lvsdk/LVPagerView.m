@@ -31,10 +31,6 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 // lua 对应的数据 key
 #define USERDATA_KEY_DELEGATE  1
 
-// 滚动方向
-#define SCROLL_DIRECTION_RIGHT 0
-#define SCROLL_DIRECTION_LEFT 1
-
 #define DEFAULT_CELL_IDENTIFIER  @"LVCollectionCell.default.identifier"
 
 @interface LVPagerView ()
@@ -49,11 +45,9 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 @property (nonatomic,strong) NSTimer *timer;
 
-@property (nonatomic,assign) NSInteger scrollDirection;
-@property (nonatomic,assign) BOOL reverseDirection;
-
 @property (nonatomic,assign) CGPoint nextOffset;
 @property (nonatomic,assign) BOOL autoScroll;
+@property (nonatomic,assign) NSInteger isScrollEndTimes;
 @end
 
 
@@ -70,8 +64,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         self.delegate = self;
         self.pageIdx = 0;
         self.scrollsToTop = NO;
-        self.scrollDirection = SCROLL_DIRECTION_RIGHT;
-        self.reverseDirection = YES;
+        self.isScrollEndTimes = 0;
     }
     return self;
 }
@@ -131,16 +124,18 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) moveCenter{
-    CGPoint p = self.contentOffset;
-    CGFloat width = self.bounds.size.width;
-    if( p.x<=0 ) {
-        self.pageIdx0 += 1;
-        self.contentOffset = CGPointMake( p.x + width, 0);
-        [self resetCellFrame];
-    } else if( p.x>=width*2 ){
-        self.pageIdx0 -= 1;
-        self.contentOffset = CGPointMake( p.x - width, 0);
-        [self resetCellFrame];
+    if( self.autoScroll ) {
+        CGPoint p = self.contentOffset;
+        CGFloat width = self.bounds.size.width;
+        if( p.x<=0 ) {
+            self.pageIdx0 += 1;
+            self.contentOffset = CGPointMake( p.x + width, 0);
+            [self resetCellFrame];
+        } else if( p.x>=width*2 ){
+            self.pageIdx0 -= 1;
+            self.contentOffset = CGPointMake( p.x - width, 0);
+            [self resetCellFrame];
+        }
     }
 }
 
@@ -455,21 +450,17 @@ static int autoScroll(lv_State *L){
 }
 
 - (void) scrollTimer:(NSTimer *) timer {
-    NSInteger pageIdx = self.pageIdx;
-    NSInteger totalPages = self.cellArray.count;
-    
-    //更改方向
-    if (self.reverseDirection) {
-        if (self.scrollDirection == SCROLL_DIRECTION_RIGHT && pageIdx + 1 >= totalPages) {
-            self.scrollDirection = SCROLL_DIRECTION_LEFT;
-        } else if (self.scrollDirection == SCROLL_DIRECTION_LEFT && pageIdx - 1 < 0) {
-            self.scrollDirection = SCROLL_DIRECTION_RIGHT;
-        }
+    if( self.isScrollEndTimes>2 ) {
+        //更改方向
+        NSInteger width = self.frame.size.width;
+        CGPoint p = self.contentOffset;
+        p.x += width;
+        p.x = ((NSInteger)p.x) /width * width;
+        self.nextOffset = p;
+        [self performSelectorOnMainThread:@selector(changeOffsetWithAnimation:) withObject:nil waitUntilDone:NO];
+    } else {
+        self.isScrollEndTimes ++;
     }
-    
-    NSInteger newPageIdx = (self.scrollDirection == SCROLL_DIRECTION_LEFT) ? (pageIdx - 1) : (pageIdx + 1);
-    
-    [self setCurrentPageIdx:newPageIdx % totalPages animation:YES];
 }
 
 static int indicator(lv_State *L) {
@@ -598,6 +589,7 @@ static int __gc (lv_State *L) {
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.isScrollEndTimes = 0;
     [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
@@ -607,6 +599,7 @@ static int __gc (lv_State *L) {
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self callLuaWithScrolling];
     [self callLuaWithScrollEnded];
+    self.isScrollEndTimes = 0;
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
