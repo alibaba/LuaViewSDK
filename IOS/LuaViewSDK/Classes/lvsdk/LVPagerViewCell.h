@@ -11,7 +11,7 @@
 
 @interface LVPagerViewCell : UIView
 
-
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) BOOL isInited;
 
 -(void) pushTableToStack;
