@@ -4,7 +4,7 @@ require "lv_kit"
 local scrW, scrH= System.screenSize()
 
 pageView = PagerView{
-    PageCount = 12,
+    PageCount = 5,
     Pages = {
         Init = function(page, pos)
             page.button = Button()
