@@ -124,15 +124,25 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) moveCenter{
+    CGFloat width = self.bounds.size.width;
+    CGPoint p = self.contentOffset;
     if( self.autoScroll ) {
         if( self.cellArray.count>2 ) {
-            CGPoint p = self.contentOffset;
-            CGFloat width = self.bounds.size.width;
             if( p.x<=0 ) {
                 self.pageIdx0 += 1;
                 self.contentOffset = CGPointMake( p.x + width, 0);
                 [self resetCellFrame];
             } else if( p.x>=width*2 ){
+                self.pageIdx0 -= 1;
+                self.contentOffset = CGPointMake( p.x - width, 0);
+                [self resetCellFrame];
+            }
+        } else {
+            if( p.x<=0 ) {
+                self.pageIdx0 += 1;
+                self.contentOffset = CGPointMake( p.x + width, 0);
+                [self resetCellFrame];
+            } else if( p.x>=width ){
                 self.pageIdx0 -= 1;
                 self.contentOffset = CGPointMake( p.x - width, 0);
                 [self resetCellFrame];
@@ -452,20 +462,14 @@ static int autoScroll(lv_State *L){
 }
 
 - (void) scrollTimer:(NSTimer *) timer {
-    if( self.isScrollEndTimes>2 ) {
+    if( self.isScrollEndTimes>1 ) {
         //更改方向
         CGSize size = self.contentSize;
         NSInteger width = self.frame.size.width;
         CGPoint p = self.contentOffset;
-        if( p.x+width < size.width-width/2 ) {
+        
             p.x += width;
-        } else {
-            // 连个banner的特殊情况
-            p.x -= width;
-            if( p.x<0 ) {
-                p.x = 0;
-            }
-        }
+            
         
         p.x = ((NSInteger)p.x) /width * width;
         self.nextOffset = p;
