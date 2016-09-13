@@ -244,7 +244,22 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     if( offsetX > maxOffset ){
         offsetX = maxOffset;
     }
-    [self setContentOffset:CGPointMake(offsetX, 0) animated:animation];
+    //[self setContentOffset:CGPointMake(offsetX, 0) animated:animation];
+    if( animation ) {
+        [self performSelectorOnMainThread:@selector(changeContentOffsetWithAnimation:) withObject:@(offsetX) waitUntilDone:NO];
+    } else {
+        [self performSelectorOnMainThread:@selector(changeContentOffsetNoAnimation:) withObject:@(offsetX) waitUntilDone:NO];
+    }
+}
+
+-(void) changeContentOffsetNoAnimation:(NSNumber*) value{
+    CGFloat offsetX = value.floatValue;
+    [self setContentOffset:CGPointMake(offsetX, 0) animated:NO];
+}
+
+-(void) changeContentOffsetWithAnimation:(NSNumber*) value{
+    CGFloat offsetX = value.floatValue;
+    [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
 static Class g_class = nil;
@@ -352,34 +367,38 @@ static int autoScroll(lv_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
-        if([view isKindOfClass: [UIScrollView class]]){
-            
+        if([view isKindOfClass: [LVPagerView class]]){
             NSInteger totalPages = view.cellArray.count;
-            
-            if(totalPages < 2){//小于两个没有效果
+            if ( totalPages < 2 ){//小于两个没有效果
                 return 0;
             }
             
             if(lv_gettop(L) >= 2) {
                 float interval = lv_tonumber(L, 2);
                 
-                if(interval > 0) {//start timer
-                    if(view.timer != nil) {//stop old
-                        [view.timer invalidate];
-                    }
-                
-                    //create new timer
-                    view.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:view selector:@selector(scrollTimer:) userInfo:nil repeats:YES];
-                    
+                if ( interval > 0.02 ) {//start timer
+                    [view startTimer:interval repeat:YES];
                 } else {//stop timer
-                    if(view.timer != nil){
-                        [view.timer invalidate];
-                    }
+                    [view stopTimer];
                 }
             }
         }
     }
     return 0;
+}
+
+#pragma -mark Timer
+-(void) stopTimer{
+    if( self.timer ) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+- (void) startTimer:(NSTimeInterval) interval repeat:(BOOL) repeat{
+    [self stopTimer];
+    //create new timer
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(scrollTimer:) userInfo:nil repeats:repeat];
 }
 
 - (void) scrollTimer:(NSTimer *) timer {
@@ -435,6 +454,26 @@ static int indicator(lv_State *L) {
     return 0;
 }
 
+#pragma -mark __gc
+static void releaseUserDataView(LVUserDataInfo* userdata){
+    if( userdata && userdata->object ){
+        LVPagerView<LVProtocal>* view = CFBridgingRelease(userdata->object);
+        userdata->object = NULL;
+        if( view ){
+            [view.timer invalidate];
+            view.lv_userData = nil;
+            view.lv_lview = nil;
+            [view removeFromSuperview];
+        }
+    }
+}
+
+static int __gc (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    releaseUserDataView(user);
+    return 0;
+}
+
 +(int) classDefine: (lv_State *)L {
     {
         lv_pushcfunction(L, lvNewPageView);
@@ -446,6 +485,7 @@ static int indicator(lv_State *L) {
         {"currentPage",     setCurrentPage },
         {"autoScroll", autoScroll},
         {"indicator", indicator},
+        {"__gc", __gc },
         {NULL, NULL}
     };
     
