@@ -558,7 +558,7 @@ static int __gc (lv_State *L) {
 
 
 - (void) callLuaWithScrolling{
-    int count = self.cellArray.count;
+    NSUInteger count = self.cellArray.count;
     count = count>0?count:1;
     CGFloat offsetX = self.contentOffset.x;
     CGFloat pageWidth = self.frame.size.width;
