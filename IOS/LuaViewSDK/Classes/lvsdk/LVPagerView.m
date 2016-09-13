@@ -91,7 +91,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // index 映射 xindex
 -(NSInteger) index2xindex:(NSInteger) i{
-    int count = self.cellArray.count;
+    NSUInteger count = self.cellArray.count;
     if( count>0 ) {
         i += self.pageIdx0;
         i += 1000 * count;
@@ -102,7 +102,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // xindex 映射 index
 -(NSInteger) xindex2index:(NSInteger) i{
-    int count = self.cellArray.count;
+    NSUInteger count = self.cellArray.count;
     if( count>0 ) {
         i -= self.pageIdx0;
         i += 1000 * count;
@@ -112,9 +112,9 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) resetCellFrame{
-    int count = self.cellArray.count;
+    NSUInteger count = self.cellArray.count;
     CGSize size = self.frame.size;
-    for( int i=0; i<count; i++ ) {
+    for( NSUInteger i=0; i<count; i++ ) {
         UIView* view = self.cellArray[i];
         CGFloat xIndex = [self index2xindex:i];
         CGFloat x = xIndex*size.width;
@@ -464,13 +464,9 @@ static int autoScroll(lv_State *L){
 - (void) scrollTimer:(NSTimer *) timer {
     if( self.isScrollEndTimes>1 ) {
         //更改方向
-        CGSize size = self.contentSize;
         NSInteger width = self.frame.size.width;
         CGPoint p = self.contentOffset;
-        
-            p.x += width;
-            
-        
+        p.x += width;
         p.x = ((NSInteger)p.x) /width * width;
         self.nextOffset = p;
         [self performSelectorOnMainThread:@selector(changeOffsetWithAnimation:) withObject:nil waitUntilDone:NO];
