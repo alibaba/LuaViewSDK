@@ -49,6 +49,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 @property (nonatomic,assign) NSInteger scrollDirection;
 @property (nonatomic,assign) BOOL reverseDirection;
+
+@property (nonatomic,assign) CGPoint nextOffset;
 @end
 
 
@@ -245,21 +247,20 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         offsetX = maxOffset;
     }
     //[self setContentOffset:CGPointMake(offsetX, 0) animated:animation];
+    self.nextOffset = CGPointMake(offsetX, 0);
     if( animation ) {
-        [self performSelectorOnMainThread:@selector(changeContentOffsetWithAnimation:) withObject:@(offsetX) waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(changeOffsetWithAnimation:) withObject:nil waitUntilDone:NO];
     } else {
-        [self performSelectorOnMainThread:@selector(changeContentOffsetNoAnimation:) withObject:@(offsetX) waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(changeOffsetNoAnimation:) withObject:nil waitUntilDone:NO];
     }
 }
 
--(void) changeContentOffsetNoAnimation:(NSNumber*) value{
-    CGFloat offsetX = value.floatValue;
-    [self setContentOffset:CGPointMake(offsetX, 0) animated:NO];
+-(void) changeOffsetNoAnimation:(NSNumber*) value{
+    [self setContentOffset:self.nextOffset animated:NO];
 }
 
--(void) changeContentOffsetWithAnimation:(NSNumber*) value{
-    CGFloat offsetX = value.floatValue;
-    [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+-(void) changeOffsetWithAnimation:(NSNumber*) value{
+    [self setContentOffset:self.nextOffset animated:YES];
 }
 
 static Class g_class = nil;
