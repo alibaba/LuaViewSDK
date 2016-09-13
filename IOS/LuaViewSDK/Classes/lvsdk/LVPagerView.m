@@ -125,16 +125,18 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 -(void) moveCenter{
     if( self.autoScroll ) {
-        CGPoint p = self.contentOffset;
-        CGFloat width = self.bounds.size.width;
-        if( p.x<=0 ) {
-            self.pageIdx0 += 1;
-            self.contentOffset = CGPointMake( p.x + width, 0);
-            [self resetCellFrame];
-        } else if( p.x>=width*2 ){
-            self.pageIdx0 -= 1;
-            self.contentOffset = CGPointMake( p.x - width, 0);
-            [self resetCellFrame];
+        if( self.cellArray.count>2 ) {
+            CGPoint p = self.contentOffset;
+            CGFloat width = self.bounds.size.width;
+            if( p.x<=0 ) {
+                self.pageIdx0 += 1;
+                self.contentOffset = CGPointMake( p.x + width, 0);
+                [self resetCellFrame];
+            } else if( p.x>=width*2 ){
+                self.pageIdx0 -= 1;
+                self.contentOffset = CGPointMake( p.x - width, 0);
+                [self resetCellFrame];
+            }
         }
     }
 }
@@ -281,7 +283,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation{
-    float offsetX = pageIdx * self.frame.size.width ;
+    float offsetX = [self index2xindex:pageIdx] * self.frame.size.width ;
     if( offsetX<=0 ){
         offsetX = 0;
     }
@@ -452,9 +454,19 @@ static int autoScroll(lv_State *L){
 - (void) scrollTimer:(NSTimer *) timer {
     if( self.isScrollEndTimes>2 ) {
         //更改方向
+        CGSize size = self.contentSize;
         NSInteger width = self.frame.size.width;
         CGPoint p = self.contentOffset;
-        p.x += width;
+        if( p.x+width < size.width-width/2 ) {
+            p.x += width;
+        } else {
+            // 连个banner的特殊情况
+            p.x -= width;
+            if( p.x<0 ) {
+                p.x = 0;
+            }
+        }
+        
         p.x = ((NSInteger)p.x) /width * width;
         self.nextOffset = p;
         [self performSelectorOnMainThread:@selector(changeOffsetWithAnimation:) withObject:nil waitUntilDone:NO];
