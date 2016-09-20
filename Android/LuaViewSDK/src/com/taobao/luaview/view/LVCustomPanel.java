@@ -37,8 +37,10 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-        super.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        if(this != view) {
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
+            super.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        }
     }
 
     public void show() {

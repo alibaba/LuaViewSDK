@@ -95,8 +95,10 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-        LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        if(this != view) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
+            LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        }
     }
 
     public void show() {

@@ -143,7 +143,9 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
 
     @Override
     public void addLVView(View view, Varargs a) {
-        this.addView(view);
+        if(this != view) {
+            this.addView(view);
+        }
     }
 
     @Override
