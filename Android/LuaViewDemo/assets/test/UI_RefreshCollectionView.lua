@@ -43,6 +43,7 @@ collectionView = RefreshCollectionView {
                 return 50, cellHeight;
             end,
             Init = function(cell, section, row)
+                cell.bg = View()
                 cell.icon = Image();
                 cell.title = Label();
                 print("构造Cell");
@@ -55,6 +56,8 @@ collectionView = RefreshCollectionView {
 
                 cell.title.frame(20, 0, w - 20, cellHeight);
                 cell.title.text("测试" .. section .. "--" .. row);
+
+                cell.bg.addView(cell.bg)
             end,
             Callback = function(section, row)
                 print(section, row);
