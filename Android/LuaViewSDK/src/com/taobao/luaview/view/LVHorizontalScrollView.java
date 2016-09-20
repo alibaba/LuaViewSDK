@@ -46,8 +46,10 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
 
     @Override
     public void addLVView(final View view, Varargs varargs) {
-        final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-        mContainer.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        if(mContainer != view) {
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
+            mContainer.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        }
     }
 
     @Override
