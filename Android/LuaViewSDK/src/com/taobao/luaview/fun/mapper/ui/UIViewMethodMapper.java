@@ -363,7 +363,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-    public LuaValue initParams(U view, Varargs varargs) {
+    public Varargs initParams(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setInitParams(view, varargs);
         } else {
@@ -376,7 +376,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.setInitParams(initParams);
     }
 
-    public LuaValue getInitParams(U view, Varargs varargs) {
+    public Varargs getInitParams(U view, Varargs varargs) {
         return view.getInitParams();
     }
 

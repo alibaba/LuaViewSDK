@@ -37,10 +37,10 @@ public class UDAudio extends BaseCacheUserdata implements MediaPlayer.OnPrepared
     }
 
     private void init() {
-        if (mVarargs != null) {
-            mUriOrName = LuaUtil.getString(mVarargs, 1);
-            mLoopTimes = LuaUtil.getInt(mVarargs, 2, 1);
-            mCallback = LuaUtil.getFunction(mVarargs, 3, 2, 1);
+        if (initParams != null) {
+            mUriOrName = LuaUtil.getString(initParams, 1);
+            mLoopTimes = LuaUtil.getInt(initParams, 2, 1);
+            mCallback = LuaUtil.getFunction(initParams, 3, 2, 1);
         }
     }
 

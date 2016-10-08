@@ -27,8 +27,7 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
 
     public LVRefreshRecyclerView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-//        this.mRecyclerView = new LVRecyclerView(mGlobals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
-        this.mRecyclerView = LVRecyclerView.createVerticalView(globals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
+        this.mRecyclerView = LVRecyclerView.createVerticalView(globals, metaTable, varargs, new UDRefreshRecyclerView(this, globals, metaTable, varargs));
         init(globals);
     }
 

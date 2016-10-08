@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
  */
 public class BaseUserdata extends LuaUserdata implements Serializable {
     private Globals mGlobals;
-    public Varargs mVarargs;
+    public Varargs initParams;
 
     public BaseUserdata(Globals globals, LuaValue metatable) {
         super(globals, metatable);
@@ -28,7 +28,7 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
 
     public BaseUserdata(Globals globals, LuaValue metatable, Varargs varargs) {
         super(globals, metatable);
-        this.mVarargs = varargs;
+        this.initParams = varargs;
     }
 
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable) {
@@ -38,9 +38,45 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable, Varargs varargs) {
         super(new WeakReference<Object>(obj), metatable);
         this.mGlobals = globals;
-        this.mVarargs = varargs;
+        this.initParams = varargs;
     }
 
+    public LuaValue setInitParams(Varargs initParams) {
+        this.initParams = initParams;
+        return this;
+    }
+
+    public Varargs getInitParams() {
+        return initParams;
+    }
+
+    public LuaValue getInitParam1() {
+        return getInitParam1(LuaValue.NIL);
+    }
+
+    public LuaValue getInitParam2() {
+        return getInitParam2(LuaValue.NIL);
+    }
+
+    public LuaValue getInitParam1(LuaValue defaultValue) {
+        return getInitParam(1, defaultValue);
+    }
+
+    public LuaValue getInitParam2(LuaValue defaultValue) {
+        return getInitParam(2, defaultValue);
+    }
+
+    public LuaValue getInitParam(int index, LuaValue defaultValue) {
+        return initParams != null && initParams.narg() >= index ? initParams.arg(index) : defaultValue;
+    }
+
+    public LuaValue getInitParam1(Varargs varargs) {
+        return getInitParam1(1, varargs, LuaValue.NIL);
+    }
+
+    public LuaValue getInitParam1(int index, Varargs varargs, LuaValue defaultValue) {
+        return varargs != null && varargs.narg() >= index ? varargs.arg(index) : defaultValue;
+    }
 
     @Override
     public Object userdata() {

@@ -5,8 +5,6 @@ import android.view.ViewGroup;
 
 import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.global.LuaViewManager;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVView;
 
 import org.luaj.vm2.Globals;
@@ -14,9 +12,6 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.VarArgFunction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 零参数函数
@@ -28,8 +23,6 @@ public abstract class BaseVarArgUICreator extends VarArgFunction {
     public Globals globals;
     public LuaValue metatable;
     public Class<? extends LibFunction> libClass;
-    private static Map<Class, LuaValue> sMetatables = new HashMap<Class, LuaValue>();
-
 
     public BaseVarArgUICreator(Globals globals, LuaValue metatable) {
         this(globals, metatable, null);
@@ -42,15 +35,8 @@ public abstract class BaseVarArgUICreator extends VarArgFunction {
     }
 
     public Varargs invoke(Varargs args) {
-        if(LuaViewConfig.isLibsLazyLoad()){
-            if(metatable == null && sMetatables != null && sMetatables.containsKey(getClass())){//先取cache
-                metatable = sMetatables.get(getClass());
-            }
-
-            if(metatable == null && libClass != null) {
-                metatable = LuaViewManager.createMetatable(libClass);
-                sMetatables.put(getClass(), metatable);
-            }
+        if (LuaViewConfig.isLibsLazyLoad()) {
+            metatable = LuaViewManager.createMetatable(libClass);
         }
 
         ILVView view = createView(globals, metatable, args);

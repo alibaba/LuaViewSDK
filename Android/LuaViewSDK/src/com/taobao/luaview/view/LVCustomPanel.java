@@ -32,7 +32,7 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
 
     @NonNull
     public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
-        return new UDCustomPanel(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        return new UDCustomPanel(this, globals, metaTable, varargs);
     }
 
 

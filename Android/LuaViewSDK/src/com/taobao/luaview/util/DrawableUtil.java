@@ -70,7 +70,7 @@ public class DrawableUtil {
                 final int resourceId = resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
                 try {
                     drawable = resources.getDrawable(resourceId);
-                } catch (Exception e) {
+                } catch (Exception e){
                     LogUtil.e("[DrawableUtil-getByName Failed]", e);
                 }
             }

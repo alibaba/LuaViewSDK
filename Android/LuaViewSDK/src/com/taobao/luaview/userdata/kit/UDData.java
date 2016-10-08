@@ -27,10 +27,10 @@ public class UDData extends BaseUserdata {
 
     private void init() {
         ByteArrayOutputStream byteArrayBuffer = (ByteArrayOutputStream) userdata();
-        if (mVarargs != null) {
+        if (initParams != null) {
             try {
-                for (int i = 0; i < mVarargs.narg(); i++) {
-                    Object obj = mVarargs.arg(i + 1);
+                for (int i = 0; i < initParams.narg(); i++) {
+                    Object obj = initParams.arg(i + 1);
                     String str = String.valueOf(obj);
                     byte[] data = str.getBytes(DEFAULT_ENCODE);
                     byteArrayBuffer.write(data, 0, data.length);

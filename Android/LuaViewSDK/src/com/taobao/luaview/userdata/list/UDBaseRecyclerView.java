@@ -12,6 +12,7 @@ import com.taobao.luaview.view.LVRecyclerView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * UDBaseRecyclerView 封装
@@ -25,7 +26,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
     private SparseIntArray mSpanSize;
 
-    public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 

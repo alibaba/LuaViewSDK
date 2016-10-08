@@ -24,6 +24,7 @@ import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ import java.util.List;
  * @author song
  */
 public class UDView<T extends View> extends BaseUserdata {
-    public LuaValue initParams = LuaValue.NIL;
     //回调
     public LuaValue mCallback;
 
@@ -54,37 +54,17 @@ public class UDView<T extends View> extends BaseUserdata {
     //effects
     private Integer mEffects;
 
-    public CSSNode getCssNode() {
-        if (mCssNode == null) {
-            View view = getView();
-            if (view instanceof LVViewGroup) {
-                LVViewGroup group = (LVViewGroup) view;
-                return group.getCssNode();
-            } else {
-                mCssNode = new CSSNode();
-            }
-        }
-
-        return mCssNode;
+    public UDView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
+        super(view, globals, metatable, initParams);
+        init(initParams);
     }
 
-    public UDView setFlexCss(String cssString) {
-        if (mFlexCss == null || !mFlexCss.equals(cssString)) {
-            CSSNode node = getCssNode();
-            FlexboxCSSParser.parseFlexNodeCSS(node, cssString);
-            mFlexCss = cssString;
-        }
-
-        return this;
-    }
-
-    public String getFlexCss() {
-        return mFlexCss;
-    }
-
-    public UDView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
-        super(view, globals, metatable);
-        this.initParams = initParams;
+    /**
+     * 初始化调用
+     *
+     * @param initParams
+     */
+    public void init(Varargs initParams) {
         setSize(0, 0);//默认初始化size全0
     }
 
@@ -108,16 +88,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public Context getContext() {
         return getView() != null ? getView().getContext() : null;
-    }
-
-
-    public UDView setInitParams(LuaValue initParams) {
-        this.initParams = initParams;
-        return this;
-    }
-
-    public LuaValue getInitParams() {
-        return initParams;
     }
 
     /**
@@ -1299,4 +1269,34 @@ public class UDView<T extends View> extends BaseUserdata {
     public Integer getEffects() {
         return this.mEffects != null ? this.mEffects : UDViewEffect.EFFECT_NONE;
     }
+
+
+    public CSSNode getCssNode() {
+        if (mCssNode == null) {
+            View view = getView();
+            if (view instanceof LVViewGroup) {
+                LVViewGroup group = (LVViewGroup) view;
+                return group.getCssNode();
+            } else {
+                mCssNode = new CSSNode();
+            }
+        }
+
+        return mCssNode;
+    }
+
+    public UDView setFlexCss(String cssString) {
+        if (mFlexCss == null || !mFlexCss.equals(cssString)) {
+            CSSNode node = getCssNode();
+            FlexboxCSSParser.parseFlexNodeCSS(node, cssString);
+            mFlexCss = cssString;
+        }
+
+        return this;
+    }
+
+    public String getFlexCss() {
+        return mFlexCss;
+    }
+
 }

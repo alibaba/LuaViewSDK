@@ -180,6 +180,34 @@ public class LuaUtil {
         return (String) getValue(LuaValue.TSTRING, varargs, poslist);
     }
 
+    public static String getString(final LuaValue valueList, String... poslist) {
+        return (String) getValueFromTable(LuaValue.TSTRING, valueList, poslist);
+    }
+
+    /**
+     * 获取char sequence
+     *
+     * @param varargs
+     * @param poslist
+     * @return
+     */
+    public static CharSequence getText(final Varargs varargs, int... poslist) {
+        LuaValue value = getValue(varargs, poslist);
+        return toText(value);
+    }
+
+    /**
+     * 获取char sequence
+     *
+     * @param values
+     * @param poslist
+     * @return
+     */
+    public static CharSequence getText(final LuaValue values, String... poslist) {
+        LuaValue value = (LuaValue) getValueFromTable(LuaValue.TVALUE, values, poslist);
+        return toText(value);
+    }
+
     /**
      * 获取table
      *
@@ -189,6 +217,10 @@ public class LuaUtil {
      */
     public static LuaTable getTable(final Varargs varargs, int... poslist) {
         return (LuaTable) getValue(LuaValue.TTABLE, varargs, poslist);
+    }
+
+    public static LuaTable getTable(final LuaValue valuelist, String... poslist) {
+        return (LuaTable) getValueFromTable(LuaValue.TTABLE, valuelist, poslist);
     }
 
     /**
@@ -225,8 +257,19 @@ public class LuaUtil {
         return (LuaValue) getValue(LuaValue.TVALUE, varargs, poslist);
     }
 
-    public static LuaValue getValue(final LuaValue varargs, String... poslist) {
-        return (LuaValue) getValueFromTable(LuaValue.TVALUE, varargs, poslist);
+    /**
+     * 获取LuaValue by poslist name
+     *
+     * @param valuelist
+     * @param poslist
+     * @return
+     */
+    public static LuaValue getValue(final LuaValue valuelist, String... poslist) {
+        return (LuaValue) getValueFromTable(LuaValue.TVALUE, valuelist, poslist);
+    }
+
+    public static LuaValue getValue(final LuaValue valuelist, LuaValue defaultValue, String... poslist) {
+        return (LuaValue) getValueFromTable(LuaValue.TVALUE, defaultValue, valuelist, poslist);
     }
 
     /**
@@ -264,9 +307,10 @@ public class LuaUtil {
         Object result = null;
         if (varargs != null) {
             if (poslist != null && poslist.length > 0) {
+                LuaValue value = null;
                 for (int i = 0; i < poslist.length; i++) {
                     if (varargs.narg() >= poslist[i]) {
-                        final LuaValue value = varargs.arg(poslist[i]);
+                        value = varargs.arg(poslist[i]);
                         result = parseValue(type, value);
                     }
                     if (result != null) {
@@ -304,8 +348,7 @@ public class LuaUtil {
         if (valueList instanceof LuaTable) {
             if (keylist != null && keylist.length > 0) {
                 for (int i = 0; i < keylist.length; i++) {
-                    final LuaValue value = valueList.get(keylist[i]);
-                    result = parseValue(type, value);
+                    result = parseValue(type, valueList.get(keylist[i]));
                     if (result != null) {
                         break;
                     }
@@ -636,8 +679,9 @@ public class LuaUtil {
         if (params != null) {
             final LuaTable result = new LuaTable();
             if (params.size() > 0) {
+                Object value = null;
                 for (int i = 0; i < params.size(); i++) {
-                    final Object value = params.get(i);
+                    value = params.get(i);
                     result.set(i + 1, toLuaValue(value));
                 }
             }
@@ -656,9 +700,11 @@ public class LuaUtil {
         if (params != null) {
             final LuaTable result = new LuaTable();
             if (params.size() > 0) {
+                Object valueObj = null;
+                LuaValue key = null;
                 for (final Object keyObj : params.keySet()) {
-                    final Object valueObj = params.get(keyObj);
-                    final LuaValue key = toLuaValue(keyObj);
+                    valueObj = params.get(keyObj);
+                    key = toLuaValue(keyObj);
                     if (key != LuaValue.NIL) {
                         result.set(key, toLuaValue(valueObj));
                     }
@@ -667,6 +713,25 @@ public class LuaUtil {
             return result;
         }
         return LuaValue.NIL;
+    }
+
+    /**
+     * convert luavalue to charsequence
+     *
+     * @param luaValue
+     * @return
+     */
+    public static CharSequence toText(LuaValue luaValue) {
+        if (LuaUtil.isString(luaValue)) {
+            return luaValue.optjstring(null);
+        } else if (LuaUtil.isUserdata(luaValue)) {
+            if (luaValue instanceof UDSpannableString) {
+                return ((UDSpannableString) luaValue).getSpannableStringBuilder();
+            } else if (luaValue instanceof UDUnicode) {
+                return ((UDUnicode) luaValue).toString();
+            }
+        }
+        return null;
     }
 
     /**

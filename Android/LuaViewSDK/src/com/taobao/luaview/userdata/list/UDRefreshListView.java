@@ -9,6 +9,7 @@ import com.taobao.luaview.view.LVRefreshListView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * 容器类-ListView，模拟OC的section分区实现，Section顺序排列
@@ -18,7 +19,7 @@ import org.luaj.vm2.LuaValue;
  */
 public class UDRefreshListView extends UDBaseListView<LVRefreshListView> implements OnLVRefreshListener {
 
-    public UDRefreshListView(LVRefreshListView view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDRefreshListView(LVRefreshListView view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 

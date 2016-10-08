@@ -22,7 +22,7 @@ public class LVEditText extends EditText implements ILVView {
 
     public LVEditText(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mLuaUserdata = new UDEditText(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.mLuaUserdata = new UDEditText(this, globals, metaTable, varargs);
         this.setTextSize(UDFontSize.FONTSIZE_SMALL);
     }
 

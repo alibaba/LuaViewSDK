@@ -27,7 +27,7 @@ public class LVRefreshListView extends SwipeRefreshLayout implements ILVListView
 
     public LVRefreshListView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mListView = new LVListView(globals, metaTable, varargs, new UDRefreshListView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
+        this.mListView = new LVListView(globals, metaTable, varargs, new UDRefreshListView(this, globals, metaTable, varargs));
         init(globals);
     }
 
