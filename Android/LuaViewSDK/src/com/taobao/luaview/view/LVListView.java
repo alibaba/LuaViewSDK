@@ -38,7 +38,7 @@ public class LVListView extends ListView implements ILVListView {
 
     public LVListView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseListView udBaseListView) {
         super(globals.getContext());
-        this.mLuaUserdata = udBaseListView != null ? udBaseListView : new UDListView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.mLuaUserdata = udBaseListView != null ? udBaseListView : new UDListView(this, globals, metaTable, varargs);
         init(globals);
     }
 

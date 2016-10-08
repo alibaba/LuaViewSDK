@@ -5,6 +5,7 @@ import com.taobao.luaview.view.indicator.LVCircleViewPagerIndicator;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 
 /**
@@ -15,7 +16,7 @@ import org.luaj.vm2.LuaValue;
  */
 public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> extends UDView<U> {
 
-    public UDCircleViewPagerIndicator(U view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDCircleViewPagerIndicator(U view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 

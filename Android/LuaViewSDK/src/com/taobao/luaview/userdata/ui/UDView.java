@@ -14,8 +14,6 @@ import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
-import com.taobao.luaview.util.ColorUtil;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -26,6 +24,7 @@ import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import java.util.ArrayList;
@@ -38,7 +37,6 @@ import java.util.List;
  * @author song
  */
 public class UDView<T extends View> extends BaseUserdata {
-    public LuaValue initParams = LuaValue.NIL;
     //回调
     public LuaValue mCallback;
 
@@ -56,37 +54,17 @@ public class UDView<T extends View> extends BaseUserdata {
     //effects
     private Integer mEffects;
 
-    public CSSNode getCssNode() {
-        if (mCssNode == null) {
-            View view = getView();
-            if (view instanceof LVViewGroup) {
-                LVViewGroup group = (LVViewGroup) view;
-                return group.getCssNode();
-            } else {
-                mCssNode = new CSSNode();
-            }
-        }
-
-        return mCssNode;
+    public UDView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
+        super(view, globals, metatable, initParams);
+        init(initParams);
     }
 
-    public UDView setFlexCss(String cssString) {
-        if (mFlexCss == null || !mFlexCss.equals(cssString)) {
-            CSSNode node = getCssNode();
-            FlexboxCSSParser.parseFlexNodeCSS(node, cssString);
-            mFlexCss = cssString;
-        }
-
-        return this;
-    }
-
-    public String getFlexCss() {
-        return mFlexCss;
-    }
-
-    public UDView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
-        super(view, globals, metatable);
-        this.initParams = initParams;
+    /**
+     * 初始化调用
+     *
+     * @param initParams
+     */
+    public void init(Varargs initParams) {
         setSize(0, 0);//默认初始化size全0
     }
 
@@ -110,16 +88,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public Context getContext() {
         return getView() != null ? getView().getContext() : null;
-    }
-
-
-    public UDView setInitParams(LuaValue initParams) {
-        this.initParams = initParams;
-        return this;
-    }
-
-    public LuaValue getInitParams() {
-        return initParams;
     }
 
     /**
@@ -930,7 +898,6 @@ public class UDView<T extends View> extends BaseUserdata {
     }
 
     private void setupClickEffects(boolean isValid) {
-        DebugUtil.tsi("Foreground-setupClickEffects");
         //setup effect
         if (LuaViewConfig.isAutoSetupClickEffects()) {
             if (isValid) {
@@ -939,7 +906,6 @@ public class UDView<T extends View> extends BaseUserdata {
                 setEffects(UDViewEffect.EFFECT_NONE);
             }
         }
-        DebugUtil.tei("Foreground-setupClickEffects");
     }
 
     /**
@@ -1279,6 +1245,10 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public UDView setEffects(Integer effects) {
+        return setEffects(effects, null, null);
+    }
+
+    public UDView setEffects(Integer effects, Integer color, Integer alpha) {
         final View view = getView();
         if (view != null) {
             this.mEffects = effects;
@@ -1288,7 +1258,7 @@ public class UDView<T extends View> extends BaseUserdata {
                         ForegroundDelegate.clearForeground(view);
                         break;
                     case UDViewEffect.EFFECT_CLICK:
-                        ForegroundDelegate.setupDefaultForeground(view);
+                        ForegroundDelegate.setupDefaultForeground(view, color, alpha);
                         break;
                 }
             }
@@ -1299,4 +1269,34 @@ public class UDView<T extends View> extends BaseUserdata {
     public Integer getEffects() {
         return this.mEffects != null ? this.mEffects : UDViewEffect.EFFECT_NONE;
     }
+
+
+    public CSSNode getCssNode() {
+        if (mCssNode == null) {
+            View view = getView();
+            if (view instanceof LVViewGroup) {
+                LVViewGroup group = (LVViewGroup) view;
+                return group.getCssNode();
+            } else {
+                mCssNode = new CSSNode();
+            }
+        }
+
+        return mCssNode;
+    }
+
+    public UDView setFlexCss(String cssString) {
+        if (mFlexCss == null || !mFlexCss.equals(cssString)) {
+            CSSNode node = getCssNode();
+            FlexboxCSSParser.parseFlexNodeCSS(node, cssString);
+            mFlexCss = cssString;
+        }
+
+        return this;
+    }
+
+    public String getFlexCss() {
+        return mFlexCss;
+    }
+
 }

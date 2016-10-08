@@ -12,6 +12,7 @@ import com.taobao.luaview.view.LVRecyclerView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * UDBaseRecyclerView 封装
@@ -25,7 +26,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
     private SparseIntArray mSpanSize;
 
-    public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 
@@ -42,51 +43,61 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public UDBaseRecyclerView reload(Integer section, Integer row) {
         final LVRecyclerView recyclerView = getLVRecyclerView();
         if (recyclerView != null) {
-            init();//重新初始化数据
-            recyclerView.updateMaxSpanCount();
-            RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
+            final RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
             if (adapter != null) {
-                adapter.notifyDataSetChanged();
+                int diffSectionCount = getDiffSectionCount();
+
+                if (section == null || diffSectionCount != 0) {//如果 section无值，或者section数量变动则更新所有
+                    refreshState(recyclerView);
+                    adapter.notifyDataSetChanged();
+                } else {//如果传了section，row，则表示要更新部分数据
+                    int diffTotalCount = getDiffTotalCount();//total count diff
+                    boolean isChanged = diffTotalCount == 0;//数据变更，数量未变更
+                    boolean isInserted = diffTotalCount > 0;//数量增加
+                    boolean isRemoved = diffTotalCount < 0;//数量减少
+
+                    if (row == null) {//row is null, notify whole section
+                        int start = getPositionBySectionAndRow(section, 0);
+                        int currentRowCount = getRowCount(section);
+                        if (isChanged) {//更新整个section，count不变，数据变
+                            refreshState(recyclerView);
+                            adapter.notifyItemRangeChanged(start, currentRowCount);
+                        } else if (isInserted) {//更新整个section，count增加
+                            int newRowCount = getRawRowCount(section);
+                            int count = Math.abs(newRowCount - currentRowCount);//新增count
+                            refreshState(recyclerView);
+                            adapter.notifyItemRangeInserted(start, count);
+                        } else if (isRemoved) {//更新整个section，count减少
+                            int newRowCount = getRawRowCount(section);
+                            int count = Math.abs(newRowCount - currentRowCount);//新增count
+                            refreshState(recyclerView);
+                            adapter.notifyItemRangeRemoved(start, count);
+                        }
+                    } else {//row not null, notify row
+                        int pos = getPositionBySectionAndRow(section, row);
+                        refreshState(recyclerView);
+                        if (isChanged) {//更新某个元素
+                            adapter.notifyItemChanged(pos);
+                        } else if (isInserted) {//插入一个元素
+                            adapter.notifyItemInserted(pos);
+                        } else if (isRemoved) {//减少一个元素
+                            adapter.notifyItemRemoved(pos);
+                        }
+                    }
+                }
             }
         }
         return this;
     }
 
-    private void reload(){
-        /*if (section == null || (section < 0 || section >= getSectionCount())) {//如果 section 无效则刷新所有
-                    adapter.notifyDataSetChanged();
-                } else {//如果传递了section，row，则表示要更新部分
-                    final int newTotalCount = getRawTotalCount();
-                    final int currentTotalCount = getTotalCount();
-                    boolean isChanged = newTotalCount == currentTotalCount;
-                    boolean isInserted = newTotalCount > currentTotalCount;
-                    boolean isRemoved = newTotalCount < currentTotalCount;
-
-                    if (row == null) {//row is null, notify whole section
-                        final int start = getPositionBySectionAndRow(section, 0);
-                        final int count = getRawRowCount(section);
-                        if (isChanged) {
-                            adapter.notifyItemRangeChanged(start, count);
-                        } else if (isInserted) {
-                            adapter.notifyItemRangeInserted(start, count);
-                        } else if (isRemoved) {
-                            adapter.notifyItemRangeRemoved(start, count);
-                        } else {
-                            adapter.notifyDataSetChanged();
-                        }
-                    } else {//row not null, notify row
-                        final int pos = getPositionBySectionAndRow(section, row);
-                        if (isChanged) {
-                            adapter.notifyItemChanged(pos);
-                        } else if (isInserted) {
-                            adapter.notifyItemInserted(pos);
-                        } else if (isRemoved) {
-                            adapter.notifyItemRemoved(pos);
-                        } else {
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                }*/
+    /**
+     * 更新列表状态，重新更新数据，元素间隔等
+     *
+     * @param recyclerView
+     */
+    private void refreshState(LVRecyclerView recyclerView) {
+        init();//重新初始化数据
+        recyclerView.updateMaxSpanCount();
     }
 
     @Override

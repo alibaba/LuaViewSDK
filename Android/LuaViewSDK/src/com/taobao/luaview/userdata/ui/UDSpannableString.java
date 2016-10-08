@@ -29,7 +29,7 @@ public class UDSpannableString extends BaseUserdata {
 
     public UDSpannableString(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(new SpannableStringBuilder(), globals, metaTable, varargs);
-        init();
+        init(varargs);
     }
 
     public SpannableStringBuilder getSpannableStringBuilder() {
@@ -39,11 +39,11 @@ public class UDSpannableString extends BaseUserdata {
     /**
      * 初始化数据
      */
-    private void init() {
+    public void init(Varargs initParams) {
         LuaValue text = NIL, config = NIL;
-        if (this.mVarargs != null) {
-            text = this.mVarargs.narg() > 0 ? this.mVarargs.arg1() : NIL;
-            config = this.mVarargs.narg() > 1 ? this.mVarargs.arg(2) : NIL;
+        if (initParams != null) {
+            text = getInitParam1();
+            config = getInitParam2();
         }
         initSpannableStringBuilder(text, config);
     }

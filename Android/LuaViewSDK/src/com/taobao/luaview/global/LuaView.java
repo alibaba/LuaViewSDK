@@ -718,9 +718,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             if (mGlobals != null && value != null) {
                 mGlobals.saveContainer(getRenderTarget());
                 mGlobals.set("window", getUserdata());//TODO 优化到其他地方?，设置window对象
-                DebugUtil.tsi("Time-prototype-3");
                 value.call(activity, viewObj);
-                DebugUtil.tei("Time-prototype-3");
                 mGlobals.restoreContainer();
                 if (callback != null) {
                     callback.onScriptExecuted(getUri(), true);

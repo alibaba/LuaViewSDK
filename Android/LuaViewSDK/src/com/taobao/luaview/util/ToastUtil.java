@@ -34,7 +34,7 @@ public class ToastUtil {
      * @param msg
      */
     public static void showToast(final Context context, final CharSequence msg) {
-        if (msg == null || msg.length() == 0)
+        if (context == null || msg == null || msg.length() == 0)
             return;
         if (handler == null) {
             handler = new Handler(Looper.getMainLooper());
@@ -80,7 +80,7 @@ public class ToastUtil {
      * @param y
      */
     public static void showToast(final Context context, final View view, final Integer duration, final Integer x, final Integer y) {
-        if (view == null)
+        if (context == null || view == null)
             return;
         if (handler == null) {
             handler = new Handler(Looper.getMainLooper());

@@ -28,7 +28,6 @@ import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.global.LuaViewConfig;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
@@ -354,9 +353,7 @@ public class Globals extends LuaTable {
             if (!is.markSupported())
                 is = new BufferedStream(is);
             is.mark(4);
-            DebugUtil.tsi("Time-prototype-xx");
             final Prototype p = undumper.undump(is, chunkname);
-            DebugUtil.tei("Time-prototype-xx");
             if (p != null)
                 return p;
             is.reset();

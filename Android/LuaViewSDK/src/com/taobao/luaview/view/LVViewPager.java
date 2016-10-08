@@ -1,12 +1,10 @@
 package com.taobao.luaview.view;
 
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewConfiguration;
 
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewPager;
@@ -31,23 +29,17 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
-    private LuaValue mInitParams;
     public UDViewPager mLuaUserdata;
     private OnPageChangeListener mOnPageChangeListener;
 
-    private double downX = 0f, downY = 0f, touchX = 0f, touchY = 0f;
-    private int touchSlop;
-
     public LVViewPager(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mInitParams = varargs != null ? varargs.arg1() : null;
-        this.mLuaUserdata = createUserdata(globals, metaTable);
+        this.mLuaUserdata = createUserdata(globals, metaTable, varargs);
         init(globals);
     }
 
-    @NonNull
-    private UDViewPager createUserdata(Globals globals, LuaValue metaTable) {
-        return new UDViewPager(this, globals, metaTable, this.mInitParams);
+    private UDViewPager createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDViewPager(this, globals, metaTable, varargs);
     }
 
     private void init(Globals globals) {
@@ -55,7 +47,6 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
         globals.saveContainer(this);
         initData(globals);
         globals.restoreContainer();
-        this.touchSlop = ViewConfiguration.get(globals.getContext()).getScaledTouchSlop();
     }
 
     private void initData(Globals globals) {

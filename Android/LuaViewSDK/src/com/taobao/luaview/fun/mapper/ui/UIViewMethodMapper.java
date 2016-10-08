@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import android.graphics.Color;
 import android.widget.RelativeLayout;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
@@ -362,7 +363,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-    public LuaValue initParams(U view, Varargs varargs) {
+    public Varargs initParams(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setInitParams(view, varargs);
         } else {
@@ -375,7 +376,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.setInitParams(initParams);
     }
 
-    public LuaValue getInitParams(U view, Varargs varargs) {
+    public Varargs getInitParams(U view, Varargs varargs) {
         return view.getInitParams();
     }
 
@@ -2143,7 +2144,9 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     @LuaViewApi(since = VmVersion.V_511)
     public LuaValue setEffects(U view, Varargs varargs) {
         final Integer effects = LuaUtil.getInt(varargs, 2);
-        return view.setEffects(effects);
+        final Integer color = varargs.narg() > 2 ? ColorUtil.parse(varargs.arg(3)) : null;
+        final Integer alpha = LuaUtil.getAlphaInt(varargs, 4);
+        return view.setEffects(effects, color, alpha);
     }
 
     @LuaViewApi(since = VmVersion.V_511)

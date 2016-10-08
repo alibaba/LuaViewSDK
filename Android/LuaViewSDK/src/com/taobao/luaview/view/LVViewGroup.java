@@ -78,7 +78,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
      * @return
      */
     public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
-        return new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        return new UDViewGroup(this, globals, metaTable, varargs);
     }
 
     @Override

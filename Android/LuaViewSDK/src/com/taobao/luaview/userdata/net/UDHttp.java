@@ -74,10 +74,10 @@ public class UDHttp extends BaseUserdata {
      * 初始化数据
      */
     private void initVarargs() {
-        final LuaValue param1 = this.mVarargs.opttable(1, null);
-        final LuaFunction callback = this.mVarargs.optfunction(2, null);
-        final String method = param1 != null ? param1.get("method").optjstring(null) : null;
-        final LuaTable params = param1 != null ? param1.get("params").opttable(null) : null;
+        final LuaValue param1 = getInitParam1();
+        final LuaFunction callback = LuaUtil.getFunction(initParams, 2);
+        final String method = LuaUtil.getString(param1, "method");
+        final LuaTable params = LuaUtil.getTable(param1, "params");
         setMethod(method);
         setParams(params);
         setCallback(callback);

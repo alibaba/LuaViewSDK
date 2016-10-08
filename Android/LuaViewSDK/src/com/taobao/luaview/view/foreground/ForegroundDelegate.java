@@ -2,9 +2,11 @@ package com.taobao.luaview.view.foreground;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -34,13 +36,29 @@ public class ForegroundDelegate {
     }
 
     public static void setupDefaultForeground(View view) {
-        if (view != null && view.getResources() != null) {
-            setupForeground(view, view.getResources().getDrawable(R.drawable.lv_click_foreground));
+        setupDefaultForeground(view, null, null);
+    }
+
+    public static void setupDefaultForeground(View view, Integer color, Integer alpha) {
+        if (view instanceof IForeground && ((IForeground) view).hasForeground() == false && view.getResources() != null) {
+            setupForeground(view, view.getResources().getDrawable(R.drawable.lv_click_foreground), color, alpha);
         }
     }
 
-    private static void setupForeground(View view, Drawable drawable) {
+    private static void setupForeground(View view, Drawable drawable, Integer color, Integer alpha) {
         if (view instanceof IForeground) {
+            if (color != null) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    if (drawable instanceof RippleDrawable) {
+                        RippleDrawable rippleDrawable = (RippleDrawable) drawable;
+                        rippleDrawable.setColor(ColorStateList.valueOf(color));
+                        if (alpha != null) {
+                            rippleDrawable.setAlpha(alpha);
+                        }
+
+                    }
+                }
+            }
             ((IForeground) view).setForeground(drawable);
         }
     }

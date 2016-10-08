@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
