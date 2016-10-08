@@ -1,5 +1,8 @@
 package com.taobao.luaview.util;
 
+import com.taobao.luaview.userdata.kit.UDUnicode;
+import com.taobao.luaview.userdata.ui.UDSpannableString;
+
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaNumber;
 import org.luaj.vm2.LuaTable;
@@ -234,13 +237,6 @@ public class LuaUtil {
         return (LuaFunction) getValue(LuaValue.TFUNCTION, varargs, poslist);
     }
 
-    /**
-     * 根据keys获取function
-     *
-     * @param valueList
-     * @param keylist
-     * @return
-     */
     public static LuaFunction getFunction(final LuaValue valueList, String... keylist) {
         return (LuaFunction) getValueFromTable(LuaValue.TFUNCTION, valueList, keylist);
     }
@@ -255,6 +251,14 @@ public class LuaUtil {
      */
     public static LuaValue getValue(final Varargs varargs, int... poslist) {
         return (LuaValue) getValue(LuaValue.TVALUE, varargs, poslist);
+    }
+
+    public static LuaValue getValue(final Varargs varargs, String... poslist) {
+        return (LuaValue) getValueFromTable(LuaValue.TVALUE, varargs, poslist);
+    }
+
+    public static LuaValue getValue(final Varargs varargs, Varargs defaultValue, String... poslist) {
+        return (LuaValue) getValueFromTable(LuaValue.TVALUE, varargs, defaultValue, poslist);
     }
 
     /**
@@ -331,7 +335,7 @@ public class LuaUtil {
      * @param keylist
      * @return
      */
-    private static Object getValueFromTable(final int type, final LuaValue valueList, String... keylist) {
+    private static Object getValueFromTable(final int type, final Varargs valueList, String... keylist) {
         return getValueFromTable(type, valueList, null, keylist);
     }
 
@@ -339,16 +343,17 @@ public class LuaUtil {
      * get value of given type, from varargs of key [poslist]
      *
      * @param type
-     * @param valueList
+     * @param varargs
      * @param keylist
      * @return
      */
-    private static Object getValueFromTable(final int type, final LuaValue valueList, Object defaultValue, String... keylist) {
+    private static Object getValueFromTable(final int type, final Varargs varargs, Object defaultValue, String... keylist) {
         Object result = null;
-        if (valueList instanceof LuaTable) {
+        if (varargs instanceof LuaTable) {
+            LuaTable varlist = ((LuaTable) varargs);
             if (keylist != null && keylist.length > 0) {
                 for (int i = 0; i < keylist.length; i++) {
-                    result = parseValue(type, valueList.get(keylist[i]));
+                    result = parseValue(type, varlist.get(keylist[i]));
                     if (result != null) {
                         break;
                     }
@@ -491,6 +496,7 @@ public class LuaUtil {
     public static boolean isValid(final LuaValue target) {
         return target != null && target.type() != LuaValue.TNIL;
     }
+
     //------------------------------------function call---------------------------------------------
 
     /**

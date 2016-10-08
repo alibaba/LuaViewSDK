@@ -6,6 +6,7 @@ import com.taobao.luaview.view.indicator.LVCustomViewPagerIndicator;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 
 /**
@@ -16,7 +17,7 @@ import org.luaj.vm2.LuaValue;
  */
 public class UDCustomViewPagerIndicator<U extends LVCustomViewPagerIndicator> extends UDView<U> {
 
-    public UDCustomViewPagerIndicator(U view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDCustomViewPagerIndicator(U view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 
@@ -49,7 +50,7 @@ public class UDCustomViewPagerIndicator<U extends LVCustomViewPagerIndicator> ex
      * @return
      */
     private LuaValue callCellFunction(String method, LuaValue cellData, int position, int currentItem) {
-        return initParams.get(method).call(cellData, LuaUtil.toLuaInt(position), LuaUtil.toLuaInt(currentItem));
+        return LuaUtil.callFunction(LuaUtil.getValue(initParams, method), cellData, LuaUtil.toLuaInt(position), LuaUtil.toLuaInt(currentItem));
     }
 
     /**

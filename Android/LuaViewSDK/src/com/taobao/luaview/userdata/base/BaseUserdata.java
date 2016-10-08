@@ -23,16 +23,16 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
     public Varargs initParams;
 
     public BaseUserdata(Globals globals, LuaValue metatable) {
-        super(globals, metatable);
+        this(globals, metatable, NIL);
+    }
+
+    public BaseUserdata(Object obj, Globals globals, LuaValue metatable) {
+        this(obj, globals, metatable, NIL);
     }
 
     public BaseUserdata(Globals globals, LuaValue metatable, Varargs varargs) {
         super(globals, metatable);
         this.initParams = varargs;
-    }
-
-    public BaseUserdata(Object obj, Globals globals, LuaValue metatable) {
-        this(obj, globals, metatable, NIL);
     }
 
     public BaseUserdata(Object obj, Globals globals, LuaValue metatable, Varargs varargs) {
@@ -76,6 +76,10 @@ public class BaseUserdata extends LuaUserdata implements Serializable {
 
     public LuaValue getInitParam1(int index, Varargs varargs, LuaValue defaultValue) {
         return varargs != null && varargs.narg() >= index ? varargs.arg(index) : defaultValue;
+    }
+
+    public int getInitParamsCount() {
+        return initParams != null ? initParams.narg() : 0;
     }
 
     @Override

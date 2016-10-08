@@ -42,7 +42,7 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     //延迟加载
     protected boolean mLazyLoad = true;
 
-    public UDBaseListOrRecyclerView(T view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDBaseListOrRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
         init();
     }
@@ -51,11 +51,12 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * 初始化数据
      */
     public void init() {
-        if (LuaUtil.isValid(this.initParams)) {
+        if (this.initParams != null) {
             this.mIdCache = new SparseCache<String>();
-            this.mSectionDelegate = this.initParams.get("Section");
-            this.mCellDelegate = this.initParams.get("Cell");
-            this.mCallback = this.initParams.get("Callback");
+
+            this.mSectionDelegate = LuaUtil.getValue(initParams, "Section");
+            this.mCellDelegate = LuaUtil.getValue(initParams, "Cell");
+            this.mCallback = LuaUtil.getValue(initParams, "Callback");
             initSectionLength();
         }
     }

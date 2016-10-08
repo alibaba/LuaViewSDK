@@ -12,6 +12,7 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         this(view, globals, LuaViewManager.createMetatable(UIViewGroupMethodMapper.class), initParams);
     }
 
-    public UDViewGroup(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDViewGroup(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
         init();
     }
