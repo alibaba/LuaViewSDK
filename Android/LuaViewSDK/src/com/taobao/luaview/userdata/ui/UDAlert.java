@@ -35,15 +35,15 @@ public class UDAlert extends BaseUserdata {
      * 初始化数据
      */
     private void init() {
-        mTitle = LuaViewUtil.getText(this.mVarargs.optvalue(1, NIL));
-        mContent = LuaViewUtil.getText(this.mVarargs.optvalue(2, NIL));
+        mTitle = LuaViewUtil.getText(getInitParam1());
+        mContent = LuaViewUtil.getText(getInitParam2());
         mButtonTexts = new ArrayList<CharSequence>();
         mButtonCallbacks = new ArrayList<LuaFunction>();
-        for (int i = 3; i <= this.mVarargs.narg(); i++) {
-            if (this.mVarargs.isfunction(i)) {
-                mButtonCallbacks.add(this.mVarargs.optfunction(i, null));
+        for (int i = 3; i <= getInitParamsCount(); i++) {
+            if (this.initParams.isfunction(i)) {
+                mButtonCallbacks.add(this.initParams.optfunction(i, null));
             } else {
-                mButtonTexts.add(LuaViewUtil.getText(this.mVarargs.optvalue(i, NIL)));
+                mButtonTexts.add(LuaViewUtil.getText(this.initParams.optvalue(i, NIL)));
             }
         }
         showDialog();

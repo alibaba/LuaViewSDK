@@ -15,7 +15,7 @@ import org.luaj.vm2.Varargs;
 public class UDLoadingView extends UDViewGroup<LVLoadingView> {
 
     public UDLoadingView(LVLoadingView view, Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(view, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        super(view, globals, metaTable, varargs);
     }
 
     public UDLoadingView setColor(Integer color) {

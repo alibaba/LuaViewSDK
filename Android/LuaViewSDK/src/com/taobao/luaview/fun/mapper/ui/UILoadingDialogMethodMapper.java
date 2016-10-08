@@ -1,5 +1,7 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import android.graphics.Color;
+
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDLoadingDialog;

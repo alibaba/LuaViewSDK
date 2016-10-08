@@ -10,6 +10,7 @@ import com.taobao.luaview.view.interfaces.ILVListView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * UDBaseListView 封装
@@ -23,7 +24,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
     private LuaValue mHeader;
     private LuaValue mFooter;
 
-    public UDBaseListView(T view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDBaseListView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 
@@ -34,7 +35,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
     public UDBaseListOrRecyclerView reload(Integer section, Integer row) {
         final T lv = getView();
         if (lv instanceof ILVListView) {
-            init();//重新初始化数据
+            init(this.initParams);//重新初始化数据
             if (((ILVListView) lv).getLVAdapter() != null) {
                 ((ILVListView) lv).getLVAdapter().notifyDataSetChanged();
             }

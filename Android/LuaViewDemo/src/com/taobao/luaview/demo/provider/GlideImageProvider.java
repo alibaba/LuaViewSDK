@@ -1,5 +1,6 @@
 package com.taobao.luaview.demo.provider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,6 +32,9 @@ public class GlideImageProvider implements ImageProvider {
 
     @Override
     public void resumeRequests(final ViewGroup view, Context context) {
+        if (context instanceof Activity && (((Activity) context).isFinishing() || ((Activity) context).isDestroyed())) {
+            return;
+        }
         if (Glide.with(context).isPaused()) {
             Glide.with(context).resumeRequests();
         }

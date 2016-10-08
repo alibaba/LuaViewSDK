@@ -118,6 +118,16 @@ public class ForegroundImageView extends ImageView implements IForeground {
     }
 
     @Override
+    public boolean hasForeground() {
+        if (enableForeground && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return mForegroundDelegate.getForeground() != null;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return super.getForeground() != null;
+        }
+        return false;
+    }
+
+    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         //LogUtil.d("Foreground", "onLayout", enableForeground, changed);
         super.onLayout(changed, left, top, right, bottom);

@@ -31,9 +31,10 @@ public class DebugUtil {
 
     /**
      * 统计独立的时间
+     *
      * @param method
      */
-    public static void tsi(String method){
+    public static void tsi(String method) {
         sTime.put(method, Debug.threadCpuTimeNanos());
     }
 
@@ -50,11 +51,12 @@ public class DebugUtil {
 
     /**
      * 统计独立的时间
+     *
      * @param method
      */
-    public static void tei(String method){
+    public static void tei(String method) {
         Long startTime = sTime.get(method);
-        if(startTime != null) {
+        if (startTime != null) {
             Long nanoTime = Debug.threadCpuTimeNanos() - startTime;
             LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
         }

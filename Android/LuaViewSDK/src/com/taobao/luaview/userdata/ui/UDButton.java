@@ -19,7 +19,7 @@ public class UDButton extends UDTextView<Button> {
     private String mNormalImage;
     private String mPressedImage;
 
-    public UDButton(Button view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDButton(Button view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
     }
 

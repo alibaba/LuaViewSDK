@@ -40,7 +40,7 @@ public class UDTimer extends BaseCacheUserdata {
 
     private void init() {
         this.mTimerHandler = (Handler) userdata();
-        this.mCallback = mVarargs.optfunction(1, null);
+        this.mCallback = initParams.optfunction(1, null);
     }
 
     @Override

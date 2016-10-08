@@ -45,18 +45,19 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         return lvRecyclerView.init(globals, metaTable, varargs, udBaseRecyclerView);
     }
 
-    private LVRecyclerView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
-        super(globals.getContext());
-        init(globals, metaTable, varargs, udBaseRecyclerView);
-    }
-
+    /**
+     * 构造函数
+     *
+     * @param context
+     * @param attrs
+     */
     public LVRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public LVRecyclerView init(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         LuaViewUtil.setId(this);
-        this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs);
         init(globals);
         return this;
     }

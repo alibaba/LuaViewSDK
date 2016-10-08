@@ -8,15 +8,17 @@ import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 
 /**
  * Edit Text 数据封装
+ *
  * @author song
  */
 public class UDEditText extends UDTextView<EditText> {
 
-    public UDEditText(EditText view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDEditText(EditText view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
     }
 

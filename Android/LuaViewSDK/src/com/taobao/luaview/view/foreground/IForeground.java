@@ -13,6 +13,8 @@ import android.graphics.drawable.Drawable;
  */
 public interface IForeground {
 
+    boolean hasForeground();
+
     void setForeground(Drawable drawable);
 
     void clearForeground();

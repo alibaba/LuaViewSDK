@@ -1,7 +1,7 @@
 package com.taobao.luaview.userdata.ui;
 
 import com.taobao.luaview.userdata.base.BaseUserdata;
-import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.ToastUtil;
 
 import org.luaj.vm2.Globals;
@@ -12,14 +12,14 @@ public class UDToast extends BaseUserdata {
 
     public UDToast(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals, metaTable, varargs);
-        init();
+        init(varargs);
     }
 
     /**
      * 初始化数据
      */
-    private void init() {
-        final CharSequence text = LuaViewUtil.getText(this.mVarargs.optvalue(1, NIL));
+    private void init(Varargs varargs) {
+        final CharSequence text = LuaUtil.getText(varargs, 1);
         show(text);
     }
 

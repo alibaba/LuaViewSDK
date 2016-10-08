@@ -1,8 +1,6 @@
 package com.taobao.luaview.vm.extend;
 
 import com.taobao.luaview.fun.base.BaseFunctionBinder;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.Globals;
@@ -53,7 +51,6 @@ public class GlobalsExtender {
      * @param p
      */
     public boolean doLoad(final Globals globals, Prototype p) {
-        DebugUtil.ts("doload");
         boolean isAnyLoaded = false;
         if (p != null && p.k != null && p.k.length > 0) {
             StringBuffer sb = new StringBuffer();
@@ -63,10 +60,7 @@ public class GlobalsExtender {
                     isAnyLoaded = (doLoad(globals, name.checkjstring()) != null) || isAnyLoaded;
                 }
             }
-            LogUtil.d("[Debug-time]", sb.toString());
         }
-        time += DebugUtil.te("doLoad");
-        LogUtil.d("[Debug-time]", time / 1000000, time);
         return isAnyLoaded;
     }
 
