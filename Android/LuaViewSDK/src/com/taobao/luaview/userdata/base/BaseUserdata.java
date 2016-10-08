@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
  */
 public class BaseUserdata extends LuaUserdata implements Serializable {
     private Globals mGlobals;
-    public Varargs initParams;
+    public Varargs initParams = LuaValue.NIL;
 
     public BaseUserdata(Globals globals, LuaValue metatable) {
         this(globals, metatable, NIL);
