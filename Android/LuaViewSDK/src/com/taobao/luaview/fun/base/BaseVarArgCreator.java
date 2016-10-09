@@ -4,8 +4,6 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.global.LuaViewManager;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.LogUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
@@ -17,9 +15,7 @@ import org.luaj.vm2.lib.VarArgFunction;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 零参数函数
@@ -30,10 +26,7 @@ import java.util.Map;
 public abstract class BaseVarArgCreator extends VarArgFunction {
     public Globals globals;
     public LuaValue metatable;
-
-    //用于延迟加载&cache
     public Class<? extends LibFunction> libClass;
-    private static Map<Class, LuaValue> sMetatables = new HashMap<Class, LuaValue>();
 
     public BaseVarArgCreator(Globals globals, LuaValue metatable) {
         this(globals, metatable, null);
@@ -46,15 +39,8 @@ public abstract class BaseVarArgCreator extends VarArgFunction {
     }
 
     public Varargs invoke(Varargs args) {
-        if(LuaViewConfig.isLibsLazyLoad()){
-            if(metatable == null && sMetatables != null && sMetatables.containsKey(getClass())){//先取cache
-                metatable = sMetatables.get(getClass());
-            }
-
-            if(metatable == null && libClass != null) {
-                metatable = LuaViewManager.createMetatable(libClass);
-                sMetatables.put(getClass(), metatable);
-            }
+        if (LuaViewConfig.isLibsLazyLoad()) {
+            metatable = LuaViewManager.createMetatable(libClass);
         }
         return createUserdata(globals, metatable, args);
     }
