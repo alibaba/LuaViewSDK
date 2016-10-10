@@ -591,7 +591,7 @@ static int value(lv_State *L) {
         animation = a;
     }
     
-    animation.delegate = self;
+    animation.delegate = (id <CAAnimationDelegate>)self;
     animation.duration = self.duration;
     animation.fillMode = @"both";
     
