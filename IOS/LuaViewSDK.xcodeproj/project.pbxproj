@@ -298,6 +298,9 @@
 		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
 		84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
+		91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91232AAA1DAB67FC00536E0C /* LVWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
+		91232AAE1DAB682100536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
 		BE50CFCE1CAB821700B0356A /* FlexboxLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE50CFCD1CAB821700B0356A /* FlexboxLayoutTests.m */; };
 		BE50CFCF1CAB841A00B0356A /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF77A91C7473A800847C05 /* libLuaViewLib.a */; };
 		BE50CFD01CAB844500B0356A /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */; };
@@ -553,6 +556,8 @@
 		84E85C191C33B84B007DE3DF /* LVBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBundle.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
+		91232AAA1DAB67FC00536E0C /* LVWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVWebView.h; sourceTree = "<group>"; };
+		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -723,6 +728,8 @@
 				846481AB1A64C61F00DE6204 /* LVButton.m */,
 				846481AE1A64C61F00DE6204 /* LVImage.h */,
 				846481AF1A64C61F00DE6204 /* LVImage.m */,
+				91232AAA1DAB67FC00536E0C /* LVWebView.h */,
+				91232AAB1DAB67FC00536E0C /* LVWebView.m */,
 				8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */,
 				8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */,
 				846481B01A64C61F00DE6204 /* LVLabel.h */,
@@ -1186,6 +1193,7 @@
 				84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */,
 				84C1D87C1C16C4510058E974 /* lVmem.h in Headers */,
 				84C1D87D1C16C4510058E974 /* lVobject.h in Headers */,
+				91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */,
 				84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */,
 				84C1D87F1C16C4520058E974 /* lVparser.h in Headers */,
 				84C1D8801C16C4520058E974 /* lVstate.h in Headers */,
@@ -1406,6 +1414,7 @@
 				3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */,
 				3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */,
 				3CFF77BB1C74740800847C05 /* LVButton.m in Sources */,
+				91232AAE1DAB682100536E0C /* LVWebView.m in Sources */,
 				3CFF77BC1C74740800847C05 /* LVImage.m in Sources */,
 				3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */,
 				3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */,
@@ -1539,6 +1548,7 @@
 				84C1D7DA1C16C3FA0058E974 /* LVBaseView.m in Sources */,
 				84C1D7DB1C16C3FA0058E974 /* UIScrollView+LuaView.m in Sources */,
 				84C1D7DC1C16C3FA0058E974 /* UIView+LuaView.m in Sources */,
+				91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */,
 				84C1D7DD1C16C3FA0058E974 /* LVButton.m in Sources */,
 				84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */,
 				84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */,

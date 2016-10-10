@@ -16,6 +16,7 @@
 #import "LVPagerIndicator.h"
 #import "LVLoadingIndicator.h"
 #import "LVImage.h"
+#import "LVWebView.h"
 #import "LVLabel.h"
 #import "LVBaseView.h"
 #import "LVTransform3D.h"
@@ -104,6 +105,7 @@
     [LVBaseView classDefine:L];
     [LVButton    classDefine:L ];
     [LVImage classDefine:L];
+    [LVWebView classDefine:L];
     [LVLabel     classDefine:L ];
     [LVScrollView classDefine:L];
     [LVTableView classDefine:L];
