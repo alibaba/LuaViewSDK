@@ -114,6 +114,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_UIActivityIndicatorView    "UI.UIActivityIndicator"
 #define META_TABLE_UICustomPanel        "UI.CustomPanel"
 #define META_TABLE_UIImageView      "UI.ImageView"
+#define META_TABLE_UIWebView        "UI.WebView"
 #define META_TABLE_UILabel          "UI.Label"
 #define META_TABLE_UITextField      "UI.TextField"
 #define META_TABLE_UITableView      "UI.TableView"
@@ -134,6 +135,9 @@ typedef struct _LVUserDataInfo {
 #define STR_CALLBACK "Callback"
 #define STR_ON_LAYOUT "onLayout"
 #define STR_ON_CLICK "onClick"
+#define STR_onPageStarted "onPageStarted"
+#define STR_onPageFinished "onPageFinished"
+#define STR_onReceivedError "onReceivedError"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );
