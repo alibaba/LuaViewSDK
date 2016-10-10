@@ -29,23 +29,32 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [self lv_runCallBack:STR_onPageStarted];
+    lv_State* L = self.lv_lview.l;
+    if( L && self.lv_userData ){
+        lv_settop(L, 0);
+        [self lv_callLuaByKey1:@STR_onPageStarted];
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [self lv_runCallBack:STR_onPageFinished];
+    lv_State* L = self.lv_lview.l;
+    if( L && self.lv_userData ){
+        lv_settop(L, 0);
+        [self lv_callLuaByKey1:@STR_onPageFinished];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     lv_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
+        lv_settop(L, 0);
         NSInteger errorCode = error.code;
         NSString* errorInfo = [NSString stringWithFormat:@"%@",error];
         NSString* url = webView.request.URL.absoluteString;
         lv_pushnumber(L, errorCode);
         lv_pushstring(L, errorInfo.UTF8String);
         lv_pushstring(L, url.UTF8String);
-        [self lv_runCallBack:STR_onReceivedError];
+        [self lv_callLuaByKey1:@STR_onReceivedError key2:nil argN:3];
     }
 }
 
@@ -53,6 +62,7 @@
 -(void) createWebView{
     self.webView = [[UIWebView alloc] init];
     self.webView.delegate = self;
+    [self addSubview:self.webView];
 }
 
 -(BOOL) canGoBack{
@@ -89,8 +99,10 @@
 }
 
 -(void) loadUrl:(NSString*) url{
-    NSURL * nsurl = [[NSURL alloc] initWithString:url];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:nsurl]];
+    if( url ) {
+        NSURL * nsurl = [[NSURL alloc] initWithString:url];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:nsurl]];
+    }
 }
 
 -(NSString*) url{
