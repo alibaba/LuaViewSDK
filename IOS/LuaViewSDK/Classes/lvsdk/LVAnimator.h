@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/CAAnimation.h>
 #import "LVHeads.h"
 #import "lVtable.h"
 
