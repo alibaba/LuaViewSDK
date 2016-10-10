@@ -153,46 +153,6 @@ static int lvNewWebView(lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int scaleType (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        LVWebView* webView = (__bridge LVWebView *)(user->object);
-        if ( [webView isKindOfClass:[LVWebView class]] ) {
-            if( lv_gettop(L)>=2 ) {
-                int model = lv_tonumber(L, 2);// 2
-                [webView setContentMode:model];
-                return 0;
-            } else {
-                UIViewContentMode model = webView.contentMode;
-                lv_pushnumber(L, model);
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
-
-static int startAnimating (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( L && user ){
-        LVWebView* webView = (__bridge LVWebView *)(user->object);
-        if ( [webView isKindOfClass:[LVWebView class]] ) {
-        }
-    }
-    return 0;
-}
-
-static int stopAnimating (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        LVWebView* webView = (__bridge LVWebView *)(user->object);
-        if ( [webView isKindOfClass:[LVWebView class]] ) {
-            return 0;
-        }
-    }
-    return 0;
-}
-
 static int canGoBack (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
