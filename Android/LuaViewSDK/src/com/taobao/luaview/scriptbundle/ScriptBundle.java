@@ -190,7 +190,7 @@ public class ScriptBundle {
         String fileName = null;
         String filePath = null;
         while ((entry = zipStream.getNextEntry()) != null) {
-            fileName = entry.getName();
+            fileName = FileUtil.getFileName(entry.getName());
 
             if (saveFile && entry.isDirectory()) {
                 filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);

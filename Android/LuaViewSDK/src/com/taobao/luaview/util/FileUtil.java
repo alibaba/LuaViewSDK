@@ -162,6 +162,21 @@ public class FileUtil {
     }
 
     /**
+     * get file name of given path
+     * @param nameOrPath
+     * @return
+     */
+    public static String getFileName(final String nameOrPath) {
+        if (nameOrPath != null) {
+            int index = nameOrPath.lastIndexOf('/');
+            if(index != -1){
+                return nameOrPath.substring(index + 1);
+            }
+        }
+        return nameOrPath;
+    }
+
+    /**
      * crate file with given path and file name
      *
      * @param fullpath
