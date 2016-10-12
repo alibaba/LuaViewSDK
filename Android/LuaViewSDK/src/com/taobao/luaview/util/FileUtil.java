@@ -178,6 +178,8 @@ public class FileUtil {
     }
 
     /**
+     * 不包含父路径，有父路径的话则去掉父路径
+     *
      * @param nameOrPath
      * @return
      */
