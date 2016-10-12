@@ -24,7 +24,7 @@ public interface ImageProvider {
      * @param url
      * @param callback
      */
-    void load(final Context context, final WeakReference<ImageView> imageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback);
+    void load(final Context context, final WeakReference<BaseImageView> imageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback);
 
     /**
      * 预下载图片
