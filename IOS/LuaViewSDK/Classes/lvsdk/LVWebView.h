@@ -40,4 +40,9 @@
 -(void) loadUrl:(NSString*) url;
 -(NSString*) url;
 
+// 开启下拉刷新（是、否）
+-(void) setPullRefreshEnable:(BOOL) t;
+// 返回下拉刷新是否开启
+-(BOOL) pullRefreshEnable;
+
 @end

@@ -109,6 +109,13 @@
     return self.webView.request.URL.absoluteString;
 }
 
+-(void) setPullRefreshEnable:(BOOL) t{
+}
+
+-(BOOL) pullRefreshEnable{
+    return NO;
+}
+
 -(void) layoutSubviews{
     [super layoutSubviews];
     self.webView.frame = self.bounds;
@@ -285,6 +292,25 @@ static int url (lv_State *L) {
     return 0;
 }
 
+static int pullRefreshEnable (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ) {
+        LVWebView* webView = (__bridge LVWebView *)(user->object);
+        if ( [webView isKindOfClass:[LVWebView class]] ) {
+            if( lv_gettop(L)>=2 ){
+                BOOL yes = lv_toboolean(L, 2);
+                [webView setPullRefreshEnable:yes];
+                return 0;
+            } else {
+                BOOL ret = [webView pullRefreshEnable];
+                lv_pushboolean(L, ret);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 static int callback (lv_State *L) {
     return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
@@ -309,6 +335,8 @@ static int callback (lv_State *L) {
         {"title",  title},
         {"loadUrl",  loadUrl},
         {"url",  url},
+        
+        {"pullRefreshEnable",pullRefreshEnable},
         
         {"callback",  callback},
         {NULL, NULL}
