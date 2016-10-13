@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -15,6 +16,7 @@ import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDWebView;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 import com.taobao.luaview.view.interfaces.ILVView;
 
 import org.luaj.vm2.Globals;
@@ -26,7 +28,7 @@ import static org.luaj.vm2.LuaValue.valueOf;
 /**
  * Created by tuoli on 10/9/16.
  */
-public class LVWebView extends SwipeRefreshLayout implements ILVView {
+public class LVWebView extends SwipeRefreshLayout implements ILVNativeViewProvider, ILVView {
 
     protected UDView mLuaUserdata;
     protected WebView mWebView;
@@ -171,5 +173,10 @@ public class LVWebView extends SwipeRefreshLayout implements ILVView {
     @Override
     public UDView getUserdata() {
         return mLuaUserdata;
+    }
+
+    @Override
+    public View getNativeView() {
+        return this.getWebView();
     }
 }
