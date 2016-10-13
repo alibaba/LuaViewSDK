@@ -162,6 +162,41 @@ public class FileUtil {
     }
 
     /**
+     * get file name of given path
+     *
+     * @param nameOrPath
+     * @return
+     */
+    public static String getFileName(final String nameOrPath) {
+        if (nameOrPath != null) {
+            int index = nameOrPath.lastIndexOf('/');
+            if (index != -1) {
+                return nameOrPath.substring(index + 1);
+            }
+        }
+        return nameOrPath;
+    }
+
+    /**
+     * 不包含父路径，有父路径的话则去掉父路径
+     *
+     * @param nameOrPath
+     * @return
+     */
+    public static String getSecurityFileName(final String nameOrPath) {
+        if (nameOrPath != null) {
+            boolean isNotSecurity = nameOrPath.contains("../");
+            if (isNotSecurity) {
+                int index = nameOrPath.lastIndexOf("../");
+                if (index != -1) {
+                    return nameOrPath.substring(index + 4);
+                }
+            }
+        }
+        return nameOrPath;
+    }
+
+    /**
      * crate file with given path and file name
      *
      * @param fullpath

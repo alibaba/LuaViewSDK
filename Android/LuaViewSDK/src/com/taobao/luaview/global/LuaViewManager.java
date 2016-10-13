@@ -40,6 +40,7 @@ import com.taobao.luaview.fun.binder.ui.UITextViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIToastBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewGroupBinder;
 import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
+import com.taobao.luaview.fun.binder.ui.UIWebViewBinder;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.util.DebugUtil;
@@ -110,6 +111,8 @@ public class LuaViewManager {
         globals.tryLazyLoad(new UILoadingDialogBinder());
         globals.tryLazyLoad(new UIToastBinder());
         globals.tryLazyLoad(new SpannableStringBinder());
+
+        globals.tryLazyLoad(new UIWebViewBinder());
 
         //animation
         globals.tryLazyLoad(new UIAnimatorBinder());

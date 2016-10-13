@@ -47,7 +47,7 @@ public class GlideImageProvider implements ImageProvider {
      * @param url
      * @param callback
      */
-    public void load(final Context context, final WeakReference<ImageView> referImageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback) {
+    public void load(final Context context, final WeakReference<BaseImageView> referImageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback) {
         if (referImageView != null) {
             ImageView imageView = referImageView.get();
             if (imageView != null) {

@@ -190,7 +190,7 @@ public class ScriptBundle {
         String fileName = null;
         String filePath = null;
         while ((entry = zipStream.getNextEntry()) != null) {
-            fileName = entry.getName();
+            fileName = FileUtil.getSecurityFileName(entry.getName());//TODO 这里需要重新修改下，需要处理一下../ 这种方式只能使用单层路径，不能处理子目录，在这里可以添加公用path
 
             if (saveFile && entry.isDirectory()) {
                 filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);

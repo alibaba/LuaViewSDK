@@ -34,7 +34,7 @@ public class LVBaseImageView extends BaseImageView {
         this.mUrl = url;
         final ImageProvider provider = LuaView.getImageProvider();
         if (provider != null) {
-            provider.load(getContext(), new WeakReference<ImageView>(this), url, new WeakReference<LoadCallback>(callback));
+            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<LoadCallback>(callback));
         }
     }
 
