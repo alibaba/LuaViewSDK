@@ -8,6 +8,7 @@ view.frame(0, 0, scrW, scrH)
 local webview = WebView()
 webview.frame(0, 0, scrW, scrH - 300)
 webview.loadUrl("http://m.taobao.com")
+--webview.pullRefreshEnable(true)
 
 webview.callback({
     onPageStarted = function()
