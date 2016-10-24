@@ -1,11 +1,11 @@
 package com.taobao.luaview.view;
 
 import android.view.Gravity;
-import android.widget.TextView;
 
 import com.taobao.luaview.userdata.constants.UDFontSize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.view.foreground.ForegroundTextView;
 import com.taobao.luaview.view.interfaces.ILVView;
 
 import org.luaj.vm2.Globals;
@@ -18,12 +18,12 @@ import org.luaj.vm2.Varargs;
  * @author song
  * @date 15/8/20
  */
-public class LVTextView extends TextView implements ILVView {
+public class LVTextView extends ForegroundTextView implements ILVView {
     private UDView mLuaUserdata;
 
     public LVTextView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mLuaUserdata = new UDTextView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
+        this.mLuaUserdata = new UDTextView(this, globals, metaTable, varargs);
         this.setIncludeFontPadding(false);//设置默认TextView不包含字体的padding，否则adjustSize的时候拿到的高度有问题
         this.setGravity(Gravity.CENTER_VERTICAL);//默认竖直居中
         this.setLines(1);//默认一行

@@ -89,7 +89,7 @@ public class LoopViewPager extends ViewPager {
     public void setCurrentItem(int realItem, boolean smoothScroll) {
         final int fakeItem = mAdapter.toFakePosition(realItem);
         final int currentFakeItem = super.getCurrentItem();
-        LogUtil.d("yesong", "setCurrentItem", fakeItem, currentFakeItem);
+//        LogUtil.d("yesong", "setCurrentItem", fakeItem, currentFakeItem);
         if (fakeItem != currentFakeItem) {
             super.setCurrentItem(fakeItem, smoothScroll);
         }
@@ -108,7 +108,7 @@ public class LoopViewPager extends ViewPager {
         super.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                LogUtil.d("yesong", "onPageSelected", position);
+//                LogUtil.d("yesong", "onPageSelected", position);
                 if (mAdapter != null && mAdapter.shouldLooping()) {
                     int fakePosition = position;
                     int realPosition = mAdapter.toRealPosition(fakePosition);
@@ -128,13 +128,13 @@ public class LoopViewPager extends ViewPager {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                LogUtil.d("yesong", "onPageScrolled－offset", position, positionOffset, positionOffsetPixels);
+//                LogUtil.d("yesong", "onPageScrolled－offset", position, positionOffset, positionOffsetPixels);
 
                 if (mAdapter != null && mAdapter.shouldLooping()) {
                     final int fakePosition = position;
                     final int realPosition = mAdapter.toRealPosition(fakePosition);
                     if (positionOffset == 0 && mPreviousOffset == 0 && isBoundaryPosition(fakePosition)) {
-                        LogUtil.d("yesong", "onPageScrolled", fakePosition, realPosition);
+//                        LogUtil.d("yesong", "onPageScrolled", fakePosition, realPosition);
                         setCurrentItem(realPosition, false);
                     }
                     mPreviousOffset = positionOffset;
@@ -158,13 +158,13 @@ public class LoopViewPager extends ViewPager {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                LogUtil.d("yesong", "onPageScrollStateChanged", state);
+//                LogUtil.d("yesong", "onPageScrollStateChanged", state);
                 if (mAdapter != null && mAdapter.shouldLooping()) {
                     int fakePosition = LoopViewPager.super.getCurrentItem();
                     int realPosition = mAdapter.toRealPosition(fakePosition);
 
                     if (state == ViewPager.SCROLL_STATE_IDLE && isBoundaryPosition(fakePosition)) {
-                        LogUtil.d("yesong", "onPageScrollStateChanged", fakePosition, realPosition);
+//                        LogUtil.d("yesong", "onPageScrollStateChanged", fakePosition, realPosition);
                         setCurrentItem(realPosition, false);
                     }
                 }

@@ -1,5 +1,7 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
+import android.graphics.Color;
+
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
@@ -7,18 +9,69 @@ import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.indicator.UDCircleViewPagerIndicator;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 
 /**
  * method mapper for PagerIndicator
+ *
  * @param <U>
  */
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
+    private static final String TAG = UICircleViewPagerIndicatorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "unselectedColor",//0
+            "selectedColor",//1
+            "fillColor",//2
+            "pageColor",//3
+            "strokeWidth",//4
+            "strokeColor",//5
+            "radius",//6
+            "snap",//7
+            "currentPage",//8
+            "currentItem"//9
+    };
 
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int opcode = code - super.getAllFunctionNames().size();
+        switch (opcode) {
+            case 0:
+                return unselectedColor(target, varargs);
+            case 1:
+                return selectedColor(target, varargs);
+            case 2:
+                return fillColor(target, varargs);
+            case 3:
+                return pageColor(target, varargs);
+            case 4:
+                return strokeWidth(target, varargs);
+            case 5:
+                return strokeColor(target, varargs);
+            case 6:
+                return radius(target, varargs);
+            case 7:
+                return snap(target, varargs);
+            case 8:
+                return currentPage(target, varargs);
+            case 9:
+                return currentItem(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 设置未选中颜色
@@ -77,12 +130,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setFillColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setFillColor(color);
     }
 
     public LuaValue getFileColor(U view, Varargs varargs) {
-        return valueOf(view.getFillColor());
+        return valueOf(ColorUtil.getHexColor(view.getFillColor()));
     }
 
 
@@ -102,12 +155,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setPageColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setPageColor(color);
     }
 
     public LuaValue getPageColor(U view, Varargs varargs) {
-        return valueOf(view.getPageColor());
+        return valueOf(ColorUtil.getHexColor(view.getPageColor()));
     }
 
     /**
@@ -150,12 +203,12 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
     }
 
     public LuaValue setStrokeColor(U view, Varargs varargs) {
-        final int color = ColorUtil.parse(varargs.optvalue(2, NIL));
+        final Integer color = ColorUtil.parse(LuaUtil.getInt(varargs, 2));
         return view.setStrokeColor(color);
     }
 
     public LuaValue getStrokeColor(U view, Varargs varargs) {
-        return valueOf(view.getStrokeColor());
+        return valueOf(ColorUtil.getHexColor(view.getStrokeColor()));
     }
 
     /**

@@ -69,6 +69,9 @@ public class DemoLuaViewActivity extends Activity {
     public void load(final LuaView luaView) {
         luaView.load(getLuaUri());
 
+        //load bytecode directly
+//        luaView.loadAssets("test/lvp/UI_Window.luap");
+
 
         //测试调用 lua function
         LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
@@ -91,5 +94,11 @@ public class DemoLuaViewActivity extends Activity {
 
     public LuaView getLuaView() {
         return mLuaView;
+    }
+
+    @Override
+    protected void onDestroy() {
+        LogUtil.d("yesong-onDestroy");
+        super.onDestroy();
     }
 }

@@ -32,13 +32,6 @@ public abstract class BaseFunctionBinder extends TwoArgFunction {
     }
 
     private LuaValue call(LuaValue env, Class<? extends LibFunction> libClass) {
-//        LuaTable methodMapper = LuaViewManager.bind(libClass, getMapperMethods(libClass));
-//        if (luaNames != null) {
-//            for (String name : luaNames) {
-//                env.set(name, createCreator(env, addNewIndex(methodMapper)));
-//            }
-//        }
-//        return methodMapper;
         final LuaTable metatable = (libClass == null || LuaViewConfig.isLibsLazyLoad() == false) ? LuaViewManager.createMetatable(libClass) : null;//当不是lazyLoad或者lib为空（常量）的时候直接加载
         if (luaNames != null) {
             for (String name : luaNames) {

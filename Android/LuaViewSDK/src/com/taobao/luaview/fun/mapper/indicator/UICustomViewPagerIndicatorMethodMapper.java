@@ -8,13 +8,40 @@ import com.taobao.luaview.util.LuaUtil;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * Method Mapper for Custom View Pager
- * @author song
+ *
  * @param <U>
+ * @author song
  */
 @LuaViewLib
 public class UICustomViewPagerIndicatorMethodMapper<U extends UDCustomViewPagerIndicator> extends UIViewMethodMapper<U> {
+    private static final String TAG = UICustomViewPagerIndicatorMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "currentPage",//0
+            "currentItem"//1
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int opcode = code - super.getAllFunctionNames().size();
+        switch (opcode) {
+            case 0:
+                return currentPage(target, varargs);
+            case 1:
+                return currentItem(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 滚动到第几页面

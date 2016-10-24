@@ -22,6 +22,7 @@ public class WeakCache {
 
     /**
      * get a named cache
+     *
      * @param cacheName
      * @return
      */
@@ -40,14 +41,33 @@ public class WeakCache {
     /**
      * should call when LuaView is destroy
      */
-    public static void clear(){
-        if(mCachePool != null){
+    public static void clear() {
+        if (mCachePool != null) {
+            WeakCache c = null;
+            WeakReference<Object> weakObj = null;
+            Object cacheObj = null;
+            for (String key : mCachePool.keySet()) {//remove mCachePool
+                c = mCachePool.get(key);
+                if (c != null && c.mCache != null) {//remove mCache
+                    for (Object key2 : c.mCache.keySet()) {
+                        weakObj = c.mCache.get(key2);
+                        if (weakObj != null) {
+                            cacheObj = weakObj.get();
+                            if (cacheObj instanceof LuaCache.CacheableObject) {
+                                ((LuaCache.CacheableObject) cacheObj).onCacheClear();
+                            }
+                        }
+                    }
+                    c.mCache.clear();
+                }
+            }
             mCachePool.clear();
         }
     }
 
     /**
      * get from cache
+     *
      * @param key
      * @param <T>
      * @return
@@ -61,6 +81,7 @@ public class WeakCache {
 
     /**
      * update cache
+     *
      * @param key
      * @param value
      * @param <T>

@@ -5,11 +5,14 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.view.LVViewGroup;
+import com.taobao.luaview.view.foreground.ForegroundDelegate;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -92,13 +95,16 @@ public class LVListViewAdapter extends BaseAdapter {
         final int viewType = getItemViewType(position);
         final boolean hasCellSize = this.mLuaUserData.hasCellSize(position);
         if (convertView == null || ((UDLuaTable) convertView.getTag()).get(KEY_VIEW_TYPE) != LuaValue.valueOf(viewType)) {//在内部创建好Cell
-            UDView layout = new UDViewGroup(createLayout(), mGlobals, mLuaUserData.getmetatable(), null);
+            UDView layout = new UDViewGroup(createLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
             //对外数据封装，必须使用LuaTable
             cellData = new UDLuaTable(layout);
             //View封装
             if (hasCellSize) {//有Size的定义
                 final LVViewGroup cellView = createLayout();
-                cellView.addView(layout.getView());
+                View tmp = layout.getView();
+                if(tmp != null) {
+                    cellView.addView(tmp);
+                }
                 convertView = cellView;
             } else {
                 convertView = layout.getView();
@@ -198,5 +204,4 @@ public class LVListViewAdapter extends BaseAdapter {
         this.mLuaUserData.callCellLayout(cell, position);
         this.mGlobals.restoreContainer();
     }
-
 }

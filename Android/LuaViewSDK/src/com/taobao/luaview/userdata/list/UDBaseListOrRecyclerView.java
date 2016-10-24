@@ -42,7 +42,7 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     //延迟加载
     protected boolean mLazyLoad = true;
 
-    public UDBaseListOrRecyclerView(T view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDBaseListOrRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
         init();
     }
@@ -51,11 +51,12 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * 初始化数据
      */
     public void init() {
-        if (!this.initParams.isnil()) {
+        if (this.initParams != null) {
             this.mIdCache = new SparseCache<String>();
-            this.mSectionDelegate = !this.initParams.isnil() ? this.initParams.get("Section") : NIL;
-            this.mCellDelegate = !this.initParams.isnil() ? this.initParams.get("Cell") : NIL;
-            this.mCallback = !this.initParams.isnil() ? this.initParams.get("Callback") : NIL;
+
+            this.mSectionDelegate = LuaUtil.getValue(initParams, "Section");
+            this.mCellDelegate = LuaUtil.getValue(initParams, "Cell");
+            this.mCallback = LuaUtil.getValue(initParams, "Callback");
             initSectionLength();
         }
     }
@@ -81,6 +82,17 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     //-----------------------------------------section----------------------------------------------
 
     /**
+     * 获取新的总数跟老的总数差别
+     *
+     * @return
+     */
+    public int getDiffTotalCount() {
+        int oldCount = (isSectionLengthInit.get() && mSectionLength != null) ? mSectionLength[mSectionLength.length - 1].y : 0;
+        int newCount = getRawTotalCount();
+        return newCount - oldCount;
+    }
+
+    /**
      * 获取总的个数
      *
      * @return
@@ -99,6 +111,31 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     }
 
     /**
+     * 获取原始总个数
+     *
+     * @return
+     */
+    protected int getRawTotalCount() {
+        final int totalSections = getRawSectionCount();
+        int totalCount = 0;
+        for (int i = 0; i < totalSections; i++) {
+            totalCount += getRawRowCount(i);
+        }
+        return totalCount;
+    }
+
+    /**
+     * 返回新count 跟 老count的差距
+     *
+     * @return
+     */
+    protected int getDiffSectionCount() {
+        int oldCount = (isSectionLengthInit.get() && mSectionLength != null) ? mSectionLength.length : 0;
+        int newCount = getRawSectionCount();
+        return newCount - oldCount;
+    }
+
+    /**
      * 分区个数，android的totalCount=分区个数*每个分区的数目
      *
      * @return
@@ -107,8 +144,29 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
         if (isSectionLengthInit.get()) {
             return mSectionLength != null ? mSectionLength.length : 0;
         } else {
-            return LuaUtil.getOrCallFunction(this.mSectionDelegate.get("SectionCount")).optint(1);
+            return getRawSectionCount();
         }
+    }
+
+    /**
+     * 获取原始的SectionCount
+     *
+     * @return
+     */
+    protected int getRawSectionCount() {
+        return LuaUtil.getOrCallFunction(this.mSectionDelegate.get("SectionCount")).optint(1);
+    }
+
+    /**
+     * 获取diff of new RowCount and old RowCount of Section
+     *
+     * @param section
+     * @return
+     */
+    protected int diffRowCount(int section) {
+        int oldCount = (isSectionLengthInit.get() && mSectionLength != null) ? (this.mSectionLength[section].y - this.mSectionLength[section].x) : 0;
+        int newCount = getRawRowCount(section);
+        return newCount - oldCount;
     }
 
     /**
@@ -121,8 +179,18 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
         if (isSectionLengthInit.get()) {
             return mSectionLength != null ? (this.mSectionLength[section].y - this.mSectionLength[section].x) : 0;
         } else {
-            return LuaUtil.callFunction(this.mSectionDelegate.get("RowCount"), LuaUtil.toLuaInt(section)).optint(0);
+            return getRawRowCount(section);
         }
+    }
+
+    /**
+     * 读取RowCount，获取原始count
+     *
+     * @param section
+     * @return
+     */
+    protected int getRawRowCount(int section) {
+        return LuaUtil.callFunction(this.mSectionDelegate.get("RowCount"), LuaUtil.toLuaInt(section)).optint(0);
     }
     //------------------------------------------cell------------------------------------------------
 
@@ -555,7 +623,7 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      *
      * @return
      */
-    public abstract UDBaseListOrRecyclerView reload();
+    public abstract UDBaseListOrRecyclerView reload(Integer section, Integer row);
 
     /**
      * listview滚动到顶部

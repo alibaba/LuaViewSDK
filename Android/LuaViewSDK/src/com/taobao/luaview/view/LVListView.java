@@ -27,7 +27,6 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVListView extends ListView implements ILVListView {
-    public Globals mGlobals;
     private UDBaseListView mLuaUserdata;
 
     //adapter
@@ -39,24 +38,23 @@ public class LVListView extends ListView implements ILVListView {
 
     public LVListView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseListView udBaseListView) {
         super(globals.getContext());
-        this.mGlobals = globals;
-        this.mLuaUserdata = udBaseListView != null ? udBaseListView : new UDListView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
-        init();
+        this.mLuaUserdata = udBaseListView != null ? udBaseListView : new UDListView(this, globals, metaTable, varargs);
+        init(globals);
     }
 
-    private void init() {
-        this.mGlobals.saveContainer(this);
-        initData();
-        this.mGlobals.restoreContainer();
+    private void init(Globals globals) {
+        globals.saveContainer(this);
+        initData(globals);
+        globals.restoreContainer();
     }
 
     /**
      * 初始化子元素
      */
-    private void initData() {
+    private void initData(Globals globals) {
 //        initHeaderContainer();
 //        initFooterContainer();
-        mAdapter = new LVListViewAdapter(mGlobals, mLuaUserdata);
+        mAdapter = new LVListViewAdapter(globals, mLuaUserdata);
         this.setAdapter(mAdapter);
         this.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,14 +79,14 @@ public class LVListView extends ListView implements ILVListView {
 
 
     private void initHeaderContainer() {
-        mHeaderContainer = new LVViewGroup(mGlobals, mLuaUserdata.getmetatable(), null);
+        mHeaderContainer = new LVViewGroup(mLuaUserdata.getGlobals(), mLuaUserdata.getmetatable(), null);
         mHeaderContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         this.addHeaderView(mHeaderContainer);
         this.setHeaderDividersEnabled(false);
     }
 
     private void initFooterContainer() {
-        mFooterContainer = new LVViewGroup(mGlobals, mLuaUserdata.getmetatable(), null);
+        mFooterContainer = new LVViewGroup(mLuaUserdata.getGlobals(), mLuaUserdata.getmetatable(), null);
         mFooterContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         this.addFooterView(mFooterContainer);
         this.setFooterDividersEnabled(false);

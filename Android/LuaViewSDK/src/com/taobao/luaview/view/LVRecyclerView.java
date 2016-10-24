@@ -32,7 +32,6 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
-    public Globals mGlobals;
     private UDBaseRecyclerView mLuaUserdata;
 
     //adapter
@@ -46,20 +45,20 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         return lvRecyclerView.init(globals, metaTable, varargs, udBaseRecyclerView);
     }
 
-    private LVRecyclerView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
-        super(globals.getContext());
-        init(globals, metaTable, varargs, udBaseRecyclerView);
-    }
-
+    /**
+     * 构造函数
+     *
+     * @param context
+     * @param attrs
+     */
     public LVRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public LVRecyclerView init(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         LuaViewUtil.setId(this);
-        this.mGlobals = globals;
-        this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs != null ? varargs.arg1() : null);
-        init();
+        this.mLuaUserdata = udBaseRecyclerView != null ? udBaseRecyclerView : new UDRecyclerView(this, globals, metaTable, varargs);
+        init(globals);
         return this;
     }
 
@@ -70,8 +69,8 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         updateMaxSpanCount();
     }
 
-    private void init() {
-        mAdapter = new LVRecyclerViewAdapter(mGlobals, mLuaUserdata);
+    private void init(Globals globals) {
+        mAdapter = new LVRecyclerViewAdapter(globals, mLuaUserdata);
         this.setAdapter(mAdapter);
         mLayoutManager = new LVGridLayoutManager(this);
         this.setLayoutManager(mLayoutManager);

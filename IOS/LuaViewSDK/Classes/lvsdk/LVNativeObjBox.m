@@ -96,7 +96,14 @@
     }
     return 0;
 }
-
+static void changeFuncName(NSMutableString* funcName){
+    if( funcName.length>0 && [funcName characterAtIndex:0]=='#' ) {
+        NSRange range = NSMakeRange(0, 1);
+        [funcName deleteCharactersInRange:range];
+    } else {
+        [funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,funcName.length)];
+    }
+}
 // 检查API是否纯在
 - (BOOL) isApiExist:(NSString*) methodName{
     if( self.apiHashtable == nil ){
@@ -107,7 +114,7 @@
         return ret.boolValue;
     } else {
         NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
-        [ocMethodName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,ocMethodName.length)];
+        changeFuncName(ocMethodName);
         id nativeObj = self.realObject;
         for ( int i=0; i<5; i++ ) {
             SEL sel = NSSelectorFromString(ocMethodName);
@@ -223,8 +230,8 @@ static int callNativeObjectFunction (lv_State *L) {
         LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
         NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
         int luaArgsNum = lv_gettop(L);
-
-        [funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,funcName.length)];
+        
+        changeFuncName(funcName);
         
         ifNotEnoughArgmentTagAppendIt(funcName, luaArgsNum);
         

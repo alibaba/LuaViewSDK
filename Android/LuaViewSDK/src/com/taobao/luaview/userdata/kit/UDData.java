@@ -3,12 +3,11 @@ package com.taobao.luaview.userdata.kit;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.JsonUtil;
 
-import org.apache.http.util.ByteArrayBuffer;
 import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -22,19 +21,19 @@ public class UDData extends BaseUserdata {
     public static final String DEFAULT_ENCODE = "utf-8";
 
     public UDData(Globals globals, LuaValue metatable, Varargs varargs) {
-        super(new ByteArrayBuffer(DEFAULT_BUFFER_SIZE), globals, metatable, varargs);
+        super(new ByteArrayOutputStream(DEFAULT_BUFFER_SIZE), globals, metatable, varargs);
         init();
     }
 
     private void init() {
-        ByteArrayBuffer byteArrayBuffer = (ByteArrayBuffer) userdata();
-        if (mVarargs != null) {
+        ByteArrayOutputStream byteArrayBuffer = (ByteArrayOutputStream) userdata();
+        if (initParams != null) {
             try {
-                for (int i = 0; i < mVarargs.narg(); i++) {
-                    Object obj = mVarargs.arg(i + 1);
+                for (int i = 0; i < initParams.narg(); i++) {
+                    Object obj = initParams.arg(i + 1);
                     String str = String.valueOf(obj);
                     byte[] data = str.getBytes(DEFAULT_ENCODE);
-                    byteArrayBuffer.append(data, 0, data.length);
+                    byteArrayBuffer.write(data, 0, data.length);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -54,13 +53,13 @@ public class UDData extends BaseUserdata {
      * @return
      */
     public UDData append(Object appendData) {
-        ByteArrayBuffer result = (ByteArrayBuffer) this.userdata();
+        ByteArrayOutputStream result = (ByteArrayOutputStream) this.userdata();
         if (appendData instanceof UDData) {
-            ByteArrayBuffer buffer2 = (ByteArrayBuffer) ((UDData) appendData).userdata();
-            result.append(buffer2.toByteArray(), 0, buffer2.length());
+            ByteArrayOutputStream buffer2 = (ByteArrayOutputStream) ((UDData) appendData).userdata();
+            result.write(buffer2.toByteArray(), 0, buffer2.size());
         } else if (appendData instanceof byte[]) {
             byte[] buffer2 = (byte[]) appendData;
-            result.append(buffer2, 0, buffer2.length);
+            result.write(buffer2, 0, buffer2.length);
         }
         return this;
     }
@@ -77,9 +76,9 @@ public class UDData extends BaseUserdata {
      * @return
      */
     public String toString(String encode) {
-        ByteArrayBuffer buffer = (ByteArrayBuffer) userdata();
+        ByteArrayOutputStream buffer = (ByteArrayOutputStream) userdata();
         try {
-            return (buffer != null && buffer.length() > 0) ? new String(buffer.toByteArray(), encode != null ? encode : DEFAULT_ENCODE) : "";
+            return (buffer != null && buffer.size() > 0) ? new String(buffer.toByteArray(), encode != null ? encode : DEFAULT_ENCODE) : "";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

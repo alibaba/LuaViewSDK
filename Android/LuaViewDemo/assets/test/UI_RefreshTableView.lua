@@ -57,7 +57,7 @@ tableView = RefreshTableView {
                 cell.icon2 = Image();
             end,
             Layout = function(cell, section, row)
-                print(window);
+                print(cell.window, "xxxxx");
                 local cellWdith, cellHeight = cell.window.size();
                 cell.icon.frame(0, 0, cellHeight, cellHeight);
                 cell.icon.image(imageUrl1, function()

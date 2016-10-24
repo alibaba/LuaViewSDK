@@ -1,5 +1,6 @@
 package com.taobao.luaview.demo.provider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,6 +32,9 @@ public class GlideImageProvider implements ImageProvider {
 
     @Override
     public void resumeRequests(final ViewGroup view, Context context) {
+        if (context instanceof Activity && (((Activity) context).isFinishing() || ((Activity) context).isDestroyed())) {
+            return;
+        }
         if (Glide.with(context).isPaused()) {
             Glide.with(context).resumeRequests();
         }
@@ -43,7 +47,7 @@ public class GlideImageProvider implements ImageProvider {
      * @param url
      * @param callback
      */
-    public void load(final Context context, final WeakReference<ImageView> referImageView, final String url, final BaseImageView.LoadCallback callback) {
+    public void load(final Context context, final WeakReference<BaseImageView> referImageView, final String url, final WeakReference<BaseImageView.LoadCallback> callback) {
         if (referImageView != null) {
             ImageView imageView = referImageView.get();
             if (imageView != null) {
@@ -51,16 +55,16 @@ public class GlideImageProvider implements ImageProvider {
                     Glide.with(context).load(url).listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            if (callback != null) {
-                                callback.onLoadResult(null);
+                            if (callback != null && callback.get() != null) {
+                                callback.get().onLoadResult(null);
                             }
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            if (callback != null) {
-                                callback.onLoadResult(resource.getCurrent());
+                            if (callback != null && callback.get() != null) {
+                                callback.get().onLoadResult(resource.getCurrent());
                             }
                             return false;
                         }

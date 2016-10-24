@@ -5,6 +5,7 @@ import com.taobao.luaview.view.LVViewPager;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 
 /**
@@ -18,15 +19,15 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
     //初始化数据
     private LuaValue mPagesDelegate = NIL;
 
-    public UDViewPager(LVViewPager viewPager, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDViewPager(LVViewPager viewPager, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(viewPager, globals, metaTable, initParams);
         init();
     }
 
     public void init() {
-        if (!this.initParams.isnil()) {
-            this.mPagesDelegate = !this.initParams.isnil() ? this.initParams.get("Pages") : NIL;
-            this.mCallback = !this.initParams.isnil() ? this.initParams.get("Callback") : NIL;
+        if (initParams != null) {
+            this.mPagesDelegate = LuaUtil.getValue(initParams, NIL, "Pages");
+            this.mCallback = LuaUtil.getValue(initParams, NIL, "Callback");
         }
     }
 
@@ -47,7 +48,7 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
      * @return
      */
     public int getPageCount() {
-        return LuaUtil.getOrCallFunction(this.initParams.get("PageCount")).optint(1, 0);
+        return LuaUtil.getOrCallFunction(LuaUtil.getValue(initParams, NIL, "PageCount")).optint(1, 0);
     }
 
     /**

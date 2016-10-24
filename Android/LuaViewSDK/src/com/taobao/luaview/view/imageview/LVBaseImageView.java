@@ -34,13 +34,17 @@ public class LVBaseImageView extends BaseImageView {
         this.mUrl = url;
         final ImageProvider provider = LuaView.getImageProvider();
         if (provider != null) {
-            provider.load(getContext(), new WeakReference<ImageView>(this), url, callback);
+            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<LoadCallback>(callback));
         }
     }
 
     @Override
-    public String getUrl() {
+    public String getUrl() {//TODO 本地图片的时候，获取的是空的
         return mUrl;
+    }
+
+    public void setUrl(String url) {
+        this.mUrl = url;
     }
 
     @Override

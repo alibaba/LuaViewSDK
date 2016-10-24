@@ -9,6 +9,7 @@ import com.taobao.luaview.view.LVRefreshRecyclerView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * 容器类-RecyclerView，模拟OC的section分区实现，Section顺序排列
@@ -18,13 +19,13 @@ import org.luaj.vm2.LuaValue;
  */
 public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerView> implements OnLVRefreshListener {
 
-    public UDRefreshRecyclerView(LVRefreshRecyclerView view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDRefreshRecyclerView(LVRefreshRecyclerView view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 
     @Override
     public LVRecyclerView getLVRecyclerView() {
-        return getView().getRecyclerView();
+        return getView() != null ? getView().getRecyclerView() : null;
     }
 
     //------------------------------------------Refresh---------------------------------------------
@@ -34,7 +35,7 @@ public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerV
      */
     public void initPullRefresh() {
         final LVRefreshRecyclerView view = getView();
-        if (view != null && !mCallback.isnil()) {
+        if (view != null && LuaUtil.isValid(mCallback)) {
             view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -64,12 +65,12 @@ public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerV
     @Override
     public void onRefresh(final Object param) {
         final LVRefreshRecyclerView view = getView();
-        if (view != null && !mCallback.isnil()) {
+        if (view != null && LuaUtil.isValid(mCallback)) {
             //这里必须放在handler中执行，否则会造成nullpointerexception(dispatchDraw的时候调用removeView出错) http://dashasalo.com/2013/09/16/android-removeview-crashes-animation-listener/
             view.post(new Runnable() {//下一帧回调，否则会造成view onDraw乱序。否则在同一帧调用的时候再调用addView, removeView会有bug
                 @Override
                 public void run() {
-                    if (!mCallback.isnil()) {
+                    if (LuaUtil.isValid(mCallback)) {
                         LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "PullDown", "pullDown"));
                     }
                     if (param instanceof OnLVRefreshListener) {

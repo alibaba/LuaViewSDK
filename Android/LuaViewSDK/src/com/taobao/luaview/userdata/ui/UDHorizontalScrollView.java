@@ -38,7 +38,7 @@ public class UDHorizontalScrollView extends UDViewGroup<LVHorizontalScrollView> 
      * @return
      */
     private LuaValue callCellFunction(String method, LuaValue cellData, int position) {
-        return initParams.get(method).call(cellData, LuaUtil.toLuaInt(position));
+        return LuaUtil.callFunction(LuaUtil.getValue(initParams, method), cellData, LuaUtil.toLuaInt(position));
     }
 
     /**

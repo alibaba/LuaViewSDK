@@ -18,6 +18,7 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaBoolean;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * Image 数据封装
@@ -28,7 +29,7 @@ import org.luaj.vm2.LuaValue;
 public class UDImageView<T extends BaseImageView> extends UDView<T> {
     private AnimationDrawable mFrameAnimation;
 
-    public UDImageView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDImageView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
     }
 
@@ -59,6 +60,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 } else {
                     imageView.setIsNetworkMode(false);
                     imageView.setTag(R.id.lv_tag_url, null);
+                    imageView.setUrl(urlOrName);
                     Drawable drawable = null;
                     if (getLuaResourceFinder() != null) {
                         drawable = getLuaResourceFinder().findDrawable(urlOrName);

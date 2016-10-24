@@ -1,6 +1,5 @@
 package com.taobao.luaview.userdata.ui;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -8,11 +7,8 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.RasterizerSpan;
-import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
-import android.text.style.TextAppearanceSpan;
 import android.text.style.UnderlineSpan;
 
 import com.taobao.luaview.extend.CustomTypefaceSpan;
@@ -23,7 +19,6 @@ import com.taobao.luaview.userdata.constants.UDFontWeight;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
-import com.taobao.luaview.util.TypefaceUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -34,7 +29,7 @@ public class UDSpannableString extends BaseUserdata {
 
     public UDSpannableString(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(new SpannableStringBuilder(), globals, metaTable, varargs);
-        init();
+        init(varargs);
     }
 
     public SpannableStringBuilder getSpannableStringBuilder() {
@@ -44,11 +39,11 @@ public class UDSpannableString extends BaseUserdata {
     /**
      * 初始化数据
      */
-    private void init() {
+    public void init(Varargs initParams) {
         LuaValue text = NIL, config = NIL;
-        if (this.mVarargs != null) {
-            text = this.mVarargs.narg() > 0 ? this.mVarargs.arg1() : NIL;
-            config = this.mVarargs.narg() > 1 ? this.mVarargs.arg(2) : NIL;
+        if (initParams != null) {
+            text = getInitParam1();
+            config = getInitParam2();
         }
         initSpannableStringBuilder(text, config);
     }
@@ -64,7 +59,7 @@ public class UDSpannableString extends BaseUserdata {
             if (config != null && config.istable()) {
                 final int end = spannableStringBuilder.length();
                 final int fontSize = DimenUtil.spToPx(config.get("fontSize").optint(-1));
-                final int fontColor = ColorUtil.parse(config.get("fontColor"));
+                final Integer fontColor = ColorUtil.parse(LuaUtil.getValue(config, "fontColor"));
                 final String fontName = config.get("fontName").optjstring(null);
 
                 final LuaValue weightValue = config.get("fontWeight");
@@ -73,7 +68,7 @@ public class UDSpannableString extends BaseUserdata {
                 final LuaValue styleValue = config.get("fontStyle");
                 final int fontStyle = LuaUtil.isNumber(styleValue) ? styleValue.optint(Typeface.NORMAL) : UDFontStyle.getValue(styleValue.optjstring(UDFontStyle.STYLE_NORMAL));
 
-                final int backgroundColor = ColorUtil.parse(config.get("backgroundColor"));
+                final Integer backgroundColor = ColorUtil.parse(LuaUtil.getValue(config, "backgroundColor"));
                 final boolean strikethrough = config.get("strikethrough").optboolean(false);
                 final boolean underline = config.get("underline").optboolean(false);
 
@@ -81,7 +76,7 @@ public class UDSpannableString extends BaseUserdata {
                     spannableStringBuilder.setSpan(new AbsoluteSizeSpan(fontSize), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                if (fontColor != Color.BLACK) {//字体颜色
+                if (fontColor != null) {//字体颜色
                     spannableStringBuilder.setSpan(new ForegroundColorSpan(fontColor), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
@@ -97,7 +92,7 @@ public class UDSpannableString extends BaseUserdata {
                     spannableStringBuilder.setSpan(new StyleSpan(fontStyle), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                if (backgroundColor != Color.BLACK) {//背景色
+                if (backgroundColor != null) {//背景色
                     spannableStringBuilder.setSpan(new BackgroundColorSpan(backgroundColor), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 

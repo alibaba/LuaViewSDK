@@ -5,6 +5,7 @@ import com.taobao.luaview.view.indicator.LVCircleViewPagerIndicator;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 
 /**
@@ -15,7 +16,7 @@ import org.luaj.vm2.LuaValue;
  */
 public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> extends UDView<U> {
 
-    public UDCircleViewPagerIndicator(U view, Globals globals, LuaValue metaTable, LuaValue initParams) {
+    public UDCircleViewPagerIndicator(U view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
 
@@ -25,8 +26,8 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @param color
      * @return
      */
-    public UDCircleViewPagerIndicator setFillColor(int color) {
-        if (getView() != null) {
+    public UDCircleViewPagerIndicator setFillColor(Integer color) {
+        if (color != null && getView() != null) {
             getView().setFillColor(color);
         }
         return this;
@@ -47,8 +48,8 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @param color
      * @return
      */
-    public UDCircleViewPagerIndicator setPageColor(int color) {
-        if (getView() != null) {
+    public UDCircleViewPagerIndicator setPageColor(Integer color) {
+        if (color != null && getView() != null) {
             getView().setPageColor(color);
         }
         return this;
@@ -91,8 +92,8 @@ public class UDCircleViewPagerIndicator<U extends LVCircleViewPagerIndicator> ex
      * @param color
      * @return
      */
-    public UDCircleViewPagerIndicator setStrokeColor(int color) {
-        if (getView() != null) {
+    public UDCircleViewPagerIndicator setStrokeColor(Integer color) {
+        if (color != null && getView() != null) {
             getView().setStrokeColor(color);
         }
         return this;

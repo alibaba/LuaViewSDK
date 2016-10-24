@@ -4,26 +4,46 @@ cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 
-tableView = RefreshCollectionView {
+collectionView = RefreshCollectionView {
     Section = {
-        SectionCount = 2,
+        SectionCount = 10,
         RowCount = function(section)
-            return 10;
+            if(section == 4 or section == 6) then
+                return 10;
+            end
+            return 1
         end
     },
     Cell = {
         Id = function(section, row)
-            if (section == 1) then
+            if (section == 4) then
                 return "ImageAndLabel";
-            else
+            elseif(section == 6) then
                 return "ImageAndImage";
             end
+            return "NONE"
         end,
+        NONE = {
+            Init = function(cell)
+            end,
+            Layout = function(cell, section, row)
+                cell.line = View();
+                cell.line.size(w, 1)
+                cell.line.backgroundColor(0xff0000);
+            end,
+            Size = function(section, row)
+                return w, 1;
+            end,
+            Callback = function(cell, section, row)
+            end
+
+        },
         ImageAndLabel = {
             Size = function(section, row)
                 return 50, cellHeight;
             end,
             Init = function(cell, section, row)
+                cell.bg = View()
                 cell.icon = Image();
                 cell.title = Label();
                 print("构造Cell");
@@ -36,10 +56,12 @@ tableView = RefreshCollectionView {
 
                 cell.title.frame(20, 0, w - 20, cellHeight);
                 cell.title.text("测试" .. section .. "--" .. row);
+
+                cell.bg.addView(cell.bg)
             end,
             Callback = function(section, row)
                 print(section, row);
-                tableView.stopRefreshing();
+                collectionView.stopRefreshing();
                 System.gc();
             end
         },
@@ -67,7 +89,7 @@ tableView = RefreshCollectionView {
             end,
             Callback = function(section, row)
                 print(section, row);
-                tableView.stopRefreshing();
+                collectionView.stopRefreshing();
                 System.gc();
             end
         }
@@ -90,7 +112,7 @@ tableView = RefreshCollectionView {
 
 loading = false;
 
-tableView.frame(0, 0, w, h - 64);
+collectionView.frame(0, 0, w, h - 64);
 
 
 

@@ -6,7 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-
 view1 = View()
 view1.cornerRadius(25)
 view1.frame(50, 50, 100, 20)

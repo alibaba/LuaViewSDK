@@ -82,6 +82,7 @@
 		84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */; };
 		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
 		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
+		91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */; };
 		BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
 		BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
@@ -216,6 +217,7 @@
 		84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ViewChildren.lua; sourceTree = "<group>"; };
 		84F9A0451C92CA7300481334 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button0.png; sourceTree = "<group>"; };
 		84F9A0461C92CA7300481334 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
+		91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_WebView.lua; sourceTree = "<group>"; };
 		BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_FlexBox.lua; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -333,6 +335,7 @@
 				3CC2F8681C706BFA00D1E0B7 /* demoH2_CollectionView.lua */,
 				3CC2F8691C706BFA00D1E0B7 /* demoK_PagerView.lua */,
 				3CC2F86A1C706BFA00D1E0B7 /* demoK_ScrollView.lua */,
+				91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */,
 				3CC2F86B1C706BFA00D1E0B7 /* demoL_Alert.lua */,
 				3CC2F86C1C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua */,
 				3CC2F86D1C706BFA00D1E0B7 /* demoM_Navigation.lua */,
@@ -574,6 +577,7 @@
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				3CC2F8A11C706BFA00D1E0B7 /* demoE_Button.lua in Resources */,
 				3CC2F8B31C706BFA00D1E0B7 /* demoY2_flxNode.lua in Resources */,
+				91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */,
 				3CC2F8C81C706BFA00D1E0B7 /* snow.png in Resources */,
 				3CC2F8AB1C706BFA00D1E0B7 /* demoO_table.lua in Resources */,
 				3CC2F8A61C706BFA00D1E0B7 /* demoK_ScrollView.lua in Resources */,

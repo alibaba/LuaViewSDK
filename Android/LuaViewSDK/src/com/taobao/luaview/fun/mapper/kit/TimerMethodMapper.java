@@ -11,6 +11,8 @@ import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.List;
+
 /**
  * timer 接口封装
  *
@@ -19,6 +21,45 @@ import org.luaj.vm2.Varargs;
  */
 @LuaViewLib
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
+    private static final String TAG = TimerMethodMapper.class.getSimpleName();
+    private static final String[] sMethods = new String[]{
+            "delay",//0
+            "repeat",//1
+            "repeatCount",//2
+            "interval",//3
+            "start",//4
+            "callback",//5
+            "cancel"//6
+    };
+
+    @Override
+    public List<String> getAllFunctionNames() {
+        return mergeFunctionNames(TAG, super.getAllFunctionNames(), sMethods);
+    }
+
+    @Override
+    public Varargs invoke(int code, U target, Varargs varargs) {
+        final int optcode = code - super.getAllFunctionNames().size();
+        switch (optcode) {
+            case 0:
+                return delay(target, varargs);
+            case 1:
+                return repeat(target, varargs);
+            case 2:
+                return repeatCount(target, varargs);
+            case 3:
+                return interval(target, varargs);
+            case 4:
+                return start(target, varargs);
+            case 5:
+                return callback(target, varargs);
+            case 6:
+                return cancel(target, varargs);
+        }
+        return super.invoke(code, target, varargs);
+    }
+
+    //--------------------------------------- API --------------------------------------------------
 
     /**
      * 启动延时
@@ -38,7 +79,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue setDelay(U udTimer, Varargs varargs) {
-        final long delay = LuaUtil.getLong(varargs, 0L, 2) * 1000;
+        final long delay = LuaUtil.getTimeLong(varargs, 0f, 2);
         return udTimer.setDelay(delay);
     }
 
@@ -75,6 +116,34 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     }
 
     /**
+     * 重复次数
+     * TODO 修改次数控制
+     * @param udTimer
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue repeatCount(U udTimer, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setRepeatCount(udTimer, varargs);
+        } else {
+            return getRepeatCount(udTimer, varargs);
+        }
+    }
+
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue setRepeatCount(U udTimer, Varargs varargs) {
+        final int repeat = LuaUtil.getInt(varargs, 0, 2);
+        return udTimer.setRepeat(repeat > 0);
+    }
+
+    @LuaViewApi(since = VmVersion.V_511)
+    public LuaValue getRepeatCount(U udTimer, Varargs varargs) {
+        return valueOf(udTimer.isRepeat());
+    }
+
+
+    /**
      * 设置interval
      *
      * @param udTimer
@@ -92,7 +161,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue setInterval(U udTimer, Varargs varargs) {
-        final long interval = LuaUtil.getLong(varargs, 1L, 2) * 1000;
+        final long interval = LuaUtil.getTimeLong(varargs, 1f, 2);
         return udTimer.setInterval(interval);
     }
 
@@ -109,9 +178,9 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
      * @return
      */
     public LuaValue start(U udTimer, Varargs varargs) {
-        final Long interval = LuaUtil.getLong(varargs, 2);
+        final Long interval = LuaUtil.getTimeLong(varargs, 2);
         final Boolean repeat = LuaUtil.getBoolean(varargs, 3);
-        return udTimer.start(interval != null ? interval * 1000 : null, repeat);
+        return udTimer.start(interval, repeat);
     }
 
     /**

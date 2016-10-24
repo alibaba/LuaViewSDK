@@ -20,15 +20,11 @@ public class LVImageView extends LVBaseImageView implements ILVView {
 
     public LVImageView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mLuaUserdata = new UDImageView(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        this.mLuaUserdata = new UDImageView(this, globals, metaTable, varargs);
         init();
     }
 
     private void init() {
-        final String url = this.mLuaUserdata.initParams.optjstring(1, null);
-        if (url != null) {
-            loadUrl(url, null);
-        }
         this.setScaleType(ScaleType.FIT_XY);//默认FIT_XY
     }
 

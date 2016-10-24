@@ -22,24 +22,21 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVRefreshListView extends SwipeRefreshLayout implements ILVListView {
-    public Globals mGlobals;
-
     //adapter
     private LVListView mListView;
 
     public LVRefreshListView(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
-        this.mListView = new LVListView(mGlobals, metaTable, varargs, new UDRefreshListView(this, globals, metaTable, varargs != null ? varargs.arg1() : null));
-        init();
+        this.mListView = new LVListView(globals, metaTable, varargs, new UDRefreshListView(this, globals, metaTable, varargs));
+        init(globals);
     }
 
-    private void init() {
-        mGlobals.saveContainer(mListView);
+    private void init(Globals globals) {
+        globals.saveContainer(mListView);
         this.addView(mListView, LuaViewUtil.createRelativeLayoutParamsMM());
-        mGlobals.restoreContainer();
+        globals.restoreContainer();
 
-        if (mGlobals.getLuaView() == null || mGlobals.getLuaView().isRefreshContainerEnable() == false) {
+        if (globals.getLuaView() == null || globals.getLuaView().isRefreshContainerEnable() == false) {
             this.setEnabled(false);
         } else {
             ((UDRefreshListView) getUserdata()).initPullRefresh();

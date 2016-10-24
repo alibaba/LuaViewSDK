@@ -59,14 +59,14 @@ Android SDK 在 Android Studio中已经包含，但是只是一个最新版的�
 # 5. Hello World 开发
 主要步骤为：
 
-1. 新建Androd工程
+1. 新建Android工程
 2. 添加LuaViewSDK Module
 3. 编写 Lua 脚本
 4. 在Activity中加载 Lua 脚本
 5. 在模拟器中运行
 
 
-## 5.1 新建Androd工程
+## 5.1 新建Android工程
 
 （1）通过 File > New > New Project 建立新工程 或者
 ![新建android工程1](luaview-createproject-01.png "新建android工程1")

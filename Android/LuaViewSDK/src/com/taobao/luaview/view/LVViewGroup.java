@@ -2,7 +2,6 @@ package com.taobao.luaview.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import com.facebook.csslayout.Spacing;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.foreground.ForegroundRelativeLayout;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -29,9 +29,7 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
-    public Globals mGlobals;
-
+public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGroup {
     private UDViewGroup mLuaUserdata;
 
     /**
@@ -42,13 +40,12 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     private CSSLayoutContext mLayoutContext;
 
     public LVViewGroup(Globals globals, LuaValue metaTable, Varargs varargs) {
-        this(globals.getContext(), globals, metaTable, varargs);
+        this(globals != null ? globals.getContext() : null, globals, metaTable, varargs);
     }
 
     public LVViewGroup(Context context, Globals globals, LuaValue metaTable, Varargs varargs) {
         super(context);
-        this.mGlobals = globals;
-        this.mLuaUserdata = new UDViewGroup(this, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        this.mLuaUserdata = createUserdata(globals, metaTable, varargs);
         //改在UDViewGroup中设置，减少影响面
 //        this.setFocusableInTouchMode(true);//需要设置，否则onKeyUp等事件无法监听，排查是否会带来其他问题(点击的时候需要点击两下)
 //        this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -73,6 +70,17 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
         return mLayoutContext;
     }
 
+    /**
+     * create user data
+     * @param globals
+     * @param metaTable
+     * @param varargs
+     * @return
+     */
+    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDViewGroup(this, globals, metaTable, varargs);
+    }
+
     @Override
     public UDView getUserdata() {
         return mLuaUserdata;
@@ -80,8 +88,10 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-        LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        if(this != view) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
+            LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+        }
     }
 
     public void show() {
@@ -126,12 +136,15 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
             mLuaUserdata.callOnLayout();
         }
     }
+
     /**
      * Flexbox account
      */
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
         // diff old and new
-        if (mChildNodeViews == childNodeViews) { return; }
+        if (mChildNodeViews == childNodeViews) {
+            return;
+        }
 
         // remove all the old views
         clearChildNodeViews();
@@ -144,7 +157,9 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     }
 
     private void clearChildNodeViews() {
-        if (mChildNodeViews == null) { return; }
+        if (mChildNodeViews == null) {
+            return;
+        }
 
         int childNodeViewsCount = mChildNodeViews.size();
         for (int i = 0; i < childNodeViewsCount; i++) {
@@ -157,7 +172,9 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
     }
 
     private void generateNodeViewTree() {
-        if (mChildNodeViews == null) { return; }
+        if (mChildNodeViews == null) {
+            return;
+        }
 
         int childNodeViewsCount = mChildNodeViews.size();
         for (int i = 0; i < childNodeViewsCount; i++) {
@@ -192,7 +209,7 @@ public class LVViewGroup extends RelativeLayout implements ILVViewGroup {
             CSSNode node = nodeView.getCssNode();
 
             if (node.getSizeToFit()) {
-                int margins = (int)(node.getMargin().get(Spacing.LEFT) + node.getMargin().get(Spacing.RIGHT));
+                int margins = (int) (node.getMargin().get(Spacing.LEFT) + node.getMargin().get(Spacing.RIGHT));
                 measureChild(view, widthMeasureSpec - margins, heightMeasureSpec);
 
                 node.setNoDirtyStyleWidth(view.getMeasuredWidth());

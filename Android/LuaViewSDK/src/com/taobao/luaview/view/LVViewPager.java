@@ -4,9 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewPager;
@@ -31,31 +29,27 @@ import java.util.ArrayList;
  * @date 15/8/20
  */
 public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
-    public Globals mGlobals;
-    private LuaValue mInitParams;
-    private UDViewPager mLuaUserdata;
+    public UDViewPager mLuaUserdata;
     private OnPageChangeListener mOnPageChangeListener;
-
-    private double downX = 0f, downY = 0f, touchX = 0f, touchY = 0f;
-    private int touchSlop;
 
     public LVViewPager(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals.getContext());
-        this.mGlobals = globals;
-        this.mInitParams = varargs != null ? varargs.arg1() : null;
-        this.mLuaUserdata = new UDViewPager(this, globals, metaTable, this.mInitParams);
-        init();
+        this.mLuaUserdata = createUserdata(globals, metaTable, varargs);
+        init(globals);
     }
 
-    private void init() {
+    private UDViewPager createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return new UDViewPager(this, globals, metaTable, varargs);
+    }
+
+    private void init(Globals globals) {
         LuaViewUtil.setId(this);//TODO 必须设置，且每个ViewPager要有唯一id android.content.res.Resources$NotFoundException: Unable to find resource ID #0xffffffff
-        this.mGlobals.saveContainer(this);
-        initData();
-        this.mGlobals.restoreContainer();
-        this.touchSlop = ViewConfiguration.get(mGlobals.getContext()).getScaledTouchSlop();
+        globals.saveContainer(this);
+        initData(globals);
+        globals.restoreContainer();
     }
 
-    private void initData() {
+    private void initData(Globals globals) {
         /*if (mGlobals.context instanceof FragmentActivity) {//TODO 这里因为拿不到childFragmentManger，暂时先用普通的Adapter来处理
             FragmentActivity activity = (FragmentActivity) mGlobals.context;
 //            this.setAdapter(new LVFragmentPagerAdapter(activity.getSupportFragmentManager(), mGlobals, mLuaUserdata));
@@ -63,7 +57,7 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
         } else {
             this.setAdapter(new LVPagerAdapter(mGlobals, mLuaUserdata));
         }*/
-        this.setAdapter(new LVLoopPagerAdapter(mGlobals, mLuaUserdata));
+        this.setAdapter(new LVLoopPagerAdapter(globals, mLuaUserdata));
         this.setCurrentItem(0);//TODO 可以定制
         initOnPageChangeListener();//初始化页面监听
     }
@@ -143,7 +137,9 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
 
     @Override
     public void addLVView(View view, Varargs a) {
-        this.addView(view);
+        if(this != view) {
+            this.addView(view);
+        }
     }
 
     @Override

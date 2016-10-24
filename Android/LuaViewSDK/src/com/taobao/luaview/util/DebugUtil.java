@@ -3,6 +3,9 @@ package com.taobao.luaview.util;
 import android.os.Debug;
 import android.text.TextUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Debug performance
  *
@@ -17,12 +20,22 @@ public class DebugUtil {
     private static long ttsTime;
     private static long totalTime;
     private static String sMethod;
+    private static final Map<String, Long> sTime = new HashMap<String, Long>();
 
     /**
      * time start
      */
     public static void ts(String method) {
         tsTime = Debug.threadCpuTimeNanos();
+    }
+
+    /**
+     * 统计独立的时间
+     *
+     * @param method
+     */
+    public static void tsi(String method) {
+        sTime.put(method, Debug.threadCpuTimeNanos());
     }
 
     /**
@@ -34,6 +47,19 @@ public class DebugUtil {
         long nanoTime = Debug.threadCpuTimeNanos() - tsTime;
         LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
         return nanoTime;
+    }
+
+    /**
+     * 统计独立的时间
+     *
+     * @param method
+     */
+    public static void tei(String method) {
+        Long startTime = sTime.get(method);
+        if (startTime != null) {
+            Long nanoTime = Debug.threadCpuTimeNanos() - startTime;
+            LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
+        }
     }
 
     /**

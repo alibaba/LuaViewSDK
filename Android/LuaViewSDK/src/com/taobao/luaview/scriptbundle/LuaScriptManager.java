@@ -32,7 +32,9 @@ public class LuaScriptManager {
     public static final String POSTFIX_PNG = ".png";
     public static final String POSTFIX_LOG = ".log";
     public static final String POSTFIX_LUA = ".lua";
-    public static final String POSTFIX_LV = ".lv";//Lua加密脚本
+    public static final String POSTFIX_B_LUA = ".blua";
+    public static final String POSTFIX_LV = ".lv";//Lua加密脚本(source or bytecode)
+    public static final String POSTFIX_LV_BYTECODE_ZIP = ".bzip";//lua的二进制zip包
     public static final String POSTFIX_SIGN = ".sign";
 
     /**
@@ -169,7 +171,7 @@ public class LuaScriptManager {
      */
     public static boolean existsScriptBundle(final String uri) {
         if (!TextUtils.isEmpty(uri)) {
-            final String scriptFilePath = buildScriptBundleFolderPath(uri);
+            final String scriptFilePath = buildScriptBundleFilePath(uri);//bundle exists
             return FileUtil.exists(scriptFilePath);//这里只需要判断folder存在与否，如果folder存在则只需要用folder来判断即可
         }
         return false;
@@ -185,6 +187,20 @@ public class LuaScriptManager {
      */
     public static boolean isLuaScriptBundle(final String fileName) {
         return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_SCRIPT_BUNDLE);
+    }
+
+    /**
+     * 是否是lua 二进制zip包
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isLuaBytecodeUrl(final String url) {
+        return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_BYTECODE_ZIP);
+    }
+
+    public static boolean isLuaBytecodeFile(final String fileName){
+        return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_B_LUA);
     }
 
     /**

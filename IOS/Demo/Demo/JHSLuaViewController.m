@@ -25,13 +25,13 @@
 @implementation JHSLuaViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [LVButton setDefaultStyle:[JHSLVButton class]];
     [LVImage setDefaultStyle:[JHSLVImage class]];
     [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
     [LVTableView setDefaultStyle:[JHSLVTableView class]];
+    
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     //摇一摇本地代码
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;

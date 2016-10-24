@@ -10,6 +10,7 @@ import com.taobao.luaview.util.TypefaceUtil;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 /**
  * Label 数据封装
@@ -22,7 +23,7 @@ public class UDTextView<T extends TextView> extends UDView<T> {
     private int mMinLines = 1;
     private int mTextAlignment = TextView.TEXT_ALIGNMENT_GRAVITY;
 
-    public UDTextView(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDTextView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
     }
 
@@ -53,10 +54,12 @@ public class UDTextView<T extends TextView> extends UDView<T> {
      *
      * @param color int
      */
-    public UDView setTextColor(int color) {
-        final T view = getView();
-        if (view != null) {
-            view.setTextColor(color);
+    public UDView setTextColor(Integer color) {
+        if (color != null) {
+            final T view = getView();
+            if (view != null) {
+                view.setTextColor(color);
+            }
         }
         return this;
     }

@@ -3,6 +3,8 @@ package com.taobao.luaview.userdata.ui;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
+import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
@@ -10,6 +12,7 @@ import com.taobao.luaview.view.interfaces.ILVViewGroup;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,11 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private LuaValue mOnBack;
     private LuaValue mOnLayout;
 
-    public UDViewGroup(T view, Globals globals, LuaValue metatable, LuaValue initParams) {
+    public UDViewGroup(T view, Globals globals, LuaValue initParams) {
+        this(view, globals, LuaViewManager.createMetatable(UIViewGroupMethodMapper.class), initParams);
+    }
+
+    public UDViewGroup(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
         init();
     }
@@ -33,7 +40,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private void init() {
     }
 
-    public ViewGroup getContainer(){
+    public ViewGroup getContainer() {
         return getView();
     }
 
@@ -59,7 +66,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnShowCallback(){
+    public LuaValue getOnShowCallback() {
         return this.mOnShow;
     }
 
@@ -68,7 +75,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnHideCallback(){
+    public LuaValue getOnHideCallback() {
         return this.mOnHide;
     }
 
@@ -77,7 +84,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnBackCallback(){
+    public LuaValue getOnBackCallback() {
         return this.mOnBack;
     }
 
@@ -86,7 +93,7 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this;
     }
 
-    public LuaValue getOnLayoutCallback(){
+    public LuaValue getOnLayoutCallback() {
         return this.mOnLayout;
     }
 
@@ -161,13 +168,15 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      */
     public UDViewGroup children(LuaFunction callback) {
         if (getView() instanceof ILVViewGroup) {
-            getGlobals().saveContainer((ILVViewGroup) getView());
-            LuaUtil.callFunction(callback, this);
-            getGlobals().restoreContainer();
+            Globals globals = getGlobals();
+            if (globals != null) {
+                globals.saveContainer((ILVViewGroup) getView());
+                LuaUtil.callFunction(callback, this);
+                globals.restoreContainer();
+            }
         }
         return this;
     }
-
 
 
     public UDViewGroup setChildNodeViews(ArrayList<UDView> childNodeViews) {

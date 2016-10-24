@@ -9,23 +9,26 @@ import org.luaj.vm2.Varargs;
 
 /**
  * Loading View 数据封装
+ *
  * @author song
  */
 public class UDLoadingView extends UDViewGroup<LVLoadingView> {
 
     public UDLoadingView(LVLoadingView view, Globals globals, LuaValue metaTable, Varargs varargs) {
-        super(view, globals, metaTable, (varargs != null ? varargs.arg1() : null));
+        super(view, globals, metaTable, varargs);
     }
 
-    public UDLoadingView setColor(int color) {
-        final LVLoadingView view = getView();
-        if (view != null) {
-            view.setColor(color);
+    public UDLoadingView setColor(Integer color) {
+        if (color != null) {
+            final LVLoadingView view = getView();
+            if (view != null) {
+                view.setColor(color);
+            }
         }
         return this;
     }
 
-    public int getColor(int color) {
+    public int getColor() {
         return getView() != null ? getView().getSolidColor() : 0;
     }
 }
