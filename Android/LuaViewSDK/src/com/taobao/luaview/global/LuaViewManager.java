@@ -26,6 +26,7 @@ import com.taobao.luaview.fun.binder.net.HttpBinder;
 import com.taobao.luaview.fun.binder.ui.SpannableStringBinder;
 import com.taobao.luaview.fun.binder.ui.UIAlertBinder;
 import com.taobao.luaview.fun.binder.ui.UIAnimatorBinder;
+import com.taobao.luaview.fun.binder.ui.UIAnimatorSetBinder;
 import com.taobao.luaview.fun.binder.ui.UIButtonBinder;
 import com.taobao.luaview.fun.binder.ui.UIEditTextBinder;
 import com.taobao.luaview.fun.binder.ui.UIHorizontalScrollViewBinder;
@@ -116,6 +117,7 @@ public class LuaViewManager {
 
         //animation
         globals.tryLazyLoad(new UIAnimatorBinder());
+        globals.tryLazyLoad(new UIAnimatorSetBinder());
 
         //net
         globals.tryLazyLoad(new HttpBinder());
