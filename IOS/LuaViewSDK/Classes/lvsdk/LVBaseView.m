@@ -941,6 +941,10 @@ static int borderColor (lv_State *L) {
     return 0;
 }
 
+static int borderDash (lv_State *L) {
+    return 0;
+}
+
 #pragma -mark clipsToBounds
 //static int clipsToBounds(lv_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
@@ -1416,6 +1420,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"borderWidth",         borderWidth },
     
     {"borderColor",         borderColor },
+    {"borderDash",         borderDash },
     
     {"shadowPath",       setShadowPath },
     {"masksToBounds",    setMasksToBounds },
