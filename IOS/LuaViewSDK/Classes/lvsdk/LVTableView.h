@@ -17,6 +17,7 @@
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 @property(nonatomic,assign) NSUInteger lv_align;
+@property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
 -(id) init:(lv_State*) l;
 +(int) classDefine: (lv_State *)L ;

@@ -32,4 +32,9 @@
 
 -(id) lv_getNativeView;
 
+// shapelayer
+@property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
+-(CALayer*) lv_layer;
+-(void) lv_createShapelayer:(NSArray<NSNumber*>*) arr;
+
 @end
