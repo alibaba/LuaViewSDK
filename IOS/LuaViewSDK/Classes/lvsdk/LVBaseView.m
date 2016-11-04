@@ -942,6 +942,36 @@ static int borderColor (lv_State *L) {
 }
 
 static int borderDash (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        int argN = lv_gettop(L);
+        if ( argN>=2 ) {
+            NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:argN];
+            for( int i=2; i<=argN; i++) {
+                if( lv_type(L, i)==LV_TNUMBER ) {
+                    int v = lv_tonumber(L, i);
+                    [arr addObject:[NSNumber numberWithInt:v]];
+                }
+            }
+            //虚线边框
+            if( arr.count>0 ) {
+                [view lv_createShapelayer:arr];
+            } else {
+                view.lv_shapeLayer.lineDashPattern = nil;
+                [view.lv_shapeLayer removeFromSuperlayer];
+                view.lv_shapeLayer = nil;
+            }
+            return 0;
+        } else {
+            NSArray<NSNumber*>* numbers = view.lv_shapeLayer.lineDashPattern;
+            for( int i=0; i<numbers.count; i++) {
+                NSNumber* number = numbers[i];
+                lv_pushnumber(L, number.floatValue );
+            }
+            return numbers.count;
+        }
+    }
     return 0;
 }
 

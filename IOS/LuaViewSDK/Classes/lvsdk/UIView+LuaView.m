@@ -146,5 +146,39 @@
     return self;
 }
 
+-(CAShapeLayer*) lv_shapeLayer{
+    return nil;
+}
+
+-(void) setLv_shapeLayer:(CAShapeLayer *)lv_shapeLayer{
+}
+
+-(CALayer*) lv_layer{
+    if( self.lv_shapeLayer ){
+        return self.lv_shapeLayer;
+    }
+    return self.layer;
+}
+
+-(void) lv_createShapelayer:(NSArray<NSNumber*>*)arr{
+    [self.lv_shapeLayer removeFromSuperlayer];
+    self.lv_shapeLayer = nil;
+    
+    CAShapeLayer *borderLayer = [CAShapeLayer layer];
+    borderLayer.bounds = self.bounds;
+    borderLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    borderLayer.lineWidth = self.layer.borderWidth;
+    
+    borderLayer.fillColor = [UIColor clearColor].CGColor;
+    borderLayer.strokeColor = self.layer.borderColor;
+    borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:borderLayer.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    borderLayer.lineDashPattern = arr;
+    self.lv_shapeLayer = borderLayer;
+    
+    if( self.lv_shapeLayer ) {
+        self.layer.borderColor = [UIColor clearColor].CGColor;
+        [self.layer addSublayer:self.lv_shapeLayer];
+    }
+}
 
 @end
