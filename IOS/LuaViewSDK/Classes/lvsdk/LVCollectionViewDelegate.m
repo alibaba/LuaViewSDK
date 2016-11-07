@@ -31,27 +31,36 @@ static inline NSInteger mapSection(NSInteger section){
 
 @property(nonatomic, strong) NSMutableSet *registeredIds;
 
+
 @end
 
 
 @implementation LVCollectionViewDelegate
 
-- (void)tryRegisterId:(NSString *)id inCollectionView:(UICollectionView *)view {
+- (void)tryRegisterId:(NSString *)identifier inCollectionView:(UICollectionView *)view {
     if (self.registeredIds == nil) {
         self.registeredIds = [NSMutableSet set];
     }
-    if (![self.registeredIds containsObject:id]) {
-        [view registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:id];
-        [self.registeredIds addObject:id];
+    if (![self.registeredIds containsObject:identifier]) {
+        [view registerClass:[LVCollectionViewCell class] forCellWithReuseIdentifier:identifier];
+        [self.registeredIds addObject:identifier];
     }
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row)];
+    BOOL pinned = NO;
+    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:&pinned];
     if( identifier == nil ){
         identifier = DEFAULT_CELL_IDENTIFIER;
+    }
+    //  制定的cell 是否悬浮
+    if( pinned ) {
+        if( [self.lvflowLayout pinnedDicIsNil] ) {
+            [self.lvflowLayout resetPinnedDic];
+        }
+        [self.lvflowLayout addPinnedIndexPath:indexPath];
     }
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
@@ -137,7 +146,7 @@ static inline NSInteger mapSection(NSInteger section){
 {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) ];
+    NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:NULL];
     if( identifier ) {
         CGSize size = [self retSizeCallKey1:"Cell" key2:identifier.UTF8String key3:"Size" mapedSection:mapSection(section) mapedRow:mapRow(row) ];
         if( size.width<0 || isnan(size.width) ) {
@@ -184,7 +193,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 
 - (NSString*) retStringCallKey1:(const char*) key1 key2:(const char*)key2
-                   mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow{
+                   mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow pinned:(BOOL*) pinned{
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
@@ -196,9 +205,13 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:1 retType:LV_TSTRING] ==0 ) {
-            if( lv_type(l, -1)==LV_TSTRING ){
-                NSString* value = lv_paramString(l, -1);
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:2 retType:LV_TSTRING] ==0 ) {
+            if( lv_type(l, -2)==LV_TSTRING ){
+                NSString* value = lv_paramString(l, -2);
+                BOOL yes = lv_toboolean(l, -1);
+                if( pinned ) {
+                    *pinned = yes;
+                }
                 return value;
             }
         }
@@ -263,7 +276,7 @@ static inline NSInteger mapSection(NSInteger section){
     NSInteger row = indexPath.row;
     lv_State* l = self.owner.lv_lview.l;
     if( l ){
-        NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) ];
+        NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:NULL];
         if ( identifier ) {
             // 参数 cell,section,row
             lv_settop(l, 0);

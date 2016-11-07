@@ -18,13 +18,13 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import "LVFlowLayout.h"
 
 
 // lua 对应的数据 key
 
 
 @interface LVCollectionView ()
-@property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic,strong) LVCollectionViewDelegate* collectionViewDelegate;
 @end
 
@@ -32,7 +32,7 @@
 @implementation LVCollectionView
 
 -(id) init:(lv_State*) l {
-    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionViewFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -42,6 +42,8 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.flowLayout = flowLayout;
+        self.collectionViewDelegate.lvCollectionView = self;
+        self.collectionViewDelegate.lvflowLayout = flowLayout;
         
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
         self.scrollsToTop = NO;
@@ -55,6 +57,11 @@
 }
 
 -(void) dealloc{
+}
+
+-(void) reloadData{
+    [super reloadData];
+    [self.flowLayout resetPinnedDic];
 }
 
 -(void) layoutSubviews{
@@ -129,6 +136,7 @@ static int reload (lv_State *L) {
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         [tableView reloadData];
         lv_pushvalue(L, 1);
+        [tableView.flowLayout resetPinnedDic];
         return 1;
     }
     return 0;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 #import "UIScrollView+LuaView.h"
+#import "LVFlowLayout.h"
 
 @interface LVCollectionView : UICollectionView<LVProtocal>
 
@@ -24,5 +25,7 @@
 + (void) setDefaultStyle:(Class) c;
 
 @property(nonatomic,weak) id lvScrollViewDelegate;
+
+@property(nonatomic,strong) LVFlowLayout* flowLayout;
 
 @end

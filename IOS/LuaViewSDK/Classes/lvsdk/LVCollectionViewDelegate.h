@@ -11,6 +11,12 @@
 #define IDENTIFIER "Id"
 #define DEFAULT_CELL_IDENTIFIER  @"LVCollectionCell.default.identifier"
 
+@class LVCollectionView;
+@class LVFlowLayout;
+
 @interface LVCollectionViewDelegate : LVScrollViewDelegate<UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property(nonatomic,weak) LVCollectionView* lvCollectionView;
+@property(nonatomic,weak) LVFlowLayout* lvflowLayout;
 
 @end

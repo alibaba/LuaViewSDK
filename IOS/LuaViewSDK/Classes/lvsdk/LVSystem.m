@@ -326,6 +326,21 @@ static int tableToString(lv_State*L){
         lv_pushnumber(L, LVAnticipateOvershootInterpolator);
         lv_setfield(L, -2, "ANTICIPATE_OVERSHOOT");
     }
+    {   // Pinned
+        lv_settop(L, 0);
+        const struct lvL_reg lib [] = {
+            {NULL, NULL}
+        };
+        lvL_register(L, "Pinned", lib);
+        
+        lv_pushboolean(L, YES);
+        lv_setfield(L, -2, "YES");
+        lv_pushboolean(L, YES);
+        lv_setfield(L, -2, "Yes");
+        lv_pushboolean(L, YES);
+        lv_setfield(L, -2, "yes");
+        lv_pushboolean(L, YES);
+    }
     {
         // 震动
         lv_pushcfunction(L, vibrate);
