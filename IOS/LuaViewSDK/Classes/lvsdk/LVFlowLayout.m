@@ -32,8 +32,8 @@
     }];
     
     UICollectionViewLayoutAttributes* prevAtt = nil;
-    int changeYTimes = 0;
-    for( int i=keys.count-1; i>=0; i-- ) {
+    NSInteger changeYTimes = 0;
+    for( NSInteger i=((NSInteger)keys.count)-1; i>=0; i-- ) {
         NSIndexPath* indexPath = keys[i];
         UICollectionViewLayoutAttributes* a = [self layoutAttributesForItemAtIndexPath:indexPath];
         if( a ) {
