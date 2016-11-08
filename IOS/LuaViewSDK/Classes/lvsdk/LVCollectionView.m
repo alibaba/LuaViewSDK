@@ -32,7 +32,7 @@
 @implementation LVCollectionView
 
 -(id) init:(lv_State*) l {
-    UICollectionViewFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
+    LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
