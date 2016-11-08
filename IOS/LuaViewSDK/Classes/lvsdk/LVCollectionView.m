@@ -41,7 +41,7 @@
         self.dataSource = self.collectionViewDelegate;
         self.backgroundColor = [UIColor clearColor];
         
-        self.flowLayout = flowLayout;
+        self.lvflowLayout = flowLayout;
         self.collectionViewDelegate.lvCollectionView = self;
         self.collectionViewDelegate.lvflowLayout = flowLayout;
         
@@ -147,17 +147,17 @@ static int miniSpacing (lv_State *L) {
         if( lv_gettop(L)>=3 ) {
             CGFloat value1 = lv_tonumber(L, 2);
             CGFloat value2 = lv_tonumber(L, 3);
-            tableView.flowLayout.minimumLineSpacing = value1;
-            tableView.flowLayout.minimumInteritemSpacing = value2;
+            tableView.lvflowLayout.minimumLineSpacing = value1;
+            tableView.lvflowLayout.minimumInteritemSpacing = value2;
             return 0;
         } else if( lv_gettop(L)>=2 ) {
             CGFloat value1 = lv_tonumber(L, 2);
-            tableView.flowLayout.minimumLineSpacing = value1;
-            tableView.flowLayout.minimumInteritemSpacing = value1;
+            tableView.lvflowLayout.minimumLineSpacing = value1;
+            tableView.lvflowLayout.minimumInteritemSpacing = value1;
             return 0;
         } else {
-            CGFloat value1 = tableView.flowLayout.minimumLineSpacing;
-            CGFloat value2 = tableView.flowLayout.minimumInteritemSpacing;
+            CGFloat value1 = tableView.lvflowLayout.minimumLineSpacing;
+            CGFloat value2 = tableView.lvflowLayout.minimumInteritemSpacing;
             lv_pushnumber(L, value1);
             lv_pushnumber(L, value2);
             return 2;
@@ -172,10 +172,10 @@ static int scrollDirection (lv_State *L) {
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             int value1 = lv_tonumber(L, 2);
-            tableView.flowLayout.scrollDirection = value1;
+            tableView.lvflowLayout.scrollDirection = value1;
             return 0;
         } else {
-            CGFloat value1 = tableView.flowLayout.scrollDirection;
+            CGFloat value1 = tableView.lvflowLayout.scrollDirection;
             lv_pushnumber(L, value1);
             return 1;
         }

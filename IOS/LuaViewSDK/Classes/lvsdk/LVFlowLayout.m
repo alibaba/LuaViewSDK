@@ -97,7 +97,7 @@
 
 -(BOOL) isPinned:(NSIndexPath*)indexPath{
     if( indexPath ) {
-        return self.pinnedDic[indexPath];
+        return (self.pinnedDic[indexPath]!=nil);
     }
     return NO;
 }

@@ -26,6 +26,6 @@
 
 @property(nonatomic,weak) id lvScrollViewDelegate;
 
-@property(nonatomic,strong) LVFlowLayout* flowLayout;
+@property(nonatomic,strong) LVFlowLayout* lvflowLayout;
 
 @end
