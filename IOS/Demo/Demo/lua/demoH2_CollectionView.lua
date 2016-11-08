@@ -57,6 +57,10 @@ collectionView = RefreshCollectionView {
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
 			Callback = function(cell, section, row)
+				if( row%2 == 0 )then
+					collectionView.reload();
+					return;
+				end
                 print(section, row);
                 collectionView.stopRefreshing();
 				System.gc();

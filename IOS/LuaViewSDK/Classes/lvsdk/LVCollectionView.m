@@ -61,7 +61,6 @@
 
 -(void) reloadData{
     [super reloadData];
-    [self.flowLayout resetPinnedDic];
 }
 
 -(void) layoutSubviews{
@@ -136,7 +135,6 @@ static int reload (lv_State *L) {
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         [tableView reloadData];
         lv_pushvalue(L, 1);
-        [tableView.flowLayout resetPinnedDic];
         return 1;
     }
     return 0;

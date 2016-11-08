@@ -57,10 +57,9 @@ static inline NSInteger mapSection(NSInteger section){
     }
     //  制定的cell 是否悬浮
     if( pinned ) {
-        if( [self.lvflowLayout pinnedDicIsNil] ) {
-            [self.lvflowLayout resetPinnedDic];
-        }
         [self.lvflowLayout addPinnedIndexPath:indexPath];
+    } else {
+        [self.lvflowLayout delPinnedIndexPath:indexPath];
     }
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
