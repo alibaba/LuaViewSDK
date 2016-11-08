@@ -969,7 +969,7 @@ static int borderDash (lv_State *L) {
                 NSNumber* number = numbers[i];
                 lv_pushnumber(L, number.floatValue );
             }
-            return numbers.count;
+            return (int)numbers.count;
         }
     }
     return 0;
