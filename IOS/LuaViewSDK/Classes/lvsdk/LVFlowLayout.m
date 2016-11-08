@@ -59,7 +59,10 @@
             [superMutAr addObject:a];
             prevAtt = a;
             if( changeYTimes > 1 ) {
+                // 这两行一定要有！！！！原因还有待确认@城西
                 a.alpha = 0;
+                a.zIndex = -1;
+                break;
             } else {
                 a.alpha = 1;
             }
@@ -76,10 +79,19 @@
 -(void) resetPinnedDic{
     self.pinnedDic = [[NSMutableDictionary alloc] initWithCapacity:8];
 }
-
--(void) addPinnedIndexPath:(NSIndexPath*)indexPath{
+    
+-(void) addPinnedIndexPath:(NSIndexPath*)indexPath {
     if( indexPath ) {
+        if( self.pinnedDic==nil ) {
+            [self resetPinnedDic];
+        }
         self.pinnedDic[indexPath] = @(YES);
+    }
+}
+
+-(void) delPinnedIndexPath:(NSIndexPath*)indexPath{
+    if( indexPath ) {
+        [self.pinnedDic removeObjectForKey:indexPath];
     }
 }
 

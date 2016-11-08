@@ -12,6 +12,7 @@
 
 -(void) resetPinnedDic;
 -(void) addPinnedIndexPath:(NSIndexPath*)indexPath;
+-(void) delPinnedIndexPath:(NSIndexPath*)indexPath;
 -(BOOL) isPinned:(NSIndexPath*)indexPath;
 -(BOOL) pinnedDicIsNil;
 
