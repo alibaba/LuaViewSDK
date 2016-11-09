@@ -32,7 +32,7 @@
     }];
     
     UICollectionViewLayoutAttributes* prevAtt = nil;
-    NSInteger changeYTimes = 0;
+    NSInteger pinnedTimes = 0;
     for( NSInteger i=((NSInteger)keys.count)-1; i>=0; i-- ) {
         NSIndexPath* indexPath = keys[i];
         UICollectionViewLayoutAttributes* a = [self layoutAttributesForItemAtIndexPath:indexPath];
@@ -40,25 +40,26 @@
             CGRect frame = a.frame;
             CGFloat minY = self.collectionView.contentOffset.y+self.collectionView.contentInset.top;
             CGFloat maxY = minY;
-            // 浮层不能小于屏幕offset
+            // 浮层：不能小于屏幕offset
             if( frame.origin.y < minY ) {
                 frame.origin.y = minY;
                 a.frame = frame;
                 a.zIndex = 10 + i;
-                changeYTimes ++;
-            }
-            if( prevAtt ) {
-                // 浮层offset不能盖住上一个浮层
-                maxY = prevAtt.frame.origin.y - frame.size.height;
-                if( frame.origin.y>maxY ) {
-                    frame.origin.y = maxY;
-                    a.frame = frame;
-                    a.zIndex = 10 + i;
+                pinnedTimes ++;
+                
+                if( prevAtt ) {
+                    // 但是浮层不能盖住上一个浮层
+                    maxY = prevAtt.frame.origin.y - frame.size.height;
+                    if( frame.origin.y>maxY ) {
+                        frame.origin.y = maxY;
+                        a.frame = frame;
+                        a.zIndex = 10 + i;
+                    }
                 }
             }
             [superMutAr addObject:a];
             prevAtt = a;
-            if( changeYTimes > 1 ) {
+            if( pinnedTimes > 1 ) {
                 // 这两行一定要有！！！！原因还有待确认@城西
                 a.alpha = 0;
                 a.zIndex = -1;
@@ -71,7 +72,7 @@
     return superMutAr;
 }
 
--(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBound
+-(BOOL) shouldInvalidateLayoutForBoundsChange:(CGRect)newBound
 {
     return YES;
 }
