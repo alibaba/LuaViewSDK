@@ -288,7 +288,7 @@ static inline NSInteger mapSection(NSInteger section){
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             
-            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK nargs:3 nrets:0 retType:LV_TNONE]==0 ) {
+            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK key4:STR_ON_CLICK nargs:3 nrets:0 retType:LV_TNONE]==0 ) {
             }
         }
     }

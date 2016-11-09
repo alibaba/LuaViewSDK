@@ -42,8 +42,14 @@
 +(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
     return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret retType:-8];
 }
-
+    
 +(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType{
+    return [self call:l key1:key1 key2:key2 key3:key3 key4:NULL nargs:nargs nrets:nret retType:retType];
+}
+    
++(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 key4:(const char*)key4
       nargs:(int)nargs nrets:(int)nret
     retType:(int) retType{
     if( l ){
@@ -60,6 +66,11 @@
                 if( lv_type(l, -1)==LV_TTABLE && key3){//table
                     lv_getfield(l, -1, key3);
                     lv_remove(l, -2);
+                    
+                    if( lv_type(l, -1)==LV_TTABLE && key4){//table
+                        lv_getfield(l, -1, key4);
+                        lv_remove(l, -2);
+                    }
                 }
             }
         }
