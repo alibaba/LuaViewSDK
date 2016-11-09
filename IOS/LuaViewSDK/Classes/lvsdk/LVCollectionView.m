@@ -63,6 +63,12 @@
     [super reloadData];
 }
 
+-(void) reloadDataASync{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001];
+    });
+}
+
 -(void) layoutSubviews{
     [super layoutSubviews];
     
@@ -133,7 +139,8 @@ static int reload (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
-        [tableView reloadData];
+        //reload接口异步拉起，确保layout中也能调用reload
+        [tableView reloadDataASync];
         lv_pushvalue(L, 1);
         return 1;
     }

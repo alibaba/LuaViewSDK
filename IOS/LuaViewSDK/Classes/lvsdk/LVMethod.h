@@ -11,13 +11,12 @@
 
 @interface LVMethod : NSObject
 
-@property (nonatomic,weak) id nativeObject;
 @property (nonatomic,assign) SEL sel;
-@property (nonatomic,copy) NSString* selectName; 
+@property (nonatomic,copy)   NSString* selName;
 @property (nonatomic,assign) NSInteger nargs;
 
--(id) initWithNativeObject:(id) nativeObject sel:(SEL)sel;
+-(id) initWithSel:(SEL)sel;
 
--(int) performMethodWithArgs:(lv_State*)L;
+-(int) callObj:(id) obj args:(lv_State*)L;
 
 @end

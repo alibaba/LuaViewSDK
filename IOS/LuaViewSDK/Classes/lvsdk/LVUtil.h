@@ -26,10 +26,14 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  *  @return stackNumber
  */
 +(NSString*) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*)key1 key2:(const char*)key2 nargs:(int)nargs;
-
+    
 +(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3
-      nargs:(int)nargs nrets:(int)nret
-    retType:(int) retType;
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType;
+    
++(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3 key4:(const char*)key4
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType;
 
 /*
  * download file

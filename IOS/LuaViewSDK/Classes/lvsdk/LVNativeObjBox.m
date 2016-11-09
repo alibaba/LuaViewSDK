@@ -13,10 +13,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import <objc/runtime.h>
+#import "LVClassInfo.h"
+
+static NSArray<NSString*>* ARG_ARR = nil;
 
 @interface LVNativeObjBox ()
-@property (nonatomic,strong) NSMutableDictionary* methods;
-@property (nonatomic,strong) NSMutableDictionary* apiHashtable;
+@property (nonatomic,strong) LVClassInfo* classInfo;
 @end
 
 
@@ -27,7 +29,9 @@
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
         self.realObject = nativeObject;
-        self.methods = [[NSMutableDictionary alloc] init];
+        
+        NSString* className = NSStringFromClass([nativeObject class]);
+        self.classInfo = [LVClassInfo classInfo:className];
     }
     return self;
 }
@@ -76,56 +80,56 @@
 }
 
 -(void) addMethod:(LVMethod*) method {
-    [self.methods setObject:method forKey:method.selectName];
+    [self.classInfo addMethod:method key:method.selName];
 }
 
 -(int) performMethod:(NSString*) methodName L:(lv_State*)L{
     if( methodName ) {
-        LVMethod* method = self.methods[methodName];
+        LVMethod* method = [self.classInfo getMethod:methodName];
         if ( method ) {
-            return [method performMethodWithArgs:L];
+            return [method callObj:self.realObject args:L ];
         } else if( self.openAllMethod ) {
             //动态创建API
             SEL sel = NSSelectorFromString(methodName);
-            LVMethod* method = [[LVMethod alloc] initWithNativeObject:self.realObject sel:sel];
-            self.methods[methodName] = method;
-            return [method performMethodWithArgs:L];
+            LVMethod* method = [[LVMethod alloc] initWithSel:sel];
+            [self.classInfo addMethod:method key:methodName];
+            return [method callObj:self.realObject args:L];
         } else {
             LVError(@"not found method: %@", methodName);
         }
     }
     return 0;
 }
-static void changeFuncName(NSMutableString* funcName){
+
+static int funcNameFromLuaToOC(NSMutableString* funcName){
     if( funcName.length>0 && [funcName characterAtIndex:0]=='#' ) {
         NSRange range = NSMakeRange(0, 1);
         [funcName deleteCharactersInRange:range];
+        return -1;
     } else {
-        [funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,funcName.length)];
+        return (int)[funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSLiteralSearch range:NSMakeRange(0,funcName.length)];
     }
 }
+
 // 检查API是否纯在
 - (BOOL) isApiExist:(NSString*) methodName{
-    if( self.apiHashtable == nil ){
-        self.apiHashtable = [[NSMutableDictionary alloc] init];
-    }
-    NSNumber* ret = self.apiHashtable[methodName];
+    BOOL ret = [self.classInfo existMethod:methodName];
     if( ret ) {
-        return ret.boolValue;
+        return YES;
     } else {
         NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
-        changeFuncName(ocMethodName);
+        funcNameFromLuaToOC(ocMethodName);
         id nativeObj = self.realObject;
         for ( int i=0; i<5; i++ ) {
             SEL sel = NSSelectorFromString(ocMethodName);
             if( [nativeObj respondsToSelector:sel] ){
-                self.apiHashtable[methodName] = @(YES);
+                [self.classInfo setMethod:methodName exist:YES];
                 return YES;
             }
             [ocMethodName appendString:@":"];
         }
     }
-    self.apiHashtable[methodName] = @(NO);
+    //self.apiHashtable[methodName] = @(NO);
     return NO;
 }
 
@@ -171,7 +175,7 @@ static int __gc (lv_State *L) {
         }
         
         if ( sel ) {
-            LVMethod* method = [[LVMethod alloc] initWithNativeObject:nativeObject sel:sel];
+            LVMethod* method = [[LVMethod alloc] initWithSel:sel];
             [nativeObjBox addMethod:method];
         } else {
             nativeObjBox.openAllMethod = YES;
@@ -211,15 +215,13 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static void ifNotEnoughArgmentTagAppendIt(NSMutableString* funcName, int luaArgsNum){
-    int num = 0;
-    for( int i=0; i<funcName.length; i++ ){
-        unichar c = [funcName characterAtIndex:i];
-        if( c==':'){
-            num ++;
-        }
+static void ifNotEnoughArgsTagAppendMore(NSMutableString* funcName, int num, int luaArgsNum){
+    int addNum = luaArgsNum-1-num;
+    if( 0<=addNum && addNum<ARG_ARR.count ) {
+        [funcName appendString:ARG_ARR[addNum]];
+        return;
     }
-    for( int i=num;i<luaArgsNum-1; i++ ){
+    for( int i=0;i<addNum; i++ ){
         [funcName appendString:@":"];
     }
 }
@@ -231,10 +233,10 @@ static int callNativeObjectFunction (lv_State *L) {
         NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
         int luaArgsNum = lv_gettop(L);
         
-        changeFuncName(funcName);
-        
-        ifNotEnoughArgmentTagAppendIt(funcName, luaArgsNum);
-        
+        int _num = funcNameFromLuaToOC(funcName);
+        if( _num>=0 ) {
+            ifNotEnoughArgsTagAppendMore(funcName, _num, luaArgsNum);
+        }
         return [nativeObjBox performMethod:funcName L:L];
     }
     LVError(@"callNativeObjectFunction");
@@ -282,6 +284,18 @@ static int __eq (lv_State *L) {
     lv_createClassMetaTable(L, META_TABLE_NativeObject);
     lvL_openlib(L, NULL, memberFunctions, 0);
     
+    //
+    if( ARG_ARR==nil ) {
+        ARG_ARR = @[
+                    @"",
+                    @":",
+                    @"::",
+                    @":::",
+                    @"::::",
+                    @":::::",
+                    @"::::::",
+                    @":::::::",];
+    }
     return 0;
 }
 

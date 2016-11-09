@@ -301,6 +301,9 @@
 		91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91232AAA1DAB67FC00536E0C /* LVWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
 		91232AAE1DAB682100536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
+		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
+		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
+		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
@@ -561,6 +564,8 @@
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
 		91232AAA1DAB67FC00536E0C /* LVWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVWebView.h; sourceTree = "<group>"; };
 		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
+		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
+		914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVClassInfo.m; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -1040,6 +1045,8 @@
 				84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */,
 				84CF56781AEA15A500A49B36 /* LVMethod.h */,
 				84CF56791AEA15A500A49B36 /* LVMethod.m */,
+				914D5F391DD3275D00CEA3FF /* LVClassInfo.h */,
+				914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */,
 				84CF56731AE9184000A49B36 /* LVNativeObjBox.h */,
 				84CF56741AE9184000A49B36 /* LVNativeObjBox.m */,
 				84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */,
@@ -1199,6 +1206,7 @@
 				84C1D8791C16C4500058E974 /* lVlex.h in Headers */,
 				84C1D87A1C16C4510058E974 /* lVlib.h in Headers */,
 				84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */,
+				914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */,
 				84C1D87C1C16C4510058E974 /* lVmem.h in Headers */,
 				84C1D87D1C16C4510058E974 /* lVobject.h in Headers */,
 				91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */,
@@ -1431,6 +1439,7 @@
 				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
 				3CFF77C21C74740800847C05 /* LVTableView.m in Sources */,
 				3CFF77C31C74740800847C05 /* LVTableViewCell.m in Sources */,
+				914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */,
 				3CFF77C41C74740800847C05 /* LVTableViewDelegate.m in Sources */,
 				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
 				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
@@ -1566,6 +1575,7 @@
 				84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */,
 				84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */,
 				84C1D7E41C16C3FA0058E974 /* LVTableView.m in Sources */,
+				914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */,
 				84C1D7E51C16C3FA0058E974 /* LVTableViewCell.m in Sources */,
 				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E61C16C3FA0058E974 /* LVTableViewDelegate.m in Sources */,

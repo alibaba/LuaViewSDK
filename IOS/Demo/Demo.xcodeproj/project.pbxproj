@@ -19,8 +19,6 @@
 		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
 		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
 		3CC2F8571C706BE700D1E0B7 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */; };
-		3CC2F8961C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */; };
-		3CC2F8971C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */; };
 		3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */; };
 		3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */; };
 		3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */; };
@@ -153,8 +151,6 @@
 		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
 		3CC2F84F1C706BE700D1E0B7 /* JHSLVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVTableView.h; sourceTree = "<group>"; };
 		3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVTableView.m; sourceTree = "<group>"; };
-		3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@2x.png"; sourceTree = "<group>"; };
-		3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@3x.png"; sourceTree = "<group>"; };
 		3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
 		3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_Image.lua; sourceTree = "<group>"; };
 		3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
@@ -317,17 +313,12 @@
 			isa = PBXGroup;
 			children = (
 				3CC2F9181C70BB8E00D1E0B7 /* candle */,
-				3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */,
-				3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */,
-				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
-				840BCEED1CB7A0B700D816AD /* tags2.9.png */,
-				840BCEEB1CB79E1A00D816AD /* tags.9.png */,
 				BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */,
-				84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */,
 				3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */,
 				3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */,
-				3CC2F8631C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua */,
+				84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */,
 				3CC2F8641C706BFA00D1E0B7 /* demoC_Label.lua */,
+				3CC2F8631C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua */,
 				840412861CCE351100B34D28 /* demoD_requestFromHttp.lua */,
 				3CC2F8651C706BFA00D1E0B7 /* demoE_Button.lua */,
 				3CC2F8661C706BFA00D1E0B7 /* demoG_RefreshTableView.lua */,
@@ -342,33 +333,36 @@
 				3CC2F86E1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua */,
 				3CC2F86F1C706BFA00D1E0B7 /* demoO_table.lua */,
 				3CC2F8701C706BFA00D1E0B7 /* demoO_Timer.lua */,
+				848645CC1CAB785D004F4FD8 /* demoP_Http.lua */,
+				8486B6001C96897500A82BA1 /* demoP_Json.lua */,
 				3CC2F8711C706BFA00D1E0B7 /* demoP_string.lua */,
 				3CC2F8721C706BFA00D1E0B7 /* demoP_System.lua */,
-				8486B6001C96897500A82BA1 /* demoP_Json.lua */,
-				848645CC1CAB785D004F4FD8 /* demoP_Http.lua */,
 				3CC2F8731C706BFA00D1E0B7 /* demoV1_CustomError.lua */,
 				3CC2F8741C706BFA00D1E0B7 /* demoV1_Customloading.lua */,
 				3CC2F8751C706BFA00D1E0B7 /* demoW1_shake.lua */,
 				3CC2F8761C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua */,
 				3CC2F8771C706BFA00D1E0B7 /* demoY2_flxNode.lua */,
 				3CC2F8781C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua */,
-				3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */,
-				3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */,
 				3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */,
 				3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */,
 				3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */,
+				3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */,
+				3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */,
 				3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */,
+				3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */,
+				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
+				84F9A0451C92CA7300481334 /* button0.png */,
+				84F9A0461C92CA7300481334 /* button1.png */,
+				3CC2F88C1C706BFA00D1E0B7 /* snow.png */,
+				840BCEEB1CB79E1A00D816AD /* tags.9.png */,
+				840BCEED1CB7A0B700D816AD /* tags2.9.png */,
 				3CC2F8841C706BFA00D1E0B7 /* img1.tiff */,
+				3CC2F8881C706BFA00D1E0B7 /* img4.tiff */,
+				3CC2F8891C706BFA00D1E0B7 /* img7.tiff */,
 				3CC2F8851C706BFA00D1E0B7 /* img10.tiff */,
 				3CC2F8861C706BFA00D1E0B7 /* img13.tiff */,
 				3CC2F8871C706BFA00D1E0B7 /* img16.tiff */,
-				3CC2F8881C706BFA00D1E0B7 /* img4.tiff */,
-				3CC2F8891C706BFA00D1E0B7 /* img7.tiff */,
 				3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */,
-				3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */,
-				3CC2F88C1C706BFA00D1E0B7 /* snow.png */,
-				84F9A0451C92CA7300481334 /* button0.png */,
-				84F9A0461C92CA7300481334 /* button1.png */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -592,7 +586,6 @@
 				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
 				840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */,
 				3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */,
-				3CC2F8971C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png in Resources */,
 				3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */,
 				84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */,
 				3CC2F8B21C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua in Resources */,
@@ -605,7 +598,6 @@
 				3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
 				3CC2F8C61C706BFA00D1E0B7 /* JHSIconfont.ttf in Resources */,
-				3CC2F8961C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png in Resources */,
 				3CC2F89F1C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua in Resources */,
 				3CC2F8A41C706BFA00D1E0B7 /* demoH2_CollectionView.lua in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
@@ -748,6 +740,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -757,6 +750,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-Wno-unused-command-line-argument",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -785,6 +783,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -793,6 +792,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-Wno-unused-command-line-argument",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
