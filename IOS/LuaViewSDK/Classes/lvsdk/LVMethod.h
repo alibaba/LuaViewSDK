@@ -16,8 +16,8 @@
 @property (nonatomic,copy) NSString* selectName; 
 @property (nonatomic,assign) NSInteger nargs;
 
--(id) initWithNativeObject:(id) nativeObject sel:(SEL)sel;
+-(id) initWithSel:(SEL)sel;
 
--(int) performMethodWithArgs:(lv_State*)L;
+-(int) performMethodWithArgs:(lv_State*)L nativeObject:(id) nativeObject;
 
 @end

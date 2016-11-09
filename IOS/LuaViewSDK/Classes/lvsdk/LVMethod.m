@@ -14,10 +14,9 @@
 
 @implementation LVMethod
 
--(id) initWithNativeObject:(id) nativeObject sel:(SEL)sel{
+-(id) initWithSel:(SEL)sel{
     self = [super init];
     if( self ){
-        self.nativeObject = nativeObject;
         self.sel = sel;
         self.selectName = NSStringFromSelector(sel);
         self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)]; 
@@ -35,11 +34,11 @@
     return num;
 }
 
--(int) performMethodWithArgs:(lv_State*)L{
-    NSMethodSignature * sig = [self.nativeObject methodSignatureForSelector:self.sel];
+-(int) performMethodWithArgs:(lv_State*)L nativeObject:(id) nativeObject{
+    NSMethodSignature * sig = [nativeObject methodSignatureForSelector:self.sel];
     if ( sig ) {
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:sig];
-        [invocation setTarget: self.nativeObject]; // 传递 参数0: self
+        [invocation setTarget: nativeObject]; // 传递 参数0: self
         [invocation setSelector: self.sel];// 传递 参数1: SEL
         
         NSInteger numberOfArguments = sig.numberOfArguments;

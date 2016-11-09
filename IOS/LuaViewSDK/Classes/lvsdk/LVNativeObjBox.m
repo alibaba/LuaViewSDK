@@ -85,13 +85,13 @@ static NSArray<NSString*>* ARG_ARR = nil;
     if( methodName ) {
         LVMethod* method = self.methods[methodName];
         if ( method ) {
-            return [method performMethodWithArgs:L];
+            return [method performMethodWithArgs:L nativeObject:self.realObject];
         } else if( self.openAllMethod ) {
             //动态创建API
             SEL sel = NSSelectorFromString(methodName);
-            LVMethod* method = [[LVMethod alloc] initWithNativeObject:self.realObject sel:sel];
+            LVMethod* method = [[LVMethod alloc] initWithSel:sel];
             self.methods[methodName] = method;
-            return [method performMethodWithArgs:L];
+            return [method performMethodWithArgs:L nativeObject:self.realObject];
         } else {
             LVError(@"not found method: %@", methodName);
         }
@@ -176,7 +176,7 @@ static int __gc (lv_State *L) {
         }
         
         if ( sel ) {
-            LVMethod* method = [[LVMethod alloc] initWithNativeObject:nativeObject sel:sel];
+            LVMethod* method = [[LVMethod alloc] initWithSel:sel];
             [nativeObjBox addMethod:method];
         } else {
             nativeObjBox.openAllMethod = YES;
