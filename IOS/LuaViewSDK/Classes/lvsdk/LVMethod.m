@@ -12,6 +12,11 @@
 #import "LVTypeConvert.h"
 #import "lVapi.h"
 
+
+@interface LVMethod ()
+@property(nonatomic,strong) NSMethodSignature * methodSig;
+@end
+
 @implementation LVMethod
 
 -(id) initWithSel:(SEL)sel{
@@ -19,7 +24,7 @@
     if( self ){
         self.sel = sel;
         self.selName = NSStringFromSelector(sel);
-        self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)]; 
+        self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)];
     }
     return self;
 }
@@ -35,7 +40,11 @@
 }
 
 -(int) callObj:(id) obj args:(lv_State*)L{
-    NSMethodSignature * sig = [obj methodSignatureForSelector:self.sel];
+    NSMethodSignature * sig = self.methodSig;
+    if( sig==nil ){
+        sig = [obj methodSignatureForSelector:self.sel];
+        self.methodSig = sig;
+    }
     if ( sig ) {
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:sig];
         [invocation setTarget: obj]; // 传递 参数0: self
