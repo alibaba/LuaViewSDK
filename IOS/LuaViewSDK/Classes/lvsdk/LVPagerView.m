@@ -369,11 +369,17 @@ static int lvNewPageView (lv_State *L) {
     [self checkCellVisible];
 }
 
+-(void) reloadDataASync{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001];
+    });
+}
+
 static int reload (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
-        [pageView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [pageView reloadDataASync];
         lv_pushvalue(L, 1);
         return 1;
     }
