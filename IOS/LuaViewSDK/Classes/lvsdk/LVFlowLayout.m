@@ -24,7 +24,7 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSMutableArray *superMutAr = [[super layoutAttributesForElementsInRect:rect] mutableCopy];
+    NSMutableArray *superLayoutAttArray = [[super layoutAttributesForElementsInRect:rect] mutableCopy];
     NSArray* keys = self.pinnedDic.allKeys;
     // 排序
     keys = [keys sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath*  obj1, NSIndexPath* obj2) {
@@ -57,7 +57,7 @@
                     }
                 }
             }
-            [superMutAr addObject:a];
+            [superLayoutAttArray addObject:a];
             prevAtt = a;
             if( pinnedTimes > 1 ) {
                 // 这两行一定要有！！！！原因还有待确认@城西
@@ -69,12 +69,12 @@
             }
         }
     }
-    return superMutAr;
+    return superLayoutAttArray;
 }
 
 -(BOOL) shouldInvalidateLayoutForBoundsChange:(CGRect)newBound
 {
-    return YES;
+    return self.pinnedDic!=nil;
 }
 
 -(void) resetPinnedDic{
