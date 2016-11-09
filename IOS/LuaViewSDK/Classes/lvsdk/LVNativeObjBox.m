@@ -13,12 +13,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import <objc/runtime.h>
+#import "LVClassInfo.h"
 
 static NSArray<NSString*>* ARG_ARR = nil;
 
 @interface LVNativeObjBox ()
-@property (nonatomic,strong) NSMutableDictionary* methods;
-@property (nonatomic,strong) NSMutableDictionary* apiHashtable;
+@property (nonatomic,strong) LVClassInfo* classInfo;
 @end
 
 
@@ -29,7 +29,9 @@ static NSArray<NSString*>* ARG_ARR = nil;
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
         self.realObject = nativeObject;
-        self.methods = [[NSMutableDictionary alloc] init];
+        
+        NSString* className = NSStringFromClass([nativeObject class]);
+        self.classInfo = [LVClassInfo classInfo:className];
     }
     return self;
 }
@@ -78,19 +80,19 @@ static NSArray<NSString*>* ARG_ARR = nil;
 }
 
 -(void) addMethod:(LVMethod*) method {
-    [self.methods setObject:method forKey:method.selectName];
+    [self.classInfo addMethod:method key:method.selectName];
 }
 
 -(int) performMethod:(NSString*) methodName L:(lv_State*)L{
     if( methodName ) {
-        LVMethod* method = self.methods[methodName];
+        LVMethod* method = [self.classInfo getMethod:methodName];
         if ( method ) {
             return [method performMethodWithArgs:L nativeObject:self.realObject];
         } else if( self.openAllMethod ) {
             //动态创建API
             SEL sel = NSSelectorFromString(methodName);
             LVMethod* method = [[LVMethod alloc] initWithSel:sel];
-            self.methods[methodName] = method;
+            [self.classInfo addMethod:method key:methodName];
             return [method performMethodWithArgs:L nativeObject:self.realObject];
         } else {
             LVError(@"not found method: %@", methodName);
@@ -111,12 +113,9 @@ static int funcNameFromLuaToOC(NSMutableString* funcName){
 
 // 检查API是否纯在
 - (BOOL) isApiExist:(NSString*) methodName{
-    if( self.apiHashtable == nil ){
-        self.apiHashtable = [[NSMutableDictionary alloc] init];
-    }
-    NSNumber* ret = self.apiHashtable[methodName];
+    BOOL ret = [self.classInfo existMethod:methodName];
     if( ret ) {
-        return ret.boolValue;
+        return YES;
     } else {
         NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
         funcNameFromLuaToOC(ocMethodName);
@@ -124,13 +123,13 @@ static int funcNameFromLuaToOC(NSMutableString* funcName){
         for ( int i=0; i<5; i++ ) {
             SEL sel = NSSelectorFromString(ocMethodName);
             if( [nativeObj respondsToSelector:sel] ){
-                self.apiHashtable[methodName] = @(YES);
+                [self.classInfo setMethod:methodName exist:YES];
                 return YES;
             }
             [ocMethodName appendString:@":"];
         }
     }
-    self.apiHashtable[methodName] = @(NO);
+    //self.apiHashtable[methodName] = @(NO);
     return NO;
 }
 
