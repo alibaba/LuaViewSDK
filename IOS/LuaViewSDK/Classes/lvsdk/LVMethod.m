@@ -34,11 +34,11 @@
     return num;
 }
 
--(int) performMethodWithArgs:(lv_State*)L nativeObject:(id) nativeObject{
-    NSMethodSignature * sig = [nativeObject methodSignatureForSelector:self.sel];
+-(int) callObj:(id) obj args:(lv_State*)L{
+    NSMethodSignature * sig = [obj methodSignatureForSelector:self.sel];
     if ( sig ) {
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:sig];
-        [invocation setTarget: nativeObject]; // 传递 参数0: self
+        [invocation setTarget: obj]; // 传递 参数0: self
         [invocation setSelector: self.sel];// 传递 参数1: SEL
         
         NSInteger numberOfArguments = sig.numberOfArguments;
@@ -51,7 +51,7 @@
         
         return [LVTypeConvert pushInvocationReturnValue:invocation toLua:L];
     }
-    LVError(@"Not found Method: %@.%@",[nativeObject class], self.selName );
+    LVError(@"Not found Method: %@.%@",[obj class], self.selName );
     return 0;
 }
 

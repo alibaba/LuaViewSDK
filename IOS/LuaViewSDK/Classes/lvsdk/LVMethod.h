@@ -17,6 +17,6 @@
 
 -(id) initWithSel:(SEL)sel;
 
--(int) performMethodWithArgs:(lv_State*)L nativeObject:(id) nativeObject;
+-(int) callObj:(id) obj args:(lv_State*)L;
 
 @end

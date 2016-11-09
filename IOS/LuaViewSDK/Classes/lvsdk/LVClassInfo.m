@@ -11,7 +11,7 @@
 
 @interface LVClassInfo ()
 @property (nonatomic,strong) NSMutableDictionary* methods;
-@property (nonatomic,strong) NSMutableDictionary* apiHashtable;
+@property (nonatomic,strong) NSMutableDictionary* apiHash;
 @end
 
 static NSMutableDictionary* g_allClassInfo = nil;
@@ -22,7 +22,7 @@ static NSMutableDictionary* g_allClassInfo = nil;
     self = [super init];
     if( self ) {
         self.methods = [[NSMutableDictionary alloc] init];
-        self.apiHashtable = [[NSMutableDictionary alloc] init];
+        self.apiHash = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -53,12 +53,12 @@ static NSMutableDictionary* g_allClassInfo = nil;
 }
 
 -(BOOL) existMethod:(NSString*) methodName{
-    return self.apiHashtable[methodName] != nil;
+    return self.apiHash[methodName] != nil;
 }
 
 -(void) setMethod:(NSString*) methodName exist:(BOOL) exist{
     if( exist ) {
-        self.apiHashtable[methodName] = @(exist);
+        self.apiHash[methodName] = @(exist);
     }
 }
 @end
