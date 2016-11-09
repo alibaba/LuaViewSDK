@@ -14,6 +14,8 @@
 #import "lVgc.h"
 #import <objc/runtime.h>
 
+static NSArray<NSString*>* ARG_ARR = nil;
+
 @interface LVNativeObjBox ()
 @property (nonatomic,strong) NSMutableDictionary* methods;
 @property (nonatomic,strong) NSMutableDictionary* apiHashtable;
@@ -96,14 +98,17 @@
     }
     return 0;
 }
-static void changeFuncName(NSMutableString* funcName){
+
+static int funcNameFromLuaToOC(NSMutableString* funcName){
     if( funcName.length>0 && [funcName characterAtIndex:0]=='#' ) {
         NSRange range = NSMakeRange(0, 1);
         [funcName deleteCharactersInRange:range];
+        return -1;
     } else {
-        [funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(0,funcName.length)];
+        return (int)[funcName replaceOccurrencesOfString:@"_" withString:@":" options:NSLiteralSearch range:NSMakeRange(0,funcName.length)];
     }
 }
+
 // 检查API是否纯在
 - (BOOL) isApiExist:(NSString*) methodName{
     if( self.apiHashtable == nil ){
@@ -114,7 +119,7 @@ static void changeFuncName(NSMutableString* funcName){
         return ret.boolValue;
     } else {
         NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
-        changeFuncName(ocMethodName);
+        funcNameFromLuaToOC(ocMethodName);
         id nativeObj = self.realObject;
         for ( int i=0; i<5; i++ ) {
             SEL sel = NSSelectorFromString(ocMethodName);
@@ -211,15 +216,13 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static void ifNotEnoughArgmentTagAppendIt(NSMutableString* funcName, int luaArgsNum){
-    int num = 0;
-    for( int i=0; i<funcName.length; i++ ){
-        unichar c = [funcName characterAtIndex:i];
-        if( c==':'){
-            num ++;
-        }
+static void ifNotEnoughArgsTagAppendMore(NSMutableString* funcName, int num, int luaArgsNum){
+    int addNum = luaArgsNum-1-num;
+    if( 0<=addNum && addNum<ARG_ARR.count ) {
+        [funcName appendString:ARG_ARR[addNum]];
+        return;
     }
-    for( int i=num;i<luaArgsNum-1; i++ ){
+    for( int i=0;i<addNum; i++ ){
         [funcName appendString:@":"];
     }
 }
@@ -231,10 +234,10 @@ static int callNativeObjectFunction (lv_State *L) {
         NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
         int luaArgsNum = lv_gettop(L);
         
-        changeFuncName(funcName);
-        
-        ifNotEnoughArgmentTagAppendIt(funcName, luaArgsNum);
-        
+        int _num = funcNameFromLuaToOC(funcName);
+        if( _num>=0 ) {
+            ifNotEnoughArgsTagAppendMore(funcName, _num, luaArgsNum);
+        }
         return [nativeObjBox performMethod:funcName L:L];
     }
     LVError(@"callNativeObjectFunction");
@@ -282,6 +285,18 @@ static int __eq (lv_State *L) {
     lv_createClassMetaTable(L, META_TABLE_NativeObject);
     lvL_openlib(L, NULL, memberFunctions, 0);
     
+    //
+    if( ARG_ARR==nil ) {
+        ARG_ARR = @[
+                    @"",
+                    @":",
+                    @"::",
+                    @":::",
+                    @"::::",
+                    @":::::",
+                    @"::::::",
+                    @":::::::",];
+    }
     return 0;
 }
 
