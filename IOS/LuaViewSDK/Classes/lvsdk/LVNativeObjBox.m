@@ -80,7 +80,7 @@ static NSArray<NSString*>* ARG_ARR = nil;
 }
 
 -(void) addMethod:(LVMethod*) method {
-    [self.classInfo addMethod:method key:method.selectName];
+    [self.classInfo addMethod:method key:method.selName];
 }
 
 -(int) performMethod:(NSString*) methodName L:(lv_State*)L{

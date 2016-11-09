@@ -18,7 +18,7 @@
     self = [super init];
     if( self ){
         self.sel = sel;
-        self.selectName = NSStringFromSelector(sel);
+        self.selName = NSStringFromSelector(sel);
         self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)]; 
     }
     return self;
@@ -51,7 +51,7 @@
         
         return [LVTypeConvert pushInvocationReturnValue:invocation toLua:L];
     }
-    LVError(@"Not found Method: %@.%@",[self.nativeObject class], self.selectName );
+    LVError(@"Not found Method: %@.%@",[nativeObject class], self.selName );
     return 0;
 }
 
