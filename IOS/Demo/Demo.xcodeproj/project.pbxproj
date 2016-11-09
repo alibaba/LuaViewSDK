@@ -19,8 +19,6 @@
 		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
 		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
 		3CC2F8571C706BE700D1E0B7 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */; };
-		3CC2F8961C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */; };
-		3CC2F8971C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */; };
 		3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */; };
 		3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */; };
 		3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */; };
@@ -153,8 +151,6 @@
 		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
 		3CC2F84F1C706BE700D1E0B7 /* JHSLVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVTableView.h; sourceTree = "<group>"; };
 		3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVTableView.m; sourceTree = "<group>"; };
-		3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@2x.png"; sourceTree = "<group>"; };
-		3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_category_right_shadow@3x.png"; sourceTree = "<group>"; };
 		3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
 		3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_Image.lua; sourceTree = "<group>"; };
 		3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
@@ -317,8 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				3CC2F9181C70BB8E00D1E0B7 /* candle */,
-				3CC2F8591C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png */,
-				3CC2F85A1C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png */,
 				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
 				840BCEED1CB7A0B700D816AD /* tags2.9.png */,
 				840BCEEB1CB79E1A00D816AD /* tags.9.png */,
@@ -592,7 +586,6 @@
 				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
 				840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */,
 				3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */,
-				3CC2F8971C706BFA00D1E0B7 /* bg_home_category_right_shadow@3x.png in Resources */,
 				3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */,
 				84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */,
 				3CC2F8B21C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua in Resources */,
@@ -605,7 +598,6 @@
 				3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
 				3CC2F8C61C706BFA00D1E0B7 /* JHSIconfont.ttf in Resources */,
-				3CC2F8961C706BFA00D1E0B7 /* bg_home_category_right_shadow@2x.png in Resources */,
 				3CC2F89F1C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua in Resources */,
 				3CC2F8A41C706BFA00D1E0B7 /* demoH2_CollectionView.lua in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
