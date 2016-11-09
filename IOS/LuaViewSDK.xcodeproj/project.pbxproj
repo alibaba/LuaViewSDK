@@ -1045,14 +1045,14 @@
 				84CF566D1AE8EC3D00A49B36 /* LVExternalLinker.m */,
 				84CF56781AEA15A500A49B36 /* LVMethod.h */,
 				84CF56791AEA15A500A49B36 /* LVMethod.m */,
+				914D5F391DD3275D00CEA3FF /* LVClassInfo.h */,
+				914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */,
 				84CF56731AE9184000A49B36 /* LVNativeObjBox.h */,
 				84CF56741AE9184000A49B36 /* LVNativeObjBox.m */,
 				84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */,
 				84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */,
 				84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */,
 				84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */,
-				914D5F391DD3275D00CEA3FF /* LVClassInfo.h */,
-				914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */,
 			);
 			name = externalLink;
 			sourceTree = "<group>";
