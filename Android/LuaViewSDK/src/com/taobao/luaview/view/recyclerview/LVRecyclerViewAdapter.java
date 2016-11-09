@@ -6,14 +6,17 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.taobao.android.luaview.R;
-import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
-import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.view.LVViewGroup;
+import com.taobao.luaview.view.recyclerview.decoration.PinnedHeaderItemDecoration;
 
 import org.luaj.vm2.Globals;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Adapter for RecyclerView
@@ -21,10 +24,13 @@ import org.luaj.vm2.Globals;
  * @author song
  * @date 15/11/30
  */
-public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHolder> {
+public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHolder> implements PinnedHeaderItemDecoration.PinnedHeaderAdapter {
 
     private UDBaseRecyclerView mLuaUserData;
     private Globals mGlobals;
+
+    // 哈希被pinned标记的position,viewType
+    private HashMap<Integer, Integer> mPinnedTypeMaps = new HashMap<Integer, Integer>();
 
     public LVRecyclerViewAdapter(Globals globals, UDBaseRecyclerView luaViewData) {
         this.mGlobals = globals;
@@ -34,7 +40,8 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     @Override
     public LVRecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         final View itemView = createItemView(viewType);
-        return new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
+        LVRecyclerViewHolder holder = new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
+        return holder;
     }
 
     /**
@@ -65,7 +72,11 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
 
     @Override
     public int getItemViewType(int position) {//TODO 从0开始，如何去除非viewtype内容
-        return this.mLuaUserData.getItemViewType(position);
+        int viewType = this.mLuaUserData.getItemViewType(position);
+        if (this.mLuaUserData.mPinnedPositionList.contains(position)) {
+            this.mPinnedTypeMaps.put(position,viewType);
+        }
+        return viewType;
     }
 
     @Override
@@ -122,4 +133,12 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         return new LVViewGroup(mGlobals, mLuaUserData.getmetatable(), null);
     }
 
+    @Override
+    public boolean isPinnedViewType(int viewType) {
+        if (this.mPinnedTypeMaps.containsValue(viewType)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

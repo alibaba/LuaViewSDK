@@ -1,0 +1,218 @@
+--
+-- Created by IntelliJ IDEA.
+-- User: tuoli
+-- Date: 11/4/16
+-- Time: 7:00 PM
+-- To change this template use File | Settings | File Templates.
+--
+
+w,h = System.screenSize();
+imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
+imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
+collectionView = RefreshCollectionView {
+    Section = {
+        SectionCount = 2,
+        RowCount = function(section)
+            if (section == 1) then
+                return 15;
+            else
+                return 10;
+            end
+        end,
+    },
+    Cell = {
+        Id = function ( section, row )
+            if( section == 1 ) then
+                if (row == 2) then
+                    return "PinnedCell1", Pinned.YES;
+                elseif (row == 8) then
+                    return "PinnedScrollCell", Pinned.YES
+                else
+                    return "ImageAndLabel";
+                end
+            else
+                if (row == 1) then
+                    return "PinnedCell2", Pinned.YES;
+                else
+                    return "ImageAndLabel2", Pinned.NO;
+                end
+            end
+        end,
+        PinnedScrollCell = {
+            Size = function(section, row)
+                return w, 70;
+            end,
+            Init = function(cell, section, row)
+                cell.scrollView = HScrollView();
+                cell.scrollView.showScrollIndicator(false, false)
+                cell.scrollView.offset(0, 0, false)
+                cell.scrollView.frame(0, 0, w, 60);
+                for i = 0, 10, 1 do
+                    local btn = Label()
+                    btn.text("BTN" .. i)
+                    btn.frame(0, 0, 60, 40)
+                    btn.backgroundColor(0xff00ff00)
+                    local view = View()
+                    view.frame(i * 60, 10, 60, 50)
+                    view.backgroundColor(0xff500f00)
+                    view.callback(
+                        function()
+                            Toast(btn.text())
+                        end
+                    )
+                    view.addView(btn)
+                    cell.scrollView.addView(view)
+                end
+            end,
+            Layout = function(cell, section, row)
+                cell.window.backgroundColor(0x00ff97)
+            end
+        },
+        PinnedCell1 = {
+            Size = function(section, row)
+                return w, 70;
+            end,
+            Init = function(cell, section, row)
+                print("tuoli PinnedCell1 init")
+                cell.button = Button();
+                cell.button.frame(150,0,100,60);
+                cell.button.callback(
+                    function()
+                        Toast("Click Button 1");
+                    end);
+
+                cell.title = Label();
+                cell.title.frame(50, 0, 100, 50);
+                cell.title.textColor(0xffFFFF);
+                cell.title.backgroundColor(0xff00ff);
+                cell.title.callback(
+                    function()
+                        Toast("Click Button 1 title");
+                    end);
+            end,
+            Layout = function(cell, section, row)
+                print("tuoli PinnedCell1 layout")
+                cell.window.backgroundColor(0x00ff00)
+                cell.title.text("测试");
+            end,
+
+            Callback = {
+                Click = function()
+                end,
+                LongClick = function()
+                end
+            }
+        },
+        PinnedCell2 = {
+            Size = function(section, row)
+                return w, 100;
+            end,
+            Init = function(cell, section, row)
+                cell.parent = View();
+                cell.parent.frame(0, 0, 400, 70)
+                cell.parent.backgroundColor(0xf9bc90)
+                cell.parent.callback(
+                    function()
+                        Toast("Click Button 2");
+                    end);
+
+                cell.title = Label();
+                cell.title.frame(100, 0, 100, 50);
+                cell.title.textColor(0xffFFFF);
+                cell.title.backgroundColor(0xff00ff);
+                cell.title.callback(
+                    function()
+                        Toast("Click Button 2 title");
+                    end);
+                cell.parent.addView(cell.title)
+            end,
+            Layout = function(cell, section, row)
+                cell.window.backgroundColor(0xffff00)
+                cell.title.text("oooooo");
+            end,
+            Callback = {
+            }
+        },
+        ImageAndLabel = {
+            Size = function(section, row)
+                return w ,200;
+            end,
+            Init = function(cell, section, row)
+                local cellWidth ,cellHeight = cell.window.size();
+                cellHeight = cellHeight / 2;
+                cell.icon = Image();
+                cell.icon.frame(0, 0, cellHeight, cellHeight);
+                cell.title = Label();
+                cell.title.frame(0, cellHeight, cellHeight, cellHeight/2);
+                cell.title.textColor(0xffFFFF);
+                cell.title.backgroundColor(0xff00ff);
+            end,
+            Layout = function(cell , section, row)
+                cell.icon.image(imageUrl1, function()
+                    local x,y,w,h = cell.icon.frame();
+                end);
+                cell.title.text("测试"..section .."--" .. row);
+                cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+            end,
+            Callback = function(cell, section, row)
+                print(section, row);
+                System.gc();
+                collectionView.scrollToCell(section, row);
+            end
+        },
+        ImageAndLabel2 = {
+            Size = function(section, row)
+                return w ,200;
+            end,
+            Init = function(cell)
+                local cellHeight = 100
+                cell.icon = Image();
+                cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
+                cell.icon2 = Image();
+                cell.icon2.frame(160, 0, cellHeight, cellHeight);
+                cell.button = Button();
+                cell.button.frame(0,0,100,60);
+                cell.button.backgroundColor(0x777777);
+                cell.button.callback(
+                    function()
+                        Toast("hhhhhhh");
+                    end);
+            end,
+            Layout = function(cell , section, row)
+                cell.icon.image(
+                    imageUrl1,
+                    function()
+                        local x,y,w,h = cell.icon.frame();
+                    end);
+                cell.icon2.image(imageUrl1)
+                cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+            end,
+            Callback = {
+                Click = function()
+                    print("tuoli ImageAndLabel2 Click")
+                end,
+                LongClick = function()
+                end
+            }
+        }
+    },
+    Callback = {
+        Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
+--            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+        end,
+        ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+--            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+        end,
+        ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+--            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+        end,
+        PullDown = function()
+            collectionView.stopPullDownRefreshing()
+            collectionView.reload()
+        end
+    }
+};
+collectionView.frame(0,0,w,h-64);
+collectionView.backgroundColor(0xffFFFF);
+collectionView.setMiniSpacing(10)
+

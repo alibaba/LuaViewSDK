@@ -14,9 +14,11 @@ import com.taobao.luaview.userdata.list.UDRecyclerView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVRecyclerView;
+import com.taobao.luaview.view.interfaces.ILVView;
 import com.taobao.luaview.view.recyclerview.LVRecyclerViewAdapter;
 import com.taobao.luaview.view.recyclerview.RecyclerViewHelper;
 import com.taobao.luaview.view.recyclerview.decoration.DividerGridItemDecoration;
+import com.taobao.luaview.view.recyclerview.decoration.PinnedHeaderItemDecoration;
 import com.taobao.luaview.view.recyclerview.layout.LVGridLayoutManager;
 
 import org.luaj.vm2.Globals;
@@ -74,6 +76,27 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         this.setAdapter(mAdapter);
         mLayoutManager = new LVGridLayoutManager(this);
         this.setLayoutManager(mLayoutManager);
+        PinnedHeaderItemDecoration decoration = new PinnedHeaderItemDecoration();
+        decoration.setHeaderClickListener(
+                new PinnedHeaderItemDecoration.OnHeaderClickAdapter() {
+                    @Override
+                    public void onHeaderClick(View view, int id, int position) {
+                        super.onHeaderClick(view, id, position);
+                        if (view instanceof ILVView && ((ILVView)view).getUserdata() != null) {
+                            ((ILVView)view).getUserdata().callOnClick();
+                        }
+                    }
+
+                    @Override
+                    public void onHeaderLongClick(View view, int id, int position) {
+                        super.onHeaderLongClick(view, id, position);
+                        if (view instanceof ILVView && ((ILVView)view).getUserdata() != null) {
+                            ((ILVView)view).getUserdata().callOnLongClick();
+                        }
+                    }
+                }
+        );
+        this.addItemDecoration(decoration);
         mLuaUserdata.initOnScrollCallback(this);
         this.setHasFixedSize(true);
         initViewHolderPool();

@@ -7,6 +7,7 @@ import android.widget.AbsListView;
 import com.taobao.luaview.cache.SparseCache;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
+import com.taobao.luaview.userdata.constants.UDPinned;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.AndroidUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -16,7 +17,9 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -35,6 +38,9 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
     private Point[] mSectionLength;//长度数组，每个point的x为开始位置(包含)，y为结束位置(不包含)，(y-x)为该组长度
     private HashMap<String, Integer> mViewTypeMap = new HashMap<String, Integer>();//view类型集合，从0开始，不能放到init中初始化
     private HashMap<Integer, String> mViewTypeNameMap = new HashMap<Integer, String>();//View类型名称集合，不能放到init中初始化
+
+    // 保存被pinned标记的position
+    public List<Integer> mPinnedPositionList = new ArrayList<Integer>();
 
     //id
     private SparseCache<String> mIdCache;
@@ -267,7 +273,19 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
         if (cacheId != null) {
             return cacheId;
         } else {
-            final String id = LuaUtil.callFunction(mCellDelegate.get("Id"), LuaUtil.toLuaInt(section), LuaUtil.toLuaInt(row)).optjstring("");
+            String id = null;
+            Varargs args = LuaUtil.invokeFunction(mCellDelegate.get("Id"), LuaUtil.toLuaInt(section), LuaUtil.toLuaInt(row));
+            if (args != null) {
+                if (args.narg() > 1) {
+                    if (args.arg(2).toint() == UDPinned.PINNED_YES) {
+                        mPinnedPositionList.add(position);
+                    }
+                    id = args.arg(1).optjstring("");
+                } else { // 兼容旧版本的写法,只有一个String参数的情况
+                    id = ((LuaValue)args).optjstring("");
+                }
+            }
+
             if (mIdCache != null) {
                 mIdCache.put(position, id);
             }
