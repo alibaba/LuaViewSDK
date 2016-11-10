@@ -253,11 +253,11 @@ static int scrollToTop(lv_State *L) {
         globalName = @"CollectionView";
     }
     // CollectionView
-    [LVUtil reg:L c:self cfunc:lvNewCollectionView globalName:globalName defaultName:@"CollectionView"];
+    [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:@"CollectionView"];
     
     // RefreshCollectionView
     NSString* refreshName = [NSString stringWithFormat:@"Refresh%@",globalName];
-    [LVUtil reg:L c:self cfunc:lvNewRefreshCollectionView globalName:refreshName defaultName:@"RefreshCollectionView"];
+    [LVUtil reg:L clas:self cfunc:lvNewRefreshCollectionView globalName:refreshName defaultName:@"RefreshCollectionView"];
     
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},

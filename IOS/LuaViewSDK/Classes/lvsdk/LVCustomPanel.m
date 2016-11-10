@@ -86,7 +86,7 @@ static int lvNewCustomPanelView (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L c:self cfunc:lvNewCustomPanelView globalName:globalName defaultName:@"CustomPanel"];
+    [LVUtil reg:L clas:self cfunc:lvNewCustomPanelView globalName:globalName defaultName:@"CustomPanel"];
     
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

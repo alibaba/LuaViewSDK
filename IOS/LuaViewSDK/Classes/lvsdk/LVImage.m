@@ -244,7 +244,7 @@ static int isAnimating (lv_State *L) {
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     
-    [LVUtil reg:L c:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
+    [LVUtil reg:L clas:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
     
     const struct lvL_reg memberFunctions [] = {
         {"image",  setImage},
