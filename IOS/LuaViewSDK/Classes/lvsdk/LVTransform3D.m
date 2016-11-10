@@ -201,10 +201,8 @@ static int __tostring (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewTransform3D);
-        lv_setglobal(L, "Transform3D");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewTransform3D globalName:globalName defaultName:@"Transform3D"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__eq", __eq},
         {"__mul", __mul},

@@ -71,10 +71,7 @@ static int rotation (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "RotationGesture");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"RotationGesture"];
     
     lv_createClassMetaTable(L ,META_TABLE_RotaionGesture);
     

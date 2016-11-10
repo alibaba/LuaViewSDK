@@ -139,10 +139,8 @@ static int currentPageIndicatorTintColor(lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewPageControl);
-        lv_setglobal(L, "PagerIndicator");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewPageControl globalName:globalName defaultName:@"PagerIndicator"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         

@@ -202,10 +202,8 @@ static int __tostring (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewTimer);
-        lv_setglobal(L, "Timer");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewTimer globalName:globalName defaultName:@"Timer"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"callback",setCallback},
         

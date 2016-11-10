@@ -315,10 +315,7 @@ static int cancel (lv_State *L) {
         
         lvL_openlib(L, NULL, memberFunctions, 0);
     }
-    {
-        lv_pushcfunction(L, lvNewHttpObject );
-        lv_setglobal(L, "Http");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewHttpObject globalName:globalName defaultName:@"Http"];
     return 1;
 }
 

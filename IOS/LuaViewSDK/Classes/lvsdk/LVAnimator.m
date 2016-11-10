@@ -437,8 +437,7 @@ static int value(lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    lv_pushcfunction(L, lvNewAnimator);
-    lv_setglobal(L, "Animation");
+    [LVUtil reg:L clas:self cfunc:lvNewAnimator globalName:globalName defaultName:@"Animation"];
     
     const struct lvL_reg memberFunctions[] = {
         { "__gc", __gc },

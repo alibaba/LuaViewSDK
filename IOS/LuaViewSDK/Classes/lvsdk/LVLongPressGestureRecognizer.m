@@ -79,10 +79,7 @@ static int setTouchCount (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "LongPressGesture");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"LongPressGesture"];
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
     

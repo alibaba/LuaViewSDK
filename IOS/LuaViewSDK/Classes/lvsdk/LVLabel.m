@@ -244,10 +244,8 @@ static int ellipsize (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewLabel);
-        lv_setglobal(L, "Label");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewLabel globalName:globalName defaultName:@"Label"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"text",    text},
         

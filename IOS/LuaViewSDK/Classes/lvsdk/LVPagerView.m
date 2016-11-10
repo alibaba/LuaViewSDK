@@ -537,10 +537,8 @@ static int __gc (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewPageView);
-        lv_setglobal(L, "PagerView");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewPageView globalName:globalName defaultName:@"PagerView"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },

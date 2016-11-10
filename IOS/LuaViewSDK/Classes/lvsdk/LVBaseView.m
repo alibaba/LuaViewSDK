@@ -1574,10 +1574,8 @@ static int lvNewView (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewView);
-        lv_setglobal(L, "View");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewView globalName:globalName defaultName:@"View"];
+    
     lv_createClassMetaTable(L, META_TABLE_UIView);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);

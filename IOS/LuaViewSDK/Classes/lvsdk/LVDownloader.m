@@ -133,10 +133,7 @@ static int PathOfResource (lv_State *L) {
         lv_pushcfunction(L, PathOfResource);
         lv_setglobal(L, "PathOfResource");
     }
-    {
-        lv_pushcfunction(L, download);
-        lv_setglobal(L, "Download");
-    }
+    [LVUtil reg:L clas:self cfunc:download globalName:globalName defaultName:@"Download"];
     const struct lvL_reg memberFunctions [] = {
         {"__gc", __gc },
         

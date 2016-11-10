@@ -112,10 +112,8 @@ static int color(lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewActivityIndicator);
-        lv_setglobal(L, "LoadingIndicator");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewActivityIndicator globalName:globalName defaultName:@"LoadingIndicator"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"start",  startAnimating },
         {"stop",   stopAnimating },

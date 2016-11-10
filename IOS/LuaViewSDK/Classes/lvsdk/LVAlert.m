@@ -122,10 +122,8 @@ static int toast (lv_State *L) {
         lv_setglobal(L, "Toast");
     }
 
-    {// 系统Alert提示框
-        lv_pushcfunction(L, lvNewAlertView);
-        lv_setglobal(L, "Alert");
-    }
+    // 系统Alert提示框
+    [LVUtil reg:L clas:self cfunc:lvNewAlertView globalName:globalName defaultName:@"Alert"];
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}
     };

@@ -182,10 +182,8 @@ static int placeholder (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewTextField);
-        lv_setglobal(L, "TextField");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewTextField globalName:globalName defaultName:@"TextField"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},

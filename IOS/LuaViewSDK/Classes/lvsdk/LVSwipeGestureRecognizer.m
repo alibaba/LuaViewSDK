@@ -116,10 +116,8 @@ static int direction (lv_State *L) {
         lv_setfield(L, -2, "DOWN");
     }
     
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "SwipeGesture");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"SwipeGesture"];
+    
     lv_createClassMetaTable(L ,META_TABLE_SwipeGesture);
     lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
     {

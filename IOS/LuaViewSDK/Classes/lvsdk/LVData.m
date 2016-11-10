@@ -192,10 +192,8 @@ static int __add (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewData);
-        lv_setglobal(L, "Data");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__index", __index },
         {"__newindex", __newindex },

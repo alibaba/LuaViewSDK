@@ -353,18 +353,8 @@ static const struct lvL_reg memberFunctions [] = {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-//    {
-//        lv_pushcfunction(L, lvNewScrollView);
-//        lv_setglobal(L, "ScrollView");
-//    }
-    {
-        lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "HScrollView");
-    }
-    {
-        lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "HorizontalScrollView");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HScrollView"];
+    [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HorizontalScrollView"];
     
     lv_createClassMetaTable(L ,META_TABLE_UIScrollView);
     

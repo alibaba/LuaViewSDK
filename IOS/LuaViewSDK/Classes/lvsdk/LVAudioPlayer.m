@@ -146,10 +146,7 @@ static int __tostring (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewAudioPlayer);
-        lv_setglobal(L, "AudioPlayer");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewAudioPlayer globalName:globalName defaultName:@"AudioPlayer"];
     const struct lvL_reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },

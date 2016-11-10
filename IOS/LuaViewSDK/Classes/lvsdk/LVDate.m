@@ -160,10 +160,8 @@ static int timeInterval (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewDate);
-        lv_setglobal(L, "Date");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewDate globalName:globalName defaultName:@"Date"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__gc",  __GC },
         {"__sub", __sub},

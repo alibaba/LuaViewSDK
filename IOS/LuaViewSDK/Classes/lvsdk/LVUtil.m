@@ -798,6 +798,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 
 +(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
     if( defaultName || globalName ) {
+        lv_checkstack(L, 12);
         NSString* className = NSStringFromClass(c);
         lv_pushstring(L, className.UTF8String);
         lv_pushcclosure(L, cfunc, 1);

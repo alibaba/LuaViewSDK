@@ -277,10 +277,8 @@ static int __add (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, lvNewAttributedString);
-        lv_setglobal(L, "StyledString");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewAttributedString globalName:globalName defaultName:@"StyledString"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"append", append },
         
