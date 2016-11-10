@@ -21,7 +21,7 @@
 -(id) init:(lv_State*) l;
 -(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished;
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 -(void) lvButtonCallBack;
 

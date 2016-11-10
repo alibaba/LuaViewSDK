@@ -70,7 +70,7 @@ static int rotation (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewGestureRecognizer);
         lv_setglobal(L, "RotationGesture");

@@ -10,7 +10,6 @@
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "LVData.h"
-//#import <TBCDNImage.h>
 #import <Accelerate/Accelerate.h>
 #import "LVNinePatchImage.h"
 #import "lV.h"
@@ -107,22 +106,13 @@
     }
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVImage class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark ImageView
 static int lvNewImageView(lv_State *L) {
-    if( g_class == nil ){
-        g_class = [LVImage class];
-    }
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVImage class]];
+    
     NSString* imageName = lv_paramString(L, 1);
     
-    LVImage* imageView = [[g_class alloc] init:L];
+    LVImage* imageView = [[c alloc] init:L];
     [imageView setImageByName:imageName];
     {
         NEW_USERDATA(userData, View);
@@ -251,11 +241,11 @@ static int isAnimating (lv_State *L) {
     return 1;
 }
 
-+(int) classDefine:(lv_State *) L {
-    {
-        lv_pushcfunction(L, lvNewImageView);
-        lv_setglobal(L, "Image");
-    }
+
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    
+    [LVUtil reg:L c:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"image",  setImage},
         {"scaleType",  scaleType},

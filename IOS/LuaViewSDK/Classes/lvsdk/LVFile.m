@@ -71,14 +71,14 @@ static int file_exist(lv_State *L){
     return 1;
 }
 
-+(int) classDefine:(lv_State *)l {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     const struct lvL_reg function [] = {
         {"save", file_save},
         {"read", file_read},
         {"exist", file_exist},
         {NULL, NULL}
     };
-    lvL_openlib(l, "File", function, 0);
+    lvL_openlib(L, "File", function, 0);
     return 0;
 }
 

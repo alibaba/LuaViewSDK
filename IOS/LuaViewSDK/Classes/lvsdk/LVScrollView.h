@@ -19,7 +19,7 @@
 
 -(id) init:(lv_State*) l;
 
-+(int) classDefine:(lv_State *)L;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 +(const struct lvL_reg*) memberFunctions;
 

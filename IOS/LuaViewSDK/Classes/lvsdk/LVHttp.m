@@ -292,7 +292,7 @@ static int cancel (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         const struct lvL_reg memberFunctions [] = {
             {"__gc", __gc },

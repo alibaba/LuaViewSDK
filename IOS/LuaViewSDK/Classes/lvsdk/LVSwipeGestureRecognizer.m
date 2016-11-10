@@ -94,7 +94,7 @@ static int direction (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_settop(L, 0);
         const struct lvL_reg lib [] = {

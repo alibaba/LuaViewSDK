@@ -21,7 +21,7 @@
 
 +(const lvL_reg*) baseMemberFunctions;
 
-+(int) classDefine: (lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end
 

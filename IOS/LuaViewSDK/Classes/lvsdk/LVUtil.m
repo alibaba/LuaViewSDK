@@ -795,6 +795,27 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return ret;
 }
 
+
++(void) reg:(lv_State*)L c:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
+    if( defaultName || globalName ) {
+        NSString* className = NSStringFromClass(c);
+        lv_pushstring(L, className.UTF8String);
+        lv_pushcclosure(L, cfunc, 1);
+        
+        lv_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
+    }
+}
+
++(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass{
+    const char* classNameChars = lv_tostring(L, lv_upvalueindex(1));
+    NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
+    Class c = NSClassFromString(className);
+    if( c == nil ) {
+        c = defaultClass;
+    }
+    return c;
+}
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;

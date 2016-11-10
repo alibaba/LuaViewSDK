@@ -82,14 +82,14 @@ static int db_set (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)l {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     const struct lvL_reg functions [] = {
         {"get",  db_get},
         {"set",  db_set},
         {LUAVIEW_SYS_TABLE_KEY, db_set},
         {NULL,   NULL}
     };
-    lvL_openlib(l, "DB", functions, 0);
+    lvL_openlib(L, "DB", functions, 0);
     return 0;
 }
 

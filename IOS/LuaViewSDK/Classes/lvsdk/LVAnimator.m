@@ -436,7 +436,7 @@ static int value(lv_State *L) {
     return updateFloat(L, nil);
 }
 
-+(int)classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     lv_pushcfunction(L, lvNewAnimator);
     lv_setglobal(L, "Animation");
     

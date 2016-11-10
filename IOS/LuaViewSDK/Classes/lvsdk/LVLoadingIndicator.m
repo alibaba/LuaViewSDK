@@ -111,7 +111,7 @@ static int color(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewActivityIndicator);
         lv_setglobal(L, "LoadingIndicator");

@@ -29,12 +29,6 @@
  */
 -(void) callLuaDelegate:(id) obj;
 
-+(int) classDefine:(lv_State *) L ;
-
-/*
- * 修改LVImageView
- */
-+ (void) setDefaultStyle:(Class) c;
-
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

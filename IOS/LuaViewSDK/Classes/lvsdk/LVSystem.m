@@ -136,7 +136,7 @@ static int tableToString(lv_State*L){
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         // System
         const struct lvL_reg staticFunctions [] = {

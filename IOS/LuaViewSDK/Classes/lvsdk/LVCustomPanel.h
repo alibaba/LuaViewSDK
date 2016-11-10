@@ -16,11 +16,9 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 - (void) callLuaWithArgument:(NSString*) info;
 - (void) callLuaWithArguments:(NSArray*) args;
-
-+ (void) addCustomPanel:(Class) c boundName:(NSString*) boundName state:(lv_State*) L;
 
 @end

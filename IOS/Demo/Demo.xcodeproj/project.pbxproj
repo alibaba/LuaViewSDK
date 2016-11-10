@@ -18,7 +18,6 @@
 		3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */; };
 		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
 		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
-		3CC2F8571C706BE700D1E0B7 /* JHSLVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */; };
 		3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */; };
 		3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */; };
 		3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */; };
@@ -149,8 +148,6 @@
 		3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
 		3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVImage.h; sourceTree = "<group>"; };
 		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
-		3CC2F84F1C706BE700D1E0B7 /* JHSLVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVTableView.h; sourceTree = "<group>"; };
-		3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVTableView.m; sourceTree = "<group>"; };
 		3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
 		3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_Image.lua; sourceTree = "<group>"; };
 		3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
@@ -303,8 +300,6 @@
 				3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */,
 				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
 				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
-				3CC2F84F1C706BE700D1E0B7 /* JHSLVTableView.h */,
-				3CC2F8501C706BE700D1E0B7 /* JHSLVTableView.m */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -677,7 +672,6 @@
 				3CC2F8531C706BE700D1E0B7 /* JHSLVCollectionView.m in Sources */,
 				3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */,
 				3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */,
-				3CC2F8571C706BE700D1E0B7 /* JHSLVTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

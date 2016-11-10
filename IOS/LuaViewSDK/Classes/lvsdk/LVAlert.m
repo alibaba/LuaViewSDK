@@ -115,7 +115,7 @@ static int toast (lv_State *L) {
 }
 
 
-+(int) classDefine: (lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     
     {// 自动消失的提示框
         lv_pushcfunction(L, toast);

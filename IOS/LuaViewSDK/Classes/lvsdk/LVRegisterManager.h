@@ -13,8 +13,6 @@
 
 @interface LVRegisterManager : NSObject
 
-
-+(void) registryApi:(lv_State*) l  lView:(LView*)lView;
-
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

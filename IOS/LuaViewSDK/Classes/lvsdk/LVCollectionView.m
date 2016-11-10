@@ -90,21 +90,13 @@
     [self scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animated];
 }
 
-static Class g_class = nil;
 
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCollectionView class]] ) {
-        g_class = c;
-    }
-}
 
 #pragma -mark lvNewCollectionView
 static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
-    if( g_class == nil ) {
-        g_class = [LVCollectionView class];
-    }
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVCollectionView class]];
 
-    LVCollectionView* tableView = [[g_class alloc] init:L];
+    LVCollectionView* tableView = [[c alloc] init:L];
     if( refresh ) {
         [tableView lv_initRefreshHeader];
     }
@@ -256,15 +248,17 @@ static int scrollToTop(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewCollectionView);
-        lv_setglobal(L, "CollectionView");
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    if( globalName==nil ) {
+        globalName = @"CollectionView";
     }
-    {
-        lv_pushcfunction(L, lvNewRefreshCollectionView);
-        lv_setglobal(L, "RefreshCollectionView");
-    }
+    // CollectionView
+    [LVUtil reg:L c:self cfunc:lvNewCollectionView globalName:globalName defaultName:@"CollectionView"];
+    
+    // RefreshCollectionView
+    NSString* refreshName = [NSString stringWithFormat:@"Refresh%@",globalName];
+    [LVUtil reg:L c:self cfunc:lvNewRefreshCollectionView globalName:refreshName defaultName:@"RefreshCollectionView"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
         

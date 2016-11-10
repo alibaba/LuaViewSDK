@@ -11,7 +11,6 @@
 #import "JHSLVCustomError.h"
 #import "JHSLVCustomLoading.h"
 #import "JHSLVCollectionView.h"
-#import "JHSLVTableView.h"
 #import "JHSLVButton.h"
 #import "JHSLVImage.h"
 
@@ -25,11 +24,6 @@
 @implementation JHSLuaViewController
 
 - (void)viewDidLoad {
-    [LVButton setDefaultStyle:[JHSLVButton class]];
-    [LVImage setDefaultStyle:[JHSLVImage class]];
-    [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
-    [LVTableView setDefaultStyle:[JHSLVTableView class]];
-    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -52,6 +46,10 @@
 
 - (void)didCreateLuaView:(LView *)view {
     [super didCreateLuaView:view];
+    
+    self.lv[@"Image"] = [JHSLVImage class];
+    self.lv[@"Button"] = [JHSLVButton class];
+    self.lv[@"CollectionView"] = [JHSLVCollectionView class];
     
     // 注册 用户面板类型
     self.lv[@"CustomError"] = [JHSLVCustomError class];

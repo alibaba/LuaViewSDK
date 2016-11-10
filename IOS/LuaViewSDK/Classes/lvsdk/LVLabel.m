@@ -243,7 +243,7 @@ static int ellipsize (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewLabel);
         lv_setglobal(L, "Label");

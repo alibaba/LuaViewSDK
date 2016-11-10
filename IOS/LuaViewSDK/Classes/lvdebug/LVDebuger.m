@@ -75,7 +75,7 @@ static const lvL_Reg dblib[] = {
     {NULL, NULL}
 };
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     lvL_register(L, LV_DBLIBNAME, dblib);
     return 0;
 }

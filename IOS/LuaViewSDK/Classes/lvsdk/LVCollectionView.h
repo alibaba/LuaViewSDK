@@ -18,11 +18,9 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
-+ (int) classDefine: (lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 - (id) init:(lv_State*) l;
-
-+ (void) setDefaultStyle:(Class) c;
 
 @property(nonatomic,weak) id lvScrollViewDelegate;
 

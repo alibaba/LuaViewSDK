@@ -352,7 +352,7 @@ static const struct lvL_reg memberFunctions [] = {
     return memberFunctions;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
 //    {
 //        lv_pushcfunction(L, lvNewScrollView);
 //        lv_setglobal(L, "ScrollView");

@@ -316,7 +316,7 @@ static int callback (lv_State *L) {
 }
 
 
-+(int) classDefine:(lv_State *) L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewWebView);
         lv_setglobal(L, "WebView");

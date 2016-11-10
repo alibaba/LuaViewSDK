@@ -40,7 +40,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
 @property(nonatomic, readonly, getter=isRunning) BOOL running;
 @property(nonatomic, readonly, getter=isPaused) BOOL paused;
 
-+ (int)classDefine:(lv_State *)L;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 - (void)start;
 - (void)cancel;

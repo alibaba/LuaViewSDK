@@ -37,13 +37,10 @@
 #import "LVSwipeGestureRecognizer.h"
 #import "LVLongPressGestureRecognizer.h"
 #import "LVDebuger.h"
-#import "LVTableView.h"
-#import "LVTableViewCell.h"
 #import "LVDownloader.h"
 #import "LVAudioPlayer.h"
 #import "LVFile.h"
 #import "LVStyledString.h"
-#import "LVExternalLinker.h"
 #import "LVNativeObjBox.h"
 #import "LVCollectionView.h"
 #import "LVStruct.h"
@@ -86,94 +83,8 @@
 
 // 注册函数
 +(void) registryApi:(lv_State*)L  lView:(LView*)lView{
-    //清理栈
-    lv_settop(L, 0);
-    lv_checkstack(L, 128);
     
     
-    // 注册System对象
-    [LVSystem classDefine:L];
-    
-    // 基础数据结构data
-    [LVData classDefine:L];
-    [LVStruct classDefine:L];
-    
-    // 注册UI类
-    lv_settop(L, 0);
-    [LVBaseView classDefine:L];
-    [LVButton    classDefine:L ];
-    [LVImage classDefine:L];
-    [LVWebView classDefine:L];
-    [LVLabel     classDefine:L ];
-    [LVScrollView classDefine:L];
-    [LVTableView classDefine:L];
-    [LVCollectionView classDefine:L];
-    [LVPagerView classDefine:L];
-    [LVTimer       classDefine:L];
-    [LVPagerIndicator classDefine:L];
-    [LVCustomPanel classDefine:L];
-    [LVTransform3D classDefine:L];
-    [LVAnimator classDefine:L];
-    [LVTextField classDefine:L];
-    [LVAnimate classDefine:L];
-    [LVDate classDefine:L];
-    [LVAlert classDefine:L];
-    // 注册DB
-    [LVDB classDefine:L];
-    
-    //清理栈
-    lv_settop(L, 0);
-    
-    // 注册手势
-    [LVGestureRecognizer    classDefine:L];
-    [LVTapGestureRecognizer classDefine:L];
-    [LVPinchGestureRecognizer classDefine:L];
-    [LVRotationGestureRecognizer classDefine:L];
-    [LVSwipeGestureRecognizer classDefine:L];
-    [LVLongPressGestureRecognizer classDefine:L];
-    [LVPanGestureRecognizer classDefine:L];
-    
-    //清理栈
-    lv_settop(L, 0);
-    [LVLoadingIndicator classDefine:L];
-    
-    // http
-    [LVHttp classDefine:L];
-    
-    // 文件下载
-    [LVDownloader classDefine:L];
-    
-    // 文件
-    [LVFile classDefine:L];
-    
-    
-    // 声音播放
-    [LVAudioPlayer classDefine:L];
-    
-    // 调试
-    [LVDebuger classDefine:L];
-    
-    // attributedString
-    [LVStyledString classDefine:L];
-    
-    
-    // 导航栏按钮
-    [LVNavigation classDefine:L];
-    
-    //清理栈
-    lv_settop(L, 0);
-    
-    
-    // 注册静态全局方法和常量
-    [LVRegisterManager registryStaticMethod:L lView:lView];
-    
-    // 注册 系统对象window
-    [LVRegisterManager registryWindow:L lView:lView];
-    
-    //外链注册器
-    [LVExternalLinker classDefine:L];
-    //清理栈
-    lv_settop(L, 0);
     return;
 }
 
@@ -268,6 +179,24 @@ static int loaderForLuaView (lv_State *L) {
     }
     
     // not found
+    return 0;
+}
+
+
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    LView* lView = (__bridge  LView *)(L->lView);
+    // 注册静态全局方法和常量
+    [LVRegisterManager registryStaticMethod:L lView:lView];
+    
+    // 注册 系统对象window
+    [LVRegisterManager registryWindow:L lView:lView];
+    
+    //外链注册器
+    [LVNativeObjBox lvClassDefine:L globalName:nil];
+    // 调试
+    [LVDebuger lvClassDefine:L globalName:nil];
+    //清理栈
+    lv_settop(L, 0);
     return 0;
 }
 

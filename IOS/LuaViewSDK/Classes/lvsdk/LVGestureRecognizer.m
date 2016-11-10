@@ -82,7 +82,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
 +(void) releaseUD:(LVUserDataInfo *) user{
     releaseUserData(user);
 }
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     //    typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
     //        UIGestureRecognizerStatePossible,
     //        UIGestureRecognizerStateBegan,

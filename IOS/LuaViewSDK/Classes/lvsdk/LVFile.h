@@ -11,6 +11,6 @@
 
 @interface LVFile : NSObject
 
-+(int) classDefine:(lv_State *)l ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

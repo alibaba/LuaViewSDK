@@ -138,7 +138,7 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewPageControl);
         lv_setglobal(L, "PagerIndicator");
