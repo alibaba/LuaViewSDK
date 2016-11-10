@@ -90,8 +90,6 @@
     lv_settop(L, 0);
     lv_checkstack(L, 128);
     
-    // 注册静态全局方法和常量
-    [LVRegisterManager registryStaticMethod:L lView:lView];
     
     // 注册System对象
     [LVSystem classDefine:L];
@@ -158,8 +156,6 @@
     // attributedString
     [LVStyledString classDefine:L];
     
-    // 注册 系统对象window
-    [LVRegisterManager registryWindow:L lView:lView];
     
     // 导航栏按钮
     [LVNavigation classDefine:L];
@@ -167,9 +163,15 @@
     //清理栈
     lv_settop(L, 0);
     
+    
+    // 注册静态全局方法和常量
+    [LVRegisterManager registryStaticMethod:L lView:lView];
+    
+    // 注册 系统对象window
+    [LVRegisterManager registryWindow:L lView:lView];
+    
     //外链注册器
     [LVExternalLinker classDefine:L];
-    
     //清理栈
     lv_settop(L, 0);
     return;
