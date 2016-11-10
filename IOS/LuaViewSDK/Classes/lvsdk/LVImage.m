@@ -263,12 +263,6 @@ static int isAnimating (lv_State *L) {
         {"startAnimationImages",  startAnimating},
         {"stopAnimationImages",  stopAnimating},
         {"isAnimationImages",  isAnimating},
-        
-//        {"render",  render},
-//        {"renderSystemApi",  renderSystemApi},
-//
-//        {"resizeImage",  resizeImage},
-        
         {NULL, NULL}
     };
     
