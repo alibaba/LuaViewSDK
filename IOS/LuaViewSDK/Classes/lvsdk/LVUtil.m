@@ -795,6 +795,48 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return ret;
 }
 
+
++(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
+    if( defaultName || globalName ) {
+        lv_checkstack(L, 12);
+        NSString* className = NSStringFromClass(c);
+        lv_pushstring(L, className.UTF8String);
+        lv_pushcclosure(L, cfunc, 1);
+        
+        lv_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
+    }
+}
+
++(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass{
+    const char* classNameChars = lv_tostring(L, lv_upvalueindex(1));
+    NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
+    Class c = NSClassFromString(className);
+    if( c == nil ) {
+        c = defaultClass;
+    }
+    return c;
+}
+
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L {
+    if( globalName && value ) {
+        lv_checkstack(L, 12);
+        lv_pushNativeObject(L, value);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Value");
+    }
+}
+
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L {
+    if( globalName && func ) {
+        lv_checkstack(L, 12);
+        lv_pushcfunction(L, func);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Function");
+    }
+}
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;

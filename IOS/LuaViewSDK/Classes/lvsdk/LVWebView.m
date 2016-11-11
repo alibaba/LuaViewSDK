@@ -128,22 +128,13 @@
     }
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVWebView class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark webView
 static int lvNewWebView(lv_State *L) {
-    if( g_class == nil ){
-        g_class = [LVWebView class];
-    }
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVWebView class]];
+    
     NSString* url = lv_paramString(L, 1);
     
-    LVWebView* webView = [[g_class alloc] init:L];
+    LVWebView* webView = [[c alloc] init:L];
     [webView loadUrl:url];
     {
         NEW_USERDATA(userData, View);
@@ -316,11 +307,9 @@ static int callback (lv_State *L) {
 }
 
 
-+(int) classDefine:(lv_State *) L {
-    {
-        lv_pushcfunction(L, lvNewWebView);
-        lv_setglobal(L, "WebView");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewWebView globalName:globalName defaultName:@"WebView"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"canGoBack",  canGoBack},
         {"goBack",  goBack},

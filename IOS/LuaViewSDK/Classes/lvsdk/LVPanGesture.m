@@ -1,13 +1,13 @@
 //
-//  LVTapGestureRecognizer.m
+//  LVPanGestureRecognizer.m
 //  LVSDK
 //
-//  Created by dongxicheng on 1/21/15.
+//  Created by dongxicheng on 1/22/15.
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVTapGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVPanGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,12 +15,11 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVTapGestureRecognizer
+@implementation LVPanGesture
 
 
 -(void) dealloc{
-    LVLog(@"LVTapGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -31,20 +30,19 @@
     return self;
 }
 
-
-
--(void) handleGesture:(LVTapGestureRecognizer*)sender {
+-(void) handleGesture:(LVPanGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
-        lv_pushUserdata(l, self.lv_userData);
+        lv_pushUserdata(l,self.lv_userData);
         [LVUtil call:l lightUserData:self key1:"callback" key2:NULL nargs:1];
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewPanGestureRecognizer (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPanGesture class]];
     {
-        LVTapGestureRecognizer* gesture = [[LVTapGestureRecognizer alloc] init:L];
+        LVPanGesture* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
@@ -55,7 +53,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
             gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
-            lvL_getmetatable(L, META_TABLE_TapGesture );
+            lvL_getmetatable(L, META_TABLE_PanGesture );
             lv_setmetatable(L, -2);
         }
     }
@@ -63,21 +61,18 @@ static int lvNewGestureRecognizer (lv_State *L) {
 }
 
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "TapGesture");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewPanGestureRecognizer globalName:globalName defaultName:@"PanGesture"];
+    
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}
     };
     
-    lv_createClassMetaTable(L ,META_TABLE_TapGesture);
+    lv_createClassMetaTable(L, META_TABLE_PanGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
-
 
 @end

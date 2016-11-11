@@ -29,7 +29,7 @@
 - (NSString *)className;
 - (BOOL)isOCClass;
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 /*
  * 注册native对象到脚本中, sel可以为空(如果为空注册所有api)

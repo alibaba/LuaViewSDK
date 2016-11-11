@@ -1,5 +1,5 @@
 //
-//  LVGestureRecognizer.h
+//  LVGesture.h
 //  LVSDK
 //
 //  Created by dongxicheng on 1/22/15.
@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVGestureRecognizer : NSObject
+@interface LVGesture : NSObject
 
 +(const lvL_reg*) baseMemberFunctions;
 
 +(void) releaseUD:(LVUserDataInfo *) user;
 
-+(int) classDefine:(lv_State *)L;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 
 @end

@@ -272,19 +272,8 @@ static int __eq (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    const struct lvL_reg memberFunctions [] = {
-        {"__gc", __gc },
-        {"__tostring", __tostring },
-        {"__eq", __eq },
-        {"__index", __index },
-        {NULL, NULL}
-    };
-    
-    lv_createClassMetaTable(L, META_TABLE_NativeObject);
-    lvL_openlib(L, NULL, memberFunctions, 0);
-    
-    //
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    // OC常量定义
     if( ARG_ARR==nil ) {
         ARG_ARR = @[
                     @"",
@@ -296,6 +285,19 @@ static int __eq (lv_State *L) {
                     @"::::::",
                     @":::::::",];
     }
+    
+    const struct lvL_reg memberFunctions [] = {
+        {"__gc", __gc },
+        {"__tostring", __tostring },
+        {"__eq", __eq },
+        {"__index", __index },
+        {NULL, NULL}
+    };
+    
+    lv_createClassMetaTable(L, META_TABLE_NativeObject);
+    lvL_openlib(L, NULL, memberFunctions, 0);
+    
+    
     return 0;
 }
 

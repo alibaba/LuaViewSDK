@@ -21,13 +21,13 @@
 @implementation LVSystem
 
 
-// // lv 扩展API
+// lv 扩展API
 static int vmVersion (lv_State *L) {
     lv_pushstring(L, LUAVIEW_VERSION ) ;
     return 1; /* number of results */
 }
 
-// // lv 扩展API
+// lv 扩展API
 static int osVersion (lv_State *L) {
     NSString* v = [[UIDevice currentDevice] systemVersion];
     lv_pushstring(L, v.UTF8String);
@@ -71,7 +71,7 @@ static int scale (lv_State *L) {
 }
 
 
-// // lv 扩展API
+// lv 扩展API
 static int platform (lv_State *L) {
     NSString* name = [[UIDevice currentDevice] systemName];
     NSString* version = [[UIDevice currentDevice] systemVersion];
@@ -88,7 +88,7 @@ static int device (lv_State *L) {
     return 1; /* number of results */
 }
 
-// // lv 扩展API
+// lv 扩展API
 static int screenSize (lv_State *L) {
     CGSize s = [UIScreen mainScreen].bounds.size;
     lv_pushnumber(L, s.width );
@@ -96,7 +96,6 @@ static int screenSize (lv_State *L) {
     return 2; /* number of results */
 }
 
-//
 static int static_gc (lv_State *L) {
     lv_gc(L, 2, 0);
     return 0;
@@ -106,8 +105,8 @@ static int vibrate(lv_State*L){
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     return 1;
 }
-// create oc class
-static int class(lv_State*L){
+
+static int lvClassLoader(lv_State*L){
     NSString* s = lv_paramString(L, -1);
     id obj = NSClassFromString(s);
     lv_pushNativeObject(L, obj);
@@ -136,9 +135,9 @@ static int tableToString(lv_State*L){
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
-        // System
+        // System API
         const struct lvL_reg staticFunctions [] = {
             {"screenSize", screenSize},
             {"gc",static_gc},
@@ -156,7 +155,7 @@ static int tableToString(lv_State*L){
         lvL_openlib(L, "System", staticFunctions, 0);
     }
     {
-        // Json
+        // Json Table相互转换
         const struct lvL_reg fs [] = {
             {"toString", tableToString},
             {"toTable",stringToTable},
@@ -168,189 +167,108 @@ static int tableToString(lv_State*L){
     {
         // Align 常量
         lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "Align", lib);
-        
-        lv_pushnumber(L, LV_ALIGN_LEFT);
-        lv_setfield(L, -2, "LEFT");
-        
-        lv_pushnumber(L, LV_ALIGN_RIGHT);
-        lv_setfield(L, -2, "RIGHT");
-        
-        lv_pushnumber(L, LV_ALIGN_TOP);
-        lv_setfield(L, -2, "TOP");
-        
-        lv_pushnumber(L, LV_ALIGN_BOTTOM);
-        lv_setfield(L, -2, "BOTTOM");
-        
-        lv_pushnumber(L, LV_ALIGN_H_CENTER);
-        lv_setfield(L, -2, "H_CENTER");// 水平居中
-        lv_pushnumber(L, LV_ALIGN_V_CENTER);// 垂直居中
-        lv_setfield(L, -2, "V_CENTER");
-        
-        lv_pushnumber(L, LV_ALIGN_H_CENTER | LV_ALIGN_V_CENTER);
-        lv_setfield(L, -2, "CENTER");// 上下左右都居中
-    }
-    {
-        // TextAlign常量. LEFT RIGHT CENTER
-        lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "TextAlign", lib);
-        
-        lv_pushnumber(L, NSTextAlignmentLeft);
-        lv_setfield(L, -2, "LEFT");
-        
-        lv_pushnumber(L, NSTextAlignmentRight);
-        lv_setfield(L, -2, "RIGHT");
-        
-        lv_pushnumber(L, NSTextAlignmentCenter);
-        lv_setfield(L, -2, "CENTER");// 上下左右都居中
-    }
-    {
-        // TextAlign常量. LEFT RIGHT CENTER
-        lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "Ellipsize", lib);// 文本太多 "..." 出现的问题
-        
-        lv_pushnumber(L, NSLineBreakByTruncatingHead);
-        lv_setfield(L, -2, "START");
-        
-        lv_pushnumber(L, NSLineBreakByTruncatingMiddle);
-        lv_setfield(L, -2, "MIDDLE");
-        
-        lv_pushnumber(L, NSLineBreakByTruncatingTail);
-        lv_setfield(L, -2, "END");
-        
-        lv_pushnumber(L, NSLineBreakByCharWrapping);
-        lv_setfield(L, -2, "MARQUEE");
+        NSDictionary* v = nil;
+        v = @{
+              @"LEFT":    @(LV_ALIGN_LEFT),
+              @"RIGHT":   @(LV_ALIGN_RIGHT),
+              @"TOP":     @(LV_ALIGN_TOP),
+              @"BOTTOM":  @(LV_ALIGN_BOTTOM),
+              @"H_CENTER":@(LV_ALIGN_H_CENTER),// 水平居中
+              @"V_CENTER":@(LV_ALIGN_V_CENTER),// 垂直居中
+              @"CENTER":  @(LV_ALIGN_H_CENTER|LV_ALIGN_V_CENTER),// 上下左右都居中
+              };
+        [LVUtil defineGlobal:@"Align" value:v L:L];
     }
     {
         lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "FontStyle", lib);
-        
-        lv_pushstring(L, "normal");
-        lv_setfield(L, -2, "NORMAL");
-        
-        lv_pushstring(L, "italic");
-        lv_setfield(L, -2, "ITALIC");
-        
-        lv_pushstring(L, "oblique");
-        lv_setfield(L, -2, "OBLIQUE");// 上下左右都居中
+        NSDictionary* v = nil;
+        v = @{
+              @"LEFT":@(NSTextAlignmentLeft),
+              @"RIGHT":@(NSTextAlignmentRight),
+              @"CENTER":@(NSTextAlignmentCenter),// 上下左右都居中
+              };
+        [LVUtil defineGlobal:@"TextAlign" value:v L:L];
+    }
+    {
+        //文本太多 "..." 出现的问题
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"START":@(NSLineBreakByTruncatingHead),
+              @"MIDDLE":@(NSLineBreakByTruncatingMiddle),
+              @"END":@(NSLineBreakByTruncatingTail),
+              @"MARQUEE":@(NSLineBreakByCharWrapping),
+              };
+        [LVUtil defineGlobal:@"Ellipsize" value:v L:L];
+    }
+    {
+        //字体Style
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"NORMAL":@"normal",//正常
+              @"ITALIC":@"italic",//斜体
+              @"OBLIQUE":@"oblique",//倾斜
+              };
+        [LVUtil defineGlobal:@"FontStyle" value:v L:L];
+    }
+    {
+        //字体Weight（粗体、正常）
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"NORMAL":@"normal",
+              @"BOLD":@"bold",
+              };
+        [LVUtil defineGlobal:@"FontWeight" value:v L:L];
+    }
+    {
+        //图片缩放常量
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"CENTER":@(UIViewContentModeCenter),//按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
+              @"CENTER_CROP":@(UIViewContentModeScaleAspectFill),//将图片等比居中显示，完全覆盖view，尽可能小；
+              @"CENTER_INSIDE":@(UIViewContentModeScaleAspectFit),//将图片的内容完整居中显示，尽可能的大
+              @"FIT_CENTER":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，居中显示
+              @"FIT_END":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，显示在View的下部分位置
+              @"FIT_START":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，显示在View的上部分位置
+              @"FIT_XY":@(UIViewContentModeScaleToFill),//把图片按照指定的大小在View中显示
+              @"MATRIX":@(UIViewContentModeScaleAspectFill),//用matrix来绘制
+              };
+        [LVUtil defineGlobal:@"ScaleType" value:v L:L];
     }
     {
         lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "FontWeight", lib);
-        
-        lv_pushstring(L, "normal");
-        lv_setfield(L, -2, "NORMAL");
-        
-        lv_pushstring(L, "bold");
-        lv_setfield(L, -2, "BOLD");
+        NSDictionary* v = nil;
+        v = @{
+              @"LINEAR" : @(LVLinearInterpolator),
+              @"ACCELERATE" : @(LVAccelerateInterpolator),
+              @"DECELERATE" : @(LVDecelerateInterpolator),
+              @"ACCELERATE_DECELERATE" : @(LVAccelerateDecelerateInterpolator),
+              @"ANTICIPATE": @(LVAnticipateInterpolator),
+              @"OVERSHOOT": @(LVOvershootInterpolator),
+              @"ANTICIPATE_OVERSHOOT": @(LVAnticipateOvershootInterpolator),
+              };
+        [LVUtil defineGlobal:@"Interpolator" value:v L:L];
     }
     {
+        // 坑位浮动Pinned
         lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "ScaleType", lib);
-        
-        //ScaleType.CENTER 按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
-        lv_pushnumber(L, UIViewContentModeCenter);
-        lv_setfield(L, -2, "CENTER");
-        
-        //ScaleType.CENTER_CROP 按比例扩大图片的size居中显示，使得图片长 (宽)等于或大于View的长(宽)
-        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
-        lv_setfield(L, -2, "CENTER_CROP");
-        
-        //ScaleType.CENTER_INSIDE 将图片的内容完整居中显示，通过按比例缩小或原来的size使得图片长(宽)等于或小于View的长(宽)
-        lv_pushnumber(L, UIViewContentModeScaleAspectFit);
-        lv_setfield(L, -2, "CENTER_INSIDE");
-        
-        //ScaleType.FIT_CENTER 把图片按比例扩大(缩小)到View的宽度，居中显示
-        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
-        lv_setfield(L, -2, "FIT_CENTER");
-        
-        //ScaleType.FIT_END 把图片按比例扩大(缩小)到View的宽度，显示在View的下部分位置
-        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
-        lv_setfield(L, -2, "FIT_END");
-        
-        //ScaleType.FIT_START 把图片按比例扩大(缩小)到View的宽度，显示在View的上部分位置
-        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
-        lv_setfield(L, -2, "FIT_START");
-        
-        //ScaleType.FIT_XY 把图片按照指定的大小在View中显示
-        lv_pushnumber(L, UIViewContentModeScaleToFill);
-        lv_setfield(L, -2, "FIT_XY");
-        
-        //ScaleType.MATRIX 用matrix来绘制
-        lv_pushnumber(L, UIViewContentModeScaleAspectFill);
-        lv_setfield(L, -2, "MATRIX");
+        NSDictionary* v = nil;
+        v = @{
+              @"YES":@(YES),
+              @"Yes":@(YES),
+              @"yes":@(YES),
+              };
+        [LVUtil defineGlobal:@"Pinned" value:v L:L];
     }
-    {
-        lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "Interpolator", lib);
-        
-        lv_pushnumber(L, LVLinearInterpolator);
-        lv_setfield(L, -2, "LINEAR");
-        
-        lv_pushnumber(L, LVAccelerateInterpolator);
-        lv_setfield(L, -2, "ACCELERATE");
-        
-        lv_pushnumber(L, LVDecelerateInterpolator);
-        lv_setfield(L, -2, "DECELERATE");
-        
-        lv_pushnumber(L, LVAccelerateDecelerateInterpolator);
-        lv_setfield(L, -2, "ACCELERATE_DECELERATE");
-        
-        lv_pushnumber(L, LVAnticipateInterpolator);
-        lv_setfield(L, -2, "ANTICIPATE");
-        
-        lv_pushnumber(L, LVOvershootInterpolator);
-        lv_setfield(L, -2, "OVERSHOOT");
-        
-        lv_pushnumber(L, LVAnticipateOvershootInterpolator);
-        lv_setfield(L, -2, "ANTICIPATE_OVERSHOOT");
-    }
-    {   // Pinned
-        lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "Pinned", lib);
-        
-        lv_pushboolean(L, YES);
-        lv_setfield(L, -2, "YES");
-        lv_pushboolean(L, YES);
-        lv_setfield(L, -2, "Yes");
-        lv_pushboolean(L, YES);
-        lv_setfield(L, -2, "yes");
-        lv_pushboolean(L, YES);
-    }
-    {
-        // 震动
-        lv_pushcfunction(L, vibrate);
-        lv_setglobal(L, "Vibrate");
-    }
-    {
-        // create class api
-        lv_pushcfunction(L, class);
-        lv_setglobal(L, "__class__");
-    }
+    
+    // 震动
+    [LVUtil defineGlobal:@"Vibrate" func:vibrate L:L];
+    
+    // create class api
+    [LVUtil defineGlobal:@"__class__" func:lvClassLoader L:L];
     return 0;
 }
 

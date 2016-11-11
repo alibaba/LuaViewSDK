@@ -1,13 +1,13 @@
 //
-//  LVRotationGestureRecognizer.m
+//  LVPinchGestureRecognizer.m
 //  LVSDK
 //
 //  Created by 董希成 on 15/3/9.
 //  Copyright (c) 2015年 dongxicheng. All rights reserved.
 //
 
-#import "LVRotationGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVPinchGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,11 +15,11 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVRotationGestureRecognizer
+@implementation LVPinchGesture
 
 -(void) dealloc{
-    LVLog(@"LVRotationGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    LVLog(@"LVPinchGesture.dealloc");
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -30,7 +30,7 @@
     return self;
 }
 
--(void) handleGesture:(LVRotationGestureRecognizer*)sender {
+-(void) handleGesture:(LVPinchGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -39,11 +39,12 @@
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewPinchGestureRecognizer (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPinchGesture class]];
     {
-        LVRotationGestureRecognizer* gesture = [[LVRotationGestureRecognizer alloc] init:L];
+        LVPinchGesture* gesture = [[c alloc] init:L];
         
-        if( lv_type(L, 1) == LV_TFUNCTION ) {
+        if( lv_type(L, 1) != LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         
@@ -52,43 +53,39 @@ static int lvNewGestureRecognizer (lv_State *L) {
             gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
-            lvL_getmetatable(L, META_TABLE_RotaionGesture );
+            lvL_getmetatable(L, META_TABLE_PinchGesture );
             lv_setmetatable(L, -2);
         }
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-static int rotation (lv_State *L) {
+static int scale (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
-        LVRotationGestureRecognizer* gesture =  (__bridge LVRotationGestureRecognizer *)(user->object);
-        float s = gesture.rotation;
+        LVPinchGesture* gesture =  (__bridge LVPinchGesture *)(user->object);
+        float s = gesture.scale;
         lv_pushnumber(L, s);
         return 1;
     }
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "RotationGesture");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewPinchGestureRecognizer globalName:globalName defaultName:@"PinchGesture"];
     
-    lv_createClassMetaTable(L ,META_TABLE_RotaionGesture);
+    lv_createClassMetaTable(L ,META_TABLE_PinchGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
         const struct lvL_reg memberFunctions [] = {
-            {"rotation", rotation},
+            {"scale", scale},
             {NULL, NULL}
         };
         lvL_openlib(L, NULL, memberFunctions, 0);
     }
     return 1;
 }
-
 
 @end

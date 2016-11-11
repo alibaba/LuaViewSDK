@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 dongxicheng. All rights reserved.
 //
 
-#import "LVLongPressGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVLongPressGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,12 +15,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVLongPressGestureRecognizer
+@implementation LVLongPressGesture
 
 
 -(void) dealloc{
-    LVLog(@"LVLongPressGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    LVLog(@"LVLongPressGesture.dealloc");
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -31,7 +31,7 @@
     return self;
 }
 
--(void) handleGesture:(LVLongPressGestureRecognizer*)sender {
+-(void) handleGesture:(LVLongPressGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -41,9 +41,11 @@
 }
 
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewLongGesture (lv_State *L) {
     {
-        LVLongPressGestureRecognizer* gesture = [[LVLongPressGestureRecognizer alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVLongPressGesture class]];
+        
+        LVLongPressGesture* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) != LV_TNIL ) {
             [LVUtil registryValue:L key:gesture stack:1];
@@ -64,7 +66,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
 static int setTouchCount (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
-        LVLongPressGestureRecognizer* gesture =  (__bridge LVLongPressGestureRecognizer *)(user->object);
+        LVLongPressGesture* gesture =  (__bridge LVLongPressGesture *)(user->object);
         if( lv_gettop(L)>=2 ){
             float num = lv_tonumber(L, 2);
             gesture.numberOfTouchesRequired = num;
@@ -78,15 +80,12 @@ static int setTouchCount (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewGestureRecognizer);
-        lv_setglobal(L, "LongPressGesture");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewLongGesture globalName:globalName defaultName:@"LongPressGesture"];
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
         const struct lvL_reg memberFunctions [] = {

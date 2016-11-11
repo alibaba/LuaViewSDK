@@ -34,21 +34,21 @@
 }
 
 #pragma -mark PageControl
-static int lvNewPageControl (lv_State *L) {
+static int lvNewPagerIndicator (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerIndicator class]];
+    
+    LVPagerIndicator* pageControl = [[c alloc] init:L];
+    
     {
-        LVPagerIndicator* pageControl = [[LVPagerIndicator alloc] init:L];
+        NEW_USERDATA(userData, View);
+        userData->object = CFBridgingRetain(pageControl);
         
-        {
-            NEW_USERDATA(userData, View);
-            userData->object = CFBridgingRetain(pageControl);
-            
-            lvL_getmetatable(L, META_TABLE_UIPageControl );
-            lv_setmetatable(L, -2);
-        }
-        LView* view = (__bridge LView *)(L->lView);
-        if( view ){
-            [view containerAddSubview:pageControl];
-        }
+        lvL_getmetatable(L, META_TABLE_UIPageControl );
+        lv_setmetatable(L, -2);
+    }
+    LView* view = (__bridge LView *)(L->lView);
+    if( view ){
+        [view containerAddSubview:pageControl];
     }
     return 1; /* new userdatum is already on the stack */
 }
@@ -138,11 +138,9 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewPageControl);
-        lv_setglobal(L, "PagerIndicator");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewPagerIndicator globalName:globalName defaultName:@"PagerIndicator"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         

@@ -20,9 +20,7 @@
 
 
 -(id) init:(lv_State*) l;
-+(int) classDefine: (lv_State *)L ;
-
-+ (void) setDefaultStyle:(Class) c;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 -(void) setIndicator:(LVPagerIndicator*) indicator;
 -(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation;

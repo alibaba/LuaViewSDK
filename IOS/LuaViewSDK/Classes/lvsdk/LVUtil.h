@@ -200,6 +200,14 @@ int lv_callbackFunction(lv_State* l, const char* functionName);
 
 BOOL lv_objcEqual(id obj1, id obj2);
 
++(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
+
++(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass;
+
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L;
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L;
+
+
 @end
 
 

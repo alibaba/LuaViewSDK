@@ -69,7 +69,9 @@ static int lvNewDate (lv_State *L) {
             date = [dateformatter dateFromString:string];
         }
         {
-            LVDate* d = [[LVDate alloc] init:date];
+            Class c = [LVUtil upvalueClass:L defaultClass:[LVDate class]];
+            
+            LVDate* d = [[c alloc] init:date];
             NEW_USERDATA(userData, Date );
             userData->object = CFBridgingRetain(d);
             
@@ -159,11 +161,9 @@ static int timeInterval (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewDate);
-        lv_setglobal(L, "Date");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewDate globalName:globalName defaultName:@"Date"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__gc",  __GC },
         {"__sub", __sub},

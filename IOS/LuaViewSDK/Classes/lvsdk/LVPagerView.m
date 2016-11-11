@@ -320,21 +320,12 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     [self setContentOffset:self.nextOffset animated:NO];
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVPagerView class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark lvNewCollectionView
-static int lvNewPageView (lv_State *L) {
-    if( g_class == nil ) {
-        g_class = [LVPagerView class];
-    }
+static int lvNewPagerView (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
+    
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
-        LVPagerView* pageView = [[g_class alloc] init:L];
+        LVPagerView* pageView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageView);
@@ -536,11 +527,9 @@ static int __gc (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewPageView);
-        lv_setglobal(L, "PagerView");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewPagerView globalName:globalName defaultName:@"PagerView"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },

@@ -86,7 +86,9 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 #pragma -mark Timer
 
 static int lvNewTimer (lv_State *L) {
-    LVTimer* timer = [[LVTimer alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTimer class]];
+    
+    LVTimer* timer = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, Timer);
         userData->object = CFBridgingRetain(timer);
@@ -201,11 +203,9 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewTimer);
-        lv_setglobal(L, "Timer");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewTimer globalName:globalName defaultName:@"Timer"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"callback",setCallback},
         

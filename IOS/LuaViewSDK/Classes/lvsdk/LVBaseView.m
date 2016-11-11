@@ -1556,7 +1556,9 @@ static const struct lvL_reg luaViewMemberFunctions [] = {
 
 #pragma -mark UIView
 static int lvNewView (lv_State *L) {
-    LVBaseView* view = [[LVBaseView alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVBaseView class]];
+    
+    LVBaseView* view = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(view);
@@ -1573,11 +1575,9 @@ static int lvNewView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewView);
-        lv_setglobal(L, "View");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewView globalName:globalName defaultName:@"View"];
+    
     lv_createClassMetaTable(L, META_TABLE_UIView);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);

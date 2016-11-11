@@ -16,7 +16,7 @@
 
 -(id) init:(lv_State*) l argNum:(int)num;
 
-+(int) classDefine: (lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 
 @end

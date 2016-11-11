@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVGestureRecognizer.h"
+#import "LVGesture.h"
 #import "lV.h"
 #import "lVauxlib.h"
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVGestureRecognizer
+@implementation LVGesture
 
 
 static void releaseUserData(LVUserDataInfo * user){
@@ -79,10 +79,12 @@ static const struct lvL_reg baseMemberFunctions [] = {
 +(const lvL_reg*) baseMemberFunctions{
     return baseMemberFunctions;
 }
+
 +(void) releaseUD:(LVUserDataInfo *) user{
     releaseUserData(user);
 }
-+(int) classDefine:(lv_State *)L {
+
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     //    typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
     //        UIGestureRecognizerStatePossible,
     //        UIGestureRecognizerStateBegan,
@@ -92,29 +94,16 @@ static const struct lvL_reg baseMemberFunctions [] = {
     //        UIGestureRecognizerStateFailed
     //    };
     lv_settop(L, 0);
-    const struct lvL_reg lib [] = {
-        {NULL, NULL}
-    };
-    lvL_register(L, "GestureState", lib);
-    
-    lv_pushnumber(L, UIGestureRecognizerStatePossible);
-    lv_setfield(L, -2, "POSSIBLE");
-    
-    lv_pushnumber(L, UIGestureRecognizerStateBegan);
-    lv_setfield(L, -2, "BEGIN");
-    
-    lv_pushnumber(L, UIGestureRecognizerStateChanged);
-    lv_setfield(L, -2, "CHANGED");
-    
-    lv_pushnumber(L, UIGestureRecognizerStateEnded);
-    lv_setfield(L, -2, "END");
-    
-    lv_pushnumber(L, UIGestureRecognizerStateCancelled);
-    lv_setfield(L, -2, "CANCEL");
-    
-    lv_pushnumber(L, UIGestureRecognizerStateFailed);
-    lv_setfield(L, -2, "FAILED");
-    
+    NSDictionary* v = nil;
+    v = @{
+          @"POSSIBLE":@(UIGestureRecognizerStatePossible),
+          @"BEGIN":@(UIGestureRecognizerStateBegan),
+          @"CHANGED":@(UIGestureRecognizerStateChanged),
+          @"END":@(UIGestureRecognizerStateEnded),
+          @"CANCEL":@(UIGestureRecognizerStateCancelled),
+          @"FAILED":@(UIGestureRecognizerStateFailed),
+          };
+    [LVUtil defineGlobal:@"GestureState" value:v L:L];
     return 0;
 }
 @end

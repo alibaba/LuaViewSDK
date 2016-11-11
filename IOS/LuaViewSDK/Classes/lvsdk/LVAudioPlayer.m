@@ -85,7 +85,9 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 
 static int lvNewAudioPlayer (lv_State *L) {
     if( lv_gettop(L)>=1 ) {
-        LVAudioPlayer* player = [[LVAudioPlayer alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
+        
+        LVAudioPlayer* player = [[c alloc] init:L];
         LView* lview = (__bridge LView *)(L->lView);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
@@ -145,11 +147,9 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewAudioPlayer);
-        lv_setglobal(L, "AudioPlayer");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewAudioPlayer globalName:globalName defaultName:@"AudioPlayer"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },

@@ -42,9 +42,10 @@
 
 #pragma -mark UILabel
 static int lvNewLabel(lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVLabel class]];
     {
         NSString* text = lv_paramString(L, 1);// 5
-        LVLabel* label = [[LVLabel alloc] init:text l:L];
+        LVLabel* label = [[c alloc] init:text l:L];
         
         {
             NEW_USERDATA(userData, View);
@@ -243,11 +244,9 @@ static int ellipsize (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewLabel);
-        lv_setglobal(L, "Label");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewLabel globalName:globalName defaultName:@"Label"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"text",    text},
         
