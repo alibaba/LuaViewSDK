@@ -97,23 +97,14 @@ static int direction (lv_State *L) {
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_settop(L, 0);
-        const struct lvL_reg lib [] = {
-            {NULL, NULL}
-        };
-        lvL_register(L, "GestureDirection", lib);
-        
-        
-        lv_pushnumber(L, UISwipeGestureRecognizerDirectionLeft);
-        lv_setfield(L, -2, "LEFT");
-        
-        lv_pushnumber(L, UISwipeGestureRecognizerDirectionRight);
-        lv_setfield(L, -2, "RIGHT");
-        
-        lv_pushnumber(L, UISwipeGestureRecognizerDirectionUp);
-        lv_setfield(L, -2, "UP");
-        
-        lv_pushnumber(L, UISwipeGestureRecognizerDirectionDown);
-        lv_setfield(L, -2, "DOWN");
+        NSDictionary* v = nil;
+        v = @{
+              @"LEFT":@(UISwipeGestureRecognizerDirectionLeft),
+              @"RIGHT":@(UISwipeGestureRecognizerDirectionRight),
+              @"UP":@(UISwipeGestureRecognizerDirectionUp),
+              @"DOWN":@(UISwipeGestureRecognizerDirectionDown),
+              };
+        [LVUtil defineGlobal:@"GestureDirection" value:v L:L];
     }
     
     [LVUtil reg:L clas:self cfunc:lvSwipeGestureRecognizer globalName:globalName defaultName:@"SwipeGesture"];
