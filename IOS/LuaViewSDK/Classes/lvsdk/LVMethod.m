@@ -54,11 +54,11 @@
         int luaArgsNum = lv_gettop(L);
         [invocation retainArguments];
         for( int i=2; (i<numberOfArguments) && (i<=luaArgsNum);  i++ ){// 传递 参数2, 参数3, ...
-            [LVTypeConvert setIvocation:invocation argIndex:i withLua:L stackID:i];
+            lv_setInvocationArgByLuaStack(invocation, i, L, i);
         }
         [invocation invoke];
         
-        return [LVTypeConvert pushInvocationReturnValue:invocation toLua:L];
+        return lv_pushInvocationReturnValueToLuaStack(invocation, L);
     }
     LVError(@"Not found Method: %@.%@",[obj class], self.selName );
     return 0;

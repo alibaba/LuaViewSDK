@@ -834,7 +834,7 @@
 				84A52BFF1AE798A100E464AC /* file */,
 				844317A51BC61CA000968368 /* navigation */,
 				844317A61BC61E3900968368 /* system */,
-				84CF566B1AE8EC0B00A49B36 /* externalLink */,
+				84CF566B1AE8EC0B00A49B36 /* objectbox */,
 				84A52C011AE7992600E464AC /* util */,
 				846481AC1A64C61F00DE6204 /* LVHeads.h */,
 				846481AD1A64C61F00DE6204 /* LVHeads.m */,
@@ -1012,7 +1012,7 @@
 			name = "Support Files";
 			sourceTree = "<group>";
 		};
-		84CF566B1AE8EC0B00A49B36 /* externalLink */ = {
+		84CF566B1AE8EC0B00A49B36 /* objectbox */ = {
 			isa = PBXGroup;
 			children = (
 				84CF56781AEA15A500A49B36 /* LVMethod.h */,
@@ -1026,7 +1026,7 @@
 				84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */,
 				84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */,
 			);
-			name = externalLink;
+			name = objectbox;
 			sourceTree = "<group>";
 		};
 		84D446EF1AF75BB6000A3911 /* PKG */ = {

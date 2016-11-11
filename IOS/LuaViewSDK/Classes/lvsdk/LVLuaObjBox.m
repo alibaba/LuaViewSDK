@@ -172,14 +172,14 @@ static BOOL lv_object_isProtocol(id obj ) {
         const char* keyName = key.UTF8String;
         if ( lv_isLuaObjectHaveProperty(L, -1, keyName) ) {
             for ( int i=2; i<argsNum; i++){
-                [LVTypeConvert pushInvocation:invocation argIndex:i toLua:L];
+                lv_pushInvocationArgToLuaStack(invocation, i, L);
                 luaArgNum ++;
             }
             [LVUtil pushRegistryValue:L key:self];
             [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LV_TNONE];
             if ( haveReturnValue ) {
                 [invocation retainArguments];
-                [LVTypeConvert setInvocationReturnValue:invocation withLua:L stackID:-1];
+                lv_setInvocationReturnValueByLuaStack(invocation, L, -1);
             }
             return ;
         } else if( !haveReturnValue && argsNum==3 && key.length>3 &&[key hasPrefix:@"set"] ){
@@ -187,7 +187,7 @@ static BOOL lv_object_isProtocol(id obj ) {
             const char* propertyName = property.UTF8String;
             if ( lv_isLuaObjectHaveProperty(L, -1, propertyName) ) {
                 lv_pushstring(L, propertyName);
-                [LVTypeConvert pushInvocation:invocation argIndex:2 toLua:L];
+                lv_pushInvocationArgToLuaStack(invocation, 2, L);
                 lv_settable(L, -3);
                 return;
             }

@@ -12,14 +12,13 @@
 
 @interface LVTypeConvert : NSObject
 
-+ (int) pushInvocationReturnValue:(NSInvocation*) invocation toLua:(lv_State*)L;
-+ (id)  setInvocationReturnValue:(NSInvocation*) invocation withLua:(lv_State*)L stackID:(int)stackID;
+int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lv_State* L);
+id  lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lv_State* L, int stackID);
 
-+ (int) pushInvocation:(NSInvocation*) invocation argIndex:(int)index toLua:(lv_State*)L;
-+ (int) setIvocation:(NSInvocation*) invocation argIndex:(int)index withLua:(lv_State*)L stackID:(int) stackID;
+int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lv_State* L);
+int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lv_State* L, int stackID);
 
-
-int lv_setValueWithType(void* p, int index,double value, int type );
+int lv_setValueWithType(void* p, int index, double value, int type );
 double lv_getValueWithType(void* p, int index, int type );
 
 @end
