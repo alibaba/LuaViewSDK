@@ -39,7 +39,7 @@
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewPinchGestureRecognizer (lv_State *L) {
     {
         LVPinchGestureRecognizer* gesture = [[LVPinchGestureRecognizer alloc] init:L];
         
@@ -71,7 +71,7 @@ static int scale (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"PinchGesture"];
+    [LVUtil reg:L clas:self cfunc:lvNewPinchGestureRecognizer globalName:globalName defaultName:@"PinchGesture"];
     
     lv_createClassMetaTable(L ,META_TABLE_PinchGesture);
     

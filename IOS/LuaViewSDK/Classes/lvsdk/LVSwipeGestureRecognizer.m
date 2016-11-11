@@ -40,7 +40,7 @@
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvSwipeGestureRecognizer (lv_State *L) {
     {
         LVSwipeGestureRecognizer* gesture = [[LVSwipeGestureRecognizer alloc] init:L];
         
@@ -116,7 +116,7 @@ static int direction (lv_State *L) {
         lv_setfield(L, -2, "DOWN");
     }
     
-    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"SwipeGesture"];
+    [LVUtil reg:L clas:self cfunc:lvSwipeGestureRecognizer globalName:globalName defaultName:@"SwipeGesture"];
     
     lv_createClassMetaTable(L ,META_TABLE_SwipeGesture);
     lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);

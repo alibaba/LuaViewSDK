@@ -39,7 +39,7 @@
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewPanGestureRecognizer (lv_State *L) {
     {
         LVPanGestureRecognizer* gesture = [[LVPanGestureRecognizer alloc] init:L];
         
@@ -61,7 +61,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
 
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"PanGesture"];
+    [LVUtil reg:L clas:self cfunc:lvNewPanGestureRecognizer globalName:globalName defaultName:@"PanGesture"];
     
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}

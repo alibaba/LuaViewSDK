@@ -41,7 +41,7 @@
 }
 
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewLongGestureRecognizer (lv_State *L) {
     {
         LVLongPressGestureRecognizer* gesture = [[LVLongPressGestureRecognizer alloc] init:L];
         
@@ -79,7 +79,7 @@ static int setTouchCount (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"LongPressGesture"];
+    [LVUtil reg:L clas:self cfunc:lvNewLongGestureRecognizer globalName:globalName defaultName:@"LongPressGesture"];
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
     

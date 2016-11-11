@@ -42,7 +42,7 @@
     }
 }
 
-static int lvNewGestureRecognizer (lv_State *L) {
+static int lvNewTapGestureRecognizer (lv_State *L) {
     {
         LVTapGestureRecognizer* gesture = [[LVTapGestureRecognizer alloc] init:L];
         
@@ -63,7 +63,7 @@ static int lvNewGestureRecognizer (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewGestureRecognizer globalName:globalName defaultName:@"TapGesture"];
+    [LVUtil reg:L clas:self cfunc:lvNewTapGestureRecognizer globalName:globalName defaultName:@"TapGesture"];
     
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}
