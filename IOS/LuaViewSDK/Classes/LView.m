@@ -723,7 +723,7 @@ extern char g_debug_lua[];
     }
     if( [key isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(object)) ) {
         if( [object respondsToSelector:@selector(lvClassDefine:globalName:)] ) {
-            [object lvClassDefine:self.l globalName:key];
+            [object lvClassDefine:self.l globalName:(NSString*)key];
             return;
         }
     }
