@@ -43,8 +43,9 @@
 }
 
 static int lvNewTapGestureRecognizer (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTapGestureRecognizer class]];
     {
-        LVTapGestureRecognizer* gesture = [[LVTapGestureRecognizer alloc] init:L];
+        LVTapGestureRecognizer* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];

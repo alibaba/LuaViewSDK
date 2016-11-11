@@ -56,9 +56,11 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
 
 
 #pragma -mark downloader
-static int download (lv_State *L) {
+static int lvNewDownloader (lv_State *L) {
     if( lv_gettop(L)>=2 ) {
-        LVDownloader* downloader = [[LVDownloader alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVDownloader class]];
+        
+        LVDownloader* downloader = [[c alloc] init:L];
         NSString* url = lv_paramString(L, 1);     // 1: url
         //NSString* fileName = lvL_paramString(L, 2);// 2: fileName
                                                    // 3: callback
@@ -133,7 +135,7 @@ static int PathOfResource (lv_State *L) {
         lv_pushcfunction(L, PathOfResource);
         lv_setglobal(L, "PathOfResource");
     }
-    [LVUtil reg:L clas:self cfunc:download globalName:globalName defaultName:@"Download"];
+    [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"];
     const struct lvL_reg memberFunctions [] = {
         {"__gc", __gc },
         

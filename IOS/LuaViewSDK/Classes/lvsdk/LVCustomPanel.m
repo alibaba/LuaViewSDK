@@ -64,6 +64,7 @@
 
 static int lvNewCustomPanelView (lv_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomPanel class]];
+    
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
         r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));

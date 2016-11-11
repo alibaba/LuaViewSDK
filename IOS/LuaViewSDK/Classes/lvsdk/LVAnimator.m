@@ -39,7 +39,9 @@ static char *callbackKeys[] = { "", "onStart", "onEnd", "onCancel", "onPause", "
 }
 
 static int lvNewAnimator(lv_State *L) {
-    LVAnimator *animator = [LVAnimator new];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVAnimator class]];
+    
+    LVAnimator *animator = [c new];
 
     NEW_USERDATA(userData, Animator);
     userData->object = CFBridgingRetain(animator);

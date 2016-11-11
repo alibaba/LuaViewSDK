@@ -40,8 +40,9 @@
 }
 
 static int lvNewPinchGestureRecognizer (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPinchGestureRecognizer class]];
     {
-        LVPinchGestureRecognizer* gesture = [[LVPinchGestureRecognizer alloc] init:L];
+        LVPinchGestureRecognizer* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) != LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];

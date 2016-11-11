@@ -50,7 +50,9 @@ static int lvDataGC (lv_State *L) {
 }
 
 static int lvNewData (lv_State *L) {
-    LVData* data = [[LVData alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVData class]];
+    
+    LVData* data = [[c alloc] init:L];
     int argN = lv_gettop(L);
     if( argN>0 ) {
         if ( lv_type(L, 1)==LV_TSTRING ) {// 支持字符串转 NSData

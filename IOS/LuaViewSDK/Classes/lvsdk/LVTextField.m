@@ -87,7 +87,9 @@
 
 #pragma -mark lvNewTextField
 static int lvNewTextField (lv_State *L) {
-    LVTextField* textFiled = [[LVTextField alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTextField class]];
+    
+    LVTextField* textFiled = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(textFiled);

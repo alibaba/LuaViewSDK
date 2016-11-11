@@ -69,7 +69,9 @@ static int lvNewDate (lv_State *L) {
             date = [dateformatter dateFromString:string];
         }
         {
-            LVDate* d = [[LVDate alloc] init:date];
+            Class c = [LVUtil upvalueClass:L defaultClass:[LVDate class]];
+            
+            LVDate* d = [[c alloc] init:date];
             NEW_USERDATA(userData, Date );
             userData->object = CFBridgingRetain(d);
             

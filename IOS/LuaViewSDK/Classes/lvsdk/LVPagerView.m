@@ -321,7 +321,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 #pragma -mark lvNewCollectionView
-static int lvNewPageView (lv_State *L) {
+static int lvNewPagerView (lv_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
     
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
@@ -528,7 +528,7 @@ static int __gc (lv_State *L) {
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewPageView globalName:globalName defaultName:@"PagerView"];
+    [LVUtil reg:L clas:self cfunc:lvNewPagerView globalName:globalName defaultName:@"PagerView"];
     
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},

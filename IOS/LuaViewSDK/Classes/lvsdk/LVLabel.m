@@ -42,9 +42,10 @@
 
 #pragma -mark UILabel
 static int lvNewLabel(lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVLabel class]];
     {
         NSString* text = lv_paramString(L, 1);// 5
-        LVLabel* label = [[LVLabel alloc] init:text l:L];
+        LVLabel* label = [[c alloc] init:text l:L];
         
         {
             NEW_USERDATA(userData, View);

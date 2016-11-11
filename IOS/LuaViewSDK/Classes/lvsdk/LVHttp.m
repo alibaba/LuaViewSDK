@@ -133,7 +133,9 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 }
 
 static int lvNewHttpObject (lv_State *L ) {
-    LVHttp* http = [[LVHttp alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVHttp class]];
+    
+    LVHttp* http = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, Http);
         userData->object = CFBridgingRetain(http);

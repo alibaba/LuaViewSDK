@@ -41,8 +41,9 @@
 }
 
 static int lvSwipeGestureRecognizer (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVSwipeGestureRecognizer class]];
     {
-        LVSwipeGestureRecognizer* gesture = [[LVSwipeGestureRecognizer alloc] init:L];
+        LVSwipeGestureRecognizer* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
