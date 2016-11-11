@@ -70,7 +70,7 @@
 		3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
 		3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
 		3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
-		3CFF77EE1C74740900847C05 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
+		3CFF77EE1C74740900847C05 /* LVExGlobalFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVExGlobalFunc.m */; };
 		3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
 		3CFF77F01C74740900847C05 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		3CFF77F11C74740900847C05 /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
@@ -166,7 +166,7 @@
 		84C1D80C1C16C3FA0058E974 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
 		84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
 		84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
-		84C1D80F1C16C3FA0058E974 /* LVRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVRegisterManager.m */; };
+		84C1D80F1C16C3FA0058E974 /* LVExGlobalFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVExGlobalFunc.m */; };
 		84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
 		84C1D8111C16C3FA0058E974 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
@@ -255,7 +255,7 @@
 		84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BC1A64C61F00DE6204 /* LVUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCF0391B44D91800AD723B /* LVTypeConvert.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVRegisterManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVExGlobalFunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AC1A64C61F00DE6204 /* LVHeads.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8701C16C44F0058E974 /* lV.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5AF1A63ED7C003E837D /* lV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8711C16C44F0058E974 /* lVapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B11A63ED7C003E837D /* lVapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -437,8 +437,8 @@
 		842532461ADCB7C0003C05BF /* LVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAudioPlayer.m; sourceTree = "<group>"; };
 		8425324A1ADCBD3A003C05BF /* LVDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDownloader.h; sourceTree = "<group>"; };
 		8425324B1ADCBD3A003C05BF /* LVDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDownloader.m; sourceTree = "<group>"; };
-		842D72671A6639A200936AD2 /* LVRegisterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRegisterManager.h; sourceTree = "<group>"; };
-		842D72681A6639A200936AD2 /* LVRegisterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRegisterManager.m; sourceTree = "<group>"; };
+		842D72671A6639A200936AD2 /* LVExGlobalFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExGlobalFunc.h; sourceTree = "<group>"; };
+		842D72681A6639A200936AD2 /* LVExGlobalFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExGlobalFunc.m; sourceTree = "<group>"; };
 		842D726C1A6643DB00936AD2 /* LVAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAlert.h; sourceTree = "<group>"; };
 		842D726D1A6643DB00936AD2 /* LVAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAlert.m; sourceTree = "<group>"; };
 		842ECCD41B71A3900034C3A2 /* TAGS_NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TAGS_NOTES.md; sourceTree = "<group>"; };
@@ -800,6 +800,8 @@
 		844317A61BC61E3900968368 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				842D72671A6639A200936AD2 /* LVExGlobalFunc.h */,
+				842D72681A6639A200936AD2 /* LVExGlobalFunc.m */,
 				8497083A1A6765B000E913F4 /* LVSystem.h */,
 				8497083B1A6765B000E913F4 /* LVSystem.m */,
 				840BCED81CB7602C00D816AD /* LVNetworkStatus.h */,
@@ -834,8 +836,6 @@
 				844317A61BC61E3900968368 /* system */,
 				84CF566B1AE8EC0B00A49B36 /* externalLink */,
 				84A52C011AE7992600E464AC /* util */,
-				842D72671A6639A200936AD2 /* LVRegisterManager.h */,
-				842D72681A6639A200936AD2 /* LVRegisterManager.m */,
 				846481AC1A64C61F00DE6204 /* LVHeads.h */,
 				846481AD1A64C61F00DE6204 /* LVHeads.m */,
 			);
@@ -1157,7 +1157,7 @@
 				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
 				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
 				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
-				84C1D86E1C16C44E0058E974 /* LVRegisterManager.h in Headers */,
+				84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */,
 				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
 				84C1D8891C16C4550058E974 /* LVBlock.h in Headers */,
 				84C1D8871C16C4540058E974 /* LView.h in Headers */,
@@ -1448,7 +1448,7 @@
 				3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */,
 				3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */,
 				BEEB28E21CA91B9500EC2D86 /* JUFLXLinearLayoutView.m in Sources */,
-				3CFF77EE1C74740900847C05 /* LVRegisterManager.m in Sources */,
+				3CFF77EE1C74740900847C05 /* LVExGlobalFunc.m in Sources */,
 				3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */,
 				91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */,
 				3CFF77F01C74740900847C05 /* LView.m in Sources */,
@@ -1581,7 +1581,7 @@
 				84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */,
 				BEEB28D61CA90EC200EC2D86 /* JUFLXLinearLayoutView.m in Sources */,
 				84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */,
-				84C1D80F1C16C3FA0058E974 /* LVRegisterManager.m in Sources */,
+				84C1D80F1C16C3FA0058E974 /* LVExGlobalFunc.m in Sources */,
 				91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */,
 				84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */,
 				84C1D8111C16C3FA0058E974 /* LView.m in Sources */,

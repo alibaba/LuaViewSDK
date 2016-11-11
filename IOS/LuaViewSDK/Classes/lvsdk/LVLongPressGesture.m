@@ -19,7 +19,7 @@
 
 
 -(void) dealloc{
-    LVLog(@"LVLongPressGestureRecognizer.dealloc");
+    LVLog(@"LVLongPressGesture.dealloc");
     [LVGesture releaseUD:_lv_userData];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LVRegisterManager.h"
+#import "LVExGlobalFunc.h"
 #import "LVUtil.h"
 #import "LVHeads.h"
 #import "lV.h"
@@ -20,7 +20,7 @@
 
 
 //------------------------------------------------------------------------
-@implementation LVRegisterManager
+@implementation LVExGlobalFunc
 
 
 #pragma -mark registryApi
@@ -150,10 +150,10 @@ static int loaderForLuaView (lv_State *L) {
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     LView* lView = (__bridge  LView *)(L->lView);
     // 注册静态全局方法和常量
-    [LVRegisterManager registryStaticMethod:L lView:lView];
+    [LVExGlobalFunc registryStaticMethod:L lView:lView];
     
     // 注册 系统对象window
-    [LVRegisterManager registryWindow:L lView:lView];
+    [LVExGlobalFunc registryWindow:L lView:lView];
     
     //外链注册器
     [LVNativeObjBox lvClassDefine:L globalName:nil];

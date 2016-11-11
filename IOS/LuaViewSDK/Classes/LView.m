@@ -7,7 +7,7 @@
 //
 
 #import "LView.h"
-#import "LVRegisterManager.h"
+#import "LVExGlobalFunc.h"
 #import "LVTimer.h"
 #import "LVDebuger.h"
 #import "lVtable.h"
@@ -262,7 +262,8 @@ extern char g_debug_lua[];
         self.l =  lvL_newstate();//lv_open();  /* opens */
         self.l->lView = (__bridge void *)(self);
         lvL_openlibs(self.l);
-        self.registerClasses =@[
+        
+        self.registerClasses = @[
                                 [LVSystem class],
                                 [LVData class],
                                 [LVStruct class],
@@ -298,7 +299,9 @@ extern char g_debug_lua[];
                                 [LVAudioPlayer class],
                                 [LVStyledString class],
                                 [LVNavigation class],
-                                [LVRegisterManager class],
+                                [LVExGlobalFunc class],
+                                [LVNativeObjBox class],
+                                [LVDebuger class],
                                 ];
         [self registerAllClass];
     }

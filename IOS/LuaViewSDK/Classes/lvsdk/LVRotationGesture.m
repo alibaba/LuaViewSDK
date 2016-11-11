@@ -18,7 +18,7 @@
 @implementation LVRotationGesture
 
 -(void) dealloc{
-    LVLog(@"LVRotationGestureRecognizer.dealloc");
+    LVLog(@"LVRotationGesture.dealloc");
     [LVGesture releaseUD:_lv_userData];
 }
 

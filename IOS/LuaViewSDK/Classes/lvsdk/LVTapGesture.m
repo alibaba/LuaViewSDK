@@ -19,7 +19,7 @@
 
 
 -(void) dealloc{
-    LVLog(@"LVTapGestureRecognizer.dealloc");
+    LVLog(@"LVTapGesture.dealloc");
     [LVGesture releaseUD:_lv_userData];
 }
 

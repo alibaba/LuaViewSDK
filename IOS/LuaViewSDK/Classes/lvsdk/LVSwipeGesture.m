@@ -19,7 +19,7 @@
 
 
 -(void) dealloc{
-    LVLog(@"LVSwipeGestureRecognizer.dealloc");
+    LVLog(@"LVSwipeGesture.dealloc");
     [LVGesture releaseUD:_lv_userData];
 }
 

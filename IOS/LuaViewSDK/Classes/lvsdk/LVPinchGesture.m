@@ -18,7 +18,7 @@
 @implementation LVPinchGesture
 
 -(void) dealloc{
-    LVLog(@"LVPinchGestureRecognizer.dealloc");
+    LVLog(@"LVPinchGesture.dealloc");
     [LVGesture releaseUD:_lv_userData];
 }
 
