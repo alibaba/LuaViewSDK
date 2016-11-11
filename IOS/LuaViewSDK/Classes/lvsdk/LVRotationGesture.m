@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 dongxicheng. All rights reserved.
 //
 
-#import "LVRotationGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVRotationGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,11 +15,11 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVRotationGestureRecognizer
+@implementation LVRotationGesture
 
 -(void) dealloc{
     LVLog(@"LVRotationGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -30,7 +30,7 @@
     return self;
 }
 
--(void) handleGesture:(LVRotationGestureRecognizer*)sender {
+-(void) handleGesture:(LVRotationGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -40,9 +40,9 @@
 }
 
 static int lvNewRotationGestureRecognizer (lv_State *L) {
-    Class c = [LVUtil upvalueClass:L defaultClass:[LVRotationGestureRecognizer class]];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVRotationGesture class]];
     {
-        LVRotationGestureRecognizer* gesture = [[c alloc] init:L];
+        LVRotationGesture* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
@@ -63,7 +63,7 @@ static int lvNewRotationGestureRecognizer (lv_State *L) {
 static int rotation (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
-        LVRotationGestureRecognizer* gesture =  (__bridge LVRotationGestureRecognizer *)(user->object);
+        LVRotationGesture* gesture =  (__bridge LVRotationGesture *)(user->object);
         float s = gesture.rotation;
         lv_pushnumber(L, s);
         return 1;
@@ -76,7 +76,7 @@ static int rotation (lv_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_RotaionGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
         const struct lvL_reg memberFunctions [] = {

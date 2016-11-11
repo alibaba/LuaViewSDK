@@ -1,13 +1,13 @@
 //
-//  LVPinchGestureRecognizer.m
+//  LVLongPressGestureRecognizer.m
 //  LVSDK
 //
-//  Created by 董希成 on 15/3/9.
+//  Created by 城西 on 15/3/9.
 //  Copyright (c) 2015年 dongxicheng. All rights reserved.
 //
 
-#import "LVPinchGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVLongPressGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,11 +15,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVPinchGestureRecognizer
+@implementation LVLongPressGesture
+
 
 -(void) dealloc{
-    LVLog(@"LVPinchGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    LVLog(@"LVLongPressGestureRecognizer.dealloc");
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -30,7 +31,7 @@
     return self;
 }
 
--(void) handleGesture:(LVPinchGestureRecognizer*)sender {
+-(void) handleGesture:(LVLongPressGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -39,12 +40,14 @@
     }
 }
 
-static int lvNewPinchGestureRecognizer (lv_State *L) {
-    Class c = [LVUtil upvalueClass:L defaultClass:[LVPinchGestureRecognizer class]];
+
+static int lvNewLongGesture (lv_State *L) {
     {
-        LVPinchGestureRecognizer* gesture = [[c alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVLongPressGesture class]];
         
-        if( lv_type(L, 1) != LV_TFUNCTION ) {
+        LVLongPressGesture* gesture = [[c alloc] init:L];
+        
+        if( lv_type(L, 1) != LV_TNIL ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         
@@ -53,39 +56,46 @@ static int lvNewPinchGestureRecognizer (lv_State *L) {
             gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
-            lvL_getmetatable(L, META_TABLE_PinchGesture );
+            lvL_getmetatable(L, META_TABLE_LongPressGesture );
             lv_setmetatable(L, -2);
         }
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-static int scale (lv_State *L) {
+static int setTouchCount (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
-        LVPinchGestureRecognizer* gesture =  (__bridge LVPinchGestureRecognizer *)(user->object);
-        float s = gesture.scale;
-        lv_pushnumber(L, s);
-        return 1;
+        LVLongPressGesture* gesture =  (__bridge LVLongPressGesture *)(user->object);
+        if( lv_gettop(L)>=2 ){
+            float num = lv_tonumber(L, 2);
+            gesture.numberOfTouchesRequired = num;
+            return 0;
+        } else {
+            float num = gesture.numberOfTouchesRequired;
+            lv_pushnumber(L, num);
+            return 1;
+        }
     }
     return 0;
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewPinchGestureRecognizer globalName:globalName defaultName:@"PinchGesture"];
+    [LVUtil reg:L clas:self cfunc:lvNewLongGesture globalName:globalName defaultName:@"LongPressGesture"];
     
-    lv_createClassMetaTable(L ,META_TABLE_PinchGesture);
+    lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
         const struct lvL_reg memberFunctions [] = {
-            {"scale", scale},
+            {"touchCount",     setTouchCount},
             {NULL, NULL}
         };
         lvL_openlib(L, NULL, memberFunctions, 0);
     }
     return 1;
 }
+
 
 @end

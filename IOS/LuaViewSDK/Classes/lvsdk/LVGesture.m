@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVGestureRecognizer.h"
+#import "LVGesture.h"
 #import "lV.h"
 #import "lVauxlib.h"
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVGestureRecognizer
+@implementation LVGesture
 
 
 static void releaseUserData(LVUserDataInfo * user){

@@ -45,15 +45,15 @@
 #import "LVAlert.h"
 #import "LVSystem.h"
 #import "LVDB.h"
-#import "LVGestureRecognizer.h"
-#import "LVTapGestureRecognizer.h"
-#import "LVPanGestureRecognizer.h"
-#import "LVPinchGestureRecognizer.h"
-#import "LVRotationGestureRecognizer.h"
+#import "LVGesture.h"
+#import "LVTapGesture.h"
+#import "LVPanGesture.h"
+#import "LVPinchGesture.h"
+#import "LVRotationGesture.h"
 #import "LVHttp.h"
 #import "LVData.h"
-#import "LVSwipeGestureRecognizer.h"
-#import "LVLongPressGestureRecognizer.h"
+#import "LVSwipeGesture.h"
+#import "LVLongPressGesture.h"
 #import "LVDebuger.h"
 #import "LVDownloader.h"
 #import "LVAudioPlayer.h"
@@ -284,13 +284,13 @@ extern char g_debug_lua[];
                                 [LVDate class],
                                 [LVAlert class],
                                 [LVDB class],
-                                [LVGestureRecognizer class],
-                                [LVTapGestureRecognizer class],
-                                [LVPinchGestureRecognizer class],
-                                [LVRotationGestureRecognizer class],
-                                [LVSwipeGestureRecognizer class],
-                                [LVLongPressGestureRecognizer class],
-                                [LVPanGestureRecognizer class],
+                                [LVGesture class],
+                                [LVTapGesture class],
+                                [LVPinchGesture class],
+                                [LVRotationGesture class],
+                                [LVSwipeGesture class],
+                                [LVLongPressGesture class],
+                                [LVPanGesture class],
                                 [LVLoadingIndicator class],
                                 [LVHttp class],
                                 [LVDownloader class],

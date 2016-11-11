@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVPanGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVPanGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,11 +15,11 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVPanGestureRecognizer
+@implementation LVPanGesture
 
 
 -(void) dealloc{
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -30,7 +30,7 @@
     return self;
 }
 
--(void) handleGesture:(LVPanGestureRecognizer*)sender {
+-(void) handleGesture:(LVPanGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -40,9 +40,9 @@
 }
 
 static int lvNewPanGestureRecognizer (lv_State *L) {
-    Class c = [LVUtil upvalueClass:L defaultClass:[LVPanGestureRecognizer class]];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPanGesture class]];
     {
-        LVPanGestureRecognizer* gesture = [[c alloc] init:L];
+        LVPanGesture* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
@@ -70,7 +70,7 @@ static int lvNewPanGestureRecognizer (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_PanGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dongxicheng. All rights reserved.
 //
 
-#import "LVTapGestureRecognizer.h"
-#import "LVGestureRecognizer.h"
+#import "LVTapGesture.h"
+#import "LVGesture.h"
 #import "LView.h"
 #import "lV.h"
 #import "lVauxlib.h"
@@ -15,12 +15,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-@implementation LVTapGestureRecognizer
+@implementation LVTapGesture
 
 
 -(void) dealloc{
     LVLog(@"LVTapGestureRecognizer.dealloc");
-    [LVGestureRecognizer releaseUD:_lv_userData];
+    [LVGesture releaseUD:_lv_userData];
 }
 
 -(id) init:(lv_State*) l{
@@ -33,7 +33,7 @@
 
 
 
--(void) handleGesture:(LVTapGestureRecognizer*)sender {
+-(void) handleGesture:(LVTapGesture*)sender {
     lv_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
@@ -43,9 +43,9 @@
 }
 
 static int lvNewTapGestureRecognizer (lv_State *L) {
-    Class c = [LVUtil upvalueClass:L defaultClass:[LVTapGestureRecognizer class]];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTapGesture class]];
     {
-        LVTapGestureRecognizer* gesture = [[c alloc] init:L];
+        LVTapGesture* gesture = [[c alloc] init:L];
         
         if( lv_type(L, 1) == LV_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
@@ -72,7 +72,7 @@ static int lvNewTapGestureRecognizer (lv_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_TapGesture);
     
-    lvL_openlib(L, NULL, [LVGestureRecognizer baseMemberFunctions], 0);
+    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
