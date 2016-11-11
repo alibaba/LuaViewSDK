@@ -25,6 +25,4 @@
 
 -(void) lvButtonCallBack;
 
-+ (void) setDefaultStyle:(Class) c;
-
 @end

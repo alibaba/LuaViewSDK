@@ -58,21 +58,12 @@
     [self lv_runCallBack:STR_ON_LAYOUT];
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVScrollView class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark ScrollView
 static int lvNewScrollView (lv_State *L) {
     {
-        if( g_class == nil )
-            g_class = [LVScrollView class];
-        LVScrollView* scrollView = [[g_class alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVScrollView class]];
         
+        LVScrollView* scrollView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(scrollView);

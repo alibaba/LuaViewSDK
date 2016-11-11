@@ -22,12 +22,6 @@
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
-/*
- * 修改LVImageView
- */
-+ (void) setDefaultStyle:(Class) c;
-
-
 //--------------------------------------
 -(void) createWebView;
 -(BOOL) canGoBack;

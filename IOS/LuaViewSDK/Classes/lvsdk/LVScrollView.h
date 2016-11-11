@@ -23,8 +23,6 @@
 
 +(const struct lvL_reg*) memberFunctions;
 
-+ (void) setDefaultStyle:(Class) c;
-
 @property(nonatomic,weak) id lvScrollViewDelegate;
 
 @end

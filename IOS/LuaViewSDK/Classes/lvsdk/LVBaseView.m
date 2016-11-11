@@ -1556,7 +1556,9 @@ static const struct lvL_reg luaViewMemberFunctions [] = {
 
 #pragma -mark UIView
 static int lvNewView (lv_State *L) {
-    LVBaseView* view = [[LVBaseView alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVBaseView class]];
+    
+    LVBaseView* view = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(view);

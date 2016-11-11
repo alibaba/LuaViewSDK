@@ -63,21 +63,12 @@
     }
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVButton class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark Button
 static int lvNewButton (lv_State *L) {
-    if( g_class == nil ){
-        g_class = [LVButton class];
-    }
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVButton class]];
+    
     {
-        LVButton* button = [[g_class alloc] init:L];
+        LVButton* button = [[c alloc] init:L];
         {
             NEW_USERDATA(userData, View);
             userData->object = CFBridgingRetain(button);

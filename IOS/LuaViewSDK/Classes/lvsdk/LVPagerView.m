@@ -320,21 +320,12 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     [self setContentOffset:self.nextOffset animated:NO];
 }
 
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVPagerView class]] ) {
-        g_class = c;
-    }
-}
-
 #pragma -mark lvNewCollectionView
 static int lvNewPageView (lv_State *L) {
-    if( g_class == nil ) {
-        g_class = [LVPagerView class];
-    }
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
+    
     if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
-        LVPagerView* pageView = [[g_class alloc] init:L];
+        LVPagerView* pageView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageView);
