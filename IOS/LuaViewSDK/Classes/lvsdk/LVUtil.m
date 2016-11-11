@@ -817,6 +817,26 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return c;
 }
 
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L {
+    if( globalName && value ) {
+        lv_checkstack(L, 12);
+        lv_pushNativeObject(L, value);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Value");
+    }
+}
+
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L {
+    if( globalName && func ) {
+        lv_checkstack(L, 12);
+        lv_pushcfunction(L, func);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Function");
+    }
+}
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;

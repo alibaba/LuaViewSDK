@@ -204,6 +204,9 @@ BOOL lv_objcEqual(id obj1, id obj2);
 
 +(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass;
 
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L;
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L;
+
 
 @end
 
