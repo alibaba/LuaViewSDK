@@ -24,9 +24,9 @@ collectionView = RefreshCollectionView {
         Id = function ( section, row )
             if( section == 1 ) then
                 if (row == 2) then
-                    return "PinnedCell1", Pinned.YES;
+                    return "PinnedScrollCell", Pinned.YES;
                 elseif (row == 8) then
-                    return "PinnedScrollCell", Pinned.YES
+                    return "PinnedCell1", Pinned.YES
                 else
                     return "ImageAndLabel";
                 end
@@ -40,7 +40,7 @@ collectionView = RefreshCollectionView {
         end,
         PinnedScrollCell = {
             Size = function(section, row)
-                return w, 70;
+                return w, 60;
             end,
             Init = function(cell, section, row)
                 cell.scrollView = HScrollView();
@@ -58,6 +58,7 @@ collectionView = RefreshCollectionView {
                     view.callback(
                         function()
                             Toast(btn.text())
+                            cell.window.backgroundColor(0xf3ff97)
                         end
                     )
                     view.addView(btn)
@@ -73,7 +74,7 @@ collectionView = RefreshCollectionView {
                 return w, 70;
             end,
             Init = function(cell, section, row)
-                print("tuoli PinnedCell1 init")
+--                print("tuoli PinnedCell1 init")
                 cell.button = Button();
                 cell.button.frame(150,0,100,60);
                 cell.button.callback(
@@ -91,7 +92,7 @@ collectionView = RefreshCollectionView {
                     end);
             end,
             Layout = function(cell, section, row)
-                print("tuoli PinnedCell1 layout")
+--                print("tuoli PinnedCell1 layout")
                 cell.window.backgroundColor(0x00ff00)
                 cell.title.text("测试");
             end,
@@ -214,5 +215,5 @@ collectionView = RefreshCollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
-collectionView.setMiniSpacing(10)
+--collectionView.setMiniSpacing(2)
 

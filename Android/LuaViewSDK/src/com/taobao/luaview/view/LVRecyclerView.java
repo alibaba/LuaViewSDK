@@ -14,11 +14,9 @@ import com.taobao.luaview.userdata.list.UDRecyclerView;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVRecyclerView;
-import com.taobao.luaview.view.interfaces.ILVView;
 import com.taobao.luaview.view.recyclerview.LVRecyclerViewAdapter;
 import com.taobao.luaview.view.recyclerview.RecyclerViewHelper;
 import com.taobao.luaview.view.recyclerview.decoration.DividerGridItemDecoration;
-import com.taobao.luaview.view.recyclerview.decoration.PinnedHeaderItemDecoration;
 import com.taobao.luaview.view.recyclerview.layout.LVGridLayoutManager;
 
 import org.luaj.vm2.Globals;
@@ -40,7 +38,7 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
     private RecyclerView.Adapter mAdapter;
     private LayoutManager mLayoutManager;
     private ItemDecoration mItemDecoration;
-    private int mSpacing;//间隔
+    private int mSpacing = 0;//间隔
 
     public static LVRecyclerView createVerticalView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         final LVRecyclerView lvRecyclerView = (LVRecyclerView) LayoutInflater.from(globals.getContext()).inflate(R.layout.lv_recyclerview_vertical, null);
@@ -76,27 +74,6 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         this.setAdapter(mAdapter);
         mLayoutManager = new LVGridLayoutManager(this);
         this.setLayoutManager(mLayoutManager);
-        PinnedHeaderItemDecoration decoration = new PinnedHeaderItemDecoration();
-        decoration.setHeaderClickListener(
-                new PinnedHeaderItemDecoration.OnHeaderClickAdapter() {
-                    @Override
-                    public void onHeaderClick(View view, int id, int position) {
-                        super.onHeaderClick(view, id, position);
-                        if (view instanceof ILVView && ((ILVView)view).getUserdata() != null) {
-                            ((ILVView)view).getUserdata().callOnClick();
-                        }
-                    }
-
-                    @Override
-                    public void onHeaderLongClick(View view, int id, int position) {
-                        super.onHeaderLongClick(view, id, position);
-                        if (view instanceof ILVView && ((ILVView)view).getUserdata() != null) {
-                            ((ILVView)view).getUserdata().callOnLongClick();
-                        }
-                    }
-                }
-        );
-        this.addItemDecoration(decoration);
         mLuaUserdata.initOnScrollCallback(this);
         this.setHasFixedSize(true);
         initViewHolderPool();

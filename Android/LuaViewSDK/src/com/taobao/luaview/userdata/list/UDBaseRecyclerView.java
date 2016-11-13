@@ -1,18 +1,27 @@
 package com.taobao.luaview.userdata.list;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.SparseIntArray;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.RelativeLayout;
 
+import com.taobao.android.luaview.R;
+import com.taobao.luaview.userdata.constants.UDPinned;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVRecyclerView;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * UDBaseRecyclerView 封装
@@ -25,6 +34,28 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     private static final int DEFAULT_MAX_SPAN = 1;
 
     private SparseIntArray mSpanSize;
+
+    private ViewGroup mRecyclerViewParent;
+
+    private int mCurrentPinnedPosition = -1;
+
+    private View mCurrentPinnedView;
+
+    private boolean mHasPinnedItemView = false;
+
+    // 哈希pinnedView与position,pinnedView是itemView的child
+    private HashMap<View, Integer> mPinnedViewPositionMaps = new HashMap<View, Integer>();
+    // 哈希position与pinnedView,pinnedView是itemView的child
+    private HashMap<Integer, View> mPositionPinnedViewMaps = new HashMap<Integer, View>();
+
+    //////// public variable
+
+    // 缓存所有itemView是否被Pinned标记的列表
+    public List<Boolean> mIsItemViewPinnedList = new ArrayList<Boolean>();
+    // 哈希被pinned标记的viewType, position
+    public HashMap<Integer, Integer> mPinnedViewTypePositionMaps = new HashMap<Integer, Integer>();
+    // 哈希被pinned标记的position,View
+    public HashMap<Integer, View> mPinnedPositionItemViewMaps = new HashMap<Integer, View>();
 
     public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
@@ -105,7 +136,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (view instanceof LVRecyclerView) {
             final LVRecyclerView lvRecyclerView = (LVRecyclerView) view;
             if (LuaUtil.isValid(mCallback) || mLazyLoad) {
-                lvRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                lvRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
                         updateAllChildScrollState(recyclerView, scrollState);
@@ -140,10 +171,255 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                             final int row = getRowInSectionByPosition(itemPosition);
                             LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "Scrolling", "scrolling"), LuaUtil.toLuaInt(section), LuaUtil.toLuaInt(row), valueOf(lvRecyclerView.getVisibleItemCount()));
                         }
+
+                        layoutPinnedView(lvRecyclerView);
                     }
                 });
             }
         }
+    }
+
+    private void layoutPinnedView(LVRecyclerView lvRecyclerView) {
+        if (!mHasPinnedItemView) {
+            return;
+        }
+
+        if (mRecyclerViewParent == null) {
+            mRecyclerViewParent = (ViewGroup) lvRecyclerView.getParent();
+        }
+
+        int firstVisiblePosition = findFirstVisiblePosition(lvRecyclerView.getLayoutManager());
+        int pinnedViewPosition = findPinnedViewPosition(firstVisiblePosition);
+        if (pinnedViewPosition >= 0 && mCurrentPinnedPosition != pinnedViewPosition) {
+            View itemView = mPinnedPositionItemViewMaps.get(pinnedViewPosition);
+            View itemViewChild = ((ViewGroup)itemView).getChildAt(0);
+            if (itemViewChild != null) {
+                if (itemView.getTop() <= 0) {
+                    // 从视图树中移除旧的mCurrentPinnedView
+                    if (mCurrentPinnedView != null) {
+                        ViewGroup parent = (ViewGroup) mCurrentPinnedView.getParent();
+                        if (parent != null && parent.equals(mRecyclerViewParent)) {
+                            parent.removeView(mCurrentPinnedView);
+                        }
+                    }
+
+                    // 移除itemViewChild之前,先让itemView占据一样的宽高
+                    itemView.getLayoutParams().width = itemViewChild.getLayoutParams().width;
+                    itemView.getLayoutParams().height = itemViewChild.getLayoutParams().height;
+                    ((ViewGroup) itemView).removeView(itemViewChild);
+                    // 把itemViewChild添加到lvRecyclerView所在父节点的一样的坐标
+                    RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) itemViewChild.getLayoutParams();
+                    paramsNew.leftMargin = (int) lvRecyclerView.getX();
+                    paramsNew.topMargin = (int) lvRecyclerView.getY();
+                    mRecyclerViewParent.addView(itemViewChild, paramsNew);
+                    mCurrentPinnedView = itemViewChild;
+                    mCurrentPinnedPosition = pinnedViewPosition;
+                    if (!mPinnedViewPositionMaps.containsKey(mCurrentPinnedView))
+                        mPinnedViewPositionMaps.put(mCurrentPinnedView, mCurrentPinnedPosition);
+
+                    if (!mPositionPinnedViewMaps.containsKey(mCurrentPinnedPosition))
+                        mPositionPinnedViewMaps.put(mCurrentPinnedPosition, mCurrentPinnedView);
+                }
+            } else {
+                // 从视图树中移除旧的mCurrentPinnedView
+                if (mCurrentPinnedView != null) {
+                    ViewGroup parent = (ViewGroup) mCurrentPinnedView.getParent();
+                    if (parent != null && parent.equals(mRecyclerViewParent)) {
+                        parent.removeView(mCurrentPinnedView);
+                    }
+                }
+
+                int position = mPinnedViewPositionMaps.get(mCurrentPinnedView);
+                View item = mPinnedPositionItemViewMaps.get(position);
+                RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                paramsOrigin.leftMargin = 0;
+                paramsOrigin.topMargin = 0;
+                ((ViewGroup)item).addView(mCurrentPinnedView, paramsOrigin);
+
+                mCurrentPinnedPosition = pinnedViewPosition;
+                mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
+
+                RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                paramsNew.leftMargin = (int) lvRecyclerView.getX();
+                paramsNew.topMargin = (int) lvRecyclerView.getY();
+                mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
+            }
+        } else {
+            if (mCurrentPinnedPosition != -1) {
+                View currentItemView = mPinnedPositionItemViewMaps.get(mCurrentPinnedPosition);
+                if (currentItemView.getTop() >= 0 && ((ViewGroup)currentItemView).getChildCount() == 0) {
+                    // 从视图树中移除旧的mCurrentPinnedView
+                    if (mCurrentPinnedView != null) {
+                        ViewGroup parent = (ViewGroup) mCurrentPinnedView.getParent();
+                        if (parent != null && parent.equals(mRecyclerViewParent)) {
+                            parent.removeView(mCurrentPinnedView);
+                        }
+                    }
+
+                    RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                    paramsOrigin.leftMargin = 0;
+                    paramsOrigin.topMargin = 0;
+                    ((ViewGroup)currentItemView).addView(mCurrentPinnedView, paramsOrigin);
+
+                    mCurrentPinnedPosition = findPinnedViewPosition(mCurrentPinnedPosition - 1);
+                    if (mCurrentPinnedPosition != -1) {
+                        mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
+                        RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                        paramsNew.leftMargin = (int) lvRecyclerView.getX();
+                        paramsNew.topMargin = (int) lvRecyclerView.getY();
+                        mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
+                    } else {
+                        mCurrentPinnedView = null;
+                    }
+                }
+            }
+        }
+
+        // 处理第一个Pinned View
+        if (pinnedViewPosition < 0 && mCurrentPinnedPosition != pinnedViewPosition) {
+            View itemView = mPinnedPositionItemViewMaps.get(mCurrentPinnedPosition);
+            View itemViewChild = ((ViewGroup)itemView).getChildAt(0);
+            if (itemViewChild == null) {
+                View pinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
+                mRecyclerViewParent.removeView(pinnedView);
+                RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                paramsOrigin.leftMargin = 0;
+                paramsOrigin.topMargin = 0;
+                ((ViewGroup)itemView).addView(pinnedView, paramsOrigin);
+                mCurrentPinnedView = null;
+                mCurrentPinnedPosition = -1;
+            }
+        }
+
+        if (mCurrentPinnedView != null) {
+            // TODO: 11/10/16 对itemView之间的spacing进行处理
+            int offsetY = 1;
+            View targetView = lvRecyclerView.findChildViewUnder(mCurrentPinnedView.getMeasuredWidth() / 2, mCurrentPinnedView.getMeasuredHeight() + offsetY);
+            if (targetView != null && targetView.getTag(R.id.lv_tag_model) != null) {
+                boolean isPinned = ((Boolean)targetView.getTag(R.id.lv_tag_model)).booleanValue();
+                if (isPinned) {
+                    if (targetView.getTop() > 0) {
+                        int deltaY = targetView.getTop() - mCurrentPinnedView.getMeasuredHeight();
+                        mCurrentPinnedView.setTranslationY(deltaY);
+                    } else {
+                        mCurrentPinnedView.setTranslationY(0);
+                    }
+                } else {
+                    mCurrentPinnedView.setTranslationY(0);
+                }
+            }
+        }
+    }
+
+    /**
+     * 从传入位置递减找出标签的位置
+     *
+     * @param fromPosition
+     * @return int
+     */
+    private int findPinnedViewPosition(int fromPosition) {
+        for (int position = fromPosition; position >= 0; position--) {
+            // 位置递减，只要查到位置是标签，立即返回此位置
+            if (this.mIsItemViewPinnedList.get(position).booleanValue()) {
+                return position;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * 找出第一个可见的Item的位置
+     *
+     * @param layoutManager
+     * @return
+     */
+    private int findFirstVisiblePosition(RecyclerView.LayoutManager layoutManager) {
+        int firstVisiblePosition = 0;
+        if (layoutManager instanceof GridLayoutManager) {
+            firstVisiblePosition = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        } else if (layoutManager instanceof LinearLayoutManager) {
+            firstVisiblePosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
+            ((StaggeredGridLayoutManager) layoutManager).findFirstVisibleItemPositions(into);
+            firstVisiblePosition = Integer.MAX_VALUE;
+            for (int pos : into) {
+                firstVisiblePosition = Math.min(pos, firstVisiblePosition);
+            }
+        }
+        return firstVisiblePosition;
+    }
+
+    @Override
+    protected String getId(int position, int section, int row) {
+        final String cacheId = mIdCache != null ? mIdCache.get(position) : null;
+        if (cacheId != null) {
+            return cacheId;
+        } else {
+            String id = null;
+            Varargs args = LuaUtil.invokeFunction(mCellDelegate.get("Id"), LuaUtil.toLuaInt(section), LuaUtil.toLuaInt(row));
+            if (args != null) {
+                if (args.narg() > 1) {
+                    if (args.arg(2).toint() == UDPinned.PINNED_YES) {
+                        mHasPinnedItemView = true;
+                        if (position < mIsItemViewPinnedList.size()) {
+                            mIsItemViewPinnedList.set(position, true);
+                        } else {
+                            mIsItemViewPinnedList.add(position, true);
+                        }
+                    } else {
+                        if (position < mIsItemViewPinnedList.size()) {
+                            mIsItemViewPinnedList.set(position, false);
+                        } else {
+                            mIsItemViewPinnedList.add(position, false);
+                        }
+                    }
+
+                    id = args.arg(1).optjstring("");
+                } else { // 兼容旧版本的写法,只有一个String参数的情况
+                    id = ((LuaValue)args).optjstring("");
+                    if (position < mIsItemViewPinnedList.size()) {
+                        mIsItemViewPinnedList.set(position, false);
+                    } else {
+                        mIsItemViewPinnedList.add(position, false);
+                    }
+                }
+            }
+
+            if (mIdCache != null) {
+                mIdCache.put(position, id);
+            }
+            return id;
+        }
+    }
+
+    /**
+     * 根据位置获取 item 的type id
+     *
+     * @param position
+     * @return
+     */
+    @Override
+    public int getItemViewType(int position) {
+        int viewType = 0;
+        final String viewTypeName = getId(position);//得到坑位类型名称
+        if (this.mViewTypeMap != null) {
+            if (!this.mViewTypeMap.containsKey(viewTypeName)) {
+                final int index = this.mViewTypeMap.size();
+                this.mViewTypeMap.put(viewTypeName, index);
+                this.mViewTypeNameMap.put(index, viewTypeName);
+                viewType = index;
+            } else {
+                viewType = this.mViewTypeMap.get(viewTypeName);
+            }
+        }
+        if (this.mIsItemViewPinnedList.get(position).booleanValue()) {
+            if (!this.mPinnedViewTypePositionMaps.containsKey(viewType)) {
+                this.mPinnedViewTypePositionMaps.put(viewType, position);
+            }
+        }
+        return viewType;
     }
 
     /**
@@ -174,7 +450,6 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         }
         return this;
     }
-
 
     /**
      * TODO 支持offset

@@ -8,6 +8,9 @@
     <!--初始化标记-->
     <item name="lv_tag_init" type="id" />
 
+    <!--ItemViewModel tag-->
+    <item name="lv_tag_model" type="id" />
+
     <!--url-->
     <item name="lv_tag_url" type="id" />
 
