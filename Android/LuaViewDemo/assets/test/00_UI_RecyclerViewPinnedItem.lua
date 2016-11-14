@@ -11,31 +11,18 @@ imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXX
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 collectionView = RefreshCollectionView {
     Section = {
-        SectionCount = 2,
-        RowCount = function(section)
-            if (section == 1) then
-                return 15;
-            else
-                return 10;
-            end
+        SectionCount = 20,
+        RowCount = function(section, row)
+            return 10;
         end,
     },
     Cell = {
         Id = function ( section, row )
-            if( section == 1 ) then
-                if (row == 2) then
-                    return "PinnedScrollCell", Pinned.YES;
-                elseif (row == 8) then
-                    return "PinnedCell1", Pinned.YES
-                else
-                    return "ImageAndLabel";
-                end
+            if (row == 1) then
+--                return "PinnedScrollCell", Pinned.YES;
+                return "PinnedCell1", Pinned.YES;
             else
-                if (row == 1) then
-                    return "PinnedCell2", Pinned.YES;
-                else
-                    return "ImageAndLabel2", Pinned.NO;
-                end
+                return "ImageAndLabel"
             end
         end,
         PinnedScrollCell = {
@@ -44,21 +31,18 @@ collectionView = RefreshCollectionView {
             end,
             Init = function(cell, section, row)
                 cell.scrollView = HScrollView();
-                cell.scrollView.showScrollIndicator(false, false)
-                cell.scrollView.offset(0, 0, false)
                 cell.scrollView.frame(0, 0, w, 60);
-                for i = 0, 10, 1 do
+                for i = 0, 30, 1 do
                     local btn = Label()
-                    btn.text("BTN" .. i)
+                    btn.text(section .. " BTN " .. i)
                     btn.frame(0, 0, 60, 40)
                     btn.backgroundColor(0xff00ff00)
                     local view = View()
                     view.frame(i * 60, 10, 60, 50)
-                    view.backgroundColor(0xff500f00)
                     view.callback(
                         function()
                             Toast(btn.text())
-                            cell.window.backgroundColor(0xf3ff97)
+                            cell.window.backgroundColor(0xf32f07)
                         end
                     )
                     view.addView(btn)
@@ -66,7 +50,7 @@ collectionView = RefreshCollectionView {
                 end
             end,
             Layout = function(cell, section, row)
-                cell.window.backgroundColor(0x00ff97)
+                cell.window.backgroundColor(0xf0ff97)
             end
         },
         PinnedCell1 = {
@@ -74,27 +58,19 @@ collectionView = RefreshCollectionView {
                 return w, 70;
             end,
             Init = function(cell, section, row)
---                print("tuoli PinnedCell1 init")
-                cell.button = Button();
-                cell.button.frame(150,0,100,60);
-                cell.button.callback(
-                    function()
-                        Toast("Click Button 1");
-                    end);
-
                 cell.title = Label();
                 cell.title.frame(50, 0, 100, 50);
-                cell.title.textColor(0xffFFFF);
-                cell.title.backgroundColor(0xff00ff);
-                cell.title.callback(
-                    function()
-                        Toast("Click Button 1 title");
-                    end);
+                cell.title.textColor(0x000000);
+                cell.window.backgroundColor(0x80ffff)
             end,
             Layout = function(cell, section, row)
---                print("tuoli PinnedCell1 layout")
-                cell.window.backgroundColor(0x00ff00)
-                cell.title.text("测试");
+                cell.title.text("测试" .. section);
+                if (section % 2 == 1) then
+                    cell.title.textColor(0x00f309)
+                else
+                    cell.title.textColor(0x000000)
+                end
+
             end,
 
             Callback = {
@@ -215,5 +191,5 @@ collectionView = RefreshCollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
---collectionView.setMiniSpacing(2)
+collectionView.setMiniSpacing(20)
 

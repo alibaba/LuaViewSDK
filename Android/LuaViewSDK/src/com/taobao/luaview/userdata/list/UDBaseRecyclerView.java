@@ -14,6 +14,7 @@ import com.taobao.android.luaview.R;
 import com.taobao.luaview.userdata.constants.UDPinned;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVRecyclerView;
+import com.taobao.luaview.view.recyclerview.LVRecyclerViewHolder;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -54,8 +55,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public List<Boolean> mIsItemViewPinnedList = new ArrayList<Boolean>();
     // 哈希被pinned标记的viewType, position
     public HashMap<Integer, Integer> mPinnedViewTypePositionMaps = new HashMap<Integer, Integer>();
-    // 哈希被pinned标记的position,View
-    public HashMap<Integer, View> mPinnedPositionItemViewMaps = new HashMap<Integer, View>();
+    // 哈希被pinned标记的position,Holder
+    public HashMap<Integer, LVRecyclerViewHolder> mPinnedPositionHolderMaps = new HashMap<Integer, LVRecyclerViewHolder>();
 
     public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
@@ -72,6 +73,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
      */
     @Override
     public UDBaseRecyclerView reload(Integer section, Integer row) {
+        mHasPinnedItemView = false;
         final LVRecyclerView recyclerView = getLVRecyclerView();
         if (recyclerView != null) {
             final RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
@@ -191,7 +193,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         int firstVisiblePosition = findFirstVisiblePosition(lvRecyclerView.getLayoutManager());
         int pinnedViewPosition = findPinnedViewPosition(firstVisiblePosition);
         if (pinnedViewPosition >= 0 && mCurrentPinnedPosition != pinnedViewPosition) {
-            View itemView = mPinnedPositionItemViewMaps.get(pinnedViewPosition);
+            View itemView = mPinnedPositionHolderMaps.get(pinnedViewPosition).itemView;
             View itemViewChild = ((ViewGroup)itemView).getChildAt(0);
             if (itemViewChild != null) {
                 if (itemView.getTop() <= 0) {
@@ -227,26 +229,27 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                     if (parent != null && parent.equals(mRecyclerViewParent)) {
                         parent.removeView(mCurrentPinnedView);
                     }
+
+                    Integer object = mPinnedViewPositionMaps.get(mCurrentPinnedView);
+                    int position = object.intValue();
+                    View item = mPinnedPositionHolderMaps.get(position).itemView;
+                    RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                    paramsOrigin.leftMargin = 0;
+                    paramsOrigin.topMargin = 0;
+                    ((ViewGroup)item).addView(mCurrentPinnedView, paramsOrigin);
+
+                    mCurrentPinnedPosition = pinnedViewPosition;
+                    mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
+
+                    RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                    paramsNew.leftMargin = (int) lvRecyclerView.getX();
+                    paramsNew.topMargin = (int) lvRecyclerView.getY();
+                    mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
                 }
-
-                int position = mPinnedViewPositionMaps.get(mCurrentPinnedView);
-                View item = mPinnedPositionItemViewMaps.get(position);
-                RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
-                paramsOrigin.leftMargin = 0;
-                paramsOrigin.topMargin = 0;
-                ((ViewGroup)item).addView(mCurrentPinnedView, paramsOrigin);
-
-                mCurrentPinnedPosition = pinnedViewPosition;
-                mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
-
-                RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
-                paramsNew.leftMargin = (int) lvRecyclerView.getX();
-                paramsNew.topMargin = (int) lvRecyclerView.getY();
-                mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
             }
         } else {
             if (mCurrentPinnedPosition != -1) {
-                View currentItemView = mPinnedPositionItemViewMaps.get(mCurrentPinnedPosition);
+                View currentItemView = mPinnedPositionHolderMaps.get(mCurrentPinnedPosition).itemView;
                 if (currentItemView.getTop() >= 0 && ((ViewGroup)currentItemView).getChildCount() == 0) {
                     // 从视图树中移除旧的mCurrentPinnedView
                     if (mCurrentPinnedView != null) {
@@ -254,22 +257,29 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                         if (parent != null && parent.equals(mRecyclerViewParent)) {
                             parent.removeView(mCurrentPinnedView);
                         }
-                    }
 
-                    RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
-                    paramsOrigin.leftMargin = 0;
-                    paramsOrigin.topMargin = 0;
-                    ((ViewGroup)currentItemView).addView(mCurrentPinnedView, paramsOrigin);
+                        RelativeLayout.LayoutParams paramsOrigin = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                        paramsOrigin.leftMargin = 0;
+                        paramsOrigin.topMargin = 0;
+                        ((ViewGroup)currentItemView).addView(mCurrentPinnedView, paramsOrigin);
 
-                    mCurrentPinnedPosition = findPinnedViewPosition(mCurrentPinnedPosition - 1);
-                    if (mCurrentPinnedPosition != -1) {
-                        mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
-                        RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
-                        paramsNew.leftMargin = (int) lvRecyclerView.getX();
-                        paramsNew.topMargin = (int) lvRecyclerView.getY();
-                        mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
-                    } else {
-                        mCurrentPinnedView = null;
+                        mCurrentPinnedPosition = findPinnedViewPosition(mCurrentPinnedPosition - 1);
+                        if (mCurrentPinnedPosition != -1) {
+                            mCurrentPinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
+                            RelativeLayout.LayoutParams paramsNew = (RelativeLayout.LayoutParams) mCurrentPinnedView.getLayoutParams();
+                            paramsNew.leftMargin = (int) lvRecyclerView.getX();
+                            paramsNew.topMargin = (int) lvRecyclerView.getY();
+                            // 从视图树中移除旧的mCurrentPinnedView
+                            if (mCurrentPinnedView != null) {
+                                ViewGroup parent2 = (ViewGroup) mCurrentPinnedView.getParent();
+                                if (parent2 != null) {
+                                    parent2.removeView(mCurrentPinnedView);
+                                }
+                            }
+                            mRecyclerViewParent.addView(mCurrentPinnedView, paramsNew);
+                        } else {
+                            mCurrentPinnedView = null;
+                        }
                     }
                 }
             }
@@ -277,7 +287,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
         // 处理第一个Pinned View
         if (pinnedViewPosition < 0 && mCurrentPinnedPosition != pinnedViewPosition) {
-            View itemView = mPinnedPositionItemViewMaps.get(mCurrentPinnedPosition);
+            View itemView = mPinnedPositionHolderMaps.get(mCurrentPinnedPosition).itemView;
             View itemViewChild = ((ViewGroup)itemView).getChildAt(0);
             if (itemViewChild == null) {
                 View pinnedView = mPositionPinnedViewMaps.get(mCurrentPinnedPosition);
@@ -355,6 +365,10 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     protected String getId(int position, int section, int row) {
         final String cacheId = mIdCache != null ? mIdCache.get(position) : null;
         if (cacheId != null) {
+            if (mIsItemViewPinnedList.get(position).booleanValue()) {
+                // 获取CellId的时候,要用lua定义的真正的Id
+                return cacheId.split("\\.PINNED")[0];
+            }
             return cacheId;
         } else {
             String id = null;
@@ -368,15 +382,17 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                         } else {
                             mIsItemViewPinnedList.add(position, true);
                         }
+                        id = args.arg(1).optjstring("");
+                        // 构造唯一的id加到mIdCache中,这样才能使得在lua用同一种Cell作为多个position的PinnedCell时,也会有不同的viewType,见getItemViewType(int)函数
+                        id = new StringBuffer(id).append(".PINNED").append(position).toString();
                     } else {
                         if (position < mIsItemViewPinnedList.size()) {
                             mIsItemViewPinnedList.set(position, false);
                         } else {
                             mIsItemViewPinnedList.add(position, false);
                         }
+                        id = args.arg(1).optjstring("");
                     }
-
-                    id = args.arg(1).optjstring("");
                 } else { // 兼容旧版本的写法,只有一个String参数的情况
                     id = ((LuaValue)args).optjstring("");
                     if (position < mIsItemViewPinnedList.size()) {
@@ -390,6 +406,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             if (mIdCache != null) {
                 mIdCache.put(position, id);
             }
+
             return id;
         }
     }
@@ -403,7 +420,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     @Override
     public int getItemViewType(int position) {
         int viewType = 0;
-        final String viewTypeName = getId(position);//得到坑位类型名称
+        final String viewTypeName = mIdCache.get(position);//得到坑位类型名称
         if (this.mViewTypeMap != null) {
             if (!this.mViewTypeMap.containsKey(viewTypeName)) {
                 final int index = this.mViewTypeMap.size();
@@ -552,6 +569,10 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public boolean hasCellSize(int viewType) {
         final String id = getItemViewTypeName(viewType);
         if (id != null) {
+            if (mPinnedViewTypePositionMaps.containsKey(viewType)) {
+                // 获取CellId的时候,要用lua定义的真正的Id
+                return hasCellFunction(id.split("\\.PINNED")[0], "Size");
+            }
             return hasCellFunction(id, "Size");
         }
         return false;
