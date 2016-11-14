@@ -34,7 +34,10 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         final View itemView = createItemView(viewType);
         LVRecyclerViewHolder holder = new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
         if (this.mLuaUserData.mPinnedViewTypePositionMaps.containsKey(viewType)) {
-            this.mLuaUserData.mPinnedPositionHolderMaps.put(this.mLuaUserData.mPinnedViewTypePositionMaps.get(viewType), holder);
+            int position = ((Integer) this.mLuaUserData.mPinnedViewTypePositionMaps.get(viewType)).intValue();
+            if (!this.mLuaUserData.mPinnedPositionHolderMaps.containsKey(position)) {
+                this.mLuaUserData.mPinnedPositionHolderMaps.put(position, holder);
+            }
         }
         return holder;
     }

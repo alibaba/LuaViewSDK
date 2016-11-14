@@ -11,14 +11,14 @@ imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXX
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
 collectionView = RefreshCollectionView {
     Section = {
-        SectionCount = 20,
+        SectionCount = 4,
         RowCount = function(section, row)
             return 10;
         end,
     },
     Cell = {
         Id = function ( section, row )
-            if (row == 1) then
+            if (row == 3) then
 --                return "PinnedScrollCell", Pinned.YES;
                 return "PinnedCell1", Pinned.YES;
             else
@@ -181,7 +181,7 @@ collectionView = RefreshCollectionView {
 --            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         PullDown = function()
             collectionView.stopPullDownRefreshing()
@@ -191,5 +191,5 @@ collectionView = RefreshCollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
-collectionView.setMiniSpacing(20)
+--collectionView.setMiniSpacing(20)
 
