@@ -13,7 +13,8 @@
 #import "LView.h"
 
 @interface LVBundle () {
-    NSMutableArray *_scriptPaths, *_resourcePaths;
+    NSMutableArray *_scriptPaths;
+    NSMutableArray *_resourcePaths;
     NSFileManager *_fileManager;
     NSString *_currentPath;
 }
@@ -128,12 +129,12 @@
         return nil;
     }
     
-    NSData *data = [self resourceWithName:name];
-    if (data == nil) {
+    NSString *path = [self resourcePathWithName:name];
+    if( path ) {
+        return [UIImage imageWithContentsOfFile:path];
+    } else {
         return [UIImage imageNamed:name];
     }
-    
-    return [UIImage imageWithData:data];
 }
 
 - (NSString *)scriptPathWithName:(NSString *)name {
