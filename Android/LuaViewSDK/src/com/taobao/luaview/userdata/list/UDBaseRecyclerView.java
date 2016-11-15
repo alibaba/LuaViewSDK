@@ -357,7 +357,10 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     @Override
     public int getItemViewType(int position) {
         int viewType = 0;
-        final String viewTypeName = mIdCache.get(position);//得到坑位类型名称
+        String viewTypeName = mIdCache.get(position);//得到坑位类型名称
+        if (viewTypeName == null) {
+            viewTypeName = getId(position);
+        }
         if (this.mViewTypeMap != null) {
             if (!this.mViewTypeMap.containsKey(viewTypeName)) {
                 final int index = this.mViewTypeMap.size();
