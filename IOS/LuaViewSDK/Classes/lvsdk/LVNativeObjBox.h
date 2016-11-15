@@ -12,7 +12,7 @@
 
 
 //LVData
-@interface LVNativeObjBox : NSObject<LVProtocal>
+@interface LVNativeObjBox : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

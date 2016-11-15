@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LVDate : NSObject<LVProtocal>
+@interface LVDate : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

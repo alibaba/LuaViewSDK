@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "UIGestureRecognizer+LuaView.h"
 
-@interface LVLongPressGesture : UILongPressGestureRecognizer<LVProtocal>
+@interface LVLongPressGesture : UILongPressGestureRecognizer<LVProtocal, LVClassProtocal>
 
 
 @property(nonatomic,weak) LView* lv_lview;

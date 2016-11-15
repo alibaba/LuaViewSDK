@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVSystem : NSObject
+@interface LVSystem : NSObject<LVClassProtocal>
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 

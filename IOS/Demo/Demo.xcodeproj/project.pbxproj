@@ -258,7 +258,7 @@
 		3CC2F81C1C706B1D00D1E0B7 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				3CC2F8421C706BD900D1E0B7 /* delegate */,
+				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
 				3CC2F8581C706BFA00D1E0B7 /* lua */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
@@ -281,7 +281,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3CC2F8421C706BD900D1E0B7 /* delegate */ = {
+		3CC2F8421C706BD900D1E0B7 /* luaviewEx */ = {
 			isa = PBXGroup;
 			children = (
 				3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */,
@@ -297,7 +297,7 @@
 				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
 				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
 			);
-			name = delegate;
+			name = luaviewEx;
 			sourceTree = "<group>";
 		};
 		3CC2F8581C706BFA00D1E0B7 /* lua */ = {
@@ -793,6 +793,7 @@
 			baseConfigurationReference = 1D91B87B0C382EBA586DA7E1 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -808,6 +809,7 @@
 			baseConfigurationReference = 39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

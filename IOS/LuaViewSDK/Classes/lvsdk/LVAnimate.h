@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVAnimate : UIView<LVProtocal>
+@interface LVAnimate : UIView<LVProtocal,LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

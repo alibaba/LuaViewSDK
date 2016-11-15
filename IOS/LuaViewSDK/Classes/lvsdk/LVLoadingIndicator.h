@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVLoadingIndicator : UIActivityIndicatorView<LVProtocal>
+@interface LVLoadingIndicator : UIActivityIndicatorView<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

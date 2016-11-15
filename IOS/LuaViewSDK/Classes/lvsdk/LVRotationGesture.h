@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "UIGestureRecognizer+LuaView.h"
 
-@interface LVRotationGesture : UIRotationGestureRecognizer<LVProtocal>
+@interface LVRotationGesture : UIRotationGestureRecognizer<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

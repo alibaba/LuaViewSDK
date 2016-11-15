@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 
 
-@interface LVAudioPlayer : NSObject<LVProtocal>
+@interface LVAudioPlayer : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

@@ -11,7 +11,7 @@
 #import "LVHeads.h"
 #import "LView.h"
 
-@interface LVExGlobalFunc : NSObject
+@interface LVExGlobalFunc : NSObject<LVClassProtocal>
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 

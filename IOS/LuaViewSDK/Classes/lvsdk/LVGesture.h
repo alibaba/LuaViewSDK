@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVGesture : NSObject
+@interface LVGesture : NSObject<LVClassProtocal>
 
 +(const lvL_reg*) baseMemberFunctions;
 

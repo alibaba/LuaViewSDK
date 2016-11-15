@@ -11,7 +11,7 @@
 
 @class LVPagerView;
 
-@interface LVPagerIndicator : UIPageControl<LVProtocal>
+@interface LVPagerIndicator : UIPageControl<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

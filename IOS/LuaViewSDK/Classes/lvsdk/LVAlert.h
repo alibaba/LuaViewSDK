@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVAlert : UIAlertView<LVProtocal,UIAlertViewDelegate>
+@interface LVAlert : UIAlertView<LVProtocal,LVClassProtocal,UIAlertViewDelegate>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

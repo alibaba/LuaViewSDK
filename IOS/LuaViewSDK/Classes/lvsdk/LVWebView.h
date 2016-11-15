@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "LView.h"
 
-@interface LVWebView : UIView<LVProtocal>
+@interface LVWebView : UIView<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

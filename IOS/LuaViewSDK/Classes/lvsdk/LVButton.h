@@ -11,7 +11,7 @@
 #import "LView.h"
 
 
-@interface LVButton : UIButton<LVProtocal>
+@interface LVButton : UIButton<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

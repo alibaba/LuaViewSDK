@@ -11,7 +11,7 @@
 #import "UIScrollView+LuaView.h"
 #import "LVFlowLayout.h"
 
-@interface LVCollectionView : UICollectionView<LVProtocal>
+@interface LVCollectionView : UICollectionView<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

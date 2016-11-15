@@ -21,7 +21,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
     LVOvershootInterpolator,
 };
 
-@interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
+@interface LVAnimator : NSObject <LVProtocal, LVClassProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
 @property(nonatomic, copy) NSValue *toValue;

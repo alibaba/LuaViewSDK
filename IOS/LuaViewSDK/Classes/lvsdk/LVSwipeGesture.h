@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "UIGestureRecognizer+LuaView.h"
 
-@interface LVSwipeGesture : UISwipeGestureRecognizer<LVProtocal>
+@interface LVSwipeGesture : UISwipeGestureRecognizer<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

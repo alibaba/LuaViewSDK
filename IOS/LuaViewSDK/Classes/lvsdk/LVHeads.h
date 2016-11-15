@@ -92,6 +92,12 @@ typedef struct _LVUserDataInfo {
 - (id) lv_nativeObject; // 返回native对象
 @end
 
+@protocol LVClassProtocal <NSObject>
+@required
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
+
+@end
+
 
 //-----------------------metatable------------------------------------------------
 #define META_TABLE_UIButton         "UI.Button"

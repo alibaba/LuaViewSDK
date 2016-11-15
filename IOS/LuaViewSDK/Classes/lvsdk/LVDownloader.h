@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 
 
-@interface LVDownloader : NSObject<LVProtocal>
+@interface LVDownloader : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

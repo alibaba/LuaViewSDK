@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 #import "UIScrollView+LuaView.h"
 
-@interface LVScrollView : UIScrollView<UIScrollViewDelegate,LVProtocal>
+@interface LVScrollView : UIScrollView<UIScrollViewDelegate, LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
