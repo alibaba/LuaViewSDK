@@ -1,6 +1,14 @@
 --
 -- Created by IntelliJ IDEA.
 -- User: tuoli
+-- Date: 11/15/16
+-- Time: 10:16 AM
+-- To change this template use File | Settings | File Templates.
+--
+
+--
+-- Created by IntelliJ IDEA.
+-- User: tuoli
 -- Date: 11/4/16
 -- Time: 7:00 PM
 -- To change this template use File | Settings | File Templates.
@@ -9,7 +17,7 @@
 w,h = System.screenSize();
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
-collectionView = RefreshCollectionView {
+collectionView = CollectionView {
     Section = {
         SectionCount = 4,
         RowCount = function(section, row)
@@ -18,11 +26,15 @@ collectionView = RefreshCollectionView {
     },
     Cell = {
         Id = function ( section, row )
-            if (row == 3) then
---                return "PinnedScrollCell", Pinned.YES;
+            if (row == 1) then
+                --                return "PinnedScrollCell", Pinned.YES;
                 return "PinnedCell1", Pinned.YES;
             else
-                return "ImageAndLabel"
+                if (section == 2) then
+                    return "ImageAndLabel2"
+                else
+                    return "ImageAndLabel"
+                end
             end
         end,
         PinnedScrollCell = {
@@ -60,7 +72,7 @@ collectionView = RefreshCollectionView {
             Init = function(cell, section, row)
                 cell.title = Label();
                 cell.title.frame(50, 0, 100, 50);
---                cell.title.backgroundColor(0xf69F7F);
+                --                cell.title.backgroundColor(0xf69F7F);
                 cell.title.textColor(0x000000);
                 if (section % 2 == 1) then
                     cell.window.backgroundColor(0x80ffff)
@@ -147,31 +159,24 @@ collectionView = RefreshCollectionView {
                 return w ,200;
             end,
             Init = function(cell)
-                local cellHeight = 100
                 cell.icon = Image();
-                cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
-                cell.icon2 = Image();
-                cell.icon2.frame(160, 0, cellHeight, cellHeight);
-                cell.button = Button();
-                cell.button.frame(0,0,100,60);
-                cell.button.backgroundColor(0x777777);
-                cell.button.callback(
-                    function()
-                        Toast("hhhhhhh");
-                    end);
+                cell.icon.frame(10, 10, w-20, 200-20);
             end,
             Layout = function(cell , section, row)
-                cell.icon.image(
-                    imageUrl1,
+                print("tuoli", "Layout", row);
+                cell.icon.image(imageUrl1,
                     function()
                         local x,y,w,h = cell.icon.frame();
-                    end);
-                cell.icon2.image(imageUrl1)
+                        print("tuoli", x, y, w, h, row);
+                    end
+                );
+--                cell.icon.callback(function()
+--                    print("tuoli", "callback", row);
+--                end)
                 cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
             end,
             Callback = {
                 Click = function()
-                    print("tuoli ImageAndLabel2 Click")
                 end,
                 LongClick = function()
                 end
@@ -180,10 +185,10 @@ collectionView = RefreshCollectionView {
     },
     Callback = {
         Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
             print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
@@ -196,5 +201,5 @@ collectionView = RefreshCollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
---collectionView.setMiniSpacing(2)
+--collectionView.setMiniSpacing(5)
 
