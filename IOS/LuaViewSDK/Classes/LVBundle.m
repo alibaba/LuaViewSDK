@@ -13,9 +13,8 @@
 #import "LView.h"
 
 @interface LVBundle () {
-    NSMutableArray* _scriptPaths;
-    NSMutableArray* _resourcePaths;
-    NSFileManager* _fileManager;
+    NSMutableArray *_scriptPaths, *_resourcePaths;
+    NSFileManager *_fileManager;
     NSString *_currentPath;
 }
 
@@ -60,7 +59,7 @@
 - (void)addResourcePath:(NSString *)path {
     NSAssert(path, @"path could not be nil");
     
-    [_resourcePaths addObject:path];
+    [_resourcePaths insertObject:path atIndex:0];
 }
 
 - (void)removeResourcePath:(NSString *)path {
@@ -76,7 +75,7 @@
 - (void)addScriptPath:(NSString *)path {
     NSAssert(path, @"path could not be nil");
     
-    [_scriptPaths addObject:path];
+    [_scriptPaths insertObject:path atIndex:0];
 }
 
 - (void)removeScriptPath:(NSString *)path {
@@ -129,12 +128,12 @@
         return nil;
     }
     
-    NSString *path = [self resourcePathWithName:name];
-    if( path ) {
-        return [UIImage imageWithContentsOfFile:path];
-    } else {
+    NSData *data = [self resourceWithName:name];
+    if (data == nil) {
         return [UIImage imageNamed:name];
     }
+    
+    return [UIImage imageWithData:data];
 }
 
 - (NSString *)scriptPathWithName:(NSString *)name {
