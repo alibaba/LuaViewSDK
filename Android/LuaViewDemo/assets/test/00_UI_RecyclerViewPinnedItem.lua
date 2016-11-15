@@ -9,16 +9,16 @@
 w,h = System.screenSize();
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
-collectionView = RefreshCollectionView {
+collectionView = CollectionView {
     Section = {
-        SectionCount = 4,
+        SectionCount = 26,
         RowCount = function(section, row)
-            return 10;
+            return 8;
         end,
     },
     Cell = {
         Id = function ( section, row )
-            if (row == 3) then
+            if (row == 2) then
 --                return "PinnedScrollCell", Pinned.YES;
                 return "PinnedCell1", Pinned.YES;
             else
@@ -55,13 +55,12 @@ collectionView = RefreshCollectionView {
         },
         PinnedCell1 = {
             Size = function(section, row)
-                return w, 70;
+                return w, 50;
             end,
             Init = function(cell, section, row)
                 cell.title = Label();
                 cell.title.frame(50, 0, 100, 50);
---                cell.title.backgroundColor(0xf69F7F);
-                cell.title.textColor(0x000000);
+                cell.title.backgroundColor(0xffffff)
                 if (section % 2 == 1) then
                     cell.window.backgroundColor(0x80ffff)
                 else
@@ -69,7 +68,7 @@ collectionView = RefreshCollectionView {
                 end
             end,
             Layout = function(cell, section, row)
-                cell.title.text("测试" .. section);
+                cell.title.text("Type " .. section);
                 if (section % 2 == 1) then
                     cell.title.textColor(0x00f309)
                 else
@@ -83,36 +82,6 @@ collectionView = RefreshCollectionView {
                 end,
                 LongClick = function()
                 end
-            }
-        },
-        PinnedCell2 = {
-            Size = function(section, row)
-                return w, 100;
-            end,
-            Init = function(cell, section, row)
-                cell.parent = View();
-                cell.parent.frame(0, 0, 400, 70)
-                cell.parent.backgroundColor(0xf9bc90)
-                cell.parent.callback(
-                    function()
-                        Toast("Click Button 2");
-                    end);
-
-                cell.title = Label();
-                cell.title.frame(100, 0, 100, 50);
-                cell.title.textColor(0xffFFFF);
-                cell.title.backgroundColor(0xff00ff);
-                cell.title.callback(
-                    function()
-                        Toast("Click Button 2 title");
-                    end);
-                cell.parent.addView(cell.title)
-            end,
-            Layout = function(cell, section, row)
-                cell.window.backgroundColor(0xffff00)
-                cell.title.text("oooooo");
-            end,
-            Callback = {
             }
         },
         ImageAndLabel = {

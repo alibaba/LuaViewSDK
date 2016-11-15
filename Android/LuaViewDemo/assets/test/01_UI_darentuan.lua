@@ -14,21 +14,72 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+gifPlayTime = 3;
+
 w,h = System.screenSize();
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
+
+gifAddress = {
+    "https://img.alicdn.com/tps/TB1s5.GOXXXXXbJaXXXXXXXXXXX-750-420.gif",
+    "http://image58.360doc.com/DownloadImg/2013/01/0714/29443574_2.gif",
+    "http://image.haha.mx/2014/02/02/middle/1115779_c221d1fc47b97bb1605cddc9c8aec0a7_1391347675.gif"
+}
+gifCells = {}
+
+local function alphaAnimation(startAlpha, endAlpha, duration, endCallback)
+    local animation = Animation().alpha(startAlpha, endAlpha).duration(duration).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
+        onStart = function()
+        end,
+        onCancel = function()
+        end,
+        onEnd = function()
+            endCallback()
+        end,
+        onPause = function()
+        end,
+        onResume = function()
+        end,
+    });
+    return animation;
+end
+
+local function showGif(row)
+    if (gifCells[row] == nil) then
+        return;
+    end
+
+    for key, value in pairs(gifCells) do
+        value.staticImg.alpha(1)
+    end
+
+    local callback = function()
+        local timer = Timer()
+        timer.callback(function()
+            timer.cancel()
+            alphaAnimation(0, 1, 1.5, nil).with(gifCells[row].staticImg).start()
+        end)
+        timer.start(gifPlayTime)
+    end
+    alphaAnimation(1, 0, 1.5, callback).with(gifCells[row].staticImg).start()
+end
+
 collectionView = CollectionView {
     Section = {
-        SectionCount = 4,
+        SectionCount = 40,
         RowCount = function(section, row)
-            return 10;
+            if (section == 2) then
+                return 4
+            else
+                return 10;
+            end
         end,
     },
     Cell = {
         Id = function ( section, row )
             if (row == 1) then
-                --                return "PinnedScrollCell", Pinned.YES;
-                return "PinnedCell1", Pinned.YES;
+                                return "PinnedCell1", Pinned.YES;
+--                return "PinnedCell1"
             else
                 if (section == 2) then
                     return "ImageAndLabel2"
@@ -37,94 +88,32 @@ collectionView = CollectionView {
                 end
             end
         end,
-        PinnedScrollCell = {
-            Size = function(section, row)
-                return w, 60;
-            end,
-            Init = function(cell, section, row)
-                cell.scrollView = HScrollView();
-                cell.scrollView.frame(0, 0, w, 60);
-                for i = 0, 30, 1 do
-                    local btn = Label()
-                    btn.text(section .. " BTN " .. i)
-                    btn.frame(0, 0, 60, 40)
-                    btn.backgroundColor(0xff00ff00)
-                    local view = View()
-                    view.frame(i * 60, 10, 60, 50)
-                    view.callback(
-                        function()
-                            Toast(btn.text())
-                            cell.window.backgroundColor(0xf32f07)
-                        end
-                    )
-                    view.addView(btn)
-                    cell.scrollView.addView(view)
-                end
-            end,
-            Layout = function(cell, section, row)
-                cell.window.backgroundColor(0xf0ff97)
-            end
-        },
         PinnedCell1 = {
             Size = function(section, row)
-                return w, 70;
+                return w, 50;
             end,
             Init = function(cell, section, row)
                 cell.title = Label();
                 cell.title.frame(50, 0, 100, 50);
-                --                cell.title.backgroundColor(0xf69F7F);
-                cell.title.textColor(0x000000);
+            end,
+            Layout = function(cell, section, row)
+                cell.title.text("Type" .. section);
+                if (section % 2 == 1) then
+                    cell.title.textColor(0x000309)
+                else
+                    cell.title.textColor(0x000000)
+                end
                 if (section % 2 == 1) then
                     cell.window.backgroundColor(0x80ffff)
                 else
                     cell.window.backgroundColor(0x80f56f)
                 end
             end,
-            Layout = function(cell, section, row)
-                cell.title.text("测试" .. section);
-                if (section % 2 == 1) then
-                    cell.title.textColor(0x00f309)
-                else
-                    cell.title.textColor(0x000000)
-                end
-
-            end,
-
             Callback = {
                 Click = function()
                 end,
                 LongClick = function()
                 end
-            }
-        },
-        PinnedCell2 = {
-            Size = function(section, row)
-                return w, 100;
-            end,
-            Init = function(cell, section, row)
-                cell.parent = View();
-                cell.parent.frame(0, 0, 400, 70)
-                cell.parent.backgroundColor(0xf9bc90)
-                cell.parent.callback(
-                    function()
-                        Toast("Click Button 2");
-                    end);
-
-                cell.title = Label();
-                cell.title.frame(100, 0, 100, 50);
-                cell.title.textColor(0xffFFFF);
-                cell.title.backgroundColor(0xff00ff);
-                cell.title.callback(
-                    function()
-                        Toast("Click Button 2 title");
-                    end);
-                cell.parent.addView(cell.title)
-            end,
-            Layout = function(cell, section, row)
-                cell.window.backgroundColor(0xffff00)
-                cell.title.text("oooooo");
-            end,
-            Callback = {
             }
         },
         ImageAndLabel = {
@@ -158,40 +147,37 @@ collectionView = CollectionView {
             Size = function(section, row)
                 return w ,200;
             end,
-            Init = function(cell)
-                cell.icon = Image();
-                cell.icon.frame(10, 10, w-20, 200-20);
+            Init = function(cell,section,row)
+                cell.gifImg = Image();
+                cell.gifImg.frame(10, 10, w-20, 200-20);
+                cell.staticImg = Image();
+                cell.staticImg.frame(10, 10, w-20, 200-20);
+                cell.staticImg.image(imageUrl1);
+                cell.gifImg.image(gifAddress[row-1]);
             end,
             Layout = function(cell , section, row)
-                print("tuoli", "Layout", row);
-                cell.icon.image(imageUrl1,
-                    function()
-                        local x,y,w,h = cell.icon.frame();
-                        print("tuoli", x, y, w, h, row);
-                    end
-                );
---                cell.icon.callback(function()
---                    print("tuoli", "callback", row);
---                end)
-                cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
-            end,
-            Callback = {
-                Click = function()
-                end,
-                LongClick = function()
+                print("tuoli", section, row, "layout")
+                if (gifCells[row] == nil) then
+                    table:insert(gifCells, row, cell)
                 end
-            }
+            end,
         }
     },
     Callback = {
         Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-            --            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --                        print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
-            --            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --                        print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
             print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            if (firstVisibleSection == 2) then
+                showGif(firstVisibleRow+1)
+            end
+            if (firstVisibleSection == 1 and firstVisibleRow == 10) then
+                showGif(2)
+            end
         end,
         PullDown = function()
             collectionView.stopPullDownRefreshing()
@@ -201,5 +187,5 @@ collectionView = CollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
---collectionView.setMiniSpacing(5)
+collectionView.miniSpacing(0)
 
