@@ -38,7 +38,7 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
     private RecyclerView.Adapter mAdapter;
     private LayoutManager mLayoutManager;
     private ItemDecoration mItemDecoration;
-    private int mSpacing;//间隔
+    private int mSpacing = 0;//间隔
 
     public static LVRecyclerView createVerticalView(Globals globals, LuaValue metaTable, Varargs varargs, UDBaseRecyclerView udBaseRecyclerView) {
         final LVRecyclerView lvRecyclerView = (LVRecyclerView) LayoutInflater.from(globals.getContext()).inflate(R.layout.lv_recyclerview_vertical, null);

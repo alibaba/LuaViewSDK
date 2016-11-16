@@ -1,132 +1,155 @@
 
+local function createRootView(params)
+    local rootView = View()
+    rootView.frame(params.x, params.y, params.w, params.h)
+    return rootView
+end
 
-local scrW, scrH = System.screenSize()
+local function createWebView(rootView, params)
+    local webview = WebView()
+    webview.frame(params.x, params.y, params.w, params.h)
+    webview.loadUrl(params.url)
+    webview.callback(params.callbacks)
+    webview.removeFromSuper()
+    rootView.addView(webview)
+    return webview
+end
 
-local view = View()
-view.frame(0, 0, scrW, scrH)
+local function test(rootView, params)
+    local button = Button()
+    button.frame(params.x, params.y, params.w, params.h)
+    button.text(params.text)
+    button.callback(params.callback)
+    button.removeFromSuper()
+    rootView.addView(button)
+end
 
-local webview = WebView()
-webview.frame(0, 0, scrW, scrH - 350)
-webview.loadUrl("http://m.taobao.com")
+local function main()
+    local scrW, scrH = System.screenSize()
 
-webview.callback({
-    onPageStarted = function()
-        print("start loading")
-    end,
-    onPageFinished = function()
-        print("end loading")
-    end,
-    onReceiveError = function(errorCode, description, failedUrl)
-        print("error", errorCode, description, failedUrl)
-    end
-})
+    local rootViewParams = {
+        x = 0,
+        y = 0,
+        w = scrW,
+        h = scrH
+    }
+    local rootView = createRootView(rootViewParams)
 
-print("[webview] url: ", webview.url())
-print("[webview] title: ", webview.title())
+    local webViewParams = {
+        x = 0,
+        y = 0,
+        w = scrW,
+        h = scrH - 350,
+        url = "http://m.taobao.com",
+        callbacks = {
+            onPageStarted = function()
+                print("started")
+            end,
+            onPageFinished = function()
+                print("finished")
+            end,
+            onReceiveError = function(errorCode, description, failedUrl)
+                print("error", errorCode, description, failedUrl)
+            end
+        }
+    }
+    local webview = createWebView(rootView, webViewParams)
 
-webview.removeFromSuper()
-view.addView(webview)
+    local backParams = {
+        x = 0,
+        y = 400,
+        w = 80,
+        h = 80,
+        text = "back",
+        callback = function()
+            if webview.canGoBack() then
+                webview.goBack()
+            end
+        end
+    }
+    test(rootView, backParams)
 
---local tf = TextField()
---tf.frame(0, 350, scrW - 200, 30)
---tf.hint("输入url")
---tf.removeFromSuper()
---view.addView(tf)
---
---local loadButton = Button()
---loadButton.frame(scrW - 150, 350, 100, 40)
---loadButton.text("load")
---loadButton.callback(function()
---    print("button click")
---    if webview.canGoBack() then
---        webview.loadUrl(tf.text())
---    end
---end)
+    local forwardParams = {
+        x = 100,
+        y = 400,
+        w = 80,
+        h = 80,
+        text = "forward",
+        callback = function()
+            if webview.canGoForward() then
+                webview.goForward()
+            end
+        end
+    }
+    test(rootView, forwardParams)
 
---loadButton.removeFromSuper()
---view.addView(loadButton)
+    local reloadParams = {
+        x = 200,
+        y = 400,
+        w = 80,
+        h = 80,
+        text = "reload",
+        callback = function()
+            webview.reload()
+        end
+    }
+    test(rootView, reloadParams)
 
-local backButton = Button()
-backButton.frame(0, 400, 80, 80)
-backButton.text("back")
-backButton.callback(function()
-    print("button click")
-    if webview.canGoBack() then
-        webview.goBack()
-    end
-end)
+    local stopLoadingParams = {
+        x = 300,
+        y = 400,
+        w = 80,
+        h = 80,
+        text = "stopLoading",
+        callback = function()
+            webview.stopLoading()
+        end
+    }
+    test(rootView, stopLoadingParams)
 
-local forwardButton = Button()
-forwardButton.frame(100, 400, 80, 80)
-forwardButton.text("forward")
-forwardButton.callback(function()
-    print("button click")
-    if webview.canGoForward() then
-        webview.goForward()
-    end
-end)
+    local getUrlParams = {
+        x = 0,
+        y = 500,
+        w = 80,
+        h = 80,
+        text = "getUrl",
+        callback = function()
+            Alert(webview.url())
+        end
+    }
+    test(rootView, getUrlParams)
 
-local reloadButton = Button()
-reloadButton.frame(200, 400, 80, 80)
-reloadButton.text("reload")
-reloadButton.callback(function()
-    print("button click")
-    webview.reload()
-end)
+    local getTitleParams = {
+        x = 100,
+        y = 500,
+        w = 80,
+        h = 80,
+        text = "getTitle",
+        callback = function()
+            Alert(webview.title())
+        end
+    }
+    test(rootView, getTitleParams)
 
-local stopButton = Button()
-stopButton.frame(300, 400, 80, 80)
-stopButton.text("stoploading")
-stopButton.callback(function()
-    print("button click")
-    webview.stopLoading()
-end)
+    local canPullParams = {
+        x = 200,
+        y = 500,
+        w = 80,
+        h = 80,
+        text = "canPull",
+        callback = function()
+            if webview.pullRefreshEnable() == true then
+                webview.pullRefreshEnable(false)
+            else
+                webview.pullRefreshEnable(true)
+            end
+        end
+    }
+    test(rootView, canPullParams)
+end
 
-local getUrlButton = Button()
-getUrlButton.frame(0, 500, 80, 80)
-getUrlButton.text("geturl")
-getUrlButton.callback(function()
-    print("button click")
-    Alert(webview.url())
-end)
+main()
 
-getUrlButton.removeFromSuper()
-view.addView(getUrlButton)
 
-local getTitleButton = Button()
-getTitleButton.frame(100, 500, 80, 80)
-getTitleButton.text("gettitle")
-getTitleButton.callback(function()
-    print("button click")
-    Alert(webview.title())
-end)
 
-getTitleButton.removeFromSuper()
-view.addView(getTitleButton)
 
-local canPullButton = Button()
-canPullButton.frame(200, 500, 80, 80)
-canPullButton.text("canPull")
-canPullButton.callback(function()
-    print("button click")
-    if webview.pullRefreshEnable() == true then
-        webview.pullRefreshEnable(false)
-    else
-        webview.pullRefreshEnable(true)
-    end
-end)
-
-canPullButton.removeFromSuper()
-view.addView(canPullButton)
-
-stopButton.removeFromSuper()
-view.addView(stopButton)
-
-reloadButton.removeFromSuper()
-view.addView(reloadButton)
-
-backButton.removeFromSuper()
-view.addView(backButton)
-
-forwardButton.removeFromSuper()
-view.addView(forwardButton)
