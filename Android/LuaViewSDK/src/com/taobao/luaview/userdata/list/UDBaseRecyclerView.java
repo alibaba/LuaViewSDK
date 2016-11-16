@@ -45,6 +45,9 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
     private boolean mHasPinnedCell = false;
 
+    // 缓存真实的Pinned Cell Name
+    private SparseArray<String> mPinnedPositionCellId = new SparseArray<String>();
+
     // 缓存被Pinned标记的position
     public SparseBooleanArray mIsPinnedSparseArray = new SparseBooleanArray();
     // 缓存被pinned标记的viewType, position
@@ -59,6 +62,16 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public abstract LVRecyclerView getLVRecyclerView();
 
     /**
+     * mPinnedViewTypePosition是onCreateViewHolder时缓存的,不能清除
+     */
+    private void restore() {
+        mHasPinnedCell = false;
+        mIsPinnedSparseArray.clear();
+        mPinnedPositionCellId.clear();
+        mPinnedViewTypePosition.clear();
+    }
+
+    /**
      * notify data changed (section, row) in java
      *
      * @param section
@@ -67,7 +80,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
      */
     @Override
     public UDBaseRecyclerView reload(Integer section, Integer row) {
-        mHasPinnedCell = false;
+        restore();
+
         final LVRecyclerView recyclerView = getLVRecyclerView();
         if (recyclerView != null) {
             final RecyclerView.Adapter adapter = recyclerView.getLVAdapter();
@@ -184,16 +198,17 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             mPinnedContainer = new FrameLayout(lvRecyclerView.getContext());
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-            if (lvRecyclerView.getParent() instanceof LVRefreshRecyclerView) {
+            ViewGroup parent = (ViewGroup) lvRecyclerView.getParent();
+            if (parent instanceof LVRefreshRecyclerView) {
                 // RefreshCollectionView
-                params.leftMargin = (int) ((ViewGroup)lvRecyclerView.getParent()).getX();
-                params.topMargin = (int) ((ViewGroup)lvRecyclerView.getParent()).getY();
-                ((ViewGroup) lvRecyclerView.getParent().getParent()).addView(mPinnedContainer, params);
+                params.leftMargin = (int) parent.getX();
+                params.topMargin = (int) parent.getY();
+                ((ViewGroup) parent.getParent()).addView(mPinnedContainer, params);
             } else {
                 // CollectionView
                 params.leftMargin = (int) lvRecyclerView.getX();
                 params.topMargin = (int) lvRecyclerView.getY();
-                ((ViewGroup) lvRecyclerView.getParent()).addView(mPinnedContainer, params);
+                parent.addView(mPinnedContainer, params);
             }
         }
 
@@ -328,7 +343,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     /**
      * 由于该函数的特殊性,有则获取无则生成。
      * 对于生成,有Pinned.YES标记的Id,会先加后缀(".PINNED"+position),再存放到mIdCache中;
-     * 对于获取,split with ".PINNED",返回Lua定义的正确Id。
+     * 对于获取,用mPinnedPositionCellId缓存的Lua定义的真实的Id。
      *
      * @param position
      * @param section
@@ -341,7 +356,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (cacheId != null) {
             if (this.mIsPinnedSparseArray.get(position)) {
                 // 获取CellId的时候,要用lua定义的真正的Id
-                return cacheId.split("\\.PINNED")[0];
+                return mPinnedPositionCellId.get(position);
             }
             return cacheId;
         } else {
@@ -353,7 +368,11 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                         mHasPinnedCell = true;
                         mIsPinnedSparseArray.put(position, true);
                         id = args.arg(1).optjstring("");
-                        // 构造唯一的id加到mIdCache中,这样才能使得在lua用同一种Cell作为多个position的PinnedCell时,也会有不同的viewType,见getItemViewType(int)函数
+                        /**
+                         * 构造唯一的id,使得在lua用同一种Cell作为多个position的PinnedCell时,也会有不同的viewType.
+                         * 见 {@link UDBaseRecyclerView#getItemViewType(int)}
+                         */
+                        mPinnedPositionCellId.put(position, id);
                         id = new StringBuffer(id).append(".PINNED").append(position).toString();
                     } else {
                         id = args.arg(1).optjstring("");
@@ -535,7 +554,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (id != null) {
             if (this.mPinnedViewTypePosition.get(viewType, -1) != -1) {
                 // 获取CellId的时候,要用Lua层定义的正确的Id
-                return hasCellFunction(id.split("\\.PINNED")[0], "Size");
+                return hasCellFunction(mPinnedPositionCellId.get(mPinnedViewTypePosition.get(viewType)), "Size");
             }
             return hasCellFunction(id, "Size");
         }

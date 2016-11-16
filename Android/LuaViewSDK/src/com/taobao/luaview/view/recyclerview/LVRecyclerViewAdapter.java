@@ -76,7 +76,9 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     public void onBindViewHolder(LVRecyclerViewHolder holder, int position) {
         if (position >= 0 && position < getItemCount()) {
             if (holder != null) {
-                holder.itemView.setTag(R.id.lv_tag_model, this.mLuaUserData.mIsPinnedSparseArray.get(position));
+                if (holder.itemView != null) {
+                    holder.itemView.setTag(R.id.lv_tag_model, this.mLuaUserData.mIsPinnedSparseArray.get(position));
+                }
 
                 if (this.mLuaUserData.hasCellSize(getItemViewType(position))) {
                     if (holder.itemView != null && holder.itemView.getTag(R.id.lv_tag) instanceof UDLuaTable) {
