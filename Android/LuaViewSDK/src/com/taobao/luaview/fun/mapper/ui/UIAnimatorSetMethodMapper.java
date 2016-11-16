@@ -56,7 +56,10 @@ public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMeth
             "onCancel",//23
             "onPause",//24
             "onUpdate",//25
-            "onResume"//26
+            "onResume",//26
+            "isRunning", //27
+            "isPaused",//28
+            "isStarted"//29
     };
 
     @Override
@@ -122,6 +125,12 @@ public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMeth
                 return onUpdate(target, varargs);
             case 26:
                 return onResume(target, varargs);
+            case 27:
+                return isRunning(target, varargs);
+            case 28:
+                return isPaused(target, varargs);
+            case 29:
+                return isStarted(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -236,6 +245,41 @@ public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMeth
         return udAnimator.setFloatValues(ParamUtil.getFloatValues(varargs, 2));
     }
 
+    /**
+     * is Running
+     *
+     * @param udAnimation
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_540)
+    public LuaValue isRunning(U udAnimation, Varargs varargs) {
+        return valueOf(udAnimation.isRunning());
+    }
+
+    /**
+     * is paused
+     *
+     * @param udAnimation
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_540)
+    public LuaValue isPaused(U udAnimation, Varargs varargs) {
+        return valueOf(udAnimation.isPaused());
+    }
+
+    /**
+     * is started
+     *
+     * @param udAnimation
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_540)
+    public LuaValue isStarted(U udAnimation, Varargs varargs) {
+        return valueOf(udAnimation.isStarted());
+    }
     //--------------------------------------------回调----------------------------------------------
 
     public LuaValue callback(U udAnimator, Varargs varargs) {
