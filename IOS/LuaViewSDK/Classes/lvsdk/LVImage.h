@@ -23,6 +23,8 @@
 -(void) setImageByName:(NSString*) imageName;
 -(void) setImageByData:(NSData*) data;
 -(void) setWebImageUrl:(NSURL*) url finished:(LVLoadFinished) finished;
+-(void) effectParallax:(CGFloat)dx dy:(CGFloat)dy ;
+-(void) effectClick:(NSInteger)color alpha:(CGFloat)alpha;
 
 /*
  * Lua 脚本回调
