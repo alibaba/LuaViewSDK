@@ -38,7 +38,7 @@
         UICollectionViewLayoutAttributes* a = [self layoutAttributesForItemAtIndexPath:indexPath];
         if( a ) {
             CGRect frame = a.frame;
-            CGFloat minY = self.collectionView.contentOffset.y+self.collectionView.contentInset.top;
+            CGFloat minY = self.collectionView.contentOffset.y;
             CGFloat maxY = minY;
             // 浮层：不能小于屏幕offset
             if( frame.origin.y < minY ) {
