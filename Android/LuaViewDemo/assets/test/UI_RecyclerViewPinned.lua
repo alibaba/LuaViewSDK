@@ -34,6 +34,7 @@ collectionView = RefreshCollectionView {
                 cell.window.backgroundColor(0xf0ff97)
                 cell.scrollView = HScrollView();
                 cell.scrollView.frame(0, 0, w, 60);
+                cell.views = {};
                 for i = 0, 30, 1 do
                     local btn = Label()
                     btn.text(section .. " BTN " .. i)
@@ -49,7 +50,9 @@ collectionView = RefreshCollectionView {
                     )
                     view.addView(btn)
                     cell.scrollView.addView(view)
+                    cell.views[i] = view;
                 end
+                cell.scrollView.contentSize(30*60,0);
             end,
             Layout = function(cell, section, row)
             end
@@ -159,7 +162,7 @@ collectionView = RefreshCollectionView {
 --            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         PullDown = function()
-            collectionView.stopPullDownRefreshing()
+            collectionView.stopRefreshing()
             collectionView.reload()
         end
     }
