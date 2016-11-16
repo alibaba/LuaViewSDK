@@ -9,6 +9,10 @@ function createCircleIndicator()
 --    indicator.size(SCREEN_WIDTH / 2, 100)
 --    indicator.alignCenter()
     indicator.frame(10, 100, SCREEN_WIDTH / 2, 100)
+    indicator.selectedColor(0xff0000)
+    indicator.unselectedColor(0x00ff00)
+--    indicator.fillColor(0xff0000)
+--    indicator.pageColor(0x00ff00)
     return indicator
 end
 

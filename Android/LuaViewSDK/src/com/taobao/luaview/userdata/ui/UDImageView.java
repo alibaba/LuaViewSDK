@@ -8,7 +8,9 @@ import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.global.LuaResourceFinder;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -31,6 +33,98 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
 
     public UDImageView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public UDView setCornerRadius(float radius) {
+        final T view = getView();
+        if (view != null) {
+            view.setCornerRadius(radius);
+        }
+        return this;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public float getCornerRadius() {
+        final T view = getView();
+        if (view != null) {
+            return view.getCornerRadius();
+        }
+        return 0;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public UDView setBorderWidth(final int borderWidth) {
+        final T view = getView();
+        if (view != null) {
+            view.setStrokeWidth(borderWidth);
+        }
+        return this;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public int getBorderWidth() {
+        final T view = getView();
+        if (view != null) {
+            return view.getStrokeWidth();
+        }
+        return 0;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public UDView setBorderColor(final Integer borderColor) {
+        if (borderColor != null) {
+            final T view = getView();
+            if (view != null) {
+                view.setStrokeColor(borderColor);
+            }
+        }
+        return this;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public int getBorderColor() {
+        final T view = getView();
+        if (view != null) {
+            return view.getStrokeColor();
+        }
+        return 0;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public UDView setBorderDashSize(float dashWidth, float dashGap) {
+        final T view = getView();
+        if(view != null){
+            view.setBorderDash(dashWidth, dashGap);
+        }
+        return this;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public float getBorderDashWidth() {
+        final T view = getView();
+        if(view != null){
+            return view.getBorderDashWidth();
+        }
+        return 0;
+    }
+
+    @LuaViewApi(since = VmVersion.V_540, revisions = {"之前写在View无效果，5.4.0开始，Image支持该方法"})
+    @Override
+    public float getBorderDashGap() {
+        final T view = getView();
+        if(view != null){
+            return view.getBorderDashGap();
+        }
+        return 0;
     }
 
     /**

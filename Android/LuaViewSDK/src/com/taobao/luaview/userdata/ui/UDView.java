@@ -262,7 +262,7 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public UDView setBorderColor(final Integer borderColor) {
-        if(borderColor != null) {
+        if (borderColor != null) {
             final T view = getView();
             if (view != null) {
                 final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
@@ -277,6 +277,38 @@ public class UDView<T extends View> extends BaseUserdata {
         final T view = getView();
         if (view != null) {
             return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getStrokeColor() : 0;
+        }
+        return 0;
+    }
+
+    /**
+     * 边框虚线(宽、间隔）
+     *
+     * @param dashWidth
+     * @param dashGap
+     * @return
+     */
+    public UDView setBorderDashSize(final float dashWidth, final float dashGap) {
+        final T view = getView();
+        if (view != null) {
+            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+            drawable.setDashSize(dashWidth, dashGap);
+        }
+        return this;
+    }
+
+    public float getBorderDashWidth() {
+        final T view = getView();
+        if (view != null) {
+            return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getDashWidth() : 0;
+        }
+        return 0;
+    }
+
+    public float getBorderDashGap() {
+        final T view = getView();
+        if (view != null) {
+            return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getDashGap() : 0;
         }
         return 0;
     }
