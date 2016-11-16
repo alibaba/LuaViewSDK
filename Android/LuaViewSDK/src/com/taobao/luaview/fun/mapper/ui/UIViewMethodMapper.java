@@ -1,6 +1,5 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import android.graphics.Color;
 import android.widget.RelativeLayout;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
@@ -131,7 +130,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "flexCss",//99
             "flxLayout",//100
             "effects",//101
-            "nativeView"//102
+            "nativeView",//102
+            "borderDash",//103
     };
 
     @Override
@@ -349,6 +349,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return effects(target, varargs);
             case 102:
                 return nativeView(target, varargs);
+            case 103:
+                return borderDash(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -1226,6 +1228,34 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public LuaValue getBorderColor(U view, Varargs varargs) {
         return valueOf(ColorUtil.getHexColor(view.getBorderColor()));
+    }
+
+    /**
+     * 设置边框虚线，dash
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_540)
+    public Varargs borderDash(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setBorderDash(view, varargs);
+        } else {
+            return getBorderDash(view, varargs);
+        }
+    }
+
+    @LuaViewApi(since = VmVersion.V_540)
+    public LuaValue setBorderDash(U view, Varargs varargs) {
+        final float width = DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 2));
+        final float gap = DimenUtil.dpiToPxF(LuaUtil.getFloat(varargs, 3));
+        return view.setBorderDashSize(width, gap);
+    }
+
+    @LuaViewApi(since = VmVersion.V_540)
+    public Varargs getBorderDash(U view, Varargs varargs) {
+        return varargsOf(valueOf(DimenUtil.pxToDpi(view.getBorderDashWidth())), valueOf(DimenUtil.pxToDpi(view.getBorderDashGap())));
     }
 
     /**
