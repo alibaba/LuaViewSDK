@@ -33,11 +33,9 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     public LVRecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         final View itemView = createItemView(viewType);
         LVRecyclerViewHolder holder = new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
-        if (this.mLuaUserData.mPinnedViewTypePositionMaps.containsKey(viewType)) {
-            int position = ((Integer) this.mLuaUserData.mPinnedViewTypePositionMaps.get(viewType)).intValue();
-            if (!this.mLuaUserData.mPinnedPositionHolderMaps.containsKey(position)) {
-                this.mLuaUserData.mPinnedPositionHolderMaps.put(position, holder);
-            }
+        int position = this.mLuaUserData.mPinnedViewTypePosition.get(viewType, -1);
+        if (position != -1) {
+            this.mLuaUserData.mPinnedPositionHolder.put(position, holder);
         }
         return holder;
     }
@@ -78,7 +76,7 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     public void onBindViewHolder(LVRecyclerViewHolder holder, int position) {
         if (position >= 0 && position < getItemCount()) {
             if (holder != null) {
-                holder.itemView.setTag(R.id.lv_tag_model, mLuaUserData.mIsItemViewPinnedList.get(position));
+                holder.itemView.setTag(R.id.lv_tag_model, this.mLuaUserData.mIsPinnedSparseArray.get(position));
 
                 if (this.mLuaUserData.hasCellSize(getItemViewType(position))) {
                     if (holder.itemView != null && holder.itemView.getTag(R.id.lv_tag) instanceof UDLuaTable) {

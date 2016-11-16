@@ -4,6 +4,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +49,12 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
 
     private boolean mHasPinnedCell = false;
 
-    // 缓存所有itemView是否被Pinned标记的列表
-    public List<Boolean> mIsItemViewPinnedList = new ArrayList<Boolean>();
-    // 哈希被pinned标记的viewType, position
-    public HashMap<Integer, Integer> mPinnedViewTypePositionMaps = new HashMap<Integer, Integer>();
-    // 哈希被pinned标记的position,Holder
-    public HashMap<Integer, LVRecyclerViewHolder> mPinnedPositionHolderMaps = new HashMap<Integer, LVRecyclerViewHolder>();
+    // 缓存被Pinned标记的position
+    public SparseBooleanArray mIsPinnedSparseArray = new SparseBooleanArray();
+    // 缓存被pinned标记的viewType, position
+    public SparseIntArray mPinnedViewTypePosition  = new SparseIntArray();
+    // 缓存被pinned标记的position,Holder
+    public SparseArray<LVRecyclerViewHolder> mPinnedPositionHolder = new SparseArray<LVRecyclerViewHolder>();
 
     public UDBaseRecyclerView(T view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
@@ -203,7 +205,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         // 从firstVisiblePosition位置开始递减查找上一个pinned position
         int pinnedViewPosition = findPinnedViewPositionDecrease(firstVisiblePosition);
         if (pinnedViewPosition >= 0 && mCurrentPinnedPosition != pinnedViewPosition) {
-            ViewGroup itemView = (ViewGroup)mPinnedPositionHolderMaps.get(pinnedViewPosition).itemView;
+            ViewGroup itemView = (ViewGroup)mPinnedPositionHolder.get(pinnedViewPosition).itemView;
             View child = itemView.getChildAt(0);
             if (child != null) {
                 // 从itemView移除child之前,先设置其与child一样的宽高占位。
@@ -218,7 +220,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             } else {
                 // 从(pinnedViewPosition + 1)位置开始递增查找下一个pinned position
                 int nextPinnedPosition = findPinnedViewPositionIncrease(pinnedViewPosition + 1);
-                ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolderMaps.get(nextPinnedPosition).itemView;
+                ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolder.get(nextPinnedPosition).itemView;
                 View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
                 mPinnedContainer.removeView(pinnedView);
                 parentItemView.addView(pinnedView);
@@ -235,7 +237,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             mPinnedContainer.removeView(subview);
             // 从position 0开始找第一个pinned标记的itemView,并把最后一个吸顶视图添加回到它的原本位置
             int firstPinnedPosition = findPinnedViewPositionIncrease(0);
-            ViewGroup parentItemView = (ViewGroup)mPinnedPositionHolderMaps.get(firstPinnedPosition).itemView;
+            ViewGroup parentItemView = (ViewGroup)mPinnedPositionHolder.get(firstPinnedPosition).itemView;
             parentItemView.addView(subview);
             // 列表恢复没有吸顶视图的状态
             mCurrentPinnedPosition = -1;
@@ -246,7 +248,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (mPinnedContainer != null && mCurrentPinnedPosition != -1) {
             View targetView = lvRecyclerView.findChildViewUnder(mPinnedContainer.getMeasuredWidth() / 2, mPinnedContainer.getMeasuredHeight() + 1);
             if (targetView != null) {
-                boolean isPinned = ((Boolean) targetView.getTag(R.id.lv_tag_model)).booleanValue();
+                boolean isPinned = (boolean) targetView.getTag(R.id.lv_tag_model);
                 if (isPinned) {
                     if (targetView.getTop() > 0) {
                         if (pinnedViewPosition != -1) {
@@ -277,9 +279,9 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
      * @return int
      */
     private int findPinnedViewPositionIncrease(int fromPosition) {
-        for (int position = fromPosition; position < this.mIsItemViewPinnedList.size(); position++) {
+        for (int position = fromPosition; position < this.getTotalCount(); position++) {
             // 位置递减，只要查到位置是Pinned标示，立即返回此位置
-            if (this.mIsItemViewPinnedList.get(position).booleanValue()) {
+            if (this.mIsPinnedSparseArray.get(position)) {
                 return position;
             }
         }
@@ -296,7 +298,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     private int findPinnedViewPositionDecrease(int fromPosition) {
         for (int position = fromPosition; position >= 0; position--) {
             // 位置递减，只要查到位置是Pinned标示，立即返回此位置
-            if (this.mIsItemViewPinnedList.get(position).booleanValue()) {
+            if (this.mIsPinnedSparseArray.get(position)) {
                 return position;
             }
         }
@@ -341,7 +343,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     protected String getId(int position, int section, int row) {
         final String cacheId = mIdCache != null ? mIdCache.get(position) : null;
         if (cacheId != null) {
-            if (mIsItemViewPinnedList.get(position).booleanValue()) {
+            if (this.mIsPinnedSparseArray.get(position)) {
                 // 获取CellId的时候,要用lua定义的真正的Id
                 return cacheId.split("\\.PINNED")[0];
             }
@@ -353,30 +355,15 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 if (args.narg() > 1) {
                     if (args.arg(2).toint() == UDPinned.PINNED_YES) {
                         mHasPinnedCell = true;
-                        if (position < mIsItemViewPinnedList.size()) {
-                            // reload的情况
-                            mIsItemViewPinnedList.set(position, true);
-                        } else {
-                            mIsItemViewPinnedList.add(position, true);
-                        }
+                        mIsPinnedSparseArray.put(position, true);
                         id = args.arg(1).optjstring("");
                         // 构造唯一的id加到mIdCache中,这样才能使得在lua用同一种Cell作为多个position的PinnedCell时,也会有不同的viewType,见getItemViewType(int)函数
                         id = new StringBuffer(id).append(".PINNED").append(position).toString();
                     } else {
-                        if (position < mIsItemViewPinnedList.size()) {
-                            mIsItemViewPinnedList.set(position, false);
-                        } else {
-                            mIsItemViewPinnedList.add(position, false);
-                        }
                         id = args.arg(1).optjstring("");
                     }
                 } else { // 兼容旧版本的写法,只有一个String参数的情况
                     id = ((LuaValue)args).optjstring("");
-                    if (position < mIsItemViewPinnedList.size()) {
-                        mIsItemViewPinnedList.set(position, false);
-                    } else {
-                        mIsItemViewPinnedList.add(position, false);
-                    }
                 }
             }
 
@@ -412,11 +399,11 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 viewType = this.mViewTypeMap.get(viewTypeName);
             }
         }
-        if (this.mIsItemViewPinnedList.get(position).booleanValue()) {
-            if (!this.mPinnedViewTypePositionMaps.containsKey(viewType)) {
-                this.mPinnedViewTypePositionMaps.put(viewType, position);
-            }
+
+        if (this.mIsPinnedSparseArray.get(position)) {
+            this.mPinnedViewTypePosition.put(viewType, position);
         }
+
         return viewType;
     }
 
@@ -550,7 +537,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public boolean hasCellSize(int viewType) {
         final String id = getItemViewTypeName(viewType);
         if (id != null) {
-            if (mPinnedViewTypePositionMaps.containsKey(viewType)) {
+            if (this.mPinnedViewTypePosition.get(viewType, -1) != -1) {
                 // 获取CellId的时候,要用Lua层定义的正确的Id
                 return hasCellFunction(id.split("\\.PINNED")[0], "Size");
             }
