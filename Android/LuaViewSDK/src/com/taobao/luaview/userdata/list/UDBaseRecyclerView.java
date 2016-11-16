@@ -41,6 +41,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     // 用于添加吸顶视图的容器
     private ViewGroup mPinnedContainer;
 
+    private View mCurrentPinnedView;
+
     private int mCurrentPinnedPosition = -1;
 
     private boolean mHasPinnedCell = false;
@@ -209,6 +211,10 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 itemView.getLayoutParams().height = child.getLayoutParams().height;
                 itemView.removeView(child);
                 mPinnedContainer.addView(child);
+                if (mCurrentPinnedView != null) {
+                    mCurrentPinnedView.setVisibility(View.GONE);
+                }
+                mCurrentPinnedView = child;
             } else {
                 // 从(pinnedViewPosition + 1)位置开始递增查找下一个pinned position
                 int nextPinnedPosition = findPinnedViewPositionIncrease(pinnedViewPosition + 1);
@@ -216,6 +222,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
                 mPinnedContainer.removeView(pinnedView);
                 parentItemView.addView(pinnedView);
+                mCurrentPinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
+                mCurrentPinnedView.setVisibility(View.VISIBLE);
             }
 
             mCurrentPinnedPosition = pinnedViewPosition;
@@ -231,6 +239,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             parentItemView.addView(subview);
             // 列表恢复没有吸顶视图的状态
             mCurrentPinnedPosition = -1;
+            mCurrentPinnedView = null;
         }
 
         // 处理吸顶视图切换时的位移效果
