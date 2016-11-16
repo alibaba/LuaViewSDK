@@ -1,7 +1,5 @@
 package com.taobao.luaview.fun.mapper.indicator;
 
-import android.graphics.Color;
-
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.UIViewMethodMapper;
@@ -81,15 +79,15 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
      * @return
      */
     public LuaValue unselectedColor(U view, Varargs varargs) {
-        return fillColor(view, varargs);
+        return pageColor(view, varargs);
     }
 
     public LuaValue setUnselectedColor(U view, Varargs varargs) {
-        return setFillColor(view, varargs);
+        return setPageColor(view, varargs);
     }
 
     public LuaValue getUnselectedColor(U view, Varargs varargs) {
-        return getFileColor(view, varargs);
+        return getPageColor(view, varargs);
     }
 
     /**
@@ -101,17 +99,17 @@ public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerI
      */
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue selectedColor(U view, Varargs varargs) {
-        return pageColor(view, varargs);
+        return fillColor(view, varargs);
     }
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue setSelectedColor(U view, Varargs varargs) {
-        return setPageColor(view, varargs);
+        return setFillColor(view, varargs);
     }
 
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue getSelectedColor(U view, Varargs varargs) {
-        return getPageColor(view, varargs);
+        return getFileColor(view, varargs);
     }
 
     /**
