@@ -175,7 +175,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         }
     }
 
-    // TODO: 11/15/16 处理itemView之前有spacing的情况 
+    // TODO: 11/15/16 处理itemView之前有spacing的情况
     private void pinned(LVRecyclerView lvRecyclerView) {
         if (!mHasPinnedCell)
             return;
@@ -210,11 +210,11 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 itemView.removeView(child);
                 mPinnedContainer.addView(child);
             } else {
-                View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
-                mPinnedContainer.removeView(pinnedView);
                 // 从(pinnedViewPosition + 1)位置开始递增查找下一个pinned position
                 int nextPinnedPosition = findPinnedViewPositionIncrease(pinnedViewPosition + 1);
-                ViewGroup parentItemView = (ViewGroup)mPinnedPositionHolderMaps.get(nextPinnedPosition).itemView;
+                ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolderMaps.get(nextPinnedPosition).itemView;
+                View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
+                mPinnedContainer.removeView(pinnedView);
                 parentItemView.addView(pinnedView);
             }
 
@@ -227,8 +227,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             mPinnedContainer.removeView(subview);
             // 从position 0开始找第一个pinned标记的itemView,并把最后一个吸顶视图添加回到它的原本位置
             int firstPinnedPosition = findPinnedViewPositionIncrease(0);
-            ViewGroup parentView = (ViewGroup)mPinnedPositionHolderMaps.get(firstPinnedPosition).itemView;
-            parentView.addView(subview);
+            ViewGroup parentItemView = (ViewGroup)mPinnedPositionHolderMaps.get(firstPinnedPosition).itemView;
+            parentItemView.addView(subview);
             // 列表恢复没有吸顶视图的状态
             mCurrentPinnedPosition = -1;
         }
@@ -242,7 +242,12 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                     if (targetView.getTop() > 0) {
                         if (pinnedViewPosition != -1) {
                             int deltaY = targetView.getTop() - mPinnedContainer.getMeasuredHeight();
-                            mPinnedContainer.setTranslationY(deltaY);
+                            if (deltaY < (lvRecyclerView.getMiniSpacing() - mPinnedContainer.getMeasuredHeight())) {
+                                // 防止设置了spacing的时候,在这个范围内mPinnedContainer被位移到top之上,而itemView是空白的现象
+                                mPinnedContainer.setTranslationY(0);
+                            } else {
+                                mPinnedContainer.setTranslationY(deltaY);
+                            }
                         }
                     } else {
                         mPinnedContainer.setTranslationY(0);
@@ -250,6 +255,8 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 } else {
                     mPinnedContainer.setTranslationY(0);
                 }
+            } else {
+                mPinnedContainer.setTranslationY(0);
             }
         }
     }
