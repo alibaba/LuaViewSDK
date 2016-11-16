@@ -260,19 +260,15 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             View targetView = lvRecyclerView.findChildViewUnder(mPinnedContainer.getMeasuredWidth() / 2, mPinnedContainer.getMeasuredHeight() + 1);
             if (targetView != null) {
                 boolean isPinned = (boolean) targetView.getTag(R.id.lv_tag_pinned);
-                if (isPinned) {
-                    if (targetView.getTop() > 0) {
-                        if (pinnedViewPosition != -1) {
-                            int deltaY = targetView.getTop() - mPinnedContainer.getMeasuredHeight();
-                            if (deltaY < (lvRecyclerView.getMiniSpacing() - mPinnedContainer.getMeasuredHeight())) {
-                                // 防止设置了spacing的时候,在这个范围内mPinnedContainer被位移到top之上,而itemView是空白的现象
-                                mPinnedContainer.setTranslationY(0);
-                            } else {
-                                mPinnedContainer.setTranslationY(deltaY);
-                            }
+                if (isPinned && targetView.getTop() > 0) {
+                    if (pinnedViewPosition != -1) {
+                        int deltaY = targetView.getTop() - mPinnedContainer.getMeasuredHeight();
+                        if (deltaY < (lvRecyclerView.getMiniSpacing() - mPinnedContainer.getMeasuredHeight())) {
+                            // 防止设置了spacing的时候,在这个范围内mPinnedContainer被位移到top之上,而itemView是空白的现象
+                            mPinnedContainer.setTranslationY(0);
+                        } else {
+                            mPinnedContainer.setTranslationY(deltaY);
                         }
-                    } else {
-                        mPinnedContainer.setTranslationY(0);
                     }
                 } else {
                     mPinnedContainer.setTranslationY(0);
