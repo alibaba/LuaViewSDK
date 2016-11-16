@@ -9,7 +9,7 @@
 w,h = System.screenSize();
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
 imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr.thumb.600_0.jpeg"
-collectionView = CollectionView {
+collectionView = RefreshCollectionView {
     Section = {
         SectionCount = 26,
         RowCount = function(section, row)
@@ -19,8 +19,9 @@ collectionView = CollectionView {
     Cell = {
         Id = function ( section, row )
             if (row == 2) then
---                return "PinnedScrollCell", Pinned.YES;
                 return "PinnedCell1", Pinned.YES;
+--            if (section == 2 and row == 1) then
+--                return "PinnedScrollCell", Pinned.YES;
             else
                 return "ImageAndLabel"
             end
@@ -30,6 +31,7 @@ collectionView = CollectionView {
                 return w, 60;
             end,
             Init = function(cell, section, row)
+                cell.window.backgroundColor(0xf0ff97)
                 cell.scrollView = HScrollView();
                 cell.scrollView.frame(0, 0, w, 60);
                 for i = 0, 30, 1 do
@@ -42,7 +44,7 @@ collectionView = CollectionView {
                     view.callback(
                         function()
                             Toast(btn.text())
-                            cell.window.backgroundColor(0xf32f07)
+                            cell.window.backgroundColor(0x032f00)
                         end
                     )
                     view.addView(btn)
@@ -50,7 +52,6 @@ collectionView = CollectionView {
                 end
             end,
             Layout = function(cell, section, row)
-                cell.window.backgroundColor(0xf0ff97)
             end
         },
         PinnedCell1 = {
@@ -155,7 +156,7 @@ collectionView = CollectionView {
 --            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
-            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+--            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         PullDown = function()
             collectionView.stopPullDownRefreshing()
@@ -165,5 +166,5 @@ collectionView = CollectionView {
 };
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
---collectionView.setMiniSpacing(2)
+collectionView.miniSpacing(5)
 
