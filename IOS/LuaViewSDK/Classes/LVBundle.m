@@ -19,6 +19,8 @@
     NSString *_currentPath;
 }
 
+@property(nonatomic,strong) NSMutableDictionary* imageCaches;
+
 @end
 
 @implementation LVBundle
@@ -34,6 +36,7 @@
         
         _resourcePaths = [NSMutableArray arrayWithObjects:[LVUtil PathForCachesResource:nil], @".", nil];
         _scriptPaths = [NSMutableArray arrayWithObject:@"."];
+        _imageCaches = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -128,13 +131,20 @@
     if (name == nil) {
         return nil;
     }
-    
+    UIImage* image = self.imageCaches[name];
+    if( image ) {
+        return image;
+    }
     NSString *path = [self resourcePathWithName:name];
     if( path ) {
-        return [UIImage imageWithContentsOfFile:path];
+        image = [UIImage imageWithContentsOfFile:path];
     } else {
-        return [UIImage imageNamed:name];
+        image = [UIImage imageNamed:name];
     }
+    if( image ){
+        self.imageCaches[name] = image;
+    }
+    return image;
 }
 
 - (NSString *)scriptPathWithName:(NSString *)name {
