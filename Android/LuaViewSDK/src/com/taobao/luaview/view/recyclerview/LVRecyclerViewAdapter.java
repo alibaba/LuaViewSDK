@@ -77,7 +77,7 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         if (position >= 0 && position < getItemCount()) {
             if (holder != null) {
                 if (holder.itemView != null) {
-                    holder.itemView.setTag(R.id.lv_tag_model, this.mLuaUserData.mIsPinnedSparseArray.get(position));
+                    holder.itemView.setTag(R.id.lv_tag_pinned, this.mLuaUserData.mIsPinnedSparseArray.get(position));
                 }
 
                 if (this.mLuaUserData.hasCellSize(getItemViewType(position))) {
