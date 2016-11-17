@@ -181,4 +181,12 @@
     }
 }
 
+-(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy{
+    // 视差效果
+}
+
+-(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha{
+    // 点击特效
+}
+
 @end

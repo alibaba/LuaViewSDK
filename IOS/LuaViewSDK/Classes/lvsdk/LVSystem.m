@@ -264,6 +264,17 @@ static int tableToString(lv_State*L){
         [LVUtil defineGlobal:@"Pinned" value:v L:L];
     }
     
+    {
+        // ViewEffect define
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"NONE":@(EFFECT_NONE),
+              @"CLICK":@(EFFECT_CLICK),
+              @"PARALLAX":@(EFFECT_PARALLAX),
+              };
+        [LVUtil defineGlobal:@"ViewEffect" value:v L:L];
+    }
     // 震动
     [LVUtil defineGlobal:@"Vibrate" func:vibrate L:L];
     

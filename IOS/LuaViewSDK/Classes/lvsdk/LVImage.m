@@ -18,10 +18,6 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
-#define EFFECT_NONE     0
-#define EFFECT_CLICK    1
-#define EFFECT_PARALLAX 2
-
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
 @property (nonatomic,strong) UIImageView* blurImageView;
@@ -85,6 +81,10 @@
             [self setImage:image];
         }
     }
+}
+
+-(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy{
+    [self effectParallax:dx dy:dy];
 }
 
 -(void) effectParallax:(CGFloat)dx dy:(CGFloat)dy {
@@ -175,35 +175,6 @@ static int setImage (lv_State *L) {
     return 0;
 }
 
-static int effects (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-        LVImage* imageView = (__bridge LVImage *)(user->object);
-        if ( [imageView isKindOfClass:[LVImage class]] ) {
-            int effectType = lv_tonumber(L, 2);
-            switch (effectType) {
-                case EFFECT_NONE:
-                    break;
-                case EFFECT_CLICK:{
-                    NSInteger color = lv_tonumber(L, 3);
-                    CGFloat alpha = lv_tonumber(L, 4);
-                    [imageView effectClick:color alpha:alpha];
-                    break;
-                }
-                case EFFECT_PARALLAX:{
-                    CGFloat dx = lv_tonumber(L, 3);
-                    CGFloat dy = lv_tonumber(L, 4);
-                    [imageView effectParallax:dx dy:dy];
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-    }
-    return 0;
-}
-
 static int scaleType (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
@@ -282,17 +253,6 @@ static int isAnimating (lv_State *L) {
 
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        // ViewEffect define
-        lv_settop(L, 0);
-        NSDictionary* v = nil;
-        v = @{
-              @"NONE":@(EFFECT_NONE),
-              @"CLICK":@(EFFECT_CLICK),
-              @"PARALLAX":@(EFFECT_PARALLAX),
-              };
-        [LVUtil defineGlobal:@"ViewEffect" value:v L:L];
-    }
     
     [LVUtil reg:L clas:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
     
@@ -303,7 +263,6 @@ static int isAnimating (lv_State *L) {
         {"startAnimationImages",  startAnimating},
         {"stopAnimationImages",  stopAnimating},
         {"isAnimationImages",  isAnimating},
-        {"effects",effects},
         {NULL, NULL}
     };
     
