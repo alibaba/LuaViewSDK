@@ -6,6 +6,7 @@ import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.VmVersion;
+import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -2173,10 +2174,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = VmVersion.V_511)
     public LuaValue setEffects(U view, Varargs varargs) {
-        final Integer effects = LuaUtil.getInt(varargs, 2);
-        final Integer color = varargs.narg() > 2 ? ColorUtil.parse(varargs.arg(3)) : null;
-        final Integer alpha = LuaUtil.getAlphaInt(varargs, 4);
-        return view.setEffects(effects, color, alpha);
+        return view.setEffects(varargs);
     }
 
     @LuaViewApi(since = VmVersion.V_511)
