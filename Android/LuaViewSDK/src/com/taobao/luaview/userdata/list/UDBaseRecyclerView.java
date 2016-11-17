@@ -259,7 +259,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (mPinnedContainer != null && mCurrentPinnedPosition != -1) {
             View targetView = lvRecyclerView.findChildViewUnder(mPinnedContainer.getMeasuredWidth() / 2, mPinnedContainer.getMeasuredHeight() + 1);
             if (targetView != null) {
-                boolean isPinned = (boolean) targetView.getTag(R.id.lv_tag_pinned);
+                boolean isPinned = ((Boolean) targetView.getTag(R.id.lv_tag_pinned)).booleanValue();
                 if (isPinned && targetView.getTop() > 0) {
                     if (pinnedViewPosition != -1) {
                         int deltaY = targetView.getTop() - mPinnedContainer.getMeasuredHeight();
