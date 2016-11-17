@@ -15,6 +15,10 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
+@interface LVAudioPlayer ()
+@property(nonatomic,assign) BOOL playing;
+@end
+
 @implementation LVAudioPlayer{
     AVAudioPlayer* audioPlayer;
 }
@@ -49,6 +53,9 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
         NSURL* url = [[NSURL alloc] initWithString:path];
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];//使用本地URL创建
     }
+    if( self.playing ) {
+        [self play];
+    }
 }
 
 -(void) setPlayFileName:(NSString*) fileName bundle:(LVBundle*) bundle{
@@ -70,10 +77,12 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 
 -(void) play {
     [audioPlayer play];
+    self.playing = YES;
 }
 
 -(void) stop {
     [audioPlayer stop];
+    self.playing = NO;
 }
 
 - (id) lv_nativeObject{
