@@ -168,7 +168,7 @@ public class LuaUtil {
      */
     public static Float getFloat(final Varargs varargs, Float defaultValue, int... poslist) {
         final LuaNumber number = (LuaNumber) getValue(LuaValue.TNUMBER, varargs, defaultValue, poslist);
-        return number != null ? (float) number.checkdouble() : null;
+        return number != null ? (float) number.checkdouble() : defaultValue;
     }
 
 
