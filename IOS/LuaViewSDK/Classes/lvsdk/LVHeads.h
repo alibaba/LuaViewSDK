@@ -200,4 +200,8 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #import "UIScrollView+LuaView.h"
 #import "LVBundle.h"
 
+#define EFFECT_NONE     0
+#define EFFECT_CLICK    1
+#define EFFECT_PARALLAX 2
+
 #endif

@@ -37,4 +37,7 @@
 -(CALayer*) lv_layer;
 -(void) lv_createShapelayer:(NSArray<NSNumber*>*) arr;
 
+-(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy;
+-(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha;
+
 @end

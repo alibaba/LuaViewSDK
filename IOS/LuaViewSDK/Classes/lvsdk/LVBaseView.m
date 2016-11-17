@@ -1429,6 +1429,34 @@ static int alignCenter(lv_State *L ) {
     return alignInfo(L, LV_ALIGN_H_CENTER|LV_ALIGN_V_CENTER);
 }
 
+static int effects (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( [view isKindOfClass:[UIView class]] ) {
+            int effectType = lv_tonumber(L, 2);
+            switch (effectType) {
+                case EFFECT_NONE:
+                    break;
+                case EFFECT_CLICK:{
+                    NSInteger color = lv_tonumber(L, 3);
+                    CGFloat alpha = lv_tonumber(L, 4);
+                    [view lv_effectClick:color alpha:alpha];
+                    break;
+                }
+                case EFFECT_PARALLAX:{
+                    CGFloat dx = lv_tonumber(L, 3);
+                    CGFloat dy = lv_tonumber(L, 4);
+                    [view lv_effectParallax:dx dy:dy];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    return 0;
+}
 
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
@@ -1543,6 +1571,8 @@ static const struct lvL_reg baseMemberFunctions [] = {
     // getNativeView
     {"getNativeView", getNativeView},
     {"nativeView", getNativeView},
+    
+    {"effects",effects},
     {NULL, NULL}
 };
 
