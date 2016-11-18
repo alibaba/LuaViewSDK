@@ -73,6 +73,8 @@
 @property (atomic,assign) NSInteger callLuaTimes;
 
 @property (nonatomic,strong) LVRSA* rsa;
+
+@property (nonatomic,assign) BOOL isOnShowed;
 @end
 
 @implementation LView
@@ -119,6 +121,17 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onForeground)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onBackground)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
     self.lv_lview = self;
     self.rsa = [[LVRSA alloc] init];
     self.bundle = [[LVBundle alloc] init];
@@ -423,6 +436,7 @@ extern char g_debug_lua[];
 }
 
 -(void) viewDidAppear{
+    self.isOnShowed = YES;
     if( self.l ) {
         lv_checkStack32(self.l);
         [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
@@ -437,9 +451,26 @@ extern char g_debug_lua[];
 }
 
 -(void) viewDidDisAppear{
+    self.isOnShowed = NO;
     if( self.l ) {
         lv_checkStack32(self.l);
         [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
+    }
+}
+
+-(void) onForeground {
+    if( self.l && self.isOnShowed ) {
+        lv_checkStack32(self.l);
+        lv_pushboolean(self.l, YES);
+        [self lv_callLuaByKey1:@"onShow" key2:nil argN:1];
+    }
+}
+
+-(void) onBackground {
+    if( self.l && self.isOnShowed ) {
+        lv_checkStack32(self.l);
+        lv_pushboolean(self.l, YES);
+        [self lv_callLuaByKey1:@"onHide" key2:nil argN:1];
     }
 }
 
