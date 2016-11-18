@@ -67,6 +67,18 @@ public class LVRefreshListView extends SwipeRefreshLayout implements ILVListView
         //TODO 这里不做操作，因为ListView不应该加子view
     }
 
+    @Override
+    public void setVerticalScrollBarEnabled(boolean horizontalScrollBarEnabled) {
+        if(mListView != null){
+            mListView.setVerticalScrollBarEnabled(horizontalScrollBarEnabled);
+        }
+    }
+
+    @Override
+    public boolean isVerticalScrollBarEnabled() {
+        return mListView != null ? mListView.isVerticalScrollBarEnabled() : true;
+    }
+
     public LVListView getListView() {
         return mListView;
     }

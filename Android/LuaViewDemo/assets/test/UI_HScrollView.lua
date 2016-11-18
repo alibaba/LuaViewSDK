@@ -45,3 +45,4 @@ end
 scrollView.xy(0, 300)
 scrollView.size(SCREEN_WIDTH, 100)
 scrollView.backgroundColor(0xffcccccc)
+scrollView.showScrollIndicator(false)

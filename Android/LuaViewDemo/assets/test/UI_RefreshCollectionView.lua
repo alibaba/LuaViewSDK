@@ -113,6 +113,7 @@ collectionView = RefreshCollectionView {
 loading = false;
 
 collectionView.frame(0, 0, w, h - 64);
+collectionView.showScrollIndicator(false)
 
 
 

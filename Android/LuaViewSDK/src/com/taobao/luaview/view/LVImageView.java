@@ -12,6 +12,7 @@ import android.view.View;
 import com.taobao.luaview.extend.SensorInterpreter;
 import com.taobao.luaview.userdata.ui.UDImageView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.view.imageview.BaseImageView;
 import com.taobao.luaview.view.imageview.LVBaseImageView;
 import com.taobao.luaview.view.interfaces.ILVView;
 
@@ -25,7 +26,7 @@ import org.luaj.vm2.Varargs;
  * @author song
  * @date 15/8/20
  */
-public class LVImageView extends LVBaseImageView implements ILVView, SensorEventListener {
+public class LVImageView extends BaseImageView implements ILVView, SensorEventListener {
     private UDImageView mLuaUserdata;
 
     private SensorManager mSensorManager;

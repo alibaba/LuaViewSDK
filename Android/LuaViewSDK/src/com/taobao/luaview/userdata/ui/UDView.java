@@ -22,6 +22,8 @@ import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVImageView;
+import com.taobao.luaview.view.LVRecyclerView;
+import com.taobao.luaview.view.LVRefreshRecyclerView;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 import com.taobao.luaview.view.foreground.ForegroundDelegate;
@@ -744,6 +746,11 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setEnabled(boolean enable) {
         final View view = getView();
         if (view != null) {
+            if(view instanceof LVRecyclerView) {
+                LVRecyclerView view2 = (LVRecyclerView) view;
+                view2.setNestedScrollingEnabled(false);
+                return this;
+            }
             view.setEnabled(enable);
         }
         return this;
