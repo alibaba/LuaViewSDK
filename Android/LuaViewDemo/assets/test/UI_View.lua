@@ -24,16 +24,19 @@ view.backgroundColor(0xff000001, 0.5)
 print(view.backgroundColor())
 
 
+print(view)
 view.children(function(parent)
     print(parent)
     local child1 = View()
     child1.frame(2, 2, 90, 90)
     child1.backgroundColor(0x00ff00)
+    print(child1)
     child1.children(function(parent)
         print(parent)
         local child2 = View()
         child2.frame(2, 2, 80, 80)
         child2.backgroundColor(0xff0000)
+        print(child2)
         child2.children(function(parent)
             print(parent)
             local child3 = View()
@@ -42,3 +45,19 @@ view.children(function(parent)
         end)
     end)
 end)
+
+
+
+view3 = Label()
+view3.frame(120, 20, 100, 100)
+view3.backgroundColor(0x00f000, 0.8)
+view3.borderColor(0xff0000)
+view3.borderWidth(2)
+
+view4 = View()
+view4.backgroundColor(0x0fff00, 0.5)
+
+view3.addView(view4)
+view4.frame(0, -40, 150, 40)
+
+print("end")

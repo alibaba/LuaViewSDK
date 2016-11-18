@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.lang.ref.WeakReference;
+import java.util.Stack;
 
 /**
  * Global environment used by luaj.  Contains global variables referenced by executing lua.
@@ -130,6 +131,9 @@ public class Globals extends LuaTable {
     private WeakReference<LuaView> mLuaView;
     public ILVViewGroup container;
     private ILVViewGroup tmpContainer;
+
+    //containers
+    private Stack<ILVViewGroup> mContainers;
 
     /**
      * The current default input stream.
@@ -595,6 +599,28 @@ public class Globals extends LuaTable {
      */
     public void restoreContainer() {
         this.container = this.tmpContainer;
+    }
+
+    /**
+     * push a container
+     *
+     * @param viewGroup
+     */
+    public void pushContainer(final ILVViewGroup viewGroup) {
+        if (this.mContainers == null) {
+            this.mContainers = new Stack<ILVViewGroup>();
+        }
+        this.mContainers.push(this.container);
+        this.container = viewGroup;
+    }
+
+    /**
+     * pop a container
+     */
+    public void popContainer() {
+        if (this.mContainers != null) {
+            this.container = this.mContainers.pop();
+        }
     }
 
     /**
