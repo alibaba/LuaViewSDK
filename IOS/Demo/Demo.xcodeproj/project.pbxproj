@@ -259,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
-				3CC2F8581C706BFA00D1E0B7 /* lua */,
+				3CC2F8581C706BFA00D1E0B7 /* luaviewDemos */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
 				3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */,
@@ -300,7 +300,7 @@
 			name = luaviewEx;
 			sourceTree = "<group>";
 		};
-		3CC2F8581C706BFA00D1E0B7 /* lua */ = {
+		3CC2F8581C706BFA00D1E0B7 /* luaviewDemos */ = {
 			isa = PBXGroup;
 			children = (
 				3CC2F9181C70BB8E00D1E0B7 /* candle */,
@@ -353,6 +353,7 @@
 				3CC2F8871C706BFA00D1E0B7 /* img16.tiff */,
 				3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */,
 			);
+			name = luaviewDemos;
 			path = lua;
 			sourceTree = "<group>";
 		};
