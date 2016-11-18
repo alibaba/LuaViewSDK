@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.taobao.android.luaview.R;
-import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
-import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -34,7 +32,12 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     @Override
     public LVRecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         final View itemView = createItemView(viewType);
-        return new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
+        LVRecyclerViewHolder holder = new LVRecyclerViewHolder(itemView, mGlobals, mLuaUserData);
+        int position = this.mLuaUserData.mPinnedViewTypePosition.get(viewType, -1);
+        if (position != -1) {
+            this.mLuaUserData.mPinnedPositionHolder.put(position, holder);
+        }
+        return holder;
     }
 
     /**
@@ -65,13 +68,18 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
 
     @Override
     public int getItemViewType(int position) {//TODO 从0开始，如何去除非viewtype内容
-        return this.mLuaUserData.getItemViewType(position);
+        int viewType = this.mLuaUserData.getItemViewType(position);
+        return viewType;
     }
 
     @Override
     public void onBindViewHolder(LVRecyclerViewHolder holder, int position) {
         if (position >= 0 && position < getItemCount()) {
             if (holder != null) {
+                if (holder.itemView != null) {
+                    holder.itemView.setTag(R.id.lv_tag_pinned, this.mLuaUserData.mIsPinnedSparseArray.get(position));
+                }
+
                 if (this.mLuaUserData.hasCellSize(getItemViewType(position))) {
                     if (holder.itemView != null && holder.itemView.getTag(R.id.lv_tag) instanceof UDLuaTable) {
                         UDLuaTable cellData = (UDLuaTable) holder.itemView.getTag(R.id.lv_tag);
@@ -121,5 +129,4 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
     private LVViewGroup createLayout() {
         return new LVViewGroup(mGlobals, mLuaUserData.getmetatable(), null);
     }
-
 }

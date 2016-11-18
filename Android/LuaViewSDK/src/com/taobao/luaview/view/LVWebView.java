@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -147,19 +146,6 @@ public class LVWebView extends SwipeRefreshLayout implements ILVNativeViewProvid
                 });
             }
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mWebView != null) {
-            // 使点击返回键时可以回退网页,而不是关闭Browser
-            if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-                mWebView.goBack();
-                return true;
-            }
-        }
-
-        return super.onKeyDown(keyCode, event);
     }
 
     public WebView getWebView() {
