@@ -48,16 +48,21 @@ end)
 
 
 
-view3 = Label()
-view3.frame(120, 20, 100, 100)
-view3.backgroundColor(0x00f000, 0.8)
+view3 = View()
+view3.frame(120, 50, 100, 100)
 view3.borderColor(0xff0000)
 view3.borderWidth(2)
 
 view4 = View()
-view4.backgroundColor(0x0fff00, 0.5)
+view4.backgroundColor(0x0fffff)
 
 view3.addView(view4)
-view4.frame(0, -40, 150, 40)
+view3.nativeView().setClipChildren(true)
+view4.frame(5, -20, 90, 50)
+
+view3.callback(function()
+    print("view4.frame=", view4.frame())
+    Animation().with(view4).translation(0, 40).duration(3).start()
+end)
 
 print("end")

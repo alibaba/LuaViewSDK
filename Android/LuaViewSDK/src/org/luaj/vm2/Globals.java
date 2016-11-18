@@ -584,6 +584,7 @@ public class Globals extends LuaTable {
      *
      * @param viewGroup
      */
+    @Deprecated
     public void saveContainer(final ILVViewGroup viewGroup) {
         if (this.container == null) {
             this.tmpContainer = viewGroup;
@@ -597,6 +598,7 @@ public class Globals extends LuaTable {
     /**
      * 使用保存的container恢复
      */
+    @Deprecated
     public void restoreContainer() {
         this.container = this.tmpContainer;
     }
