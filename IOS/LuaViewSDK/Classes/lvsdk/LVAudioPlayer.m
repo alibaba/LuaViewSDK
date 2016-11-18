@@ -51,7 +51,11 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     NSString* path = [bundle resourcePathWithName:fileName];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];//使用本地URL创建
+        NSError* error = nil;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//使用本地URL创建
+        if( error ) {
+            NSLog(@"[LuaView][error]%@",error);
+        }
     }
     if( self.playing ) {
         [self play];
@@ -62,11 +66,12 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
-        // fixme: 构造完成后调用play()无效，下载完成后没有回调
         [LVUtil download:fileName callback:^(NSData *fileData) {
+            NSString* suffix = [fileName componentsSeparatedByString:@"."].lastObject;
             NSData* theFileNameData = [fileName dataUsingEncoding:NSUTF8StringEncoding];
             NSString* md5Path = [LVUtil MD5HashFromData:theFileNameData];
-            if(  [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
+            md5Path = [NSString stringWithFormat:@"%@.%@",md5Path,suffix];//Mp3文件一定要加后缀，否则无法播放
+            if( [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
                 [self setPlayFileName0:md5Path bundle:bundle];
             }
         }];
