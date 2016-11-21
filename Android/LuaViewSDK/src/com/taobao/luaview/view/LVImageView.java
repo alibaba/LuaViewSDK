@@ -12,6 +12,7 @@ import android.view.View;
 import com.taobao.luaview.extend.SensorInterpreter;
 import com.taobao.luaview.userdata.ui.UDImageView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.imageview.LVBaseImageView;
 import com.taobao.luaview.view.interfaces.ILVView;
 
@@ -128,9 +129,18 @@ public class LVImageView extends LVBaseImageView implements ILVView, SensorEvent
         mSensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
 
         if (mSensorManager != null) {
-            mSensorManager.registerListener(this,
-                    mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR),
-                    samplingPeriodUs);
+            Sensor sensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
+            if (sensor == null) {
+                sensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+                if (sensor == null) {
+                    sensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+                }
+            }
+            if (sensor != null) {
+                mSensorManager.registerListener(this, sensor, samplingPeriodUs);
+            } else {
+                LogUtil.i("LuaViewSDK Exception", "Rotation sensor is null");
+            }
         }
     }
 
