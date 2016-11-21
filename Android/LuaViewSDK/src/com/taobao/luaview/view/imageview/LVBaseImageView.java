@@ -59,7 +59,7 @@ public class LVBaseImageView extends BaseImageView {
     }
 
     public void restoreImage() {// 恢复被清空的image
-        if (isNetworkMode && isNetworkMode) {
+        if (isNetworkMode) {
             loadUrl(mUrl, null);
         }
     }

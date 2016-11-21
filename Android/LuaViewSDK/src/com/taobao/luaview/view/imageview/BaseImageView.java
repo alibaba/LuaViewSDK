@@ -1,14 +1,20 @@
 package com.taobao.luaview.view.imageview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 import com.taobao.luaview.view.foreground.ForegroundImageView;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Base ImageView
@@ -17,11 +23,13 @@ import com.taobao.luaview.view.foreground.ForegroundImageView;
  * @date 16/3/9
  */
 public abstract class BaseImageView extends ForegroundImageView {
-    protected boolean mAttachedWindow = false;
-    protected boolean isNetworkMode = false;
-
     private LVGradientDrawable mStyleDrawable = null;
     private Path mPath = null;
+
+    private String mUrl;
+
+    protected Boolean mAttachedWindow = null;
+    protected boolean isNetworkMode = false;
 
     public void setIsNetworkMode(boolean isNetworkMode) {
         this.isNetworkMode = isNetworkMode;
@@ -37,39 +45,83 @@ public abstract class BaseImageView extends ForegroundImageView {
 
     public BaseImageView(Context context) {
         super(context);
+        initRecycler(context);
+    }
+
+    private void initRecycler(Context context) {
+        if (context instanceof Activity) {
+            ImageActivityLifeCycle.getInstance(((Activity) context).getApplication()).watch(this);
+        }
+    }
+
+    public void loadUrl(final String url, final LoadCallback callback) {
+        this.mUrl = url;
+        final ImageProvider provider = LuaView.getImageProvider();
+        if (provider != null) {
+            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<LoadCallback>(callback));
+        }
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public void setUrl(String url) {
+        this.mUrl = url;
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        restoreImage();
         mAttachedWindow = true;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        releaseBitmap();
         mAttachedWindow = false;
     }
 
-    public abstract void loadUrl(final String url, final LoadCallback callback);
 
-    public abstract String getUrl();
+    public void restoreImage() {
+        if (isNetworkMode && mAttachedWindow != null) {// 恢复被清空的image，只有已经被加过才恢复
+            if (mUrl != null) {
+                loadUrl(mUrl, null);
+            } else {
+                setImageDrawable(null);
+            }
+        }
+    }
 
-    public abstract void setUrl(String url);
-
+    public void releaseBitmap() {// 释放图片内存
+        if (isNetworkMode) {//只有被加过才释放
+            setImageDrawable(null);
+        }
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         final boolean hasStyle = setupStyleDrawable();
+
         if (hasStyle && canvas != null) {
-            canvas.clipPath(getClipPath());
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {//fix API 11~ API 17
+                setLayerType(LAYER_TYPE_SOFTWARE, null);
+                try {
+                    canvas.clipPath(getClipPath());
+                } catch (UnsupportedOperationException e) {
+                }
+            } else {
+                canvas.clipPath(getClipPath());
+            }
         }
 
         super.onDraw(canvas);
 
-        if (hasStyle) {//背景放到上面画
+        if (hasStyle) {//背景放到上面画，默认为透明颜色
+            mStyleDrawable.setColor(Color.TRANSPARENT);
             mStyleDrawable.draw(canvas);
-            mStyleDrawable.getBounds();
         }
     }
 
@@ -106,7 +158,7 @@ public abstract class BaseImageView extends ForegroundImageView {
      * @return
      */
     private boolean setupStyleDrawable() {
-        if (mStyleDrawable != null) {
+        if (/*getDrawable() != null && */mStyleDrawable != null) {
             mStyleDrawable.setBounds(0, 0, getWidth(), getHeight());
             return true;
         }
