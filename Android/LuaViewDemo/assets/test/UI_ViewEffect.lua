@@ -36,3 +36,14 @@ button.callback(function()
     print("Change ViewEffect", view.effects())
 end)
 button.effects(ViewEffect.CLICK)
+
+
+imageView2 = Image();
+imageView2.frame( 50, 300, 300, 200);
+imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png");
+
+imageView2.effects(ViewEffect.PARALLAX, 150, 140)
+imageView2.effects(ViewEffect.CLICK, 0xff0000, 0.6)
+imageView2.callback(function()
+    print("yyy")
+end)

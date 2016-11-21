@@ -326,27 +326,34 @@ public class FileUtil {
      * @return
      */
     public static boolean copy(final InputStream input, final String filePath) {
+        boolean result = false;
+        File file = new File(filePath);
+        OutputStream output = null;
         try {
-            File file = new File(filePath);
-            OutputStream output = new FileOutputStream(file);
+            output = new FileOutputStream(file);
             byte[] buffer = new byte[8 * 1024]; // or other buffer size
             int read;
             while ((read = input.read(buffer)) != -1) {
                 output.write(buffer, 0, read);
             }
-            output.flush();
-            output.close();
-            return true;
+
+            result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            result = false;
         } finally {
             try {
+                if (output != null) {
+                    output.flush();
+                    output.close();
+                }
                 input.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        return result;
     }
 
     /**
