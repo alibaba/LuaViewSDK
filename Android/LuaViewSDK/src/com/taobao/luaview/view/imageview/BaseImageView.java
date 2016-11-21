@@ -105,14 +105,15 @@ public abstract class BaseImageView extends ForegroundImageView {
     protected void onDraw(Canvas canvas) {
         final boolean hasStyle = setupStyleDrawable();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {//fix API 11~ API 17
-            setLayerType(LAYER_TYPE_SOFTWARE, null);
-        }
-
         if (hasStyle && canvas != null) {
-            try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {//fix API 11~ API 17
+                setLayerType(LAYER_TYPE_SOFTWARE, null);
+                try {
+                    canvas.clipPath(getClipPath());
+                } catch (UnsupportedOperationException e) {
+                }
+            } else {
                 canvas.clipPath(getClipPath());
-            } catch (UnsupportedOperationException e) {
             }
         }
 
@@ -157,7 +158,7 @@ public abstract class BaseImageView extends ForegroundImageView {
      * @return
      */
     private boolean setupStyleDrawable() {
-        if (mStyleDrawable != null) {
+        if (/*getDrawable() != null && */mStyleDrawable != null) {
             mStyleDrawable.setBounds(0, 0, getWidth(), getHeight());
             return true;
         }

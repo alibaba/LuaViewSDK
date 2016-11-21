@@ -1,6 +1,6 @@
 view = Image()
 view.frame(10, 10, 100, 100)
-view.image("animate1")
+view.image("animate3")
 view.cornerRadius(50)
 view.borderColor(0x33ff0000)
 view.borderWidth(2)
