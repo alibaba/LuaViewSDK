@@ -3,6 +3,7 @@ package com.taobao.luaview.view.imageview;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -103,15 +104,23 @@ public abstract class BaseImageView extends ForegroundImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         final boolean hasStyle = setupStyleDrawable();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {//fix API 11~ API 17
+            setLayerType(LAYER_TYPE_SOFTWARE, null);
+        }
+
         if (hasStyle && canvas != null) {
-            canvas.clipPath(getClipPath());
+            try {
+                canvas.clipPath(getClipPath());
+            } catch (UnsupportedOperationException e) {
+            }
         }
 
         super.onDraw(canvas);
 
-        if (hasStyle) {//背景放到上面画
+        if (hasStyle) {//背景放到上面画，默认为透明颜色
+            mStyleDrawable.setColor(Color.TRANSPARENT);
             mStyleDrawable.draw(canvas);
-            mStyleDrawable.getBounds();
         }
     }
 

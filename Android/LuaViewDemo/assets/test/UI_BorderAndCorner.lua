@@ -21,5 +21,3 @@ view3.cornerRadius(20)
 view3.borderColor(0xff0000)
 view3.borderWidth(2)
 view3.borderDash(5, 2)
-
-
