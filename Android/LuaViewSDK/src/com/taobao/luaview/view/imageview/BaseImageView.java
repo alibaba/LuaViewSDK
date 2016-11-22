@@ -106,7 +106,7 @@ public abstract class BaseImageView extends ForegroundImageView {
         final boolean hasStyle = setupStyleDrawable();
 
         if (hasStyle && canvas != null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {//fix API 11~ API 17
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB && Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {//fix API 11~ API 17, 部分19也会有问题，一并解决
                 setLayerType(LAYER_TYPE_SOFTWARE, null);
                 try {
                     canvas.clipPath(getClipPath());
