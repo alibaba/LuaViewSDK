@@ -1337,7 +1337,7 @@ static int __tostring (lv_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_runCallBack:STR_ON_LAYOUT];
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 static int releaseObject(lv_State *L) {

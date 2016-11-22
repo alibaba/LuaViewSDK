@@ -72,7 +72,7 @@
 -(void) layoutSubviews{
     [super layoutSubviews];
     
-    [self lv_runCallBack:STR_ON_LAYOUT];
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 // 重载以实现可能的定制需求, contentOffset
