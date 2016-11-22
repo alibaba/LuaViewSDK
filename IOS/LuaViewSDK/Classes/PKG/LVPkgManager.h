@@ -21,7 +21,13 @@ extern NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME;
 
 @class LVRSA;
 
-typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
+typedef enum : NSUInteger {
+    LV_DOWNLOAD_ERROR = -1,
+    LV_DOWNLOAD_CACHE = 0 ,
+    LV_DOWNLOAD_NET = 1,
+} LVDownloadDataType;
+
+typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloadDataType dataType);
 
 @interface LVPkgManager : NSObject
 
