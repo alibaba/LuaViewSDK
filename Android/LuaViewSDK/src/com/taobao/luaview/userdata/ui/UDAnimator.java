@@ -182,7 +182,7 @@ public class UDAnimator extends BaseUserdata {
             if (repeatCount >= 0) {
                 animator.setRepeatCount(repeatCount);
             } else {
-                animator.setRepeatMode(ValueAnimator.INFINITE);
+                animator.setRepeatCount(ValueAnimator.INFINITE);
             }
         }
         return this;
