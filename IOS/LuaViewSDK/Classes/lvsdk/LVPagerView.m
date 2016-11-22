@@ -182,7 +182,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     [self moveCenter];
     [self checkCellVisible];
     
-    [self lv_runCallBack:STR_ON_LAYOUT];
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 -(void) dealloc{

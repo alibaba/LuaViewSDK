@@ -19,7 +19,6 @@
 - (void) lv_callLuaByKey1:(NSString*) key1;
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int) argN;
 - (void) lv_buttonCallBack;
-- (void) lv_runCallBack:(const char*) key;
 
 
 - (void) lv_alignSubviews;

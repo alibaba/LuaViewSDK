@@ -557,7 +557,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"LayoutSubviews"];
+        [self lv_callLuaByKey1:@STR_ON_LAYOUT];
     }
 }
 
