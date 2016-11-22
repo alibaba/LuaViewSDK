@@ -39,6 +39,7 @@
                 <artifactId>android-maven-plugin</artifactId>
                 <!--<version>3.7.0</version>-->
                 <!--sdk打包-->
+                <version>1.3.6.7</version>
                 <inherited>true</inherited>
                 <extensions>true</extensions>
                 <configuration>
@@ -96,7 +97,7 @@
         <dependency>
             <groupId>com.android.support</groupId>
             <artifactId>recyclerview-v7</artifactId>
-            <version>23.0.1</version>
+            <version>24.1.1</version>
             <type>aar</type>
             <scope>provided</scope>
         </dependency>
