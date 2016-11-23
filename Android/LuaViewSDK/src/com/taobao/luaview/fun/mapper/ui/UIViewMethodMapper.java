@@ -441,10 +441,10 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     }
 
     public LuaValue setMargin(U view, Varargs varargs) {
-        final int left = DimenUtil.dpiToPx(varargs.arg(2));
-        final int top = DimenUtil.dpiToPx(varargs.arg(3));
-        final int right = DimenUtil.dpiToPx(varargs.arg(4));
-        final int bottom = DimenUtil.dpiToPx(varargs.arg(5));
+        final Integer left = DimenUtil.dpiToPx(varargs.arg(2), null);
+        final Integer top = DimenUtil.dpiToPx(varargs.arg(3), null);
+        final Integer right = DimenUtil.dpiToPx(varargs.arg(4), null);
+        final Integer bottom = DimenUtil.dpiToPx(varargs.arg(5), null);
         return view.setMargin(left, top, right, bottom);
     }
 

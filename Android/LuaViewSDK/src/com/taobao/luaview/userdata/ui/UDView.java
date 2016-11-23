@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
@@ -152,14 +151,22 @@ public class UDView<T extends View> extends BaseUserdata {
      * @param bottom
      * @return
      */
-    public UDView setMargin(int left, int top, int right, int bottom) {
+    public UDView setMargin(Integer left, Integer top, Integer right, Integer bottom) {
         final View view = getView();
         if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-            layoutParams.leftMargin = left;
-            layoutParams.topMargin = top;
-            layoutParams.rightMargin = right;
-            layoutParams.bottomMargin = bottom;
+            if (left != null) {
+                layoutParams.leftMargin = left;
+            }
+            if (top != null) {
+                layoutParams.topMargin = top;
+            }
+            if (right != null) {
+                layoutParams.rightMargin = right;
+            }
+            if (bottom != null) {
+                layoutParams.bottomMargin = bottom;
+            }
             view.setLayoutParams(layoutParams);
         }
         return this;
