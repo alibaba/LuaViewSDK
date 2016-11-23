@@ -393,8 +393,6 @@ public class UDView<T extends View> extends BaseUserdata {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
             layoutParams.leftMargin = x;
             layoutParams.topMargin = y;
-            layoutParams.rightMargin = -x;
-            layoutParams.bottomMargin = -y;
             layoutParams.width = width;
             layoutParams.height = height;
             view.setLayoutParams(layoutParams);
@@ -422,8 +420,6 @@ public class UDView<T extends View> extends BaseUserdata {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
                 layoutParams.leftMargin = x;
                 layoutParams.topMargin = y;
-                layoutParams.rightMargin = -x;
-                layoutParams.bottomMargin = -y;
                 view.setLayoutParams(layoutParams);
             } else {
                 //TODO 其他Layout处理
@@ -444,7 +440,6 @@ public class UDView<T extends View> extends BaseUserdata {
             if (view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
                 layoutParams.leftMargin = x;
-                layoutParams.rightMargin = -x;
                 view.setLayoutParams(layoutParams);
             } else {
                 //TODO 其他Layout处理
@@ -482,7 +477,6 @@ public class UDView<T extends View> extends BaseUserdata {
             if (view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
                 layoutParams.topMargin = y;
-                layoutParams.bottomMargin = -y;
                 view.setLayoutParams(layoutParams);
             } else {
                 //TODO 其他Layout处理
