@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
@@ -23,7 +24,6 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVImageView;
 import com.taobao.luaview.view.LVRecyclerView;
-import com.taobao.luaview.view.LVRefreshRecyclerView;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 import com.taobao.luaview.view.foreground.ForegroundDelegate;
@@ -141,6 +141,64 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public int getPaddingBottom() {
         return getView() != null ? getView().getPaddingBottom() : 0;
+    }
+
+    /**
+     * 设置Margin
+     *
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @return
+     */
+    public UDView setMargin(int left, int top, int right, int bottom) {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            layoutParams.leftMargin = left;
+            layoutParams.topMargin = top;
+            layoutParams.rightMargin = right;
+            layoutParams.bottomMargin = bottom;
+            view.setLayoutParams(layoutParams);
+        }
+        return this;
+    }
+
+    public int getMarginLeft() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.leftMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginTop() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.topMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginRight() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.rightMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginBottom() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.bottomMargin;
+        }
+        return 0;
     }
 
     /**
@@ -752,7 +810,7 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setEnabled(boolean enable) {
         final View view = getView();
         if (view != null) {
-            if(view instanceof LVRecyclerView) {
+            if (view instanceof LVRecyclerView) {
                 LVRecyclerView view2 = (LVRecyclerView) view;
                 view2.setNestedScrollingEnabled(false);
                 return this;

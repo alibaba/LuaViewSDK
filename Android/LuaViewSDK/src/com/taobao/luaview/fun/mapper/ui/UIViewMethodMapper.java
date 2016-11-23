@@ -133,6 +133,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "effects",//101
             "nativeView",//102
             "borderDash",//103
+            "margin"//104
     };
 
     @Override
@@ -352,6 +353,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return nativeView(target, varargs);
             case 103:
                 return borderDash(target, varargs);
+            case 104:
+                return margin(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -422,6 +425,32 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return varargsOf(new LuaValue[]{valueOf(DimenUtil.pxToDpi(view.getPaddingLeft())), valueOf(DimenUtil.pxToDpi(view.getPaddingTop())), valueOf(DimenUtil.pxToDpi(view.getPaddingRight())), valueOf(DimenUtil.pxToDpi(view.getPaddingBottom()))});
     }
 
+
+    /**
+     * 设置Margin
+     * @param view
+     * @param varargs
+     * @return
+     */
+    public Varargs margin(U view, Varargs varargs){
+        if (varargs.narg() > 1) {
+            return setMargin(view, varargs);
+        } else {
+            return getMargin(view, varargs);
+        }
+    }
+
+    public LuaValue setMargin(U view, Varargs varargs) {
+        final int left = DimenUtil.dpiToPx(varargs.arg(2));
+        final int top = DimenUtil.dpiToPx(varargs.arg(3));
+        final int right = DimenUtil.dpiToPx(varargs.arg(4));
+        final int bottom = DimenUtil.dpiToPx(varargs.arg(5));
+        return view.setMargin(left, top, right, bottom);
+    }
+
+    public Varargs getMargin(U view, Varargs varargs) {
+        return varargsOf(new LuaValue[]{valueOf(DimenUtil.pxToDpi(view.getMarginLeft())), valueOf(DimenUtil.pxToDpi(view.getMarginTop())), valueOf(DimenUtil.pxToDpi(view.getMarginRight())), valueOf(DimenUtil.pxToDpi(view.getMarginBottom()))});
+    }
 
     /**
      * 获取view的位置和大小
