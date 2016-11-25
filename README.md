@@ -27,8 +27,8 @@ LuaView 是一种运行在一个 ViewController/Activity 中，可以灵活加�
 # 2. 入门
 ## 2.1 [新手入门 - iOS](IOS/Documentation/新手入门-iOS/新手入门 - iOS.md) 
 ## 2.2 [新手入门 - Android](Android/Documentation/新手入门-android/新手入门 - android.md)
-## 2.3 交流群
-	* QQ群: 539262083
+## 2.3 交流
+	QQ群: 539262083
 
-##3. 文档
+# 3. 文档
 http://luaview.github.io 
