@@ -7,13 +7,16 @@ import com.taobao.luaview.demo.provider.GlideImageProvider;
 import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
 import com.taobao.luaview.global.Constants;
+import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.util.JsonUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVLoadingDialog;
 
 import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 /**
  * 通过LuaView、注入bridge对象，实现Lua-Java通信
@@ -67,17 +70,29 @@ public class DemoLuaViewActivity extends Activity {
      * 加载数据
      */
     public void load(final LuaView luaView) {
-        luaView.load(getLuaUri());
+        luaView.load(getLuaUri(), new LuaScriptLoader.ScriptExecuteCallback() {
+            @Override
+            public boolean onScriptPrepared(ScriptBundle bundle) {
+                return false;
+            }
+
+            @Override
+            public boolean onScriptCompiled(LuaValue value, LuaValue context, LuaValue view) {
+                return false;
+            }
+
+            @Override
+            public void onScriptExecuted(String uri, boolean executedSuccess) {
+                //测试调用 lua function
+                LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
+                LogUtil.d("call-lua-function return:", JsonUtil.toString(luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
+                LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun1", 3, "c", 0.3));
+                LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun2", 4, "d", 0.4));
+            }
+        });
 
         //load bytecode directly
 //        luaView.loadAssets("test/lvp/UI_Window.luap");
-
-
-        //测试调用 lua function
-        LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
-        LogUtil.d("call-lua-function return:", JsonUtil.toString(luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
-        LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun1", 3, "c", 0.3));
-        LogUtil.d("call-window-function return:", luaView.callWindowFunction("window_fun2", 4, "d", 0.4));
     }
 
     /**
