@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class ImageActivityLifeCycle implements Application.ActivityLifecycleCallbacks {
     private static ImageActivityLifeCycle instance;
-    private ArrayList<WeakReference<LVBaseImageView>> weakReferenceList = new ArrayList<WeakReference<LVBaseImageView>>();
+    private ArrayList<WeakReference<BaseImageView>> weakReferenceList = new ArrayList<WeakReference<BaseImageView>>();
 
     public static ImageActivityLifeCycle getInstance(Application application) {
         if (instance == null) {
@@ -22,8 +22,8 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
         return instance;
     }
 
-    public void watch(LVBaseImageView imageView) {
-        weakReferenceList.add(new WeakReference<LVBaseImageView>(imageView));
+    public void watch(BaseImageView imageView) {
+        weakReferenceList.add(new WeakReference<BaseImageView>(imageView));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
     public void onActivityStarted(Activity activity) {
         int size = weakReferenceList.size();
         for (int i = size - 1; i >= 0; i--) {
-            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            BaseImageView imageView = weakReferenceList.get(i).get();
             if (imageView == null) {
                 weakReferenceList.remove(i);
             } else {
@@ -59,7 +59,7 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
     public void onActivityStopped(Activity activity) {
         int size = weakReferenceList.size();
         for (int i = size - 1; i >= 0; i--) {
-            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            BaseImageView imageView = weakReferenceList.get(i).get();
             if (imageView == null) {
                 weakReferenceList.remove(i);
             } else {
@@ -79,7 +79,7 @@ public class ImageActivityLifeCycle implements Application.ActivityLifecycleCall
     public void onActivityDestroyed(Activity activity) {
         int size = weakReferenceList.size();
         for (int i = size - 1; i >= 0; i--) {
-            LVBaseImageView imageView = weakReferenceList.get(i).get();
+            BaseImageView imageView = weakReferenceList.get(i).get();
             if (imageView == null) {
                 weakReferenceList.remove(i);
             } else {

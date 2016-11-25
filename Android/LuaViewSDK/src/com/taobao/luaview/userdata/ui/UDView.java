@@ -10,13 +10,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.csslayout.CSSNode;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.util.AnimatorUtil;
+import com.taobao.luaview.util.ColorUtil;
+import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.FlexboxCSSParser;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
+import com.taobao.luaview.view.LVImageView;
+import com.taobao.luaview.view.LVRecyclerView;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 import com.taobao.luaview.view.foreground.ForegroundDelegate;
@@ -134,6 +140,72 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public int getPaddingBottom() {
         return getView() != null ? getView().getPaddingBottom() : 0;
+    }
+
+    /**
+     * 设置Margin
+     *
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @return
+     */
+    public UDView setMargin(Integer left, Integer top, Integer right, Integer bottom) {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            if (left != null) {
+                layoutParams.leftMargin = left;
+            }
+            if (top != null) {
+                layoutParams.topMargin = top;
+            }
+            if (right != null) {
+                layoutParams.rightMargin = right;
+            }
+            if (bottom != null) {
+                layoutParams.bottomMargin = bottom;
+            }
+            view.setLayoutParams(layoutParams);
+        }
+        return this;
+    }
+
+    public int getMarginLeft() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.leftMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginTop() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.topMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginRight() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.rightMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginBottom() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.bottomMargin;
+        }
+        return 0;
     }
 
     /**
@@ -262,7 +334,7 @@ public class UDView<T extends View> extends BaseUserdata {
      * @return
      */
     public UDView setBorderColor(final Integer borderColor) {
-        if(borderColor != null) {
+        if (borderColor != null) {
             final T view = getView();
             if (view != null) {
                 final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
@@ -277,6 +349,38 @@ public class UDView<T extends View> extends BaseUserdata {
         final T view = getView();
         if (view != null) {
             return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getStrokeColor() : 0;
+        }
+        return 0;
+    }
+
+    /**
+     * 边框虚线(宽、间隔）
+     *
+     * @param dashWidth
+     * @param dashGap
+     * @return
+     */
+    public UDView setBorderDashSize(final float dashWidth, final float dashGap) {
+        final T view = getView();
+        if (view != null) {
+            final LVGradientDrawable drawable = view.getBackground() instanceof LVGradientDrawable ? (LVGradientDrawable) view.getBackground() : new LVGradientDrawable();
+            drawable.setDashSize(dashWidth, dashGap);
+        }
+        return this;
+    }
+
+    public float getBorderDashWidth() {
+        final T view = getView();
+        if (view != null) {
+            return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getDashWidth() : 0;
+        }
+        return 0;
+    }
+
+    public float getBorderDashGap() {
+        final T view = getView();
+        if (view != null) {
+            return view.getBackground() instanceof LVGradientDrawable ? ((LVGradientDrawable) view.getBackground()).getDashGap() : 0;
         }
         return 0;
     }
@@ -707,6 +811,11 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setEnabled(boolean enable) {
         final View view = getView();
         if (view != null) {
+            if (view instanceof LVRecyclerView) {
+                LVRecyclerView view2 = (LVRecyclerView) view;
+                view2.setNestedScrollingEnabled(false);
+                return this;
+            }
             view.setEnabled(enable);
         }
         return this;
@@ -1244,11 +1353,18 @@ public class UDView<T extends View> extends BaseUserdata {
      * @param effects
      * @return
      */
-    public UDView setEffects(Integer effects) {
-        return setEffects(effects, null, null);
+    public UDView setEffects(int effects) {
+        return setEffects(effects, null);
     }
 
-    public UDView setEffects(Integer effects, Integer color, Integer alpha) {
+    @LuaViewApi(since = VmVersion.V_540, revisions = "新增 UDViewEffect.EFFECT_PARALLAX")
+    public UDView setEffects(Varargs varargs) {
+        final Integer effects = LuaUtil.getInt(varargs, 2);
+        setEffects(effects, varargs);
+        return this;
+    }
+
+    private UDView setEffects(Integer effects, Varargs varargs) {
         final View view = getView();
         if (view != null) {
             this.mEffects = effects;
@@ -1258,7 +1374,14 @@ public class UDView<T extends View> extends BaseUserdata {
                         ForegroundDelegate.clearForeground(view);
                         break;
                     case UDViewEffect.EFFECT_CLICK:
+                        final Integer color = ColorUtil.parse(LuaUtil.getValue(varargs, 3));
+                        final Integer alpha = LuaUtil.getAlphaInt(LuaUtil.getValue(varargs, 4));
                         ForegroundDelegate.setupDefaultForeground(view, color, alpha);
+                        break;
+                    case UDViewEffect.EFFECT_PARALLAX:
+                        int deltaX = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 0f, 3));
+                        int deltaY = DimenUtil.dpiToPx(LuaUtil.getFloat(varargs, 0f, 4));
+                        ((LVImageView) view).setMotionDistanceXY(deltaX, deltaY);
                         break;
                 }
             }

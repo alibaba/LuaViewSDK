@@ -8,6 +8,9 @@
     <!--初始化标记-->
     <item name="lv_tag_init" type="id" />
 
+    <!--pinned tag-->
+    <item name="lv_tag_pinned" type="id" />
+
     <!--url-->
     <item name="lv_tag_url" type="id" />
 

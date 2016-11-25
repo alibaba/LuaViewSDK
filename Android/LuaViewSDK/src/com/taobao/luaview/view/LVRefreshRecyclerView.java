@@ -43,6 +43,18 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
         }
     }
 
+    @Override
+    public void setVerticalScrollBarEnabled(boolean horizontalScrollBarEnabled) {
+        if (mRecyclerView != null) {
+            mRecyclerView.setVerticalScrollBarEnabled(horizontalScrollBarEnabled);
+        }
+    }
+
+    @Override
+    public boolean isVerticalScrollBarEnabled() {
+        return mRecyclerView != null ? mRecyclerView.isVerticalScrollBarEnabled() : true;
+    }
+
     /**
      * 停止刷新
      */

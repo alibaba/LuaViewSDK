@@ -2,7 +2,6 @@ package com.taobao.luaview.view.imageview;
 
 import android.app.Activity;
 import android.content.Context;
-import android.widget.ImageView;
 
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.provider.ImageProvider;
@@ -49,14 +48,14 @@ public class LVBaseImageView extends BaseImageView {
 
     @Override
     protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
         restoreImage();
+        super.onAttachedToWindow();
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         releaseBitmap();
+        super.onDetachedFromWindow();
     }
 
     public void restoreImage() {// 恢复被清空的image

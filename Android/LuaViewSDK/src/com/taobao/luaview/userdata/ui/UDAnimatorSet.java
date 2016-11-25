@@ -8,6 +8,8 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.view.animation.Interpolator;
 
+import com.taobao.luaview.extend.animation.AnimatorDecorationHelper;
+import com.taobao.luaview.extend.animation.BaseViewAnimatorDecoration;
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.LuaUtil;
 
@@ -40,17 +42,21 @@ public class UDAnimatorSet extends BaseUserdata {
     private float[] mFloatValues;
     private int[] mIntValues;
 
+    private BaseViewAnimatorDecoration mAnimatorDecoration;
+
     public UDAnimatorSet(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(new AnimatorSet(), globals, metaTable, varargs);
-        init();
+        init(varargs);
     }
 
     private AnimatorSet getAnimatorSet() {
         return (AnimatorSet) userdata();
     }
 
-    private void init() {
+    private void init(Varargs varargs) {
         mAnimators = new ArrayList<Animator>();
+        String animTypeName = LuaUtil.getString(varargs, 1);
+        this.mAnimatorDecoration = AnimatorDecorationHelper.createDecoration(animTypeName);
     }
 
     private ObjectAnimator createAnimator() {
@@ -71,6 +77,9 @@ public class UDAnimatorSet extends BaseUserdata {
         final AnimatorSet animator = getAnimatorSet();
         if (animator != null && udView != null && udView.getView() != null) {
             mTarget = udView;
+            if (mAnimatorDecoration != null) {//decoration
+                mAnimatorDecoration.setTarget(animator, udView.getView());
+            }
         }
         return this;
     }
@@ -380,6 +389,21 @@ public class UDAnimatorSet extends BaseUserdata {
         return result;
     }
 
+    public boolean isRunning() {
+        return getAnimatorSet().isRunning();
+    }
+
+    public boolean isStarted() {
+        return getAnimatorSet().isStarted();
+    }
+
+    public boolean isPaused() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return getAnimatorSet().isPaused();
+        } else {//TODO 这个判断是否有问题?
+            return !isRunning() && isStarted();
+        }
+    }
     //----------------------------------------listeners---------------------------------------------
 
     private void addAnimatorListener(Animator animator) {

@@ -38,6 +38,13 @@ public class DimenUtil {
         return defaultValue;
     }
 
+    public static Integer dpiToPx(LuaValue value, Integer defaultValue) {
+        if (value != null && value.isnumber()) {
+            return (int) (value.optdouble(0.0f) * Constants.sScale + 0.5f);//向上取整数
+        }
+        return defaultValue;
+    }
+
 
     /**
      * convert dpi to px，返回给Android系统的必须是整数

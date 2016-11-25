@@ -20,7 +20,7 @@ import org.luaj.vm2.lib.LibFunction;
 public class UIAnimatorSetBinder extends BaseFunctionBinder {
 
     public UIAnimatorSetBinder() {
-        super("Animation");
+        super("AnimationSet");
     }
 
     @Override

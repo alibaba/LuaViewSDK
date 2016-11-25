@@ -96,6 +96,7 @@ tableView = RefreshTableView {
 loading = false;
 
 tableView.frame(0, 0, w, h - 64);
+tableView.showScrollIndicator(false)
 
 
 

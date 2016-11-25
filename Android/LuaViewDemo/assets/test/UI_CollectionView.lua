@@ -71,8 +71,8 @@ setmetatable(tableViewData.Cell, { __index = cellData })
 tableView = CollectionView(tableViewData)
 tableView.miniSpacing(1)
 tableView.frame(0, 0, s_width, s_height)
-tableView.showScrollIndicator(true)
-
+tableView.showScrollIndicator(false)
+tableView.enabled(false)
 
 
 

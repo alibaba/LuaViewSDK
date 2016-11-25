@@ -93,18 +93,15 @@ public class UDSystem extends BaseLuaTable {
             table.set("product", AndroidUtil.getProduct());
             table.set("manufacturer", AndroidUtil.getManufacturer());
 
-            //window size
-            int[] windowSize = AndroidUtil.getWindowSize(getContext());
-            table.set("window_width", windowSize[0]);
-            table.set("window_height", windowSize[1]);
-
             //screen size
             int[] screenSize = AndroidUtil.getWindowSizeInDp(getContext());
-            table.set("screen_width", screenSize[0]);
-            table.set("screen_height", screenSize[1]);
+            table.set("window_width", screenSize[0]);
+            table.set("window_height", screenSize[1]);
 
+            //action bar height
+            int actionBarHeight = AndroidUtil.getActionBarHeightInDp(getContext());
+            table.set("nav_height", actionBarHeight);
             return table;
-//            return valueOf("TODO设备信息（Phone、Pad）等信息");
         }
     }
 

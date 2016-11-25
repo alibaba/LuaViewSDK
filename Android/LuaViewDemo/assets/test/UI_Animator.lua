@@ -25,7 +25,7 @@ local function updateControlBtns()
     resumeBtn.text(paused and "Resume" or "Pause")
 end
 
-translation = Animation().translation(100, -100).duration(3).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
+translation = Animation().translation(100, -100).duration(3).repeatCount(-1).interpolator(Interpolator.ACCELERATE_DECELERATE).callback({
     onStart = function()
         stateLabel.text("Running")
     end,

@@ -1,6 +1,8 @@
 package com.taobao.luaview.userdata.net;
 
+import android.os.Build;
 import android.text.TextUtils;
+import android.webkit.CookieSyncManager;
 
 import com.taobao.luaview.util.LogUtil;
 
@@ -75,11 +77,25 @@ public class CookieManager {
     private static String getWebkitRequestCookies(String requestUrl) {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
         if (cookieManager != null) {
+            syncWebkitCookies(cookieManager);
             final String webkitCookie = cookieManager.getCookie(requestUrl);
             LogUtil.d(TAG, "get-webkit", webkitCookie);
             return webkitCookie;
         }
         return null;
+    }
+
+    /**
+     * synchronous cookies for webkit
+     *
+     * @param cookieManager
+     */
+    private static void syncWebkitCookies(android.webkit.CookieManager cookieManager) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {//同步cookie synchronous
+            CookieSyncManager.getInstance().sync();
+        } else {
+            cookieManager.flush();
+        }
     }
 
     /**
