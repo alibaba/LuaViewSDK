@@ -49,8 +49,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
         //改在UDViewGroup中设置，减少影响面
 //        this.setFocusableInTouchMode(true);//需要设置，否则onKeyUp等事件无法监听，排查是否会带来其他问题(点击的时候需要点击两下)
 //        this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
-        this.setWillNotDraw(true);
-        this.setClipChildren(false);
+//        this.setClipChildren(false);
     }
 
 
@@ -100,13 +99,6 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
 
     public void hide() {
         LVViewGroup.this.setVisibility(View.GONE);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        // TODO: 16/4/5 @野松，待和iOS的统一，目前影响flexbox的布局
-//        canvas.clipRect(0, 0, getWidth(), getHeight(), Region.Op.DIFFERENCE);
-        super.onDraw(canvas);
     }
 
     //-------------------------------------------显示回调--------------------------------------------

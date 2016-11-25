@@ -8,6 +8,7 @@ import com.taobao.luaview.fun.binder.constants.FontStyleBinder;
 import com.taobao.luaview.fun.binder.constants.FontWeightBinder;
 import com.taobao.luaview.fun.binder.constants.GravityBinder;
 import com.taobao.luaview.fun.binder.constants.InterpolatorBinder;
+import com.taobao.luaview.fun.binder.constants.PinnedBinder;
 import com.taobao.luaview.fun.binder.constants.ScaleTypeBinder;
 import com.taobao.luaview.fun.binder.constants.TextAlignBinder;
 import com.taobao.luaview.fun.binder.constants.ViewEffectBinder;
@@ -26,6 +27,7 @@ import com.taobao.luaview.fun.binder.net.HttpBinder;
 import com.taobao.luaview.fun.binder.ui.SpannableStringBinder;
 import com.taobao.luaview.fun.binder.ui.UIAlertBinder;
 import com.taobao.luaview.fun.binder.ui.UIAnimatorBinder;
+import com.taobao.luaview.fun.binder.ui.UIAnimatorSetBinder;
 import com.taobao.luaview.fun.binder.ui.UIButtonBinder;
 import com.taobao.luaview.fun.binder.ui.UIEditTextBinder;
 import com.taobao.luaview.fun.binder.ui.UIHorizontalScrollViewBinder;
@@ -116,6 +118,7 @@ public class LuaViewManager {
 
         //animation
         globals.tryLazyLoad(new UIAnimatorBinder());
+        globals.tryLazyLoad(new UIAnimatorSetBinder());
 
         //net
         globals.tryLazyLoad(new HttpBinder());
@@ -141,6 +144,7 @@ public class LuaViewManager {
         globals.tryLazyLoad(new EllipsizeBinder());
         globals.tryLazyLoad(new InterpolatorBinder());
         globals.tryLazyLoad(new ViewEffectBinder());//view特效
+        globals.tryLazyLoad(new PinnedBinder());
     }
 
     //----------------------------------------bind methods------------------------------------------

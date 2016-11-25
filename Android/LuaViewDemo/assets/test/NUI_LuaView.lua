@@ -1,6 +1,3 @@
--- 测试native 调用LuaView的函数
-
-
 -- 全局函数
 function global_fun_test1(a, b, c)
     print("global_fun_test1 called params:", a, b, c)
@@ -18,6 +15,9 @@ end
 
 -- 注册window的回调函数
 window.callback({
+    onHide=function()
+        print("onHide")
+    end,
     window_fun1 = function(a, b, c)
         print("window_fun1 called params:", a, b, c)
         return "window_fun1"

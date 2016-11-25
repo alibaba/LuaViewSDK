@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.global.LuaViewManager;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
@@ -170,9 +171,9 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         if (getView() instanceof ILVViewGroup) {
             Globals globals = getGlobals();
             if (globals != null) {
-                globals.saveContainer((ILVViewGroup) getView());
+                globals.pushContainer((ILVViewGroup) getView());
                 LuaUtil.callFunction(callback, this);
-                globals.restoreContainer();
+                globals.popContainer();
             }
         }
         return this;

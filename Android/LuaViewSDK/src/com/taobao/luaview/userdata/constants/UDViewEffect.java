@@ -17,6 +17,7 @@ import org.luaj.vm2.LuaValue;
 public class UDViewEffect extends BaseLuaTable {
     public static final int EFFECT_NONE = -1;
     public static final int EFFECT_CLICK = 1;
+    public static final int EFFECT_PARALLAX = 2;
 
     public UDViewEffect(Globals globals, LuaValue metatable) {
         super(globals, metatable);
@@ -34,6 +35,7 @@ public class UDViewEffect extends BaseLuaTable {
     private void initEffects() {
         set("NONE", EFFECT_NONE);//无效果
         set("CLICK", EFFECT_CLICK);//点击
+        set("PARALLAX", EFFECT_PARALLAX);//视差效果
     }
 
 }

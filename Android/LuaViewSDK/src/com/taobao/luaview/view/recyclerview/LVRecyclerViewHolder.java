@@ -19,7 +19,6 @@ public class LVRecyclerViewHolder extends RecyclerView.ViewHolder {
     private Globals mGlobals;
     private UDBaseRecyclerView mLuaUserData;
 
-
     public LVRecyclerViewHolder(View container, Globals globals, UDBaseRecyclerView luaUserData) {
         super(container);
         this.mGlobals = globals;
@@ -83,5 +82,4 @@ public class LVRecyclerViewHolder extends RecyclerView.ViewHolder {
             mGlobals.restoreContainer();
         }
     }
-
 }

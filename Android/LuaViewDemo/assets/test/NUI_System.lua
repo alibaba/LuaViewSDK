@@ -17,7 +17,7 @@ end).start(1, true)
 
 System.gc()
 
-
+print(window.size())
 
 btn1 = Button();
 btn1.text("Screen-On")

@@ -28,7 +28,8 @@ public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapp
             "title",
             "isLoading",
             "stopLoading",
-            "url"
+            "url",
+            "pullRefreshEnable"
     };
 
     @Override
@@ -60,6 +61,8 @@ public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapp
                 return stopLoading(target, varargs);
             case 9:
                 return url(target, varargs);
+            case 10:
+                return pullRefreshEnable(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -115,5 +118,15 @@ public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapp
     @LuaViewApi(since = VmVersion.V_530)
     public LuaValue url(U view, Varargs varargs) {
         return valueOf(view.url());
+    }
+
+    @LuaViewApi(since = VmVersion.V_530)
+    public LuaValue pullRefreshEnable(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            final boolean enable = LuaUtil.getBoolean(varargs, 2);
+            return view.pullRefreshEnable(enable);
+        } else {
+            return valueOf(view.isPullRefreshEnable());
+        }
     }
 }
