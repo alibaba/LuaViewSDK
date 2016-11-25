@@ -1,13 +1,3 @@
--- 测试native 调用LuaView的函数
-
-view = Button()
-view.text("test")
-view.callback(function()
-
-    bridgeCall.callFunction()
-
-end)
-
 -- 全局函数
 function global_fun_test1(a, b, c)
     print("global_fun_test1 called params:", a, b, c)
