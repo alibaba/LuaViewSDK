@@ -838,8 +838,8 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 }
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
-    [subview.layer removeFromSuperlayer];
     [subview removeFromSuperview];
+    [subview.layer removeFromSuperlayer];
     if( lv.closeLayerMode
        || [superview isKindOfClass:[UIScrollView class]]
        || [subview isKindOfClass:[UIScrollView class]] ) {

@@ -44,8 +44,8 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         if( view ){
             view.lv_userData = nil;
             view.lv_lview = nil;
-            [view.layer removeFromSuperlayer];
             [view removeFromSuperview];
+            [view.layer removeFromSuperlayer];
         }
     }
 }
@@ -597,8 +597,8 @@ static int removeFromSuperview (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
-            [view.layer removeFromSuperlayer];
             [view removeFromSuperview];
+            [view.layer removeFromSuperlayer];
             lv_pushvalue(L,1);
             return 1;
         }
@@ -611,13 +611,13 @@ static int removeAllSubviews (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
-            NSArray* sublayers = view.layer.sublayers;
-            for(CALayer * sublayer in sublayers ) {
-                [sublayer removeFromSuperlayer];
-            }
             NSArray* subviews = view.subviews;
             for( UIView* child in subviews ) {
                 [child removeFromSuperview];
+            }
+            NSArray* sublayers = view.layer.sublayers;
+            for(CALayer * sublayer in sublayers ) {
+                [sublayer removeFromSuperlayer];
             }
             lv_pushvalue(L,1);
             return 1;
@@ -1350,8 +1350,8 @@ static int releaseObject(lv_State *L) {
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
         UIView* view = (__bridge UIView *)(user->object);
-        [view.layer removeFromSuperlayer];
         [view removeFromSuperview];
+        [view.layer removeFromSuperlayer];
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
             L->lView = NULL;
