@@ -55,6 +55,15 @@ static int netWorkType (lv_State *L) {
     return 1;
 }
 
+static int layerMode (lv_State *L) {
+    if( lv_gettop(L)>0 ){
+        BOOL yes = lv_toboolean(L, -1);
+        LView* luaview = (__bridge LView *)(L->lView);
+        luaview.closeLayerMode = !yes;
+    }
+    return 0;
+}
+
 // 屏幕常亮
 static int keepScreenOn (lv_State *L) {
     if( lv_gettop(L)>0 ){
@@ -150,6 +159,7 @@ static int tableToString(lv_State*L){
             {"android", android},
             {"network", netWorkType},
             {"keepScreenOn", keepScreenOn},// 保持屏幕常亮接口
+            {"layerMode", layerMode},// 是否开启layer模式
             {NULL, NULL}
         };
         lvL_openlib(L, "System", staticFunctions, 0);

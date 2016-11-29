@@ -44,6 +44,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         if( view ){
             view.lv_userData = nil;
             view.lv_lview = nil;
+            [view.layer removeFromSuperlayer];
             [view removeFromSuperview];
         }
     }
@@ -546,14 +547,13 @@ static int removeGestureRecognizer (lv_State *L) {
 static int addSubview (lv_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LView* luaview = (__bridge LView *)(L->lView);
     if( father &&  LVIsType(son, View) ){
-        UIView* viewRoot = (__bridge UIView *)(father->object);
-        UIView* viewSub = (__bridge UIView *)(son->object);
-        if( viewRoot && viewSub ){
-            [viewSub removeFromSuperview];
-            [viewRoot addSubview:viewSub];
-            
-            [viewSub lv_alignSelfWithSuperRect:viewRoot.frame];
+        UIView* superview = (__bridge UIView *)(father->object);
+        UIView* subview = (__bridge UIView *)(son->object);
+        if( superview && subview ){
+            lv_addSubview(luaview, superview, subview);
+            [subview lv_alignSelfWithSuperRect:superview.frame];
             lv_pushvalue(L,1);
             return 1;
         }
@@ -597,6 +597,7 @@ static int removeFromSuperview (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
+            [view.layer removeFromSuperlayer];
             [view removeFromSuperview];
             lv_pushvalue(L,1);
             return 1;
@@ -610,8 +611,12 @@ static int removeAllSubviews (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
-            while (view.subviews.count) {
-                UIView* child = view.subviews.lastObject;
+            NSArray* sublayers = view.layer.sublayers;
+            for(CALayer * sublayer in sublayers ) {
+                [sublayer removeFromSuperlayer];
+            }
+            NSArray* subviews = view.subviews;
+            for( UIView* child in subviews ) {
                 [child removeFromSuperview];
             }
             lv_pushvalue(L,1);
@@ -1345,12 +1350,13 @@ static int releaseObject(lv_State *L) {
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
         UIView* view = (__bridge UIView *)(user->object);
+        [view.layer removeFromSuperlayer];
+        [view removeFromSuperview];
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
             L->lView = NULL;
             [lView releaseLuaView];
         }
-        [view removeFromSuperview];
     }
     return 0;
 }
