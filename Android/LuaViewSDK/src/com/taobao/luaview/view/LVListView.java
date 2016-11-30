@@ -129,7 +129,7 @@ public class LVListView extends ListView implements ILVListView {
 
     @Override
     public void addFooter(View view) {
-        if (mFooterContainer != null) {
+        if (mFooterContainer == null) {
             initFooterContainer();
         }
         mFooterContainer.addLVView(view, null);
