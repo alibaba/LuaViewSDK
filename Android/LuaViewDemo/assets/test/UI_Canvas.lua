@@ -1,6 +1,15 @@
+img = Image()
+
 view = View()
-view.frame(100, 100, 100, 100)
+view.frame(100, 100, 200, 200)
 view.backgroundColor(0x000000, 0.3)
+
+
+img.image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg", function()
+    view.invalidate()
+end)
+img.hidden(true)
+
 view.onDraw(function(canvas)
 
     print(canvas)
@@ -85,9 +94,26 @@ view.onDraw(function(canvas)
         {30, 30, 50, 50, 182, 100, false}
     })
 
+    -- drawBitmap
+    canvas.drawBitmap("animate1", 0, 100, 100, 200)
+
+    print(img)
+    if(img) then
+        canvas.drawBitmap(img, 100, 0, 200, 100)
+    end
 
     -- drawColor
     canvas.drawColor(0x00ff00, 0.5)
 
+    -- clipRect
+    canvas.clipRect(100, 100, 135, 135)
+    canvas.drawCircle(100, 100, 40)
+
+    canvas.clipRect(150, 150, 180, 180)
+    canvas.drawText("TestABCDEFGHEFGHIJKLMOPQRST", 150, 150)
+
+
+
     print(canvas.nativeObj())
 end)
+

@@ -1,15 +1,21 @@
 package com.taobao.luaview.userdata.ui;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVViewGroup;
 
@@ -19,6 +25,8 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
+
+import java.lang.reflect.Method;
 
 /**
  * Canvas，View.onDraw返回的数据
@@ -40,6 +48,10 @@ public class UDCanvas extends BaseLuaTable {
         this.mTarget = target;
         this.mCanvas = canvas;
         set("nativeObj", new nativeObj());
+        set("save", new save());
+        set("restore", new restore());
+        set("clipRect", new ClipRect());
+
         set("drawLine", new drawLine());
         set("drawPoint", new drawPoint());
         set("drawRect", new drawRect());
@@ -49,6 +61,7 @@ public class UDCanvas extends BaseLuaTable {
         set("drawOval", new drawOval());
         set("drawColor", new drawColor());
         set("drawArc", new drawArc());
+        set("drawBitmap", new drawBitmap());
     }
 
     public void setTarget(LVViewGroup mTarget) {
@@ -63,9 +76,6 @@ public class UDCanvas extends BaseLuaTable {
         if (mPaint == null) {
             mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         }
-//        mPaint.setColor(color);
-//        mPaint.setAlpha(alpha);
-//        mPaint.setStrokeWidth(width);
         return mPaint;
     }
 
@@ -82,6 +92,89 @@ public class UDCanvas extends BaseLuaTable {
     }
 
     /**
+     * save
+     */
+    class save extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs args) {
+            Canvas canvas = mCanvas;
+            if (canvas != null) {
+                canvas.save();
+            }
+            return UDCanvas.this;
+        }
+    }
+
+    /**
+     * restore
+     */
+    class restore extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs args) {
+            Canvas canvas = mCanvas;
+            if (canvas != null) {
+                if (args.narg() > 1) {
+                    final int count = LuaUtil.getInt(args, 2);
+                    canvas.restoreToCount(count);
+                } else {
+                    canvas.restore();
+                }
+            }
+            return UDCanvas.this;
+        }
+    }
+
+    /**
+     * clip rect
+     */
+    class ClipRect extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs varargs) {
+            if (varargs != null && varargs.narg() > 1) {
+                if (varargs.istable(2)) {
+                    clipRects(varargs);
+                } else {
+                    clipRect(varargs);
+                }
+            }
+            return UDCanvas.this;
+        }
+
+        private void clipRect(Varargs value) {
+            final Canvas canvas = mCanvas;
+            if (canvas != null && value != null && value.narg() >= 4) {
+                final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
+                final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
+                final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                canvas.clipRect(x1, y1, x2, y2);
+            }
+        }
+
+        private void clipRects(Varargs varargs) {
+            final Canvas canvas = mCanvas;
+            if (canvas != null) {
+                final LuaTable table = LuaUtil.getTable(varargs, 2);
+                if (table != null) {
+                    final LuaValue[] keys = table.keys();
+                    if (keys.length > 0) {
+                        LuaValue value = null;
+                        for (int i = 0; i < keys.length; i++) {
+                            value = table.get(keys[i]);
+                            if (value instanceof LuaTable && value.length() >= 4) {
+                                canvas.clipRect(DimenUtil.dpiToPx(value.get(1)),
+                                        DimenUtil.dpiToPx(value.get(2)),
+                                        DimenUtil.dpiToPx(value.get(3)),
+                                        DimenUtil.dpiToPx(value.get(4)));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * draw Line
      */
     class drawLine extends VarArgFunction {
@@ -94,7 +187,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawLine(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawLine(Varargs value) {
@@ -145,7 +238,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawRect(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawRect(Varargs value) {
@@ -197,7 +290,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawRoundRect(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawRoundRect(Varargs value) {
@@ -257,7 +350,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawArc(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawArc(Varargs value) {
@@ -318,7 +411,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawPoint(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawPoint(Varargs value) {
@@ -367,7 +460,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawCircle(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawCircle(Varargs value) {
@@ -417,7 +510,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawText(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawText(Varargs value) {
@@ -472,7 +565,7 @@ public class UDCanvas extends BaseLuaTable {
                     drawOval(varargs);
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
 
         private void drawOval(Varargs value) {
@@ -535,63 +628,68 @@ public class UDCanvas extends BaseLuaTable {
                     }
                 }
             }
-            return LuaValue.NIL;
+            return UDCanvas.this;
         }
     }
 
+    /**
+     * draw a bitmap
+     */
+    class drawBitmap extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs varargs) {
+            if (varargs != null && varargs.narg() > 1) {
+                drawBitmap(varargs);
+            }
+            return UDCanvas.this;
+        }
 
-//        mCanvas.drawLine(float startX, float startY, float stopX, float stopY);
-//        mCanvas.drawLine({
-//                {sx1, sy1, ex1, ey1},
-//                {sx2, sy2, ex2, ey2}
-//        });
-//        mCanvas.drawPoint(float x, float y);
-//        mCanvas.drawPoint({
-//                {},
-//                {}
-//        })
-//
-//        mCanvas.drawRect(float left, float top, float right, float bottom);
-//        mCanvas.drawRect({
-//                {},
-//                {}
-//        })
-//
-//        mCanvas.drawRoundRect(float left, float top, float right, float bottom, float rx, float ry);
-//        mCanvas.drawRoundRect({
-//                {},
-//                {}
-//        })
-//
-//        mCanvas.drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle, boolean useCenter);
-//        mCanvas.drawArc({
-//                {},
-//                {}
-//        })
-//
-//        mCanvas.drawCircle(x, y, r);
-//        mCanvas.drawCircle({
-//                {},
-//                {}
-//        })
-//
-//        mCanvas.drawText(text, x, y);
-//        mCanvas.drawText({
-//                {text, x, y},
-//                {text, x, y}
-//        })
-//
-//
-//        mCanvas.drawOval(left, top, right, bottom);
-//        mCanvas.drawOval({
-//                {left, top, right, bottom},
-//        });
-//
-//        mCanvas.drawColor(color, alpha);
+        private void drawBitmap(Varargs value) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                final Canvas canvas = mCanvas;
+                if (canvas != null && value != null && value.narg() >= 4) {
+                    final LuaValue param = LuaUtil.getValue(value, 2);
+                    Drawable drawable = null;
+                    if (LuaUtil.isString(param)) {
+                        final String uri = param.optjstring(null);
+                        final LuaResourceFinder finder = getLuaResourceFinder();
+                        if (!TextUtils.isEmpty(uri) && finder != null) {
+                            drawable = finder.findDrawable(uri);
+                        }
+                    } else if (param instanceof UDImageView) {
+                        View view = ((UDImageView) param).getView();
+                        if (view instanceof ImageView) {
+                            drawable = ((ImageView) view).getDrawable();
+                        }
+                    }
 
-//        mCanvas.save();
-//        mCanvas.restore();
-//
-//        mCanvas.drawBitmap(bitmap, x, y, paint);
+                    Bitmap bitmap = null;
+                    if (drawable instanceof BitmapDrawable) {
+                        bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    } else {//TODO glide GlideImageDrawable，通过反射
+                        try {
+                            Method method = drawable.getClass().getMethod("getBitmap");
+                            if (method != null) {
+                                bitmap = (Bitmap) method.invoke(drawable);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    if (bitmap != null) {
+                        final float x = DimenUtil.dpiToPx(LuaUtil.getValue(value, 3));
+                        final float y = DimenUtil.dpiToPx(LuaUtil.getValue(value, 4));
+                        if (value.narg() >= 6) {
+                            final float x1 = DimenUtil.dpiToPx(LuaUtil.getValue(value, 5));
+                            final float y1 = DimenUtil.dpiToPx(LuaUtil.getValue(value, 6));
+                            canvas.drawBitmap(bitmap, null, new RectF(x, y, x1, y1), getDefaultPaint());
+                        } else {
+                            canvas.drawBitmap(bitmap, x, y, getDefaultPaint());
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
