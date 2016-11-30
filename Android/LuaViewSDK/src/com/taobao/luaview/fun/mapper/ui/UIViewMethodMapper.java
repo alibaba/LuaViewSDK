@@ -6,7 +6,6 @@ import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.VmVersion;
-import com.taobao.luaview.userdata.constants.UDViewEffect;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
@@ -133,7 +132,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "effects",//101
             "nativeView",//102
             "borderDash",//103
-            "margin"//104
+            "margin",//104
+            "onTouch"//105
     };
 
     @Override
@@ -355,6 +355,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return borderDash(target, varargs);
             case 104:
                 return margin(target, varargs);
+            case 105:
+                return onTouch(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -428,11 +430,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     /**
      * 设置Margin
+     *
      * @param view
      * @param varargs
      * @return
      */
-    public Varargs margin(U view, Varargs varargs){
+    public Varargs margin(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setMargin(view, varargs);
         } else {
@@ -2080,6 +2083,31 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public LuaValue getOnLongClick(U view, Varargs varargs) {
         return view.getOnLongClickCallback();
+    }
+
+    /**
+     * On Touch 事件
+     *
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_550)
+    public LuaValue onTouch(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setOnTouch(view, varargs);
+        } else {
+            return getOnTouch(view, varargs);
+        }
+    }
+
+    public LuaValue setOnTouch(U view, Varargs varargs) {
+        final LuaFunction callback = LuaUtil.getFunction(varargs, 2);
+        return view.setOnTouchCallback(callback);
+    }
+
+    public LuaValue getOnTouch(U view, Varargs varargs) {
+        return view.getOnTouchCallback();
     }
 
     /**

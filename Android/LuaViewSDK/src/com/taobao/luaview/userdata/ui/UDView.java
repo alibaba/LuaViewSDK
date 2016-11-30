@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -29,6 +30,7 @@ import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -49,6 +51,9 @@ public class UDView<T extends View> extends BaseUserdata {
     //点击
     private LuaValue mOnClick;
     private LuaValue mOnLongClick;
+    private LuaValue mOnTouch;
+    private LuaTable mOnTouchEventData;
+
 
     //动画列表
     private List<Animator> mAnimators;
@@ -995,13 +1000,15 @@ public class UDView<T extends View> extends BaseUserdata {
         if (this.mCallback != null) {
             mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");
             mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;
+            mOnTouch = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onTouch", "OnTouch") : null;
 
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
+            setOnTouchListener();
 
             //setup click effects
-            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick));
+            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick) || LuaUtil.isValid(mOnTouch));
         }
         return this;
     }
@@ -1029,9 +1036,27 @@ public class UDView<T extends View> extends BaseUserdata {
         return this;
     }
 
+    /**
+     * 设置长按事件
+     *
+     * @param callback
+     * @return
+     */
     public UDView setOnLongClickCallback(final LuaValue callback) {
         this.mOnLongClick = callback;
         setOnLongClickListener();
+        return this;
+    }
+
+    /**
+     * 设置触摸事件
+     *
+     * @param callback
+     * @return
+     */
+    public UDView setOnTouchCallback(final LuaValue callback) {
+        this.mOnTouch = callback;
+        setOnTouchListener();
         return this;
     }
 
@@ -1048,19 +1073,25 @@ public class UDView<T extends View> extends BaseUserdata {
         return LuaUtil.callFunction(this.mOnLongClick).optboolean(false);
     }
 
+    public boolean callOnTouch(Object... params) {
+        return LuaUtil.callFunction(this.mOnTouch, params).arg1().optboolean(false);
+    }
+
     /**
      * 点击
      */
     private void setOnClickListener() {
-        if (LuaUtil.isValid(this.mOnClick)) {
-            final T view = getView();
-            if (view != null) {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnClick)) {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         callOnClick();
                     }
                 });
+            } else {
+                view.setOnClickListener(null);
             }
         }
     }
@@ -1069,15 +1100,48 @@ public class UDView<T extends View> extends BaseUserdata {
      * 长按
      */
     private void setOnLongClickListener() {
-        if (LuaUtil.isValid(this.mOnLongClick)) {
-            final T view = getView();
-            if (view != null) {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnLongClick)) {
                 view.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         return callOnLongClick();
                     }
                 });
+            } else {
+                view.setOnLongClickListener(null);
+            }
+        }
+    }
+
+    /**
+     * 设置触摸事件
+     */
+
+    private void setOnTouchListener() {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnTouch)) {
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (mOnTouchEventData == null) {
+                            mOnTouchEventData = new LuaTable();
+                        }
+                        if (event != null) {
+                            mOnTouchEventData.set("action", event.getActionMasked());
+                            mOnTouchEventData.set("pointer", event.getPointerId(event.getActionIndex()));
+                            mOnTouchEventData.set("x", DimenUtil.pxToDpi(event.getX()));
+                            mOnTouchEventData.set("y", DimenUtil.pxToDpi(event.getY()));
+                            mOnTouchEventData.set("gx", DimenUtil.pxToDpi(event.getRawX()));
+                            mOnTouchEventData.set("gy", DimenUtil.pxToDpi(event.getRawY()));
+                        }
+                        return callOnTouch(mOnTouchEventData);
+                    }
+                });
+            } else {
+                view.setOnTouchListener(null);
             }
         }
     }
@@ -1098,6 +1162,10 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public LuaValue getOnLongClickCallback() {
         return this.mOnLongClick;
+    }
+
+    public LuaValue getOnTouchCallback() {
+        return this.mOnTouch;
     }
 
     /**

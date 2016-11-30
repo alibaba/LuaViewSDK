@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -38,7 +39,7 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        if(this != view) {
+        if (this != view) {
             final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
             super.addView(LuaViewUtil.removeFromParent(view), layoutParams);
         }
@@ -58,11 +59,29 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
     public abstract void initPanel();
 
     /**
+     * call LuaView 的 global functions
+     *
+     * @param objs
+     */
+    public void callLuaFunction(String name, Object... objs) {
+        UDView userdata = getUserdata();
+        if (userdata != null) {
+            Globals globals = userdata.getGlobals();
+            if (globals != null) {
+                LuaView luaView = globals.getLuaView();
+                if (luaView != null) {
+                    luaView.callLuaFunction(name, objs);
+                }
+            }
+        }
+    }
+
+    /**
      * 子类实现该方法，用于Lua回调该方法
      */
     public void callLuaCallback(Object... objs) {
         UDView userdata = getUserdata();
-        if(userdata != null) {
+        if (userdata != null) {
             final LuaValue callback = userdata.getCallback();
             LuaUtil.callFunction(callback, objs);
         }

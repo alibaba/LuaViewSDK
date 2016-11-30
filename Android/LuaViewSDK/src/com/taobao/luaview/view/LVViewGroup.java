@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.facebook.csslayout.CSSLayoutContext;
 import com.facebook.csslayout.CSSNode;
 import com.facebook.csslayout.Spacing;
+import com.taobao.luaview.userdata.ui.UDCanvas;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -71,6 +72,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
 
     /**
      * create user data
+     *
      * @param globals
      * @param metaTable
      * @param varargs
@@ -87,7 +89,7 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        if(this != view) {//不能自己加自己
+        if (this != view) {//不能自己加自己
             final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
             LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
         }
@@ -127,6 +129,19 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
         if (mLuaUserdata != null) {
             mLuaUserdata.callOnLayout();
         }
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        if (mLuaUserdata != null && mLuaUserdata.hasOnDrawCallback()) {
+            mLuaUserdata.callOnDraw(this, canvas);
+        } else {
+            super.onDraw(canvas);
+        }
+    }
+
+    public void superOnDraw(Canvas canvas){
+        super.onDraw(canvas);
     }
 
     /**
