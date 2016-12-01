@@ -639,6 +639,7 @@ static int layerMode(lv_State *L) {
                 UIView* superview = view.superview;
                 BOOL yes = lvL_checkbool(L, 2);
                 if( yes ) {
+                    [view removeFromSuperview];
                     [superview.layer addSublayer:view.layer];
                 } else {
                     [view.layer removeFromSuperlayer];
