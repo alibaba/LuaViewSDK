@@ -16,6 +16,7 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
+@property(nonatomic,assign) BOOL lv_canvas;
 
 -(id) init:(lv_State*) l;
 

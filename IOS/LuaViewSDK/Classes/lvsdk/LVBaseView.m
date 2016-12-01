@@ -36,6 +36,10 @@
     }
     return self;
 }
+    
+-(void) drawRect:(CGRect)rect{
+    [super drawRect:rect];
+}
 
 static void releaseUserDataView(LVUserDataInfo* userdata){
     if( userdata && userdata->object ){
@@ -621,6 +625,30 @@ static int removeAllSubviews (lv_State *L) {
             }
             lv_pushvalue(L,1);
             return 1;
+        }
+    }
+    return 0;
+}
+
+static int layerMode(lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if ( lv_gettop(L)>=2 ) {
+                UIView* superview = view.superview;
+                BOOL yes = lvL_checkbool(L, 2);
+                if( yes ) {
+                    [superview.layer addSublayer:view.layer];
+                } else {
+                    [view.layer removeFromSuperlayer];
+                    [superview addSubview:view];
+                }
+                return 0;
+            } else {
+                //lv_pushboolean(L, view.hidden );
+                //return 1;
+            }
         }
     }
     return 0;
@@ -1579,6 +1607,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"nativeView", getNativeView},
     
     {"effects",effects},
+    {"layerMode",layerMode},
     {NULL, NULL}
 };
 

@@ -39,4 +39,6 @@
 -(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy;
 -(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha;
 
+@property(nonatomic,assign) BOOL lv_canvas;
+
 @end
