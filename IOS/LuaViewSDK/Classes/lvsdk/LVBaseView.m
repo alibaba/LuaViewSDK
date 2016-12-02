@@ -36,10 +36,6 @@
     }
     return self;
 }
-    
--(void) drawRect:(CGRect)rect{
-    [super drawRect:rect];
-}
 
 static void releaseUserDataView(LVUserDataInfo* userdata){
     if( userdata && userdata->object ){
