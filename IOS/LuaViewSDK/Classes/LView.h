@@ -118,6 +118,12 @@
  */
 @property (nonatomic,assign) BOOL closeLayerMode;
 
+
+/**
+ *  图片首次出现是否使用动画
+ */
+@property (nonatomic,assign) BOOL disableAnimate;
+
 @end
 
 

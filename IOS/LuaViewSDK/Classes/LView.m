@@ -100,6 +100,7 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
     self.backgroundColor = [UIColor clearColor];
