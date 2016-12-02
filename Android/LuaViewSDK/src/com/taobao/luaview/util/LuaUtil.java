@@ -49,6 +49,21 @@ public class LuaUtil {
     }
 
     /**
+     * convert a LuaValue to Alpha int
+     * @param value
+     * @return
+     */
+    public static Integer toAlphaInt(final LuaValue value) {
+        if (isNumber(value)) {
+            final double dValue = value.optdouble(-1);
+            if (dValue >= 0) {
+                return (int) (dValue * 0xFF);
+            }
+        }
+        return null;
+    }
+
+    /**
      * 获取时间，入参为秒(可以是小数)，输出为毫秒
      *
      * @param varargs
@@ -405,16 +420,6 @@ public class LuaUtil {
      */
     public static boolean isString(final LuaValue target) {
         return target != null && target.type() == LuaValue.TSTRING;
-    }
-
-    /**
-     * is int
-     *
-     * @param target
-     * @return
-     */
-    public static boolean isInt(final LuaValue target) {
-        return target != null && target.type() == LuaValue.TINT;
     }
 
     /**

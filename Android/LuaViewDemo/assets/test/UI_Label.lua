@@ -11,7 +11,7 @@ a.size(100, 50)
 
 b = Label()
 b.text(StyledString("测试说", {fontColor=0xff0000, fontWeight=FontWeight.BOLD--[[fontStyle="bold", fontWeight="bold"]]}))
-b.fontSize(36)
+b.fontSize(12)
 b.backgroundColor(0xaa00aa)
 b.cornerRadius(5)
 b.xy(50, 10)

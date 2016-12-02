@@ -67,15 +67,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public UDView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
-        init(initParams);
-    }
-
-    /**
-     * 初始化调用
-     *
-     * @param initParams
-     */
-    public void init(Varargs initParams) {
         setSize(0, 0);//默认初始化size全0
     }
 
@@ -1130,7 +1121,7 @@ public class UDView<T extends View> extends BaseUserdata {
                             mOnTouchEventData = new LuaTable();
                         }
                         if (event != null) {
-                            mOnTouchEventData.set("action", event.getActionMasked());
+                            mOnTouchEventData.set("action", event.getActionMasked());//0按下，1起来，2移动，3取消，4外部
                             mOnTouchEventData.set("pointer", event.getPointerId(event.getActionIndex()));
                             mOnTouchEventData.set("x", DimenUtil.pxToDpi(event.getX()));
                             mOnTouchEventData.set("y", DimenUtil.pxToDpi(event.getY()));

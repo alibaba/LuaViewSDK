@@ -1,12 +1,12 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDEllipsize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.util.ColorUtil;
+import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 
@@ -83,7 +83,6 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     //--------------------------------------- API --------------------------------------------------
 
 
-
     /**
      * 获得文本
      *
@@ -150,12 +149,12 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     public LuaValue setTextSize(U view, Varargs varargs) {
-        final float fontSize = (float) varargs.optdouble(2, 12.0);
+        final float fontSize = DimenUtil.spToPx((float) varargs.optdouble(2, 12.0));
         return view.setTextSize(fontSize);
     }
 
     public LuaValue getTextSize(U view, Varargs varargs) {
-        return valueOf(view.getTextSize());
+        return valueOf(DimenUtil.pxToSp(view.getTextSize()));
     }
 
     /**

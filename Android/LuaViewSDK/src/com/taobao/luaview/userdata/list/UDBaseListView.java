@@ -35,7 +35,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
     public UDBaseListOrRecyclerView reload(Integer section, Integer row) {
         final T lv = getView();
         if (lv instanceof ILVListView) {
-            init(this.initParams);//重新初始化数据
+            init();//重新初始化数据
             if (((ILVListView) lv).getLVAdapter() != null) {
                 ((ILVListView) lv).getLVAdapter().notifyDataSetChanged();
             }
