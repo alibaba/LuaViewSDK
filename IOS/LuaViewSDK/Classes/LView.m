@@ -100,6 +100,7 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.closeLayerMode = YES;
     self.mySelf = self;
     self.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -805,13 +806,9 @@ extern char g_debug_lua[];
 
 -(void) containerAddSubview:(UIView *)view{
     if( self.conentView ) {
-        if( view.superview!=self.conentView ) {
-            [self.conentView addSubview:view];
-        }
+        lv_addSubview(self, self.conentView, view);
     } else {
-        if( view.superview!=self ) {
-            [super addSubview:view];
-        }
+        lv_addSubview(self, self, view);
     }
 }
 

@@ -175,4 +175,11 @@
     // 点击特效
 }
 
+-(BOOL) lv_canvas{
+    return NO;
+}
+
+-(void) setLv_canvas:(BOOL)lv_canvas{
+}
+
 @end

@@ -837,6 +837,18 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     }
 }
 
+void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
+    [subview removeFromSuperview];
+    [subview.layer removeFromSuperlayer];
+    if( lv.closeLayerMode
+       || [superview isKindOfClass:[UIScrollView class]]
+       || [subview isKindOfClass:[UIScrollView class]] ) {
+        [superview addSubview:subview];
+    } else {
+        [superview.layer addSublayer:subview.layer];
+    }
+}
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;

@@ -113,6 +113,11 @@
  */
 -(void) releaseLuaView;
 
+/**
+ *  Layer模式优化性能
+ */
+@property (nonatomic,assign) BOOL closeLayerMode;
+
 @end
 
 
