@@ -40,6 +40,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
+        self.disableAnimate = self.lv_lview.disableAnimate;
     }
     return self;
 }
@@ -251,6 +252,17 @@ static int isAnimating (lv_State *L) {
     return 1;
 }
 
+static int disableAnimate (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVImage* imageView = (__bridge LVImage *)(user->object);
+        if ( [imageView isKindOfClass:[LVImage class]] ) {
+            BOOL disableAnimate = lv_toboolean(L, 2);
+            imageView.disableAnimate = disableAnimate;
+        }
+    }
+    return 0;
+}
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     
@@ -263,6 +275,8 @@ static int isAnimating (lv_State *L) {
         {"startAnimationImages",  startAnimating},
         {"stopAnimationImages",  stopAnimating},
         {"isAnimationImages",  isAnimating},
+        
+        {"disableAnimate",  disableAnimate},
         {NULL, NULL}
     };
     
