@@ -295,6 +295,9 @@
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
+		91F678841DF520920042D6FC /* LVCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91F678821DF520920042D6FC /* LVCustomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91F678851DF520920042D6FC /* LVCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678831DF520920042D6FC /* LVCustomView.m */; };
+		91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678831DF520920042D6FC /* LVCustomView.m */; };
 		BE50CFCE1CAB821700B0356A /* FlexboxLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE50CFCD1CAB821700B0356A /* FlexboxLayoutTests.m */; };
 		BE50CFCF1CAB841A00B0356A /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF77A91C7473A800847C05 /* libLuaViewLib.a */; };
 		BE50CFD01CAB844500B0356A /* LuaViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */; };
@@ -558,6 +561,8 @@
 		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
 		91C55C701DD07185000BCB0B /* LVFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFlowLayout.h; sourceTree = "<group>"; };
 		91C55C711DD07185000BCB0B /* LVFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFlowLayout.m; sourceTree = "<group>"; };
+		91F678821DF520920042D6FC /* LVCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomView.h; sourceTree = "<group>"; };
+		91F678831DF520920042D6FC /* LVCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomView.m; sourceTree = "<group>"; };
 		BE50CFCD1CAB821700B0356A /* FlexboxLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexboxLayoutTests.m; sourceTree = "<group>"; };
 		BE9CD4F61CACC02800D6AC94 /* JUFLXTargeNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXTargeNamespace.h; sourceTree = "<group>"; };
 		BE9CD4F71CACC02800D6AC94 /* JUFLXLayoutDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXLayoutDefine.h; sourceTree = "<group>"; };
@@ -815,6 +820,8 @@
 			children = (
 				846481A81A64C61F00DE6204 /* LVBaseView.h */,
 				846481A91A64C61F00DE6204 /* LVBaseView.m */,
+				91F678821DF520920042D6FC /* LVCustomView.h */,
+				91F678831DF520920042D6FC /* LVCustomView.m */,
 				84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */,
 				84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */,
 				843447481B61DDED0039B98A /* UIView+LuaView.h */,
@@ -1186,6 +1193,7 @@
 				84C1D8831C16C4530058E974 /* lVtm.h in Headers */,
 				84C1D8841C16C4530058E974 /* lVundump.h in Headers */,
 				84C1D8851C16C4530058E974 /* lVvm.h in Headers */,
+				91F678841DF520920042D6FC /* LVCustomView.h in Headers */,
 				3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */,
 				BEEB28D41CA90EC200EC2D86 /* Layout.h in Headers */,
 				84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */,
@@ -1409,6 +1417,7 @@
 				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
 				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
 				3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */,
+				91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */,
 				3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */,
 				3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */,
 				3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */,
@@ -1541,6 +1550,7 @@
 				914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */,
 				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
+				91F678851DF520920042D6FC /* LVCustomView.m in Sources */,
 				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,
 				84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */,
 				84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */,

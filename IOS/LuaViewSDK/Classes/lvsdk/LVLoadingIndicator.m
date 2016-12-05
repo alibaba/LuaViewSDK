@@ -44,7 +44,7 @@ static int lvNewLoadingIndicator (lv_State *L) {
             NEW_USERDATA(userData, View);
             userData->object = CFBridgingRetain(pageControl);
             
-            lvL_getmetatable(L, META_TABLE_UIActivityIndicatorView );
+            lvL_getmetatable(L, META_TABLE_LoadingIndicator );
             lv_setmetatable(L, -2);
         }
         LView* view = (__bridge LView *)(L->lView);
@@ -126,7 +126,7 @@ static int color(lv_State *L) {
         {NULL, NULL}
     };
     
-    lv_createClassMetaTable(L, META_TABLE_UIActivityIndicatorView);
+    lv_createClassMetaTable(L, META_TABLE_LoadingIndicator);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
