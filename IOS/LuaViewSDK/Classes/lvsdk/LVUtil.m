@@ -569,24 +569,7 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
 
 void lv_pushNativeObject(lv_State* L, id value){
     lv_checkstack(L, 4);
-    if( value==nil || value == [NSNull null] ) {
-        lv_pushnil(L);
-        return;
-    } else if( [value isKindOfClass:[NSNumber class]] ) {
-        static Class boolClass = nil;;
-        if ( boolClass ==nil ) {
-            boolClass = [@(YES) class];
-        }
-        NSNumber* number = value;
-        if( [value class] == boolClass) {
-            //  是否是bool类型
-            lv_pushboolean(L, number.boolValue);
-            return;
-        } else {
-            lv_pushnumber(L, number.doubleValue);
-            return;
-        }
-    }  else if( [value isKindOfClass:[NSString class]] ) {
+    if( [value isKindOfClass:[NSString class]] ) {
         NSString* s = value;
         lv_pushstring(L, s.UTF8String);
         return;
@@ -610,6 +593,23 @@ void lv_pushNativeObject(lv_State* L, id value){
             lv_pushNativeObject(L,value);
             lv_settable(L, -3);
         }
+        return;
+    } else if( [value isKindOfClass:[NSNumber class]] ) {
+        static Class boolClass = nil;;
+        if ( boolClass ==nil ) {
+            boolClass = [@(YES) class];
+        }
+        NSNumber* number = value;
+        if( [value class] == boolClass) {
+            //  是否是bool类型
+            lv_pushboolean(L, number.boolValue);
+            return;
+        } else {
+            lv_pushnumber(L, number.doubleValue);
+            return;
+        }
+    }  else if( value==nil || value == [NSNull null] ) {
+        lv_pushnil(L);
         return;
     } else if( [value isKindOfClass:[LVBlock class] ] ) {
         LVBlock* block = (LVBlock*)value;
