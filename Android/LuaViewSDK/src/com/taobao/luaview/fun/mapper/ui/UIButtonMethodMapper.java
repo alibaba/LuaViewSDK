@@ -101,7 +101,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
         }
     }
 
-    public LuaValue setImage(U view, Varargs varargs) {
+    public LuaValue setImage(U view, Varargs varargs) {//TODO 支持参数为Data类型
         final String normalImage = varargs.optjstring(2, null);
         final String pressedImage = varargs.optjstring(3, null);
         return view.setImage(normalImage, pressedImage);

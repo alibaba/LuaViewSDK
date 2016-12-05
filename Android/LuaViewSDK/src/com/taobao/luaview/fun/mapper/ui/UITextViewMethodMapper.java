@@ -149,12 +149,12 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     public LuaValue setTextSize(U view, Varargs varargs) {
-        final float fontSize = DimenUtil.spToPx((float) varargs.optdouble(2, 12.0));
+        final float fontSize = (float) varargs.optdouble(2, 12.0);//TODO 这里需要转sp么？
         return view.setTextSize(fontSize);
     }
 
     public LuaValue getTextSize(U view, Varargs varargs) {
-        return valueOf(DimenUtil.pxToSp(view.getTextSize()));
+        return valueOf(view.getTextSize());
     }
 
     /**
