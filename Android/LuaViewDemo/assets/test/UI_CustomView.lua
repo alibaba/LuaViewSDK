@@ -1,6 +1,6 @@
 img = Image()
 
-view = View()
+view = CustomView()
 view.frame(100, 100, 200, 200)
 view.backgroundColor(0x000000, 0.3)
 
@@ -11,11 +11,10 @@ end)
 img.hidden(true)
 
 view.onDraw(function(canvas)
-    -- ios low
-    textCanvasAndroidAndIos(canvas)
+    testCanvasAndroidAndIos(canvas)
 end)
 
-function textCanvasAndroidAndIos(canvas)
+function testCanvasAndroidAndIos(canvas)
     print(canvas)
     -- drawLine
     canvas.color(0xff0000)
@@ -39,9 +38,9 @@ function textCanvasAndroidAndIos(canvas)
 
     -- drawRect
     canvas.resetPaint()
-    canvas.style("stroke")
+    canvas.style(PaintStyle.STROKE)
     canvas.drawRect(5, 5, 10, 10)
-    canvas.style("fillStroke")
+    canvas.style(PaintStyle.FILL)
     canvas.drawRect(10, 10, 15, 15)
 
     -- drawRoundRects
@@ -77,13 +76,13 @@ function textCanvasAndroidAndIos(canvas)
     canvas.bold(true)
     canvas.drawText("测试一下", 20, 150)
     canvas.alpha(0.5)
-    canvas.drawBitmap("animate1", 0, 100, 100, 200)
+    canvas.drawImage("animate1", 0, 100, 100, 200)
     canvas.restore()
     canvas.resetPaint()
 
     print(img)
     if(img) then
-        canvas.drawBitmap(img, 100, 0, 200, 100)
+        canvas.drawImage(img, 100, 0, 200, 100)
     end
 
     -- clipRect

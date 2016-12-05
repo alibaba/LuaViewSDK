@@ -1,6 +1,5 @@
 package com.taobao.luaview.userdata.ui;
 
-import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -8,7 +7,6 @@ import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.global.LuaViewManager;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
-import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -29,8 +27,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     private LuaValue mOnHide;
     private LuaValue mOnBack;
     private LuaValue mOnLayout;
-    private LuaValue mOnDraw;
-    private UDCanvas mCanvas;
 
     public UDViewGroup(T view, Globals globals, LuaValue initParams) {
         this(view, globals, LuaViewManager.createMetatable(UIViewGroupMethodMapper.class), initParams);
@@ -56,7 +52,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
             mOnHide = LuaUtil.getFunction(mCallback, "onHide", "OnHide");
             mOnBack = LuaUtil.getFunction(mCallback, "onBack", "OnBack");
             mOnLayout = LuaUtil.getFunction(mCallback, "onLayout", "OnLayout");
-            mOnDraw = LuaUtil.getFunction(mCallback, "onDraw", "OnDraw");
             //是否需要统一成OnShow, OnHide?
             if (mOnBack != null && getContainer() != null) {
                 getContainer().setFocusableInTouchMode(true);
@@ -102,19 +97,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         return this.mOnLayout;
     }
 
-    public LuaValue setOnDrawCallback(LuaValue mOnDraw) {
-        this.mOnDraw = mOnDraw;
-        return this;
-    }
-
-    public LuaValue getOnDrawCallback() {
-        return this.mOnDraw;
-    }
-
-    public boolean hasOnDrawCallback() {
-        return this.mOnDraw != null && this.mOnDraw.isfunction();
-    }
-
     public LuaValue callOnShow() {
         return LuaUtil.callFunction(mOnShow);
     }
@@ -129,16 +111,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
 
     public LuaValue callOnLayout() {
         return LuaUtil.callFunction(mOnLayout);
-    }
-
-    public LuaValue callOnDraw(LVViewGroup viewGroup, Canvas canvas) {
-        if (mCanvas == null) {
-            mCanvas = new UDCanvas(viewGroup, canvas, getGlobals(), getmetatable(), null);
-        } else {
-            mCanvas.setCanvas(canvas);
-            mCanvas.setTarget(viewGroup);
-        }
-        return LuaUtil.callFunction(mOnDraw, mCanvas);
     }
 
     /**

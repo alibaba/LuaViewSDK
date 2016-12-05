@@ -130,9 +130,8 @@ public class UDCanvas extends BaseLuaTable {
         set("drawCircle", new drawCircle());//drawCircle(x, y, r)
         set("drawText", new drawText());//drawText("text", x, y)
         set("drawOval", new drawOval());//drawOval(x1, y1, x2, y2)
-        set("drawColor", new drawColor());//drawColor(0xff0000)
         set("drawArc", new drawArc());//drawArc(x1, y1, x2, y2, 开始角度, 结束角度, 是否以中心为点)
-        set("drawBitmap", new drawBitmap());//drawBitmap("name", x, y) or drawBitmap("name, x1, y1, x2, y2) or drawBitmap(Image(), ...)
+        set("drawImage", new drawBitmap());//drawBitmap("name", x, y) or drawBitmap("name, x1, y1, x2, y2) or drawBitmap(Image(), ...)
     }
 
     public void setTarget(LVViewGroup mTarget) {
@@ -279,10 +278,10 @@ public class UDCanvas extends BaseLuaTable {
             if (LuaUtil.isNumber(value)) {
                 final int style = value.optint(1);
                 switch (style) {
-                    case 2:
+                    case 1:
                         paint.setStyle(Paint.Style.STROKE);
                         break;
-                    case 1:
+                    case 2:
                         paint.setStyle(Paint.Style.FILL_AND_STROKE);
                         break;
                     case 0:

@@ -1,7 +1,6 @@
 package com.taobao.luaview.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.RelativeLayout;
 import com.facebook.csslayout.CSSLayoutContext;
 import com.facebook.csslayout.CSSNode;
 import com.facebook.csslayout.Spacing;
-import com.taobao.luaview.userdata.ui.UDCanvas;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -30,8 +28,8 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGroup {
-    private UDViewGroup mLuaUserdata;
+public class LVViewGroup<T extends UDViewGroup> extends ForegroundRelativeLayout implements ILVViewGroup {
+    protected T mLuaUserdata;
 
     /**
      * Flexbox attributes
@@ -78,12 +76,12 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
      * @param varargs
      * @return
      */
-    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
-        return new UDViewGroup(this, globals, metaTable, varargs);
+    public T createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return (T) (new UDViewGroup(this, globals, metaTable, varargs));
     }
 
     @Override
-    public UDView getUserdata() {
+    public T getUserdata() {
         return mLuaUserdata;
     }
 
@@ -129,19 +127,6 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
         if (mLuaUserdata != null) {
             mLuaUserdata.callOnLayout();
         }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if (mLuaUserdata != null && mLuaUserdata.hasOnDrawCallback()) {
-            mLuaUserdata.callOnDraw(this, canvas);
-        } else {
-            super.onDraw(canvas);
-        }
-    }
-
-    public void superOnDraw(Canvas canvas){
-        super.onDraw(canvas);
     }
 
     /**

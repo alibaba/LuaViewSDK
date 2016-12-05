@@ -49,7 +49,7 @@ public class LuaResourceFinder implements ResourceFinder {
     }
 
     public LuaResourceFinder(Context context) {
-        if(context != null) {
+        if (context != null) {
             this.mContext = context.getApplicationContext();
         }
     }
@@ -64,11 +64,11 @@ public class LuaResourceFinder implements ResourceFinder {
         mBaseAssetPath = FileUtil.getAssetFolderPath(uri);//脚本默认放在asset目录下
     }
 
-    public String getUri(){
+    public String getUri() {
         return mUri;
     }
 
-    public String getBasePath(){
+    public String getBasePath() {
         return mBasePath;
     }
 
@@ -297,40 +297,86 @@ public class LuaResourceFinder implements ResourceFinder {
     }
 
     /**
+     * exists
+     *
+     * @param nameOrPath
+     * @return
+     */
+    public boolean exists(final String nameOrPath) {
+        if (!TextUtils.isEmpty(nameOrPath)) {
+            String fullPath = buildFilePath(nameOrPath);
+            if (fullPath != null) {//文件
+                return FileUtil.exists(nameOrPath);
+            } else {
+                fullPath = buildAssetPath(nameOrPath);
+                return AssetUtil.exists(mContext, fullPath);
+            }
+        }
+        return false;
+    }
+
+    /**
      * 获取文件的完整路径
      *
      * @param nameOrPath
      * @return
      */
     public String findFullPath(final String nameOrPath) {
+        if (!TextUtils.isEmpty(nameOrPath)) {
+            String fullPath = buildFilePath(nameOrPath);
+            if (!FileUtil.exists(fullPath)) {
+                fullPath = buildAssetPath(nameOrPath);
+            }
+            return fullPath;
+        }
+        return null;
+    }
+
+    /**
+     * build file path
+     *
+     * @param nameOrPath
+     * @return
+     */
+    public String buildFilePath(final String nameOrPath) {
         String fullPath = null;
         if (!TextUtils.isEmpty(nameOrPath)) {
             if (fullPath == null && !TextUtils.isEmpty(mBasePath)) {//尝试文件系统路径
                 if (!FileUtil.isContainsFolderPath(nameOrPath, mBasePath)) {//不带基础路径的情况
                     final String filePath = FileUtil.buildPath(mBasePath, nameOrPath);
-                    if (FileUtil.exists(filePath)) {
-                        LogUtil.d("[findFullPath-FileSystem]", filePath);
-                        fullPath = filePath;
-                    }
-                } else if (FileUtil.exists(nameOrPath)) {
-                    LogUtil.d("[findFullPath-FileSystem]", nameOrPath);
+                    LogUtil.d("[buildFilePath-FileSystem]", filePath);
+                    fullPath = filePath;
+                } else {
+                    LogUtil.d("[buildFilePath-FileSystem]", nameOrPath);
                     fullPath = nameOrPath;
                 }
             }
+        }
+        return fullPath;
+    }
 
+    /**
+     * build asset path
+     *
+     * @param nameOrPath
+     * @return
+     */
+    public String buildAssetPath(final String nameOrPath) {
+        String fullPath = null;
+        if (!TextUtils.isEmpty(nameOrPath)) {
             if (fullPath == null && !TextUtils.isEmpty(mBaseAssetPath)) {//尝试从asset下获取
                 if (!FileUtil.isContainsFolderPath(nameOrPath, mBaseAssetPath)) {//不带基础路径的情况
                     final String assetFilePath = FileUtil.buildPath(mBaseAssetPath, nameOrPath);
-                    LogUtil.d("[findFullPath-Assets]", assetFilePath);
+                    LogUtil.d("[buildAssetPath-Assets]", assetFilePath);
                     fullPath = assetFilePath;
                 } else {
-                    LogUtil.d("[findFullPath-Assets]", nameOrPath);
+                    LogUtil.d("[buildAssetPath-Assets]", nameOrPath);
                     fullPath = nameOrPath;
                 }
             }
 
             if (fullPath == null) {//直接从asset下加载
-                LogUtil.d("[findFullPath-Assets]", nameOrPath);
+                LogUtil.d("[buildAssetPath-Assets]", nameOrPath);
                 fullPath = nameOrPath;
             }
         }

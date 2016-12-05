@@ -24,7 +24,7 @@ import org.luaj.vm2.Varargs;
  * @author song
  * @date 15/8/20
  */
-public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup, ILVNativeViewProvider {
+public abstract class LVCustomPanel extends LVViewGroup<UDCustomPanel> implements ILVViewGroup, ILVNativeViewProvider {
 
     public LVCustomPanel(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals, metaTable, varargs);
@@ -32,7 +32,7 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
     }
 
     @NonNull
-    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+    public UDCustomPanel createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
         return new UDCustomPanel(this, globals, metaTable, varargs);
     }
 

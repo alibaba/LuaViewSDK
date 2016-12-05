@@ -1,8 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
-import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
@@ -35,7 +33,6 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
             "removeAllViews",//6
             "children",//7
             "flexChildren",//8
-            "onDraw",//9
     };
 
     @Override
@@ -65,8 +62,6 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
                 return children(target, varargs);
             case 8:
                 return flexChildren(target, varargs);
-            case 9:
-                return onDraw(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -168,32 +163,6 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
 
     public LuaValue getOnLayout(U view, Varargs varargs) {
         return view.getOnLayoutCallback();
-    }
-
-
-    /**
-     * onDraw
-     *
-     * @param view
-     * @param varargs
-     * @return
-     */
-    @LuaViewApi(since = VmVersion.V_550)
-    public LuaValue onDraw(U view, Varargs varargs) {
-        if (varargs.narg() > 1) {
-            return setOnDraw(view, varargs);
-        } else {
-            return getOnDraw(view, varargs);
-        }
-    }
-
-    public LuaValue setOnDraw(U view, Varargs varargs) {
-        final LuaValue callbacks = varargs.optvalue(2, NIL);
-        return view.setOnDrawCallback(callbacks);
-    }
-
-    public LuaValue getOnDraw(U view, Varargs varargs) {
-        return view.getOnDrawCallback();
     }
 
     /**

@@ -1,8 +1,10 @@
 require "kit/lv_kit"
 
 sw, sh = System.screenSize()
-window.frame(0, 0, sw,sh)
-window.backgroundColor(0xff0000, 0.5)
+
+view = CustomView()
+view.frame(0, 0, sw,sh)
+view.backgroundColor(0xff0000, 0.5)
 
 lastX = nil
 lastY = nil
@@ -13,7 +15,7 @@ w = 4
 dx = 0
 dy = 0
 
-window.onTouch(function(event)
+view.onTouch(function(event)
     print(event.id, event.pointer, event.action, event.x, event.y)
     dx = lastX and event.x - lastX or 0
     dy = lastY and event.y - lastY or 0
@@ -38,10 +40,10 @@ window.onTouch(function(event)
         y = sh
     end
 
-    lastX = event.action == 2 and event.x or nil
-    lastY = event.action == 2 and event.y or nil
+    lastX = event.action == TouchEvent.MOVE and event.x or nil
+    lastY = event.action == TouchEvent.MOVE and event.y or nil
 
-    window.invalidate()
+    view.invalidate()
 
     return true;
 end)
@@ -62,7 +64,7 @@ for i = 0, count, 1 do
     w = 3 + math:random(10)
 end
 
-window.onDraw(function(canvas)
+view.onDraw(function(canvas)
     print(x, y, w, h)
 
     for i = 0, count, 1 do
@@ -86,5 +88,5 @@ end)
 
 
 Timer().callback(function()
-    window.invalidate()
+    view.invalidate()
 end).start(0.01, true)
