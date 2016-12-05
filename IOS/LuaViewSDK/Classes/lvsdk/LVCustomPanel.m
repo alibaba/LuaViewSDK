@@ -77,7 +77,7 @@ static int lvNewCustomPanelView (lv_State *L) {
         errorNotice.lv_userData = userData;
         errorNotice.lv_lview = (__bridge LView *)(L->lView);
         
-        lvL_getmetatable(L, META_TABLE_UICustomPanel );
+        lvL_getmetatable(L, META_TABLE_CustomPanel );
         lv_setmetatable(L, -2);
     }
     LView* view = (__bridge LView *)(L->lView);
@@ -94,7 +94,7 @@ static int lvNewCustomPanelView (lv_State *L) {
         {NULL, NULL}
     };
     
-    lv_createClassMetaTable(L, META_TABLE_UICustomPanel);
+    lv_createClassMetaTable(L, META_TABLE_CustomPanel);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);
