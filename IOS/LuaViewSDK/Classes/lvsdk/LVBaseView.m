@@ -1489,6 +1489,17 @@ static int effects (lv_State *L) {
     return 0;
 }
 
+static int invalidate (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( [view isKindOfClass:[UIView class]] ) {
+            [view setNeedsDisplay];
+        }
+    }
+    return 0;
+}
+
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
     
@@ -1605,6 +1616,8 @@ static const struct lvL_reg baseMemberFunctions [] = {
     
     {"effects",effects},
     {"layerMode",layerMode},
+    
+    {"invalidate",invalidate},
     {NULL, NULL}
 };
 

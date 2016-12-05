@@ -9,11 +9,38 @@
 #import "LVCustomView.h"
 #import "LVBaseView.h"
 #import "LView.h"
+#import "LVCanvas.h"
+
+@interface LVCustomView ()
+@property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
+@end
 
 @implementation LVCustomView
 
+-(id) init:(lv_State*) l{
+    self = [super init];
+    if( self ){
+        self.lv_lview = (__bridge LView *)(l->lView);
+        self.backgroundColor = [UIColor clearColor];
+        self.clipsToBounds = YES;
+    }
+    return self;
+}
+
+-(void) drawRect:(CGRect)rect{
+    [super drawRect:rect];
+    
+    lv_State* L = self.lv_lview.l;
+    if( L ) {
+        lv_settop(L, 0);
+         CGContextRef contextRef = UIGraphicsGetCurrentContext();
+        [LVCanvas createLuaCanvas:L contentRef:contextRef];
+        [self lv_callLuaByKey1:@STR_ON_DRAW key2:nil argN:1];
+    }
+}
+
 #pragma -mark CustomView
-static int lvNewButton (lv_State *L) {
+static int lvNewCustomView (lv_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomView class]];
     
     {
@@ -34,12 +61,15 @@ static int lvNewButton (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
+static int onDraw (lv_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_DRAW, NO);
+}
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    [LVUtil reg:L clas:self cfunc:lvNewButton globalName:globalName defaultName:@"CustomView"];
+    [LVUtil reg:L clas:self cfunc:lvNewCustomView globalName:globalName defaultName:@"CustomView"];
     
     const struct lvL_reg memberFunctions [] = {
-        
+        {"onDraw" , onDraw},
         {NULL, NULL}
     };
     
