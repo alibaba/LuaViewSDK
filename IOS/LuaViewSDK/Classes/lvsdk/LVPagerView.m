@@ -362,7 +362,7 @@ static int lvNewPagerView (lv_State *L) {
 
 -(void) reloadDataASync{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001];
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001 inModes:@[NSRunLoopCommonModes]];
     });
 }
 
