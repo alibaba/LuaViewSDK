@@ -19,6 +19,8 @@
 
 -(id) init:(lv_State*) l;
 
+-(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h;
+
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 +(int) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef;

@@ -75,6 +75,7 @@ extern const char* LVType_AudioPlayer;
 extern const char* LVType_StyledString;
 extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
+extern const char* LVType_Canvas;
 
 
 //----------------View的用户数据结构------------------------------------------------

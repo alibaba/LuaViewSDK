@@ -66,6 +66,7 @@
 #import "LVCustomPanel.h"
 #import "LVCustomView.h"
 #import "LVPagerView.h"
+#import "LVCanvas.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -292,6 +293,7 @@ extern char g_debug_lua[];
                 [LVCollectionView class],
                 [LVPagerView class],
                 [LVCustomView class],
+                [LVCanvas class],
                 [LVTimer class],
                 [LVPagerIndicator class],
                 [LVCustomPanel class],

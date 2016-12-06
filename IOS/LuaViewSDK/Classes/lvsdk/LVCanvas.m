@@ -23,6 +23,26 @@
     return self;
 }
 
+-(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h{
+    if( _contentRef ) {
+        CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
+        CGContextDrawPath(_contentRef, kCGPathFill);
+    }
+}
+
+static int drawRect (lv_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
+    if( LVIsType(user1, Canvas)  ){
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat w = lv_tonumber(L, 4);
+        CGFloat h = lv_tonumber(L, 5);
+        [canvas drawRect:x :y :w :h];
+        return 1;
+    }
+    return 0;
+}
 static void releaseCanvasUserData(LVUserDataInfo* user){
     if( user && user->object ){
         LVCanvas* canvas = CFBridgingRelease(user->object);
@@ -47,7 +67,7 @@ static int lvNewCanvas (lv_State *L) {
     LVCanvas* canvas = [[c alloc] init:L];
 
     {
-        NEW_USERDATA(userData, Data);
+        NEW_USERDATA(userData, Canvas);
         userData->object = CFBridgingRetain(canvas);
         canvas.lv_userData = userData;
         
@@ -61,7 +81,7 @@ static int lvNewCanvas (lv_State *L) {
     LVCanvas* lvCanvas = [[LVCanvas alloc] init:L];
     lvCanvas.contentRef = contentRef;
     {
-        NEW_USERDATA(userData, Data);
+        NEW_USERDATA(userData, Canvas);
         userData->object = CFBridgingRetain(lvCanvas);
         lvCanvas.lv_userData = userData;
         
@@ -77,12 +97,14 @@ static int lvNewCanvas (lv_State *L) {
     const struct lvL_reg memberFunctions [] = {
         {"__gc", lvCanvasGC },
         
+        {"drawRect",drawRect},
+        
         {NULL, NULL}
     };
     
     lv_createClassMetaTable(L, META_TABLE_Canvas);
-    
     lvL_openlib(L, NULL, memberFunctions, 0);
+    
     return 0;
 }
 

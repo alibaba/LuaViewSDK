@@ -27,5 +27,6 @@
  const char* LVType_StyledString = "LVType_UserDataStyledString";
  const char* LVType_NativeObject = "LVType_UserDataNativeObject";
  const char* LVType_Struct = "LVType_UserDataStruct";
+ const char* LVType_Canvas = "LVType_UserDataCanvas";
 
 @end
