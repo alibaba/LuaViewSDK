@@ -2,7 +2,9 @@ package com.taobao.luaview.userdata.kit;
 
 import android.text.TextUtils;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.global.LuaResourceFinder;
+import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.FileUtil;
@@ -21,6 +23,7 @@ import java.io.File;
  * @author song
  * @date 15/9/6
  */
+@LuaViewApi(since = VmVersion.V_550)
 public class UDFile extends BaseLuaTable {
 
     public UDFile(Globals globals, LuaValue metatable) {
