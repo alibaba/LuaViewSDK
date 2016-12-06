@@ -147,7 +147,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                     }
 
                     @Override
-                    protected void onPostExecute(Bitmap bitmap) {
+                    protected void onPostExecute(Bitmap bitmap) {//TODO 这里的bitmap是不经过缓存的，需要考虑
                         if (bitmap != null) {
                             imageView.setImageBitmap(bitmap);
                         }
