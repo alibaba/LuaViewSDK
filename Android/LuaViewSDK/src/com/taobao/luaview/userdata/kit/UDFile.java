@@ -6,7 +6,6 @@ import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.FileUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.Globals;
@@ -61,27 +60,26 @@ public class UDFile extends BaseLuaTable {
                     if (data != null && data.length > 0 && !TextUtils.isEmpty(name)) {
                         if (args.isfunction(4)) {
                             final LuaValue callback = LuaUtil.getFunction(args, 4);
-                            new SimpleTask1<Object>() {
+                            new SimpleTask1<Boolean>() {
                                 @Override
-                                protected Object doInBackground(Object... params) {
-                                    final String path = finder.buildFilePath((String) params[0]);
-                                    FileUtil.save(path, (byte[]) params[1]);
-                                    return null;
+                                protected Boolean doInBackground(Object... params) {
+                                    final String path = finder.buildSecurePathInSdcard((String) params[0]);
+                                    return FileUtil.save(path, (byte[]) params[1]);
                                 }
 
                                 @Override
-                                protected void onPostExecute(Object o) {
-                                    LuaUtil.callFunction(callback);
+                                protected void onPostExecute(Boolean o) {
+                                    LuaUtil.callFunction(callback, o);
                                 }
                             }.execute(name, data);
                         } else {
-                            final String path = finder.buildFilePath(name);
-                            FileUtil.save(path, data);
+                            final String path = finder.buildSecurePathInSdcard(name);
+                            return valueOf(FileUtil.save(path, data));
                         }
                     }
                 }
             }
-            return this;
+            return FALSE;
         }
     }
 
@@ -95,29 +93,37 @@ public class UDFile extends BaseLuaTable {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
                     final String name = LuaUtil.getString(args, 2);
-                    final String path = finder.buildFilePath(name);
+                    final String path = finder.buildSecurePathInSdcard(name);
 
                     if (args.isfunction(3)) {
                         final LuaValue callback = LuaUtil.getFunction(args, 3);
-                        new SimpleTask1<UDData>() {
-                            @Override
-                            protected UDData doInBackground(Object... params) {
-                                byte[] data = FileUtil.readBytes(new File(path));
-                                return new UDData(getGlobals(), getmetatable(), null).append(data);
-                            }
+                        if (path != null) {
+                            new SimpleTask1<UDData>() {
+                                @Override
+                                protected UDData doInBackground(Object... params) {
+                                    byte[] data = FileUtil.readBytes(new File(path));
+                                    return new UDData(getGlobals(), getmetatable(), null).append(data);
+                                }
 
-                            @Override
-                            protected void onPostExecute(UDData udData) {
-                                LuaUtil.callFunction(callback, udData);
-                            }
-                        }.execute();
+                                @Override
+                                protected void onPostExecute(UDData udData) {
+                                    LuaUtil.callFunction(callback, udData);
+                                }
+                            }.execute();
+                        } else {
+                            LuaUtil.callFunction(callback, NIL);
+                        }
                     } else {
-                        byte[] data = FileUtil.readBytes(new File(path));
-                        return new UDData(getGlobals(), getmetatable(), null).append(data);
+                        if (path != null) {
+                            byte[] data = FileUtil.readBytes(new File(path));
+                            return new UDData(getGlobals(), getmetatable(), null).append(data);
+                        } else {
+                            return NIL;
+                        }
                     }
                 }
             }
-            return this;
+            return NIL;
         }
     }
 
@@ -132,7 +138,7 @@ public class UDFile extends BaseLuaTable {
                 if (finder != null) {
                     final String fileName = LuaUtil.getString(args, 2);
                     if (!TextUtils.isEmpty(fileName)) {
-                        return valueOf(finder.exists(finder.buildFilePath(fileName)));
+                        return valueOf(finder.exists(fileName));
                     }
                 }
             }
@@ -150,7 +156,8 @@ public class UDFile extends BaseLuaTable {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
                     final String fileName = LuaUtil.getString(args, 2);
-                    return valueOf(finder.buildFilePath(fileName));
+                    final String path = finder.buildSecurePathInSdcard(fileName);
+                    return path != null ? valueOf(path) : NIL;
                 }
             }
             return NIL;

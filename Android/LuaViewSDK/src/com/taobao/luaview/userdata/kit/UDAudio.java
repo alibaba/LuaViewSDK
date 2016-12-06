@@ -118,7 +118,7 @@ public class UDAudio extends BaseCacheUserdata implements MediaPlayer.OnPrepared
                 if (URLUtil.isNetworkUrl(this.mUriOrName) || URLUtil.isFileUrl(this.mUriOrName) || URLUtil.isAssetUrl(this.mUriOrName)) {//net & file & asset
                     uri = this.mUriOrName;
                 } else {//plain text, use as file path
-                    uri = getLuaResourceFinder().findFullPath(this.mUriOrName);
+                    uri = getLuaResourceFinder().buildFullPathInBundleOrAssets(this.mUriOrName);
                     assetFileExist = AssetUtil.exists(getContext(), uri);
                 }
                 try {

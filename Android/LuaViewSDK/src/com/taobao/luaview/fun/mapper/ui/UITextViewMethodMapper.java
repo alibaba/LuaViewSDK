@@ -28,7 +28,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
             "font",//5
             "gravity",//6
             "textAlign",//7
-            "lines",//8
+            "lines",//8 TODO iOS没有这个方法
             "maxLines",//9
             "lineCount",//10
             "minLines",//11
