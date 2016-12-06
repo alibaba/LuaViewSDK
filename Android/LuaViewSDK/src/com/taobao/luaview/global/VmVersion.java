@@ -16,13 +16,15 @@ public class VmVersion {
     public static final String V_520 = "5.2.0";
     public static final String V_530 = "5.3.0";
     public static final String V_540 = "5.4.0";
+    public static final String V_550 = "5.5.0";
 
     public static String getCurrent() {
-        return V_540;
+        return V_550;
     }
 
     /**
      * 是否比某个版本更新
+     *
      * @param compareVersion
      * @return
      */

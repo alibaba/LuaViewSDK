@@ -85,6 +85,14 @@ public class LuaScriptManager {
     }
 
     /**
+     * get scriptFolderPath
+     * @return
+     */
+    public static String getBaseScriptFolderPath() {
+        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator + FOLDER_SCRIPT + File.separator;
+    }
+
+    /**
      * get path of given folder
      *
      * @param subFolderName
@@ -92,7 +100,7 @@ public class LuaScriptManager {
      */
     public static String getFolderPath(final String subFolderName) {
         return new StringBuffer()
-                .append(getBaseFilePath())
+                .append(getBaseScriptFolderPath())
                 .append(subFolderName)
                 .append(File.separator)
                 .toString();
@@ -144,7 +152,7 @@ public class LuaScriptManager {
      */
     public static String buildScriptBundleFolderPath(final String uri) {
         final String fileNameWithoutPostfix = EncryptUtil.md5Hex(uri);
-        final String folderName = new StringBuffer().append(FOLDER_SCRIPT).append(File.separator).append(fileNameWithoutPostfix).toString();//使用文件名作为子目录的名称
+        final String folderName = fileNameWithoutPostfix;//使用文件名作为子目录的名称//new StringBuffer().append(FOLDER_SCRIPT).append(File.separator).append(fileNameWithoutPostfix).toString();
         return getFolderPath(folderName);
     }
 
@@ -156,7 +164,7 @@ public class LuaScriptManager {
      */
     public static String buildScriptBundleFilePath(final String uri) {
         final String fileNameWithoutPostfix = EncryptUtil.md5Hex(uri);
-        final String folderName = new StringBuffer().append(FOLDER_SCRIPT).append(File.separator).append(fileNameWithoutPostfix).toString();//使用文件名作为子目录的名称
+        final String folderName = fileNameWithoutPostfix;//使用文件名作为子目录的名称//new StringBuffer().append(FOLDER_SCRIPT).append(File.separator).append(fileNameWithoutPostfix).toString();
         final String fileName = buildFileName(fileNameWithoutPostfix, POSTFIX_SCRIPT_BUNDLE);
         return getFilePath(folderName, fileName);
     }
@@ -199,7 +207,7 @@ public class LuaScriptManager {
         return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_BYTECODE_ZIP);
     }
 
-    public static boolean isLuaBytecodeFile(final String fileName){
+    public static boolean isLuaBytecodeFile(final String fileName) {
         return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_B_LUA);
     }
 

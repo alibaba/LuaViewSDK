@@ -48,6 +48,7 @@ tableView = TableView(tableViewData)
 tableView.miniSpacing(1)
 tableView.frame(0, 0, s_width, s_height)
 tableView.showScrollIndicator(false)
+tableView.reload()
 
 
 

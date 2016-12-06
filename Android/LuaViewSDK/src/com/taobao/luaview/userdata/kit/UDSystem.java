@@ -101,6 +101,10 @@ public class UDSystem extends BaseLuaTable {
             //action bar height
             int actionBarHeight = AndroidUtil.getActionBarHeightInDp(getContext());
             table.set("nav_height", actionBarHeight);
+            int bottomNavHeight = AndroidUtil.getNavigationBarHeightInDp(getContext());
+            table.set("bottom_nav_height", bottomNavHeight);
+            int statusBarHeight = AndroidUtil.getStatusBarHeightInDp(getContext());
+            table.set("status_bar_height", statusBarHeight);
             return table;
         }
     }

@@ -41,6 +41,17 @@ public class UDData extends BaseUserdata {
         }
     }
 
+    /**
+     * get bytes of this data
+     * @return
+     */
+    public byte[] bytes() {
+        if (userdata() instanceof ByteArrayOutputStream) {
+            return ((ByteArrayOutputStream) userdata()).toByteArray();
+        }
+        return null;
+    }
+
     @Override
     public LuaValue add(LuaValue data2) {
         return new UDData(getGlobals(), getmetatable(), null).append(this).append(data2);
@@ -67,6 +78,12 @@ public class UDData extends BaseUserdata {
     @Override
     public String tojstring() {
         return toString(DEFAULT_ENCODE);
+    }
+
+
+    @Override
+    public String toString() {
+        return tojstring();
     }
 
     /**

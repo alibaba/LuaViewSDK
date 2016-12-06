@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDImageScaleType;
+import com.taobao.luaview.userdata.kit.UDData;
 import com.taobao.luaview.userdata.ui.UDImageView;
 
 import org.luaj.vm2.LuaFunction;
@@ -76,9 +77,15 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     }
 
     public LuaValue setImage(U view, Varargs varargs) {
-        final String url = varargs.optjstring(2, null);
-        final LuaFunction callback = varargs.optfunction(3, null);
-        return view.setImageUrl(url, callback);
+        if (varargs.isstring(2)) {
+            final String url = varargs.optjstring(2, null);
+            final LuaFunction callback = varargs.optfunction(3, null);
+            return view.setImageUrl(url, callback);
+        } else if (varargs.arg(2) instanceof UDData) {//data
+            final UDData data = (UDData) varargs.arg(2);
+            return view.setImageBitmap(data != null ? data.bytes() : null);
+        }
+        return view;
     }
 
     public LuaValue getImage(U view, Varargs varargs) {
