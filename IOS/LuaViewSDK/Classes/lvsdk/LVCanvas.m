@@ -41,7 +41,7 @@ static int nativeObj (lv_State *L) {
     return 0;
 }
 
-static int drawPoint (lv_State *L) {
+static int canvas_drawPoint (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -59,12 +59,13 @@ static int drawPoint (lv_State *L) {
         CGPoint aPoints[2];
         aPoints[0] = CGPointMake(x1, y1);
         aPoints[1] = CGPointMake(x2, y2);
+        CGContextSetLineWidth(_contentRef,self.strokeWidth);
         CGContextAddLines(_contentRef, aPoints, 2);
         CGContextDrawPath(_contentRef, kCGPathStroke); //根据坐标绘制路径
     }
 }
 
-static int drawLine (lv_State *L) {
+static int canvas_drawLine (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -78,30 +79,39 @@ static int drawLine (lv_State *L) {
     return 0;
 }
 
--(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h{
+-(void) drawRect:(CGFloat) x1 :(CGFloat)y1 :(CGFloat) x2 :(CGFloat)y2{
     if( _contentRef ) {
+        CGContextSetLineWidth(_contentRef,self.strokeWidth);
+        CGFloat x = MIN(x1, x2);
+        CGFloat y = MIN(y1, y2);
+        CGFloat w = ABS(x2-x1);
+        CGFloat h = ABS(y2-y1);
         CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
         CGContextDrawPath(_contentRef, self.drawingMode);
     }
 }
 
-static int drawRect (lv_State *L) {
+static int canvas_drawRect (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
-        CGFloat h = lv_tonumber(L, 5);
-        [canvas drawRect:x :y :w :h];
+        CGFloat x1 = lv_tonumber(L, 2);
+        CGFloat y1 = lv_tonumber(L, 3);
+        CGFloat x2 = lv_tonumber(L, 4);
+        CGFloat y2 = lv_tonumber(L, 5);
+        [canvas drawRect:x1 :y1 :x2 :y2];
         return 1;
     }
     return 0;
 }
 
--(void) drawRoundRect:(CGFloat) x :(CGFloat)y :(CGFloat)w :(CGFloat)h  :(CGFloat)rx :(CGFloat)ry{
+-(void) drawRoundRect:(CGFloat) x1 :(CGFloat)y1 :(CGFloat)x2 :(CGFloat)y2  :(CGFloat)rx :(CGFloat)ry{
     CGContextRef context = _contentRef;
     if( context ) {
+        CGFloat x = MIN(x1, x2);
+        CGFloat y = MIN(y1, y2);
+        CGFloat w = ABS(x2-x1);
+        CGFloat h = ABS(y2-y1);
         // 简便起见，这里把圆角半径设置为长和宽平均值的1/10
         CGFloat radius = rx;
         
@@ -132,17 +142,17 @@ static int drawRect (lv_State *L) {
     }
 }
 
-static int drawRoundRect (lv_State *L) {
+static int canvas_drawRoundRect (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
-        CGFloat h = lv_tonumber(L, 5);
+        CGFloat x1 = lv_tonumber(L, 2);
+        CGFloat y1 = lv_tonumber(L, 3);
+        CGFloat x2 = lv_tonumber(L, 4);
+        CGFloat y2 = lv_tonumber(L, 5);
         CGFloat rx = lv_tonumber(L, 6);
         CGFloat ry = lv_tonumber(L, 7);
-        [canvas drawRoundRect:x :y :w :h :rx :ry];
+        [canvas drawRoundRect:x1 :y1 :x2 :y2 :rx :ry];
         return 1;
     }
     return 0;
@@ -157,7 +167,7 @@ static int drawRoundRect (lv_State *L) {
     }
 }
 
-static int drawEllipse (lv_State *L) {
+static int canvas_drawEllipse (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -174,7 +184,7 @@ static int drawEllipse (lv_State *L) {
     return 0;
 }
 
-static int color (lv_State *L) {
+static int canvas_color (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -196,8 +206,7 @@ static int color (lv_State *L) {
     return 0;
 }
 
-
-static int strokeWidth (lv_State *L) {
+static int canvas_strokeWidth (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -208,6 +217,128 @@ static int strokeWidth (lv_State *L) {
             lv_pushnumber(L, canvas.strokeWidth );
             return 1;
         }
+    }
+    return 0;
+}
+
+static int canvas_style (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            canvas.drawingMode = lv_tonumber(L, 2);
+            return 0;
+        } else {
+            lv_pushnumber(L, canvas.drawingMode );
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int canvas_resetPaint (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        canvas.color = [UIColor blackColor];
+    }
+    return 0;
+}
+
+static int canvas_alpha (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_textSize (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_bold (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_clipRect (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int drawText (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_drawOval (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_drawArc (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_drawImage (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_save (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_restore (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_rotate (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_skew (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_scale (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+    }
+    return 0;
+}
+
+static int canvas_translate (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
     }
     return 0;
 }
@@ -268,14 +399,35 @@ static int lvNewCanvas (lv_State *L) {
         {"nativeObj", nativeObj},
         
         
-        {"drawPoint",drawPoint},
-        {"drawLine",drawLine},
-        {"drawRect",drawRect},
-        {"drawRoundRect",drawRoundRect},
-        {"drawCircle",drawEllipse},
-        {"drawEllipse",drawEllipse},
-        {"color",color},
-        {"strokeWidth",strokeWidth},
+        {"drawPoint",canvas_drawPoint},
+        {"drawLine",canvas_drawLine},
+        {"drawRect",canvas_drawRect},
+        {"drawRoundRect",canvas_drawRoundRect},
+        {"drawCircle",canvas_drawEllipse},
+        {"drawEllipse",canvas_drawEllipse},
+        {"drawText",drawText},
+        {"drawOval",canvas_drawOval},
+        {"drawArc",canvas_drawArc},
+        {"drawImage",canvas_drawImage},
+        
+        {"color",canvas_color},
+        {"alpha",canvas_alpha},
+        {"strokeWidth",canvas_strokeWidth},
+        {"style",canvas_style},
+        {"textSize",canvas_textSize},
+        
+        {"resetPaint",canvas_resetPaint},
+        {"save",canvas_save},
+        {"restore",canvas_restore},
+        
+        {"rotate",canvas_rotate},
+        {"skew",canvas_skew},
+        {"scale",canvas_scale},
+        {"translate",canvas_translate},
+        {"bold",canvas_bold},
+        
+        
+        {"clipRect",canvas_clipRect},
         
         {NULL, NULL}
     };
@@ -283,6 +435,20 @@ static int lvNewCanvas (lv_State *L) {
     lv_createClassMetaTable(L, META_TABLE_Canvas);
     lvL_openlib(L, NULL, memberFunctions, 0);
     
+    
+    {
+        // PaintStyle 常量
+        lv_settop(L, 0);
+        NSDictionary* v = nil;
+        v = @{
+              @"FILL":    @(kCGPathFill),
+              @"EOFILL":   @(kCGPathEOFill),
+              @"STROKE":   @(kCGPathStroke),
+              @"FILLSTROKE":   @(kCGPathFillStroke),
+              @"EOFILLSTROKE":   @(kCGPathEOFillStroke),
+        };
+        [LVUtil defineGlobal:@"PaintStyle" value:v L:L];
+    }
     return 0;
 }
 
