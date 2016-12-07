@@ -184,14 +184,10 @@ public class LuaResourceFinder implements ResourceFinder {
             }
 
             if (drawable == null) {//从asset加载
-                filepath = buildPathInAssets(drawableName);
+                filepath = buildPathInAssetsIfExists(drawableName);
                 if (filepath != null) {
                     drawable = DrawableUtil.getAssetByPath(mContext, drawableName);
                 }
-            }
-
-            if (drawable == null) {//直接从res下加载
-                drawable = DrawableUtil.getByName(mContext, drawableName);
             }
         }
         return drawable;
@@ -215,7 +211,7 @@ public class LuaResourceFinder implements ResourceFinder {
             }
 
             if (typeface == null) {//从asset下加载
-                filepath = buildPathInAssets(typefaceNameOrPath);
+                filepath = buildPathInAssetsIfExists(typefaceNameOrPath);
                 if (filepath != null) {
                     typeface = TypefaceUtil.create(mContext, filepath);
                 }
@@ -242,7 +238,7 @@ public class LuaResourceFinder implements ResourceFinder {
             }
 
             if (inputStream == null) {//从asset下加载
-                filepath = buildPathInAssets(nameOrPath);
+                filepath = buildPathInAssetsIfExists(nameOrPath);
                 if (filepath != null) {
                     inputStream = AssetUtil.open(mContext, filepath);
                 }
@@ -318,7 +314,7 @@ public class LuaResourceFinder implements ResourceFinder {
         String path = buildPathInBundleFolder(nameOrPath);
         if (path != null) {//处理../../../
             final String canonicalPath = FileUtil.getCanonicalPath(path);
-            if(canonicalPath != null && canonicalPath.startsWith(mBaseScriptFolderPath)){
+            if (canonicalPath != null && canonicalPath.startsWith(mBaseScriptFolderPath)) {
                 return path;
             } else {
                 LogUtil.e("[LuaView-Error buildSecurePathInSdcard error]", nameOrPath, "must in folder", mBaseScriptFolderPath);
@@ -384,6 +380,20 @@ public class LuaResourceFinder implements ResourceFinder {
             return canonicalPath != null && canonicalPath.startsWith(mBaseAssetPath) ? path : null;
         }
         return null;
+    }
+
+    /**
+     * build path in assets
+     * @param nameOrPath
+     * @return
+     */
+    private String buildPathInAssetsIfExists(final String nameOrPath) {
+        String filepath = buildPathInAssets(nameOrPath);
+        if (AssetUtil.exists(mContext, filepath)) {
+            return filepath;
+        } else {
+            return nameOrPath;
+        }
     }
 
     /**
