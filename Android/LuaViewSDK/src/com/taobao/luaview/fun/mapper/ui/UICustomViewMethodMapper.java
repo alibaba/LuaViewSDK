@@ -20,7 +20,7 @@ import java.util.List;
 @LuaViewLib
 public class UICustomViewMethodMapper<U extends UDCustomView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UICustomViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UICustomViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "onDraw"//0
     };

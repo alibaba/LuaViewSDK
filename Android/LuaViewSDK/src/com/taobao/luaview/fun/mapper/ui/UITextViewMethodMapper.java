@@ -18,7 +18,7 @@ import java.util.List;
 @LuaViewLib
 public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UITextViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UITextViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "text",//0
             "textColor",//1

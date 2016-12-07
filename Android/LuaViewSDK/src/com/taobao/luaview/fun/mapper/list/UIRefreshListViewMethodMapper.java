@@ -18,7 +18,7 @@ import java.util.List;
 @LuaViewLib
 public class UIRefreshListViewMethodMapper<U extends UDRefreshListView> extends UIBaseListViewMethodMapper<U> {
 
-    private static final String TAG = UIRefreshListViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIRefreshListViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "refreshEnable",//0
             "initRefreshing",//1

@@ -16,7 +16,7 @@ import java.util.List;
  */
 @LuaViewLib
 public abstract class UIBaseListViewMethodMapper<U extends UDViewGroup> extends UIBaseListOrRecyclerViewMethodMapper<U> {
-    private static final String TAG = UIBaseListViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIBaseListViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "header",//0
             "footer",//1

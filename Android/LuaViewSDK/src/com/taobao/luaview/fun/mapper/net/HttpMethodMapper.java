@@ -21,7 +21,7 @@ import java.util.List;
 @LuaViewLib
 public class HttpMethodMapper<U extends UDHttp> extends BaseMethodMapper<U> {
 
-    private static final String TAG = HttpMethodMapper.class.getSimpleName();
+    private static final String TAG = "HttpMethodMapper";
     private static final String[] sMethods = new String[]{
             "url",//0
             "method",//1

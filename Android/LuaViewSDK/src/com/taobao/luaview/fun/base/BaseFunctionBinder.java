@@ -15,7 +15,6 @@ import org.luaj.vm2.lib.TwoArgFunction;
  * @date 15/8/14
  */
 public abstract class BaseFunctionBinder extends TwoArgFunction {
-    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
     public String[] luaNames;
 
     public BaseFunctionBinder(String... name) {

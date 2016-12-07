@@ -16,7 +16,7 @@ import java.util.List;
 @LuaViewLib
 public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends BaseMethodMapper<U> {
 
-    private static final String TAG = UILoadingDialogMethodMapper.class.getSimpleName();
+    private static final String TAG = "UILoadingDialogMethodMapper";
     private static final String[] sMethods = new String[]{
             "show",//0
             "isShow",//1

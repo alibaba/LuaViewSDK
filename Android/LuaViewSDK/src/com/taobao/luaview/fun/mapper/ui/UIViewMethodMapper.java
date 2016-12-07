@@ -26,7 +26,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
-    private static final String TAG = UIViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "initParams",//0
             "invalidate",//1

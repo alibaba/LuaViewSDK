@@ -16,7 +16,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMapper<U> {
-    private static final String TAG = UIButtonMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIButtonMethodMapper";
     private static final String[] sMethods = new String[]{
             "title",//0
             "titleColor",//1

@@ -19,7 +19,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
-    private static final String TAG = AudioMethodMapper.class.getSimpleName();
+    private static final String TAG = "AudioMethodMapper";
     private static final String[] sMethods = new String[]{
             "play",//0
             "pause",//1

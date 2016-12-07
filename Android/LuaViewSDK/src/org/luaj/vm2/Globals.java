@@ -122,9 +122,6 @@ import java.util.Stack;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-    private static final String TAG = Globals.class.getSimpleName();
-    private static final String CACHE_PROTOTYPE = AppCache.CACHE_PROTOTYPE;
-
     /**
      * Android parent view
      */

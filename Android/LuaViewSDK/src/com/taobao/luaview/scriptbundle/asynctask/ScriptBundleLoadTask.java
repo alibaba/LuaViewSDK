@@ -31,7 +31,6 @@ import java.util.Map;
  * 2. 签名验证成功的文件，做unzip操作，获取需要返回的数据
  */
 public class ScriptBundleLoadTask extends AsyncTask<Object, Integer, ScriptBundle> {
-    private static final String TAG = ScriptBundleLoadTask.class.getSimpleName();
     private static final String CACHE_SCRIPTS = AppCache.CACHE_SCRIPTS;
     private Context mContext;
 

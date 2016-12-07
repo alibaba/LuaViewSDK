@@ -15,7 +15,7 @@ import java.util.List;
 @LuaViewLib
 public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UIViewPagerMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIViewPagerMethodMapper";
     private static final String[] sMethods = new String[]{
             "reload",//0
             "indicator",//1

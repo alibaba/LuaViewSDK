@@ -15,7 +15,7 @@ import java.util.List;
 @LuaViewLib
 public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UIHorizontalScrollViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIHorizontalScrollViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "offset",//0
             "scrollTo",//1

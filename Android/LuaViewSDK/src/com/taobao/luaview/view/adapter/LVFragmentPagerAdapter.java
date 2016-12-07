@@ -17,7 +17,7 @@ import org.luaj.vm2.Globals;
  * @date 15/9/17
  */
 public class LVFragmentPagerAdapter extends FragmentPagerAdapter {
-    private static final String TAG = LVFragmentPagerAdapter.class.getSimpleName();
+    private static final String TAG = "LVFragmentPagerAdapter";
     private UDViewPager mInitProps;
     private Globals mGlobals;
 

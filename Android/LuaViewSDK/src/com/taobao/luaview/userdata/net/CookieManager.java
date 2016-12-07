@@ -24,7 +24,7 @@ import java.util.Map;
  * 下午5:20 song XXX
  */
 public class CookieManager {
-    private static final String TAG = CookieManager.class.getSimpleName();
+    private static final String TAG = "CookieManager";
     public static final String COOKIE = "Cookie";
     public static final String COOKIES_HEADER = "Set-Cookie";
 

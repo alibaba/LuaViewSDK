@@ -70,7 +70,6 @@ import java.util.List;
  * @date 15/8/14
  */
 public class LuaViewManager {
-    private static final String TAG = LuaViewManager.class.getSimpleName();
     private static final String CACHE_METATABLES = AppCache.CACHE_METATABLES;
 
     /**

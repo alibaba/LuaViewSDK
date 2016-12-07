@@ -17,7 +17,7 @@ import org.luaj.vm2.Globals;
  * @date 15/9/17
  */
 public class LVFragmentStatePagerAdapter extends FixedFragmentStatePagerAdapter {
-    private static final String TAG = LVFragmentStatePagerAdapter.class.getSimpleName();
+    private static final String TAG = "LVFragmentStatePagerAdapter";
     private UDViewPager mInitProps;
     private Globals mGlobals;
 

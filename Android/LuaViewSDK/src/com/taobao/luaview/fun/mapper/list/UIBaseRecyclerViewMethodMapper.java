@@ -14,7 +14,7 @@ import java.util.List;
  */
 @LuaViewLib
 public abstract class UIBaseRecyclerViewMethodMapper<U extends UDBaseRecyclerView> extends UIBaseListOrRecyclerViewMethodMapper<U> {
-    private  static final String TAG = UIBaseRecyclerViewMethodMapper.class.getSimpleName();
+    private  static final String TAG = "UIBaseRecyclerViewMethodMapper";
 
     @Override
     public List<String> getAllFunctionNames() {

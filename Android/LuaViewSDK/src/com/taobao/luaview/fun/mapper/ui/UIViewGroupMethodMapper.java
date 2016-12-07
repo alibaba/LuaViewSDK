@@ -22,7 +22,7 @@ import java.util.List;
 @LuaViewLib
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIViewGroupMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIViewGroupMethodMapper";
     private static final String[] sMethods = new String[]{
             "onShow",//0
             "onHide",//1

@@ -23,7 +23,7 @@ import java.util.List;
 @LuaViewLib
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIImageViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIImageViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "image",//0
             "contentMode",//1

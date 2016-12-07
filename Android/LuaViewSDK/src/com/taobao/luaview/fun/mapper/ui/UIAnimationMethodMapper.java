@@ -22,7 +22,7 @@ import java.util.List;
 @LuaViewLib
 public class UIAnimationMethodMapper<U extends UDAnimation> extends BaseMethodMapper<U> {
 
-    private static final String TAG = UIAnimationMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIAnimationMethodMapper";
     private static final String[] sMethods = new String[]{
             "alpha",//0
             "rotate",//1

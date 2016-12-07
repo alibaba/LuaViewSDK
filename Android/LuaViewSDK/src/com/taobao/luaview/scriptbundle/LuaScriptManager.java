@@ -17,7 +17,6 @@ import java.io.File;
  * @date 15/11/9
  */
 public class LuaScriptManager {
-    private static final String TAG = LuaScriptManager.class.getSimpleName();
     private static String PACKAGE_NAME;
     private static String BASE_FILECACHE_PATH;
     //folders

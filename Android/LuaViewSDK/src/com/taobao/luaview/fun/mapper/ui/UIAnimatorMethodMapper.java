@@ -28,7 +28,7 @@ import java.util.List;
 @LuaViewLib
 public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapper<U> {
 
-    private static final String TAG = UIAnimatorMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIAnimatorMethodMapper";
     private static final String[] sMethods = new String[]{
             "with",//0
             "start",//1
