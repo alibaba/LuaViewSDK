@@ -23,6 +23,43 @@
     return self;
 }
 
+static int drawPoint (lv_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
+    if( LVIsType(user1, Canvas)  ){
+        CGFloat x1 = lv_tonumber(L, 2);
+        CGFloat y1 = lv_tonumber(L, 3);
+        [canvas drawLine:x1 :y1 :x1 :y1];
+        return 1;
+    }
+    return 0;
+}
+
+
+-(void) drawLine:(CGFloat) x1 :(CGFloat)y1 :(CGFloat) x2 :(CGFloat) y2{
+    if( _contentRef ) {
+        CGPoint aPoints[2];
+        aPoints[0] = CGPointMake(x1, y1);
+        aPoints[1] = CGPointMake(x2, y2);
+        CGContextAddLines(_contentRef, aPoints, 2);
+        CGContextDrawPath(_contentRef, kCGPathStroke); //根据坐标绘制路径
+    }
+}
+
+static int drawLine (lv_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
+    if( LVIsType(user1, Canvas)  ){
+        CGFloat x1 = lv_tonumber(L, 2);
+        CGFloat y1 = lv_tonumber(L, 3);
+        CGFloat x2 = lv_tonumber(L, 4);
+        CGFloat y2 = lv_tonumber(L, 5);
+        [canvas drawLine:x1 :y1 :x2 :y2];
+        return 1;
+    }
+    return 0;
+}
+
 -(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h{
     if( _contentRef ) {
         CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
@@ -93,43 +130,31 @@ static int drawRoundRect (lv_State *L) {
     return 0;
 }
 
--(void) drawLine:(CGFloat) x1 :(CGFloat)y1 :(CGFloat) x2 :(CGFloat) y2{
-    if( _contentRef ) {
-        CGPoint aPoints[2];
-        aPoints[0] = CGPointMake(x1, y1);
-        aPoints[1] = CGPointMake(x2, y2);
-        CGContextAddLines(_contentRef, aPoints, 2);
-        CGContextDrawPath(_contentRef, kCGPathStroke); //根据坐标绘制路径
+-(void) drawEllipse:(CGFloat) x :(CGFloat)y :(CGFloat)rx :(CGFloat)ry  {
+    CGContextRef context = _contentRef;
+    if( context && rx>=0 && ry>= 0 ) {
+        //画椭圆
+        CGContextAddEllipseInRect(context, CGRectMake(x-rx, y-ry, rx*2, ry*2)); //椭圆
+        CGContextDrawPath(context, kCGPathFillStroke);
     }
 }
 
-static int drawLine (lv_State *L) {
+static int drawEllipse (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
-        CGFloat x2 = lv_tonumber(L, 4);
-        CGFloat y2 = lv_tonumber(L, 5);
-        [canvas drawLine:x1 :y1 :x2 :y2];
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat rx = lv_tonumber(L, 4);
+        CGFloat ry = rx;
+        if( lv_type(L, 5)==LV_TNUMBER ) {
+            ry = lv_tonumber(L, 5);
+        }
+        [canvas drawEllipse:x :y :rx :ry];
         return 1;
     }
     return 0;
 }
-
-static int drawPoint (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
-    if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
-        [canvas drawLine:x1 :y1 :x1 :y1];
-        return 1;
-    }
-    return 0;
-}
-
-
 
 static void releaseCanvasUserData(LVUserDataInfo* user){
     if( user && user->object ){
@@ -185,7 +210,12 @@ static int lvNewCanvas (lv_State *L) {
     const struct lvL_reg memberFunctions [] = {
         {"__gc", lvCanvasGC },
         
+        {"drawPoint",drawPoint},
+        {"drawLine",drawLine},
         {"drawRect",drawRect},
+        {"drawRoundRect",drawRoundRect},
+        {"drawCircle",drawEllipse},
+        {"drawEllipse",drawEllipse},
         
         {NULL, NULL}
     };
