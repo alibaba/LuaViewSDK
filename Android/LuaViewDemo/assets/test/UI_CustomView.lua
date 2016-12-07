@@ -37,13 +37,13 @@ function testCanvasAndroidAndIos(canvas)
     -- drawRect
     canvas.resetPaint()
     canvas.style(PaintStyle.STROKE)
-    canvas.drawRect(5, 5, 10, 10)
+    canvas.drawRect(5, 5, 5, 5)
     canvas.style(PaintStyle.FILL)
-    canvas.drawRect(10, 10, 15, 15)
+    canvas.drawRect(10, 10, 5, 5)
 
     -- drawRoundRects
     canvas.drawRoundRect(45, 1, 5, 5, 2, 2)
-    canvas.drawRoundRect(45, 5, 10, 10, 2, 2)
+    canvas.drawRoundRect(45, 5, 10, 5, 2, 2)
 
     -- drawCircle
     canvas.drawCircle(80, 0, 5)
@@ -96,6 +96,7 @@ end
 
 img.image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg", function()
     view.invalidate()
+    print("image load finish")
 end)
 
 function testCanvasAndroid(canvas)
@@ -132,22 +133,22 @@ function testCanvasAndroid(canvas)
 
 
     -- drawRect
-    canvas.drawRect(5, 5, 10, 10, { style = "stroke" })
-    canvas.drawRect(10, 10, 15, 15, { style = "fillStroke" })
+    canvas.drawRect(5, 5, 5, 5, { style = "stroke" })
+    canvas.drawRect(10, 10, 5, 5, { style = "fillStroke" })
 
     canvas.drawRect({
-        { 15, 15, 20, 20 },
-        { 20, 20, 25, 25 },
-        { 26, 26, 30, 30 },
+        { 15, 15, 5, 5 },
+        { 20, 20, 5, 5 },
+        { 26, 26, 5, 5 },
     }, { style = 2 })
 
     -- drawRoundRects
-    canvas.drawRoundRect(45, 1, 55, 5, 2, 2)
-    canvas.drawRoundRect(45, 5, 55, 10, 2, 2)
+    canvas.drawRoundRect(45, 1, 10, 5, 2, 2)
+    canvas.drawRoundRect(45, 5, 10, 5, 2, 2)
 
     canvas.drawRoundRect({
-        { 45, 10, 55, 15, 2, 2 },
-        { 45, 16, 65, 20, 1, 1 },
+        { 45, 10, 10, 5, 2, 2 },
+        { 45, 16, 20, 4, 1, 1 },
     })
 
     -- drawCircle
@@ -171,20 +172,20 @@ function testCanvasAndroid(canvas)
     canvas.resetPaint()
 
     -- drawOval
-    canvas.drawOval(45, 50, 70, 60)
-    canvas.drawOval(45, 60, 70, 70)
+    canvas.drawOval(45, 50, 25, 20)
+    canvas.drawOval(45, 60, 25, 20)
 
     canvas.drawOval({
-        { 45, 70, 70, 75 },
-        { 45, 80, 70, 85 }
+        { 45, 70, 25, 5 },
+        { 45, 80, 25, 5 }
     })
 
     -- draw Arc
-    canvas.drawArc(30, 30, 50, 50, 0, 90, true)
+    canvas.drawArc(30, 30, 20, 20, 0, 90, true)
 
     canvas.drawArc({
-        { 10, 30, 30, 40, 91, 180, true },
-        { 30, 30, 50, 50, 182, 100, false }
+        { 10, 30, 20, 10, 91, 180, true },
+        { 30, 30, 20, 20, 182, 100, false }
     })
 
     -- drawBitmap
@@ -194,7 +195,7 @@ function testCanvasAndroid(canvas)
     canvas.scale(1.2)
     canvas.translate(-10, -10)
     canvas.drawText("测试一下", 20, 150, { strokeWidth = 10, textSize = 15, filterBitmap = true, bold = true })
-    canvas.drawBitmap("animate1", 0, 100, 100, 200, { alpha = 0.5 })
+    canvas.drawBitmap("animate1", 0, 100, 100, 100, { alpha = 0.5 })
     canvas.restore()
     canvas.resetPaint()
 
@@ -204,10 +205,10 @@ function testCanvasAndroid(canvas)
     end
 
     -- clipRect
-    canvas.clipRect(100, 100, 135, 135)
+    canvas.clipRect(100, 100, 35, 35)
     canvas.drawCircle(100, 100, 40)
 
-    canvas.clipRect(150, 150, 180, 180)
+    canvas.clipRect(150, 150, 30, 30)
     canvas.drawText("TestABCDEFGHEFGHIJKLMOPQRST", 150, 150)
 
     print(canvas.nativeObj())

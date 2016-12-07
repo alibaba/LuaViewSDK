@@ -583,9 +583,9 @@ public class UDCanvas extends BaseLuaTable {
             if (canvas != null && value != null && value.narg() >= 5) {
                 final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
                 final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
-                canvas.clipRect(x1, y1, x2, y2);
+                final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                canvas.clipRect(x1, y1, x1 + dx, y1 + dy);
             }
         }
 
@@ -597,13 +597,15 @@ public class UDCanvas extends BaseLuaTable {
                     final LuaValue[] keys = table.keys();
                     if (keys.length > 0) {
                         LuaValue value = null;
+                        float x1, y1, dx, dy;
                         for (int i = 0; i < keys.length; i++) {
                             value = table.get(keys[i]);
                             if (value instanceof LuaTable && value.length() >= 4) {
-                                canvas.clipRect(DimenUtil.dpiToPx(value.get(1)),
-                                        DimenUtil.dpiToPx(value.get(2)),
-                                        DimenUtil.dpiToPx(value.get(3)),
-                                        DimenUtil.dpiToPx(value.get(4)));
+                                x1 = DimenUtil.dpiToPx(value.get(1));
+                                y1 = DimenUtil.dpiToPx(value.get(2));
+                                dx = DimenUtil.dpiToPx(value.get(3));
+                                dy = DimenUtil.dpiToPx(value.get(4));
+                                canvas.clipRect(x1, y1, x1 + dx, y1 + dy);
                             }
                         }
                     }
@@ -689,10 +691,10 @@ public class UDCanvas extends BaseLuaTable {
             if (canvas != null && value != null && value.narg() >= 5) {
                 final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
                 final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
                 final LuaValue config = LuaUtil.isTable(value.arg(6)) ? LuaUtil.getTable(value, 6) : null;
-                canvas.drawRect(x1, y1, x2, y2, getDefaultPaint(config));
+                canvas.drawRect(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(config));
             }
         }
 
@@ -705,14 +707,15 @@ public class UDCanvas extends BaseLuaTable {
                     final LuaValue[] keys = table.keys();
                     if (keys.length > 0) {
                         LuaValue value = null;
+                        float x1, y1, dx, dy;
                         for (int i = 0; i < keys.length; i++) {
                             value = table.get(keys[i]);
                             if (value instanceof LuaTable && value.length() >= 4) {
-                                canvas.drawRect(DimenUtil.dpiToPx(value.get(1)),
-                                        DimenUtil.dpiToPx(value.get(2)),
-                                        DimenUtil.dpiToPx(value.get(3)),
-                                        DimenUtil.dpiToPx(value.get(4)),
-                                        getDefaultPaint(LuaUtil.isTable(value.get(5)) ? value.get(5) : config));
+                                x1 = DimenUtil.dpiToPx(value.get(1));
+                                y1 = DimenUtil.dpiToPx(value.get(2));
+                                dx = DimenUtil.dpiToPx(value.get(3));
+                                dy = DimenUtil.dpiToPx(value.get(4));
+                                canvas.drawRect(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(LuaUtil.isTable(value.get(5)) ? value.get(5) : config));
                             }
                         }
                     }
@@ -743,12 +746,12 @@ public class UDCanvas extends BaseLuaTable {
                 if (canvas != null && value != null && value.narg() >= 7) {
                     final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
                     final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
                     final float x3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 6));
                     final float y3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 7));
                     final LuaValue config = LuaUtil.isTable(value.arg(8)) ? LuaUtil.getTable(value, 8) : null;
-                    canvas.drawRoundRect(x1, y1, x2, y2, x3, y3, getDefaultPaint(config));
+                    canvas.drawRoundRect(x1, y1, x1 + dx, y1 + dy, x3, y3, getDefaultPaint(config));
                 }
             }
         }
@@ -763,13 +766,15 @@ public class UDCanvas extends BaseLuaTable {
                         final LuaValue[] keys = table.keys();
                         if (keys.length > 0) {
                             LuaValue value = null;
+                            float x1, y1, dx, dy;
                             for (int i = 0; i < keys.length; i++) {
                                 value = table.get(keys[i]);
                                 if (value instanceof LuaTable && value.length() >= 6) {
-                                    canvas.drawRoundRect(DimenUtil.dpiToPx(value.get(1)),
-                                            DimenUtil.dpiToPx(value.get(2)),
-                                            DimenUtil.dpiToPx(value.get(3)),
-                                            DimenUtil.dpiToPx(value.get(4)),
+                                    x1 = DimenUtil.dpiToPx(value.get(1));
+                                    y1 = DimenUtil.dpiToPx(value.get(2));
+                                    dx = DimenUtil.dpiToPx(value.get(3));
+                                    dy = DimenUtil.dpiToPx(value.get(4));
+                                    canvas.drawRoundRect(x1, y1, x1 + dx, y1 + dy,
                                             DimenUtil.dpiToPx(value.get(5)),
                                             DimenUtil.dpiToPx(value.get(6)),
                                             getDefaultPaint(LuaUtil.isTable(value.get(7)) ? value.get(7) : config));
@@ -805,13 +810,13 @@ public class UDCanvas extends BaseLuaTable {
                 if (canvas != null && value != null && value.narg() >= 8) {
                     final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
                     final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
                     final float x3 = LuaUtil.getFloat(value, 6);
                     final float y3 = LuaUtil.getFloat(value, 7);
                     final boolean use = LuaUtil.getBoolean(value, false, 8);
                     final LuaValue config = LuaUtil.isTable(value.arg(9)) ? LuaUtil.getTable(value, 9) : null;
-                    canvas.drawArc(x1, y1, x2, y2, x3, y3, use, getDefaultPaint(config));
+                    canvas.drawArc(x1, y1, x1 + dx, y1 + dy, x3, y3, use, getDefaultPaint(config));
                 }
             }
         }
@@ -826,13 +831,15 @@ public class UDCanvas extends BaseLuaTable {
                         final LuaValue[] keys = table.keys();
                         if (keys.length > 0) {
                             LuaValue value = null;
+                            float x1, y1, dx, dy;
                             for (int i = 0; i < keys.length; i++) {
                                 value = table.get(keys[i]);
                                 if (value instanceof LuaTable && value.length() >= 7) {
-                                    canvas.drawArc(DimenUtil.dpiToPx(value.get(1)),
-                                            DimenUtil.dpiToPx(value.get(2)),
-                                            DimenUtil.dpiToPx(value.get(3)),
-                                            DimenUtil.dpiToPx(value.get(4)),
+                                    x1 = DimenUtil.dpiToPx(value.get(1));
+                                    y1 = DimenUtil.dpiToPx(value.get(2));
+                                    dx = DimenUtil.dpiToPx(value.get(3));
+                                    dy = DimenUtil.dpiToPx(value.get(4));
+                                    canvas.drawArc(x1, y1, x1 + dx, y1 + dy,
                                             (float) value.get(5).optdouble(0),
                                             (float) value.get(6).optdouble(0),
                                             value.get(7).optboolean(false),
@@ -1028,10 +1035,10 @@ public class UDCanvas extends BaseLuaTable {
                 if (canvas != null && value != null && value.narg() >= 5) {
                     final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
                     final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float x2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float y2 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
                     final LuaValue config = LuaUtil.isTable(value.arg(6)) ? LuaUtil.getTable(value, 6) : null;
-                    canvas.drawOval(x1, y1, x2, y2, getDefaultPaint(config));
+                    canvas.drawOval(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(config));
                 }
             }
         }
@@ -1046,14 +1053,15 @@ public class UDCanvas extends BaseLuaTable {
                         final LuaValue[] keys = table.keys();
                         if (keys.length > 0) {
                             LuaValue value = null;
+                            float x1, y1, dx, dy;
                             for (int i = 0; i < keys.length; i++) {
                                 value = table.get(keys[i]);
                                 if (value instanceof LuaTable && value.length() >= 4) {
-                                    canvas.drawOval(DimenUtil.dpiToPx(value.get(1)),
-                                            DimenUtil.dpiToPx(value.get(2)),
-                                            DimenUtil.dpiToPx(value.get(3)),
-                                            DimenUtil.dpiToPx(value.get(4)),
-                                            getDefaultPaint(LuaUtil.isTable(value.get(5)) ? value.get(5) : config));
+                                    x1 = DimenUtil.dpiToPx(value.get(1));
+                                    y1 = DimenUtil.dpiToPx(value.get(2));
+                                    dx = DimenUtil.dpiToPx(value.get(3));
+                                    dy = DimenUtil.dpiToPx(value.get(4));
+                                    canvas.drawOval(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(LuaUtil.isTable(value.get(5)) ? value.get(5) : config));
                                 }
                             }
                         }
@@ -1140,10 +1148,10 @@ public class UDCanvas extends BaseLuaTable {
                         final float y = DimenUtil.dpiToPx(LuaUtil.getValue(value, 4));
                         LuaValue config = null;
                         if (value.narg() >= 6) {
-                            final float x1 = DimenUtil.dpiToPx(LuaUtil.getValue(value, 5));
-                            final float y1 = DimenUtil.dpiToPx(LuaUtil.getValue(value, 6));
+                            final float dx = DimenUtil.dpiToPx(LuaUtil.getValue(value, 5));
+                            final float dy = DimenUtil.dpiToPx(LuaUtil.getValue(value, 6));
                             config = LuaUtil.isTable(value.arg(7)) ? LuaUtil.getTable(value, 7) : null;
-                            canvas.drawBitmap(bitmap, null, new RectF(x, y, x1, y1), getDefaultPaint(config));
+                            canvas.drawBitmap(bitmap, null, new RectF(x, y, x + dx, y + dy), getDefaultPaint(config));
                         } else {
                             config = LuaUtil.isTable(value.arg(5)) ? LuaUtil.getTable(value, 5) : null;
                             canvas.drawBitmap(bitmap, x, y, getDefaultPaint(config));
