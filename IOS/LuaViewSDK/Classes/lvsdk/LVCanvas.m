@@ -79,13 +79,9 @@ static int canvas_drawLine (lv_State *L) {
     return 0;
 }
 
--(void) drawRect:(CGFloat) x1 :(CGFloat)y1 :(CGFloat) x2 :(CGFloat)y2{
+-(void) drawRect:(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h{
     if( _contentRef ) {
         CGContextSetLineWidth(_contentRef,self.strokeWidth);
-        CGFloat x = MIN(x1, x2);
-        CGFloat y = MIN(y1, y2);
-        CGFloat w = ABS(x2-x1);
-        CGFloat h = ABS(y2-y1);
         CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
         CGContextDrawPath(_contentRef, self.drawingMode);
     }
@@ -105,13 +101,9 @@ static int canvas_drawRect (lv_State *L) {
     return 0;
 }
 
--(void) drawRoundRect:(CGFloat) x1 :(CGFloat)y1 :(CGFloat)x2 :(CGFloat)y2  :(CGFloat)rx :(CGFloat)ry{
+-(void) drawRoundRect:(CGFloat) x :(CGFloat)y :(CGFloat)w :(CGFloat)h  :(CGFloat)rx :(CGFloat)ry{
     CGContextRef context = _contentRef;
     if( context ) {
-        CGFloat x = MIN(x1, x2);
-        CGFloat y = MIN(y1, y2);
-        CGFloat w = ABS(x2-x1);
-        CGFloat h = ABS(y2-y1);
         // 简便起见，这里把圆角半径设置为长和宽平均值的1/10
         CGFloat radius = rx;
         
@@ -146,13 +138,13 @@ static int canvas_drawRoundRect (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
-        CGFloat x2 = lv_tonumber(L, 4);
-        CGFloat y2 = lv_tonumber(L, 5);
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat w = lv_tonumber(L, 4);
+        CGFloat h = lv_tonumber(L, 5);
         CGFloat rx = lv_tonumber(L, 6);
         CGFloat ry = lv_tonumber(L, 7);
-        [canvas drawRoundRect:x1 :y1 :x2 :y2 :rx :ry];
+        [canvas drawRoundRect:x :y :w :h :rx :ry];
         return 1;
     }
     return 0;
@@ -377,7 +369,7 @@ static int lvNewCanvas (lv_State *L) {
     return 1;
 }
 
-+(int) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef{
++(LVCanvas*) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef{
     LVCanvas* lvCanvas = [[LVCanvas alloc] init:L];
     lvCanvas.contentRef = contentRef;
     {
@@ -388,7 +380,7 @@ static int lvNewCanvas (lv_State *L) {
         lvL_getmetatable(L, META_TABLE_Canvas );
         lv_setmetatable(L, -2);
     }
-    return 1;
+    return lvCanvas;
 }
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{

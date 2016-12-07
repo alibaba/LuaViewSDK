@@ -23,6 +23,6 @@
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
-+(int) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef;
++(LVCanvas*) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef;
 
 @end
