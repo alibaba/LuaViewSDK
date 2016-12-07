@@ -131,7 +131,7 @@ public class UDCanvas extends BaseLuaTable {
         set("drawText", new drawText());//drawText("text", x, y)
         set("drawOval", new drawOval());//drawOval(x1, y1, x2, y2)
         set("drawArc", new drawArc());//drawArc(x1, y1, x2, y2, 开始角度, 结束角度, 是否以中心为点)
-        set("drawImage", new drawBitmap());//drawBitmap("name", x, y) or drawBitmap("name, x1, y1, x2, y2) or drawBitmap(Image(), ...)
+        set("drawImage", new drawImage());//drawBitmap("name", x, y) or drawBitmap("name, x1, y1, x2, y2) or drawBitmap(Image(), ...)
     }
 
     public void setTarget(LVViewGroup mTarget) {
@@ -1099,16 +1099,16 @@ public class UDCanvas extends BaseLuaTable {
     /**
      * draw a bitmap
      */
-    class drawBitmap extends VarArgFunction {
+    class drawImage extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs varargs) {
             if (varargs != null && varargs.narg() > 1) {
-                drawBitmap(varargs);
+                drawImage(varargs);
             }
             return UDCanvas.this;
         }
 
-        private void drawBitmap(Varargs value) {
+        private void drawImage(Varargs value) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 final Canvas canvas = getCanvas();
                 if (canvas != null && value != null && value.narg() >= 4) {
