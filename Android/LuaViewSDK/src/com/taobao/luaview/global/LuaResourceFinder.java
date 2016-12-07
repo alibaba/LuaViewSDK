@@ -189,6 +189,10 @@ public class LuaResourceFinder implements ResourceFinder {
                     drawable = DrawableUtil.getAssetByPath(mContext, drawableName);
                 }
             }
+
+            if (drawable == null) {//直接使用name加载
+                drawable = DrawableUtil.getByName(mContext, nameOrPath);
+            }
         }
         return drawable;
     }
@@ -216,6 +220,10 @@ public class LuaResourceFinder implements ResourceFinder {
                     typeface = TypefaceUtil.create(mContext, filepath);
                 }
             }
+
+            if (typeface == null) {//default name
+                typeface = TypefaceUtil.create(mContext, nameOrPath);
+            }
         }
         return typeface != null ? typeface : Typeface.DEFAULT;
     }
@@ -242,6 +250,10 @@ public class LuaResourceFinder implements ResourceFinder {
                 if (filepath != null) {
                     inputStream = AssetUtil.open(mContext, filepath);
                 }
+            }
+
+            if(inputStream == null){//直接使用name加载
+                inputStream = AssetUtil.open(mContext, nameOrPath);
             }
         }
         return inputStream;
@@ -384,6 +396,7 @@ public class LuaResourceFinder implements ResourceFinder {
 
     /**
      * build path in assets
+     *
      * @param nameOrPath
      * @return
      */
@@ -391,9 +404,10 @@ public class LuaResourceFinder implements ResourceFinder {
         String filepath = buildPathInAssets(nameOrPath);
         if (AssetUtil.exists(mContext, filepath)) {
             return filepath;
-        } else {
+        } else if (AssetUtil.exists(mContext, nameOrPath)) {
             return nameOrPath;
         }
+        return null;
     }
 
     /**

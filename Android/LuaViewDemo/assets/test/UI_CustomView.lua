@@ -4,10 +4,6 @@ view = CustomView()
 view.frame(100, 100, 200, 200)
 view.backgroundColor(0x000000, 0.3)
 
-
-img.image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg", function()
-    view.invalidate()
-end)
 img.hidden(true)
 
 view.onDraw(function(canvas)
@@ -33,8 +29,10 @@ function testCanvasAndroidAndIos(canvas)
     canvas.drawLine(100, 0, 0, 100)
 
     -- drawPoint
-    canvas.drawPoint(1, 3)
-    canvas.drawPoint(99, 97)
+    canvas.color(0xff0000)
+    canvas.strokeWidth(2)
+    canvas.drawPoint(1, 5)
+    canvas.drawPoint(99, 93)
 
     -- drawRect
     canvas.resetPaint()
@@ -44,8 +42,8 @@ function testCanvasAndroidAndIos(canvas)
     canvas.drawRect(10, 10, 15, 15)
 
     -- drawRoundRects
-    canvas.drawRoundRect(45, 1, 55, 5, 2, 2)
-    canvas.drawRoundRect(45, 5, 55, 10, 2, 2)
+    canvas.drawRoundRect(45, 1, 5, 5, 2, 2)
+    canvas.drawRoundRect(45, 5, 10, 10, 2, 2)
 
     -- drawCircle
     canvas.drawCircle(80, 0, 5)
@@ -59,11 +57,11 @@ function testCanvasAndroidAndIos(canvas)
     canvas.resetPaint()
 
     -- drawOval
-    canvas.drawOval(45, 50, 70, 60)
-    canvas.drawOval(45, 60, 70, 70)
+    canvas.drawOval(45, 50, 25, 10)
+    canvas.drawOval(45, 60, 25, 10)
 
     -- draw Arc
-    canvas.drawArc(30, 30, 50, 50, 0, 90, true)
+    canvas.drawArc(30, 30, 20, 20, 0, 90, true)
 
     -- drawBitmap
     canvas.save()
@@ -76,24 +74,29 @@ function testCanvasAndroidAndIos(canvas)
     canvas.bold(true)
     canvas.drawText("测试一下", 20, 150)
     canvas.alpha(0.5)
-    canvas.drawImage("animate1", 0, 100, 100, 200)
+    canvas.drawImage("animate1", 0, 100, 100, 100)
     canvas.restore()
     canvas.resetPaint()
 
     print(img)
     if(img) then
-        canvas.drawImage(img, 100, 0, 200, 100)
+        canvas.drawImage(img, 100, 0, 100, 100)
     end
 
     -- clipRect
-    canvas.clipRect(100, 100, 135, 135)
+    canvas.clipRect(100, 100, 35, 35)
     canvas.drawCircle(100, 100, 40)
 
-    canvas.clipRect(150, 150, 180, 180)
+    canvas.clipRect(150, 150, 30, 30)
     canvas.drawText("TestABCDEFGHEFGHIJKLMOPQRST", 150, 150)
 
     print(canvas.nativeObj())
 end
+
+
+img.image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg", function()
+    view.invalidate()
+end)
 
 function testCanvasAndroid(canvas)
     print(canvas)

@@ -1120,16 +1120,18 @@ public class UDCanvas extends BaseLuaTable {
                     }
 
                     Bitmap bitmap = null;
-                    if (drawable instanceof BitmapDrawable) {
-                        bitmap = ((BitmapDrawable) drawable).getBitmap();
-                    } else {//TODO glide GlideImageDrawable，通过反射
-                        try {
-                            Method method = drawable.getClass().getMethod("getBitmap");
-                            if (method != null) {
-                                bitmap = (Bitmap) method.invoke(drawable);
+                    if (drawable != null) {
+                        if (drawable instanceof BitmapDrawable) {
+                            bitmap = ((BitmapDrawable) drawable).getBitmap();
+                        } else {//TODO glide GlideImageDrawable，通过反射
+                            try {
+                                Method method = drawable.getClass().getMethod("getBitmap");
+                                if (method != null) {
+                                    bitmap = (Bitmap) method.invoke(drawable);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     }
 
