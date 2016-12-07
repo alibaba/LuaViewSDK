@@ -8,6 +8,11 @@
 
 #import "LVCanvas.h"
 
+@interface LVCanvas ()
+@property(nonatomic,strong) UIColor* color;
+@property(nonatomic,assign) CGFloat strokeWidth;
+@end
+
 @implementation LVCanvas
 
 
@@ -21,6 +26,19 @@
 
 -(id) lv_nativeObject{
     return self;
+}
+
+static int nativeObj (lv_State *L) {
+    LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( userData ){
+        LVCanvas* view = (__bridge LVCanvas *)(userData->object);
+        if( view ){
+            id object = [view lv_nativeObject];
+            lv_pushNativeObjectWithBox(L, object);
+            return 1;
+        }
+    }
+    return 0;
 }
 
 static int drawPoint (lv_State *L) {
@@ -63,7 +81,7 @@ static int drawLine (lv_State *L) {
 -(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h{
     if( _contentRef ) {
         CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
-        CGContextDrawPath(_contentRef, kCGPathFill);
+        CGContextDrawPath(_contentRef, self.drawingMode);
     }
 }
 
@@ -110,7 +128,7 @@ static int drawRect (lv_State *L) {
         
         // 闭合路径
         CGContextClosePath(context);
-        CGContextDrawPath(context, kCGPathFill);
+        CGContextDrawPath(context, self.drawingMode);
     }
 }
 
@@ -152,6 +170,44 @@ static int drawEllipse (lv_State *L) {
         }
         [canvas drawEllipse:x :y :rx :ry];
         return 1;
+    }
+    return 0;
+}
+
+static int color (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            UIColor* color = lv_getColorFromStack(L, 2);
+            canvas.color = color;
+            return 0;
+        } else {
+            UIColor* color = canvas.color;
+            NSUInteger c = 0;
+            CGFloat a = 0;
+            if( lv_uicolor2int(color, &c,&a) ){
+                lv_pushnumber(L, c );
+                lv_pushnumber(L, a);
+                return 2;
+            }
+        }
+    }
+    return 0;
+}
+
+
+static int strokeWidth (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            canvas.strokeWidth = lv_tonumber(L, 2);
+            return 0;
+        } else {
+            lv_pushnumber(L, canvas.strokeWidth );
+            return 1;
+        }
     }
     return 0;
 }
@@ -209,6 +265,8 @@ static int lvNewCanvas (lv_State *L) {
     
     const struct lvL_reg memberFunctions [] = {
         {"__gc", lvCanvasGC },
+        {"nativeObj", nativeObj},
+        
         
         {"drawPoint",drawPoint},
         {"drawLine",drawLine},
@@ -216,6 +274,8 @@ static int lvNewCanvas (lv_State *L) {
         {"drawRoundRect",drawRoundRect},
         {"drawCircle",drawEllipse},
         {"drawEllipse",drawEllipse},
+        {"color",color},
+        {"strokeWidth",strokeWidth},
         
         {NULL, NULL}
     };
