@@ -17,10 +17,9 @@
 
 @property(nonatomic,assign) CGContextRef contentRef;
 
--(id) init:(lv_State*) l;
+@property(nonatomic,assign) CGPathDrawingMode drawingMode;
 
--(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h;
--(void) drawRect:(CGFloat) x :(CGFloat)y :(CGFloat) w :(CGFloat)h;
+-(id) init:(lv_State*) l;
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 

@@ -90,7 +90,7 @@ static int drawRect (lv_State *L) {
         // 获取CGContext，注意UIKit里用的是一个专门的函数
         CGContextRef context = UIGraphicsGetCurrentContext();
         // 移动到初始点
-        CGContextMoveToPoint(context, radius,y+ 0);
+        CGContextMoveToPoint(context,x+ radius,y+ 0);
         
         // 绘制第1条线和第1个1/4圆弧
         CGContextAddLineToPoint(context, x+ w - radius, y+0);
@@ -101,8 +101,8 @@ static int drawRect (lv_State *L) {
         CGContextAddArc(context,  x+ w - radius, y+ h - radius, radius, 0.0, 0.5 * M_PI, 0);
         
         // 绘制第3条线和第3个1/4圆弧
-        CGContextAddLineToPoint(context,  x+radius, h);
-        CGContextAddArc(context,  x+ radius, y+ h - radius, radius, 0.5 * M_PI, M_PI, 0);
+        CGContextAddLineToPoint(context,  x+radius, y+ h);
+        CGContextAddArc(context,  x+ radius, y+ h-radius, radius, 0.5 * M_PI, M_PI, 0);
         
         // 绘制第4条线和第4个1/4圆弧
         CGContextAddLineToPoint(context,  x+ 0,  y+ radius);
