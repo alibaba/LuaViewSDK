@@ -10,6 +10,7 @@
 #import "LView.h"
 #import "LVBundle.h"
 #import "LVData.h"
+#import "LVImage.h"
 
 @interface LVCanvas ()
 @property(nonatomic,strong) UIColor* color;
@@ -309,7 +310,7 @@ static int canvas_drawArc (lv_State *L) {
 
 -(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
     if( _contentRef && image) {
-        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
+        [image drawInRect:CGRectMake(x, y, w, h)];
     }
 }
 
@@ -322,9 +323,16 @@ static int canvas_drawImage (lv_State *L) {
             NSString* imageName = lv_paramString(L, 2);// 2
             image = [canvas.lv_lview.bundle imageWithName:imageName];
         } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-//            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
-//            LVData* lvdata = (__bridge LVData *)(userdata->object);
-//            image = [[UIImage alloc] initWithData:lvdata.data];
+            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+            if( LVIsType(userdata, View) ){
+                LVImage* lvImage = (__bridge LVImage *)(userdata->object);
+                if( [lvImage isKindOfClass:[LVImage class]] ) {
+                    image = lvImage.image;
+                }
+            } else if( LVIsType(userdata, Data) ) {
+                LVData* lvdata = (__bridge LVData *)(userdata->object);
+                image = [[UIImage alloc] initWithData:lvdata.data];
+            }
         }
         if( image ) {
             CGFloat x = lv_tonumber(L, 3);
