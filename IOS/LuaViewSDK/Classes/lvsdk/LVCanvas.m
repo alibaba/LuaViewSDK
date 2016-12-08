@@ -409,23 +409,48 @@ static int canvas_drawImage (lv_State *L) {
     return 0;
 }
 
+-(void) saveGState {
+    if( _contentRef ) {
+        CGContextSaveGState(_contentRef);
+    }
+}
+
 static int canvas_save (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        [canvas saveGState];
     }
     return 0;
+}
+
+-(void) restoreGState {
+    if( _contentRef ) {
+        CGContextRestoreGState(_contentRef);
+    }
 }
 
 static int canvas_restore (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        [canvas restoreGState];
     }
     return 0;
+}
+
+-(void) rotate:(CGFloat) angle {
+    if( _contentRef ) {
+        CGContextRotateCTM(_contentRef,M_PI*angle/180);
+    }
 }
 
 static int canvas_rotate (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        CGFloat angle = lv_tonumber(L, 2);
+        [canvas rotate:angle];;
     }
     return 0;
 }
@@ -437,16 +462,39 @@ static int canvas_skew (lv_State *L) {
     return 0;
 }
 
+-(void) scale:(CGFloat)scaleX :(CGFloat)scaleY {
+    if( _contentRef ) {
+        CGContextScaleCTM(_contentRef, scaleX, scaleY);
+    }
+}
+
 static int canvas_scale (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        CGFloat scaleX = lv_tonumber(L, 2);
+        CGFloat scaleY = scaleX;
+        if( lv_type(L, 3)==LV_TNUMBER ) {
+            scaleY = lv_tonumber(L, 3);
+        }
+        [canvas scale:scaleX :scaleY];
     }
     return 0;
+}
+
+-(void) translate:(CGFloat)x :(CGFloat)y {
+    if( _contentRef ) {
+        CGContextTranslateCTM(_contentRef, x, y);
+    }
 }
 
 static int canvas_translate (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        [canvas translate:x :y];
     }
     return 0;
 }
