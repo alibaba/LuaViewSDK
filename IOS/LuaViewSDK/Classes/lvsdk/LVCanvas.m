@@ -46,9 +46,14 @@
 -(void) setAlpha:(CGFloat)alpha{
     _alpha = alpha;
     if (_contentRef) {
-        const CGFloat *components = CGColorGetComponents(self.color.CGColor);
-        CGContextSetRGBStrokeColor(_contentRef, components[0], components[1], components[2], _alpha);
-        CGContextSetRGBFillColor(_contentRef, components[0], components[1], components[2], _alpha);
+        CGFloat r = 0;
+        CGFloat g = 0;
+        CGFloat b = 0;
+        CGFloat a = 0;
+        if( [_color getRed:&r green:&g blue:&b alpha:&a] ){
+            CGContextSetRGBStrokeColor(_contentRef, r, g, b, _alpha);
+            CGContextSetRGBFillColor(_contentRef, r, g, b, _alpha);
+        }
     }
 }
 
@@ -267,6 +272,7 @@ static int canvas_resetPaint (lv_State *L) {
         canvas.color = [UIColor blackColor];
         [canvas clipRect:0 :0 :10240 :10240];
         canvas.strokeWidth = 0.5;
+        canvas.alpha = 1;
     }
     return 0;
 }
