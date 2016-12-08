@@ -33,21 +33,27 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
      */
     public static void unpackAllAssetScripts(final Context context, final String assetFolderPath) {
         if (context != null && assetFolderPath != null) {
-            final AssetManager assetManager = context.getAssets();
-            if (assetManager != null) {
-                try {
-                    final String[] assetBundles = assetManager.list(assetFolderPath);
-                    if (assetBundles != null) {
-                        for (final String assetBundleFileName : assetBundles) {
-                            if (LuaScriptManager.isLuaScriptBundle(assetBundleFileName)) {//如果是luaview bundle，则解包
-                                new ScriptBundleUnpackTask(context).execute(FileUtil.removePostfix(assetBundleFileName), assetFolderPath + File.separator + assetBundleFileName);
+            new SimpleTask1<Object>() {//起simple task 来解压包
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    final AssetManager assetManager = context.getAssets();
+                    if (assetManager != null) {
+                        try {
+                            final String[] assetBundles = assetManager.list(assetFolderPath);//list 耗时
+                            if (assetBundles != null) {
+                                for (final String assetBundleFileName : assetBundles) {
+                                    if (LuaScriptManager.isLuaScriptBundle(assetBundleFileName)) {//如果是luaview bundle，则解包
+                                        unpackAsset(context, FileUtil.removePostfix(assetBundleFileName), assetFolderPath + File.separator + assetBundleFileName);
+                                    }
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    return null;
                 }
-            }
+            }.execute();
         }
     }
 
@@ -70,27 +76,34 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
      */
     @Override
     protected ScriptBundle doInBackground(Object... params) {
-//        DebugUtil.tsi("lvperformance-unpackScripts");
         if (params != null && params.length > 0) {//一个参数，指定文件路径
             final String url = (String) params[0];
-            final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
-            final InputStream inputStream = params.length > 1 ? AssetUtil.open(mContext, (String) params[1]) : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
+            final String asset = params.length > 1 ? String.valueOf(params[1]) : null;
+            return unpackAsset(mContext, url, asset);
+        }
+        return null;
+    }
 
-            try {
-                ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);
-//                DebugUtil.tei("lvperformance-unpackScripts");
-                return result;
-            } catch (IOException e) {
-//                DebugUtil.tei("lvperformance-unpackScripts");
-                return null;
-            } finally {
-                if (params.length > 1) {//asset，copy原始文件到文件夹下
-                    FileUtil.copy(AssetUtil.open(mContext, (String) params[1]), scriptBundleFilePath);
-                }
+    /**
+     * unpack asset
+     *
+     * @param url
+     * @param assetFilePath
+     * @return
+     */
+    private static ScriptBundle unpackAsset(Context context, String url, String assetFilePath) {
+        final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
+        final InputStream inputStream = assetFilePath != null ? AssetUtil.open(context, assetFilePath) : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
+        try {
+            ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);
+            return result;
+        } catch (IOException e) {
+            return null;
+        } finally {
+            if (assetFilePath != null) {//asset，copy原始文件到文件夹下
+                FileUtil.copy(AssetUtil.open(context, assetFilePath), scriptBundleFilePath);
             }
         }
-//        DebugUtil.tei("lvperformance-unpackScripts");
-        return null;
     }
 
     @Override

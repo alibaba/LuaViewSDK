@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -61,6 +62,7 @@ public class UDCanvas extends BaseLuaTable {
 
     private WeakReference<Canvas> mCanvas;
     private Paint mPaint;
+    private RectF mRectF = new RectF();
 
     static {
         //attrs
@@ -378,6 +380,7 @@ public class UDCanvas extends BaseLuaTable {
         @Override
         public Varargs invoke(Varargs args) {
             getDefaultPaint(null).reset();
+            getDefaultPaint(null).setAntiAlias(true);
             return UDCanvas.this;
         }
     }
@@ -741,49 +744,89 @@ public class UDCanvas extends BaseLuaTable {
         }
 
         private void drawRoundRect(Varargs value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null && value != null && value.narg() >= 7) {
-                    final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
-                    final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
-                    final float x3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 6));
-                    final float y3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 7));
-                    final LuaValue config = LuaUtil.isTable(value.arg(8)) ? LuaUtil.getTable(value, 8) : null;
+            final Canvas canvas = getCanvas();
+            if (canvas != null && value != null && value.narg() >= 7) {
+                final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
+                final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
+                final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                final float x3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 6));
+                final float y3 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 7));
+                final LuaValue config = LuaUtil.isTable(value.arg(8)) ? LuaUtil.getTable(value, 8) : null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     canvas.drawRoundRect(x1, y1, x1 + dx, y1 + dy, x3, y3, getDefaultPaint(config));
+                } else {
+                    drawRoundRectPlain(x1, y1, x1 + dx, y1 + dy, x3, y3, getDefaultPaint(config), canvas);
                 }
             }
         }
 
         private void drawRoundRects(Varargs varargs) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null) {
-                    final LuaTable table = LuaUtil.getTable(varargs, 2);
-                    final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
-                    if (table != null) {
-                        final LuaValue[] keys = table.keys();
-                        if (keys.length > 0) {
-                            LuaValue value = null;
-                            float x1, y1, dx, dy;
-                            for (int i = 0; i < keys.length; i++) {
-                                value = table.get(keys[i]);
-                                if (value instanceof LuaTable && value.length() >= 6) {
-                                    x1 = DimenUtil.dpiToPx(value.get(1));
-                                    y1 = DimenUtil.dpiToPx(value.get(2));
-                                    dx = DimenUtil.dpiToPx(value.get(3));
-                                    dy = DimenUtil.dpiToPx(value.get(4));
-                                    canvas.drawRoundRect(x1, y1, x1 + dx, y1 + dy,
-                                            DimenUtil.dpiToPx(value.get(5)),
-                                            DimenUtil.dpiToPx(value.get(6)),
-                                            getDefaultPaint(LuaUtil.isTable(value.get(7)) ? value.get(7) : config));
+            final Canvas canvas = getCanvas();
+            if (canvas != null) {
+                final LuaTable table = LuaUtil.getTable(varargs, 2);
+                final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
+                if (table != null) {
+                    final LuaValue[] keys = table.keys();
+                    if (keys.length > 0) {
+                        LuaValue value = null;
+                        float x1, y1, dx, dy, x3, y3;
+                        Paint paint = null;
+                        for (int i = 0; i < keys.length; i++) {
+                            value = table.get(keys[i]);
+                            if (value instanceof LuaTable && value.length() >= 6) {
+                                x1 = DimenUtil.dpiToPx(value.get(1));
+                                y1 = DimenUtil.dpiToPx(value.get(2));
+                                dx = DimenUtil.dpiToPx(value.get(3));
+                                dy = DimenUtil.dpiToPx(value.get(4));
+                                x3 = DimenUtil.dpiToPx(value.get(5));
+                                y3 = DimenUtil.dpiToPx(value.get(6));
+                                paint = getDefaultPaint(LuaUtil.isTable(value.get(7)) ? value.get(7) : config);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    canvas.drawRoundRect(x1, y1, x1 + dx, y1 + dy, x3, y3, paint);
+                                } else {
+                                    drawRoundRectPlain(x1, y1, x1 + dx, y1 + dy, x3, y3, paint, canvas);
                                 }
                             }
                         }
                     }
                 }
             }
+        }
+
+        //api 21 以下的绘制
+        public void drawRoundRectPlain(float left, float top, float right, float bottom, float rx, float ry, Paint paint, Canvas canvas) {
+            Path path = new Path();
+            if (rx < 0) {
+                rx = 0;
+            }
+            if (ry < 0) {
+                ry = 0;
+            }
+            float width = right - left;
+            float height = bottom - top;
+            if (rx > width / 2) {
+                rx = width / 2;
+            }
+            if (ry > height / 2) {
+                ry = height / 2;
+            }
+            float widthMinusCorners = (width - (2 * rx));
+            float heightMinusCorners = (height - (2 * ry));
+
+            path.moveTo(right, top + ry);
+            path.rQuadTo(0, -ry, -rx, -ry);//top-right corner
+            path.rLineTo(-widthMinusCorners, 0);
+            path.rQuadTo(-rx, 0, -rx, ry); //top-left corner
+            path.rLineTo(0, heightMinusCorners);
+            path.rQuadTo(0, ry, rx, ry);//bottom-left corner
+            path.rLineTo(widthMinusCorners, 0);
+            path.rQuadTo(rx, 0, rx, -ry); //bottom-right corner
+            path.rLineTo(0, -heightMinusCorners);
+
+            path.close();//Given close, last lineto can be removed.
+
+            canvas.drawPath(path, paint);
         }
     }
 
@@ -805,45 +848,60 @@ public class UDCanvas extends BaseLuaTable {
         }
 
         private void drawArc(Varargs value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null && value != null && value.narg() >= 8) {
-                    final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
-                    final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
-                    final float x3 = LuaUtil.getFloat(value, 6);
-                    final float y3 = LuaUtil.getFloat(value, 7);
-                    final boolean use = LuaUtil.getBoolean(value, false, 8);
-                    final LuaValue config = LuaUtil.isTable(value.arg(9)) ? LuaUtil.getTable(value, 9) : null;
+            final Canvas canvas = getCanvas();
+            if (canvas != null && value != null && value.narg() >= 8) {
+                final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
+                final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
+                final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                final float x3 = LuaUtil.getFloat(value, 6);
+                final float y3 = LuaUtil.getFloat(value, 7);
+                final boolean use = LuaUtil.getBoolean(value, false, 8);
+                final LuaValue config = LuaUtil.isTable(value.arg(9)) ? LuaUtil.getTable(value, 9) : null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     canvas.drawArc(x1, y1, x1 + dx, y1 + dy, x3, y3, use, getDefaultPaint(config));
+                } else {
+                    final RectF rectF = mRectF;
+                    rectF.left = x1;
+                    rectF.top = y1;
+                    rectF.right = x1 + dx;
+                    rectF.bottom = y1 + dy;
+                    canvas.drawArc(rectF, x3, y3, use, getDefaultPaint(config));
                 }
             }
         }
 
         private void drawArcs(Varargs varargs) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null) {
-                    final LuaTable table = LuaUtil.getTable(varargs, 2);
-                    final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
-                    if (table != null) {
-                        final LuaValue[] keys = table.keys();
-                        if (keys.length > 0) {
-                            LuaValue value = null;
-                            float x1, y1, dx, dy;
-                            for (int i = 0; i < keys.length; i++) {
-                                value = table.get(keys[i]);
-                                if (value instanceof LuaTable && value.length() >= 7) {
-                                    x1 = DimenUtil.dpiToPx(value.get(1));
-                                    y1 = DimenUtil.dpiToPx(value.get(2));
-                                    dx = DimenUtil.dpiToPx(value.get(3));
-                                    dy = DimenUtil.dpiToPx(value.get(4));
-                                    canvas.drawArc(x1, y1, x1 + dx, y1 + dy,
-                                            (float) value.get(5).optdouble(0),
-                                            (float) value.get(6).optdouble(0),
-                                            value.get(7).optboolean(false),
+            final Canvas canvas = getCanvas();
+            if (canvas != null) {
+                final LuaTable table = LuaUtil.getTable(varargs, 2);
+                final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
+                if (table != null) {
+                    final LuaValue[] keys = table.keys();
+                    if (keys.length > 0) {
+                        LuaValue value = null;
+                        float x1, y1, dx, dy, x3, y3;
+                        boolean use = false;
+                        for (int i = 0; i < keys.length; i++) {
+                            value = table.get(keys[i]);
+                            if (value instanceof LuaTable && value.length() >= 7) {
+                                x1 = DimenUtil.dpiToPx(value.get(1));
+                                y1 = DimenUtil.dpiToPx(value.get(2));
+                                dx = DimenUtil.dpiToPx(value.get(3));
+                                dy = DimenUtil.dpiToPx(value.get(4));
+                                x3 = (float) value.get(5).optdouble(0);
+                                y3 = (float) value.get(6).optdouble(0);
+                                use = value.get(7).optboolean(false);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    canvas.drawArc(x1, y1, x1 + dx, y1 + dy, x3, y3, use,
                                             getDefaultPaint(LuaUtil.isTable(value.get(8)) ? value.get(8) : config));
+                                } else {
+                                    final RectF rectF = mRectF;
+                                    rectF.left = x1;
+                                    rectF.top = y1;
+                                    rectF.right = x1 + dx;
+                                    rectF.bottom = y1 + dy;
+                                    canvas.drawArc(rectF, x3, y3, use, getDefaultPaint(config));
                                 }
                             }
                         }
@@ -1030,38 +1088,52 @@ public class UDCanvas extends BaseLuaTable {
         }
 
         private void drawOval(Varargs value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null && value != null && value.narg() >= 5) {
-                    final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
-                    final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
-                    final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
-                    final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
-                    final LuaValue config = LuaUtil.isTable(value.arg(6)) ? LuaUtil.getTable(value, 6) : null;
+            final Canvas canvas = getCanvas();
+            if (canvas != null && value != null && value.narg() >= 5) {
+                final float x1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 2));
+                final float y1 = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 3));
+                final float dx = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 4));
+                final float dy = DimenUtil.dpiToPx(LuaUtil.getFloat(value, 5));
+                final LuaValue config = LuaUtil.isTable(value.arg(6)) ? LuaUtil.getTable(value, 6) : null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     canvas.drawOval(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(config));
+                } else {
+                    final RectF rectF = mRectF;
+                    rectF.left = x1;
+                    rectF.top = y1;
+                    rectF.right = x1 + dx;
+                    rectF.bottom = y1 + dy;
+                    canvas.drawOval(rectF, getDefaultPaint(config));
                 }
             }
         }
 
         private void drawOvals(Varargs varargs) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null) {
-                    final LuaTable table = LuaUtil.getTable(varargs, 2);
-                    final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
-                    if (table != null) {
-                        final LuaValue[] keys = table.keys();
-                        if (keys.length > 0) {
-                            LuaValue value = null;
-                            float x1, y1, dx, dy;
-                            for (int i = 0; i < keys.length; i++) {
-                                value = table.get(keys[i]);
-                                if (value instanceof LuaTable && value.length() >= 4) {
-                                    x1 = DimenUtil.dpiToPx(value.get(1));
-                                    y1 = DimenUtil.dpiToPx(value.get(2));
-                                    dx = DimenUtil.dpiToPx(value.get(3));
-                                    dy = DimenUtil.dpiToPx(value.get(4));
+            final Canvas canvas = getCanvas();
+            if (canvas != null) {
+                final LuaTable table = LuaUtil.getTable(varargs, 2);
+                final LuaValue config = LuaUtil.isTable(varargs.arg(3)) ? LuaUtil.getTable(varargs, 3) : null;
+                if (table != null) {
+                    final LuaValue[] keys = table.keys();
+                    if (keys.length > 0) {
+                        LuaValue value = null;
+                        float x1, y1, dx, dy;
+                        for (int i = 0; i < keys.length; i++) {
+                            value = table.get(keys[i]);
+                            if (value instanceof LuaTable && value.length() >= 4) {
+                                x1 = DimenUtil.dpiToPx(value.get(1));
+                                y1 = DimenUtil.dpiToPx(value.get(2));
+                                dx = DimenUtil.dpiToPx(value.get(3));
+                                dy = DimenUtil.dpiToPx(value.get(4));
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                     canvas.drawOval(x1, y1, x1 + dx, y1 + dy, getDefaultPaint(LuaUtil.isTable(value.get(5)) ? value.get(5) : config));
+                                } else {
+                                    final RectF rectF = mRectF;
+                                    rectF.left = x1;
+                                    rectF.top = y1;
+                                    rectF.right = x1 + dx;
+                                    rectF.bottom = y1 + dy;
+                                    canvas.drawOval(rectF, getDefaultPaint(config));
                                 }
                             }
                         }
@@ -1109,53 +1181,51 @@ public class UDCanvas extends BaseLuaTable {
         }
 
         private void drawImage(Varargs value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                final Canvas canvas = getCanvas();
-                if (canvas != null && value != null && value.narg() >= 4) {
-                    final LuaValue param = LuaUtil.getValue(value, 2);
-                    Drawable drawable = null;
-                    if (LuaUtil.isString(param)) {
-                        final String uri = param.optjstring(null);
-                        final LuaResourceFinder finder = getLuaResourceFinder();
-                        if (!TextUtils.isEmpty(uri) && finder != null) {
-                            drawable = finder.findDrawable(uri);
-                        }
-                    } else if (param instanceof UDImageView) {
-                        View view = ((UDImageView) param).getView();
-                        if (view instanceof ImageView) {
-                            drawable = ((ImageView) view).getDrawable();
-                        }
+            final Canvas canvas = getCanvas();
+            if (canvas != null && value != null && value.narg() >= 4) {
+                final LuaValue param = LuaUtil.getValue(value, 2);
+                Drawable drawable = null;
+                if (LuaUtil.isString(param)) {
+                    final String uri = param.optjstring(null);
+                    final LuaResourceFinder finder = getLuaResourceFinder();
+                    if (!TextUtils.isEmpty(uri) && finder != null) {
+                        drawable = finder.findDrawable(uri);
                     }
+                } else if (param instanceof UDImageView) {
+                    View view = ((UDImageView) param).getView();
+                    if (view instanceof ImageView) {
+                        drawable = ((ImageView) view).getDrawable();
+                    }
+                }
 
-                    Bitmap bitmap = null;
-                    if (drawable != null) {
-                        if (drawable instanceof BitmapDrawable) {
-                            bitmap = ((BitmapDrawable) drawable).getBitmap();
-                        } else {//TODO glide GlideImageDrawable，通过反射
-                            try {
-                                Method method = drawable.getClass().getMethod("getBitmap");
-                                if (method != null) {
-                                    bitmap = (Bitmap) method.invoke(drawable);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                Bitmap bitmap = null;
+                if (drawable != null) {
+                    if (drawable instanceof BitmapDrawable) {
+                        bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    } else {//TODO glide GlideImageDrawable，通过反射
+                        try {
+                            Method method = drawable.getClass().getMethod("getBitmap");
+                            if (method != null) {
+                                bitmap = (Bitmap) method.invoke(drawable);
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
+                }
 
-                    if (bitmap != null) {
-                        final float x = DimenUtil.dpiToPx(LuaUtil.getValue(value, 3));
-                        final float y = DimenUtil.dpiToPx(LuaUtil.getValue(value, 4));
-                        LuaValue config = null;
-                        if (value.narg() >= 6) {
-                            final float dx = DimenUtil.dpiToPx(LuaUtil.getValue(value, 5));
-                            final float dy = DimenUtil.dpiToPx(LuaUtil.getValue(value, 6));
-                            config = LuaUtil.isTable(value.arg(7)) ? LuaUtil.getTable(value, 7) : null;
-                            canvas.drawBitmap(bitmap, null, new RectF(x, y, x + dx, y + dy), getDefaultPaint(config));
-                        } else {
-                            config = LuaUtil.isTable(value.arg(5)) ? LuaUtil.getTable(value, 5) : null;
-                            canvas.drawBitmap(bitmap, x, y, getDefaultPaint(config));
-                        }
+                if (bitmap != null) {
+                    final float x = DimenUtil.dpiToPx(LuaUtil.getValue(value, 3));
+                    final float y = DimenUtil.dpiToPx(LuaUtil.getValue(value, 4));
+                    LuaValue config = null;
+                    if (value.narg() >= 6) {
+                        final float dx = DimenUtil.dpiToPx(LuaUtil.getValue(value, 5));
+                        final float dy = DimenUtil.dpiToPx(LuaUtil.getValue(value, 6));
+                        config = LuaUtil.isTable(value.arg(7)) ? LuaUtil.getTable(value, 7) : null;
+                        canvas.drawBitmap(bitmap, null, new RectF(x, y, x + dx, y + dy), getDefaultPaint(config));
+                    } else {
+                        config = LuaUtil.isTable(value.arg(5)) ? LuaUtil.getTable(value, 5) : null;
+                        canvas.drawBitmap(bitmap, x, y, getDefaultPaint(config));
                     }
                 }
             }
