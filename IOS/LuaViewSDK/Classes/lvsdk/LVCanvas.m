@@ -15,6 +15,7 @@
 @property(nonatomic,strong) UIColor* color;
 @property(nonatomic,assign) CGFloat strokeWidth;
 @property(nonatomic,assign) CGFloat alpha;
+@property(nonatomic,assign) UIFont* font;
 @end
 
 @implementation LVCanvas
@@ -38,6 +39,15 @@
     if( _contentRef ) {
         CGContextSetStrokeColorWithColor(_contentRef,self.color.CGColor);
         CGContextSetFillColorWithColor(_contentRef,self.color.CGColor);
+    }
+}
+
+-(void) setAlpha:(CGFloat)alpha{
+    _alpha = alpha;
+    if (_contentRef) {
+        const CGFloat *components = CGColorGetComponents(self.color.CGColor);
+        CGContextSetRGBStrokeColor(_contentRef, components[0], components[1], components[2], _alpha);
+        CGContextSetRGBFillColor(_contentRef, components[0], components[1], components[2], _alpha);
     }
 }
 
@@ -171,6 +181,15 @@ static int canvas_drawRoundRect (lv_State *L) {
     }
 }
 
+-(void) drawText:(NSString *)text :(UIFont *)font :(CGRect)rect{
+    CGContextRef context = _contentRef;
+    if (context && text) {
+        //写文字
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,self.color,NSForegroundColorAttributeName,nil];
+        [text drawInRect:rect withAttributes:attributes];
+    }
+}
+
 static int canvas_drawEllipse (lv_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
@@ -247,7 +266,6 @@ static int canvas_resetPaint (lv_State *L) {
         canvas.color = [UIColor blackColor];
         [canvas clipRect:0 :0 :10240 :10240];
         canvas.strokeWidth = 0.5;
-        canvas.alpha = 1;
     }
     return 0;
 }
@@ -255,6 +273,14 @@ static int canvas_resetPaint (lv_State *L) {
 static int canvas_alpha (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            CGFloat alpha = lv_tonumber(L, 2);
+            canvas.alpha = alpha;
+            return 0;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
@@ -262,6 +288,14 @@ static int canvas_alpha (lv_State *L) {
 static int canvas_textSize (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            CGFloat font = lv_tonumber(L, 2);
+            canvas.font = [UIFont systemFontOfSize:font];
+            return 0;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
@@ -269,6 +303,18 @@ static int canvas_textSize (lv_State *L) {
 static int canvas_bold (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            CGFloat bold = lv_toboolean(L, 2);
+            if (bold) {
+                canvas.font = [UIFont boldSystemFontOfSize:canvas.font.pointSize];
+            }else{
+                canvas.font = [UIFont systemFontOfSize:canvas.font.pointSize];
+            }
+            return 0;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
@@ -289,6 +335,18 @@ static int canvas_clipRect (lv_State *L) {
 static int drawText (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        if( lv_gettop(L)>=2 ) {
+            const char* text = lv_tolstring(L, 2, NULL);
+            NSString *str = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
+            CGFloat x = lv_tonumber(L, 3);
+            CGFloat y = lv_tonumber(L, 4);
+            CGRect rect = CGRectMake(x, y, canvas.font.lineHeight * str.length, canvas.font.lineHeight+10);
+            [canvas drawText:str :canvas.font :rect];
+            return 0;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
