@@ -307,6 +307,12 @@ static int canvas_drawArc (lv_State *L) {
     return 0;
 }
 
+-(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
+    if( _contentRef && image) {
+        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
+    }
+}
+
 static int canvas_drawImage (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
@@ -321,7 +327,11 @@ static int canvas_drawImage (lv_State *L) {
 //            image = [[UIImage alloc] initWithData:lvdata.data];
         }
         if( image ) {
-            
+            CGFloat x = lv_tonumber(L, 3);
+            CGFloat y = lv_tonumber(L, 4);
+            CGFloat w = lv_tonumber(L, 5);
+            CGFloat h = lv_tonumber(L, 6);
+            [canvas drawImage:image :x :y :w :h];
         }
     }
     return 0;
