@@ -1081,8 +1081,6 @@ public class UDView<T extends View> extends BaseUserdata {
                         callOnClick();
                     }
                 });
-            } else {
-                view.setOnClickListener(null);
             }
         }
     }
@@ -1100,8 +1098,6 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnLongClick();
                     }
                 });
-            } else {
-                view.setOnLongClickListener(null);
             }
         }
     }
