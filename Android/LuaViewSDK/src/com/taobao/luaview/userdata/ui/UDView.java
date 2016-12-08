@@ -1131,8 +1131,6 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnTouch(mOnTouchEventData);
                     }
                 });
-            } else {
-                view.setOnTouchListener(null);
             }
         }
     }

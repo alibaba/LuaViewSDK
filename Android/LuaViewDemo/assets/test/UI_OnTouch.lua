@@ -1,6 +1,12 @@
-require "kit/lv_kit"
-
 sw, sh = System.screenSize()
+
+bg = Label()
+bg.text("我是背景，重复进入页面，尝试不同状态。")
+bg.frame(0, 0, sw, sh)
+bg.callback(function()
+    Toast("bg clicked")
+end)
+
 
 view = CustomView()
 view.frame(0, 0, sw,sh)
@@ -14,6 +20,10 @@ y = 0
 w = 4
 dx = 0
 dy = 0
+
+isTouchable = math:random() > 0.5
+
+bg.text(bg.text() .. (isTouchable and " 不可点击" or " 可以点击"))
 
 view.onTouch(function(event)
     print(event.id, event.pointer, event.action, event.x, event.y)
@@ -45,7 +55,7 @@ view.onTouch(function(event)
 
     view.invalidate()
 
-    return true;
+    return isTouchable;
 end)
 
 rect = {}
@@ -56,8 +66,8 @@ for i = 0, count, 1 do
     rect[i + 1] = {}
     rect[i + 1][1] = x
     rect[i + 1][2] = y
-    rect[i + 1][3] = rect[i + 1][1] + w
-    rect[i + 1][4] = rect[i + 1][2] + w
+    rect[i + 1][3] = w
+    rect[i + 1][4] = w
 
     x = x + 20
 
@@ -72,13 +82,10 @@ view.onDraw(function(canvas)
     end
 
     for i = 0, count, 1 do
-        local s = rect[i+1][3] - rect[i+1][1]
         rect[i+1][2] = (rect[i+1][2] + math:random()) * 1.005 - dy
-        rect[i+1][4] = rect[i+1][2] + s
 
-        if(rect[i+1][4] > 500) then
-            rect[i+1][4] = 500
-            rect[i+1][2] = 500-s
+        if(rect[i+1][2] + rect[i+1][4] > 500) then
+            rect[i+1][2] = 500 - rect[i + 1][4]
         end
     end
 
