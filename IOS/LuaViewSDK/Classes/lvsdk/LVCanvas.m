@@ -7,10 +7,14 @@
 //
 
 #import "LVCanvas.h"
+#import "LView.h"
+#import "LVBundle.h"
+#import "LVData.h"
 
 @interface LVCanvas ()
 @property(nonatomic,strong) UIColor* color;
 @property(nonatomic,assign) CGFloat strokeWidth;
+@property(nonatomic,assign) CGFloat alpha;
 @end
 
 @implementation LVCanvas
@@ -20,12 +24,21 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.strokeWidth = 0.5;
     }
     return self;
 }
 
 -(id) lv_nativeObject{
     return self;
+}
+
+-(void) setColor:(UIColor *)color{
+    _color = color;
+    if( _contentRef ) {
+        CGContextSetStrokeColorWithColor(_contentRef,self.color.CGColor);
+        CGContextSetFillColorWithColor(_contentRef,self.color.CGColor);
+    }
 }
 
 static int nativeObj (lv_State *L) {
@@ -52,7 +65,6 @@ static int canvas_drawPoint (lv_State *L) {
     }
     return 0;
 }
-
 
 -(void) drawLine:(CGFloat) x1 :(CGFloat)y1 :(CGFloat) x2 :(CGFloat) y2{
     if( _contentRef ) {
@@ -233,6 +245,9 @@ static int canvas_resetPaint (lv_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         canvas.color = [UIColor blackColor];
+        [canvas clipRect:0 :0 :10240 :10240];
+        canvas.strokeWidth = 0.5;
+        canvas.alpha = 1;
     }
     return 0;
 }
@@ -256,6 +271,12 @@ static int canvas_bold (lv_State *L) {
     if( user ){
     }
     return 0;
+}
+
+-(void) clipRect:(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h{
+    if( _contentRef ) {
+        CGContextClipToRect(_contentRef,CGRectMake(x, y, w, h));
+    }
 }
 
 static int canvas_clipRect (lv_State *L) {
@@ -289,6 +310,19 @@ static int canvas_drawArc (lv_State *L) {
 static int canvas_drawImage (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        UIImage* image = nil;
+        if ( lv_type(L, 2)==LV_TSTRING ) {
+            NSString* imageName = lv_paramString(L, 2);// 2
+            image = [canvas.lv_lview.bundle imageWithName:imageName];
+        } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
+            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+            LVData* lvdata = (__bridge LVData *)(userdata->object);
+            image = [[UIImage alloc] initWithData:lvdata.data];
+        }
+        if( image ) {
+            
+        }
     }
     return 0;
 }
