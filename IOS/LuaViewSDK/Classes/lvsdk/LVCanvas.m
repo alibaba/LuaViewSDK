@@ -316,9 +316,9 @@ static int canvas_drawImage (lv_State *L) {
             NSString* imageName = lv_paramString(L, 2);// 2
             image = [canvas.lv_lview.bundle imageWithName:imageName];
         } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
-            LVData* lvdata = (__bridge LVData *)(userdata->object);
-            image = [[UIImage alloc] initWithData:lvdata.data];
+//            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+//            LVData* lvdata = (__bridge LVData *)(userdata->object);
+//            image = [[UIImage alloc] initWithData:lvdata.data];
         }
         if( image ) {
             
