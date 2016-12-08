@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
+import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.FileUtil;
 
 import java.io.File;
@@ -39,7 +40,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
                     if (assetBundles != null) {
                         for (final String assetBundleFileName : assetBundles) {
                             if (LuaScriptManager.isLuaScriptBundle(assetBundleFileName)) {//如果是luaview bundle，则解包
-                                new ScriptBundleUnpackTask(context).execute(FileUtil.removePostfix(assetBundleFileName), assetManager.open(assetFolderPath + File.separator + assetBundleFileName));
+                                new ScriptBundleUnpackTask(context).execute(FileUtil.removePostfix(assetBundleFileName), assetFolderPath + File.separator + assetBundleFileName);
                             }
                         }
                     }
@@ -73,7 +74,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
         if (params != null && params.length > 0) {//一个参数，指定文件路径
             final String url = (String) params[0];
             final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
-            final InputStream inputStream = params.length > 1 ? (InputStream) params[1] : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
+            final InputStream inputStream = params.length > 1 ? AssetUtil.open(mContext, (String) params[1]) : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
 
             try {
                 ScriptBundle result = ScriptBundle.unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);
@@ -84,7 +85,7 @@ public class ScriptBundleUnpackTask extends AsyncTask<Object, Integer, ScriptBun
                 return null;
             } finally {
                 if (params.length > 1) {//asset，copy原始文件到文件夹下
-                    FileUtil.copy(inputStream, scriptBundleFilePath);
+                    FileUtil.copy(AssetUtil.open(mContext, (String) params[1]), scriptBundleFilePath);
                 }
             }
         }

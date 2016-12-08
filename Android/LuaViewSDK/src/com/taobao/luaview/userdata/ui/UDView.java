@@ -1081,7 +1081,7 @@ public class UDView<T extends View> extends BaseUserdata {
                         callOnClick();
                     }
                 });
-            }
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
         }
     }
 
@@ -1098,7 +1098,7 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnLongClick();
                     }
                 });
-            }
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
         }
     }
 
@@ -1127,7 +1127,7 @@ public class UDView<T extends View> extends BaseUserdata {
                         return callOnTouch(mOnTouchEventData);
                     }
                 });
-            }
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
         }
     }
 
