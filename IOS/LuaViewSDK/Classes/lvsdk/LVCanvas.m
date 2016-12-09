@@ -18,6 +18,8 @@
 @property(nonatomic,assign) CGFloat alpha;
 @property(nonatomic,assign) UIFont* font;
 @property(nonatomic,assign) CGAffineTransform concatCTM;
+@property(nonatomic,assign) CGFloat scaleX;
+@property(nonatomic,assign) CGFloat scaleY;
 @end
 
 @implementation LVCanvas
@@ -27,9 +29,13 @@
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
-        self.strokeWidth = 0.5;
     }
     return self;
+}
+
+-(void) setContentRef:(CGContextRef)contentRef{
+    _contentRef = contentRef;
+    [self resetPaint];
 }
 
 -(id) lv_nativeObject{
@@ -290,18 +296,22 @@ static int canvas_style (lv_State *L) {
     return 0;
 }
 
+-(void) resetPaint{
+    [self clipRect:0 :0 :10240 :10240];
+    self.color = [UIColor blackColor];
+    self.strokeWidth = 0.5;
+    self.alpha = 1;
+    [self scale:1 :1];
+    [self rotate:0 :0 :0];
+    [self translate:0 :0];
+    [self skew:0 :0];
+}
+
 static int canvas_resetPaint (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        canvas.color = [UIColor blackColor];
-        [canvas clipRect:0 :0 :10240 :10240];
-        canvas.strokeWidth = 0.5;
-        canvas.alpha = 1;
-        [canvas scale:1 :1];
-        [canvas rotate:0 :0 :0];
-        [canvas translate:0 :0];
-        [canvas skew:0 :0];
+        [canvas resetPaint];
     }
     return 0;
 }
@@ -328,7 +338,7 @@ static int canvas_textSize (lv_State *L) {
             canvas.font = [UIFont systemFontOfSize:font];
             return 0;
         } else {
-            return 1;
+            return 0;
         }
     }
     return 0;
@@ -347,7 +357,7 @@ static int canvas_bold (lv_State *L) {
             }
             return 0;
         } else {
-            return 1;
+            return 0;
         }
     }
     return 0;
@@ -388,7 +398,7 @@ static int drawText (lv_State *L) {
             [canvas drawText:str :canvas.font :rect];
             return 0;
         } else {
-            return 1;
+            return 0;
         }
     }
     return 0;
@@ -411,6 +421,7 @@ static int canvas_drawArc (lv_State *L) {
 //        CGContextSaveGState(_contentRef);
 //        CGContextTranslateCTM(_contentRef, x, -y+h);
 //        CGContextScaleCTM(_contentRef, 1.0, -1.0);
+        
         CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
 //        CGContextRestoreGState(_contentRef);
     }
@@ -534,6 +545,8 @@ static int canvas_skew (lv_State *L) {
 
 -(void) scale:(CGFloat)scaleX :(CGFloat)scaleY {
     if( _contentRef ) {
+        self.scaleX = scaleX;
+        self.scaleY = scaleY;
         CGContextScaleCTM(_contentRef, scaleX, scaleY);
     }
 }
