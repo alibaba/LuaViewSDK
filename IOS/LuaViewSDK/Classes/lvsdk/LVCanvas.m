@@ -98,7 +98,6 @@ static int canvas_drawPoint (lv_State *L) {
         CGPoint aPoints[2];
         aPoints[0] = CGPointMake(x1, y1);
         aPoints[1] = CGPointMake(x2, y2);
-        CGContextSetLineWidth(_contentRef,self.strokeWidth);
         CGContextAddLines(_contentRef, aPoints, 2);
         CGContextDrawPath(_contentRef, kCGPathStroke); //根据坐标绘制路径
     }
@@ -120,7 +119,6 @@ static int canvas_drawLine (lv_State *L) {
 
 -(void) drawRect:(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h{
     if( _contentRef ) {
-        CGContextSetLineWidth(_contentRef,self.strokeWidth);
         CGContextAddRect(_contentRef, CGRectMake(x, y, w, h));
         CGContextDrawPath(_contentRef, self.drawingMode);
     }
@@ -194,7 +192,7 @@ static int canvas_drawRoundRect (lv_State *L) {
     if( context && w>=0 && h>= 0 ) {
         //画椭圆
         CGContextAddEllipseInRect(context, CGRectMake(x, y, w, h)); //椭圆
-        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextDrawPath(context, self.drawingMode);
     }
 }
 
@@ -268,6 +266,13 @@ static int canvas_color (lv_State *L) {
     return 0;
 }
 
+-(void) setStrokeWidth:(CGFloat)strokeWidth{
+    _strokeWidth = strokeWidth;
+    if( _contentRef ) {
+        CGContextSetLineWidth(_contentRef, strokeWidth);
+    }
+}
+
 static int canvas_strokeWidth (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
@@ -303,6 +308,8 @@ static int canvas_style (lv_State *L) {
     self.color = [UIColor blackColor];
     self.strokeWidth = 0.5;
     self.alpha = 1;
+    self.drawingMode = kCGPathStroke;
+    self.font = [UIFont systemFontOfSize:12];
     [self scale:1 :1];
     [self rotate:0 :0 :0];
     [self translate:0 :0];
