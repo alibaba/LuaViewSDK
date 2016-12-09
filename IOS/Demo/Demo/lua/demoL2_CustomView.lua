@@ -65,7 +65,7 @@ function testCanvasAndroidAndIos(canvas)
     -- drawBitmap
     canvas.save()
     canvas.rotate(-10, 100, 100)
-    canvas.skew(100)
+    -- canvas.skew(1 )
     canvas.scale(1.2)
     canvas.translate(-10, -10)
     canvas.strokeWidth(10)

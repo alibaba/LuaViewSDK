@@ -46,14 +46,15 @@
 -(void) setAlpha:(CGFloat)alpha{
     _alpha = alpha;
     if (_contentRef) {
-        CGFloat r = 0;
-        CGFloat g = 0;
-        CGFloat b = 0;
-        CGFloat a = 0;
-        if( [_color getRed:&r green:&g blue:&b alpha:&a] ){
-            CGContextSetRGBStrokeColor(_contentRef, r, g, b, _alpha);
-            CGContextSetRGBFillColor(_contentRef, r, g, b, _alpha);
-        }
+//        CGFloat r = 0;
+//        CGFloat g = 0;
+//        CGFloat b = 0;
+//        CGFloat a = 0;
+//        if( [_color getRed:&r green:&g blue:&b alpha:&a] ){
+//            CGContextSetRGBStrokeColor(_contentRef, r, g, b, _alpha);
+//            CGContextSetRGBFillColor(_contentRef, r, g, b, _alpha);
+//        }
+        CGContextSetAlpha(_contentRef,alpha);
     }
 }
 
@@ -178,11 +179,11 @@ static int canvas_drawRoundRect (lv_State *L) {
     return 0;
 }
 
--(void) drawEllipse:(CGFloat) x :(CGFloat)y :(CGFloat)rx :(CGFloat)ry  {
+-(void) drawEllipse:(CGFloat) x :(CGFloat)y :(CGFloat)w :(CGFloat)h  {
     CGContextRef context = _contentRef;
-    if( context && rx>=0 && ry>= 0 ) {
+    if( context && w>=0 && h>= 0 ) {
         //画椭圆
-        CGContextAddEllipseInRect(context, CGRectMake(x-rx, y-ry, rx*2, ry*2)); //椭圆
+        CGContextAddEllipseInRect(context, CGRectMake(x, y, w, h)); //椭圆
         CGContextDrawPath(context, kCGPathFillStroke);
     }
 }
@@ -202,12 +203,25 @@ static int canvas_drawEllipse (lv_State *L) {
     if( LVIsType(user1, Canvas)  ){
         CGFloat x = lv_tonumber(L, 2);
         CGFloat y = lv_tonumber(L, 3);
-        CGFloat rx = lv_tonumber(L, 4);
-        CGFloat ry = rx;
+        CGFloat w = lv_tonumber(L, 4);
+        CGFloat h = w;
         if( lv_type(L, 5)==LV_TNUMBER ) {
-            ry = lv_tonumber(L, 5);
+            h = lv_tonumber(L, 5);
         }
-        [canvas drawEllipse:x :y :rx :ry];
+        [canvas drawEllipse:x :y :w :h];
+        return 1;
+    }
+    return 0;
+}
+
+static int canvas_drawCircle (lv_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
+    if( LVIsType(user1, Canvas)  ){
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat r = lv_tonumber(L, 4);
+        [canvas drawEllipse:x-r :y-r :r*2 :r*2];
         return 1;
     }
     return 0;
@@ -273,6 +287,10 @@ static int canvas_resetPaint (lv_State *L) {
         [canvas clipRect:0 :0 :10240 :10240];
         canvas.strokeWidth = 0.5;
         canvas.alpha = 1;
+        [canvas scale:1 :1];
+        [canvas rotate:0 :0 :0];
+        [canvas translate:0 :0];
+        [canvas skew:0 :0];
     }
     return 0;
 }
@@ -285,8 +303,6 @@ static int canvas_alpha (lv_State *L) {
             CGFloat alpha = lv_tonumber(L, 2);
             canvas.alpha = alpha;
             return 0;
-        } else {
-            return 1;
         }
     }
     return 0;
@@ -359,10 +375,7 @@ static int drawText (lv_State *L) {
 }
 
 static int canvas_drawOval (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
-    }
-    return 0;
+    return canvas_drawEllipse(L);
 }
 
 static int canvas_drawArc (lv_State *L) {
@@ -374,7 +387,12 @@ static int canvas_drawArc (lv_State *L) {
 
 -(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
     if( _contentRef && image) {
-        [image drawInRect:CGRectMake(x, y, w, h)];
+//        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
+//        CGContextSaveGState(_contentRef);
+//        CGContextTranslateCTM(_contentRef, x, -y+h);
+//        CGContextScaleCTM(_contentRef, 1.0, -1.0);
+        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
+//        CGContextRestoreGState(_contentRef);
     }
 }
 
@@ -439,9 +457,11 @@ static int canvas_restore (lv_State *L) {
     return 0;
 }
 
--(void) rotate:(CGFloat) angle {
+-(void) rotate:(CGFloat) angle :(CGFloat)x :(CGFloat) y{
     if( _contentRef ) {
+        CGContextTranslateCTM(_contentRef, x, y);
         CGContextRotateCTM(_contentRef,M_PI*angle/180);
+        CGContextTranslateCTM(_contentRef, -x, -y);
     }
 }
 
@@ -450,14 +470,36 @@ static int canvas_rotate (lv_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat angle = lv_tonumber(L, 2);
-        [canvas rotate:angle];;
+        CGFloat x = 0;
+        if( lv_type(L, 3) ) {
+            x = lv_tonumber(L, 3);
+        }
+        CGFloat y = 0;
+        if( lv_type(L, 4) ) {
+            y = lv_tonumber(L, 4);
+        }
+        [canvas rotate:angle :x :y];;
     }
     return 0;
+}
+
+-(void) skew:(CGFloat)sx :(CGFloat)sy {
+    if( _contentRef ) {
+        CGAffineTransform transform = CGAffineTransformMake(1, sx, sy, 1, 0, 0);
+        CGContextConcatCTM(_contentRef,transform);
+    }
 }
 
 static int canvas_skew (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        CGFloat sx = lv_tonumber(L, 2);
+        CGFloat sy = 0;
+        if (lv_type(L, 3)==LV_TNUMBER ) {
+            sy = lv_tonumber(L, 3);
+        }
+        [canvas skew:sx :sy];
     }
     return 0;
 }
@@ -559,7 +601,7 @@ static int lvNewCanvas (lv_State *L) {
         {"drawLine",canvas_drawLine},
         {"drawRect",canvas_drawRect},
         {"drawRoundRect",canvas_drawRoundRect},
-        {"drawCircle",canvas_drawEllipse},
+        {"drawCircle",canvas_drawCircle},
         {"drawEllipse",canvas_drawEllipse},
         {"drawText",drawText},
         {"drawOval",canvas_drawOval},
