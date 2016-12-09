@@ -17,6 +17,7 @@
 @property(nonatomic,assign) CGFloat strokeWidth;
 @property(nonatomic,assign) CGFloat alpha;
 @property(nonatomic,assign) UIFont* font;
+@property(nonatomic,assign) CGAffineTransform concatCTM;
 @end
 
 @implementation LVCanvas
@@ -350,7 +351,13 @@ static int canvas_bold (lv_State *L) {
 
 static int canvas_clipRect (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user ){
+    if( user && lv_gettop(L)>=5 ){
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat w = lv_tonumber(L, 4);
+        CGFloat h = lv_tonumber(L, 5);
+        [canvas clipRect:x :y :w :h];
     }
     return 0;
 }
@@ -488,6 +495,14 @@ static int canvas_rotate (lv_State *L) {
         CGAffineTransform transform = CGAffineTransformMake(1, sx, sy, 1, 0, 0);
         CGContextConcatCTM(_contentRef,transform);
     }
+}
+
+-(void) setConcatCTM:(CGAffineTransform) transform{
+    CGContextConcatCTM(_contentRef,transform);
+}
+
+-(CGAffineTransform) concatCTM{
+    return CGContextGetCTM(_contentRef);
 }
 
 static int canvas_skew (lv_State *L) {
