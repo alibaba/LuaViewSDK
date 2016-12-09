@@ -76,6 +76,7 @@ extern const char* LVType_StyledString;
 extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
 extern const char* LVType_Canvas;
+extern const char* LVType_Event;
 
 
 //----------------View的用户数据结构------------------------------------------------
@@ -108,6 +109,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_CustomPanel          "UI.CustomPanel"
 #define META_TABLE_CustomView           "UI.CustomView"
 #define META_TABLE_Canvas               "UI.Canvas"
+#define META_TABLE_Event                "UI.Event"
 #define META_TABLE_UIViewNewIndex       "UI.View.NewIndex"
 #define META_TABLE_PagerIndicator       "UI.PagerIndicator"
 #define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"
@@ -145,7 +147,8 @@ typedef struct _LVUserDataInfo {
 #define STR_CALLBACK    "Callback"
 #define STR_ON_LAYOUT   "onLayout"
 #define STR_ON_CLICK    "onClick"
-#define STR_ON_DRAW    "onDraw"
+#define STR_ON_DRAW     "onDraw"
+#define STR_ON_TOUCH    "onTouch"
 #define STR_onPageStarted   "onPageStarted"
 #define STR_onPageFinished  "onPageFinished"
 #define STR_onReceivedError "onReceivedError"

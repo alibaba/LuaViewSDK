@@ -286,6 +286,9 @@
 		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
 		84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
+		9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 911270981DFAC65F001F8047 /* LVEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 911270991DFAC65F001F8047 /* LVEvent.m */; };
+		9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 911270991DFAC65F001F8047 /* LVEvent.m */; };
 		91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91232AAA1DAB67FC00536E0C /* LVWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
 		91232AAE1DAB682100536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
@@ -548,6 +551,8 @@
 		84E85C191C33B84B007DE3DF /* LVBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBundle.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
+		911270981DFAC65F001F8047 /* LVEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVEvent.h; sourceTree = "<group>"; };
+		911270991DFAC65F001F8047 /* LVEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVEvent.m; sourceTree = "<group>"; };
 		91232AAA1DAB67FC00536E0C /* LVWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVWebView.h; sourceTree = "<group>"; };
 		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
 		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
@@ -919,6 +924,8 @@
 			children = (
 				8410D9AE1A70A51C00B22E49 /* LVGesture.h */,
 				8410D9AF1A70A51C00B22E49 /* LVGesture.m */,
+				911270981DFAC65F001F8047 /* LVEvent.h */,
+				911270991DFAC65F001F8047 /* LVEvent.m */,
 				9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */,
 				9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */,
 				8410D9A91A70A00400B22E49 /* LVPanGesture.h */,
@@ -1145,6 +1152,7 @@
 				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
 				84C1D8541C16C44B0058E974 /* LVDate.h in Headers */,
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
+				9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */,
 				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
 				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
 				3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */,
@@ -1402,6 +1410,7 @@
 				3CFF780E1C74741400847C05 /* lVtablib.c in Sources */,
 				3CFF780F1C74741400847C05 /* lVtm.c in Sources */,
 				3CFF78101C74741400847C05 /* lVundump.c in Sources */,
+				9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				3CFF78111C74741400847C05 /* lVvm.c in Sources */,
 				3CFF78121C74741400847C05 /* lVzio.c in Sources */,
 				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
@@ -1536,6 +1545,7 @@
 				84C1D82F1C16C4070058E974 /* lVtablib.c in Sources */,
 				84C1D8301C16C4070058E974 /* lVtm.c in Sources */,
 				84C1D8311C16C4070058E974 /* lVundump.c in Sources */,
+				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */,
 				84C1D8321C16C4070058E974 /* lVvm.c in Sources */,
 				84C1D8331C16C4070058E974 /* lVzio.c in Sources */,

@@ -78,6 +78,7 @@
 		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
 		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
 		911270911DFA954D001F8047 /* demoL3_onTouch.lua in Resources */ = {isa = PBXBuildFile; fileRef = 911270901DFA954D001F8047 /* demoL3_onTouch.lua */; };
+		911270971DFAA464001F8047 /* demoZ_Gesture.lua in Resources */ = {isa = PBXBuildFile; fileRef = 911270961DFAA464001F8047 /* demoZ_Gesture.lua */; };
 		91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */; };
 		91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91912B0B1DF9658200ACDF0C /* animate1.jpg */; };
 		91F6788D1DF582770042D6FC /* demoL2_CustomView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */; };
@@ -210,6 +211,7 @@
 		84F9A0451C92CA7300481334 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button0.png; sourceTree = "<group>"; };
 		84F9A0461C92CA7300481334 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		911270901DFA954D001F8047 /* demoL3_onTouch.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL3_onTouch.lua; sourceTree = "<group>"; };
+		911270961DFAA464001F8047 /* demoZ_Gesture.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_Gesture.lua; sourceTree = "<group>"; };
 		91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_WebView.lua; sourceTree = "<group>"; };
 		91912B0B1DF9658200ACDF0C /* animate1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = animate1.jpg; sourceTree = "<group>"; };
 		91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL2_CustomView.lua; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */,
 				3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */,
 				3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */,
+				911270961DFAA464001F8047 /* demoZ_Gesture.lua */,
 				3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */,
 				91912B0B1DF9658200ACDF0C /* animate1.jpg */,
 				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
@@ -585,6 +588,7 @@
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
 				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
 				840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */,
+				911270971DFAA464001F8047 /* demoZ_Gesture.lua in Resources */,
 				91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */,
 				3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */,
 				3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */,

@@ -19,6 +19,7 @@
 #import "lVgc.h"
 #import "JUFLXLayoutKit.h"
 #import "UIView+JUFLXNode.h"
+#import "LVGesture.h"
 
 @interface LVBaseView ()
 @property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
@@ -1344,8 +1345,32 @@ static int onClick (lv_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static void removeOnTouchEventGesture(UIView* view){
+    NSArray< UIGestureRecognizer *> * gestures = view.gestureRecognizers;
+    for( LVGesture* g in gestures ) {
+        if( [g isKindOfClass:[LVGesture class]] ) {
+            if( g.onTouchEventCallback ) {
+                [view removeGestureRecognizer:g];
+                break;
+            }
+        }
+    }
+}
+
 static int onTouch (lv_State *L) {
-    return 0;
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    int ret = lv_setCallbackByKey(L, STR_ON_TOUCH, NO);
+    if( user ){
+        __weak UIView* view = (__bridge UIView *)(user->object);
+        removeOnTouchEventGesture(view);
+        
+        LVGesture* gesture = [[LVGesture alloc] init:L];
+        gesture.onTouchEventCallback = ^(LVGesture* gesture, int argN){
+            [view lv_callLuaByKey1:@STR_ON_TOUCH key2:nil argN:1];
+        };
+        [view addGestureRecognizer:gesture];
+    }
+    return ret;
 }
 
 #pragma -mark __gc

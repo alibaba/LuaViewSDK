@@ -8,8 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
+#import "UIGestureRecognizer+LuaView.h"
 
-@interface LVGesture : NSObject<LVClassProtocal>
+@class LVGesture;
+
+typedef void(^LVGestureOnTouchEventCallback)(LVGesture* gesture, int argN);
+
+@interface LVGesture : UIGestureRecognizer<LVClassProtocal,LVClassProtocal>
+
+@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,assign) LVUserDataInfo* lv_userData;
+
+@property(nonatomic,copy) LVGestureOnTouchEventCallback onTouchEventCallback;
+
+-(id) init:(lv_State*) l;
 
 +(const lvL_reg*) baseMemberFunctions;
 
