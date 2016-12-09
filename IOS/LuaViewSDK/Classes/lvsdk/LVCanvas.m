@@ -20,6 +20,8 @@
 @property(nonatomic,assign) CGAffineTransform concatCTM;
 @property(nonatomic,assign) CGFloat scaleX;
 @property(nonatomic,assign) CGFloat scaleY;
+@property(nonatomic,assign) CGFloat skewX;
+@property(nonatomic,assign) CGFloat skewY;
 @end
 
 @implementation LVCanvas
@@ -417,13 +419,9 @@ static int canvas_drawArc (lv_State *L) {
 
 -(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
     if( _contentRef && image) {
-//        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
-//        CGContextSaveGState(_contentRef);
-//        CGContextTranslateCTM(_contentRef, x, -y+h);
-//        CGContextScaleCTM(_contentRef, 1.0, -1.0);
-        
-        CGContextDrawImage(_contentRef, CGRectMake(x, y, w, h), image.CGImage);
-//        CGContextRestoreGState(_contentRef);
+        CGContextConcatCTM(_contentRef, CGAffineTransformMake(1, self.skewX, self.skewY, -1, 0, 0) );
+        CGContextDrawImage(_contentRef, CGRectMake(x, -y-h, w, h), image.CGImage);
+        CGContextConcatCTM(_contentRef, CGAffineTransformMake(1, self.skewX, self.skewY, +1, 0, 0) );
     }
 }
 
@@ -516,6 +514,8 @@ static int canvas_rotate (lv_State *L) {
 
 -(void) skew:(CGFloat)sx :(CGFloat)sy {
     if( _contentRef ) {
+        self.skewX = sx;
+        self.skewY = sy;
         CGAffineTransform transform = CGAffineTransformMake(1, sx, sy, 1, 0, 0);
         CGContextConcatCTM(_contentRef,transform);
     }
