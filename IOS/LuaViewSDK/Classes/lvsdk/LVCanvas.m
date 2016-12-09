@@ -55,6 +55,7 @@
 //            CGContextSetRGBStrokeColor(_contentRef, r, g, b, _alpha);
 //            CGContextSetRGBFillColor(_contentRef, r, g, b, _alpha);
 //        }
+        // 控制左右的绘图alpha
         CGContextSetAlpha(_contentRef,alpha);
     }
 }
@@ -78,7 +79,7 @@ static int canvas_drawPoint (lv_State *L) {
     if( LVIsType(user1, Canvas)  ){
         CGFloat x1 = lv_tonumber(L, 2);
         CGFloat y1 = lv_tonumber(L, 3);
-        [canvas drawLine:x1 :y1 :x1 :y1];
+        [canvas drawLine:x1-0.5 :y1-0.5 :x1+0.5 :y1+0.5];
         return 1;
     }
     return 0;
@@ -195,6 +196,15 @@ static int canvas_drawRoundRect (lv_State *L) {
         //写文字
         NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,self.color,NSForegroundColorAttributeName,nil];
         [text drawInRect:rect withAttributes:attributes];
+    }
+}
+
+-(void) drawText:(NSString *)text :(UIFont *)font :(CGFloat)x :(CGFloat) y{
+    CGContextRef context = _contentRef;
+    if (context && text) {
+        //画文字
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,self.color,NSForegroundColorAttributeName,nil];
+        [text drawAtPoint:CGPointMake(x, y) withAttributes:attributes];
     }
 }
 
@@ -371,7 +381,10 @@ static int drawText (lv_State *L) {
             NSString *str = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
             CGFloat x = lv_tonumber(L, 3);
             CGFloat y = lv_tonumber(L, 4);
-            CGRect rect = CGRectMake(x, y, canvas.font.lineHeight * str.length, canvas.font.lineHeight+10);
+            CGFloat h = canvas.font.lineHeight;
+            CGFloat leading = canvas.font.leading ;
+            CGFloat descender = canvas.font.descender;
+            CGRect rect = CGRectMake(x, y - (h+leading+descender), h * str.length, h );
             [canvas drawText:str :canvas.font :rect];
             return 0;
         } else {
