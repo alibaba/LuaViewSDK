@@ -1344,6 +1344,10 @@ static int onClick (lv_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static int onTouch (lv_State *L) {
+    return 0;
+}
+
 #pragma -mark __gc
 static int __gc (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1580,6 +1584,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"callback",     callback },
     {"onLayout",     onLayout },
     {"onClick",     onClick },
+    {"onTouch",     onTouch },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },

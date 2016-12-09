@@ -94,16 +94,30 @@ static const struct lvL_reg baseMemberFunctions [] = {
     //        UIGestureRecognizerStateFailed
     //    };
     lv_settop(L, 0);
-    NSDictionary* v = nil;
-    v = @{
-          @"POSSIBLE":@(UIGestureRecognizerStatePossible),
-          @"BEGIN":@(UIGestureRecognizerStateBegan),
-          @"CHANGED":@(UIGestureRecognizerStateChanged),
-          @"END":@(UIGestureRecognizerStateEnded),
-          @"CANCEL":@(UIGestureRecognizerStateCancelled),
-          @"FAILED":@(UIGestureRecognizerStateFailed),
-          };
-    [LVUtil defineGlobal:@"GestureState" value:v L:L];
+    {
+        NSDictionary* v = nil;
+        v = @{
+              @"POSSIBLE":@(UIGestureRecognizerStatePossible),
+              @"BEGIN":@(UIGestureRecognizerStateBegan),
+              @"CHANGED":@(UIGestureRecognizerStateChanged),
+              @"END":@(UIGestureRecognizerStateEnded),
+              @"CANCEL":@(UIGestureRecognizerStateCancelled),
+              @"FAILED":@(UIGestureRecognizerStateFailed),
+              };
+        [LVUtil defineGlobal:@"GestureState" value:v L:L];
+    }
+    {
+        
+        NSDictionary* v = nil;
+        v = @{
+              @"DOWN":@(0),
+              @"UP":@(1),
+              @"MOVE":@(2),
+              @"CANCEL":@(3),
+              @"OUTSIDE":@(4),
+              };
+        [LVUtil defineGlobal:@"TouchEvent" value:v L:L];
+    }
     return 0;
 }
 @end

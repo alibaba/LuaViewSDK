@@ -308,7 +308,7 @@ static int canvas_style (lv_State *L) {
     self.color = [UIColor blackColor];
     self.strokeWidth = 0.5;
     self.alpha = 1;
-    self.drawingMode = kCGPathStroke;
+    self.drawingMode = kCGPathFill;
     self.font = [UIFont systemFontOfSize:12];
     [self scale:1 :1];
     [self rotate:0 :0 :0];
