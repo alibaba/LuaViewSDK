@@ -22,6 +22,7 @@
 @property(nonatomic,assign) CGFloat scaleY;
 @property(nonatomic,assign) CGFloat skewX;
 @property(nonatomic,assign) CGFloat skewY;
+@property(nonatomic,assign) CGPoint translate;
 @end
 
 @implementation LVCanvas
@@ -577,6 +578,7 @@ static int canvas_scale (lv_State *L) {
 }
 
 -(void) translate:(CGFloat)x :(CGFloat)y {
+    self.translate = CGPointMake(x, y);
     if( _contentRef ) {
         CGContextTranslateCTM(_contentRef, x, y);
     }
