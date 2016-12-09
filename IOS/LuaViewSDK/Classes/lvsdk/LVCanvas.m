@@ -426,9 +426,13 @@ static int canvas_drawArc (lv_State *L) {
 
 -(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
     if( _contentRef && image) {
-        CGContextConcatCTM(_contentRef, CGAffineTransformMake(1, self.skewX, self.skewY, -1, 0, 0) );
-        CGContextDrawImage(_contentRef, CGRectMake(x, -y-h, w, h), image.CGImage);
-        CGContextConcatCTM(_contentRef, CGAffineTransformMake(1, self.skewX, self.skewY, +1, 0, 0) );
+        CGAffineTransform t1 = CGAffineTransformMake(1, self.skewY, self.skewX, 1, 0, 0);
+        CGAffineTransform t2 = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
+        //CGAffineTransform t3  = CGAffineTransformConcat(t1, t2);
+        
+        CGContextConcatCTM(_contentRef, t2 );
+        CGContextDrawImage(_contentRef, CGRectMake(x, -y-h , w, h), image.CGImage);
+        CGContextConcatCTM(_contentRef, t1 );
     }
 }
 
@@ -523,7 +527,7 @@ static int canvas_rotate (lv_State *L) {
     if( _contentRef ) {
         self.skewX = sx;
         self.skewY = sy;
-        CGAffineTransform transform = CGAffineTransformMake(1, sx, sy, 1, 0, 0);
+        CGAffineTransform transform = CGAffineTransformMake(1, sy, sx, 1, 0, 0);
         CGContextConcatCTM(_contentRef,transform);
     }
 }
