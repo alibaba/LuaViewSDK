@@ -119,7 +119,7 @@ static int pointer (lv_State *L) {
         CGPoint point = lvEvent.point;
         lv_pushnumber(L, point.x );
         lv_pushnumber(L, point.y );
-        return 1;
+        return 2;
     }
     return 0;
 }
@@ -156,30 +156,62 @@ static int event_id (lv_State *L) {
     return 0;
 }
 
+static int __index (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        if ( lv_type(L, 2)==LV_TSTRING ){
+            lv_checkstack(L, 4);
+            lv_settop(L, 2);
+            lvL_getmetatable(L, META_TABLE_EventFunc );
+            lv_pushvalue(L, 2);
+            lv_gettable(L, -2);
+            lv_remove(L, -2);
+            lv_remove(L, -2);
+            lv_CFunction cfunc = lv_tocfunction(L, -1);
+            if( cfunc ) {
+                lv_settop(L, 1);
+                return cfunc(L);
+            }
+        }
+    }
+    return 0; /* new userdatum is already on the stack */
+}
+
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewEvent globalName:globalName defaultName:@"Event"];
     
-    const struct lvL_reg memberFunctions [] = {
-        {"__gc", lvEventGC },
-        {"nativeObj", nativeObj},
+    {
+        const struct lvL_reg memberFunctions [] = {
+            {"__gc", lvEventGC },
+            {"nativeObj", nativeObj},
+            {"__index", __index },
+            
+            {NULL, NULL}
+        };
         
-        {"id", event_id},
-        {"action", action},
-        {"pointer", pointer},
-        {"x", x},
-        {"y", y},
+        lv_createClassMetaTable(L, META_TABLE_Event);
+        lvL_openlib(L, NULL, memberFunctions, 0);
+    }
+    {
         
-        {NULL, NULL}
-    };
-    
-    lv_createClassMetaTable(L, META_TABLE_Event);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+        const struct lvL_reg memberFunctions [] = {
+            {"id", event_id},
+            {"action", action},
+            {"pointer", pointer},
+            {"x", x},
+            {"y", y},
+            {NULL, NULL}
+        };
+        
+        lv_createClassMetaTable(L, META_TABLE_EventFunc);
+        lvL_openlib(L, NULL, memberFunctions, 0);
+    }
     {
         
         NSDictionary* v = nil;
         v = @{
-              @"DOWN":@(UIEventTypeTouches),
-              @"MOVE":@(UIEventTypeMotion),
+              @"DOWN":@(LVTouchEventType_DOWN),
+              @"MOVE":@(LVTouchEventType_MOVE),
               @"OUTSIDE":@(UIEventTypeRemoteControl),
               @"PRESSES":@(UIEventTypePresses),
               @"UP":@(LVTouchEventType_UP),

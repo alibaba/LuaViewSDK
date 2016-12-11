@@ -110,6 +110,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_CustomView           "UI.CustomView"
 #define META_TABLE_Canvas               "UI.Canvas"
 #define META_TABLE_Event                "UI.Event"
+#define META_TABLE_EventFunc            "UI.EventFunc"
 #define META_TABLE_UIViewNewIndex       "UI.View.NewIndex"
 #define META_TABLE_PagerIndicator       "UI.PagerIndicator"
 #define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"

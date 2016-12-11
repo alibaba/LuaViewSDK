@@ -51,12 +51,12 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    [self handleGesture:self event:event eventType:0];
+    [self handleGesture:self event:event eventType:LVTouchEventType_DOWN];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
-    [self handleGesture:self event:event eventType:0];
+    [self handleGesture:self event:event eventType:LVTouchEventType_MOVE];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

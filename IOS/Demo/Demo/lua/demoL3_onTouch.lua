@@ -27,7 +27,7 @@ isTouchable = math:random() > 0.5
 bg.text(bg.text() .. (isTouchable and " 不可点击" or " 可以点击"))
 
 view.onTouch(function(event)
-    print(event.id, event.pointer, event.action, event.x, event.y)
+    print(event.id, event.pointer, "action:", event.action, event.x, event.y)
     dx = lastX and event.x - lastX or 0
     dy = lastY and event.y - lastY or 0
 
@@ -94,7 +94,7 @@ view.onDraw(function(canvas)
 
 end)
 
-
-Timer().callback(function()
+timer = Timer();
+timer.callback(function()
     view.invalidate()
 end).start(0.01, true)

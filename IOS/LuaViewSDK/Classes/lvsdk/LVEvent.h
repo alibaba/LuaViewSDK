@@ -10,8 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-#define LVTouchEventType_UP     1001
-#define LVTouchEventType_CANCEL 1001
+#define LVTouchEventType_DOWN    1010
+#define LVTouchEventType_MOVE    1020
+#define LVTouchEventType_CANCEL  1030
+#define LVTouchEventType_UP      1040
 
 @interface LVEvent : NSObject<LVProtocal, LVClassProtocal>
 
