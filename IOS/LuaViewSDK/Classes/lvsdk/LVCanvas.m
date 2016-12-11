@@ -427,13 +427,13 @@ static int canvas_drawArc (lv_State *L) {
 
 -(void) drawImage:(UIImage*)image :(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h {
     if( _contentRef && image) {
-        CGAffineTransform t1 = CGAffineTransformMake(1, self.skewY, self.skewX, 1, 0, 0);
+        CGContextSaveGState(_contentRef);
+        //CGAffineTransform t1 = CGAffineTransformMake(1, self.skewY, self.skewX, 1, 0, 0);
         CGAffineTransform t2 = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
         //CGAffineTransform t3  = CGAffineTransformConcat(t1, t2);
-        
         CGContextConcatCTM(_contentRef, t2 );
         CGContextDrawImage(_contentRef, CGRectMake(x, -y-h , w, h), image.CGImage);
-        CGContextConcatCTM(_contentRef, t1 );
+        CGContextRestoreGState(_contentRef);
     }
 }
 
