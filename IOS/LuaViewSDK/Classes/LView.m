@@ -64,7 +64,10 @@
 #import "LVStruct.h"
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
+#import "LVCustomView.h"
 #import "LVPagerView.h"
+#import "LVCanvas.h"
+#import "LVEvent.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -290,6 +293,9 @@ extern char g_debug_lua[];
                 [LVScrollView class],
                 [LVCollectionView class],
                 [LVPagerView class],
+                [LVCustomView class],
+                [LVCanvas class],
+                [LVEvent class],
                 [LVTimer class],
                 [LVPagerIndicator class],
                 [LVCustomPanel class],

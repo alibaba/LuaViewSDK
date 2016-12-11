@@ -43,7 +43,7 @@ static int lvNewPagerIndicator (lv_State *L) {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageControl);
         
-        lvL_getmetatable(L, META_TABLE_UIPageControl );
+        lvL_getmetatable(L, META_TABLE_PagerIndicator );
         lv_setmetatable(L, -2);
     }
     LView* view = (__bridge LView *)(L->lView);
@@ -152,7 +152,7 @@ static int currentPageIndicatorTintColor(lv_State *L) {
         {NULL, NULL}
     };
     
-    lv_createClassMetaTable(L, META_TABLE_UIPageControl);
+    lv_createClassMetaTable(L, META_TABLE_PagerIndicator);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);

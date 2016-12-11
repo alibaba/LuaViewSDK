@@ -46,7 +46,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 @property (nonatomic,strong) NSTimer *timer;
 
 @property (nonatomic,assign) CGPoint nextOffset;
-@property (nonatomic,assign) BOOL autoScroll;
+@property (nonatomic,assign) BOOL looping;
 @property (nonatomic,assign) NSInteger isScrollEndTimes;
 @end
 
@@ -126,7 +126,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 -(void) moveCenter{
     CGFloat width = self.bounds.size.width;
     CGPoint p = self.contentOffset;
-    if( self.autoScroll ) {
+    if( self.looping ) {
         if( self.cellArray.count>2 ) {
             if( p.x<=0 ) {
                 self.pageIdx0 += 1;
@@ -362,7 +362,7 @@ static int lvNewPagerView (lv_State *L) {
 
 -(void) reloadDataASync{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001];
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001 inModes:@[NSRunLoopCommonModes]];
     });
 }
 
@@ -443,6 +443,25 @@ static int autoScroll(lv_State *L){
     return 0;
 }
 
+static int looping(lv_State *L){
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if(user){
+        LVPagerView * view = (__bridge LVPagerView *)(user -> object);
+        if([view isKindOfClass: [LVPagerView class]]){
+            if( lv_gettop(L)>=2 ) {
+            BOOL ret = lv_toboolean(L, 2);
+            view.looping = ret;
+                return 0;
+            } else {
+                BOOL yes = view.looping;
+                lv_pushboolean(L, yes);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 #pragma -mark Timer
 -(void) stopTimer{
     if( self.timer ) {
@@ -452,7 +471,7 @@ static int autoScroll(lv_State *L){
 }
 
 - (void) startTimer:(NSTimeInterval) interval repeat:(BOOL) repeat{
-    self.autoScroll = YES;
+    self.looping = YES;
     [self stopTimer];
     //create new timer
     self.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(scrollTimer:) userInfo:nil repeats:repeat];
@@ -535,6 +554,7 @@ static int __gc (lv_State *L) {
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
         {"autoScroll", autoScroll},
+        {"looping", looping},
         {"indicator", indicator},
         {"__gc", __gc },
         {NULL, NULL}
