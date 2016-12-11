@@ -12,6 +12,8 @@
 #import "LVData.h"
 #import "LVImage.h"
 
+#define LV_ANGLE_RADIANS(angle) (M_PI*angle/180)
+
 @interface LVCanvas ()
 @property(nonatomic,strong) UIColor* color;
 @property(nonatomic,assign) CGFloat strokeWidth;
@@ -418,9 +420,31 @@ static int canvas_drawOval (lv_State *L) {
     return canvas_drawEllipse(L);
 }
 
+-(void) drawArc:(CGFloat)x :(CGFloat)y :(CGFloat)w :(CGFloat)h :(CGFloat)startAngle :(CGFloat)endAngle :(BOOL) includeCenter{
+    if( _contentRef ) {
+        x += w/2;
+        y += h/2;
+        if( includeCenter ) {
+            CGContextMoveToPoint(_contentRef, x, y);
+        }
+        CGContextAddArc(_contentRef, x, y, w/2, LV_ANGLE_RADIANS(startAngle), LV_ANGLE_RADIANS(endAngle), NO);
+        CGContextClosePath(_contentRef);
+        CGContextDrawPath(_contentRef, self.drawingMode);
+    }
+}
+
 static int canvas_drawArc (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
+        CGFloat x = lv_tonumber(L, 2);
+        CGFloat y = lv_tonumber(L, 3);
+        CGFloat w = lv_tonumber(L, 4);
+        CGFloat h = lv_tonumber(L, 5);
+        CGFloat startAngle = lv_tonumber(L, 6);
+        CGFloat endAngle = lv_tonumber(L, 7);
+        BOOL includeCenter = lv_toboolean(L, 8);
+        LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
+        [canvas drawArc:x :y :w :h :startAngle :endAngle :includeCenter];
     }
     return 0;
 }
@@ -501,7 +525,7 @@ static int canvas_restore (lv_State *L) {
 -(void) rotate:(CGFloat) angle :(CGFloat)x :(CGFloat) y{
     if( _contentRef ) {
         CGContextTranslateCTM(_contentRef, x, y);
-        CGContextRotateCTM(_contentRef,M_PI*angle/180);
+        CGContextRotateCTM(_contentRef,LV_ANGLE_RADIANS(angle) );
         CGContextTranslateCTM(_contentRef, -x, -y);
     }
 }
