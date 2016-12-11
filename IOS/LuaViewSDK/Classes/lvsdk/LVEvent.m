@@ -117,9 +117,12 @@ static int pointer (lv_State *L) {
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
         CGPoint point = lvEvent.point;
-        lv_pushnumber(L, point.x );
-        lv_pushnumber(L, point.y );
-        return 2;
+        NSDictionary* dic = @{
+            @"x":@(point.x),
+            @"y":@(point.y)
+        };
+        lv_pushNativeObject(L, dic );
+        return 1;
     }
     return 0;
 }
