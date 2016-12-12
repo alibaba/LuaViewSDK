@@ -14,7 +14,7 @@
 
 typedef void(^LVGestureOnTouchEventCallback)(LVGesture* gesture, int argN);
 
-@interface LVGesture : UIGestureRecognizer<LVClassProtocal,LVClassProtocal>
+@interface LVGesture : UIGestureRecognizer<LVClassProtocal,LVClassProtocal,UIGestureRecognizerDelegate>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;

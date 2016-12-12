@@ -22,6 +22,7 @@
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.delegate = self;
     }
     return self;
 }
@@ -196,7 +197,40 @@ static int lvNewGesture (lv_State *L) {
               };
         [LVUtil defineGlobal:@"GestureState" value:v L:L];
     }
-
+    
     return 0;
 }
+
+// delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if( gestureRecognizer ==self ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if( gestureRecognizer ==self ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceivePress:(UIPress *)press{
+    if( gestureRecognizer ==self ) {
+        return YES;
+    }
+    return NO;
+}
+
+
 @end
