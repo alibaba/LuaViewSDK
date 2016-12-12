@@ -61,6 +61,7 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
+    [self handleGesture:self event:event eventType:LVTouchEventType_MOVE];
     [self handleGesture:self event:event eventType:LVTouchEventType_UP];
     
 }
