@@ -597,6 +597,14 @@ static int __gc (lv_State *L) {
 }
 
 - (void) callLuaWithScrollEnded{
+    {
+        CGFloat offsetX = self.contentOffset.x;
+        CGFloat pageWidth = self.frame.size.width;
+        CGFloat pageIndex = offsetX/pageWidth;
+        
+        self.pageIdx = [self xindex2index:pageIndex + 0.1];
+        [self setPageIndicatorIdx:[self xindex2index:pageIndex + 0.1]];
+    }
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
