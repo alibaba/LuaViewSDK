@@ -52,6 +52,20 @@
     }
 }
 
+-(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
+    lv_State* L = self.lv_lview.l;
+    if( L ){
+        lv_checkstack(L, (int)args.count*2 + 2);
+        
+        for( int i=0; i<args.count; i++ ){
+            id obj = args[i];
+            lv_pushNativeObject(L,obj);
+        }
+        lv_getglobal(L, functionName.UTF8String);// function
+        return lv_runFunctionWithArgs(L, (int)args.count, 0);
+    }
+    return nil;
+}
 -(BOOL) lv_isCallbackAddClickGesture{
     return NO;
 }
@@ -173,6 +187,13 @@
 
 -(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha{
     // 点击特效
+}
+
+-(BOOL) lv_canvas{
+    return NO;
+}
+
+-(void) setLv_canvas:(BOOL)lv_canvas{
 }
 
 @end

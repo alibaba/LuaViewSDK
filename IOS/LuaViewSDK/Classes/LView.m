@@ -64,7 +64,10 @@
 #import "LVStruct.h"
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
+#import "LVCustomView.h"
 #import "LVPagerView.h"
+#import "LVCanvas.h"
+#import "LVEvent.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -100,6 +103,8 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.disableAnimate = YES;
+    self.closeLayerMode = YES;
     self.mySelf = self;
     self.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -288,6 +293,9 @@ extern char g_debug_lua[];
                 [LVScrollView class],
                 [LVCollectionView class],
                 [LVPagerView class],
+                [LVCustomView class],
+                [LVCanvas class],
+                [LVEvent class],
                 [LVTimer class],
                 [LVPagerIndicator class],
                 [LVCustomPanel class],
@@ -805,13 +813,9 @@ extern char g_debug_lua[];
 
 -(void) containerAddSubview:(UIView *)view{
     if( self.conentView ) {
-        if( view.superview!=self.conentView ) {
-            [self.conentView addSubview:view];
-        }
+        lv_addSubview(self, self.conentView, view);
     } else {
-        if( view.superview!=self ) {
-            [super addSubview:view];
-        }
+        lv_addSubview(self, self, view);
     }
 }
 

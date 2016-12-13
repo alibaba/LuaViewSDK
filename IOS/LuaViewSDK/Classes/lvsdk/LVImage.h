@@ -33,4 +33,9 @@
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
+/**
+ *  图片首次出现是否使用动画
+ */
+@property (nonatomic,assign) BOOL disableAnimate;
+
 @end

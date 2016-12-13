@@ -18,6 +18,8 @@
 
 - (void) lv_callLuaByKey1:(NSString*) key1;
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int) argN;
+-(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args;
+
 - (void) lv_buttonCallBack;
 
 
@@ -38,5 +40,7 @@
 
 -(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy;
 -(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha;
+
+@property(nonatomic,assign) BOOL lv_canvas;
 
 @end

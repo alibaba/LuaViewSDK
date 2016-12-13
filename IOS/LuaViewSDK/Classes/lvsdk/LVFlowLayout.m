@@ -39,7 +39,6 @@
         if( a ) {
             CGRect frame = a.frame;
             CGFloat minY = self.collectionView.contentOffset.y;
-            CGFloat maxY = minY;
             // 浮层：不能小于屏幕offset
             if( frame.origin.y < minY ) {
                 frame.origin.y = minY;
@@ -49,7 +48,7 @@
                 
                 if( prevAtt ) {
                     // 但是浮层不能盖住上一个浮层
-                    maxY = prevAtt.frame.origin.y - frame.size.height;
+                    CGFloat maxY = prevAtt.frame.origin.y - frame.size.height;
                     if( frame.origin.y>maxY ) {
                         frame.origin.y = maxY;
                         a.frame = frame;
