@@ -348,6 +348,12 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
 }
 
 +(void) download:(NSString*) urlStr callback:(LVFuncDownloadEndCallback) nextStep{
+    if( [urlStr hasPrefix:@"//"] ) {
+        urlStr = [NSString stringWithFormat:@"https:%@",urlStr];
+    }
+    if( [urlStr.lowercaseString hasPrefix:@"http://"] ){
+        urlStr = [NSString stringWithFormat:@"https://%@",[urlStr substringFromIndex:7]];
+    }
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
