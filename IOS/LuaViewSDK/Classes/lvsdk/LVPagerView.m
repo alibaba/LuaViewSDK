@@ -52,6 +52,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 @property (nonatomic,strong) UIScrollView *scrollview;
 @property (nonatomic,assign) CGFloat sideLeft;
 @property (nonatomic,assign) CGFloat sideRight;
+
+@property (nonatomic,assign) BOOL doubleMode;
 @end
 
 
@@ -85,6 +87,13 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 -(void) createAllCell {
     NSInteger num = [self numberOfPagesInPageView];
+    if( num==2 && ( self.sideLeft!=0 || self.sideRight!=0 ) ) {
+        // 开始双倍模式
+        num = 4;
+        self.doubleMode = YES;
+    } else {
+        self.doubleMode = NO;
+    }
     if( num<self.cellArray.count ) {
         for( ; num<self.cellArray.count; ){
             UIView* view = self.cellArray.lastObject;
@@ -99,7 +108,11 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         }
     }
     [self resetCellFrame];
-    self.pagerIndicator.numberOfPages = self.cellArray.count;
+    if( self.doubleMode ) {
+        self.pagerIndicator.numberOfPages = 2;
+    } else {
+        self.pagerIndicator.numberOfPages = self.cellArray.count;
+    }
     
 }
 
@@ -223,6 +236,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     lview.conentView = cell;
     lview.contentViewIsWindow = NO;
     if ( l ) {
+        // 只有两个Cell的时候开启特殊翻倍模式！！！
+        if( self.doubleMode && pageIdx>=2 ) {
+            pageIdx = pageIdx-2;
+        }
         if( !cell.isInited ){
             cell.isInited = YES;
             [cell doInitWithLView:lview];
@@ -271,37 +288,13 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     return 1;
 }
 
-//- (LVPagerIndicator*) callLuaGetIndicator{
-//    lv_State* L = self.lv_lview.l;
-//    if( L && self.lv_userData ){
-//        lv_pushUserdata(L, self.lv_userData);
-//        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-//        if(  [LVUtil call:L key1:"Indicator" key2:NULL nargs:0 nrets:1] ==0 ) {
-//            if( lv_type(L, -1)==LV_TUSERDATA ) {
-//                
-//                LVUserDataView * user2 = (LVUserDataView *)lv_touserdata(L, -1);
-//                if( LVIsType(user2, LVUserDataView) ) {
-//                    lv_checkstack(L, 8);
-//                    lv_pushvalue(L, 1);
-//                    lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-//                    lv_pushvalue(L, -2);// value
-//                    lv_setfield(L, -2, "Indicator.object");
-//                    
-//                    LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->view);
-//                    if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
-//                        [self setIndicator:pagerIndicator];// 设置Indicator
-//                        return pagerIndicator;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    return nil;
-//}
-
 -(void) setPageIndicatorIdx:(NSInteger)pageIdx{
     if( pageIdx>=0 && pageIdx<self.cellArray.count ) {
-        self.pagerIndicator.currentPage = pageIdx;
+        if( self.doubleMode && pageIdx>=2 ) {
+            self.pagerIndicator.currentPage = pageIdx-2;
+        } else {
+            self.pagerIndicator.currentPage = pageIdx;
+        }
     }
 }
 
@@ -309,7 +302,11 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 -(void) setIndicator:(LVPagerIndicator*) indicator{
     self.pagerIndicator = indicator;
     self.pagerIndicator.pagerView = self;
-    self.pagerIndicator.numberOfPages = self.cellArray.count;
+    if( self.doubleMode ) {
+        self.pagerIndicator.numberOfPages = 2;
+    } else {
+        self.pagerIndicator.numberOfPages = self.cellArray.count;
+    }
     [self setPageIndicatorIdx:self.pageIdx];
 }
 
@@ -557,6 +554,9 @@ static int previewSide(lv_State *L) {
             pagerview.sideLeft = sideLeft;
             pagerview.sideRight = sideRight;
             pagerview.frame = pagerview.frame;
+            if( pagerview.cellArray.count==2 ) {
+                [pagerview reloadDataASync];
+            }
             return 0;
         } else {
             lv_pushnumber(L, pagerview.sideLeft);
@@ -629,7 +629,11 @@ static int __gc (lv_State *L) {
         lv_checkStack32(l);
         double intPart = 0;
         double floatPart = modf( pageIndex, &intPart);
-        lv_pushnumber(l, mapPageIdx( self.pageIdx ) );
+        NSInteger pageIdx = self.pageIdx;
+        if( self.doubleMode&& pageIdx>=2 ) {
+            pageIdx -= 2;
+        }
+        lv_pushnumber(l, mapPageIdx( pageIdx ) );
         lv_pushnumber(l, floatPart);
         lv_pushnumber(l, offsetX - intPart*pageWidth);
         
@@ -652,7 +656,11 @@ static int __gc (lv_State *L) {
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_checkStack32(l);
-        lv_pushnumber(l, mapPageIdx(self.pageIdx) );
+        NSInteger pageIdx = self.pageIdx;
+        if( self.doubleMode&& pageIdx>=2 ) {
+            pageIdx -= 2;
+        }
+        lv_pushnumber(l, mapPageIdx(pageIdx) );
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
