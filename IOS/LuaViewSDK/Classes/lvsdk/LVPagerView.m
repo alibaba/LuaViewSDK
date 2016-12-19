@@ -626,6 +626,7 @@ static int __gc (lv_State *L) {
 
     lv_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
+        lv_settop(l, 0);
         lv_checkStack32(l);
         double intPart = 0;
         double floatPart = modf( pageIndex, &intPart);
