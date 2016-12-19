@@ -55,4 +55,12 @@
     [self lv_alignSubviews];
 }
 
+-(instancetype) init{
+    self = [super init];
+    if ( self ) {
+        self.clipsToBounds = YES;
+    }
+    return self;
+}
+
 @end
