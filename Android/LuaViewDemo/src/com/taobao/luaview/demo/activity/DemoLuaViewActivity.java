@@ -3,6 +3,7 @@ package com.taobao.luaview.demo.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.taobao.luaview.activity.LuaViewActivity;
 import com.taobao.luaview.demo.provider.GlideImageProvider;
 import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
@@ -29,7 +30,7 @@ import java.io.InputStream;
  * 修改描述
  * 下午4:50 song XXX
  */
-public class DemoLuaViewActivity extends Activity {
+public class DemoLuaViewActivity extends LuaViewActivity {
     private LuaView mLuaView;
     private LVLoadingDialog mDialog;
 

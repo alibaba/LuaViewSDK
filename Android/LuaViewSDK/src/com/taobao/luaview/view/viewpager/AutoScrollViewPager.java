@@ -149,6 +149,9 @@ public class AutoScrollViewPager extends LoopViewPager {
      * <li>if event is down, stop auto scroll.</li>
      * <li>if event is up, start auto scroll again.</li>
      * </ul>
+     *
+     * bugfix: 增加ev.getAction() == MotionEvent.ACTION_CANCEL条件判断,Action Cancel事件发生的时候也要重新开始自动滚动
+     *
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -161,7 +164,7 @@ public class AutoScrollViewPager extends LoopViewPager {
             if ((action == MotionEvent.ACTION_DOWN) && isAutoScroll) {
                 isStopByTouch = true;
                 stopAutoScroll();
-            } else if (ev.getAction() == MotionEvent.ACTION_UP && isStopByTouch) {
+            } else if ((ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_CANCEL) && isStopByTouch) {
                 startAutoScroll();
             }
         }

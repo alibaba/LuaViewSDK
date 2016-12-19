@@ -4,6 +4,7 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import com.taobao.luaview.userdata.ui.UDViewPager;
+import com.taobao.luaview.view.indicator.circle.CycleIconPagerAdapter;
 
 import org.luaj.vm2.Globals;
 
@@ -13,7 +14,7 @@ import org.luaj.vm2.Globals;
  * @author song
  * @date 15/9/17
  */
-public class LVLoopPagerAdapter extends LVPagerAdapter {
+public class LVLoopPagerAdapter extends LVPagerAdapter implements CycleIconPagerAdapter {
 
     private boolean mIsLooping = false;
     private boolean mBoundaryCaching = false;
@@ -188,5 +189,25 @@ public class LVLoopPagerAdapter extends LVPagerAdapter {
             this.realPosition = position;
             this.object = object;
         }
+    }
+
+    /**
+     * bugfix: mIsLooping条件为真的时候,实际要绘制的indicator个数应该扣除掉两个虚拟的
+     * see: {@link com.taobao.luaview.view.viewpager.LoopViewPager}
+     */
+    @Override
+    public int getActualCount() {
+        if (mIsLooping)
+            return getCount()-2;
+        else
+            return getCount();
+    }
+
+    @Override
+    public int getInstanceCount() {
+        if (mIsLooping)
+            return getCount()-2;
+        else
+            return getCount();
     }
 }
