@@ -1,9 +1,12 @@
 package com.taobao.luaview.userdata.ui;
 
+import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
+import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVViewPager;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.Lua;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -251,5 +254,17 @@ public class UDViewPager extends UDViewGroup<LVViewPager> {
      */
     public boolean isLooping() {
         return getView() != null && getView().isLooping();
+    }
+
+    /**
+     * 支持左右透出预览
+     */
+    public LuaValue previewSide(int left, int right) {
+        final LVViewPager viewPager = getView();
+        if (viewPager != null) {
+            viewPager.setClipToPadding(false);
+            viewPager.setPadding(DimenUtil.dpiToPx(left), 0, DimenUtil.dpiToPx(right), 0);
+        }
+        return this;
     }
 }

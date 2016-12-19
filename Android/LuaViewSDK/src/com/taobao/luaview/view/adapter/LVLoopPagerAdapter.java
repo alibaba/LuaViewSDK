@@ -197,9 +197,9 @@ public class LVLoopPagerAdapter extends LVPagerAdapter implements CycleIconPager
      */
     @Override
     public int getActualCount() {
-        if (mIsLooping)
-            return getCount()-2;
-        else
+//        if (mIsLooping)
+//            return getCount()-2;
+//        else
             return getCount();
     }
 

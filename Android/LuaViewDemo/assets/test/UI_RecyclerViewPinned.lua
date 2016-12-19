@@ -18,10 +18,14 @@ collectionView = RefreshCollectionView {
     },
     Cell = {
         Id = function ( section, row )
+            if (section == 1 and row ==1) then
+                return "Pager"
+            end
+
             if (row == 2) then
                 return "PinnedCell1", Pinned.YES;
---            if (section == 2 and row == 1) then
---                return "PinnedScrollCell", Pinned.YES;
+                --            if (section == 2 and row == 1) then
+                --                return "PinnedScrollCell", Pinned.YES;
             else
                 return "ImageAndLabel"
             end
@@ -88,6 +92,73 @@ collectionView = RefreshCollectionView {
                 end
             }
         },
+        Pager = {
+            Size = function(section, row)
+                return w, 200;
+            end,
+            Init = function(cell, section, row)
+                local cellWidth ,cellHeight = cell.window.size();
+                cell.pagerView = PagerView({
+                    PageCount = function()
+                        return 2
+                    end,
+                    Pages = {
+                        Title = function(pos)
+                            return "Title"
+                        end,
+                        Init = function(page, pos)
+                            page.icon = Button()
+                            if (pos == 1) then
+                                page.icon.backgroundColor(0x00ff00)
+                            else
+                                page.icon.backgroundColor(0x00ffff)
+                            end
+                        end,
+                        Layout = function(page, pos)
+                            page.icon.text("测试按钮"..pos)
+                            page.icon.frame(0, 0, cell.pagerView.width()-60, 150)
+                        end
+                    },
+                    Callback = {
+                        Scrolling=function(pos, percent, distance)
+                            Toast("滑动"..pos)
+                        end,
+                        Selected=function(pos)
+                            Toast("选中"..pos)
+                        end
+                    }
+                })
+                cell.pagerView.frame(0, 0, cellWidth, cellHeight);
+                cell.pagerView.looping(true)
+                cell.pagerView.autoScroll()
+                --                cell.pagerView.nativeView().setClipToPadding(false)
+                --                cell.pagerView.nativeView().setPadding(150, 0, 150, 0)
+                cell.pagerView.previewSide(30, 30)
+                --                cell.pagerView.backgroundColor(0xff0000)
+                local createCircleIndicator = function ()
+                    local indicator = PagerIndicator()
+                    --    indicator.size(SCREEN_WIDTH / 2, 100)
+                    --    indicator.alignCenter()
+                    --                    print("tuoli", cell.pagerView.width())
+                    indicator.frame(0, 180, cell.pagerView.width(), 30)
+                    indicator.selectedColor(0xff0000)
+                    indicator.unselectedColor(0x00ff00)
+                    --    indicator.fillColor(0xff0000)
+                    --    indicator.pageColor(0x00ff00)
+                    return indicator
+                end
+
+                --活动指示器
+                cell.pagerView.indicator(createCircleIndicator())
+            end,
+            Layout = function(cell , section, row)
+                --                cell.icon.image(imageUrl1, function()
+                --                    local x,y,w,h = cell.icon.frame();
+                --                end);
+            end,
+            Callback = function(cell, section, row)
+            end
+        },
         ImageAndLabel = {
             Size = function(section, row)
                 return w ,200;
@@ -153,13 +224,13 @@ collectionView = RefreshCollectionView {
     },
     Callback = {
         Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --            print("scrolling", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --            print("scrolling begin", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
---            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
+            --            print("scrolling end", firstVisibleSection,"---" ,firstVisibleRow, "---", visibleCellCount);
         end,
         PullDown = function()
             collectionView.stopRefreshing()
@@ -170,4 +241,6 @@ collectionView = RefreshCollectionView {
 collectionView.frame(0,0,w,h-64);
 collectionView.backgroundColor(0xffFFFF);
 collectionView.miniSpacing(5)
+
+print("tuoli System.vmVersion = ", System.vmVersion() )
 

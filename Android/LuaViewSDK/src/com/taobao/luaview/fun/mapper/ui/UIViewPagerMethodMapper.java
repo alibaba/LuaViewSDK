@@ -22,7 +22,8 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
             "currentPage",//2
             "currentItem",//3
             "autoScroll",//4
-            "looping"//5
+            "looping",//5
+            "previewSide"//6
     };
 
     @Override
@@ -46,11 +47,26 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
                 return autoScroll(target, varargs);
             case 5:
                 return looping(target, varargs);
+            case 6:
+                return previewSide(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
 
     //--------------------------------------- API --------------------------------------------------
+
+    /**
+     * 支持左右透出预览
+     * @param view
+     * @param varargs
+     * @return
+     */
+    @LuaViewApi(since = VmVersion.V_570)
+    public LuaValue previewSide(U view, Varargs varargs) {
+        Integer left = LuaUtil.getInt(varargs, 2);
+        Integer right = LuaUtil.getInt(varargs, 3);
+        return view.previewSide(left, right);
+    }
 
     /**
      * 重新更新数据
