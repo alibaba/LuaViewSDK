@@ -48,6 +48,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 @property (nonatomic,assign) CGPoint nextOffset;
 @property (nonatomic,assign) BOOL looping;
 @property (nonatomic,assign) NSInteger isScrollEndTimes;
+
+@property (nonatomic,strong) UIScrollView *scrollview;
+@property (nonatomic,assign) CGFloat sideLeft;
+@property (nonatomic,assign) CGFloat sideRight;
 @end
 
 
@@ -59,11 +63,21 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         self.lv_lview = (__bridge LView *)(l->lView);
         self.backgroundColor = [UIColor clearColor];
         self.cellArray = [[NSMutableArray alloc] init];
-        self.pagingEnabled = YES;
-        self.showsHorizontalScrollIndicator = NO;
-        self.delegate = self;
+        self.scrollview = ({
+            UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+            scroll.pagingEnabled = YES;
+            scroll.clipsToBounds = NO;
+            scroll;
+        })                                                                                      ;
+        
+        [self addSubview:self.scrollview];
+        self.clipsToBounds = YES;
+        
+        self.scrollview.pagingEnabled = YES;
+        self.scrollview.showsHorizontalScrollIndicator = NO;
+        self.scrollview.delegate = self;
+        self.scrollview.scrollsToTop = NO;
         self.pageIdx = 0;
-        self.scrollsToTop = NO;
         self.isScrollEndTimes = 0;
     }
     return self;
@@ -112,39 +126,45 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) resetCellFrame{
+    {// ScrollView的滚动大小
+        CGRect rect = self.bounds;
+        rect.origin.x = self.sideLeft;
+        rect.size.width -= self.sideLeft + self.sideRight;
+        self.scrollview.frame = rect;
+    }
     NSUInteger count = self.cellArray.count;
-    CGSize size = self.frame.size;
+    CGSize size = self.scrollview.frame.size;
     for( NSUInteger i=0; i<count; i++ ) {
         UIView* view = self.cellArray[i];
         CGFloat xIndex = [self index2xindex:i];
         CGFloat x = xIndex*size.width;
         view.frame = CGRectMake(x, 0, size.width, size.height);
     }
-    self.contentSize = CGSizeMake( count * size.width, 0);
+    self.scrollview.contentSize = CGSizeMake( count * size.width, 0);
 }
 
 -(void) moveCenter{
-    CGFloat width = self.bounds.size.width;
-    CGPoint p = self.contentOffset;
+    CGFloat width = self.scrollview.bounds.size.width;
+    CGPoint p = self.scrollview.contentOffset;
     if( self.looping ) {
         if( self.cellArray.count>2 ) {
-            if( p.x<=0 ) {
+            if( p.x < width*0.5 ) {
                 self.pageIdx0 += 1;
-                self.contentOffset = CGPointMake( p.x + width, 0);
+                self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
                 [self resetCellFrame];
-            } else if( p.x>=width*2 ){
+            } else if( p.x> width*1.5 ){
                 self.pageIdx0 -= 1;
-                self.contentOffset = CGPointMake( p.x - width, 0);
+                self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
                 [self resetCellFrame];
             }
         } else {
-            if( p.x<=0 ) {
+            if( p.x< 0 ) {
                 self.pageIdx0 += 1;
-                self.contentOffset = CGPointMake( p.x + width, 0);
+                self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
                 [self resetCellFrame];
             } else if( p.x>=width ){
                 self.pageIdx0 -= 1;
-                self.contentOffset = CGPointMake( p.x - width, 0);
+                self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
                 [self resetCellFrame];
             }
         }
@@ -157,17 +177,19 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) checkCellVisible{
-    CGPoint p =  self.contentOffset;
-    CGRect r0 = self.bounds;
+    CGPoint p =  self.scrollview.contentOffset;
+    CGRect r0 = self.scrollview.bounds;
     r0.origin = p;
+    r0.origin.x -= self.sideLeft;
+    r0.size.width += self.sideLeft + self.sideRight;
     for( int i=0; i<self.cellArray.count; i++ ){
         UIView* view = self.cellArray[i];
         if( view ) {
             CGRect r = view.frame;
             if(  CGRectIntersectsRect(r, r0) ){
-                if( view.superview!= self ) {
+                if( view.superview!= self.scrollview ) {
                     [self cellLayoutAtPageIdx:i];
-                    [self addSubview:view];
+                    [self.scrollview addSubview:view];
                 }
             } else {
                 [view removeFromSuperview];
@@ -178,7 +200,6 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    
     [self moveCenter];
     [self checkCellVisible];
     
@@ -293,11 +314,11 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 -(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation{
-    float offsetX = [self index2xindex:pageIdx] * self.frame.size.width ;
+    float offsetX = [self index2xindex:pageIdx] * self.scrollview.frame.size.width ;
     if( offsetX<=0 ){
         offsetX = 0;
     }
-    float maxOffset = self.contentSize.width - self.frame.size.width;
+    float maxOffset = self.scrollview.contentSize.width - self.scrollview.frame.size.width;
     if( offsetX > maxOffset ){
         offsetX = maxOffset;
     }
@@ -312,12 +333,12 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // 有动画
 -(void) changeOffsetWithAnimation:(NSNumber*) value{
-    [self setContentOffset:self.nextOffset animated:YES];
+    [self.scrollview setContentOffset:self.nextOffset animated:YES];
 }
 
 // 无动画
 -(void) changeOffsetNoAnimation:(NSNumber*) value{
-    [self setContentOffset:self.nextOffset animated:NO];
+    [self.scrollview setContentOffset:self.nextOffset animated:NO];
 }
 
 #pragma -mark lvNewCollectionView
@@ -480,8 +501,8 @@ static int looping(lv_State *L){
 - (void) scrollTimer:(NSTimer *) timer {
     if( self.isScrollEndTimes>1 ) {
         //更改方向
-        NSInteger width = self.frame.size.width;
-        CGPoint p = self.contentOffset;
+        NSInteger width = self.scrollview.frame.size.width;
+        CGPoint p = self.scrollview.contentOffset;
         p.x += width;
         p.x = ((NSInteger)p.x) /width * width;
         self.nextOffset = p;
@@ -526,6 +547,26 @@ static int indicator(lv_State *L) {
     return 0;
 }
 
+static int previewSide(lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        LVPagerView* pagerview = (__bridge LVPagerView *)(user->object);
+        if( lv_gettop(L)>=3 ) {
+            CGFloat sideLeft = lv_tonumber(L, 2);
+            CGFloat sideRight = lv_tonumber(L, 3);
+            pagerview.sideLeft = sideLeft;
+            pagerview.sideRight = sideRight;
+            pagerview.frame = pagerview.frame;
+            return 0;
+        } else {
+            lv_pushnumber(L, pagerview.sideLeft);
+            lv_pushnumber(L, pagerview.sideRight);
+            return 2;
+        }
+    }
+    return 0;
+}
+
 #pragma -mark __gc
 static void releaseUserDataView(LVUserDataInfo* userdata){
     if( userdata && userdata->object ){
@@ -556,6 +597,9 @@ static int __gc (lv_State *L) {
         {"autoScroll", autoScroll},
         {"looping", looping},
         {"indicator", indicator},
+        
+        {"previewSide", previewSide},
+        
         {"__gc", __gc },
         {NULL, NULL}
     };
@@ -573,8 +617,8 @@ static int __gc (lv_State *L) {
 
 
 - (void) callLuaWithScrolling{
-    CGFloat offsetX = self.contentOffset.x;
-    CGFloat pageWidth = self.frame.size.width;
+    CGFloat offsetX = self.scrollview.contentOffset.x;
+    CGFloat pageWidth = self.scrollview.frame.size.width;
     CGFloat pageIndex = offsetX/pageWidth;
     
     self.pageIdx = [self xindex2index:pageIndex];
@@ -598,8 +642,8 @@ static int __gc (lv_State *L) {
 
 - (void) callLuaWithScrollEnded{
     {
-        CGFloat offsetX = self.contentOffset.x;
-        CGFloat pageWidth = self.frame.size.width;
+        CGFloat offsetX = self.scrollview.contentOffset.x;
+        CGFloat pageWidth = self.scrollview.frame.size.width;
         CGFloat pageIndex = offsetX/pageWidth;
         
         self.pageIdx = [self xindex2index:pageIndex + 0.1];
@@ -618,6 +662,9 @@ static int __gc (lv_State *L) {
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self moveCenter];
+    [self checkCellVisible];
+    
     [self callLuaWithScrolling];
 }
 
@@ -638,6 +685,27 @@ static int __gc (lv_State *L) {
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self callLuaWithScrolling];
     [self callLuaWithScrollEnded];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = [super hitTest:point withEvent:event];
+    if ([view isEqual:self])
+    {
+        UIScrollView* scrollview = self.scrollview;
+        for (UIView *subview in scrollview.subviews)
+        {
+            CGPoint offset = CGPointMake(point.x - scrollview.frame.origin.x + scrollview.contentOffset.x - subview.frame.origin.x,
+                                         point.y - scrollview.frame.origin.y + scrollview.contentOffset.y - subview.frame.origin.y);
+            
+            if ((view = [subview hitTest:offset withEvent:event]))
+            {
+                return view;
+            }
+        }
+        return scrollview;
+    }
+    return view;
 }
 
 -(NSString*) description{

@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 
 @class LVPagerIndicator;
-@interface LVPagerView : UIScrollView<LVProtocal, LVClassProtocal, UIScrollViewDelegate>
+@interface LVPagerView : UIView<LVProtocal, LVClassProtocal, UIScrollViewDelegate>
 
 
 @property(nonatomic,weak) LView* lv_lview;
