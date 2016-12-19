@@ -1007,23 +1007,23 @@ static int borderDash (lv_State *L) {
 }
 
 #pragma -mark clipsToBounds
-//static int clipsToBounds(lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user ){
-//        UIView* view = (__bridge UIView *)(user->view);
-//        if( view ){
-//            if( lv_gettop(L)>=2 ) {
-//                BOOL yes = lvL_checkbool(L, 2);
-//                view.clipsToBounds = yes;
-//                return 0;
-//            } else {
-//                lv_pushnumber(L, view.clipsToBounds );
-//                return 1;
-//            }
-//        }
-//    }
-//    return 0;
-//}
+static int clipsToBounds(lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if( lv_gettop(L)>=2 ) {
+                BOOL yes = lvL_checkbool(L, 2);
+                view.clipsToBounds = yes;
+                return 0;
+            } else {
+                lv_pushnumber(L, view.clipsToBounds );
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 static int adjustSize(lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1539,6 +1539,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"isShow",    isShow },
     
     {"enabled",    userInteractionEnabled },
+    {"clipsToBounds",    clipsToBounds },
     
     {"backgroundColor",     backgroundColor },
     
