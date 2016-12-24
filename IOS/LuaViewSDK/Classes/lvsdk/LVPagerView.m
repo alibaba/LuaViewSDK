@@ -399,15 +399,13 @@ static int showScrollBar(lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
-        if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
-                BOOL yes1 = lv_toboolean(L, 2);
-                view.showsHorizontalScrollIndicator = yes1;
-                return 0;
-            } else {
-                lv_pushboolean(L, view.showsHorizontalScrollIndicator );
-                return 1;
-            }
+        if( lv_gettop(L)>=2 ) {
+            BOOL yes1 = lv_toboolean(L, 2);
+            view.showsHorizontalScrollIndicator = yes1;
+            return 0;
+        } else {
+            lv_pushboolean(L, view.showsHorizontalScrollIndicator );
+            return 1;
         }
     }
     return 0;
@@ -417,21 +415,19 @@ static int setCurrentPage(lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerView* view = (__bridge LVPagerView *)(user->object);
-        if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
-                int luaPageIdx = lv_tonumber(L, 2);
-                BOOL animated = YES;
-                if( lv_gettop(L)>=3 ) {
-                    animated = lv_toboolean(L, 3);
-                }
-                [view setCurrentPageIdx:unmapPageIdx(luaPageIdx) animation:animated];
-                lv_settop(L, 1);
-                return 1;
-            } else {
-                NSInteger currentPageIdx = view.pageIdx;
-                lv_pushnumber( L, mapPageIdx(currentPageIdx) );
-                return 1;
+        if( lv_gettop(L)>=2 ) {
+            int luaPageIdx = lv_tonumber(L, 2);
+            BOOL animated = YES;
+            if( lv_gettop(L)>=3 ) {
+                animated = lv_toboolean(L, 3);
             }
+            [view setCurrentPageIdx:unmapPageIdx(luaPageIdx) animation:animated];
+            lv_settop(L, 1);
+            return 1;
+        } else {
+            NSInteger currentPageIdx = view.pageIdx;
+            lv_pushnumber( L, mapPageIdx(currentPageIdx) );
+            return 1;
         }
     }
     return 0;
@@ -441,20 +437,18 @@ static int autoScroll(lv_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
-        if([view isKindOfClass: [LVPagerView class]]){
-            NSInteger totalPages = view.cellArray.count;
-            if ( totalPages < 2 ){//小于两个没有效果
-                return 0;
-            }
+        NSInteger totalPages = view.cellArray.count;
+        if ( totalPages < 2 ){//小于两个没有效果
+            return 0;
+        }
+        
+        if(lv_gettop(L) >= 2) {
+            float interval = lv_tonumber(L, 2);
             
-            if(lv_gettop(L) >= 2) {
-                float interval = lv_tonumber(L, 2);
-                
-                if ( interval > 0.02 ) {//start timer
-                    [view startTimer:interval repeat:YES];
-                } else {//stop timer
-                    [view stopTimer];
-                }
+            if ( interval > 0.02 ) {//start timer
+                [view startTimer:interval repeat:YES];
+            } else {//stop timer
+                [view stopTimer];
             }
         }
     }
@@ -465,16 +459,14 @@ static int looping(lv_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
-        if([view isKindOfClass: [LVPagerView class]]){
-            if( lv_gettop(L)>=2 ) {
-            BOOL ret = lv_toboolean(L, 2);
-            view.looping = ret;
-                return 0;
-            } else {
-                BOOL yes = view.looping;
-                lv_pushboolean(L, yes);
-                return 1;
-            }
+        if( lv_gettop(L)>=2 ) {
+        BOOL ret = lv_toboolean(L, 2);
+        view.looping = ret;
+            return 0;
+        } else {
+            BOOL yes = view.looping;
+            lv_pushboolean(L, yes);
+            return 1;
         }
     }
     return 0;
