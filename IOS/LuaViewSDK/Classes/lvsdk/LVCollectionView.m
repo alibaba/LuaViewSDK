@@ -19,9 +19,12 @@
 #import "lVstate.h"
 #import "lVgc.h"
 #import "LVFlowLayout.h"
+#import "LVRefreshHeader.h"
 
 
-// lua 对应的数据 key
+#define NONE_REFRESH    0
+#define NATIVE_REFRESH  1
+#define EMPTY_REFRESH   2
 
 
 @interface LVCollectionView ()
@@ -30,6 +33,32 @@
 
 
 @implementation LVCollectionView
+// 下拉刷新
+-(void) lv_initEmptyRefreshHeader{// 初始化下拉刷新功能
+    LVRefreshHeader* refreshHeader = [[LVRefreshHeader alloc] init];
+    self.lv_refresh_header = refreshHeader;
+    
+    __weak typeof(self) weakSelf = self;
+    refreshHeader.refreshingBlock = ^(){
+        [weakSelf lv_refreshHeaderToRefresh];
+    };
+}
+
+- (void) lv_hiddenRefreshHeader:(BOOL) hidden{
+    self.lv_refresh_header.hidden = hidden;
+}
+
+- (void) lv_beginRefreshing{// 进入刷新状态
+    [self.lv_refresh_header beginRefreshing];
+}
+
+- (void) lv_endRefreshing{// 结束刷新状态
+    [self.lv_refresh_header endRefreshing];
+}
+
+- (BOOL) lv_isRefreshing{// 是否正在刷新
+    return self.lv_refresh_header.isRefreshing;
+}
 
 -(id) init:(lv_State*) l {
     LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
@@ -93,12 +122,22 @@
 
 
 #pragma -mark lvNewCollectionView
-static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
+static int lvNewCollectionView0 (lv_State *L, int refresh) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCollectionView class]];
 
     LVCollectionView* tableView = [[c alloc] init:L];
-    if( refresh ) {
-        [tableView lv_initRefreshHeader];
+    
+    switch(refresh){
+        case NONE_REFRESH:
+            break;
+        case NATIVE_REFRESH:
+            [tableView lv_initRefreshHeader];
+            break;
+            
+        case EMPTY_REFRESH:
+            [tableView lv_initEmptyRefreshHeader];
+            break;
+            
     }
 
     NEW_USERDATA(userData, View);
@@ -120,11 +159,15 @@ static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
 }
 
 static int lvNewCollectionView (lv_State *L) {
-    return lvNewCollectionView0(L, NO);
+    return lvNewCollectionView0(L, NONE_REFRESH);
 }
 
 static int lvNewRefreshCollectionView (lv_State *L) {
-    return lvNewCollectionView0(L, YES);
+    return lvNewCollectionView0(L, NATIVE_REFRESH);
+}
+
+static int lvNewEmptyRefreshCollectionView (lv_State *L) {
+    return lvNewCollectionView0(L, EMPTY_REFRESH);
 }
 
 static int reload (lv_State *L) {
@@ -255,9 +298,16 @@ static int scrollToTop(lv_State *L) {
     // CollectionView
     [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:@"CollectionView"];
     
-    // RefreshCollectionView
-    NSString* refreshName = [NSString stringWithFormat:@"Refresh%@",globalName];
-    [LVUtil reg:L clas:self cfunc:lvNewRefreshCollectionView globalName:refreshName defaultName:@"RefreshCollectionView"];
+    {
+        // RefreshCollectionView
+        NSString* refreshName = [NSString stringWithFormat:@"Refresh%@",globalName];
+        [LVUtil reg:L clas:self cfunc:lvNewRefreshCollectionView globalName:refreshName defaultName:@"RefreshCollectionView"];
+    }
+    {
+        // RefreshCollectionView
+        NSString* refreshName = [NSString stringWithFormat:@"EmptyRefresh%@",globalName];
+        [LVUtil reg:L clas:self cfunc:lvNewEmptyRefreshCollectionView globalName:refreshName defaultName:@"EmptyRefreshCollectionView"];
+    }
     
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
