@@ -5,7 +5,7 @@
 
 
 
-## tag: 2.4.1.13 
+## tag: 2.4.1.13 -> LuaViewSDK 5.5.0
 ### Feature
 * 新加功能：
 * 1.新加cell吸顶 + 视差效果 + 3Dbox
@@ -13,7 +13,21 @@
 * 3.新加CustomView Canvas绘图组件
 * 4.新加onTouch API
 * 5.http -> https
-* 使用范围：聚客，手淘,猫客中使用
+
+
+
+## tag: 2.4.1.15 -> LuaViewSDK 5.7.0
+### Feature
+* 新加功能：
+* 1.PagerView左右留边
+
+
+
+## tag: 2.4.1.8 -> LuaViewSDK 5.8.0
+### Feature
+* 新加功能：
+* 1.功能正常，内容为空的下拉刷新
+
 
 
 
