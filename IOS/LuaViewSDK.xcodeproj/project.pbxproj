@@ -295,6 +295,18 @@
 		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
 		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
 		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
+		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; };
+		91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
+		91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
+		91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA31E11004B0088EFD6 /* LVRefreshConst.h */; };
+		91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA41E11004B0088EFD6 /* LVRefreshConst.m */; };
+		91695AAE1E11004B0088EFD6 /* LVRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA41E11004B0088EFD6 /* LVRefreshConst.m */; };
+		91695AAF1E11004B0088EFD6 /* LVRefreshComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */; };
+		91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */; };
+		91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */; };
+		91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */; };
+		91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
+		91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
@@ -557,6 +569,14 @@
 		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
 		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
 		914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVClassInfo.m; sourceTree = "<group>"; };
+		91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LVRefresh.h"; sourceTree = "<group>"; };
+		91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LVRefresh.m"; sourceTree = "<group>"; };
+		91695AA31E11004B0088EFD6 /* LVRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshConst.h; sourceTree = "<group>"; };
+		91695AA41E11004B0088EFD6 /* LVRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshConst.m; sourceTree = "<group>"; };
+		91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshComponent.h; sourceTree = "<group>"; };
+		91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshComponent.m; sourceTree = "<group>"; };
+		91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshHeader.h; sourceTree = "<group>"; };
+		91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshHeader.m; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGesture.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGesture.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGesture.h; sourceTree = "<group>"; };
@@ -752,6 +772,7 @@
 		844317A01BC6194700968368 /* container */ = {
 			isa = PBXGroup;
 			children = (
+				91695AA01E11003E0088EFD6 /* refresh */,
 				84799AF31BAFECA00070E214 /* LVPagerView.h */,
 				84799AF41BAFECA00070E214 /* LVPagerView.m */,
 				84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */,
@@ -1068,6 +1089,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		91695AA01E11003E0088EFD6 /* refresh */ = {
+			isa = PBXGroup;
+			children = (
+				91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */,
+				91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */,
+				91695AA31E11004B0088EFD6 /* LVRefreshConst.h */,
+				91695AA41E11004B0088EFD6 /* LVRefreshConst.m */,
+				91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */,
+				91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */,
+				91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */,
+				91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */,
+			);
+			name = refresh;
+			sourceTree = "<group>";
+		};
 		91ACCE741AC530CA0034D9B3 /* lvdebug */ = {
 			isa = PBXGroup;
 			children = (
@@ -1126,6 +1162,7 @@
 				84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */,
 				84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */,
 				84C1D83D1C16C44A0058E974 /* LVImage.h in Headers */,
+				91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */,
 				84C1D83E1C16C44A0058E974 /* LVNinePatchImage.h in Headers */,
 				84C1D83F1C16C44A0058E974 /* LVLabel.h in Headers */,
 				84C1D8401C16C44A0058E974 /* LVTextField.h in Headers */,
@@ -1147,6 +1184,7 @@
 				84C1D84F1C16C44A0058E974 /* LVToast.h in Headers */,
 				84C1D8501C16C44A0058E974 /* LVAnimate.h in Headers */,
 				84C1D8511C16C44B0058E974 /* LVStyledString.h in Headers */,
+				91695AAF1E11004B0088EFD6 /* LVRefreshComponent.h in Headers */,
 				84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */,
 				BEEB28D51CA90EC200EC2D86 /* JUFLXLinearLayoutView.h in Headers */,
 				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
@@ -1158,6 +1196,7 @@
 				3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */,
 				84C1D8571C16C44B0058E974 /* LVGesture.h in Headers */,
 				84C1D8581C16C44B0058E974 /* LVLongPressGesture.h in Headers */,
+				91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */,
 				BEEB28D11CA90EC200EC2D86 /* JUFLXNode.h in Headers */,
 				84C1D8591C16C44B0058E974 /* LVPanGesture.h in Headers */,
 				84C1D85A1C16C44B0058E974 /* LVPinchGesture.h in Headers */,
@@ -1191,6 +1230,7 @@
 				84C1D8731C16C44F0058E974 /* lVcode.h in Headers */,
 				84C1D8741C16C44F0058E974 /* lVconf.h in Headers */,
 				84C1D8751C16C4500058E974 /* lVdebug.h in Headers */,
+				91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */,
 				84C1D8761C16C4500058E974 /* lVdo.h in Headers */,
 				84C1D8771C16C4500058E974 /* lVfunc.h in Headers */,
 				84C1D8781C16C4500058E974 /* lVgc.h in Headers */,
@@ -1393,6 +1433,7 @@
 				3CFF78001C74741400847C05 /* lViolib.c in Sources */,
 				3CFF78011C74741400847C05 /* lVlex.c in Sources */,
 				3CFF78021C74741400847C05 /* lVmathlib.c in Sources */,
+				91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
 				3CFF78031C74741400847C05 /* lVmem.c in Sources */,
 				3CFF78041C74741400847C05 /* lVoadlib.c in Sources */,
 				3CFF78051C74741400847C05 /* lVobject.c in Sources */,
@@ -1413,8 +1454,10 @@
 				9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				3CFF78111C74741400847C05 /* lVvm.c in Sources */,
 				3CFF78121C74741400847C05 /* lVzio.c in Sources */,
+				91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
 				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
 				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
+				91695AAE1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
 				3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */,
 				BEEB28E01CA91B8900EC2D86 /* JUFLXNode.m in Sources */,
 				3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */,
@@ -1435,6 +1478,7 @@
 				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
 				3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */,
 				91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */,
+				91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
 				3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */,
 				3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */,
 				3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */,
@@ -1528,6 +1572,7 @@
 				84C1D8211C16C4070058E974 /* lViolib.c in Sources */,
 				84C1D8221C16C4070058E974 /* lVlex.c in Sources */,
 				84C1D8231C16C4070058E974 /* lVmathlib.c in Sources */,
+				91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
 				84C1D8241C16C4070058E974 /* lVmem.c in Sources */,
 				84C1D8251C16C4070058E974 /* lVoadlib.c in Sources */,
 				84C1D8261C16C4070058E974 /* lVobject.c in Sources */,
@@ -1548,8 +1593,10 @@
 				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */,
 				84C1D8321C16C4070058E974 /* lVvm.c in Sources */,
+				91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
 				84C1D8331C16C4070058E974 /* lVzio.c in Sources */,
 				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
+				91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
 				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
 				BEEB28D21CA90EC200EC2D86 /* JUFLXNode.m in Sources */,
 				84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */,
@@ -1570,6 +1617,7 @@
 				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
 				91F678851DF520920042D6FC /* LVCustomView.m in Sources */,
+				91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
 				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,
 				84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */,
 				84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */,
