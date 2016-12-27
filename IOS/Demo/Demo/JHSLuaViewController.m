@@ -49,7 +49,7 @@
     
     self.lv[@"Image"] = [JHSLVImage class];
     self.lv[@"Button"] = [JHSLVButton class];
-    self.lv[@"CollectionView"] = [JHSLVCollectionView class];
+    self.lv[@"RefreshCollectionView"] = [JHSLVCollectionView class];
     
     // 注册 用户面板类型
     self.lv[@"CustomError"] = [JHSLVCustomError class];

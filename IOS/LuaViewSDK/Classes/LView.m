@@ -61,6 +61,7 @@
 #import "LVStyledString.h"
 #import "LVNativeObjBox.h"
 #import "LVCollectionView.h"
+#import "LVEmptyRefreshCollectionView.h"
 #import "LVStruct.h"
 #import "LVNavigation.h"
 #import "LVCustomPanel.h"
@@ -292,6 +293,7 @@ extern char g_debug_lua[];
                 [LVLabel class],
                 [LVScrollView class],
                 [LVCollectionView class],
+                [LVEmptyRefreshCollectionView class],
                 [LVPagerView class],
                 [LVCustomView class],
                 [LVCanvas class],

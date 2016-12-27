@@ -307,6 +307,9 @@
 		91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */; };
 		91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
 		91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
+		91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */; };
+		91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
@@ -577,6 +580,8 @@
 		91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshComponent.m; sourceTree = "<group>"; };
 		91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshHeader.h; sourceTree = "<group>"; };
 		91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshHeader.m; sourceTree = "<group>"; };
+		91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVEmptyRefreshCollectionView.h; sourceTree = "<group>"; };
+		91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVEmptyRefreshCollectionView.m; sourceTree = "<group>"; };
 		9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGesture.h; sourceTree = "<group>"; };
 		9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGesture.m; sourceTree = "<group>"; };
 		91882E891AAD45A400107DFC /* LVPinchGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGesture.h; sourceTree = "<group>"; };
@@ -779,6 +784,8 @@
 				84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */,
 				848CA35D1B29669A00C70321 /* LVCollectionView.h */,
 				848CA35E1B29669A00C70321 /* LVCollectionView.m */,
+				91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */,
+				91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */,
 				848CA3621B29748800C70321 /* LVCollectionViewCell.h */,
 				848CA3631B29748800C70321 /* LVCollectionViewCell.m */,
 				8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */,
@@ -1243,6 +1250,7 @@
 				91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */,
 				84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */,
 				84C1D87F1C16C4520058E974 /* lVparser.h in Headers */,
+				91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */,
 				84C1D8801C16C4520058E974 /* lVstate.h in Headers */,
 				84C1D8811C16C4520058E974 /* lVstring.h in Headers */,
 				84C1D8821C16C4530058E974 /* lVtable.h in Headers */,
@@ -1422,6 +1430,7 @@
 				3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */,
 				3CFF77F71C74741400847C05 /* lVc.c in Sources */,
 				3CFF77F81C74741400847C05 /* lVcode.c in Sources */,
+				91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
 				3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */,
 				3CFF77F91C74741400847C05 /* lVdblib.c in Sources */,
 				3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */,
@@ -1561,6 +1570,7 @@
 				84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */,
 				84C1D8181C16C4070058E974 /* lVc.c in Sources */,
 				84C1D8191C16C4070058E974 /* lVcode.c in Sources */,
+				91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
 				3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */,
 				84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */,
 				84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */,
