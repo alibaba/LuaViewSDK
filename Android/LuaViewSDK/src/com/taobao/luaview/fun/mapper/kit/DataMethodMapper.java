@@ -17,8 +17,8 @@ import java.util.List;
  */
 @LuaViewLib
 public class DataMethodMapper<U extends UDData> extends BaseMethodMapper<U> {
+    private static final String TAG = "DataMethodMapper";
 
-    private static final String TAG = DataMethodMapper.class.getSimpleName();
     private static final String[] sMethods = new String[]{
             "append",//0
             "toString",//1

@@ -1,6 +1,8 @@
 package com.taobao.luaview.userdata.ui;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import com.taobao.android.luaview.R;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.VmVersion;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
@@ -101,7 +104,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
     @Override
     public UDView setBorderDashSize(float dashWidth, float dashGap) {
         final T view = getView();
-        if(view != null){
+        if (view != null) {
             view.setBorderDash(dashWidth, dashGap);
         }
         return this;
@@ -111,7 +114,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
     @Override
     public float getBorderDashWidth() {
         final T view = getView();
-        if(view != null){
+        if (view != null) {
             return view.getBorderDashWidth();
         }
         return 0;
@@ -121,10 +124,38 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
     @Override
     public float getBorderDashGap() {
         final T view = getView();
-        if(view != null){
+        if (view != null) {
             return view.getBorderDashGap();
         }
         return 0;
+    }
+
+    /**
+     * set data
+     *
+     * @param data
+     * @return
+     */
+    public UDImageView setImageBitmap(final byte[] data) {
+        if (data != null) {
+            final T imageView = getView();
+            if (imageView != null) {
+                new SimpleTask1<Bitmap>() {
+                    @Override
+                    protected Bitmap doInBackground(Object... params) {
+                        return BitmapFactory.decodeByteArray(data, 0, data.length);
+                    }
+
+                    @Override
+                    protected void onPostExecute(Bitmap bitmap) {//TODO 这里的bitmap是不经过缓存的，需要考虑
+                        if (bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    }
+                }.execute();
+            }
+        }
+        return this;
     }
 
     /**

@@ -18,7 +18,7 @@ import java.util.List;
 @LuaViewLib
 public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMethodMapper<U> {
 
-    private static final String TAG = UIEditTextMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIEditTextMethodMapper";
     private static final String[] sMethods = new String[]{
             "hint",//0
             "placeholder"//1

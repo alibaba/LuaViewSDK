@@ -17,7 +17,7 @@ import java.util.List;
 @LuaViewLib
 public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> extends UIBaseRecyclerViewMethodMapper<U> {
 
-    private static final String TAG = UIRefreshRecyclerViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIRefreshRecyclerViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "refreshEnable",//0
             "initRefreshing",//1

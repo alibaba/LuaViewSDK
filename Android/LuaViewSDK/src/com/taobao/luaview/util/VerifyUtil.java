@@ -29,7 +29,7 @@ import java.security.spec.X509EncodedKeySpec;
  * @date 15/11/10
  */
 public class VerifyUtil {
-    private static final String TAG = VerifyUtil.class.getSimpleName();
+    private static final String TAG = "VerifyUtil";
     private static final String CACHE_PUBLIC_KEY = AppCache.CACHE_PUBLIC_KEY;
 
     public static final String ALGORITHM_RSA = "RSA";

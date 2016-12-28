@@ -17,7 +17,7 @@ import java.util.List;
 @LuaViewLib
 public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIWebViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIWebViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "loadUrl",  //0
             "canGoBack",

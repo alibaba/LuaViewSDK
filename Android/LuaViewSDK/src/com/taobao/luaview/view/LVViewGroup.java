@@ -1,7 +1,6 @@
 package com.taobao.luaview.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,8 @@ import java.util.ArrayList;
  * @author song
  * @date 15/8/20
  */
-public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGroup {
-    private UDViewGroup mLuaUserdata;
+public class LVViewGroup<T extends UDViewGroup> extends ForegroundRelativeLayout implements ILVViewGroup {
+    protected T mLuaUserdata;
 
     /**
      * Flexbox attributes
@@ -71,23 +70,24 @@ public class LVViewGroup extends ForegroundRelativeLayout implements ILVViewGrou
 
     /**
      * create user data
+     *
      * @param globals
      * @param metaTable
      * @param varargs
      * @return
      */
-    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
-        return new UDViewGroup(this, globals, metaTable, varargs);
+    public T createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+        return (T) (new UDViewGroup(this, globals, metaTable, varargs));
     }
 
     @Override
-    public UDView getUserdata() {
+    public T getUserdata() {
         return mLuaUserdata;
     }
 
     @Override
     public void addLVView(final View view, Varargs a) {
-        if(this != view) {//不能自己加自己
+        if (this != view) {//不能自己加自己
             final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
             LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
         }

@@ -12,6 +12,7 @@ import org.luaj.vm2.lib.LibFunction;
  * @author song
  * @date 15/8/21
  */
+@Deprecated
 public class DownloaderBinder extends BaseFunctionBinder {
 
     public DownloaderBinder() {

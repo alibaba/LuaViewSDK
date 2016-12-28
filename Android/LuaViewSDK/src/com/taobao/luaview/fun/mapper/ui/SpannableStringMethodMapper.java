@@ -18,7 +18,7 @@ import java.util.List;
 @LuaViewLib
 public class SpannableStringMethodMapper<U extends UDSpannableString> extends BaseMethodMapper<U> {
 
-    private static final String TAG = SpannableStringMethodMapper.class.getSimpleName();
+    private static final String TAG = "SpannableStringMethodMapper";
     private static final String[] sMethods = new String[]{
             "append"//0
     };

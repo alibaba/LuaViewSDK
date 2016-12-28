@@ -14,7 +14,7 @@ import com.taobao.luaview.cache.WeakCache;
  * @date 15/9/9
  */
 public class DrawableUtil {
-    private static final String TAG = DrawableUtil.class.getSimpleName();
+    private static final String TAG = "DrawableUtil";
 
     /**
      * get drawable by path

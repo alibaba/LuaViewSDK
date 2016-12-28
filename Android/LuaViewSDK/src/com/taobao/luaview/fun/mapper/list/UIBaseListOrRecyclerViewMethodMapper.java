@@ -20,7 +20,7 @@ import java.util.List;
  */
 @LuaViewLib
 public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup> extends UIViewGroupMethodMapper<U> {
-    private static final String TAG = UIBaseListOrRecyclerViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIBaseListOrRecyclerViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "reload",//0
             "contentSize",//1

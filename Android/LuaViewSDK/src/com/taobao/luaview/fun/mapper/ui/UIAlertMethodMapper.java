@@ -16,7 +16,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class UIAlertMethodMapper<U extends UDAlert> extends BaseMethodMapper<U> {
-    private static final String TAG = UIAlertMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIAlertMethodMapper";
 
     @Override
     public List<String> getAllFunctionNames() {

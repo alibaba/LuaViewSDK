@@ -12,8 +12,8 @@ import com.taobao.luaview.cache.SimpleCache;
  * @date 15/11/6
  */
 public class TypefaceUtil {
-    private static final String TAG = TypefaceUtil.class.getSimpleName();
-    private static final String TAG_TYPEFACE_NAME = TypefaceUtil.class.getSimpleName() + "_NAME";
+    private static final String TAG = "TypefaceUtil";
+    private static final String TAG_TYPEFACE_NAME = "TypefaceUtil_NAME";
 
     /**
      * 未知

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class UIListViewMethodMapper<U extends UDListView> extends UIBaseListViewMethodMapper<U> {
-    private static final String TAG = UIListViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIListViewMethodMapper";
 
     @Override
     public List<String> getAllFunctionNames() {

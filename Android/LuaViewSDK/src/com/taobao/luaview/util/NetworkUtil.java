@@ -15,7 +15,7 @@ import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
  * @author song
  */
 public class NetworkUtil {
-    private static final String TAG = NetworkUtil.class.getSimpleName();
+    private static final String TAG = "NetworkUtil";
 
     //ConnectionChangeListener
     private static ConnectionStateChangeBroadcastReceiver sConnectionBroadcastReceiver;

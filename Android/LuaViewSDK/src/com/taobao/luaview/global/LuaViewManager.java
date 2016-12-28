@@ -8,16 +8,18 @@ import com.taobao.luaview.fun.binder.constants.FontStyleBinder;
 import com.taobao.luaview.fun.binder.constants.FontWeightBinder;
 import com.taobao.luaview.fun.binder.constants.GravityBinder;
 import com.taobao.luaview.fun.binder.constants.InterpolatorBinder;
+import com.taobao.luaview.fun.binder.constants.PaintStyleBinder;
 import com.taobao.luaview.fun.binder.constants.PinnedBinder;
 import com.taobao.luaview.fun.binder.constants.ScaleTypeBinder;
 import com.taobao.luaview.fun.binder.constants.TextAlignBinder;
+import com.taobao.luaview.fun.binder.constants.TouchEventBinder;
 import com.taobao.luaview.fun.binder.constants.ViewEffectBinder;
 import com.taobao.luaview.fun.binder.indicator.UICircleViewPagerIndicatorBinder;
 import com.taobao.luaview.fun.binder.indicator.UICustomViewPagerIndicatorBinder;
 import com.taobao.luaview.fun.binder.kit.ActionBarBinder;
 import com.taobao.luaview.fun.binder.kit.AudioBinder;
 import com.taobao.luaview.fun.binder.kit.DataBinder;
-import com.taobao.luaview.fun.binder.kit.DownloaderBinder;
+import com.taobao.luaview.fun.binder.kit.FileBinder;
 import com.taobao.luaview.fun.binder.kit.JsonBinder;
 import com.taobao.luaview.fun.binder.kit.SystemBinder;
 import com.taobao.luaview.fun.binder.kit.TimerBinder;
@@ -29,6 +31,7 @@ import com.taobao.luaview.fun.binder.ui.UIAlertBinder;
 import com.taobao.luaview.fun.binder.ui.UIAnimatorBinder;
 import com.taobao.luaview.fun.binder.ui.UIAnimatorSetBinder;
 import com.taobao.luaview.fun.binder.ui.UIButtonBinder;
+import com.taobao.luaview.fun.binder.ui.UICustomViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIEditTextBinder;
 import com.taobao.luaview.fun.binder.ui.UIHorizontalScrollViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIImageViewBinder;
@@ -45,7 +48,6 @@ import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
 import com.taobao.luaview.fun.binder.ui.UIWebViewBinder;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
@@ -68,7 +70,6 @@ import java.util.List;
  * @date 15/8/14
  */
 public class LuaViewManager {
-    private static final String TAG = LuaViewManager.class.getSimpleName();
     private static final String CACHE_METATABLES = AppCache.CACHE_METATABLES;
 
     /**
@@ -115,6 +116,7 @@ public class LuaViewManager {
         globals.tryLazyLoad(new SpannableStringBinder());
 
         globals.tryLazyLoad(new UIWebViewBinder());
+        globals.tryLazyLoad(new UICustomViewBinder());
 
         //animation
         globals.tryLazyLoad(new UIAnimatorBinder());
@@ -127,7 +129,7 @@ public class LuaViewManager {
         globals.tryLazyLoad(new TimerBinder());
         globals.tryLazyLoad(new SystemBinder());
         globals.tryLazyLoad(new ActionBarBinder());
-        globals.tryLazyLoad(new DownloaderBinder());
+        globals.tryLazyLoad(new FileBinder());
         globals.tryLazyLoad(new UnicodeBinder());
         globals.tryLazyLoad(new DataBinder());
         globals.tryLazyLoad(new JsonBinder());
@@ -145,6 +147,8 @@ public class LuaViewManager {
         globals.tryLazyLoad(new InterpolatorBinder());
         globals.tryLazyLoad(new ViewEffectBinder());//view特效
         globals.tryLazyLoad(new PinnedBinder());
+        globals.tryLazyLoad(new PaintStyleBinder());
+        globals.tryLazyLoad(new TouchEventBinder());
     }
 
     //----------------------------------------bind methods------------------------------------------

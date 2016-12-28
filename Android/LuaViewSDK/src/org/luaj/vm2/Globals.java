@@ -122,9 +122,6 @@ import java.util.Stack;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-    private static final String TAG = Globals.class.getSimpleName();
-    private static final String CACHE_PROTOTYPE = AppCache.CACHE_PROTOTYPE;
-
     /**
      * Android parent view
      */
@@ -250,7 +247,7 @@ public class Globals extends LuaTable {
             LuaResourceFinder luaFinder = getLuaResourceFinder();
             StringBuffer sb = new StringBuffer();
             if (luaFinder != null) {
-                sb.append(luaFinder.getBasePath()).append(filename);
+                sb.append(luaFinder.getBaseBundlePath()).append(filename);
             } else {
                 sb.append(this.hashCode()).append("@").append(filename);
             }

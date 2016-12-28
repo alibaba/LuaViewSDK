@@ -22,7 +22,7 @@ import java.util.List;
 @LuaViewLib
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIViewGroupMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIViewGroupMethodMapper";
     private static final String[] sMethods = new String[]{
             "onShow",//0
             "onHide",//1
@@ -32,7 +32,7 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
             "removeView",//5
             "removeAllViews",//6
             "children",//7
-            "flexChildren"//8
+            "flexChildren",//8
     };
 
     @Override
@@ -69,7 +69,6 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
     //--------------------------------------- API --------------------------------------------------
 
 
-
     /**
      * onShow
      *
@@ -78,19 +77,19 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @return
      */
     public LuaValue onShow(U view, Varargs varargs) {
-        if(varargs.narg() > 1){
+        if (varargs.narg() > 1) {
             return setOnShow(view, varargs);
         } else {
             return getOnShow(view, varargs);
         }
     }
 
-    public LuaValue setOnShow(U view, Varargs varargs){
+    public LuaValue setOnShow(U view, Varargs varargs) {
         final LuaValue callbacks = varargs.optvalue(2, NIL);
         return view.setOnShowCallback(callbacks);
     }
 
-    public LuaValue getOnShow(U view, Varargs varargs){
+    public LuaValue getOnShow(U view, Varargs varargs) {
         return view.getOnShowCallback();
     }
 
@@ -102,19 +101,19 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @return
      */
     public LuaValue onHide(U view, Varargs varargs) {
-        if(varargs.narg() > 1){
+        if (varargs.narg() > 1) {
             return setOnHide(view, varargs);
         } else {
             return getOnHide(view, varargs);
         }
     }
 
-    public LuaValue setOnHide(U view, Varargs varargs){
+    public LuaValue setOnHide(U view, Varargs varargs) {
         final LuaValue callbacks = varargs.optvalue(2, NIL);
         return view.setOnHideCallback(callbacks);
     }
 
-    public LuaValue getOnHide(U view, Varargs varargs){
+    public LuaValue getOnHide(U view, Varargs varargs) {
         return view.getOnHideCallback();
     }
 
@@ -126,19 +125,19 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @return
      */
     public LuaValue onBack(U view, Varargs varargs) {
-        if(varargs.narg() > 1){
+        if (varargs.narg() > 1) {
             return setOnBack(view, varargs);
         } else {
             return getOnBack(view, varargs);
         }
     }
 
-    public LuaValue setOnBack(U view, Varargs varargs){
+    public LuaValue setOnBack(U view, Varargs varargs) {
         final LuaValue callbacks = varargs.optvalue(2, NIL);
         return view.setOnBackCallback(callbacks);
     }
 
-    public LuaValue getOnBack(U view, Varargs varargs){
+    public LuaValue getOnBack(U view, Varargs varargs) {
         return view.getOnBackCallback();
     }
 
@@ -150,19 +149,19 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @return
      */
     public LuaValue onLayout(U view, Varargs varargs) {
-        if(varargs.narg() > 1){
+        if (varargs.narg() > 1) {
             return setOnLayout(view, varargs);
         } else {
             return getOnLayout(view, varargs);
         }
     }
 
-    public LuaValue setOnLayout(U view, Varargs varargs){
+    public LuaValue setOnLayout(U view, Varargs varargs) {
         final LuaValue callbacks = varargs.optvalue(2, NIL);
         return view.setOnLayoutCallback(callbacks);
     }
 
-    public LuaValue getOnLayout(U view, Varargs varargs){
+    public LuaValue getOnLayout(U view, Varargs varargs) {
         return view.getOnLayoutCallback();
     }
 
@@ -231,7 +230,7 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
         for (int i = 2; i <= varargs.narg(); i++) {
             LuaValue luaValue = varargs.optvalue(i, null);
             if (luaValue != null && luaValue instanceof UDView) {
-                flexChildren.add((UDView)luaValue);
+                flexChildren.add((UDView) luaValue);
             }
         }
         view.setChildNodeViews(flexChildren);

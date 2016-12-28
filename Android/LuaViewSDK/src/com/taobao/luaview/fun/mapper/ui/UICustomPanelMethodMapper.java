@@ -20,7 +20,7 @@ import java.util.List;
 @LuaViewLib
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
+    private static final String TAG = "UICustomPanelMethodMapper";
     private static final String[] sMethods = new String[]{
             "nativeView",//0
             "getNativeView"//1

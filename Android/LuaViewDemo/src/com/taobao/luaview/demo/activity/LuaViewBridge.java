@@ -1,6 +1,8 @@
 package com.taobao.luaview.demo.activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 
 import com.taobao.luaview.util.LogUtil;
 
@@ -21,12 +23,20 @@ import java.util.Map;
  * 下午2:31 song XXX
  */
 public class LuaViewBridge {
-    private static final String TAG = LuaViewBridge.class.getSimpleName();
-
     private Activity mActivity;
 
     public LuaViewBridge(Activity activity) {
         this.mActivity = activity;
+    }
+
+    public void openPage(String pageUri){
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(pageUri));
+        mActivity.startActivity(intent);
+    }
+
+    public boolean isLogin(){
+        return true;
     }
 
     public Map<String, String> testMap() {

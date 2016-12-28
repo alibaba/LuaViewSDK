@@ -22,7 +22,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class UICircleViewPagerIndicatorMethodMapper<U extends UDCircleViewPagerIndicator> extends UIViewMethodMapper<U> {
-    private static final String TAG = UICircleViewPagerIndicatorMethodMapper.class.getSimpleName();
+    private static final String TAG = "UICircleViewPagerIndicatorMethodMapper";
     private static final String[] sMethods = new String[]{
             "unselectedColor",//0
             "selectedColor",//1

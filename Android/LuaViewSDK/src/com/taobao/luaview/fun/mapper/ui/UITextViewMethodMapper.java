@@ -1,12 +1,12 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDEllipsize;
 import com.taobao.luaview.userdata.ui.UDTextView;
 import com.taobao.luaview.util.ColorUtil;
+import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @LuaViewLib
 public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UITextViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UITextViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "text",//0
             "textColor",//1
@@ -28,7 +28,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
             "font",//5
             "gravity",//6
             "textAlign",//7
-            "lines",//8
+            "lines",//8 TODO iOS没有这个方法
             "maxLines",//9
             "lineCount",//10
             "minLines",//11
@@ -81,7 +81,6 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     //--------------------------------------- API --------------------------------------------------
-
 
 
     /**
@@ -150,7 +149,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
     }
 
     public LuaValue setTextSize(U view, Varargs varargs) {
-        final float fontSize = (float) varargs.optdouble(2, 12.0);
+        final float fontSize = (float) varargs.optdouble(2, 12.0);//TODO 这里需要转sp么？
         return view.setTextSize(fontSize);
     }
 

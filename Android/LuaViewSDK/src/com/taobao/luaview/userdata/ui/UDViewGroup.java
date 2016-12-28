@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.global.LuaViewManager;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
@@ -113,7 +112,6 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
     public LuaValue callOnLayout() {
         return LuaUtil.callFunction(mOnLayout);
     }
-
 
     /**
      * add a subview

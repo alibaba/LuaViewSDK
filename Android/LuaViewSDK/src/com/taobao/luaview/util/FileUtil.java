@@ -26,11 +26,11 @@ public class FileUtil {
      * @param folderPath
      * @return
      */
-    public static boolean isContainsFolderPath(final String filePath, final String folderPath) {
+    public static boolean isContainsFolderPath(final String filePath, final String folderPath) {//TODO ../../目录处理
         if (filePath != null && folderPath != null) {//filePath本身是folder，并且包含folderPath
             if (folderPath.charAt(folderPath.length() - 1) == '/') {//本身是路径
-                filePath.startsWith(folderPath);
-            } else {
+                return filePath.startsWith(folderPath);
+            } else {//非路径的话需要判断路径
                 return filePath.startsWith(folderPath + "/");
             }
         }
@@ -177,6 +177,28 @@ public class FileUtil {
         return nameOrPath;
     }
 
+
+    /**
+     * get filepath
+     *
+     * @param filepath
+     * @return
+     */
+    public static String getCanonicalPath(String filepath) {
+        if (filepath != null) {
+            if (filepath.contains("../")) {
+                try {
+                    return new File(filepath).getCanonicalPath();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return filepath;
+            }
+        }
+        return null;
+    }
+
     /**
      * 不包含父路径，有父路径的话则去掉父路径
      *
@@ -237,7 +259,7 @@ public class FileUtil {
      * @return
      */
     public static byte[] readBytes(File f) {
-        if (f != null) {
+        if (f != null && f.exists() && f.isFile()) {
             InputStream inputStream = null;
             try {
                 inputStream = new FileInputStream(f);
@@ -263,17 +285,20 @@ public class FileUtil {
      * @param path file path with file name
      * @param data data to saved
      */
-    public static void save(final String path, final byte[] data) {
+    public static boolean save(final String path, final byte[] data) {
         if (!TextUtils.isEmpty(path) && data != null && data.length > 0) {
             FileOutputStream out = null;
             try {
                 File destFile = createFile(path);
                 out = new FileOutputStream(destFile);
                 out.write(data);
+                return true;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                return false;
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             } finally {
                 try {
                     if (out != null) {
@@ -285,6 +310,7 @@ public class FileUtil {
                 }
             }
         }
+        return false;
     }
 
     /**

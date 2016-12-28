@@ -3,6 +3,7 @@ package com.taobao.luaview.demo.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.taobao.luaview.activity.LuaViewActivity;
 import com.taobao.luaview.demo.provider.GlideImageProvider;
 import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
@@ -10,13 +11,15 @@ import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
+import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.JsonUtil;
 import com.taobao.luaview.util.LogUtil;
-import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVLoadingDialog;
 
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 通过LuaView、注入bridge对象，实现Lua-Java通信
@@ -27,7 +30,7 @@ import org.luaj.vm2.LuaValue;
  * 修改描述
  * 下午4:50 song XXX
  */
-public class DemoLuaViewActivity extends Activity {
+public class DemoLuaViewActivity extends LuaViewActivity {
     private LuaView mLuaView;
     private LVLoadingDialog mDialog;
 
@@ -70,6 +73,7 @@ public class DemoLuaViewActivity extends Activity {
      * 加载数据
      */
     public void load(final LuaView luaView) {
+        LogUtil.timeStart("plain code");
         luaView.load(getLuaUri(), new LuaScriptLoader.ScriptExecuteCallback() {
             @Override
             public boolean onScriptPrepared(ScriptBundle bundle) {
@@ -83,6 +87,7 @@ public class DemoLuaViewActivity extends Activity {
 
             @Override
             public void onScriptExecuted(String uri, boolean executedSuccess) {
+                LogUtil.timeEnd("plain code");
                 //测试调用 lua function
                 LogUtil.d("call-lua-function return:", luaView.callLuaFunction("global_fun_test1", 1, "a", 0.1));
                 LogUtil.d("call-lua-function return:", JsonUtil.toString(luaView.callLuaFunction("global_fun_test2", 2, "b", 0.2)));
@@ -92,7 +97,23 @@ public class DemoLuaViewActivity extends Activity {
         });
 
         //load bytecode directly
-//        luaView.loadAssets("test/lvp/UI_Window.luap");
+//        LogUtil.timeStart("prototype");
+//        luaView.loadPrototype(AssetUtil.open(this, "test/lvp/UI_Window.luap"), "UI_window", new LuaScriptLoader.ScriptExecuteCallback() {
+//            @Override
+//            public boolean onScriptPrepared(ScriptBundle bundle) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onScriptCompiled(LuaValue value, LuaValue context, LuaValue view) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onScriptExecuted(String uri, boolean executedSuccess) {
+//                LogUtil.timeEnd("prototype");
+//            }
+//        });
     }
 
     /**

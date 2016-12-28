@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author song
  */
 public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
-    private static final String TAG = ConnectionStateChangeBroadcastReceiver.class.getSimpleName();
     private ConcurrentHashMap<Integer, WeakReference<OnConnectionChangeListener>> mOnConnectionChangeListeners;
 
     public interface OnConnectionChangeListener {

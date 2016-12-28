@@ -20,7 +20,7 @@ import java.util.List;
 @LuaViewLib
 public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UILoadingViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UILoadingViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "start",//0
             "isStart",//1

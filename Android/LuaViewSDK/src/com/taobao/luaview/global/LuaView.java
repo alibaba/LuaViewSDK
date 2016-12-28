@@ -382,7 +382,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 final LuaValue activity = CoerceJavaToLua.coerce(getContext());
                 final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
                 if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
-                    executeScript(value, activity, viewObj, null);
+                    executeScript(value, activity, viewObj, callback);
                 }
             }
         }.execute();

@@ -21,7 +21,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
-    private static final String TAG = TimerMethodMapper.class.getSimpleName();
+    private static final String TAG = "TimerMethodMapper";
     private static final String[] sMethods = new String[]{
             "delay",//0
             "repeat",//1

@@ -20,7 +20,7 @@ import java.util.List;
  */
 @LuaViewLib
 public class VibratorMethodMapper<U extends UDVibrator> extends BaseMethodMapper<U> {
-    private static final String TAG = VibratorMethodMapper.class.getSimpleName();
+    private static final String TAG = "VibratorMethodMapper";
     private static final String[] sMethods = new String[]{
             "hasVibrator",//0
             "vibrate",//1
