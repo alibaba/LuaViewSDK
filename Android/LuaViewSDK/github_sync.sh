@@ -1,3 +1,8 @@
+if [ ! -n "$1" ]; then
+  echo "必须指定需要的同步的分支, sh github_sync.sh branch_name"
+  exit 0;
+fi
+
 GIT_MERGE="git merge $1"
 
 echo "save current branch changes:"
