@@ -75,6 +75,8 @@ extern const char* LVType_AudioPlayer;
 extern const char* LVType_StyledString;
 extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
+extern const char* LVType_Canvas;
+extern const char* LVType_Event;
 
 
 //----------------View的用户数据结构------------------------------------------------
@@ -92,48 +94,65 @@ typedef struct _LVUserDataInfo {
 - (id) lv_nativeObject; // 返回native对象
 @end
 
+@protocol LVClassProtocal <NSObject>
+@required
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
+
+@end
+
 
 //-----------------------metatable------------------------------------------------
-#define META_TABLE_UIButton         "UI.Button"
-#define META_TABLE_UIScrollView     "UI.ScrollView"
-#define META_TABLE_UIView           "UI.View"
-#define META_TABLE_LuaView           "UI.LuaView"
-#define META_TABLE_UIViewNewIndex   "UI.View.NewIndex"
-#define META_TABLE_Timer            "LV.Timer"
-#define META_TABLE_Http             "LV.Http"
-#define META_TABLE_Gesture          "LV.GestureRecognizer"
-#define META_TABLE_PanGesture       "LV.Pan.GestureRecognizer"
-#define META_TABLE_TapGesture       "LV.Tap.GestureRecognizer"
-#define META_TABLE_PinchGesture     "LV.Pinch.GestureRecognizer"
-#define META_TABLE_RotaionGesture   "LV.Rotaion.GestureRecognizer"
-#define META_TABLE_SwipeGesture     "LV.Swipe.GestureRecognizer"
-#define META_TABLE_LongPressGesture "LV.LongPress.GestureRecognizer"
-#define META_TABLE_Date             "LV.Date"
-#define META_TABLE_Data             "LV.Data"
-#define META_TABLE_UIPageControl    "UI.PageControl"
-#define META_TABLE_UIActivityIndicatorView    "UI.UIActivityIndicator"
-#define META_TABLE_UICustomPanel        "UI.CustomPanel"
-#define META_TABLE_UIImageView      "UI.ImageView"
-#define META_TABLE_UILabel          "UI.Label"
-#define META_TABLE_UITextField      "UI.TextField"
-#define META_TABLE_UITableView      "UI.TableView"
-#define META_TABLE_UITableViewCell  "UI.TableView.Cell"
-#define META_TABLE_UICollectionView      "UI.CollectionView"
-#define META_TABLE_UICollectionViewCell  "UI.CollectionView.Cell"
-#define META_TABLE_UIPageView       "UI.PagerView"
-#define META_TABLE_UIAlertView      "UI.AlertView"
-#define META_TABLE_Transform3D      "UI.Transfrom3D"
-#define META_TABLE_Animator         "UI.Animator"
-#define META_TABLE_Struct           "UI.Struct"
-#define META_TABLE_Downloader       "LV.Downloader"
-#define META_TABLE_AudioPlayer      "LV.AudioPlayer"
-#define META_TABLE_AttributedString "LV.AttributedString"
-#define META_TABLE_NativeObject     "LV.nativeObjBox"
-#define META_TABLE_System           "LV.System"
+#define META_TABLE_UIButton             "UI.Button"
+#define META_TABLE_UIScrollView         "UI.ScrollView"
+#define META_TABLE_UIView               "UI.View"
+#define META_TABLE_LuaView              "UI.LuaView"
+#define META_TABLE_CustomPanel          "UI.CustomPanel"
+#define META_TABLE_CustomView           "UI.CustomView"
+#define META_TABLE_Canvas               "UI.Canvas"
+#define META_TABLE_Event                "UI.Event"
+#define META_TABLE_EventFunc            "UI.EventFunc"
+#define META_TABLE_UIViewNewIndex       "UI.View.NewIndex"
+#define META_TABLE_PagerIndicator       "UI.PagerIndicator"
+#define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"
+#define META_TABLE_UIImageView          "UI.ImageView"
+#define META_TABLE_UIWebView            "UI.WebView"
+#define META_TABLE_UILabel              "UI.Label"
+#define META_TABLE_UITextField          "UI.TextField"
+#define META_TABLE_UITableView          "UI.TableView"
+#define META_TABLE_UITableViewCell      "UI.TableView.Cell"
+#define META_TABLE_UICollectionView     "UI.CollectionView"
+#define META_TABLE_UICollectionViewCell "UI.CollectionView.Cell"
+#define META_TABLE_UIPageView           "UI.PagerView"
+#define META_TABLE_UIAlertView          "UI.AlertView"
+#define META_TABLE_Transform3D          "UI.Transfrom3D"
+#define META_TABLE_Animator             "UI.Animator"
 
-#define STR_CALLBACK "Callback"
-#define STR_ON_LAYOUT "onLayout"
-#define STR_ON_CLICK "onClick"
+#define META_TABLE_Timer                "LV.Timer"
+#define META_TABLE_Http                 "LV.Http"
+#define META_TABLE_Gesture              "LV.Gesture"
+#define META_TABLE_PanGesture           "LV.Pan.Gesturer"
+#define META_TABLE_TapGesture           "LV.Tap.Gesture"
+#define META_TABLE_PinchGesture         "LV.Pinch.Gesture"
+#define META_TABLE_RotaionGesture       "LV.Rotaion.Gesture"
+#define META_TABLE_SwipeGesture         "LV.Swipe.Gesture"
+#define META_TABLE_LongPressGesture     "LV.LongPress.Gesture"
+#define META_TABLE_Date                 "LV.Date"
+#define META_TABLE_Data                 "LV.Data"
+#define META_TABLE_Struct               "LV.Struct"
+#define META_TABLE_Downloader           "LV.Downloader"
+#define META_TABLE_AudioPlayer          "LV.AudioPlayer"
+#define META_TABLE_AttributedString     "LV.AttributedString"
+#define META_TABLE_NativeObject         "LV.nativeObjBox"
+#define META_TABLE_System               "LV.System"
+
+#define STR_CALLBACK    "Callback"
+#define STR_ON_LAYOUT   "onLayout"
+#define STR_ON_CLICK    "onClick"
+#define STR_ON_DRAW     "onDraw"
+#define STR_ON_TOUCH    "onTouch"
+#define STR_onPageStarted   "onPageStarted"
+#define STR_onPageFinished  "onPageFinished"
+#define STR_onReceivedError "onReceivedError"
 
 // lua对象 -> NSString
 NSString* lv_paramString(lv_State* L, int idx );
@@ -189,5 +208,9 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #import "UIView+LuaView.h"
 #import "UIScrollView+LuaView.h"
 #import "LVBundle.h"
+
+#define EFFECT_NONE     0
+#define EFFECT_CLICK    1
+#define EFFECT_PARALLAX 2
 
 #endif

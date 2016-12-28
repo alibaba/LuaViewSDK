@@ -105,6 +105,10 @@ static BOOL __disableReloadKeyCommand = NO;
     
     self.lv = [[LView alloc] initWithFrame:rect];
     self.lv.viewController = self;
+    
+    if( self.luaviewRegister ) {
+        self.luaviewRegister(self.lv);
+    }
 
     [self didCreateLuaView:self.lv];
     

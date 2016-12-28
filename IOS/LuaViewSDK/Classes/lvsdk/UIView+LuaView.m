@@ -52,6 +52,20 @@
     }
 }
 
+-(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
+    lv_State* L = self.lv_lview.l;
+    if( L ){
+        lv_checkstack(L, (int)args.count*2 + 2);
+        
+        for( int i=0; i<args.count; i++ ){
+            id obj = args[i];
+            lv_pushNativeObject(L,obj);
+        }
+        lv_getglobal(L, functionName.UTF8String);// function
+        return lv_runFunctionWithArgs(L, (int)args.count, 0);
+    }
+    return nil;
+}
 -(BOOL) lv_isCallbackAddClickGesture{
     return NO;
 }
@@ -75,20 +89,6 @@
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
         if( lv_type(L, -1)==LV_TTABLE ) {
             lv_getfield(L, -1, STR_ON_CLICK);
-        }
-        lv_runFunction(L);
-        lv_settop(L, num);
-    }
-}
-
-- (void) lv_runCallBack:(const char*) key{
-    lv_State* L = self.lv_lview.l;
-    if( L && self.lv_userData ){
-        int num = lv_gettop(L);
-        lv_pushUserdata(L, self.lv_userData);
-        lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-        if( lv_type(L, -1)==LV_TTABLE && key ) {
-            lv_getfield(L, -1, key);
         }
         lv_runFunction(L);
         lv_settop(L, num);
@@ -146,5 +146,54 @@
     return self;
 }
 
+-(CAShapeLayer*) lv_shapeLayer{
+    return nil;
+}
+
+-(void) setLv_shapeLayer:(CAShapeLayer *)lv_shapeLayer{
+}
+
+-(CALayer*) lv_layer{
+    if( self.lv_shapeLayer ){
+        return self.lv_shapeLayer;
+    }
+    return self.layer;
+}
+
+-(void) lv_createShapelayer:(NSArray<NSNumber*>*)arr{
+    [self.lv_shapeLayer removeFromSuperlayer];
+    self.lv_shapeLayer = nil;
+    
+    CAShapeLayer *borderLayer = [CAShapeLayer layer];
+    borderLayer.bounds = self.bounds;
+    borderLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    borderLayer.lineWidth = self.layer.borderWidth;
+    
+    borderLayer.fillColor = [UIColor clearColor].CGColor;
+    borderLayer.strokeColor = self.layer.borderColor;
+    borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:borderLayer.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    borderLayer.lineDashPattern = arr;
+    self.lv_shapeLayer = borderLayer;
+    
+    if( self.lv_shapeLayer ) {
+        self.layer.borderColor = [UIColor clearColor].CGColor;
+        [self.layer addSublayer:self.lv_shapeLayer];
+    }
+}
+
+-(void) lv_effectParallax:(CGFloat)dx dy:(CGFloat)dy{
+    // 视差效果
+}
+
+-(void) lv_effectClick:(NSInteger)color alpha:(CGFloat)alpha{
+    // 点击特效
+}
+
+-(BOOL) lv_canvas{
+    return NO;
+}
+
+-(void) setLv_canvas:(BOOL)lv_canvas{
+}
 
 @end

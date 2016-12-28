@@ -87,7 +87,9 @@
 
 #pragma -mark lvNewTextField
 static int lvNewTextField (lv_State *L) {
-    LVTextField* textFiled = [[LVTextField alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTextField class]];
+    
+    LVTextField* textFiled = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(textFiled);
@@ -181,11 +183,9 @@ static int placeholder (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewTextField);
-        lv_setglobal(L, "TextField");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewTextField globalName:globalName defaultName:@"TextField"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},

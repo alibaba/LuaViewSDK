@@ -1,7 +1,8 @@
 
 w,h = System.screenSize();
 
-player = AudioPlayer("http://g.tbcdn.cn/ju/lua/1.2.0/shake.js");
+player = AudioPlayer("http://fm111.img.xiaonei.com/tribe/20070613/10/52/A314269027058MUS.mp3");
+--player = AudioPlayer("http://g.tbcdn.cn/ju/lua/1.2.0/shake.js");
 
 button = Button();
 button.title("播放音效");
@@ -13,3 +14,4 @@ button.callback( function()
 	end
 end)
 
+player.play();

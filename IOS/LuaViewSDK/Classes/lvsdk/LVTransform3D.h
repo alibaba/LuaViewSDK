@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVTransform3D : NSObject<LVProtocal>
+@interface LVTransform3D : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
@@ -17,7 +17,7 @@
 
 @property(nonatomic,assign) CATransform3D transform;
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 +(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t;
 

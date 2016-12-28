@@ -25,6 +25,8 @@
 #pragma mark -LuaView 类加载脚本调用接口
 @interface LView : UIView
 
+@property(nonatomic,copy) NSArray* registerClasses;
+
 @property(nonatomic,weak) id<LVCallback> callback; //用于LuaView回调( luaView大小改变 等回调)
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
@@ -111,6 +113,17 @@
  */
 -(void) releaseLuaView;
 
+/**
+ *  Layer模式优化性能
+ */
+@property (nonatomic,assign) BOOL closeLayerMode;
+
+
+/**
+ *  图片首次出现是否使用动画
+ */
+@property (nonatomic,assign) BOOL disableAnimate;
+
 @end
 
 
@@ -156,7 +169,6 @@
 - (void) registerObject:(id) object forName:(NSString*) name weakMode:(BOOL) weakMode;// 注册改对象的所有api
 - (void) unregisteObjectForName:(NSString*) name;// 取消注册对象
 
-- (void) registerCustomPanel:(Class) c boundName:(NSString*) boundName;
 @end
 
 

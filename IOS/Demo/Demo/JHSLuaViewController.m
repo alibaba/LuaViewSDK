@@ -11,7 +11,6 @@
 #import "JHSLVCustomError.h"
 #import "JHSLVCustomLoading.h"
 #import "JHSLVCollectionView.h"
-#import "JHSLVTableView.h"
 #import "JHSLVButton.h"
 #import "JHSLVImage.h"
 
@@ -27,11 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [LVButton setDefaultStyle:[JHSLVButton class]];
-    [LVImage setDefaultStyle:[JHSLVImage class]];
-    [LVCollectionView setDefaultStyle:[JHSLVCollectionView class]];
-    [LVTableView setDefaultStyle:[JHSLVTableView class]];
     
     //摇一摇本地代码
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
@@ -53,6 +47,10 @@
 - (void)didCreateLuaView:(LView *)view {
     [super didCreateLuaView:view];
     
+    self.lv[@"Image"] = [JHSLVImage class];
+    self.lv[@"Button"] = [JHSLVButton class];
+    self.lv[@"RefreshCollectionView"] = [JHSLVCollectionView class];
+    
     // 注册 用户面板类型
     self.lv[@"CustomError"] = [JHSLVCustomError class];
     self.lv[@"CustomLoading"] = [JHSLVCustomLoading class];
@@ -67,11 +65,9 @@
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.lv viewDidAppear];
 }
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.lv viewDidDisAppear];
 }
 
 /**

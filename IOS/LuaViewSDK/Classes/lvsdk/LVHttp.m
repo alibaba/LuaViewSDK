@@ -133,7 +133,9 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 }
 
 static int lvNewHttpObject (lv_State *L ) {
-    LVHttp* http = [[LVHttp alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVHttp class]];
+    
+    LVHttp* http = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, Http);
         userData->object = CFBridgingRetain(http);
@@ -292,7 +294,7 @@ static int cancel (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         const struct lvL_reg memberFunctions [] = {
             {"__gc", __gc },
@@ -315,10 +317,7 @@ static int cancel (lv_State *L) {
         
         lvL_openlib(L, NULL, memberFunctions, 0);
     }
-    {
-        lv_pushcfunction(L, lvNewHttpObject );
-        lv_setglobal(L, "Http");
-    }
+    [LVUtil reg:L clas:self cfunc:lvNewHttpObject globalName:globalName defaultName:@"Http"];
     return 1;
 }
 

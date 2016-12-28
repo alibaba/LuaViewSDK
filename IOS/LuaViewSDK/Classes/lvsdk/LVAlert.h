@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVAlert : UIAlertView<LVProtocal,UIAlertViewDelegate>
+@interface LVAlert : UIAlertView<LVProtocal,LVClassProtocal,UIAlertViewDelegate>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lv_State*) l argNum:(int)num;
 
-+(int) classDefine: (lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 
 @end

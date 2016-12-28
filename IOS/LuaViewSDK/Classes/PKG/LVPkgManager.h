@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define LUAVIEW_ROOT_PATH  @"LUAVIEW_500"
-#define LUAVIEW_VERSION   "5.2.0"
+#define LUAVIEW_VERSION   "5.7.0"
 
 #define LV_PKGINFO_PROPERTY_URL      @"url"
 //#define LV_PKGINFO_PROPERTY_TIME     @"time"
@@ -21,7 +21,13 @@ extern NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME;
 
 @class LVRSA;
 
-typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error);
+typedef enum : NSUInteger {
+    LV_DOWNLOAD_ERROR = -1,
+    LV_DOWNLOAD_CACHE = 0 ,
+    LV_DOWNLOAD_NET = 1,
+} LVDownloadDataType;
+
+typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloadDataType dataType);
 
 @interface LVPkgManager : NSObject
 

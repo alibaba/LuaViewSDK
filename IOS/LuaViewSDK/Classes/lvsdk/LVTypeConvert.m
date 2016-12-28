@@ -201,7 +201,7 @@ double lv_getValueWithType(void* p, int index, int type ){
     return 0;
 }
 
-+(int) pushInvocationReturnValue:(NSInvocation*) invocation toLua:(lv_State*)L{
+int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lv_State* L){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ){
         switch ( lv_typeID(type) ) {
@@ -330,7 +330,7 @@ double lv_getValueWithType(void* p, int index, int type ){
     return 0;
 }
 
-+ (int) setIvocation:(NSInvocation*) invocation argIndex:(int)index withLua:(lv_State*)L stackID:(int) stackID{
+int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lv_State* L, int stackID){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
     if ( type ){
         switch ( lv_typeID(type) ) {
@@ -449,8 +449,7 @@ double lv_getValueWithType(void* p, int index, int type ){
     return 0;
 }
 
-
-+ (id) setInvocationReturnValue:(NSInvocation*) invocation withLua:(lv_State*)L stackID:(int)stackID{
+id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lv_State* L, int stackID){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ) {
         switch ( lv_typeID(type) ) {
@@ -565,7 +564,7 @@ double lv_getValueWithType(void* p, int index, int type ){
     return  nil ;
 }
 
-+ (int) pushInvocation:(NSInvocation*) invocation argIndex:(int)index toLua:(lv_State*)L {
+int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lv_State* L ){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
     switch ( lv_typeID(type) ) {
         case LVTypeID_BOOL: {

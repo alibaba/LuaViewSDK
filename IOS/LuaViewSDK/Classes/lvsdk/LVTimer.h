@@ -10,7 +10,7 @@
 #import "LVHeads.h"
 
 
-@interface LVTimer : NSObject<LVProtocal>
+@interface LVTimer : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
@@ -21,7 +21,7 @@
 -(void) cancel;
 
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 
 @end

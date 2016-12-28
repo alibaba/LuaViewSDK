@@ -7,7 +7,6 @@
 //
 
 #import "LVScrollView.h"
-#import "LVRegisterManager.h"
 #import "LVBaseView.h"
 #import "LVUtil.h"
 #import "UIScrollView+LuaView.h"
@@ -17,6 +16,7 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
+#import "LView.h"
 
 @interface LVScrollView ()
 @property (nonatomic,strong) LVScrollViewDelegate* scrollViewDelegate;
@@ -55,24 +55,15 @@
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_runCallBack:STR_ON_LAYOUT];
-}
-
-static Class g_class = nil;
-
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVScrollView class]] ) {
-        g_class = c;
-    }
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 #pragma -mark ScrollView
 static int lvNewScrollView (lv_State *L) {
     {
-        if( g_class == nil )
-            g_class = [LVScrollView class];
-        LVScrollView* scrollView = [[g_class alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVScrollView class]];
         
+        LVScrollView* scrollView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(scrollView);
@@ -352,19 +343,9 @@ static const struct lvL_reg memberFunctions [] = {
     return memberFunctions;
 }
 
-+(int) classDefine:(lv_State *)L {
-//    {
-//        lv_pushcfunction(L, lvNewScrollView);
-//        lv_setglobal(L, "ScrollView");
-//    }
-    {
-        lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "HScrollView");
-    }
-    {
-        lv_pushcfunction(L, lvNewScrollView);
-        lv_setglobal(L, "HorizontalScrollView");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HScrollView"];
+    [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HorizontalScrollView"];
     
     lv_createClassMetaTable(L ,META_TABLE_UIScrollView);
     

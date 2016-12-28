@@ -18,13 +18,9 @@
 #import "lVlib.h"
 #import "lVstate.h"
 #import "lVgc.h"
-
-
-// lua 对应的数据 key
-
+#import "LVFlowLayout.h"
 
 @interface LVCollectionView ()
-@property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic,strong) LVCollectionViewDelegate* collectionViewDelegate;
 @end
 
@@ -32,7 +28,7 @@
 @implementation LVCollectionView
 
 -(id) init:(lv_State*) l {
-    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -41,7 +37,9 @@
         self.dataSource = self.collectionViewDelegate;
         self.backgroundColor = [UIColor clearColor];
         
-        self.flowLayout = flowLayout;
+        self.lvflowLayout = flowLayout;
+        self.collectionViewDelegate.lvCollectionView = self;
+        self.collectionViewDelegate.lvflowLayout = flowLayout;
         
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
         self.scrollsToTop = NO;
@@ -57,10 +55,20 @@
 -(void) dealloc{
 }
 
+-(void) reloadData{
+    [super reloadData];
+}
+
+-(void) reloadDataASync{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.001 inModes:@[NSRunLoopCommonModes]];
+    });
+}
+
 -(void) layoutSubviews{
     [super layoutSubviews];
     
-    [self lv_runCallBack:STR_ON_LAYOUT];
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 // 重载以实现可能的定制需求, contentOffset
@@ -78,28 +86,18 @@
     [self scrollRectToVisible:CGRectMake(0, 0, 320, 10) animated:animated];
 }
 
-static Class g_class = nil;
 
-+ (void) setDefaultStyle:(Class) c{
-    if( [c isSubclassOfClass:[LVCollectionView class]] ) {
-        g_class = c;
-    }
-}
 
 #pragma -mark lvNewCollectionView
-static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
-    if( g_class == nil ) {
-        g_class = [LVCollectionView class];
-    }
+static int lvNewCollectionView(lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVCollectionView class]];
 
-    LVCollectionView* tableView = [[g_class alloc] init:L];
-    if( refresh ) {
-        [tableView lv_initRefreshHeader];
-    }
-
+    LVCollectionView* collectionView = [[c alloc] init:L];
+    [collectionView lv_initRefreshHeader];
+    
     NEW_USERDATA(userData, View);
-    userData->object = CFBridgingRetain(tableView);
-    tableView.lv_userData = userData;
+    userData->object = CFBridgingRetain(collectionView);
+    collectionView.lv_userData = userData;
     lvL_getmetatable(L, META_TABLE_UICollectionView );
     lv_setmetatable(L, -2);
     
@@ -110,24 +108,17 @@ static int lvNewCollectionView0 (lv_State *L, BOOL refresh) {
     
     LView* lview = (__bridge LView *)(L->lView);
     if( lview ){
-        [lview containerAddSubview:tableView];
+        [lview containerAddSubview:collectionView];
     }
     return 1;
-}
-
-static int lvNewCollectionView (lv_State *L) {
-    return lvNewCollectionView0(L, NO);
-}
-
-static int lvNewRefreshCollectionView (lv_State *L) {
-    return lvNewCollectionView0(L, YES);
 }
 
 static int reload (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
-        [tableView reloadData];
+        //reload接口异步拉起，确保layout中也能调用reload
+        [tableView reloadDataASync];
         lv_pushvalue(L, 1);
         return 1;
     }
@@ -141,17 +132,17 @@ static int miniSpacing (lv_State *L) {
         if( lv_gettop(L)>=3 ) {
             CGFloat value1 = lv_tonumber(L, 2);
             CGFloat value2 = lv_tonumber(L, 3);
-            tableView.flowLayout.minimumLineSpacing = value1;
-            tableView.flowLayout.minimumInteritemSpacing = value2;
+            tableView.lvflowLayout.minimumLineSpacing = value1;
+            tableView.lvflowLayout.minimumInteritemSpacing = value2;
             return 0;
         } else if( lv_gettop(L)>=2 ) {
             CGFloat value1 = lv_tonumber(L, 2);
-            tableView.flowLayout.minimumLineSpacing = value1;
-            tableView.flowLayout.minimumInteritemSpacing = value1;
+            tableView.lvflowLayout.minimumLineSpacing = value1;
+            tableView.lvflowLayout.minimumInteritemSpacing = value1;
             return 0;
         } else {
-            CGFloat value1 = tableView.flowLayout.minimumLineSpacing;
-            CGFloat value2 = tableView.flowLayout.minimumInteritemSpacing;
+            CGFloat value1 = tableView.lvflowLayout.minimumLineSpacing;
+            CGFloat value2 = tableView.lvflowLayout.minimumInteritemSpacing;
             lv_pushnumber(L, value1);
             lv_pushnumber(L, value2);
             return 2;
@@ -166,10 +157,10 @@ static int scrollDirection (lv_State *L) {
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=2 ) {
             int value1 = lv_tonumber(L, 2);
-            tableView.flowLayout.scrollDirection = value1;
+            tableView.lvflowLayout.scrollDirection = value1;
             return 0;
         } else {
-            CGFloat value1 = tableView.flowLayout.scrollDirection;
+            CGFloat value1 = tableView.lvflowLayout.scrollDirection;
             lv_pushnumber(L, value1);
             return 1;
         }
@@ -243,15 +234,14 @@ static int scrollToTop(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewCollectionView);
-        lv_setglobal(L, "CollectionView");
-    }
-    {
-        lv_pushcfunction(L, lvNewRefreshCollectionView);
-        lv_setglobal(L, "RefreshCollectionView");
-    }
++(NSString*) globalName{
+    return @"CollectionView";
+}
+
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    
+    [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:[self globalName]];
+    
     const struct lvL_reg memberFunctions [] = {
         {"reload",    reload},
         

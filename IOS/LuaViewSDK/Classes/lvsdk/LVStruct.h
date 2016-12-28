@@ -11,13 +11,13 @@
 
 #define LV_STRUCT_MAX_LEN 16
 
-@interface LVStruct : NSObject<LVProtocal>
+@interface LVStruct : NSObject<LVProtocal, LVClassProtocal>
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject; // 返回native对象
 
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 +(int) pushStructToLua:(lv_State*)L data:(void*)data;
 

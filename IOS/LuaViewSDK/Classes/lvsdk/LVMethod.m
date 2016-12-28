@@ -12,15 +12,19 @@
 #import "LVTypeConvert.h"
 #import "lVapi.h"
 
+
+@interface LVMethod ()
+@property(nonatomic,strong) NSMethodSignature * methodSig;
+@end
+
 @implementation LVMethod
 
--(id) initWithNativeObject:(id) nativeObject sel:(SEL)sel{
+-(id) initWithSel:(SEL)sel{
     self = [super init];
     if( self ){
-        self.nativeObject = nativeObject;
         self.sel = sel;
-        self.selectName = NSStringFromSelector(sel);
-        self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)]; 
+        self.selName = NSStringFromSelector(sel);
+        self.nargs = [self checkSelectorArgsNumber:NSStringFromSelector(sel)];
     }
     return self;
 }
@@ -35,24 +39,28 @@
     return num;
 }
 
--(int) performMethodWithArgs:(lv_State*)L{
-    NSMethodSignature * sig = [self.nativeObject methodSignatureForSelector:self.sel];
+-(int) callObj:(id) obj args:(lv_State*)L{
+    NSMethodSignature * sig = self.methodSig;
+    if( sig==nil ){
+        sig = [obj methodSignatureForSelector:self.sel];
+        self.methodSig = sig;
+    }
     if ( sig ) {
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:sig];
-        [invocation setTarget: self.nativeObject]; // 传递 参数0: self
+        [invocation setTarget: obj]; // 传递 参数0: self
         [invocation setSelector: self.sel];// 传递 参数1: SEL
         
         NSInteger numberOfArguments = sig.numberOfArguments;
         int luaArgsNum = lv_gettop(L);
         [invocation retainArguments];
         for( int i=2; (i<numberOfArguments) && (i<=luaArgsNum);  i++ ){// 传递 参数2, 参数3, ...
-            [LVTypeConvert setIvocation:invocation argIndex:i withLua:L stackID:i];
+            lv_setInvocationArgByLuaStack(invocation, i, L, i);
         }
         [invocation invoke];
         
-        return [LVTypeConvert pushInvocationReturnValue:invocation toLua:L];
+        return lv_pushInvocationReturnValueToLuaStack(invocation, L);
     }
-    LVError(@"Not found Method: %@.%@",[self.nativeObject class], self.selectName );
+    LVError(@"Not found Method: %@.%@",[obj class], self.selName );
     return 0;
 }
 

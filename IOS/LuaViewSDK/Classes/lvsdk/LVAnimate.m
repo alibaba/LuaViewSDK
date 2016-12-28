@@ -132,11 +132,8 @@ static int lvNewAnimate (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewAnimate);
-        lv_setglobal(L, "Animate");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewAnimate globalName:globalName defaultName:@"Animate"];
     return 1;
 }
 

@@ -420,6 +420,12 @@ window.callback{
 	LayoutSubviews = function()
 		print("layoutSubviews");
 	end,
+	onShow = function(bg)
+		print("onShow",bg);
+	end,
+	onHide = function(bg)
+		print("onHide",bg);
+	end,
 };
 
 

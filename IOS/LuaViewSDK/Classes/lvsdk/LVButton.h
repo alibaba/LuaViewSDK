@@ -11,19 +11,18 @@
 #import "LView.h"
 
 
-@interface LVButton : UIButton<LVProtocal>
+@interface LVButton : UIButton<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 @property(nonatomic,assign) NSUInteger lv_align;
+@property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
 -(id) init:(lv_State*) l;
 -(void) setWebImageUrl:(NSString*)url forState:(UIControlState) state finished:(LVLoadFinished) finished;
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 -(void) lvButtonCallBack;
-
-+ (void) setDefaultStyle:(Class) c;
 
 @end
