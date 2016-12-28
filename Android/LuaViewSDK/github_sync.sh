@@ -1,9 +1,10 @@
 GIT_MERGE="git merge $1"
-GIT_CURRENT_BRANCH="git rev-parse --abbrev-ref HEAD"
 
-CURRENT_BRANCH=$GIT_CURRENT_BRANCH
+GIT_CURRENT_BRANCH=$(git symbolic-ref -q HEAD)
+GIT_CURRENT_BRANCH=${GIT_CURRENT_BRANCH##refs/heads/}
+GIT_CURRENT_BRANCH=${GIT_CURRENT_BRANCH:-HEAD}
 
-echo $CURRENT_BRANCH
+echo $GIT_CURRENT_BRANCH
 
 git pull
 git checkout develop
@@ -19,6 +20,5 @@ git merge develop
 git push
 git push https://github.com/alibaba/LuaViewSDK master:master
 
-git checkout $CURRENT_BRANCH
-$GIT_CURRENT_BRANCH
+git checkout $GIT_CURRENT_BRANCH
 
