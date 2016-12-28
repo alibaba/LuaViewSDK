@@ -20,7 +20,7 @@ public class VmVersion {
     public static final String V_570 = "5.7.0";
 
     public static String getCurrent() {
-        return V_570;
+        return V_550;
     }
 
     /**
