@@ -34,5 +34,6 @@ git push
 echo "\npush to github on branch master"
 git push https://github.com/alibaba/LuaViewSDK master:master
 
+echo "\n"
 git checkout $GIT_CURRENT_BRANCH
 git stash apply
