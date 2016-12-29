@@ -16,10 +16,11 @@
 
 @implementation LVEvent
 
--(id) init:(lv_State *)l{
+-(id) init:(lv_State *)l gesture:(UIGestureRecognizer*) gesture{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
+        self.gesture = gesture;
     }
     return self;
 }
@@ -28,7 +29,7 @@
     _event = event;
     self.touches = event.allTouches.allObjects;
     self.touch = self.touches.firstObject;
-    self.point = [self.touch locationInView:nil];
+    self.point = [self.touch locationInView:self.gesture.view];
 }
 
 -(id) lv_nativeObject{
@@ -57,7 +58,7 @@ static int lvEventGC (lv_State *L) {
 static int lvNewEvent (lv_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVEvent class]];
     
-    LVEvent* lvEvent = [[c alloc] init:L];
+    LVEvent* lvEvent = [[c alloc] init:L gesture:nil];
     
     {
         NEW_USERDATA(userData, Event);
@@ -70,8 +71,8 @@ static int lvNewEvent (lv_State *L) {
     return 1;
 }
 
-+(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event{
-    LVEvent* lvEvent = [[LVEvent alloc] init:L];
++(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture{
+    LVEvent* lvEvent = [[LVEvent alloc] init:L gesture:gesture];
     lvEvent.event = event;
     {
         NEW_USERDATA(userData, Event);
