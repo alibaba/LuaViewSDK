@@ -21,6 +21,8 @@
  ******************************************************************************/
 package org.luaj.vm2;
 
+//TODO 与3.0不一样
+
 import android.content.Context;
 
 import com.taobao.luaview.cache.AppCache;
@@ -177,6 +179,9 @@ public class Globals extends LuaTable {
     public DebugLib debuglib;
     public DebugConnection debugConnection;//用作debug
 
+
+    public boolean standardSyntax = false;//是否标准语法
+
     /**
      * Interface for module that converts a Prototype into a LuaFunction with an environment.
      */
@@ -194,7 +199,7 @@ public class Globals extends LuaTable {
         /**
          * Compile lua source into a Prototype. The InputStream is assumed to be in UTF-8.
          */
-        Prototype compile(InputStream stream, String chunkname) throws IOException;
+        Prototype compile(InputStream stream, String chunkname, boolean standardSyntax) throws IOException;
     }
 
     /**
@@ -383,7 +388,7 @@ public class Globals extends LuaTable {
     public Prototype compilePrototype(InputStream stream, String chunkname) throws IOException {
         if (compiler == null)
             error("No compiler.");
-        return compiler.compile(stream, chunkname);
+        return compiler.compile(stream, chunkname, standardSyntax);
     }
 
     /**

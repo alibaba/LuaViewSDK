@@ -18,7 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DemoActivity extends ListActivity {
+    public static boolean useStandardSyntax = true;
     private static final String FOLDER_NAME = "test";
+    private static final String FOLDER_STANDARD_NAME = "test-standard";
+
+    private String getFolderName(){
+        return (useStandardSyntax ? FOLDER_STANDARD_NAME : FOLDER_NAME);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class DemoActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final String fileName = adapter.getItem(position - getListView().getHeaderViewsCount());
                 final Intent intent = new Intent(DemoActivity.this, DemoLuaViewActivity.class);
-                intent.putExtra(Constants.PARAM_URI, FOLDER_NAME + "/" + fileName);
+                intent.putExtra(Constants.PARAM_URI, getFolderName() + "/" + fileName);
                 startActivity(intent);
             }
         });
@@ -57,7 +63,7 @@ public class DemoActivity extends ListActivity {
         String[] array = null;
         List<String> result = new ArrayList<String>();
         try {
-            array = getResources().getAssets().list(FOLDER_NAME);
+            array = getResources().getAssets().list(getFolderName());
 
             if (array != null) {
                 for (String name : array) {

@@ -21,6 +21,8 @@
  ******************************************************************************/
 package org.luaj.vm2.lib;
 
+//TODO 与3.0不一样
+
 import android.util.Log;
 
 import com.taobao.luaview.util.LogUtil;

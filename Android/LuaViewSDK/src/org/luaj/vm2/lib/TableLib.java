@@ -21,6 +21,8 @@
 ******************************************************************************/
 package org.luaj.vm2.lib;
 
+//TODO 与3.0不一样
+
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;

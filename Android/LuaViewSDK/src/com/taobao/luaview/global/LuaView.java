@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.cache.LuaCache;
@@ -18,14 +17,12 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.EncryptUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 import com.taobao.luaview.view.LVViewGroup;
-import com.taobao.luaview.view.interfaces.ILVView;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
@@ -536,6 +533,16 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     //----------------------------------------setup functions---------------------------------------
+
+    /**
+     * 设置使用标准语法
+     * @param standardSyntax
+     */
+    public void setUseStandardSyntax(boolean standardSyntax) {
+        if (mGlobals != null) {
+            mGlobals.standardSyntax = standardSyntax;
+        }
+    }
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)

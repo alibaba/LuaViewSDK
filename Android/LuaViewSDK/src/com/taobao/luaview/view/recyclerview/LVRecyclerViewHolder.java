@@ -53,7 +53,7 @@ public class LVRecyclerViewHolder extends RecyclerView.ViewHolder {
      */
     public void initCallbacks(final UDLuaTable cellData, final int position) {
         if (itemView != null) {
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {//TODO 这里的position是初始化的时候给的，所以需要每次更新，类似onLayout里面的更新
                 @Override
                 public void onClick(View v) {
                     mLuaUserData.onCellClicked(cellData, position);
