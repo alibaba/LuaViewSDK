@@ -206,7 +206,7 @@ public class LexState {
 	}
 
     //是否标准语法
-    private boolean standardSyntax = false;
+    private boolean standardSyntax = true;
 
 	public LexState(LuaC state, InputStream stream, boolean standardSyntax) {
 		this.z = stream;

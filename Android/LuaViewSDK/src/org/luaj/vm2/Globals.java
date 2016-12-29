@@ -180,7 +180,7 @@ public class Globals extends LuaTable {
     public DebugConnection debugConnection;//用作debug
 
 
-    public boolean standardSyntax = false;//是否标准语法
+    public boolean standardSyntax = true;//是否标准语法
 
     /**
      * Interface for module that converts a Prototype into a LuaFunction with an environment.
