@@ -24,10 +24,12 @@
 
 @property(nonatomic,assign) NSInteger eventType;
 
--(id) init:(lv_State*) l;
+@property(nonatomic,weak) UIGestureRecognizer* gesture;
+
+-(id) init:(lv_State *)l gesture:(UIGestureRecognizer*) gesture;
 
 +(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
-+(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event;
++(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture;
 
 @end

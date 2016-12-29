@@ -39,7 +39,7 @@
         
         if( self.onTouchEventCallback ) {
             LVEvent* lvEvent = nil;
-            lvEvent = [LVEvent createLuaEvent:l event:event];
+            lvEvent = [LVEvent createLuaEvent:l event:event gesture:self];
             lvEvent.eventType = eventType;
             self.onTouchEventCallback(self,1);
             lvEvent.event = nil;
