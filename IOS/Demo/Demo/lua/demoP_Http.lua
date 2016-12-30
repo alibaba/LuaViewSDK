@@ -12,6 +12,7 @@ http.post("http://www.taobao.com",
     },
     function ( response )
         local str = tostring( response.data() );
+        print(str);
         local object = Json.toTable(str);
 
         if( callback ) then
