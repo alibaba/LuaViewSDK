@@ -262,8 +262,39 @@
 		9162E66D1E1B39EA003FDB96 /* lvm.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E6351E1B39EA003FDB96 /* lvm.h */; };
 		9162E66E1E1B39EA003FDB96 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6361E1B39EA003FDB96 /* lzio.c */; };
 		9162E66F1E1B39EA003FDB96 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E6371E1B39EA003FDB96 /* lzio.h */; };
-		9162E6701E1B39EA003FDB96 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6381E1B39EA003FDB96 /* Makefile */; };
 		9162E6711E1B39EA003FDB96 /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6391E1B39EA003FDB96 /* print.c */; };
+		9162E6BB1E1BE25F003FDB96 /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6021E1B39EA003FDB96 /* lapi.c */; };
+		9162E6BC1E1BE25F003FDB96 /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6041E1B39EA003FDB96 /* lauxlib.c */; };
+		9162E6BD1E1BE25F003FDB96 /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6061E1B39EA003FDB96 /* lbaselib.c */; };
+		9162E6BE1E1BE25F003FDB96 /* lcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6071E1B39EA003FDB96 /* lcode.c */; };
+		9162E6BF1E1BE25F003FDB96 /* ldblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6091E1B39EA003FDB96 /* ldblib.c */; };
+		9162E6C01E1BE25F003FDB96 /* ldebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E60A1E1B39EA003FDB96 /* ldebug.c */; };
+		9162E6C11E1BE25F003FDB96 /* ldo.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E60C1E1B39EA003FDB96 /* ldo.c */; };
+		9162E6C21E1BE25F003FDB96 /* ldump.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E60E1E1B39EA003FDB96 /* ldump.c */; };
+		9162E6C31E1BE25F003FDB96 /* lfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E60F1E1B39EA003FDB96 /* lfunc.c */; };
+		9162E6C41E1BE25F003FDB96 /* lgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6111E1B39EA003FDB96 /* lgc.c */; };
+		9162E6C51E1BE25F003FDB96 /* linit.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6131E1B39EA003FDB96 /* linit.c */; };
+		9162E6C61E1BE25F003FDB96 /* liolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6141E1B39EA003FDB96 /* liolib.c */; };
+		9162E6C71E1BE25F003FDB96 /* llex.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6151E1B39EA003FDB96 /* llex.c */; };
+		9162E6C81E1BE25F003FDB96 /* lmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6181E1B39EA003FDB96 /* lmathlib.c */; };
+		9162E6C91E1BE25F003FDB96 /* lmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6191E1B39EA003FDB96 /* lmem.c */; };
+		9162E6CA1E1BE25F003FDB96 /* loadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E61B1E1B39EA003FDB96 /* loadlib.c */; };
+		9162E6CB1E1BE25F003FDB96 /* lobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E61C1E1B39EA003FDB96 /* lobject.c */; };
+		9162E6CC1E1BE25F003FDB96 /* lopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E61E1E1B39EA003FDB96 /* lopcodes.c */; };
+		9162E6CD1E1BE25F003FDB96 /* loslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6201E1B39EA003FDB96 /* loslib.c */; };
+		9162E6CE1E1BE25F003FDB96 /* lparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6211E1B39EA003FDB96 /* lparser.c */; };
+		9162E6CF1E1BE25F003FDB96 /* lstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6231E1B39EA003FDB96 /* lstate.c */; };
+		9162E6D01E1BE25F003FDB96 /* lstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6251E1B39EA003FDB96 /* lstring.c */; };
+		9162E6D11E1BE25F003FDB96 /* lstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6271E1B39EA003FDB96 /* lstrlib.c */; };
+		9162E6D21E1BE25F003FDB96 /* ltable.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6281E1B39EA003FDB96 /* ltable.c */; };
+		9162E6D31E1BE25F003FDB96 /* ltablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62A1E1B39EA003FDB96 /* ltablib.c */; };
+		9162E6D41E1BE25F003FDB96 /* ltm.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62B1E1B39EA003FDB96 /* ltm.c */; };
+		9162E6D51E1BE25F003FDB96 /* lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62D1E1B39EA003FDB96 /* lua.c */; };
+		9162E6D61E1BE25F003FDB96 /* luac.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62F1E1B39EA003FDB96 /* luac.c */; };
+		9162E6D71E1BE25F003FDB96 /* lundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6321E1B39EA003FDB96 /* lundump.c */; };
+		9162E6D81E1BE25F003FDB96 /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6341E1B39EA003FDB96 /* lvm.c */; };
+		9162E6D91E1BE25F003FDB96 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6361E1B39EA003FDB96 /* lzio.c */; };
+		9162E6DA1E1BE25F003FDB96 /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6391E1B39EA003FDB96 /* print.c */; };
 		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; };
 		91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
 		91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
@@ -1399,9 +1430,13 @@
 				3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */,
 				91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
 				BEEB28E11CA91B9000EC2D86 /* Layout.c in Sources */,
+				9162E6CD1E1BE25F003FDB96 /* loslib.c in Sources */,
+				9162E6D01E1BE25F003FDB96 /* lstring.c in Sources */,
 				3C98A5421C7C56270001508E /* LViewController.m in Sources */,
 				BEEB28E31CA91B9900EC2D86 /* UIView+JUFLXNode.m in Sources */,
+				9162E6BF1E1BE25F003FDB96 /* ldblib.c in Sources */,
 				9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */,
+				9162E6BE1E1BE25F003FDB96 /* lcode.c in Sources */,
 				91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
 				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
 				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
@@ -1411,6 +1446,9 @@
 				3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */,
 				3CFF77B71C74740800847C05 /* LVDebugConnection.m in Sources */,
 				3CFF77B81C74740800847C05 /* LVBaseView.m in Sources */,
+				9162E6C51E1BE25F003FDB96 /* linit.c in Sources */,
+				9162E6DA1E1BE25F003FDB96 /* print.c in Sources */,
+				9162E6C21E1BE25F003FDB96 /* ldump.c in Sources */,
 				3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */,
 				3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */,
 				3CFF77BB1C74740800847C05 /* LVButton.m in Sources */,
@@ -1419,57 +1457,82 @@
 				3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */,
 				3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */,
 				3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */,
+				9162E6C71E1BE25F003FDB96 /* llex.c in Sources */,
 				3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */,
 				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
+				9162E6D61E1BE25F003FDB96 /* luac.c in Sources */,
 				914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */,
 				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
 				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
 				3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */,
+				9162E6C41E1BE25F003FDB96 /* lgc.c in Sources */,
 				91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */,
 				91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
+				9162E6D81E1BE25F003FDB96 /* lvm.c in Sources */,
 				3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */,
 				3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */,
 				3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */,
 				3CFF77CB1C74740800847C05 /* LVScrollViewDelegate.m in Sources */,
 				3CFF77CC1C74740800847C05 /* LVCustomPanel.m in Sources */,
+				9162E6C31E1BE25F003FDB96 /* lfunc.c in Sources */,
+				9162E6C81E1BE25F003FDB96 /* lmathlib.c in Sources */,
 				3CFF77CD1C74740800847C05 /* LVAlert.m in Sources */,
 				3CFF77CE1C74740800847C05 /* LVToast.m in Sources */,
 				3CFF77CF1C74740800847C05 /* LVAnimate.m in Sources */,
+				9162E6CE1E1BE25F003FDB96 /* lparser.c in Sources */,
 				3CFF77D01C74740800847C05 /* LVAnimator.m in Sources */,
 				3CFF77D11C74740800847C05 /* LVStyledString.m in Sources */,
 				3CFF77D21C74740800847C05 /* LVTransform3D.m in Sources */,
 				3CFF77D31C74740800847C05 /* LVData.m in Sources */,
+				9162E6CF1E1BE25F003FDB96 /* lstate.c in Sources */,
+				9162E6C01E1BE25F003FDB96 /* ldebug.c in Sources */,
 				3CFF77D41C74740800847C05 /* LVDate.m in Sources */,
+				9162E6BB1E1BE25F003FDB96 /* lapi.c in Sources */,
 				3CFF77D51C74740800847C05 /* LVTimer.m in Sources */,
+				9162E6D31E1BE25F003FDB96 /* ltablib.c in Sources */,
 				3CFF77D61C74740800847C05 /* LVStruct.m in Sources */,
 				3CFF77D71C74740900847C05 /* LVGesture.m in Sources */,
 				3CFF77D81C74740900847C05 /* LVLongPressGesture.m in Sources */,
 				3CFF77D91C74740900847C05 /* LVPanGesture.m in Sources */,
 				840BCEE41CB78E8300D816AD /* LVNetworkStatus.m in Sources */,
+				9162E6D71E1BE25F003FDB96 /* lundump.c in Sources */,
+				9162E6CB1E1BE25F003FDB96 /* lobject.c in Sources */,
 				91F6788B1DF561D40042D6FC /* LVCanvas.m in Sources */,
+				9162E6D51E1BE25F003FDB96 /* lua.c in Sources */,
 				3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */,
 				3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */,
 				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
 				3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */,
 				3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */,
 				3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */,
+				9162E6C91E1BE25F003FDB96 /* lmem.c in Sources */,
 				3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */,
 				3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */,
+				9162E6D21E1BE25F003FDB96 /* ltable.c in Sources */,
+				9162E6D11E1BE25F003FDB96 /* lstrlib.c in Sources */,
 				3CFF77E21C74740900847C05 /* LVDB.m in Sources */,
 				3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */,
+				9162E6BD1E1BE25F003FDB96 /* lbaselib.c in Sources */,
+				9162E6C11E1BE25F003FDB96 /* ldo.c in Sources */,
 				3CFF77E41C74740900847C05 /* LVFile.m in Sources */,
 				3CFF77E51C74740900847C05 /* LVNavigation.m in Sources */,
+				9162E6BC1E1BE25F003FDB96 /* lauxlib.c in Sources */,
+				9162E6CC1E1BE25F003FDB96 /* lopcodes.c in Sources */,
 				3CFF77E61C74740900847C05 /* LVSystem.m in Sources */,
 				3CFF77E81C74740900847C05 /* LVMethod.m in Sources */,
 				3CFF77E91C74740900847C05 /* LVNativeObjBox.m in Sources */,
 				3CFF77EA1C74740900847C05 /* LVLuaObjBox.m in Sources */,
+				9162E6CA1E1BE25F003FDB96 /* loadlib.c in Sources */,
 				3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */,
+				9162E6C61E1BE25F003FDB96 /* liolib.c in Sources */,
 				3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */,
 				3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */,
 				BEEB28E21CA91B9500EC2D86 /* JUFLXLinearLayoutView.m in Sources */,
 				3CFF77EE1C74740900847C05 /* LVExGlobalFunc.m in Sources */,
 				3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */,
+				9162E6D41E1BE25F003FDB96 /* ltm.c in Sources */,
 				91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */,
+				9162E6D91E1BE25F003FDB96 /* lzio.c in Sources */,
 				3CFF77F01C74740900847C05 /* LView.m in Sources */,
 				3CFF77F11C74740900847C05 /* LVBundle.m in Sources */,
 				3CFF77F21C74740900847C05 /* LVBlock.m in Sources */,
@@ -1516,7 +1579,6 @@
 				91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
 				9162E6421E1B39EA003FDB96 /* ldebug.c in Sources */,
 				BEEB28D31CA90EC200EC2D86 /* Layout.c in Sources */,
-				9162E6701E1B39EA003FDB96 /* Makefile in Sources */,
 				3C98A53B1C7C0C100001508E /* LViewController.m in Sources */,
 				BEEB28D81CA90EC200EC2D86 /* UIView+JUFLXNode.m in Sources */,
 				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
