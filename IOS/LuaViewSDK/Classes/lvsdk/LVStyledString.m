@@ -179,6 +179,11 @@ static int lvNewAttributedString (lv_State *L) {
             const char* chars = lv_tolstring(L, 1, &n );
             s = [NSString stringWithUTF8String:chars];
             
+            // 字符串格式非法，导致crash
+            if( s==nil ) {
+                s = @"";
+            }
+            
             attString.mutableStyledString = [[NSMutableAttributedString alloc] initWithString:s];
             
             NSDictionary* dic = lv_luaTableToDictionary(L,2);
