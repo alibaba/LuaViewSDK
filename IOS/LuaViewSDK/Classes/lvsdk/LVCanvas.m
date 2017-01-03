@@ -30,7 +30,7 @@
 @implementation LVCanvas
 
 
--(id) init:(lv_State *)l{
+-(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -71,7 +71,7 @@
     }
 }
 
-static int nativeObj (lv_State *L) {
+static int nativeObj (lua_State *L) {
     LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( userData ){
         LVCanvas* view = (__bridge LVCanvas *)(userData->object);
@@ -84,7 +84,7 @@ static int nativeObj (lv_State *L) {
     return 0;
 }
 
-static int canvas_drawPoint (lv_State *L) {
+static int canvas_drawPoint (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -106,7 +106,7 @@ static int canvas_drawPoint (lv_State *L) {
     }
 }
 
-static int canvas_drawLine (lv_State *L) {
+static int canvas_drawLine (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -127,7 +127,7 @@ static int canvas_drawLine (lv_State *L) {
     }
 }
 
-static int canvas_drawRect (lv_State *L) {
+static int canvas_drawRect (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -174,7 +174,7 @@ static int canvas_drawRect (lv_State *L) {
     }
 }
 
-static int canvas_drawRoundRect (lv_State *L) {
+static int canvas_drawRoundRect (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -217,7 +217,7 @@ static int canvas_drawRoundRect (lv_State *L) {
     }
 }
 
-static int canvas_drawEllipse (lv_State *L) {
+static int canvas_drawEllipse (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -234,7 +234,7 @@ static int canvas_drawEllipse (lv_State *L) {
     return 0;
 }
 
-static int canvas_drawCircle (lv_State *L) {
+static int canvas_drawCircle (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
@@ -247,7 +247,7 @@ static int canvas_drawCircle (lv_State *L) {
     return 0;
 }
 
-static int canvas_color (lv_State *L) {
+static int canvas_color (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -276,7 +276,7 @@ static int canvas_color (lv_State *L) {
     }
 }
 
-static int canvas_strokeWidth (lv_State *L) {
+static int canvas_strokeWidth (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -291,7 +291,7 @@ static int canvas_strokeWidth (lv_State *L) {
     return 0;
 }
 
-static int canvas_style (lv_State *L) {
+static int canvas_style (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -319,7 +319,7 @@ static int canvas_style (lv_State *L) {
     [self skew:0 :0];
 }
 
-static int canvas_resetPaint (lv_State *L) {
+static int canvas_resetPaint (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -328,7 +328,7 @@ static int canvas_resetPaint (lv_State *L) {
     return 0;
 }
 
-static int canvas_alpha (lv_State *L) {
+static int canvas_alpha (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -341,7 +341,7 @@ static int canvas_alpha (lv_State *L) {
     return 0;
 }
 
-static int canvas_textSize (lv_State *L) {
+static int canvas_textSize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -356,7 +356,7 @@ static int canvas_textSize (lv_State *L) {
     return 0;
 }
 
-static int canvas_bold (lv_State *L) {
+static int canvas_bold (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -381,7 +381,7 @@ static int canvas_bold (lv_State *L) {
     }
 }
 
-static int canvas_clipRect (lv_State *L) {
+static int canvas_clipRect (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user && lv_gettop(L)>=5 ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -394,7 +394,7 @@ static int canvas_clipRect (lv_State *L) {
     return 0;
 }
 
-static int drawText (lv_State *L) {
+static int drawText (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -416,7 +416,7 @@ static int drawText (lv_State *L) {
     return 0;
 }
 
-static int canvas_drawOval (lv_State *L) {
+static int canvas_drawOval (lua_State *L) {
     return canvas_drawEllipse(L);
 }
 
@@ -433,7 +433,7 @@ static int canvas_drawOval (lv_State *L) {
     }
 }
 
-static int canvas_drawArc (lv_State *L) {
+static int canvas_drawArc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         CGFloat x = lv_tonumber(L, 2);
@@ -461,7 +461,7 @@ static int canvas_drawArc (lv_State *L) {
     }
 }
 
-static int canvas_drawImage (lv_State *L) {
+static int canvas_drawImage (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -498,7 +498,7 @@ static int canvas_drawImage (lv_State *L) {
     }
 }
 
-static int canvas_save (lv_State *L) {
+static int canvas_save (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -513,7 +513,7 @@ static int canvas_save (lv_State *L) {
     }
 }
 
-static int canvas_restore (lv_State *L) {
+static int canvas_restore (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -530,7 +530,7 @@ static int canvas_restore (lv_State *L) {
     }
 }
 
-static int canvas_rotate (lv_State *L) {
+static int canvas_rotate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -565,7 +565,7 @@ static int canvas_rotate (lv_State *L) {
     return CGContextGetCTM(_contentRef);
 }
 
-static int canvas_skew (lv_State *L) {
+static int canvas_skew (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -587,7 +587,7 @@ static int canvas_skew (lv_State *L) {
     }
 }
 
-static int canvas_scale (lv_State *L) {
+static int canvas_scale (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -608,7 +608,7 @@ static int canvas_scale (lv_State *L) {
     }
 }
 
-static int canvas_translate (lv_State *L) {
+static int canvas_translate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
@@ -631,13 +631,13 @@ static void releaseCanvasUserData(LVUserDataInfo* user){
     }
 }
 
-static int lvCanvasGC (lv_State *L) {
+static int lvCanvasGC (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseCanvasUserData(user);
     return 0;
 }
 
-static int lvNewCanvas (lv_State *L) {
+static int lvNewCanvas (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCanvas class]];
     
     LVCanvas* canvas = [[c alloc] init:L];
@@ -653,7 +653,7 @@ static int lvNewCanvas (lv_State *L) {
     return 1;
 }
 
-+(LVCanvas*) createLuaCanvas:(lv_State *)L  contentRef:(CGContextRef) contentRef{
++(LVCanvas*) createLuaCanvas:(lua_State *)L  contentRef:(CGContextRef) contentRef{
     LVCanvas* lvCanvas = [[LVCanvas alloc] init:L];
     lvCanvas.contentRef = contentRef;
     {
@@ -667,10 +667,10 @@ static int lvNewCanvas (lv_State *L) {
     return lvCanvas;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewCanvas globalName:globalName defaultName:@"Canvas"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__gc", lvCanvasGC },
         {"nativeObj", nativeObj},
         

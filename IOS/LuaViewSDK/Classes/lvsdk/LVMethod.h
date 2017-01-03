@@ -17,6 +17,6 @@
 
 -(id) initWithSel:(SEL)sel;
 
--(int) callObj:(id) obj args:(lv_State*)L;
+-(int) callObj:(id) obj args:(lua_State*)L;
 
 @end

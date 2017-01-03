@@ -9,11 +9,7 @@
 #import "LVCustomPanel.h"
 #import "LVBaseView.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVCustomPanel
 
@@ -24,7 +20,7 @@
 - (void) callLuaWithArguments:(NSArray*) args{
     // 外部回调脚本一定要在主线程调用
     dispatch_block_t f = ^(){
-        lv_State* L = self.lv_lview.l;
+        lua_State* L = self.lv_lview.l;
         if( L && self.lv_userData ){
             lv_checkstack(L,32);
             int num = lv_gettop(L);
@@ -63,7 +59,7 @@
     return subviews.firstObject;
 }
 
-static int lvNewCustomPanelView (lv_State *L) {
+static int lvNewCustomPanelView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomPanel class]];
     
     CGRect r = CGRectMake(0, 0, 0, 0);
@@ -87,10 +83,10 @@ static int lvNewCustomPanelView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewCustomPanelView globalName:globalName defaultName:@"CustomPanel"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {NULL, NULL}
     };
     

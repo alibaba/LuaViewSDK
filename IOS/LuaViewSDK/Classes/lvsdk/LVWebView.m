@@ -16,7 +16,7 @@
 @implementation LVWebView
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -29,7 +29,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         lv_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageStarted];
@@ -37,7 +37,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         lv_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageFinished];
@@ -45,7 +45,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         lv_settop(L, 0);
         NSInteger errorCode = error.code;
@@ -129,7 +129,7 @@
 }
 
 #pragma -mark webView
-static int lvNewWebView(lv_State *L) {
+static int lvNewWebView(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVWebView class]];
     
     NSString* url = lv_paramString(L, 1);
@@ -151,7 +151,7 @@ static int lvNewWebView(lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int canGoBack (lv_State *L) {
+static int canGoBack (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -165,7 +165,7 @@ static int canGoBack (lv_State *L) {
     return 1;
 }
 
-static int goBack (lv_State *L) {
+static int goBack (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -177,7 +177,7 @@ static int goBack (lv_State *L) {
     return 0;
 }
 
-static int canGoForward (lv_State *L) {
+static int canGoForward (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -191,7 +191,7 @@ static int canGoForward (lv_State *L) {
     return 1;
 }
 
-static int goForward (lv_State *L) {
+static int goForward (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -203,7 +203,7 @@ static int goForward (lv_State *L) {
     return 0;
 }
 
-static int reload (lv_State *L) {
+static int reload (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -215,7 +215,7 @@ static int reload (lv_State *L) {
     return 0;
 }
 
-static int stopLoading (lv_State *L) {
+static int stopLoading (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -227,7 +227,7 @@ static int stopLoading (lv_State *L) {
     return 0;
 }
 
-static int isLoading (lv_State *L) {
+static int isLoading (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -241,7 +241,7 @@ static int isLoading (lv_State *L) {
     return 1;
 }
 
-static int title (lv_State *L) {
+static int title (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -254,7 +254,7 @@ static int title (lv_State *L) {
     return 0;
 }
 
-static int loadUrl (lv_State *L) {
+static int loadUrl (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -270,7 +270,7 @@ static int loadUrl (lv_State *L) {
     return 0;
 }
 
-static int url (lv_State *L) {
+static int url (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -283,7 +283,7 @@ static int url (lv_State *L) {
     return 0;
 }
 
-static int pullRefreshEnable (lv_State *L) {
+static int pullRefreshEnable (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ) {
         LVWebView* webView = (__bridge LVWebView *)(user->object);
@@ -302,15 +302,15 @@ static int pullRefreshEnable (lv_State *L) {
     return 0;
 }
 
-static int callback (lv_State *L) {
+static int callback (lua_State *L) {
     return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewWebView globalName:globalName defaultName:@"WebView"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"canGoBack",  canGoBack},
         {"goBack",  goBack},
         

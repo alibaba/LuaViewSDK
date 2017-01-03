@@ -9,11 +9,7 @@
 #import "LVTimer.h"
 #import "LView.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVTimer ()
 @property(nonatomic,assign) BOOL repeat;
@@ -41,7 +37,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
     releaseUserDataTimer(_lv_userData);
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -53,7 +49,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 }
 
 -(void) timerCallBack{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE );
@@ -86,7 +82,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 
 #pragma -mark Timer
 
-static int lvNewTimer (lv_State *L) {
+static int lvNewTimer (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTimer class]];
     
     LVTimer* timer = [[c alloc] init:L];
@@ -105,7 +101,7 @@ static int lvNewTimer (lv_State *L) {
     return 1;
 }
 
-static int setCallback (lv_State *L) {
+static int setCallback (lua_State *L) {
     if( lv_type(L, 2) == LV_TFUNCTION ) {
         lv_pushvalue(L, 1);
         lv_pushvalue(L, 2);
@@ -115,7 +111,7 @@ static int setCallback (lv_State *L) {
     return 1;
 }
 
-static int start (lv_State *L) {
+static int start (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVTimer* timer = (__bridge LVTimer *)(user->object);
     if( lv_gettop(L)>=2 ) {
@@ -134,7 +130,7 @@ static int start (lv_State *L) {
     return 0;
 }
 
-static int cancel (lv_State *L) {
+static int cancel (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVTimer* timer = (__bridge LVTimer *)(user->object);
@@ -145,7 +141,7 @@ static int cancel (lv_State *L) {
     return 0;
 }
 
-static int delay (lv_State *L) {
+static int delay (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     double delay = lv_tonumber(L, 2);
     if( user ){
@@ -159,7 +155,7 @@ static int delay (lv_State *L) {
     return 0;
 }
 
-static int repeat (lv_State *L) {
+static int repeat (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     BOOL repeat = lv_toboolean(L, 2);
     if( user ){
@@ -173,7 +169,7 @@ static int repeat (lv_State *L) {
     return 0;
 }
 
-static int interval (lv_State *L) {
+static int interval (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     double interval = lv_tonumber(L, 2);
     if( user ){
@@ -187,13 +183,13 @@ static int interval (lv_State *L) {
     return 0;
 }
 
-static int __gc (lv_State *L) {
+static int __gc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataTimer(user);
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVTimer* timer =  (__bridge LVTimer *)(user->object);
@@ -204,10 +200,10 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTimer globalName:globalName defaultName:@"Timer"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"callback",setCallback},
         
         {"start", start },

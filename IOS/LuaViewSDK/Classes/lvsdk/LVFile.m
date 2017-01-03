@@ -10,15 +10,11 @@
 #import "LVHeads.h"
 #import "LVData.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVFile
 
-static void saveCallback(lv_State *L, int callbackIndex, NSString* fileName, int errorInfo ) {
+static void saveCallback(lua_State *L, int callbackIndex, NSString* fileName, int errorInfo ) {
     if( callbackIndex ) {
         lv_checkStack32(L);
         lv_pushboolean(L, errorInfo);
@@ -27,7 +23,7 @@ static void saveCallback(lv_State *L, int callbackIndex, NSString* fileName, int
     }
 }
 
-static BOOL readCallback(lv_State *L, int callbackIndex, NSString* fileName, NSData* data) {
+static BOOL readCallback(lua_State *L, int callbackIndex, NSString* fileName, NSData* data) {
     if( callbackIndex ) {
         lv_checkStack32(L);
         [LVData createDataObject:L data:data];
@@ -38,7 +34,7 @@ static BOOL readCallback(lv_State *L, int callbackIndex, NSString* fileName, NSD
     return NO;
 }
 
-static int file_save (lv_State *L) {
+static int file_save (lua_State *L) {
     int num = lv_gettop(L);
     if( num>=2 ) {
         LVUserDataInfo * userData = NULL;
@@ -72,7 +68,7 @@ static int file_save (lv_State *L) {
     return 1;
 }
 
-static int file_read(lv_State *L){
+static int file_read(lua_State *L){
     int num = lv_gettop(L);
     if( L && num>=1 ){
         NSString* fileName = nil;
@@ -102,7 +98,7 @@ static int file_read(lv_State *L){
     return 0;
 }
 
-static int file_exist(lv_State *L){
+static int file_exist(lua_State *L){
     if( L && lv_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, -1);
         LView* lview = (__bridge LView *)(L->lView);
@@ -115,7 +111,7 @@ static int file_exist(lv_State *L){
     return 1;
 }
 
-static int file_path (lv_State *L) {
+static int file_path (lua_State *L) {
     NSString* fileName = lv_paramString(L, -1);
     LView* lview = (__bridge LView *)(L->lView);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
@@ -123,8 +119,8 @@ static int file_path (lv_State *L) {
     return 1;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    const struct lvL_reg function [] = {
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    const struct luaL_Reg function [] = {
         {"save", file_save},
         {"read", file_read},
         {"exist", file_exist},

@@ -39,7 +39,7 @@
     return num;
 }
 
--(int) callObj:(id) obj args:(lv_State*)L{
+-(int) callObj:(id) obj args:(lua_State*)L{
     NSMethodSignature * sig = self.methodSig;
     if( sig==nil ){
         sig = [obj methodSignatureForSelector:self.sel];

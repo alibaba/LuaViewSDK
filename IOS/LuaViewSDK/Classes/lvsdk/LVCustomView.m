@@ -17,7 +17,7 @@
 
 @implementation LVCustomView
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -30,7 +30,7 @@
 -(void) drawRect:(CGRect)rect{
     [super drawRect:rect];
     
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
         lv_settop(L, 0);
          CGContextRef contextRef = UIGraphicsGetCurrentContext();
@@ -41,7 +41,7 @@
 }
 
 #pragma -mark CustomView
-static int lvNewCustomView (lv_State *L) {
+static int lvNewCustomView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomView class]];
     
     {
@@ -62,14 +62,14 @@ static int lvNewCustomView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int onDraw (lv_State *L) {
+static int onDraw (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_DRAW, NO);
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewCustomView globalName:globalName defaultName:@"CustomView"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"onDraw" , onDraw},
         {NULL, NULL}
     };

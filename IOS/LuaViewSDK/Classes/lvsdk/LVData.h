@@ -18,9 +18,9 @@
 
 @property(nonatomic,strong) NSMutableData* data;//真实的数据
 
--(id) init:(lv_State*) l;
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
+-(id) init:(lua_State*) l;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
-+(int) createDataObject:(lv_State *)L  data:(NSData*) data;
++(int) createDataObject:(lua_State *)L  data:(NSData*) data;
 
 @end

@@ -9,11 +9,7 @@
 #import "LVNavigation.h"
 #import "LView.h"
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVNavigation
 
@@ -39,7 +35,7 @@ static void setViewControllerTitleView(UIViewController* vc, UIView* view){
     }
 }
 
-static int setTitle (lv_State *L) {
+static int setTitle (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
@@ -70,7 +66,7 @@ static int setTitle (lv_State *L) {
     return 0;
 }
 
-+(NSArray*) getNavigationItems:(lv_State*)L{
++(NSArray*) getNavigationItems:(lua_State*)L{
     NSMutableArray* array = [[NSMutableArray alloc] init];
     int num = lv_gettop(L);
     for ( int i=1; i<=num; i++ ) {
@@ -82,7 +78,7 @@ static int setTitle (lv_State *L) {
     return array;
 }
 
-static int setLeftButton (lv_State *L) {
+static int setLeftButton (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
@@ -97,7 +93,7 @@ static int setLeftButton (lv_State *L) {
     return 0; /* number of results */
 }
 
-static int setRightButton (lv_State *L) {
+static int setRightButton (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
@@ -112,7 +108,7 @@ static int setRightButton (lv_State *L) {
     return 0; /* number of results */
 }
 
-static int setBackground(lv_State*L ) {
+static int setBackground(lua_State*L ) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
@@ -135,7 +131,7 @@ static int setBackground(lv_State*L ) {
     return 0;
 }
 
-static int setStatusBarStyle (lv_State *L) {
+static int setStatusBarStyle (lua_State *L) {
     lv_clearFirstTableValue(L);
     if ( lv_gettop(L)>=1 ) {
         NSInteger value = lv_tonumber(L, 2);
@@ -144,8 +140,8 @@ static int setStatusBarStyle (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    const struct lvL_reg fs [] = {
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    const struct luaL_Reg fs [] = {
         {"title", setTitle},
         {"left", setLeftButton},
         {"right", setRightButton},

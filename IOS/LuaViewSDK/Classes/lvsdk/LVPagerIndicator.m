@@ -10,17 +10,12 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVPagerView.h"
-
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVPagerIndicator
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -34,7 +29,7 @@
 }
 
 #pragma -mark PageControl
-static int lvNewPagerIndicator (lv_State *L) {
+static int lvNewPagerIndicator (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerIndicator class]];
     
     LVPagerIndicator* pageControl = [[c alloc] init:L];
@@ -53,7 +48,7 @@ static int lvNewPagerIndicator (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-//static int setPageCount(lv_State *L) {
+//static int setPageCount(lua_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
@@ -71,7 +66,7 @@ static int lvNewPagerIndicator (lv_State *L) {
 //    return 0;
 //}
 
-static int setCurrentPage(lv_State *L) {
+static int setCurrentPage(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
@@ -90,7 +85,7 @@ static int setCurrentPage(lv_State *L) {
     return 0;
 }
 
-static int pageIndicatorTintColor(lv_State *L) {
+static int pageIndicatorTintColor(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
@@ -114,7 +109,7 @@ static int pageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-static int currentPageIndicatorTintColor(lv_State *L) {
+static int currentPageIndicatorTintColor(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
@@ -138,10 +133,10 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPagerIndicator globalName:globalName defaultName:@"PagerIndicator"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         
         {"pageColor",     pageIndicatorTintColor },

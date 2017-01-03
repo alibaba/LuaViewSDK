@@ -9,11 +9,7 @@
 #import "LVTapGesture.h"
 #import "LVGesture.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVTapGesture
 
@@ -23,7 +19,7 @@
     [LVGesture releaseUD:_lv_userData];
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -34,7 +30,7 @@
 
 
 -(void) handleGesture:(LVTapGesture*)sender {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l, self.lv_userData);
@@ -42,7 +38,7 @@
     }
 }
 
-static int lvNewTapGestureRecognizer (lv_State *L) {
+static int lvNewTapGestureRecognizer (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTapGesture class]];
     {
         LVTapGesture* gesture = [[c alloc] init:L];
@@ -63,10 +59,10 @@ static int lvNewTapGestureRecognizer (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTapGestureRecognizer globalName:globalName defaultName:@"TapGesture"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {NULL, NULL}
     };
     

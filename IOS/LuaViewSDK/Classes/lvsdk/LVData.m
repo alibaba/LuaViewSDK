@@ -7,18 +7,14 @@
 //
 
 #import "LVData.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVData ()
 @end
 
 @implementation LVData
 
--(id) init:(lv_State *)l{
+-(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -43,13 +39,13 @@ static void releaseUserDataData(LVUserDataInfo* user){
     }
 }
 
-static int lvDataGC (lv_State *L) {
+static int lvDataGC (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
 
-static int lvNewData (lv_State *L) {
+static int lvNewData (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVData class]];
     
     LVData* data = [[c alloc] init:L];
@@ -78,11 +74,11 @@ static int lvNewData (lv_State *L) {
     return 1;
 }
 
-+(int) createDataObject:(lv_State *)L  data:(NSData*) data{
++(int) createDataObject:(lua_State *)L  data:(NSData*) data{
     return [self createDataObject:L data1:data data2:nil];
 }
 
-+(int) createDataObject:(lv_State *)L  data1:(NSData*) data1 data2:(NSData*) data2{
++(int) createDataObject:(lua_State *)L  data1:(NSData*) data1 data2:(NSData*) data2{
     LVData* lvdata = [[LVData alloc] init:L];
     if( data1 ) {
         [lvdata.data setData:data1];
@@ -101,7 +97,7 @@ static int lvNewData (lv_State *L) {
     return 1;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVData* data =  (__bridge LVData *)(user->object);
@@ -123,7 +119,7 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static int __index (lv_State *L) {
+static int __index (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
@@ -152,7 +148,7 @@ static int __index (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __newindex (lv_State *L) {
+static int __newindex (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
@@ -181,7 +177,7 @@ static int __newindex (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __add (lv_State *L) {
+static int __add (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     LVData* lvData1 = (__bridge LVData *)(user1->object);
@@ -193,10 +189,10 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__index", __index },
         {"__newindex", __newindex },
         

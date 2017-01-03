@@ -9,11 +9,7 @@
 #import "LVPanGesture.h"
 #import "LVGesture.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVPanGesture
 
@@ -22,7 +18,7 @@
     [LVGesture releaseUD:_lv_userData];
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -31,7 +27,7 @@
 }
 
 -(void) handleGesture:(LVPanGesture*)sender {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l,self.lv_userData);
@@ -39,7 +35,7 @@
     }
 }
 
-static int lvNewPanGestureRecognizer (lv_State *L) {
+static int lvNewPanGestureRecognizer (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPanGesture class]];
     {
         LVPanGesture* gesture = [[c alloc] init:L];
@@ -61,10 +57,10 @@ static int lvNewPanGestureRecognizer (lv_State *L) {
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPanGestureRecognizer globalName:globalName defaultName:@"PanGesture"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {NULL, NULL}
     };
     

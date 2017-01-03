@@ -7,11 +7,7 @@
 //
 
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import "LView.h"
 
 @interface LVStyledString ()
@@ -19,7 +15,7 @@
 
 @implementation LVStyledString
 
--(id) init:(lv_State *)l{
+-(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -43,7 +39,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
     }
 }
 
-static int __attributedString_gc (lv_State *L) {
+static int __attributedString_gc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
@@ -169,7 +165,7 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
     resetLineSpace(attString, dic, range);
 }
 
-static int lvNewAttributedString (lv_State *L) {
+static int lvNewAttributedString (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
     if( luaView && lv_gettop(L)>=2 ) {
@@ -202,7 +198,7 @@ static int lvNewAttributedString (lv_State *L) {
     return 1;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVStyledString* attString =  (__bridge LVStyledString *)(user->object);
@@ -216,7 +212,7 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static int append (lv_State *L) {
+static int append (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     LVStyledString* string1 = (__bridge LVStyledString *)(user1->object);
@@ -229,7 +225,7 @@ static int append (lv_State *L) {
     return 0;
 }
 
-static int __add (lv_State *L) {
+static int __add (lua_State *L) {
     if( lv_type(L, 2)==LV_TUSERDATA ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -287,10 +283,10 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAttributedString globalName:globalName defaultName:@"StyledString"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"append", append },
         
         {"__add", __add },

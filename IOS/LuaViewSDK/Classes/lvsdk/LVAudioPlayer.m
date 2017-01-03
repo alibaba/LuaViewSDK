@@ -9,11 +9,7 @@
 #import "LVAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVAudioPlayer ()
 @property(nonatomic,assign) BOOL playing;
@@ -39,7 +35,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     releaseUserDataAudioPlayer(_lv_userData);
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -97,7 +93,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 
 #pragma -mark AudioPlayer
 
-static int lvNewAudioPlayer (lv_State *L) {
+static int lvNewAudioPlayer (lua_State *L) {
     if( lv_gettop(L)>=1 ) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
         
@@ -119,7 +115,7 @@ static int lvNewAudioPlayer (lv_State *L) {
     return 0;
 }
 
-static int play (lv_State *L) {
+static int play (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if( user && LVIsType(user, AudioPlayer) ){
@@ -133,7 +129,7 @@ static int play (lv_State *L) {
     return 0;
 }
 
-static int stop (lv_State *L) {
+static int stop (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
@@ -144,13 +140,13 @@ static int stop (lv_State *L) {
     return 0;
 }
 
-static int __gc (lv_State *L) {
+static int __gc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataAudioPlayer(user);
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVAudioPlayer* player =  (__bridge LVAudioPlayer *)(user->object);
@@ -161,10 +157,10 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAudioPlayer globalName:globalName defaultName:@"AudioPlayer"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },
         

@@ -21,13 +21,13 @@ typedef void(^LVGestureOnTouchEventCallback)(LVGesture* gesture, int argN);
 
 @property(nonatomic,copy) LVGestureOnTouchEventCallback onTouchEventCallback;
 
--(id) init:(lv_State*) l;
+-(id) init:(lua_State*) l;
 
-+(const lvL_reg*) baseMemberFunctions;
++(const luaL_Reg*) baseMemberFunctions;
 
 +(void) releaseUD:(LVUserDataInfo *) user;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 
 @end

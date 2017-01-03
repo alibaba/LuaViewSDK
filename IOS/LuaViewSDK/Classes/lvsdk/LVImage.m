@@ -12,11 +12,7 @@
 #import "LVData.h"
 #import <Accelerate/Accelerate.h>
 #import "LVNinePatchImage.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
@@ -31,7 +27,7 @@
 @implementation LVImage
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -49,7 +45,7 @@
 }
 
 -(void) callLuaDelegate:(id) obj{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
         lv_checkstack(L, 4);
         lv_pushboolean(L, obj?0:1);
@@ -104,7 +100,7 @@
 -(void) canelWebImageLoading{
     // [self cancelCurrentImageLoad]; // 取消上一次CDN加载
 }
--(void) cancelImageLoadAndClearCallback:(lv_State*)L{
+-(void) cancelImageLoadAndClearCallback:(lua_State*)L{
     [self canelWebImageLoading];
     [NSObject cancelPreviousPerformRequestsWithTarget:self]; // 取消回调脚本
     [LVUtil unregistry:L key:self.functionTag]; // 清除脚本回调
@@ -118,7 +114,7 @@
 }
 
 #pragma -mark ImageView
-static int lvNewImageView(lv_State *L) {
+static int lvNewImageView(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVImage class]];
     
     NSString* imageName = lv_paramString(L, 1);
@@ -140,7 +136,7 @@ static int lvNewImageView(lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setImage (lv_State *L) {
+static int setImage (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -176,7 +172,7 @@ static int setImage (lv_State *L) {
     return 0;
 }
 
-static int scaleType (lv_State *L) {
+static int scaleType (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -195,7 +191,7 @@ static int scaleType (lv_State *L) {
     return 0;
 }
 
-static int startAnimating (lv_State *L) {
+static int startAnimating (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( L && user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -227,7 +223,7 @@ static int startAnimating (lv_State *L) {
     return 0;
 }
 
-static int stopAnimating (lv_State *L) {
+static int stopAnimating (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -239,7 +235,7 @@ static int stopAnimating (lv_State *L) {
     return 0;
 }
 
-static int isAnimating (lv_State *L) {
+static int isAnimating (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -252,7 +248,7 @@ static int isAnimating (lv_State *L) {
     return 1;
 }
 
-static int disableAnimate (lv_State *L) {
+static int disableAnimate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
@@ -264,11 +260,11 @@ static int disableAnimate (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     [LVUtil reg:L clas:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"image",  setImage},
         {"scaleType",  scaleType},
         

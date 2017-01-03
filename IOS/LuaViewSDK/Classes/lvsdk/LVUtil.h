@@ -26,13 +26,13 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  *
  *  @return stackNumber
  */
-+(NSString*) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*)key1 key2:(const char*)key2 nargs:(int)nargs;
++(NSString*) call:(lua_State*) l  lightUserData:(id) lightUserData key1:(const char*)key1 key2:(const char*)key2 nargs:(int)nargs;
     
-+(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3
++(NSString*) call:(lua_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3
             nargs:(int)nargs nrets:(int)nret
           retType:(int) retType;
     
-+(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3 key4:(const char*)key4
++(NSString*) call:(lua_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3 key4:(const char*)key4
             nargs:(int)nargs nrets:(int)nret
           retType:(int) retType;
 
@@ -94,90 +94,90 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 NSData *LV_AES256DecryptDataWithKey(NSData *data, NSData* key);
 
 // 全局注册表添加/删除
-+ (void) registryValue:(lv_State*) L key:(id) key stack:(int) valueIndex;
-+ (void) unregistry:(lv_State*) L key:(id) key;
-+ (void) pushRegistryValue:(lv_State*) L key:(id) key;
++ (void) registryValue:(lua_State*) L key:(id) key stack:(int) valueIndex;
++ (void) unregistry:(lua_State*) L key:(id) key;
++ (void) pushRegistryValue:(lua_State*) L key:(id) key;
 
 // UData 关联脚本object
-void lv_udataRef(lv_State* L, int key);  // -2: userdata   -1: value
-void lv_udataUnref(lv_State* L, int key); // -1: userdata
-void lv_pushUDataRef(lv_State* L, int key); // -1: userdata
+void lv_udataRef(lua_State* L, int key);  // -2: userdata   -1: value
+void lv_udataUnref(lua_State* L, int key); // -1: userdata
+void lv_pushUDataRef(lua_State* L, int key); // -1: userdata
 
 /*
  * Create Class MetaTable
  */
-void lv_createClassMetaTable(lv_State* L, const char* name);
+void lv_createClassMetaTable(lua_State* L, const char* name);
 
 /*
  * Push userData to stack
  */
-void lv_pushUserdata(lv_State* L, void* p);
+void lv_pushUserdata(lua_State* L, void* p);
 
 /*
  * table -> NSDictionary
  */
-id lv_luaTableToDictionary(lv_State* L, int index);
+id lv_luaTableToDictionary(lua_State* L, int index);
 
 /*
  * table -> NSArray
  */
-NSArray* lv_luaTableToArray(lv_State* L, int idx);
+NSArray* lv_luaTableToArray(lua_State* L, int idx);
 
 /*
  * oc对象(所有类型) 转成 luavalue
  */
-void lv_pushNativeObject(lv_State* L , id value );
+void lv_pushNativeObject(lua_State* L , id value );
 
 /*
  * oc对象(非基本类型) 转成 luavalue
  */
-void lv_pushNativeObjectWithBox(lv_State* L,id nativeObject);
+void lv_pushNativeObjectWithBox(lua_State* L,id nativeObject);
 
 /*
  * luavalue 转成 oc对象
  */
-id lv_luaValueToNativeObject(lv_State* L, int idx);
+id lv_luaValueToNativeObject(lua_State* L, int idx);
 
 /*
  * 获取LuaTable对象的 keys
  */
-NSArray* lv_luaTableKeys(lv_State* L, int index);
+NSArray* lv_luaTableKeys(lua_State* L, int index);
 
 /*
  * 移除LuaTable对象的 指定Keys
  */
-void lv_luaTableRemoveKeys(lv_State* L, const char** keys);
+void lv_luaTableRemoveKeys(lua_State* L, const char** keys);
 
 /*
  * lua table是否包含属性
  */
-BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key);
+BOOL lv_isLuaObjectHaveProperty(lua_State* L, int idx, const char* key);
 
 /*
  * lua table添加window属性
  */
-void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell);
+void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell);
 
 /**
  *  重置lua虚拟机的栈大小位置
  *
  *  @param l lua state
  */
-void lv_checkStack32(lv_State* l);
+void lv_checkStack32(lua_State* l);
 
 /**
  *  清理首个无效参数
  *
  *  @param l lua state
  */
-void lv_clearFirstTableValue(lv_State* l);
+void lv_clearFirstTableValue(lua_State* l);
 
 /*
  * uicolor -> int
  */
 BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alpha);
 
-UIColor* lv_getColorFromStack(lv_State* L, int stackID);
+UIColor* lv_getColorFromStack(lua_State* L, int stackID);
 
 
 /*
@@ -197,16 +197,16 @@ void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
 //----------------------------------------
-int lv_callbackFunction(lv_State* l, const char* functionName);
+int lv_callbackFunction(lua_State* l, const char* functionName);
 
 BOOL lv_objcEqual(id obj1, id obj2);
 
-+(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
++(void) reg:(lua_State*)L clas:(id) c cfunc:(lua_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
 
-+(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass;
++(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass;
 
-+(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L;
-+(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L;
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L;
++(void) defineGlobal:(NSString*)globalName func:(lua_CFunction) func L:(lua_State*)L;
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 

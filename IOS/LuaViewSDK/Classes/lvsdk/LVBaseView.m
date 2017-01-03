@@ -12,14 +12,10 @@
 #import "LVAnimator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LVStruct.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "JUFLXLayoutKit.h"
 #import "UIView+JUFLXNode.h"
 #import "LVGesture.h"
+#import "LVHeads.h"
 
 @interface LVBaseView ()
 @property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
@@ -28,7 +24,7 @@
 @implementation LVBaseView
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -55,7 +51,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
 }
 
 #pragma -mark center
-static int center (lv_State *L) {
+static int center (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -97,7 +93,7 @@ static int center (lv_State *L) {
     return 0;
 }
 
-static int centerX(lv_State *L) {
+static int centerX(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -122,7 +118,7 @@ static int centerX(lv_State *L) {
     return 0;
 }
 
-static int centerY(lv_State *L) {
+static int centerY(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -148,7 +144,7 @@ static int centerY(lv_State *L) {
 }
 
 #pragma -mark frame
-static int frame (lv_State *L) {
+static int frame (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -199,7 +195,7 @@ static int frame (lv_State *L) {
 }
 
 #pragma -mark frame
-static int size (lv_State *L) {
+static int size (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -240,7 +236,7 @@ static int size (lv_State *L) {
     return 0;
 }
 
-static int origin (lv_State *L) {
+static int origin (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -282,7 +278,7 @@ static int origin (lv_State *L) {
     return 0;
 }
 
-static int x (lv_State *L) {
+static int x (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -307,7 +303,7 @@ static int x (lv_State *L) {
 }
 
 #pragma - mark flxNode
-static int flxChildViews(lv_State *L)
+static int flxChildViews(lua_State *L)
 {
     LVUserDataInfo *user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (user) {
@@ -329,7 +325,7 @@ static int flxChildViews(lv_State *L)
     return 0;
 }
 
-static int flxBindingInlineCSS(lv_State *L)
+static int flxBindingInlineCSS(lua_State *L)
 {
     LVUserDataInfo *user = (LVUserDataInfo *)lv_touserdata(L, 1);
     UIView *view = (__bridge UIView *)(user->object);
@@ -344,7 +340,7 @@ static int flxBindingInlineCSS(lv_State *L)
     return 0;
 }
 
-//static int flxMeasure(lv_State *L)
+//static int flxMeasure(lua_State *L)
 //{
 //    LVUserDataView *user = (LVUserDataView *)lv_touserdata(L, 1);
 //    UIView *view = (__bridge UIView *)(user->view);
@@ -370,7 +366,7 @@ static int flxBindingInlineCSS(lv_State *L)
 //    return 0;
 //}
 
-static int flxLayout(lv_State *L)
+static int flxLayout(lua_State *L)
 {
     LVUserDataInfo *user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (user) {
@@ -397,7 +393,7 @@ static int flxLayout(lv_State *L)
 }
 
 
-static int y (lv_State *L) {
+static int y (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -421,7 +417,7 @@ static int y (lv_State *L) {
     return 0;
 }
 
-static int bottom (lv_State *L) {
+static int bottom (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -445,7 +441,7 @@ static int bottom (lv_State *L) {
     return 0;
 }
 
-static int right (lv_State *L) {
+static int right (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -469,7 +465,7 @@ static int right (lv_State *L) {
     return 0;
 }
 
-static int width (lv_State *L) {
+static int width (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -492,7 +488,7 @@ static int width (lv_State *L) {
     return 0;
 }
 
-static int height (lv_State *L) {
+static int height (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -515,7 +511,7 @@ static int height (lv_State *L) {
     return 0;
 }
 
-static int addGestureRecognizer (lv_State *L) {
+static int addGestureRecognizer (lua_State *L) {
     LVUserDataInfo * userDataView = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * userDataGesture = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( userDataView && LVIsType(userDataGesture, Gesture) ){
@@ -530,7 +526,7 @@ static int addGestureRecognizer (lv_State *L) {
     return 0;
 }
 
-static int removeGestureRecognizer (lv_State *L) {
+static int removeGestureRecognizer (lua_State *L) {
     LVUserDataInfo * userDataView = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * userDataGesture = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( userDataView && LVIsType(userDataGesture, Gesture) ){
@@ -545,7 +541,7 @@ static int removeGestureRecognizer (lv_State *L) {
     return 0;
 }
 
-static int addSubview (lv_State *L) {
+static int addSubview (lua_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lv_touserdata(L, 2);
     LView* luaview = (__bridge LView *)(L->lView);
@@ -563,7 +559,7 @@ static int addSubview (lv_State *L) {
 }
 
 
-static int getNativeView (lv_State *L) {
+static int getNativeView (lua_State *L) {
     LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( userData ){
         UIView* view = (__bridge UIView *)(userData->object);
@@ -577,7 +573,7 @@ static int getNativeView (lv_State *L) {
 }
 
 #pragma -mark 运行环境
-static int children (lv_State *L) {
+static int children (lua_State *L) {
     LView* lview = (__bridge LView *)(L->lView);
     UIView* oldContent = lview.conentView;
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -593,7 +589,7 @@ static int children (lv_State *L) {
 }
 
 
-static int removeFromSuperview (lv_State *L) {
+static int removeFromSuperview (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -607,7 +603,7 @@ static int removeFromSuperview (lv_State *L) {
     return 0;
 }
 
-static int removeAllSubviews (lv_State *L) {
+static int removeAllSubviews (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -627,7 +623,7 @@ static int removeAllSubviews (lv_State *L) {
     return 0;
 }
 
-static int layerMode(lv_State *L) {
+static int layerMode(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -653,7 +649,7 @@ static int layerMode(lv_State *L) {
 }
 
 #pragma -mark hidden
-static int hidden(lv_State *L) {
+static int hidden(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -671,7 +667,7 @@ static int hidden(lv_State *L) {
     return 0;
 }
 
-static int hide(lv_State *L) {
+static int hide(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -683,7 +679,7 @@ static int hide(lv_State *L) {
     return 0;
 }
 
-static int show(lv_State *L) {
+static int show(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -695,7 +691,7 @@ static int show(lv_State *L) {
     return 0;
 }
 
-static int isShow(lv_State *L) {
+static int isShow(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -707,7 +703,7 @@ static int isShow(lv_State *L) {
     return 0;
 }
 
-static int isHide(lv_State *L) {
+static int isHide(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -719,7 +715,7 @@ static int isHide(lv_State *L) {
     return 0;
 }
 
-static int becomeFirstResponder(lv_State *L) {
+static int becomeFirstResponder(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -734,7 +730,7 @@ static int becomeFirstResponder(lv_State *L) {
     return 0;
 }
 
-static int resignFirstResponder(lv_State *L) {
+static int resignFirstResponder(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -749,7 +745,7 @@ static int resignFirstResponder(lv_State *L) {
     return 0;
 }
 
-static int isFirstResponder(lv_State *L) {
+static int isFirstResponder(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -762,7 +758,7 @@ static int isFirstResponder(lv_State *L) {
 }
 
 #pragma -mark userInteractionEnabled
-static int userInteractionEnabled(lv_State *L) {
+static int userInteractionEnabled(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -781,7 +777,7 @@ static int userInteractionEnabled(lv_State *L) {
 }
 
 #pragma -mark backgroundColor
-static int backgroundColor (lv_State *L) {
+static int backgroundColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -806,7 +802,7 @@ static int backgroundColor (lv_State *L) {
 }
 
 #pragma -mark alpha
-static int alpha (lv_State *L) {
+static int alpha (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -830,7 +826,7 @@ static int alpha (lv_State *L) {
 }
 
 #pragma -mark cornerRadius
-static int cornerRadius (lv_State *L) {
+static int cornerRadius (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -848,7 +844,7 @@ static int cornerRadius (lv_State *L) {
 }
 
 #pragma -mark borderWidth
-static int borderWidth (lv_State *L) {
+static int borderWidth (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -866,7 +862,7 @@ static int borderWidth (lv_State *L) {
 }
 
 #pragma -mark shadow
-static int setShadowPath (lv_State *L) {
+static int setShadowPath (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -876,7 +872,7 @@ static int setShadowPath (lv_State *L) {
     }
     return 0;
 }
-static int setMasksToBounds (lv_State *L) {
+static int setMasksToBounds (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     BOOL masksToBounds = lvL_checkbool(L, 2);// 2
     if( user ){
@@ -888,7 +884,7 @@ static int setMasksToBounds (lv_State *L) {
     return 0;
 }
 
-static int setShadowOffset (lv_State *L) {
+static int setShadowOffset (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float x = lv_tonumber(L, 2);// 2
     float y = lv_tonumber(L, 3);// 2
@@ -901,7 +897,7 @@ static int setShadowOffset (lv_State *L) {
     return 0;
 }
 
-static int setShadowRadius (lv_State *L) {
+static int setShadowRadius (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float radius = lv_tonumber(L, 2);// 2
     if( user ){
@@ -913,7 +909,7 @@ static int setShadowRadius (lv_State *L) {
     return 0;
 }
 
-static int setShadowOpacity (lv_State *L) {
+static int setShadowOpacity (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     float opacity = lv_tonumber(L, 2);// 2
     if( user ){
@@ -925,7 +921,7 @@ static int setShadowOpacity (lv_State *L) {
     return 0;
 }
 
-static int setShadowColor (lv_State *L) {
+static int setShadowColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user && lv_gettop(L)>=2 ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -949,7 +945,7 @@ UIColor* lv_UIColorFromRGBA(NSInteger rgbValue, float alphaValue){
 
 }
 
-static int borderColor (lv_State *L) {
+static int borderColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -972,7 +968,7 @@ static int borderColor (lv_State *L) {
     return 0;
 }
 
-static int borderDash (lv_State *L) {
+static int borderDash (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1007,7 +1003,7 @@ static int borderDash (lv_State *L) {
 }
 
 #pragma -mark clipsToBounds
-static int clipsToBounds(lv_State *L) {
+static int clipsToBounds(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1025,7 +1021,7 @@ static int clipsToBounds(lv_State *L) {
     return 0;
 }
 
-static int adjustSize(lv_State *L) {
+static int adjustSize(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1041,7 +1037,7 @@ static int adjustSize(lv_State *L) {
 typedef void (TransformSetter)(CATransform3D *, CGFloat);
 typedef double (TransformGetter)(CATransform3D *);
 
-static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGetter getter) {
+static int transformFuncOneArg(lua_State *L, TransformSetter setter, TransformGetter getter) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     UIView *view = (__bridge UIView *)(user->object);
     
@@ -1070,7 +1066,7 @@ static int transformFuncOneArg(lv_State *L, TransformSetter setter, TransformGet
     return 0;
 }
 
-static int transformFuncTwoArg(lv_State *L,
+static int transformFuncTwoArg(lua_State *L,
                                  TransformSetter xsetter, TransformSetter ysetter,
                                  TransformGetter xgetter, TransformGetter ygetter) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1122,12 +1118,12 @@ static double transform3DGetDegreeRotation(CATransform3D *t) {
     return radianToDegree(r);
 }
 
-static int rotationZ (lv_State *L) {
+static int rotationZ (lua_State *L) {
     return transformFuncOneArg(L, transform3DSetDegreeRotation,
                                transform3DGetDegreeRotation);
 }
 
-static int rotationX (lv_State *L) {
+static int rotationX (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1150,7 +1146,7 @@ static int rotationX (lv_State *L) {
     return 0;
 }
 
-static int rotationY (lv_State *L) {
+static int rotationY (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1173,7 +1169,7 @@ static int rotationY (lv_State *L) {
     return 0;
 }
 
-static int scale (lv_State *L) {
+static int scale (lua_State *L) {
     if (lv_gettop(L) == 2) {
         lv_pushnumber(L, lv_tonumber(L, 2));
     }
@@ -1181,28 +1177,28 @@ static int scale (lv_State *L) {
                                  CATransform3DGetScaleX, CATransform3DGetScaleY);
 }
 
-static int scaleX (lv_State *L) {
+static int scaleX (lua_State *L) {
     return transformFuncOneArg(L, CATransform3DSetScaleX, CATransform3DGetScaleX);
 }
 
-static int scaleY (lv_State *L) {
+static int scaleY (lua_State *L) {
     return transformFuncOneArg(L, CATransform3DSetScaleY, CATransform3DGetScaleY);
 }
 
-static int translation (lv_State *L) {
+static int translation (lua_State *L) {
     return transformFuncTwoArg(L, CATransform3DSetTranslationX, CATransform3DSetTranslationY,
                                  CATransform3DGetTranslationX, CATransform3DGetTranslationY);
 }
 
-static int translationX (lv_State *L) {
+static int translationX (lua_State *L) {
     return transformFuncOneArg(L, CATransform3DSetTranslationX, CATransform3DGetTranslationX);
 }
 
-static int translationY (lv_State *L) {
+static int translationY (lua_State *L) {
     return transformFuncOneArg(L, CATransform3DSetTranslationY, CATransform3DGetTranslationY);
 }
 
-static int transform3D (lv_State *L) {
+static int transform3D (lua_State *L) {
     LVUserDataInfo* user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1228,7 +1224,7 @@ static int transform3D (lv_State *L) {
     return 0;
 }
 
-static int startAnimation(lv_State *L) {
+static int startAnimation(lua_State *L) {
     LVUserDataInfo* vdata = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( vdata ){
         LVUserDataInfo *adata = NULL;
@@ -1253,7 +1249,7 @@ static int startAnimation(lv_State *L) {
     return 0;
 }
 
-static int stopAnimation(lv_State *L) {
+static int stopAnimation(lua_State *L) {
     LVUserDataInfo* user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1264,7 +1260,7 @@ static int stopAnimation(lv_State *L) {
 }
 
 #pragma -mark anchorPoint
-static int anchorPoint (lv_State *L) {
+static int anchorPoint (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1283,7 +1279,7 @@ static int anchorPoint (lv_State *L) {
     return 0;
 }
 
-int lv_setCallbackByKey(lv_State *L, const char* key, BOOL addGesture) {
+int lv_setCallbackByKey(lua_State *L, const char* key, BOOL addGesture) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 ) {
@@ -1333,15 +1329,15 @@ int lv_setCallbackByKey(lv_State *L, const char* key, BOOL addGesture) {
     return 0;
 }
 
-static int callback (lv_State *L) {
+static int callback (lua_State *L) {
     return lv_setCallbackByKey(L, NULL, YES);
 }
 
-static int onLayout (lv_State *L) {
+static int onLayout (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_LAYOUT, NO);
 }
 
-static int onClick (lv_State *L) {
+static int onClick (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
@@ -1357,7 +1353,7 @@ static void removeOnTouchEventGesture(UIView* view){
     }
 }
 
-static int onTouch (lv_State *L) {
+static int onTouch (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     int ret = lv_setCallbackByKey(L, STR_ON_TOUCH, NO);
     if( user ){
@@ -1374,13 +1370,13 @@ static int onTouch (lv_State *L) {
 }
 
 #pragma -mark __gc
-static int __gc (lv_State *L) {
+static int __gc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserDataView(user);
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView<LVProtocal>* view = (__bridge UIView<LVProtocal> *)(user->object);
@@ -1399,7 +1395,7 @@ static int __tostring (lv_State *L) {
     [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
-static int releaseObject(lv_State *L) {
+static int releaseObject(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
@@ -1415,13 +1411,13 @@ static int releaseObject(lv_State *L) {
     return 0;
 }
 //---------------------------
-//static int __newindex (lv_State *L) {
+//static int __newindex (lua_State *L) {
 //    NSString* key = lv_paramString(L, 2);
 //    if( key ){
 //        lv_getmetatable( L, 1 );
 //        lv_getfield(L, -1, key.UTF8String);
 //        if( lv_type(L, -1)==LV_TFUNCTION ) {
-//            lv_CFunction function =  lv_tocfunction(L,-1);
+//            lua_CFunction function =  lv_tocfunction(L,-1);
 //            if( function ) {
 //                lv_remove(L, 2);
 //                lv_settop(L, 2);
@@ -1434,7 +1430,7 @@ static int releaseObject(lv_State *L) {
 //}
 
 
-static int align (lv_State *L) {
+static int align (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1457,7 +1453,7 @@ static int align (lv_State *L) {
     return 0;
 }
 
-static int alignInfo (lv_State *L, int align) {
+static int alignInfo (lua_State *L, int align) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1469,27 +1465,27 @@ static int alignInfo (lv_State *L, int align) {
     return 0;
 }
 
-static int alignLeft(lv_State *L ) {
+static int alignLeft(lua_State *L ) {
     return alignInfo(L, LV_ALIGN_LEFT);
 }
 
-static int alignRight(lv_State *L ) {
+static int alignRight(lua_State *L ) {
     return alignInfo(L, LV_ALIGN_RIGHT);
 }
 
-static int alignTop(lv_State *L ) {
+static int alignTop(lua_State *L ) {
     return alignInfo(L, LV_ALIGN_TOP);
 }
 
-static int alignBottom(lv_State *L ) {
+static int alignBottom(lua_State *L ) {
     return alignInfo(L, LV_ALIGN_BOTTOM);
 }
 
-static int alignCenter(lv_State *L ) {
+static int alignCenter(lua_State *L ) {
     return alignInfo(L, LV_ALIGN_H_CENTER|LV_ALIGN_V_CENTER);
 }
 
-static int effects (lv_State *L) {
+static int effects (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1518,7 +1514,7 @@ static int effects (lv_State *L) {
     return 0;
 }
 
-static int invalidate (lv_State *L) {
+static int invalidate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
@@ -1529,7 +1525,7 @@ static int invalidate (lv_State *L) {
     return 0;
 }
 
-static const struct lvL_reg baseMemberFunctions [] = {
+static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
     
     {"hide",    hide },
@@ -1652,16 +1648,16 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {NULL, NULL}
 };
 
-static const struct lvL_reg luaViewMemberFunctions [] = {
+static const struct luaL_Reg luaViewMemberFunctions [] = {
     {NULL,    NULL },
 };
 
-+(const lvL_reg*) baseMemberFunctions{
++(const luaL_Reg*) baseMemberFunctions{
     return baseMemberFunctions;
 }
 
 #pragma -mark UIView
-static int lvNewView (lv_State *L) {
+static int lvNewView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVBaseView class]];
     
     LVBaseView* view = [[c alloc] init:L];
@@ -1681,7 +1677,7 @@ static int lvNewView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewView globalName:globalName defaultName:@"View"];
     
     lv_createClassMetaTable(L, META_TABLE_UIView);

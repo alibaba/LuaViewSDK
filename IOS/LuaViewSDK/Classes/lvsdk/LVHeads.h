@@ -12,13 +12,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
-
-#define lvL_reg	lvL_Reg
+#import "lua.h"
+#import "lauxlib.h"
+#import "lualib.h"
+#import "lstate.h"
+#import "lgc.h"
 
 /**
  * the index of signed scripts' extionsion(@"lv") in LVScriptExts[]
@@ -96,7 +94,7 @@ typedef struct _LVUserDataInfo {
 
 @protocol LVClassProtocal <NSObject>
 @required
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end
 
@@ -155,11 +153,11 @@ typedef struct _LVUserDataInfo {
 #define STR_onReceivedError "onReceivedError"
 
 // lua对象 -> NSString
-NSString* lv_paramString(lv_State* L, int idx );
+NSString* lv_paramString(lua_State* L, int idx );
 
 // run
-NSString*  lv_runFunction(lv_State* l);
-NSString*  lv_runFunctionWithArgs(lv_State* l, int nargs, int nret);
+NSString*  lv_runFunction(lua_State* l);
+NSString*  lv_runFunctionWithArgs(lua_State* l, int nargs, int nret);
 
 
 

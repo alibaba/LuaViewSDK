@@ -16,7 +16,7 @@
 
 @implementation LVEvent
 
--(id) init:(lv_State *)l gesture:(UIGestureRecognizer*) gesture{
+-(id) init:(lua_State *)l gesture:(UIGestureRecognizer*) gesture{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -49,13 +49,13 @@ static void releaseEventUserData(LVUserDataInfo* user){
     }
 }
 
-static int lvEventGC (lv_State *L) {
+static int lvEventGC (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseEventUserData(user);
     return 0;
 }
 
-static int lvNewEvent (lv_State *L) {
+static int lvNewEvent (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVEvent class]];
     
     LVEvent* lvEvent = [[c alloc] init:L gesture:nil];
@@ -71,7 +71,7 @@ static int lvNewEvent (lv_State *L) {
     return 1;
 }
 
-+(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture{
++(LVEvent*) createLuaEvent:(lua_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture{
     LVEvent* lvEvent = [[LVEvent alloc] init:L gesture:gesture];
     lvEvent.event = event;
     {
@@ -85,7 +85,7 @@ static int lvNewEvent (lv_State *L) {
     return lvEvent;
 }
 
-static int nativeObj (lv_State *L) {
+static int nativeObj (lua_State *L) {
     LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( userData ){
         LVEvent* lvEvent = (__bridge LVEvent *)(userData->object);
@@ -98,7 +98,7 @@ static int nativeObj (lv_State *L) {
     return 0;
 }
 
-static int action (lv_State *L) {
+static int action (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
@@ -113,7 +113,7 @@ static int action (lv_State *L) {
     return 0;
 }
 
-static int pointer (lv_State *L) {
+static int pointer (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
@@ -128,7 +128,7 @@ static int pointer (lv_State *L) {
     return 0;
 }
 
-static int x (lv_State *L) {
+static int x (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
@@ -139,7 +139,7 @@ static int x (lv_State *L) {
     return 0;
 }
 
-static int y (lv_State *L) {
+static int y (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
@@ -150,7 +150,7 @@ static int y (lv_State *L) {
     return 0;
 }
 
-static int event_id (lv_State *L) {
+static int event_id (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
@@ -160,7 +160,7 @@ static int event_id (lv_State *L) {
     return 0;
 }
 
-static int __index (lv_State *L) {
+static int __index (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_type(L, 2)==LV_TSTRING ){
@@ -171,7 +171,7 @@ static int __index (lv_State *L) {
             lv_gettable(L, -2);
             lv_remove(L, -2);
             lv_remove(L, -2);
-            lv_CFunction cfunc = lv_tocfunction(L, -1);
+            lua_CFunction cfunc = lv_tocfunction(L, -1);
             if( cfunc ) {
                 lv_settop(L, 1);
                 return cfunc(L);
@@ -181,11 +181,11 @@ static int __index (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewEvent globalName:globalName defaultName:@"Event"];
     
     {
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"__gc", lvEventGC },
             {"nativeObj", nativeObj},
             {"__index", __index },
@@ -198,7 +198,7 @@ static int __index (lv_State *L) {
     }
     {
         
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"id", event_id},
             {"action", action},
             {"pointer", pointer},

@@ -9,8 +9,7 @@
 #import "LVTypeConvert.h"
 #import "LVHeads.h"
 #import "LVStruct.h"
-#import "lVapi.h"
-#import "lV.h"
+#import "LVHeads.h"
 #import <objc/runtime.h>
 
 @implementation LVTypeConvert
@@ -201,7 +200,7 @@ double lv_getValueWithType(void* p, int index, int type ){
     return 0;
 }
 
-int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lv_State* L){
+int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lua_State* L){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ){
         switch ( lv_typeID(type) ) {
@@ -330,7 +329,7 @@ int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lv_State* L
     return 0;
 }
 
-int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lv_State* L, int stackID){
+int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lua_State* L, int stackID){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
     if ( type ){
         switch ( lv_typeID(type) ) {
@@ -449,7 +448,7 @@ int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lv_State*
     return 0;
 }
 
-id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lv_State* L, int stackID){
+id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lua_State* L, int stackID){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ) {
         switch ( lv_typeID(type) ) {
@@ -564,7 +563,7 @@ id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lv_State* L, 
     return  nil ;
 }
 
-int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lv_State* L ){
+int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lua_State* L ){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
     switch ( lv_typeID(type) ) {
         case LVTypeID_BOOL: {

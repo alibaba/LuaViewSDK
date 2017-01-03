@@ -7,9 +7,6 @@
 //
 
 #import "LVAnimator.h"
-#import "lV.h"
-#import "lVstate.h"
-#import "lVauxlib.h"
 #import "LVHeads.h"
 #import "LVUtil.h"
 #import "LView.h"
@@ -38,7 +35,7 @@ static char *callbackKeys[] = { "", "onStart", "onEnd", "onCancel", "onPause", "
     return self;
 }
 
-static int lvNewAnimator(lv_State *L) {
+static int lvNewAnimator(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVAnimator class]];
     
     LVAnimator *animator = [c new];
@@ -55,7 +52,7 @@ static int lvNewAnimator(lv_State *L) {
     return 1;
 }
 
-static int __gc(lv_State *L) {
+static int __gc(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator) && data->object) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -69,7 +66,7 @@ static int __gc(lv_State *L) {
     return 0;
 }
 
-static int __tostring(lv_State *L) {
+static int __tostring(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -82,7 +79,7 @@ static int __tostring(lv_State *L) {
     return 0;
 }
 
-static int __eq(lv_State *L) {
+static int __eq(lua_State *L) {
     LVUserDataInfo *data1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo *data2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     
@@ -99,7 +96,7 @@ static int __eq(lv_State *L) {
     return 0;
 }
 
-static int clone(lv_State *L) {
+static int clone(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = [(__bridge LVAnimator *)data->object copy];
@@ -119,7 +116,7 @@ static int clone(lv_State *L) {
     return 0;
 }
 
-static int with(lv_State *L) {
+static int with(lua_State *L) {
     LVUserDataInfo *adata = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo *vdata = (LVUserDataInfo *)lv_touserdata(L, 2);
 
@@ -133,7 +130,7 @@ static int with(lv_State *L) {
     return 1;
 }
 
-static int start(lv_State *L) {
+static int start(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -150,7 +147,7 @@ static int start(lv_State *L) {
     return 1;
 }
 
-static int cancel(lv_State *L) {
+static int cancel(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -163,7 +160,7 @@ static int cancel(lv_State *L) {
     return 1;
 }
 
-static int isRunning(lv_State *L) {
+static int isRunning(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -176,7 +173,7 @@ static int isRunning(lv_State *L) {
     return 1;
 }
 
-static int pauseAnimator(lv_State *L) {
+static int pauseAnimator(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -189,7 +186,7 @@ static int pauseAnimator(lv_State *L) {
     return 1;
 }
 
-static int resumeAnimator(lv_State *L) {
+static int resumeAnimator(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -202,7 +199,7 @@ static int resumeAnimator(lv_State *L) {
     return 1;
 }
 
-static int isPaused(lv_State *L) {
+static int isPaused(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -215,7 +212,7 @@ static int isPaused(lv_State *L) {
     return 1;
 }
 
-static int duration(lv_State *L) {
+static int duration(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_tonumber(L, 2);
     
@@ -230,7 +227,7 @@ static int duration(lv_State *L) {
     return 1;
 }
 
-static int delay(lv_State *L) {
+static int delay(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     float value = lv_tonumber(L, 2);
     
@@ -245,7 +242,7 @@ static int delay(lv_State *L) {
     return 1;
 }
 
-static int repeatCount(lv_State *L) {
+static int repeatCount(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     int value = (int)lv_tointeger(L, 2);
     
@@ -260,7 +257,7 @@ static int repeatCount(lv_State *L) {
     return 1;
 }
 
-static int autoreverses(lv_State *L) {
+static int autoreverses(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     BOOL autoreverses = !!lv_toboolean(L, 2);
     
@@ -275,7 +272,7 @@ static int autoreverses(lv_State *L) {
     return 1;
 }
 
-static int interpolator(lv_State *L) {
+static int interpolator(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVAniamtorInterpolator interpolator = lv_tonumber(L, 2);
     
@@ -290,7 +287,7 @@ static int interpolator(lv_State *L) {
     return 1;
 }
 
-static int setCallback(lv_State *L, int idx) {
+static int setCallback(lua_State *L, int idx) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
@@ -309,27 +306,27 @@ static int setCallback(lv_State *L, int idx) {
     return 1;
 }
 
-static int onStart(lv_State *L) {
+static int onStart(lua_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnStart);
 }
 
-static int onEnd(lv_State *L) {
+static int onEnd(lua_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnEnd);
 }
 
-static int onCancel(lv_State *L) {
+static int onCancel(lua_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnCancel);
 }
 
-static int onPause(lv_State *L) {
+static int onPause(lua_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnPause);
 }
 
-static int onResume(lv_State *L) {
+static int onResume(lua_State *L) {
     return setCallback(L, kLVAnimatorCallbackOnResume);
 }
 
-static int callback(lv_State *L) {
+static int callback(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator) && lv_type(L, 2) == LV_TTABLE) {
         lv_pushvalue(L, 2);
@@ -369,7 +366,7 @@ static int callback(lv_State *L) {
     return 1;
 }
 
-static int updateValue(lv_State *L, NSString *keyPath, id value) {
+static int updateValue(lua_State *L, NSString *keyPath, id value) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -385,28 +382,28 @@ static int updateValue(lv_State *L, NSString *keyPath, id value) {
     return 1;
 }
 
-static int updateFloat(lv_State *L, NSString *keyPath) {
+static int updateFloat(lua_State *L, NSString *keyPath) {
     float value = lv_tonumber(L, 2);
     
     return updateValue(L, keyPath, @(value));
 }
 
-static int updatePoint(lv_State *L, NSString *keyPath) {
+static int updatePoint(lua_State *L, NSString *keyPath) {
     float x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
     NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
     
     return updateValue(L, keyPath, point);
 }
 
-static int alpha(lv_State *L) {
+static int alpha(lua_State *L) {
     return updateFloat(L, @"opacity");
 }
 
-static int rotation(lv_State *L) {
+static int rotation(lua_State *L) {
     return updateFloat(L, @"transform.rotation");
 }
 
-static int scale(lv_State *L) {
+static int scale(lua_State *L) {
     // default y = x
     if (lv_gettop(L) == 2) {
         lv_pushnumber(L, lv_tonumber(L, 2));
@@ -414,34 +411,34 @@ static int scale(lv_State *L) {
     return updatePoint(L, @"transform.scale");
 }
 
-static int scaleX(lv_State *L) {
+static int scaleX(lua_State *L) {
     return updateFloat(L, @"transform.scale.x");
 }
 
-static int scaleY(lv_State *L) {
+static int scaleY(lua_State *L) {
     return updateFloat(L, @"transform.scale.y");
 }
 
-static int translation(lv_State *L) {
+static int translation(lua_State *L) {
     return updatePoint(L, @"transform.translation");
 }
 
-static int translationX(lv_State *L) {
+static int translationX(lua_State *L) {
     return updateFloat(L, @"transform.translation.x");
 }
 
-static int translationY(lv_State *L) {
+static int translationY(lua_State *L) {
     return updateFloat(L, @"transform.translation.y");
 }
 
-static int value(lv_State *L) {
+static int value(lua_State *L) {
     return updateFloat(L, nil);
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAnimator globalName:globalName defaultName:@"Animation"];
     
-    const struct lvL_reg memberFunctions[] = {
+    const struct luaL_Reg memberFunctions[] = {
         { "__gc", __gc },
         { "__tostring", __tostring },
         { "__eq", __eq },
@@ -750,7 +747,7 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
 }
 
 - (void)callback:(LVAnimatorCallback)idx {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if (l && self.lv_userData) {
         int stackIndex = lv_gettop(l);
 

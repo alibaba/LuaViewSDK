@@ -8,11 +8,7 @@
 
 #import "LVStruct.h"
 #import "LVTypeConvert.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 
@@ -41,7 +37,7 @@
     return self;
 }
 
-static int lvNewStruct (lv_State *L) {
+static int lvNewStruct (lua_State *L) {
     NEW_USERDATA(userData, Struct);
     LVStruct* lvstruct = [[LVStruct alloc] init];
     userData->object = CFBridgingRetain(lvstruct);
@@ -59,7 +55,7 @@ static int lvNewStruct (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) pushStructToLua:(lv_State*)L data:(void*)data{
++(int) pushStructToLua:(lua_State*)L data:(void*)data{
     NEW_USERDATA(userData, Struct);
     LVStruct* lvstruct = [[LVStruct alloc] init];
     userData->object = CFBridgingRetain(lvstruct);
@@ -72,7 +68,7 @@ static int lvNewStruct (lv_State *L) {
 }
 
 
-static int setValue (lv_State *L) {
+static int setValue (lua_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=3 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -98,7 +94,7 @@ static int setValue (lv_State *L) {
     return 0;
 }
 
-static int getValue (lv_State *L) {
+static int getValue (lua_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=2 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -124,7 +120,7 @@ static int getValue (lv_State *L) {
     return 0;
 }
 
-static int __eq (lv_State *L) {
+static int __eq (lua_State *L) {
     if( lv_gettop(L)==2 ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -143,7 +139,7 @@ static int __eq (lv_State *L) {
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Struct) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataStruct: %d", (int)user ];
@@ -153,7 +149,7 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static int __index (lv_State *L) {
+static int __index (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_type(L, 2)==LV_TNUMBER ) {
@@ -173,7 +169,7 @@ static int __index (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __newindex (lv_State *L) {
+static int __newindex (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if( lv_type(L, 2)==LV_TNUMBER ){
@@ -185,7 +181,7 @@ static int __newindex (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewStruct);
         lv_setglobal(L, "Struct");
@@ -196,7 +192,7 @@ static int __newindex (lv_State *L) {
         lv_pushcfunction(L, lvNewStruct);
         lv_setglobal(L, "Point");
     }
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__index", __index },
         {"__newindex", __newindex },
         {"__eq", __eq},
@@ -214,7 +210,7 @@ static int __newindex (lv_State *L) {
     lvL_openlib(L, NULL, memberFunctions, 0);
     
 //    {
-//        const struct lvL_reg memberFunctions2 [] = {
+//        const struct luaL_Reg memberFunctions2 [] = {
 //            {"__index", __index },
 //            {"__newindex", __newindex },
 //            {NULL, NULL}

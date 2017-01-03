@@ -10,11 +10,7 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVToast.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVAlert ()
 @property(nonatomic,strong) NSArray* cmdArray;
@@ -26,7 +22,7 @@
 }
 
 -(void) dealloc{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     for ( int i=0; i<self.functionNum; i++ ) {
         if( lv_type(L, i) == LV_TFUNCTION ) {
             NSString* tag = self.cmdArray[i];
@@ -36,7 +32,7 @@
 }
 
 
--(id) init:(lv_State*) l argNum:(int)num{
+-(id) init:(lua_State*) l argNum:(int)num{
     NSString* cancel = getArgs(l, 3, num);
     NSString* ok = getArgs(l, 4, num);
     if( cancel==nil && ok==nil ){
@@ -67,7 +63,7 @@
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
         lv_pushnumber(l, buttonIndex);
@@ -76,14 +72,14 @@
     }
 }
 
-static NSString* getArgs(lv_State* L, int index, int max){
+static NSString* getArgs(lua_State* L, int index, int max){
     if( index>=1 && index<=max ){
         return lv_paramString(L, index);
     }
     return nil;
 }
 
-static int lvNewAlertView (lv_State *L) {
+static int lvNewAlertView (lua_State *L) {
     int num = lv_gettop(L);
     LVAlert* alertView = [[LVAlert alloc] init:L argNum:num];
     if( num>0 ){
@@ -101,7 +97,7 @@ static int lvNewAlertView (lv_State *L) {
 }
 
 
-static int toast (lv_State *L) {
+static int toast (lua_State *L) {
     int num = lv_gettop(L);
     if( num>0 ){
         NSString* s = lv_paramString(L, 1);
@@ -115,7 +111,7 @@ static int toast (lv_State *L) {
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     {// 自动消失的提示框
         lv_pushcfunction(L, toast);
@@ -124,7 +120,7 @@ static int toast (lv_State *L) {
 
     // 系统Alert提示框
     [LVUtil reg:L clas:self cfunc:lvNewAlertView globalName:globalName defaultName:@"Alert"];
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {NULL, NULL}
     };
     

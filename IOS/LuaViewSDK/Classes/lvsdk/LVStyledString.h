@@ -18,7 +18,7 @@
 
 @property(nonatomic,strong) NSMutableAttributedString* mutableStyledString;//真实的数据
 
--(id) init:(lv_State*) l;
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
+-(id) init:(lua_State*) l;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end

@@ -13,18 +13,14 @@
 #import "LView.h"
 #import "LVStyledString.h"
 #import "UIView+LuaView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface  LVButton()
 @end
 
 @implementation LVButton
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -64,7 +60,7 @@
 }
 
 #pragma -mark Button
-static int lvNewButton (lv_State *L) {
+static int lvNewButton (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVButton class]];
     
     {
@@ -85,7 +81,7 @@ static int lvNewButton (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int selected (lv_State *L) {
+static int selected (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVButton* button = (__bridge LVButton *)(user->object);
@@ -103,7 +99,7 @@ static int selected (lv_State *L) {
     return 0;
 }
 
-static int enabled (lv_State *L) {
+static int enabled (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVButton* button = (__bridge LVButton *)(user->object);
@@ -119,7 +115,7 @@ static int enabled (lv_State *L) {
     return 0;
 }
 
-static int image (lv_State *L) {
+static int image (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         NSString* normalImage = lv_paramString(L, 2);// 2
@@ -141,7 +137,7 @@ static int image (lv_State *L) {
 }
 
 static const UIControlState g_states[] = {UIControlStateNormal,UIControlStateHighlighted,UIControlStateDisabled,UIControlStateSelected};
-static int title (lv_State *L) {
+static int title (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVButton* button = (__bridge LVButton *)(user->object);
@@ -179,7 +175,7 @@ static int title (lv_State *L) {
     return 0;
 }
 
-static int titleColor (lv_State *L) {
+static int titleColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVButton* button = (__bridge LVButton *)(user->object);
@@ -212,7 +208,7 @@ static int titleColor (lv_State *L) {
     return 0;
 }
 
-static int font (lv_State *L) {
+static int font (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
@@ -240,7 +236,7 @@ static int font (lv_State *L) {
     return 0;
 }
 
-static int fontSize (lv_State *L) {
+static int fontSize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVButton* view = (__bridge LVButton *)(user->object);
@@ -260,7 +256,7 @@ static int fontSize (lv_State *L) {
     return 0;
 }
 
-//static int showsTouchWhenHighlighted(lv_State *L) {
+//static int showsTouchWhenHighlighted(lua_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        LVButton* button = (__bridge LVButton *)(user->view);
@@ -276,10 +272,10 @@ static int fontSize (lv_State *L) {
 //    return 0;
 //}
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewButton globalName:globalName defaultName:@"Button"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"image",    image},
         
         {"font",    font},

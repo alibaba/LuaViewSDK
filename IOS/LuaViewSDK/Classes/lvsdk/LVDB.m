@@ -7,17 +7,13 @@
 //
 
 #import "LVDB.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVDB
 
 
 
-static int db_get (lv_State *L) {
+static int db_get (lua_State *L) {
     lv_clearFirstTableValue(L);
     NSString* key = lv_paramString(L, 1);
     NSString* defaultValue = nil;
@@ -65,7 +61,7 @@ static NSString* clearString(NSString* s){
     return s;
 }
 
-static int db_set (lv_State *L) {
+static int db_set (lua_State *L) {
     lv_clearFirstTableValue(L);
     if( lv_gettop(L)>=2 ) {
         NSString* key = lv_paramString(L, 1);
@@ -82,8 +78,8 @@ static int db_set (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    const struct lvL_reg functions [] = {
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    const struct luaL_Reg functions [] = {
         {"get",  db_get},
         {"set",  db_set},
         {LUAVIEW_SYS_TABLE_KEY, db_set},

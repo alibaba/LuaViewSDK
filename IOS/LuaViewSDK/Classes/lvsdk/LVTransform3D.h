@@ -17,9 +17,9 @@
 
 @property(nonatomic,assign) CATransform3D transform;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
-+(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t;
++(int) pushTransform3D:(lua_State *)L  transform3d:(CATransform3D) t;
 
 @end
 

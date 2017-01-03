@@ -8,11 +8,7 @@
 
 #import "LVBlock.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVBlock ()
 @property (nonatomic,weak) LView* lview;
@@ -22,7 +18,7 @@
 
 @implementation LVBlock
 
-- (id) initWith:(lv_State*)L statckID:(int) idx{
+- (id) initWith:(lua_State*)L statckID:(int) idx{
     self = [super init];
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
@@ -34,7 +30,7 @@
     return self;
 }
 
-- (id) initWith:(lv_State*)L globalName:(NSString*) globalName{
+- (id) initWith:(lua_State*)L globalName:(NSString*) globalName{
     self = [super init];
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
@@ -54,7 +50,7 @@
 
 -(void) resetFunctionByNames:(NSString*) globalName{
     NSArray * names = [globalName componentsSeparatedByString:@"."];
-    lv_State* L = self.lview.l;
+    lua_State* L = self.lview.l;
     if( names.count>0 ){
         NSString* name0 = names.firstObject;
         lv_getglobal(L, name0.UTF8String);
@@ -73,14 +69,14 @@
 }
 
 - (void) dealloc{
-    lv_State* L = self.lview.l;
+    lua_State* L = self.lview.l;
     if( L ) {
         [LVUtil unregistry:L key:self.retainKey];
     }
 }
 
 - (NSString*) callWithArgs:(NSArray*) args{
-    lv_State* L = self.lview.l;
+    lua_State* L = self.lview.l;
     if( L ) {
         lv_checkstack(L, (int)args.count*2+2 );
         
@@ -114,7 +110,7 @@
 }
 
 -(void) pushFunctionToStack{
-    lv_State* L = self.lview.l;
+    lua_State* L = self.lview.l;
     if( L ){
         [LVUtil pushRegistryValue:L key:self.retainKey];
     }

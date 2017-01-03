@@ -14,11 +14,7 @@
 #import "LVLuaObjBox.h"
 #import "LVPointerValueBox.h"
 #import "LVDebuger.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import <CoreText/CTFontManager.h>
 
 @implementation LVUtil
@@ -28,7 +24,7 @@
     return [url hasPrefix:@"https://"] || [url hasPrefix:@"http://"];
 }
 
-+(NSString*) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
++(NSString*) call:(lua_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
     if( l ){
         lv_checkStack32(l);
         lv_pushlightuserdata(l, (__bridge void *)lightUserData);// key=view
@@ -39,17 +35,17 @@
     return nil;
 }
 
-+(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
++(NSString*) call:(lua_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
     return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret retType:-8];
 }
     
-+(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
++(NSString*) call:(lua_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
             nargs:(int)nargs nrets:(int)nret
           retType:(int) retType{
     return [self call:l key1:key1 key2:key2 key3:key3 key4:NULL nargs:nargs nrets:nret retType:retType];
 }
     
-+(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 key4:(const char*)key4
++(NSString*) call:(lua_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 key4:(const char*)key4
       nargs:(int)nargs nrets:(int)nret
     retType:(int) retType{
     if( l ){
@@ -82,14 +78,14 @@
             return lv_runFunctionWithArgs(l, nargs, nret);
         }
     }
-    return @"LVUtil:lv_State is nil";
+    return @"LVUtil:lua_State is nil";
 }
 
-NSString* lv_runFunction(lv_State* l){
+NSString* lv_runFunction(lua_State* l){
     return lv_runFunctionWithArgs(l, 0, 0);
 }
 
-NSString* lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
+NSString* lv_runFunctionWithArgs(lua_State* l, int nargs, int nret){
     if( l && lv_type(l, -1) == LV_TFUNCTION ) {
         if( nargs>0 ){
             lv_insert(l, -nargs-1);
@@ -110,7 +106,7 @@ NSString* lv_runFunctionWithArgs(lv_State* l, int nargs, int nret){
 }
 
 #define api_incr_top(L)   {api_check(L, L->top < L->ci->top); L->top++;}
-void lv_pushUserdata(lv_State* L, void* p){///是否正确 ????????
+void lv_pushUserdata(lua_State* L, void* p){///是否正确 ????????
     if( p ) {
         Udata* u = (Udata*)p;
         u -= 1;
@@ -124,7 +120,7 @@ void lv_pushUserdata(lv_State* L, void* p){///是否正确 ????????
     }
 }
 
-id lv_luaTableToDictionary(lv_State* L ,int index){
+id lv_luaTableToDictionary(lua_State* L ,int index){
     if( lv_type(L, index)!=LV_TTABLE ) {
         return nil;
     }
@@ -186,7 +182,7 @@ id lv_luaTableToDictionary(lv_State* L ,int index){
     return @{};
 }
 
-NSArray* lv_luaTableKeys(lv_State* L, int index){
+NSArray* lv_luaTableKeys(lua_State* L, int index){
     lv_checkstack(L, 128);
     NSMutableArray* keys = [[NSMutableArray alloc] init];
     //lv_settop(L, 8);
@@ -218,7 +214,7 @@ NSArray* lv_luaTableKeys(lv_State* L, int index){
     return nil;
 }
 
-NSArray* lv_luaTableToArray(lv_State* L,int stackID)
+NSArray* lv_luaTableToArray(lua_State* L,int stackID)
 {
     if( lv_type(L, stackID)==LV_TTABLE) {
         int count = lvL_getn(L, stackID);
@@ -238,7 +234,7 @@ NSArray* lv_luaTableToArray(lv_State* L,int stackID)
 
 #pragma -mark registry
 
-+ (void) registryValue:(lv_State*)L key:(id) key stack:(int) stackID{
++ (void) registryValue:(lua_State*)L key:(id) key stack:(int) stackID{
     if( L ) {
         lv_checkstack(L, 4);
         lv_pushvalue(L, stackID );    // value
@@ -248,7 +244,7 @@ NSArray* lv_luaTableToArray(lv_State* L,int stackID)
     }
 }
 
-+ (void) unregistry:(lv_State*) L key:(id) key{
++ (void) unregistry:(lua_State*) L key:(id) key{
     if( L ) {
         lv_checkstack(L, 2);
         lv_pushlightuserdata(L, (__bridge void *)(key) );   // key
@@ -257,27 +253,27 @@ NSArray* lv_luaTableToArray(lv_State* L,int stackID)
     }
 }
 
-+ (void) pushRegistryValue:(lv_State*) L key:(id) key{
++ (void) pushRegistryValue:(lua_State*) L key:(id) key{
     if( L ){
         lv_pushlightuserdata(L, (__bridge void *)(key));// key=button
         lv_gettable(L, LV_REGISTRYINDEX);/* value = registry[&Key] */
     }
 }
 
-void lv_createClassMetaTable(lv_State* L , const char* name ){
+void lv_createClassMetaTable(lua_State* L , const char* name ){
     lvL_newmetatable(L, name );
     lv_pushstring(L, "__index");//必须要的。
     lv_pushvalue(L, -2); /* pushes the metatable */
     lv_settable(L, -3); /* metatable.__index = metatable */
 }
 
-void lv_checkStack32(lv_State* l){
+void lv_checkStack32(lua_State* l){
     if( l ){
         lv_checkstack( l, 32);
     }
 }
 
-void lv_clearFirstTableValue(lv_State* L){
+void lv_clearFirstTableValue(lua_State* L){
     int num = lv_gettop(L);
     if( num>1 && lv_type(L, 1)==LV_TTABLE ) {
         lv_checkstack(L, 4);
@@ -307,7 +303,7 @@ BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
     return NO;
 }
 
-UIColor* lv_getColorFromStack(lv_State* L, int stackID){
+UIColor* lv_getColorFromStack(lua_State* L, int stackID){
     if ( lv_type(L, stackID)==LV_TSTRING ) {
 //        NSString* s = lv_paramString(L, stackID);
 //        if( s.length>0 && [s characterAtIndex:0]=='#' ) {
@@ -508,7 +504,7 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
     return [[NSData alloc] initWithBytes:bs length:16];
 }
 
-BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key){
+BOOL lv_isLuaObjectHaveProperty(lua_State* L, int idx, const char* key){
     if (lv_type(L, idx) == LV_TTABLE ) {
         lv_checkstack(L, 8);
         lv_pushvalue(L, idx);
@@ -520,12 +516,12 @@ BOOL lv_isLuaObjectHaveProperty(lv_State* L, int idx, const char* key){
     return NO;
 }
 
-static id luaObjBox(lv_State* L, int idx){
+static id luaObjBox(lua_State* L, int idx){
     LVLuaObjBox* box = [[LVLuaObjBox alloc] init:L stackID:idx];
     return box;
 }
 
-id lv_luaValueToNativeObject(lv_State* L, int idx){
+id lv_luaValueToNativeObject(lua_State* L, int idx){
     int type = lv_type(L, idx);
     switch ( type ) {
         case LV_TNIL: {
@@ -573,7 +569,7 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
 
 
 
-void lv_pushNativeObject(lv_State* L, id value){
+void lv_pushNativeObject(lua_State* L, id value){
     lv_checkstack(L, 4);
     if( [value isKindOfClass:[NSString class]] ) {
         NSString* s = value;
@@ -627,7 +623,7 @@ void lv_pushNativeObject(lv_State* L, id value){
     }
 }
 
-void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
+void lv_pushNativeObjectWithBox(lua_State * L, id nativeObject ){
     LVNativeObjBox* nativeObjBox = [[LVNativeObjBox alloc] init:L nativeObject:nativeObject];
     nativeObjBox.openAllMethod = YES;// 所有api都开放
     
@@ -639,7 +635,7 @@ void lv_pushNativeObjectWithBox(lv_State * L, id nativeObject ){
 }
 
 // 获取参数-》字符串类型
-NSString* lv_paramString(lv_State* L, int idx ){
+NSString* lv_paramString(lua_State* L, int idx ){
     if( lv_gettop(L)>=ABS(idx) && lv_type(L, idx) == LV_TSTRING ) {
         size_t n = 0;
         const char* chars = lvL_checklstring(L, idx, &n );
@@ -662,7 +658,7 @@ NSString* lv_paramString(lv_State* L, int idx ){
     return yes;
 }
 
-void lv_pushUDataRef(lv_State* L, int key) {
+void lv_pushUDataRef(lua_State* L, int key) {
     // -1:userdata
     if( lv_gettop(L)>=1 && lv_type(L, -1)==LV_TUSERDATA ) {
         lv_checkstack(L, 2);
@@ -682,7 +678,7 @@ void lv_pushUDataRef(lv_State* L, int key) {
     }
 }
 
-void lv_udataRef(lv_State* L, int key ){
+void lv_udataRef(lua_State* L, int key ){
     //-2: userdata   -1: value
     if( lv_gettop(L)>=2 && lv_type(L, -2)==LV_TUSERDATA ) {
         lv_checkstack(L, 8);
@@ -699,7 +695,7 @@ void lv_udataRef(lv_State* L, int key ){
     }
 }
 
-void lv_udataUnref(lv_State* L, int key) {
+void lv_udataUnref(lua_State* L, int key) {
     // -1:userdata
     if( lv_gettop(L)>=1 && lv_type(L, -1)==LV_TUSERDATA ) {
         lv_checkstack(L, 8);
@@ -717,7 +713,7 @@ void lv_udataUnref(lv_State* L, int key) {
 }
 
 
-void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell){
+void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell){
     lv_pushstring(L, "window");
     
     NEW_USERDATA(userData, View);
@@ -729,7 +725,7 @@ void lv_luaTableSetWeakWindow(lv_State* L, UIView* cell){
     lv_settable(L, -3);
 }
 
-void lv_luaTableRemoveKeys(lv_State* L, const char** keys){
+void lv_luaTableRemoveKeys(lua_State* L, const char** keys){
     if ( lv_type(L, -1)== LV_TTABLE ) {
         for ( int i=0; ;i++ ){
             const char* key = keys[i];
@@ -744,7 +740,7 @@ void lv_luaTableRemoveKeys(lv_State* L, const char** keys){
 }
 
 
-int lv_callbackFunction(lv_State* L, const char* functionName){
+int lv_callbackFunction(lua_State* L, const char* functionName){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         if ( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TFUNCTION ) {
@@ -802,7 +798,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 }
 
 
-+(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
++(void) reg:(lua_State*)L clas:(id) c cfunc:(lua_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
     if( defaultName || globalName ) {
         lv_checkstack(L, 12);
         NSString* className = NSStringFromClass(c);
@@ -813,7 +809,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     }
 }
 
-+(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass{
++(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass{
     const char* classNameChars = lv_tostring(L, lv_upvalueindex(1));
     NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
     Class c = NSClassFromString(className);
@@ -823,7 +819,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     return c;
 }
 
-+(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L {
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L {
     if( globalName && value ) {
         lv_checkstack(L, 12);
         lv_pushNativeObject(L, value);
@@ -833,7 +829,7 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     }
 }
 
-+(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L {
++(void) defineGlobal:(NSString*)globalName func:(lua_CFunction) func L:(lua_State*)L {
     if( globalName && func ) {
         lv_checkstack(L, 12);
         lv_pushcfunction(L, func);

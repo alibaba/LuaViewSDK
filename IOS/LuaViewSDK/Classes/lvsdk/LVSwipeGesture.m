@@ -9,11 +9,7 @@
 #import "LVSwipeGesture.h"
 #import "LVGesture.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVSwipeGesture
 
@@ -23,7 +19,7 @@
     [LVGesture releaseUD:_lv_userData];
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -32,7 +28,7 @@
 }
 
 -(void) handleGesture:(LVSwipeGesture*)sender {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l,self.lv_userData);
@@ -40,7 +36,7 @@
     }
 }
 
-static int lvSwipeGestureRecognizer (lv_State *L) {
+static int lvSwipeGestureRecognizer (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVSwipeGesture class]];
     {
         LVSwipeGesture* gesture = [[c alloc] init:L];
@@ -61,7 +57,7 @@ static int lvSwipeGestureRecognizer (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int touchCount (lv_State *L) {
+static int touchCount (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
         LVSwipeGesture* gesture =  (__bridge LVSwipeGesture *)(user->object);
@@ -78,7 +74,7 @@ static int touchCount (lv_State *L) {
     return 0;
 }
 
-static int direction (lv_State *L) {
+static int direction (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
         LVSwipeGesture* gesture =  (__bridge LVSwipeGesture *)(user->object);
@@ -95,7 +91,7 @@ static int direction (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     {
         lv_settop(L, 0);
         NSDictionary* v = nil;
@@ -113,7 +109,7 @@ static int direction (lv_State *L) {
     lv_createClassMetaTable(L ,META_TABLE_SwipeGesture);
     lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     {
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"touchCount", touchCount},
             {"direction", direction},
             {NULL, NULL}

@@ -10,11 +10,7 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVLabel ()
 @property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
@@ -23,7 +19,7 @@
 @implementation LVLabel
 
 
--(id) init:(NSString*)imageName l:(lv_State*) l{
+-(id) init:(NSString*)imageName l:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -41,7 +37,7 @@
 }
 
 #pragma -mark UILabel
-static int lvNewLabel(lv_State *L) {
+static int lvNewLabel(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVLabel class]];
     {
         NSString* text = lv_paramString(L, 1);// 5
@@ -63,7 +59,7 @@ static int lvNewLabel(lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int text (lv_State *L) {
+static int text (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ) {
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -98,7 +94,7 @@ static int text (lv_State *L) {
     return 0;
 }
 
-static int lineCount(lv_State *L) {
+static int lineCount(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -116,7 +112,7 @@ static int lineCount(lv_State *L) {
     return 0;
 }
 
-static int adjustFontSize(lv_State *L) {
+static int adjustFontSize(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         BOOL yes = lv_toboolean(L, 2);// 2
@@ -131,7 +127,7 @@ static int adjustFontSize(lv_State *L) {
     return 0;
 }
 
-static int textColor (lv_State *L) {
+static int textColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -155,7 +151,7 @@ static int textColor (lv_State *L) {
     return 0;
 }
 
-static int font (lv_State *L) {
+static int font (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( luaView && user ){
@@ -186,7 +182,7 @@ static int font (lv_State *L) {
 }
 
 
-static int fontSize (lv_State *L) {
+static int fontSize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -206,7 +202,7 @@ static int fontSize (lv_State *L) {
     return 0;
 }
 
-static int textAlignment (lv_State *L) {
+static int textAlignment (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -225,7 +221,7 @@ static int textAlignment (lv_State *L) {
     return 0;
 }
 
-static int ellipsize (lv_State *L) {
+static int ellipsize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -244,10 +240,10 @@ static int ellipsize (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewLabel globalName:globalName defaultName:@"Label"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"text",    text},
         
         {"textColor",    textColor},

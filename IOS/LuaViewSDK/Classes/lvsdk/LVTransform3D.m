@@ -8,11 +8,7 @@
 
 #import "LVTransform3D.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVTransform3D
 
@@ -20,7 +16,7 @@
     return nil;
 }
 
-static int lvNewTransform3D (lv_State *L) {
+static int lvNewTransform3D (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTransform3D class]];
     
     {
@@ -34,7 +30,7 @@ static int lvNewTransform3D (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t{
++(int) pushTransform3D:(lua_State *)L  transform3d:(CATransform3D) t{
     {
         NEW_USERDATA(userData, Transform3D);
         LVTransform3D* trans = [[LVTransform3D alloc] init];
@@ -47,7 +43,7 @@ static int lvNewTransform3D (lv_State *L) {
 }
 
 
-static int translation (lv_State *L) {
+static int translation (lua_State *L) {
     if( lv_gettop(L)==4 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double x = lv_tonumber(L, 2);// 2
@@ -63,7 +59,7 @@ static int translation (lv_State *L) {
     return 0;
 }
 
-static int scale (lv_State *L) {
+static int scale (lua_State *L) {
     if( lv_gettop(L)==4 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double x = lv_tonumber(L, 2);// 2
@@ -79,7 +75,7 @@ static int scale (lv_State *L) {
     return 0;
 }
 
-static int rotate (lv_State *L) {
+static int rotate (lua_State *L) {
     if( lv_gettop(L)==5 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         double angle = lv_tonumber(L, 2);
@@ -96,7 +92,7 @@ static int rotate (lv_State *L) {
     return 0;
 }
 
-static int isIdentity (lv_State *L) {
+static int isIdentity (lua_State *L) {
     if( lv_gettop(L)==1 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         if( LVIsType(user, Transform3D) ){
@@ -110,7 +106,7 @@ static int isIdentity (lv_State *L) {
     return 0;
 }
 
-static int reset (lv_State *L) {
+static int reset (lua_State *L) {
     if( lv_gettop(L)==1 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
         if( LVIsType(user, Transform3D) ){
@@ -123,7 +119,7 @@ static int reset (lv_State *L) {
     return 0;
 }
 
-static int transform_set (lv_State *L) {
+static int transform_set (lua_State *L) {
     if( lv_gettop(L)==2 ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -138,7 +134,7 @@ static int transform_set (lv_State *L) {
     return 0;
 }
 
-static int concat (lv_State *L) {
+static int concat (lua_State *L) {
     if( lv_gettop(L)==2 ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -154,7 +150,7 @@ static int concat (lv_State *L) {
     return 0;
 }
 
-static int __mul (lv_State *L) {
+static int __mul (lua_State *L) {
     if( lv_gettop(L)==2 ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -177,7 +173,7 @@ static int __mul (lv_State *L) {
     return 0;
 }
 
-static int __eq (lv_State *L) {
+static int __eq (lua_State *L) {
     if( lv_gettop(L)==2 ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
         LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -192,7 +188,7 @@ static int __eq (lv_State *L) {
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Transform3D) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataTransform3D: %d", (int)user ];
@@ -202,10 +198,10 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTransform3D globalName:globalName defaultName:@"Transform3D"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__eq", __eq},
         {"__mul", __mul},
         {"rotate", rotate},

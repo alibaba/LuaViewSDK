@@ -8,11 +8,7 @@
 
 #import "UIView+LuaView.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation UIView (UIViewLuaView)
 
@@ -35,7 +31,7 @@
 }
 
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData && key1){
         lv_checkStack32(l);
         lv_pushUserdata(l, self.lv_userData);
@@ -53,7 +49,7 @@
 }
 
 -(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ){
         lv_checkstack(L, (int)args.count*2 + 2);
         
@@ -82,7 +78,7 @@
 }
 
 -(void) lv_buttonCallBack{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
         int num = lv_gettop(L);
         lv_pushUserdata(L, self.lv_userData);

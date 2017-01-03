@@ -17,11 +17,11 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
--(id) init:(lv_State*) l;
+-(id) init:(lua_State*) l;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
-+(const struct lvL_reg*) memberFunctions;
++(const struct luaL_Reg*) memberFunctions;
 
 @property(nonatomic,weak) id lvScrollViewDelegate;
 

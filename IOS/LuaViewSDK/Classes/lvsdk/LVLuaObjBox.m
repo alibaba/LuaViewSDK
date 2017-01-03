@@ -10,11 +10,7 @@
 #import <objc/runtime.h>
 #import "LView.h"
 #import "LVTypeConvert.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVLuaObjBox ()
 @property (nonatomic, strong) NSMutableArray* protocolArray;
@@ -26,7 +22,7 @@
 @implementation LVLuaObjBox
 
 
-- (id) init:(lv_State*)L stackID:(int) stackID{
+- (id) init:(lua_State*)L stackID:(int) stackID{
     self = [super init];
     if( self ){
         self.methodSigHashtable = [[NSMutableDictionary alloc] init];
@@ -40,7 +36,7 @@
 - (void) dealloc{
     LView* lview = self.lview;
     if( lview) {
-        lv_State* L = lview.l;
+        lua_State* L = lview.l;
         if( L ) {
             [LVUtil unregistry:L key:self];
         }
@@ -161,7 +157,7 @@ static BOOL lv_object_isProtocol(id obj ) {
 {
     NSString *key = NSStringFromSelector([invocation selector]);
     LView* lview = self.lview;
-    lv_State* L = lview.l;
+    lua_State* L = lview.l;
     if ( lview && L) {
         int luaArgNum = 1;
         [LVUtil pushRegistryValue:L key:self];

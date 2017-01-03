@@ -7,10 +7,10 @@
 //
 
 #import "LView.h"
+#import "LVHeads.h"
 #import "LVExGlobalFunc.h"
 #import "LVTimer.h"
 #import "LVDebuger.h"
-#import "lVtable.h"
 #import "LVNativeObjBox.h"
 #import "LVBlock.h"
 #import "LVPkgManager.h"
@@ -19,11 +19,6 @@
 #import "LVDebugConnection.h"
 #import "LVCustomPanel.h"
 #import <objc/runtime.h>
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "LVRSA.h"
 #import "LVBundle.h"
 #import "LVButton.h"
@@ -278,7 +273,7 @@ extern char g_debug_lua[];
 -(void) registeLibs{
     if( !self.stateInited ) {
         self.stateInited = YES;
-        self.l =  lvL_newstate();//lv_open();  /* opens */
+        self.l =  luaL_newstate();//lv_open();  /* opens */
         self.l->lView = (__bridge void *)(self);
         lvL_openlibs(self.l);
         NSArray* arr = nil;
@@ -332,7 +327,7 @@ extern char g_debug_lua[];
 }
 
 -(void) registerAllClass{
-    lv_State* L = self.l;
+    lua_State* L = self.l;
     //清理栈
     for( NSInteger i =0; i<self.registerClasses.count; i++ ){
         lv_settop(L, 0);
@@ -424,7 +419,7 @@ extern char g_debug_lua[];
 
 -(void) freeMySelf{
     [self removeFromSuperview];
-    lv_State* l = self.l;
+    lua_State* l = self.l;
     self.l = NULL;
     if( l ){
         lv_close(l);

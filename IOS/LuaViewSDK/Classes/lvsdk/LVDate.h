@@ -18,7 +18,7 @@
 
 - (id) lv_nativeObject; // 返回native对象
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 
 @end

@@ -11,11 +11,7 @@
 #import "LVUtil.h"
 #import "UIScrollView+LuaView.h"
 #import "LVScrollViewDelegate.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import "LView.h"
 
 @interface LVScrollView ()
@@ -25,7 +21,7 @@
 @implementation LVScrollView
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -59,7 +55,7 @@
 }
 
 #pragma -mark ScrollView
-static int lvNewScrollView (lv_State *L) {
+static int lvNewScrollView (lua_State *L) {
     {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVScrollView class]];
         
@@ -84,7 +80,7 @@ static int lvNewScrollView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int contentSize (lv_State *L) {
+static int contentSize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
@@ -108,7 +104,7 @@ static int contentSize (lv_State *L) {
     return 0;
 }
 
-static int contentOffset (lv_State *L) {
+static int contentOffset (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
@@ -150,7 +146,7 @@ static int contentOffset (lv_State *L) {
     return 0;
 }
 
-static int contentInset (lv_State *L) {
+static int contentInset (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
@@ -184,7 +180,7 @@ static int contentInset (lv_State *L) {
     return 0;
 }
 
-//static int pageEnable (lv_State *L) {
+//static int pageEnable (lua_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* view = (__bridge UIScrollView *)(user->view);
@@ -202,7 +198,7 @@ static int contentInset (lv_State *L) {
 //    return 0;
 //}
 
-static int showScrollIndicator (lv_State *L) {
+static int showScrollIndicator (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
@@ -223,7 +219,7 @@ static int showScrollIndicator (lv_State *L) {
     return 0;
 }
 
-//static int initRefreshHeader (lv_State *L) {
+//static int initRefreshHeader (lua_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
@@ -232,7 +228,7 @@ static int showScrollIndicator (lv_State *L) {
 //    return 0;
 //}
 
-static int startHeaderRefreshing (lv_State *L){
+static int startHeaderRefreshing (lua_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
@@ -241,7 +237,7 @@ static int startHeaderRefreshing (lv_State *L){
     return 0;
 }
 
-static int stopHeaderRefreshing (lv_State *L){
+static int stopHeaderRefreshing (lua_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
@@ -250,7 +246,7 @@ static int stopHeaderRefreshing (lv_State *L){
     return 0;
 }
 
-static int isHeaderRefreshing (lv_State *L){
+static int isHeaderRefreshing (lua_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
@@ -261,7 +257,7 @@ static int isHeaderRefreshing (lv_State *L){
     return 0;
 }
 
-//static int footerNoticeNoMoreData (lv_State *L){
+//static int footerNoticeNoMoreData (lua_State *L){
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
@@ -270,7 +266,7 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 //
-//static int footerResetNoMoreData (lv_State *L){
+//static int footerResetNoMoreData (lua_State *L){
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
@@ -279,7 +275,7 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 //
-//static int hiddenRefreshFooter (lv_State *L){
+//static int hiddenRefreshFooter (lua_State *L){
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
@@ -289,7 +285,7 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 
-//static int alwaysBounce(lv_State *L) {
+//static int alwaysBounce(lua_State *L) {
 //    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* view = (__bridge UIScrollView *)(user->view);
@@ -310,12 +306,12 @@ static int isHeaderRefreshing (lv_State *L){
 //    return 0;
 //}
 
-static int callback (lv_State *L) {
+static int callback (lua_State *L) {
     return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
 
 
-static const struct lvL_reg memberFunctions [] = {
+static const struct luaL_Reg memberFunctions [] = {
     {"callback",     callback },// 回调
     
     {"contentSize",     contentSize },//TODO
@@ -339,11 +335,11 @@ static const struct lvL_reg memberFunctions [] = {
     {NULL, NULL}
 };
 
-+(const struct lvL_reg*) memberFunctions{
++(const struct luaL_Reg*) memberFunctions{
     return memberFunctions;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HScrollView"];
     [LVUtil reg:L clas:self cfunc:lvNewScrollView globalName:globalName defaultName:@"HorizontalScrollView"];
     

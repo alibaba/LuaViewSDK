@@ -9,18 +9,14 @@
 #import "LVLoadingIndicator.h"
 #import "LVBaseView.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 @implementation LVLoadingIndicator
 
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -34,7 +30,7 @@
 }
 
 #pragma -mark lvNewActivityIndicator
-static int lvNewLoadingIndicator (lv_State *L) {
+static int lvNewLoadingIndicator (lua_State *L) {
     {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVLoadingIndicator class]];
         
@@ -55,7 +51,7 @@ static int lvNewLoadingIndicator (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int startAnimating(lv_State *L) {
+static int startAnimating(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
@@ -66,7 +62,7 @@ static int startAnimating(lv_State *L) {
     return 0;
 }
 
-static int stopAnimating(lv_State *L) {
+static int stopAnimating(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
@@ -77,7 +73,7 @@ static int stopAnimating(lv_State *L) {
     return 0;
 }
 
-static int isAnimating(lv_State *L) {
+static int isAnimating(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
@@ -89,7 +85,7 @@ static int isAnimating(lv_State *L) {
     return 0;
 }
 
-static int color(lv_State *L) {
+static int color(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
@@ -113,10 +109,10 @@ static int color(lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewLoadingIndicator globalName:globalName defaultName:@"LoadingIndicator"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"start",  startAnimating },
         {"stop",   stopAnimating },
         {"show",  startAnimating },

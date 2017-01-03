@@ -21,7 +21,7 @@
 
 
 -(void) dealloc{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
         [LVUtil unregistry:L key:self];
     }
@@ -29,7 +29,7 @@
 
 -(void) doInitWithLView:(LView*) lview{
     self.lv_lview = lview;
-    lv_State* L = lview.l;
+    lua_State* L = lview.l;
     if( L ) {
         lv_createtable(L, 0, 0);
         [LVUtil registryValue:L key:self stack:-1];
@@ -38,7 +38,7 @@
 }
 
 -(void) pushTableToStack{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
         [LVUtil pushRegistryValue:L key:self];
     }

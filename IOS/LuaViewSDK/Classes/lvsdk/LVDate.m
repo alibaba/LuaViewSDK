@@ -8,11 +8,7 @@
 
 #import "LVHeads.h"
 #import "LVDate.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 
@@ -44,7 +40,7 @@ static NSString* string09(NSString* s, NSUInteger len){
     return buf;
 }
 
-static int lvNewDate (lv_State *L) {
+static int lvNewDate (lua_State *L) {
     {
         NSString* string = lv_paramString(L, 1);
         NSString* format = lv_paramString(L, 2);
@@ -83,7 +79,7 @@ static int lvNewDate (lv_State *L) {
 }
 
 
-static int __GC (lv_State *L) {
+static int __GC (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Date) && user->object ){
         CFBridgingRelease(user->object);
@@ -92,7 +88,7 @@ static int __GC (lv_State *L) {
     return 0;
 }
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Date) ){
         LVDate* date =  (__bridge LVDate *)(user->object);
@@ -103,7 +99,7 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static int format (lv_State *L) {
+static int format (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     NSString* formatString = lv_paramString(L, 2);
     if( LVIsType(user, Date) ){
@@ -124,7 +120,7 @@ static int format (lv_State *L) {
     return 0;
 }
 
-static int __sub (lv_State *L) {
+static int __sub (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
@@ -137,7 +133,7 @@ static int __sub (lv_State *L) {
     return 0;
 }
 
-static int __eq (lv_State *L) {
+static int __eq (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
@@ -150,7 +146,7 @@ static int __eq (lv_State *L) {
     return 0;
 }
 
-static int timeInterval (lv_State *L) {
+static int timeInterval (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user1, Date) ){
         LVDate* date1 = (__bridge LVDate *)(user1->object);
@@ -161,10 +157,10 @@ static int timeInterval (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewDate globalName:globalName defaultName:@"Date"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__gc",  __GC },
         {"__sub", __sub},
         {"__eq",  __eq},

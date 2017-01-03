@@ -26,10 +26,10 @@
 
 @property(nonatomic,weak) UIGestureRecognizer* gesture;
 
--(id) init:(lv_State *)l gesture:(UIGestureRecognizer*) gesture;
+-(id) init:(lua_State *)l gesture:(UIGestureRecognizer*) gesture;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
-+(LVEvent*) createLuaEvent:(lv_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture;
++(LVEvent*) createLuaEvent:(lua_State *)L  event:(UIEvent*) event gesture:(UIGestureRecognizer*) gesture;
 
 @end

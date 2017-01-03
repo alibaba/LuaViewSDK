@@ -12,11 +12,6 @@
 #import "LView.h"
 #import "UIView+LuaView.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 
 
 static inline NSInteger mapRow(NSInteger row){
@@ -64,7 +59,7 @@ static inline NSInteger mapSection(NSInteger section){
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     LView* lview = self.owner.lv_lview;
-    lv_State* l = lview.l;
+    lua_State* l = lview.l;
     lview.conentView = cell.contentView;
     lview.contentViewIsWindow = NO;
     if ( l ) {
@@ -103,7 +98,7 @@ static inline NSInteger mapSection(NSInteger section){
 
 // section数量
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l && self.owner.lv_userData ){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -120,7 +115,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 // 每个区域的行数
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_pushnumber(l, mapSection(section) );
@@ -174,7 +169,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 
 - (CGFloat) retFloatCallKey1:(const char*) funcName key2:(const char*) key2 mapedSection:(NSInteger) mapedSection {
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         lv_checkstack(l, 12);
         lv_pushnumber(l, mapedSection);
@@ -193,7 +188,7 @@ static inline NSInteger mapSection(NSInteger section){
 
 - (NSString*) retStringCallKey1:(const char*) key1 key2:(const char*)key2
                    mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow pinned:(BOOL*) pinned{
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
@@ -220,7 +215,7 @@ static inline NSInteger mapSection(NSInteger section){
 
 - (CGSize) retSizeCallKey1:(const char*) key1 key2:(const char*)key2 key3:(const char*)key3
               mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow {
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
@@ -247,7 +242,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 - (UIEdgeInsets) retInsetCallKey1:(const char*) key1 key2:(const char*)key2
                      mapedSection:(NSInteger) mapSection mapedRow:(NSInteger)mapedRow {
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
         lv_checkstack(l, 12);
@@ -273,7 +268,7 @@ static inline NSInteger mapSection(NSInteger section){
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    lv_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_lview.l;
     if( l ){
         NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:NULL];
         if ( identifier ) {
@@ -306,7 +301,7 @@ static inline NSInteger mapSection(NSInteger section){
             indexPath0 = indexPath;
         }
     }
-    lv_State* L = self.owner.lv_lview.l;
+    lua_State* L = self.owner.lv_lview.l;
     if( L && indexPath0 ) {
         NSInteger section = indexPath0.section;
         NSInteger row = indexPath0.row;

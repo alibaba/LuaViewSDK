@@ -9,11 +9,7 @@
 #import "LVLongPressGesture.h"
 #import "LVGesture.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVLongPressGesture
 
@@ -23,7 +19,7 @@
     [LVGesture releaseUD:_lv_userData];
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -32,7 +28,7 @@
 }
 
 -(void) handleGesture:(LVLongPressGesture*)sender {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l,self.lv_userData);
@@ -41,7 +37,7 @@
 }
 
 
-static int lvNewLongGesture (lv_State *L) {
+static int lvNewLongGesture (lua_State *L) {
     {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVLongPressGesture class]];
         
@@ -63,7 +59,7 @@ static int lvNewLongGesture (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setTouchCount (lv_State *L) {
+static int setTouchCount (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
         LVLongPressGesture* gesture =  (__bridge LVLongPressGesture *)(user->object);
@@ -80,7 +76,7 @@ static int setTouchCount (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewLongGesture globalName:globalName defaultName:@"LongPressGesture"];
     
     lv_createClassMetaTable(L, META_TABLE_LongPressGesture);
@@ -88,7 +84,7 @@ static int setTouchCount (lv_State *L) {
     lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"touchCount",     setTouchCount},
             {NULL, NULL}
         };

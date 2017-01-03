@@ -16,8 +16,8 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
--(id) init:(NSString*)imageName l:(lv_State*) l;
+-(id) init:(NSString*)imageName l:(lua_State*) l;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end

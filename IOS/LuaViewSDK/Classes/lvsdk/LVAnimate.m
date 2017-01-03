@@ -9,11 +9,7 @@
 #import "LVAnimate.h"
 #import "LVUtil.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 @interface LVAnimate ()
@@ -24,7 +20,7 @@
 
 @implementation LVAnimate
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.mySelf = self;
@@ -39,7 +35,7 @@
 }
 
 
-static int lvNewAnimate (lv_State *L) {
+static int lvNewAnimate (lua_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=1 ){
         LVAnimate* animate = [[LVAnimate alloc] init:L];
@@ -98,7 +94,7 @@ static int lvNewAnimate (lv_State *L) {
                     [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                 }
             } completion:^(BOOL finished) {
-                lv_State* l = animate.lv_lview.l;
+                lua_State* l = animate.lv_lview.l;
                 if( l ) {
                     lv_settop(l, 0);
                     lv_checkStack32(l);
@@ -117,7 +113,7 @@ static int lvNewAnimate (lv_State *L) {
                                         [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                                     }
                                 } completion:^(BOOL finished) {
-                                    lv_State* l = animate.lv_lview.l;
+                                    lua_State* l = animate.lv_lview.l;
                                     if( l ) {
                                         lv_settop(l, 0);
                                         lv_checkStack32(l);
@@ -132,7 +128,7 @@ static int lvNewAnimate (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAnimate globalName:globalName defaultName:@"Animate"];
     return 1;
 }

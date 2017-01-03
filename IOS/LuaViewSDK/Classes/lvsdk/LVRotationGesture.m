@@ -9,11 +9,7 @@
 #import "LVRotationGesture.h"
 #import "LVGesture.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVRotationGesture
 
@@ -22,7 +18,7 @@
     [LVGesture releaseUD:_lv_userData];
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -31,7 +27,7 @@
 }
 
 -(void) handleGesture:(LVRotationGesture*)sender {
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_checkStack32(l);
         lv_pushUserdata(l,self.lv_userData);
@@ -39,7 +35,7 @@
     }
 }
 
-static int lvNewRotationGestureRecognizer (lv_State *L) {
+static int lvNewRotationGestureRecognizer (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVRotationGesture class]];
     {
         LVRotationGesture* gesture = [[c alloc] init:L];
@@ -60,7 +56,7 @@ static int lvNewRotationGestureRecognizer (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int rotation (lv_State *L) {
+static int rotation (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Gesture) ){
         LVRotationGesture* gesture =  (__bridge LVRotationGesture *)(user->object);
@@ -71,7 +67,7 @@ static int rotation (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewRotationGestureRecognizer globalName:globalName defaultName:@"RotationGesture"];
     
     lv_createClassMetaTable(L ,META_TABLE_RotaionGesture);
@@ -79,7 +75,7 @@ static int rotation (lv_State *L) {
     lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
     
     {
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"rotation", rotation},
             {NULL, NULL}
         };

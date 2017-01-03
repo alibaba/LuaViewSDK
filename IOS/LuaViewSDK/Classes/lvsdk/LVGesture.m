@@ -7,18 +7,14 @@
 //
 
 #import "LVGesture.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "LView.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 #import "LVEvent.h"
+#import "LVHeads.h"
 
 @implementation LVGesture
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -32,7 +28,7 @@
 }
 
 -(void) handleGesture:(LVGesture*)sender event:(UIEvent*) event eventType:(NSInteger) eventType{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if ( l ){
         lv_settop(l, 0);
         lv_checkStack32(l);
@@ -84,14 +80,14 @@ static void releaseUserData(LVUserDataInfo * user){
     }
 }
 
-static int __GC (lv_State *L) {
+static int __GC (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     releaseUserData(user);
     return 0;
 }
 
 
-static int __tostring (lv_State *L) {
+static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
@@ -102,7 +98,7 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-static int location (lv_State *L) {
+static int location (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
@@ -114,7 +110,7 @@ static int location (lv_State *L) {
     return 0;
 }
 
-static int state (lv_State *L) {
+static int state (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
@@ -125,7 +121,7 @@ static int state (lv_State *L) {
     return 0;
 }
 
-static int nativeGesture (lv_State *L) {
+static int nativeGesture (lua_State *L) {
     LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( userData ){
         UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userData->object);
@@ -137,7 +133,7 @@ static int nativeGesture (lv_State *L) {
     return 0;
 }
 
-static const struct lvL_reg baseMemberFunctions [] = {
+static const struct luaL_Reg baseMemberFunctions [] = {
     {"nativeGesture", nativeGesture },
     
     {"location", location },
@@ -147,7 +143,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {NULL, NULL}
 };
 
-+(const lvL_reg*) baseMemberFunctions{
++(const luaL_Reg*) baseMemberFunctions{
     return baseMemberFunctions;
 }
 
@@ -155,7 +151,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     releaseUserData(user);
 }
 
-static int lvNewGesture (lv_State *L) {
+static int lvNewGesture (lua_State *L) {
     {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVGesture class]];
         
@@ -177,7 +173,7 @@ static int lvNewGesture (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     [LVUtil reg:L clas:self cfunc:lvNewGesture globalName:globalName defaultName:@"Gesture"];
     

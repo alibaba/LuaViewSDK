@@ -10,11 +10,7 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVTextField ()<UITextFieldDelegate>
 
@@ -23,7 +19,7 @@
 @implementation LVTextField
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithFrame:CGRectMake(0, 0, 100, 40)];
     if( self ){
         self.lv_lview = (__bridge LView *)(l->lView);
@@ -40,7 +36,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     // became first responder
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
         [self lv_callLuaByKey1:@"BeginEditing"];
@@ -48,7 +44,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ) {
         lv_checkStack32(l);
         [self lv_callLuaByKey1:@"EndEditing"];
@@ -56,7 +52,7 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-//    lv_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_lview.l;
 //    if( l ) {
 //        lv_checkStack32(l);
 //        if(  [LVUtil call:l lightUserData:self key:"清理"] ){
@@ -69,7 +65,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-//    lv_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_lview.l;
 //    if( l ) {
 //        lv_checkStack32(l);
 //        if( [LVUtil call:l lightUserData:self key:"返回"]==0 ){
@@ -86,7 +82,7 @@
 }
 
 #pragma -mark lvNewTextField
-static int lvNewTextField (lv_State *L) {
+static int lvNewTextField (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTextField class]];
     
     LVTextField* textFiled = [[c alloc] init:L];
@@ -105,7 +101,7 @@ static int lvNewTextField (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int text (lv_State *L) {
+static int text (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->object);
@@ -152,7 +148,7 @@ static int text (lv_State *L) {
     return 0;
 }
 
-static int placeholder (lv_State *L) {
+static int placeholder (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->object);
@@ -183,10 +179,10 @@ static int placeholder (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTextField globalName:globalName defaultName:@"TextField"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},
         {"placeholder", placeholder},

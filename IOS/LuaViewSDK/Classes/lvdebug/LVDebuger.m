@@ -10,17 +10,12 @@
 #import "LVHeads.h"
 #import "LVDebugConnection.h"
 #import "LView.h"
-
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVDebuger
 
 
-static int DebugReadCmd (lv_State *L) {
+static int DebugReadCmd (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     
     NSString* cmd = [luaView.debugConnection getCmd];
@@ -32,7 +27,7 @@ static int DebugReadCmd (lv_State *L) {
     return 1;
 }
 
-static int DebugSleep (lv_State *L) {
+static int DebugSleep (lua_State *L) {
     float time = lv_tonumber(L, 1);
     if( time>0 ) {
         [NSThread sleepForTimeInterval:time];
@@ -40,14 +35,14 @@ static int DebugSleep (lv_State *L) {
     return 0;
 }
 
-static int DebugPrintToServer (lv_State *L) {
+static int DebugPrintToServer (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     BOOL open = lvL_checkbool(L, 1);
     luaView.debugConnection.printToServer = !!open;
     return 0;
 }
 
-static int runningLine (lv_State *L) {
+static int runningLine (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName == nil ){
         fileName = @"unkown";
@@ -60,13 +55,13 @@ static int runningLine (lv_State *L) {
     return 0;
 }
 
-static int get_file_line( lv_State *L )
+static int get_file_line( lua_State *L )
 {
     lv_pushstring(L, "one line code");
     return 1;
 }
 
-static const lvL_Reg dblib[] = {
+static const luaL_Reg dblib[] = {
     {"readCmd", DebugReadCmd},
     {"sleep", DebugSleep},
     {"printToServer", DebugPrintToServer},
@@ -75,13 +70,13 @@ static const lvL_Reg dblib[] = {
     {NULL, NULL}
 };
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    lvL_register(L, LV_DBLIBNAME, dblib);
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    luaL_register(L, LUA_DBLIBNAME, dblib);
     return 0;
 }
 
 // 把日志传送到服务器
-void lv_printToServer(lv_State* L, const char* cs, int withTabChar){
+void lv_printToServer(lua_State* L, const char* cs, int withTabChar){
     LView* lview = (__bridge LView *)(L->lView);
     if( lview.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];

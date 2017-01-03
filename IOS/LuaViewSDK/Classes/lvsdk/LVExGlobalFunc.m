@@ -10,11 +10,6 @@
 #import "LVExGlobalFunc.h"
 #import "LVUtil.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "LVNativeObjBox.h"
 #import "LVDebuger.h"
 
@@ -25,7 +20,7 @@
 
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
-+(void) registryStaticMethod:(lv_State *)L lView:(LView *)lView{
++(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
     lv_pushcfunction(L, loadJson);
     lv_setglobal(L, "loadJson");
     
@@ -46,14 +41,14 @@
 }
 
 // 注册函数
-+(void) registryApi:(lv_State*)L  lView:(LView*)lView{
++(void) registryApi:(lua_State*)L  lView:(LView*)lView{
     
     
     return;
 }
 
 // 注册系统对象 window
-+(void) registryWindow:(lv_State*)L  lView:(LView*)lView{
++(void) registryWindow:(lua_State*)L  lView:(LView*)lView{
     NEW_USERDATA(userData, View);
     userData->object = CFBridgingRetain(lView);
     lView.lv_userData = userData;
@@ -65,7 +60,7 @@
 }
 //------------------------------------------------------------------------------------
 
-static int loadJson (lv_State *L) {
+static int loadJson (lua_State *L) {
     NSString* json = lv_paramString(L, 1);
     if( json ){
         json = [NSString stringWithFormat:@"return %@",json];
@@ -84,7 +79,7 @@ static int loadJson (lv_State *L) {
     return 0; /* number of results */
 }
 
-static int unicode(lv_State *L) {
+static int unicode(lua_State *L) {
     int num = lv_gettop(L);
     NSMutableString* buf = [[NSMutableString alloc] init];
     for( int i=1; i<=num; i++ ) {
@@ -102,7 +97,7 @@ static int unicode(lv_State *L) {
     return 0; /* number of results */
 }
 
-static int loaderForLuaView (lv_State *L) {
+static int loaderForLuaView (lua_State *L) {
     static NSString *pathFormats[] = { @"%@.%@", @"%@/init.%@" };
 
     NSString* moduleName = lv_paramString(L, 1);
@@ -147,7 +142,7 @@ static int loaderForLuaView (lv_State *L) {
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     LView* lView = (__bridge  LView *)(L->lView);
     // 注册静态全局方法和常量
     [LVExGlobalFunc registryStaticMethod:L lView:lView];
