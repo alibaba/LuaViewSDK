@@ -48,7 +48,7 @@ static int lvNewDate (lua_State *L) {
         NSDate* date = nil;
         if( string==nil && format==nil ){
             if( lv_type(L, 1)==LV_TNUMBER ){
-                double time = lv_tonumber(L, 1);
+                double time = lua_tonumber(L, 1);
                 date = [[NSDate alloc] initWithTimeIntervalSince1970:time];
             } else {
                 date = [NSDate date];
@@ -93,7 +93,7 @@ static int __tostring (lua_State *L) {
     if( LVIsType(user, Date) ){
         LVDate* date =  (__bridge LVDate *)(user->object);
         NSString* s = [NSString stringWithFormat:@"%@", date.date ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
@@ -113,7 +113,7 @@ static int format (lua_State *L) {
             } else {
                 ret = [NSString stringWithFormat:@"%@", date.date ];
             }
-            lv_pushstring(L, ret.UTF8String);
+            lua_pushstring(L, ret.UTF8String);
             return 1;
         }
     }

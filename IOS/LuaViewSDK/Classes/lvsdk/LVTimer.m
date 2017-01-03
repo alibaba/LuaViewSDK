@@ -94,7 +94,7 @@ static int lvNewTimer (lua_State *L) {
         lvL_getmetatable(L, META_TABLE_Timer );
         lv_setmetatable(L, -2);
     }
-    if( lv_type(L, 1) == LV_TFUNCTION ) {
+    if( lv_type(L, 1) == LUA_TFUNCTION ) {
         lv_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE);
     }
@@ -102,7 +102,7 @@ static int lvNewTimer (lua_State *L) {
 }
 
 static int setCallback (lua_State *L) {
-    if( lv_type(L, 2) == LV_TFUNCTION ) {
+    if( lv_type(L, 2) == LUA_TFUNCTION ) {
         lv_pushvalue(L, 1);
         lv_pushvalue(L, 2);
         lv_udataRef(L, USERDATA_KEY_DELEGATE);
@@ -115,7 +115,7 @@ static int start (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVTimer* timer = (__bridge LVTimer *)(user->object);
     if( lv_gettop(L)>=2 ) {
-        timer.interval = lv_tonumber(L, 2);
+        timer.interval = lua_tonumber(L, 2);
     }
     if( lv_gettop(L)>=3 ) {
         timer.repeat = lv_toboolean(L, 3);
@@ -143,7 +143,7 @@ static int cancel (lua_State *L) {
 
 static int delay (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    double delay = lv_tonumber(L, 2);
+    double delay = lua_tonumber(L, 2);
     if( user ){
         LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
@@ -171,7 +171,7 @@ static int repeat (lua_State *L) {
 
 static int interval (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    double interval = lv_tonumber(L, 2);
+    double interval = lua_tonumber(L, 2);
     if( user ){
         LVTimer* timer = (__bridge LVTimer *)(user->object);
         if( timer ){
@@ -194,7 +194,7 @@ static int __tostring (lua_State *L) {
     if( user ){
         LVTimer* timer =  (__bridge LVTimer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataTimer: %@", timer ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

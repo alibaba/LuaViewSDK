@@ -177,7 +177,7 @@
             lv_pushNativeObject( self.l, obj );
         }
         lv_getglobal(self.l, "main");// function
-        if( lv_type(self.l, -1) == LV_TFUNCTION ) {
+        if( lv_type(self.l, -1) == LUA_TFUNCTION ) {
             ret = lv_runFunctionWithArgs(self.l, (int)args.count, 0);
         }
     }
@@ -384,7 +384,7 @@ extern char g_debug_lua[];
         LVError(@"  '%s'  should be a number",globalName );
         return 0;
     } else {
-        return (int) lv_tonumber(self.l, -1);
+        return (int) lua_tonumber(self.l, -1);
     }
 }
 
@@ -792,7 +792,7 @@ extern char g_debug_lua[];
 
 -(double)  argumentToNumber:(int) index{
     if ( self.l ) {
-        return lv_tonumber(self.l, index);
+        return lua_tonumber(self.l, index);
     }
     return 0;
 }

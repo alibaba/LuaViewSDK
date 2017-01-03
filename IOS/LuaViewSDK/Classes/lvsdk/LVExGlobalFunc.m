@@ -65,7 +65,7 @@ static int loadJson (lua_State *L) {
     if( json ){
         json = [NSString stringWithFormat:@"return %@",json];
         lvL_loadstring(L, json.UTF8String);
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
+        if( lv_type(L, -1) == LUA_TFUNCTION ) {
             int errorCode = lv_pcall( L, 0, 1, 0);
             if( errorCode == 0 ){
                 return 1;
@@ -84,14 +84,14 @@ static int unicode(lua_State *L) {
     NSMutableString* buf = [[NSMutableString alloc] init];
     for( int i=1; i<=num; i++ ) {
         if( lv_type(L, i) == LV_TNUMBER ) {
-            unichar c = lv_tonumber(L, i);
+            unichar c = lua_tonumber(L, i);
             [buf appendFormat:@"%C",c];
         } else {
             break;
         }
     }
     if( buf.length>0 ) {
-        lv_pushstring(L, buf.UTF8String);
+        lua_pushstring(L, buf.UTF8String);
         return 1;
     }
     return 0; /* number of results */

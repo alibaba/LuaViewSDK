@@ -30,7 +30,7 @@
             lv_pushUserdata(L, self.lv_userData);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
             
-            if( lv_type(L, -1)==LV_TTABLE ) {
+            if( lv_type(L, -1)==LUA_TTABLE ) {
                 lv_getfield(L, -1, STR_CALLBACK);
                 if( lv_type(L, -1)==LV_TNIL ) {
                     lv_remove(L, -1);
@@ -64,7 +64,7 @@ static int lvNewCustomPanelView (lua_State *L) {
     
     CGRect r = CGRectMake(0, 0, 0, 0);
     if( lv_gettop(L)>=4 ) {
-        r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
+        r = CGRectMake(lua_tonumber(L, 1), lua_tonumber(L, 2), lua_tonumber(L, 3), lua_tonumber(L, 4));
     }
     LVCustomPanel* errorNotice = [[c alloc] initWithFrame:r];
     {

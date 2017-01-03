@@ -46,7 +46,7 @@ static int lvNewStruct (lua_State *L) {
     int num = lv_gettop(L);
     
     for (int i=1,index=0; (i<=num) && (index<LV_STRUCT_MAX_LEN); i++ ) {
-        CGFloat value = lv_tonumber(L, i);
+        CGFloat value = lua_tonumber(L, i);
         [lvstruct setIndex:index++ byValue:value];
     }
     
@@ -72,8 +72,8 @@ static int setValue (lua_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=3 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        unsigned int index = lv_tonumber(L, 2);
-        CGFloat value = lv_tonumber(L, 3);
+        unsigned int index = lua_tonumber(L, 2);
+        CGFloat value = lua_tonumber(L, 3);
         if ( index>=LV_STRUCT_MAX_LEN ) {
             LVError(@"LVStruct.set index:%d", index );
             return 0;
@@ -81,7 +81,7 @@ static int setValue (lua_State *L) {
         if( LVIsType(user, Struct) ){
             LVStruct* lvstruct = (__bridge LVStruct *)(user->object);
             if ( argNum>=4 ) {
-                int type = lv_tonumber(L, 4);
+                int type = lua_tonumber(L, 4);
                 if( [lvstruct dataPointer] ) {
                     lv_setValueWithType( [lvstruct dataPointer], index, value, type);
                 }
@@ -98,7 +98,7 @@ static int getValue (lua_State *L) {
     int argNum = lv_gettop(L);
     if( argNum>=2 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        unsigned int index = lv_tonumber(L, 2);
+        unsigned int index = lua_tonumber(L, 2);
         if ( index>=LV_STRUCT_MAX_LEN ) {
             LVError(@"LVStruct.get index:%d", index );
             return 0;
@@ -106,7 +106,7 @@ static int getValue (lua_State *L) {
         if( LVIsType(user, Struct) ){
             LVStruct* stru = (__bridge LVStruct *)(user->object);
             if ( argNum>=3 ) {
-                int type = lv_tonumber(L, 3);
+                int type = lua_tonumber(L, 3);
                 CGFloat value = lv_getValueWithType(  [stru dataPointer], index, type);
                 lv_pushnumber(L, value);
                 return 1;
@@ -143,7 +143,7 @@ static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Struct) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataStruct: %d", (int)user ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

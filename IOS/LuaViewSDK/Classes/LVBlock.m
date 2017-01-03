@@ -23,7 +23,7 @@
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
         self.lview = (__bridge LView *)(L->lView);
-        if( lv_type(L, idx)==LV_TFUNCTION ) {
+        if( lv_type(L, idx)==LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:self.retainKey stack:idx];
         }
     }
@@ -40,7 +40,7 @@
             [self resetFunctionByNames:globalName];
         } else {
             lv_getglobal(L, globalName.UTF8String);
-            if( lv_type(L, -1)==LV_TFUNCTION ) {
+            if( lv_type(L, -1)==LUA_TFUNCTION ) {
                 [LVUtil registryValue:L key:self.retainKey stack:-1];
             }
         }
@@ -56,13 +56,13 @@
         lv_getglobal(L, name0.UTF8String);
         for( int i=1; i<names.count; i++ ){
             NSString* key = names[i];
-            if( lv_type(L, -1) == LV_TTABLE ){
+            if( lv_type(L, -1) == LUA_TTABLE ){
                 lv_getfield(L, -1, key.UTF8String);
             } else {
                 break;
             }
         }
-        if( lv_type(L, -1)==LV_TFUNCTION ) {
+        if( lv_type(L, -1)==LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:self.retainKey stack:-1];
         }
     }

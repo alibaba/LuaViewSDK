@@ -60,7 +60,7 @@ static int lvNewDownloader (lua_State *L) {
         NSString* url = lv_paramString(L, 1);     // 1: url
         //NSString* fileName = lvL_paramString(L, 2);// 2: fileName
                                                    // 3: callback
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
+        if( lv_type(L, -1) == LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:downloader stack:-1];
         }
         
@@ -91,7 +91,7 @@ static int lvNewDownloader (lua_State *L) {
         if( self.data ) {
             [LVData createDataObject:L data:self.data];
         } else {
-            lv_pushnil(L);
+            lua_pushnil(L);
         }
         [LVUtil call:L lightUserData:self key1:nil key2:nil nargs:1];
         
@@ -112,7 +112,7 @@ static int __tostring (lua_State *L) {
     if( user ){
         LVDownloader* downloader =  (__bridge LVDownloader *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataDownloader: %@", downloader ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
@@ -122,7 +122,7 @@ static int PathOfResource (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     LView* lview = (__bridge LView *)(L->lView);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
-    lv_pushstring(L, path.UTF8String);
+    lua_pushstring(L, path.UTF8String);
     return 1;
 }
 

@@ -350,67 +350,67 @@ int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lua_State
                 return 1;
             }
             case LVTypeID_char: {
-                char value = lv_tonumber(L, stackID);
+                char value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_unsignedchar: {
-                unsigned char value = lv_tonumber(L, stackID);
+                unsigned char value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_short: {
-                short value = lv_tonumber(L, stackID);
+                short value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_unsignedshort: {
-                unsigned short value = lv_tonumber(L, stackID);
+                unsigned short value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_int: {
-                int value = lv_tonumber(L, stackID);
+                int value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_unsignedint: {
-                unsigned int value = lv_tonumber(L, stackID);
+                unsigned int value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_NSInteger: {
-                NSInteger value = lv_tonumber(L, stackID);
+                NSInteger value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_NSUInteger: {
-                NSUInteger value = lv_tonumber(L, stackID);
+                NSUInteger value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_longlong: {
-                long long value = lv_tonumber(L, stackID);
+                long long value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_unsigedlonglong: {
-                unsigned long long value = lv_tonumber(L, stackID);
+                unsigned long long value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_float: {
-                float value = lv_tonumber(L, stackID);
+                float value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_CGFloat: {
-                CGFloat value = lv_tonumber(L, stackID);
+                CGFloat value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_double: {
-                double value = lv_tonumber(L, stackID);
+                double value = lua_tonumber(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
@@ -471,67 +471,67 @@ id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lua_State* L,
                 return object;
             }
             case LVTypeID_char: {
-                char result = lv_tonumber(L, stackID);
+                char result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_unsignedchar: {
-                unsigned char result = lv_tonumber(L, stackID);
+                unsigned char result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_short: {
-                short result = lv_tonumber(L, stackID);
+                short result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_unsignedshort: {
-                unsigned short result = lv_tonumber(L, stackID);
+                unsigned short result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_int: {
-                int result = lv_tonumber(L, stackID);
+                int result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_unsignedint: {
-                unsigned int result = lv_tonumber(L, stackID);
+                unsigned int result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_NSInteger: {
-                NSInteger result = lv_tonumber(L, stackID);
+                NSInteger result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_NSUInteger: {
-                NSUInteger result = lv_tonumber(L, stackID);
+                NSUInteger result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_longlong: {
-                long long result = lv_tonumber(L, stackID);
+                long long result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_unsigedlonglong: {
-                unsigned long long result = lv_tonumber(L, stackID);
+                unsigned long long result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_float: {
-                float result = lv_tonumber(L, stackID);
+                float result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_CGFloat: {
-                CGFloat result = lv_tonumber(L, stackID);
+                CGFloat result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_double: {
-                double result = lv_tonumber(L, stackID);
+                double result = lua_tonumber(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }

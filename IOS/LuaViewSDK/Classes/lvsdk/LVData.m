@@ -56,7 +56,7 @@ static int lvNewData (lua_State *L) {
             const char* chars = s.UTF8String;
             [data.data appendBytes:chars length:strlen(chars) ];
         } else {
-            int num = lv_tonumber(L, 1);
+            int num = lua_tonumber(L, 1);
             if( num>0 ){
                 [data.data setLength:num];
             }
@@ -103,7 +103,7 @@ static int __tostring (lua_State *L) {
         LVData* data =  (__bridge LVData *)(user->object);
         NSStringEncoding encode = NSUTF8StringEncoding;
         if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
-            encode = lv_tonumber(L, 2);
+            encode = lua_tonumber(L, 2);
         }
         NSString* s = [[NSString alloc] initWithData:data.data encoding:encode];
         if( s==nil ){
@@ -113,7 +113,7 @@ static int __tostring (lua_State *L) {
                 s = [[NSString alloc] initWithFormat:@"{ UserDataType=data, length=%ld }",(long)data.data.length];
             }
         }
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
@@ -125,7 +125,7 @@ static int __index (lua_State *L) {
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2)-1;
+            int index = lua_tonumber(L, 2)-1;
             if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 NSRange range;
@@ -154,8 +154,8 @@ static int __newindex (lua_State *L) {
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
         if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2)-1;
-            int value = lv_tonumber(L, 3);
+            int index = lua_tonumber(L, 2)-1;
+            int value = lua_tonumber(L, 3);
             if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 cs[0] = value;
@@ -167,7 +167,7 @@ static int __newindex (lua_State *L) {
             }
         } else if( lv_type(L, 2)==LV_TSTRING ){
             NSString* key = lv_paramString(L, 2);
-            int value = lv_tonumber(L, 3);
+            int value = lua_tonumber(L, 3);
             if( [@"length" isEqualToString:key] ){
                 data.length = value;
                 return 0;

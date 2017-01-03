@@ -36,7 +36,7 @@
         lv_checkStack32(l);
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if( lv_type(l, -1) == LV_TTABLE ) {
+        if( lv_type(l, -1) == LUA_TTABLE ) {
             lv_getfield(l, -1, STR_CALLBACK);
             if( lv_type(l, -1)==LV_TNIL ) {
                 lv_remove(l, -1);
@@ -83,7 +83,7 @@
         int num = lv_gettop(L);
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-        if( lv_type(L, -1)==LV_TTABLE ) {
+        if( lv_type(L, -1)==LUA_TTABLE ) {
             lv_getfield(L, -1, STR_ON_CLICK);
         }
         lv_runFunction(L);

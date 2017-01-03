@@ -151,7 +151,7 @@ static int __tostring (lua_State *L) {
     if( user ){
         LVAudioPlayer* player =  (__bridge LVAudioPlayer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataAudioPlayer: %@", player ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

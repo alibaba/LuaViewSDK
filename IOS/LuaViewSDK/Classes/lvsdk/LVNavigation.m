@@ -134,7 +134,7 @@ static int setBackground(lua_State*L ) {
 static int setStatusBarStyle (lua_State *L) {
     lv_clearFirstTableValue(L);
     if ( lv_gettop(L)>=1 ) {
-        NSInteger value = lv_tonumber(L, 2);
+        NSInteger value = lua_tonumber(L, 2);
         [[UIApplication sharedApplication] setStatusBarStyle:value];
     }
     return 0;

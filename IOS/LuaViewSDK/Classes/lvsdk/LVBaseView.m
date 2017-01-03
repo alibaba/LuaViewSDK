@@ -70,10 +70,10 @@ static int center (lua_State *L) {
                     }
                 } else {
                     if( lv_isnumber(L, 2) ){
-                        center.x = lv_tonumber(L, 2);// 2
+                        center.x = lua_tonumber(L, 2);// 2
                     }
                     if( lv_isnumber(L, 3) ){
-                        center.y = lv_tonumber(L, 3);// 3
+                        center.y = lua_tonumber(L, 3);// 3
                     }
                 }
                 if(  isnan(center.x) || isnan(center.y) ){
@@ -101,7 +101,7 @@ static int centerX(lua_State *L) {
             CGPoint center = view.center;
             if ( lv_gettop(L)>=2  ) {
                 if( lv_isnumber(L, 2) ){
-                    center.x = lv_tonumber(L, 2);// 2
+                    center.x = lua_tonumber(L, 2);// 2
                 }
                 if(  isnan(center.x) || isnan(center.y) ){
                     LVError(@"LVBaseView.setCenterX2");
@@ -126,7 +126,7 @@ static int centerY(lua_State *L) {
             CGPoint center = view.center;
             if ( lv_gettop(L)>=2  ) {
                 if( lv_isnumber(L, 2) ){
-                    center.y = lv_tonumber(L, 2);// 2
+                    center.y = lua_tonumber(L, 2);// 2
                 }
                 if(  isnan(center.x) || isnan(center.y) ){
                     LVError(@"LVBaseView.setCenterX2");
@@ -163,16 +163,16 @@ static int frame (lua_State *L) {
                     }
                 } else {
                     if( lv_isnumber(L, 2) ){
-                        r.origin.x = lv_tonumber(L, 2);// 2
+                        r.origin.x = lua_tonumber(L, 2);// 2
                     }
                     if( lv_isnumber(L, 3) ){
-                        r.origin.y = lv_tonumber(L, 3);// 3
+                        r.origin.y = lua_tonumber(L, 3);// 3
                     }
                     if( lv_isnumber(L, 4) ){
-                        r.size.width = lv_tonumber(L, 4);// 4
+                        r.size.width = lua_tonumber(L, 4);// 4
                     }
                     if( lv_isnumber(L, 5) ){
-                        r.size.height = lv_tonumber(L, 5);// 5
+                        r.size.height = lua_tonumber(L, 5);// 5
                     }
                 }
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
@@ -214,10 +214,10 @@ static int size (lua_State *L) {
                     }
                 } else {
                     if( lv_isnumber(L, 2) ){
-                        r.size.width = lv_tonumber(L, 2);// 4
+                        r.size.width = lua_tonumber(L, 2);// 4
                     }
                     if( lv_isnumber(L, 3) ){
-                        r.size.height = lv_tonumber(L, 3);// 5
+                        r.size.height = lua_tonumber(L, 3);// 5
                     }
                 }
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
@@ -255,10 +255,10 @@ static int origin (lua_State *L) {
                     }
                 } else {
                     if( lv_isnumber(L, 2) ){
-                        r.origin.x = lv_tonumber(L, 2);// 2
+                        r.origin.x = lua_tonumber(L, 2);// 2
                     }
                     if( lv_isnumber(L, 3) ){
-                        r.origin.y = lv_tonumber(L, 3);// 3
+                        r.origin.y = lua_tonumber(L, 3);// 3
                     }
                 }
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
@@ -285,7 +285,7 @@ static int x (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.origin.x = lv_tonumber(L, 2);// 2
+                r.origin.x = lua_tonumber(L, 2);// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -346,7 +346,7 @@ static int flxBindingInlineCSS(lua_State *L)
 //    UIView *view = (__bridge UIView *)(user->view);
 //    int childNum = lv_gettop(L);
 //    if (view && childNum == 2) {
-//        if (lv_type(L, 2) == LV_TFUNCTION) {
+//        if (lv_type(L, 2) == LUA_TFUNCTION) {
 //            lv_pushvalue(L, 1);
 //            lv_pushvalue(L, 2);
 //            lv_udataRef(L, USERDATA_FLEX_DELEGATE);
@@ -357,8 +357,8 @@ static int flxBindingInlineCSS(lua_State *L)
 //            lv_pushnumber(L, width);
 //            lv_runFunctionWithArgs(L, 1, 2);
 //            CGSize size = CGSizeZero;
-//            size.width = lv_tonumber(L, -2);
-//            size.height = lv_tonumber(L, -1);
+//            size.width = lua_tonumber(L, -2);
+//            size.height = lua_tonumber(L, -1);
 //            return size;
 //        };
 //
@@ -376,7 +376,7 @@ static int flxLayout(lua_State *L)
             if ( lv_type(L, i)==LV_TBOOLEAN ){
                 async = lv_toboolean(L, i);
             }
-            if( lv_type(L, i) == LV_TFUNCTION ) {
+            if( lv_type(L, i) == LUA_TFUNCTION ) {
                 lv_pushvalue(L, 1);
                 lv_pushvalue(L, i);
                 lv_udataRef(L, USERDATA_FLEX_DELEGATE);
@@ -400,7 +400,7 @@ static int y (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.origin.y = lv_tonumber(L, 2);// 2
+                r.origin.y = lua_tonumber(L, 2);// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -424,7 +424,7 @@ static int bottom (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.origin.y = lv_tonumber(L, 2)-r.size.height;// 2
+                r.origin.y = lua_tonumber(L, 2)-r.size.height;// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -448,7 +448,7 @@ static int right (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.origin.x = lv_tonumber(L, 2)-r.size.width;// 2
+                r.origin.x = lua_tonumber(L, 2)-r.size.width;// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -472,7 +472,7 @@ static int width (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.size.width = lv_tonumber(L, 2);// 2
+                r.size.width = lua_tonumber(L, 2);// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -495,7 +495,7 @@ static int height (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lv_gettop(L)>=2 ) {
-                r.size.height = lv_tonumber(L, 2);// 2
+                r.size.height = lua_tonumber(L, 2);// 2
                 if( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ){
                     LVError(@"LVBaseView.y2: %s", NSStringFromCGRect(r) );
                 } else {
@@ -579,7 +579,7 @@ static int children (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     
     UIView* newContentView = (__bridge UIView *)(user->object);
-    if ( lview && newContentView && lv_type(L, 2)==LV_TFUNCTION ) {
+    if ( lview && newContentView && lv_type(L, 2)==LUA_TFUNCTION ) {
         lv_settop(L, 2);
         lview.conentView = newContentView;
         lv_runFunctionWithArgs(L, 1, 0);
@@ -630,7 +630,7 @@ static int layerMode(lua_State *L) {
         if( view ){
             if ( lv_gettop(L)>=2 ) {
                 UIView* superview = view.superview;
-                BOOL yes = lvL_checkbool(L, 2);
+                BOOL yes = lua_toboolean(L, 2);
                 if( yes ) {
                     [view removeFromSuperview];
                     [superview.layer addSublayer:view.layer];
@@ -655,7 +655,7 @@ static int hidden(lua_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if ( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);
+                BOOL yes = lua_toboolean(L, 2);
                 view.hidden = yes;
                 return 0;
             } else {
@@ -764,7 +764,7 @@ static int userInteractionEnabled(lua_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if ( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);
+                BOOL yes = lua_toboolean(L, 2);
                 view.userInteractionEnabled = yes;
                 return 0;
             } else {
@@ -809,7 +809,7 @@ static int alpha (lua_State *L) {
         if ( lv_gettop(L)>=2 ) {
             CALayer* layer = view.layer;
 
-            double alpha = lv_tonumber(L, 2);// 2
+            double alpha = lua_tonumber(L, 2);// 2
             layer.opacity = alpha;
             
             lv_pop(L, 1);
@@ -831,7 +831,7 @@ static int cornerRadius (lua_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double r = lv_tonumber(L, 2);// 2
+            double r = lua_tonumber(L, 2);// 2
             view.layer.cornerRadius = r;
             return 0;
         } else {
@@ -849,7 +849,7 @@ static int borderWidth (lua_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double width = lv_tonumber(L, 2);// 2
+            double width = lua_tonumber(L, 2);// 2
             view.layer.borderWidth = width;
             return 0;
         } else {
@@ -874,7 +874,7 @@ static int setShadowPath (lua_State *L) {
 }
 static int setMasksToBounds (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    BOOL masksToBounds = lvL_checkbool(L, 2);// 2
+    BOOL masksToBounds = lua_toboolean(L, 2);// 2
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         view.layer.masksToBounds = masksToBounds;
@@ -886,8 +886,8 @@ static int setMasksToBounds (lua_State *L) {
 
 static int setShadowOffset (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float x = lv_tonumber(L, 2);// 2
-    float y = lv_tonumber(L, 3);// 2
+    float x = lua_tonumber(L, 2);// 2
+    float y = lua_tonumber(L, 3);// 2
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowOffset:CGSizeMake(x, y)];
@@ -899,7 +899,7 @@ static int setShadowOffset (lua_State *L) {
 
 static int setShadowRadius (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float radius = lv_tonumber(L, 2);// 2
+    float radius = lua_tonumber(L, 2);// 2
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowRadius:radius];
@@ -911,7 +911,7 @@ static int setShadowRadius (lua_State *L) {
 
 static int setShadowOpacity (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float opacity = lv_tonumber(L, 2);// 2
+    float opacity = lua_tonumber(L, 2);// 2
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         [view.layer setShadowOpacity:opacity];
@@ -977,7 +977,7 @@ static int borderDash (lua_State *L) {
             NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:argN];
             for( int i=2; i<=argN; i++) {
                 if( lv_type(L, i)==LV_TNUMBER ) {
-                    int v = lv_tonumber(L, i);
+                    int v = lua_tonumber(L, i);
                     [arr addObject:[NSNumber numberWithInt:v]];
                 }
             }
@@ -1009,7 +1009,7 @@ static int clipsToBounds(lua_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);
+                BOOL yes = lua_toboolean(L, 2);
                 view.clipsToBounds = yes;
                 return 0;
             } else {
@@ -1045,7 +1045,7 @@ static int transformFuncOneArg(lua_State *L, TransformSetter setter, TransformGe
         if ( lv_gettop(L) > 1 ) {
             CALayer* layer = view.layer;
 
-            double x = lv_tonumber(L, 2);
+            double x = lua_tonumber(L, 2);
             CATransform3D t = layer.transform;
             setter(&t, x);
             
@@ -1077,7 +1077,7 @@ static int transformFuncTwoArg(lua_State *L,
         if ( argNum > 1 ) {
             CALayer* layer = view.layer;
 
-            double x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
+            double x = lua_tonumber(L, 2), y = lua_tonumber(L, 3);
             CATransform3D t = layer.transform;
             xsetter(&t, x);
             ysetter(&t, y);
@@ -1130,7 +1130,7 @@ static int rotationX (lua_State *L) {
         if( lv_gettop(L)>=2 ) {
             CALayer *layer = view.layer;
 
-            double angle = degreeToRadian(lv_tonumber(L, 2));
+            double angle = degreeToRadian(lua_tonumber(L, 2));
             layer.transform = CATransform3DMakeRotation(angle, 1, 0, 0);
             
             lv_pop(L, 1);
@@ -1153,7 +1153,7 @@ static int rotationY (lua_State *L) {
         if( lv_gettop(L)>=2 ) {
             CALayer *layer = view.layer;
 
-            double angle = degreeToRadian(lv_tonumber(L, 2));
+            double angle = degreeToRadian(lua_tonumber(L, 2));
             layer.transform = CATransform3DMakeRotation(angle, 0, 1, 0);
             
             lv_pop(L, 1);
@@ -1171,7 +1171,7 @@ static int rotationY (lua_State *L) {
 
 static int scale (lua_State *L) {
     if (lv_gettop(L) == 2) {
-        lv_pushnumber(L, lv_tonumber(L, 2));
+        lv_pushnumber(L, lua_tonumber(L, 2));
     }
     return transformFuncTwoArg(L, CATransform3DSetScaleX, CATransform3DSetScaleY,
                                  CATransform3DGetScaleX, CATransform3DGetScaleY);
@@ -1265,8 +1265,8 @@ static int anchorPoint (lua_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double x = lv_tonumber(L, 2);// 2
-            double y = lv_tonumber(L, 3);// 3
+            double x = lua_tonumber(L, 2);// 2
+            double y = lua_tonumber(L, 3);// 3
             view.layer.anchorPoint = CGPointMake(x, y);
             return 0;
         } else {
@@ -1301,9 +1301,9 @@ int lv_setCallbackByKey(lua_State *L, const char* key, BOOL addGesture) {
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             }
             lv_pushvalue(L, 2);
-            if( key==NULL && lv_type(L, -1) == LV_TTABLE ) {
+            if( key==NULL && lv_type(L, -1) == LUA_TTABLE ) {
                 // 如果是表格 设置每个Key
-                lv_pushnil(L);
+                lua_pushnil(L);
                 while (lv_next(L, -2))
                 {
                     NSString* key   = lv_paramString(L, -2);
@@ -1317,10 +1317,10 @@ int lv_setCallbackByKey(lua_State *L, const char* key, BOOL addGesture) {
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             if ( key ) {
-                if ( lv_type(L, -1)==LV_TTABLE ) {
+                if ( lv_type(L, -1)==LUA_TTABLE ) {
                     lv_getfield(L, -1, key);
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
             }
             return 1;
@@ -1382,7 +1382,7 @@ static int __tostring (lua_State *L) {
         UIView<LVProtocal>* view = (__bridge UIView<LVProtocal> *)(user->object);
         if( view ){
             NSString* s = [NSString stringWithFormat:@"%@",view];
-            lv_pushstring(L, s.UTF8String);
+            lua_pushstring(L, s.UTF8String);
             return 1;
         }
     }
@@ -1416,7 +1416,7 @@ static int releaseObject(lua_State *L) {
 //    if( key ){
 //        lv_getmetatable( L, 1 );
 //        lv_getfield(L, -1, key.UTF8String);
-//        if( lv_type(L, -1)==LV_TFUNCTION ) {
+//        if( lv_type(L, -1)==LUA_TFUNCTION ) {
 //            lua_CFunction function =  lv_tocfunction(L,-1);
 //            if( function ) {
 //                lv_remove(L, 2);
@@ -1490,19 +1490,19 @@ static int effects (lua_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if ( [view isKindOfClass:[UIView class]] ) {
-            int effectType = lv_tonumber(L, 2);
+            int effectType = lua_tonumber(L, 2);
             switch (effectType) {
                 case EFFECT_NONE:
                     break;
                 case EFFECT_CLICK:{
-                    NSInteger color = lv_tonumber(L, 3);
-                    CGFloat alpha = lv_tonumber(L, 4);
+                    NSInteger color = lua_tonumber(L, 3);
+                    CGFloat alpha = lua_tonumber(L, 4);
                     [view lv_effectClick:color alpha:alpha];
                     break;
                 }
                 case EFFECT_PARALLAX:{
-                    CGFloat dx = lv_tonumber(L, 3);
-                    CGFloat dy = lv_tonumber(L, 4);
+                    CGFloat dx = lua_tonumber(L, 3);
+                    CGFloat dy = lua_tonumber(L, 4);
                     [view lv_effectParallax:dx dy:dy];
                     break;
                 }

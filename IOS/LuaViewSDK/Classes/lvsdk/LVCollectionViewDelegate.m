@@ -104,7 +104,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"Section" key2:"SectionCount" key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
-                NSInteger num = lv_tonumber(l, -1);
+                NSInteger num = lua_tonumber(l, -1);
                 num = (num>0 ? num : 0);
                 return num;
             }
@@ -125,7 +125,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"Section" key2:"RowCount" key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
-                NSInteger num = lv_tonumber(l, -1);
+                NSInteger num = lua_tonumber(l, -1);
                 num = (num>0 ? num : 0);
                 return num;
             }
@@ -178,7 +178,7 @@ static inline NSInteger mapSection(NSInteger section){
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:funcName key2:key2 key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
-                CGFloat heigth = lv_tonumber(l, -1);
+                CGFloat heigth = lua_tonumber(l, -1);
                 return heigth;
             }
         }
@@ -230,10 +230,10 @@ static inline NSInteger mapSection(NSInteger section){
             CGSize size = {0};
             if( lv_type(l, -1) ==LV_TNIL ) {
                 size.width = self.owner.frame.size.width;
-                size.height = lv_tonumber(l, -2);
+                size.height = lua_tonumber(l, -2);
             } else{
-                size.width = lv_tonumber(l, -2);
-                size.height = lv_tonumber(l, -1);
+                size.width = lua_tonumber(l, -2);
+                size.height = lua_tonumber(l, -1);
             }
             return size;
         }
@@ -255,10 +255,10 @@ static inline NSInteger mapSection(NSInteger section){
         
         if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:4 retType:LV_TNONE] ==0 ) {
             UIEdgeInsets egeInsets = {0};
-            egeInsets.top = lv_tonumber(l, -4);
-            egeInsets.left = lv_tonumber(l, -3);
-            egeInsets.bottom = lv_tonumber(l, -2);
-            egeInsets.right = lv_tonumber(l, -1);
+            egeInsets.top = lua_tonumber(l, -4);
+            egeInsets.left = lua_tonumber(l, -3);
+            egeInsets.bottom = lua_tonumber(l, -2);
+            egeInsets.right = lua_tonumber(l, -1);
             return egeInsets;
         }
     }
@@ -275,7 +275,7 @@ static inline NSInteger mapSection(NSInteger section){
             // 参数 cell,section,row
             lv_settop(l, 0);
             lv_checkstack(l, 12);
-            lv_pushnil(l);// cell
+            lua_pushnil(l);// cell
             lv_pushnumber(l, mapSection(section) );
             lv_pushnumber(l, mapRow(row) );
             

@@ -188,13 +188,13 @@ static int post (lua_State *L) {
                     NSString* s = lv_paramString(L, i);
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }
-                if( type==LV_TTABLE ) {// 数据
+                if( type==LUA_TTABLE ) {// 数据
                     id tempDic = lv_luaTableToDictionary(L, i);
                     NSString* s = [LVUtil objectToString:tempDic];
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }
                 
-                if( type==LV_TFUNCTION ) {
+                if( type==LUA_TFUNCTION ) {
                     [LVUtil registryValue:L key:http.function stack:4];
                 }
             }
@@ -242,7 +242,7 @@ static int __tostring (lua_State *L) {
                        http.response.response,
                        (long)http.response.data.length,
                        http.response.error ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

@@ -86,8 +86,8 @@ static int contentSize (lua_State *L) {
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
             if( lv_gettop(L)>=2 ) {
-                double w = lv_tonumber(L, 2);// 2
-                double h = lv_tonumber(L, 3);// 3
+                double w = lua_tonumber(L, 2);// 2
+                double h = lua_tonumber(L, 3);// 3
                 CGSize s = CGSizeMake( w, h );
                 if ( isNormalSize(s) ) {
                     view.contentSize = s;
@@ -109,11 +109,11 @@ static int contentOffset (lua_State *L) {
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            double x = lv_tonumber(L, 2);// 2
-            double y = lv_tonumber(L, 3);// 3
+            double x = lua_tonumber(L, 2);// 2
+            double y = lua_tonumber(L, 3);// 3
             BOOL yes = NO;
             if( lv_gettop(L)>=4 )
-                yes = lvL_checkbool(L, 4);// 3
+                yes = lua_toboolean(L, 4);// 3
             if( [view isKindOfClass:[UIScrollView class]] ){
                 CGPoint p = CGPointMake(x, y);
                 if( isNormalPoint(p) ) {
@@ -155,13 +155,13 @@ static int contentInset (lua_State *L) {
             if( num>=2 ) {
                 UIEdgeInsets edgeInsets = view.contentInset;
                 if( num>=2 )
-                    edgeInsets.top = lv_tonumber(L, 2);
+                    edgeInsets.top = lua_tonumber(L, 2);
                 if( num>=3 )
-                    edgeInsets.left = lv_tonumber(L, 3);
+                    edgeInsets.left = lua_tonumber(L, 3);
                 if( num>=4 )
-                    edgeInsets.bottom = lv_tonumber(L, 4);
+                    edgeInsets.bottom = lua_tonumber(L, 4);
                 if( num>=5 )
-                    edgeInsets.right = lv_tonumber(L, 5);
+                    edgeInsets.right = lua_tonumber(L, 5);
                 if( isNormalEdgeInsets(edgeInsets) ) {
                     view.contentInset = edgeInsets;
                     view.scrollIndicatorInsets = edgeInsets;
@@ -186,7 +186,7 @@ static int contentInset (lua_State *L) {
 //        UIScrollView* view = (__bridge UIScrollView *)(user->view);
 //        if( [view isKindOfClass:[UIScrollView class]] ){
 //            if( lv_gettop(L)>=2 ) {
-//                BOOL yes = lvL_checkbool(L, 2);// 2
+//                BOOL yes = lua_toboolean(L, 2);// 2
 //                view.pagingEnabled = yes;
 //                return 0;
 //            } else {

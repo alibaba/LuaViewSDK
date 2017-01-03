@@ -275,7 +275,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         if(  [LVUtil call:l key1:"PageCount" key2:NULL key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
             if( lv_type(l, -1)==LV_TNUMBER ) {
-                NSInteger num = lv_tonumber(l, -1);
+                NSInteger num = lua_tonumber(l, -1);
                 return num;
             }
         }
@@ -338,7 +338,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 static int lvNewPagerView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
     
-    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
+    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LUA_TTABLE ) {
         LVPagerView* pageView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
@@ -412,7 +412,7 @@ static int setCurrentPage(lua_State *L) {
     if( user ){
         LVPagerView* view = (__bridge LVPagerView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            int luaPageIdx = lv_tonumber(L, 2);
+            int luaPageIdx = lua_tonumber(L, 2);
             BOOL animated = YES;
             if( lv_gettop(L)>=3 ) {
                 animated = lv_toboolean(L, 3);
@@ -439,7 +439,7 @@ static int autoScroll(lua_State *L){
         }
         
         if(lv_gettop(L) >= 2) {
-            float interval = lv_tonumber(L, 2);
+            float interval = lua_tonumber(L, 2);
             
             if ( interval > 0.02 ) {//start timer
                 [view startTimer:interval repeat:YES];
@@ -507,7 +507,7 @@ static int indicator(lua_State *L) {
                 [view setIndicator:nil];// 设置Indicator
                 lv_pushvalue(L, 1);
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-                lv_pushnil(L);// value
+                lua_pushnil(L);// value
                 lv_setfield(L, -2, "Indicator");
             } else {
                 LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
@@ -537,8 +537,8 @@ static int previewSide(lua_State *L) {
     if( user ){
         LVPagerView* pagerview = (__bridge LVPagerView *)(user->object);
         if( lv_gettop(L)>=3 ) {
-            CGFloat sideLeft = lv_tonumber(L, 2);
-            CGFloat sideRight = lv_tonumber(L, 3);
+            CGFloat sideLeft = lua_tonumber(L, 2);
+            CGFloat sideRight = lua_tonumber(L, 3);
             pagerview.sideLeft = sideLeft;
             pagerview.sideRight = sideRight;
             pagerview.frame = pagerview.frame;

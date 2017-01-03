@@ -46,9 +46,9 @@ static int lvNewTransform3D (lua_State *L) {
 static int translation (lua_State *L) {
     if( lv_gettop(L)==4 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double x = lv_tonumber(L, 2);// 2
-        double y = lv_tonumber(L, 3);// 3
-        double z = lv_tonumber(L, 4);// 4
+        double x = lua_tonumber(L, 2);// 2
+        double y = lua_tonumber(L, 3);// 3
+        double z = lua_tonumber(L, 4);// 4
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DTranslate(tran.transform, x, y, z);
@@ -62,9 +62,9 @@ static int translation (lua_State *L) {
 static int scale (lua_State *L) {
     if( lv_gettop(L)==4 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double x = lv_tonumber(L, 2);// 2
-        double y = lv_tonumber(L, 3);// 3
-        double z = lv_tonumber(L, 4);// 4
+        double x = lua_tonumber(L, 2);// 2
+        double y = lua_tonumber(L, 3);// 3
+        double z = lua_tonumber(L, 4);// 4
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DScale(tran.transform, x, y, z);
@@ -78,10 +78,10 @@ static int scale (lua_State *L) {
 static int rotate (lua_State *L) {
     if( lv_gettop(L)==5 ) {
         LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double angle = lv_tonumber(L, 2);
-        double x = lv_tonumber(L, 3);
-        double y = lv_tonumber(L, 4);
-        double z = lv_tonumber(L, 5);
+        double angle = lua_tonumber(L, 2);
+        double x = lua_tonumber(L, 3);
+        double y = lua_tonumber(L, 4);
+        double z = lua_tonumber(L, 5);
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DRotate(tran.transform, angle, x, y, z);
@@ -192,7 +192,7 @@ static int __tostring (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( LVIsType(user, Transform3D) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataTransform3D: %d", (int)user ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

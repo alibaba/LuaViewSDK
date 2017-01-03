@@ -97,7 +97,7 @@ static int lvNewCollectionView(lua_State *L) {
     lvL_getmetatable(L, META_TABLE_UICollectionView );
     lv_setmetatable(L, -2);
     
-    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
+    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LUA_TTABLE ) {
         lv_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
@@ -126,13 +126,13 @@ static int miniSpacing (lua_State *L) {
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=3 ) {
-            CGFloat value1 = lv_tonumber(L, 2);
-            CGFloat value2 = lv_tonumber(L, 3);
+            CGFloat value1 = lua_tonumber(L, 2);
+            CGFloat value2 = lua_tonumber(L, 3);
             tableView.lvflowLayout.minimumLineSpacing = value1;
             tableView.lvflowLayout.minimumInteritemSpacing = value2;
             return 0;
         } else if( lv_gettop(L)>=2 ) {
-            CGFloat value1 = lv_tonumber(L, 2);
+            CGFloat value1 = lua_tonumber(L, 2);
             tableView.lvflowLayout.minimumLineSpacing = value1;
             tableView.lvflowLayout.minimumInteritemSpacing = value1;
             return 0;
@@ -152,7 +152,7 @@ static int scrollDirection (lua_State *L) {
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            int value1 = lv_tonumber(L, 2);
+            int value1 = lua_tonumber(L, 2);
             tableView.lvflowLayout.scrollDirection = value1;
             return 0;
         } else {
@@ -171,13 +171,13 @@ static int scrollToCell (lua_State *L) {
         if( [collectionView isKindOfClass:[LVCollectionView class]] ) {
             int nargs = lv_gettop(L);
             if( nargs>=3 ){
-                int section = lv_tonumber(L, 2);
-                int row = lv_tonumber(L, 3);
+                int section = lua_tonumber(L, 2);
+                int row = lua_tonumber(L, 3);
                 CGFloat offsetY = 0;
                 BOOL animation = YES;
                 for( int i=4; i<=nargs; i++ ) {
                     if( nargs>=i && lv_type(L, i)==LV_TNUMBER ) {
-                        offsetY = lv_tonumber(L, i);
+                        offsetY = lua_tonumber(L, i);
                     }
                     if( nargs>=i && lv_type(L, i)==LV_TBOOLEAN ) {
                         animation = lv_toboolean(L, i);
@@ -221,7 +221,7 @@ static int scrollToTop(lua_State *L) {
         if( [tableView isKindOfClass:[LVCollectionView class]] ) {
             BOOL animation = YES;
             if( lv_gettop(L)>=2 ) {
-                animation = lv_tonumber(L, 2);
+                animation = lua_tonumber(L, 2);
             }
             [tableView luaviewScrollToTopWithAnimated:animation];
             return 0;

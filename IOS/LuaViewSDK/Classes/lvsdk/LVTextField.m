@@ -121,7 +121,7 @@ static int text (lua_State *L) {
             } else {
                 NSString* s = view.text;
                 if( s ) {
-                    lv_pushstring(L, s.UTF8String);
+                    lua_pushstring(L, s.UTF8String);
                     return 1;
                 }
                 
@@ -139,7 +139,7 @@ static int text (lua_State *L) {
                     lv_setmetatable(L, -2);
                     return 1;
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
                 return 1;
             }
@@ -168,9 +168,9 @@ static int placeholder (lua_State *L) {
             } else {
                 NSString* s = view.placeholder;
                 if( s ) {
-                    lv_pushstring(L, s.UTF8String);
+                    lua_pushstring(L, s.UTF8String);
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
             }
             return 1;

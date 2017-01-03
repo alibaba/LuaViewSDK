@@ -52,8 +52,8 @@
         NSString* errorInfo = [NSString stringWithFormat:@"%@",error];
         NSString* url = webView.request.URL.absoluteString;
         lv_pushnumber(L, errorCode);
-        lv_pushstring(L, errorInfo.UTF8String);
-        lv_pushstring(L, url.UTF8String);
+        lua_pushstring(L, errorInfo.UTF8String);
+        lua_pushstring(L, url.UTF8String);
         [self lv_callLuaByKey1:@STR_onReceivedError key2:nil argN:3];
     }
 }
@@ -247,7 +247,7 @@ static int title (lua_State *L) {
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             NSString* title = [webView title];
-            lv_pushstring(L, title.UTF8String);
+            lua_pushstring(L, title.UTF8String);
             return 1;
         }
     }
@@ -276,7 +276,7 @@ static int url (lua_State *L) {
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             NSString* s = [webView url];
-            lv_pushstring(L, s.UTF8String);
+            lua_pushstring(L, s.UTF8String);
             return 1;
         }
     }

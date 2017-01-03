@@ -64,7 +64,7 @@ static int setTouchCount (lua_State *L) {
     if( LVIsType(user, Gesture) ){
         LVLongPressGesture* gesture =  (__bridge LVLongPressGesture *)(user->object);
         if( lv_gettop(L)>=2 ){
-            float num = lv_tonumber(L, 2);
+            float num = lua_tonumber(L, 2);
             gesture.numberOfTouchesRequired = num;
             return 0;
         } else {

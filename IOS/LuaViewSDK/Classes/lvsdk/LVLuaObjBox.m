@@ -182,7 +182,7 @@ static BOOL lv_object_isProtocol(id obj ) {
             NSString* property = [self propertyName:key];
             const char* propertyName = property.UTF8String;
             if ( lv_isLuaObjectHaveProperty(L, -1, propertyName) ) {
-                lv_pushstring(L, propertyName);
+                lua_pushstring(L, propertyName);
                 lv_pushInvocationArgToLuaStack(invocation, 2, L);
                 lv_settable(L, -3);
                 return;

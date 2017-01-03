@@ -20,15 +20,15 @@ static int DebugReadCmd (lua_State *L) {
     
     NSString* cmd = [luaView.debugConnection getCmd];
     if( cmd ){
-        lv_pushstring(L, cmd.UTF8String);
+        lua_pushstring(L, cmd.UTF8String);
     } else {
-        lv_pushnil(L);
+        lua_pushnil(L);
     }
     return 1;
 }
 
 static int DebugSleep (lua_State *L) {
-    float time = lv_tonumber(L, 1);
+    float time = lua_tonumber(L, 1);
     if( time>0 ) {
         [NSThread sleepForTimeInterval:time];
     }
@@ -37,7 +37,7 @@ static int DebugSleep (lua_State *L) {
 
 static int DebugPrintToServer (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
-    BOOL open = lvL_checkbool(L, 1);
+    BOOL open = lua_toboolean(L, 1);
     luaView.debugConnection.printToServer = !!open;
     return 0;
 }
@@ -47,7 +47,7 @@ static int runningLine (lua_State *L) {
     if( fileName == nil ){
         fileName = @"unkown";
     }
-    int lineNumber = lv_tonumber(L, 2);
+    int lineNumber = lua_tonumber(L, 2);
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
     LView* luaView = (__bridge LView *)(L->lView);
@@ -57,7 +57,7 @@ static int runningLine (lua_State *L) {
 
 static int get_file_line( lua_State *L )
 {
-    lv_pushstring(L, "one line code");
+    lua_pushstring(L, "one line code");
     return 1;
 }
 

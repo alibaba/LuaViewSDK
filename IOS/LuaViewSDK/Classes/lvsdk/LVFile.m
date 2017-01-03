@@ -47,7 +47,7 @@ static int file_save (lua_State *L) {
             if( lv_type(L, i)==LV_TSTRING  && fileName==nil ) {
                fileName = lv_paramString(L, i);
             }
-            if( lv_type(L,i)==LV_TFUNCTION ) {
+            if( lv_type(L,i)==LUA_TFUNCTION ) {
                 callbackIndex = i;
             }
         }
@@ -77,7 +77,7 @@ static int file_read(lua_State *L){
             if( lv_type(L, i)==LV_TSTRING  && fileName==nil ) {
                 fileName = lv_paramString(L, i);
             }
-            if( lv_type(L,i)==LV_TFUNCTION ) {
+            if( lv_type(L,i)==LUA_TFUNCTION ) {
                 callbackIndex = i;
             }
         }
@@ -115,7 +115,7 @@ static int file_path (lua_State *L) {
     NSString* fileName = lv_paramString(L, -1);
     LView* lview = (__bridge LView *)(L->lView);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
-    lv_pushstring(L, path.UTF8String);
+    lua_pushstring(L, path.UTF8String);
     return 1;
 }
 

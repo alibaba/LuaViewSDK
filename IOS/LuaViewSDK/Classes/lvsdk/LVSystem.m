@@ -19,14 +19,14 @@
 
 // lv 扩展API
 static int vmVersion (lua_State *L) {
-    lv_pushstring(L, LUAVIEW_VERSION ) ;
+    lua_pushstring(L, LUAVIEW_VERSION ) ;
     return 1; /* number of results */
 }
 
 // lv 扩展API
 static int osVersion (lua_State *L) {
     NSString* v = [[UIDevice currentDevice] systemVersion];
-    lv_pushstring(L, v.UTF8String);
+    lua_pushstring(L, v.UTF8String);
     return 1; /* number of results */
 }
 
@@ -47,7 +47,7 @@ static int android (lua_State *L) {
 
 static int netWorkType (lua_State *L) {
     NSString* type = [LVSystem netWorkType];
-    lv_pushstring(L, type.UTF8String);
+    lua_pushstring(L, type.UTF8String);
     return 1;
 }
 
@@ -81,7 +81,7 @@ static int platform (lua_State *L) {
     NSString* name = [[UIDevice currentDevice] systemName];
     NSString* version = [[UIDevice currentDevice] systemVersion];
     NSString* buf = [NSString stringWithFormat:@"%@;%@",name,version];
-    lv_pushstring(L, [buf UTF8String] ) ;
+    lua_pushstring(L, [buf UTF8String] ) ;
     return 1; /* number of results */
 }
 
@@ -89,7 +89,7 @@ static int device (lua_State *L) {
     NSString* name = [[UIDevice currentDevice] localizedModel];
     NSString* version = [[UIDevice currentDevice] model];
     NSString* buf = [NSString stringWithFormat:@"%@;%@",name,version];
-    lv_pushstring(L, [buf UTF8String] ) ;
+    lua_pushstring(L, [buf UTF8String] ) ;
     return 1; /* number of results */
 }
 
@@ -131,10 +131,10 @@ static int stringToTable(lua_State*L){
 }
 
 static int tableToString(lua_State*L){
-    if( lv_type(L, -1) == LV_TTABLE ) {
+    if( lv_type(L, -1) == LUA_TTABLE ) {
         id obj = lv_luaValueToNativeObject(L,-1);
         NSString* s = [LVUtil objectToString:obj];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

@@ -40,7 +40,7 @@ static int lvNewRotationGestureRecognizer (lua_State *L) {
     {
         LVRotationGesture* gesture = [[c alloc] init:L];
         
-        if( lv_type(L, 1) == LV_TFUNCTION ) {
+        if( lv_type(L, 1) == LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         

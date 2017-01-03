@@ -87,7 +87,7 @@ static int selected (lua_State *L) {
         LVButton* button = (__bridge LVButton *)(user->object);
         if( button ){
             if ( lv_gettop(L)>=2 ) {
-                BOOL yes = lvL_checkbool(L, 2);
+                BOOL yes = lua_toboolean(L, 2);
                 button.selected = yes;
                 return 0;
             } else {
@@ -104,7 +104,7 @@ static int enabled (lua_State *L) {
     if( user ){
         LVButton* button = (__bridge LVButton *)(user->object);
         if ( lv_gettop(L)>=2 ){
-            BOOL yes = lvL_checkbool(L, 2);
+            BOOL yes = lua_toboolean(L, 2);
             button.enabled = yes;
             return 0;
         } else {
@@ -158,7 +158,7 @@ static int title (lua_State *L) {
                             [button.titleLabel sizeToFit];
                         }
                     }else if ( lv_type(L, i) == LV_TNUMBER ) {
-                        float f = lv_tonumber(L, i);
+                        float f = lua_tonumber(L, i);
                         [button setTitle:[NSString stringWithFormat:@"%f",f] forState:g_states[j++]];
                     }
                 }
@@ -166,7 +166,7 @@ static int title (lua_State *L) {
             } else { // getValue
                 for (int j=0; j<4; j++ ){
                     NSString* text1 = [button titleForState:g_states[j++] ];
-                    lv_pushstring(L, text1.UTF8String);
+                    lua_pushstring(L, text1.UTF8String);
                 }
                 return 4;
             }
@@ -218,16 +218,16 @@ static int font (lua_State *L) {
             if( num>=2 ) {
                 if( num>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
-                    float fontSize = lv_tonumber(L, 3);
+                    float fontSize = lua_tonumber(L, 3);
                     view.titleLabel.font = [LVUtil fontWithName:fontName size:fontSize bundle:luaView.bundle];
                 } else {
-                    float fontSize = lv_tonumber(L, 2);
+                    float fontSize = lua_tonumber(L, 2);
                     view.titleLabel.font = [UIFont systemFontOfSize:fontSize];
                 }
                 return 0;
             } else {
                 UIFont* font = view.titleLabel.font;
-                lv_pushstring(L, font.fontName.UTF8String);
+                lua_pushstring(L, font.fontName.UTF8String);
                 lv_pushnumber(L, font.pointSize);
                 return 2;
             }
@@ -243,7 +243,7 @@ static int fontSize (lua_State *L) {
         if( [view isKindOfClass:[LVButton class]] ){
             int num = lv_gettop(L);
             if( num>=2 ) {
-                float fontSize = lv_tonumber(L, 2);
+                float fontSize = lua_tonumber(L, 2);
                 view.titleLabel.font = [UIFont systemFontOfSize:fontSize];
                 return 0;
             } else {
@@ -264,7 +264,7 @@ static int fontSize (lua_State *L) {
 //            lv_pushboolean(L, button.showsTouchWhenHighlighted );
 //            return 1;
 //        } else {
-//            BOOL yes = lvL_checkbool(L, 2);
+//            BOOL yes = lua_toboolean(L, 2);
 //            button.showsTouchWhenHighlighted = yes;
 //            return 0;
 //        }

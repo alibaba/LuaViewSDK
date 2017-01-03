@@ -54,7 +54,7 @@ static int lvNewPagerIndicator (lua_State *L) {
 //        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
 //        if( view ){
 //            if( lv_gettop(L)>=2 ) {
-//                int number = lv_tonumber(L, 2);
+//                int number = lua_tonumber(L, 2);
 //                view.numberOfPages = number;
 //                return 0;
 //            } else {
@@ -72,7 +72,7 @@ static int setCurrentPage(lua_State *L) {
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
             if( lv_gettop(L)>=2 ) {
-                int currentPage = lv_tonumber(L, 2);
+                int currentPage = lua_tonumber(L, 2);
                 //view.currentPage = currentPage-1;
                 [view.pagerView setCurrentPageIdx:currentPage-1 animation:YES];
                 return 0;

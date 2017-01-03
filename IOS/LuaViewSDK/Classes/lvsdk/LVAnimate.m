@@ -49,33 +49,33 @@ static int lvNewAnimate (lua_State *L) {
         CGFloat velocity = 0;//0~1
         
         if( lv_type(L, stackID)==LV_TNUMBER ){
-            duration = lv_tonumber(L,stackID++);
+            duration = lua_tonumber(L,stackID++);
         }
         if( lv_type(L, stackID)==LV_TNUMBER ){
-            delay = lv_tonumber(L,stackID++);
-        }
-        
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            dampingRatio = lv_tonumber(L,stackID++);
+            delay = lua_tonumber(L,stackID++);
         }
         
         if( lv_type(L, stackID)==LV_TNUMBER ){
-            velocity = lv_tonumber(L,stackID++);
+            dampingRatio = lua_tonumber(L,stackID++);
         }
         
         if( lv_type(L, stackID)==LV_TNUMBER ){
-            option = lv_tonumber(L,stackID++);
+            velocity = lua_tonumber(L,stackID++);
+        }
+        
+        if( lv_type(L, stackID)==LV_TNUMBER ){
+            option = lua_tonumber(L,stackID++);
         }
         
         lv_createtable(L, 0, 8);// table
-        if( argNum>=stackID && lv_type(L,stackID)==LV_TFUNCTION ){
-            lv_pushstring(L, "animations");// key
+        if( argNum>=stackID && lv_type(L,stackID)==LUA_TFUNCTION ){
+            lua_pushstring(L, "animations");// key
             lv_pushvalue(L, stackID);//value
             lv_settable(L, -3);
             stackID++;
         }
-        if( argNum>=stackID && lv_type(L,stackID)==LV_TFUNCTION ){
-            lv_pushstring(L, "completion");// key
+        if( argNum>=stackID && lv_type(L,stackID)==LUA_TFUNCTION ){
+            lua_pushstring(L, "completion");// key
             lv_pushvalue(L, stackID );//value
             lv_settable(L, -3);
         }

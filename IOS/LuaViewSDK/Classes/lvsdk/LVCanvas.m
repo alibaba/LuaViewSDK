@@ -88,8 +88,8 @@ static int canvas_drawPoint (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
+        CGFloat x1 = lua_tonumber(L, 2);
+        CGFloat y1 = lua_tonumber(L, 3);
         [canvas drawLine:x1-0.5 :y1-0.5 :x1+0.5 :y1+0.5];
         return 1;
     }
@@ -110,10 +110,10 @@ static int canvas_drawLine (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
-        CGFloat x2 = lv_tonumber(L, 4);
-        CGFloat y2 = lv_tonumber(L, 5);
+        CGFloat x1 = lua_tonumber(L, 2);
+        CGFloat y1 = lua_tonumber(L, 3);
+        CGFloat x2 = lua_tonumber(L, 4);
+        CGFloat y2 = lua_tonumber(L, 5);
         [canvas drawLine:x1 :y1 :x2 :y2];
         return 1;
     }
@@ -131,10 +131,10 @@ static int canvas_drawRect (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x1 = lv_tonumber(L, 2);
-        CGFloat y1 = lv_tonumber(L, 3);
-        CGFloat x2 = lv_tonumber(L, 4);
-        CGFloat y2 = lv_tonumber(L, 5);
+        CGFloat x1 = lua_tonumber(L, 2);
+        CGFloat y1 = lua_tonumber(L, 3);
+        CGFloat x2 = lua_tonumber(L, 4);
+        CGFloat y2 = lua_tonumber(L, 5);
         [canvas drawRect:x1 :y1 :x2 :y2];
         return 1;
     }
@@ -178,12 +178,12 @@ static int canvas_drawRoundRect (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
-        CGFloat h = lv_tonumber(L, 5);
-        CGFloat rx = lv_tonumber(L, 6);
-        CGFloat ry = lv_tonumber(L, 7);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
+        CGFloat w = lua_tonumber(L, 4);
+        CGFloat h = lua_tonumber(L, 5);
+        CGFloat rx = lua_tonumber(L, 6);
+        CGFloat ry = lua_tonumber(L, 7);
         [canvas drawRoundRect:x :y :w :h :rx :ry];
         return 1;
     }
@@ -221,12 +221,12 @@ static int canvas_drawEllipse (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
+        CGFloat w = lua_tonumber(L, 4);
         CGFloat h = w;
         if( lv_type(L, 5)==LV_TNUMBER ) {
-            h = lv_tonumber(L, 5);
+            h = lua_tonumber(L, 5);
         }
         [canvas drawEllipse:x :y :w :h];
         return 1;
@@ -238,9 +238,9 @@ static int canvas_drawCircle (lua_State *L) {
     LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat r = lv_tonumber(L, 4);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
+        CGFloat r = lua_tonumber(L, 4);
         [canvas drawEllipse:x-r :y-r :r*2 :r*2];
         return 1;
     }
@@ -281,7 +281,7 @@ static int canvas_strokeWidth (lua_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            canvas.strokeWidth = lv_tonumber(L, 2);
+            canvas.strokeWidth = lua_tonumber(L, 2);
             return 0;
         } else {
             lv_pushnumber(L, canvas.strokeWidth );
@@ -296,7 +296,7 @@ static int canvas_style (lua_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            canvas.drawingMode = lv_tonumber(L, 2);
+            canvas.drawingMode = lua_tonumber(L, 2);
             return 0;
         } else {
             lv_pushnumber(L, canvas.drawingMode );
@@ -333,7 +333,7 @@ static int canvas_alpha (lua_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            CGFloat alpha = lv_tonumber(L, 2);
+            CGFloat alpha = lua_tonumber(L, 2);
             canvas.alpha = alpha;
             return 0;
         }
@@ -346,7 +346,7 @@ static int canvas_textSize (lua_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            CGFloat font = lv_tonumber(L, 2);
+            CGFloat font = lua_tonumber(L, 2);
             canvas.font = [UIFont systemFontOfSize:font];
             return 0;
         } else {
@@ -385,10 +385,10 @@ static int canvas_clipRect (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user && lv_gettop(L)>=5 ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
-        CGFloat h = lv_tonumber(L, 5);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
+        CGFloat w = lua_tonumber(L, 4);
+        CGFloat h = lua_tonumber(L, 5);
         [canvas clipRect:x :y :w :h];
     }
     return 0;
@@ -401,8 +401,8 @@ static int drawText (lua_State *L) {
         if( lv_gettop(L)>=2 ) {
             const char* text = lv_tolstring(L, 2, NULL);
             NSString *str = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
-            CGFloat x = lv_tonumber(L, 3);
-            CGFloat y = lv_tonumber(L, 4);
+            CGFloat x = lua_tonumber(L, 3);
+            CGFloat y = lua_tonumber(L, 4);
             CGFloat h = canvas.font.lineHeight;
             CGFloat leading = canvas.font.leading ;
             CGFloat descender = canvas.font.descender;
@@ -436,12 +436,12 @@ static int canvas_drawOval (lua_State *L) {
 static int canvas_drawArc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
-        CGFloat w = lv_tonumber(L, 4);
-        CGFloat h = lv_tonumber(L, 5);
-        CGFloat startAngle = lv_tonumber(L, 6);
-        CGFloat endAngle = lv_tonumber(L, 7);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
+        CGFloat w = lua_tonumber(L, 4);
+        CGFloat h = lua_tonumber(L, 5);
+        CGFloat startAngle = lua_tonumber(L, 6);
+        CGFloat endAngle = lua_tonumber(L, 7);
         BOOL includeCenter = lv_toboolean(L, 8);
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         [canvas drawArc:x :y :w :h :startAngle :endAngle :includeCenter];
@@ -482,10 +482,10 @@ static int canvas_drawImage (lua_State *L) {
             }
         }
         if( image ) {
-            CGFloat x = lv_tonumber(L, 3);
-            CGFloat y = lv_tonumber(L, 4);
-            CGFloat w = lv_tonumber(L, 5);
-            CGFloat h = lv_tonumber(L, 6);
+            CGFloat x = lua_tonumber(L, 3);
+            CGFloat y = lua_tonumber(L, 4);
+            CGFloat w = lua_tonumber(L, 5);
+            CGFloat h = lua_tonumber(L, 6);
             [canvas drawImage:image :x :y :w :h];
         }
     }
@@ -534,14 +534,14 @@ static int canvas_rotate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        CGFloat angle = lv_tonumber(L, 2);
+        CGFloat angle = lua_tonumber(L, 2);
         CGFloat x = 0;
         if( lv_type(L, 3) ) {
-            x = lv_tonumber(L, 3);
+            x = lua_tonumber(L, 3);
         }
         CGFloat y = 0;
         if( lv_type(L, 4) ) {
-            y = lv_tonumber(L, 4);
+            y = lua_tonumber(L, 4);
         }
         [canvas rotate:angle :x :y];;
     }
@@ -569,10 +569,10 @@ static int canvas_skew (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        CGFloat sx = lv_tonumber(L, 2);
+        CGFloat sx = lua_tonumber(L, 2);
         CGFloat sy = 0;
         if (lv_type(L, 3)==LV_TNUMBER ) {
-            sy = lv_tonumber(L, 3);
+            sy = lua_tonumber(L, 3);
         }
         [canvas skew:sx :sy];
     }
@@ -591,10 +591,10 @@ static int canvas_scale (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        CGFloat scaleX = lv_tonumber(L, 2);
+        CGFloat scaleX = lua_tonumber(L, 2);
         CGFloat scaleY = scaleX;
         if( lv_type(L, 3)==LV_TNUMBER ) {
-            scaleY = lv_tonumber(L, 3);
+            scaleY = lua_tonumber(L, 3);
         }
         [canvas scale:scaleX :scaleY];
     }
@@ -612,8 +612,8 @@ static int canvas_translate (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        CGFloat x = lv_tonumber(L, 2);
-        CGFloat y = lv_tonumber(L, 3);
+        CGFloat x = lua_tonumber(L, 2);
+        CGFloat y = lua_tonumber(L, 3);
         [canvas translate:x :y];
     }
     return 0;

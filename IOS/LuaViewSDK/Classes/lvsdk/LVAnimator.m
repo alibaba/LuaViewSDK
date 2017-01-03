@@ -71,7 +71,7 @@ static int __tostring(lua_State *L) {
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
         NSString *s = [NSString stringWithFormat:@"Animator<%@>: %@", animator.keyPath, animator.toValue];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         
         return 1;
     }
@@ -214,7 +214,7 @@ static int isPaused(lua_State *L) {
 
 static int duration(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float value = lv_tonumber(L, 2);
+    float value = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -229,7 +229,7 @@ static int duration(lua_State *L) {
 
 static int delay(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    float value = lv_tonumber(L, 2);
+    float value = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -274,7 +274,7 @@ static int autoreverses(lua_State *L) {
 
 static int interpolator(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVAniamtorInterpolator interpolator = lv_tonumber(L, 2);
+    LVAniamtorInterpolator interpolator = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -292,10 +292,10 @@ static int setCallback(lua_State *L, int idx) {
     
     if (LVIsType(data, Animator)) {
         lv_pushvalue(L, 1);
-        if (lv_type(L, 2) == LV_TFUNCTION) {
+        if (lv_type(L, 2) == LUA_TFUNCTION) {
             lv_pushvalue(L, 2);
         } else {
-            lv_pushnil(L);
+            lua_pushnil(L);
         }
         
         lv_udataRef(L, idx);
@@ -328,9 +328,9 @@ static int onResume(lua_State *L) {
 
 static int callback(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if (LVIsType(data, Animator) && lv_type(L, 2) == LV_TTABLE) {
+    if (LVIsType(data, Animator) && lv_type(L, 2) == LUA_TTABLE) {
         lv_pushvalue(L, 2);
-        lv_pushnil(L);
+        lua_pushnil(L);
         
         while (lv_next(L, -2)) {
             if (lv_type(L, -2) != LV_TSTRING) {
@@ -347,10 +347,10 @@ static int callback(lua_State *L) {
             
             if (idx != 0) {
                 lv_pushvalue(L, 1);
-                if (lv_type(L, -2) == LV_TFUNCTION) {
+                if (lv_type(L, -2) == LUA_TFUNCTION) {
                     lv_pushvalue(L, -2);
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
                 lv_udataRef(L, idx);
                 lv_pop(L, 2);
@@ -383,13 +383,13 @@ static int updateValue(lua_State *L, NSString *keyPath, id value) {
 }
 
 static int updateFloat(lua_State *L, NSString *keyPath) {
-    float value = lv_tonumber(L, 2);
+    float value = lua_tonumber(L, 2);
     
     return updateValue(L, keyPath, @(value));
 }
 
 static int updatePoint(lua_State *L, NSString *keyPath) {
-    float x = lv_tonumber(L, 2), y = lv_tonumber(L, 3);
+    float x = lua_tonumber(L, 2), y = lua_tonumber(L, 3);
     NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
     
     return updateValue(L, keyPath, point);
@@ -406,7 +406,7 @@ static int rotation(lua_State *L) {
 static int scale(lua_State *L) {
     // default y = x
     if (lv_gettop(L) == 2) {
-        lv_pushnumber(L, lv_tonumber(L, 2));
+        lv_pushnumber(L, lua_tonumber(L, 2));
     }
     return updatePoint(L, @"transform.scale");
 }

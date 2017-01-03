@@ -18,7 +18,7 @@ static int db_get (lua_State *L) {
     NSString* key = lv_paramString(L, 1);
     NSString* defaultValue = nil;
     if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
-        double v = lv_tonumber(L, 2);
+        double v = lua_tonumber(L, 2);
         defaultValue = [NSString stringWithFormat:@"%lf",v];
     } else {
         defaultValue = lv_paramString(L, 2);
@@ -27,7 +27,7 @@ static int db_get (lua_State *L) {
         NSString* value = [[NSUserDefaults standardUserDefaults] objectForKey:key];
         if( value == nil )
             value = defaultValue;
-        lv_pushstring(L, value.UTF8String);
+        lua_pushstring(L, value.UTF8String);
         return 1; /* number of results */
     } else {
         return 0;
@@ -67,7 +67,7 @@ static int db_set (lua_State *L) {
         NSString* key = lv_paramString(L, 1);
         NSString* value = lv_paramString(L, 2);
         if( value==nil && (lv_type(L, 2)==LV_TNUMBER) ){
-            value = [NSString stringWithFormat:@"%f",lv_tonumber(L, 2)];
+            value = [NSString stringWithFormat:@"%f",lua_tonumber(L, 2)];
             value = clearString(value);
         }
         if( key.length>0 && value.length>0 ){

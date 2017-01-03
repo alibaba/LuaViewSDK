@@ -194,7 +194,7 @@ static int __gc (lua_State *L) {
 
 +(int) unregisteObjectWithL:(lua_State *)L name:(NSString*) name{
     if ( L && name ) {
-        lv_pushnil(L);
+        lua_pushnil(L);
         lv_setglobal(L, name.UTF8String);
     }
     return 0;
@@ -205,7 +205,7 @@ static int __tostring (lua_State *L) {
     if( user ){
         LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->object);
         NSString* s = [[NSString alloc] initWithFormat:@"{ UserDataType=NativeObject, %@ }",nativeObjBox.realObject];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

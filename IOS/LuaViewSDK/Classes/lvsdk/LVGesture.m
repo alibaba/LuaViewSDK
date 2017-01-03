@@ -92,7 +92,7 @@ static int __tostring (lua_State *L) {
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataGesture: %@", gesture ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

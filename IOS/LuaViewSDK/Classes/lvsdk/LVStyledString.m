@@ -169,7 +169,7 @@ static int lvNewAttributedString (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
     if( luaView && lv_gettop(L)>=2 ) {
-        if( ( lv_type(L, 1)==LV_TSTRING || lv_type(L, 1)==LV_TNUMBER ) && lv_type(L, 2)==LV_TTABLE ){
+        if( ( lv_type(L, 1)==LV_TSTRING || lv_type(L, 1)==LV_TNUMBER ) && lv_type(L, 2)==LUA_TTABLE ){
             NSString* s = nil;
             size_t n = 0;
             const char* chars = lv_tolstring(L, 1, &n );
@@ -206,7 +206,7 @@ static int __tostring (lua_State *L) {
         if( s==nil ){
             s = [[NSString alloc] initWithFormat:@"{ UserDataType=AttributedString, null }" ];
         }
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;

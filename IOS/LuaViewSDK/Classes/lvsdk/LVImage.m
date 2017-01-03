@@ -142,7 +142,7 @@ static int setImage (lua_State *L) {
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView cancelImageLoadAndClearCallback:L];
-            if( lv_type(L, 3) == LV_TFUNCTION ) {
+            if( lv_type(L, 3) == LUA_TFUNCTION ) {
                 [LVUtil registryValue:L key:imageView.functionTag stack:3];
                 imageView.needCallLuaFunc = YES;
             } else {
@@ -178,7 +178,7 @@ static int scaleType (lua_State *L) {
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             if( lv_gettop(L)>=2 ) {
-                int model = lv_tonumber(L, 2);// 2
+                int model = lua_tonumber(L, 2);// 2
                 [imageView setContentMode:model];
                 return 0;
             } else {
@@ -200,10 +200,10 @@ static int startAnimating (lua_State *L) {
             float repeatCount = 1;
             float duration = 0.3;
             if( lv_gettop(L)>=3 ){
-                duration = lv_tonumber(L, 3);
+                duration = lua_tonumber(L, 3);
             }
             if( lv_gettop(L)>=4 ){
-                repeatCount = lv_tonumber(L, 4);
+                repeatCount = lua_tonumber(L, 4);
             }
             LView* lview = (__bridge LView *)(L->lView);
             LVBundle* bundle = lview.bundle;

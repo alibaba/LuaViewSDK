@@ -24,7 +24,7 @@
 -(void) dealloc{
     lua_State* L = self.lv_lview.l;
     for ( int i=0; i<self.functionNum; i++ ) {
-        if( lv_type(L, i) == LV_TFUNCTION ) {
+        if( lv_type(L, i) == LUA_TFUNCTION ) {
             NSString* tag = self.cmdArray[i];
             [LVUtil unregistry:L key:tag];
         }
@@ -85,7 +85,7 @@ static int lvNewAlertView (lua_State *L) {
     if( num>0 ){
         int argID= 0;
         for ( int i=1; i<=num; i++ ) {
-            if( lv_type(L, i) == LV_TFUNCTION ) {
+            if( lv_type(L, i) == LUA_TFUNCTION ) {
                 NSString* tag = alertView.cmdArray[argID++];
                 [LVUtil registryValue:L key:tag stack:i];
                 alertView.argNum = argID;

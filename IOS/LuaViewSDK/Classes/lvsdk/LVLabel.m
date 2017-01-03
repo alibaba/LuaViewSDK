@@ -68,7 +68,7 @@ static int text (lua_State *L) {
                 if ( lv_isnoneornil(L, 2 ) ) {
                     view.text = nil;
                 } else if( lv_type(L, 2)==LV_TNUMBER ){
-                    CGFloat text = lv_tonumber(L, 2);// 2
+                    CGFloat text = lua_tonumber(L, 2);// 2
                     view.text = [NSString stringWithFormat:@"%f",text];
                     return 0;
                 } else if( lv_type(L, 2)==LV_TSTRING ){
@@ -86,7 +86,7 @@ static int text (lua_State *L) {
                 }
             } else {
                 NSString* text = view.text;
-                lv_pushstring(L, text.UTF8String);
+                lua_pushstring(L, text.UTF8String);
                 return 1;
             }
         }
@@ -99,7 +99,7 @@ static int lineCount(lua_State *L) {
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            int number = lv_tonumber(L, 2);// 2
+            int number = lua_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
                 view.numberOfLines = number;
                 return 0;
@@ -160,11 +160,11 @@ static int font (lua_State *L) {
             if( lv_gettop(L)>=2 ) {
                 if( lv_gettop(L)>=3 && lv_type(L, 2)==LV_TSTRING ) {
                     NSString* fontName = lv_paramString(L, 2);
-                    float fontSize = lv_tonumber(L, 3);
+                    float fontSize = lua_tonumber(L, 3);
                     UIFont* font = [LVUtil fontWithName:fontName size:fontSize bundle:luaView.bundle];
                     view.font = font;
                 } else {
-                    float fontSize = lv_tonumber(L, 2);
+                    float fontSize = lua_tonumber(L, 2);
                     view.font = [UIFont systemFontOfSize:fontSize];
                 }
                 return 0;
@@ -172,7 +172,7 @@ static int font (lua_State *L) {
                 UIFont* font = view.font;
                 NSString* fontName = font.fontName;
                 CGFloat fontSize = font.pointSize;
-                lv_pushstring(L, fontName.UTF8String);
+                lua_pushstring(L, fontName.UTF8String);
                 lv_pushnumber(L, fontSize);
                 return 2;
             }
@@ -188,7 +188,7 @@ static int fontSize (lua_State *L) {
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if( [view isKindOfClass:[LVLabel class]] ){
             if( lv_gettop(L)>=2 ) {
-                float fontSize = lv_tonumber(L, 2);
+                float fontSize = lua_tonumber(L, 2);
                 view.font = [UIFont systemFontOfSize:fontSize];
                 return 0;
             } else {
@@ -207,7 +207,7 @@ static int textAlignment (lua_State *L) {
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            NSInteger align = lv_tonumber(L, 2);// 2
+            NSInteger align = lua_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
                 view.textAlignment = align;
                 return 0;
@@ -226,7 +226,7 @@ static int ellipsize (lua_State *L) {
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            NSInteger lineBreakMode = lv_tonumber(L, 2);// 2
+            NSInteger lineBreakMode = lua_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
                 view.lineBreakMode = lineBreakMode;
                 return 0;

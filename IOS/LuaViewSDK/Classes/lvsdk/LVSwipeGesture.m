@@ -41,7 +41,7 @@ static int lvSwipeGestureRecognizer (lua_State *L) {
     {
         LVSwipeGesture* gesture = [[c alloc] init:L];
         
-        if( lv_type(L, 1) == LV_TFUNCTION ) {
+        if( lv_type(L, 1) == LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         
@@ -62,7 +62,7 @@ static int touchCount (lua_State *L) {
     if( LVIsType(user, Gesture) ){
         LVSwipeGesture* gesture =  (__bridge LVSwipeGesture *)(user->object);
         if( lv_gettop(L)>=2 ) {
-            float num = lv_tonumber(L, 2);
+            float num = lua_tonumber(L, 2);
             gesture.numberOfTouchesRequired = num;
             return 0;
         } else {
@@ -79,7 +79,7 @@ static int direction (lua_State *L) {
     if( LVIsType(user, Gesture) ){
         LVSwipeGesture* gesture =  (__bridge LVSwipeGesture *)(user->object);
         if ( lv_gettop(L)>=2 ) {
-            float num = lv_tonumber(L, 2);
+            float num = lua_tonumber(L, 2);
             gesture.direction = num;
             return 0;
         } else {
