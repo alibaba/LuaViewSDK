@@ -8,7 +8,7 @@
 
 #import "LVPagerViewCell.h"
 #import "LView.h"
-#import "lVapi.h"
+#import "lapi.h"
 
 @interface LVPagerViewCell ()
 @property (nonatomic,weak) LView* lv_lview;
@@ -29,7 +29,7 @@
     self.lv_lview = lview;
     lua_State* L = lview.l;
     if( L ) {
-        lv_createtable(L, 0, 0);
+        lua_createtable(L, 0, 0);
         [LVUtil registryValue:L key:self stack:-1];
         lv_luaTableSetWeakWindow(L, self);
     }

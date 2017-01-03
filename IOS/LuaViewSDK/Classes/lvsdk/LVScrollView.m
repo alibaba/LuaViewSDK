@@ -66,7 +66,7 @@ static int lvNewScrollView (lua_State *L) {
         scrollView.lv_userData = userData;
         
         //创建delegate用的事件存储器
-        lv_createtable(L, 0, 0);
+        lua_createtable(L, 0, 0);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
         
         luaL_getmetatable(L, META_TABLE_UIScrollView );

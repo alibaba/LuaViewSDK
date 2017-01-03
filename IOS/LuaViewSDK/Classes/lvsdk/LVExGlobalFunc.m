@@ -29,9 +29,9 @@
     
     // 替换pakcage.loaders中的loader_lv
     
-    lua_getglobal(L, LV_LOADLIBNAME);
+    lua_getglobal(L, LUA_LOADLIBNAME);
     lua_getfield(L, 1, "loaders");
-    if (!lv_istable(L, -1)) {
+    if (!lua_istable(L, -1)) {
         return;
     }
     
@@ -64,7 +64,7 @@ static int loadJson (lua_State *L) {
     NSString* json = lv_paramString(L, 1);
     if( json ){
         json = [NSString stringWithFormat:@"return %@",json];
-        lvL_loadstring(L, json.UTF8String);
+        luaL_loadstring(L, json.UTF8String);
         if( lua_type(L, -1) == LUA_TFUNCTION ) {
             int errorCode = lua_pcall( L, 0, 1, 0);
             if( errorCode == 0 ){
@@ -143,7 +143,7 @@ static int loaderForLuaView (lua_State *L) {
 
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
-    LView* lView = (__bridge  LView *)(L->lView);
+    LView* lView = LV_LUASTATE_VIEW(L);
     // 注册静态全局方法和常量
     [LVExGlobalFunc registryStaticMethod:L lView:lView];
     

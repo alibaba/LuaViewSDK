@@ -65,7 +65,7 @@ static int text (lua_State *L) {
         LVLabel* view = (__bridge LVLabel *)(user->object);
         if ( [view isKindOfClass:[LVLabel class]] ) {
             if( lua_gettop(L)>=2 ) {
-                if ( lv_isnoneornil(L, 2 ) ) {
+                if ( lua_isnoneornil(L, 2 ) ) {
                     view.text = nil;
                 } else if( lua_type(L, 2)==LUA_TNUMBER ){
                     CGFloat text = lua_tonumber(L, 2);// 2

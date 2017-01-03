@@ -712,6 +712,69 @@ void lv_udataUnref(lua_State* L, int key) {
     }
 }
 
+int lv_createUDataLuatable (lua_State *L, int objindex){
+    lua_checkstack(L, 8);
+    lua_pushvalue(L, objindex);
+    lua_createtable(L, 8, 0);
+    lv_setUDataLuatable(L, -2);
+    lua_pop(L, 1);
+    return 1;
+}
+
+int lv_setUDataLuatable (lua_State *L, int objindex) {
+//    TValue *obj;
+//    Table *lt;
+//    lua_lock(L);
+//    api_checknelems(L, 1);
+//    obj = index2adr(L, objindex);
+//    api_checkvalidindex(L, obj);
+//    if (ttisnil(L->top - 1))
+//        lt = NULL;
+//    else {
+//        api_check(L, ttistable(L->top - 1));
+//        lt = hvalue(L->top - 1);
+//    }
+//    switch (ttype(obj)) {
+//        case LV_TUSERDATA: {
+//            uvalue(obj)->luaTable = lt;
+//            if (lt)
+//                lvC_objbarrier(L, rawuvalue(obj), lt);
+//            break;
+//        }
+//        default: {
+//            printf("[luaview] error lv_setudataLuatable");
+//            break;
+//        }
+//    }
+//    L->top--;
+//    lv_unlock(L);
+    return 1;
+}
+
+int lv_getUDataLuaTable (lua_State *L, int objindex) {
+//    const TValue *obj;
+//    Table *mt = NULL;
+//    int res;
+//    lua_lock(L);
+//    obj = index2adr(L, objindex);
+//    switch (ttype(obj)) {
+//        case LUA_TUSERDATA:
+////            mt = uvalue(obj)->luaTable;
+//            break;
+//        default:
+//            break;
+//    }
+//    if (mt == NULL)
+//        res = 0;
+//    else {
+//        sethvalue(L, L->top, mt);
+//        api_incr_top(L);
+//        res = 1;
+//    }
+//    lua_unlock(L);
+//    return res;
+    return 0;
+}
 
 void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell){
     lua_pushstring(L, "window");
@@ -747,7 +810,7 @@ int lv_callbackFunction(lua_State* L, const char* functionName){
             lua_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             if( lua_type(L, -1)==LUA_TNIL ) {
-                lv_createtable(L, 0, 0);
+                lua_createtable(L, 0, 0);
                 lv_udataRef(L, USERDATA_KEY_DELEGATE);
             }
             lua_pushstring(L, functionName);
@@ -803,14 +866,14 @@ BOOL lv_objcEqual(id obj1, id obj2) {
         lua_checkstack(L, 12);
         NSString* className = NSStringFromClass(c);
         lua_pushstring(L, className.UTF8String);
-        lv_pushcclosure(L, cfunc, 1);
+        lua_pushcclosure(L, cfunc, 1);
         
         lua_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
     }
 }
 
 +(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass{
-    const char* classNameChars = lua_tostring(L, lv_upvalueindex(1));
+    const char* classNameChars = lua_tostring(L, lua_upvalueindex(1));
     NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
     Class c = NSClassFromString(className);
     if( c == nil ) {

@@ -17,6 +17,7 @@
 #import "lualib.h"
 #import "lstate.h"
 #import "lgc.h"
+#import "lapi.h"
 
 /**
  * the index of signed scripts' extionsion(@"lv") in LVScriptExts[]
@@ -211,6 +212,7 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define EFFECT_CLICK    1
 #define EFFECT_PARALLAX 2
 
-#define LV_LUASTATE_VIEW(L) ( (__bridge LView *)( G(L)->ud ) )
+#define LV_LUASTATE_VIEW(L)     ( (__bridge LView *)( G(L)->ud ) )
+#define LUAVIEW_SYS_TABLE_KEY   "..::luaview::.."
 
 #endif

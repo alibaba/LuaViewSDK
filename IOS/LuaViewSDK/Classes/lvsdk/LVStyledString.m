@@ -172,7 +172,7 @@ static int lvNewAttributedString (lua_State *L) {
         if( ( lua_type(L, 1)==LUA_TSTRING || lua_type(L, 1)==LUA_TNUMBER ) && lua_type(L, 2)==LUA_TTABLE ){
             NSString* s = nil;
             size_t n = 0;
-            const char* chars = lv_tolstring(L, 1, &n );
+            const char* chars = lua_tolstring(L, 1, &n );
             s = [NSString stringWithUTF8String:chars];
             
             attString.mutableStyledString = [[NSMutableAttributedString alloc] initWithString:s];
@@ -256,7 +256,7 @@ static int __add (lua_State *L) {
             stringArg = lv_paramString(L, 2);
         } else {
             size_t n = 0;
-            const char* chars = lv_tolstring(L, 2, &n );
+            const char* chars = lua_tolstring(L, 2, &n );
             stringArg = [NSString stringWithUTF8String:chars];
         }
         if( LVIsType(user1, StyledString)  ){

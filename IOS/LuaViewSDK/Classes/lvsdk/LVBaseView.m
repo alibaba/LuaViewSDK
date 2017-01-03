@@ -1293,7 +1293,7 @@ int lv_setCallbackByKey(lua_State *L, const char* key, BOOL addGesture) {
             if( lua_type(L, -1)==LUA_TNIL ) {
                 lua_settop(L, 2);
                 lua_pushvalue(L, 1);
-                lv_createtable(L, 0, 0);
+                lua_createtable(L, 0, 0);
                 lv_udataRef(L, USERDATA_KEY_DELEGATE );
                 
                 lua_settop(L, 2);
@@ -1404,7 +1404,8 @@ static int releaseObject(lua_State *L) {
         [view.layer removeFromSuperlayer];
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
-            L->lView = NULL;
+            lView.l = NULL;
+            G(L)->ud = NULL;
             [lView releaseLuaView];
         }
     }
@@ -1439,7 +1440,7 @@ static int align (lua_State *L) {
             if ( argNum>=2 ) {
                 NSUInteger align = 0;
                 for (int i=2; i<=argNum; i++ ) {
-                    align |= (NSUInteger)lv_tointeger(L, i);
+                    align |= (NSUInteger)lua_tointeger(L, i);
                 }
                 view.lv_align = align;
                 [view lv_alignSelfWithSuperRect:view.superview.frame];

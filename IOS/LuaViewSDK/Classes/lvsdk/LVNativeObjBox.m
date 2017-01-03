@@ -223,10 +223,10 @@ static void ifNotEnoughArgsTagAppendMore(NSMutableString* funcName, int num, int
 }
 
 static int callNativeObjectFunction (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, lv_upvalueindex(1));
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, lua_upvalueindex(1));
     if ( user ) {
         LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
-        NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lua_tostring(L, lv_upvalueindex(2)) ];
+        NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lua_tostring(L, lua_upvalueindex(2)) ];
         int luaArgsNum = lua_gettop(L);
         
         int _num = funcNameFromLuaToOC(funcName);
@@ -247,7 +247,7 @@ static int __index (lua_State *L) {
     LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
     id object = nativeObjBox.realObject;
     if( nativeObjBox && object && [nativeObjBox isApiExist:functionName] ){
-        lv_pushcclosure(L, callNativeObjectFunction, 2);
+        lua_pushcclosure(L, callNativeObjectFunction, 2);
         return 1;
     }
     return 0; /* new userdatum is already on the stack */

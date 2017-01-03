@@ -214,7 +214,7 @@
     [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
 #endif
     
-    int error = lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
+    int error = luaL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
     if (error) {
         const char* s = lua_tostring(self.l, -1);
         LVError( @"%s", s );
@@ -270,11 +270,22 @@ extern char g_debug_lua[];
 }
 #endif
 
+static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
+    (void)ud;
+    (void)osize;
+    if (nsize == 0) {
+        free(ptr);
+        return NULL;
+    }
+    else
+        return realloc(ptr, nsize);
+}
+
+
 -(void) registeLibs{
     if( !self.stateInited ) {
         self.stateInited = YES;
-        self.l =  luaL_newstate();//lv_open();  /* opens */
-        self.l->lView = (__bridge void *)(self);
+        self.l =  lua_newstate(l_alloc, (__bridge void *)(self));
         luaL_openlibs(self.l);
         NSArray* arr = nil;
         arr = @[
@@ -358,7 +369,7 @@ extern char g_debug_lua[];
 #endif
     
     int error = -1;
-    error = lvL_loadbuffer(self.l, data.bytes , data.length, fileName.UTF8String) ;
+    error = luaL_loadbuffer(self.l, data.bytes , data.length, fileName.UTF8String) ;
     if ( error ) {
         const char* s = lua_tostring(self.l, -1);
         LVError( @"%s", s );
@@ -395,12 +406,12 @@ extern char g_debug_lua[];
     }
     lua_getglobal(self.l, globalName);
     
-    if( !lv_isstring(self.l, -1) ){
+    if( !lua_isstring(self.l, -1) ){
         //是否需要出栈？？？
         LVError(@" '%s'  should be a number",globalName );
         return nil;
     } else {
-        const char* chars = lv_tolstring(self.l, -1, NULL);
+        const char* chars = lua_tolstring(self.l, -1, NULL);
         if( chars ){
             return [NSString stringWithFormat:@"%s",chars];
         }
@@ -422,7 +433,7 @@ extern char g_debug_lua[];
     lua_State* l = self.l;
     self.l = NULL;
     if( l ){
-        lv_close(l);
+        lua_close(l);
         l = NULL;
     }
     self.mySelf = nil;

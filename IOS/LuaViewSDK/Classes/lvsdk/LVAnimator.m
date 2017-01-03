@@ -44,7 +44,7 @@ static int lvNewAnimator(lua_State *L) {
     userData->object = CFBridgingRetain(animator);
     
     animator.lv_userData = userData;
-    animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
+    animator.lv_lview =  LV_LUASTATE_VIEW(L);
     
     luaL_getmetatable(L, META_TABLE_Animator);
     lua_setmetatable(L, -2);
@@ -105,7 +105,7 @@ static int clone(lua_State *L) {
         userData->object = CFBridgingRetain(animator);
         
         animator.lv_userData = userData;
-        animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
+        animator.lv_lview = LV_LUASTATE_VIEW(L);
         
         luaL_getmetatable(L, META_TABLE_Animator);
         lua_setmetatable(L, -2);
@@ -244,7 +244,7 @@ static int delay(lua_State *L) {
 
 static int repeatCount(lua_State *L) {
     LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
-    int value = (int)lv_tointeger(L, 2);
+    int value = (int)lua_tointeger(L, 2);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;

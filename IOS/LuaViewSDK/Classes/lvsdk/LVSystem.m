@@ -102,7 +102,7 @@ static int screenSize (lua_State *L) {
 }
 
 static int static_gc (lua_State *L) {
-    lv_gc(L, 2, 0);
+    lua_gc(L, 2, 0);
     return 0;
 }
 

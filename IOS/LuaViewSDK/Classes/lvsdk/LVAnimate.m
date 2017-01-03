@@ -67,7 +67,7 @@ static int lvNewAnimate (lua_State *L) {
             option = lua_tonumber(L,stackID++);
         }
         
-        lv_createtable(L, 0, 8);// table
+        lua_createtable(L, 0, 8);// table
         if( argNum>=stackID && lua_type(L,stackID)==LUA_TFUNCTION ){
             lua_pushstring(L, "animations");// key
             lua_pushvalue(L, stackID);//value
