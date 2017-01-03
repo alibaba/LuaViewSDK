@@ -23,7 +23,7 @@ static NSArray<NSString*>* ARG_ARR = nil;
 -(id) init:(lua_State*) l  nativeObject:(id)nativeObject{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.realObject = nativeObject;
         
         NSString* className = NSStringFromClass([nativeObject class]);

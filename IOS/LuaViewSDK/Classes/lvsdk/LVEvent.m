@@ -19,7 +19,7 @@
 -(id) init:(lua_State *)l gesture:(UIGestureRecognizer*) gesture{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.gesture = gesture;
     }
     return self;

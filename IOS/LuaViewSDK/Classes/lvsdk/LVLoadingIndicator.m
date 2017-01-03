@@ -19,7 +19,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.clipsToBounds = YES;
         self.userInteractionEnabled = NO;
     }
@@ -43,7 +43,7 @@ static int lvNewLoadingIndicator (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_LoadingIndicator );
             lua_setmetatable(L, -2);
         }
-        LView* view = (__bridge LView *)(L->lView);
+        LView* view = LV_LUASTATE_VIEW(L);
         if( view ){
             [view containerAddSubview:pageControl];
         }

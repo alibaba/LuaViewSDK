@@ -27,7 +27,7 @@
     if( self ){
         self.methodSigHashtable = [[NSMutableDictionary alloc] init];
         
-        self.lview = (__bridge LView *)(L->lView);
+        self.lview = LV_LUASTATE_VIEW(L);
         [LVUtil registryValue:L key:self stack:stackID];
     }
     return self;

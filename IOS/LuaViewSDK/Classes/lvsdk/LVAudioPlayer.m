@@ -35,10 +35,10 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     releaseUserDataAudioPlayer(_lv_userData);
 }
 
--(id) init:(lua_State*) l{
+-(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(L);
     }
     return self;
 }
@@ -98,7 +98,7 @@ static int lvNewAudioPlayer (lua_State *L) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
         
         LVAudioPlayer* player = [[c alloc] init:L];
-        LView* lview = (__bridge LView *)(L->lView);
+        LView* lview = LV_LUASTATE_VIEW(L);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
         

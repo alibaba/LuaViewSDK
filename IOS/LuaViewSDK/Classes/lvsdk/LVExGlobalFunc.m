@@ -105,7 +105,7 @@ static int loaderForLuaView (lua_State *L) {
         // submodule
         moduleName = [moduleName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
         
-        LView* lview = (__bridge LView *)(L->lView);
+        LView* lview = LV_LUASTATE_VIEW(L);
         if( lview ) {
             __block NSString *fullName = nil, *format = nil, *ext = nil;
             BOOL(^findFile)() = ^BOOL() { // set fullName and return YES if found

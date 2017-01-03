@@ -27,7 +27,7 @@
     LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.collectionViewDelegate = [[LVCollectionViewDelegate alloc] init:self];
         self.delegate = self.collectionViewDelegate;
         self.dataSource = self.collectionViewDelegate;
@@ -102,7 +102,7 @@ static int lvNewCollectionView(lua_State *L) {
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
     
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:collectionView];
     }

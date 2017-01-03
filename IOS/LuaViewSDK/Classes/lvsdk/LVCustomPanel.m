@@ -71,12 +71,12 @@ static int lvNewCustomPanelView (lua_State *L) {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(errorNotice);
         errorNotice.lv_userData = userData;
-        errorNotice.lv_lview = (__bridge LView *)(L->lView);
+        errorNotice.lv_lview = LV_LUASTATE_VIEW(L);
         
         luaL_getmetatable(L, META_TABLE_CustomPanel );
         lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:errorNotice];
     }

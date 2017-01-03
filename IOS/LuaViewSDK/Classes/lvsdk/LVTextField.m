@@ -22,7 +22,7 @@
 -(id) init:(lua_State*) l{
     self = [super initWithFrame:CGRectMake(0, 0, 100, 40)];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
@@ -94,7 +94,7 @@ static int lvNewTextField (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UITextField );
         lua_setmetatable(L, -2);
     }
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:textFiled];
     }

@@ -32,24 +32,24 @@
 }
 
 
--(id) init:(lua_State*) l argNum:(int)num{
-    NSString* cancel = getArgs(l, 3, num);
-    NSString* ok = getArgs(l, 4, num);
+-(id) init:(lua_State*) L argNum:(int)num{
+    NSString* cancel = getArgs(L, 3, num);
+    NSString* ok = getArgs(L, 4, num);
     if( cancel==nil && ok==nil ){
         ok = @"确定";
     }
-    self = [super initWithTitle:getArgs(l, 1, num)
-                        message:getArgs(l, 2, num) delegate:self
+    self = [super initWithTitle:getArgs(L, 1, num)
+                        message:getArgs(L, 2, num) delegate:self
               cancelButtonTitle:cancel
               otherButtonTitles:ok,
-                                getArgs(l, 5, num),
-                                getArgs(l, 6, num),
-                                getArgs(l, 7, num),
-                                getArgs(l, 8, num),
-                                getArgs(l, 9, num),nil];
+                                getArgs(L, 5, num),
+                                getArgs(L, 6, num),
+                                getArgs(L, 7, num),
+                                getArgs(L, 8, num),
+                                getArgs(L, 9, num),nil];
     if( self ){
         self.argNum = num;
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(L);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         NSMutableArray* mutArray = [[NSMutableArray alloc] init];

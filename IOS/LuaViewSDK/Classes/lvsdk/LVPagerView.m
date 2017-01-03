@@ -58,7 +58,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 -(id) init:(lua_State*) l {
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.cellArray = [[NSMutableArray alloc] init];
         self.scrollview = ({
@@ -347,7 +347,7 @@ static int lvNewPagerView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIPageView );
         lua_setmetatable(L, -2);
         
-        LView* lview = (__bridge LView *)(L->lView);
+        LView* lview = LV_LUASTATE_VIEW(L);
         if( lview ){
             [lview containerAddSubview:pageView];
         }

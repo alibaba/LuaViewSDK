@@ -20,7 +20,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
     }
@@ -54,7 +54,7 @@ static int lvNewCustomView (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_CustomView );
             lua_setmetatable(L, -2);
         }
-        LView* father = (__bridge LView *)(L->lView);
+        LView* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:customView];
         }

@@ -20,11 +20,11 @@
 
 @implementation LVAnimate
 
--(id) init:(lua_State*) l{
+-(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
         self.mySelf = self;
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(L);
     }
     return self;
 }

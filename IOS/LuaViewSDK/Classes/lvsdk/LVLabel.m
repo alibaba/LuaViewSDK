@@ -22,7 +22,7 @@
 -(id) init:(NSString*)imageName l:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.text = imageName;
         self.backgroundColor = [UIColor clearColor];
         self.textAlignment = NSTextAlignmentLeft;
@@ -51,7 +51,7 @@ static int lvNewLabel(lua_State *L) {
             luaL_getmetatable(L, META_TABLE_UILabel );
             lua_setmetatable(L, -2);
         }
-        LView* view = (__bridge LView *)(L->lView);
+        LView* view = LV_LUASTATE_VIEW(L);
         if( view ){
             [view containerAddSubview:label];
         }
@@ -152,7 +152,7 @@ static int textColor (lua_State *L) {
 }
 
 static int font (lua_State *L) {
-    LView* luaView = (__bridge LView *)(L->lView);
+    LView* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( luaView && user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);

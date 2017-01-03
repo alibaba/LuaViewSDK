@@ -44,7 +44,7 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
     self = [super init];
     if( self ){
         self.luaObjRetainKey = [[NSMutableString alloc] init];
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.strongSelf = self;
     }
     return self;
@@ -120,7 +120,7 @@ static int __tostring (lua_State *L) {
 
 static int PathOfResource (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
     lua_pushstring(L, path.UTF8String);
     return 1;

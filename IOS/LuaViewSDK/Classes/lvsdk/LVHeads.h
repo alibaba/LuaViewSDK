@@ -211,4 +211,6 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define EFFECT_CLICK    1
 #define EFFECT_PARALLAX 2
 
+#define LV_LUASTATE_VIEW(L) ( (__bridge LView *)( G(L)->ud ) )
+
 #endif

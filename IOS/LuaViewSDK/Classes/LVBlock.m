@@ -22,7 +22,7 @@
     self = [super init];
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
-        self.lview = (__bridge LView *)(L->lView);
+        self.lview = LV_LUASTATE_VIEW(L);
         if( lua_type(L, idx)==LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:self.retainKey stack:idx];
         }
@@ -34,7 +34,7 @@
     self = [super init];
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
-        self.lview = (__bridge LView *)(L->lView);
+        self.lview = LV_LUASTATE_VIEW(L);
         
         if ( [globalName rangeOfString:@"."].length>0 ){
             [self resetFunctionByNames:globalName];

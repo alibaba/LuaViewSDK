@@ -24,10 +24,10 @@
 @implementation LVBaseView
 
 
--(id) init:(lua_State*) l{
+-(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(L);
         self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
     }
@@ -544,7 +544,7 @@ static int removeGestureRecognizer (lua_State *L) {
 static int addSubview (lua_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lua_touserdata(L, 2);
-    LView* luaview = (__bridge LView *)(L->lView);
+    LView* luaview = LV_LUASTATE_VIEW(L);
     if( father &&  LVIsType(son, View) ){
         UIView* superview = (__bridge UIView *)(father->object);
         UIView* subview = (__bridge UIView *)(son->object);
@@ -574,7 +574,7 @@ static int getNativeView (lua_State *L) {
 
 #pragma -mark 运行环境
 static int children (lua_State *L) {
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     UIView* oldContent = lview.conentView;
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
@@ -1669,7 +1669,7 @@ static int lvNewView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIView );
         lua_setmetatable(L, -2);
         
-        LView* lView = (__bridge LView *)(L->lView);
+        LView* lView = LV_LUASTATE_VIEW(L);
         if( lView ){
             [lView containerAddSubview:view];
         }

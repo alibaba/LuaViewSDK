@@ -37,7 +37,7 @@ static void setViewControllerTitleView(UIViewController* vc, UIView* view){
 
 static int setTitle (lua_State *L) {
     lv_clearFirstTableValue(L);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     UIViewController* vc = lview.viewController;
     if( vc && lua_gettop(L)>=1 ) {
         if( lua_type(L, 1)== LUA_TSTRING ) {// 第一种: string
@@ -80,7 +80,7 @@ static int setTitle (lua_State *L) {
 
 static int setLeftButton (lua_State *L) {
     lv_clearFirstTableValue(L);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     UIViewController* vc = lview.viewController;
     if( vc && lua_gettop(L)>=1 ) {
         NSArray* buttonItems = [LVNavigation getNavigationItems:L];
@@ -95,7 +95,7 @@ static int setLeftButton (lua_State *L) {
 
 static int setRightButton (lua_State *L) {
     lv_clearFirstTableValue(L);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     UIViewController* vc = lview.viewController;
     if( vc && lua_gettop(L)>=1 ) {
         NSArray* buttonItems = [LVNavigation getNavigationItems:L];
@@ -110,7 +110,7 @@ static int setRightButton (lua_State *L) {
 
 static int setBackground(lua_State*L ) {
     lv_clearFirstTableValue(L);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     UIViewController* vc = lview.viewController;
     if( vc && lua_gettop(L)>=1 ) {
         id obj = lv_luaValueToNativeObject(L, 1);

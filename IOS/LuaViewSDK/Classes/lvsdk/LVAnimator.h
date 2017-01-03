@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/CAAnimation.h>
 #import "LVHeads.h"
-#import "lVtable.h"
+#import "ltable.h"
 
 typedef NS_ENUM(int, LVAniamtorInterpolator) {
     LVLinearInterpolator = 0,

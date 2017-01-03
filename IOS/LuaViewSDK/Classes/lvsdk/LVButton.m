@@ -23,7 +23,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         [self addTarget:self action:@selector(lvButtonCallBack) forControlEvents:UIControlEventTouchUpInside];
         
         // 默认黑色字
@@ -73,7 +73,7 @@ static int lvNewButton (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_UIButton );
             lua_setmetatable(L, -2);
         }
-        LView* father = (__bridge LView *)(L->lView);
+        LView* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:button];
         }
@@ -209,7 +209,7 @@ static int titleColor (lua_State *L) {
 }
 
 static int font (lua_State *L) {
-    LView* luaView = (__bridge LView *)(L->lView);
+    LView* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVButton* view = (__bridge LVButton *)(user->object);

@@ -30,7 +30,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.functionTag = [[NSMutableString alloc] init];
         self.backgroundColor = [UIColor clearColor];
@@ -129,7 +129,7 @@ static int lvNewImageView(lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIImageView );
         lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:imageView];
     }
@@ -205,7 +205,7 @@ static int startAnimating (lua_State *L) {
             if( lua_gettop(L)>=4 ){
                 repeatCount = lua_tonumber(L, 4);
             }
-            LView* lview = (__bridge LView *)(L->lView);
+            LView* lview = LV_LUASTATE_VIEW(L);
             LVBundle* bundle = lview.bundle;
             NSMutableArray  *arrayM=[NSMutableArray array];
             for (NSString* url in urlArray) {
