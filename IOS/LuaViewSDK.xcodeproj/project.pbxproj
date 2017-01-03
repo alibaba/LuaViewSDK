@@ -75,38 +75,6 @@
 		3CFF77F01C74740900847C05 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		3CFF77F11C74740900847C05 /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
 		3CFF77F21C74740900847C05 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
-		3CFF77F31C74741400847C05 /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
-		3CFF77F41C74741400847C05 /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
-		3CFF77F51C74741400847C05 /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
-		3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
-		3CFF77F71C74741400847C05 /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
-		3CFF77F81C74741400847C05 /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
-		3CFF77F91C74741400847C05 /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
-		3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
-		3CFF77FB1C74741400847C05 /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
-		3CFF77FC1C74741400847C05 /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
-		3CFF77FD1C74741400847C05 /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
-		3CFF77FE1C74741400847C05 /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
-		3CFF77FF1C74741400847C05 /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
-		3CFF78001C74741400847C05 /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
-		3CFF78011C74741400847C05 /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
-		3CFF78021C74741400847C05 /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
-		3CFF78031C74741400847C05 /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
-		3CFF78041C74741400847C05 /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
-		3CFF78051C74741400847C05 /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
-		3CFF78061C74741400847C05 /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
-		3CFF78071C74741400847C05 /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
-		3CFF78081C74741400847C05 /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
-		3CFF78091C74741400847C05 /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
-		3CFF780A1C74741400847C05 /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
-		3CFF780B1C74741400847C05 /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
-		3CFF780C1C74741400847C05 /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
-		3CFF780D1C74741400847C05 /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
-		3CFF780E1C74741400847C05 /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
-		3CFF780F1C74741400847C05 /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
-		3CFF78101C74741400847C05 /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
-		3CFF78111C74741400847C05 /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
-		3CFF78121C74741400847C05 /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		840BCEDA1CB7602C00D816AD /* LVNetworkStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 840BCED81CB7602C00D816AD /* LVNetworkStatus.h */; };
 		840BCEDB1CB7602C00D816AD /* LVNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 840BCED91CB7602C00D816AD /* LVNetworkStatus.m */; };
 		840BCEE41CB78E8300D816AD /* LVNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 840BCED91CB7602C00D816AD /* LVNetworkStatus.m */; };
@@ -170,38 +138,6 @@
 		84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
 		84C1D8111C16C3FA0058E974 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
 		84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
-		84C1D8141C16C4070058E974 /* lV.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5AE1A63ED7C003E837D /* lV.c */; };
-		84C1D8151C16C4070058E974 /* lVapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B01A63ED7C003E837D /* lVapi.c */; };
-		84C1D8161C16C4070058E974 /* lVauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B21A63ED7C003E837D /* lVauxlib.c */; };
-		84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B41A63ED7C003E837D /* lVbaselib.c */; };
-		84C1D8181C16C4070058E974 /* lVc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B51A63ED7C003E837D /* lVc.c */; };
-		84C1D8191C16C4070058E974 /* lVcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B61A63ED7C003E837D /* lVcode.c */; };
-		84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5B91A63ED7C003E837D /* lVdblib.c */; };
-		84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BA1A63ED7C003E837D /* lVdebug.c */; };
-		84C1D81C1C16C4070058E974 /* lVdo.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BC1A63ED7C003E837D /* lVdo.c */; };
-		84C1D81D1C16C4070058E974 /* lVdump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BE1A63ED7C003E837D /* lVdump.c */; };
-		84C1D81E1C16C4070058E974 /* lVfunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5BF1A63ED7C003E837D /* lVfunc.c */; };
-		84C1D81F1C16C4070058E974 /* lVgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C11A63ED7C003E837D /* lVgc.c */; };
-		84C1D8201C16C4070058E974 /* lVinit.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C31A63ED7C003E837D /* lVinit.c */; };
-		84C1D8211C16C4070058E974 /* lViolib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C41A63ED7C003E837D /* lViolib.c */; };
-		84C1D8221C16C4070058E974 /* lVlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C51A63ED7C003E837D /* lVlex.c */; };
-		84C1D8231C16C4070058E974 /* lVmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5C91A63ED7C003E837D /* lVmathlib.c */; };
-		84C1D8241C16C4070058E974 /* lVmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CA1A63ED7C003E837D /* lVmem.c */; };
-		84C1D8251C16C4070058E974 /* lVoadlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CC1A63ED7C003E837D /* lVoadlib.c */; };
-		84C1D8261C16C4070058E974 /* lVobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CD1A63ED7C003E837D /* lVobject.c */; };
-		84C1D8271C16C4070058E974 /* lVopcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5CF1A63ED7C003E837D /* lVopcodes.c */; };
-		84C1D8281C16C4070058E974 /* lVoslib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D11A63ED7C003E837D /* lVoslib.c */; };
-		84C1D8291C16C4070058E974 /* lVparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D21A63ED7C003E837D /* lVparser.c */; };
-		84C1D82A1C16C4070058E974 /* lVprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D41A63ED7C003E837D /* lVprint.c */; };
-		84C1D82B1C16C4070058E974 /* lVstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D51A63ED7C003E837D /* lVstate.c */; };
-		84C1D82C1C16C4070058E974 /* lVstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D71A63ED7C003E837D /* lVstring.c */; };
-		84C1D82D1C16C4070058E974 /* lVstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5D91A63ED7C003E837D /* lVstrlib.c */; };
-		84C1D82E1C16C4070058E974 /* lVtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DA1A63ED7C003E837D /* lVtable.c */; };
-		84C1D82F1C16C4070058E974 /* lVtablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DC1A63ED7D003E837D /* lVtablib.c */; };
-		84C1D8301C16C4070058E974 /* lVtm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DD1A63ED7D003E837D /* lVtm.c */; };
-		84C1D8311C16C4070058E974 /* lVundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5DF1A63ED7D003E837D /* lVundump.c */; };
-		84C1D8321C16C4070058E974 /* lVvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E11A63ED7D003E837D /* lVvm.c */; };
-		84C1D8331C16C4070058E974 /* lVzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5E31A63ED7D003E837D /* lVzio.c */; };
 		84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8361C16C4490058E974 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -257,29 +193,6 @@
 		84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCF0391B44D91800AD723B /* LVTypeConvert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVExGlobalFunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AC1A64C61F00DE6204 /* LVHeads.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8701C16C44F0058E974 /* lV.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5AF1A63ED7C003E837D /* lV.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8711C16C44F0058E974 /* lVapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B11A63ED7C003E837D /* lVapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8721C16C44F0058E974 /* lVauxlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B31A63ED7C003E837D /* lVauxlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8731C16C44F0058E974 /* lVcode.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B71A63ED7C003E837D /* lVcode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8741C16C44F0058E974 /* lVconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5B81A63ED7C003E837D /* lVconf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8751C16C4500058E974 /* lVdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BB1A63ED7C003E837D /* lVdebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8761C16C4500058E974 /* lVdo.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5BD1A63ED7C003E837D /* lVdo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8771C16C4500058E974 /* lVfunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C01A63ED7C003E837D /* lVfunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8781C16C4500058E974 /* lVgc.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C21A63ED7C003E837D /* lVgc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8791C16C4500058E974 /* lVlex.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C61A63ED7C003E837D /* lVlex.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87A1C16C4510058E974 /* lVlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C71A63ED7C003E837D /* lVlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5C81A63ED7C003E837D /* lVlimits.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87C1C16C4510058E974 /* lVmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CB1A63ED7C003E837D /* lVmem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87D1C16C4510058E974 /* lVobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5CE1A63ED7C003E837D /* lVobject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D01A63ED7C003E837D /* lVopcodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D87F1C16C4520058E974 /* lVparser.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D31A63ED7C003E837D /* lVparser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8801C16C4520058E974 /* lVstate.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D61A63ED7C003E837D /* lVstate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8811C16C4520058E974 /* lVstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5D81A63ED7C003E837D /* lVstring.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8821C16C4530058E974 /* lVtable.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DB1A63ED7D003E837D /* lVtable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8831C16C4530058E974 /* lVtm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5DE1A63ED7D003E837D /* lVtm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8841C16C4530058E974 /* lVundump.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E01A63ED7D003E837D /* lVundump.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8851C16C4530058E974 /* lVvm.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E21A63ED7D003E837D /* lVvm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D8861C16C4540058E974 /* lVzio.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5E41A63ED7D003E837D /* lVzio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8871C16C4540058E974 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D8911C16CA540058E974 /* Dummy.h */; };
@@ -447,61 +360,6 @@
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
 		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
 		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
-		840AD5AE1A63ED7C003E837D /* lV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lV.c; sourceTree = "<group>"; };
-		840AD5AF1A63ED7C003E837D /* lV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lV.h; sourceTree = "<group>"; };
-		840AD5B01A63ED7C003E837D /* lVapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVapi.c; sourceTree = "<group>"; };
-		840AD5B11A63ED7C003E837D /* lVapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVapi.h; sourceTree = "<group>"; };
-		840AD5B21A63ED7C003E837D /* lVauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVauxlib.c; sourceTree = "<group>"; };
-		840AD5B31A63ED7C003E837D /* lVauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVauxlib.h; sourceTree = "<group>"; };
-		840AD5B41A63ED7C003E837D /* lVbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVbaselib.c; sourceTree = "<group>"; };
-		840AD5B51A63ED7C003E837D /* lVc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVc.c; sourceTree = "<group>"; };
-		840AD5B61A63ED7C003E837D /* lVcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVcode.c; sourceTree = "<group>"; };
-		840AD5B71A63ED7C003E837D /* lVcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVcode.h; sourceTree = "<group>"; };
-		840AD5B81A63ED7C003E837D /* lVconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVconf.h; sourceTree = "<group>"; };
-		840AD5B91A63ED7C003E837D /* lVdblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVdblib.c; sourceTree = "<group>"; };
-		840AD5BA1A63ED7C003E837D /* lVdebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVdebug.c; sourceTree = "<group>"; };
-		840AD5BB1A63ED7C003E837D /* lVdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVdebug.h; sourceTree = "<group>"; };
-		840AD5BC1A63ED7C003E837D /* lVdo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVdo.c; sourceTree = "<group>"; };
-		840AD5BD1A63ED7C003E837D /* lVdo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVdo.h; sourceTree = "<group>"; };
-		840AD5BE1A63ED7C003E837D /* lVdump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVdump.c; sourceTree = "<group>"; };
-		840AD5BF1A63ED7C003E837D /* lVfunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVfunc.c; sourceTree = "<group>"; };
-		840AD5C01A63ED7C003E837D /* lVfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVfunc.h; sourceTree = "<group>"; };
-		840AD5C11A63ED7C003E837D /* lVgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVgc.c; sourceTree = "<group>"; };
-		840AD5C21A63ED7C003E837D /* lVgc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVgc.h; sourceTree = "<group>"; };
-		840AD5C31A63ED7C003E837D /* lVinit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVinit.c; sourceTree = "<group>"; };
-		840AD5C41A63ED7C003E837D /* lViolib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lViolib.c; sourceTree = "<group>"; };
-		840AD5C51A63ED7C003E837D /* lVlex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVlex.c; sourceTree = "<group>"; };
-		840AD5C61A63ED7C003E837D /* lVlex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVlex.h; sourceTree = "<group>"; };
-		840AD5C71A63ED7C003E837D /* lVlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVlib.h; sourceTree = "<group>"; };
-		840AD5C81A63ED7C003E837D /* lVlimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVlimits.h; sourceTree = "<group>"; };
-		840AD5C91A63ED7C003E837D /* lVmathlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVmathlib.c; sourceTree = "<group>"; };
-		840AD5CA1A63ED7C003E837D /* lVmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVmem.c; sourceTree = "<group>"; };
-		840AD5CB1A63ED7C003E837D /* lVmem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVmem.h; sourceTree = "<group>"; };
-		840AD5CC1A63ED7C003E837D /* lVoadlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVoadlib.c; sourceTree = "<group>"; };
-		840AD5CD1A63ED7C003E837D /* lVobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVobject.c; sourceTree = "<group>"; };
-		840AD5CE1A63ED7C003E837D /* lVobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVobject.h; sourceTree = "<group>"; };
-		840AD5CF1A63ED7C003E837D /* lVopcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVopcodes.c; sourceTree = "<group>"; };
-		840AD5D01A63ED7C003E837D /* lVopcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVopcodes.h; sourceTree = "<group>"; };
-		840AD5D11A63ED7C003E837D /* lVoslib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVoslib.c; sourceTree = "<group>"; };
-		840AD5D21A63ED7C003E837D /* lVparser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVparser.c; sourceTree = "<group>"; };
-		840AD5D31A63ED7C003E837D /* lVparser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVparser.h; sourceTree = "<group>"; };
-		840AD5D41A63ED7C003E837D /* lVprint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVprint.c; sourceTree = "<group>"; };
-		840AD5D51A63ED7C003E837D /* lVstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVstate.c; sourceTree = "<group>"; };
-		840AD5D61A63ED7C003E837D /* lVstate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVstate.h; sourceTree = "<group>"; };
-		840AD5D71A63ED7C003E837D /* lVstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVstring.c; sourceTree = "<group>"; };
-		840AD5D81A63ED7C003E837D /* lVstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVstring.h; sourceTree = "<group>"; };
-		840AD5D91A63ED7C003E837D /* lVstrlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVstrlib.c; sourceTree = "<group>"; };
-		840AD5DA1A63ED7C003E837D /* lVtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVtable.c; sourceTree = "<group>"; };
-		840AD5DB1A63ED7D003E837D /* lVtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVtable.h; sourceTree = "<group>"; };
-		840AD5DC1A63ED7D003E837D /* lVtablib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVtablib.c; sourceTree = "<group>"; };
-		840AD5DD1A63ED7D003E837D /* lVtm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVtm.c; sourceTree = "<group>"; };
-		840AD5DE1A63ED7D003E837D /* lVtm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVtm.h; sourceTree = "<group>"; };
-		840AD5DF1A63ED7D003E837D /* lVundump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVundump.c; sourceTree = "<group>"; };
-		840AD5E01A63ED7D003E837D /* lVundump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVundump.h; sourceTree = "<group>"; };
-		840AD5E11A63ED7D003E837D /* lVvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVvm.c; sourceTree = "<group>"; };
-		840AD5E21A63ED7D003E837D /* lVvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVvm.h; sourceTree = "<group>"; };
-		840AD5E31A63ED7D003E837D /* lVzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lVzio.c; sourceTree = "<group>"; };
-		840AD5E41A63ED7D003E837D /* lVzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lVzio.h; sourceTree = "<group>"; };
 		840BCED81CB7602C00D816AD /* LVNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNetworkStatus.h; sourceTree = "<group>"; };
 		840BCED91CB7602C00D816AD /* LVNetworkStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNetworkStatus.m; sourceTree = "<group>"; };
 		8410D9A91A70A00400B22E49 /* LVPanGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPanGesture.h; sourceTree = "<group>"; };
@@ -761,68 +619,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		840AD5AD1A63ED7C003E837D /* lv514 */ = {
-			isa = PBXGroup;
-			children = (
-				840AD5AE1A63ED7C003E837D /* lV.c */,
-				840AD5AF1A63ED7C003E837D /* lV.h */,
-				840AD5B01A63ED7C003E837D /* lVapi.c */,
-				840AD5B11A63ED7C003E837D /* lVapi.h */,
-				840AD5B21A63ED7C003E837D /* lVauxlib.c */,
-				840AD5B31A63ED7C003E837D /* lVauxlib.h */,
-				840AD5B41A63ED7C003E837D /* lVbaselib.c */,
-				840AD5B51A63ED7C003E837D /* lVc.c */,
-				840AD5B61A63ED7C003E837D /* lVcode.c */,
-				840AD5B71A63ED7C003E837D /* lVcode.h */,
-				840AD5B81A63ED7C003E837D /* lVconf.h */,
-				840AD5B91A63ED7C003E837D /* lVdblib.c */,
-				840AD5BA1A63ED7C003E837D /* lVdebug.c */,
-				840AD5BB1A63ED7C003E837D /* lVdebug.h */,
-				840AD5BC1A63ED7C003E837D /* lVdo.c */,
-				840AD5BD1A63ED7C003E837D /* lVdo.h */,
-				840AD5BE1A63ED7C003E837D /* lVdump.c */,
-				840AD5BF1A63ED7C003E837D /* lVfunc.c */,
-				840AD5C01A63ED7C003E837D /* lVfunc.h */,
-				840AD5C11A63ED7C003E837D /* lVgc.c */,
-				840AD5C21A63ED7C003E837D /* lVgc.h */,
-				840AD5C31A63ED7C003E837D /* lVinit.c */,
-				840AD5C41A63ED7C003E837D /* lViolib.c */,
-				840AD5C51A63ED7C003E837D /* lVlex.c */,
-				840AD5C61A63ED7C003E837D /* lVlex.h */,
-				840AD5C71A63ED7C003E837D /* lVlib.h */,
-				840AD5C81A63ED7C003E837D /* lVlimits.h */,
-				840AD5C91A63ED7C003E837D /* lVmathlib.c */,
-				840AD5CA1A63ED7C003E837D /* lVmem.c */,
-				840AD5CB1A63ED7C003E837D /* lVmem.h */,
-				840AD5CC1A63ED7C003E837D /* lVoadlib.c */,
-				840AD5CD1A63ED7C003E837D /* lVobject.c */,
-				840AD5CE1A63ED7C003E837D /* lVobject.h */,
-				840AD5CF1A63ED7C003E837D /* lVopcodes.c */,
-				840AD5D01A63ED7C003E837D /* lVopcodes.h */,
-				840AD5D11A63ED7C003E837D /* lVoslib.c */,
-				840AD5D21A63ED7C003E837D /* lVparser.c */,
-				840AD5D31A63ED7C003E837D /* lVparser.h */,
-				840AD5D41A63ED7C003E837D /* lVprint.c */,
-				840AD5D51A63ED7C003E837D /* lVstate.c */,
-				840AD5D61A63ED7C003E837D /* lVstate.h */,
-				840AD5D71A63ED7C003E837D /* lVstring.c */,
-				840AD5D81A63ED7C003E837D /* lVstring.h */,
-				840AD5D91A63ED7C003E837D /* lVstrlib.c */,
-				840AD5DA1A63ED7C003E837D /* lVtable.c */,
-				840AD5DB1A63ED7D003E837D /* lVtable.h */,
-				840AD5DC1A63ED7D003E837D /* lVtablib.c */,
-				840AD5DD1A63ED7D003E837D /* lVtm.c */,
-				840AD5DE1A63ED7D003E837D /* lVtm.h */,
-				840AD5DF1A63ED7D003E837D /* lVundump.c */,
-				840AD5E01A63ED7D003E837D /* lVundump.h */,
-				840AD5E11A63ED7D003E837D /* lVvm.c */,
-				840AD5E21A63ED7D003E837D /* lVvm.h */,
-				840AD5E31A63ED7D003E837D /* lVzio.c */,
-				840AD5E41A63ED7D003E837D /* lVzio.h */,
-			);
-			path = lv514;
-			sourceTree = "<group>";
-		};
 		8418E3411A5E67FC00158125 /* LuaViewSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,7 +636,6 @@
 				84B1E37E1AEF24330054B9F1 /* RSA */,
 				91ACCE741AC530CA0034D9B3 /* lvdebug */,
 				846481A51A64C61F00DE6204 /* lvsdk */,
-				840AD5AD1A63ED7C003E837D /* lv514 */,
 				9162E6011E1B39EA003FDB96 /* lua5.1.5 */,
 				840AD5311A5EAB4A0075CB58 /* LView.h */,
 				840AD5321A5EAB4A0075CB58 /* LView.m */,
@@ -1423,45 +1218,22 @@
 				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
 				84C1D8891C16C4550058E974 /* LVBlock.h in Headers */,
 				84C1D8871C16C4540058E974 /* LView.h in Headers */,
-				84C1D8701C16C44F0058E974 /* lV.h in Headers */,
 				BE9CD4F81CACC02800D6AC94 /* JUFLXTargeNamespace.h in Headers */,
-				84C1D8711C16C44F0058E974 /* lVapi.h in Headers */,
-				84C1D8721C16C44F0058E974 /* lVauxlib.h in Headers */,
-				84C1D8731C16C44F0058E974 /* lVcode.h in Headers */,
-				84C1D8741C16C44F0058E974 /* lVconf.h in Headers */,
-				84C1D8751C16C4500058E974 /* lVdebug.h in Headers */,
 				91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */,
-				84C1D8761C16C4500058E974 /* lVdo.h in Headers */,
-				84C1D8771C16C4500058E974 /* lVfunc.h in Headers */,
-				84C1D8781C16C4500058E974 /* lVgc.h in Headers */,
-				84C1D8791C16C4500058E974 /* lVlex.h in Headers */,
-				84C1D87A1C16C4510058E974 /* lVlib.h in Headers */,
 				9162E6691E1B39EA003FDB96 /* lualib.h in Headers */,
-				84C1D87B1C16C4510058E974 /* lVlimits.h in Headers */,
 				9162E6641E1B39EA003FDB96 /* ltm.h in Headers */,
 				914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */,
-				84C1D87C1C16C4510058E974 /* lVmem.h in Headers */,
-				84C1D87D1C16C4510058E974 /* lVobject.h in Headers */,
 				91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */,
-				84C1D87E1C16C4520058E974 /* lVopcodes.h in Headers */,
 				9162E6681E1B39EA003FDB96 /* luaconf.h in Headers */,
-				84C1D87F1C16C4520058E974 /* lVparser.h in Headers */,
 				91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */,
 				9162E6611E1B39EA003FDB96 /* ltable.h in Headers */,
-				84C1D8801C16C4520058E974 /* lVstate.h in Headers */,
-				84C1D8811C16C4520058E974 /* lVstring.h in Headers */,
 				9162E66D1E1B39EA003FDB96 /* lvm.h in Headers */,
-				84C1D8821C16C4530058E974 /* lVtable.h in Headers */,
-				84C1D8831C16C4530058E974 /* lVtm.h in Headers */,
-				84C1D8841C16C4530058E974 /* lVundump.h in Headers */,
-				84C1D8851C16C4530058E974 /* lVvm.h in Headers */,
 				9162E6571E1B39EA003FDB96 /* lopcodes.h in Headers */,
 				91F678841DF520920042D6FC /* LVCustomView.h in Headers */,
 				3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */,
 				BEEB28D41CA90EC200EC2D86 /* Layout.h in Headers */,
 				84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */,
 				BEEB28CE1CA90EC200EC2D86 /* JUFLXCSSParser.h in Headers */,
-				84C1D8861C16C4540058E974 /* lVzio.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1623,45 +1395,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CFF77F31C74741400847C05 /* lV.c in Sources */,
-				3CFF77F41C74741400847C05 /* lVapi.c in Sources */,
-				3CFF77F51C74741400847C05 /* lVauxlib.c in Sources */,
-				3CFF77F61C74741400847C05 /* lVbaselib.c in Sources */,
-				3CFF77F71C74741400847C05 /* lVc.c in Sources */,
-				3CFF77F81C74741400847C05 /* lVcode.c in Sources */,
 				91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
 				3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */,
-				3CFF77F91C74741400847C05 /* lVdblib.c in Sources */,
-				3CFF77FA1C74741400847C05 /* lVdebug.c in Sources */,
-				3CFF77FB1C74741400847C05 /* lVdo.c in Sources */,
-				3CFF77FC1C74741400847C05 /* lVdump.c in Sources */,
-				3CFF77FD1C74741400847C05 /* lVfunc.c in Sources */,
-				3CFF77FE1C74741400847C05 /* lVgc.c in Sources */,
-				3CFF77FF1C74741400847C05 /* lVinit.c in Sources */,
-				3CFF78001C74741400847C05 /* lViolib.c in Sources */,
-				3CFF78011C74741400847C05 /* lVlex.c in Sources */,
-				3CFF78021C74741400847C05 /* lVmathlib.c in Sources */,
 				91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
-				3CFF78031C74741400847C05 /* lVmem.c in Sources */,
-				3CFF78041C74741400847C05 /* lVoadlib.c in Sources */,
-				3CFF78051C74741400847C05 /* lVobject.c in Sources */,
-				3CFF78061C74741400847C05 /* lVopcodes.c in Sources */,
-				3CFF78071C74741400847C05 /* lVoslib.c in Sources */,
 				BEEB28E11CA91B9000EC2D86 /* Layout.c in Sources */,
-				3CFF78081C74741400847C05 /* lVparser.c in Sources */,
-				3CFF78091C74741400847C05 /* lVprint.c in Sources */,
 				3C98A5421C7C56270001508E /* LViewController.m in Sources */,
 				BEEB28E31CA91B9900EC2D86 /* UIView+JUFLXNode.m in Sources */,
-				3CFF780A1C74741400847C05 /* lVstate.c in Sources */,
-				3CFF780B1C74741400847C05 /* lVstring.c in Sources */,
-				3CFF780C1C74741400847C05 /* lVstrlib.c in Sources */,
-				3CFF780D1C74741400847C05 /* lVtable.c in Sources */,
-				3CFF780E1C74741400847C05 /* lVtablib.c in Sources */,
-				3CFF780F1C74741400847C05 /* lVtm.c in Sources */,
-				3CFF78101C74741400847C05 /* lVundump.c in Sources */,
 				9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */,
-				3CFF78111C74741400847C05 /* lVvm.c in Sources */,
-				3CFF78121C74741400847C05 /* lVzio.c in Sources */,
 				91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
 				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
 				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
@@ -1764,57 +1504,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				9162E6471E1B39EA003FDB96 /* lfunc.c in Sources */,
-				84C1D8141C16C4070058E974 /* lV.c in Sources */,
-				84C1D8151C16C4070058E974 /* lVapi.c in Sources */,
-				84C1D8161C16C4070058E974 /* lVauxlib.c in Sources */,
 				9162E6581E1B39EA003FDB96 /* loslib.c in Sources */,
-				84C1D8171C16C4070058E974 /* lVbaselib.c in Sources */,
-				84C1D8181C16C4070058E974 /* lVc.c in Sources */,
-				84C1D8191C16C4070058E974 /* lVcode.c in Sources */,
 				91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
 				9162E64B1E1B39EA003FDB96 /* linit.c in Sources */,
 				3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */,
-				84C1D81A1C16C4070058E974 /* lVdblib.c in Sources */,
-				84C1D81B1C16C4070058E974 /* lVdebug.c in Sources */,
-				84C1D81C1C16C4070058E974 /* lVdo.c in Sources */,
 				9162E6561E1B39EA003FDB96 /* lopcodes.c in Sources */,
 				9162E66C1E1B39EA003FDB96 /* lvm.c in Sources */,
-				84C1D81D1C16C4070058E974 /* lVdump.c in Sources */,
-				84C1D81E1C16C4070058E974 /* lVfunc.c in Sources */,
-				84C1D81F1C16C4070058E974 /* lVgc.c in Sources */,
 				9162E64D1E1B39EA003FDB96 /* llex.c in Sources */,
 				9162E63F1E1B39EA003FDB96 /* lcode.c in Sources */,
-				84C1D8201C16C4070058E974 /* lVinit.c in Sources */,
-				84C1D8211C16C4070058E974 /* lViolib.c in Sources */,
-				84C1D8221C16C4070058E974 /* lVlex.c in Sources */,
-				84C1D8231C16C4070058E974 /* lVmathlib.c in Sources */,
 				9162E6441E1B39EA003FDB96 /* ldo.c in Sources */,
 				91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
-				84C1D8241C16C4070058E974 /* lVmem.c in Sources */,
-				84C1D8251C16C4070058E974 /* lVoadlib.c in Sources */,
-				84C1D8261C16C4070058E974 /* lVobject.c in Sources */,
-				84C1D8271C16C4070058E974 /* lVopcodes.c in Sources */,
-				84C1D8281C16C4070058E974 /* lVoslib.c in Sources */,
 				9162E6421E1B39EA003FDB96 /* ldebug.c in Sources */,
 				BEEB28D31CA90EC200EC2D86 /* Layout.c in Sources */,
-				84C1D8291C16C4070058E974 /* lVparser.c in Sources */,
-				84C1D82A1C16C4070058E974 /* lVprint.c in Sources */,
 				9162E6701E1B39EA003FDB96 /* Makefile in Sources */,
 				3C98A53B1C7C0C100001508E /* LViewController.m in Sources */,
 				BEEB28D81CA90EC200EC2D86 /* UIView+JUFLXNode.m in Sources */,
-				84C1D82B1C16C4070058E974 /* lVstate.c in Sources */,
-				84C1D82C1C16C4070058E974 /* lVstring.c in Sources */,
-				84C1D82D1C16C4070058E974 /* lVstrlib.c in Sources */,
-				84C1D82E1C16C4070058E974 /* lVtable.c in Sources */,
-				84C1D82F1C16C4070058E974 /* lVtablib.c in Sources */,
-				84C1D8301C16C4070058E974 /* lVtm.c in Sources */,
-				84C1D8311C16C4070058E974 /* lVundump.c in Sources */,
 				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */,
-				84C1D8321C16C4070058E974 /* lVvm.c in Sources */,
 				91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
 				9162E6651E1B39EA003FDB96 /* lua.c in Sources */,
-				84C1D8331C16C4070058E974 /* lVzio.c in Sources */,
 				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
 				91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
 				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
