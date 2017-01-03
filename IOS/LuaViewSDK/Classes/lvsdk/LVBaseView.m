@@ -58,7 +58,7 @@ static int center (lua_State *L) {
         if( view ){
             CGPoint center = view.center;
             if ( lua_gettop(L)>=2  ) {
-                if ( lv_isuserdata(L, 2) ) {
+                if ( lua_isuserdata(L, 2) ) {
                     LVUserDataInfo* user = lua_touserdata(L, 2);
                     if ( LVIsType(user, Struct) ) {
                         LVStruct* stru = (__bridge LVStruct *)(user->object);
@@ -69,10 +69,10 @@ static int center (lua_State *L) {
                         LVError(@"LVBaseView.setCenter1");
                     }
                 } else {
-                    if( lv_isnumber(L, 2) ){
+                    if( lua_isnumber(L, 2) ){
                         center.x = lua_tonumber(L, 2);// 2
                     }
-                    if( lv_isnumber(L, 3) ){
+                    if( lua_isnumber(L, 3) ){
                         center.y = lua_tonumber(L, 3);// 3
                     }
                 }
@@ -100,7 +100,7 @@ static int centerX(lua_State *L) {
         if( view ){
             CGPoint center = view.center;
             if ( lua_gettop(L)>=2  ) {
-                if( lv_isnumber(L, 2) ){
+                if( lua_isnumber(L, 2) ){
                     center.x = lua_tonumber(L, 2);// 2
                 }
                 if(  isnan(center.x) || isnan(center.y) ){
@@ -125,7 +125,7 @@ static int centerY(lua_State *L) {
         if( view ){
             CGPoint center = view.center;
             if ( lua_gettop(L)>=2  ) {
-                if( lv_isnumber(L, 2) ){
+                if( lua_isnumber(L, 2) ){
                     center.y = lua_tonumber(L, 2);// 2
                 }
                 if(  isnan(center.x) || isnan(center.y) ){
@@ -151,7 +151,7 @@ static int frame (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if( lua_gettop(L)>=2 ) {
-                if ( lv_isuserdata(L, 2) ) {
+                if ( lua_isuserdata(L, 2) ) {
                     LVUserDataInfo* user = lua_touserdata(L, 2);
                     if ( LVIsType(user, Struct) ) {
                         LVStruct* stru = (__bridge LVStruct *)(user->object);
@@ -162,16 +162,16 @@ static int frame (lua_State *L) {
                         LVError(@"LVBaseView.setFrame1");
                     }
                 } else {
-                    if( lv_isnumber(L, 2) ){
+                    if( lua_isnumber(L, 2) ){
                         r.origin.x = lua_tonumber(L, 2);// 2
                     }
-                    if( lv_isnumber(L, 3) ){
+                    if( lua_isnumber(L, 3) ){
                         r.origin.y = lua_tonumber(L, 3);// 3
                     }
-                    if( lv_isnumber(L, 4) ){
+                    if( lua_isnumber(L, 4) ){
                         r.size.width = lua_tonumber(L, 4);// 4
                     }
-                    if( lv_isnumber(L, 5) ){
+                    if( lua_isnumber(L, 5) ){
                         r.size.height = lua_tonumber(L, 5);// 5
                     }
                 }
@@ -202,7 +202,7 @@ static int size (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lua_gettop(L)>=2 ) {
-                if ( lv_isuserdata(L, 2) ) {
+                if ( lua_isuserdata(L, 2) ) {
                     LVUserDataInfo* user = lua_touserdata(L, 2);
                     if ( LVIsType(user, Struct) ) {
                         LVStruct* stru = (__bridge LVStruct *)(user->object);
@@ -213,10 +213,10 @@ static int size (lua_State *L) {
                         LVError(@"LVBaseView.setSize1");
                     }
                 } else {
-                    if( lv_isnumber(L, 2) ){
+                    if( lua_isnumber(L, 2) ){
                         r.size.width = lua_tonumber(L, 2);// 4
                     }
-                    if( lv_isnumber(L, 3) ){
+                    if( lua_isnumber(L, 3) ){
                         r.size.height = lua_tonumber(L, 3);// 5
                     }
                 }
@@ -243,7 +243,7 @@ static int origin (lua_State *L) {
         if( view ){
             CGRect r = view.frame;
             if ( lua_gettop(L)>=2 ) {
-                if ( lv_isuserdata(L, 2) ) {
+                if ( lua_isuserdata(L, 2) ) {
                     LVUserDataInfo* user = lua_touserdata(L, 2);
                     if ( LVIsType(user, Struct) ) {
                         LVStruct* stru = (__bridge LVStruct *)(user->object);
@@ -254,10 +254,10 @@ static int origin (lua_State *L) {
                         LVError(@"LVBaseView.setOrigin1");
                     }
                 } else {
-                    if( lv_isnumber(L, 2) ){
+                    if( lua_isnumber(L, 2) ){
                         r.origin.x = lua_tonumber(L, 2);// 2
                     }
-                    if( lv_isnumber(L, 3) ){
+                    if( lua_isnumber(L, 3) ){
                         r.origin.y = lua_tonumber(L, 3);// 3
                     }
                 }
@@ -1417,7 +1417,7 @@ static int releaseObject(lua_State *L) {
 //        lv_getmetatable( L, 1 );
 //        lua_getfield(L, -1, key.UTF8String);
 //        if( lua_type(L, -1)==LUA_TFUNCTION ) {
-//            lua_CFunction function =  lv_tocfunction(L,-1);
+//            lua_CFunction function =  lua_tocfunction(L,-1);
 //            if( function ) {
 //                lua_remove(L, 2);
 //                lua_settop(L, 2);

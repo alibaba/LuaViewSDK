@@ -379,7 +379,7 @@ extern char g_debug_lua[];
     }
     lua_getglobal(self.l, globalName);
     
-    if( !lv_isnumber(self.l, -1) ){
+    if( !lua_isnumber(self.l, -1) ){
         //是否需要出栈？？？
         LVError(@"  '%s'  should be a number",globalName );
         return 0;

@@ -171,7 +171,7 @@ static int __index (lua_State *L) {
             lua_gettable(L, -2);
             lua_remove(L, -2);
             lua_remove(L, -2);
-            lua_CFunction cfunc = lv_tocfunction(L, -1);
+            lua_CFunction cfunc = lua_tocfunction(L, -1);
             if( cfunc ) {
                 lua_settop(L, 1);
                 return cfunc(L);

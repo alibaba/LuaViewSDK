@@ -399,7 +399,7 @@ static int drawText (lua_State *L) {
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         if( lua_gettop(L)>=2 ) {
-            const char* text = lv_tolstring(L, 2, NULL);
+            const char* text = lua_tolstring(L, 2, NULL);
             NSString *str = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
             CGFloat x = lua_tonumber(L, 3);
             CGFloat y = lua_tonumber(L, 4);
