@@ -32,7 +32,7 @@
     
     lua_State* L = self.lv_lview.l;
     if( L ) {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
          CGContextRef contextRef = UIGraphicsGetCurrentContext();
         LVCanvas* canvas = [LVCanvas createLuaCanvas:L contentRef:contextRef];
         [self lv_callLuaByKey1:@STR_ON_DRAW key2:nil argN:1];
@@ -51,8 +51,8 @@ static int lvNewCustomView (lua_State *L) {
             userData->object = CFBridgingRetain(customView);
             customView.lv_userData = userData;
             
-            lvL_getmetatable(L, META_TABLE_CustomView );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_CustomView );
+            lua_setmetatable(L, -2);
         }
         LView* father = (__bridge LView *)(L->lView);
         if( father ){
@@ -76,8 +76,8 @@ static int onDraw (lua_State *L) {
     
     lv_createClassMetaTable(L,META_TABLE_CustomView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     return 1;
 }

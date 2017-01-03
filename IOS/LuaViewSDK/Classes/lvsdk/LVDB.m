@@ -17,7 +17,7 @@ static int db_get (lua_State *L) {
     lv_clearFirstTableValue(L);
     NSString* key = lv_paramString(L, 1);
     NSString* defaultValue = nil;
-    if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
+    if( lua_gettop(L)>=2 && lua_type(L, 2)==LUA_TNUMBER ) {
         double v = lua_tonumber(L, 2);
         defaultValue = [NSString stringWithFormat:@"%lf",v];
     } else {
@@ -63,10 +63,10 @@ static NSString* clearString(NSString* s){
 
 static int db_set (lua_State *L) {
     lv_clearFirstTableValue(L);
-    if( lv_gettop(L)>=2 ) {
+    if( lua_gettop(L)>=2 ) {
         NSString* key = lv_paramString(L, 1);
         NSString* value = lv_paramString(L, 2);
-        if( value==nil && (lv_type(L, 2)==LV_TNUMBER) ){
+        if( value==nil && (lua_type(L, 2)==LUA_TNUMBER) ){
             value = [NSString stringWithFormat:@"%f",lua_tonumber(L, 2)];
             value = clearString(value);
         }
@@ -85,7 +85,7 @@ static int db_set (lua_State *L) {
         {LUAVIEW_SYS_TABLE_KEY, db_set},
         {NULL,   NULL}
     };
-    lvL_openlib(L, "DB", functions, 0);
+    luaL_openlib(L, "DB", functions, 0);
     return 0;
 }
 

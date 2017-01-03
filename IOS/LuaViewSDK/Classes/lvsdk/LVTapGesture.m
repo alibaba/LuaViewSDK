@@ -32,7 +32,7 @@
 -(void) handleGesture:(LVTapGesture*)sender {
     lua_State* l = self.lv_lview.l;
     if ( l ){
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         lv_pushUserdata(l, self.lv_userData);
         [LVUtil call:l lightUserData:self key1:"callback" key2:NULL nargs:1];
     }
@@ -43,7 +43,7 @@ static int lvNewTapGestureRecognizer (lua_State *L) {
     {
         LVTapGesture* gesture = [[c alloc] init:L];
         
-        if( lv_type(L, 1) == LUA_TFUNCTION ) {
+        if( lua_type(L, 1) == LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         
@@ -52,8 +52,8 @@ static int lvNewTapGestureRecognizer (lua_State *L) {
             gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
-            lvL_getmetatable(L, META_TABLE_TapGesture );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_TapGesture );
+            lua_setmetatable(L, -2);
         }
     }
     return 1; /* new userdatum is already on the stack */
@@ -68,8 +68,8 @@ static int lvNewTapGestureRecognizer (lua_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_TapGesture);
     
-    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

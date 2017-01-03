@@ -68,27 +68,27 @@ static inline NSInteger mapSection(NSInteger section){
             [cell doInitWithLView:lview];
             
             // 创建cell初始化
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
+            lua_settop(l, 0);
+            lua_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, mapSection(section) );//arg2: section
-            lv_pushnumber(l, mapRow(row) );//arg3: row
+            lua_pushnumber(l, mapSection(section) );//arg2: section
+            lua_pushnumber(l, mapRow(row) );//arg3: row
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:0 retType:LV_TNONE];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:0 retType:LUA_TNONE];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
+            lua_settop(l, 0);
+            lua_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, mapSection(section) );//arg2: section
-            lv_pushnumber(l, mapRow(row) );//arg3: row
+            lua_pushnumber(l, mapSection(section) );//arg2: section
+            lua_pushnumber(l, mapRow(row) );//arg3: row
             
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LV_TNONE];
+            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LUA_TNONE];
         }
     }
     lview.conentView = nil;
@@ -102,8 +102,8 @@ static inline NSInteger mapSection(NSInteger section){
     if( l && self.owner.lv_userData ){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"Section" key2:"SectionCount" key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
-            if( lv_type(l, -1)==LV_TNUMBER ) {
+        if(  [LVUtil call:l key1:"Section" key2:"SectionCount" key3:NULL nargs:0 nrets:1 retType:LUA_TNUMBER] ==0 ) {
+            if( lua_type(l, -1)==LUA_TNUMBER ) {
                 NSInteger num = lua_tonumber(l, -1);
                 num = (num>0 ? num : 0);
                 return num;
@@ -118,13 +118,13 @@ static inline NSInteger mapSection(NSInteger section){
     lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
-        lv_pushnumber(l, mapSection(section) );
+        lua_pushnumber(l, mapSection(section) );
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"Section" key2:"RowCount" key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
-            if( lv_type(l, -1)==LV_TNUMBER ) {
+        if(  [LVUtil call:l key1:"Section" key2:"RowCount" key3:NULL nargs:1 nrets:1 retType:LUA_TNUMBER] ==0 ) {
+            if( lua_type(l, -1)==LUA_TNUMBER ) {
                 NSInteger num = lua_tonumber(l, -1);
                 num = (num>0 ? num : 0);
                 return num;
@@ -171,13 +171,13 @@ static inline NSInteger mapSection(NSInteger section){
 - (CGFloat) retFloatCallKey1:(const char*) funcName key2:(const char*) key2 mapedSection:(NSInteger) mapedSection {
     lua_State* l = self.owner.lv_lview.l;
     if( l ){
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, mapedSection);
+        lua_checkstack(l, 12);
+        lua_pushnumber(l, mapedSection);
         
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:funcName key2:key2 key3:NULL nargs:1 nrets:1 retType:LV_TNUMBER] ==0 ) {
-            if( lv_type(l, -1)==LV_TNUMBER ) {
+        if(  [LVUtil call:l key1:funcName key2:key2 key3:NULL nargs:1 nrets:1 retType:LUA_TNUMBER] ==0 ) {
+            if( lua_type(l, -1)==LUA_TNUMBER ) {
                 CGFloat heigth = lua_tonumber(l, -1);
                 return heigth;
             }
@@ -191,18 +191,18 @@ static inline NSInteger mapSection(NSInteger section){
     lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, mapedSection);
-        lv_pushnumber(l, mapedRow);
+        lua_checkstack(l, 12);
+        lua_pushnumber(l, mapedSection);
+        lua_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:2 retType:LV_TSTRING] ==0 ) {
-            if( lv_type(l, -2)==LV_TSTRING ){
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:2 retType:LUA_TSTRING] ==0 ) {
+            if( lua_type(l, -2)==LUA_TSTRING ){
                 NSString* value = lv_paramString(l, -2);
-                BOOL yes = lv_toboolean(l, -1);
+                BOOL yes = lua_toboolean(l, -1);
                 if( pinned ) {
                     *pinned = yes;
                 }
@@ -218,17 +218,17 @@ static inline NSInteger mapSection(NSInteger section){
     lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, mapedSection);
-        lv_pushnumber(l, mapedRow);
+        lua_checkstack(l, 12);
+        lua_pushnumber(l, mapedSection);
+        lua_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 key3:key3 nargs:2 nrets:2 retType:LV_TNONE] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:key3 nargs:2 nrets:2 retType:LUA_TNONE] ==0 ) {
             CGSize size = {0};
-            if( lv_type(l, -1) ==LV_TNIL ) {
+            if( lua_type(l, -1) ==LUA_TNIL ) {
                 size.width = self.owner.frame.size.width;
                 size.height = lua_tonumber(l, -2);
             } else{
@@ -245,15 +245,15 @@ static inline NSInteger mapSection(NSInteger section){
     lua_State* l = self.owner.lv_lview.l;
     if( l ){
         // args
-        lv_checkstack(l, 12);
-        lv_pushnumber(l, mapSection);
-        lv_pushnumber(l, mapedRow);
+        lua_checkstack(l, 12);
+        lua_pushnumber(l, mapSection);
+        lua_pushnumber(l, mapedRow);
         
         // table
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:4 retType:LV_TNONE] ==0 ) {
+        if(  [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:2 nrets:4 retType:LUA_TNONE] ==0 ) {
             UIEdgeInsets egeInsets = {0};
             egeInsets.top = lua_tonumber(l, -4);
             egeInsets.left = lua_tonumber(l, -3);
@@ -273,17 +273,17 @@ static inline NSInteger mapSection(NSInteger section){
         NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:NULL];
         if ( identifier ) {
             // 参数 cell,section,row
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
+            lua_settop(l, 0);
+            lua_checkstack(l, 12);
             lua_pushnil(l);// cell
-            lv_pushnumber(l, mapSection(section) );
-            lv_pushnumber(l, mapRow(row) );
+            lua_pushnumber(l, mapSection(section) );
+            lua_pushnumber(l, mapRow(row) );
             
             // table
             lv_pushUserdata(l, self.owner.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
             
-            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK key4:STR_ON_CLICK nargs:3 nrets:0 retType:LV_TNONE]==0 ) {
+            if(  [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:STR_CALLBACK key4:STR_ON_CLICK nargs:3 nrets:0 retType:LUA_TNONE]==0 ) {
             }
         }
     }
@@ -306,10 +306,10 @@ static inline NSInteger mapSection(NSInteger section){
         NSInteger section = indexPath0.section;
         NSInteger row = indexPath0.row;
         
-        lv_settop(L, 0);
-        lv_pushnumber(L, mapSection(section) );
-        lv_pushnumber(L, mapRow(row) );
-        lv_pushnumber(L, visibleCount );
+        lua_settop(L, 0);
+        lua_pushnumber(L, mapSection(section) );
+        lua_pushnumber(L, mapRow(row) );
+        lua_pushnumber(L, visibleCount );
         [self.owner lv_callLuaByKey1:functionName key2:nil argN:3];
     }
 }

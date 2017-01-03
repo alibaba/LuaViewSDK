@@ -24,7 +24,7 @@
 -(void) dealloc{
     lua_State* L = self.lv_lview.l;
     for ( int i=0; i<self.functionNum; i++ ) {
-        if( lv_type(L, i) == LUA_TFUNCTION ) {
+        if( lua_type(L, i) == LUA_TFUNCTION ) {
             NSString* tag = self.cmdArray[i];
             [LVUtil unregistry:L key:tag];
         }
@@ -65,8 +65,8 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     lua_State* l = self.lv_lview.l;
     if( l ) {
-        lv_checkStack32(l);
-        lv_pushnumber(l, buttonIndex);
+        lua_checkstack32(l);
+        lua_pushnumber(l, buttonIndex);
         [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key1:NULL key2:NULL nargs:1];
         self.lv_lview = nil;
     }
@@ -80,12 +80,12 @@ static NSString* getArgs(lua_State* L, int index, int max){
 }
 
 static int lvNewAlertView (lua_State *L) {
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     LVAlert* alertView = [[LVAlert alloc] init:L argNum:num];
     if( num>0 ){
         int argID= 0;
         for ( int i=1; i<=num; i++ ) {
-            if( lv_type(L, i) == LUA_TFUNCTION ) {
+            if( lua_type(L, i) == LUA_TFUNCTION ) {
                 NSString* tag = alertView.cmdArray[argID++];
                 [LVUtil registryValue:L key:tag stack:i];
                 alertView.argNum = argID;
@@ -98,7 +98,7 @@ static int lvNewAlertView (lua_State *L) {
 
 
 static int toast (lua_State *L) {
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     if( num>0 ){
         NSString* s = lv_paramString(L, 1);
         if( s ==nil ) {
@@ -114,8 +114,8 @@ static int toast (lua_State *L) {
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     {// 自动消失的提示框
-        lv_pushcfunction(L, toast);
-        lv_setglobal(L, "Toast");
+        lua_pushcfunction(L, toast);
+        lua_setglobal(L, "Toast");
     }
 
     // 系统Alert提示框
@@ -126,8 +126,8 @@ static int toast (lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_UIAlertView);
     
-    //lvL_openlib(L, NULL, [LVBaseView lvMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    //luaL_openlib(L, NULL, [LVBaseView lvMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

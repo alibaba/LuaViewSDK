@@ -69,8 +69,8 @@ static int lvNewScrollView (lua_State *L) {
         lv_createtable(L, 0, 0);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
         
-        lvL_getmetatable(L, META_TABLE_UIScrollView );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UIScrollView );
+        lua_setmetatable(L, -2);
         
         LView* view = (__bridge LView *)(L->lView);
         if( view ){
@@ -81,11 +81,11 @@ static int lvNewScrollView (lua_State *L) {
 }
 
 static int contentSize (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 double w = lua_tonumber(L, 2);// 2
                 double h = lua_tonumber(L, 3);// 3
                 CGSize s = CGSizeMake( w, h );
@@ -95,8 +95,8 @@ static int contentSize (lua_State *L) {
                 return 0;
             } else {
                 CGSize s = view.contentSize;
-                lv_pushnumber(L, s.width   );
-                lv_pushnumber(L, s.height    );
+                lua_pushnumber(L, s.width   );
+                lua_pushnumber(L, s.height    );
                 return 2;
             }
         }
@@ -105,14 +105,14 @@ static int contentSize (lua_State *L) {
 }
 
 static int contentOffset (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             double x = lua_tonumber(L, 2);// 2
             double y = lua_tonumber(L, 3);// 3
             BOOL yes = NO;
-            if( lv_gettop(L)>=4 )
+            if( lua_gettop(L)>=4 )
                 yes = lua_toboolean(L, 4);// 3
             if( [view isKindOfClass:[UIScrollView class]] ){
                 CGPoint p = CGPointMake(x, y);
@@ -138,8 +138,8 @@ static int contentOffset (lua_State *L) {
             }
         } else {
             CGPoint p = view.contentOffset;
-            lv_pushnumber(L, p.x   );
-            lv_pushnumber(L, p.y    );
+            lua_pushnumber(L, p.x   );
+            lua_pushnumber(L, p.y    );
             return 2;
         }
     }
@@ -147,11 +147,11 @@ static int contentOffset (lua_State *L) {
 }
 
 static int contentInset (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
-            int num = lv_gettop(L);
+            int num = lua_gettop(L);
             if( num>=2 ) {
                 UIEdgeInsets edgeInsets = view.contentInset;
                 if( num>=2 )
@@ -169,10 +169,10 @@ static int contentInset (lua_State *L) {
                 return 0;
             } else {
                 UIEdgeInsets edgeInsets = view.contentInset;
-                lv_pushnumber(L, edgeInsets.top   );
-                lv_pushnumber(L, edgeInsets.left   );
-                lv_pushnumber(L, edgeInsets.bottom   );
-                lv_pushnumber(L, edgeInsets.right   );
+                lua_pushnumber(L, edgeInsets.top   );
+                lua_pushnumber(L, edgeInsets.left   );
+                lua_pushnumber(L, edgeInsets.bottom   );
+                lua_pushnumber(L, edgeInsets.right   );
                 return 4;
             }
         }
@@ -181,16 +181,16 @@ static int contentInset (lua_State *L) {
 }
 
 //static int pageEnable (lua_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* view = (__bridge UIScrollView *)(user->view);
 //        if( [view isKindOfClass:[UIScrollView class]] ){
-//            if( lv_gettop(L)>=2 ) {
+//            if( lua_gettop(L)>=2 ) {
 //                BOOL yes = lua_toboolean(L, 2);// 2
 //                view.pagingEnabled = yes;
 //                return 0;
 //            } else {
-//                lv_pushnumber(L, view.pagingEnabled );
+//                lua_pushnumber(L, view.pagingEnabled );
 //                return 1;
 //            }
 //        }
@@ -199,19 +199,19 @@ static int contentInset (lua_State *L) {
 //}
 
 static int showScrollIndicator (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
         if( [view isKindOfClass:[UIScrollView class]] ){
-            if( lv_gettop(L)>=2 ) {
-                BOOL yes1 = lv_toboolean(L, 2);
-                BOOL yes2 = lv_toboolean(L, 3);
+            if( lua_gettop(L)>=2 ) {
+                BOOL yes1 = lua_toboolean(L, 2);
+                BOOL yes2 = lua_toboolean(L, 3);
                 view.showsHorizontalScrollIndicator = yes1;
                 view.showsVerticalScrollIndicator = yes2;
                 return 0;
             } else {
-                lv_pushboolean(L, view.showsHorizontalScrollIndicator );
-                lv_pushboolean(L, view.showsVerticalScrollIndicator );
+                lua_pushboolean(L, view.showsHorizontalScrollIndicator );
+                lua_pushboolean(L, view.showsVerticalScrollIndicator );
                 return 2;
             }
         }
@@ -220,7 +220,7 @@ static int showScrollIndicator (lua_State *L) {
 }
 
 //static int initRefreshHeader (lua_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* scrollView = (__bridge UIScrollView *)(user->view);
 //        [scrollView lv_initRefreshHeader];
@@ -229,7 +229,7 @@ static int showScrollIndicator (lua_State *L) {
 //}
 
 static int startHeaderRefreshing (lua_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         [scrollView lv_beginRefreshing];
@@ -238,7 +238,7 @@ static int startHeaderRefreshing (lua_State *L){
 }
 
 static int stopHeaderRefreshing (lua_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         [scrollView lv_endRefreshing];
@@ -247,18 +247,18 @@ static int stopHeaderRefreshing (lua_State *L){
 }
 
 static int isHeaderRefreshing (lua_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVScrollView* scrollView = (__bridge LVScrollView *)(user->object);
         BOOL yes = [scrollView lv_isRefreshing];
-        lv_pushboolean(L, yes);
+        lua_pushboolean(L, yes);
         return 1;
     }
     return 0;
 }
 
 //static int footerNoticeNoMoreData (lua_State *L){
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
 //        [scrollView lv_noticeNoMoreData];
@@ -267,7 +267,7 @@ static int isHeaderRefreshing (lua_State *L){
 //}
 //
 //static int footerResetNoMoreData (lua_State *L){
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
 //        [scrollView lv_resetNoMoreData];
@@ -276,29 +276,29 @@ static int isHeaderRefreshing (lua_State *L){
 //}
 //
 //static int hiddenRefreshFooter (lua_State *L){
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        LVScrollView* scrollView = (__bridge LVScrollView *)(user->view);
-//        BOOL hidden = lv_toboolean(L, 2);
+//        BOOL hidden = lua_toboolean(L, 2);
 //        [scrollView lv_hiddenRefreshFooter:hidden];
 //    }
 //    return 0;
 //}
 
 //static int alwaysBounce(lua_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        UIScrollView* view = (__bridge UIScrollView *)(user->view);
 //        if( [view isKindOfClass:[UIScrollView class]] ){
-//            if( lv_gettop(L)>=2 ) {
-//                BOOL yesVertical = lv_toboolean(L, 2);
-//                BOOL yesHorizontal = lv_toboolean(L, 3);
+//            if( lua_gettop(L)>=2 ) {
+//                BOOL yesVertical = lua_toboolean(L, 2);
+//                BOOL yesHorizontal = lua_toboolean(L, 3);
 //                view.alwaysBounceVertical = yesVertical;
 //                view.alwaysBounceHorizontal = yesHorizontal;
 //                return 0;
 //            } else {
-//                lv_pushboolean(L, view.alwaysBounceVertical);
-//                lv_pushboolean(L, view.alwaysBounceHorizontal);
+//                lua_pushboolean(L, view.alwaysBounceVertical);
+//                lua_pushboolean(L, view.alwaysBounceHorizontal);
 //                return 2;
 //            }
 //        }
@@ -345,8 +345,8 @@ static const struct luaL_Reg memberFunctions [] = {
     
     lv_createClassMetaTable(L ,META_TABLE_UIScrollView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "startRefreshing", "stopRefreshing", "isRefreshing", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

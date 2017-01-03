@@ -34,7 +34,7 @@ static int typeIdx(const char* type){
     return 0;
 }
 
-LVTypeIDEnum lv_typeID(const char* type){
+LVTypeIDEnum lua_typeID(const char* type){
     static LVTypeIDEnum typesDic[256*4] = {0};
     static BOOL inited = NO;
     if( !inited ) {
@@ -203,19 +203,19 @@ double lv_getValueWithType(void* p, int index, int type ){
 int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lua_State* L){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ){
-        switch ( lv_typeID(type) ) {
+        switch ( lua_typeID(type) ) {
             case LVTypeID_void:
                 return 0;
             case LVTypeID_BOOL: {
                 BOOL result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushboolean(L, result);
+                lua_pushboolean(L, result);
                 return 1;
             }
             case LVTypeID_bool: {
                 bool result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushboolean(L, result);
+                lua_pushboolean(L, result);
                 return 1;
             }
             case LVTypeID_Class:
@@ -228,91 +228,91 @@ int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lua_State* 
             case LVTypeID_char: {
                 char result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_unsignedchar: {
                 unsigned char result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_short: {
                 short result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_unsignedshort: {
                 unsigned short result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_int: {
                 int result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_unsignedint: {
                 unsigned int result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_NSInteger: {
                 NSInteger result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_NSUInteger: {
                 NSUInteger result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_longlong: {
                 long long result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_unsigedlonglong: {
                 unsigned long long result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_float: {
                 float result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_CGFloat: {
                 CGFloat result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_double: {
                 double result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushnumber(L, result);
+                lua_pushnumber(L, result);
                 return 1;
             }
             case LVTypeID_charP: {
                 char* result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushlightuserdata(L, result);
+                lua_pushlightuserdata(L, result);
                 return 1;
             }
             case LVTypeID_voidP: {
                 void* result = 0;
                 [invocation getReturnValue: &result];
-                lv_pushlightuserdata(L, result);
+                lua_pushlightuserdata(L, result);
                 return 1;
             }
             case LVTypeID_struct:{
@@ -332,14 +332,14 @@ int lv_pushInvocationReturnValueToLuaStack(NSInvocation* invocation, lua_State* 
 int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lua_State* L, int stackID){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
     if ( type ){
-        switch ( lv_typeID(type) ) {
+        switch ( lua_typeID(type) ) {
             case LVTypeID_BOOL: {
-                BOOL value = lv_toboolean(L, stackID);
+                BOOL value = lua_toboolean(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_bool: {
-                bool value = lv_toboolean(L, stackID);
+                bool value = lua_toboolean(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
@@ -415,17 +415,17 @@ int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lua_State
                 return 1;
             }
             case LVTypeID_charP: {
-                char* value = lv_touserdata(L, stackID);
+                char* value = lua_touserdata(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_voidP: {
-                void* value = lv_touserdata(L, stackID);
+                void* value = lua_touserdata(L, stackID);
                 [invocation setArgument: &value atIndex:index];
                 return 1;
             }
             case LVTypeID_struct: {
-                LVUserDataInfo* user = lv_touserdata(L, stackID);
+                LVUserDataInfo* user = lua_touserdata(L, stackID);
                 if ( LVIsType(user, Struct) ) {
                     LVStruct* stru = (__bridge LVStruct *)(user->object);
                     if( [stru dataPointer] ) {
@@ -451,16 +451,16 @@ int lv_setInvocationArgByLuaStack(NSInvocation* invocation, int index, lua_State
 id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lua_State* L, int stackID){
     const char* type = [invocation.methodSignature methodReturnType];
     if ( type ) {
-        switch ( lv_typeID(type) ) {
+        switch ( lua_typeID(type) ) {
             case LVTypeID_void:
                 return nil;
             case LVTypeID_BOOL: {
-                BOOL result = lv_toboolean(L, stackID);
+                BOOL result = lua_toboolean(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_bool: {
-                bool result = lv_toboolean(L, stackID);
+                bool result = lua_toboolean(L, stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
@@ -536,17 +536,17 @@ id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lua_State* L,
                 return nil;
             }
             case LVTypeID_charP: {
-                char* result = lv_touserdata(L,stackID);
+                char* result = lua_touserdata(L,stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_voidP: {
-                char* result = lv_touserdata(L,stackID);
+                char* result = lua_touserdata(L,stackID);
                 [invocation setReturnValue: &result];
                 return nil;
             }
             case LVTypeID_struct: {
-                LVUserDataInfo* user = lv_touserdata(L,stackID);
+                LVUserDataInfo* user = lua_touserdata(L,stackID);
                 if ( LVIsType(user, Struct) ) {
                     LVStruct* stru = (__bridge LVStruct *)(user->object);
                     if( [stru dataPointer] ) {
@@ -565,17 +565,17 @@ id lv_setInvocationReturnValueByLuaStack(NSInvocation* invocation, lua_State* L,
 
 int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lua_State* L ){
     const char* type = [invocation.methodSignature getArgumentTypeAtIndex:index];
-    switch ( lv_typeID(type) ) {
+    switch ( lua_typeID(type) ) {
         case LVTypeID_BOOL: {
             BOOL value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_bool: {
             bool value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_Class:
@@ -588,91 +588,91 @@ int lv_pushInvocationArgToLuaStack(NSInvocation* invocation, int index, lua_Stat
         case LVTypeID_char: {
             char value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_unsignedchar: {
             unsigned char value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_short: {
             short value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_unsignedshort: {
             unsigned short value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_int: {
             int value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_unsignedint: {
             unsigned int value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_NSInteger: {
             NSInteger value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_NSUInteger: {
             NSUInteger value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_longlong: {
             long long value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_unsigedlonglong: {
             unsigned long long value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_float: {
             float value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_CGFloat: {
             CGFloat value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_double: {
             double value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushnumber(L, value);
+            lua_pushnumber(L, value);
             return 1;
         }
         case LVTypeID_charP: {
             char* value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushlightuserdata(L,value);
+            lua_pushlightuserdata(L,value);
             return 1;
         }
         case LVTypeID_voidP: {
             void* value = 0;
             [invocation getArgument: &value atIndex:index];
-            lv_pushlightuserdata(L,value);
+            lua_pushlightuserdata(L,value);
             return 1;
         }
         case LVTypeID_struct: {

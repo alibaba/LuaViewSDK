@@ -51,7 +51,7 @@
         [invocation setSelector: self.sel];// 传递 参数1: SEL
         
         NSInteger numberOfArguments = sig.numberOfArguments;
-        int luaArgsNum = lv_gettop(L);
+        int luaArgsNum = lua_gettop(L);
         [invocation retainArguments];
         for( int i=2; (i<numberOfArguments) && (i<=luaArgsNum);  i++ ){// 传递 参数2, 参数3, ...
             lv_setInvocationArgByLuaStack(invocation, i, L, i);

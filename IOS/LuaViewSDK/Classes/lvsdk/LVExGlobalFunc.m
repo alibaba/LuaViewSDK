@@ -21,23 +21,23 @@
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
 +(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
-    lv_pushcfunction(L, loadJson);
-    lv_setglobal(L, "loadJson");
+    lua_pushcfunction(L, loadJson);
+    lua_setglobal(L, "loadJson");
     
-    lv_pushcfunction(L, unicode);
-    lv_setglobal(L, "Unicode");
+    lua_pushcfunction(L, unicode);
+    lua_setglobal(L, "Unicode");
     
     // 替换pakcage.loaders中的loader_lv
     
-    lv_getglobal(L, LV_LOADLIBNAME);
-    lv_getfield(L, 1, "loaders");
+    lua_getglobal(L, LV_LOADLIBNAME);
+    lua_getfield(L, 1, "loaders");
     if (!lv_istable(L, -1)) {
         return;
     }
     
-    lv_pushnumber(L, 2);
-    lv_pushcfunction(L, loaderForLuaView);
-    lv_settable(L, -3);
+    lua_pushnumber(L, 2);
+    lua_pushcfunction(L, loaderForLuaView);
+    lua_settable(L, -3);
 }
 
 // 注册函数
@@ -53,10 +53,10 @@
     userData->object = CFBridgingRetain(lView);
     lView.lv_userData = userData;
     
-    lvL_getmetatable(L, META_TABLE_LuaView );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_LuaView );
+    lua_setmetatable(L, -2);
     
-    lv_setglobal(L, "window");
+    lua_setglobal(L, "window");
 }
 //------------------------------------------------------------------------------------
 
@@ -65,25 +65,25 @@ static int loadJson (lua_State *L) {
     if( json ){
         json = [NSString stringWithFormat:@"return %@",json];
         lvL_loadstring(L, json.UTF8String);
-        if( lv_type(L, -1) == LUA_TFUNCTION ) {
-            int errorCode = lv_pcall( L, 0, 1, 0);
+        if( lua_type(L, -1) == LUA_TFUNCTION ) {
+            int errorCode = lua_pcall( L, 0, 1, 0);
             if( errorCode == 0 ){
                 return 1;
             } else {
-                LVError( @"loadJson : %s", lv_tostring(L, -1) );
+                LVError( @"loadJson : %s", lua_tostring(L, -1) );
             }
         } else {
-            LVError( @"loadJson : %s", lv_tostring(L, -1) );
+            LVError( @"loadJson : %s", lua_tostring(L, -1) );
         }
     }
     return 0; /* number of results */
 }
 
 static int unicode(lua_State *L) {
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     NSMutableString* buf = [[NSMutableString alloc] init];
     for( int i=1; i<=num; i++ ) {
-        if( lv_type(L, i) == LV_TNUMBER ) {
+        if( lua_type(L, i) == LUA_TNUMBER ) {
             unichar c = lua_tonumber(L, i);
             [buf appendFormat:@"%C",c];
         } else {
@@ -155,7 +155,7 @@ static int loaderForLuaView (lua_State *L) {
     // 调试
     [LVDebuger lvClassDefine:L globalName:nil];
     //清理栈
-    lv_settop(L, 0);
+    lua_settop(L, 0);
     return 0;
 }
 

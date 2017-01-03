@@ -38,8 +38,8 @@ static int lvNewPagerIndicator (lua_State *L) {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageControl);
         
-        lvL_getmetatable(L, META_TABLE_PagerIndicator );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_PagerIndicator );
+        lua_setmetatable(L, -2);
     }
     LView* view = (__bridge LView *)(L->lView);
     if( view ){
@@ -49,16 +49,16 @@ static int lvNewPagerIndicator (lua_State *L) {
 }
 
 //static int setPageCount(lua_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
 //        if( view ){
-//            if( lv_gettop(L)>=2 ) {
+//            if( lua_gettop(L)>=2 ) {
 //                int number = lua_tonumber(L, 2);
 //                view.numberOfPages = number;
 //                return 0;
 //            } else {
-//                lv_pushnumber(L, view.numberOfPages );
+//                lua_pushnumber(L, view.numberOfPages );
 //                return 1;
 //            }
 //        }
@@ -67,17 +67,17 @@ static int lvNewPagerIndicator (lua_State *L) {
 //}
 
 static int setCurrentPage(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 int currentPage = lua_tonumber(L, 2);
                 //view.currentPage = currentPage-1;
                 [view.pagerView setCurrentPageIdx:currentPage-1 animation:YES];
                 return 0;
             } else {
-                lv_pushnumber(L, view.currentPage+1 );
+                lua_pushnumber(L, view.currentPage+1 );
                 return 1;
             }
         }
@@ -86,11 +86,11 @@ static int setCurrentPage(lua_State *L) {
 }
 
 static int pageIndicatorTintColor(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
                 view.pageIndicatorTintColor = color;
                 return 0;
@@ -99,8 +99,8 @@ static int pageIndicatorTintColor(lua_State *L) {
                 NSUInteger c = 0;
                 CGFloat a = 0;
                 if( lv_uicolor2int(color, &c, &a) ){
-                    lv_pushnumber(L, c );
-                    lv_pushnumber(L, a);
+                    lua_pushnumber(L, c );
+                    lua_pushnumber(L, a);
                     return 2;
                 }
             }
@@ -110,11 +110,11 @@ static int pageIndicatorTintColor(lua_State *L) {
 }
 
 static int currentPageIndicatorTintColor(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
                 view.currentPageIndicatorTintColor = color;
                 return 0;
@@ -123,8 +123,8 @@ static int currentPageIndicatorTintColor(lua_State *L) {
                 NSUInteger c = 0;
                 CGFloat a = 0;
                 if( lv_uicolor2int(color, &c, &a) ){
-                    lv_pushnumber(L, c );
-                    lv_pushnumber(L, a);
+                    lua_pushnumber(L, c );
+                    lua_pushnumber(L, a);
                     return 2;
                 }
             }
@@ -149,8 +149,8 @@ static int currentPageIndicatorTintColor(lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_PagerIndicator);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

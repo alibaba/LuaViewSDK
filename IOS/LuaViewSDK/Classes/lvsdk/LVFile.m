@@ -16,18 +16,18 @@
 
 static void saveCallback(lua_State *L, int callbackIndex, NSString* fileName, int errorInfo ) {
     if( callbackIndex ) {
-        lv_checkStack32(L);
-        lv_pushboolean(L, errorInfo);
-        lv_pushvalue(L,callbackIndex);
+        lua_checkstack32(L);
+        lua_pushboolean(L, errorInfo);
+        lua_pushvalue(L,callbackIndex);
         lv_runFunctionWithArgs(L, 1, 0);
     }
 }
 
 static BOOL readCallback(lua_State *L, int callbackIndex, NSString* fileName, NSData* data) {
     if( callbackIndex ) {
-        lv_checkStack32(L);
+        lua_checkstack32(L);
         [LVData createDataObject:L data:data];
-        lv_pushvalue(L,callbackIndex);
+        lua_pushvalue(L,callbackIndex);
         lv_runFunctionWithArgs(L, 1, 0);
         return YES;
     }
@@ -35,19 +35,19 @@ static BOOL readCallback(lua_State *L, int callbackIndex, NSString* fileName, NS
 }
 
 static int file_save (lua_State *L) {
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     if( num>=2 ) {
         LVUserDataInfo * userData = NULL;
         NSString* fileName = nil;
         int callbackIndex = 0;
         for( int i=1; i<=num; i++ ) {
-            if( lv_type(L, i)==LV_TUSERDATA  && userData==nil ) {
-                userData = (LVUserDataInfo *)lv_touserdata(L, i);
+            if( lua_type(L, i)==LUA_TUSERDATA  && userData==nil ) {
+                userData = (LVUserDataInfo *)lua_touserdata(L, i);
             }
-            if( lv_type(L, i)==LV_TSTRING  && fileName==nil ) {
+            if( lua_type(L, i)==LUA_TSTRING  && fileName==nil ) {
                fileName = lv_paramString(L, i);
             }
-            if( lv_type(L,i)==LUA_TFUNCTION ) {
+            if( lua_type(L,i)==LUA_TFUNCTION ) {
                 callbackIndex = i;
             }
         }
@@ -56,7 +56,7 @@ static int file_save (lua_State *L) {
             if( LVIsType(userData, Data) && lvData1.data){
                 if( [LVUtil saveData:lvData1.data toFile:[LVUtil PathForCachesResource:fileName]] ){
                     saveCallback(L, callbackIndex, fileName, YES);
-                    lv_pushboolean(L, 1);
+                    lua_pushboolean(L, 1);
                     return 1;
                 } else {
                     saveCallback(L, callbackIndex, fileName, NO);
@@ -64,20 +64,20 @@ static int file_save (lua_State *L) {
             }
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
 static int file_read(lua_State *L){
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     if( L && num>=1 ){
         NSString* fileName = nil;
         int callbackIndex = 0;
         for( int i=1; i<=num; i++ ) {
-            if( lv_type(L, i)==LV_TSTRING  && fileName==nil ) {
+            if( lua_type(L, i)==LUA_TSTRING  && fileName==nil ) {
                 fileName = lv_paramString(L, i);
             }
-            if( lv_type(L,i)==LUA_TFUNCTION ) {
+            if( lua_type(L,i)==LUA_TFUNCTION ) {
                 callbackIndex = i;
             }
         }
@@ -99,15 +99,15 @@ static int file_read(lua_State *L){
 }
 
 static int file_exist(lua_State *L){
-    if( L && lv_gettop(L)>=1 ){
+    if( L && lua_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, -1);
         LView* lview = (__bridge LView *)(L->lView);
         if(  [lview.bundle resourcePathWithName:fileName] ){
-            lv_pushboolean(L, 1);
+            lua_pushboolean(L, 1);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
@@ -127,7 +127,7 @@ static int file_path (lua_State *L) {
         {"path", file_path},
         {NULL, NULL}
     };
-    lvL_openlib(L, "File", function, 0);
+    luaL_openlib(L, "File", function, 0);
     return 0;
 }
 

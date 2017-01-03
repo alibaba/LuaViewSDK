@@ -43,15 +43,15 @@ static int lvNewStruct (lua_State *L) {
     userData->object = CFBridgingRetain(lvstruct);
     lvstruct.lv_userData = userData;
     
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     
     for (int i=1,index=0; (i<=num) && (index<LV_STRUCT_MAX_LEN); i++ ) {
         CGFloat value = lua_tonumber(L, i);
         [lvstruct setIndex:index++ byValue:value];
     }
     
-    lvL_getmetatable(L, META_TABLE_Struct );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_Struct );
+    lua_setmetatable(L, -2);
     return 1; /* new userdatum is already on the stack */
 }
 
@@ -62,16 +62,16 @@ static int lvNewStruct (lua_State *L) {
     lvstruct.lv_userData = userData;
     
     memcpy( [lvstruct dataPointer], data, LV_STRUCT_MAX_LEN*sizeof(CGFloat) );
-    lvL_getmetatable(L, META_TABLE_Struct );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_Struct );
+    lua_setmetatable(L, -2);
     return 1;
 }
 
 
 static int setValue (lua_State *L) {
-    int argNum = lv_gettop(L);
+    int argNum = lua_gettop(L);
     if( argNum>=3 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         unsigned int index = lua_tonumber(L, 2);
         CGFloat value = lua_tonumber(L, 3);
         if ( index>=LV_STRUCT_MAX_LEN ) {
@@ -95,9 +95,9 @@ static int setValue (lua_State *L) {
 }
 
 static int getValue (lua_State *L) {
-    int argNum = lv_gettop(L);
+    int argNum = lua_gettop(L);
     if( argNum>=2 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         unsigned int index = lua_tonumber(L, 2);
         if ( index>=LV_STRUCT_MAX_LEN ) {
             LVError(@"LVStruct.get index:%d", index );
@@ -108,11 +108,11 @@ static int getValue (lua_State *L) {
             if ( argNum>=3 ) {
                 int type = lua_tonumber(L, 3);
                 CGFloat value = lv_getValueWithType(  [stru dataPointer], index, type);
-                lv_pushnumber(L, value);
+                lua_pushnumber(L, value);
                 return 1;
             } else {
                 CGFloat value = [stru getValueByIndex:index];
-                lv_pushnumber(L, value);
+                lua_pushnumber(L, value);
                 return 1;
             }
         }
@@ -121,9 +121,9 @@ static int getValue (lua_State *L) {
 }
 
 static int __eq (lua_State *L) {
-    if( lv_gettop(L)==2 ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( lua_gettop(L)==2 ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, Struct) && LVIsType(user2, Struct) ){
             LVStruct* s1 = (__bridge LVStruct *)(user1->object);
             LVStruct* s2 = (__bridge LVStruct *)(user2->object);
@@ -132,7 +132,7 @@ static int __eq (lua_State *L) {
             if( [s1 dataPointer] && [s2 dataPointer] ) {
                 yes = !memcmp( [s1 dataPointer], [s2 dataPointer], size);
             }
-            lv_pushboolean(L, (yes?1:0) );
+            lua_pushboolean(L, (yes?1:0) );
             return 1;
         }
     }
@@ -140,7 +140,7 @@ static int __eq (lua_State *L) {
 }
 
 static int __tostring (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, Struct) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataStruct: %d", (int)user ];
         lua_pushstring(L, s.UTF8String);
@@ -150,18 +150,18 @@ static int __tostring (lua_State *L) {
 }
 
 static int __index (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
-        if ( lv_type(L, 2)==LV_TNUMBER ) {
+        if ( lua_type(L, 2)==LUA_TNUMBER ) {
             return  getValue(L);
-        } else if ( lv_type(L, 2)==LV_TSTRING ){
+        } else if ( lua_type(L, 2)==LUA_TSTRING ){
             NSString* key = lv_paramString(L, 2);
             if ( [key isEqualToString:@"get"] ) {
-                lv_pushcfunction(L, getValue);
+                lua_pushcfunction(L, getValue);
                 return 1;
             }
             if ( [key isEqualToString:@"set"] ) {
-                lv_pushcfunction(L, setValue);
+                lua_pushcfunction(L, setValue);
                 return 1;
             }
         }
@@ -170,11 +170,11 @@ static int __index (lua_State *L) {
 }
 
 static int __newindex (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
-        if( lv_type(L, 2)==LV_TNUMBER ){
+        if( lua_type(L, 2)==LUA_TNUMBER ){
             return setValue(L);
-        } else if( lv_type(L, 3)==LV_TSTRING ){
+        } else if( lua_type(L, 3)==LUA_TSTRING ){
             
         }
     }
@@ -183,14 +183,14 @@ static int __newindex (lua_State *L) {
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     {
-        lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "Struct");
-        lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "Rect");
-        lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "Size");
-        lv_pushcfunction(L, lvNewStruct);
-        lv_setglobal(L, "Point");
+        lua_pushcfunction(L, lvNewStruct);
+        lua_setglobal(L, "Struct");
+        lua_pushcfunction(L, lvNewStruct);
+        lua_setglobal(L, "Rect");
+        lua_pushcfunction(L, lvNewStruct);
+        lua_setglobal(L, "Size");
+        lua_pushcfunction(L, lvNewStruct);
+        lua_setglobal(L, "Point");
     }
     const struct luaL_Reg memberFunctions [] = {
         {"__index", __index },
@@ -207,7 +207,7 @@ static int __newindex (lua_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_Struct);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
 //    {
 //        const struct luaL_Reg memberFunctions2 [] = {
@@ -216,11 +216,11 @@ static int __newindex (lua_State *L) {
 //            {NULL, NULL}
 //        };
 //        lv_createClassMetaTable(L ,"META_TABLE_Struct" );
-//        lvL_openlib(L, NULL, memberFunctions2, 0);
+//        luaL_openlib(L, NULL, memberFunctions2, 0);
 //        
-//        lvL_getmetatable(L, META_TABLE_Struct );
-//        lvL_getmetatable(L, "META_TABLE_Struct" );
-//        lv_setmetatable(L, -2);
+//        luaL_getmetatable(L, META_TABLE_Struct );
+//        luaL_getmetatable(L, "META_TABLE_Struct" );
+//        lua_setmetatable(L, -2);
 //    }
     return 1;
 }

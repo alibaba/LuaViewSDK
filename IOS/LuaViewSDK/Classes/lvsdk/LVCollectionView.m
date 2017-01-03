@@ -94,11 +94,11 @@ static int lvNewCollectionView(lua_State *L) {
     NEW_USERDATA(userData, View);
     userData->object = CFBridgingRetain(collectionView);
     collectionView.lv_userData = userData;
-    lvL_getmetatable(L, META_TABLE_UICollectionView );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_UICollectionView );
+    lua_setmetatable(L, -2);
     
-    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LUA_TTABLE ) {
-        lv_pushvalue(L, 1);
+    if ( lua_gettop(L)>=1 && lua_type(L, 1)==LUA_TTABLE ) {
+        lua_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
     
@@ -110,28 +110,28 @@ static int lvNewCollectionView(lua_State *L) {
 }
 
 static int reload (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         //reload接口异步拉起，确保layout中也能调用reload
         [tableView reloadDataASync];
-        lv_pushvalue(L, 1);
+        lua_pushvalue(L, 1);
         return 1;
     }
     return 0;
 }
 
 static int miniSpacing (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
-        if( lv_gettop(L)>=3 ) {
+        if( lua_gettop(L)>=3 ) {
             CGFloat value1 = lua_tonumber(L, 2);
             CGFloat value2 = lua_tonumber(L, 3);
             tableView.lvflowLayout.minimumLineSpacing = value1;
             tableView.lvflowLayout.minimumInteritemSpacing = value2;
             return 0;
-        } else if( lv_gettop(L)>=2 ) {
+        } else if( lua_gettop(L)>=2 ) {
             CGFloat value1 = lua_tonumber(L, 2);
             tableView.lvflowLayout.minimumLineSpacing = value1;
             tableView.lvflowLayout.minimumInteritemSpacing = value1;
@@ -139,8 +139,8 @@ static int miniSpacing (lua_State *L) {
         } else {
             CGFloat value1 = tableView.lvflowLayout.minimumLineSpacing;
             CGFloat value2 = tableView.lvflowLayout.minimumInteritemSpacing;
-            lv_pushnumber(L, value1);
-            lv_pushnumber(L, value2);
+            lua_pushnumber(L, value1);
+            lua_pushnumber(L, value2);
             return 2;
         }
     }
@@ -148,16 +148,16 @@ static int miniSpacing (lua_State *L) {
 }
 
 static int scrollDirection (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             int value1 = lua_tonumber(L, 2);
             tableView.lvflowLayout.scrollDirection = value1;
             return 0;
         } else {
             CGFloat value1 = tableView.lvflowLayout.scrollDirection;
-            lv_pushnumber(L, value1);
+            lua_pushnumber(L, value1);
             return 1;
         }
     }
@@ -165,22 +165,22 @@ static int scrollDirection (lua_State *L) {
 }
 
 static int scrollToCell (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, View) ){
         LVCollectionView* collectionView = (__bridge LVCollectionView *)(user->object);
         if( [collectionView isKindOfClass:[LVCollectionView class]] ) {
-            int nargs = lv_gettop(L);
+            int nargs = lua_gettop(L);
             if( nargs>=3 ){
                 int section = lua_tonumber(L, 2);
                 int row = lua_tonumber(L, 3);
                 CGFloat offsetY = 0;
                 BOOL animation = YES;
                 for( int i=4; i<=nargs; i++ ) {
-                    if( nargs>=i && lv_type(L, i)==LV_TNUMBER ) {
+                    if( nargs>=i && lua_type(L, i)==LUA_TNUMBER ) {
                         offsetY = lua_tonumber(L, i);
                     }
-                    if( nargs>=i && lv_type(L, i)==LV_TBOOLEAN ) {
-                        animation = lv_toboolean(L, i);
+                    if( nargs>=i && lua_type(L, i)==LUA_TBOOLEAN ) {
+                        animation = lua_toboolean(L, i);
                     }
                 }
                 
@@ -215,12 +215,12 @@ static int scrollToCell (lua_State *L) {
 }
 
 static int scrollToTop(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, View) ){
         LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
         if( [tableView isKindOfClass:[LVCollectionView class]] ) {
             BOOL animation = YES;
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 animation = lua_tonumber(L, 2);
             }
             [tableView luaviewScrollToTopWithAnimated:animation];
@@ -253,9 +253,9 @@ static int scrollToTop(lua_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_UICollectionView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, [LVScrollView memberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, [LVScrollView memberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

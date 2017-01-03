@@ -47,8 +47,8 @@
 -(void) callLuaDelegate:(id) obj{
     lua_State* L = self.lv_lview.l;
     if( L ) {
-        lv_checkstack(L, 4);
-        lv_pushboolean(L, obj?0:1);
+        lua_checkstack(L, 4);
+        lua_pushboolean(L, obj?0:1);
         [LVUtil pushRegistryValue:L key:self.functionTag];
         lv_runFunctionWithArgs(L, 1, 0);
     }
@@ -126,8 +126,8 @@ static int lvNewImageView(lua_State *L) {
         userData->object = CFBridgingRetain(imageView);
         imageView.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_UIImageView );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UIImageView );
+        lua_setmetatable(L, -2);
     }
     LView* view = (__bridge LView *)(L->lView);
     if( view ){
@@ -137,30 +137,30 @@ static int lvNewImageView(lua_State *L) {
 }
 
 static int setImage (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView cancelImageLoadAndClearCallback:L];
-            if( lv_type(L, 3) == LUA_TFUNCTION ) {
+            if( lua_type(L, 3) == LUA_TFUNCTION ) {
                 [LVUtil registryValue:L key:imageView.functionTag stack:3];
                 imageView.needCallLuaFunc = YES;
             } else {
                 imageView.needCallLuaFunc = NO;
             }
-            if ( lv_type(L, 2)==LV_TSTRING ) {
+            if ( lua_type(L, 2)==LUA_TSTRING ) {
                 NSString* imageName = lv_paramString(L, 2);// 2
                 if( imageName ){
                     [imageView setImageByName:imageName];
-                    lv_pushvalue(L,1);
+                    lua_pushvalue(L,1);
                     return 1;
                 }
-            } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-                LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+            } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
+                LVUserDataInfo * userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
                 LVData* lvdata = (__bridge LVData *)(userdata->object);
                 if( LVIsType(userdata, Data) ) {
                     [imageView setImageByData:lvdata.data];
-                    lv_pushvalue(L,1);
+                    lua_pushvalue(L,1);
                     return 1;
                 }
             } else {
@@ -173,17 +173,17 @@ static int setImage (lua_State *L) {
 }
 
 static int scaleType (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 int model = lua_tonumber(L, 2);// 2
                 [imageView setContentMode:model];
                 return 0;
             } else {
                 UIViewContentMode model = imageView.contentMode;
-                lv_pushnumber(L, model);
+                lua_pushnumber(L, model);
                 return 1;
             }
         }
@@ -192,17 +192,17 @@ static int scaleType (lua_State *L) {
 }
 
 static int startAnimating (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( L && user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             NSArray* urlArray = lv_luaTableToArray(L,2);
             float repeatCount = 1;
             float duration = 0.3;
-            if( lv_gettop(L)>=3 ){
+            if( lua_gettop(L)>=3 ){
                 duration = lua_tonumber(L, 3);
             }
-            if( lv_gettop(L)>=4 ){
+            if( lua_gettop(L)>=4 ){
                 repeatCount = lua_tonumber(L, 4);
             }
             LView* lview = (__bridge LView *)(L->lView);
@@ -224,7 +224,7 @@ static int startAnimating (lua_State *L) {
 }
 
 static int stopAnimating (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
@@ -236,24 +236,24 @@ static int stopAnimating (lua_State *L) {
 }
 
 static int isAnimating (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            lv_pushboolean(L, imageView.isAnimating?1:0);
+            lua_pushboolean(L, imageView.isAnimating?1:0);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
 static int disableAnimate (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            BOOL disableAnimate = lv_toboolean(L, 2);
+            BOOL disableAnimate = lua_toboolean(L, 2);
             imageView.disableAnimate = disableAnimate;
         }
     }
@@ -278,8 +278,8 @@ static int disableAnimate (lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_UIImageView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

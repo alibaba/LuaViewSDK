@@ -40,7 +40,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
 }
 
 static int lvDataGC (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
@@ -49,9 +49,9 @@ static int lvNewData (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVData class]];
     
     LVData* data = [[c alloc] init:L];
-    int argN = lv_gettop(L);
+    int argN = lua_gettop(L);
     if( argN>0 ) {
-        if ( lv_type(L, 1)==LV_TSTRING ) {// 支持字符串转 NSData
+        if ( lua_type(L, 1)==LUA_TSTRING ) {// 支持字符串转 NSData
             NSString* s = lv_paramString(L, 1);
             const char* chars = s.UTF8String;
             [data.data appendBytes:chars length:strlen(chars) ];
@@ -68,8 +68,8 @@ static int lvNewData (lua_State *L) {
         userData->object = CFBridgingRetain(data);
         data.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Data );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Data );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
@@ -91,18 +91,18 @@ static int lvNewData (lua_State *L) {
         userData->object = CFBridgingRetain(lvdata);
         lvdata.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Data );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Data );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
 static int __tostring (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVData* data =  (__bridge LVData *)(user->object);
         NSStringEncoding encode = NSUTF8StringEncoding;
-        if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
+        if( lua_gettop(L)>=2 && lua_type(L, 2)==LUA_TNUMBER ) {
             encode = lua_tonumber(L, 2);
         }
         NSString* s = [[NSString alloc] initWithData:data.data encoding:encode];
@@ -120,11 +120,11 @@ static int __tostring (lua_State *L) {
 }
 
 static int __index (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
-        if( lv_type(L, 2)==LV_TNUMBER ){
+        if( lua_type(L, 2)==LUA_TNUMBER ){
             int index = lua_tonumber(L, 2)-1;
             if( index>=0 && index<data.length ){
                 char cs[8] = {0};
@@ -132,13 +132,13 @@ static int __index (lua_State *L) {
                 range.length = 1;
                 range.location = index;
                 [data getBytes:cs range:range];
-                lv_pushnumber(L, cs[0] );
+                lua_pushnumber(L, cs[0] );
                 return 1;
             }
-        } else if( lv_type(L, 2)==LV_TSTRING ){
+        } else if( lua_type(L, 2)==LUA_TSTRING ){
             NSString* key = lv_paramString(L, 2);
             if( [@"length" isEqualToString:key] ){
-                lv_pushnumber(L, data.length );
+                lua_pushnumber(L, data.length );
                 return 1;
             }
         } else {
@@ -149,11 +149,11 @@ static int __index (lua_State *L) {
 }
 
 static int __newindex (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
-        if( lv_type(L, 2)==LV_TNUMBER ){
+        if( lua_type(L, 2)==LUA_TNUMBER ){
             int index = lua_tonumber(L, 2)-1;
             int value = lua_tonumber(L, 3);
             if( index>=0 && index<data.length ){
@@ -165,7 +165,7 @@ static int __newindex (lua_State *L) {
                 [data replaceBytesInRange:range withBytes:cs ];
                 return 0;
             }
-        } else if( lv_type(L, 2)==LV_TSTRING ){
+        } else if( lua_type(L, 2)==LUA_TSTRING ){
             NSString* key = lv_paramString(L, 2);
             int value = lua_tonumber(L, 3);
             if( [@"length" isEqualToString:key] ){
@@ -178,8 +178,8 @@ static int __newindex (lua_State *L) {
 }
 
 static int __add (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     LVData* lvData1 = (__bridge LVData *)(user1->object);
     LVData* lvData2 = (__bridge LVData *)(user2->object);
     if( LVIsType(user1, Data) && LVIsType(user2, Data) && lvData1.data && lvData2.data ){
@@ -206,7 +206,7 @@ static int __add (lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_Data);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 0;
 }
 

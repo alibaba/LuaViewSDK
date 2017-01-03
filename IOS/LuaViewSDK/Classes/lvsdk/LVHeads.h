@@ -49,7 +49,7 @@ extern NSString * const LVScriptExts[2];
 
 //---------------创建用户数据-------------------------------------------------------
 #define NEW_USERDATA(var, typeName)    \
-    LVUserDataInfo* var = ( (LVUserDataInfo*)lv_newuserdata( L, sizeof(LVUserDataInfo)) ); \
+    LVUserDataInfo* var = ( (LVUserDataInfo*)lua_newuserdata( L, sizeof(LVUserDataInfo)) ); \
     lv_createUDataLuatable(L,-1);\
     var->type = LVType_##typeName; \
 //
@@ -193,7 +193,7 @@ typedef enum:int{
 }LVTypeIDEnum;
 
 
-LVTypeIDEnum lv_typeID(const char* type);
+LVTypeIDEnum lua_typeID(const char* type);
 
 #define isNormalRect(r)  ( !( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ) )
 #define isNormalSize(s)  ( !( isnan(s.width) || isnan(s.height) ) )

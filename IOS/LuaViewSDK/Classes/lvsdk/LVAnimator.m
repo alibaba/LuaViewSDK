@@ -46,14 +46,14 @@ static int lvNewAnimator(lua_State *L) {
     animator.lv_userData = userData;
     animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
     
-    lvL_getmetatable(L, META_TABLE_Animator);
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_Animator);
+    lua_setmetatable(L, -2);
     
     return 1;
 }
 
 static int __gc(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     if (LVIsType(data, Animator) && data->object) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
 
@@ -67,7 +67,7 @@ static int __gc(lua_State *L) {
 }
 
 static int __tostring(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
         NSString *s = [NSString stringWithFormat:@"Animator<%@>: %@", animator.keyPath, animator.toValue];
@@ -80,15 +80,15 @@ static int __tostring(lua_State *L) {
 }
 
 static int __eq(lua_State *L) {
-    LVUserDataInfo *data1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo *data2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVUserDataInfo *data1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo *data2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     
     if (LVIsType(data1, Animator) && LVIsType(data2, Animator)) {
         LVAnimator *a1 = (__bridge LVAnimator *)data1->object;
         LVAnimator *a2 = (__bridge LVAnimator *)data2->object;
         
         BOOL eq = [a1 isEqual:a2];
-        lv_pushboolean(L, eq);
+        lua_pushboolean(L, eq);
         
         return 1;
     }
@@ -97,7 +97,7 @@ static int __eq(lua_State *L) {
 }
 
 static int clone(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = [(__bridge LVAnimator *)data->object copy];
         
@@ -107,8 +107,8 @@ static int clone(lua_State *L) {
         animator.lv_userData = userData;
         animator.lv_lview = (__bridge LView * _Nullable)(L->lView);
         
-        lvL_getmetatable(L, META_TABLE_Animator);
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Animator);
+        lua_setmetatable(L, -2);
         
         return 1;
     }
@@ -117,8 +117,8 @@ static int clone(lua_State *L) {
 }
 
 static int with(lua_State *L) {
-    LVUserDataInfo *adata = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo *vdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVUserDataInfo *adata = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo *vdata = (LVUserDataInfo *)lua_touserdata(L, 2);
 
     if (LVIsType(adata, Animator) && LVIsType(vdata, View)) {
         LVAnimator *animator = (__bridge LVAnimator *)adata->object;
@@ -131,7 +131,7 @@ static int with(lua_State *L) {
 }
 
 static int start(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -148,7 +148,7 @@ static int start(lua_State *L) {
 }
 
 static int cancel(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -161,20 +161,20 @@ static int cancel(lua_State *L) {
 }
 
 static int isRunning(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
-        lv_pushboolean(L, animator.running);
+        lua_pushboolean(L, animator.running);
     } else {
-        lv_pushboolean(L, 0);
+        lua_pushboolean(L, 0);
     }
     
     return 1;
 }
 
 static int pauseAnimator(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -187,7 +187,7 @@ static int pauseAnimator(lua_State *L) {
 }
 
 static int resumeAnimator(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -200,20 +200,20 @@ static int resumeAnimator(lua_State *L) {
 }
 
 static int isPaused(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
-        lv_pushboolean(L, animator.paused);
+        lua_pushboolean(L, animator.paused);
     } else {
-        lv_pushboolean(L, 0);
+        lua_pushboolean(L, 0);
     }
     
     return 1;
 }
 
 static int duration(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     float value = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
@@ -228,7 +228,7 @@ static int duration(lua_State *L) {
 }
 
 static int delay(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     float value = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
@@ -243,7 +243,7 @@ static int delay(lua_State *L) {
 }
 
 static int repeatCount(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     int value = (int)lv_tointeger(L, 2);
     
     if (LVIsType(data, Animator)) {
@@ -258,8 +258,8 @@ static int repeatCount(lua_State *L) {
 }
 
 static int autoreverses(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    BOOL autoreverses = !!lv_toboolean(L, 2);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
+    BOOL autoreverses = !!lua_toboolean(L, 2);
     
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
@@ -273,7 +273,7 @@ static int autoreverses(lua_State *L) {
 }
 
 static int interpolator(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVAniamtorInterpolator interpolator = lua_tonumber(L, 2);
     
     if (LVIsType(data, Animator)) {
@@ -288,12 +288,12 @@ static int interpolator(lua_State *L) {
 }
 
 static int setCallback(lua_State *L, int idx) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if (LVIsType(data, Animator)) {
-        lv_pushvalue(L, 1);
-        if (lv_type(L, 2) == LUA_TFUNCTION) {
-            lv_pushvalue(L, 2);
+        lua_pushvalue(L, 1);
+        if (lua_type(L, 2) == LUA_TFUNCTION) {
+            lua_pushvalue(L, 2);
         } else {
             lua_pushnil(L);
         }
@@ -327,16 +327,16 @@ static int onResume(lua_State *L) {
 }
 
 static int callback(lua_State *L) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if (LVIsType(data, Animator) && lv_type(L, 2) == LUA_TTABLE) {
-        lv_pushvalue(L, 2);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if (LVIsType(data, Animator) && lua_type(L, 2) == LUA_TTABLE) {
+        lua_pushvalue(L, 2);
         lua_pushnil(L);
         
-        while (lv_next(L, -2)) {
-            if (lv_type(L, -2) != LV_TSTRING) {
+        while (lua_next(L, -2)) {
+            if (lua_type(L, -2) != LUA_TSTRING) {
                 continue;
             }
-            const char* key = lv_tostring(L, -2);
+            const char* key = lua_tostring(L, -2);
             int idx = 0;
             for (int i = 0; i < sizeof(callbackKeys) / sizeof(callbackKeys[0]); ++i) {
                 if (strcmp(key, callbackKeys[i]) == 0) {
@@ -346,19 +346,19 @@ static int callback(lua_State *L) {
             }
             
             if (idx != 0) {
-                lv_pushvalue(L, 1);
-                if (lv_type(L, -2) == LUA_TFUNCTION) {
-                    lv_pushvalue(L, -2);
+                lua_pushvalue(L, 1);
+                if (lua_type(L, -2) == LUA_TFUNCTION) {
+                    lua_pushvalue(L, -2);
                 } else {
                     lua_pushnil(L);
                 }
                 lv_udataRef(L, idx);
-                lv_pop(L, 2);
+                lua_pop(L, 2);
             } else {
-                lv_pop(L, 1);
+                lua_pop(L, 1);
             }
         }
-        lv_pop(L, 1);
+        lua_pop(L, 1);
     }
     
     lv_pushUserdata(L, data);
@@ -367,7 +367,7 @@ static int callback(lua_State *L) {
 }
 
 static int updateValue(lua_State *L, NSString *keyPath, id value) {
-    LVUserDataInfo *data = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo *data = (LVUserDataInfo *)lua_touserdata(L, 1);
     if (LVIsType(data, Animator)) {
         LVAnimator *animator = (__bridge LVAnimator *)data->object;
         if (keyPath) {
@@ -377,7 +377,7 @@ static int updateValue(lua_State *L, NSString *keyPath, id value) {
         animator.toValue = value;
     }
     
-    lv_settop(L, 1);
+    lua_settop(L, 1);
     
     return 1;
 }
@@ -405,8 +405,8 @@ static int rotation(lua_State *L) {
 
 static int scale(lua_State *L) {
     // default y = x
-    if (lv_gettop(L) == 2) {
-        lv_pushnumber(L, lua_tonumber(L, 2));
+    if (lua_gettop(L) == 2) {
+        lua_pushnumber(L, lua_tonumber(L, 2));
     }
     return updatePoint(L, @"transform.scale");
 }
@@ -481,7 +481,7 @@ static int value(lua_State *L) {
     };
     
     lv_createClassMetaTable(L, META_TABLE_Animator);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     return 1;
 }
@@ -749,14 +749,14 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
 - (void)callback:(LVAnimatorCallback)idx {
     lua_State* l = self.lv_lview.l;
     if (l && self.lv_userData) {
-        int stackIndex = lv_gettop(l);
+        int stackIndex = lua_gettop(l);
 
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, idx);
         lv_runFunction(l);
         
-        if (lv_gettop(l) > stackIndex) {
-            lv_settop(l, stackIndex);
+        if (lua_gettop(l) > stackIndex) {
+            lua_settop(l, stackIndex);
         }
     }
 }

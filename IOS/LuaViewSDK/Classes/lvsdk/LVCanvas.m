@@ -72,7 +72,7 @@
 }
 
 static int nativeObj (lua_State *L) {
-    LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * userData = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( userData ){
         LVCanvas* view = (__bridge LVCanvas *)(userData->object);
         if( view ){
@@ -85,7 +85,7 @@ static int nativeObj (lua_State *L) {
 }
 
 static int canvas_drawPoint (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x1 = lua_tonumber(L, 2);
@@ -107,7 +107,7 @@ static int canvas_drawPoint (lua_State *L) {
 }
 
 static int canvas_drawLine (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x1 = lua_tonumber(L, 2);
@@ -128,7 +128,7 @@ static int canvas_drawLine (lua_State *L) {
 }
 
 static int canvas_drawRect (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x1 = lua_tonumber(L, 2);
@@ -175,7 +175,7 @@ static int canvas_drawRect (lua_State *L) {
 }
 
 static int canvas_drawRoundRect (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x = lua_tonumber(L, 2);
@@ -218,14 +218,14 @@ static int canvas_drawRoundRect (lua_State *L) {
 }
 
 static int canvas_drawEllipse (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x = lua_tonumber(L, 2);
         CGFloat y = lua_tonumber(L, 3);
         CGFloat w = lua_tonumber(L, 4);
         CGFloat h = w;
-        if( lv_type(L, 5)==LV_TNUMBER ) {
+        if( lua_type(L, 5)==LUA_TNUMBER ) {
             h = lua_tonumber(L, 5);
         }
         [canvas drawEllipse:x :y :w :h];
@@ -235,7 +235,7 @@ static int canvas_drawEllipse (lua_State *L) {
 }
 
 static int canvas_drawCircle (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVCanvas* canvas = (__bridge LVCanvas *)(user1->object);
     if( LVIsType(user1, Canvas)  ){
         CGFloat x = lua_tonumber(L, 2);
@@ -248,10 +248,10 @@ static int canvas_drawCircle (lua_State *L) {
 }
 
 static int canvas_color (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             UIColor* color = lv_getColorFromStack(L, 2);
             canvas.color = color;
             return 0;
@@ -260,8 +260,8 @@ static int canvas_color (lua_State *L) {
             NSUInteger c = 0;
             CGFloat a = 0;
             if( lv_uicolor2int(color, &c,&a) ){
-                lv_pushnumber(L, c );
-                lv_pushnumber(L, a);
+                lua_pushnumber(L, c );
+                lua_pushnumber(L, a);
                 return 2;
             }
         }
@@ -277,14 +277,14 @@ static int canvas_color (lua_State *L) {
 }
 
 static int canvas_strokeWidth (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             canvas.strokeWidth = lua_tonumber(L, 2);
             return 0;
         } else {
-            lv_pushnumber(L, canvas.strokeWidth );
+            lua_pushnumber(L, canvas.strokeWidth );
             return 1;
         }
     }
@@ -292,14 +292,14 @@ static int canvas_strokeWidth (lua_State *L) {
 }
 
 static int canvas_style (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             canvas.drawingMode = lua_tonumber(L, 2);
             return 0;
         } else {
-            lv_pushnumber(L, canvas.drawingMode );
+            lua_pushnumber(L, canvas.drawingMode );
             return 1;
         }
     }
@@ -320,7 +320,7 @@ static int canvas_style (lua_State *L) {
 }
 
 static int canvas_resetPaint (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         [canvas resetPaint];
@@ -329,10 +329,10 @@ static int canvas_resetPaint (lua_State *L) {
 }
 
 static int canvas_alpha (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             CGFloat alpha = lua_tonumber(L, 2);
             canvas.alpha = alpha;
             return 0;
@@ -342,10 +342,10 @@ static int canvas_alpha (lua_State *L) {
 }
 
 static int canvas_textSize (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             CGFloat font = lua_tonumber(L, 2);
             canvas.font = [UIFont systemFontOfSize:font];
             return 0;
@@ -357,11 +357,11 @@ static int canvas_textSize (lua_State *L) {
 }
 
 static int canvas_bold (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            CGFloat bold = lv_toboolean(L, 2);
+        if( lua_gettop(L)>=2 ) {
+            CGFloat bold = lua_toboolean(L, 2);
             if (bold) {
                 canvas.font = [UIFont boldSystemFontOfSize:canvas.font.pointSize];
             }else{
@@ -382,8 +382,8 @@ static int canvas_bold (lua_State *L) {
 }
 
 static int canvas_clipRect (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    if( user && lv_gettop(L)>=5 ){
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user && lua_gettop(L)>=5 ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat x = lua_tonumber(L, 2);
         CGFloat y = lua_tonumber(L, 3);
@@ -395,10 +395,10 @@ static int canvas_clipRect (lua_State *L) {
 }
 
 static int drawText (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
-        if( lv_gettop(L)>=2 ) {
+        if( lua_gettop(L)>=2 ) {
             const char* text = lv_tolstring(L, 2, NULL);
             NSString *str = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
             CGFloat x = lua_tonumber(L, 3);
@@ -434,7 +434,7 @@ static int canvas_drawOval (lua_State *L) {
 }
 
 static int canvas_drawArc (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         CGFloat x = lua_tonumber(L, 2);
         CGFloat y = lua_tonumber(L, 3);
@@ -442,7 +442,7 @@ static int canvas_drawArc (lua_State *L) {
         CGFloat h = lua_tonumber(L, 5);
         CGFloat startAngle = lua_tonumber(L, 6);
         CGFloat endAngle = lua_tonumber(L, 7);
-        BOOL includeCenter = lv_toboolean(L, 8);
+        BOOL includeCenter = lua_toboolean(L, 8);
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         [canvas drawArc:x :y :w :h :startAngle :endAngle :includeCenter];
     }
@@ -462,15 +462,15 @@ static int canvas_drawArc (lua_State *L) {
 }
 
 static int canvas_drawImage (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         UIImage* image = nil;
-        if ( lv_type(L, 2)==LV_TSTRING ) {
+        if ( lua_type(L, 2)==LUA_TSTRING ) {
             NSString* imageName = lv_paramString(L, 2);// 2
             image = [canvas.lv_lview.bundle imageWithName:imageName];
-        } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-            LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+        } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
+            LVUserDataInfo * userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
             if( LVIsType(userdata, View) ){
                 LVImage* lvImage = (__bridge LVImage *)(userdata->object);
                 if( [lvImage isKindOfClass:[LVImage class]] ) {
@@ -499,7 +499,7 @@ static int canvas_drawImage (lua_State *L) {
 }
 
 static int canvas_save (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         [canvas saveGState];
@@ -514,7 +514,7 @@ static int canvas_save (lua_State *L) {
 }
 
 static int canvas_restore (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         [canvas restoreGState];
@@ -531,16 +531,16 @@ static int canvas_restore (lua_State *L) {
 }
 
 static int canvas_rotate (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat angle = lua_tonumber(L, 2);
         CGFloat x = 0;
-        if( lv_type(L, 3) ) {
+        if( lua_type(L, 3) ) {
             x = lua_tonumber(L, 3);
         }
         CGFloat y = 0;
-        if( lv_type(L, 4) ) {
+        if( lua_type(L, 4) ) {
             y = lua_tonumber(L, 4);
         }
         [canvas rotate:angle :x :y];;
@@ -566,12 +566,12 @@ static int canvas_rotate (lua_State *L) {
 }
 
 static int canvas_skew (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat sx = lua_tonumber(L, 2);
         CGFloat sy = 0;
-        if (lv_type(L, 3)==LV_TNUMBER ) {
+        if (lua_type(L, 3)==LUA_TNUMBER ) {
             sy = lua_tonumber(L, 3);
         }
         [canvas skew:sx :sy];
@@ -588,12 +588,12 @@ static int canvas_skew (lua_State *L) {
 }
 
 static int canvas_scale (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat scaleX = lua_tonumber(L, 2);
         CGFloat scaleY = scaleX;
-        if( lv_type(L, 3)==LV_TNUMBER ) {
+        if( lua_type(L, 3)==LUA_TNUMBER ) {
             scaleY = lua_tonumber(L, 3);
         }
         [canvas scale:scaleX :scaleY];
@@ -609,7 +609,7 @@ static int canvas_scale (lua_State *L) {
 }
 
 static int canvas_translate (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVCanvas* canvas = (__bridge LVCanvas *)(user->object);
         CGFloat x = lua_tonumber(L, 2);
@@ -632,7 +632,7 @@ static void releaseCanvasUserData(LVUserDataInfo* user){
 }
 
 static int lvCanvasGC (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseCanvasUserData(user);
     return 0;
 }
@@ -647,8 +647,8 @@ static int lvNewCanvas (lua_State *L) {
         userData->object = CFBridgingRetain(canvas);
         canvas.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Canvas );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Canvas );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
@@ -661,8 +661,8 @@ static int lvNewCanvas (lua_State *L) {
         userData->object = CFBridgingRetain(lvCanvas);
         lvCanvas.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Canvas );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Canvas );
+        lua_setmetatable(L, -2);
     }
     return lvCanvas;
 }
@@ -709,12 +709,12 @@ static int lvNewCanvas (lua_State *L) {
     };
     
     lv_createClassMetaTable(L, META_TABLE_Canvas);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     
     {
         // PaintStyle 常量
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"FILL":    @(kCGPathFill),

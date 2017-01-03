@@ -26,9 +26,9 @@
 
 +(NSString*) call:(lua_State*) l  lightUserData:(id) lightUserData key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs {
     if( l ){
-        lv_checkStack32(l);
-        lv_pushlightuserdata(l, (__bridge void *)lightUserData);// key=view
-        lv_gettable(l, LV_REGISTRYINDEX);/* table = registry[&Key] */
+        lua_checkstack32(l);
+        lua_pushlightuserdata(l, (__bridge void *)lightUserData);// key=view
+        lua_gettable(l, LUA_REGISTRYINDEX);/* table = registry[&Key] */
         
         return [LVUtil call:l key1:key1 key2:key2 nargs:nargs nrets:0];
     }
@@ -49,28 +49,28 @@
       nargs:(int)nargs nrets:(int)nret
     retType:(int) retType{
     if( l ){
-        if( lv_type(l, -1)==LV_TNIL ){
+        if( lua_type(l, -1)==LUA_TNIL ){
             return @"LVUtil: call nil function";
-        } else if( lv_type(l, -1)==LUA_TTABLE && key1){//table
-            lv_getfield(l, -1, key1);
-            lv_remove(l, -2);
+        } else if( lua_type(l, -1)==LUA_TTABLE && key1){//table
+            lua_getfield(l, -1, key1);
+            lua_remove(l, -2);
             
-            if( lv_type(l, -1)==LUA_TTABLE && key2){//table
-                lv_getfield(l, -1, key2);
-                lv_remove(l, -2);
+            if( lua_type(l, -1)==LUA_TTABLE && key2){//table
+                lua_getfield(l, -1, key2);
+                lua_remove(l, -2);
                 
-                if( lv_type(l, -1)==LUA_TTABLE && key3){//table
-                    lv_getfield(l, -1, key3);
-                    lv_remove(l, -2);
+                if( lua_type(l, -1)==LUA_TTABLE && key3){//table
+                    lua_getfield(l, -1, key3);
+                    lua_remove(l, -2);
                     
-                    if( lv_type(l, -1)==LUA_TTABLE && key4){//table
-                        lv_getfield(l, -1, key4);
-                        lv_remove(l, -2);
+                    if( lua_type(l, -1)==LUA_TTABLE && key4){//table
+                        lua_getfield(l, -1, key4);
+                        lua_remove(l, -2);
                     }
                 }
             }
         }
-        int type = lv_type(l, -1);
+        int type = lua_type(l, -1);
         if ( type==retType && nret==1 ) {
             return nil;
         }
@@ -86,13 +86,13 @@ NSString* lv_runFunction(lua_State* l){
 }
 
 NSString* lv_runFunctionWithArgs(lua_State* l, int nargs, int nret){
-    if( l && lv_type(l, -1) == LUA_TFUNCTION ) {
+    if( l && lua_type(l, -1) == LUA_TFUNCTION ) {
         if( nargs>0 ){
-            lv_insert(l, -nargs-1);
+            lua_insert(l, -nargs-1);
         }
-        int errorCode = lv_pcall( l, nargs, nret, 0);
+        int errorCode = lua_pcall( l, nargs, nret, 0);
         if ( errorCode != 0 ) {
-            const char* s = lv_tostring(l, -1);
+            const char* s = lua_tostring(l, -1);
             LVError( @"%s", s );
 #ifdef DEBUG
             NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s",s];
@@ -110,48 +110,48 @@ void lv_pushUserdata(lua_State* L, void* p){///是否正确 ????????
     if( p ) {
         Udata* u = (Udata*)p;
         u -= 1;
-        lv_lock(L);
-        lvC_checkGC(L);
+        lua_lock(L);
+        luaC_checkGC(L);
         setuvalue(L, L->top, u);
         api_incr_top(L);
-        lv_unlock(L);
+        lua_unlock(L);
     } else {
         lua_pushnil(L);
     }
 }
 
 id lv_luaTableToDictionary(lua_State* L ,int index){
-    if( lv_type(L, index)!=LUA_TTABLE ) {
+    if( lua_type(L, index)!=LUA_TTABLE ) {
         return nil;
     }
-    lv_checkstack(L, 128);
+    lua_checkstack(L, 128);
     NSMutableDictionary* dic = nil;
     NSMutableArray* array = nil;
-    //lv_settop(L, 8);
+    //lua_settop(L, 8);
     // Push another reference to the table on top of the stack (so we know
     // where it is, and this function can work for negative, positive and
     // pseudo indices
-    lv_pushvalue(L, index);
+    lua_pushvalue(L, index);
     // stack now contains: -1 => table
     lua_pushnil(L);
     // stack now contains: -1 => nil; -2 => table
-    while (lv_next(L, -2))
+    while (lua_next(L, -2))
     {
-        int keyType = lv_type(L, -2);
+        int keyType = lua_type(L, -2);
         
         id value = nil;
-        if( lv_type(L, -1)==LV_TSTRING ){
+        if( lua_type(L, -1)==LUA_TSTRING ){
             value = lv_paramString(L, -1);
-        } else if( lv_type(L, -1)==LV_TNUMBER ){
+        } else if( lua_type(L, -1)==LUA_TNUMBER ){
             value = @(lua_tonumber(L, -1) );
-        } else if( lv_type(L, -1)==LUA_TTABLE ){
+        } else if( lua_type(L, -1)==LUA_TTABLE ){
             value = lv_luaTableToDictionary(L,-1);
-        } else if( lv_type(L, -1)==LV_TBOOLEAN ){
-            value = @( ((BOOL)lv_toboolean(L, -1)) );
+        } else if( lua_type(L, -1)==LUA_TBOOLEAN ){
+            value = @( ((BOOL)lua_toboolean(L, -1)) );
         }
         // stack now contains: -1 => value; -2 => key; -3 => table
         if( value ) {
-            if( keyType== LV_TNUMBER ) {
+            if( keyType== LUA_TNUMBER ) {
                 // number key
                 if( array == nil ) {
                     array = [[NSMutableArray alloc] init];
@@ -167,10 +167,10 @@ id lv_luaTableToDictionary(lua_State* L ,int index){
                 }
             }
         }
-        lv_pop(L, 1);
+        lua_pop(L, 1);
         // stack now contains: -1 => key; -2 => table
     }
-    lv_pop(L, 1);
+    lua_pop(L, 1);
     
     if( [dic count]>0 ) {
         return dic;
@@ -183,30 +183,30 @@ id lv_luaTableToDictionary(lua_State* L ,int index){
 }
 
 NSArray* lv_luaTableKeys(lua_State* L, int index){
-    lv_checkstack(L, 128);
+    lua_checkstack(L, 128);
     NSMutableArray* keys = [[NSMutableArray alloc] init];
-    //lv_settop(L, 8);
+    //lua_settop(L, 8);
     // Push another reference to the table on top of the stack (so we know
     // where it is, and this function can work for negative, positive and
     // pseudo indices
-    if ( lv_type(L, index)!= LUA_TTABLE ){
+    if ( lua_type(L, index)!= LUA_TTABLE ){
         return nil;
     }
-    lv_pushvalue(L, index);
+    lua_pushvalue(L, index);
     // stack now contains: -1 => table
     lua_pushnil(L);
     // stack now contains: -1 => nil; -2 => table
-    while (lv_next(L, -2))
+    while (lua_next(L, -2))
     {
         NSString* key   = lv_paramString(L, -2);
         // stack now contains: -1 => value; -2 => key; -3 => table
         if( key ) {
             [keys addObject:key];
         }
-        lv_pop(L, 1);
+        lua_pop(L, 1);
         // stack now contains: -1 => key; -2 => table
     }
-    lv_pop(L, 1);
+    lua_pop(L, 1);
     // Stack is now the same as it was on entry to this function
     if( keys.count>0 ){
         return keys;
@@ -216,16 +216,16 @@ NSArray* lv_luaTableKeys(lua_State* L, int index){
 
 NSArray* lv_luaTableToArray(lua_State* L,int stackID)
 {
-    if( lv_type(L, stackID)==LUA_TTABLE) {
-        int count = lvL_getn(L, stackID);
+    if( lua_type(L, stackID)==LUA_TTABLE) {
+        int count = luaL_getn(L, stackID);
         NSMutableArray* array = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < count; i++)
         {
-            lv_rawgeti(L, stackID, i+1);
+            lua_rawgeti(L, stackID, i+1);
             NSString* s = lv_paramString(L, -1);
             [array addObject:s];
-            lv_pop(L,1);
+            lua_pop(L,1);
         }
         return array;
     }
@@ -236,55 +236,55 @@ NSArray* lv_luaTableToArray(lua_State* L,int stackID)
 
 + (void) registryValue:(lua_State*)L key:(id) key stack:(int) stackID{
     if( L ) {
-        lv_checkstack(L, 4);
-        lv_pushvalue(L, stackID );    // value
-        lv_pushlightuserdata(L, (__bridge void *)(key) );   // key
-        lv_insert(L, -2);                // key <==> value 互换
-        lv_settable(L, LV_REGISTRYINDEX);// registry[&Key] = fucntion
+        lua_checkstack(L, 4);
+        lua_pushvalue(L, stackID );    // value
+        lua_pushlightuserdata(L, (__bridge void *)(key) );   // key
+        lua_insert(L, -2);                // key <==> value 互换
+        lua_settable(L, LUA_REGISTRYINDEX);// registry[&Key] = fucntion
     }
 }
 
 + (void) unregistry:(lua_State*) L key:(id) key{
     if( L ) {
-        lv_checkstack(L, 2);
-        lv_pushlightuserdata(L, (__bridge void *)(key) );   // key
+        lua_checkstack(L, 2);
+        lua_pushlightuserdata(L, (__bridge void *)(key) );   // key
         lua_pushnil(L);                   // nil
-        lv_settable(L, LV_REGISTRYINDEX);// registry[&Key] = nil
+        lua_settable(L, LUA_REGISTRYINDEX);// registry[&Key] = nil
     }
 }
 
 + (void) pushRegistryValue:(lua_State*) L key:(id) key{
     if( L ){
-        lv_pushlightuserdata(L, (__bridge void *)(key));// key=button
-        lv_gettable(L, LV_REGISTRYINDEX);/* value = registry[&Key] */
+        lua_pushlightuserdata(L, (__bridge void *)(key));// key=button
+        lua_gettable(L, LUA_REGISTRYINDEX);/* value = registry[&Key] */
     }
 }
 
 void lv_createClassMetaTable(lua_State* L , const char* name ){
-    lvL_newmetatable(L, name );
+    luaL_newmetatable(L, name );
     lua_pushstring(L, "__index");//必须要的。
-    lv_pushvalue(L, -2); /* pushes the metatable */
-    lv_settable(L, -3); /* metatable.__index = metatable */
+    lua_pushvalue(L, -2); /* pushes the metatable */
+    lua_settable(L, -3); /* metatable.__index = metatable */
 }
 
-void lv_checkStack32(lua_State* l){
+void lua_checkstack32(lua_State* l){
     if( l ){
-        lv_checkstack( l, 32);
+        lua_checkstack( l, 32);
     }
 }
 
 void lv_clearFirstTableValue(lua_State* L){
-    int num = lv_gettop(L);
-    if( num>1 && lv_type(L, 1)==LUA_TTABLE ) {
-        lv_checkstack(L, 4);
-        lv_getfield(L, 1, LUAVIEW_SYS_TABLE_KEY);
-        if( lv_isnil(L, -1) ) {
-            lv_settop(L, num);
-        } else {
-            lv_settop(L, num);
-            lv_remove(L, 1);
-        }
-    }
+//    int num = lua_gettop(L);
+//    if( num>1 && lua_type(L, 1)==LUA_TTABLE ) {
+//        lua_checkstack(L, 4);
+//        lua_getfield(L, 1, LUAVIEW_SYS_TABLE_KEY);
+//        if( lua_isnil(L, -1) ) {
+//            lua_settop(L, num);
+//        } else {
+//            lua_settop(L, num);
+//            lua_remove(L, 1);
+//        }
+//    }
 }
 
 BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
@@ -304,7 +304,7 @@ BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
 }
 
 UIColor* lv_getColorFromStack(lua_State* L, int stackID){
-    if ( lv_type(L, stackID)==LV_TSTRING ) {
+    if ( lua_type(L, stackID)==LUA_TSTRING ) {
 //        NSString* s = lv_paramString(L, stackID);
 //        if( s.length>0 && [s characterAtIndex:0]=='#' ) {
 //            s = [s substringFromIndex:1];
@@ -321,14 +321,14 @@ UIColor* lv_getColorFromStack(lua_State* L, int stackID){
 //            UIColor* colorObj = [UIColor colorWithRed:r green:g blue:b alpha:a];
 //            return colorObj;
 //        }
-    } else if( lv_type(L,stackID)==LV_TNUMBER ) {
+    } else if( lua_type(L,stackID)==LUA_TNUMBER ) {
         NSUInteger color = lua_tonumber(L, stackID);
         float a = 1;
         float r = ( (color>>16)&0xff )/255.0;
         float g = ( (color>>8)&0xff  )/255.0;
         float b = ( (color>>0)&0xff  )/255.0;
         int stackID3 = stackID + 1;
-        if ( lv_gettop(L)>=stackID3 && lv_type(L,stackID3)==LV_TNUMBER ) {
+        if ( lua_gettop(L)>=stackID3 && lua_type(L,stackID3)==LUA_TNUMBER ) {
             a = lua_tonumber(L, stackID+1 );
             if( a>1 ) {
                 a = 1;
@@ -505,12 +505,12 @@ UIColor* lv_getColorFromStack(lua_State* L, int stackID){
 }
 
 BOOL lv_isLuaObjectHaveProperty(lua_State* L, int idx, const char* key){
-    if (lv_type(L, idx) == LUA_TTABLE ) {
-        lv_checkstack(L, 8);
-        lv_pushvalue(L, idx);
-        lv_getfield(L, -1, key);
-        BOOL ret = lv_type(L, -1)!=LV_TNIL;
-        lv_pop(L, 2);
+    if (lua_type(L, idx) == LUA_TTABLE ) {
+        lua_checkstack(L, 8);
+        lua_pushvalue(L, idx);
+        lua_getfield(L, -1, key);
+        BOOL ret = lua_type(L, -1)!=LUA_TNIL;
+        lua_pop(L, 2);
         return ret;
     }
     return NO;
@@ -522,13 +522,13 @@ static id luaObjBox(lua_State* L, int idx){
 }
 
 id lv_luaValueToNativeObject(lua_State* L, int idx){
-    int type = lv_type(L, idx);
+    int type = lua_type(L, idx);
     switch ( type ) {
-        case LV_TNIL: {
+        case LUA_TNIL: {
             return nil;
         }
-        case LV_TUSERDATA: {
-            LVUserDataInfo* user =  (LVUserDataInfo*)lv_touserdata(L, idx);
+        case LUA_TUSERDATA: {
+            LVUserDataInfo* user =  (LVUserDataInfo*)lua_touserdata(L, idx);
             id<LVProtocal> obj =  (__bridge id<LVProtocal>)(user->object);
             if( [obj respondsToSelector:@selector(lv_nativeObject)] ){
                 return [obj lv_nativeObject];
@@ -536,18 +536,18 @@ id lv_luaValueToNativeObject(lua_State* L, int idx){
             LVError(@"lv_luaValueToNativeObject.1");
             return obj;
         }
-        case LV_TLIGHTUSERDATA:{
+        case LUA_TLIGHTUSERDATA:{
             LVPointerValueBox* box = [[LVPointerValueBox alloc] init];
-            box.pointer = lv_touserdata(L, idx);
+            box.pointer = lua_touserdata(L, idx);
             return box;
         }
-        case LV_TBOOLEAN: {
-            return [[NSNumber alloc] initWithBool:lv_toboolean(L, idx)];
+        case LUA_TBOOLEAN: {
+            return [[NSNumber alloc] initWithBool:lua_toboolean(L, idx)];
         }
-        case LV_TNUMBER: {
+        case LUA_TNUMBER: {
             return @( lua_tonumber(L, idx) );
         }
-        case LV_TSTRING: {
+        case LUA_TSTRING: {
             return lv_paramString(L, idx);
         }
         case LUA_TTABLE: {
@@ -570,30 +570,30 @@ id lv_luaValueToNativeObject(lua_State* L, int idx){
 
 
 void lv_pushNativeObject(lua_State* L, id value){
-    lv_checkstack(L, 4);
+    lua_checkstack(L, 4);
     if( [value isKindOfClass:[NSString class]] ) {
         NSString* s = value;
         lua_pushstring(L, s.UTF8String);
         return;
     } else if( [value isKindOfClass:[NSDictionary class]] ) {
         NSDictionary* dictionary = value;
-        lv_newtable(L);
+        lua_newtable(L);
         for (NSString *key in dictionary) {
             NSString* value = dictionary[key];
-            lv_checkstack(L, 4);
+            lua_checkstack(L, 4);
             lua_pushstring(L, key.UTF8String);
             lv_pushNativeObject(L,value);
-            lv_settable(L, -3);
+            lua_settable(L, -3);
         }
         return;
     } else if( [value isKindOfClass:[NSArray class]] ) {
         NSArray* array = value;
-        lv_newtable(L);
+        lua_newtable(L);
         for (int i=0; i<array.count; i++) {
             id value = array[i];
-            lv_pushnumber(L, i+1);
+            lua_pushnumber(L, i+1);
             lv_pushNativeObject(L,value);
-            lv_settable(L, -3);
+            lua_settable(L, -3);
         }
         return;
     } else if( [value isKindOfClass:[NSNumber class]] ) {
@@ -604,10 +604,10 @@ void lv_pushNativeObject(lua_State* L, id value){
         NSNumber* number = value;
         if( [value class] == boolClass) {
             //  是否是bool类型
-            lv_pushboolean(L, number.boolValue);
+            lua_pushboolean(L, number.boolValue);
             return;
         } else {
-            lv_pushnumber(L, number.doubleValue);
+            lua_pushnumber(L, number.doubleValue);
             return;
         }
     }  else if( value==nil || value == [NSNull null] ) {
@@ -630,15 +630,15 @@ void lv_pushNativeObjectWithBox(lua_State * L, id nativeObject ){
     NEW_USERDATA(userData, NativeObject);
     userData->object = CFBridgingRetain(nativeObjBox);
     nativeObjBox.lv_userData = userData;
-    lvL_getmetatable(L, META_TABLE_NativeObject );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_NativeObject );
+    lua_setmetatable(L, -2);
 }
 
 // 获取参数-》字符串类型
 NSString* lv_paramString(lua_State* L, int idx ){
-    if( lv_gettop(L)>=ABS(idx) && lv_type(L, idx) == LV_TSTRING ) {
+    if( lua_gettop(L)>=ABS(idx) && lua_type(L, idx) == LUA_TSTRING ) {
         size_t n = 0;
-        const char* chars = lvL_checklstring(L, idx, &n );
+        const char* chars = luaL_checklstring(L, idx, &n );
         NSString* s = @"";
         if( chars && n>0 ){
             s = [NSString stringWithUTF8String:chars];
@@ -660,16 +660,16 @@ NSString* lv_paramString(lua_State* L, int idx ){
 
 void lv_pushUDataRef(lua_State* L, int key) {
     // -1:userdata
-    if( lv_gettop(L)>=1 && lv_type(L, -1)==LV_TUSERDATA ) {
-        lv_checkstack(L, 2);
+    if( lua_gettop(L)>=1 && lua_type(L, -1)==LUA_TUSERDATA ) {
+        lua_checkstack(L, 2);
         
         if( lv_getUDataLuaTable(L, -1) ) {
-            lv_remove(L, -2);
+            lua_remove(L, -2);
         }
-        if( lv_type(L, -1)==LUA_TTABLE ) {
-            lv_pushnumber(L, key);
-            lv_gettable(L, -2);
-            lv_remove(L, -2);
+        if( lua_type(L, -1)==LUA_TTABLE ) {
+            lua_pushnumber(L, key);
+            lua_gettable(L, -2);
+            lua_remove(L, -2);
         } else {
             LVError( @"lv_pushUDataRef.1" );
         }
@@ -680,15 +680,15 @@ void lv_pushUDataRef(lua_State* L, int key) {
 
 void lv_udataRef(lua_State* L, int key ){
     //-2: userdata   -1: value
-    if( lv_gettop(L)>=2 && lv_type(L, -2)==LV_TUSERDATA ) {
-        lv_checkstack(L, 8);
+    if( lua_gettop(L)>=2 && lua_type(L, -2)==LUA_TUSERDATA ) {
+        lua_checkstack(L, 8);
         
         lv_getUDataLuaTable(L, -2);//table
-        if( lv_type(L, -1)==LUA_TTABLE ) {
-            lv_pushnumber(L, key);// key
-            lv_pushvalue(L, -3);//value
-            lv_settable(L, -3);
-            lv_pop(L, 2);
+        if( lua_type(L, -1)==LUA_TTABLE ) {
+            lua_pushnumber(L, key);// key
+            lua_pushvalue(L, -3);//value
+            lua_settable(L, -3);
+            lua_pop(L, 2);
         } else {
             LVError( @"lv_udataRef" );
         }
@@ -697,15 +697,15 @@ void lv_udataRef(lua_State* L, int key ){
 
 void lv_udataUnref(lua_State* L, int key) {
     // -1:userdata
-    if( lv_gettop(L)>=1 && lv_type(L, -1)==LV_TUSERDATA ) {
-        lv_checkstack(L, 8);
+    if( lua_gettop(L)>=1 && lua_type(L, -1)==LUA_TUSERDATA ) {
+        lua_checkstack(L, 8);
         
         lv_getUDataLuaTable(L, -1);
-        if( lv_type(L, -1)==LUA_TTABLE ) {
-            lv_pushnumber(L, key);
+        if( lua_type(L, -1)==LUA_TTABLE ) {
+            lua_pushnumber(L, key);
             lua_pushnil(L);
-            lv_settable(L, -3);
-            lv_pop(L, 1);
+            lua_settable(L, -3);
+            lua_pop(L, 1);
         } else {
             LVError( @"lv_udataUnref" );
         }
@@ -719,19 +719,19 @@ void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell){
     NEW_USERDATA(userData, View);
     userData->object = CFBridgingRetain(cell);
     
-    lvL_getmetatable(L, META_TABLE_UIView );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_UIView );
+    lua_setmetatable(L, -2);
     
-    lv_settable(L, -3);
+    lua_settable(L, -3);
 }
 
 void lv_luaTableRemoveKeys(lua_State* L, const char** keys){
-    if ( lv_type(L, -1)== LUA_TTABLE ) {
+    if ( lua_type(L, -1)== LUA_TTABLE ) {
         for ( int i=0; ;i++ ){
             const char* key = keys[i];
             if( key ) {
                 lua_pushnil(L);
-                lv_setfield(L, -2, key);
+                lua_setfield(L, -2, key);
             } else {
                 break;
             }
@@ -741,23 +741,23 @@ void lv_luaTableRemoveKeys(lua_State* L, const char** keys){
 
 
 int lv_callbackFunction(lua_State* L, const char* functionName){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
-        if ( lv_gettop(L)>=2 && lv_type(L, 2)==LUA_TFUNCTION ) {
-            lv_pushvalue(L, 1);
+        if ( lua_gettop(L)>=2 && lua_type(L, 2)==LUA_TFUNCTION ) {
+            lua_pushvalue(L, 1);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
-            if( lv_type(L, -1)==LV_TNIL ) {
+            if( lua_type(L, -1)==LUA_TNIL ) {
                 lv_createtable(L, 0, 0);
                 lv_udataRef(L, USERDATA_KEY_DELEGATE);
             }
             lua_pushstring(L, functionName);
-            lv_pushvalue(L, 2);
-            lv_settable(L, -3);
+            lua_pushvalue(L, 2);
+            lua_settable(L, -3);
             return 0;
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
             lua_pushstring(L, functionName);
-            lv_gettable(L, -2);
+            lua_gettable(L, -2);
             return 1;
         }
     }
@@ -800,17 +800,17 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 
 +(void) reg:(lua_State*)L clas:(id) c cfunc:(lua_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
     if( defaultName || globalName ) {
-        lv_checkstack(L, 12);
+        lua_checkstack(L, 12);
         NSString* className = NSStringFromClass(c);
         lua_pushstring(L, className.UTF8String);
         lv_pushcclosure(L, cfunc, 1);
         
-        lv_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
+        lua_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
     }
 }
 
 +(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass{
-    const char* classNameChars = lv_tostring(L, lv_upvalueindex(1));
+    const char* classNameChars = lua_tostring(L, lv_upvalueindex(1));
     NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
     Class c = NSClassFromString(className);
     if( c == nil ) {
@@ -821,9 +821,9 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 
 +(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L {
     if( globalName && value ) {
-        lv_checkstack(L, 12);
+        lua_checkstack(L, 12);
         lv_pushNativeObject(L, value);
-        lv_setglobal(L, globalName.UTF8String);
+        lua_setglobal(L, globalName.UTF8String);
     } else {
         LVError(@"define Global Value");
     }
@@ -831,9 +831,9 @@ BOOL lv_objcEqual(id obj1, id obj2) {
 
 +(void) defineGlobal:(NSString*)globalName func:(lua_CFunction) func L:(lua_State*)L {
     if( globalName && func ) {
-        lv_checkstack(L, 12);
-        lv_pushcfunction(L, func);
-        lv_setglobal(L, globalName.UTF8String);
+        lua_checkstack(L, 12);
+        lua_pushcfunction(L, func);
+        lua_setglobal(L, globalName.UTF8String);
     } else {
         LVError(@"define Global Function");
     }

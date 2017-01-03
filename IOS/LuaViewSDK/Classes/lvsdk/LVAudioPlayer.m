@@ -94,7 +94,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 #pragma -mark AudioPlayer
 
 static int lvNewAudioPlayer (lua_State *L) {
-    if( lv_gettop(L)>=1 ) {
+    if( lua_gettop(L)>=1 ) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
         
         LVAudioPlayer* player = [[c alloc] init:L];
@@ -107,8 +107,8 @@ static int lvNewAudioPlayer (lua_State *L) {
             userData->object = CFBridgingRetain(player);
             player.lv_userData = userData;
             
-            lvL_getmetatable(L, META_TABLE_AudioPlayer );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_AudioPlayer );
+            lua_setmetatable(L, -2);
         }
         return 1;
     }
@@ -116,13 +116,13 @@ static int lvNewAudioPlayer (lua_State *L) {
 }
 
 static int play (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     if( user && LVIsType(user, AudioPlayer) ){
         LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
         if( player ){
             [player play];
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
@@ -130,7 +130,7 @@ static int play (lua_State *L) {
 }
 
 static int stop (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
         if( player ){
@@ -141,13 +141,13 @@ static int stop (lua_State *L) {
 }
 
 static int __gc (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataAudioPlayer(user);
     return 0;
 }
 
 static int __tostring (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVAudioPlayer* player =  (__bridge LVAudioPlayer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataAudioPlayer: %@", player ];
@@ -170,7 +170,7 @@ static int __tostring (lua_State *L) {
     };
     lv_createClassMetaTable(L, META_TABLE_AudioPlayer);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

@@ -31,12 +31,12 @@ static int osVersion (lua_State *L) {
 }
 
 static int ios (lua_State *L) {
-    lv_pushboolean(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
 static int android (lua_State *L) {
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
@@ -52,8 +52,8 @@ static int netWorkType (lua_State *L) {
 }
 
 static int layerMode (lua_State *L) {
-    if( lv_gettop(L)>0 ){
-        BOOL yes = lv_toboolean(L, -1);
+    if( lua_gettop(L)>0 ){
+        BOOL yes = lua_toboolean(L, -1);
         LView* luaview = (__bridge LView *)(L->lView);
         luaview.closeLayerMode = !yes;
     }
@@ -62,8 +62,8 @@ static int layerMode (lua_State *L) {
 
 // 屏幕常亮
 static int keepScreenOn (lua_State *L) {
-    if( lv_gettop(L)>0 ){
-        BOOL yes = lv_toboolean(L, -1);
+    if( lua_gettop(L)>0 ){
+        BOOL yes = lua_toboolean(L, -1);
         [[UIApplication sharedApplication] setIdleTimerDisabled:yes] ;
     }
     return 0;
@@ -71,7 +71,7 @@ static int keepScreenOn (lua_State *L) {
 
 static int scale (lua_State *L) {
     CGFloat s = [UIScreen mainScreen].scale;
-    lv_pushnumber( L, s);
+    lua_pushnumber( L, s);
     return 1; /* number of results */
 }
 
@@ -96,8 +96,8 @@ static int device (lua_State *L) {
 // lv 扩展API
 static int screenSize (lua_State *L) {
     CGSize s = [UIScreen mainScreen].bounds.size;
-    lv_pushnumber(L, s.width );
-    lv_pushnumber(L, s.height );
+    lua_pushnumber(L, s.width );
+    lua_pushnumber(L, s.height );
     return 2; /* number of results */
 }
 
@@ -119,7 +119,7 @@ static int lvClassLoader(lua_State*L){
 }
 
 static int stringToTable(lua_State*L){
-    if( lv_type(L, -1) == LV_TSTRING ) {
+    if( lua_type(L, -1) == LUA_TSTRING ) {
         NSString* s = lv_paramString(L, -1);
         if( s ) {
             id obj = [LVUtil stringToObject:s];
@@ -131,7 +131,7 @@ static int stringToTable(lua_State*L){
 }
 
 static int tableToString(lua_State*L){
-    if( lv_type(L, -1) == LUA_TTABLE ) {
+    if( lua_type(L, -1) == LUA_TTABLE ) {
         id obj = lv_luaValueToNativeObject(L,-1);
         NSString* s = [LVUtil objectToString:obj];
         lua_pushstring(L, s.UTF8String);
@@ -158,7 +158,7 @@ static int tableToString(lua_State*L){
             {"layerMode", layerMode},// 是否开启layer模式
             {NULL, NULL}
         };
-        lvL_openlib(L, "System", staticFunctions, 0);
+        luaL_openlib(L, "System", staticFunctions, 0);
     }
     {
         // Json Table相互转换
@@ -167,12 +167,12 @@ static int tableToString(lua_State*L){
             {"toTable",stringToTable},
             {NULL, NULL}
         };
-        lvL_openlib(L, "Json", fs, 0);
+        luaL_openlib(L, "Json", fs, 0);
     }
     // ----  常量注册 ----
     {
         // Align 常量
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LEFT":    @(LV_ALIGN_LEFT),
@@ -186,7 +186,7 @@ static int tableToString(lua_State*L){
         [LVUtil defineGlobal:@"Align" value:v L:L];
     }
     {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LEFT":@(NSTextAlignmentLeft),
@@ -197,7 +197,7 @@ static int tableToString(lua_State*L){
     }
     {
         //文本太多 "..." 出现的问题
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"START":@(NSLineBreakByTruncatingHead),
@@ -209,7 +209,7 @@ static int tableToString(lua_State*L){
     }
     {
         //字体Style
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NORMAL":@"normal",//正常
@@ -220,7 +220,7 @@ static int tableToString(lua_State*L){
     }
     {
         //字体Weight（粗体、正常）
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NORMAL":@"normal",
@@ -230,7 +230,7 @@ static int tableToString(lua_State*L){
     }
     {
         //图片缩放常量
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"CENTER":@(UIViewContentModeCenter),//按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
@@ -245,7 +245,7 @@ static int tableToString(lua_State*L){
         [LVUtil defineGlobal:@"ScaleType" value:v L:L];
     }
     {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LINEAR" : @(LVLinearInterpolator),
@@ -260,7 +260,7 @@ static int tableToString(lua_State*L){
     }
     {
         // 坑位浮动Pinned
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"YES":@(YES),
@@ -272,7 +272,7 @@ static int tableToString(lua_State*L){
     
     {
         // ViewEffect define
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NONE":@(EFFECT_NONE),

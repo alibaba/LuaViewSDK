@@ -40,7 +40,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
 }
 
 static int __attributedString_gc (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
@@ -168,8 +168,8 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
 static int lvNewAttributedString (lua_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
-    if( luaView && lv_gettop(L)>=2 ) {
-        if( ( lv_type(L, 1)==LV_TSTRING || lv_type(L, 1)==LV_TNUMBER ) && lv_type(L, 2)==LUA_TTABLE ){
+    if( luaView && lua_gettop(L)>=2 ) {
+        if( ( lua_type(L, 1)==LUA_TSTRING || lua_type(L, 1)==LUA_TNUMBER ) && lua_type(L, 2)==LUA_TTABLE ){
             NSString* s = nil;
             size_t n = 0;
             const char* chars = lv_tolstring(L, 1, &n );
@@ -192,14 +192,14 @@ static int lvNewAttributedString (lua_State *L) {
         userData->object = CFBridgingRetain(attString);
         attString.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_AttributedString );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_AttributedString );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
 static int __tostring (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVStyledString* attString =  (__bridge LVStyledString *)(user->object);
         NSString* s = attString.mutableStyledString.string;
@@ -213,8 +213,8 @@ static int __tostring (lua_State *L) {
 }
 
 static int append (lua_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     LVStyledString* string1 = (__bridge LVStyledString *)(user1->object);
     LVStyledString* string2 = (__bridge LVStyledString *)(user2->object);
     if( LVIsType(user1, StyledString) && LVIsType(user2, StyledString)
@@ -226,9 +226,9 @@ static int append (lua_State *L) {
 }
 
 static int __add (lua_State *L) {
-    if( lv_type(L, 2)==LV_TUSERDATA ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+    if( lua_type(L, 2)==LUA_TUSERDATA ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, StyledString) && LVIsType(user2, StyledString) ){
             LVStyledString* user1AttString = (__bridge LVStyledString *)(user1->object);
             LVStyledString* user2AttString = (__bridge LVStyledString *)(user2->object);
@@ -244,15 +244,15 @@ static int __add (lua_State *L) {
                 userData->object = CFBridgingRetain(attString);
                 attString.lv_userData = userData;
                 
-                lvL_getmetatable(L, META_TABLE_AttributedString );
-                lv_setmetatable(L, -2);
+                luaL_getmetatable(L, META_TABLE_AttributedString );
+                lua_setmetatable(L, -2);
             }
             return 1;
         }
-    } else if( lv_type(L, 2)==LV_TSTRING || lv_type(L, 2)==LV_TNUMBER ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    } else if( lua_type(L, 2)==LUA_TSTRING || lua_type(L, 2)==LUA_TNUMBER ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
         NSString* stringArg = nil;
-        if( lv_type(L, 2)==LV_TSTRING ) {
+        if( lua_type(L, 2)==LUA_TSTRING ) {
             stringArg = lv_paramString(L, 2);
         } else {
             size_t n = 0;
@@ -274,8 +274,8 @@ static int __add (lua_State *L) {
                 userData->object = CFBridgingRetain(attString);
                 attString.lv_userData = userData;
                 
-                lvL_getmetatable(L, META_TABLE_AttributedString );
-                lv_setmetatable(L, -2);
+                luaL_getmetatable(L, META_TABLE_AttributedString );
+                lua_setmetatable(L, -2);
             }
             return 1;
         }
@@ -297,7 +297,7 @@ static int __add (lua_State *L) {
     };
     lv_createClassMetaTable(L, META_TABLE_AttributedString);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 0;
 }
 

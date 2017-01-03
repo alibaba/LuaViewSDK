@@ -30,8 +30,8 @@
 -(void) handleGesture:(LVGesture*)sender event:(UIEvent*) event eventType:(NSInteger) eventType{
     lua_State* l = self.lv_lview.l;
     if ( l ){
-        lv_settop(l, 0);
-        lv_checkStack32(l);
+        lua_settop(l, 0);
+        lua_checkstack32(l);
         
         if( self.onTouchEventCallback ) {
             LVEvent* lvEvent = nil;
@@ -81,14 +81,14 @@ static void releaseUserData(LVUserDataInfo * user){
 }
 
 static int __GC (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserData(user);
     return 0;
 }
 
 
 static int __tostring (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataGesture: %@", gesture ];
@@ -99,30 +99,30 @@ static int __tostring (lua_State *L) {
 }
 
 static int location (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         CGPoint p = [gesture locationInView:gesture.view];
-        lv_pushnumber(L, p.x);
-        lv_pushnumber(L, p.y);
+        lua_pushnumber(L, p.x);
+        lua_pushnumber(L, p.y);
         return 2;
     }
     return 0;
 }
 
 static int state (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIGestureRecognizer* gesture =  (__bridge UIGestureRecognizer *)(user->object);
         NSInteger state = gesture.state;
-        lv_pushnumber(L, state);
+        lua_pushnumber(L, state);
         return 1;
     }
     return 0;
 }
 
 static int nativeGesture (lua_State *L) {
-    LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * userData = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( userData ){
         UIGestureRecognizer* gesture = (__bridge UIGestureRecognizer *)(userData->object);
         if( gesture && [gesture isKindOfClass:[UIGestureRecognizer class]] ){
@@ -157,7 +157,7 @@ static int lvNewGesture (lua_State *L) {
         
         LVGesture* gesture = [[c alloc] init:L];
         
-        if( lv_type(L, 1) != LV_TNIL ) {
+        if( lua_type(L, 1) != LUA_TNIL ) {
             [LVUtil registryValue:L key:gesture stack:1];
         }
         
@@ -166,8 +166,8 @@ static int lvNewGesture (lua_State *L) {
             gesture.lv_userData = userData;
             userData->object = CFBridgingRetain(gesture);
             
-            lvL_getmetatable(L, META_TABLE_Gesture );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_Gesture );
+            lua_setmetatable(L, -2);
         }
     }
     return 1; /* new userdatum is already on the stack */
@@ -179,8 +179,8 @@ static int lvNewGesture (lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_Gesture);
     
-    lvL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
-    lv_settop(L, 0);
+    luaL_openlib(L, NULL, [LVGesture baseMemberFunctions], 0);
+    lua_settop(L, 0);
     {
         NSDictionary* v = nil;
         v = @{

@@ -172,7 +172,7 @@ static BOOL lv_object_isProtocol(id obj ) {
                 luaArgNum ++;
             }
             [LVUtil pushRegistryValue:L key:self];
-            [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LV_TNONE];
+            [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LUA_TNONE];
             if ( haveReturnValue ) {
                 [invocation retainArguments];
                 lv_setInvocationReturnValueByLuaStack(invocation, L, -1);
@@ -184,7 +184,7 @@ static BOOL lv_object_isProtocol(id obj ) {
             if ( lv_isLuaObjectHaveProperty(L, -1, propertyName) ) {
                 lua_pushstring(L, propertyName);
                 lv_pushInvocationArgToLuaStack(invocation, 2, L);
-                lv_settable(L, -3);
+                lua_settable(L, -3);
                 return;
             }
         }

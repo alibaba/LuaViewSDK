@@ -50,7 +50,7 @@ static void releaseEventUserData(LVUserDataInfo* user){
 }
 
 static int lvEventGC (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseEventUserData(user);
     return 0;
 }
@@ -65,8 +65,8 @@ static int lvNewEvent (lua_State *L) {
         userData->object = CFBridgingRetain(lvEvent);
         lvEvent.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Event );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Event );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
@@ -79,14 +79,14 @@ static int lvNewEvent (lua_State *L) {
         userData->object = CFBridgingRetain(lvEvent);
         lvEvent.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Event );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Event );
+        lua_setmetatable(L, -2);
     }
     return lvEvent;
 }
 
 static int nativeObj (lua_State *L) {
-    LVUserDataInfo * userData = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * userData = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( userData ){
         LVEvent* lvEvent = (__bridge LVEvent *)(userData->object);
         if( lvEvent ){
@@ -99,14 +99,14 @@ static int nativeObj (lua_State *L) {
 }
 
 static int action (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
         if( lvEvent.eventType ) {
-            lv_pushnumber(L, lvEvent.eventType );
+            lua_pushnumber(L, lvEvent.eventType );
         } else {
             UIEventType type = lvEvent.event.type;
-            lv_pushnumber(L, type );
+            lua_pushnumber(L, type );
         }
         return 1;
     }
@@ -114,7 +114,7 @@ static int action (lua_State *L) {
 }
 
 static int pointer (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
         CGPoint point = lvEvent.point;
@@ -129,51 +129,51 @@ static int pointer (lua_State *L) {
 }
 
 static int x (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
         CGPoint point = lvEvent.point;
-        lv_pushnumber(L, point.x );
+        lua_pushnumber(L, point.x );
         return 1;
     }
     return 0;
 }
 
 static int y (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
         CGPoint point = lvEvent.point;
-        lv_pushnumber(L, point.y );
+        lua_pushnumber(L, point.y );
         return 1;
     }
     return 0;
 }
 
 static int event_id (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVEvent* lvEvent = (__bridge LVEvent *)(user->object);
-        lv_pushnumber(L, lvEvent.touch.timestamp );
+        lua_pushnumber(L, lvEvent.touch.timestamp );
         return 1;
     }
     return 0;
 }
 
 static int __index (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
-        if ( lv_type(L, 2)==LV_TSTRING ){
-            lv_checkstack(L, 4);
-            lv_settop(L, 2);
-            lvL_getmetatable(L, META_TABLE_EventFunc );
-            lv_pushvalue(L, 2);
-            lv_gettable(L, -2);
-            lv_remove(L, -2);
-            lv_remove(L, -2);
+        if ( lua_type(L, 2)==LUA_TSTRING ){
+            lua_checkstack(L, 4);
+            lua_settop(L, 2);
+            luaL_getmetatable(L, META_TABLE_EventFunc );
+            lua_pushvalue(L, 2);
+            lua_gettable(L, -2);
+            lua_remove(L, -2);
+            lua_remove(L, -2);
             lua_CFunction cfunc = lv_tocfunction(L, -1);
             if( cfunc ) {
-                lv_settop(L, 1);
+                lua_settop(L, 1);
                 return cfunc(L);
             }
         }
@@ -194,7 +194,7 @@ static int __index (lua_State *L) {
         };
         
         lv_createClassMetaTable(L, META_TABLE_Event);
-        lvL_openlib(L, NULL, memberFunctions, 0);
+        luaL_openlib(L, NULL, memberFunctions, 0);
     }
     {
         
@@ -208,7 +208,7 @@ static int __index (lua_State *L) {
         };
         
         lv_createClassMetaTable(L, META_TABLE_EventFunc);
-        lvL_openlib(L, NULL, memberFunctions, 0);
+        luaL_openlib(L, NULL, memberFunctions, 0);
     }
     {
         

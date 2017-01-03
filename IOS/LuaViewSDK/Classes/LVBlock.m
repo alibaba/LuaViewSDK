@@ -23,7 +23,7 @@
     if( self ){
         self.retainKey = [[NSMutableString alloc] init];
         self.lview = (__bridge LView *)(L->lView);
-        if( lv_type(L, idx)==LUA_TFUNCTION ) {
+        if( lua_type(L, idx)==LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:self.retainKey stack:idx];
         }
     }
@@ -39,8 +39,8 @@
         if ( [globalName rangeOfString:@"."].length>0 ){
             [self resetFunctionByNames:globalName];
         } else {
-            lv_getglobal(L, globalName.UTF8String);
-            if( lv_type(L, -1)==LUA_TFUNCTION ) {
+            lua_getglobal(L, globalName.UTF8String);
+            if( lua_type(L, -1)==LUA_TFUNCTION ) {
                 [LVUtil registryValue:L key:self.retainKey stack:-1];
             }
         }
@@ -53,16 +53,16 @@
     lua_State* L = self.lview.l;
     if( names.count>0 ){
         NSString* name0 = names.firstObject;
-        lv_getglobal(L, name0.UTF8String);
+        lua_getglobal(L, name0.UTF8String);
         for( int i=1; i<names.count; i++ ){
             NSString* key = names[i];
-            if( lv_type(L, -1) == LUA_TTABLE ){
-                lv_getfield(L, -1, key.UTF8String);
+            if( lua_type(L, -1) == LUA_TTABLE ){
+                lua_getfield(L, -1, key.UTF8String);
             } else {
                 break;
             }
         }
-        if( lv_type(L, -1)==LUA_TFUNCTION ) {
+        if( lua_type(L, -1)==LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:self.retainKey stack:-1];
         }
     }
@@ -78,9 +78,9 @@
 - (NSString*) callWithArgs:(NSArray*) args{
     lua_State* L = self.lview.l;
     if( L ) {
-        lv_checkstack(L, (int)args.count*2+2 );
+        lua_checkstack(L, (int)args.count*2+2 );
         
-        int oldStackNum = lv_gettop(L);
+        int oldStackNum = lua_gettop(L);
         
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
@@ -92,7 +92,7 @@
         NSString* ret = lv_runFunctionWithArgs(L, (int)args.count, self.returnValueNum);
         
         NSMutableArray* values = [[NSMutableArray alloc] init];
-        int newStackNum = lv_gettop(L);
+        int newStackNum = lua_gettop(L);
         for( int i=oldStackNum+1; i<=newStackNum; i++ ){
             id value = lv_luaValueToNativeObject(L, i);
             value = ( (value==nil) ? [NSNull null] : value );
@@ -103,7 +103,7 @@
         } else {
             self.returnValues = nil;
         }
-        //lv_settop(L, oldStackNum);
+        //lua_settop(L, oldStackNum);
         return ret;
     }
     return nil;

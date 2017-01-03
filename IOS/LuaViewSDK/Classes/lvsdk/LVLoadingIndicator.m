@@ -40,8 +40,8 @@ static int lvNewLoadingIndicator (lua_State *L) {
             NEW_USERDATA(userData, View);
             userData->object = CFBridgingRetain(pageControl);
             
-            lvL_getmetatable(L, META_TABLE_LoadingIndicator );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_LoadingIndicator );
+            lua_setmetatable(L, -2);
         }
         LView* view = (__bridge LView *)(L->lView);
         if( view ){
@@ -52,7 +52,7 @@ static int lvNewLoadingIndicator (lua_State *L) {
 }
 
 static int startAnimating(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
@@ -63,7 +63,7 @@ static int startAnimating(lua_State *L) {
 }
 
 static int stopAnimating(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
@@ -74,11 +74,11 @@ static int stopAnimating(lua_State *L) {
 }
 
 static int isAnimating(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
-            lv_pushboolean(L, view.isAnimating);
+            lua_pushboolean(L, view.isAnimating);
             return 1;
         }
     }
@@ -86,11 +86,11 @@ static int isAnimating(lua_State *L) {
 }
 
 static int color(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVLoadingIndicator* view = (__bridge LVLoadingIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
                 view.color = color;
                 return 0;
@@ -99,8 +99,8 @@ static int color(lua_State *L) {
                 NSUInteger c = 0;
                 CGFloat a = 1;
                 if( lv_uicolor2int(color, &c, &a) ){
-                    lv_pushnumber(L, c );
-                    lv_pushnumber(L, a);
+                    lua_pushnumber(L, c );
+                    lua_pushnumber(L, a);
                     return 2;
                 }
             }
@@ -124,8 +124,8 @@ static int color(lua_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_LoadingIndicator);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

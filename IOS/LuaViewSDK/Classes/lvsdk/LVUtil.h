@@ -163,7 +163,7 @@ void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell);
  *
  *  @param l lua state
  */
-void lv_checkStack32(lua_State* l);
+void lua_checkstack32(lua_State* l);
 
 /**
  *  清理首个无效参数

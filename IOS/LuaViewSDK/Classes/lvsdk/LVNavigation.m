@@ -39,8 +39,8 @@ static int setTitle (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
-    if( vc && lv_gettop(L)>=1 ) {
-        if( lv_type(L, 1)== LV_TSTRING ) {// 第一种: string
+    if( vc && lua_gettop(L)>=1 ) {
+        if( lua_type(L, 1)== LUA_TSTRING ) {// 第一种: string
             NSString* title = lv_paramString(L, 1);
             if( [vc respondsToSelector:@selector(lv_setNavigationItemTitle:)] ) {
                 [vc performSelector:@selector(lv_setNavigationItemTitle:) withObject:title];
@@ -48,8 +48,8 @@ static int setTitle (lua_State *L) {
                 vc.navigationItem.title = title;
             }
             return 0;
-        } else if( lv_type(L, 1)== LV_TUSERDATA ) {//第二种: 复合文本
-            LVUserDataInfo * user2 = lv_touserdata(L, 1);
+        } else if( lua_type(L, 1)== LUA_TUSERDATA ) {//第二种: 复合文本
+            LVUserDataInfo * user2 = lua_touserdata(L, 1);
             if( user2 && LVIsType(user2, StyledString) ) {
                 UILabel* label = [[UILabel alloc] init];
                 LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
@@ -68,7 +68,7 @@ static int setTitle (lua_State *L) {
 
 +(NSArray*) getNavigationItems:(lua_State*)L{
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    int num = lv_gettop(L);
+    int num = lua_gettop(L);
     for ( int i=1; i<=num; i++ ) {
         id object = lv_luaValueToNativeObject(L, i);
         if ( [object isKindOfClass:[UIView class]] ) {
@@ -82,7 +82,7 @@ static int setLeftButton (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
-    if( vc && lv_gettop(L)>=1 ) {
+    if( vc && lua_gettop(L)>=1 ) {
         NSArray* buttonItems = [LVNavigation getNavigationItems:L];
         if( [vc respondsToSelector:@selector(lv_setNavigationItemLeftBarButtonItems:)] ) {
             [vc performSelector:@selector(lv_setNavigationItemLeftBarButtonItems:) withObject:buttonItems];
@@ -97,7 +97,7 @@ static int setRightButton (lua_State *L) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
-    if( vc && lv_gettop(L)>=1 ) {
+    if( vc && lua_gettop(L)>=1 ) {
         NSArray* buttonItems = [LVNavigation getNavigationItems:L];
         if( [vc respondsToSelector:@selector(lv_setNavigationItemRightBarButtonItems:)] ){
             [vc performSelector:@selector(lv_setNavigationItemRightBarButtonItems:) withObject:buttonItems];
@@ -112,7 +112,7 @@ static int setBackground(lua_State*L ) {
     lv_clearFirstTableValue(L);
     LView* lview = (__bridge LView *)(L->lView);
     UIViewController* vc = lview.viewController;
-    if( vc && lv_gettop(L)>=1 ) {
+    if( vc && lua_gettop(L)>=1 ) {
         id obj = lv_luaValueToNativeObject(L, 1);
         if( [obj isKindOfClass:[UIImageView class]] ) {
             UIImageView* imgView = obj;
@@ -133,7 +133,7 @@ static int setBackground(lua_State*L ) {
 
 static int setStatusBarStyle (lua_State *L) {
     lv_clearFirstTableValue(L);
-    if ( lv_gettop(L)>=1 ) {
+    if ( lua_gettop(L)>=1 ) {
         NSInteger value = lua_tonumber(L, 2);
         [[UIApplication sharedApplication] setStatusBarStyle:value];
     }
@@ -150,7 +150,7 @@ static int setStatusBarStyle (lua_State *L) {
         {LUAVIEW_SYS_TABLE_KEY, setBackground},
         {NULL, NULL}
     };
-    lvL_openlib(L, "Navigation", fs, 0);
+    luaL_openlib(L, "Navigation", fs, 0);
     return 0;
 }
 
