@@ -13,8 +13,8 @@
 
 @class LView;
 @class LVBlock;
-@protocol LVProtocal;
 @class LVBundle;
+@protocol LVProtocal;
 
 #pragma mark - LuaView窗口大小变动回调
 @protocol LVCallback <NSObject>
@@ -31,6 +31,7 @@
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 
+@property (nonatomic,assign) BOOL standVM; // 是否lua标准语法，默认是标准语法（原先luaview语法和lua标准语法的区别是‘.’和':'互换了）
 
 /**
  *  load and run script
