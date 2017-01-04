@@ -712,23 +712,23 @@ void lv_udataUnref(lua_State* L, int key) {
     }
 }
 
-static int lv_setUDataLuatable (lua_State *L, int objindex) {
-    if( lua_type(L, objindex)==LUA_TUSERDATA ){
-        lua_setfenv(L, objindex);
+static int lv_setUDataLuatable (lua_State *L, int index) {
+    if( lua_type(L, index)==LUA_TUSERDATA ){
+        lua_setfenv(L, index);
     }
     return 1;
 }
 
-int lv_getUDataLuatable (lua_State *L, int objindex) {
-    if( lua_type(L, objindex)==LUA_TUSERDATA ){
-        lua_getfenv(L, objindex);
+int lv_getUDataLuatable (lua_State *L, int index) {
+    if( lua_type(L, index)==LUA_TUSERDATA ){
+        lua_getfenv(L, index);
     }
     return 0;
 }
 
-int lv_createUDataLuatable (lua_State *L, int objindex){
+int lv_createUDataLuatable (lua_State *L, int index){
     lua_checkstack(L, 8);
-    lua_pushvalue(L, objindex);
+    lua_pushvalue(L, index);
     lua_createtable(L, 8, 0);
     lv_setUDataLuatable(L, -2);
     lua_pop(L, 1);

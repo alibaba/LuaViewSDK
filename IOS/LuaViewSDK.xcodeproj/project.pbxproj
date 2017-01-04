@@ -251,9 +251,7 @@
 		9162E6621E1B39EA003FDB96 /* ltablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62A1E1B39EA003FDB96 /* ltablib.c */; };
 		9162E6631E1B39EA003FDB96 /* ltm.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62B1E1B39EA003FDB96 /* ltm.c */; };
 		9162E6641E1B39EA003FDB96 /* ltm.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E62C1E1B39EA003FDB96 /* ltm.h */; };
-		9162E6651E1B39EA003FDB96 /* lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62D1E1B39EA003FDB96 /* lua.c */; };
 		9162E6661E1B39EA003FDB96 /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E62E1E1B39EA003FDB96 /* lua.h */; };
-		9162E6671E1B39EA003FDB96 /* luac.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62F1E1B39EA003FDB96 /* luac.c */; };
 		9162E6681E1B39EA003FDB96 /* luaconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E6301E1B39EA003FDB96 /* luaconf.h */; };
 		9162E6691E1B39EA003FDB96 /* lualib.h in Headers */ = {isa = PBXBuildFile; fileRef = 9162E6311E1B39EA003FDB96 /* lualib.h */; };
 		9162E66A1E1B39EA003FDB96 /* lundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6321E1B39EA003FDB96 /* lundump.c */; };
@@ -289,8 +287,6 @@
 		9162E6D21E1BE25F003FDB96 /* ltable.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6281E1B39EA003FDB96 /* ltable.c */; };
 		9162E6D31E1BE25F003FDB96 /* ltablib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62A1E1B39EA003FDB96 /* ltablib.c */; };
 		9162E6D41E1BE25F003FDB96 /* ltm.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62B1E1B39EA003FDB96 /* ltm.c */; };
-		9162E6D51E1BE25F003FDB96 /* lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62D1E1B39EA003FDB96 /* lua.c */; };
-		9162E6D61E1BE25F003FDB96 /* luac.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E62F1E1B39EA003FDB96 /* luac.c */; };
 		9162E6D71E1BE25F003FDB96 /* lundump.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6321E1B39EA003FDB96 /* lundump.c */; };
 		9162E6D81E1BE25F003FDB96 /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6341E1B39EA003FDB96 /* lvm.c */; };
 		9162E6D91E1BE25F003FDB96 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 9162E6361E1B39EA003FDB96 /* lzio.c */; };
@@ -560,9 +556,7 @@
 		9162E62A1E1B39EA003FDB96 /* ltablib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ltablib.c; sourceTree = "<group>"; };
 		9162E62B1E1B39EA003FDB96 /* ltm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ltm.c; sourceTree = "<group>"; };
 		9162E62C1E1B39EA003FDB96 /* ltm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ltm.h; sourceTree = "<group>"; };
-		9162E62D1E1B39EA003FDB96 /* lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua.c; sourceTree = "<group>"; };
 		9162E62E1E1B39EA003FDB96 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua.h; sourceTree = "<group>"; };
-		9162E62F1E1B39EA003FDB96 /* luac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luac.c; sourceTree = "<group>"; };
 		9162E6301E1B39EA003FDB96 /* luaconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaconf.h; sourceTree = "<group>"; };
 		9162E6311E1B39EA003FDB96 /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lualib.h; sourceTree = "<group>"; };
 		9162E6321E1B39EA003FDB96 /* lundump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lundump.c; sourceTree = "<group>"; };
@@ -571,7 +565,6 @@
 		9162E6351E1B39EA003FDB96 /* lvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lvm.h; sourceTree = "<group>"; };
 		9162E6361E1B39EA003FDB96 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lzio.c; sourceTree = "<group>"; };
 		9162E6371E1B39EA003FDB96 /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzio.h; sourceTree = "<group>"; };
-		9162E6381E1B39EA003FDB96 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		9162E6391E1B39EA003FDB96 /* print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = print.c; sourceTree = "<group>"; };
 		91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LVRefresh.h"; sourceTree = "<group>"; };
 		91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LVRefresh.m"; sourceTree = "<group>"; };
@@ -1081,9 +1074,7 @@
 				9162E62A1E1B39EA003FDB96 /* ltablib.c */,
 				9162E62B1E1B39EA003FDB96 /* ltm.c */,
 				9162E62C1E1B39EA003FDB96 /* ltm.h */,
-				9162E62D1E1B39EA003FDB96 /* lua.c */,
 				9162E62E1E1B39EA003FDB96 /* lua.h */,
-				9162E62F1E1B39EA003FDB96 /* luac.c */,
 				9162E6301E1B39EA003FDB96 /* luaconf.h */,
 				9162E6311E1B39EA003FDB96 /* lualib.h */,
 				9162E6321E1B39EA003FDB96 /* lundump.c */,
@@ -1092,7 +1083,6 @@
 				9162E6351E1B39EA003FDB96 /* lvm.h */,
 				9162E6361E1B39EA003FDB96 /* lzio.c */,
 				9162E6371E1B39EA003FDB96 /* lzio.h */,
-				9162E6381E1B39EA003FDB96 /* Makefile */,
 				9162E6391E1B39EA003FDB96 /* print.c */,
 			);
 			path = lua5.1.5;
@@ -1460,7 +1450,6 @@
 				9162E6C71E1BE25F003FDB96 /* llex.c in Sources */,
 				3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */,
 				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
-				9162E6D61E1BE25F003FDB96 /* luac.c in Sources */,
 				914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */,
 				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
 				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
@@ -1498,7 +1487,6 @@
 				9162E6D71E1BE25F003FDB96 /* lundump.c in Sources */,
 				9162E6CB1E1BE25F003FDB96 /* lobject.c in Sources */,
 				91F6788B1DF561D40042D6FC /* LVCanvas.m in Sources */,
-				9162E6D51E1BE25F003FDB96 /* lua.c in Sources */,
 				3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */,
 				3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */,
 				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
@@ -1584,7 +1572,6 @@
 				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
 				84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */,
 				91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
-				9162E6651E1B39EA003FDB96 /* lua.c in Sources */,
 				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
 				91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
 				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
@@ -1675,7 +1662,6 @@
 				9162E6621E1B39EA003FDB96 /* ltablib.c in Sources */,
 				9162E6541E1B39EA003FDB96 /* lobject.c in Sources */,
 				84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */,
-				9162E6671E1B39EA003FDB96 /* luac.c in Sources */,
 				BEEB28CF1CA90EC200EC2D86 /* JUFLXCSSParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

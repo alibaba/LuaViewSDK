@@ -25,12 +25,12 @@
 #include "lauxlib.h"
 
 
-#define FREELIST_REF	0	/* free list of references */
+#define FREELIST_REF    0    /* free list of references */
 
 
 /* convert a stack index to positive */
-#define abs_index(L, i)		((i) > 0 || (i) <= LUA_REGISTRYINDEX ? (i) : \
-					lua_gettop(L) + (i) + 1)
+#define abs_index(L, i)        ((i) > 0 || (i) <= LUA_REGISTRYINDEX ? (i) : \
+                    lua_gettop(L) + (i) + 1)
 
 
 /*
@@ -389,10 +389,10 @@ LUALIB_API const char *luaL_findtable (lua_State *L, int idx,
 */
 
 
-#define bufflen(B)	((B)->p - (B)->buffer)
-#define bufffree(B)	((size_t)(LUAL_BUFFERSIZE - bufflen(B)))
+#define bufflen(B)    ((B)->p - (B)->buffer)
+#define bufffree(B)    ((size_t)(LUAL_BUFFERSIZE - bufflen(B)))
 
-#define LIMIT	(LUA_MINSTACK/2)
+#define LIMIT    (LUA_MINSTACK/2)
 
 
 static int emptybuffer (luaL_Buffer *B) {
@@ -574,9 +574,7 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
     lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode */
     if (lf.f == NULL) return errfile(L, "reopen", fnameindex);
     /* skip eventual `#!...' */
-      while ((c = getc(lf.f)) != EOF && c != LUA_SIGNATURE[0]){
-          
-      }
+      while ((c = getc(lf.f)) != EOF && c != LUA_SIGNATURE[0]) {};
     lf.extraline = 0;
   }
   ungetc(c, lf.f);
