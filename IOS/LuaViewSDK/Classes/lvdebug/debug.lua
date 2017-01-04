@@ -57,7 +57,7 @@ end
 function debug_print_var( name, value, level )
     local s = debug_print_var_0( name, value, level );
     if( s ) then
-        s = s.sub(1,s:len()-1);
+        s = s:sub(1, s:len()-1 );
         debug_log( s );
     else
         debug_log( s );
@@ -74,6 +74,7 @@ function debug_print_expr( var )
 
     local index = 1
     --找局部变量
+    
     while true do
         local name, value = debug.getlocal( 4, index )
         if not name then 
@@ -101,7 +102,6 @@ function debug_print_expr( var )
         end
        index = index + 1
     end
-
 
     --找全局变量
     if _G[var] ~= nil then

@@ -17,10 +17,35 @@
 //------------------------------------------------------------------------
 @implementation LVExGlobalFunc
 
+static int lv_print (lua_State *L) {
+    int n = lua_gettop(L);  /* number of arguments */
+    int i;
+    NSMutableString* buffer = [[NSMutableString alloc] init];
+    lua_getglobal(L, "tostring");
+    for (i=1; i<=n; i++) {
+        const char *s;
+        lua_pushvalue(L, -1);  /* function to be called */
+        lua_pushvalue(L, i);   /* value to print */
+        lua_call(L, 1, 1);
+        s = lua_tostring(L, -1);  /* get result */
+        if (s == NULL)
+            return luaL_error(L, LUA_QL("tostring") " must return a string to " LUA_QL("print"));
+        if (i>1) {
+            [buffer appendString:@"\t"];
+        }
+        [buffer appendFormat:@"%s",s];
+        lua_pop(L, 1);  /* pop result */
+    }
+    NSLog(@"%@",buffer);
+    return 0;
+}
 
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
 +(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
+    lua_pushcfunction(L, lv_print);
+    lua_setglobal(L, "print");
+    
     lua_pushcfunction(L, loadJson);
     lua_setglobal(L, "loadJson");
     
@@ -28,7 +53,6 @@
     lua_setglobal(L, "Unicode");
     
     // 替换pakcage.loaders中的loader_lv
-    
     lua_getglobal(L, LUA_LOADLIBNAME);
     lua_getfield(L, 1, "loaders");
     if (!lua_istable(L, -1)) {
