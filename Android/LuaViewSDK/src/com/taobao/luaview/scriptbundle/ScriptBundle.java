@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -31,6 +32,9 @@ public class ScriptBundle {
 
     //是否是bytecode
     private boolean isBytecode;
+
+    //config，TODO 可以根据脚本包里的配置来控制虚拟机的运行
+    private Properties mProps;
 
     public ScriptBundle() {
         mScriptFileMap = new HashMap<String, ScriptFile>();
