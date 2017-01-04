@@ -260,7 +260,7 @@ extern char g_debug_lua[];
     if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
-            [self.debugConnection sendCmd:@"log" info:@"[调试器] 开始调试!\n"];
+            [self.debugConnection sendCmd:@"log" info:@"[LuaView][调试日志] 开始调试!\n"];
             [self loadDebugModel];// 加载调试模块
         }
     }

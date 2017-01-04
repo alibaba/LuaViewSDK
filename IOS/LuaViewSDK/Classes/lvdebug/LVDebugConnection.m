@@ -176,7 +176,7 @@ static void ServerConnectCallBack( CFSocketRef socket,
         case kCFSocketReadCallBack: {
             NSString* cmd = readString(socket);
             if ( cmd && cmd.length>0) {
-                LVLog(@"received CMD: %@", cmd);
+                LVLog(@"[调试日志]: 收到指令%@", cmd);
                 [debuger.receivedArray insertObject:cmd atIndex:0];
             }
             // 关闭掉socket

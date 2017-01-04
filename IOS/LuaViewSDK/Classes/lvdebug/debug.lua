@@ -11,7 +11,7 @@ debug.bps = {
 }
 
 function debug_log( log_str )
-    print( "[调试器] " .. log_str );
+    print( "[LuaView][调试日志] " .. log_str );
 end
 
 function debug_print_var_0( name, value, level )
@@ -22,7 +22,6 @@ function debug_print_var_0( name, value, level )
     if type( value ) == "table" then
         if debug.var_tbl[value] then
             --已在临时表中的,只打印表地址
-            -- print( str )
             ret = ret .. tostring(str) .. '\n';
             return ret;
         end
@@ -30,7 +29,6 @@ function debug_print_var_0( name, value, level )
         --加到临时表中,以免表出现循环引用时,打印也产生死循环
         debug.var_tbl[value] = true
         --打印表中所有数据
-        --print( string.format( "%s%s = {", prefix, name ) )
         ret = ret .. string.format( "%s%s = {", prefix, name ) .. '\n';
         for k, v in pairs( value ) do
             if type( k ) == "string" then
@@ -42,13 +40,10 @@ function debug_print_var_0( name, value, level )
             ret = ret .. debug_print_var_0( k, v, level + 1 )
             --end
         end
-        -- print( prefix .. "}" )
         ret = ret .. prefix .. "}" .. '\n';
     elseif type( value ) == "string" then
-        -- print( str )
         ret = ret .. tostring(str) .. '\n';
     else
-        -- print( str )
         ret = ret .. tostring(str) .. '\n';
     end
     return ret;
@@ -74,7 +69,6 @@ function debug_print_expr( var )
 
     local index = 1
     --找局部变量
-    
     while true do
         local name, value = debug.getlocal( 4, index )
         if not name then 
@@ -335,7 +329,6 @@ function debug_execute_cmd( env )
 end
 
 function debug_trace( event, line )
-
     local env = debug.getinfo( 2 )
 
     if env.source == _DEBUG_FILE then
@@ -379,9 +372,6 @@ function debug_trace( event, line )
         end
         return;
     end
-
-    -- local cmd = debug.readCmd()
-    -- debug_runing_execute( cmd );
 end
 
 function begin_debug()
@@ -398,7 +388,6 @@ end
 
 debug_log("load debug model");
 debug.printToServer(true);
-
 
 
 begin_debug(); -- last line

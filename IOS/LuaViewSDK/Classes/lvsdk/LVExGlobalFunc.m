@@ -18,25 +18,30 @@
 @implementation LVExGlobalFunc
 
 static int lv_print (lua_State *L) {
+#ifdef DEBUG
     int n = lua_gettop(L);  /* number of arguments */
     int i;
-    NSMutableString* buffer = [[NSMutableString alloc] init];
+    NSMutableString* buf = [[NSMutableString alloc] init];
     lua_getglobal(L, "tostring");
     for (i=1; i<=n; i++) {
-        const char *s;
+        const char *s = NULL;
         lua_pushvalue(L, -1);  /* function to be called */
         lua_pushvalue(L, i);   /* value to print */
         lua_call(L, 1, 1);
         s = lua_tostring(L, -1);  /* get result */
         if (s == NULL)
             return luaL_error(L, LUA_QL("tostring") " must return a string to " LUA_QL("print"));
-        if (i>1) {
-            [buffer appendString:@"\t"];
+        if ( i>1 ) {
+            [buf appendString:@"\t"];
         }
-        [buffer appendFormat:@"%s",s];
+        NSString* str  = [NSString stringWithUTF8String:s];
+        [buf appendFormat:@"%@",str];
         lua_pop(L, 1);  /* pop result */
     }
-    NSLog(@"%@",buffer);
+    NSLog(@"%@",buf);
+    [buf appendString:@"\n"];
+    lv_printToServer(L, buf.UTF8String, 0);
+#endif
     return 0;
 }
 
