@@ -548,10 +548,11 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     public boolean hasCellSize(int viewType) {
         final String id = getItemViewTypeName(viewType);
         if (id != null) {
-            if (this.mPinnedViewTypePosition.get(viewType, -1) != -1) {
+            if (mHasPinnedCell && this.mPinnedViewTypePosition.get(viewType, -1) != -1) {
                 // 获取CellId的时候,要用Lua层定义的正确的Id
                 return hasCellFunction(mPinnedPositionCellId.get(mPinnedViewTypePosition.get(viewType)), "Size");
             }
+
             return hasCellFunction(id, "Size");
         }
         return false;

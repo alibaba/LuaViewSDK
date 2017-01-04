@@ -196,7 +196,8 @@ public class ScriptBundle {
         while ((entry = zipStream.getNextEntry()) != null) {
             // 处理../ 这种方式只能使用单层路径，不能处理子目录，在这里可以添加公用path
             String szName = entry.getName();
-            if(szName != null && szName.indexOf("../") != -1){
+            if(szName == null || szName.indexOf("../") != -1){
+                zipStream.close();
                 return null;
             }
 

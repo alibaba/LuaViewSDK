@@ -659,6 +659,10 @@ public class LuaUtil {
         return pos != null ? LuaValue.valueOf(pos + 1) : LuaValue.NIL;
     }
 
+    public static LuaValue toLuaBoolean(boolean value) {
+        return LuaValue.valueOf(value);
+    }
+
     /**
      * java 从 0 开始
      *
