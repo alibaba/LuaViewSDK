@@ -104,8 +104,8 @@ void lv_udataUnref(lua_State* L, int key); // -1: userdata
 void lv_pushUDataRef(lua_State* L, int key); // -1: userdata
 
 int lv_createUDataLuatable (lua_State *L, int objindex);
-int lv_setUDataLuatable (lua_State *L, int objindex);
-int lv_getUDataLuaTable (lua_State *L, int objindex);
+//int lv_setUDataLuatable (lua_State *L, int objindex);
+int lv_getUDataLuatable (lua_State *L, int objindex);
 /*
  * Create Class MetaTable
  */

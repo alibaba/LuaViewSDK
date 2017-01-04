@@ -274,17 +274,17 @@ void lua_checkstack32(lua_State* l){
 }
 
 void lv_clearFirstTableValue(lua_State* L){
-//    int num = lua_gettop(L);
-//    if( num>1 && lua_type(L, 1)==LUA_TTABLE ) {
-//        lua_checkstack(L, 4);
-//        lua_getfield(L, 1, LUAVIEW_SYS_TABLE_KEY);
-//        if( lua_isnil(L, -1) ) {
-//            lua_settop(L, num);
-//        } else {
-//            lua_settop(L, num);
-//            lua_remove(L, 1);
-//        }
-//    }
+    int num = lua_gettop(L);
+    if( num>1 && lua_type(L, 1)==LUA_TTABLE ) {
+        lua_checkstack(L, 4);
+        lua_getfield(L, 1, LUAVIEW_SYS_TABLE_KEY);
+        if( lua_isnil(L, -1) ) {
+            lua_settop(L, num);
+        } else {
+            lua_settop(L, num);
+            lua_remove(L, 1);
+        }
+    }
 }
 
 BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alphaP){
@@ -663,7 +663,7 @@ void lv_pushUDataRef(lua_State* L, int key) {
     if( lua_gettop(L)>=1 && lua_type(L, -1)==LUA_TUSERDATA ) {
         lua_checkstack(L, 2);
         
-        if( lv_getUDataLuaTable(L, -1) ) {
+        if( lv_getUDataLuatable(L, -1) ) {
             lua_remove(L, -2);
         }
         if( lua_type(L, -1)==LUA_TTABLE ) {
@@ -683,7 +683,7 @@ void lv_udataRef(lua_State* L, int key ){
     if( lua_gettop(L)>=2 && lua_type(L, -2)==LUA_TUSERDATA ) {
         lua_checkstack(L, 8);
         
-        lv_getUDataLuaTable(L, -2);//table
+        lv_getUDataLuatable(L, -2);//table
         if( lua_type(L, -1)==LUA_TTABLE ) {
             lua_pushnumber(L, key);// key
             lua_pushvalue(L, -3);//value
@@ -700,7 +700,7 @@ void lv_udataUnref(lua_State* L, int key) {
     if( lua_gettop(L)>=1 && lua_type(L, -1)==LUA_TUSERDATA ) {
         lua_checkstack(L, 8);
         
-        lv_getUDataLuaTable(L, -1);
+        lv_getUDataLuatable(L, -1);
         if( lua_type(L, -1)==LUA_TTABLE ) {
             lua_pushnumber(L, key);
             lua_pushnil(L);
@@ -712,6 +712,20 @@ void lv_udataUnref(lua_State* L, int key) {
     }
 }
 
+static int lv_setUDataLuatable (lua_State *L, int objindex) {
+    if( lua_type(L, objindex)==LUA_TUSERDATA ){
+        lua_setfenv(L, objindex);
+    }
+    return 1;
+}
+
+int lv_getUDataLuatable (lua_State *L, int objindex) {
+    if( lua_type(L, objindex)==LUA_TUSERDATA ){
+        lua_getfenv(L, objindex);
+    }
+    return 0;
+}
+
 int lv_createUDataLuatable (lua_State *L, int objindex){
     lua_checkstack(L, 8);
     lua_pushvalue(L, objindex);
@@ -719,61 +733,6 @@ int lv_createUDataLuatable (lua_State *L, int objindex){
     lv_setUDataLuatable(L, -2);
     lua_pop(L, 1);
     return 1;
-}
-
-int lv_setUDataLuatable (lua_State *L, int objindex) {
-//    TValue *obj;
-//    Table *lt;
-//    lua_lock(L);
-//    api_checknelems(L, 1);
-//    obj = index2adr(L, objindex);
-//    api_checkvalidindex(L, obj);
-//    if (ttisnil(L->top - 1))
-//        lt = NULL;
-//    else {
-//        api_check(L, ttistable(L->top - 1));
-//        lt = hvalue(L->top - 1);
-//    }
-//    switch (ttype(obj)) {
-//        case LV_TUSERDATA: {
-//            uvalue(obj)->luaTable = lt;
-//            if (lt)
-//                lvC_objbarrier(L, rawuvalue(obj), lt);
-//            break;
-//        }
-//        default: {
-//            printf("[luaview] error lv_setudataLuatable");
-//            break;
-//        }
-//    }
-//    L->top--;
-//    lv_unlock(L);
-    return 1;
-}
-
-int lv_getUDataLuaTable (lua_State *L, int objindex) {
-//    const TValue *obj;
-//    Table *mt = NULL;
-//    int res;
-//    lua_lock(L);
-//    obj = index2adr(L, objindex);
-//    switch (ttype(obj)) {
-//        case LUA_TUSERDATA:
-////            mt = uvalue(obj)->luaTable;
-//            break;
-//        default:
-//            break;
-//    }
-//    if (mt == NULL)
-//        res = 0;
-//    else {
-//        sethvalue(L, L->top, mt);
-//        api_incr_top(L);
-//        res = 1;
-//    }
-//    lua_unlock(L);
-//    return res;
-    return 0;
 }
 
 void lv_luaTableSetWeakWindow(lua_State* L, UIView* cell){
