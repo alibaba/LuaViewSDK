@@ -873,6 +873,171 @@ void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
     }
 }
 
+#define LV_TYPE_CHAR_FIRST    (1)
+#define LV_TYPE_CHAR_SECOND   (2)
+#define LV_TYPE_CHAR_SPACE    (4)
+#define LV_TYPE_CHAR_NOTES    (8)
+#define LV_TYPE_CHAR_POINT    (16)
+
+static int g_charTypes[256] = {0};
+static void charTypesInited(){
+    g_charTypes['_'] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+    for( char c = 'a'; c<='z'; c++ ) {
+        g_charTypes[c] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+    }
+    for( char c = 'A'; c<='Z'; c++ ) {
+        g_charTypes[c] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+    }
+    for( char c = '0'; c<='9'; c++ ) {
+        g_charTypes[c] = LV_TYPE_CHAR_SECOND;
+    }
+    g_charTypes[' '] = LV_TYPE_CHAR_SPACE;
+    g_charTypes['\n'] = LV_TYPE_CHAR_SPACE;
+    g_charTypes['.'] = LV_TYPE_CHAR_POINT;
+    g_charTypes['-'] = LV_TYPE_CHAR_NOTES;
+}
+
+inline static NSInteger skipNotes(const unsigned char* cs, NSInteger i, NSInteger length){
+    NSInteger i0 = i;
+    for( int m=0 ; m<2 && i<length; m++ ) {
+        char c = cs[i];
+        if( c=='-' ) {
+            i++;
+        } else {
+            return i0;
+        }
+    }
+    for( ;i<length;) {
+        char c = cs[i];
+        if( c=='\n' ) {
+            i++;
+            return i;
+        } else {
+            return i;
+        }
+    }
+    return i;
+}
+
+inline static NSInteger skipName(const unsigned char* cs, NSInteger i, NSInteger length){
+    int* types = g_charTypes;
+    if( i<length ) {
+        char c = cs[i];
+        int type = types[c];
+        if( type&LV_TYPE_CHAR_FIRST ) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+    for( ;i<length;) {
+        char c = cs[i];
+        int type = types[c];
+        if( type&LV_TYPE_CHAR_SECOND ) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+    return i;
+}
+
+inline static NSInteger skipSpace(const unsigned char* cs, NSInteger i, NSInteger length){
+    int* types = g_charTypes;
+    for( ;i<length;) {
+        unsigned char c = cs[i];
+        int type = types[c];
+        if( type&LV_TYPE_CHAR_SPACE) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+    return i;
+}
+
+inline static NSInteger skipOther(const unsigned char* cs, NSInteger i, NSInteger length){
+    int* types = g_charTypes;
+    for( ;i<length;) {
+        unsigned char c = cs[i];
+        int type = types[c];
+        if( type==0) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+    return i;
+}
+
+inline static BOOL checkNextChar(const unsigned char* cs, NSInteger i, NSInteger length, char c){
+    if( i<length && cs[i]==c ) {
+        return YES;
+    }
+    return NO;
+}
+/*
+ * 转换成标准lua语法
+ */
+NSData* toStandLuaGrammar(NSData* data){
+    {
+        static BOOL inited = NO;
+        if( !inited ) {
+            inited = YES;
+            charTypesInited();
+        }
+    }
+    if( data && data.length>0 ) {
+        NSInteger length = data.length;
+        unsigned char* cs = malloc(length+64);
+        memset(cs, 0, length+64);
+        [data getBytes:cs length:length];
+        for ( NSInteger i=0; i<length;) {
+            unsigned char c = cs[i];
+            int type = g_charTypes[c];
+            switch (type) {
+                case '-':
+                    i = skipNotes(cs, i, length);
+                    break;
+                case ' ':
+                case '\n':
+                    i = skipSpace(cs, i, length);
+                    break;
+                    
+                default:
+                    i = skipOther(cs, i, length);
+                    break;
+            }
+            i = skipName(cs, i, length);
+            if( checkNextChar(cs, i, length, '.') && checkNextChar(cs, i+1, length, '.') ) {
+                i += 2;
+            }
+            if( checkNextChar(cs, i, length, '.') || checkNextChar(cs, i, length, ':') ) {
+                NSInteger i0 = i;
+                i++;
+                i = skipSpace(cs, i, length);
+                NSInteger i3 = skipName(cs, i, length);
+                i = i3;
+                if( i3>i ) {
+                    i = skipSpace(cs, i, length);
+                    if( checkNextChar(cs, i, length, '(') ||  checkNextChar(cs, i, length, '{') ) {
+                        if( cs[i0]=='.' ) {
+                            cs[i0]==':';
+                        } else {
+                            cs[i0]=='.';
+                        }
+                    }
+                }
+            }
+            
+        }
+        NSData* newData = [[NSData alloc] initWithBytes:cs length:length];
+        free(cs);
+        return newData;
+    }
+    return nil;
+}
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;
