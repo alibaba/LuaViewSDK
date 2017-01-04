@@ -61,12 +61,22 @@ static int get_file_line( lua_State *L )
     return 1;
 }
 
+static int db_traceback_count (lua_State *L) {
+    lua_Debug ar;
+    int index = 1;
+    while (lua_getstack(L, index, &ar))
+        index++;
+    lua_pushnumber( L, index - 1 );
+    return 1;
+}
+
 static const luaL_Reg dblib[] = {
     {"readCmd", DebugReadCmd},
     {"sleep", DebugSleep},
     {"printToServer", DebugPrintToServer},
     {"runningLine", runningLine},
     {"get_file_line", get_file_line},
+    {"traceback_count", db_traceback_count},
     {NULL, NULL}
 };
 
