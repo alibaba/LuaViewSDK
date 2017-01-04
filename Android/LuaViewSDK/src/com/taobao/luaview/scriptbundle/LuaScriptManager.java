@@ -34,6 +34,7 @@ public class LuaScriptManager {
     public static final String POSTFIX_B_LUA = ".blua";
     public static final String POSTFIX_LV = ".lv";//Lua加密脚本(source or bytecode)
     public static final String POSTFIX_LV_BYTECODE_ZIP = ".bzip";//lua的二进制zip包
+    public static final String POSTFIX_LV_STANDARD_SYNTAX_ZIP = ".szip";//标准语法的zip包
     public static final String POSTFIX_SIGN = ".sign";
 
     /**
@@ -85,6 +86,7 @@ public class LuaScriptManager {
 
     /**
      * get scriptFolderPath
+     *
      * @return
      */
     public static String getBaseScriptFolderPath() {
@@ -208,6 +210,16 @@ public class LuaScriptManager {
 
     public static boolean isLuaBytecodeFile(final String fileName) {
         return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_B_LUA);
+    }
+
+    /**
+     * 是否是标准语法的 zip包
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isLuaStandardSyntaxUrl(final String url) {
+        return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_STANDARD_SYNTAX_ZIP);
     }
 
     /**

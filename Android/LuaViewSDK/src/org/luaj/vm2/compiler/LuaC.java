@@ -258,7 +258,7 @@ public class LuaC extends Lua implements Globals.Compiler, Globals.Loader {
 	 * or LuaC.compil(InputStream, String) and construct LuaClosure directly.
 	 */
 	public LuaValue load(InputStream stream, String chunkname, Globals globals) throws IOException {
-		return new LuaClosure(compile(stream, chunkname, globals.standardSyntax), globals);
+		return new LuaClosure(compile(stream, chunkname, globals.isStandardSyntax()), globals);
 	}
 
 

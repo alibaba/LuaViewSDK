@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DemoActivity extends ListActivity {
-    public static boolean useStandardSyntax = true;
+    public static boolean useStandardSyntax = false;
     private static final String FOLDER_NAME = "test";
     private static final String FOLDER_STANDARD_NAME = "test-standard";
 

@@ -2012,17 +2012,29 @@ public class LexState {
 
 	boolean funcname(expdesc v) {
 		/* funcname -> NAME {field} [`:' NAME] */
-        boolean needself = false;
-        this.singlevar(v);
-        while (this.t.token == '.') {
-            needself = true;
-            this.fieldsel(v);
-        }
-        if (this.t.token == ':') {
-            needself = false;
-            this.fieldsel(v);
-        }
-        return needself;
+		if(standardSyntax){//TODO . 和 : 兼容
+			boolean ismethod = false;
+			this.singlevar(v);
+			while (this.t.token == '.')
+				this.fieldsel(v);
+			if (this.t.token == ':') {
+				ismethod = true;
+				this.fieldsel(v);
+			}
+			return ismethod;
+		} else {
+			boolean needself = false;
+			this.singlevar(v);
+			while (this.t.token == '.') {
+				needself = true;
+				this.fieldsel(v);
+			}
+			if (this.t.token == ':') {
+				needself = false;
+				this.fieldsel(v);
+			}
+			return needself;
+		}
     }
 
 

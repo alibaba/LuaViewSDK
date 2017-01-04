@@ -540,7 +540,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     public void setUseStandardSyntax(boolean standardSyntax) {
         if (mGlobals != null) {
-            mGlobals.standardSyntax = standardSyntax;
+            mGlobals.setUseStandardSyntax(standardSyntax);
         }
     }
 

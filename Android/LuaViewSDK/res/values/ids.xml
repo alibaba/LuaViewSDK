@@ -16,4 +16,7 @@
 
     <!--callback-->
     <item name="lv_tag_callback" type="id" />
+
+    <!--position-->
+    <item name="lv_tag_position" type="id" />
 </resources>

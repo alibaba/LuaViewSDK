@@ -30,6 +30,7 @@ import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
@@ -179,8 +180,7 @@ public class Globals extends LuaTable {
     public DebugLib debuglib;
     public DebugConnection debugConnection;//用作debug
 
-
-    public boolean standardSyntax = true;//是否标准语法
+    private Boolean isStandardSyntax = null;
 
     /**
      * Interface for module that converts a Prototype into a LuaFunction with an environment.
@@ -388,7 +388,7 @@ public class Globals extends LuaTable {
     public Prototype compilePrototype(InputStream stream, String chunkname) throws IOException {
         if (compiler == null)
             error("No compiler.");
-        return compiler.compile(stream, chunkname, standardSyntax);
+        return compiler.compile(stream, chunkname, isStandardSyntax());
     }
 
     /**
@@ -571,6 +571,30 @@ public class Globals extends LuaTable {
     }
 
     //----------------------------------------------------------------------------------------------
+
+    /**
+     * 设置是否标准语法，如果为null的时候则依据url来判断
+     *
+     * @param standardSyntax
+     */
+    public void setUseStandardSyntax(boolean standardSyntax) {
+        isStandardSyntax = standardSyntax;
+    }
+
+    /**
+     * 是否是标准语法
+     *
+     * @return
+     */
+    public boolean isStandardSyntax() {
+        if (isStandardSyntax != null) {
+            return isStandardSyntax;
+        } else {
+            final LuaResourceFinder finder = getLuaResourceFinder();
+            final String url = finder != null ? finder.getUri() : null;
+            return LuaScriptManager.isLuaStandardSyntaxUrl(url);
+        }
+    }
 
     /**
      * 延迟加载库

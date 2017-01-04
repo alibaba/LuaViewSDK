@@ -56,16 +56,22 @@ public class LVRecyclerViewHolder extends RecyclerView.ViewHolder {
             itemView.setOnClickListener(new View.OnClickListener() {//TODO 这里的position是初始化的时候给的，所以需要每次更新，类似onLayout里面的更新
                 @Override
                 public void onClick(View v) {
-                    mLuaUserData.onCellClicked(cellData, position);
+                    mLuaUserData.onCellClicked(cellData, getItemViewPosition(position));
                 }
             });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    return mLuaUserData.onCellLongClicked(cellData, position);
+                    return mLuaUserData.onCellLongClicked(cellData, getItemViewPosition(position));
                 }
             });
         }
+    }
+
+    private int getItemViewPosition(final int defaultValue) {
+        final Object posObj = itemView.getTag(R.id.lv_tag_position);
+        final int pos = posObj instanceof Integer ? (Integer) posObj : defaultValue;
+        return pos;
     }
 
     /**
