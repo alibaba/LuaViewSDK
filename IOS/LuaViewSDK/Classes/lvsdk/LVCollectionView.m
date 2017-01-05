@@ -63,7 +63,9 @@
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    
+    if ( self.lv_lview.l ) {
+        lua_settop(self.lv_lview.l, 0);
+    }
     [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 

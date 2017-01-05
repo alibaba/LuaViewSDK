@@ -715,13 +715,15 @@ void lv_udataUnref(lua_State* L, int key) {
 static int lv_setUDataLuatable (lua_State *L, int index) {
     if( lua_type(L, index)==LUA_TUSERDATA ){
         lua_setfenv(L, index);
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 int lv_getUDataLuatable (lua_State *L, int index) {
     if( lua_type(L, index)==LUA_TUSERDATA ){
         lua_getfenv(L, index);
+        return 1;
     }
     return 0;
 }
