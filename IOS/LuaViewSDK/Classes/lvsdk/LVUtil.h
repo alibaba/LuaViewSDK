@@ -213,7 +213,7 @@ BOOL lv_objcEqual(id obj1, id obj2);
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 
-NSData* toStandLuaGrammar(NSData* data);
+NSData* lv_toStandLuaGrammar(NSData* data);
 
 @end
 

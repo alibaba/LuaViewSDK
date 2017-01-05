@@ -873,38 +873,39 @@ void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
     }
 }
 
-#define LV_TYPE_CHAR_FIRST    (1)
-#define LV_TYPE_CHAR_SECOND   (2)
-#define LV_TYPE_CHAR_SPACE    (4)
-#define LV_TYPE_CHAR_NOTES    (8)
-#define LV_TYPE_CHAR_POINT    (16)
+#define LV_TYPE_WORD_FIRST    (1)
+#define LV_TYPE_WORD_SECOND   (2)
+#define LV_TYPE_NUMBER         (4)
+#define LV_TYPE_CHAR_SPACE    (8)
+#define LV_TYPE_CHAR_NOTES    (16)
+#define LV_TYPE_CHAR_POINT    (32)
 
 static int g_charTypes[256] = {0};
 static void charTypesInited(){
-    g_charTypes['_'] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+    g_charTypes['_'] = LV_TYPE_WORD_FIRST|LV_TYPE_WORD_SECOND;
     for( char c = 'a'; c<='z'; c++ ) {
-        g_charTypes[c] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+        g_charTypes[c] = LV_TYPE_WORD_FIRST|LV_TYPE_WORD_SECOND;
     }
     for( char c = 'A'; c<='Z'; c++ ) {
-        g_charTypes[c] = LV_TYPE_CHAR_FIRST|LV_TYPE_CHAR_SECOND;
+        g_charTypes[c] = LV_TYPE_WORD_FIRST|LV_TYPE_WORD_SECOND;
     }
     for( char c = '0'; c<='9'; c++ ) {
-        g_charTypes[c] = LV_TYPE_CHAR_SECOND;
+        g_charTypes[c] = LV_TYPE_NUMBER | LV_TYPE_WORD_SECOND;
     }
     g_charTypes[' '] = LV_TYPE_CHAR_SPACE;
     g_charTypes['\n'] = LV_TYPE_CHAR_SPACE;
     g_charTypes['.'] = LV_TYPE_CHAR_POINT;
+    g_charTypes[':'] = LV_TYPE_CHAR_POINT;
     g_charTypes['-'] = LV_TYPE_CHAR_NOTES;
 }
 
 inline static NSInteger skipNotes(const unsigned char* cs, NSInteger i, NSInteger length){
-    NSInteger i0 = i;
     for( int m=0 ; m<2 && i<length; m++ ) {
         char c = cs[i];
         if( c=='-' ) {
             i++;
         } else {
-            return i0;
+            return i;
         }
     }
     for( ;i<length;) {
@@ -924,7 +925,7 @@ inline static NSInteger skipName(const unsigned char* cs, NSInteger i, NSInteger
     if( i<length ) {
         char c = cs[i];
         int type = types[c];
-        if( type&LV_TYPE_CHAR_FIRST ) {
+        if( type&LV_TYPE_WORD_FIRST ) {
             i++;
         } else {
             return i;
@@ -933,7 +934,21 @@ inline static NSInteger skipName(const unsigned char* cs, NSInteger i, NSInteger
     for( ;i<length;) {
         char c = cs[i];
         int type = types[c];
-        if( type&LV_TYPE_CHAR_SECOND ) {
+        if( type&LV_TYPE_WORD_SECOND ) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+    return i;
+}
+
+inline static NSInteger skipNumber(const unsigned char* cs, NSInteger i, NSInteger length){
+    int* types = g_charTypes;
+    for( ;i<length;) {
+        char c = cs[i];
+        int type = types[c];
+        if( type&LV_TYPE_WORD_SECOND ) {
             i++;
         } else {
             return i;
@@ -979,7 +994,7 @@ inline static BOOL checkNextChar(const unsigned char* cs, NSInteger i, NSInteger
 /*
  * 转换成标准lua语法
  */
-NSData* toStandLuaGrammar(NSData* data){
+NSData* lv_toStandLuaGrammar(NSData* data){
     {
         static BOOL inited = NO;
         if( !inited ) {
@@ -996,38 +1011,51 @@ NSData* toStandLuaGrammar(NSData* data){
             unsigned char c = cs[i];
             int type = g_charTypes[c];
             switch (type) {
-                case '-':
+                case LV_TYPE_CHAR_NOTES:
                     i = skipNotes(cs, i, length);
                     break;
-                case ' ':
-                case '\n':
+                case LV_TYPE_CHAR_SPACE:
                     i = skipSpace(cs, i, length);
                     break;
+                case LV_TYPE_NUMBER:
+                case LV_TYPE_NUMBER|LV_TYPE_WORD_SECOND: {
+                    i = skipNumber(cs, i, length);
+                    break;
+                    break;
+                }
+                case LV_TYPE_WORD_FIRST:
+                case LV_TYPE_WORD_SECOND:
+                case LV_TYPE_WORD_FIRST|LV_TYPE_WORD_SECOND:
+                    i = skipName(cs, i, length);
+                    break;
+                case LV_TYPE_CHAR_POINT:{
+                    if( checkNextChar(cs, i, length, '.') && checkNextChar(cs, i+1, length, '.') ) {
+                        i += 2;
+                    }else if( checkNextChar(cs, i, length, '.') || checkNextChar(cs, i, length, ':') ) {
+                        NSInteger i0 = i;
+                        i++;
+                        i = skipSpace(cs, i, length);
+                        NSInteger i2 = skipName(cs, i, length);
+                        if( i2>i ) {
+                            i = i2;
+                            i = skipSpace(cs, i, length);
+                            if( checkNextChar(cs, i, length, '(') ||  checkNextChar(cs, i, length, '{') ) {
+                                unsigned char tempChar = cs[i0];
+                                if( (char)tempChar=='.' ) {
+                                    cs[i0] = ':';
+                                } else {
+                                    cs[i0] = '.';
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
                     
                 default:
                     i = skipOther(cs, i, length);
                     break;
-            }
-            i = skipName(cs, i, length);
-            if( checkNextChar(cs, i, length, '.') && checkNextChar(cs, i+1, length, '.') ) {
-                i += 2;
-            }
-            if( checkNextChar(cs, i, length, '.') || checkNextChar(cs, i, length, ':') ) {
-                NSInteger i0 = i;
-                i++;
-                i = skipSpace(cs, i, length);
-                NSInteger i3 = skipName(cs, i, length);
-                i = i3;
-                if( i3>i ) {
-                    i = skipSpace(cs, i, length);
-                    if( checkNextChar(cs, i, length, '(') ||  checkNextChar(cs, i, length, '{') ) {
-                        if( cs[i0]=='.' ) {
-                            cs[i0]==':';
-                        } else {
-                            cs[i0]=='.';
-                        }
-                    }
-                }
             }
             
         }

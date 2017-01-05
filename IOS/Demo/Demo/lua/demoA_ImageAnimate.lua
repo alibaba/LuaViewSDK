@@ -44,10 +44,12 @@ imageView2.image("http://g.alicdn.com/ju/lua/2.0.24/doc/icon.png",
 	end);
 
 
-	Animate( 2, 0, 0.3,0, function(){
-		imageView2.scale(1.2,1.2);
-	}, function ()
-	end);
+	Animate( 2, 0, 0.3,0, 
+		function()
+			imageView2.scale(1.2,1.2);
+		end, 
+		function ()
+		end);
 
 imageView3 = Image();
 imageView3.frame(X0,Y0+w+Y0,w,w);

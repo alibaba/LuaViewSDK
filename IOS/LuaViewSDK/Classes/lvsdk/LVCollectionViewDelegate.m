@@ -59,36 +59,36 @@ static inline NSInteger mapSection(NSInteger section){
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     LView* lview = self.owner.lv_lview;
-    lua_State* l = lview.l;
+    lua_State* L = lview.l;
     lview.conentView = cell.contentView;
     lview.contentViewIsWindow = NO;
-    if ( l ) {
+    if ( L ) {
         if( !cell.isInited ){
             cell.isInited = YES;
             [cell doInitWithLView:lview];
             
             // 创建cell初始化
-            lua_settop(l, 0);
-            lua_checkstack(l, 12);
+            lua_settop(L, 0);
+            lua_checkstack(L, 12);
             [cell pushTableToStack];//arg1: cell
-            lua_pushnumber(l, mapSection(section) );//arg2: section
-            lua_pushnumber(l, mapRow(row) );//arg3: row
+            lua_pushnumber(L, mapSection(section) );//arg2: section
+            lua_pushnumber(L, mapRow(row) );//arg3: row
             
-            lv_pushUserdata(l, self.owner.lv_userData);
-            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:0 retType:LUA_TNONE];
+            lv_pushUserdata(L, self.owner.lv_userData);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            [LVUtil call:L key1:"Cell" key2:identifier.UTF8String key3:"Init" nargs:3 nrets:0 retType:LUA_TNONE];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
-            lua_settop(l, 0);
-            lua_checkstack(l, 12);
+            lua_settop(L, 0);
+            lua_checkstack(L, 12);
             [cell pushTableToStack];//arg1: cell
-            lua_pushnumber(l, mapSection(section) );//arg2: section
-            lua_pushnumber(l, mapRow(row) );//arg3: row
+            lua_pushnumber(L, mapSection(section) );//arg2: section
+            lua_pushnumber(L, mapRow(row) );//arg3: row
             
-            lv_pushUserdata(l, self.owner.lv_userData);
-            lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LUA_TNONE];
+            lv_pushUserdata(L, self.owner.lv_userData);
+            lv_pushUDataRef(L, USERDATA_KEY_DELEGATE);
+            [LVUtil call:L key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LUA_TNONE];
         }
     }
     lview.conentView = nil;

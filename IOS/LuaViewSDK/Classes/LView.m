@@ -233,7 +233,7 @@ extern char g_debug_lua[];
 
 -(NSString*) loadDebugModel{
     NSData* data = [[NSData alloc] initWithBytes:g_debug_lua length:strlen(g_debug_lua)];
-    return [self runData:data fileName:@"debug.lua"];
+    return [self runData:data fileName:@"debug.lua" changeGrammar:NO];
 }
 
 - (void) callLuaToExecuteServerCmd{
@@ -351,6 +351,13 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
+    return [self runData:data fileName:fileName changeGrammar:YES];
+}
+
+-(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{
+    if( changeGrammar ) {
+        data = lv_toStandLuaGrammar(data);
+    }
     if( self.l==NULL ){
         LVError( @"Lua State is released !!!");
         return @"Lua State is released !!!";
