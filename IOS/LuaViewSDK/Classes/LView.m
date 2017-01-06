@@ -436,13 +436,11 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 
 #pragma mark - setFrame
 
--(void) releaseLuaView{
-    self.hidden = YES;
-    [self removeFromSuperview];
-    [self performSelector:@selector(freeMySelf) withObject:nil afterDelay:0.001];
+-(void) releaseLuaView {
+    [self performSelectorOnMainThread:@selector(freeMySelf) withObject:nil waitUntilDone:NO];
 }
 
--(void) freeMySelf{
+-(void) freeMySelf {
     [self removeFromSuperview];
     lua_State* l = self.l;
     self.l = NULL;
