@@ -182,10 +182,10 @@ static int __newindex (lua_State *L) {
 }
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
-    lv_defineGlobalFunc(@"Struct", lvNewStruct, L);
-    lv_defineGlobalFunc(@"Rect",   lvNewStruct, L);
-    lv_defineGlobalFunc(@"Size",   lvNewStruct, L);
-    lv_defineGlobalFunc(@"Point",  lvNewStruct, L);
+    lv_defineGlobalFunc("Struct", lvNewStruct, L);
+    lv_defineGlobalFunc("Rect",   lvNewStruct, L);
+    lv_defineGlobalFunc("Size",   lvNewStruct, L);
+    lv_defineGlobalFunc("Point",  lvNewStruct, L);
     
     const struct luaL_Reg memberFunctions [] = {
         {"__index", __index },

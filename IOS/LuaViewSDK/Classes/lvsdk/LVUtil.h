@@ -209,7 +209,7 @@ BOOL lv_objcEqual(id obj1, id obj2);
 +(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass;
 
 +(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L;
-void lv_defineGlobalFunc(NSString* globalName, lua_CFunction func, lua_State* L);
+void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L);
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 

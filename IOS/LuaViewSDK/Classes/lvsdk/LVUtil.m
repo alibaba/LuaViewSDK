@@ -853,11 +853,11 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     }
 }
 
-void lv_defineGlobalFunc(NSString* globalName, lua_CFunction func, lua_State* L) {
+void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L) {
     if( globalName && func ) {
         lua_checkstack(L, 12);
         lua_pushcfunction(L, func);
-        lua_setglobal(L, globalName.UTF8String);
+        lua_setglobal(L, globalName);
     } else {
         LVError(@"define Global Function");
     }
