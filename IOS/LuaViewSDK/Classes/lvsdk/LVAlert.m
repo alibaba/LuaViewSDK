@@ -113,10 +113,8 @@ static int toast (lua_State *L) {
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
-    {// 自动消失的提示框
-        lua_pushcfunction(L, toast);
-        lua_setglobal(L, "Toast");
-    }
+    // 自动消失的提示框
+    lv_defineGlobalFunc(@"Toast",  toast, L);
 
     // 系统Alert提示框
     [LVUtil reg:L clas:self cfunc:lvNewAlertView globalName:globalName defaultName:@"Alert"];

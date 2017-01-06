@@ -48,14 +48,11 @@ static int lv_print (lua_State *L) {
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
 +(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
-    lua_pushcfunction(L, lv_print);
-    lua_setglobal(L, "print");
+    lv_defineGlobalFunc(@"print",  lv_print, L);
     
-    lua_pushcfunction(L, loadJson);
-    lua_setglobal(L, "loadJson");
+    lv_defineGlobalFunc(@"loadJson",  loadJson, L);
     
-    lua_pushcfunction(L, unicode);
-    lua_setglobal(L, "Unicode");
+    lv_defineGlobalFunc(@"Unicode",  unicode, L);
     
     // 替换pakcage.loaders中的loader_lv
     lua_getglobal(L, LUA_LOADLIBNAME);

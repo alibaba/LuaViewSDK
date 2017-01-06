@@ -282,10 +282,10 @@ static int tableToString(lua_State*L){
         [LVUtil defineGlobal:@"ViewEffect" value:v L:L];
     }
     // 震动
-    [LVUtil defineGlobal:@"Vibrate" func:vibrate L:L];
+    lv_defineGlobalFunc(@"Vibrate", vibrate, L);
     
     // create class api
-    [LVUtil defineGlobal:@"__class__" func:lvClassLoader L:L];
+    lv_defineGlobalFunc(@"__class__", lvClassLoader, L);
     return 0;
 }
 
