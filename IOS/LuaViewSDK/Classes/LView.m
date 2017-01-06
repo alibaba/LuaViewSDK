@@ -349,7 +349,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     //清理栈
     for( NSInteger i =0; i<self.registerClasses.count; i++ ){
         lua_settop(L, 0);
-        lua_checkstack(L, 128);
+        lua_checkstack(L, 256);
         id c = self.registerClasses[i];
         [c lvClassDefine:L globalName:nil];
     }

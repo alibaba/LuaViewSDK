@@ -306,6 +306,9 @@
 		91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */; };
 		91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
 		91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
+		91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
@@ -584,6 +587,8 @@
 		91882E8F1AAD934D00107DFC /* LVRotationGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRotationGesture.m; sourceTree = "<group>"; };
 		918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSwipeGesture.h; sourceTree = "<group>"; };
 		918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSwipeGesture.m; sourceTree = "<group>"; };
+		91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgInfo.h; path = PKG/LVPkgInfo.h; sourceTree = "<group>"; };
+		91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgInfo.m; path = PKG/LVPkgInfo.m; sourceTree = "<group>"; };
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
 		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
 		91C55C701DD07185000BCB0B /* LVFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFlowLayout.h; sourceTree = "<group>"; };
@@ -1013,6 +1018,8 @@
 		84D446EF1AF75BB6000A3911 /* PKG */ = {
 			isa = PBXGroup;
 			children = (
+				91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */,
+				91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */,
 				84D446F01AF75BD8000A3911 /* LVPkgManager.h */,
 				84D446F11AF75BD8000A3911 /* LVPkgManager.m */,
 				3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */,
@@ -1200,6 +1207,7 @@
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
 				9162E6661E1B39EA003FDB96 /* lua.h in Headers */,
 				9162E6551E1B39EA003FDB96 /* lobject.h in Headers */,
+				91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */,
 				9162E64F1E1B39EA003FDB96 /* llimits.h in Headers */,
 				9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */,
 				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
@@ -1440,6 +1448,7 @@
 				9162E6DA1E1BE25F003FDB96 /* print.c in Sources */,
 				9162E6C21E1BE25F003FDB96 /* ldump.c in Sources */,
 				3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */,
+				91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */,
 				3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */,
 				3CFF77BB1C74740800847C05 /* LVButton.m in Sources */,
 				91232AAE1DAB682100536E0C /* LVWebView.m in Sources */,
@@ -1578,6 +1587,7 @@
 				BEEB28D21CA90EC200EC2D86 /* JUFLXNode.m in Sources */,
 				9162E6501E1B39EA003FDB96 /* lmathlib.c in Sources */,
 				9162E65F1E1B39EA003FDB96 /* lstrlib.c in Sources */,
+				91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */,
 				84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */,
 				84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */,
 				84C1D7D91C16C3FA0058E974 /* LVDebugConnection.m in Sources */,

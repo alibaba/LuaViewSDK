@@ -7,14 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVPkgInfo.h"
 
-#define LUAVIEW_ROOT_PATH  @"LUAVIEW_500"
-#define LUAVIEW_VERSION   "5.8.0"
+#define LUAVIEW_ROOT_PATH  @"LUAVIEW590"
+#define LUAVIEW_VERSION    "5.9.0"
 
-#define LV_PKGINFO_PROPERTY_URL      @"url"
-//#define LV_PKGINFO_PROPERTY_TIME     @"time"
-#define LV_PKGINFO_PROPERTY_TIME     @"url"  // url 作为时间戳的唯一标识, url变了就从新下发
-#define LV_PKGINFO_SHA256            @"sha256"
 
 extern NSString * const LV_PACKAGE_TIME_FILE_NAME;
 extern NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME;

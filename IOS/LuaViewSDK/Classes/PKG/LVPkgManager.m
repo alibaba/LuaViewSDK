@@ -145,26 +145,15 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return [NSString stringWithFormat:@"%@.sign",fileName];
 }
 
-+(NSString*) safe_string:(NSDictionary*) dic forKey:(NSString*) key{
-    if( [dic isKindOfClass:[NSDictionary class]] && key ) {
-        NSString* s = dic[key];
-        if( [s isKindOfClass:[NSString class]] ) {
-            return s;
-        }
-    }
-    return nil;
-}
 
 +(int) compareLocalInfoOfPackage:(NSString*)packageName withServerInfo:(NSDictionary*) info{
-    NSDictionary* dic = info;
-    if( dic ){
-        NSString* time1 = [LVPkgManager timeOfPackage:packageName];
-        NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
-        if( time1 && time2 &&
-           [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
-           [time1 isEqualToString:time2] ){
-            return 0;
-        }
+    LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
+    NSString* time1 = [LVPkgManager timeOfPackage:packageName];
+    NSString* time2 = pkgInfo.url;
+    if( time1 && time2 &&
+       [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
+       [time1 isEqualToString:time2] ){
+        return 0;
     }
     return -1;
 }
@@ -199,35 +188,33 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
 }
 
 +(void) doDownLoadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
-    NSString* url  = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_URL];
-    NSString* time = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_TIME];
-    NSString* sha256 = [LVPkgManager safe_string:info forKey:LV_PKGINFO_SHA256];// SHA256完整性验证
+    LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
     
     if ( callback == nil ){// 回调一定不是空
         callback = ^(NSDictionary* dic, NSString* erro , LVDownloadDataType dataType){
         };
     }
     
-    if( pkgName.length>0 && url.length>0 && time.length>0){
-        [LVUtil download:url callback:^(NSData *data) {
+    if( pkgName.length>0 && pkgInfo.url.length>0 && pkgInfo.timestamp.length>0){
+        [LVUtil download:pkgInfo.url callback:^(NSData *data) {
             // 解包过程放在主线程执行!!!!
             dispatch_async(dispatch_get_main_queue(), ^{
                 if( data ){
-                    BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
+                    BOOL sha256Check = [LVPkgManager sha256Check:data ret:pkgInfo.sha256];
                     if( sha256Check ){
                         [LVPkgManager deleteFileOfTimePackage:pkgName];// 开始解包, 删除时间戳文件
                         if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
                             // 解包成功
-                            if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
-                                callback(info, nil, LV_DOWNLOAD_NET);
+                            if(  [LVPkgManager wirteTimeForPackage:pkgName time:pkgInfo.timestamp] ){// 写标记成功
+                                callback(pkgInfo.originalDic, nil, LV_DOWNLOAD_NET);
                                 return ;
                             }
                         }
                     }
                 } else {
-                    LVError(@"[downLoadPackage] error: url=%@",url);
+                    LVError(@"[downLoadPackage] error: url=%@",pkgInfo.url);
                 }
-                callback(info, @"error", LV_DOWNLOAD_ERROR);
+                callback(pkgInfo.originalDic, @"error", LV_DOWNLOAD_ERROR);
             });
         }];
     }
