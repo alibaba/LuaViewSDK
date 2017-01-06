@@ -204,6 +204,13 @@
 }
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
+    return [self loadData:data fileName:fileName changeGrammar:YES];
+}
+
+- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
+    if( changeGrammar ) {
+        data = lv_toStandLuaGrammar(data);
+    }
     if (!data || !data.length || !fileName || !fileName.length) {
         LVError( @"running chars == NULL, file:%@", fileName);
         return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
