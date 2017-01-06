@@ -875,6 +875,7 @@ void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
     }
 }
 
+// ‘.’ 和‘:’ 相互转化代码
 #define LV_TYPE_WORD_FIRST    (1)
 #define LV_TYPE_WORD_SECOND   (2)
 #define LV_TYPE_NUMBER         (4)
