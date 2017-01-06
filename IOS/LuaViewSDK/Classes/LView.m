@@ -226,7 +226,7 @@
         const char* s = lua_tostring(self.l, -1);
         LVError( @"%s", s );
 #ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
         lv_printToServer(self.l, string.UTF8String, 0);
 #endif
         return [NSString stringWithFormat:@"%s",s];
@@ -388,7 +388,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         const char* s = lua_tostring(self.l, -1);
         LVError( @"%s", s );
 #ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
         lv_printToServer(self.l, string.UTF8String, 0);
 #endif
         return [NSString stringWithFormat:@"%s",s];
