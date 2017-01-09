@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LVPkgInfo.h"
 
-#define LUAVIEW_ROOT_PATH  @"LUAVIEW590"
-#define LUAVIEW_VERSION    "5.9.0"
+#define LUAVIEW_ROOT_PATH  @"LUAVIEW_5_10_0"
+#define LUAVIEW_VERSION    "5.10.0"
 
 
 extern NSString * const LV_PACKAGE_TIME_FILE_NAME;
