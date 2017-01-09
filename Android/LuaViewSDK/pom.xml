@@ -10,7 +10,7 @@
     </parent>-->
 
     <groupId>com.taobao.ju.android</groupId>
-    <artifactId>LuaViewSDK</artifactId>
+    <artifactId>luaviewsdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
 
@@ -21,23 +21,17 @@
     </description>
 
     <properties>
+        <app.releasemode>true</app.releasemode>
+        <pakageidsegment>57</pakageidsegment>
         <packaging.type>aar</packaging.type>
+        <project.build.Encoding>UTF-8</project.build.Encoding>
     </properties>
 
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>com.taobao.maven.plugins.android</groupId>
                 <artifactId>android-maven-plugin</artifactId>
@@ -47,6 +41,7 @@
                 <inherited>true</inherited>
                 <extensions>true</extensions>
                 <configuration>
+                    <customPackageID>${pakageidsegment}</customPackageID>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     <sourceDirectories>${project.basedir}/src</sourceDirectories>
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.indicator.UDCustomViewPagerIndicator;
 import com.taobao.luaview.userdata.ui.UDView;
@@ -117,7 +118,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
         //set tag
         View view = cellData.getView();
         if (view != null) {
-            view.setTag(R.id.lv_tag, cellData);
+            view.setTag(Constants.RES_LV_TAG, cellData);
         }
         return cellData;
     }
@@ -191,7 +192,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
             }
 
             //TODO 这里需要优化一下，实现的太低效，有bug
-            Object obj = child.getTag(R.id.lv_tag);
+            Object obj = child.getTag(Constants.RES_LV_TAG);
             if (obj instanceof LuaValue) {
                 LuaValue cellData = (LuaValue) obj;
                 mLuaUserdata.callCellLayout(cellData, i, item);//绘制

@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -62,7 +62,7 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         } else {
             itemView = layout.getView();
         }
-        itemView.setTag(R.id.lv_tag, cellData);
+        itemView.setTag(Constants.RES_LV_TAG, cellData);
         return itemView;
     }
 
@@ -77,20 +77,20 @@ public class LVRecyclerViewAdapter extends RecyclerView.Adapter<LVRecyclerViewHo
         if (position >= 0 && position < getItemCount()) {
             if (holder != null) {
                 if (holder.itemView != null) {
-                    holder.itemView.setTag(R.id.lv_tag_position, position);//设置位置
-                    holder.itemView.setTag(R.id.lv_tag_pinned, this.mLuaUserData.mIsPinnedSparseArray.get(position));
+                    holder.itemView.setTag(Constants.RES_LV_TAG_POSITION, position);//设置位置
+                    holder.itemView.setTag(Constants.RES_LV_TAG_PINNED, this.mLuaUserData.mIsPinnedSparseArray.get(position));
                 }
 
                 if (this.mLuaUserData.hasCellSize(getItemViewType(position))) {
-                    if (holder.itemView != null && holder.itemView.getTag(R.id.lv_tag) instanceof UDLuaTable) {
-                        UDLuaTable cellData = (UDLuaTable) holder.itemView.getTag(R.id.lv_tag);
+                    if (holder.itemView != null && holder.itemView.getTag(Constants.RES_LV_TAG) instanceof UDLuaTable) {
+                        UDLuaTable cellData = (UDLuaTable) holder.itemView.getTag(Constants.RES_LV_TAG);
                         initCellSize(cellData, position);//初始化View的size，这里因为每个cell的宽度高度可能不一样，需要再调用一遍
                     }
                 }
 
-                if (holder.itemView != null && holder.itemView.getTag(R.id.lv_tag_init) == null) {//是否已经调用过onInit，如果调用过则不重复调用
+                if (holder.itemView != null && holder.itemView.getTag(Constants.RES_LV_TAG_INIT) == null) {//是否已经调用过onInit，如果调用过则不重复调用
                     holder.onInit(position);
-                    holder.itemView.setTag(R.id.lv_tag_init, true);
+                    holder.itemView.setTag(Constants.RES_LV_TAG_INIT, true);
                 }
                 holder.onLayout(position);
             }

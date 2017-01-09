@@ -2,7 +2,6 @@ package com.taobao.luaview.userdata.constants;
 
 import android.view.Gravity;
 
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;

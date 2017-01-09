@@ -13,7 +13,7 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.constants.UDPinned;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.view.LVRecyclerView;
@@ -259,7 +259,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         if (mPinnedContainer != null && mCurrentPinnedPosition != -1) {
             View targetView = lvRecyclerView.findChildViewUnder(mPinnedContainer.getMeasuredWidth() / 2, mPinnedContainer.getMeasuredHeight() + 1);
             if (targetView != null) {
-                boolean isPinned = ((Boolean) targetView.getTag(R.id.lv_tag_pinned)).booleanValue();
+                boolean isPinned = ((Boolean) targetView.getTag(Constants.RES_LV_TAG_PINNED)).booleanValue();
                 if (isPinned && targetView.getTop() > 0) {
                     if (pinnedViewPosition != -1) {
                         int deltaY = targetView.getTop() - mPinnedContainer.getMeasuredHeight();

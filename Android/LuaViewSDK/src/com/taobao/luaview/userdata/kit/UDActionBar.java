@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.userdata.ui.UDImageView;
 import com.taobao.luaview.userdata.ui.UDSpannableString;
@@ -80,7 +80,7 @@ public class UDActionBar extends BaseLuaTable {
                     if (actionBar != null) {
                         final View view = ((UDView) titleViewValue).getView();
                         if (view != null) {
-                            view.setTag(R.id.lv_tag, titleViewValue);
+                            view.setTag(Constants.RES_LV_TAG, titleViewValue);
                         }
                         actionBar.setDisplayShowCustomEnabled(true);
                         actionBar.setCustomView(LuaViewUtil.removeFromParent(view));
@@ -103,7 +103,7 @@ public class UDActionBar extends BaseLuaTable {
                 } else {
                     final View view = actionBar.getCustomView();
                     if (view != null) {
-                        final Object tag = view.getTag(R.id.lv_tag);
+                        final Object tag = view.getTag(Constants.RES_LV_TAG);
                         return tag instanceof LuaValue ? (LuaValue) tag : NIL;
                     }
                 }

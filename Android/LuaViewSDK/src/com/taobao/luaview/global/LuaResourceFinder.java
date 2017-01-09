@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
@@ -147,7 +146,7 @@ public class LuaResourceFinder implements ResourceFinder {
             protected void onPreExecute() {
                 super.onPreExecute();
                 if (imageView != null && nameOrPath != null) {
-                    imageView.setTag(R.id.lv_tag_url, nameOrPath);
+                    imageView.setTag(Constants.RES_LV_TAG_URL, nameOrPath);
                 }
             }
 
@@ -159,7 +158,7 @@ public class LuaResourceFinder implements ResourceFinder {
             @Override
             protected void onPostExecute(Drawable drawable) {
                 super.onPostExecute(drawable);
-                if (imageView != null && nameOrPath != null && nameOrPath.equals(imageView.getTag(R.id.lv_tag_url))) {
+                if (imageView != null && nameOrPath != null && nameOrPath.equals(imageView.getTag(Constants.RES_LV_TAG_URL))) {
                     imageView.setImageDrawable(drawable);
                 }
             }
