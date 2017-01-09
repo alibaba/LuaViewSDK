@@ -828,8 +828,8 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 
 #pragma mark - package
 
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*)info{
-    [LVPkgManager downLoadPackage:packageName withInfo:info];
++(void) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*)info{
+    [LVPkgManager downloadPackage:packageName withInfo:info];
 }
 
 -(BOOL) argumentToBool:(int) index{

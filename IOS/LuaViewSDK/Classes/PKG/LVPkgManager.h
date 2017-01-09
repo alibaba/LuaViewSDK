@@ -34,9 +34,9 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 +(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
 
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*) rsa;
 

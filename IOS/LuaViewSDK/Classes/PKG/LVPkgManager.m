@@ -160,14 +160,14 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return -1;
 }
 
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
-    return [self downLoadPackage:packageName withInfo:info callback:nil];
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
+    return [self downloadPackage:packageName withInfo:info callback:nil];
 }
 
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     if( info ) {
         if( [LVPkgManager compareLocalInfoOfPackage:packageName withServerInfo:info] ){
-            [LVPkgManager doDownLoadPackage:packageName withInfo:info callback:callback];
+            [LVPkgManager doDownloadPackage:packageName withInfo:info callback:callback];
             return LV_DOWNLOAD_NET;
         }
         return LV_DOWNLOAD_CACHE;
@@ -189,7 +189,7 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return NO;
 }
 
-+(void) doDownLoadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
++(void) doDownloadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
     
     if ( callback == nil ){// 回调一定不是空
@@ -214,7 +214,7 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
                         }
                     }
                 } else {
-                    LVError(@"[downLoadPackage] error: url=%@",pkgInfo.url);
+                    LVError(@"[downloadPackage] error: url=%@",pkgInfo.url);
                 }
                 callback(pkgInfo.originalDic, @"error", LV_DOWNLOAD_ERROR);
             });

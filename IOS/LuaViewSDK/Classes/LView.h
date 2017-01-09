@@ -139,7 +139,7 @@
  * packageName: 包名  比如:"ppt"
  * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/3.2.12/ppt4.4.0.js" , "time":"2015-11-18 09:53"}
  */
-+(void) downLoadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
++(void) downloadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
 
 @end
 
