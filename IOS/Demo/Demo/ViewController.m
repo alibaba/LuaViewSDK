@@ -52,6 +52,27 @@
     self.names = nameArray;
 
     [LViewController disableReloadKeyCommand:YES];
+    
+//    [LVPkgManager downloadPackage:@"123"
+//                         withInfo:@{
+//
+//            @"bsha": @"ada9b8c175a9fe2f1b90c513b4b9c3887ef5793a531b29ef9e224c37f36a73b7",
+//            @"sha": @"eabf095a31290def9c732f51f4568b480cf4a316f409133432cc0c05830d8fb9",
+//            @"burl": @"//gjusp.alicdn.com/midway-luaView/julua_1111_tabbar-1a679ce0-d629-11e6-9d20-0918a0280bed.bzip",
+//            @"url": @"//gjusp.alicdn.com/midway-luaView/julua_1111_tabbar-1a679ce0-d629-11e6-9d20-0918a0280bed.zip"
+//
+//
+//            
+//            @"bsha": @"268acd704e0d995d5aac823fc4ee0bcdbcc5049b8278ab050da5fca8d2dc7bfd",
+//            @"sha": @"06f210f0e8ee72a880a165dc6fcae936c9b9d41f6af1d97dc7294bd197a3a4ab",
+//            @"burl": @"//gjusp.alicdn.com/midway-luaView/julua_1111_tabbar-b2667c40-d472-11e6-ab99-3b5804d6288d.bzip",
+//            @"url": @"//gjusp.alicdn.com/midway-luaView/julua_1111_tabbar-b2667c40-d472-11e6-ab99-3b5804d6288d.zip"
+//
+//            
+//                                    }
+//                         callback:^(NSDictionary *info, NSString *error, LVDownloadDataType dataType) {
+//                             NSLog(@"%@",info);
+//    }];
 }
 
 
