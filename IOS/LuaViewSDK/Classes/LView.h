@@ -31,7 +31,7 @@
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 
-@property (nonatomic,assign) BOOL standVM; // 是否lua标准语法，默认是标准语法（原先luaview语法和lua标准语法的区别是‘.’和':'互换了）
+@property (nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是非标准语法，需要转换
 
 /**
  *  load and run script

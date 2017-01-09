@@ -99,6 +99,7 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.changeGrammar = YES;
     self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
@@ -169,6 +170,8 @@
     [self.bundle addScriptPath:packagePath];
     [self.bundle addResourcePath:packagePath];
     
+    self.changeGrammar = [[LVPkgManager changeGrammarOfPackage:packageName] isEqualToString:@"true"];
+    
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
     lua_State* L = self.l;
@@ -205,7 +208,7 @@
 }
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
-    return [self loadData:data fileName:fileName changeGrammar:YES];
+    return [self loadData:data fileName:fileName changeGrammar:self.changeGrammar];
 }
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
@@ -360,7 +363,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
-    return [self runData:data fileName:fileName changeGrammar:YES];
+    return [self runData:data fileName:fileName changeGrammar:self.changeGrammar];
 }
 
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{

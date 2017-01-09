@@ -21,13 +21,17 @@ imageView.image("img16.tiff");
 imageView.startAnimation( names, 3.0, 1000);
 
 
-Animate(3, function(){
-	imageView.center(scrW/2,scrH/2);
-}, function ()
-	Animate(3, function(){
-		imageView.center(scrW,scrH);
-	}, function ()
-	end);
+Animate(3, 
+	function()
+		imageView.center(scrW/2,scrH/2);
+	end,
+	function ()
+		Animate(3, function()
+			imageView.center(scrW,scrH);
+		end,
+		function ()
+		end
+	);
 end);
 
 
