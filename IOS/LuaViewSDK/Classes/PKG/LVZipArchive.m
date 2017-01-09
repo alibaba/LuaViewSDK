@@ -337,7 +337,7 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
 
 - (NSString*) timeIntervalStr{
     NSDate* date = [self lastModDate];
-    long long s = (long long)( [date timeIntervalSince1970]*1000 );
+    long long s = (long long)( [date timeIntervalSince1970] );
     NSString *timeStr = [NSString stringWithFormat:@"%lld", s];
     return timeStr;
 }

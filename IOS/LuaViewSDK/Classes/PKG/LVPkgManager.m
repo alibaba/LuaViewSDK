@@ -102,24 +102,29 @@ NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
     return NO;
 }
 
++(BOOL) isNewTimestamp:(NSString*)newTS old:(NSString*) oldTS{
+    return newTS.length>0 && oldTS.length>0 && [newTS compare:oldTS]==NSOrderedDescending;
+}
+
 +(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName {
     NSString *path = [self rootDirectoryOfPackage:packageName];
     if( pkgData && [LVUtil createPath:path] ){
         LVZipArchive *archive = [LVZipArchive archiveWithData:pkgData];
         
-        NSString *newTimestamp = [archive timeIntervalStr];
+        NSString* newTS = [archive timeIntervalStr];
         
-        NSString* oldTimestamp = [self timestampOfPackage:packageName];
+        NSString* oldTS = [self timestampOfPackage:packageName];
         
-        if( newTimestamp.length>0 && oldTimestamp.length>0 && [newTimestamp compare:oldTimestamp]==NSOrderedDescending ){
-            [self setPackage:packageName timestamp:newTimestamp];
+        if( (newTS && oldTS==nil ) || // 首次下载
+            [self isNewTimestamp:newTS old:oldTS] // 有更新的包
+           ){
             BOOL result = [archive unzipToDirectory:path];
             if( result ) {
-                [self setPackage:packageName timestamp:newTimestamp];
+                [self setPackage:packageName timestamp:newTS];
             }
             return result;
         } else {
-            LVLog(@" Not Need unpackage, %@, %@",packageName,newTimestamp);
+            LVLog(@" Not Need unpackage, %@, %@",packageName,newTS);
             return YES;
         }
     }
