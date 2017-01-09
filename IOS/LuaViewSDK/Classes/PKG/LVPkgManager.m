@@ -114,10 +114,8 @@ NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
         NSString* newTS = [archive timeIntervalStr];
         
         NSString* oldTS = [self timestampOfPackage:packageName];
-        
-        if( (newTS && oldTS==nil ) || // 首次下载
-            [self isNewTimestamp:newTS old:oldTS] // 有更新的包
-           ){
+         // 首次下载 或者有 新的最新包
+        if( (newTS && oldTS==nil) ||  [self isNewTimestamp:newTS old:oldTS] ){
             BOOL result = [archive unzipToDirectory:path];
             if( result ) {
                 [self setPackage:packageName timestamp:newTS];
