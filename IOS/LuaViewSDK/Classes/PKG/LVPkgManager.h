@@ -31,8 +31,9 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 + (NSString *)rootDirectoryOfPackage:(NSString *)packageName;
 + (NSString *)pathForFileName:(NSString *)fileName package:(NSString *)packageName;
 
-+(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName;
-+(BOOL) unpackageData:(NSData*) data       packageName:(NSString*) packageName;
+// 解压失败是-1， 无需解压本地更加新是0， 解压成功是1
++(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName;
++(int) unpackageData:(NSData*) data       packageName:(NSString*) packageName;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;

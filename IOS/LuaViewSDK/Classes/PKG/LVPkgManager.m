@@ -92,21 +92,21 @@ NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
 }
 
 //------------------------------------------------------------------------------------------
-+(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName {
++(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName {
     NSString *path = [LVUtil PathForBundle:nil relativePath:fileName];
     
     if( [LVUtil exist:path] ){
         NSData* pkgData = [LVUtil dataReadFromFile:path];
         return [self unpackageData:pkgData packageName:packageName];
     }
-    return NO;
+    return -1;
 }
-
-+(BOOL) isNewTimestamp:(NSString*)newTS old:(NSString*) oldTS{
+// 根据时间戳，检查是否需要更新
++(BOOL) checkUpdateWithNewTS:(NSString*)newTS oldTS:(NSString*) oldTS{
     return newTS.length>0 && oldTS.length>0 && [newTS compare:oldTS]==NSOrderedDescending;
 }
 
-+(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName {
++(int) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName {
     NSString *path = [self rootDirectoryOfPackage:packageName];
     if( pkgData && [LVUtil createPath:path] ){
         LVZipArchive *archive = [LVZipArchive archiveWithData:pkgData];
@@ -115,18 +115,19 @@ NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
         
         NSString* oldTS = [self timestampOfPackage:packageName];
          // 首次下载 或者有 新的最新包
-        if( (newTS && oldTS==nil) ||  [self isNewTimestamp:newTS old:oldTS] ){
+        if( (newTS && oldTS==nil) ||  [self checkUpdateWithNewTS:newTS oldTS:oldTS] ){
             BOOL result = [archive unzipToDirectory:path];
             if( result ) {
                 [self setPackage:packageName timestamp:newTS];
+                return 1;
             }
-            return result;
+            return -1;
         } else {
             LVLog(@" Not Need unpackage, %@, %@",packageName,newTS);
-            return YES;
+            return 0;
         }
     }
-    return NO;
+    return -1;
 }
 
 +(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
@@ -188,10 +189,10 @@ NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
             // 解包过程放在主线程执行!!!!
             dispatch_async(dispatch_get_main_queue(), ^{
                 if( data ){
-                    BOOL sha256Check = [self sha256Check:data ret:pkgInfo.sha256];
-                    if( sha256Check ){
+                    BOOL sha256OK = [self sha256Check:data ret:pkgInfo.sha256];
+                    if( sha256OK ){
                         [self deleteFileOfPackageDownloadUrl:pkgName];// 开始解包, 删除时间戳文件
-                        if ( [self unpackageData:data packageName:pkgName] ) {
+                        if ( [self unpackageData:data packageName:pkgName]>=0 ) {
                             // 解包成功
                             if( [self setPackage:pkgName downloadUrl:pkgInfo.url] ){// 写标记成功
                                 callback(pkgInfo.originalDic, nil, LV_DOWNLOAD_NET);
