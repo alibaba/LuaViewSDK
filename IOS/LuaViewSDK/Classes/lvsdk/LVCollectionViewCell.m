@@ -58,4 +58,8 @@
     }
 }
 
+// 修复gif图片滚动会消失问题
+-(void) prepareForReuse{
+}
+
 @end
