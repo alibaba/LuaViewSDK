@@ -13,8 +13,8 @@
 #define LUAVIEW_VERSION    "5.10.0"
 
 
-extern NSString * const LV_PACKAGE_TIME_FILE_NAME;
-extern NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME;
+extern NSString * const LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL;
+extern NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP;
 
 @class LVRSA;
 
@@ -31,7 +31,8 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 + (NSString *)rootDirectoryOfPackage:(NSString *)packageName;
 + (NSString *)pathForFileName:(NSString *)fileName package:(NSString *)packageName;
 
-+(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  checkTime:(BOOL) checkTime;
++(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName;
++(BOOL) unpackageData:(NSData*) data       packageName:(NSString*) packageName;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
@@ -40,14 +41,14 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*) rsa;
 
++(NSString*) downloadUrlOfPackage:(NSString*)packageName;
++(BOOL) setPackage:(NSString*)packageName downloadUrl:(NSString*) downloadUrl;
+
 +(NSString*) timestampOfPackage:(NSString*)packageName;
 +(BOOL) setPackage:(NSString*)packageName timestamp:(NSString*) time;
 
-+(NSString*) timestampOfLocalPackage:(NSString*)packageName;
-+(BOOL) setLocalPackage:(NSString*)packageName timestamp:(NSString*) time;
-
 // 返回值说明   0:本地和线上版本一样;   -1:错误或者不相等
-+(int) compareLocalInfoOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;
++(int) compareDownloadUrlOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;
 
 //清理所有LuaView相关文件
 +(void) clearCachesPath;

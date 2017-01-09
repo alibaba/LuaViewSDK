@@ -324,6 +324,24 @@ static NSUInteger lfheader_getLength(struct LVZipLFHeader *header) {
     return archive;
 }
 
+- (NSDate *) lastModDate {
+    NSDate* date0 = self.entries.firstObject.lastModDate;
+    for( LVZipEntry * entry in self.entries ){
+        NSDate* date2 = entry.lastModDate;
+        if( [date2 timeIntervalSinceDate:date0]>0 ) {
+            date0 = date2;
+        }
+    }
+    return date0;
+}
+
+- (NSString*) timeIntervalStr{
+    NSDate* date = [self lastModDate];
+    long long s = (long long)( [date timeIntervalSince1970]*1000 );
+    NSString *timeStr = [NSString stringWithFormat:@"%lld", s];
+    return timeStr;
+}
+
 + (BOOL)unzipData:(NSData *)data toDirectory:(NSString *)path {
     LVZipArchive *archive = [self archiveWithData:data];
     return [archive unzipToDirectory:path];
