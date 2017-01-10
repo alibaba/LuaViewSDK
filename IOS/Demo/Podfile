@@ -8,7 +8,7 @@ target 'Demo' do
     pod 'SDWebImage', '3.7.5'
     pod 'liblua', '5.1.4-SNAPSHOT'
 
-    pod 'LuaViewSDK', :path => '../../../LuaViewSDK'
+    pod 'LuaViewSDK', :path => '../../'
 
 end
 
