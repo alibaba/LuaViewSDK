@@ -30,6 +30,7 @@ extern const int LVSignedScriptExtIndex;
 extern NSString * const LVScriptExts[2];
 
 #import "LVUtil.h"
+#import "LVGrammarChanger.h"
 //--------------------------------------------------------------------------------
 #define LV_ALIGN_LEFT       (1)
 #define LV_ALIGN_H_CENTER   (2)

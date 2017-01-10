@@ -328,13 +328,15 @@ static int flxChildViews(lua_State *L)
 static int flxBindingInlineCSS(lua_State *L)
 {
     LVUserDataInfo *user = (LVUserDataInfo *)lua_touserdata(L, 1);
-    UIView *view = (__bridge UIView *)(user->object);
-    
-    int childNum = lua_gettop(L);
-    if (view && childNum==2) {
-        if (lua_type(L, 2) == LUA_TSTRING) {
-            [view.ju_flxNode bindingInlineCSS:[NSString stringWithUTF8String:lua_tostring(L, 2)]];
-            return 0;
+    if( user ) {
+        UIView *view = (__bridge UIView *)(user->object);
+        
+        int childNum = lua_gettop(L);
+        if (view && childNum==2) {
+            if (lua_type(L, 2) == LUA_TSTRING) {
+                [view.ju_flxNode bindingInlineCSS:[NSString stringWithUTF8String:lua_tostring(L, 2)]];
+                return 0;
+            }
         }
     }
     return 0;

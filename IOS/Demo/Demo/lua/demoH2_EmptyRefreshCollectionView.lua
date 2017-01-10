@@ -1,11 +1,11 @@
 
-w,h = System.screenSize();
+w,h = System:screenSize();
 
-window.backgroundColor(0xffFFFF,1);
+window:backgroundColor(0xffFFFF,1);
 
 label = Label();
-label.frame(0,0,320,54);
-label.text("loading...");
+label:frame(0,0,320,54);
+label:text("loading...");
 
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"
@@ -38,37 +38,37 @@ collectionView = EmptyRefreshCollectionView {
 				return (w-10)/2 ,200;
 			end,
 			Init = function(cell)
-				local cellWidth ,cellHeight = cell.window.size();
+				local cellWidth ,cellHeight = cell.window:size();
 				cellHeight = cellHeight / 2;
 				cell.icon = Image();
-				cell.icon.frame(0, 0, cellHeight, cellHeight);
+				cell.icon:frame(0, 0, cellHeight, cellHeight);
 
 				cell.title = Label();
-				cell.title.frame(0, cellHeight+2, cellHeight, 40);
-				cell.title.textColor(0xffFFFF);
-				cell.title.backgroundColor(0xff00ff);
+				cell.title:frame(0, cellHeight+2, cellHeight, 40);
+				cell.title:textColor(0xffFFFF);
+				cell.title:backgroundColor(0xff00ff);
 				print("构造Cell--2");
 			end,
 			Layout = function(cell , section, row)
-				cell.icon.image(imageUrl1, function()
-						local x,y,w,h = cell.icon.frame();
+				cell.icon:image(imageUrl1, function()
+						local x,y,w,h = cell.icon:frame();
 						print("dongxicheng----",x,y,w,h);
 					end);
 
-				cell.title.text("测试"..section .."--" .. row);
+				cell.title:text("测试"..section .."--" .. row);
 				print("布局Cell--" , section, "--", row);
 
-				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+				cell.window:backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
 			Callback = function(cell, section, row)
 				if( row%2 == 0 )then
-					collectionView.reload();
+					collectionView:reload();
 					return;
 				end
                 print(section, row);
-                collectionView.stopRefreshing();
-				System.gc();
-				-- collectionView.scrollToCell(section, row);
+                collectionView:stopRefreshing();
+				System:gc();
+				-- collectionView:scrollToCell(section, row);
 			end
 		},
 		ImageAndLabel2 = {
@@ -77,58 +77,58 @@ collectionView = EmptyRefreshCollectionView {
 			end,
 			Init = function(cell)
 				cell.icon = Image();
-				cell.icon.frame(w*0.05, 10, cellHeight, cellHeight);
+				cell.icon:frame(w*0.05, 10, cellHeight, cellHeight);
 
 				cell.button = Button();
-				cell.button.frame(0,0,100,60);
-				cell.button.backgroundColor(0x777777);
-				cell.button.callback( 
+				cell.button:frame(0,0,100,60);
+				cell.button:backgroundColor(0x777777);
+				cell.button:callback( 
 					function()
 							Animate( function()
-											cell.icon2.center(160,100);
+											cell.icon2:center(160,100);
 									 end
 								    ) ;
 					end);
 
 
 				cell.icon2 = Image();
-				cell.icon2.frame(160, 0, cellHeight, cellHeight);
+				cell.icon2:frame(160, 0, cellHeight, cellHeight);
 
 				print("构造Cell--2");
 			end,
 			Layout = function(cell , section, row)
-				cell.icon.image(
+				cell.icon:image(
 					imageUrl1, 
 					function() 
-						local x,y,w,h = cell.icon.frame();
+						local x,y,w,h = cell.icon:frame();
 						print("dongxicheng----",x,y,w,h);
 					end);
 
-				cell.icon2.image(imageUrl1)
+				cell.icon2:image(imageUrl1)
 				print("布局Cell--" , section, "--", row);
-				cell.button.text(tostring(section) .. "," .. tostring(row) );
+				cell.button:text(tostring(section) .. "," .. tostring(row) );
 
-				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
+				cell.window:backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
 			Callback = function(cell, section, row)
 				print(section, row);
-                collectionView.stopRefreshing();
-				System.gc();
-				-- collectionView.scrollToCell(section, row);
+                collectionView:stopRefreshing();
+				System:gc();
+				-- collectionView:scrollToCell(section, row);
 			end
 		}
 	},
 	Callback = {
 			Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-				local x,y = collectionView.offset();
+				local x,y = collectionView:offset();
 				if( y<= 0 ) then
-					label.frame( 0,-54-y, 320, 54);
+					label:frame( 0,-54-y, 320, 54);
 				end
 			end,
 			-- ContentInset = function()
-			-- 	local x,y = collectionView.offset();
+			-- 	local x,y = collectionView:offset();
 			-- 	if( y<=0 ) then
-			-- 		label.frame( 0,-54-y, 320, 54);
+			-- 		label:frame( 0,-54-y, 320, 54);
 			-- 	end
 			-- end,
 			ScrollBegin = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
@@ -140,9 +140,9 @@ collectionView = EmptyRefreshCollectionView {
 	}
 };
 
-collectionView.frame(0,0,w,h-64);
--- collectionView.backgroundColor(0xffFFFF);
-collectionView.miniSpacing(10);
--- collectionView.scrollDirection(1);
+collectionView:frame(0,0,w,h-64);
+-- collectionView:backgroundColor(0xffFFFF);
+collectionView:miniSpacing(10);
+-- collectionView:scrollDirection(1);
 
 
