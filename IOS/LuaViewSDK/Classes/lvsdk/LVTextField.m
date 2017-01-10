@@ -10,11 +10,7 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVTextField ()<UITextFieldDelegate>
 
@@ -23,10 +19,10 @@
 @implementation LVTextField
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super initWithFrame:CGRectMake(0, 0, 100, 40)];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
@@ -40,28 +36,28 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     // became first responder
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ) {
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         [self lv_callLuaByKey1:@"BeginEditing"];
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ) {
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         [self lv_callLuaByKey1:@"EndEditing"];
     }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-//    lv_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_lview.l;
 //    if( l ) {
-//        lv_checkStack32(l);
+//        lua_checkstack32(l);
 //        if(  [LVUtil call:l lightUserData:self key:"清理"] ){
 //            if(  lv_isboolean(l, -1) ){
-//                return lv_toboolean(l, -1);
+//                return lua_toboolean(l, -1);
 //            }
 //        }
 //    }
@@ -69,12 +65,12 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-//    lv_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_lview.l;
 //    if( l ) {
-//        lv_checkStack32(l);
+//        lua_checkstack32(l);
 //        if( [LVUtil call:l lightUserData:self key:"返回"]==0 ){
 //            if(  lv_isboolean(l, -1) ){
-//                return lv_toboolean(l, -1);
+//                return lua_toboolean(l, -1);
 //            }
 //        }
 //    }
@@ -86,7 +82,7 @@
 }
 
 #pragma -mark lvNewTextField
-static int lvNewTextField (lv_State *L) {
+static int lvNewTextField (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTextField class]];
     
     LVTextField* textFiled = [[c alloc] init:L];
@@ -95,29 +91,29 @@ static int lvNewTextField (lv_State *L) {
         userData->object = CFBridgingRetain(textFiled);
         textFiled.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_UITextField );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UITextField );
+        lua_setmetatable(L, -2);
     }
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:textFiled];
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-static int text (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int text (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->object);
         if( [view isKindOfClass:[LVTextField class]] ){
-            if ( lv_gettop(L)>=2 ) {
-                if( lv_type(L, 2)==LV_TUSERDATA ) {
-                    LVUserDataInfo * user2 = lv_touserdata(L, 2);// 2
+            if ( lua_gettop(L)>=2 ) {
+                if( lua_type(L, 2)==LUA_TUSERDATA ) {
+                    LVUserDataInfo * user2 = lua_touserdata(L, 2);// 2
                     if( user2 && LVIsType(user2, StyledString) ) {
                         LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                         view.attributedText = attString.mutableStyledString;
                     }
-                } else if( lv_type(L, 2)==LV_TSTRING ) {
+                } else if( lua_type(L, 2)==LUA_TSTRING ) {
                     NSString* text = lv_paramString(L, 2);// 2
                     view.text = text;
                 }
@@ -125,7 +121,7 @@ static int text (lv_State *L) {
             } else {
                 NSString* s = view.text;
                 if( s ) {
-                    lv_pushstring(L, s.UTF8String);
+                    lua_pushstring(L, s.UTF8String);
                     return 1;
                 }
                 
@@ -139,11 +135,11 @@ static int text (lv_State *L) {
                     userData->object = CFBridgingRetain(attString);
                     attString.lv_userData = userData;
                     
-                    lvL_getmetatable(L, META_TABLE_AttributedString );
-                    lv_setmetatable(L, -2);
+                    luaL_getmetatable(L, META_TABLE_AttributedString );
+                    lua_setmetatable(L, -2);
                     return 1;
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
                 return 1;
             }
@@ -152,17 +148,17 @@ static int text (lv_State *L) {
     return 0;
 }
 
-static int placeholder (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int placeholder (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVTextField* view = (__bridge LVTextField *)(user->object);
         if( [view isKindOfClass:[LVTextField class]] ){
-            if ( lv_gettop(L)>=2 ) {
-                if( lv_type(L, 2)==LV_TSTRING ) {
+            if ( lua_gettop(L)>=2 ) {
+                if( lua_type(L, 2)==LUA_TSTRING ) {
                     NSString* text = lv_paramString(L, 2);// 2
                     view.placeholder = text;
-                } else if( lv_type(L, 2)==LV_TUSERDATA ) {
-                    LVUserDataInfo * user2 = lv_touserdata(L, 2);// 2
+                } else if( lua_type(L, 2)==LUA_TUSERDATA ) {
+                    LVUserDataInfo * user2 = lua_touserdata(L, 2);// 2
                     if( user2 && LVIsType(user2, StyledString) ) {
                         LVStyledString* attString = (__bridge LVStyledString *)(user2->object);
                         view.attributedPlaceholder = attString.mutableStyledString;
@@ -172,9 +168,9 @@ static int placeholder (lv_State *L) {
             } else {
                 NSString* s = view.placeholder;
                 if( s ) {
-                    lv_pushstring(L, s.UTF8String);
+                    lua_pushstring(L, s.UTF8String);
                 } else {
-                    lv_pushnil(L);
+                    lua_pushnil(L);
                 }
             }
             return 1;
@@ -183,10 +179,10 @@ static int placeholder (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTextField globalName:globalName defaultName:@"TextField"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},
         {"placeholder", placeholder},
@@ -195,8 +191,8 @@ static int placeholder (lv_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_UITextField);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

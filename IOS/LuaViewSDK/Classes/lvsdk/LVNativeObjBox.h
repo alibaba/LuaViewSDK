@@ -22,24 +22,24 @@
 @property(nonatomic,weak)   id realObjectWeak;
 @property(nonatomic,assign) BOOL openAllMethod;
 
--(id) init:(lv_State*) l  nativeObject:(id)nativeObject;
+-(id) init:(lua_State*) l  nativeObject:(id)nativeObject;
 -(void) addMethod:(LVMethod*) method;
--(int) performMethod:(NSString*) methodName L:(lv_State*)L;
+-(int) performMethod:(NSString*) methodName L:(lua_State*)L;
 
 - (NSString *)className;
 - (BOOL)isOCClass;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 /*
  * 注册native对象到脚本中, sel可以为空(如果为空注册所有api)
  */
-+(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) luaName sel:(SEL) sel weakMode:(BOOL) weakMode;
++(int) registeObjectWithL:(lua_State *)L  nativeObject:(id) nativeObject name:(NSString*) luaName sel:(SEL) sel weakMode:(BOOL) weakMode;
 
 /*
  * 清除脚本中注册的native对象
  */
-+(int) unregisteObjectWithL:(lv_State *)L name:(NSString*) name;
++(int) unregisteObjectWithL:(lua_State *)L name:(NSString*) name;
 
 
 @end

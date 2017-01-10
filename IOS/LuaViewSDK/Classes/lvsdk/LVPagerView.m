@@ -12,11 +12,7 @@
 #import "LVScrollView.h"
 #import "LVPagerViewCell.h"
 #import "LVPagerIndicator.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 static inline NSInteger mapPageIdx(NSInteger pageIdx){
     return pageIdx + 1;
@@ -59,10 +55,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 @implementation LVPagerView
 
--(id) init:(lv_State*) l {
+-(id) init:(lua_State*) l {
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.cellArray = [[NSMutableArray alloc] init];
         self.scrollview = ({
@@ -232,7 +228,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 - (LVPagerViewCell*) cellLayoutAtPageIdx:(int)pageIdx {
     LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
     LView* lview = self.lv_lview;
-    lv_State* l = lview.l;
+    lua_State* l = lview.l;
     lview.conentView = cell;
     lview.contentViewIsWindow = NO;
     if ( l ) {
@@ -245,25 +241,25 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             [cell doInitWithLView:lview];
             
             // 创建cell初始化
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
+            lua_settop(l, 0);
+            lua_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
+            lua_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Pages" key2:"Init" key3:NULL nargs:2 nrets:0 retType:LV_TNONE];
+            [LVUtil call:l key1:"Pages" key2:"Init" key3:NULL nargs:2 nrets:0 retType:LUA_TNONE];
         }
         {   // 通知布局调整
             // 参数 cell,section,row
-            lv_settop(l, 0);
-            lv_checkstack(l, 12);
+            lua_settop(l, 0);
+            lua_checkstack(l, 12);
             [cell pushTableToStack];//arg1: cell
-            lv_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
+            lua_pushnumber(l, mapPageIdx(pageIdx) );//arg2: section
             
             lv_pushUserdata(l, self.lv_userData);
             lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-            [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LV_TNONE];
+            [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LUA_TNONE];
         }
     }
     lview.conentView = nil;
@@ -273,13 +269,13 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // section数量
 - (NSInteger) numberOfPagesInPageView{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if(  [LVUtil call:l key1:"PageCount" key2:NULL key3:NULL nargs:0 nrets:1 retType:LV_TNUMBER] ==0 ) {
-            if( lv_type(l, -1)==LV_TNUMBER ) {
-                NSInteger num = lv_tonumber(l, -1);
+        if(  [LVUtil call:l key1:"PageCount" key2:NULL key3:NULL nargs:0 nrets:1 retType:LUA_TNUMBER] ==0 ) {
+            if( lua_type(l, -1)==LUA_TNUMBER ) {
+                NSInteger num = lua_tonumber(l, -1);
                 return num;
             }
         }
@@ -339,29 +335,29 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 }
 
 #pragma -mark lvNewCollectionView
-static int lvNewPagerView (lv_State *L) {
+static int lvNewPagerView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
     
-    if ( lv_gettop(L)>=1 && lv_type(L, 1)==LV_TTABLE ) {
+    if ( lua_gettop(L)>=1 && lua_type(L, 1)==LUA_TTABLE ) {
         LVPagerView* pageView = [[c alloc] init:L];
         
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageView);
         pageView.lv_userData = userData;
-        lvL_getmetatable(L, META_TABLE_UIPageView );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UIPageView );
+        lua_setmetatable(L, -2);
         
-        LView* lview = (__bridge LView *)(L->lView);
+        LView* lview = LV_LUASTATE_VIEW(L);
         if( lview ){
             [lview containerAddSubview:pageView];
         }
         
-        int stackNum = lv_gettop(L);
-        lv_pushvalue(L, 1);
+        int stackNum = lua_gettop(L);
+        lua_pushvalue(L, 1);
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
         
         [pageView createAllCell];
-        lv_settop(L, stackNum);
+        lua_settop(L, stackNum);
         
         lv_pushUserdata(L, pageView.lv_userData);
         return 1;
@@ -384,57 +380,57 @@ static int lvNewPagerView (lv_State *L) {
     });
 }
 
-static int reload (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int reload (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
         [pageView reloadDataASync];
-        lv_pushvalue(L, 1);
+        lua_pushvalue(L, 1);
         return 1;
     }
     return 0;
 }
 
-static int showScrollBar(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int showScrollBar(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         UIScrollView* view = (__bridge UIScrollView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            BOOL yes1 = lv_toboolean(L, 2);
+        if( lua_gettop(L)>=2 ) {
+            BOOL yes1 = lua_toboolean(L, 2);
             view.showsHorizontalScrollIndicator = yes1;
             return 0;
         } else {
-            lv_pushboolean(L, view.showsHorizontalScrollIndicator );
+            lua_pushboolean(L, view.showsHorizontalScrollIndicator );
             return 1;
         }
     }
     return 0;
 }
 
-static int setCurrentPage(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int setCurrentPage(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerView* view = (__bridge LVPagerView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            int luaPageIdx = lv_tonumber(L, 2);
+        if( lua_gettop(L)>=2 ) {
+            int luaPageIdx = lua_tonumber(L, 2);
             BOOL animated = YES;
-            if( lv_gettop(L)>=3 ) {
-                animated = lv_toboolean(L, 3);
+            if( lua_gettop(L)>=3 ) {
+                animated = lua_toboolean(L, 3);
             }
             [view setCurrentPageIdx:unmapPageIdx(luaPageIdx) animation:animated];
-            lv_settop(L, 1);
+            lua_settop(L, 1);
             return 1;
         } else {
             NSInteger currentPageIdx = view.pageIdx;
-            lv_pushnumber( L, mapPageIdx(currentPageIdx) );
+            lua_pushnumber( L, mapPageIdx(currentPageIdx) );
             return 1;
         }
     }
     return 0;
 }
 
-static int autoScroll(lv_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int autoScroll(lua_State *L){
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
         NSInteger totalPages = view.cellArray.count;
@@ -442,8 +438,8 @@ static int autoScroll(lv_State *L){
             return 0;
         }
         
-        if(lv_gettop(L) >= 2) {
-            float interval = lv_tonumber(L, 2);
+        if(lua_gettop(L) >= 2) {
+            float interval = lua_tonumber(L, 2);
             
             if ( interval > 0.02 ) {//start timer
                 [view startTimer:interval repeat:YES];
@@ -455,17 +451,17 @@ static int autoScroll(lv_State *L){
     return 0;
 }
 
-static int looping(lv_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int looping(lua_State *L){
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
-        if( lv_gettop(L)>=2 ) {
-        BOOL ret = lv_toboolean(L, 2);
+        if( lua_gettop(L)>=2 ) {
+        BOOL ret = lua_toboolean(L, 2);
         view.looping = ret;
             return 0;
         } else {
             BOOL yes = view.looping;
-            lv_pushboolean(L, yes);
+            lua_pushboolean(L, yes);
             return 1;
         }
     }
@@ -501,48 +497,48 @@ static int looping(lv_State *L){
     }
 }
 
-static int indicator(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int indicator(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerView* view = (__bridge LVPagerView *)(user->object);
-        if( lv_gettop(L)>=2 ) {
-            if ( lv_type(L, 2)==LV_TNIL ) {
+        if( lua_gettop(L)>=2 ) {
+            if ( lua_type(L, 2)==LUA_TNIL ) {
                 view.pagerIndicator = nil;
                 [view setIndicator:nil];// 设置Indicator
-                lv_pushvalue(L, 1);
+                lua_pushvalue(L, 1);
                 lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-                lv_pushnil(L);// value
-                lv_setfield(L, -2, "Indicator");
+                lua_pushnil(L);// value
+                lua_setfield(L, -2, "Indicator");
             } else {
-                LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+                LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
                 if( LVIsType(user2, View) ) {
                     LVPagerIndicator* pagerIndicator = (__bridge LVPagerIndicator *)(user2->object);
                     if( [pagerIndicator isKindOfClass:[LVPagerIndicator class]] ) {
                         [view setIndicator:pagerIndicator];// 设置Indicator
-                        lv_pushvalue(L, 1);
+                        lua_pushvalue(L, 1);
                         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-                        lv_pushvalue(L, 2);// value
-                        lv_setfield(L, -2, "Indicator");
+                        lua_pushvalue(L, 2);// value
+                        lua_setfield(L, -2, "Indicator");
                     }
                 }
             }
             return 0;
         } else {
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-            lv_getfield(L, -2, "Indicator");
+            lua_getfield(L, -2, "Indicator");
             return 1;
         }
     }
     return 0;
 }
 
-static int previewSide(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int previewSide(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerView* pagerview = (__bridge LVPagerView *)(user->object);
-        if( lv_gettop(L)>=3 ) {
-            CGFloat sideLeft = lv_tonumber(L, 2);
-            CGFloat sideRight = lv_tonumber(L, 3);
+        if( lua_gettop(L)>=3 ) {
+            CGFloat sideLeft = lua_tonumber(L, 2);
+            CGFloat sideRight = lua_tonumber(L, 3);
             pagerview.sideLeft = sideLeft;
             pagerview.sideRight = sideRight;
             pagerview.frame = pagerview.frame;
@@ -551,8 +547,8 @@ static int previewSide(lv_State *L) {
             }
             return 0;
         } else {
-            lv_pushnumber(L, pagerview.sideLeft);
-            lv_pushnumber(L, pagerview.sideRight);
+            lua_pushnumber(L, pagerview.sideLeft);
+            lua_pushnumber(L, pagerview.sideRight);
             return 2;
         }
     }
@@ -573,16 +569,16 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
     }
 }
 
-static int __gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataView(user);
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPagerView globalName:globalName defaultName:@"PagerView"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
@@ -598,9 +594,9 @@ static int __gc (lv_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_UIPageView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, [LVScrollView memberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, [LVScrollView memberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );
@@ -616,24 +612,24 @@ static int __gc (lv_State *L) {
     self.pageIdx = [self xindex2index:pageIndex];
     [self setPageIndicatorIdx:[self xindex2index:pageIndex + 0.5]];
 
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
-        lv_settop(l, 0);
-        lv_checkStack32(l);
+        lua_settop(l, 0);
+        lua_checkstack32(l);
         double intPart = 0;
         double floatPart = modf( pageIndex, &intPart);
         NSInteger pageIdx = self.pageIdx;
         if( self.doubleMode&& pageIdx>=2 ) {
             pageIdx -= 2;
         }
-        lv_pushnumber(l, mapPageIdx( pageIdx ) );
-        lv_pushnumber(l, floatPart);
-        lv_pushnumber(l, offsetX - intPart*pageWidth);
+        lua_pushnumber(l, mapPageIdx( pageIdx ) );
+        lua_pushnumber(l, floatPart);
+        lua_pushnumber(l, offsetX - intPart*pageWidth);
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:STR_CALLBACK key2:"Scrolling" key3:NULL nargs:3 nrets:0 retType:LV_TNONE];
+        [LVUtil call:l key1:STR_CALLBACK key2:"Scrolling" key3:NULL nargs:3 nrets:0 retType:LUA_TNONE];
     }
 }
 
@@ -646,19 +642,19 @@ static int __gc (lv_State *L) {
         self.pageIdx = [self xindex2index:pageIndex + 0.1];
         [self setPageIndicatorIdx:[self xindex2index:pageIndex + 0.1]];
     }
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData ){
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         NSInteger pageIdx = self.pageIdx;
         if( self.doubleMode&& pageIdx>=2 ) {
             pageIdx -= 2;
         }
-        lv_pushnumber(l, mapPageIdx(pageIdx) );
+        lua_pushnumber(l, mapPageIdx(pageIdx) );
         
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
         
-        [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" key3:NULL nargs:1 nrets:0 retType:LV_TNONE];
+        [LVUtil call:l key1:STR_CALLBACK key2:"ScrollEnd" key3:NULL nargs:1 nrets:0 retType:LUA_TNONE];
     }
 }
 

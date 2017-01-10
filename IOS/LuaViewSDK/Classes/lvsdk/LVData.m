@@ -7,21 +7,17 @@
 //
 
 #import "LVData.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVData ()
 @end
 
 @implementation LVData
 
--(id) init:(lv_State *)l{
+-(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.data = [[NSMutableData alloc] init];
     }
     return self;
@@ -43,24 +39,24 @@ static void releaseUserDataData(LVUserDataInfo* user){
     }
 }
 
-static int lvDataGC (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int lvDataGC (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
 
-static int lvNewData (lv_State *L) {
+static int lvNewData (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVData class]];
     
     LVData* data = [[c alloc] init:L];
-    int argN = lv_gettop(L);
+    int argN = lua_gettop(L);
     if( argN>0 ) {
-        if ( lv_type(L, 1)==LV_TSTRING ) {// 支持字符串转 NSData
+        if ( lua_type(L, 1)==LUA_TSTRING ) {// 支持字符串转 NSData
             NSString* s = lv_paramString(L, 1);
             const char* chars = s.UTF8String;
             [data.data appendBytes:chars length:strlen(chars) ];
         } else {
-            int num = lv_tonumber(L, 1);
+            int num = lua_tonumber(L, 1);
             if( num>0 ){
                 [data.data setLength:num];
             }
@@ -72,17 +68,17 @@ static int lvNewData (lv_State *L) {
         userData->object = CFBridgingRetain(data);
         data.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Data );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Data );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
-+(int) createDataObject:(lv_State *)L  data:(NSData*) data{
++(int) createDataObject:(lua_State *)L  data:(NSData*) data{
     return [self createDataObject:L data1:data data2:nil];
 }
 
-+(int) createDataObject:(lv_State *)L  data1:(NSData*) data1 data2:(NSData*) data2{
++(int) createDataObject:(lua_State *)L  data1:(NSData*) data1 data2:(NSData*) data2{
     LVData* lvdata = [[LVData alloc] init:L];
     if( data1 ) {
         [lvdata.data setData:data1];
@@ -95,19 +91,19 @@ static int lvNewData (lv_State *L) {
         userData->object = CFBridgingRetain(lvdata);
         lvdata.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Data );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Data );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVData* data =  (__bridge LVData *)(user->object);
         NSStringEncoding encode = NSUTF8StringEncoding;
-        if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
-            encode = lv_tonumber(L, 2);
+        if( lua_gettop(L)>=2 && lua_type(L, 2)==LUA_TNUMBER ) {
+            encode = lua_tonumber(L, 2);
         }
         NSString* s = [[NSString alloc] initWithData:data.data encoding:encode];
         if( s==nil ){
@@ -117,32 +113,32 @@ static int __tostring (lv_State *L) {
                 s = [[NSString alloc] initWithFormat:@"{ UserDataType=data, length=%ld }",(long)data.data.length];
             }
         }
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-static int __index (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __index (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
-        if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2)-1;
+        if( lua_type(L, 2)==LUA_TNUMBER ){
+            int index = lua_tonumber(L, 2)-1;
             if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 NSRange range;
                 range.length = 1;
                 range.location = index;
                 [data getBytes:cs range:range];
-                lv_pushnumber(L, cs[0] );
+                lua_pushnumber(L, cs[0] );
                 return 1;
             }
-        } else if( lv_type(L, 2)==LV_TSTRING ){
+        } else if( lua_type(L, 2)==LUA_TSTRING ){
             NSString* key = lv_paramString(L, 2);
             if( [@"length" isEqualToString:key] ){
-                lv_pushnumber(L, data.length );
+                lua_pushnumber(L, data.length );
                 return 1;
             }
         } else {
@@ -152,14 +148,14 @@ static int __index (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __newindex (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __newindex (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVData* lvData = (__bridge LVData *)(user->object);
     NSMutableData* data = lvData.data;
     if( lvData && lvData.data){
-        if( lv_type(L, 2)==LV_TNUMBER ){
-            int index = lv_tonumber(L, 2)-1;
-            int value = lv_tonumber(L, 3);
+        if( lua_type(L, 2)==LUA_TNUMBER ){
+            int index = lua_tonumber(L, 2)-1;
+            int value = lua_tonumber(L, 3);
             if( index>=0 && index<data.length ){
                 char cs[8] = {0};
                 cs[0] = value;
@@ -169,9 +165,9 @@ static int __newindex (lv_State *L) {
                 [data replaceBytesInRange:range withBytes:cs ];
                 return 0;
             }
-        } else if( lv_type(L, 2)==LV_TSTRING ){
+        } else if( lua_type(L, 2)==LUA_TSTRING ){
             NSString* key = lv_paramString(L, 2);
-            int value = lv_tonumber(L, 3);
+            int value = lua_tonumber(L, 3);
             if( [@"length" isEqualToString:key] ){
                 data.length = value;
                 return 0;
@@ -181,9 +177,9 @@ static int __newindex (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __add (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __add (lua_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     LVData* lvData1 = (__bridge LVData *)(user1->object);
     LVData* lvData2 = (__bridge LVData *)(user2->object);
     if( LVIsType(user1, Data) && LVIsType(user2, Data) && lvData1.data && lvData2.data ){
@@ -193,10 +189,10 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__index", __index },
         {"__newindex", __newindex },
         
@@ -210,7 +206,7 @@ static int __add (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_Data);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 0;
 }
 

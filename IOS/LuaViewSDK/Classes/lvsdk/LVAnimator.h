@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/CAAnimation.h>
 #import "LVHeads.h"
-#import "lVtable.h"
+#import "ltable.h"
 
 typedef NS_ENUM(int, LVAniamtorInterpolator) {
     LVLinearInterpolator = 0,
@@ -40,7 +40,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
 @property(nonatomic, readonly, getter=isRunning) BOOL running;
 @property(nonatomic, readonly, getter=isPaused) BOOL paused;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 - (void)start;
 - (void)cancel;

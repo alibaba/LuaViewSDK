@@ -11,7 +11,7 @@
 
 @interface LVNavigation : NSObject<LVClassProtocal>
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 // 空实现去除编译警告
 -(void) lv_setNavigationItemTitleView:(UIView*) view;

@@ -10,11 +10,7 @@
 #import "LVUtil.h"
 #import "LVData.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVDownloader ()
 @property(nonatomic,strong) NSData* data;
@@ -44,11 +40,11 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
     return nil;
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
         self.luaObjRetainKey = [[NSMutableString alloc] init];
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.strongSelf = self;
     }
     return self;
@@ -56,15 +52,15 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
 
 
 #pragma -mark downloader
-static int lvNewDownloader (lv_State *L) {
-    if( lv_gettop(L)>=2 ) {
+static int lvNewDownloader (lua_State *L) {
+    if( lua_gettop(L)>=2 ) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVDownloader class]];
         
         LVDownloader* downloader = [[c alloc] init:L];
         NSString* url = lv_paramString(L, 1);     // 1: url
         //NSString* fileName = lvL_paramString(L, 2);// 2: fileName
                                                    // 3: callback
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
+        if( lua_type(L, -1) == LUA_TFUNCTION ) {
             [LVUtil registryValue:L key:downloader stack:-1];
         }
         
@@ -73,8 +69,8 @@ static int lvNewDownloader (lv_State *L) {
             userData->object = CFBridgingRetain(downloader);
             downloader.lv_userData = userData;
             
-            lvL_getmetatable(L, META_TABLE_Downloader );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_Downloader );
+            lua_setmetatable(L, -2);
             
             [LVUtil registryValue:L key:downloader.luaObjRetainKey stack:-1];
         }
@@ -90,12 +86,12 @@ static int lvNewDownloader (lv_State *L) {
 }
 
 -(void) didFileLoaded{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ){
         if( self.data ) {
             [LVData createDataObject:L data:self.data];
         } else {
-            lv_pushnil(L);
+            lua_pushnil(L);
         }
         [LVUtil call:L lightUserData:self key1:nil key2:nil nargs:1];
         
@@ -105,38 +101,36 @@ static int lvNewDownloader (lv_State *L) {
     self.strongSelf = nil;
 }
 
- static int __gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+ static int __gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataDownloader(user);
     return 0;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVDownloader* downloader =  (__bridge LVDownloader *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataDownloader: %@", downloader ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-static int PathOfResource (lv_State *L) {
+static int PathOfResource (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
-    LView* lview = (__bridge LView *)(L->lView);
+    LView* lview = LV_LUASTATE_VIEW(L);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
-    lv_pushstring(L, path.UTF8String);
+    lua_pushstring(L, path.UTF8String);
     return 1;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    {
-        lv_pushcfunction(L, PathOfResource);
-        lv_setglobal(L, "PathOfResource");
-    }
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    lv_defineGlobalFunc("PathOfResource",  PathOfResource, L);
+    
     [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"];
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__gc", __gc },
         
         {"__tostring", __tostring },
@@ -145,7 +139,7 @@ static int PathOfResource (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_Downloader);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

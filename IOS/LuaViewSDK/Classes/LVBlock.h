@@ -13,8 +13,8 @@
 
 @property (nonatomic,assign) int returnValueNum;// 返回值的数量
 
-- (id) initWith:(lv_State*)L statckID:(int) idx;
-- (id) initWith:(lv_State*)L globalName:(NSString*) globalName;
+- (id) initWith:(lua_State*)L statckID:(int) idx;
+- (id) initWith:(lua_State*)L globalName:(NSString*) globalName;
 
 - (NSString*) callWithArgs:(NSArray*) args;
 

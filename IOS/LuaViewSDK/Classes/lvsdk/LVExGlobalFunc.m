@@ -10,11 +10,6 @@
 #import "LVExGlobalFunc.h"
 #import "LVUtil.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "LVNativeObjBox.h"
 #import "LVDebuger.h"
 
@@ -22,87 +17,113 @@
 //------------------------------------------------------------------------
 @implementation LVExGlobalFunc
 
+static int lv_print (lua_State *L) {
+#ifdef DEBUG
+    int n = lua_gettop(L);  /* number of arguments */
+    int i;
+    NSMutableString* buf = [[NSMutableString alloc] init];
+    lua_getglobal(L, "tostring");
+    for (i=1; i<=n; i++) {
+        const char *s = NULL;
+        lua_pushvalue(L, -1);  /* function to be called */
+        lua_pushvalue(L, i);   /* value to print */
+        lua_call(L, 1, 1);
+        s = lua_tostring(L, -1);  /* get result */
+        if (s == NULL)
+            return luaL_error(L, LUA_QL("tostring") " must return a string to " LUA_QL("print"));
+        if ( i>1 ) {
+            [buf appendString:@"\t"];
+        }
+        NSString* str  = [NSString stringWithUTF8String:s];
+        [buf appendFormat:@"%@",str];
+        lua_pop(L, 1);  /* pop result */
+    }
+    NSLog(@"%@",buf);
+    [buf appendString:@"\n"];
+    lv_printToServer(L, buf.UTF8String, 0);
+#endif
+    return 0;
+}
 
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
-+(void) registryStaticMethod:(lv_State *)L lView:(LView *)lView{
-    lv_pushcfunction(L, loadJson);
-    lv_setglobal(L, "loadJson");
++(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
+    lv_defineGlobalFunc("print",  lv_print, L);
     
-    lv_pushcfunction(L, unicode);
-    lv_setglobal(L, "Unicode");
+    lv_defineGlobalFunc("loadJson",  loadJson, L);
+    
+    lv_defineGlobalFunc("Unicode",  unicode, L);
     
     // 替换pakcage.loaders中的loader_lv
-    
-    lv_getglobal(L, LV_LOADLIBNAME);
-    lv_getfield(L, 1, "loaders");
-    if (!lv_istable(L, -1)) {
+    lua_getglobal(L, LUA_LOADLIBNAME);
+    lua_getfield(L, 1, "loaders");
+    if (!lua_istable(L, -1)) {
         return;
     }
     
-    lv_pushnumber(L, 2);
-    lv_pushcfunction(L, loaderForLuaView);
-    lv_settable(L, -3);
+    lua_pushnumber(L, 2);
+    lua_pushcfunction(L, loaderForLuaView);
+    lua_settable(L, -3);
 }
 
 // 注册函数
-+(void) registryApi:(lv_State*)L  lView:(LView*)lView{
++(void) registryApi:(lua_State*)L  lView:(LView*)lView{
     
     
     return;
 }
 
 // 注册系统对象 window
-+(void) registryWindow:(lv_State*)L  lView:(LView*)lView{
++(void) registryWindow:(lua_State*)L  lView:(LView*)lView{
     NEW_USERDATA(userData, View);
     userData->object = CFBridgingRetain(lView);
     lView.lv_userData = userData;
     
-    lvL_getmetatable(L, META_TABLE_LuaView );
-    lv_setmetatable(L, -2);
+    luaL_getmetatable(L, META_TABLE_LuaView );
+    lua_setmetatable(L, -2);
     
-    lv_setglobal(L, "window");
+    lua_setglobal(L, "window");
 }
 //------------------------------------------------------------------------------------
 
-static int loadJson (lv_State *L) {
+static int loadJson (lua_State *L) {
     NSString* json = lv_paramString(L, 1);
     if( json ){
         json = [NSString stringWithFormat:@"return %@",json];
-        lvL_loadstring(L, json.UTF8String);
-        if( lv_type(L, -1) == LV_TFUNCTION ) {
-            int errorCode = lv_pcall( L, 0, 1, 0);
+        luaL_loadstring(L, json.UTF8String);
+        if( lua_type(L, -1) == LUA_TFUNCTION ) {
+            int errorCode = lua_pcall( L, 0, 1, 0);
             if( errorCode == 0 ){
                 return 1;
             } else {
-                LVError( @"loadJson : %s", lv_tostring(L, -1) );
+                LVError( @"loadJson : %s", lua_tostring(L, -1) );
             }
         } else {
-            LVError( @"loadJson : %s", lv_tostring(L, -1) );
+            LVError( @"loadJson : %s", lua_tostring(L, -1) );
         }
     }
     return 0; /* number of results */
 }
 
-static int unicode(lv_State *L) {
-    int num = lv_gettop(L);
+static int unicode(lua_State *L) {
+    int num = lua_gettop(L);
     NSMutableString* buf = [[NSMutableString alloc] init];
     for( int i=1; i<=num; i++ ) {
-        if( lv_type(L, i) == LV_TNUMBER ) {
-            unichar c = lv_tonumber(L, i);
+        if( lua_type(L, i) == LUA_TNUMBER ) {
+            unichar c = lua_tonumber(L, i);
             [buf appendFormat:@"%C",c];
         } else {
             break;
         }
     }
     if( buf.length>0 ) {
-        lv_pushstring(L, buf.UTF8String);
+        lua_pushstring(L, buf.UTF8String);
         return 1;
     }
     return 0; /* number of results */
 }
 
-static int loaderForLuaView (lv_State *L) {
+static int loaderForLuaView (lua_State *L) {
     static NSString *pathFormats[] = { @"%@.%@", @"%@/init.%@" };
 
     NSString* moduleName = lv_paramString(L, 1);
@@ -110,7 +131,7 @@ static int loaderForLuaView (lv_State *L) {
         // submodule
         moduleName = [moduleName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
         
-        LView* lview = (__bridge LView *)(L->lView);
+        LView* lview = LV_LUASTATE_VIEW(L);
         if( lview ) {
             __block NSString *fullName = nil, *format = nil, *ext = nil;
             BOOL(^findFile)() = ^BOOL() { // set fullName and return YES if found
@@ -147,8 +168,8 @@ static int loaderForLuaView (lv_State *L) {
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    LView* lView = (__bridge  LView *)(L->lView);
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    LView* lView = LV_LUASTATE_VIEW(L);
     // 注册静态全局方法和常量
     [LVExGlobalFunc registryStaticMethod:L lView:lView];
     
@@ -160,7 +181,7 @@ static int loaderForLuaView (lv_State *L) {
     // 调试
     [LVDebuger lvClassDefine:L globalName:nil];
     //清理栈
-    lv_settop(L, 0);
+    lua_settop(L, 0);
     return 0;
 }
 

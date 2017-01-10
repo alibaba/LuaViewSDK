@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-extern void lv_printToServer(lv_State* L, const char* cs, int withTabChar);
+extern void lv_printToServer(lua_State* L, const char* cs, int withTabChar);
 
 @interface LVDebuger : NSObject<LVClassProtocal>
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 
 @end

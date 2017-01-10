@@ -1,5 +1,5 @@
 
-function createButton( text , x,y,w,h, callback) {
+function createButton( text , x,y,w,h, callback)
 	local button = Button();
 	button.frame(x,y,w,h);
 	button.text(text);
@@ -11,7 +11,7 @@ function createButton( text , x,y,w,h, callback) {
 		end
 	end);
 	return button;
-}
+end
 
 button1 = createButton("测试",10,10,300,60);
 

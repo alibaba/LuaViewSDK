@@ -12,13 +12,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
-
-#define lvL_reg	lvL_Reg
+#import "lua.h"
+#import "lauxlib.h"
+#import "lualib.h"
+#import "lstate.h"
+#import "lgc.h"
+#import "lapi.h"
 
 /**
  * the index of signed scripts' extionsion(@"lv") in LVScriptExts[]
@@ -51,7 +50,7 @@ extern NSString * const LVScriptExts[2];
 
 //---------------创建用户数据-------------------------------------------------------
 #define NEW_USERDATA(var, typeName)    \
-    LVUserDataInfo* var = ( (LVUserDataInfo*)lv_newuserdata( L, sizeof(LVUserDataInfo)) ); \
+    LVUserDataInfo* var = ( (LVUserDataInfo*)lua_newuserdata( L, sizeof(LVUserDataInfo)) ); \
     lv_createUDataLuatable(L,-1);\
     var->type = LVType_##typeName; \
 //
@@ -96,7 +95,7 @@ typedef struct _LVUserDataInfo {
 
 @protocol LVClassProtocal <NSObject>
 @required
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end
 
@@ -155,11 +154,11 @@ typedef struct _LVUserDataInfo {
 #define STR_onReceivedError "onReceivedError"
 
 // lua对象 -> NSString
-NSString* lv_paramString(lv_State* L, int idx );
+NSString* lv_paramString(lua_State* L, int idx );
 
 // run
-NSString*  lv_runFunction(lv_State* l);
-NSString*  lv_runFunctionWithArgs(lv_State* l, int nargs, int nret);
+NSString*  lv_runFunction(lua_State* l);
+NSString*  lv_runFunctionWithArgs(lua_State* l, int nargs, int nret);
 
 
 
@@ -195,7 +194,7 @@ typedef enum:int{
 }LVTypeIDEnum;
 
 
-LVTypeIDEnum lv_typeID(const char* type);
+LVTypeIDEnum lua_typeID(const char* type);
 
 #define isNormalRect(r)  ( !( isnan(r.origin.x) || isnan(r.origin.y) || isnan(r.size.width) || isnan(r.size.height) ) )
 #define isNormalSize(s)  ( !( isnan(s.width) || isnan(s.height) ) )
@@ -212,5 +211,8 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define EFFECT_NONE     0
 #define EFFECT_CLICK    1
 #define EFFECT_PARALLAX 2
+
+#define LV_LUASTATE_VIEW(L)     ( (__bridge LView *)( G(L)->ud ) )
+#define LUAVIEW_SYS_TABLE_KEY   "..::luaview::.."
 
 #endif

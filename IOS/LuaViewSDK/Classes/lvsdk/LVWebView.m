@@ -16,10 +16,10 @@
 @implementation LVWebView
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
@@ -29,31 +29,31 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageStarted];
     }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageFinished];
     }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSInteger errorCode = error.code;
         NSString* errorInfo = [NSString stringWithFormat:@"%@",error];
         NSString* url = webView.request.URL.absoluteString;
-        lv_pushnumber(L, errorCode);
-        lv_pushstring(L, errorInfo.UTF8String);
-        lv_pushstring(L, url.UTF8String);
+        lua_pushnumber(L, errorCode);
+        lua_pushstring(L, errorInfo.UTF8String);
+        lua_pushstring(L, url.UTF8String);
         [self lv_callLuaByKey1:@STR_onReceivedError key2:nil argN:3];
     }
 }
@@ -129,7 +129,7 @@
 }
 
 #pragma -mark webView
-static int lvNewWebView(lv_State *L) {
+static int lvNewWebView(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVWebView class]];
     
     NSString* url = lv_paramString(L, 1);
@@ -141,32 +141,32 @@ static int lvNewWebView(lv_State *L) {
         userData->object = CFBridgingRetain(webView);
         webView.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_UIWebView );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UIWebView );
+        lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:webView];
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-static int canGoBack (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int canGoBack (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             BOOL ret = [webView canGoBack];
-            lv_pushboolean(L, ret);
+            lua_pushboolean(L, ret);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
-static int goBack (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int goBack (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
@@ -177,22 +177,22 @@ static int goBack (lv_State *L) {
     return 0;
 }
 
-static int canGoForward (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int canGoForward (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             BOOL ret = [webView canGoForward];
-            lv_pushboolean(L, ret);
+            lua_pushboolean(L, ret);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
-static int goForward (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int goForward (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
@@ -203,8 +203,8 @@ static int goForward (lv_State *L) {
     return 0;
 }
 
-static int reload (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int reload (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
@@ -215,8 +215,8 @@ static int reload (lv_State *L) {
     return 0;
 }
 
-static int stopLoading (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int stopLoading (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
@@ -227,42 +227,42 @@ static int stopLoading (lv_State *L) {
     return 0;
 }
 
-static int isLoading (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int isLoading (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             BOOL ret = [webView isLoading];
-            lv_pushboolean(L, ret);
+            lua_pushboolean(L, ret);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
-static int title (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int title (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             NSString* title = [webView title];
-            lv_pushstring(L, title.UTF8String);
+            lua_pushstring(L, title.UTF8String);
             return 1;
         }
     }
     return 0;
 }
 
-static int loadUrl (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int loadUrl (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
-            if ( lv_type(L, 2)==LV_TSTRING ) {
+            if ( lua_type(L, 2)==LUA_TSTRING ) {
                 NSString* url = lv_paramString(L, 2);// 2
                 [webView loadUrl:url];
-            } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
+            } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
             } else {
             }
         }
@@ -270,31 +270,31 @@ static int loadUrl (lv_State *L) {
     return 0;
 }
 
-static int url (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int url (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
             NSString* s = [webView url];
-            lv_pushstring(L, s.UTF8String);
+            lua_pushstring(L, s.UTF8String);
             return 1;
         }
     }
     return 0;
 }
 
-static int pullRefreshEnable (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int pullRefreshEnable (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ) {
         LVWebView* webView = (__bridge LVWebView *)(user->object);
         if ( [webView isKindOfClass:[LVWebView class]] ) {
-            if( lv_gettop(L)>=2 ){
-                BOOL yes = lv_toboolean(L, 2);
+            if( lua_gettop(L)>=2 ){
+                BOOL yes = lua_toboolean(L, 2);
                 [webView setPullRefreshEnable:yes];
                 return 0;
             } else {
                 BOOL ret = [webView pullRefreshEnable];
-                lv_pushboolean(L, ret);
+                lua_pushboolean(L, ret);
                 return 1;
             }
         }
@@ -302,15 +302,15 @@ static int pullRefreshEnable (lv_State *L) {
     return 0;
 }
 
-static int callback (lv_State *L) {
+static int callback (lua_State *L) {
     return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewWebView globalName:globalName defaultName:@"WebView"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"canGoBack",  canGoBack},
         {"goBack",  goBack},
         
@@ -333,8 +333,8 @@ static int callback (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_UIWebView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

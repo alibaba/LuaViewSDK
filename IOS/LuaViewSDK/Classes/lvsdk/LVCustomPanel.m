@@ -9,11 +9,7 @@
 #import "LVCustomPanel.h"
 #import "LVBaseView.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVCustomPanel
 
@@ -24,26 +20,26 @@
 - (void) callLuaWithArguments:(NSArray*) args{
     // 外部回调脚本一定要在主线程调用
     dispatch_block_t f = ^(){
-        lv_State* L = self.lv_lview.l;
+        lua_State* L = self.lv_lview.l;
         if( L && self.lv_userData ){
-            lv_checkstack(L,32);
-            int num = lv_gettop(L);
+            lua_checkstack(L,32);
+            int num = lua_gettop(L);
             for( int i=0; i<args.count; i++ ) {
                 lv_pushNativeObject(L, args[i]);
             }
             lv_pushUserdata(L, self.lv_userData);
             lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
             
-            if( lv_type(L, -1)==LV_TTABLE ) {
-                lv_getfield(L, -1, STR_CALLBACK);
-                if( lv_type(L, -1)==LV_TNIL ) {
-                    lv_remove(L, -1);
-                    lv_getfield(L, -1, STR_ON_CLICK);
+            if( lua_type(L, -1)==LUA_TTABLE ) {
+                lua_getfield(L, -1, STR_CALLBACK);
+                if( lua_type(L, -1)==LUA_TNIL ) {
+                    lua_remove(L, -1);
+                    lua_getfield(L, -1, STR_ON_CLICK);
                 }
-                lv_remove(L, -2);
+                lua_remove(L, -2);
             }
             lv_runFunctionWithArgs(L, (int)args.count, 0);
-            lv_settop(L, num);
+            lua_settop(L, num);
         }
     };
     if ([NSThread isMainThread]) {
@@ -63,41 +59,41 @@
     return subviews.firstObject;
 }
 
-static int lvNewCustomPanelView (lv_State *L) {
+static int lvNewCustomPanelView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomPanel class]];
     
     CGRect r = CGRectMake(0, 0, 0, 0);
-    if( lv_gettop(L)>=4 ) {
-        r = CGRectMake(lv_tonumber(L, 1), lv_tonumber(L, 2), lv_tonumber(L, 3), lv_tonumber(L, 4));
+    if( lua_gettop(L)>=4 ) {
+        r = CGRectMake(lua_tonumber(L, 1), lua_tonumber(L, 2), lua_tonumber(L, 3), lua_tonumber(L, 4));
     }
     LVCustomPanel* errorNotice = [[c alloc] initWithFrame:r];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(errorNotice);
         errorNotice.lv_userData = userData;
-        errorNotice.lv_lview = (__bridge LView *)(L->lView);
+        errorNotice.lv_lview = LV_LUASTATE_VIEW(L);
         
-        lvL_getmetatable(L, META_TABLE_CustomPanel );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_CustomPanel );
+        lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:errorNotice];
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewCustomPanelView globalName:globalName defaultName:@"CustomPanel"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {NULL, NULL}
     };
     
     lv_createClassMetaTable(L, META_TABLE_CustomPanel);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

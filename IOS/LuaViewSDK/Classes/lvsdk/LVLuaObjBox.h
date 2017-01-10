@@ -11,7 +11,7 @@
 
 @interface LVLuaObjBox : NSObject
 
-- (id) init:(lv_State*)L stackID:(int) stackID;
+- (id) init:(lua_State*)L stackID:(int) stackID;
 
 - (void) setProtocols:(NSArray*) protocols;
 

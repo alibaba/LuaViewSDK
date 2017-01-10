@@ -13,8 +13,8 @@
 
 @class LView;
 @class LVBlock;
-@protocol LVProtocal;
 @class LVBundle;
+@protocol LVProtocal;
 
 #pragma mark - LuaView窗口大小变动回调
 @protocol LVCallback <NSObject>
@@ -31,6 +31,7 @@
 
 @property (nonatomic,weak) UIViewController* viewController;// 所在的ViewController
 
+@property (nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是非标准语法，需要转换
 
 /**
  *  load and run script
@@ -79,6 +80,8 @@
  *  @return 运行结果
  */
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName;
+
+-(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar;
 
 /**
  * 加载签名的脚本文件，读取文件并调用lvL_loadbuffer
@@ -136,7 +139,7 @@
  * packageName: 包名  比如:"ppt"
  * info格式: { "url" : "http://g.tbcdn.cn/ju/lua/3.2.12/ppt4.4.0.js" , "time":"2015-11-18 09:53"}
  */
-+(void) downLoadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
++(void) downloadPackage:(NSString*)package  withInfo:(NSDictionary*)info;
 
 @end
 
@@ -199,7 +202,7 @@
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view
 @property (nonatomic, weak)   LView* lv_lview;
 @property (nonatomic, assign) LVUserDataInfo* lv_userData;// 脚本中的window对象 数据绑定
-@property (nonatomic, assign) lv_State* l; // lua 状态机
+@property (nonatomic, assign) lua_State* l; // lua 状态机
 @property(nonatomic,assign) BOOL contentViewIsWindow;// contentView是否是窗口
 
 -(void) containerAddSubview:(UIView *)view;

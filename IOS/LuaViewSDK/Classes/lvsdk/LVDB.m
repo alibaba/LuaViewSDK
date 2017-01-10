@@ -7,22 +7,18 @@
 //
 
 #import "LVDB.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVDB
 
 
 
-static int db_get (lv_State *L) {
+static int db_get (lua_State *L) {
     lv_clearFirstTableValue(L);
     NSString* key = lv_paramString(L, 1);
     NSString* defaultValue = nil;
-    if( lv_gettop(L)>=2 && lv_type(L, 2)==LV_TNUMBER ) {
-        double v = lv_tonumber(L, 2);
+    if( lua_gettop(L)>=2 && lua_type(L, 2)==LUA_TNUMBER ) {
+        double v = lua_tonumber(L, 2);
         defaultValue = [NSString stringWithFormat:@"%lf",v];
     } else {
         defaultValue = lv_paramString(L, 2);
@@ -31,7 +27,7 @@ static int db_get (lv_State *L) {
         NSString* value = [[NSUserDefaults standardUserDefaults] objectForKey:key];
         if( value == nil )
             value = defaultValue;
-        lv_pushstring(L, value.UTF8String);
+        lua_pushstring(L, value.UTF8String);
         return 1; /* number of results */
     } else {
         return 0;
@@ -65,13 +61,13 @@ static NSString* clearString(NSString* s){
     return s;
 }
 
-static int db_set (lv_State *L) {
+static int db_set (lua_State *L) {
     lv_clearFirstTableValue(L);
-    if( lv_gettop(L)>=2 ) {
+    if( lua_gettop(L)>=2 ) {
         NSString* key = lv_paramString(L, 1);
         NSString* value = lv_paramString(L, 2);
-        if( value==nil && (lv_type(L, 2)==LV_TNUMBER) ){
-            value = [NSString stringWithFormat:@"%f",lv_tonumber(L, 2)];
+        if( value==nil && (lua_type(L, 2)==LUA_TNUMBER) ){
+            value = [NSString stringWithFormat:@"%f",lua_tonumber(L, 2)];
             value = clearString(value);
         }
         if( key.length>0 && value.length>0 ){
@@ -82,14 +78,14 @@ static int db_set (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    const struct lvL_reg functions [] = {
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    const struct luaL_Reg functions [] = {
         {"get",  db_get},
         {"set",  db_set},
         {LUAVIEW_SYS_TABLE_KEY, db_set},
         {NULL,   NULL}
     };
-    lvL_openlib(L, "DB", functions, 0);
+    luaL_openlib(L, "DB", functions, 0);
     return 0;
 }
 

@@ -8,11 +8,7 @@
 
 #import "LVTransform3D.h"
 #import "LVHeads.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVTransform3D
 
@@ -20,7 +16,7 @@
     return nil;
 }
 
-static int lvNewTransform3D (lv_State *L) {
+static int lvNewTransform3D (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVTransform3D class]];
     
     {
@@ -28,136 +24,136 @@ static int lvNewTransform3D (lv_State *L) {
         LVTransform3D* trans = [[c alloc] init];
         userData->object = CFBridgingRetain(trans);
         trans.transform = CATransform3DIdentity;
-        lvL_getmetatable(L, META_TABLE_Transform3D );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Transform3D );
+        lua_setmetatable(L, -2);
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) pushTransform3D:(lv_State *)L  transform3d:(CATransform3D) t{
++(int) pushTransform3D:(lua_State *)L  transform3d:(CATransform3D) t{
     {
         NEW_USERDATA(userData, Transform3D);
         LVTransform3D* trans = [[LVTransform3D alloc] init];
         userData->object = CFBridgingRetain(trans);
         trans.transform = t;
-        lvL_getmetatable(L, META_TABLE_Transform3D );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Transform3D );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
 
-static int translation (lv_State *L) {
-    if( lv_gettop(L)==4 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double x = lv_tonumber(L, 2);// 2
-        double y = lv_tonumber(L, 3);// 3
-        double z = lv_tonumber(L, 4);// 4
+static int translation (lua_State *L) {
+    if( lua_gettop(L)==4 ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+        double x = lua_tonumber(L, 2);// 2
+        double y = lua_tonumber(L, 3);// 3
+        double z = lua_tonumber(L, 4);// 4
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DTranslate(tran.transform, x, y, z);
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int scale (lv_State *L) {
-    if( lv_gettop(L)==4 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double x = lv_tonumber(L, 2);// 2
-        double y = lv_tonumber(L, 3);// 3
-        double z = lv_tonumber(L, 4);// 4
+static int scale (lua_State *L) {
+    if( lua_gettop(L)==4 ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+        double x = lua_tonumber(L, 2);// 2
+        double y = lua_tonumber(L, 3);// 3
+        double z = lua_tonumber(L, 4);// 4
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DScale(tran.transform, x, y, z);
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int rotate (lv_State *L) {
-    if( lv_gettop(L)==5 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-        double angle = lv_tonumber(L, 2);
-        double x = lv_tonumber(L, 3);
-        double y = lv_tonumber(L, 4);
-        double z = lv_tonumber(L, 5);
+static int rotate (lua_State *L) {
+    if( lua_gettop(L)==5 ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+        double angle = lua_tonumber(L, 2);
+        double x = lua_tonumber(L, 3);
+        double y = lua_tonumber(L, 4);
+        double z = lua_tonumber(L, 5);
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DRotate(tran.transform, angle, x, y, z);
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int isIdentity (lv_State *L) {
-    if( lv_gettop(L)==1 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int isIdentity (lua_State *L) {
+    if( lua_gettop(L)==1 ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             BOOL yes = CATransform3DIsIdentity(tran.transform );
             int ret = (yes ? 1 : 0);
-            lv_pushboolean(L, ret);
+            lua_pushboolean(L, ret);
             return 1;
         }
     }
     return 0;
 }
 
-static int reset (lv_State *L) {
-    if( lv_gettop(L)==1 ) {
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int reset (lua_State *L) {
+    if( lua_gettop(L)==1 ) {
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         if( LVIsType(user, Transform3D) ){
             LVTransform3D* tran = (__bridge LVTransform3D *)(user->object);
             tran.transform = CATransform3DIdentity;
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int transform_set (lv_State *L) {
-    if( lv_gettop(L)==2 ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int transform_set (lua_State *L) {
+    if( lua_gettop(L)==2 ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
             LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
             LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
             tran1.transform = tran2.transform;
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int concat (lv_State *L) {
-    if( lv_gettop(L)==2 ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int concat (lua_State *L) {
+    if( lua_gettop(L)==2 ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
             LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
             LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
             tran1.transform = CATransform3DConcat(tran1.transform, tran2.transform);
             
-            lv_pushvalue(L,1);
+            lua_pushvalue(L,1);
             return 1;
         }
     }
     return 0;
 }
 
-static int __mul (lv_State *L) {
-    if( lv_gettop(L)==2 ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __mul (lua_State *L) {
+    if( lua_gettop(L)==2 ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
             LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
             LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
@@ -167,8 +163,8 @@ static int __mul (lv_State *L) {
             user->object = CFBridgingRetain(trans);
 
             trans.transform = CATransform3DIdentity;
-            lvL_getmetatable(L, META_TABLE_Transform3D );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_Transform3D );
+            lua_setmetatable(L, -2);
             
             trans.transform = CATransform3DConcat(tran1.transform, tran2.transform);
             return 1;
@@ -177,35 +173,35 @@ static int __mul (lv_State *L) {
     return 0;
 }
 
-static int __eq (lv_State *L) {
-    if( lv_gettop(L)==2 ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __eq (lua_State *L) {
+    if( lua_gettop(L)==2 ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, Transform3D) && LVIsType(user2, Transform3D) ){
             LVTransform3D* tran1 = (__bridge LVTransform3D *)(user1->object);
             LVTransform3D* tran2 = (__bridge LVTransform3D *)(user2->object);
             BOOL yes =  CATransform3DEqualToTransform( tran1.transform, tran2.transform);
-            lv_pushboolean(L, (yes?1:0) );
+            lua_pushboolean(L, (yes?1:0) );
             return 1;
         }
     }
     return 0;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, Transform3D) ){
         NSString* s = [NSString stringWithFormat:@"LVUserDataTransform3D: %d", (int)user ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewTransform3D globalName:globalName defaultName:@"Transform3D"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__eq", __eq},
         {"__mul", __mul},
         {"rotate", rotate},
@@ -225,7 +221,7 @@ static int __tostring (lv_State *L) {
     
     lv_createClassMetaTable(L ,META_TABLE_Transform3D);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

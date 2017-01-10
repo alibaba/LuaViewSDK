@@ -8,11 +8,7 @@
 
 #import "UIView+LuaView.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation UIView (UIViewLuaView)
 
@@ -35,33 +31,33 @@
 }
 
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l && self.lv_userData && key1){
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
-        if( lv_type(l, -1) == LV_TTABLE ) {
-            lv_getfield(l, -1, STR_CALLBACK);
-            if( lv_type(l, -1)==LV_TNIL ) {
-                lv_remove(l, -1);
+        if( lua_type(l, -1) == LUA_TTABLE ) {
+            lua_getfield(l, -1, STR_CALLBACK);
+            if( lua_type(l, -1)==LUA_TNIL ) {
+                lua_remove(l, -1);
             } else {
-                lv_remove(l, -2);
+                lua_remove(l, -2);
             }
         }
-        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String key3:NULL nargs:argN nrets:0 retType:LV_TNONE];
+        [LVUtil call:l key1:key1.UTF8String key2:key2.UTF8String key3:NULL nargs:argN nrets:0 retType:LUA_TNONE];
     }
 }
 
 -(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ){
-        lv_checkstack(L, (int)args.count*2 + 2);
+        lua_checkstack(L, (int)args.count*2 + 2);
         
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
             lv_pushNativeObject(L,obj);
         }
-        lv_getglobal(L, functionName.UTF8String);// function
+        lua_getglobal(L, functionName.UTF8String);// function
         return lv_runFunctionWithArgs(L, (int)args.count, 0);
     }
     return nil;
@@ -82,16 +78,16 @@
 }
 
 -(void) lv_buttonCallBack{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L && self.lv_userData ){
-        int num = lv_gettop(L);
+        int num = lua_gettop(L);
         lv_pushUserdata(L, self.lv_userData);
         lv_pushUDataRef(L, USERDATA_KEY_DELEGATE );
-        if( lv_type(L, -1)==LV_TTABLE ) {
-            lv_getfield(L, -1, STR_ON_CLICK);
+        if( lua_type(L, -1)==LUA_TTABLE ) {
+            lua_getfield(L, -1, STR_ON_CLICK);
         }
         lv_runFunction(L);
-        lv_settop(L, num);
+        lua_settop(L, num);
     }
 }
 

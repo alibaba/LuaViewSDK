@@ -10,79 +10,84 @@
 #import "LVHeads.h"
 #import "LVDebugConnection.h"
 #import "LView.h"
-
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVDebuger
 
 
-static int DebugReadCmd (lv_State *L) {
-    LView* luaView = (__bridge LView *)(L->lView);
+static int DebugReadCmd (lua_State *L) {
+    LView* luaView = LV_LUASTATE_VIEW(L);
     
     NSString* cmd = [luaView.debugConnection getCmd];
     if( cmd ){
-        lv_pushstring(L, cmd.UTF8String);
+        lua_pushstring(L, cmd.UTF8String);
     } else {
-        lv_pushnil(L);
+        lua_pushnil(L);
     }
     return 1;
 }
 
-static int DebugSleep (lv_State *L) {
-    float time = lv_tonumber(L, 1);
+static int DebugSleep (lua_State *L) {
+    float time = lua_tonumber(L, 1);
     if( time>0 ) {
         [NSThread sleepForTimeInterval:time];
     }
     return 0;
 }
 
-static int DebugPrintToServer (lv_State *L) {
-    LView* luaView = (__bridge LView *)(L->lView);
-    BOOL open = lvL_checkbool(L, 1);
+static int DebugPrintToServer (lua_State *L) {
+    LView* luaView = LV_LUASTATE_VIEW(L);
+    BOOL open = lua_toboolean(L, 1);
     luaView.debugConnection.printToServer = !!open;
     return 0;
 }
 
-static int runningLine (lv_State *L) {
+static int runningLine (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
     if( fileName == nil ){
         fileName = @"unkown";
     }
-    int lineNumber = lv_tonumber(L, 2);
+    int lineNumber = lua_tonumber(L, 2);
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
-    LView* luaView = (__bridge LView *)(L->lView);
+    LView* luaView = LV_LUASTATE_VIEW(L);
     [luaView.debugConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
     return 0;
 }
 
-static int get_file_line( lv_State *L )
+static int get_file_line( lua_State *L )
 {
-    lv_pushstring(L, "one line code");
+    lua_pushstring(L, "one line code");
     return 1;
 }
 
-static const lvL_Reg dblib[] = {
+static int db_traceback_count (lua_State *L) {
+    lua_Debug ar;
+    int index = 1;
+    while (lua_getstack(L, index, &ar))
+        index++;
+    lua_pushnumber( L, index - 1 );
+    return 1;
+}
+
+static const luaL_Reg dblib[] = {
     {"readCmd", DebugReadCmd},
     {"sleep", DebugSleep},
     {"printToServer", DebugPrintToServer},
     {"runningLine", runningLine},
     {"get_file_line", get_file_line},
+    {"traceback_count", db_traceback_count},
     {NULL, NULL}
 };
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
-    lvL_register(L, LV_DBLIBNAME, dblib);
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    luaL_register(L, LUA_DBLIBNAME, dblib);
     return 0;
 }
 
 // 把日志传送到服务器
-void lv_printToServer(lv_State* L, const char* cs, int withTabChar){
-    LView* lview = (__bridge LView *)(L->lView);
+void lv_printToServer(lua_State* L, const char* cs, int withTabChar){
+    LView* lview = LV_LUASTATE_VIEW(L);
     if( lview.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
         if( withTabChar ){

@@ -17,10 +17,10 @@
 
 @implementation LVCustomView
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
     }
@@ -30,9 +30,9 @@
 -(void) drawRect:(CGRect)rect{
     [super drawRect:rect];
     
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
          CGContextRef contextRef = UIGraphicsGetCurrentContext();
         LVCanvas* canvas = [LVCanvas createLuaCanvas:L contentRef:contextRef];
         [self lv_callLuaByKey1:@STR_ON_DRAW key2:nil argN:1];
@@ -41,7 +41,7 @@
 }
 
 #pragma -mark CustomView
-static int lvNewCustomView (lv_State *L) {
+static int lvNewCustomView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVCustomView class]];
     
     {
@@ -51,10 +51,10 @@ static int lvNewCustomView (lv_State *L) {
             userData->object = CFBridgingRetain(customView);
             customView.lv_userData = userData;
             
-            lvL_getmetatable(L, META_TABLE_CustomView );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_CustomView );
+            lua_setmetatable(L, -2);
         }
-        LView* father = (__bridge LView *)(L->lView);
+        LView* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:customView];
         }
@@ -62,22 +62,22 @@ static int lvNewCustomView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-static int onDraw (lv_State *L) {
+static int onDraw (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_DRAW, NO);
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewCustomView globalName:globalName defaultName:@"CustomView"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"onDraw" , onDraw},
         {NULL, NULL}
     };
     
     lv_createClassMetaTable(L,META_TABLE_CustomView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     return 1;
 }

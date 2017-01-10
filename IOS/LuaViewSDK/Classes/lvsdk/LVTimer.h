@@ -15,13 +15,13 @@
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
--(id) init:(lv_State*) l;
+-(id) init:(lua_State*) l;
 
 -(void) startTimer;
 -(void) cancel;
 
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 
 @end

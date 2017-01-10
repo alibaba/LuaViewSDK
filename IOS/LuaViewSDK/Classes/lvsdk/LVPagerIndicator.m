@@ -10,20 +10,15 @@
 #import "LVBaseView.h"
 #import "LView.h"
 #import "LVPagerView.h"
-
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @implementation LVPagerIndicator
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.clipsToBounds = YES;
         self.userInteractionEnabled = NO;
     }
@@ -34,7 +29,7 @@
 }
 
 #pragma -mark PageControl
-static int lvNewPagerIndicator (lv_State *L) {
+static int lvNewPagerIndicator (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerIndicator class]];
     
     LVPagerIndicator* pageControl = [[c alloc] init:L];
@@ -43,27 +38,27 @@ static int lvNewPagerIndicator (lv_State *L) {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(pageControl);
         
-        lvL_getmetatable(L, META_TABLE_PagerIndicator );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_PagerIndicator );
+        lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:pageControl];
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-//static int setPageCount(lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
+//static int setPageCount(lua_State *L) {
+//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
 //    if( user ){
 //        LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->view);
 //        if( view ){
-//            if( lv_gettop(L)>=2 ) {
-//                int number = lv_tonumber(L, 2);
+//            if( lua_gettop(L)>=2 ) {
+//                int number = lua_tonumber(L, 2);
 //                view.numberOfPages = number;
 //                return 0;
 //            } else {
-//                lv_pushnumber(L, view.numberOfPages );
+//                lua_pushnumber(L, view.numberOfPages );
 //                return 1;
 //            }
 //        }
@@ -71,18 +66,18 @@ static int lvNewPagerIndicator (lv_State *L) {
 //    return 0;
 //}
 
-static int setCurrentPage(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int setCurrentPage(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
-                int currentPage = lv_tonumber(L, 2);
+            if( lua_gettop(L)>=2 ) {
+                int currentPage = lua_tonumber(L, 2);
                 //view.currentPage = currentPage-1;
                 [view.pagerView setCurrentPageIdx:currentPage-1 animation:YES];
                 return 0;
             } else {
-                lv_pushnumber(L, view.currentPage+1 );
+                lua_pushnumber(L, view.currentPage+1 );
                 return 1;
             }
         }
@@ -90,12 +85,12 @@ static int setCurrentPage(lv_State *L) {
     return 0;
 }
 
-static int pageIndicatorTintColor(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int pageIndicatorTintColor(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
                 view.pageIndicatorTintColor = color;
                 return 0;
@@ -104,8 +99,8 @@ static int pageIndicatorTintColor(lv_State *L) {
                 NSUInteger c = 0;
                 CGFloat a = 0;
                 if( lv_uicolor2int(color, &c, &a) ){
-                    lv_pushnumber(L, c );
-                    lv_pushnumber(L, a);
+                    lua_pushnumber(L, c );
+                    lua_pushnumber(L, a);
                     return 2;
                 }
             }
@@ -114,12 +109,12 @@ static int pageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-static int currentPageIndicatorTintColor(lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int currentPageIndicatorTintColor(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVPagerIndicator* view = (__bridge LVPagerIndicator *)(user->object);
         if( view ){
-            if( lv_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {
                 UIColor* color = lv_getColorFromStack(L, 2);
                 view.currentPageIndicatorTintColor = color;
                 return 0;
@@ -128,8 +123,8 @@ static int currentPageIndicatorTintColor(lv_State *L) {
                 NSUInteger c = 0;
                 CGFloat a = 0;
                 if( lv_uicolor2int(color, &c, &a) ){
-                    lv_pushnumber(L, c );
-                    lv_pushnumber(L, a);
+                    lua_pushnumber(L, c );
+                    lua_pushnumber(L, a);
                     return 2;
                 }
             }
@@ -138,10 +133,10 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPagerIndicator globalName:globalName defaultName:@"PagerIndicator"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         
         {"pageColor",     pageIndicatorTintColor },
@@ -154,8 +149,8 @@ static int currentPageIndicatorTintColor(lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_PagerIndicator);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

@@ -7,11 +7,7 @@
 //
 
 #import "LVNativeObjBox.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import <objc/runtime.h>
 #import "LVClassInfo.h"
 
@@ -24,10 +20,10 @@ static NSArray<NSString*>* ARG_ARR = nil;
 
 @implementation LVNativeObjBox
 
--(id) init:(lv_State*) l  nativeObject:(id)nativeObject{
+-(id) init:(lua_State*) l  nativeObject:(id)nativeObject{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.realObject = nativeObject;
         
         NSString* className = NSStringFromClass([nativeObject class]);
@@ -83,7 +79,7 @@ static NSArray<NSString*>* ARG_ARR = nil;
     [self.classInfo addMethod:method key:method.selName];
 }
 
--(int) performMethod:(NSString*) methodName L:(lv_State*)L{
+-(int) performMethod:(NSString*) methodName L:(lua_State*)L{
     if( methodName ) {
         LVMethod* method = [self.classInfo getMethod:methodName];
         if ( method ) {
@@ -145,24 +141,24 @@ static void releaseNativeObject(LVUserDataInfo* user){
     }
 }
 
-static int __gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseNativeObject(user);
     return 0;
 }
 
-+(int) registeObjectWithL:(lv_State *)L  nativeObject:(id) nativeObject name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode {
++(int) registeObjectWithL:(lua_State *)L  nativeObject:(id) nativeObject name:(NSString*) name sel:(SEL) sel weakMode:(BOOL)weakMode {
     if ( L==nil ){
         LVError( @"Lua State is released !!!");
         return 0;
     }
     if( nativeObject && name ) {
-        lv_checkstack(L, 64);
-        lv_getglobal(L, name.UTF8String);
+        lua_checkstack(L, 64);
+        lua_getglobal(L, name.UTF8String);
         
         LVNativeObjBox* nativeObjBox = nil;
-        if( lv_type(L, -1)==LV_TUSERDATA ) {
-            LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, -1);
+        if( lua_type(L, -1)==LUA_TUSERDATA ) {
+            LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, -1);
             if( LVIsType(user, NativeObject) ){
                 LVNativeObjBox* temp = (__bridge LVNativeObjBox *)(user->object);
                 if( temp.realObject==nativeObject ){
@@ -185,10 +181,10 @@ static int __gc (lv_State *L) {
         NEW_USERDATA(userData, NativeObject);
         userData->object = CFBridgingRetain(nativeObjBox);
         nativeObjBox.lv_userData = userData;
-        lvL_getmetatable(L, META_TABLE_NativeObject );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_NativeObject );
+        lua_setmetatable(L, -2);
         
-        lv_setglobal(L, name.UTF8String);
+        lua_setglobal(L, name.UTF8String);
     } else if ( nativeObject==nil ){
         [LVNativeObjBox unregisteObjectWithL:L name:name];
     }
@@ -196,20 +192,20 @@ static int __gc (lv_State *L) {
 }
 
 
-+(int) unregisteObjectWithL:(lv_State *)L name:(NSString*) name{
++(int) unregisteObjectWithL:(lua_State *)L name:(NSString*) name{
     if ( L && name ) {
-        lv_pushnil(L);
-        lv_setglobal(L, name.UTF8String);
+        lua_pushnil(L);
+        lua_setglobal(L, name.UTF8String);
     }
     return 0;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVNativeObjBox* nativeObjBox =  (__bridge LVNativeObjBox *)(user->object);
         NSString* s = [[NSString alloc] initWithFormat:@"{ UserDataType=NativeObject, %@ }",nativeObjBox.realObject];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
@@ -226,12 +222,12 @@ static void ifNotEnoughArgsTagAppendMore(NSMutableString* funcName, int num, int
     }
 }
 
-static int callNativeObjectFunction (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, lv_upvalueindex(1));
+static int callNativeObjectFunction (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, lua_upvalueindex(1));
     if ( user ) {
         LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
-        NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lv_tostring(L, lv_upvalueindex(2)) ];
-        int luaArgsNum = lv_gettop(L);
+        NSMutableString* funcName = [NSMutableString stringWithFormat:@"%s",lua_tostring(L, lua_upvalueindex(2)) ];
+        int luaArgsNum = lua_gettop(L);
         
         int _num = funcNameFromLuaToOC(funcName);
         if( _num>=0 ) {
@@ -244,35 +240,35 @@ static int callNativeObjectFunction (lv_State *L) {
 }
 
 
-static int __index (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __index (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     NSString* functionName = lv_paramString(L, 2);
     
     LVNativeObjBox* nativeObjBox = (__bridge LVNativeObjBox *)(user->object);
     id object = nativeObjBox.realObject;
     if( nativeObjBox && object && [nativeObjBox isApiExist:functionName] ){
-        lv_pushcclosure(L, callNativeObjectFunction, 2);
+        lua_pushcclosure(L, callNativeObjectFunction, 2);
         return 1;
     }
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __eq (lv_State *L) {
-    if (lv_gettop(L) < 2) {
+static int __eq (lua_State *L) {
+    if (lua_gettop(L) < 2) {
         return 0;
     }
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * another = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * another = (LVUserDataInfo *)lua_touserdata(L, 2);
     if (another != NULL) {
         LVNativeObjBox * box1 = (__bridge LVNativeObjBox *)(user->object);
         LVNativeObjBox * box2 = (__bridge LVNativeObjBox *)(user->object);
-        lv_pushboolean(L, [box1 isEqual:box2]);
+        lua_pushboolean(L, [box1 isEqual:box2]);
         return 1;
     }
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     // OC常量定义
     if( ARG_ARR==nil ) {
         ARG_ARR = @[
@@ -286,7 +282,7 @@ static int __eq (lv_State *L) {
                     @":::::::",];
     }
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__gc", __gc },
         {"__tostring", __tostring },
         {"__eq", __eq },
@@ -295,7 +291,7 @@ static int __eq (lv_State *L) {
     };
     
     lv_createClassMetaTable(L, META_TABLE_NativeObject);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     
     return 0;

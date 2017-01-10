@@ -19,8 +19,8 @@
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
 
--(id) init:(lv_State*) l;
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
+-(id) init:(lua_State*) l;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 -(void) setIndicator:(LVPagerIndicator*) indicator;
 -(void) setCurrentPageIdx:(NSInteger) pageIdx animation:(BOOL) animation;

@@ -18,7 +18,7 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
--(id) init:(lv_State*) l;
+-(id) init:(lua_State*) l;
 
 -(void) setImageByName:(NSString*) imageName;
 -(void) setImageByData:(NSData*) data;
@@ -31,7 +31,7 @@
  */
 -(void) callLuaDelegate:(id) obj;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 /**
  *  图片首次出现是否使用动画

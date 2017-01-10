@@ -7,11 +7,7 @@
 //
 
 #import "LVStyledString.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import "LView.h"
 
 @interface LVStyledString ()
@@ -19,10 +15,10 @@
 
 @implementation LVStyledString
 
--(id) init:(lv_State *)l{
+-(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
     }
     return self;
 }
@@ -43,8 +39,8 @@ static void releaseUserDataData(LVUserDataInfo* user){
     }
 }
 
-static int __attributedString_gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __attributedString_gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataData(user);
     return 0;
 }
@@ -169,14 +165,14 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
     resetLineSpace(attString, dic, range);
 }
 
-static int lvNewAttributedString (lv_State *L) {
-    LView* luaView = (__bridge LView *)(L->lView);
+static int lvNewAttributedString (lua_State *L) {
+    LView* luaView = LV_LUASTATE_VIEW(L);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
-    if( luaView && lv_gettop(L)>=2 ) {
-        if( ( lv_type(L, 1)==LV_TSTRING || lv_type(L, 1)==LV_TNUMBER ) && lv_type(L, 2)==LV_TTABLE ){
+    if( luaView && lua_gettop(L)>=2 ) {
+        if( ( lua_type(L, 1)==LUA_TSTRING || lua_type(L, 1)==LUA_TNUMBER ) && lua_type(L, 2)==LUA_TTABLE ){
             NSString* s = nil;
             size_t n = 0;
-            const char* chars = lv_tolstring(L, 1, &n );
+            const char* chars = lua_tolstring(L, 1, &n );
             s = [NSString stringWithUTF8String:chars];
             
             // 字符串格式非法，导致crash
@@ -201,29 +197,29 @@ static int lvNewAttributedString (lv_State *L) {
         userData->object = CFBridgingRetain(attString);
         attString.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_AttributedString );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_AttributedString );
+        lua_setmetatable(L, -2);
     }
     return 1;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVStyledString* attString =  (__bridge LVStyledString *)(user->object);
         NSString* s = attString.mutableStyledString.string;
         if( s==nil ){
             s = [[NSString alloc] initWithFormat:@"{ UserDataType=AttributedString, null }" ];
         }
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-static int append (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int append (lua_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     LVStyledString* string1 = (__bridge LVStyledString *)(user1->object);
     LVStyledString* string2 = (__bridge LVStyledString *)(user2->object);
     if( LVIsType(user1, StyledString) && LVIsType(user2, StyledString)
@@ -234,10 +230,10 @@ static int append (lv_State *L) {
     return 0;
 }
 
-static int __add (lv_State *L) {
-    if( lv_type(L, 2)==LV_TUSERDATA ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __add (lua_State *L) {
+    if( lua_type(L, 2)==LUA_TUSERDATA ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+        LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
         if( LVIsType(user1, StyledString) && LVIsType(user2, StyledString) ){
             LVStyledString* user1AttString = (__bridge LVStyledString *)(user1->object);
             LVStyledString* user2AttString = (__bridge LVStyledString *)(user2->object);
@@ -253,19 +249,19 @@ static int __add (lv_State *L) {
                 userData->object = CFBridgingRetain(attString);
                 attString.lv_userData = userData;
                 
-                lvL_getmetatable(L, META_TABLE_AttributedString );
-                lv_setmetatable(L, -2);
+                luaL_getmetatable(L, META_TABLE_AttributedString );
+                lua_setmetatable(L, -2);
             }
             return 1;
         }
-    } else if( lv_type(L, 2)==LV_TSTRING || lv_type(L, 2)==LV_TNUMBER ) {
-        LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+    } else if( lua_type(L, 2)==LUA_TSTRING || lua_type(L, 2)==LUA_TNUMBER ) {
+        LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
         NSString* stringArg = nil;
-        if( lv_type(L, 2)==LV_TSTRING ) {
+        if( lua_type(L, 2)==LUA_TSTRING ) {
             stringArg = lv_paramString(L, 2);
         } else {
             size_t n = 0;
-            const char* chars = lv_tolstring(L, 2, &n );
+            const char* chars = lua_tolstring(L, 2, &n );
             stringArg = [NSString stringWithUTF8String:chars];
         }
         if( LVIsType(user1, StyledString)  ){
@@ -283,8 +279,8 @@ static int __add (lv_State *L) {
                 userData->object = CFBridgingRetain(attString);
                 attString.lv_userData = userData;
                 
-                lvL_getmetatable(L, META_TABLE_AttributedString );
-                lv_setmetatable(L, -2);
+                luaL_getmetatable(L, META_TABLE_AttributedString );
+                lua_setmetatable(L, -2);
             }
             return 1;
         }
@@ -292,10 +288,10 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAttributedString globalName:globalName defaultName:@"StyledString"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"append", append },
         
         {"__add", __add },
@@ -306,7 +302,7 @@ static int __add (lv_State *L) {
     };
     lv_createClassMetaTable(L, META_TABLE_AttributedString);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 0;
 }
 

@@ -11,18 +11,17 @@ debug.bps = {
 }
 
 function debug_log( log_str )
-    print( "[调试器] " .. log_str );
+    print( "[LuaView][调试日志] " .. log_str );
 end
 
 function debug_print_var_0( name, value, level )
     local ret = "";
-    local prefix = string:rep( "    ", level )
-    local str = string:format( "%s%s = %s", prefix, name, tostring(value) )
+    local prefix = string.rep( "    ", level )
+    local str = string.format( "%s%s = %s", prefix, name, tostring(value) )
 
     if type( value ) == "table" then
         if debug.var_tbl[value] then
             --已在临时表中的,只打印表地址
-            -- print( str )
             ret = ret .. tostring(str) .. '\n';
             return ret;
         end
@@ -30,25 +29,21 @@ function debug_print_var_0( name, value, level )
         --加到临时表中,以免表出现循环引用时,打印也产生死循环
         debug.var_tbl[value] = true
         --打印表中所有数据
-        --print( string:format( "%s%s = {", prefix, name ) )
-        ret = ret .. string:format( "%s%s = {", prefix, name ) .. '\n';
+        ret = ret .. string.format( "%s%s = {", prefix, name ) .. '\n';
         for k, v in pairs( value ) do
             if type( k ) == "string" then
             else
                 k = tostring(k);
             end
             --不打印 "_"开头的内部变量
-            --if string:sub( k, 1, 1 ) ~= "_" then
+            --if string.sub( k, 1, 1 ) ~= "_" then
             ret = ret .. debug_print_var_0( k, v, level + 1 )
             --end
         end
-        -- print( prefix .. "}" )
         ret = ret .. prefix .. "}" .. '\n';
     elseif type( value ) == "string" then
-        -- print( str )
         ret = ret .. tostring(str) .. '\n';
     else
-        -- print( str )
         ret = ret .. tostring(str) .. '\n';
     end
     return ret;
@@ -57,7 +52,7 @@ end
 function debug_print_var( name, value, level )
     local s = debug_print_var_0( name, value, level );
     if( s ) then
-        s = s.sub(1,s.length()-1);
+        s = s:sub(1, s:len()-1 );
         debug_log( s );
     else
         debug_log( s );
@@ -75,7 +70,7 @@ function debug_print_expr( var )
     local index = 1
     --找局部变量
     while true do
-        local name, value = debug:getlocal( 4, index )
+        local name, value = debug.getlocal( 4, index )
         if not name then 
             break 
         end
@@ -88,10 +83,10 @@ function debug_print_expr( var )
     end
 
     -- try upvalues
-    local func = debug:getinfo(4,"f").func
+    local func = debug.getinfo(4,"f").func
     local index = 1
     while true do
-        local name, value = debug:getupvalue(func, index)
+        local name, value = debug.getupvalue(func, index)
         if not name then 
             break 
         end
@@ -101,7 +96,6 @@ function debug_print_expr( var )
         end
        index = index + 1
     end
-
 
     --找全局变量
     if _G[var] ~= nil then
@@ -118,19 +112,19 @@ function debug_run_expr( s )
 end
 
 function add_breakpoint( expr )
-    local si = string:find( expr, ":" )
+    local si = string.find( expr, ":" )
     if nil == si then
         debug_log( "add breakpoint error, expr (" .. expr .. ") invalid" )
         return
     end
 
-    local line = string:sub( expr, si + 1 )
+    local line = string.sub( expr, si + 1 )
     local line = tonumber( line )
-    local source = string:sub( expr, 1, si - 1 )
+    local source = string.sub( expr, 1, si - 1 )
 
     --先查找有不有相同断点
     if ( ( debug.bps[line] ~= nil ) and ( debug.bps[line][source] ~= nil ) ) then
-        debug_log( string:format( "breakpoint %s:%d existed", source, line ) )
+        debug_log( string.format( "breakpoint %s:%d existed", source, line ) )
         return
     end
 
@@ -146,27 +140,27 @@ function add_breakpoint( expr )
 
     debug.bps[line][source] = tbl
     debug.bps.max = debug.bps.max + 1
-    debug_log( string:format( "加断点(%s:%d)", source, line ) )
+    debug_log( string.format( "加断点(%s:%d)", source, line ) )
 end
 
 function remove_breakpoint( expr )
-    local si = string:find( expr, ":" )
+    local si = string.find( expr, ":" )
     if nil == si then
         debug_log( "remove breakpoint error, expr (" .. expr .. ") invalid" )
         return
     end
 
-    local line = string:sub( expr, si + 1 )
+    local line = string.sub( expr, si + 1 )
     local line = tonumber( line )
-    local source = string:sub( expr, 1, si - 1 )
+    local source = string.sub( expr, 1, si - 1 )
 
     --先查找有不有相同断点
     if( ( debug.bps[line] ~= nil ) and ( debug.bps[line][source] ~= nil ) )then
         debug.bps[line][source] = nil;
-        debug_log( string:format( "删点断(%s:%d)", source, line ) )
+        debug_log( string.format( "删点断(%s:%d)", source, line ) )
         return
     else
-        debug_log( string:format( "not found breakpoint %s:%d existed", source, line ) )
+        debug_log( string.format( "not found breakpoint %s:%d existed", source, line ) )
         return
     end
 end
@@ -175,7 +169,7 @@ function debug_show_bp()
     for k, v in pairs( debug.bps ) do
         if type( v ) == "table" then
             for k1, v1 in pairs( v ) do
-                local str = string:format( "bp num:%d  %s:%d  active:",
+                local str = string.format( "bp num:%d  %s:%d  active:",
                 v1.number,
                 v1.source,
                 v1.line )
@@ -251,10 +245,10 @@ function debug_runing_execute( cmd )
     end
     local c = cmd
     local expr = ""
-    local si = string:find( cmd, " " )
+    local si = string.find( cmd, " " )
     if si ~= nil then
-        c = string:sub( cmd, 1, si - 1 )
-        expr = string:sub( cmd, string:find( cmd, " %w" ) + 1 )
+        c = string.sub( cmd, 1, si - 1 )
+        expr = string.sub( cmd, string.find( cmd, " %w" ) + 1 )
     end
 
     if c == "b" then
@@ -268,9 +262,9 @@ end
 
 function debug_execute_cmd( env )
     --print( "(ldb) " )
-    local cmd = debug:readCmd()
+    local cmd = debug.readCmd()
     if ( cmd ==nil ) then
-    	debug:sleep(0.01);
+    	debug.sleep(0.01);
     	return false;
     end
     --取上一次的命令,方便调试
@@ -282,14 +276,14 @@ function debug_execute_cmd( env )
 
     local c = cmd
     local expr = ""
-    local si = string:find( cmd, " " )
+    local si = string.find( cmd, " " )
     if si ~= nil then
-        c = string:sub( cmd, 1, si - 1 )
-        -- local index = string:find( cmd, " %w" );
+        c = string.sub( cmd, 1, si - 1 )
+        -- local index = string.find( cmd, " %w" );
         -- if ( index ) then
-        --     expr = string:sub( cmd, index + 1 );
+        --     expr = string.sub( cmd, index + 1 );
         -- end
-        expr = string:sub(cmd, si + 1 );
+        expr = string.sub(cmd, si + 1 );
     end
     if c=="close" then
         debug_close();
@@ -306,7 +300,7 @@ function debug_execute_cmd( env )
         debug.bps.trace = false
         debug.bps.next = true
         debug.bps.cur_func = env.func
-        debug.bps.trace_count = debug:traceback_count() - 1
+        debug.bps.trace_count = debug.traceback_count() - 1
         return true
     elseif c == "p" then
         debug_print_expr( expr )
@@ -325,7 +319,7 @@ function debug_execute_cmd( env )
     elseif c == "bd" then
         debug_disable_bp( expr )
     elseif c == "bt" then
-        print( debug:traceback("", 3) )
+        print( debug.traceback("", 3) )
     elseif c == "h" then
         debug_help()
     else
@@ -335,8 +329,7 @@ function debug_execute_cmd( env )
 end
 
 function debug_trace( event, line )
-
-    local env = debug:getinfo( 2 )
+    local env = debug.getinfo( 2 )
 
     if env.source == _DEBUG_FILE then
         return
@@ -344,7 +337,7 @@ function debug_trace( event, line )
 
     --判断是否在next调试
     if debug.bps.next  then
-        local trace_count = debug:traceback_count()
+        local trace_count = debug.traceback_count()
         --函数返回了,调用栈数量就会比现在小
         if trace_count < debug.bps.trace_count then
             debug.bps.next = false
@@ -369,36 +362,32 @@ function debug_trace( event, line )
     end
 
     if debug.bps.trace then
-        local src = debug:get_file_line( env.source, line )
+        local src = debug.get_file_line( env.source, line )
         local funname = env.name or "unknow"
-        --debug_log( string:format( "%s:%d(%s)  %s", env.source, line, funname, src ) )
-        debug:runningLine( env.source, line );
+        --debug_log( string.format( "%s:%d(%s)  %s", env.source, line, funname, src ) )
+        debug.runningLine( env.source, line );
         debug.bps.cur_file = env.source;
         debug.bps.cur_line = line
         while not debug_execute_cmd( env ) do
         end
         return;
     end
-
-    -- local cmd = debug:readCmd()
-    -- debug_runing_execute( cmd );
 end
 
 function begin_debug()
     debug.bps.trace = true
-    debug:sethook( debug_trace, "l" )
+    debug.sethook( debug_trace, "l" )
 end
 
 --关闭debugger
 function debug_close()
     debug.bps.trace = false
     debug.bps.next = false
-    debug:sethook()
+    debug.sethook()
 end
 
 debug_log("load debug model");
-debug:printToServer(true);
-
+debug.printToServer(true);
 
 
 begin_debug(); -- last line

@@ -7,10 +7,10 @@
 //
 
 #import "LView.h"
+#import "LVHeads.h"
 #import "LVExGlobalFunc.h"
 #import "LVTimer.h"
 #import "LVDebuger.h"
-#import "lVtable.h"
 #import "LVNativeObjBox.h"
 #import "LVBlock.h"
 #import "LVPkgManager.h"
@@ -19,11 +19,6 @@
 #import "LVDebugConnection.h"
 #import "LVCustomPanel.h"
 #import <objc/runtime.h>
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
 #import "LVRSA.h"
 #import "LVBundle.h"
 #import "LVButton.h"
@@ -104,6 +99,7 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.changeGrammar = YES;
     self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
@@ -174,16 +170,19 @@
     [self.bundle addScriptPath:packagePath];
     [self.bundle addResourcePath:packagePath];
     
+    self.changeGrammar = [[LVPkgManager changeGrammarOfPackage:packageName] isEqualToString:@"true"];
+    
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
-    if( ret==nil && self.l ) {
+    lua_State* L = self.l;
+    if( ret==nil && L ) {
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
-            lv_pushNativeObject( self.l, obj );
+            lv_pushNativeObject( L, obj );
         }
-        lv_getglobal(self.l, "main");// function
-        if( lv_type(self.l, -1) == LV_TFUNCTION ) {
-            ret = lv_runFunctionWithArgs(self.l, (int)args.count, 0);
+        lua_getglobal(L, "main");// function
+        if( lua_type(L, -1) == LUA_TFUNCTION ) {
+            ret = lv_runFunctionWithArgs(L, (int)args.count, 0);
         }
     }
     return ret;
@@ -209,6 +208,13 @@
 }
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
+    return [self loadData:data fileName:fileName changeGrammar:self.changeGrammar];
+}
+
+- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
+    if( changeGrammar ) {
+        data = lv_toStandLuaGrammar(data);
+    }
     if (!data || !data.length || !fileName || !fileName.length) {
         LVError( @"running chars == NULL, file:%@", fileName);
         return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
@@ -219,13 +225,14 @@
     [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
 #endif
     
-    int error = lvL_loadbuffer(self.l, data.bytes, data.length, fileName.UTF8String);
+    lua_State* L = self.l;
+    int error = luaL_loadbuffer(L, data.bytes, data.length, fileName.UTF8String);
     if (error) {
-        const char* s = lv_tostring(self.l, -1);
+        const char* s = lua_tostring(L, -1);
         LVError( @"%s", s );
 #ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
-        lv_printToServer(self.l, string.UTF8String, 0);
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
+        lv_printToServer(L, string.UTF8String, 0);
 #endif
         return [NSString stringWithFormat:@"%s",s];
     } else {
@@ -238,7 +245,7 @@ extern char g_debug_lua[];
 
 -(NSString*) loadDebugModel{
     NSData* data = [[NSData alloc] initWithBytes:g_debug_lua length:strlen(g_debug_lua)];
-    return [self runData:data fileName:@"debug.lua"];
+    return [self runData:data fileName:@"debug.lua" changeGrammar:NO];
 }
 
 - (void) callLuaToExecuteServerCmd{
@@ -265,7 +272,7 @@ extern char g_debug_lua[];
     if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
-            [self.debugConnection sendCmd:@"log" info:@"[调试器] 开始调试!\n"];
+            [self.debugConnection sendCmd:@"log" info:@"[LuaView][调试日志] 开始调试!\n"];
             [self loadDebugModel];// 加载调试模块
         }
     }
@@ -275,12 +282,23 @@ extern char g_debug_lua[];
 }
 #endif
 
+static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
+    (void)ud;
+    (void)osize;
+    if (nsize == 0) {
+        free(ptr);
+        return NULL;
+    } else {
+        return realloc(ptr, nsize);
+    }
+}
+
+
 -(void) registeLibs{
     if( !self.stateInited ) {
         self.stateInited = YES;
-        self.l =  lvL_newstate();//lv_open();  /* opens */
-        self.l->lView = (__bridge void *)(self);
-        lvL_openlibs(self.l);
+        self.l =  lua_newstate(l_alloc, (__bridge void *)(self));
+        luaL_openlibs(self.l);
         NSArray* arr = nil;
         arr = @[
                 [LVSystem class],
@@ -332,20 +350,28 @@ extern char g_debug_lua[];
 }
 
 -(void) registerAllClass{
-    lv_State* L = self.l;
+    lua_State* L = self.l;
     //清理栈
     for( NSInteger i =0; i<self.registerClasses.count; i++ ){
-        lv_settop(L, 0);
-        lv_checkstack(L, 128);
+        lua_settop(L, 0);
+        lua_checkstack(L, 256);
         id c = self.registerClasses[i];
         [c lvClassDefine:L globalName:nil];
     }
     //清理栈
-    lv_settop(L, 0);
+    lua_settop(L, 0);
 }
 
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
-    if( self.l==NULL ){
+    return [self runData:data fileName:fileName changeGrammar:self.changeGrammar];
+}
+
+-(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{
+    if( changeGrammar ) {
+        data = lv_toStandLuaGrammar(data);
+    }
+    lua_State* L = self.l;
+    if( L==NULL ){
         LVError( @"Lua State is released !!!");
         return @"Lua State is released !!!";
     }
@@ -363,49 +389,51 @@ extern char g_debug_lua[];
 #endif
     
     int error = -1;
-    error = lvL_loadbuffer(self.l, data.bytes , data.length, fileName.UTF8String) ;
+    error = luaL_loadbuffer(L, data.bytes , data.length, fileName.UTF8String) ;
     if ( error ) {
-        const char* s = lv_tostring(self.l, -1);
+        const char* s = lua_tostring(L, -1);
         LVError( @"%s", s );
 #ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error]   %s\n",s];
-        lv_printToServer(self.l, string.UTF8String, 0);
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
+        lv_printToServer(L, string.UTF8String, 0);
 #endif
         return [NSString stringWithFormat:@"%s",s];
     } else {
-        return lv_runFunction(self.l);
+        return lv_runFunction(L);
     }
 }
 
 -(int) globalNumber:(const char*) globalName{
-    if ( self.l ==nil ){
+    lua_State* L = self.l;
+    if ( L ==nil ){
         LVError( @"Lua State is released !!!");
         return 0;
     }
-    lv_getglobal(self.l, globalName);
+    lua_getglobal(L, globalName);
     
-    if( !lv_isnumber(self.l, -1) ){
+    if( !lua_isnumber(L, -1) ){
         //是否需要出栈？？？
         LVError(@"  '%s'  should be a number",globalName );
         return 0;
     } else {
-        return (int) lv_tonumber(self.l, -1);
+        return (int) lua_tonumber(L, -1);
     }
 }
 
 -(NSString*) globalString:(const char*) globalName{
-    if ( self.l ==nil ){
+    lua_State* L = self.l;
+    if ( L ==nil ){
         LVError( @"Lua State is released !!!");
         return nil;
     }
-    lv_getglobal(self.l, globalName);
+    lua_getglobal(L, globalName);
     
-    if( !lv_isstring(self.l, -1) ){
+    if( !lua_isstring(L, -1) ){
         //是否需要出栈？？？
         LVError(@" '%s'  should be a number",globalName );
         return nil;
     } else {
-        const char* chars = lv_tolstring(self.l, -1, NULL);
+        const char* chars = lua_tolstring(L, -1, NULL);
         if( chars ){
             return [NSString stringWithFormat:@"%s",chars];
         }
@@ -416,18 +444,16 @@ extern char g_debug_lua[];
 
 #pragma mark - setFrame
 
--(void) releaseLuaView{
-    self.hidden = YES;
-    [self removeFromSuperview];
-    [self performSelector:@selector(freeMySelf) withObject:nil afterDelay:0.001];
+-(void) releaseLuaView {
+    [self performSelectorOnMainThread:@selector(freeMySelf) withObject:nil waitUntilDone:NO];
 }
 
--(void) freeMySelf{
+-(void) freeMySelf {
     [self removeFromSuperview];
-    lv_State* l = self.l;
+    lua_State* l = self.l;
     self.l = NULL;
     if( l ){
-        lv_close(l);
+        lua_close(l);
         l = NULL;
     }
     self.mySelf = nil;
@@ -439,47 +465,53 @@ extern char g_debug_lua[];
 #pragma mark - view appear
 
 -(void) viewWillAppear{
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"ViewWillAppear"];
     }
 }
 
 -(void) viewDidAppear{
     self.isOnShowed = YES;
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
     }
 }
 
 -(void) viewWillDisAppear{
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"ViewWillDisAppear"];
     }
 }
 
 -(void) viewDidDisAppear{
     self.isOnShowed = NO;
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
     }
 }
 
 -(void) onForeground {
-    if( self.l && self.isOnShowed ) {
-        lv_checkStack32(self.l);
-        lv_pushboolean(self.l, YES);
+    lua_State* L = self.l;
+    if( L && self.isOnShowed ) {
+        lua_checkstack32(L);
+        lua_pushboolean(L, YES);
         [self lv_callLuaByKey1:@"onShow" key2:nil argN:1];
     }
 }
 
 -(void) onBackground {
-    if( self.l && self.isOnShowed ) {
-        lv_checkStack32(self.l);
-        lv_pushboolean(self.l, YES);
+    lua_State* L = self.l;
+    if( L && self.isOnShowed ) {
+        lua_checkstack32(L);
+        lua_pushboolean(L, YES);
         [self lv_callLuaByKey1:@"onHide" key2:nil argN:1];
     }
 }
@@ -487,8 +519,9 @@ extern char g_debug_lua[];
 - (void)didMoveToSuperview{
     [super didMoveToSuperview];
     
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"DidMoveToSuperview"];
     }
 }
@@ -496,8 +529,9 @@ extern char g_debug_lua[];
 - (void)didMoveToWindow{
     [super didMoveToWindow];
     
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"DidMoveToSuperview"];
     }
 }
@@ -505,26 +539,30 @@ extern char g_debug_lua[];
 #pragma mark - keyboard
 
 -(void) keyboardWillShow:(NSNotification *)notification {
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"KeyboardWillShow"];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"KeyboardDidShow"];
     }
 }
 -(void) keyboardWillHide:(NSNotification *)notification {
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"KeyboardWillHide"];
     }
 }
 -(void) keyboardDidHide:(NSNotification *)notification {
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@"KeyboardDidHide"];
     }
 }
@@ -532,9 +570,10 @@ extern char g_debug_lua[];
 #pragma mark - 摇一摇相关方法
 // 摇一摇开始摇动
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    lua_State* L = self.l;
     if (event.subtype == UIEventSubtypeMotionShake) {
-        if( self.l ) {
-            lv_checkStack32(self.l);
+        if( L ) {
+            lua_checkstack32(L);
             [self lv_callLuaByKey1:@"ShakeBegin"];
         }
     }
@@ -543,8 +582,9 @@ extern char g_debug_lua[];
 // 摇一摇取消摇动
 - (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.subtype == UIEventSubtypeMotionShake) {
-        if( self.l ) {
-            lv_checkStack32(self.l);
+        lua_State* L = self.l;
+        if( L ) {
+            lua_checkstack32(L);
             [self lv_callLuaByKey1:@"ShakeCanceled"];
         }
     }
@@ -553,8 +593,9 @@ extern char g_debug_lua[];
 // 摇一摇摇动结束
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.subtype == UIEventSubtypeMotionShake) {
-        if( self.l ) {
-            lv_checkStack32(self.l);
+        lua_State* L = self.l;
+        if( L ) {
+            lua_checkstack32(L);
             [self lv_callLuaByKey1:@"ShakeEnded"];
         }
     }
@@ -565,8 +606,9 @@ extern char g_debug_lua[];
 -(void) layoutSubviews{
     [super layoutSubviews];
     
-    if( self.l ) {
-        lv_checkStack32(self.l);
+    lua_State* L = self.l;
+    if( L ) {
+        lua_checkstack32(L);
         [self lv_callLuaByKey1:@STR_ON_LAYOUT];
     }
 }
@@ -686,24 +728,25 @@ extern char g_debug_lua[];
 
 #pragma mark - call lua global function
 -(NSString*) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args{
-    if( self.l ){
-        lv_checkstack(self.l, 8 + (int)args.count*2);
+    lua_State* L = self.l;
+    if( L ){
+        lua_checkstack(L, 8 + (int)args.count*2);
         self.conentView = environment;
         self.contentViewIsWindow = YES;
         
-        [LVUtil pushRegistryValue:self.l key:tag]; // param1: cell
+        [LVUtil pushRegistryValue:L key:tag]; // param1: cell
         
-        if( lv_type(self.l, -1)==LV_TNIL ) {// if param1==nil , create param1
-            lv_newtable(self.l);
+        if( lua_type(L, -1)==LUA_TNIL ) {// if param1==nil , create param1
+            lua_newtable(L);
             
-            [LVUtil registryValue:self.l key:tag stack:-1];
+            [LVUtil registryValue:L key:tag stack:-1];
         }
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
-            lv_pushNativeObject(self.l,obj);
+            lv_pushNativeObject(L,obj);
         }
-        lv_getglobal(self.l, functionName.UTF8String);// function
-        NSString* ret = lv_runFunctionWithArgs(self.l, (int)args.count+1, 0);
+        lua_getglobal(L, functionName.UTF8String);// function
+        NSString* ret = lv_runFunctionWithArgs(L, (int)args.count+1, 0);
         self.conentView = nil;
         self.contentViewIsWindow = NO;
         return ret;
@@ -716,27 +759,29 @@ extern char g_debug_lua[];
 }
 
 -(NSString*) callLua:(NSString*) functionName args:(NSArray*) args{
-    if( self.l ){
-        lv_checkstack(self.l, (int)args.count*2 + 2);
+    lua_State* L = self.l;
+    if( L ){
+        lua_checkstack(L, (int)args.count*2 + 2);
         self.conentView = nil;
         self.contentViewIsWindow = NO;
         
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
-            lv_pushNativeObject(self.l,obj);
+            lv_pushNativeObject(L,obj);
         }
-        lv_getglobal(self.l, functionName.UTF8String);// function
-        return lv_runFunctionWithArgs(self.l, (int)args.count, 0);
+        lua_getglobal(L, functionName.UTF8String);// function
+        return lv_runFunctionWithArgs(L, (int)args.count, 0);
     }
     return nil;
 }
 
 -(LVBlock*) getLuaBlock:(NSString*) name{
-    if ( self.l ==nil ){
+    lua_State* L = self.l;
+    if ( L ==nil ){
         LVError( @"Lua State is released !!!");
         return nil;
     }
-    return [[LVBlock alloc] initWith:self.l globalName:name];
+    return [[LVBlock alloc] initWith:L globalName:name];
 }
 
 #pragma mark - registe object.method
@@ -759,52 +804,57 @@ extern char g_debug_lua[];
 
 
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key{
-    if ( self.l ==nil ){
+    lua_State* L = self.l;
+    if ( L ==nil ){
         LVError( @"Lua State is released !!!");
         return;
     }
     if( [key isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(object)) ) {
         if( [object respondsToSelector:@selector(lvClassDefine:globalName:)] ) {
-            [object lvClassDefine:self.l globalName:(NSString*)key];
+            [object lvClassDefine:L globalName:(NSString*)key];
             return;
         }
     }
     if ( [key isKindOfClass:[NSString class]] ){
-        [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:(NSString*)key sel:nil weakMode:YES];
+        [LVNativeObjBox registeObjectWithL:L nativeObject:object name:(NSString*)key sel:nil weakMode:YES];
     }
 }
 
 -(void) unregisteObjectForName:(NSString*) name{
-    if ( self.l ==nil ){
+    lua_State* L = self.l;
+    if ( L ==nil ){
         LVError( @"Lua State is released !!!");
         return ;
     }
-    [LVNativeObjBox unregisteObjectWithL:self.l name:name];
+    [LVNativeObjBox unregisteObjectWithL:L name:name];
 }
 
 #pragma mark - package
 
-+(void) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*)info{
-    [LVPkgManager downLoadPackage:packageName withInfo:info];
++(void) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*)info{
+    [LVPkgManager downloadPackage:packageName withInfo:info];
 }
 
 -(BOOL) argumentToBool:(int) index{
-    if ( self.l ) {
-        return lv_toboolean(self.l, index);
+    lua_State* L = self.l;
+    if ( L ) {
+        return lua_toboolean(L, index);
     }
     return NO;
 }
 
 -(double)  argumentToNumber:(int) index{
-    if ( self.l ) {
-        return lv_tonumber(self.l, index);
+    lua_State* L = self.l;
+    if ( L ) {
+        return lua_tonumber(L, index);
     }
     return 0;
 }
 
 -(id) argumentToObject:(int) index{
-    if ( self.l ) {
-        return lv_luaValueToNativeObject(self.l, index);
+    lua_State* L = self.l;
+    if ( L ) {
+        return lv_luaValueToNativeObject(L, index);
     }
     return 0;
 }

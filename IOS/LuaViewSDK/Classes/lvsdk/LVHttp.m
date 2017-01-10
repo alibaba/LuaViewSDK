@@ -10,11 +10,7 @@
 #import "LVHttpResponse.h"
 #import "LVData.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVHttp ()<NSURLConnectionDataDelegate>
 @property(nonatomic,strong) id mySelf;
@@ -41,10 +37,10 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 -(void) dealloc{
 }
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.mySelf = self;
         self.function = [[NSMutableString alloc] init];
         self.response = [[LVHttpResponse alloc] init];
@@ -54,9 +50,9 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 }
 
 -(void) requesetEndToDo{
-    lv_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_lview.l;
     if( l ){
-        lv_checkStack32(l);
+        lua_checkstack32(l);
         [LVUtil pushRegistryValue:l key:self];
         [LVUtil call:l lightUserData:self.function key1:"callback" key2:NULL nargs:1];
         [LVUtil unregistry:l key:self];
@@ -132,7 +128,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
     return self;
 }
 
-static int lvNewHttpObject (lv_State *L ) {
+static int lvNewHttpObject (lua_State *L ) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVHttp class]];
     
     LVHttp* http = [[c alloc] init:L];
@@ -141,22 +137,22 @@ static int lvNewHttpObject (lv_State *L ) {
         userData->object = CFBridgingRetain(http);
         http.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_Http );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_Http );
+        lua_setmetatable(L, -2);
     }
     [LVUtil registryValue:L key:http stack:-1];
     return 1;
 }
 
-static int get (lv_State *L) {
-    int argN = lv_gettop(L);
+static int get (lua_State *L) {
+    int argN = lua_gettop(L);
     if( argN>=2 ){
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         if(  LVIsType(user, Http) ) {
             LVHttp* http = (__bridge LVHttp *)(user->object);
             NSString* urlStr = lv_paramString(L, 2);
             
-            if( lv_type(L, 3) != LV_TNIL ) {
+            if( lua_type(L, 3) != LUA_TNIL ) {
                 [LVUtil registryValue:L key:http.function stack:3];
             }
             NSURL *url = [NSURL URLWithString:urlStr];
@@ -176,10 +172,10 @@ static int get (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int post (lv_State *L) {
-    int argN = lv_gettop(L);
+static int post (lua_State *L) {
+    int argN = lua_gettop(L);
     if( argN>=3 ){
-        LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
         if(  LVIsType(user, Http) ) {
             // 1:url    2:heads   3:data   4:callback
             NSString* urlStr = lv_paramString(L, 2);
@@ -187,18 +183,18 @@ static int post (lv_State *L) {
             NSDictionary* dic = nil;
             NSData* data = nil;
             for( int i=3 ; i<=argN ; i++ ) {
-                int type = lv_type(L, i);
-                if( type==LV_TSTRING ) {// 数据
+                int type = lua_type(L, i);
+                if( type==LUA_TSTRING ) {// 数据
                     NSString* s = lv_paramString(L, i);
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }
-                if( type==LV_TTABLE ) {// 数据
+                if( type==LUA_TTABLE ) {// 数据
                     id tempDic = lv_luaTableToDictionary(L, i);
                     NSString* s = [LVUtil objectToString:tempDic];
                     data = [s dataUsingEncoding:NSUTF8StringEncoding];
                 }
                 
-                if( type==LV_TFUNCTION ) {
+                if( type==LUA_TFUNCTION ) {
                     [LVUtil registryValue:L key:http.function stack:4];
                 }
             }
@@ -232,28 +228,28 @@ static int post (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-static int __gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataHttp(user);
     return 0;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user && LVIsType(user, Http) ){
         LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSString* s = [NSString stringWithFormat:@"LVUserDataHttp: %@\n response.data.length=%ld\n error:%@",
                        http.response.response,
                        (long)http.response.data.length,
                        http.response.error ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-static int data (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int data (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user && LVIsType(user, Http) ){
         LVHttp* http =  (__bridge LVHttp *)(user->object);
         //        NSString* s = [NSString stringWithFormat:@"LVUserDataHttp: %@\n response.data.length=%ld\n error:%@",
@@ -264,18 +260,18 @@ static int data (lv_State *L) {
     }
     return 0;
 }
-static int responseStatusCode (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int responseStatusCode (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user && LVIsType(user, Http) ){
         LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSHTTPURLResponse* httpResponse = http.response.httpResponse;
-        lv_pushnumber(L, httpResponse.statusCode);
+        lua_pushnumber(L, httpResponse.statusCode);
         return 1;
     }
     return 0;
 }
-static int responseHeaderFields (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int responseHeaderFields (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user && LVIsType(user, Http) ){
         LVHttp* http =  (__bridge LVHttp *)(user->object);
         NSHTTPURLResponse* response = http.response.httpResponse;
@@ -284,8 +280,8 @@ static int responseHeaderFields (lv_State *L) {
     }
     return 0;
 }
-static int cancel (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int cancel (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user && LVIsType(user, Http) ){
         LVHttp* http =  (__bridge LVHttp *)(user->object);
         [http.connection cancel];
@@ -294,9 +290,9 @@ static int cancel (lv_State *L) {
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     {
-        const struct lvL_reg memberFunctions [] = {
+        const struct luaL_Reg memberFunctions [] = {
             {"__gc", __gc },
             
             {"__tostring", __tostring },
@@ -315,7 +311,7 @@ static int cancel (lv_State *L) {
         
         lv_createClassMetaTable(L, META_TABLE_Http);
         
-        lvL_openlib(L, NULL, memberFunctions, 0);
+        luaL_openlib(L, NULL, memberFunctions, 0);
     }
     [LVUtil reg:L clas:self cfunc:lvNewHttpObject globalName:globalName defaultName:@"Http"];
     return 1;

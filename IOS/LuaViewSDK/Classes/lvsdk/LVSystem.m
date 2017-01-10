@@ -10,11 +10,7 @@
 #import "LView.h"
 #import "LVPkgManager.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 #import "LVNetworkStatus.h"
 #import "LVAnimator.h"
 
@@ -22,25 +18,25 @@
 
 
 // lv 扩展API
-static int vmVersion (lv_State *L) {
-    lv_pushstring(L, LUAVIEW_VERSION ) ;
+static int vmVersion (lua_State *L) {
+    lua_pushstring(L, LUAVIEW_VERSION ) ;
     return 1; /* number of results */
 }
 
 // lv 扩展API
-static int osVersion (lv_State *L) {
+static int osVersion (lua_State *L) {
     NSString* v = [[UIDevice currentDevice] systemVersion];
-    lv_pushstring(L, v.UTF8String);
+    lua_pushstring(L, v.UTF8String);
     return 1; /* number of results */
 }
 
-static int ios (lv_State *L) {
-    lv_pushboolean(L, 1);
+static int ios (lua_State *L) {
+    lua_pushboolean(L, 1);
     return 1;
 }
 
-static int android (lv_State *L) {
-    lv_pushboolean(L, 0);
+static int android (lua_State *L) {
+    lua_pushboolean(L, 0);
     return 1;
 }
 
@@ -49,81 +45,81 @@ static int android (lv_State *L) {
     return [[LVNetworkStatus shareInstance] currentNetworkStatusString];
 }
 
-static int netWorkType (lv_State *L) {
+static int netWorkType (lua_State *L) {
     NSString* type = [LVSystem netWorkType];
-    lv_pushstring(L, type.UTF8String);
+    lua_pushstring(L, type.UTF8String);
     return 1;
 }
 
-static int layerMode (lv_State *L) {
-    if( lv_gettop(L)>0 ){
-        BOOL yes = lv_toboolean(L, -1);
-        LView* luaview = (__bridge LView *)(L->lView);
+static int layerMode (lua_State *L) {
+    if( lua_gettop(L)>0 ){
+        BOOL yes = lua_toboolean(L, -1);
+        LView* luaview = LV_LUASTATE_VIEW(L);
         luaview.closeLayerMode = !yes;
     }
     return 0;
 }
 
 // 屏幕常亮
-static int keepScreenOn (lv_State *L) {
-    if( lv_gettop(L)>0 ){
-        BOOL yes = lv_toboolean(L, -1);
+static int keepScreenOn (lua_State *L) {
+    if( lua_gettop(L)>0 ){
+        BOOL yes = lua_toboolean(L, -1);
         [[UIApplication sharedApplication] setIdleTimerDisabled:yes] ;
     }
     return 0;
 }
 
-static int scale (lv_State *L) {
+static int scale (lua_State *L) {
     CGFloat s = [UIScreen mainScreen].scale;
-    lv_pushnumber( L, s);
+    lua_pushnumber( L, s);
     return 1; /* number of results */
 }
 
 
 // lv 扩展API
-static int platform (lv_State *L) {
+static int platform (lua_State *L) {
     NSString* name = [[UIDevice currentDevice] systemName];
     NSString* version = [[UIDevice currentDevice] systemVersion];
     NSString* buf = [NSString stringWithFormat:@"%@;%@",name,version];
-    lv_pushstring(L, [buf UTF8String] ) ;
+    lua_pushstring(L, [buf UTF8String] ) ;
     return 1; /* number of results */
 }
 
-static int device (lv_State *L) {
+static int device (lua_State *L) {
     NSString* name = [[UIDevice currentDevice] localizedModel];
     NSString* version = [[UIDevice currentDevice] model];
     NSString* buf = [NSString stringWithFormat:@"%@;%@",name,version];
-    lv_pushstring(L, [buf UTF8String] ) ;
+    lua_pushstring(L, [buf UTF8String] ) ;
     return 1; /* number of results */
 }
 
 // lv 扩展API
-static int screenSize (lv_State *L) {
+static int screenSize (lua_State *L) {
     CGSize s = [UIScreen mainScreen].bounds.size;
-    lv_pushnumber(L, s.width );
-    lv_pushnumber(L, s.height );
+    lua_pushnumber(L, s.width );
+    lua_pushnumber(L, s.height );
     return 2; /* number of results */
 }
 
-static int static_gc (lv_State *L) {
-    lv_gc(L, 2, 0);
+static int static_gc (lua_State *L) {
+    lua_gc(L, 2, 0);
     return 0;
 }
 
-static int vibrate(lv_State*L){
+static int vibrate(lua_State*L){
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     return 1;
 }
 
-static int lvClassLoader(lv_State*L){
+static int lvClassLoader(lua_State*L){
     NSString* s = lv_paramString(L, -1);
     id obj = NSClassFromString(s);
     lv_pushNativeObject(L, obj);
     return 1;
 }
 
-static int stringToTable(lv_State*L){
-    if( lv_type(L, -1) == LV_TSTRING ) {
+static int stringToTable(lua_State*L){
+    if( lua_type(L, -1) == LUA_TSTRING ) {
         NSString* s = lv_paramString(L, -1);
         if( s ) {
             id obj = [LVUtil stringToObject:s];
@@ -134,20 +130,20 @@ static int stringToTable(lv_State*L){
     return 0;
 }
 
-static int tableToString(lv_State*L){
-    if( lv_type(L, -1) == LV_TTABLE ) {
+static int tableToString(lua_State*L){
+    if( lua_type(L, -1) == LUA_TTABLE ) {
         id obj = lv_luaValueToNativeObject(L,-1);
         NSString* s = [LVUtil objectToString:obj];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     {
         // System API
-        const struct lvL_reg staticFunctions [] = {
+        const struct luaL_Reg staticFunctions [] = {
             {"screenSize", screenSize},
             {"gc",static_gc},
             {"osVersion", osVersion},
@@ -162,21 +158,21 @@ static int tableToString(lv_State*L){
             {"layerMode", layerMode},// 是否开启layer模式
             {NULL, NULL}
         };
-        lvL_openlib(L, "System", staticFunctions, 0);
+        luaL_openlib(L, "System", staticFunctions, 0);
     }
     {
         // Json Table相互转换
-        const struct lvL_reg fs [] = {
+        const struct luaL_Reg fs [] = {
             {"toString", tableToString},
             {"toTable",stringToTable},
             {NULL, NULL}
         };
-        lvL_openlib(L, "Json", fs, 0);
+        luaL_openlib(L, "Json", fs, 0);
     }
     // ----  常量注册 ----
     {
         // Align 常量
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LEFT":    @(LV_ALIGN_LEFT),
@@ -190,7 +186,7 @@ static int tableToString(lv_State*L){
         [LVUtil defineGlobal:@"Align" value:v L:L];
     }
     {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LEFT":@(NSTextAlignmentLeft),
@@ -201,7 +197,7 @@ static int tableToString(lv_State*L){
     }
     {
         //文本太多 "..." 出现的问题
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"START":@(NSLineBreakByTruncatingHead),
@@ -213,7 +209,7 @@ static int tableToString(lv_State*L){
     }
     {
         //字体Style
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NORMAL":@"normal",//正常
@@ -224,7 +220,7 @@ static int tableToString(lv_State*L){
     }
     {
         //字体Weight（粗体、正常）
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NORMAL":@"normal",
@@ -234,7 +230,7 @@ static int tableToString(lv_State*L){
     }
     {
         //图片缩放常量
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"CENTER":@(UIViewContentModeCenter),//按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
@@ -249,7 +245,7 @@ static int tableToString(lv_State*L){
         [LVUtil defineGlobal:@"ScaleType" value:v L:L];
     }
     {
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"LINEAR" : @(LVLinearInterpolator),
@@ -264,7 +260,7 @@ static int tableToString(lv_State*L){
     }
     {
         // 坑位浮动Pinned
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"YES":@(YES),
@@ -276,7 +272,7 @@ static int tableToString(lv_State*L){
     
     {
         // ViewEffect define
-        lv_settop(L, 0);
+        lua_settop(L, 0);
         NSDictionary* v = nil;
         v = @{
               @"NONE":@(EFFECT_NONE),
@@ -286,10 +282,10 @@ static int tableToString(lv_State*L){
         [LVUtil defineGlobal:@"ViewEffect" value:v L:L];
     }
     // 震动
-    [LVUtil defineGlobal:@"Vibrate" func:vibrate L:L];
+    lv_defineGlobalFunc("Vibrate", vibrate, L);
     
     // create class api
-    [LVUtil defineGlobal:@"__class__" func:lvClassLoader L:L];
+    lv_defineGlobalFunc("__class__", lvClassLoader, L);
     return 0;
 }
 

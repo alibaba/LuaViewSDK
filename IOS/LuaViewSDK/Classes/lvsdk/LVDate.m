@@ -8,11 +8,7 @@
 
 #import "LVHeads.h"
 #import "LVDate.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 
@@ -44,15 +40,15 @@ static NSString* string09(NSString* s, NSUInteger len){
     return buf;
 }
 
-static int lvNewDate (lv_State *L) {
+static int lvNewDate (lua_State *L) {
     {
         NSString* string = lv_paramString(L, 1);
         NSString* format = lv_paramString(L, 2);
         
         NSDate* date = nil;
         if( string==nil && format==nil ){
-            if( lv_type(L, 1)==LV_TNUMBER ){
-                double time = lv_tonumber(L, 1);
+            if( lua_type(L, 1)==LUA_TNUMBER ){
+                double time = lua_tonumber(L, 1);
                 date = [[NSDate alloc] initWithTimeIntervalSince1970:time];
             } else {
                 date = [NSDate date];
@@ -75,16 +71,16 @@ static int lvNewDate (lv_State *L) {
             NEW_USERDATA(userData, Date );
             userData->object = CFBridgingRetain(d);
             
-            lvL_getmetatable(L, META_TABLE_Date );
-            lv_setmetatable(L, -2);
+            luaL_getmetatable(L, META_TABLE_Date );
+            lua_setmetatable(L, -2);
         }
     }
     return 1; /* new userdatum is already on the stack */
 }
 
 
-static int __GC (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __GC (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, Date) && user->object ){
         CFBridgingRelease(user->object);
         user->object = NULL;
@@ -92,19 +88,19 @@ static int __GC (lv_State *L) {
     return 0;
 }
 
-static int __tostring (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __tostring (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user, Date) ){
         LVDate* date =  (__bridge LVDate *)(user->object);
         NSString* s = [NSString stringWithFormat:@"%@", date.date ];
-        lv_pushstring(L, s.UTF8String);
+        lua_pushstring(L, s.UTF8String);
         return 1;
     }
     return 0;
 }
 
-static int format (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int format (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     NSString* formatString = lv_paramString(L, 2);
     if( LVIsType(user, Date) ){
         LVDate* date =  (__bridge LVDate *)(user->object);
@@ -117,54 +113,54 @@ static int format (lv_State *L) {
             } else {
                 ret = [NSString stringWithFormat:@"%@", date.date ];
             }
-            lv_pushstring(L, ret.UTF8String);
+            lua_pushstring(L, ret.UTF8String);
             return 1;
         }
     }
     return 0;
 }
 
-static int __sub (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __sub (lua_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
         LVDate* date1 = (__bridge LVDate *)(user1->object);
         LVDate* date2 = (__bridge LVDate *)(user2->object);
         double time = [date1.date timeIntervalSinceDate:date2.date];
-        lv_pushnumber(L, time);
+        lua_pushnumber(L, time);
         return 1;
     }
     return 0;
 }
 
-static int __eq (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-    LVUserDataInfo * user2 = (LVUserDataInfo *)lv_touserdata(L, 2);
+static int __eq (lua_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user2 = (LVUserDataInfo *)lua_touserdata(L, 2);
     if( LVIsType(user1, Date) && LVIsType(user2, Date) ){
         LVDate* date1 = (__bridge LVDate *)(user1->object);
         LVDate* date2 = (__bridge LVDate *)(user2->object);
         BOOL yes = [date1.date isEqualToDate:date2.date];
-        lv_pushboolean(L, (yes?1:0) );
+        lua_pushboolean(L, (yes?1:0) );
         return 1;
     }
     return 0;
 }
 
-static int timeInterval (lv_State *L) {
-    LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int timeInterval (lua_State *L) {
+    LVUserDataInfo * user1 = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( LVIsType(user1, Date) ){
         LVDate* date1 = (__bridge LVDate *)(user1->object);
         double time = [date1.date timeIntervalSince1970];
-        lv_pushnumber(L, time);
+        lua_pushnumber(L, time);
         return 1;
     }
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewDate globalName:globalName defaultName:@"Date"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"__gc",  __GC },
         {"__sub", __sub},
         {"__eq",  __eq},
@@ -177,7 +173,7 @@ static int timeInterval (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_Date);
     
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
 

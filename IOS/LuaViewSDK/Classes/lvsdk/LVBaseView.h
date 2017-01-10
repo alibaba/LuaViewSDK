@@ -18,11 +18,11 @@
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 @property(nonatomic,assign) BOOL lv_canvas;
 
--(id) init:(lv_State*) l;
+-(id) init:(lua_State*) l;
 
-+(const lvL_reg*) baseMemberFunctions;
++(const luaL_Reg*) baseMemberFunctions;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end
 
@@ -30,4 +30,4 @@
 /**
  * callback回调统一处理API
  */
-extern int lv_setCallbackByKey(lv_State *L, const char* key, BOOL addGesture);
+extern int lv_setCallbackByKey(lua_State *L, const char* key, BOOL addGesture);

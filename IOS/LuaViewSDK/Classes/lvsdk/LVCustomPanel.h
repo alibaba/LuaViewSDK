@@ -16,7 +16,7 @@
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 - (void) callLuaWithArgument:(NSString*) info;
 - (void) callLuaWithArguments:(NSArray*) args;

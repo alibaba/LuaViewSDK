@@ -12,8 +12,9 @@
 #import "LVZipArchive.h"
 #import "zlib.h"
 
-NSString * const LV_PACKAGE_TIME_FILE_NAME = @"___time___";
-NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
+NSString * const LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL = @"___download_url___";
+NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
+NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
 
 @implementation LVPkgManager
 
@@ -26,9 +27,9 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return [[self rootDirectoryOfPackage:packageName] stringByAppendingPathComponent:fileName];
 }
 
+//------------------------------ write/read file for package ---------------------------------
 +(BOOL) writeFile:(NSData*)data packageName:(NSString*)packageName fileName:(NSString*)fileName {
-    NSString *path = [self pathForFileName:fileName package:packageName];
-    
+    NSString* path = [self pathForFileName:fileName package:packageName];
     if(  [LVUtil saveData:data toFile:path] ){
         LVLog  (@"writeFile: %@, %d", fileName, (int)data.length);
         return YES;
@@ -38,22 +39,34 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     }
 }
 
-+(NSString*) timefileNameOfPackage:(NSString *)packageName {
-    return [self pathForFileName:LV_PACKAGE_TIME_FILE_NAME package:packageName];
++(NSData*) readFileFromPackage:(NSString*)packageName fileName:(NSString*)fileName {
+    NSString *path = [self pathForFileName:fileName package:packageName];
+    NSData* data =[LVUtil dataReadFromFile:path];
+    return data;
 }
 
-+(BOOL) wirteTimeForPackage:(NSString*)packageName time:(NSString*) time{
-    // time file
-    NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
-    return [LVPkgManager writeFile:timeBytes
-                       packageName:packageName
-                          fileName:LV_PACKAGE_TIME_FILE_NAME];
+//----------------------------------- timestamp path -----------------------------------------
++(NSString*) filePathOfPackageDownloadUrl:(NSString *)packageName {
+    return [self pathForFileName:LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL package:packageName];
 }
-
-
-+(NSString*) timeOfPackage:(NSString*)packageName{
-    NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
-    NSData* data = [LVUtil dataReadFromFile:fileName];
++(NSString*) filePathOfPackageTimestamp:(NSString *)packageName {
+    return [self pathForFileName:LV_FILE_NAME_OF_PACKAGE_TIMESTAMP package:packageName];
+}
++(NSString*) filePathOfChangeGrammar:(NSString *)packageName {
+    return [self pathForFileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR package:packageName];
+}
+//------------------------------------------------------------------------------------------
++(BOOL) deleteFileOfPackageDownloadUrl:(NSString*) packageName{
+    NSString* path = [self filePathOfPackageDownloadUrl:packageName];
+    return [LVUtil deleteFile:path];
+}
++(BOOL) deleteFileOfPackageTimestamp:(NSString*) packageName{
+    NSString* path = [self filePathOfPackageTimestamp:packageName];
+    return [LVUtil deleteFile:path];
+}
+//------------------------------------ read/write package download url -----------------------------------
++(NSString*) downloadUrlOfPackage:(NSString*)packageName{
+    NSData* data = [self readFileFromPackage:packageName fileName:LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
@@ -61,26 +74,13 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     }
 }
 
-+(BOOL) deleteFileOfTimePackage:(NSString*) packageName{
-    NSString* fileName = [LVPkgManager timefileNameOfPackage:packageName];
-    return [LVUtil deleteFile:fileName];
++(BOOL) setPackage:(NSString*)packageName downloadUrl:(NSString*) timestamp{
+    NSData* data = [timestamp dataUsingEncoding:NSUTF8StringEncoding];
+    return [self writeFile:data packageName:packageName fileName:LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL];
 }
-
-+(NSString*) timefileNameOfLocalPackage:(NSString *)packageName {
-    return [self pathForFileName:LV_LOCAL_PACKAGE_TIME_FILE_NAME package:packageName];
-}
-
-+(BOOL) wirteTimeForLocalPackage:(NSString*)packageName time:(NSString*) time{
-    // time file
-    NSData* timeBytes = [time dataUsingEncoding:NSUTF8StringEncoding];
-    return [LVPkgManager writeFile:timeBytes
-                       packageName:packageName
-                          fileName:LV_LOCAL_PACKAGE_TIME_FILE_NAME];
-}
-
-+(NSString*) timeOfLocalPackage:(NSString*)packageName {
-    NSString* fileName = [LVPkgManager timefileNameOfLocalPackage:packageName];
-    NSData* data = [LVUtil dataReadFromFile:fileName];
+//------------------------------------ read/write package timestamp -----------------------------------
++(NSString*) timestampOfPackage:(NSString*)packageName {
+    NSData* data = [self readFileFromPackage:packageName fileName:LV_FILE_NAME_OF_PACKAGE_TIMESTAMP];
     if( data ) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
@@ -88,95 +88,92 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     }
 }
 
-+(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName{
-    return [LVPkgManager unpackageFile:fileName packageName:packageName checkTime:NO];
++(BOOL) setPackage:(NSString*)packageName timestamp:(NSString*) timestamp{
+    // time file
+    NSData* data = [timestamp dataUsingEncoding:NSUTF8StringEncoding];
+    return [self writeFile:data packageName:packageName fileName:LV_FILE_NAME_OF_PACKAGE_TIMESTAMP];
+}
+//------------------------------------ read/write change grammar -----------------------------------
++(NSString*) changeGrammarOfPackage:(NSString*)packageName {
+    NSData* data = [self readFileFromPackage:packageName fileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR];
+    if( data ) {
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    } else {
+        return nil;
+    }
 }
 
-+(BOOL) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName checkTime:(BOOL) checkTime{
++(BOOL) setPackage:(NSString*)packageName changeGrammar:(NSString*) timestamp{
+    // time file
+    NSData* data = [timestamp dataUsingEncoding:NSUTF8StringEncoding];
+    return [self writeFile:data packageName:packageName fileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR];
+}
+
+//------------------------------------------------------------------------------------------
++(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  changeGrammar:(BOOL) changeGrammar{
     NSString *path = [LVUtil PathForBundle:nil relativePath:fileName];
     
     if( [LVUtil exist:path] ){
         NSData* pkgData = [LVUtil dataReadFromFile:path];
-        return [LVPkgManager unpackageData:pkgData packageName:packageName checkTime:checkTime localMode:YES];
+        return [self unpackageData:pkgData packageName:packageName changeGrammar:changeGrammar];
     }
-    return NO;
+    return -1;
+}
+// 根据时间戳，检查是否需要更新
++(BOOL) checkUpdateWithNewTS:(NSString*)newTS oldTS:(NSString*) oldTS{
+    return newTS.length>0 && oldTS.length>0 && [newTS compare:oldTS]==NSOrderedDescending;
 }
 
-+(BOOL) unpackageData:(NSData*) data packageName:(NSString*) packageName  localMode:(BOOL) localMode{
-    return [LVPkgManager unpackageData:data packageName:packageName checkTime:NO localMode:localMode];
-}
-
-+(BOOL) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName  checkTime:(BOOL) checkTime localMode:(BOOL) localMode{
++(int) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName changeGrammar:(BOOL) changeGrammar{
     NSString *path = [self rootDirectoryOfPackage:packageName];
     if( pkgData && [LVUtil createPath:path] ){
         LVZipArchive *archive = [LVZipArchive archiveWithData:pkgData];
         
-        if( checkTime ){
-            NSDate *date = [archive.entries.firstObject lastModDate];
-            if (date != nil) {
-                long long ms = (long long)([date timeIntervalSince1970] * 1000);
-                NSString *timeStr = [NSString stringWithFormat:@"%lld", ms];
-                
-                NSString* oldTime = nil;
-                if( localMode ) {
-                    oldTime = [LVPkgManager timeOfLocalPackage:packageName];
-                } else {
-                    oldTime = [LVPkgManager timeOfPackage:packageName];
-                }
-                
-                if( timeStr.length>0 && oldTime.length>0 && [timeStr isEqualToString:oldTime] ){
-                    LVLog(@" Not Need unpackage, %@, %@",packageName,timeStr);
-                    return NO;
-                } else {
-                    if( localMode ) {
-                        [LVPkgManager wirteTimeForLocalPackage:packageName time:timeStr];
-                    }
-                }
-            }
-        }
+        NSString* newTS = [archive timeIntervalStr];
         
-        BOOL result = [archive unzipToDirectory:path];
-        return result;
-    }
-    return NO;
-}
-
-+(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
-    return [NSString stringWithFormat:@"%@.sign",fileName];
-}
-
-+(NSString*) safe_string:(NSDictionary*) dic forKey:(NSString*) key{
-    if( [dic isKindOfClass:[NSDictionary class]] && key ) {
-        NSString* s = dic[key];
-        if( [s isKindOfClass:[NSString class]] ) {
-            return s;
-        }
-    }
-    return nil;
-}
-
-+(int) compareLocalInfoOfPackage:(NSString*)packageName withServerInfo:(NSDictionary*) info{
-    NSDictionary* dic = info;
-    if( dic ){
-        NSString* time1 = [LVPkgManager timeOfPackage:packageName];
-        NSString* time2 = [LVPkgManager safe_string:dic forKey:LV_PKGINFO_PROPERTY_TIME];
-        if( time1 && time2 &&
-           [time1 isKindOfClass:[NSString class]] && [time2 isKindOfClass:[NSString class]] &&
-           [time1 isEqualToString:time2] ){
+        NSString* oldTS = [self timestampOfPackage:packageName];
+         // 首次下载 或者有 新的最新包
+        if( (newTS && oldTS==nil) ||  [self checkUpdateWithNewTS:newTS oldTS:oldTS] ){
+            BOOL result = [archive unzipToDirectory:path];
+            if( result ) {
+                [self setPackage:packageName changeGrammar:(changeGrammar ? @"true":@"false") ];
+                [self setPackage:packageName timestamp:newTS];
+                return 1;
+            }
+            return -1;
+        } else {
+            LVLog(@" Not Need unpackage, %@, %@",packageName,newTS);
             return 0;
         }
     }
     return -1;
 }
 
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
-    return [self downLoadPackage:packageName withInfo:info callback:nil];
++(NSString*) signfileNameOfOriginFile:(NSString*) fileName{
+    return [NSString stringWithFormat:@"%@.sign",fileName];
 }
 
-+(NSInteger) downLoadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
+
++(int) compareDownloadUrlOfPackage:(NSString*)packageName withServerInfo:(NSDictionary*) info{
+    LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
+    NSString* url1 = [self downloadUrlOfPackage:packageName];
+    NSString* url2 = pkgInfo.url;
+    if( url1 && url2 &&
+       [url1 isKindOfClass:[NSString class]] && [url2 isKindOfClass:[NSString class]] &&
+       [url1 isEqualToString:url2] ){
+        return 0;
+    }
+    return -1;
+}
+
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info {
+    return [self downloadPackage:packageName withInfo:info callback:nil];
+}
+
++(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     if( info ) {
-        if( [LVPkgManager compareLocalInfoOfPackage:packageName withServerInfo:info] ){
-            [LVPkgManager doDownLoadPackage:packageName withInfo:info callback:callback];
+        if( [self compareDownloadUrlOfPackage:packageName withServerInfo:info] ){
+            [self doDownloadPackage:packageName withInfo:info callback:callback];
             return LV_DOWNLOAD_NET;
         }
         return LV_DOWNLOAD_CACHE;
@@ -198,43 +195,41 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     return NO;
 }
 
-+(void) doDownLoadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
-    NSString* url  = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_URL];
-    NSString* time = [LVPkgManager safe_string:info forKey:LV_PKGINFO_PROPERTY_TIME];
-    NSString* sha256 = [LVPkgManager safe_string:info forKey:LV_PKGINFO_SHA256];// SHA256完整性验证
++(void) doDownloadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
+    LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
     
     if ( callback == nil ){// 回调一定不是空
         callback = ^(NSDictionary* dic, NSString* erro , LVDownloadDataType dataType){
         };
     }
     
-    if( pkgName.length>0 && url.length>0 && time.length>0){
-        [LVUtil download:url callback:^(NSData *data) {
+    if( pkgName.length>0 && pkgInfo.url.length>0 && pkgInfo.timestamp.length>0){
+        [LVUtil download:pkgInfo.url callback:^(NSData *data) {
             // 解包过程放在主线程执行!!!!
             dispatch_async(dispatch_get_main_queue(), ^{
                 if( data ){
-                    BOOL sha256Check = [LVPkgManager sha256Check:data ret:sha256];
-                    if( sha256Check ){
-                        [LVPkgManager deleteFileOfTimePackage:pkgName];// 开始解包, 删除时间戳文件
-                        if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
+                    BOOL sha256OK = [self sha256Check:data ret:pkgInfo.sha256];
+                    if( sha256OK ){
+                        [self deleteFileOfPackageDownloadUrl:pkgName];// 开始解包, 删除时间戳文件
+                        if ( [self unpackageData:data packageName:pkgName changeGrammar:pkgInfo.changeGrammar]>=0 ) {
                             // 解包成功
-                            if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
-                                callback(info, nil, LV_DOWNLOAD_NET);
+                            if( [self setPackage:pkgName downloadUrl:pkgInfo.url] ){// 写标记成功
+                                callback(pkgInfo.originalDic, nil, LV_DOWNLOAD_NET);
                                 return ;
                             }
                         }
                     }
                 } else {
-                    LVError(@"[downLoadPackage] error: url=%@",url);
+                    LVError(@"[downloadPackage] error: url=%@",pkgInfo.url);
                 }
-                callback(info, @"error", LV_DOWNLOAD_ERROR);
+                callback(pkgInfo.originalDic, @"error", LV_DOWNLOAD_ERROR);
             });
         }];
     }
 }
 
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*)rsa{
-    NSString* signfileName = [LVPkgManager signfileNameOfOriginFile:fileName];
+    NSString* signfileName = [self signfileNameOfOriginFile:fileName];
     NSData* signData = [LVUtil dataReadFromFile:signfileName];
     NSData* encodedfileData = [LVUtil dataReadFromFile:fileName];
     // LVLog(@"%@",[[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding]);

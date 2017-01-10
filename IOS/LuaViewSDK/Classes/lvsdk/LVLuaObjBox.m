@@ -10,11 +10,7 @@
 #import <objc/runtime.h>
 #import "LView.h"
 #import "LVTypeConvert.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVLuaObjBox ()
 @property (nonatomic, strong) NSMutableArray* protocolArray;
@@ -26,12 +22,12 @@
 @implementation LVLuaObjBox
 
 
-- (id) init:(lv_State*)L stackID:(int) stackID{
+- (id) init:(lua_State*)L stackID:(int) stackID{
     self = [super init];
     if( self ){
         self.methodSigHashtable = [[NSMutableDictionary alloc] init];
         
-        self.lview = (__bridge LView *)(L->lView);
+        self.lview = LV_LUASTATE_VIEW(L);
         [LVUtil registryValue:L key:self stack:stackID];
     }
     return self;
@@ -40,7 +36,7 @@
 - (void) dealloc{
     LView* lview = self.lview;
     if( lview) {
-        lv_State* L = lview.l;
+        lua_State* L = lview.l;
         if( L ) {
             [LVUtil unregistry:L key:self];
         }
@@ -161,7 +157,7 @@ static BOOL lv_object_isProtocol(id obj ) {
 {
     NSString *key = NSStringFromSelector([invocation selector]);
     LView* lview = self.lview;
-    lv_State* L = lview.l;
+    lua_State* L = lview.l;
     if ( lview && L) {
         int luaArgNum = 1;
         [LVUtil pushRegistryValue:L key:self];
@@ -176,7 +172,7 @@ static BOOL lv_object_isProtocol(id obj ) {
                 luaArgNum ++;
             }
             [LVUtil pushRegistryValue:L key:self];
-            [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LV_TNONE];
+            [LVUtil call:L key1:keyName key2:NULL key3:NULL nargs:luaArgNum nrets:haveReturnValue retType:LUA_TNONE];
             if ( haveReturnValue ) {
                 [invocation retainArguments];
                 lv_setInvocationReturnValueByLuaStack(invocation, L, -1);
@@ -186,9 +182,9 @@ static BOOL lv_object_isProtocol(id obj ) {
             NSString* property = [self propertyName:key];
             const char* propertyName = property.UTF8String;
             if ( lv_isLuaObjectHaveProperty(L, -1, propertyName) ) {
-                lv_pushstring(L, propertyName);
+                lua_pushstring(L, propertyName);
                 lv_pushInvocationArgToLuaStack(invocation, 2, L);
-                lv_settable(L, -3);
+                lua_settable(L, -3);
                 return;
             }
         }

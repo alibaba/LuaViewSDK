@@ -9,11 +9,7 @@
 #import "LVAnimate.h"
 #import "LVUtil.h"
 #import "LView.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 
 @interface LVAnimate ()
@@ -24,11 +20,11 @@
 
 @implementation LVAnimate
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
         self.mySelf = self;
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(L);
     }
     return self;
 }
@@ -39,8 +35,8 @@
 }
 
 
-static int lvNewAnimate (lv_State *L) {
-    int argNum = lv_gettop(L);
+static int lvNewAnimate (lua_State *L) {
+    int argNum = lua_gettop(L);
     if( argNum>=1 ){
         LVAnimate* animate = [[LVAnimate alloc] init:L];
         
@@ -52,36 +48,36 @@ static int lvNewAnimate (lv_State *L) {
         CGFloat dampingRatio = 0;//0~1
         CGFloat velocity = 0;//0~1
         
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            duration = lv_tonumber(L,stackID++);
+        if( lua_type(L, stackID)==LUA_TNUMBER ){
+            duration = lua_tonumber(L,stackID++);
         }
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            delay = lv_tonumber(L,stackID++);
-        }
-        
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            dampingRatio = lv_tonumber(L,stackID++);
+        if( lua_type(L, stackID)==LUA_TNUMBER ){
+            delay = lua_tonumber(L,stackID++);
         }
         
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            velocity = lv_tonumber(L,stackID++);
+        if( lua_type(L, stackID)==LUA_TNUMBER ){
+            dampingRatio = lua_tonumber(L,stackID++);
         }
         
-        if( lv_type(L, stackID)==LV_TNUMBER ){
-            option = lv_tonumber(L,stackID++);
+        if( lua_type(L, stackID)==LUA_TNUMBER ){
+            velocity = lua_tonumber(L,stackID++);
         }
         
-        lv_createtable(L, 0, 8);// table
-        if( argNum>=stackID && lv_type(L,stackID)==LV_TFUNCTION ){
-            lv_pushstring(L, "animations");// key
-            lv_pushvalue(L, stackID);//value
-            lv_settable(L, -3);
+        if( lua_type(L, stackID)==LUA_TNUMBER ){
+            option = lua_tonumber(L,stackID++);
+        }
+        
+        lua_createtable(L, 0, 8);// table
+        if( argNum>=stackID && lua_type(L,stackID)==LUA_TFUNCTION ){
+            lua_pushstring(L, "animations");// key
+            lua_pushvalue(L, stackID);//value
+            lua_settable(L, -3);
             stackID++;
         }
-        if( argNum>=stackID && lv_type(L,stackID)==LV_TFUNCTION ){
-            lv_pushstring(L, "completion");// key
-            lv_pushvalue(L, stackID );//value
-            lv_settable(L, -3);
+        if( argNum>=stackID && lua_type(L,stackID)==LUA_TFUNCTION ){
+            lua_pushstring(L, "completion");// key
+            lua_pushvalue(L, stackID );//value
+            lua_settable(L, -3);
         }
         
         [LVUtil registryValue:L key:animate stack:-1];
@@ -94,14 +90,14 @@ static int lvNewAnimate (lv_State *L) {
                   initialSpringVelocity:velocity
                                 options:option animations:^{
                 if( animate.lv_lview && animate.lv_lview.l ) {
-                    lv_checkStack32( animate.lv_lview.l);
+                    lua_checkstack32( animate.lv_lview.l);
                     [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                 }
             } completion:^(BOOL finished) {
-                lv_State* l = animate.lv_lview.l;
+                lua_State* l = animate.lv_lview.l;
                 if( l ) {
-                    lv_settop(l, 0);
-                    lv_checkStack32(l);
+                    lua_settop(l, 0);
+                    lua_checkstack32(l);
                     [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
                     
                     [LVUtil unregistry:l key:animate];
@@ -113,14 +109,14 @@ static int lvNewAnimate (lv_State *L) {
                                   delay:delay
                                 options:option animations:^{
                                     if( animate.lv_lview && animate.lv_lview.l ) {
-                                        lv_checkStack32( animate.lv_lview.l);
+                                        lua_checkstack32( animate.lv_lview.l);
                                         [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                                     }
                                 } completion:^(BOOL finished) {
-                                    lv_State* l = animate.lv_lview.l;
+                                    lua_State* l = animate.lv_lview.l;
                                     if( l ) {
-                                        lv_settop(l, 0);
-                                        lv_checkStack32(l);
+                                        lua_settop(l, 0);
+                                        lua_checkstack32(l);
                                         [LVUtil call:l lightUserData:animate key1:"completion" key2:NULL nargs:0];
                                         
                                         [LVUtil unregistry:l key:animate];
@@ -132,7 +128,7 @@ static int lvNewAnimate (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewAnimate globalName:globalName defaultName:@"Animate"];
     return 1;
 }

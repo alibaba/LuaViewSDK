@@ -32,4 +32,8 @@
 
 - (BOOL)unzipToDirectory:(NSString *)path;
 
+- (NSDate *)lastModDate; //修改日期
+
+-(NSString*) timeIntervalStr; //时间戳
+
 @end

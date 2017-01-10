@@ -82,6 +82,7 @@
 		91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */; };
 		914822D41E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 914822D31E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua */; };
 		91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91912B0B1DF9658200ACDF0C /* animate1.jpg */; };
+		91A9AB0E1E2374B70069115C /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = 91A9AB0D1E2374B70069115C /* demo.zip */; };
 		91F6788D1DF582770042D6FC /* demoL2_CustomView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */; };
 		BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
 		BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */; };
@@ -216,6 +217,7 @@
 		91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_WebView.lua; sourceTree = "<group>"; };
 		914822D31E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoH2_EmptyRefreshCollectionView.lua; sourceTree = "<group>"; };
 		91912B0B1DF9658200ACDF0C /* animate1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = animate1.jpg; sourceTree = "<group>"; };
+		91A9AB0D1E2374B70069115C /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = demo.zip; sourceTree = "<group>"; };
 		91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL2_CustomView.lua; sourceTree = "<group>"; };
 		BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_FlexBox.lua; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -367,6 +369,7 @@
 				3CC2F8861C706BFA00D1E0B7 /* img13.tiff */,
 				3CC2F8871C706BFA00D1E0B7 /* img16.tiff */,
 				3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */,
+				91A9AB0D1E2374B70069115C /* demo.zip */,
 			);
 			name = luaviewDemos;
 			path = lua;
@@ -577,6 +580,7 @@
 				3CC2F8C41C706BFA00D1E0B7 /* img4.tiff in Resources */,
 				84F9A0481C92CA7300481334 /* button1.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
+				91A9AB0E1E2374B70069115C /* demo.zip in Resources */,
 				3CC2F8A11C706BFA00D1E0B7 /* demoE_Button.lua in Resources */,
 				3CC2F8B31C706BFA00D1E0B7 /* demoY2_flxNode.lua in Resources */,
 				91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */,
@@ -832,6 +836,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6L4X75AQK7;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

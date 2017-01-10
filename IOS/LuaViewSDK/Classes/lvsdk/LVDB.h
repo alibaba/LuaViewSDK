@@ -11,6 +11,6 @@
 
 @interface LVDB : NSObject<LVClassProtocal>
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 @end

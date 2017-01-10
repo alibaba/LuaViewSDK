@@ -11,7 +11,7 @@
 
 @interface LVSystem : NSObject<LVClassProtocal>
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
 /*
  * 获取网络状态, 需要重载API获取网络链接信息: 2g 3g 4g wifi 未知类型返回unkown 断网返回"none"

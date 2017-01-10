@@ -12,11 +12,7 @@
 #import "LVData.h"
 #import <Accelerate/Accelerate.h>
 #import "LVNinePatchImage.h"
-#import "lV.h"
-#import "lVauxlib.h"
-#import "lVlib.h"
-#import "lVstate.h"
-#import "lVgc.h"
+#import "LVHeads.h"
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
@@ -31,10 +27,10 @@
 @implementation LVImage
 
 
--(id) init:(lv_State*) l{
+-(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = (__bridge LView *)(l->lView);
+        self.lv_lview = LV_LUASTATE_VIEW(l);
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.functionTag = [[NSMutableString alloc] init];
         self.backgroundColor = [UIColor clearColor];
@@ -49,10 +45,10 @@
 }
 
 -(void) callLuaDelegate:(id) obj{
-    lv_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_lview.l;
     if( L ) {
-        lv_checkstack(L, 4);
-        lv_pushboolean(L, obj?0:1);
+        lua_checkstack(L, 4);
+        lua_pushboolean(L, obj?0:1);
         [LVUtil pushRegistryValue:L key:self.functionTag];
         lv_runFunctionWithArgs(L, 1, 0);
     }
@@ -104,7 +100,7 @@
 -(void) canelWebImageLoading{
     // [self cancelCurrentImageLoad]; // 取消上一次CDN加载
 }
--(void) cancelImageLoadAndClearCallback:(lv_State*)L{
+-(void) cancelImageLoadAndClearCallback:(lua_State*)L{
     [self canelWebImageLoading];
     [NSObject cancelPreviousPerformRequestsWithTarget:self]; // 取消回调脚本
     [LVUtil unregistry:L key:self.functionTag]; // 清除脚本回调
@@ -118,7 +114,7 @@
 }
 
 #pragma -mark ImageView
-static int lvNewImageView(lv_State *L) {
+static int lvNewImageView(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVImage class]];
     
     NSString* imageName = lv_paramString(L, 1);
@@ -130,41 +126,41 @@ static int lvNewImageView(lv_State *L) {
         userData->object = CFBridgingRetain(imageView);
         imageView.lv_userData = userData;
         
-        lvL_getmetatable(L, META_TABLE_UIImageView );
-        lv_setmetatable(L, -2);
+        luaL_getmetatable(L, META_TABLE_UIImageView );
+        lua_setmetatable(L, -2);
     }
-    LView* view = (__bridge LView *)(L->lView);
+    LView* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:imageView];
     }
     return 1; /* new userdatum is already on the stack */
 }
 
-static int setImage (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int setImage (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             [imageView cancelImageLoadAndClearCallback:L];
-            if( lv_type(L, 3) == LV_TFUNCTION ) {
+            if( lua_type(L, 3) == LUA_TFUNCTION ) {
                 [LVUtil registryValue:L key:imageView.functionTag stack:3];
                 imageView.needCallLuaFunc = YES;
             } else {
                 imageView.needCallLuaFunc = NO;
             }
-            if ( lv_type(L, 2)==LV_TSTRING ) {
+            if ( lua_type(L, 2)==LUA_TSTRING ) {
                 NSString* imageName = lv_paramString(L, 2);// 2
                 if( imageName ){
                     [imageView setImageByName:imageName];
-                    lv_pushvalue(L,1);
+                    lua_pushvalue(L,1);
                     return 1;
                 }
-            } else if ( lv_type(L, 2)==LV_TUSERDATA ) {
-                LVUserDataInfo * userdata = (LVUserDataInfo *)lv_touserdata(L, 2);
+            } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
+                LVUserDataInfo * userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
                 LVData* lvdata = (__bridge LVData *)(userdata->object);
                 if( LVIsType(userdata, Data) ) {
                     [imageView setImageByData:lvdata.data];
-                    lv_pushvalue(L,1);
+                    lua_pushvalue(L,1);
                     return 1;
                 }
             } else {
@@ -176,18 +172,18 @@ static int setImage (lv_State *L) {
     return 0;
 }
 
-static int scaleType (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int scaleType (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            if( lv_gettop(L)>=2 ) {
-                int model = lv_tonumber(L, 2);// 2
+            if( lua_gettop(L)>=2 ) {
+                int model = lua_tonumber(L, 2);// 2
                 [imageView setContentMode:model];
                 return 0;
             } else {
                 UIViewContentMode model = imageView.contentMode;
-                lv_pushnumber(L, model);
+                lua_pushnumber(L, model);
                 return 1;
             }
         }
@@ -195,21 +191,21 @@ static int scaleType (lv_State *L) {
     return 0;
 }
 
-static int startAnimating (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int startAnimating (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( L && user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
             NSArray* urlArray = lv_luaTableToArray(L,2);
             float repeatCount = 1;
             float duration = 0.3;
-            if( lv_gettop(L)>=3 ){
-                duration = lv_tonumber(L, 3);
+            if( lua_gettop(L)>=3 ){
+                duration = lua_tonumber(L, 3);
             }
-            if( lv_gettop(L)>=4 ){
-                repeatCount = lv_tonumber(L, 4);
+            if( lua_gettop(L)>=4 ){
+                repeatCount = lua_tonumber(L, 4);
             }
-            LView* lview = (__bridge LView *)(L->lView);
+            LView* lview = LV_LUASTATE_VIEW(L);
             LVBundle* bundle = lview.bundle;
             NSMutableArray  *arrayM=[NSMutableArray array];
             for (NSString* url in urlArray) {
@@ -227,8 +223,8 @@ static int startAnimating (lv_State *L) {
     return 0;
 }
 
-static int stopAnimating (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int stopAnimating (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
@@ -239,36 +235,36 @@ static int stopAnimating (lv_State *L) {
     return 0;
 }
 
-static int isAnimating (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int isAnimating (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            lv_pushboolean(L, imageView.isAnimating?1:0);
+            lua_pushboolean(L, imageView.isAnimating?1:0);
             return 1;
         }
     }
-    lv_pushboolean(L, 0);
+    lua_pushboolean(L, 0);
     return 1;
 }
 
-static int disableAnimate (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int disableAnimate (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVImage* imageView = (__bridge LVImage *)(user->object);
         if ( [imageView isKindOfClass:[LVImage class]] ) {
-            BOOL disableAnimate = lv_toboolean(L, 2);
+            BOOL disableAnimate = lua_toboolean(L, 2);
             imageView.disableAnimate = disableAnimate;
         }
     }
     return 0;
 }
 
-+(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     [LVUtil reg:L clas:self cfunc:lvNewImageView globalName:globalName defaultName:@"Image"];
     
-    const struct lvL_reg memberFunctions [] = {
+    const struct luaL_Reg memberFunctions [] = {
         {"image",  setImage},
         {"scaleType",  scaleType},
         
@@ -282,8 +278,8 @@ static int disableAnimate (lv_State *L) {
     
     lv_createClassMetaTable(L, META_TABLE_UIImageView);
     
-    lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    lvL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
+    luaL_openlib(L, NULL, memberFunctions, 0);
     
     const char* keys[] = { "addView", NULL};// 移除多余API
     lv_luaTableRemoveKeys(L, keys );

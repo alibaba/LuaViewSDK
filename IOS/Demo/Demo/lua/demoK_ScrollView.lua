@@ -18,15 +18,15 @@ end
 scrollView.backgroundColor(0xff0000);
 
 scrollView.callback{
-			Scrolling = function(){
+			Scrolling = function()
 				print("scrolling");
-			},
-			ScrollBegin = function(){
+			end,
+			ScrollBegin = function()
 				print("scrolling begin");
-			},
-			ScrollEnd = function(){
+			end,
+			ScrollEnd = function()
 				print("scrolling end");
-			}
+			end
 		};
 
 
