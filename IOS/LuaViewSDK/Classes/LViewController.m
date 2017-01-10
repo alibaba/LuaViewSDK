@@ -131,7 +131,8 @@ static BOOL __disableReloadKeyCommand = NO;
         [self.lv.bundle addScriptPath:packagePath];
         [self.lv.bundle addResourcePath:packagePath];
     }
-    
+    // 无需转换再运行，使用lua标准语法！！！，如果为YES表示需要转换语法，使用非标准lua语法；
+    self.lv.changeGrammar = NO;
     [self.lv runFile:scriptName ?: @"main.lua"];
 }
 

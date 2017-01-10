@@ -213,8 +213,6 @@ void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* 
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 
-NSData* lv_toStandLuaGrammar(NSData* data);
-
 @end
 
 

@@ -1,9 +1,9 @@
 
 function requestHttp( url)
     http = Http();
-    http.get(url,
+    http:get(url,
         function ( response )
-            local str = tostring( response.data() );
+            local str = tostring( response:data() );
             local f = loadstring(str, url);
             f();
         end)
