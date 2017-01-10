@@ -84,7 +84,6 @@
 		91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91912B0B1DF9658200ACDF0C /* animate1.jpg */; };
 		91A9AB0E1E2374B70069115C /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = 91A9AB0D1E2374B70069115C /* demo.zip */; };
 		91F6788D1DF582770042D6FC /* demoL2_CustomView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */; };
-		BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF78181C74743C00847C05 /* libLuaViewLib.a */; };
 		BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 /* End PBXBuildFile section */
@@ -96,34 +95,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3CC2F8191C706B1D00D1E0B7;
 			remoteInfo = Demo;
-		};
-		3CC2F8D91C706C2300D1E0B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84C1D6A31C16B09D0058E974;
-			remoteInfo = LuaViewTests;
-		};
-		3CC2F8DB1C706C2300D1E0B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84C1D7C41C16C3CD0058E974;
-			remoteInfo = LuaViewSDK;
-		};
-		3CC2F8DD1C706C2300D1E0B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84C1D8981C16CB820058E974;
-			remoteInfo = Dummy;
-		};
-		3CFF78171C74743C00847C05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3CFF77A91C7473A800847C05;
-			remoteInfo = LuaViewLib;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -198,7 +169,6 @@
 		3CC2F8931C706BFA00D1E0B7 /* hongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hongbao.png; sourceTree = "<group>"; };
 		3CC2F8941C706BFA00D1E0B7 /* jhs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jhs.png; sourceTree = "<group>"; };
 		3CC2F8951C706BFA00D1E0B7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
-		3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaViewSDK.xcodeproj; path = ../LuaViewSDK.xcodeproj; sourceTree = "<group>"; };
 		3CC2F9081C70758000D1E0B7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -228,7 +198,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE9CD5061CACCF5700D6AC94 /* libLuaViewLib.a in Frameworks */,
 				3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */,
 				3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */,
 				3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */,
@@ -390,21 +359,9 @@
 			path = lua_animate;
 			sourceTree = "<group>";
 		};
-		3CC2F8D41C706C2300D1E0B7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3CC2F8DA1C706C2300D1E0B7 /* LuaViewTests.xctest */,
-				3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */,
-				3CC2F8DE1C706C2300D1E0B7 /* libDummy.a */,
-				3CFF78181C74743C00847C05 /* libLuaViewLib.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3CC2F8F51C7071C000D1E0B7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -443,6 +400,7 @@
 				3CC2F8181C706B1D00D1E0B7 /* Resources */,
 				9FC0D3B176417E1FCCAA292F /* Embed Pods Frameworks */,
 				38AA2395FB23F05E678F60BF /* Copy Pods Resources */,
+				D6B095773A9CD1B2ED818FE5 /* Copy Framework Resources */,
 			);
 			buildRules = (
 			);
@@ -501,12 +459,6 @@
 			mainGroup = 3CC2F8111C706B1D00D1E0B7;
 			productRefGroup = 3CC2F81B1C706B1D00D1E0B7 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3CC2F8D41C706C2300D1E0B7 /* Products */;
-					ProjectRef = 3CC2F8D31C706C2300D1E0B7 /* LuaViewSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3CC2F8191C706B1D00D1E0B7 /* Demo */,
@@ -514,37 +466,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3CC2F8DA1C706C2300D1E0B7 /* LuaViewTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = LuaViewTests.xctest;
-			remoteRef = 3CC2F8D91C706C2300D1E0B7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3CC2F8DC1C706C2300D1E0B7 /* LuaViewSDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework.static;
-			path = LuaViewSDK.framework;
-			remoteRef = 3CC2F8DB1C706C2300D1E0B7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3CC2F8DE1C706C2300D1E0B7 /* libDummy.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDummy.a;
-			remoteRef = 3CC2F8DD1C706C2300D1E0B7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3CFF78181C74743C00847C05 /* libLuaViewLib.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libLuaViewLib.a;
-			remoteRef = 3CFF78171C74743C00847C05 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3CC2F8181C706B1D00D1E0B7 /* Resources */ = {
@@ -672,6 +593,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D6B095773A9CD1B2ED818FE5 /* Copy Framework Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Framework Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash -l -c \"ruby \\\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/copy-framework-resources.rb\\\"\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
