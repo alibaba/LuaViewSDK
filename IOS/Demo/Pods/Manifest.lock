@@ -1,5 +1,5 @@
 PODS:
-  - liblua (5.1.4-SNAPSHOT)
+  - liblua (5.1.4.0)
   - LuaViewSDK (2.1.1.2)
   - MJRefresh (3.1.0)
   - SDWebImage (3.7.5):
@@ -7,7 +7,7 @@ PODS:
   - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
-  - liblua (= 5.1.4-SNAPSHOT)
+  - liblua (= 5.1.4.0)
   - LuaViewSDK (from `../../`)
   - MJRefresh
   - SDWebImage (= 3.7.5)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  liblua: 4cacb0c29e689a0fe35a2eab990c7d25deaffd16
+  liblua: b44536351debe259f476ddc1adfd3a9ab1697a87
   LuaViewSDK: 23d5cd8c008d7b65a58b311b608cb7aab63e82e3
   MJRefresh: 8bcd08c96987d3a9844eb431963d4510d77b8852
   SDWebImage: 033e39d6f389724696c4d790b4daffcb4395a9f6

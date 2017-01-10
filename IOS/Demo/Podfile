@@ -6,7 +6,7 @@ target 'Demo' do
 
     pod 'MJRefresh'
     pod 'SDWebImage', '3.7.5'
-    pod 'liblua', '5.1.4-SNAPSHOT'
+    pod 'liblua', '5.1.4.0'
 
     pod 'LuaViewSDK', :path => '../../'
 
