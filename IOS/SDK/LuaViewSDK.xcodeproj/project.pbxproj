@@ -1,0 +1,1580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C02D1D71C31106E00213386 /* LVAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
+		3C98A53A1C7C0C100001508E /* LViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C98A5381C7C0C100001508E /* LViewController.h */; };
+		3C98A53B1C7C0C100001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
+		3C98A5421C7C56270001508E /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98A5391C7C0C100001508E /* LViewController.m */; };
+		3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */; };
+		3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */; };
+		3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */; };
+		3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
+		3CFF77B41C74740800847C05 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
+		3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
+		3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
+		3CFF77B71C74740800847C05 /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		3CFF77B81C74740800847C05 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
+		3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
+		3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
+		3CFF77BB1C74740800847C05 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
+		3CFF77BC1C74740800847C05 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
+		3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
+		3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
+		3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
+		3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
+		3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
+		3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
+		3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
+		3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
+		3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
+		3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
+		3CFF77CB1C74740800847C05 /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
+		3CFF77CC1C74740800847C05 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
+		3CFF77CD1C74740800847C05 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
+		3CFF77CE1C74740800847C05 /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		3CFF77CF1C74740800847C05 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
+		3CFF77D01C74740800847C05 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
+		3CFF77D11C74740800847C05 /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
+		3CFF77D21C74740800847C05 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
+		3CFF77D31C74740800847C05 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
+		3CFF77D41C74740800847C05 /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
+		3CFF77D51C74740800847C05 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
+		3CFF77D61C74740800847C05 /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
+		3CFF77D71C74740900847C05 /* LVGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGesture.m */; };
+		3CFF77D81C74740900847C05 /* LVLongPressGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */; };
+		3CFF77D91C74740900847C05 /* LVPanGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGesture.m */; };
+		3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGesture.m */; };
+		3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
+		3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
+		3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
+		3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
+		3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
+		3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
+		3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
+		3CFF77E21C74740900847C05 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
+		3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
+		3CFF77E41C74740900847C05 /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
+		3CFF77E51C74740900847C05 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
+		3CFF77E61C74740900847C05 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
+		3CFF77E81C74740900847C05 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
+		3CFF77E91C74740900847C05 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
+		3CFF77EA1C74740900847C05 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
+		3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
+		3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
+		3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
+		3CFF77EE1C74740900847C05 /* LVExGlobalFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVExGlobalFunc.m */; };
+		3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
+		3CFF77F01C74740900847C05 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
+		3CFF77F11C74740900847C05 /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
+		3CFF77F21C74740900847C05 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
+		840BCEDA1CB7602C00D816AD /* LVNetworkStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 840BCED81CB7602C00D816AD /* LVNetworkStatus.h */; };
+		840BCEDB1CB7602C00D816AD /* LVNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 840BCED91CB7602C00D816AD /* LVNetworkStatus.m */; };
+		840BCEE41CB78E8300D816AD /* LVNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 840BCED91CB7602C00D816AD /* LVNetworkStatus.m */; };
+		84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */; };
+		84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D446F11AF75BD8000A3911 /* LVPkgManager.m */; };
+		84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1E3801AEF24480054B9F1 /* LVRSA.m */; };
+		84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */ = {isa = PBXBuildFile; fileRef = 842142A21ACD3427001FD0ED /* LVDebugLua.m */; };
+		84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */ = {isa = PBXBuildFile; fileRef = 91ACCE761AC531160034D9B3 /* LVDebuger.m */; };
+		84C1D7D91C16C3FA0058E974 /* LVDebugConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */; };
+		84C1D7DA1C16C3FA0058E974 /* LVBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A91A64C61F00DE6204 /* LVBaseView.m */; };
+		84C1D7DB1C16C3FA0058E974 /* UIScrollView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */; };
+		84C1D7DC1C16C3FA0058E974 /* UIView+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843447491B61DDED0039B98A /* UIView+LuaView.m */; };
+		84C1D7DD1C16C3FA0058E974 /* LVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AB1A64C61F00DE6204 /* LVButton.m */; };
+		84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AF1A64C61F00DE6204 /* LVImage.m */; };
+		84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */; };
+		84C1D7E01C16C3FA0058E974 /* LVLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B11A64C61F00DE6204 /* LVLabel.m */; };
+		84C1D7E11C16C3FA0058E974 /* LVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B71A64C61F00DE6204 /* LVTextField.m */; };
+		84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B58E391B65CC260048F33D /* LVLoadingIndicator.m */; };
+		84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B31A64C61F00DE6204 /* LVPagerIndicator.m */; };
+		84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF41BAFECA00070E214 /* LVPagerView.m */; };
+		84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */; };
+		84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA35E1B29669A00C70321 /* LVCollectionView.m */; };
+		84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848CA3631B29748800C70321 /* LVCollectionViewCell.m */; };
+		84C1D7EB1C16C3FA0058E974 /* LVCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */; };
+		84C1D7EC1C16C3FA0058E974 /* LVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B51A64C61F00DE6204 /* LVScrollView.m */; };
+		84C1D7ED1C16C3FA0058E974 /* LVScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */; };
+		84C1D7EE1C16C3FA0058E974 /* LVCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84056E711B5CA5990078F9D6 /* LVCustomPanel.m */; };
+		84C1D7EF1C16C3FA0058E974 /* LVAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D726D1A6643DB00936AD2 /* LVAlert.m */; };
+		84C1D7F01C16C3FA0058E974 /* LVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8468C9701BDA177C002D4B1E /* LVToast.m */; };
+		84C1D7F11C16C3FA0058E974 /* LVAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481A71A64C61F00DE6204 /* LVAnimate.m */; };
+		84C1D7F21C16C3FA0058E974 /* LVStyledString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */; };
+		84C1D7F31C16C3FA0058E974 /* LVTransform3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BB1A64C61F00DE6204 /* LVTransform3D.m */; };
+		84C1D7F41C16C3FA0058E974 /* LVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3B7291A84622A00923404 /* LVData.m */; };
+		84C1D7F51C16C3FA0058E974 /* LVDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E879A1A653DEC000D14DA /* LVDate.m */; };
+		84C1D7F61C16C3FA0058E974 /* LVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481B91A64C61F00DE6204 /* LVTimer.m */; };
+		84C1D7F71C16C3FA0058E974 /* LVStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 84185DC01B451E28003E0ECE /* LVStruct.m */; };
+		84C1D7F81C16C3FA0058E974 /* LVGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AF1A70A51C00B22E49 /* LVGesture.m */; };
+		84C1D7F91C16C3FA0058E974 /* LVLongPressGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */; };
+		84C1D7FA1C16C3FA0058E974 /* LVPanGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D9AA1A70A00400B22E49 /* LVPanGesture.m */; };
+		84C1D7FB1C16C3FA0058E974 /* LVPinchGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8A1AAD45A400107DFC /* LVPinchGesture.m */; };
+		84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
+		84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
+		84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
+		84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
+		84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
+		84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
+		84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
+		84C1D8031C16C3FA0058E974 /* LVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 849708361A67653A00E913F4 /* LVDB.m */; };
+		84C1D8041C16C3FA0058E974 /* LVDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425324B1ADCBD3A003C05BF /* LVDownloader.m */; };
+		84C1D8051C16C3FA0058E974 /* LVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E2C1ADE37A7002506CB /* LVFile.m */; };
+		84C1D8061C16C3FA0058E974 /* LVNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8F881B560933001C83E9 /* LVNavigation.m */; };
+		84C1D8071C16C3FA0058E974 /* LVSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497083B1A6765B000E913F4 /* LVSystem.m */; };
+		84C1D8091C16C3FA0058E974 /* LVMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56791AEA15A500A49B36 /* LVMethod.m */; };
+		84C1D80A1C16C3FA0058E974 /* LVNativeObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF56741AE9184000A49B36 /* LVNativeObjBox.m */; };
+		84C1D80B1C16C3FA0058E974 /* LVLuaObjBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */; };
+		84C1D80C1C16C3FA0058E974 /* LVPointerValueBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */; };
+		84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481BD1A64C61F00DE6204 /* LVUtil.m */; };
+		84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCF03A1B44D91800AD723B /* LVTypeConvert.m */; };
+		84C1D80F1C16C3FA0058E974 /* LVExGlobalFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D72681A6639A200936AD2 /* LVExGlobalFunc.m */; };
+		84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */ = {isa = PBXBuildFile; fileRef = 846481AD1A64C61F00DE6204 /* LVHeads.m */; };
+		84C1D8111C16C3FA0058E974 /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AD5321A5EAB4A0075CB58 /* LView.m */; };
+		84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E446971AEE0655009C9A8A /* LVBlock.m */; };
+		84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D446F01AF75BD8000A3911 /* LVPkgManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8361C16C4490058E974 /* LVRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B1E37F1AEF24480054B9F1 /* LVRSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */ = {isa = PBXBuildFile; fileRef = 91ACCE751AC531160034D9B3 /* LVDebuger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8391C16C4490058E974 /* LVBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A81A64C61F00DE6204 /* LVBaseView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83A1C16C4490058E974 /* UIScrollView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 843447481B61DDED0039B98A /* UIView+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AA1A64C61F00DE6204 /* LVButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83D1C16C44A0058E974 /* LVImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AE1A64C61F00DE6204 /* LVImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83E1C16C44A0058E974 /* LVNinePatchImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D83F1C16C44A0058E974 /* LVLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B01A64C61F00DE6204 /* LVLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8401C16C44A0058E974 /* LVTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B61A64C61F00DE6204 /* LVTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8411C16C44A0058E974 /* LVLoadingIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B58E381B65CC260048F33D /* LVLoadingIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8421C16C44A0058E974 /* LVPagerIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B21A64C61F00DE6204 /* LVPagerIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8461C16C44A0058E974 /* LVPagerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF31BAFECA00070E214 /* LVPagerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8471C16C44A0058E974 /* LVPagerViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8481C16C44A0058E974 /* LVCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA35D1B29669A00C70321 /* LVCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8491C16C44A0058E974 /* LVCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 848CA3621B29748800C70321 /* LVCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84A1C16C44A0058E974 /* LVCollectionViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84B1C16C44A0058E974 /* LVScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B41A64C61F00DE6204 /* LVScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84C1C16C44A0058E974 /* LVScrollViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84D1C16C44A0058E974 /* LVCustomPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84056E701B5CA5990078F9D6 /* LVCustomPanel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84E1C16C44A0058E974 /* LVAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D726C1A6643DB00936AD2 /* LVAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D84F1C16C44A0058E974 /* LVToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8468C96F1BDA177C002D4B1E /* LVToast.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8501C16C44A0058E974 /* LVAnimate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481A61A64C61F00DE6204 /* LVAnimate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8511C16C44B0058E974 /* LVStyledString.h in Headers */ = {isa = PBXBuildFile; fileRef = 84342D8C1AE0E02B00ECB4EF /* LVStyledString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BA1A64C61F00DE6204 /* LVTransform3D.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8531C16C44B0058E974 /* LVData.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C3B7281A84622A00923404 /* LVData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8541C16C44B0058E974 /* LVDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 846E87991A653DEC000D14DA /* LVDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481B81A64C61F00DE6204 /* LVTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 84185DBF1B451E28003E0ECE /* LVStruct.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8571C16C44B0058E974 /* LVGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9AE1A70A51C00B22E49 /* LVGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8581C16C44B0058E974 /* LVLongPressGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8591C16C44B0058E974 /* LVPanGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 8410D9A91A70A00400B22E49 /* LVPanGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85A1C16C44B0058E974 /* LVPinchGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E891AAD45A400107DFC /* LVPinchGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E8E1AAD934D00107DFC /* LVRotationGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D13F1A7F732500774565 /* LVHttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D1441A7FA7A400774565 /* LVHttpResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8621C16C44C0058E974 /* LVDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 849708351A67653A00E913F4 /* LVDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8631C16C44C0058E974 /* LVDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8425324A1ADCBD3A003C05BF /* LVDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8641C16C44D0058E974 /* LVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84765E2B1ADE37A7002506CB /* LVFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8651C16C44D0058E974 /* LVNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DD8F871B560933001C83E9 /* LVNavigation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8661C16C44D0058E974 /* LVSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8497083A1A6765B000E913F4 /* LVSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8681C16C44D0058E974 /* LVMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56781AEA15A500A49B36 /* LVMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF56731AE9184000A49B36 /* LVNativeObjBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481BC1A64C61F00DE6204 /* LVUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DCF0391B44D91800AD723B /* LVTypeConvert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D72671A6639A200936AD2 /* LVExGlobalFunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */ = {isa = PBXBuildFile; fileRef = 846481AC1A64C61F00DE6204 /* LVHeads.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8871C16C4540058E974 /* LView.h in Headers */ = {isa = PBXBuildFile; fileRef = 840AD5311A5EAB4A0075CB58 /* LView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8891C16C4550058E974 /* LVBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E446961AEE0655009C9A8A /* LVBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C1D8911C16CA540058E974 /* Dummy.h */; };
+		84C1D8A21C16CC930058E974 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1D8921C16CA540058E974 /* Dummy.m */; };
+		84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E85C181C33B84B007DE3DF /* LVBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E85C191C33B84B007DE3DF /* LVBundle.m */; };
+		9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 911270981DFAC65F001F8047 /* LVEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 911270991DFAC65F001F8047 /* LVEvent.m */; };
+		9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 911270991DFAC65F001F8047 /* LVEvent.m */; };
+		91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91232AAA1DAB67FC00536E0C /* LVWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
+		91232AAE1DAB682100536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
+		914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */ = {isa = PBXBuildFile; fileRef = 914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		914BB65D1E24C69E00C76042 /* LVGrammarChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */; };
+		914BB65E1E24C69E00C76042 /* LVGrammarChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */; };
+		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
+		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
+		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
+		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; };
+		91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
+		91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
+		91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA31E11004B0088EFD6 /* LVRefreshConst.h */; };
+		91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA41E11004B0088EFD6 /* LVRefreshConst.m */; };
+		91695AAE1E11004B0088EFD6 /* LVRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA41E11004B0088EFD6 /* LVRefreshConst.m */; };
+		91695AAF1E11004B0088EFD6 /* LVRefreshComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */; };
+		91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */; };
+		91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */; };
+		91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */; };
+		91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
+		91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */; };
+		91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */; };
+		91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
+		91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
+		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
+		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
+		91F678841DF520920042D6FC /* LVCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91F678821DF520920042D6FC /* LVCustomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91F678851DF520920042D6FC /* LVCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678831DF520920042D6FC /* LVCustomView.m */; };
+		91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678831DF520920042D6FC /* LVCustomView.m */; };
+		91F678891DF561D40042D6FC /* LVCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 91F678871DF561D40042D6FC /* LVCanvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91F6788A1DF561D40042D6FC /* LVCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678881DF561D40042D6FC /* LVCanvas.m */; };
+		91F6788B1DF561D40042D6FC /* LVCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F678881DF561D40042D6FC /* LVCanvas.m */; };
+		BE9CD4F81CACC02800D6AC94 /* JUFLXTargeNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = BE9CD4F61CACC02800D6AC94 /* JUFLXTargeNamespace.h */; };
+		BE9CD4F91CACC02800D6AC94 /* JUFLXLayoutDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = BE9CD4F71CACC02800D6AC94 /* JUFLXLayoutDefine.h */; };
+		BEEB28CE1CA90EC200EC2D86 /* JUFLXCSSParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28C21CA90EC200EC2D86 /* JUFLXCSSParser.h */; };
+		BEEB28CF1CA90EC200EC2D86 /* JUFLXCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C31CA90EC200EC2D86 /* JUFLXCSSParser.m */; };
+		BEEB28D01CA90EC200EC2D86 /* JUFLXLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28C41CA90EC200EC2D86 /* JUFLXLayoutKit.h */; };
+		BEEB28D11CA90EC200EC2D86 /* JUFLXNode.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28C51CA90EC200EC2D86 /* JUFLXNode.h */; };
+		BEEB28D21CA90EC200EC2D86 /* JUFLXNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C61CA90EC200EC2D86 /* JUFLXNode.m */; };
+		BEEB28D31CA90EC200EC2D86 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C71CA90EC200EC2D86 /* Layout.c */; };
+		BEEB28D41CA90EC200EC2D86 /* Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28C81CA90EC200EC2D86 /* Layout.h */; };
+		BEEB28D51CA90EC200EC2D86 /* JUFLXLinearLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28CA1CA90EC200EC2D86 /* JUFLXLinearLayoutView.h */; };
+		BEEB28D61CA90EC200EC2D86 /* JUFLXLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28CB1CA90EC200EC2D86 /* JUFLXLinearLayoutView.m */; };
+		BEEB28D71CA90EC200EC2D86 /* UIView+JUFLXNode.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEB28CC1CA90EC200EC2D86 /* UIView+JUFLXNode.h */; };
+		BEEB28D81CA90EC200EC2D86 /* UIView+JUFLXNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28CD1CA90EC200EC2D86 /* UIView+JUFLXNode.m */; };
+		BEEB28DF1CA91B8600EC2D86 /* JUFLXCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C31CA90EC200EC2D86 /* JUFLXCSSParser.m */; };
+		BEEB28E01CA91B8900EC2D86 /* JUFLXNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C61CA90EC200EC2D86 /* JUFLXNode.m */; };
+		BEEB28E11CA91B9000EC2D86 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28C71CA90EC200EC2D86 /* Layout.c */; };
+		BEEB28E21CA91B9500EC2D86 /* JUFLXLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28CB1CA90EC200EC2D86 /* JUFLXLinearLayoutView.m */; };
+		BEEB28E31CA91B9900EC2D86 /* UIView+JUFLXNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB28CD1CA90EC200EC2D86 /* UIView+JUFLXNode.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3CFF77A71C7473A800847C05 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D8961C16CB820058E974 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				84C1D8A11C16CC870058E974 /* Dummy.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
+		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
+		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
+		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
+		3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVZipArchive.h; path = PKG/LVZipArchive.h; sourceTree = "<group>"; };
+		3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVZipArchive.m; path = PKG/LVZipArchive.m; sourceTree = "<group>"; };
+		3CFF77A91C7473A800847C05 /* libLuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
+		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
+		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
+		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
+		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
+		840BCED81CB7602C00D816AD /* LVNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNetworkStatus.h; sourceTree = "<group>"; };
+		840BCED91CB7602C00D816AD /* LVNetworkStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNetworkStatus.m; sourceTree = "<group>"; };
+		8410D9A91A70A00400B22E49 /* LVPanGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPanGesture.h; sourceTree = "<group>"; };
+		8410D9AA1A70A00400B22E49 /* LVPanGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPanGesture.m; sourceTree = "<group>"; };
+		8410D9AE1A70A51C00B22E49 /* LVGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVGesture.h; sourceTree = "<group>"; };
+		8410D9AF1A70A51C00B22E49 /* LVGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVGesture.m; sourceTree = "<group>"; };
+		84185DBF1B451E28003E0ECE /* LVStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVStruct.h; sourceTree = "<group>"; };
+		84185DC01B451E28003E0ECE /* LVStruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStruct.m; sourceTree = "<group>"; };
+		8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LuaViewSDK-Prefix.pch"; sourceTree = "<group>"; };
+		842142A21ACD3427001FD0ED /* LVDebugLua.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugLua.m; path = lvdebug/LVDebugLua.m; sourceTree = "<group>"; };
+		842142A51ACD3E2C001FD0ED /* debug.lua */ = {isa = PBXFileReference; lastKnownFileType = text; name = debug.lua; path = lvdebug/debug.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		842532451ADCB7C0003C05BF /* LVAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAudioPlayer.h; sourceTree = "<group>"; };
+		842532461ADCB7C0003C05BF /* LVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAudioPlayer.m; sourceTree = "<group>"; };
+		8425324A1ADCBD3A003C05BF /* LVDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDownloader.h; sourceTree = "<group>"; };
+		8425324B1ADCBD3A003C05BF /* LVDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDownloader.m; sourceTree = "<group>"; };
+		842D72671A6639A200936AD2 /* LVExGlobalFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVExGlobalFunc.h; sourceTree = "<group>"; };
+		842D72681A6639A200936AD2 /* LVExGlobalFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVExGlobalFunc.m; sourceTree = "<group>"; };
+		842D726C1A6643DB00936AD2 /* LVAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAlert.h; sourceTree = "<group>"; };
+		842D726D1A6643DB00936AD2 /* LVAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAlert.m; sourceTree = "<group>"; };
+		84342D8C1AE0E02B00ECB4EF /* LVStyledString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVStyledString.h; sourceTree = "<group>"; };
+		84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStyledString.m; sourceTree = "<group>"; };
+		843447481B61DDED0039B98A /* UIView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LuaView.h"; sourceTree = "<group>"; };
+		843447491B61DDED0039B98A /* UIView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LuaView.m"; sourceTree = "<group>"; };
+		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
+		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
+		8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNinePatchImage.h; sourceTree = "<group>"; };
+		8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNinePatchImage.m; sourceTree = "<group>"; };
+		8454D13F1A7F732500774565 /* LVHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttp.h; sourceTree = "<group>"; };
+		8454D1401A7F732500774565 /* LVHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttp.m; sourceTree = "<group>"; };
+		8454D1441A7FA7A400774565 /* LVHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttpResponse.h; sourceTree = "<group>"; };
+		8454D1451A7FA7A400774565 /* LVHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHttpResponse.m; sourceTree = "<group>"; };
+		846481A61A64C61F00DE6204 /* LVAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimate.h; sourceTree = "<group>"; };
+		846481A71A64C61F00DE6204 /* LVAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimate.m; sourceTree = "<group>"; };
+		846481A81A64C61F00DE6204 /* LVBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBaseView.h; sourceTree = "<group>"; };
+		846481A91A64C61F00DE6204 /* LVBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBaseView.m; sourceTree = "<group>"; };
+		846481AA1A64C61F00DE6204 /* LVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVButton.h; sourceTree = "<group>"; };
+		846481AB1A64C61F00DE6204 /* LVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVButton.m; sourceTree = "<group>"; };
+		846481AC1A64C61F00DE6204 /* LVHeads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHeads.h; sourceTree = "<group>"; };
+		846481AD1A64C61F00DE6204 /* LVHeads.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVHeads.m; sourceTree = "<group>"; };
+		846481AE1A64C61F00DE6204 /* LVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVImage.h; sourceTree = "<group>"; };
+		846481AF1A64C61F00DE6204 /* LVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVImage.m; sourceTree = "<group>"; };
+		846481B01A64C61F00DE6204 /* LVLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLabel.h; sourceTree = "<group>"; };
+		846481B11A64C61F00DE6204 /* LVLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLabel.m; sourceTree = "<group>"; };
+		846481B21A64C61F00DE6204 /* LVPagerIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerIndicator.h; sourceTree = "<group>"; };
+		846481B31A64C61F00DE6204 /* LVPagerIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerIndicator.m; sourceTree = "<group>"; };
+		846481B41A64C61F00DE6204 /* LVScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVScrollView.h; sourceTree = "<group>"; };
+		846481B51A64C61F00DE6204 /* LVScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVScrollView.m; sourceTree = "<group>"; };
+		846481B61A64C61F00DE6204 /* LVTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTextField.h; sourceTree = "<group>"; };
+		846481B71A64C61F00DE6204 /* LVTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTextField.m; sourceTree = "<group>"; };
+		846481B81A64C61F00DE6204 /* LVTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTimer.h; sourceTree = "<group>"; };
+		846481B91A64C61F00DE6204 /* LVTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTimer.m; sourceTree = "<group>"; };
+		846481BA1A64C61F00DE6204 /* LVTransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTransform3D.h; sourceTree = "<group>"; };
+		846481BB1A64C61F00DE6204 /* LVTransform3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTransform3D.m; sourceTree = "<group>"; };
+		846481BC1A64C61F00DE6204 /* LVUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVUtil.h; sourceTree = "<group>"; };
+		846481BD1A64C61F00DE6204 /* LVUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVUtil.m; sourceTree = "<group>"; };
+		846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Lua中文教程.pdf"; sourceTree = "<group>"; };
+		846481E41A64F0EB00DE6204 /* lua源码分析.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "lua源码分析.pdf"; sourceTree = "<group>"; };
+		8468C96F1BDA177C002D4B1E /* LVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVToast.h; sourceTree = "<group>"; };
+		8468C9701BDA177C002D4B1E /* LVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVToast.m; sourceTree = "<group>"; };
+		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
+		846E879A1A653DEC000D14DA /* LVDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDate.m; sourceTree = "<group>"; };
+		84765E2B1ADE37A7002506CB /* LVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFile.h; sourceTree = "<group>"; };
+		84765E2C1ADE37A7002506CB /* LVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFile.m; sourceTree = "<group>"; };
+		84799AF31BAFECA00070E214 /* LVPagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerView.h; sourceTree = "<group>"; };
+		84799AF41BAFECA00070E214 /* LVPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerView.m; sourceTree = "<group>"; };
+		84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPagerViewCell.h; sourceTree = "<group>"; };
+		84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPagerViewCell.m; sourceTree = "<group>"; };
+		8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVScrollViewDelegate.h; sourceTree = "<group>"; };
+		8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVScrollViewDelegate.m; sourceTree = "<group>"; };
+		8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewDelegate.h; sourceTree = "<group>"; };
+		8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewDelegate.m; sourceTree = "<group>"; };
+		848CA35D1B29669A00C70321 /* LVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionView.h; sourceTree = "<group>"; };
+		848CA35E1B29669A00C70321 /* LVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionView.m; sourceTree = "<group>"; };
+		848CA3621B29748800C70321 /* LVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCollectionViewCell.h; sourceTree = "<group>"; };
+		848CA3631B29748800C70321 /* LVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCollectionViewCell.m; sourceTree = "<group>"; };
+		849708351A67653A00E913F4 /* LVDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDB.h; sourceTree = "<group>"; };
+		849708361A67653A00E913F4 /* LVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVDB.m; sourceTree = "<group>"; };
+		8497083A1A6765B000E913F4 /* LVSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSystem.h; sourceTree = "<group>"; };
+		8497083B1A6765B000E913F4 /* LVSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSystem.m; sourceTree = "<group>"; };
+		84B1E37F1AEF24480054B9F1 /* LVRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVRSA.h; path = RSA/LVRSA.h; sourceTree = "<group>"; };
+		84B1E3801AEF24480054B9F1 /* LVRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVRSA.m; path = RSA/LVRSA.m; sourceTree = "<group>"; };
+		84B58E381B65CC260048F33D /* LVLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLoadingIndicator.h; sourceTree = "<group>"; };
+		84B58E391B65CC260048F33D /* LVLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLoadingIndicator.m; sourceTree = "<group>"; };
+		84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebugConnection.h; path = lvdebug/LVDebugConnection.h; sourceTree = "<group>"; };
+		84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebugConnection.m; path = lvdebug/LVDebugConnection.m; sourceTree = "<group>"; };
+		84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = LuaViewSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LuaViewSDK-Info.plist"; sourceTree = "<group>"; };
+		84C1D7D01C16C3CD0058E974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dummy-Prefix.pch"; sourceTree = "<group>"; };
+		84C1D8911C16CA540058E974 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
+		84C1D8921C16CA540058E974 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
+		84C1D8981C16CB820058E974 /* libDummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C3B7281A84622A00923404 /* LVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVData.h; sourceTree = "<group>"; };
+		84C3B7291A84622A00923404 /* LVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVData.m; sourceTree = "<group>"; };
+		84CF56731AE9184000A49B36 /* LVNativeObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNativeObjBox.h; sourceTree = "<group>"; };
+		84CF56741AE9184000A49B36 /* LVNativeObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNativeObjBox.m; sourceTree = "<group>"; };
+		84CF56781AEA15A500A49B36 /* LVMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVMethod.h; sourceTree = "<group>"; };
+		84CF56791AEA15A500A49B36 /* LVMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVMethod.m; sourceTree = "<group>"; };
+		84D446F01AF75BD8000A3911 /* LVPkgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgManager.h; path = PKG/LVPkgManager.h; sourceTree = "<group>"; };
+		84D446F11AF75BD8000A3911 /* LVPkgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgManager.m; path = PKG/LVPkgManager.m; sourceTree = "<group>"; };
+		84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLuaObjBox.h; sourceTree = "<group>"; };
+		84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLuaObjBox.m; sourceTree = "<group>"; };
+		84DCF0391B44D91800AD723B /* LVTypeConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTypeConvert.h; sourceTree = "<group>"; };
+		84DCF03A1B44D91800AD723B /* LVTypeConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTypeConvert.m; sourceTree = "<group>"; };
+		84DD8F871B560933001C83E9 /* LVNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNavigation.h; sourceTree = "<group>"; };
+		84DD8F881B560933001C83E9 /* LVNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNavigation.m; sourceTree = "<group>"; };
+		84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPointerValueBox.h; sourceTree = "<group>"; };
+		84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPointerValueBox.m; sourceTree = "<group>"; };
+		84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTapGesture.h; sourceTree = "<group>"; };
+		84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTapGesture.m; sourceTree = "<group>"; };
+		84E446961AEE0655009C9A8A /* LVBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBlock.h; sourceTree = "<group>"; };
+		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
+		84E85C181C33B84B007DE3DF /* LVBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBundle.h; sourceTree = "<group>"; };
+		84E85C191C33B84B007DE3DF /* LVBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBundle.m; sourceTree = "<group>"; };
+		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
+		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
+		911270981DFAC65F001F8047 /* LVEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVEvent.h; sourceTree = "<group>"; };
+		911270991DFAC65F001F8047 /* LVEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVEvent.m; sourceTree = "<group>"; };
+		91232AAA1DAB67FC00536E0C /* LVWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVWebView.h; sourceTree = "<group>"; };
+		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
+		914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVGrammarChanger.h; sourceTree = "<group>"; };
+		914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVGrammarChanger.m; sourceTree = "<group>"; };
+		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
+		914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVClassInfo.m; sourceTree = "<group>"; };
+		91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LVRefresh.h"; sourceTree = "<group>"; };
+		91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LVRefresh.m"; sourceTree = "<group>"; };
+		91695AA31E11004B0088EFD6 /* LVRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshConst.h; sourceTree = "<group>"; };
+		91695AA41E11004B0088EFD6 /* LVRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshConst.m; sourceTree = "<group>"; };
+		91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshComponent.h; sourceTree = "<group>"; };
+		91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshComponent.m; sourceTree = "<group>"; };
+		91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshHeader.h; sourceTree = "<group>"; };
+		91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRefreshHeader.m; sourceTree = "<group>"; };
+		91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVEmptyRefreshCollectionView.h; sourceTree = "<group>"; };
+		91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVEmptyRefreshCollectionView.m; sourceTree = "<group>"; };
+		9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVLongPressGesture.h; sourceTree = "<group>"; };
+		9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVLongPressGesture.m; sourceTree = "<group>"; };
+		91882E891AAD45A400107DFC /* LVPinchGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPinchGesture.h; sourceTree = "<group>"; };
+		91882E8A1AAD45A400107DFC /* LVPinchGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPinchGesture.m; sourceTree = "<group>"; };
+		91882E8E1AAD934D00107DFC /* LVRotationGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRotationGesture.h; sourceTree = "<group>"; };
+		91882E8F1AAD934D00107DFC /* LVRotationGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRotationGesture.m; sourceTree = "<group>"; };
+		918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSwipeGesture.h; sourceTree = "<group>"; };
+		918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSwipeGesture.m; sourceTree = "<group>"; };
+		91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgInfo.h; path = PKG/LVPkgInfo.h; sourceTree = "<group>"; };
+		91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgInfo.m; path = PKG/LVPkgInfo.m; sourceTree = "<group>"; };
+		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
+		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
+		91C55C701DD07185000BCB0B /* LVFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFlowLayout.h; sourceTree = "<group>"; };
+		91C55C711DD07185000BCB0B /* LVFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFlowLayout.m; sourceTree = "<group>"; };
+		91F678821DF520920042D6FC /* LVCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomView.h; sourceTree = "<group>"; };
+		91F678831DF520920042D6FC /* LVCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomView.m; sourceTree = "<group>"; };
+		91F678871DF561D40042D6FC /* LVCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCanvas.h; sourceTree = "<group>"; };
+		91F678881DF561D40042D6FC /* LVCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCanvas.m; sourceTree = "<group>"; };
+		A292E710DF361DF229141A75 /* Pods-LuaViewSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.release.xcconfig"; sourceTree = "<group>"; };
+		AEC737B8A0B47AC8A1436C7A /* Pods-LuaViewSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuaViewSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuaViewSDK/Pods-LuaViewSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		BE9CD4F61CACC02800D6AC94 /* JUFLXTargeNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXTargeNamespace.h; sourceTree = "<group>"; };
+		BE9CD4F71CACC02800D6AC94 /* JUFLXLayoutDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXLayoutDefine.h; sourceTree = "<group>"; };
+		BEEB28C21CA90EC200EC2D86 /* JUFLXCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXCSSParser.h; sourceTree = "<group>"; };
+		BEEB28C31CA90EC200EC2D86 /* JUFLXCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUFLXCSSParser.m; sourceTree = "<group>"; };
+		BEEB28C41CA90EC200EC2D86 /* JUFLXLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXLayoutKit.h; sourceTree = "<group>"; };
+		BEEB28C51CA90EC200EC2D86 /* JUFLXNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXNode.h; sourceTree = "<group>"; };
+		BEEB28C61CA90EC200EC2D86 /* JUFLXNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUFLXNode.m; sourceTree = "<group>"; };
+		BEEB28C71CA90EC200EC2D86 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
+		BEEB28C81CA90EC200EC2D86 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
+		BEEB28CA1CA90EC200EC2D86 /* JUFLXLinearLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUFLXLinearLayoutView.h; sourceTree = "<group>"; };
+		BEEB28CB1CA90EC200EC2D86 /* JUFLXLinearLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUFLXLinearLayoutView.m; sourceTree = "<group>"; };
+		BEEB28CC1CA90EC200EC2D86 /* UIView+JUFLXNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JUFLXNode.h"; sourceTree = "<group>"; };
+		BEEB28CD1CA90EC200EC2D86 /* UIView+JUFLXNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JUFLXNode.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3CFF77A61C7473A800847C05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D7BF1C16C3CD0058E974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D8951C16CB820058E974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8418E3411A5E67FC00158125 /* LuaViewSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8418E3A61A5E704100158125 /* Classes */,
+				8418E3AE1A5E704600158125 /* Supporting Files */,
+			);
+			path = LuaViewSDK;
+			sourceTree = "<group>";
+		};
+		8418E3A61A5E704100158125 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BEEB28C11CA90EC200EC2D86 /* layout */,
+				84D446EF1AF75BB6000A3911 /* PKG */,
+				84B1E37E1AEF24330054B9F1 /* RSA */,
+				91ACCE741AC530CA0034D9B3 /* lvdebug */,
+				846481A51A64C61F00DE6204 /* lvsdk */,
+				840AD5311A5EAB4A0075CB58 /* LView.h */,
+				840AD5321A5EAB4A0075CB58 /* LView.m */,
+				3C98A5381C7C0C100001508E /* LViewController.h */,
+				3C98A5391C7C0C100001508E /* LViewController.m */,
+				84E85C181C33B84B007DE3DF /* LVBundle.h */,
+				84E85C191C33B84B007DE3DF /* LVBundle.m */,
+				84E446961AEE0655009C9A8A /* LVBlock.h */,
+				84E446971AEE0655009C9A8A /* LVBlock.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8418E3AE1A5E704600158125 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8418E3A91A5E704100158125 /* LuaViewSDK-Prefix.pch */,
+				84C1D7CA1C16C3CD0058E974 /* LuaViewSDK-Info.plist */,
+				84C1D7D01C16C3CD0058E974 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8443179F1BC6191500968368 /* items */ = {
+			isa = PBXGroup;
+			children = (
+				846481AA1A64C61F00DE6204 /* LVButton.h */,
+				846481AB1A64C61F00DE6204 /* LVButton.m */,
+				846481AE1A64C61F00DE6204 /* LVImage.h */,
+				846481AF1A64C61F00DE6204 /* LVImage.m */,
+				91232AAA1DAB67FC00536E0C /* LVWebView.h */,
+				91232AAB1DAB67FC00536E0C /* LVWebView.m */,
+				8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */,
+				8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */,
+				846481B01A64C61F00DE6204 /* LVLabel.h */,
+				846481B11A64C61F00DE6204 /* LVLabel.m */,
+				846481B61A64C61F00DE6204 /* LVTextField.h */,
+				846481B71A64C61F00DE6204 /* LVTextField.m */,
+				84B58E381B65CC260048F33D /* LVLoadingIndicator.h */,
+				84B58E391B65CC260048F33D /* LVLoadingIndicator.m */,
+				846481B21A64C61F00DE6204 /* LVPagerIndicator.h */,
+				846481B31A64C61F00DE6204 /* LVPagerIndicator.m */,
+			);
+			name = items;
+			sourceTree = "<group>";
+		};
+		844317A01BC6194700968368 /* container */ = {
+			isa = PBXGroup;
+			children = (
+				91695AA01E11003E0088EFD6 /* refresh */,
+				84799AF31BAFECA00070E214 /* LVPagerView.h */,
+				84799AF41BAFECA00070E214 /* LVPagerView.m */,
+				84799AF81BAFEFDA0070E214 /* LVPagerViewCell.h */,
+				84799AF91BAFEFDA0070E214 /* LVPagerViewCell.m */,
+				848CA35D1B29669A00C70321 /* LVCollectionView.h */,
+				848CA35E1B29669A00C70321 /* LVCollectionView.m */,
+				91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */,
+				91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */,
+				848CA3621B29748800C70321 /* LVCollectionViewCell.h */,
+				848CA3631B29748800C70321 /* LVCollectionViewCell.m */,
+				8481E0631BD7B29100FDFEEA /* LVCollectionViewDelegate.h */,
+				8481E0641BD7B29100FDFEEA /* LVCollectionViewDelegate.m */,
+				91C55C701DD07185000BCB0B /* LVFlowLayout.h */,
+				91C55C711DD07185000BCB0B /* LVFlowLayout.m */,
+				846481B41A64C61F00DE6204 /* LVScrollView.h */,
+				846481B51A64C61F00DE6204 /* LVScrollView.m */,
+				8481E0591BD7AC8000FDFEEA /* LVScrollViewDelegate.h */,
+				8481E05A1BD7AC8000FDFEEA /* LVScrollViewDelegate.m */,
+			);
+			name = container;
+			sourceTree = "<group>";
+		};
+		844317A11BC6198800968368 /* customView */ = {
+			isa = PBXGroup;
+			children = (
+				91F678821DF520920042D6FC /* LVCustomView.h */,
+				91F678831DF520920042D6FC /* LVCustomView.m */,
+				91F678871DF561D40042D6FC /* LVCanvas.h */,
+				91F678881DF561D40042D6FC /* LVCanvas.m */,
+				84056E701B5CA5990078F9D6 /* LVCustomPanel.h */,
+				84056E711B5CA5990078F9D6 /* LVCustomPanel.m */,
+			);
+			name = customView;
+			sourceTree = "<group>";
+		};
+		844317A31BC61C1F00968368 /* alert */ = {
+			isa = PBXGroup;
+			children = (
+				842D726C1A6643DB00936AD2 /* LVAlert.h */,
+				842D726D1A6643DB00936AD2 /* LVAlert.m */,
+				8468C96F1BDA177C002D4B1E /* LVToast.h */,
+				8468C9701BDA177C002D4B1E /* LVToast.m */,
+			);
+			name = alert;
+			sourceTree = "<group>";
+		};
+		844317A41BC61C3000968368 /* animate */ = {
+			isa = PBXGroup;
+			children = (
+				846481A61A64C61F00DE6204 /* LVAnimate.h */,
+				846481A71A64C61F00DE6204 /* LVAnimate.m */,
+				3C02D1D71C31106E00213386 /* LVAnimator.h */,
+				3C02D1D81C31106E00213386 /* LVAnimator.m */,
+			);
+			name = animate;
+			sourceTree = "<group>";
+		};
+		844317A51BC61CA000968368 /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				84DD8F871B560933001C83E9 /* LVNavigation.h */,
+				84DD8F881B560933001C83E9 /* LVNavigation.m */,
+			);
+			name = navigation;
+			sourceTree = "<group>";
+		};
+		844317A61BC61E3900968368 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				842D72671A6639A200936AD2 /* LVExGlobalFunc.h */,
+				842D72681A6639A200936AD2 /* LVExGlobalFunc.m */,
+				8497083A1A6765B000E913F4 /* LVSystem.h */,
+				8497083B1A6765B000E913F4 /* LVSystem.m */,
+				840BCED81CB7602C00D816AD /* LVNetworkStatus.h */,
+				840BCED91CB7602C00D816AD /* LVNetworkStatus.m */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
+		844317A71BC61E8000968368 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				846481A81A64C61F00DE6204 /* LVBaseView.h */,
+				846481A91A64C61F00DE6204 /* LVBaseView.m */,
+				84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */,
+				84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */,
+				843447481B61DDED0039B98A /* UIView+LuaView.h */,
+				843447491B61DDED0039B98A /* UIView+LuaView.m */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		846481A51A64C61F00DE6204 /* lvsdk */ = {
+			isa = PBXGroup;
+			children = (
+				84A52BFC1AE7985D00E464AC /* ui */,
+				84A52C021AE7995D00E464AC /* basic */,
+				84A52BFE1AE7988A00E464AC /* gesture */,
+				84A52BFD1AE7986600E464AC /* net */,
+				84A52C001AE7990B00E464AC /* audio */,
+				84A52BFF1AE798A100E464AC /* file */,
+				844317A51BC61CA000968368 /* navigation */,
+				844317A61BC61E3900968368 /* system */,
+				84CF566B1AE8EC0B00A49B36 /* objectbox */,
+				84A52C011AE7992600E464AC /* util */,
+				846481AC1A64C61F00DE6204 /* LVHeads.h */,
+				846481AD1A64C61F00DE6204 /* LVHeads.m */,
+			);
+			path = lvsdk;
+			sourceTree = "<group>";
+		};
+		846481E21A64F0EB00DE6204 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */,
+				846481E41A64F0EB00DE6204 /* lua源码分析.pdf */,
+				8405078B1ADF8F7300906BAC /* podinstall.text */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
+		848B5C151A0A4CA000F59678 = {
+			isa = PBXGroup;
+			children = (
+				8418E3411A5E67FC00158125 /* LuaViewSDK */,
+				848B5C1F1A0A4CA000F59678 /* Products */,
+				84C1D88F1C16CA540058E974 /* Dummy */,
+				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
+				846481E21A64F0EB00DE6204 /* Documentation */,
+				CD0201B0E7FEAFF3C6E6611A /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		848B5C1F1A0A4CA000F59678 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */,
+				84C1D8981C16CB820058E974 /* libDummy.a */,
+				3CFF77A91C7473A800847C05 /* libLuaViewLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84A52BFC1AE7985D00E464AC /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				844317A71BC61E8000968368 /* base */,
+				8443179F1BC6191500968368 /* items */,
+				844317A01BC6194700968368 /* container */,
+				844317A11BC6198800968368 /* customView */,
+				844317A31BC61C1F00968368 /* alert */,
+				844317A41BC61C3000968368 /* animate */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		84A52BFD1AE7986600E464AC /* net */ = {
+			isa = PBXGroup;
+			children = (
+				8454D13F1A7F732500774565 /* LVHttp.h */,
+				8454D1401A7F732500774565 /* LVHttp.m */,
+				8454D1441A7FA7A400774565 /* LVHttpResponse.h */,
+				8454D1451A7FA7A400774565 /* LVHttpResponse.m */,
+			);
+			name = net;
+			sourceTree = "<group>";
+		};
+		84A52BFE1AE7988A00E464AC /* gesture */ = {
+			isa = PBXGroup;
+			children = (
+				8410D9AE1A70A51C00B22E49 /* LVGesture.h */,
+				8410D9AF1A70A51C00B22E49 /* LVGesture.m */,
+				911270981DFAC65F001F8047 /* LVEvent.h */,
+				911270991DFAC65F001F8047 /* LVEvent.m */,
+				9171D4A21AADD0300040DAA3 /* LVLongPressGesture.h */,
+				9171D4A31AADD0300040DAA3 /* LVLongPressGesture.m */,
+				8410D9A91A70A00400B22E49 /* LVPanGesture.h */,
+				8410D9AA1A70A00400B22E49 /* LVPanGesture.m */,
+				91882E891AAD45A400107DFC /* LVPinchGesture.h */,
+				91882E8A1AAD45A400107DFC /* LVPinchGesture.m */,
+				91882E8E1AAD934D00107DFC /* LVRotationGesture.h */,
+				91882E8F1AAD934D00107DFC /* LVRotationGesture.m */,
+				918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */,
+				918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */,
+				84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */,
+				84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */,
+				8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */,
+				8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */,
+			);
+			name = gesture;
+			sourceTree = "<group>";
+		};
+		84A52BFF1AE798A100E464AC /* file */ = {
+			isa = PBXGroup;
+			children = (
+				849708351A67653A00E913F4 /* LVDB.h */,
+				849708361A67653A00E913F4 /* LVDB.m */,
+				8425324A1ADCBD3A003C05BF /* LVDownloader.h */,
+				8425324B1ADCBD3A003C05BF /* LVDownloader.m */,
+				84765E2B1ADE37A7002506CB /* LVFile.h */,
+				84765E2C1ADE37A7002506CB /* LVFile.m */,
+			);
+			name = file;
+			sourceTree = "<group>";
+		};
+		84A52C001AE7990B00E464AC /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				842532451ADCB7C0003C05BF /* LVAudioPlayer.h */,
+				842532461ADCB7C0003C05BF /* LVAudioPlayer.m */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
+		84A52C011AE7992600E464AC /* util */ = {
+			isa = PBXGroup;
+			children = (
+				846481BC1A64C61F00DE6204 /* LVUtil.h */,
+				846481BD1A64C61F00DE6204 /* LVUtil.m */,
+				84DCF0391B44D91800AD723B /* LVTypeConvert.h */,
+				84DCF03A1B44D91800AD723B /* LVTypeConvert.m */,
+				914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */,
+				914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		84A52C021AE7995D00E464AC /* basic */ = {
+			isa = PBXGroup;
+			children = (
+				84342D8C1AE0E02B00ECB4EF /* LVStyledString.h */,
+				84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */,
+				846481BA1A64C61F00DE6204 /* LVTransform3D.h */,
+				846481BB1A64C61F00DE6204 /* LVTransform3D.m */,
+				84C3B7281A84622A00923404 /* LVData.h */,
+				84C3B7291A84622A00923404 /* LVData.m */,
+				846E87991A653DEC000D14DA /* LVDate.h */,
+				846E879A1A653DEC000D14DA /* LVDate.m */,
+				846481B81A64C61F00DE6204 /* LVTimer.h */,
+				846481B91A64C61F00DE6204 /* LVTimer.m */,
+				84185DBF1B451E28003E0ECE /* LVStruct.h */,
+				84185DC01B451E28003E0ECE /* LVStruct.m */,
+			);
+			name = basic;
+			sourceTree = "<group>";
+		};
+		84B1E37E1AEF24330054B9F1 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				84B1E37F1AEF24480054B9F1 /* LVRSA.h */,
+				84B1E3801AEF24480054B9F1 /* LVRSA.m */,
+			);
+			name = RSA;
+			sourceTree = "<group>";
+		};
+		84C1D88F1C16CA540058E974 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D8931C16CA660058E974 /* Support Files */,
+				84C1D8911C16CA540058E974 /* Dummy.h */,
+				84C1D8921C16CA540058E974 /* Dummy.m */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		84C1D8931C16CA660058E974 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				84C1D8901C16CA540058E974 /* Dummy-Prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		84CF566B1AE8EC0B00A49B36 /* objectbox */ = {
+			isa = PBXGroup;
+			children = (
+				84CF56781AEA15A500A49B36 /* LVMethod.h */,
+				84CF56791AEA15A500A49B36 /* LVMethod.m */,
+				914D5F391DD3275D00CEA3FF /* LVClassInfo.h */,
+				914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */,
+				84CF56731AE9184000A49B36 /* LVNativeObjBox.h */,
+				84CF56741AE9184000A49B36 /* LVNativeObjBox.m */,
+				84DCB2AF1B39349A00244C39 /* LVLuaObjBox.h */,
+				84DCB2B01B39349A00244C39 /* LVLuaObjBox.m */,
+				84DDB85B1B43BAEB006ACE9A /* LVPointerValueBox.h */,
+				84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */,
+			);
+			name = objectbox;
+			sourceTree = "<group>";
+		};
+		84D446EF1AF75BB6000A3911 /* PKG */ = {
+			isa = PBXGroup;
+			children = (
+				91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */,
+				91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */,
+				84D446F01AF75BD8000A3911 /* LVPkgManager.h */,
+				84D446F11AF75BD8000A3911 /* LVPkgManager.m */,
+				3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */,
+				3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */,
+			);
+			name = PKG;
+			sourceTree = "<group>";
+		};
+		8DF50822C3B250E24CAD9EC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91695AA01E11003E0088EFD6 /* refresh */ = {
+			isa = PBXGroup;
+			children = (
+				91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */,
+				91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */,
+				91695AA31E11004B0088EFD6 /* LVRefreshConst.h */,
+				91695AA41E11004B0088EFD6 /* LVRefreshConst.m */,
+				91695AA51E11004B0088EFD6 /* LVRefreshComponent.h */,
+				91695AA61E11004B0088EFD6 /* LVRefreshComponent.m */,
+				91695AA71E11004B0088EFD6 /* LVRefreshHeader.h */,
+				91695AA81E11004B0088EFD6 /* LVRefreshHeader.m */,
+			);
+			name = refresh;
+			sourceTree = "<group>";
+		};
+		91ACCE741AC530CA0034D9B3 /* lvdebug */ = {
+			isa = PBXGroup;
+			children = (
+				842142A51ACD3E2C001FD0ED /* debug.lua */,
+				842142A21ACD3427001FD0ED /* LVDebugLua.m */,
+				91ACCE751AC531160034D9B3 /* LVDebuger.h */,
+				91ACCE761AC531160034D9B3 /* LVDebuger.m */,
+				84BC621E1BA95A3F0019B02E /* LVDebugConnection.h */,
+				84BC621F1BA95A3F0019B02E /* LVDebugConnection.m */,
+			);
+			name = lvdebug;
+			sourceTree = "<group>";
+		};
+		BEEB28C11CA90EC200EC2D86 /* layout */ = {
+			isa = PBXGroup;
+			children = (
+				BE9CD4F61CACC02800D6AC94 /* JUFLXTargeNamespace.h */,
+				BE9CD4F71CACC02800D6AC94 /* JUFLXLayoutDefine.h */,
+				BEEB28C21CA90EC200EC2D86 /* JUFLXCSSParser.h */,
+				BEEB28C31CA90EC200EC2D86 /* JUFLXCSSParser.m */,
+				BEEB28C41CA90EC200EC2D86 /* JUFLXLayoutKit.h */,
+				BEEB28C51CA90EC200EC2D86 /* JUFLXNode.h */,
+				BEEB28C61CA90EC200EC2D86 /* JUFLXNode.m */,
+				BEEB28C71CA90EC200EC2D86 /* Layout.c */,
+				BEEB28C81CA90EC200EC2D86 /* Layout.h */,
+				BEEB28C91CA90EC200EC2D86 /* LayoutExtensions */,
+				BEEB28CC1CA90EC200EC2D86 /* UIView+JUFLXNode.h */,
+				BEEB28CD1CA90EC200EC2D86 /* UIView+JUFLXNode.m */,
+			);
+			path = layout;
+			sourceTree = "<group>";
+		};
+		BEEB28C91CA90EC200EC2D86 /* LayoutExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				BEEB28CA1CA90EC200EC2D86 /* JUFLXLinearLayoutView.h */,
+				BEEB28CB1CA90EC200EC2D86 /* JUFLXLinearLayoutView.m */,
+			);
+			path = LayoutExtensions;
+			sourceTree = "<group>";
+		};
+		CD0201B0E7FEAFF3C6E6611A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AEC737B8A0B47AC8A1436C7A /* Pods-LuaViewSDK.debug.xcconfig */,
+				A292E710DF361DF229141A75 /* Pods-LuaViewSDK.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		84C1D7C01C16C3CD0058E974 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D8341C16C4490058E974 /* LVPkgManager.h in Headers */,
+				84C1D8361C16C4490058E974 /* LVRSA.h in Headers */,
+				84C1D8371C16C4490058E974 /* LVDebuger.h in Headers */,
+				84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */,
+				84C1D8391C16C4490058E974 /* LVBaseView.h in Headers */,
+				84C1D83A1C16C4490058E974 /* UIScrollView+LuaView.h in Headers */,
+				91F678891DF561D40042D6FC /* LVCanvas.h in Headers */,
+				84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */,
+				84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */,
+				84C1D83D1C16C44A0058E974 /* LVImage.h in Headers */,
+				91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */,
+				84C1D83E1C16C44A0058E974 /* LVNinePatchImage.h in Headers */,
+				84C1D83F1C16C44A0058E974 /* LVLabel.h in Headers */,
+				84C1D8401C16C44A0058E974 /* LVTextField.h in Headers */,
+				BEEB28D01CA90EC200EC2D86 /* JUFLXLayoutKit.h in Headers */,
+				84C1D8411C16C44A0058E974 /* LVLoadingIndicator.h in Headers */,
+				84C1D8421C16C44A0058E974 /* LVPagerIndicator.h in Headers */,
+				91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */,
+				84C1D8461C16C44A0058E974 /* LVPagerView.h in Headers */,
+				84C1D8471C16C44A0058E974 /* LVPagerViewCell.h in Headers */,
+				84C1D8481C16C44A0058E974 /* LVCollectionView.h in Headers */,
+				84C1D8491C16C44A0058E974 /* LVCollectionViewCell.h in Headers */,
+				84C1D84A1C16C44A0058E974 /* LVCollectionViewDelegate.h in Headers */,
+				84C1D84B1C16C44A0058E974 /* LVScrollView.h in Headers */,
+				84C1D84C1C16C44A0058E974 /* LVScrollViewDelegate.h in Headers */,
+				84C1D84D1C16C44A0058E974 /* LVCustomPanel.h in Headers */,
+				840BCEDA1CB7602C00D816AD /* LVNetworkStatus.h in Headers */,
+				BE9CD4F91CACC02800D6AC94 /* JUFLXLayoutDefine.h in Headers */,
+				84C1D84E1C16C44A0058E974 /* LVAlert.h in Headers */,
+				84C1D84F1C16C44A0058E974 /* LVToast.h in Headers */,
+				84C1D8501C16C44A0058E974 /* LVAnimate.h in Headers */,
+				84C1D8511C16C44B0058E974 /* LVStyledString.h in Headers */,
+				91695AAF1E11004B0088EFD6 /* LVRefreshComponent.h in Headers */,
+				84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */,
+				BEEB28D51CA90EC200EC2D86 /* JUFLXLinearLayoutView.h in Headers */,
+				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
+				84C1D8541C16C44B0058E974 /* LVDate.h in Headers */,
+				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
+				91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */,
+				9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */,
+				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
+				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
+				3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */,
+				84C1D8571C16C44B0058E974 /* LVGesture.h in Headers */,
+				84C1D8581C16C44B0058E974 /* LVLongPressGesture.h in Headers */,
+				91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */,
+				BEEB28D11CA90EC200EC2D86 /* JUFLXNode.h in Headers */,
+				84C1D8591C16C44B0058E974 /* LVPanGesture.h in Headers */,
+				84C1D85A1C16C44B0058E974 /* LVPinchGesture.h in Headers */,
+				84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */,
+				84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */,
+				84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */,
+				84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */,
+				914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */,
+				84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */,
+				84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */,
+				84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */,
+				84C1D8621C16C44C0058E974 /* LVDB.h in Headers */,
+				84C1D8631C16C44C0058E974 /* LVDownloader.h in Headers */,
+				84C1D8641C16C44D0058E974 /* LVFile.h in Headers */,
+				84C1D8651C16C44D0058E974 /* LVNavigation.h in Headers */,
+				84C1D8661C16C44D0058E974 /* LVSystem.h in Headers */,
+				84C1D8681C16C44D0058E974 /* LVMethod.h in Headers */,
+				BEEB28D71CA90EC200EC2D86 /* UIView+JUFLXNode.h in Headers */,
+				84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */,
+				84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */,
+				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
+				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
+				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
+				84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */,
+				84C1D86F1C16C44E0058E974 /* LVHeads.h in Headers */,
+				84C1D8891C16C4550058E974 /* LVBlock.h in Headers */,
+				84C1D8871C16C4540058E974 /* LView.h in Headers */,
+				BE9CD4F81CACC02800D6AC94 /* JUFLXTargeNamespace.h in Headers */,
+				91695AB21E11004B0088EFD6 /* LVRefreshHeader.h in Headers */,
+				914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */,
+				91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */,
+				91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */,
+				91F678841DF520920042D6FC /* LVCustomView.h in Headers */,
+				3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */,
+				BEEB28D41CA90EC200EC2D86 /* Layout.h in Headers */,
+				84E85C1A1C33B84B007DE3DF /* LVBundle.h in Headers */,
+				BEEB28CE1CA90EC200EC2D86 /* JUFLXCSSParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3CFF77A81C7473A800847C05 /* LuaViewLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CFF77B11C7473A800847C05 /* Build configuration list for PBXNativeTarget "LuaViewLib" */;
+			buildPhases = (
+				3CFF77A51C7473A800847C05 /* Sources */,
+				3CFF77A61C7473A800847C05 /* Frameworks */,
+				3CFF77A71C7473A800847C05 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LuaViewLib;
+			productName = LuaViewLib;
+			productReference = 3CFF77A91C7473A800847C05 /* libLuaViewLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		84C1D7C31C16C3CD0058E974 /* LuaViewSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C1D7D11C16C3CD0058E974 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */;
+			buildPhases = (
+				84C1D7BE1C16C3CD0058E974 /* Sources */,
+				84C1D7BF1C16C3CD0058E974 /* Frameworks */,
+				84C1D7C01C16C3CD0058E974 /* Headers */,
+				84C1D7C11C16C3CD0058E974 /* Resources */,
+				84C1D7C21C16C3CD0058E974 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LuaViewSDK;
+			productName = LuaViewSDK;
+			productReference = 84C1D7C41C16C3CD0058E974 /* LuaViewSDK.framework */;
+			productType = "com.apple.product-type.framework.static";
+		};
+		84C1D8971C16CB820058E974 /* Dummy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C1D89E1C16CB820058E974 /* Build configuration list for PBXNativeTarget "Dummy" */;
+			buildPhases = (
+				84C1D8941C16CB820058E974 /* Sources */,
+				84C1D8951C16CB820058E974 /* Frameworks */,
+				84C1D8961C16CB820058E974 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dummy;
+			productName = Dummy;
+			productReference = 84C1D8981C16CB820058E974 /* libDummy.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		848B5C161A0A4CA000F59678 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = dongxicheng;
+				TargetAttributes = {
+					3CFF77A81C7473A800847C05 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					84C1D7C31C16C3CD0058E974 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					84C1D8971C16CB820058E974 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 848B5C151A0A4CA000F59678;
+			productRefGroup = 848B5C1F1A0A4CA000F59678 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84C1D7C31C16C3CD0058E974 /* LuaViewSDK */,
+				84C1D8971C16CB820058E974 /* Dummy */,
+				3CFF77A81C7473A800847C05 /* LuaViewLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84C1D7C11C16C3CD0058E974 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D7CB1C16C3CD0058E974 /* LuaViewSDK-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84C1D7C21C16C3CD0058E974 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "# TAG: BUILD SCRIPT (do not remove this comment)\n# Build script generated using https://github.com/kstenerud/iOS-Universal-Framework Mk 8 (beta 2012-06-16)\nimport logging\n\n\n##############################################################################\n#\n# Configuration\n#\n##############################################################################\n\n# Select which kind of framework to build.\n#\n# Note: Due to issues with Xcode's build process, if you select\n#       'embeddedframework', it will still show the regular framework\n#       (as a symlink) along side of the embedded framework. Be sure to\n#       instruct your users to copy/move the embedded framework in this case!\n#\n# If your framework contains resources such as images, nibs, momds, plists,\n# zipfiles and such, choose 'embeddedframework'.\n#\n# If your framework contains no resources, choose 'framework'.\n#\nconfig_framework_type = 'framework'\n#config_framework_type = 'embeddedframework'\n\n# Open the build directory in Finder when the universal framework is\n# successfully built.\n#\n# This value can be overridden by setting the UFW_OPEN_BUILD_DIR env variable\n# to True or False.\n#\n# Recommended setting: True\n#\nconfig_open_build_dir = False\n\n# If true, ensures that all public headers are stored in the framework under\n# the same directory hierarchy as they were in the source tree.\n#\n# Xcode by default places all headers at the same top level, but every other\n# build tool in the known universe preserves directory structure. For simple\n# libraries it doesn't really matter much, but for ports of existing software\n# packages or for bigger libraries, it makes sense to have more structure.\n#\n# The default is set to \"False\" since that's what most Xcode users are used to.\n#\n# Recommended setting: True for deep hierarchy projects, False otherwise.\n#\nconfig_deep_header_hierarchy = False\n\n# Specify where the top of the public header hierarchy is. This path is\n# relative to the project's dir (PROJECT_DIR). You can reference environment\n# variables using templating syntax (e.g. \"${TARGET_NAME}/Some/Subdir\")\n#\n# NOTE: Only used if config_deep_header_hierarchy is True.\n#\n# If this is set to None, the script will attempt to figure out for itself\n# where the top of the header hierarchy is by looking for common path prefixes\n# in the public header files. This process can fail if:\n# - You only have one public header file.\n# - Your source header files don't all have a common root.\n#\n# A common approach is to use \"${TARGET_NAME}\", working under the assumption\n# that all of your header files share the common root of a directory under\n# your project with the same name as your target (which is the Xcode default).\n#\n# Recommended setting: \"${TARGET_NAME}\"\n#\nconfig_deep_header_top = \"${TARGET_NAME}\"\n\n# Warn when \"DerivedData\" is detected in any of the header, library, or\n# framework search paths. In almost all cases, references to directories under\n# DerivedData are added as a result of an Xcode bug and must be manually\n# removed.\n#\n# Recommended setting: True\n#\nconfig_warn_derived_data = True\n\n# Warn if no headers were marked public in this framework.\n#\n# Recommended setting: True\n#\nconfig_warn_no_public_headers = False\n\n# Cause the build to fail if any warnings are issued.\n#\n# Recommended setting: True\n#\nconfig_fail_on_warnings = True\n\n# Minimum log level\n#\n# Recommended setting: logging.INFO\n#\nconfig_log_level = logging.INFO\n\n\n##############################################################################\n#\n# Don't touch anything below here unless you know what you're doing.\n#\n##############################################################################\n\nimport collections\nimport json\nimport os\nimport re\nimport shlex\nimport shutil\nimport string\nimport subprocess\nimport sys\nimport time\nimport traceback\n\n\n##############################################################################\n#\n# Globals\n#\n##############################################################################\n\nlog = logging.getLogger('UFW')\n\nissued_warnings = False\n\n\n##############################################################################\n#\n# Classes\n#\n##############################################################################\n\n# Allows the slave build to communicate with the master build.\n#\nclass BuildState:\n\n    def __init__(self):\n        self.reload()\n\n    def reset(self):\n        self.slave_platform = None\n        self.slave_architectures = []\n        self.slave_linked_archive_paths = []\n        self.slave_built_fw_path = None\n        self.slave_built_embedded_fw_path = None\n\n    def set_slave_properties(self, architectures,\n                             linked_archive_paths,\n                             built_fw_path,\n                             built_embedded_fw_path):\n        self.slave_platform = os.environ['PLATFORM_NAME']\n        self.slave_architectures = architectures\n        self.slave_linked_archive_paths = linked_archive_paths\n        self.slave_built_fw_path = built_fw_path\n        self.slave_built_embedded_fw_path = built_embedded_fw_path\n\n    def get_save_path(self):\n        return os.path.join(os.environ['PROJECT_TEMP_DIR'], \"ufw_build_state.json\")\n\n    def persist(self):\n        filename = self.get_save_path()\n        parent = os.path.dirname(filename)\n        if not os.path.isdir(parent):\n            os.makedirs(parent)\n        with open(filename, \"w\") as f:\n            f.write(json.dumps(self.__dict__))\n\n    def reload(self):\n        self.reset()\n        filename = self.get_save_path()\n        if os.path.exists(filename):\n            with open(filename, \"r\") as f:\n                new_dict = json.loads(f.read())\n                if new_dict is not None:\n                    self.__dict__ = dict(self.__dict__.items() + new_dict.items())\n\n\n# Holds information about the current project and build environment.\n#\nclass Project:\n\n    def __init__(self, filename):\n        sourcecode_types = ['sourcecode.c.c',\n                            'sourcecode.c.objc',\n                            'sourcecode.cpp.cpp',\n                            'sourcecode.cpp.objcpp',\n                            'sourcecode.asm.asm',\n                            'sourcecode.asm.llvm',\n                            'sourcecode.nasm']\n\n        self.build_state = BuildState()\n        self.project_data = self.load_from_file(filename)\n        self.target = filter(lambda x: x['name'] == os.environ['TARGET_NAME'], self.project_data['targets'])[0]\n        self.public_headers = self.get_build_phase_files('PBXHeadersBuildPhase', lambda x: x.get('settings', False) and x['settings'].get('ATTRIBUTES', False) and 'Public' in x['settings']['ATTRIBUTES'])\n        self.static_libraries = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'archive.ar' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.static_frameworks = self.get_build_phase_files('PBXFrameworksBuildPhase', lambda x: x['fileRef']['fileType'] == 'wrapper.framework' and x['fileRef']['sourceTree'] not in ['DEVELOPER_DIR', 'SDKROOT'])\n        self.compilable_sources = self.get_build_phase_files('PBXSourcesBuildPhase', lambda x: x['fileRef']['fileType'] in sourcecode_types)\n        self.header_paths = [os.path.join(*x['pathComponents']) for x in self.public_headers]\n\n        self.headers_dir = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['CONTENTS_FOLDER_PATH'], 'Headers')\n        self.libtool_path = os.path.join(os.environ['DT_TOOLCHAIN_DIR'], 'usr', 'bin', 'libtool')\n        self.project_filename = os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\")\n        self.local_exe_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])\n        self.local_architectures = os.environ['ARCHS'].split(' ')\n        self.local_built_fw_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['WRAPPER_NAME'])\n        self.local_built_embedded_fw_path = os.path.splitext(self.local_built_fw_path)[0] + \".embeddedframework\"\n        self.local_linked_archive_paths = [self.get_linked_ufw_archive_path(arch) for arch in self.local_architectures]\n        self.local_platform = os.environ['PLATFORM_NAME']\n        other_platforms = os.environ['SUPPORTED_PLATFORMS'].split(' ')\n        other_platforms.remove(self.local_platform)\n        self.other_platform = other_platforms[0]\n\n        sdk_name = os.environ['SDK_NAME']\n        if not sdk_name.startswith(self.local_platform):\n            raise Exception(\"%s didn't start with %s\" % (sdk_name, self.local_platform))\n        self.sdk_version = sdk_name[len(self.local_platform):]\n\n    # Load an Xcode project file.\n    #\n    def load_from_file(self, filename):\n        project_file = json.loads(subprocess.check_output([\"plutil\", \"-convert\", \"json\", \"-o\", \"-\", filename]))\n        all_objects = project_file['objects']\n        del project_file['objects']\n        for obj in all_objects.values():\n            self.fix_keys(obj)\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, project_file))\n        self.unpack_objects(self.build_dereference_list(all_objects, None, None, all_objects.values()))\n        project_data = project_file['rootObject']\n        self.build_full_paths(project_data, splitpath(os.environ['SOURCE_ROOT']))\n        return project_data\n\n    def is_key(self, obj):        \n        return isinstance(obj, basestring) and len(obj) == 24 and re.search('^[0-9a-fA-F]+$', obj) is not None\n    \n    def build_dereference_list(self, all_objects, parent, key, obj):\n        deref_list = []\n        if self.is_key(obj):\n            dereferenced = all_objects.get(obj, obj)\n            if dereferenced is not obj:\n                deref_list.append((parent, key, obj, dereferenced))\n        elif isinstance(obj, collections.Mapping):\n            for k, v in obj.iteritems():\n                deref_list += self.build_dereference_list(all_objects, obj, k, v)\n        elif isinstance(obj, collections.Iterable) and not isinstance(obj, basestring):\n            for item in obj:\n                deref_list += self.build_dereference_list(all_objects, obj, None, item)\n        return deref_list\n    \n    def unpack_objects(self, deref_list):\n        for parent, key, orig, obj in deref_list:\n            if key is None:\n                parent.remove(orig)\n                parent.append(obj)\n            else:\n                parent[key] = obj\n\n    # Store the full path, separated into components, to a node inside the node\n    # as \"pathComponents\". Also recurse into that node if it's a group.\n    #\n    def build_full_paths(self, node, base_path):\n        # Some nodes are relative to a different source tree, specified as an\n        # env variable.\n        if node.get('sourceTree', '<group>') != '<group>':\n            new_base_path = os.environ.get(node['sourceTree'], None)\n            if new_base_path:\n                base_path = splitpath(new_base_path)\n        # Add the current node's path, if any.\n        if node.get('path', False):\n            base_path = base_path + splitpath(node['path'])\n        node['pathComponents'] = base_path\n        # Recurse if this is a group.\n        if node['isa'] == 'PBXGroup':\n            for child in node['children']:\n                self.build_full_paths(child, base_path)\n        elif node['isa'] == 'PBXProject':\n            self.build_full_paths(node['mainGroup'], base_path)\n            self.build_full_paths(node['productRefGroup'], base_path)\n            for child in node['targets']:\n                self.build_full_paths(child, base_path)\n            projectRefs = node.get('projectReferences', None)\n            if projectRefs is not None and len(projectRefs) > 0:\n                for child in projectRefs[0].values():\n                    self.build_full_paths(child, base_path)\n\n    # Fix up any inconvenient keys.\n    #\n    def fix_keys(self, obj):\n        key_remappings = {'lastKnownFileType': 'fileType', 'explicitFileType': 'fileType'}\n        for key in list(set(key_remappings.keys()) & set(obj.keys())):\n            obj[key_remappings[key]] = obj[key]\n            del obj[key]\n\n    # Get the files from a build phase.\n    #\n    def get_build_phase_files(self, build_phase_name, filter_func):\n        build_phase = filter(lambda x: x['isa'] == build_phase_name, self.target['buildPhases'])[0]\n        build_files = filter(filter_func, build_phase['files'])\n        return [x['fileRef'] for x in build_files]\n\n    # Get the truncated paths of all headers that start with the specified\n    # relative path. Paths are read and returned as fully separated lists.\n    # e.g. ['Some', 'Path', 'To', 'A', 'Header'] with relative_path of\n    # ['Some', 'Path'] gets truncated to ['To', 'A', 'Header']\n    #\n    def movable_headers_relative_to(self, relative_path):\n        rel_path_length = len(relative_path)\n        result = filter(lambda path: len(path) >= rel_path_length and\n                                     path[:rel_path_length] == relative_path, self.header_paths)\n        return [path[rel_path_length:] for path in result]\n\n    # Get the full path to where a linkable archive (library or framework)\n    # is supposed to be.\n    #\n    def get_linked_archive_path(self, architecture):\n        return os.path.join(os.environ['OBJECT_FILE_DIR_%s' % os.environ['CURRENT_VARIANT']],\n                            architecture,\n                            os.environ['EXECUTABLE_NAME'])\n\n    # Get the full path to our custom linked archive of the project.\n    #\n    def get_linked_ufw_archive_path(self, architecture):\n        return self.get_linked_archive_path(architecture) + \".ufwbuild\"\n\n    # Get the full path to the executable of an archive.\n    #\n    def get_exe_path(self, node):\n        path = os.path.join(*node['pathComponents'])\n        if node['fileType'] == 'wrapper.framework':\n            # Frameworks are directories, so go one deeper\n            path = os.path.join(path, os.path.splitext(node['pathComponents'][-1])[0])\n        return path\n\n    # Get the path to the directory containing the archive.\n    #\n    def get_containing_path(self, node):\n        return os.path.join(*node['pathComponents'])\n    \n    def get_archive_search_paths(self):\n        log.info(\"Search paths = %s\" % set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries]))\n        return set([self.get_containing_path(fw) for fw in self.static_frameworks] + [self.get_containing_path(fw) for fw in self.static_libraries])\n\n    # Command to link all objects of a single architecture.\n    #\n    def get_single_arch_link_command(self, architecture):\n        cmd = [self.libtool_path,\n               \"-static\",\n               \"-arch_only\", architecture,\n               \"-syslibroot\", os.environ['SDKROOT'],\n               \"-L%s\" % os.environ['TARGET_BUILD_DIR'],\n               \"-filelist\", os.environ['LINK_FILE_LIST_%s_%s' % (os.environ['CURRENT_VARIANT'], architecture)]]\n        if os.environ.get('OTHER_LDFLAGS', False):\n            cmd += [os.environ['OTHER_LDFLAGS']]\n        if os.environ.get('WARNING_LDFLAGS', False):\n            cmd += [os.environ['WARNING_LDFLAGS']]\n#        cmd += [\"-L%s\" % libpath for libpath in self.get_archive_search_paths()]\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", self.get_linked_ufw_archive_path(architecture)]\n        return cmd\n\n    # Command to link all local architectures for the current configuration\n    # into an archive. This reads all libraries + the UFW-built archives and\n    # overwrites the final product.\n    #\n    def get_local_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths\n        cmd += [self.get_exe_path(fw) for fw in self.static_frameworks]\n        cmd += [self.get_exe_path(lib) for lib in self.static_libraries]\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Command to link all architectures into a universal archive.\n    # This reads all UFW-built archives and overwrites the final product.\n    #\n    def get_all_archs_link_command(self):\n        cmd = [self.libtool_path,\n               \"-static\"]\n        cmd += self.local_linked_archive_paths + self.build_state.slave_linked_archive_paths\n        cmd += [\"-o\", os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['EXECUTABLE_PATH'])]\n        return cmd\n\n    # Build up an environment for the slave process. This uses BUILD_ROOT\n    # and TEMP_ROOT to convert all environment variables to values suitable\n    # for the slave build environment so that xcodebuild doesn't try to build\n    # in the project directory under \"build\".\n    #\n    def get_slave_environment(self):\n        ignored = ['LD_MAP_FILE_PATH',\n        'HEADER_SEARCH_PATHS',\n        'LIBRARY_SEARCH_PATHS',\n        'FRAMEWORK_SEARCH_PATHS']\n        build_root = os.environ['BUILD_ROOT']\n        temp_root = os.environ['TEMP_ROOT']\n        newenv = {}\n        for key, value in os.environ.items():\n            if key not in ignored and not key.startswith('LINK_FILE_LIST_') and not key.startswith('LD_DEPENDENCY_'):\n                if build_root in value or temp_root in value:\n                    newenv[key] = value.replace(self.local_platform, self.other_platform)\n        return newenv\n\n    # Command to invoke xcodebuild on the slave platform.\n    #\n    def get_slave_project_build_command(self):\n        cmd = [\"xcodebuild\",\n               \"-project\",\n               os.environ['PROJECT_FILE_PATH'],\n               \"-target\",\n               os.environ['TARGET_NAME'],\n               \"-configuration\",\n               os.environ['CONFIGURATION'],\n               \"-sdk\",\n               self.other_platform + self.sdk_version]\n        cmd += [\"%s=%s\" % (key, value) for key, value in self.get_slave_environment().items()]\n        cmd += [\"UFW_MASTER_PLATFORM=\" + os.environ['PLATFORM_NAME']]\n        cmd += [os.environ['ACTION']]\n        return cmd\n\n\n\n##############################################################################\n#\n# Utility Functions\n#\n##############################################################################\n\n# Split a path into a list of path components.\n#\ndef splitpath(path, maxdepth=20):\n     (head, tail) = os.path.split(path)\n     return splitpath(head, maxdepth - 1) + [tail] if maxdepth and head and head != path else [ head or tail ]\n\n# Remove all subdirectories under a path.\n#\ndef remove_subdirs(path, ignore_files):\n    if os.path.exists(path):\n        for filename in filter(lambda x: x not in ignore_files, os.listdir(path)):\n            fullpath = os.path.join(path, filename)\n            if os.path.isdir(fullpath):\n                log.info(\"Remove %s\" % fullpath)\n                shutil.rmtree(fullpath)\n\n# Make whatever parent paths are necessary for a path to exist.\n#\ndef ensure_path_exists(path):\n    if not os.path.isdir(path):\n        os.makedirs(path)\n\n# Make whatever parent paths are necessary for a path's parent to exist.\n#\ndef ensure_parent_exists(path):\n    parent = os.path.dirname(path)\n    if not os.path.isdir(parent):\n        os.makedirs(parent)\n\n# Remove a file or dir if it exists.\n#\ndef remove_path(path):\n    if os.path.exists(path):\n        if os.path.isdir(path) and not os.path.islink(path):\n            shutil.rmtree(path)\n        else:\n            os.remove(path)\n\n# Move a file or dir, replacing the destination if it exists.\n#\ndef move_file(src, dst):\n    if src == dst:\n        return\n    log.info(\"Move %s to %s\" % (src, dst))\n    ensure_parent_exists(dst)\n    remove_path(dst)\n    shutil.move(src, dst)\n\n# Copy a file or dir, replacing the destination if it exists already.\n#\ndef copy_overwrite(src, dst):\n    if src != dst:\n        remove_path(dst)\n        ensure_parent_exists(dst)\n        shutil.copytree(src, dst, symlinks=True)\n\n# Attempt to symlink link_path -> link_to.\n# link_to must be a path relative to link_path's parent and must exist.\n# If link_path already exists, do nothing.\n#\ndef attempt_symlink(link_path, link_to):\n    # Only allow linking to an existing file\n    os.stat(os.path.abspath(os.path.join(link_path, \"..\", link_to)))\n\n    # Only make the link if it hasn't already been made\n    if not os.path.exists(link_path):\n        log.info(\"Symlink %s -> %s\" % (link_path, link_to))\n        os.symlink(link_to, link_path)\n\n# Takes the last entry in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef top_level_file_path(base_path, path_list):\n    return os.path.join(base_path, os.path.split(path_list[-1])[-1])\n\n# Takes all entries in an array-based path and returns a normal path\n# relative to base_path.\n#\ndef full_file_path(base_path, path_list):\n    return os.path.join(*([base_path] + path_list))\n\n# Print a command before executing it.\n# Also print out all output from the command to STDOUT.\n#\ndef print_and_call(cmd):\n    log.info(\"Cmd \" + \" \".join(cmd))\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0]\n    if len(result) > 0:\n        log.info(result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Special print-and-call command for the slave build that strips out\n# xcodebuild's spammy list of environment variables.\n#\ndef print_and_call_slave_build(cmd, other_platform):\n    separator = '=== BUILD NATIVE TARGET '\n    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n    result = p.communicate()[0].split(separator)\n    if len(result) == 1:\n        result = result[0]\n    else:\n        result = separator + result[1]\n    log.info(\"Cmd \" + \" \".join(cmd) + \"\\n\" + result)\n    if p.returncode != 0:\n        raise subprocess.CalledProcessError(p.returncode, cmd)\n\n# Issue a warning and record that a warning has been issued.\n#\ndef issue_warning(msg, *args, **kwargs):\n    global issued_warnings\n    issued_warnings = True\n    log.warn(msg, *args, **kwargs)\n\n\n\n##############################################################################\n#\n# Main Application\n#\n##############################################################################\n\n# Check if we are running as master.\n#\ndef is_master():\n    return os.environ.get('UFW_MASTER_PLATFORM', os.environ['PLATFORM_NAME']) == os.environ['PLATFORM_NAME']\n\n# DerivedData should almost never appear in any framework, library, or header\n# search paths. However, Xcode will sometimes add them in, so we check to make\n# sure.\n#\ndef check_for_derived_data_in_search_paths(project):\n    search_path_keys = [\"FRAMEWORK_SEARCH_PATHS\", \"LIBRARY_SEARCH_PATHS\", \"HEADER_SEARCH_PATHS\"]\n    build_configs = project.target['buildConfigurationList']['buildConfigurations']\n    build_settings = filter(lambda x: x['name'] == os.environ['CONFIGURATION'], build_configs)[0]['buildSettings']\n    \n    found_something = False\n    for path_key in filter(lambda x: x in build_settings, search_path_keys):\n        path = build_settings[path_key]\n        if \"DerivedData\" in path:\n            found_something = True\n            log.warn(\"Derived data in %s\" % path)\n            issue_warning(\"'%s' contains reference to 'DerivedData'.\" % path_key)\n    if found_something:\n        log.warn(\"Check your build settings and remove any entries that contain paths inside the DerivedData folder.\")\n        log.warn(\"Otherwise you can disable this warning by changing 'config_warn_derived_data' in this script.\")\n\n# Link local architectures into their respective archives.\n#\ndef link_local_archs(project):\n    for arch in project.local_architectures:\n        print_and_call(project.get_single_arch_link_command(arch))\n\n# Link only the local architectures into the final product, not the slave\n# architectures. For iphoneos, this will be armv6, armv7. For simulator, this\n# will be i386.\n#\ndef link_combine_local_archs(project):\n    print_and_call(project.get_local_archs_link_command())\n\n# Link all architectures into the final product.\n#\ndef link_combine_all_archs(project):\n    print_and_call(project.get_all_archs_link_command())\n\n# Check if we should open the build directory after a successful build.\n#\ndef should_open_build_dir():\n    env_setting = os.environ.get('UFW_OPEN_BUILD_DIR', None)\n    if env_setting is not None:\n        return env_setting\n\n    return config_open_build_dir\n\n# Open the build dir in Finder.\n#\ndef open_build_dir():\n    print_and_call(['open', os.environ['TARGET_BUILD_DIR']])\n\n# Check if the build was started by selecting \"Archive\" under \"Product\" in\n# Xcode.\n#\ndef is_archive_build():\n    # ACTION is always 'build', but perhaps Apple will fix this someday?\n    archive_build = os.environ['ACTION'] == 'archive'\n\n    if not archive_build:\n        # This can be passed in as an env variable when building from command line.\n        archive_build = os.environ.get('UFW_ACTION', None) == 'archive'\n\n    build_dir = splitpath(os.environ['BUILD_DIR'])\n    if not archive_build:\n        # This partial path is used when you select \"archive\" from within Xcode.\n        archive_build = 'ArchiveIntermediates' in build_dir\n\n    # It only counts as a full archive build if this target is being built into\n    # its own build dir (not being built as a dependency of another target)\n    #if archive_build:\n        #archive_build = os.environ['TARGET_NAME'] in build_dir\n    \n    return archive_build\n\n# Xcode by default throws all public headers into the top level directory.\n# This function moves them to their expected deep hierarchy.\n#\ndef build_deep_header_hierarchy(project):\n    header_path_top = config_deep_header_top\n    if not header_path_top:\n        header_path_top = os.path.commonprefix(project.header_paths)\n    else:\n        header_path_top = splitpath(header_path_top)\n\n    built_headers_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['PUBLIC_HEADERS_FOLDER_PATH'])\n    movable_headers = project.movable_headers_relative_to(header_path_top)\n\n    # Remove subdirs if they only contain files that have been rebuilt\n    ignore_headers = filter(lambda x: not os.path.isfile(top_level_file_path(built_headers_path, x)), movable_headers)\n    remove_subdirs(built_headers_path, [file[0] for file in ignore_headers])\n\n    # Move rebuilt headers into their proper subdirs\n    for header in movable_headers:\n        move_file(top_level_file_path(built_headers_path, header), full_file_path(built_headers_path, header))\n\ndef tb_get_file_name(path):\n    f_list = os.listdir(path)\n    log.debug(f_list)\n    dest_list = []\n    for key in f_list:\n        if key == 'Headers' or key == 'Resources' or key == 'Versions' or key == os.environ['TARGET_NAME']:\n            log.debug(\"do no thing\")\n        else:\n            dest_list.append(key)\n    return dest_list\ndef tb_compare_version(version1, version2):\n    int_ver1 = int(version1)\n    int_ver2 = int(version2)\n    if int_ver2 >= int_ver1:\n        return True\n    return False\n#Source directory and files is\n\n\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# |--MyFramework\n# So this is not standard file structure, this function do make files and directory to the standard files structure\n# Dest directory and files is\n# MyFramework.framework\n# |--Headers\n# |--all resource files\n# `--Versions\n#     |--A\n#     |  |--MyFramework\n#     |  |--Headers\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\ndef tb_format_file_and_directory(project):\n    base_dir = project.local_built_fw_path\n    log.debug(base_dir)\n\n    resource_files = tb_get_file_name(base_dir)\n\n    versions_path = os.path.join(base_dir, \"Versions\")\n    log.debug(versions_path)\n    ensure_path_exists(versions_path)\n\n    framework_version_path = os.path.join(versions_path, os.environ['FRAMEWORK_VERSION'])\n    ensure_path_exists(framework_version_path)\n\n    dest_headers_path = os.path.join(framework_version_path, \"Headers\")\n    ensure_path_exists(dest_headers_path)\n\n    #Moves Headers to Versions/A/Headers\n    src_headers_path = os.path.join(base_dir, \"Headers\")\n    if os.path.isdir(src_headers_path):\n        if not os.path.islink(src_headers_path):\n            move_file(src_headers_path, dest_headers_path)\n\n#Moves Resource files to Versions/A/Resources\n    des_res_path = os.path.join(framework_version_path, \"Resources\")\n    ensure_path_exists(des_res_path)\n    for i in resource_files :\n        dest_res_file_path = os.path.join(des_res_path, i)\n        src_res_file_path  = os.path.join(base_dir, i)\n        move_file(src_res_file_path, dest_res_file_path)\n\n    #Moves MyFramework to Versions/A/MyFramework\n    src_framework_path = os.path.join(base_dir, os.environ['TARGET_NAME'])\n    dest_framework_path= os.path.join(framework_version_path,  os.environ['TARGET_NAME'])\n    move_file(src_framework_path, dest_framework_path)\n    \n    \n# Add all symlinks needed to make a full framework structure:\n#\n# MyFramework.framework\n# |-- MyFramework -> Versions/Current/MyFramework\n# |-- Headers -> Versions/Current/Headers\n# |-- Resources -> Versions/Current/Resources\n# `-- Versions\n#     |-- A\n#     |   |-- MyFramework\n#     |   |-- Headers\n#     |   |   `-- MyFramework.h\n#     |   `-- Resources\n#     |       |-- Info.plist\n#     |       |-- MyViewController.nib\n#     |       `-- en.lproj\n#     |           `-- InfoPlist.strings\n#     `-- Current -> A\n#\ndef add_symlinks_to_framework(project):\n    base_dir = project.local_built_fw_path\n    attempt_symlink(os.path.join(base_dir, \"Versions\", \"Current\"), os.environ['FRAMEWORK_VERSION'])\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Headers\")):\n        attempt_symlink(os.path.join(base_dir, \"Headers\"), os.path.join(\"Versions\", \"Current\", \"Headers\"))\n    if os.path.isdir(os.path.join(base_dir, \"Versions\", \"Current\", \"Resources\")):\n        attempt_symlink(os.path.join(base_dir, \"Resources\"), os.path.join(\"Versions\", \"Current\", \"Resources\"))\n    attempt_symlink(os.path.join(base_dir, os.environ['EXECUTABLE_NAME']), os.path.join(\"Versions\", \"Current\", os.environ['EXECUTABLE_NAME']))\n\n# Build an embedded framework structure.\n# An embedded framework contains the actual framework, plus a \"Resources\"\n# directory containing symlinks to all resources found in the actual framework,\n# with the exception of \"Info.plist\" and anything ending in \".lproj\":\n#\n# MyFramework.embeddedframework\n# |-- MyFramework.framework\n# |   |-- MyFramework -> Versions/Current/MyFramework\n# |   |-- Headers -> Versions/Current/Headers\n# |   |-- Resources -> Versions/Current/Resources\n# |   `-- Versions\n# |       |-- A\n# |       |   |-- MyFramework\n# |       |   |-- Headers\n# |       |   |   `-- MyFramework.h\n# |       |   `-- Resources\n# |       |       |-- Info.plist\n# |       |       |-- MyViewController.nib\n# |       |       `-- en.lproj\n# |       |           `-- InfoPlist.strings\n# |       `-- Current -> A\n# `-- Resources\n#     `-- MyViewController.nib -> ../MyFramework.framework/Resources/MyViewController.nib\n#\ndef build_embedded_framework(project):\n    fw_path = project.local_built_fw_path\n    embedded_path = project.local_built_embedded_fw_path\n    fw_name = os.environ['WRAPPER_NAME']\n\n    if (os.path.islink(fw_path)):\n        # If the framework path is a link, the build result already in embeddedframework.\n        # Just recreate embeddedframework's Resources\n        remove_path(os.path.join(embedded_path, \"Resources\"))\n    else:\n        remove_path(embedded_path)\n        ensure_path_exists(embedded_path)\n        copy_overwrite(fw_path, os.path.join(embedded_path, fw_name))\n\n    # Create embeddedframework's Resources        \n    ensure_path_exists(os.path.join(embedded_path, \"Resources\"))\n    symlink_source = os.path.join(\"..\", fw_name, \"Resources\")\n    symlink_path = os.path.join(embedded_path, \"Resources\")\n    if os.path.isdir(os.path.join(fw_path, \"Resources\")):\n        for file in filter(lambda x: x != \"Info.plist\" and not x.endswith(\".lproj\"), os.listdir(os.path.join(fw_path, \"Resources\"))):\n            attempt_symlink(os.path.join(symlink_path, file), os.path.join(symlink_source, file))\n\n    # Remove the normal framework and replace it with a symlink to the copy\n    # in the embedded framework. This is needed because Xcode runs its strip\n    # phase AFTER the script runs.\n    embed_fw_wrapper = os.path.splitext(os.environ['WRAPPER_NAME'])[0] + \".embeddedframework\"\n    remove_path(fw_path)\n    attempt_symlink(fw_path, os.path.join(embed_fw_wrapper, os.environ['WRAPPER_NAME']))\n\n\n# Run the build process in slave mode to build the other configuration\n# (device/simulator).\n#\ndef run_slave_build(project):\n    print_and_call_slave_build(project.get_slave_project_build_command(), project.other_platform)\n\n# Run the build process.\n#\ndef run_build():\n    project = Project(os.path.join(os.environ['PROJECT_FILE_PATH'], \"project.pbxproj\"))\n\n    # Issue warnings only if we're master.\n    if is_master():\n        if len(project.compilable_sources) == 0:\n            raise Exception(\"No compilable sources found. Please add at least one source file to build target %s.\" % os.environ['TARGET_NAME'])\n\n        if config_warn_derived_data:\n            check_for_derived_data_in_search_paths(project)\n        if config_warn_no_public_headers and len(project.public_headers) == 0:\n            issue_warning('No headers in build target %s were marked public. Please move at least one header to \"Public\" in the \"Copy Headers\" build phase.' % os.environ['TARGET_NAME'])\n\n    # Only build slave if this is an archive build.\n    if is_archive_build():\n        if is_master():\n            log.debug(\"Building as MASTER\")\n            # The slave-side linker tries to include this (nonexistent) path as\n            # a library path.\n            ensure_path_exists(project.get_slave_environment()['BUILT_PRODUCTS_DIR'])\n            project.build_state.persist()\n            run_slave_build(project)\n            project.build_state.reload()\n        else:\n            log.debug(\"Building as SLAVE\")\n            project.build_state.reload()\n            project.build_state.set_slave_properties(project.local_architectures,\n                                                     project.local_linked_archive_paths,\n                                                     project.local_built_fw_path,\n                                                     project.local_built_embedded_fw_path)\n            project.build_state.persist()\n\n    link_local_archs(project)\n    \n    # Only do a universal binary when building an archive.\n    if is_archive_build() and is_master():\n        link_combine_all_archs(project)\n    else:\n        link_combine_local_archs(project)\n\n    if config_deep_header_hierarchy:\n        build_deep_header_hierarchy(project)\n\n    xcode_version = os.environ['XCODE_VERSION_MAJOR']\n\n    if tb_compare_version('0700', xcode_version):\n        tb_format_file_and_directory(project)\n\n    add_symlinks_to_framework(project)\n    \n    if is_master():\n        if config_framework_type == 'embeddedframework':\n            build_embedded_framework(project)\n        elif config_framework_type != 'framework':\n            raise Exception(\"%s: Unknown framework type for config_framework_type\" % config_framework_type)\n\n\nif __name__ == \"__main__\":\n    log_handler = logging.StreamHandler()\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n    log.addHandler(log_handler)\n    log.setLevel(config_log_level)\n\n    error_code = 0\n    prefix = \"M\" if is_master() else \"S\"\n    log_handler.setFormatter(logging.Formatter(\"%(name)s (\" + prefix + \" \" + os.environ['PLATFORM_NAME'] + \"): %(levelname)s: %(message)s\"))\n\n    log.debug(\"Begin build process\")\n\n    if config_deep_header_top:\n        config_deep_header_top = string.Template(config_deep_header_top).substitute(os.environ)\n\n    try:\n        run_build()\n        if issued_warnings:\n            if config_fail_on_warnings:\n                error_code = 1\n            log.warn(\"Build completed with warnings\")\n        else:\n            log.info(\"Build completed\")\n        if not is_archive_build():\n            log.info(\"Note: This is *NOT* a universal framework build. To build as a universal framework, do an archive build.\")\n            log.info(\"To do an archive build from command line, use \\\"xcodebuild -configuration Release UFW_ACTION=archive clean build\\\"\")\n    except Exception:\n        traceback.print_exc(file=sys.stdout)\n        error_code = 1\n        log.error(\"Build failed\")\n    finally:\n        if error_code == 0 and is_archive_build() and is_master():\n            log.info(\"Built framework is in \" + os.environ['TARGET_BUILD_DIR'])\n            if should_open_build_dir():\n                open_build_dir()\n        sys.exit(error_code)\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3CFF77A51C7473A800847C05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
+				3CC1B5551C96B5BC001DEEC0 /* LVZipArchive.m in Sources */,
+				91695AB11E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
+				BEEB28E11CA91B9000EC2D86 /* Layout.c in Sources */,
+				3C98A5421C7C56270001508E /* LViewController.m in Sources */,
+				BEEB28E31CA91B9900EC2D86 /* UIView+JUFLXNode.m in Sources */,
+				9112709C1DFAC65F001F8047 /* LVEvent.m in Sources */,
+				91695AB41E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
+				3CFF77B21C74740800847C05 /* LVPkgManager.m in Sources */,
+				3CFF77B41C74740800847C05 /* LVRSA.m in Sources */,
+				91695AAE1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
+				3CFF77B51C74740800847C05 /* LVDebugLua.m in Sources */,
+				BEEB28E01CA91B8900EC2D86 /* JUFLXNode.m in Sources */,
+				3CFF77B61C74740800847C05 /* LVDebuger.m in Sources */,
+				3CFF77B71C74740800847C05 /* LVDebugConnection.m in Sources */,
+				3CFF77B81C74740800847C05 /* LVBaseView.m in Sources */,
+				3CFF77B91C74740800847C05 /* UIScrollView+LuaView.m in Sources */,
+				91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */,
+				3CFF77BA1C74740800847C05 /* UIView+LuaView.m in Sources */,
+				3CFF77BB1C74740800847C05 /* LVButton.m in Sources */,
+				91232AAE1DAB682100536E0C /* LVWebView.m in Sources */,
+				3CFF77BC1C74740800847C05 /* LVImage.m in Sources */,
+				3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */,
+				3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */,
+				3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */,
+				3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */,
+				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
+				914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */,
+				3CFF77C51C74740800847C05 /* LVPagerView.m in Sources */,
+				3CFF77C61C74740800847C05 /* LVPagerViewCell.m in Sources */,
+				3CFF77C71C74740800847C05 /* LVCollectionView.m in Sources */,
+				91F678861DF5209B0042D6FC /* LVCustomView.m in Sources */,
+				91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
+				3CFF77C81C74740800847C05 /* LVCollectionViewCell.m in Sources */,
+				3CFF77C91C74740800847C05 /* LVCollectionViewDelegate.m in Sources */,
+				3CFF77CA1C74740800847C05 /* LVScrollView.m in Sources */,
+				3CFF77CB1C74740800847C05 /* LVScrollViewDelegate.m in Sources */,
+				3CFF77CC1C74740800847C05 /* LVCustomPanel.m in Sources */,
+				3CFF77CD1C74740800847C05 /* LVAlert.m in Sources */,
+				3CFF77CE1C74740800847C05 /* LVToast.m in Sources */,
+				3CFF77CF1C74740800847C05 /* LVAnimate.m in Sources */,
+				3CFF77D01C74740800847C05 /* LVAnimator.m in Sources */,
+				3CFF77D11C74740800847C05 /* LVStyledString.m in Sources */,
+				3CFF77D21C74740800847C05 /* LVTransform3D.m in Sources */,
+				3CFF77D31C74740800847C05 /* LVData.m in Sources */,
+				3CFF77D41C74740800847C05 /* LVDate.m in Sources */,
+				3CFF77D51C74740800847C05 /* LVTimer.m in Sources */,
+				3CFF77D61C74740800847C05 /* LVStruct.m in Sources */,
+				3CFF77D71C74740900847C05 /* LVGesture.m in Sources */,
+				3CFF77D81C74740900847C05 /* LVLongPressGesture.m in Sources */,
+				3CFF77D91C74740900847C05 /* LVPanGesture.m in Sources */,
+				840BCEE41CB78E8300D816AD /* LVNetworkStatus.m in Sources */,
+				91F6788B1DF561D40042D6FC /* LVCanvas.m in Sources */,
+				3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */,
+				3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */,
+				914BB65E1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
+				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
+				3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */,
+				3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */,
+				3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */,
+				3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */,
+				3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */,
+				3CFF77E21C74740900847C05 /* LVDB.m in Sources */,
+				3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */,
+				3CFF77E41C74740900847C05 /* LVFile.m in Sources */,
+				3CFF77E51C74740900847C05 /* LVNavigation.m in Sources */,
+				3CFF77E61C74740900847C05 /* LVSystem.m in Sources */,
+				3CFF77E81C74740900847C05 /* LVMethod.m in Sources */,
+				3CFF77E91C74740900847C05 /* LVNativeObjBox.m in Sources */,
+				3CFF77EA1C74740900847C05 /* LVLuaObjBox.m in Sources */,
+				3CFF77EB1C74740900847C05 /* LVPointerValueBox.m in Sources */,
+				3CFF77EC1C74740900847C05 /* LVUtil.m in Sources */,
+				3CFF77ED1C74740900847C05 /* LVTypeConvert.m in Sources */,
+				BEEB28E21CA91B9500EC2D86 /* JUFLXLinearLayoutView.m in Sources */,
+				3CFF77EE1C74740900847C05 /* LVExGlobalFunc.m in Sources */,
+				3CFF77EF1C74740900847C05 /* LVHeads.m in Sources */,
+				91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */,
+				3CFF77F01C74740900847C05 /* LView.m in Sources */,
+				3CFF77F11C74740900847C05 /* LVBundle.m in Sources */,
+				3CFF77F21C74740900847C05 /* LVBlock.m in Sources */,
+				BEEB28DF1CA91B8600EC2D86 /* JUFLXCSSParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D7BE1C16C3CD0058E974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */,
+				3CC1B5541C96B59D001DEEC0 /* LVZipArchive.m in Sources */,
+				91695AB01E11004B0088EFD6 /* LVRefreshComponent.m in Sources */,
+				BEEB28D31CA90EC200EC2D86 /* Layout.c in Sources */,
+				3C98A53B1C7C0C100001508E /* LViewController.m in Sources */,
+				BEEB28D81CA90EC200EC2D86 /* UIView+JUFLXNode.m in Sources */,
+				9112709B1DFAC65F001F8047 /* LVEvent.m in Sources */,
+				84E85C1C1C33B84B007DE3DF /* LVBundle.m in Sources */,
+				91695AB31E11004B0088EFD6 /* LVRefreshHeader.m in Sources */,
+				84C1D7D41C16C3F90058E974 /* LVPkgManager.m in Sources */,
+				91695AAD1E11004B0088EFD6 /* LVRefreshConst.m in Sources */,
+				84C1D7D61C16C3FA0058E974 /* LVRSA.m in Sources */,
+				BEEB28D21CA90EC200EC2D86 /* JUFLXNode.m in Sources */,
+				91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */,
+				84C1D7D71C16C3FA0058E974 /* LVDebugLua.m in Sources */,
+				84C1D7D81C16C3FA0058E974 /* LVDebuger.m in Sources */,
+				84C1D7D91C16C3FA0058E974 /* LVDebugConnection.m in Sources */,
+				84C1D7DA1C16C3FA0058E974 /* LVBaseView.m in Sources */,
+				84C1D7DB1C16C3FA0058E974 /* UIScrollView+LuaView.m in Sources */,
+				84C1D7DC1C16C3FA0058E974 /* UIView+LuaView.m in Sources */,
+				91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */,
+				84C1D7DD1C16C3FA0058E974 /* LVButton.m in Sources */,
+				84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */,
+				84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */,
+				84C1D7E01C16C3FA0058E974 /* LVLabel.m in Sources */,
+				84C1D7E11C16C3FA0058E974 /* LVTextField.m in Sources */,
+				84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */,
+				84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */,
+				914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */,
+				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
+				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
+				91F678851DF520920042D6FC /* LVCustomView.m in Sources */,
+				91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
+				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,
+				84C1D7E91C16C3FA0058E974 /* LVCollectionView.m in Sources */,
+				84C1D7EA1C16C3FA0058E974 /* LVCollectionViewCell.m in Sources */,
+				84C1D7EB1C16C3FA0058E974 /* LVCollectionViewDelegate.m in Sources */,
+				84C1D7EC1C16C3FA0058E974 /* LVScrollView.m in Sources */,
+				84C1D7ED1C16C3FA0058E974 /* LVScrollViewDelegate.m in Sources */,
+				84C1D7EE1C16C3FA0058E974 /* LVCustomPanel.m in Sources */,
+				84C1D7EF1C16C3FA0058E974 /* LVAlert.m in Sources */,
+				84C1D7F01C16C3FA0058E974 /* LVToast.m in Sources */,
+				84C1D7F11C16C3FA0058E974 /* LVAnimate.m in Sources */,
+				84C1D7F21C16C3FA0058E974 /* LVStyledString.m in Sources */,
+				84C1D7F31C16C3FA0058E974 /* LVTransform3D.m in Sources */,
+				84C1D7F41C16C3FA0058E974 /* LVData.m in Sources */,
+				84C1D7F51C16C3FA0058E974 /* LVDate.m in Sources */,
+				84C1D7F61C16C3FA0058E974 /* LVTimer.m in Sources */,
+				84C1D7F71C16C3FA0058E974 /* LVStruct.m in Sources */,
+				84C1D7F81C16C3FA0058E974 /* LVGesture.m in Sources */,
+				84C1D7F91C16C3FA0058E974 /* LVLongPressGesture.m in Sources */,
+				84C1D7FA1C16C3FA0058E974 /* LVPanGesture.m in Sources */,
+				91F6788A1DF561D40042D6FC /* LVCanvas.m in Sources */,
+				84C1D7FB1C16C3FA0058E974 /* LVPinchGesture.m in Sources */,
+				914BB65D1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
+				84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */,
+				84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */,
+				84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */,
+				84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */,
+				84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */,
+				840BCEDB1CB7602C00D816AD /* LVNetworkStatus.m in Sources */,
+				84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */,
+				84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */,
+				84C1D8031C16C3FA0058E974 /* LVDB.m in Sources */,
+				84C1D8041C16C3FA0058E974 /* LVDownloader.m in Sources */,
+				84C1D8051C16C3FA0058E974 /* LVFile.m in Sources */,
+				84C1D8061C16C3FA0058E974 /* LVNavigation.m in Sources */,
+				84C1D8071C16C3FA0058E974 /* LVSystem.m in Sources */,
+				84C1D8091C16C3FA0058E974 /* LVMethod.m in Sources */,
+				84C1D80A1C16C3FA0058E974 /* LVNativeObjBox.m in Sources */,
+				84C1D80B1C16C3FA0058E974 /* LVLuaObjBox.m in Sources */,
+				84C1D80C1C16C3FA0058E974 /* LVPointerValueBox.m in Sources */,
+				84C1D80D1C16C3FA0058E974 /* LVUtil.m in Sources */,
+				BEEB28D61CA90EC200EC2D86 /* JUFLXLinearLayoutView.m in Sources */,
+				84C1D80E1C16C3FA0058E974 /* LVTypeConvert.m in Sources */,
+				84C1D80F1C16C3FA0058E974 /* LVExGlobalFunc.m in Sources */,
+				91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */,
+				84C1D8101C16C3FA0058E974 /* LVHeads.m in Sources */,
+				84C1D8111C16C3FA0058E974 /* LView.m in Sources */,
+				84C1D8131C16C3FA0058E974 /* LVBlock.m in Sources */,
+				BEEB28CF1CA90EC200EC2D86 /* JUFLXCSSParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84C1D8941C16CB820058E974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C1D8A21C16CC930058E974 /* Dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3CFF77AF1C7473A800847C05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3CFF77B01C7473A800847C05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		848B5C3F1A0A4CA000F59678 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shi Jie Qin (FSAP8479L6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shi Jie Qin (FSAP8479L6)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7s armv7";
+			};
+			name = Debug;
+		};
+		848B5C401A0A4CA000F59678 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shi Jie Qin (FSAP8479L6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shi Jie Qin (FSAP8479L6)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7s armv7";
+			};
+			name = Release;
+		};
+		84C1D7D21C16C3CD0058E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEC737B8A0B47AC8A1436C7A /* Pods-LuaViewSDK.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					LV_USE_APICHECK,
+					"lv_assert=assert",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = LuaViewSDK/Info.plist;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-Wno-unused-command-line-argument",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wno-unused-command-line-argument",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		84C1D7D31C16C3CD0058E974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A292E710DF361DF229141A75 /* Pods-LuaViewSDK.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = LuaViewSDK/Info.plist;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.LuaViewSDK.LuaViewSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		84C1D89F1C16CB820058E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		84C1D8A01C16CB820058E974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3CFF77B11C7473A800847C05 /* Build configuration list for PBXNativeTarget "LuaViewLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CFF77AF1C7473A800847C05 /* Debug */,
+				3CFF77B01C7473A800847C05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848B5C191A0A4CA000F59678 /* Build configuration list for PBXProject "LuaViewSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848B5C3F1A0A4CA000F59678 /* Debug */,
+				848B5C401A0A4CA000F59678 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84C1D7D11C16C3CD0058E974 /* Build configuration list for PBXNativeTarget "LuaViewSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C1D7D21C16C3CD0058E974 /* Debug */,
+				84C1D7D31C16C3CD0058E974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84C1D89E1C16CB820058E974 /* Build configuration list for PBXNativeTarget "Dummy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C1D89F1C16CB820058E974 /* Debug */,
+				84C1D8A01C16CB820058E974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 848B5C161A0A4CA000F59678 /* Project object */;
+}

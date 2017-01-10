@@ -29,10 +29,6 @@
 // 字体大小
 #define MJRefreshLabelFont [UIFont boldSystemFontOfSize:14]
 
-// 图片路径
-#define MJRefreshSrcName(file) [@"MJRefresh.bundle" stringByAppendingPathComponent:file]
-#define MJRefreshFrameworkSrcName(file) [@"Frameworks/MJRefresh.framework/MJRefresh.bundle" stringByAppendingPathComponent:file]
-
 // 常量
 UIKIT_EXTERN const CGFloat MJRefreshHeaderHeight;
 UIKIT_EXTERN const CGFloat MJRefreshFooterHeight;
@@ -58,6 +54,10 @@ UIKIT_EXTERN NSString *const MJRefreshBackFooterIdleText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterPullingText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterRefreshingText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterNoMoreDataText;
+
+UIKIT_EXTERN NSString *const MJRefreshHeaderLastTimeText;
+UIKIT_EXTERN NSString *const MJRefreshHeaderDateTodayText;
+UIKIT_EXTERN NSString *const MJRefreshHeaderNoneLastDateText;
 
 // 状态检查
 #define MJRefreshCheckState \
