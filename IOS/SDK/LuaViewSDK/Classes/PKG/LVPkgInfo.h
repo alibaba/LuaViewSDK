@@ -14,7 +14,7 @@
 
 #define LV_PKGINFO_SURL     @"surl"
 #define LV_PKGINFO_SSHA     @"ssha"
-#define LV_PKGINFO_SSHA256  @"ssha"
+#define LV_PKGINFO_SSHA256  @"ssha256"
 
 @interface LVPkgInfo : NSObject
 
