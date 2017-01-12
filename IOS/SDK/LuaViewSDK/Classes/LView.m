@@ -99,7 +99,6 @@
 #pragma mark - init
 
 -(void) myInit{
-    self.changeGrammar = YES;
     self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
