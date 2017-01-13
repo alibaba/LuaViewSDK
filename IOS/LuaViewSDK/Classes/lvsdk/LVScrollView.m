@@ -327,9 +327,11 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
                 UICollectionView* collectionView = (UICollectionView*)view;
                 collectionView.delegate = nil;
                 collectionView.dataSource = nil;
+                collectionView.scrollEnabled = NO;
             } else if( [view isKindOfClass:[UIScrollView class]] ) {
-                UIScrollView* collectionView = (UIScrollView*)view;
-                collectionView.delegate = nil;
+                UIScrollView* scrollView = (UIScrollView*)view;
+                scrollView.delegate = nil;
+                scrollView.scrollEnabled = NO;
             }
         }
     }

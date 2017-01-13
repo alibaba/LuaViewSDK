@@ -337,7 +337,9 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // 无动画
 -(void) changeOffsetNoAnimation:(NSNumber*) value{
-    [self.scrollview setContentOffset:self.nextOffset animated:NO];
+    if( self.lv_lview ) {
+        [self.scrollview setContentOffset:self.nextOffset animated:NO];
+    }
 }
 
 #pragma -mark lvNewCollectionView
