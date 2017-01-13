@@ -314,6 +314,33 @@ static int callback (lv_State *L) {
     return lv_setCallbackByKey(L, STR_CALLBACK, NO);
 }
 
+static void releaseUserDataView(LVUserDataInfo* userdata){
+    if( userdata && userdata->object ){
+        UIView<LVProtocal>* view = CFBridgingRelease(userdata->object);
+        userdata->object = NULL;
+        if( view ){
+            view.lv_userData = nil;
+            view.lv_lview = nil;
+            [view removeFromSuperview];
+            [view.layer removeFromSuperlayer];
+            if( [view isKindOfClass:[UICollectionView class]] ) {
+                UICollectionView* collectionView = (UICollectionView*)view;
+                collectionView.delegate = nil;
+                collectionView.dataSource = nil;
+            } else if( [view isKindOfClass:[UIScrollView class]] ) {
+                UIScrollView* collectionView = (UIScrollView*)view;
+                collectionView.delegate = nil;
+            }
+        }
+    }
+}
+
+#pragma -mark __gc
+static int __gc (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    releaseUserDataView(user);
+    return 0;
+}
 
 static const struct lvL_reg memberFunctions [] = {
     {"callback",     callback },// 回调
@@ -336,6 +363,7 @@ static const struct lvL_reg memberFunctions [] = {
     //    {"footerResetNoMoreData", footerResetNoMoreData},
     //    {"hiddenRefreshFooter", hiddenRefreshFooter},
     
+    {"__gc",        __gc },
     {NULL, NULL}
 };
 
