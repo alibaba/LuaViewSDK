@@ -326,12 +326,16 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // 有动画
 -(void) changeOffsetWithAnimation:(NSNumber*) value{
-    [self.scrollview setContentOffset:self.nextOffset animated:YES];
+    if( self.lv_lview ) {
+        [self.scrollview setContentOffset:self.nextOffset animated:YES];
+    }
 }
 
 // 无动画
 -(void) changeOffsetNoAnimation:(NSNumber*) value{
-    [self.scrollview setContentOffset:self.nextOffset animated:NO];
+    if( self.lv_lview ) {
+        [self.scrollview setContentOffset:self.nextOffset animated:NO];
+    }
 }
 
 #pragma -mark lvNewCollectionView
@@ -562,6 +566,15 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         userdata->object = NULL;
         if( view ){
             [view.timer invalidate];
+            view.scrollview.delegate = nil;
+            [view.scrollview removeFromSuperview];
+            NSArray* subviews = view.scrollview.subviews;
+            for( UIView* view  in subviews ) {
+                [view removeFromSuperview];
+            }
+            view.scrollview.scrollEnabled = NO;
+            view.scrollview = nil;
+            
             view.lv_userData = nil;
             view.lv_lview = nil;
             [view removeFromSuperview];

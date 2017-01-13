@@ -60,6 +60,7 @@ static int __gc(lua_State *L) {
         CFBridgingRelease((__bridge CFTypeRef)(animator));
         data->object = nil;
         
+        animator.lv_lview = nil;
         animator.lv_userData = NULL;
     }
     
