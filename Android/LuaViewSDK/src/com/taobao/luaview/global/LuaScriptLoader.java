@@ -24,7 +24,11 @@ public class LuaScriptLoader {
 
     public LuaScriptLoader(final Context context) {
         if (context != null) {
-            this.mContext = context.getApplicationContext();
+            try {
+                this.mContext = context.getApplicationContext();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         LuaScriptManager.init(context);
     }
@@ -55,7 +59,8 @@ public class LuaScriptLoader {
 
         /**
          * 脚本执行完成，参数表示是否执行成功，保证一定被调用到
-         * @param uri 原始的加载url
+         *
+         * @param uri             原始的加载url
          * @param executedSuccess
          */
         void onScriptExecuted(String uri, boolean executedSuccess);
