@@ -96,7 +96,7 @@
         <dependency>
             <groupId>com.android.support</groupId>
             <artifactId>recyclerview-v7</artifactId>
-            <version>24.1.1</version>
+            <version>23.4.0</version>
             <type>aar</type>
             <scope>provided</scope>
         </dependency>
