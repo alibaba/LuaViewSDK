@@ -213,6 +213,16 @@ void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* 
 
 void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 
+extern NSString* safe_stringForKey(NSDictionary*dic, id key);
+extern NSDictionary * safe_dictionaryForKey(NSDictionary* dic, id key);
+NSDate * safe_dateForKey(NSDictionary* dic, id key );
+
+
+
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
+                                         block:(void (^)(NSTimer *timer))block
+                                       repeats:(BOOL)inRepeats;
+
 @end
 
 

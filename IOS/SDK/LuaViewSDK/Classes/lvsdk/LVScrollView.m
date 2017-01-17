@@ -334,8 +334,8 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
 }
 
 #pragma -mark __gc
-static int __gc (lv_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+static int __gc (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataView(user);
     return 0;
 }

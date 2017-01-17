@@ -216,4 +216,8 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define LV_LUASTATE_VIEW(L)     ( (__bridge LView *)( G(L)->ud ) )
 #define LUAVIEW_SYS_TABLE_KEY   "..::luaview::.."
 
+#ifndef MakeSureNotNil
+#define MakeSureNotNil(__obj) ((__obj) ? (__obj) : @"")
+#endif
+
 #endif

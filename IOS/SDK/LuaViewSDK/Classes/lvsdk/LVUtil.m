@@ -878,6 +878,51 @@ void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
     }
 }
 
+
+static id objectForKey(NSDictionary* dic, id key, Class clazz){
+    id obj = [dic objectForKey:key];
+    if ([obj isKindOfClass:clazz]) {
+        return obj;
+    }
+    return nil;
+}
+
+NSString* safe_stringForKey(NSDictionary*dic, id key) {
+    NSString *obj = objectForKey(dic, key, [NSString class] );
+    return obj;
+}
+
+NSDictionary * safe_dictionaryForKey(NSDictionary* dic, id key) {
+    NSDictionary *obj = objectForKey( dic, key, [NSDictionary class] );
+    return obj;
+}
+
+NSDate * safe_dateForKey(NSDictionary* dic, id key ){
+    NSDate *obj = objectForKey(dic, key, [NSDate class] );
+    return obj;
+}
+
+
+
++ (NSTimer *) scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
+                                         block:(void (^)(NSTimer *timer))block
+                                       repeats:(BOOL)inRepeats {
+    NSParameterAssert(block != nil);
+    return [NSTimer scheduledTimerWithTimeInterval:inTimeInterval
+                                         target:self
+                                       selector:@selector(lv_executeBlockFromTimer:)
+                                       userInfo:[block copy]
+                                        repeats:inRepeats];
+}
+
++ (void)lv_executeBlockFromTimer:(NSTimer *)aTimer {
+    void (^block)(NSTimer *) = [aTimer userInfo];
+    if (block)
+        block(aTimer);
+}
+
+
+
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG
     va_list params; //定义一个指向个数可变的参数列表指针;
