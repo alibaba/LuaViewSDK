@@ -270,7 +270,8 @@ public class LexState {
 		L.pushfstring( cid+":"+linenumber+": "+msg );
 		if ( token != 0 )
 			L.pushfstring( "syntax error: "+msg+" near "+txtToken(token) );
-		throw new LuaError(cid+":"+linenumber+": "+msg);
+//		throw new LuaError(cid+":"+linenumber+": "+msg);
+		throw new LuaError(cid+":"+linenumber+": "+msg+" near "+txtToken(token));//modified by song
 	}
 
 	void syntaxerror( String msg ) {
