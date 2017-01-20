@@ -29,6 +29,7 @@
             self.changeGrammar = YES;
         }
         self.url = [self stringByDecodingURLFormat:self.url]; // 下载地址可能需要解码
+        self.url = [self addHttpPrefix:self.url];// 下载地址可能需要加https前缀
         self.package = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_PACKAGE];
         if( self.package.length<=0 && self.url) {
             self.package = [LVUtil MD5HashFromData:[self.url dataUsingEncoding:NSUTF8StringEncoding]];
@@ -37,6 +38,16 @@
         self.originalDic = dic;
     }
     return self;
+}
+
+-(NSString*) addHttpPrefix:(NSString*) url{
+    if( [url rangeOfString:@"://"].length>0 ){
+        return url;
+    }
+    if( [url hasPrefix:@"//"] ) {
+        return [NSString stringWithFormat:@"https:%@",url];
+    }
+    return url;
 }
 
 - (NSString *)stringByDecodingURLFormat:(NSString*) str
