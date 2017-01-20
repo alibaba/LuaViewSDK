@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define LV_PKGINFO_URL      @"url"
+#define LV_PKGINFO_URL2     @"luaview_script_url"
 #define LV_PKGINFO_SHA      @"sha"
 #define LV_PKGINFO_SHA256   @"sha256"
 
@@ -25,9 +26,18 @@
 @property(nonatomic,copy) NSString* timestamp; // 版本对比时间戳
 @property(nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（‘:’和'.'互换）
 
-
-
+/*
+ *
+ * 解析字典 -> model
+ *
+ */
 -(instancetype) init:(NSDictionary*) dic;
 
+/*
+ *
+ * model -> 字典信息
+ *
+ */
+- (NSDictionary*) dictionaryInfo;
 
 @end
