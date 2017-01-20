@@ -7,6 +7,7 @@
 //
 
 #import "LVPkgInfo.h"
+#import "LVUtil.h"
 
 @implementation LVPkgInfo
 
@@ -26,6 +27,10 @@
             self.url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL key2:LV_PKGINFO_URL2];
             self.sha256 = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
             self.changeGrammar = YES;
+        }
+        self.package = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_PACKAGE];
+        if( self.package.length<=0 && self.url) {
+            self.package = [LVUtil MD5HashFromData:[self.url dataUsingEncoding:NSUTF8StringEncoding]];
         }
         self.timestamp = self.url;//时间戳 用下载地址标示
         self.originalDic = dic;
