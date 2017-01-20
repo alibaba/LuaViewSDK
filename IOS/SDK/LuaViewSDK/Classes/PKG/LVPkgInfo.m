@@ -28,6 +28,7 @@
             self.sha256 = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
             self.changeGrammar = YES;
         }
+        self.url = [self stringByDecodingURLFormat:self.url]; // 下载地址可能需要解码
         self.package = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_PACKAGE];
         if( self.package.length<=0 && self.url) {
             self.package = [LVUtil MD5HashFromData:[self.url dataUsingEncoding:NSUTF8StringEncoding]];
@@ -36,6 +37,14 @@
         self.originalDic = dic;
     }
     return self;
+}
+
+- (NSString *)stringByDecodingURLFormat:(NSString*) str
+{
+    NSString *result = [str stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    //result = [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    result = [result stringByRemovingPercentEncoding];
+    return result;
 }
 
 - (NSDictionary*) dictionaryInfo{
