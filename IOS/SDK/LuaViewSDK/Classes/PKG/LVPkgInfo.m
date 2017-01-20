@@ -21,17 +21,29 @@
         if(  url && sha ) {
             self.url = url;
             self.sha256 = sha;
-            self.timestamp = self.url;
             self.changeGrammar = NO;
         } else {
-            self.url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL];
+            self.url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL key2:LV_PKGINFO_URL2];
             self.sha256 = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
-            self.timestamp = self.url;
             self.changeGrammar = YES;
         }
+        self.timestamp = self.url;//时间戳 用下载地址标示
         self.originalDic = dic;
     }
     return self;
+}
+
+- (NSDictionary*) dictionaryInfo{
+    if( self.url && self.sha256 ) {
+        if( self.changeGrammar ) {
+            return @{LV_PKGINFO_URL:self.url,
+                     LV_PKGINFO_SHA:self.sha256};
+        } else {
+            return @{LV_PKGINFO_SURL:self.url ,
+                     LV_PKGINFO_SSHA:self.sha256};
+        }
+    }
+    return nil;
 }
 
 +(NSString*) safe_string:(NSDictionary*) dic forKey:(NSString*) key {
