@@ -59,13 +59,15 @@
 }
 
 - (NSDictionary*) dictionaryInfo{
-    if( self.url && self.sha256 ) {
+    if( self.url && self.sha256 && self.package ) {
         if( self.changeGrammar ) {
             return @{LV_PKGINFO_URL:self.url,
-                     LV_PKGINFO_SHA:self.sha256};
+                     LV_PKGINFO_SHA:self.sha256,
+                     LV_PKGINFO_PACKAGE:self.package};
         } else {
             return @{LV_PKGINFO_SURL:self.url ,
-                     LV_PKGINFO_SSHA:self.sha256};
+                     LV_PKGINFO_SSHA:self.sha256,
+                     LV_PKGINFO_PACKAGE:self.package};
         }
     }
     return nil;
