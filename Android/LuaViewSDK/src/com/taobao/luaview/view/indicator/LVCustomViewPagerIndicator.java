@@ -50,7 +50,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
 
     private void init() {
         this.setHorizontalScrollBarEnabled(false);
-        addView(mLayout, LuaViewUtil.createRelativeLayoutParamsMM());
+        super.addView(mLayout, LuaViewUtil.createRelativeLayoutParamsMM());
     }
 
     @Override

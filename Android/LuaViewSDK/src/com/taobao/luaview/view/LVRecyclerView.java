@@ -113,11 +113,6 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
     }
 
     @Override
-    public void addLVView(View view, Varargs varargs) {
-        //TODO 这里不做操作，因为ListView不应该加子view
-    }
-
-    @Override
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
 
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.URLUtil;
 
 import com.taobao.luaview.cache.LuaCache;
@@ -23,7 +24,6 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.NetworkUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 import com.taobao.luaview.view.LVViewGroup;
-import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
@@ -51,7 +51,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     private LuaCache mLuaCache;
 
     //需要渲染的Target
-    private ILVViewGroup mRenderTarget;
+    private ViewGroup mRenderTarget;
 
     //globals
     public Globals mGlobals;
@@ -809,7 +809,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      *
      * @return
      */
-    public ILVViewGroup createDefaultRenderTarget() {
+    public ViewGroup createDefaultRenderTarget() {
         return new LVViewGroup(mGlobals, createMetaTableForLuaView(), null);
     }
 
@@ -819,7 +819,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param viewGroup
      * @return
      */
-    public LuaView setRenderTarget(ILVViewGroup viewGroup) {
+    public LuaView setRenderTarget(ViewGroup viewGroup) {
         this.mRenderTarget = viewGroup;
         return this;
     }
@@ -829,7 +829,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      *
      * @return
      */
-    private ILVViewGroup getRenderTarget() {
+    private ViewGroup getRenderTarget() {
         return mRenderTarget != null ? mRenderTarget : this;
     }
 

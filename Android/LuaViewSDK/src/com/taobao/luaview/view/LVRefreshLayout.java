@@ -33,7 +33,7 @@ public class LVRefreshLayout extends SuperSwipeRefreshLayout implements ILVViewG
 
     private void init(Globals globals) {
         mContainer = new LVViewGroup(globals, mLuaUserdata.getmetatable(), null);
-        addView(mContainer, LuaViewUtil.createRelativeLayoutParamsMM());
+        super.addView(mContainer, LuaViewUtil.createRelativeLayoutParamsMM());
     }
 
     @Override
@@ -42,10 +42,9 @@ public class LVRefreshLayout extends SuperSwipeRefreshLayout implements ILVViewG
     }
 
     @Override
-    public void addLVView(final View view, Varargs varargs) {
+    public void addView(View view, LayoutParams params) {
         if(mContainer != view) {
-            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-            mContainer.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+            mContainer.addView(view, params);
         }
     }
 

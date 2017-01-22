@@ -24,6 +24,7 @@ package org.luaj.vm2;
 //TODO 与3.0不一样
 
 import android.content.Context;
+import android.view.ViewGroup;
 
 import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.debug.DebugConnection;
@@ -129,11 +130,11 @@ public class Globals extends LuaTable {
      * Android parent view
      */
     private WeakReference<LuaView> mLuaView;
-    public ILVViewGroup container;
-    private ILVViewGroup tmpContainer;
+    public ViewGroup container;
+    private ViewGroup tmpContainer;
 
     //containers
-    private Stack<ILVViewGroup> mContainers;
+    private Stack<ViewGroup> mContainers;
 
     /**
      * The current default input stream.
@@ -611,7 +612,7 @@ public class Globals extends LuaTable {
      * @param viewGroup
      */
     @Deprecated
-    public void saveContainer(final ILVViewGroup viewGroup) {
+    public void saveContainer(final ViewGroup viewGroup) {
         if (this.container == null) {
             this.tmpContainer = viewGroup;
             this.container = viewGroup;
@@ -634,9 +635,9 @@ public class Globals extends LuaTable {
      *
      * @param viewGroup
      */
-    public void pushContainer(final ILVViewGroup viewGroup) {
+    public void pushContainer(final ViewGroup viewGroup) {
         if (this.mContainers == null) {
-            this.mContainers = new Stack<ILVViewGroup>();
+            this.mContainers = new Stack<ViewGroup>();
         }
         this.mContainers.push(this.container);
         this.container = viewGroup;
