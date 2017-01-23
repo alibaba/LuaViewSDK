@@ -33,7 +33,7 @@
     if( L ) {
         lua_createtable(L, 0, 0);
         [LVUtil registryValue:L key:self stack:-1];
-        lv_luaTableSetWeakWindow(L, self);
+        lv_luaTableSetWeakWindow(L, self.contentView);
     }
 }
 
