@@ -125,4 +125,33 @@ public class LuaScriptLoader {
         }
     }
 
+
+    //--------------------------------preload script------------------------------------------------
+
+    /**
+     * preload script
+     *
+     * @param url
+     * @param sha256
+     */
+    public void preload(final String url, final String sha256) {
+        if (LuaScriptManager.existsScriptBundle(url)) {//load local
+            new ScriptBundleLoadTask(mContext, null).execute(url);
+        } else {
+            new ScriptBundleDownloadTask(mContext, null).execute(url, sha256);
+        }
+    }
+
+
+    /**
+     * download script
+     *
+     * @param url
+     * @param sha256
+     */
+    public void download(final String url, final String sha256) {
+        if (!LuaScriptManager.existsScriptBundle(url)) {//load local
+            new ScriptBundleDownloadTask(mContext, null).execute(url, sha256);
+        }
+    }
 }

@@ -49,6 +49,7 @@ import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
 import com.taobao.luaview.fun.binder.ui.UIWebViewBinder;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
@@ -80,7 +81,12 @@ public class LuaViewManager {
      * @return
      */
     public static Globals createGlobals() {
+        DebugUtil.tsi("luaviewp-loadSystemLibs");
+
         final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
+
+        DebugUtil.tei("luaviewp-loadSystemLibs");
+
         if (LuaViewConfig.isUseLuaDC()) {
             LuaDC.install(globals);
         }
@@ -95,6 +101,7 @@ public class LuaViewManager {
      * @param globals
      */
     public static void loadLuaViewLibs(final Globals globals) {
+        DebugUtil.tsi("luaviewp-loadLibs");
         //ui
         globals.tryLazyLoad(new UITextViewBinder());
         globals.tryLazyLoad(new UIEditTextBinder());
@@ -151,6 +158,7 @@ public class LuaViewManager {
         globals.tryLazyLoad(new PinnedBinder());
         globals.tryLazyLoad(new PaintStyleBinder());
         globals.tryLazyLoad(new TouchEventBinder());
+        DebugUtil.tei("luaviewp-loadLibs");
     }
 
     //----------------------------------------bind methods------------------------------------------
