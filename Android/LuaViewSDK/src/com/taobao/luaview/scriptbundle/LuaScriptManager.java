@@ -24,7 +24,7 @@ public class LuaScriptManager {
     public static final String FOLDER_SCRIPT = "script";
 
     //默认缓存文件的后缀
-    public static final String POSTFIX_SCRIPT_BUNDLE = ".lvbundle";
+    public static final String POSTFIX_SCRIPT_BUNDLE = ".lvraw";
     public static final String POSTFIX_DEFAULT = ".lv";
     public static final String POSTFIX_JPG = ".jpg";
     public static final String POSTFIX_APK = ".apk";
@@ -33,6 +33,7 @@ public class LuaScriptManager {
     public static final String POSTFIX_LUA = ".lua";
     public static final String POSTFIX_B_LUA = ".blua";
     public static final String POSTFIX_LV = ".lv";//Lua加密脚本(source or bytecode)
+    public static final String POSTFIX_LV_ZIP = ".zip";//lua的zip包
     public static final String POSTFIX_LV_BYTECODE_ZIP = ".bzip";//lua的二进制zip包
     public static final String POSTFIX_LV_STANDARD_SYNTAX_ZIP = ".szip";//标准语法的zip包
     public static final String POSTFIX_SIGN = ".sign";
@@ -180,8 +181,7 @@ public class LuaScriptManager {
      */
     public static boolean existsScriptBundle(final String uri) {
         if (!TextUtils.isEmpty(uri)) {
-            final String scriptFilePath = buildScriptBundleFilePath(uri);//bundle exists
-            return FileUtil.exists(scriptFilePath);//这里只需要判断folder存在与否，如果folder存在则只需要用folder来判断即可
+            return FileUtil.exists(buildScriptBundleFilePath(uri));
         }
         return false;
     }
@@ -196,6 +196,17 @@ public class LuaScriptManager {
      */
     public static boolean isLuaScriptBundle(final String fileName) {
         return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_SCRIPT_BUNDLE);
+    }
+
+    /**
+     * 是否是lua的zip包（zip，bzip，szip）
+     * @param fileName
+     * @return
+     */
+    public static boolean isLuaScriptZip(final String fileName) {
+        return FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_LV_ZIP)
+                || FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_LV_BYTECODE_ZIP)
+                || FileUtil.isSuffix(fileName, LuaScriptManager.POSTFIX_LV_STANDARD_SYNTAX_ZIP);
     }
 
     /**

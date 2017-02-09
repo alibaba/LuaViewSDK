@@ -1,7 +1,6 @@
 package com.taobao.luaview.fun.base;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.taobao.luaview.global.LuaViewConfig;
 import com.taobao.luaview.global.LuaViewManager;
@@ -41,7 +40,7 @@ public abstract class BaseVarArgUICreator extends VarArgFunction {
         }
 
         ILVView view = createView(globals, metatable, args);
-        if (globals.container instanceof ViewGroup && view instanceof View && ((View) view).getParent() == null) {
+        if (globals.container != null && view instanceof View && ((View) view).getParent() == null) {
             LuaViewUtil.addView(globals.container, (View) view, args);
         }
         return view.getUserdata();

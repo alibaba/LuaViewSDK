@@ -152,7 +152,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                             imageView.setImageBitmap(bitmap);
                         }
                     }
-                }.execute();
+                }.executeInPool();
             }
         }
         return this;

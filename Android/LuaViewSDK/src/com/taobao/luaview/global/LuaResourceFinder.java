@@ -10,6 +10,7 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleLoadDelegate;
 import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.DrawableUtil;
 import com.taobao.luaview.util.FileUtil;
@@ -92,10 +93,10 @@ public class LuaResourceFinder implements ResourceFinder {
         }
 
         if (LuaScriptManager.isLuaEncryptScript(nameOrPath)) {//.lv
-            return ScriptBundleLoadTask.loadEncryptScript(mContext, findFile(nameOrPath));
+            return ScriptBundleLoadDelegate.loadEncryptScript(mContext, findFile(nameOrPath));
         } else {//.lua 或者 输入folder名字（其实是lvbundle的名字，如ppt440), 则加载 main.lua
             final String newName = LuaScriptManager.isLuaScript(nameOrPath) ? nameOrPath : DEFAULT_MAIN_ENTRY;//如果是脚本则加载，否则加载main.lua
-            InputStream inputStream = ScriptBundleLoadTask.loadEncryptScript(mContext, findFile(LuaScriptManager.changeSuffix(newName, LuaScriptManager.POSTFIX_LV)));
+            InputStream inputStream = ScriptBundleLoadDelegate.loadEncryptScript(mContext, findFile(LuaScriptManager.changeSuffix(newName, LuaScriptManager.POSTFIX_LV)));
             if (inputStream == null) {//如果.lv不存在，则尝试读取.lua
                 inputStream = findFile(newName);
             }
@@ -131,7 +132,7 @@ public class LuaResourceFinder implements ResourceFinder {
                     callback.onFinish(drawable);
                 }
             }
-        }.execute();
+        }.executeInPool();
     }
 
     /**
@@ -162,7 +163,7 @@ public class LuaResourceFinder implements ResourceFinder {
                     imageView.setImageDrawable(drawable);
                 }
             }
-        }.execute();
+        }.executeInPool();
     }
 
     /**

@@ -18,6 +18,7 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.EncryptUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
@@ -72,12 +73,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         init(context);
 
         //create globals
-        final Globals globals = createGlobals(context);
+        final Globals globals = LuaViewManager.createGlobals();
 
         //设置metaTable
         return createLuaView(context, globals);
     }
-
 
     /**
      * create LuaView async
@@ -86,6 +86,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param createdCallback
      */
     public static void createAsync(final Context context, final CreatedCallback createdCallback) {
+        DebugUtil.tsi("luaviewp-createAsync");
         new SimpleTask1<Globals>() {
             @Override
             protected Globals doInBackground(Object... params) {
@@ -93,7 +94,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 initAsync();
 
                 //create globals
-                return createGlobalsAsync();
+                return LuaViewManager.createGlobalsAsync();//TODO 异步创建有风险，如果使用的时候尚未创建完成则会加载失败
             }
 
             @Override
@@ -108,24 +109,15 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                 LuaScriptManager.init(context);
             }
 
-            //创建globals
-            private Globals createGlobalsAsync() {
-                return createGlobals(context);
-            }
-
             //创建view
             private void createViewAsync(Globals globals) {
                 final LuaView luaView = createLuaView(context, globals);
+                DebugUtil.tei("luaviewp-createAsync");
                 if (createdCallback != null) {
                     createdCallback.onCreated(luaView);
                 }
             }
-        }.execute();
-    }
-
-    private static Globals createGlobals(final Context context) {
-        final Globals globals = LuaViewManager.createGlobals();
-        return globals;
+        }.executeInPool();
     }
 
     private static LuaView createLuaView(final Context context, final Globals globals) {
@@ -382,7 +374,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     executeScript(value, activity, viewObj, callback);
                 }
             }
-        }.execute();
+        }.executeInPool();
         return this;
     }
 
@@ -536,6 +528,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
 
     /**
      * 设置使用标准语法
+     *
      * @param standardSyntax
      */
     public void setUseStandardSyntax(boolean standardSyntax) {
@@ -667,7 +660,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     executeScript(value, activity, viewObj, callback);
                 }
             }
-        }.execute();
+        }.executeInPool();
         return this;
     }
 
@@ -681,14 +674,14 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             @Override
             protected LuaValue doInBackground(Object... params) {
                 if (scriptFile != null) {//prototype
-                    String luaScript = scriptFile.getScriptString();
                     String filePath = scriptFile.getFilePath();
+
                     if (mGlobals != null && scriptFile.prototype != null) {//prototype
                         return mGlobals.load(scriptFile.prototype, filePath);
                     } else {//source code
                         try {
                             if (mGlobals != null) {
-                                return mGlobals.load(luaScript, filePath);
+                                return mGlobals.load(scriptFile.getScriptString(), filePath);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -708,7 +701,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     executeScript(value, activity, viewObj, callback);
                 }
             }
-        }.execute();
+        }.executeSerial();//TODO 这里使用execute，而不是executeInPoll，与createGlobalAsync保持一致
         return this;
     }
 
