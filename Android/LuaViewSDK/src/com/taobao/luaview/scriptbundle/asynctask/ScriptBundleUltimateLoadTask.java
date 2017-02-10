@@ -10,6 +10,7 @@ import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleDownloadDe
 import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleLoadDelegate;
 import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleUnpackDelegate;
 import com.taobao.luaview.util.DebugUtil;
+import com.taobao.luaview.util.IOUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
+import java.util.Random;
 
 /**
  * download lua script bundle from server and return saved path in local file system

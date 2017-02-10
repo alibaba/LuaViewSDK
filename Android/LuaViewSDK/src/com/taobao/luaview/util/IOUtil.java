@@ -47,12 +47,62 @@ public class IOUtil {
 
     /**
      * convert input stream of inputEncoding to stream of DEFAULT_ENCODE
+     *
      * @param input
      * @param inputEncoding
      * @return
      */
     public static byte[] toBytes(final InputStream input, final String inputEncoding) {
         byte[] result = toBytes(input);
+        if (result != null && inputEncoding != null && !UDData.DEFAULT_ENCODE.equalsIgnoreCase(inputEncoding)) {
+            try {
+                return new String(result, inputEncoding).getBytes(UDData.DEFAULT_ENCODE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * read input stream to bytes
+     *
+     * @param input
+     * @param length
+     * @return
+     */
+    public static byte[] toBytes(final InputStream input, int length) {
+        if (length > 0) {
+            byte[] bytes = new byte[length];
+            int count;
+            int pos = 0;
+            try {
+                while (pos < length && ((count = input.read(bytes, pos, length - pos)) != -1)) {
+                    pos += count;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (pos != length) {
+                return null;
+            }
+            return bytes;
+        } else {
+            return toBytes(input);
+        }
+    }
+
+    /**
+     * read input stream to bytes
+     *
+     * @param input
+     * @param length
+     * @param inputEncoding
+     * @return
+     */
+    public static byte[] toBytes(final InputStream input, int length, final String inputEncoding) {
+        byte[] result = toBytes(input, length);
         if (result != null && inputEncoding != null && !UDData.DEFAULT_ENCODE.equalsIgnoreCase(inputEncoding)) {
             try {
                 return new String(result, inputEncoding).getBytes(UDData.DEFAULT_ENCODE);
