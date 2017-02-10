@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LVPkgInfo.h"
 
-#define LUAVIEW_ROOT_PATH  @"LUAVIEW_5_10_0"
-#define LUAVIEW_VERSION    "5.10.0"
+#define LUAVIEW_ROOT_PATH  @"LUAVIEW_5_11_0"
+#define LUAVIEW_VERSION    "5.11.0"
 
 
 extern NSString * const LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL;
