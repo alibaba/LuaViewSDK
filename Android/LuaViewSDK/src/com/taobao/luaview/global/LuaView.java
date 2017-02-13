@@ -86,7 +86,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param createdCallback
      */
     public static void createAsync(final Context context, final CreatedCallback createdCallback) {
-        DebugUtil.tsi("luaviewp-createAsync");
+//        DebugUtil.tsi("luaviewp-createAsync");
         new SimpleTask1<Globals>() {
             @Override
             protected Globals doInBackground(Object... params) {
@@ -112,7 +112,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
             //创建view
             private void createViewAsync(Globals globals) {
                 final LuaView luaView = createLuaView(context, globals);
-                DebugUtil.tei("luaviewp-createAsync");
+//                DebugUtil.tei("luaviewp-createAsync");
                 if (createdCallback != null) {
                     createdCallback.onCreated(luaView);
                 }
@@ -713,7 +713,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param viewObj
      * @param callback
      */
-    private boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
+    public boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
         try {
             if (mGlobals != null && value != null) {
                 mGlobals.saveContainer(getRenderTarget());
@@ -814,6 +814,7 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     public LuaView setRenderTarget(ViewGroup viewGroup) {
         this.mRenderTarget = viewGroup;
+        this.mLuaUserdata = createUserdata(mGlobals, mLuaUserdata.getmetatable(), LuaValue.NIL);//重新创建一个userdata
         return this;
     }
 

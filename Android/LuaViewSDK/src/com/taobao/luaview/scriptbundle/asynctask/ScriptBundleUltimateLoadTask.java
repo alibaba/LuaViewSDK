@@ -78,12 +78,8 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
             }
 
         } else {//下载解压加载
-
-            DebugUtil.tsi("luaviewp-downloadAndUnpack");
             ScriptBundleDownloadDelegate downloadDelegate = new ScriptBundleDownloadDelegate(url, sha256);
-            DebugUtil.tsi("luaviewp-creatConnection");
             HttpURLConnection connection = downloadDelegate.createHttpUrlConnection();
-            DebugUtil.tei("luaviewp-creatConnection");
             InputStream inputStream = downloadDelegate.downloadAsStream(connection);
 
             if (inputStream != null) {
@@ -93,7 +89,6 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
             if (connection != null) {
                 connection.disconnect();
             }
-            DebugUtil.tei("luaviewp-downloadAndUnpack");
         }
 
         scriptBundle = new ScriptBundleLoadDelegate().load(mContext, scriptBundle);//解密脚本或者加载Prototype

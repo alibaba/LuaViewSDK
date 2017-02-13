@@ -82,7 +82,7 @@ public class ScriptBundleUnpackDelegate {
         final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
         final InputStream inputStream = assetFilePath != null ? AssetUtil.open(context, assetFilePath) : FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
         try {
-            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);//TODO 性能瓶颈
+            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, inputStream);//TODO 性能瓶颈
         } catch (IOException e) {
             return null;
         } finally {
@@ -102,7 +102,7 @@ public class ScriptBundleUnpackDelegate {
         final String scriptBundleFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
         final InputStream inputStream = FileUtil.open(scriptBundleFilePath);//额外参数，告知了inputstream (asset的情况)
         try {
-            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);//TODO 性能瓶颈
+            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, inputStream);//TODO 性能瓶颈
         } catch (IOException e) {
             return null;
         }
@@ -116,7 +116,7 @@ public class ScriptBundleUnpackDelegate {
      */
     public static ScriptBundle unpack(String url, byte[] fileData) {
         try {
-            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, new ByteArrayInputStream(fileData));//TODO 性能瓶颈
+            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, new ByteArrayInputStream(fileData));//TODO 性能瓶颈
         } catch (IOException e) {
             return null;
         }
@@ -130,7 +130,7 @@ public class ScriptBundleUnpackDelegate {
      */
     public static ScriptBundle unpack(String url, InputStream inputStream) {
         try {
-            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), true, url, inputStream);//TODO 性能瓶颈
+            return unpackBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, inputStream);//TODO 性能瓶颈
         } catch (IOException e) {
             return null;
         }
@@ -150,52 +150,52 @@ public class ScriptBundleUnpackDelegate {
             return null;
         }
 
-        if (isBytecode) {//bytecode，直接从.lvbundle中加载
-            if (file.isFile()) {
-                try {
-                    return unpackBundleRaw(true, url, file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        } else {//源码文件，从文件夹下加载
-            if (file.isDirectory()) {
-                final File[] files = file.listFiles();
-                if (files != null && files.length > 0) {
-                    HashMap<String, byte[]> dataFiles = new HashMap<String, byte[]>();
-                    HashMap<String, byte[]> signFiles = new HashMap<String, byte[]>();
-
-                    String fileName;//file name
-                    for (final File f : files) {
-                        fileName = f.getName();
-                        if (LuaScriptManager.isLuaEncryptScript(fileName)) {//lua加密脚本
-                            dataFiles.put(fileName, FileUtil.fastReadBytes(f));
-                        } else if (LuaScriptManager.isLuaSignFile(fileName)) {//sign文件
-                            signFiles.put(fileName, FileUtil.fastReadBytes(f));
-                        }
-                    }
-
-                    //根据读取的数据构建出文件node
-                    ScriptBundle result = new ScriptBundle();
-
-                    result.setUrl(url);
-                    result.setBytecode(false);
-                    result.setBaseFilePath(destFilePath);
-
-                    String signFileName;//sign name
-                    for (Map.Entry<String, byte[]> entry : dataFiles.entrySet()) {
-                        fileName = entry.getKey();
-                        signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;
-                        result.addScript(new ScriptFile(url, destFilePath, fileName, entry.getValue(), signFiles.get(signFileName)));
-                    }
-                    return result;
-                }
-            } else if (file.isFile()) {
-                return loadBundle(false, url, file.getParent());
+//        if (isBytecode) {//bytecode，直接从.lvbundle中加载
+        if (file.isFile()) {
+            try {
+                return unpackBundleRaw(isBytecode, url, file);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return null;
+//        } else {//源码文件，从文件夹下加载
+//            if (file.isDirectory()) {
+//                final File[] files = file.listFiles();
+//                if (files != null && files.length > 0) {
+//                    HashMap<String, byte[]> dataFiles = new HashMap<String, byte[]>();
+//                    HashMap<String, byte[]> signFiles = new HashMap<String, byte[]>();
+//
+//                    String fileName;//file name
+//                    for (final File f : files) {
+//                        fileName = f.getName();
+//                        if (LuaScriptManager.isLuaEncryptScript(fileName)) {//lua加密脚本
+//                            dataFiles.put(fileName, FileUtil.fastReadBytes(f));
+//                        } else if (LuaScriptManager.isLuaSignFile(fileName)) {//sign文件
+//                            signFiles.put(fileName, FileUtil.fastReadBytes(f));
+//                        }
+//                    }
+//
+//                    //根据读取的数据构建出文件node
+//                    ScriptBundle result = new ScriptBundle();
+//
+//                    result.setUrl(url);
+//                    result.setBytecode(false);
+//                    result.setBaseFilePath(destFilePath);
+//
+//                    String signFileName;//sign name
+//                    for (Map.Entry<String, byte[]> entry : dataFiles.entrySet()) {
+//                        fileName = entry.getKey();
+//                        signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;
+//                        result.addScript(new ScriptFile(url, destFilePath, fileName, entry.getValue(), signFiles.get(signFileName)));
+//                    }
+//                    return result;
+//                }
+//            } else if (file.isFile()) {
+//                return loadBundle(false, url, file.getParent());
+//            }
+//        }
+//        return null;
     }
 
 
@@ -206,7 +206,7 @@ public class ScriptBundleUnpackDelegate {
      * @param url
      * @return
      */
-    public static ScriptBundle unpackBundle(boolean isBytecode, boolean saveFile, final String url, final InputStream inputStream) throws IOException {
+    public static ScriptBundle unpackBundle(final boolean isBytecode, final String url, final InputStream inputStream) throws IOException {
         if (inputStream == null || url == null) {
             return null;
         }
@@ -218,7 +218,6 @@ public class ScriptBundleUnpackDelegate {
         final Map<String, byte[]> luaSigns = new HashMap<String, byte[]>();
         final Map<String, byte[]> luaRes = new HashMap<String, byte[]>();
         final Map<String, byte[]> luaScripts = new HashMap<String, byte[]>();
-        boolean shouldSaveFile = !isBytecode;//非bytecode模式下签名文件存起来
 
         scriptBundle.setUrl(url);
         scriptBundle.setBytecode(isBytecode);
@@ -240,7 +239,7 @@ public class ScriptBundleUnpackDelegate {
 
             fileName = FileUtil.getSecurityFileName(rawName);
 
-            if (saveFile && entry.isDirectory()) {
+            if (entry.isDirectory()) {
                 filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
@@ -256,10 +255,6 @@ public class ScriptBundleUnpackDelegate {
                 } else if (LuaScriptManager.isLuaSignFile(fileName)) {//签名文件，不解压到文件系统
                     luaSigns.put(fileName, fileData);
                 } else {//其他文件解压到文件系统(图片、资源)
-                    shouldSaveFile = true;
-                }
-
-                if (shouldSaveFile && saveFile) {//存且应该存
                     filePath = FileUtil.buildPath(scriptBundleFolderPath, fileName);
                     luaRes.put(filePath, fileData);
                 }
@@ -294,14 +289,15 @@ public class ScriptBundleUnpackDelegate {
         }
 
         if (luaScripts.size() > 0) {
-            new SimpleTask<Map<String, byte[]>>() {//写xxx.lvbundle文件
+            new SimpleTask<Object>() {//写xxx.lvbundle文件
                 @Override
-                public void doTask(Map<String, byte[]>... params) {
-                    if (params != null && params.length > 0) {//save all script files
-                        saveFilesUsingOutputStream(url, params[0]);
-                    }
+                public void doTask(Object... params) {
+                    boolean isBytecode = params != null && params.length >= 0 ? (Boolean) params[0] : false;
+                    Map<String, byte[]> fileData = params != null && params.length >= 1 ? (Map<String, byte[]>) params[1] : null;
+                    Map<String, byte[]> signData = params != null && params.length >= 2 ? (Map<String, byte[]>) params[2] : null;
+                    saveFilesUsingOutputStream(isBytecode, url, fileData, signData);
                 }
-            }.executeInPool(luaScripts);
+            }.executeInPool(isBytecode, luaScripts, luaSigns);
         }
 
 
@@ -312,17 +308,19 @@ public class ScriptBundleUnpackDelegate {
      * save files as xxx.lvbundle
      *
      * @param url
-     * @param fileToBeSave
+     * @param fileDatas
      */
-    private static void saveFilesUsingOutputStream(String url, Map<String, byte[]> fileToBeSave) {
+    private static void saveFilesUsingOutputStream(boolean isBytecode, String url, Map<String, byte[]> fileDatas, Map<String, byte[]> signDatas) {
         String filePath = LuaScriptManager.buildScriptBundleFilePath(url);
         File tmpFile = FileUtil.createFile(filePath);
         DataOutputStream output = null;
         try {
             output = new DataOutputStream(new FileOutputStream(tmpFile));
-            output.writeInt(fileToBeSave.size());
-            for (Map.Entry<String, byte[]> file : fileToBeSave.entrySet()) {
-                byte[] fileName = file.getKey().getBytes();
+            output.writeInt(fileDatas.size());
+            String fileNameStr = null;
+            for (Map.Entry<String, byte[]> file : fileDatas.entrySet()) {
+                fileNameStr = file.getKey();
+                byte[] fileName = fileNameStr.getBytes();
 
                 output.writeInt(fileName.length);
                 output.write(fileName);
@@ -330,8 +328,15 @@ public class ScriptBundleUnpackDelegate {
                 byte[] fileData = file.getValue();
                 output.writeInt(fileData.length);
                 output.write(fileData);
+
+                if (!isBytecode) {//非bytecode还写sign
+                    byte[] signData = signDatas.get(LuaScriptManager.changeSuffix(fileNameStr, LuaScriptManager.POSTFIX_LV) + LuaScriptManager.POSTFIX_SIGN);//sign file name, TODO 这里可以优化一下，名称使用统一的名称
+                    output.writeInt(signData.length);
+                    output.write(signData);
+                }
+
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (output != null) {
@@ -372,7 +377,7 @@ public class ScriptBundleUnpackDelegate {
         int fileLen = 0;
         String fileNameStr = null;
 
-        byte[] fileName, fileData;
+        byte[] fileName, fileData, signData;
         int count = buffer.getInt();
         for (int i = 0; i < count; i++) {//all files
             fileNameLen = buffer.getInt();// get file name
@@ -383,12 +388,20 @@ public class ScriptBundleUnpackDelegate {
             fileData = new byte[fileLen];
             buffer.get(fileData);
 
+            if (!isBytecode) {//非二进制的还有sign的data
+                fileLen = buffer.getInt();
+                signData = new byte[fileLen];
+                buffer.get(signData);
+            } else {
+                signData = null;
+            }
+
             fileNameStr = new String(fileName);
             if (fileNameStr == null || fileNameStr.indexOf("../") != -1) {
                 return null;
             }
 
-            scriptBundle.addScript(new ScriptFile(url, scriptBundleFolderPath, fileNameStr, fileData, null));
+            scriptBundle.addScript(new ScriptFile(url, scriptBundleFolderPath, fileNameStr, fileData, signData));
         }
 
         if (inputStream != null) {

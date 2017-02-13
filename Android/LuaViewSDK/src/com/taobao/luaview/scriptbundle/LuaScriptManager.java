@@ -25,7 +25,6 @@ public class LuaScriptManager {
 
     //默认缓存文件的后缀
     public static final String POSTFIX_SCRIPT_BUNDLE = ".lvraw";
-    public static final String POSTFIX_DEFAULT = ".lv";
     public static final String POSTFIX_JPG = ".jpg";
     public static final String POSTFIX_APK = ".apk";
     public static final String POSTFIX_PNG = ".png";

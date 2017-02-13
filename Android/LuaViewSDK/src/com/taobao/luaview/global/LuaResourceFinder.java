@@ -92,7 +92,7 @@ public class LuaResourceFinder implements ResourceFinder {
             return scriptFile.getInputStream();
         }
 
-        if (LuaScriptManager.isLuaEncryptScript(nameOrPath)) {//.lv
+        if (LuaScriptManager.isLuaEncryptScript(nameOrPath)) {//.lv TODO 这里需要去掉，不再有本地lv文件
             return ScriptBundleLoadDelegate.loadEncryptScript(mContext, findFile(nameOrPath));
         } else {//.lua 或者 输入folder名字（其实是lvbundle的名字，如ppt440), 则加载 main.lua
             final String newName = LuaScriptManager.isLuaScript(nameOrPath) ? nameOrPath : DEFAULT_MAIN_ENTRY;//如果是脚本则加载，否则加载main.lua

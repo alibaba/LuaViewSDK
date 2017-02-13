@@ -1,5 +1,6 @@
 package com.taobao.luaview.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,13 +19,14 @@ public final class ChannelTools {
 
     /**
      * read to
+     *
      * @param buffer
      * @param offset
      * @param size
      * @return
      */
-    public static byte[] toBytes(MappedByteBuffer buffer, int offset, int size){
-        if(buffer != null && offset >= 0 && size > 0){
+    public static byte[] toBytes(MappedByteBuffer buffer, int offset, int size) {
+        if (buffer != null && offset >= 0 && size > 0) {
             byte[] result = new byte[size];
             buffer.get(result);
             return result;
@@ -34,6 +36,7 @@ public final class ChannelTools {
 
     /**
      * file path to
+     *
      * @param filepath
      * @param sizes
      * @return
@@ -45,7 +48,7 @@ public final class ChannelTools {
             MappedByteBuffer buffer = randomAccessFile.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, randomAccessFile.length());
 
             if (sizes != null && sizes.length > 0) {
-                for(int size : sizes){
+                for (int size : sizes) {
                     byte[] r = new byte[size];
                     buffer.get(r);//fill buffer
                 }
@@ -57,6 +60,30 @@ public final class ChannelTools {
         return result;
     }
 
+
+    /**
+     * copy a input stream to a byte[]
+     *
+     * @param inputStream
+     * @return
+     */
+    public static byte[] toBytes(InputStream inputStream) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            fastCopy(inputStream, outputStream);
+            return outputStream.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     /**
      * fast copy
      *
@@ -65,11 +92,9 @@ public final class ChannelTools {
      * @throws IOException
      */
     public static void fastCopy(InputStream inputStream, OutputStream outputStream) throws IOException {
-        DebugUtil.tsi("luaviewp-fastCopy");
         final ReadableByteChannel input = Channels.newChannel(inputStream);
         final WritableByteChannel output = Channels.newChannel(outputStream);
         fastCopy(input, output);
-        DebugUtil.tei("luaviewp-fastCopy");
     }
 
     /**
