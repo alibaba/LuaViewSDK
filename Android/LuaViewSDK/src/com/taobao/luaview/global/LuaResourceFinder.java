@@ -324,7 +324,7 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildSecurePathInSdcard(final String nameOrPath) {//主要用在文件操作
         String path = buildPathInBundleFolder(nameOrPath);
-        if (path != null) {//处理../../../
+        if (path != null) {//处理../../../ TODO 这里如何应对全局路径
             final String canonicalPath = FileUtil.getCanonicalPath(path);
             if (canonicalPath != null && canonicalPath.startsWith(mBaseScriptFolderPath)) {
                 return path;
@@ -344,6 +344,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildPathInBundleFolder(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseBundlePath)) {
             if (!FileUtil.isContainsFolderPath(nameOrPath, mBaseBundlePath)) {//不带基础路径的情况
                 final String filePath = FileUtil.buildPath(mBaseBundlePath, nameOrPath);
@@ -365,6 +370,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildPathInRootFolder(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseScriptFolderPath)) {
             if (!FileUtil.isContainsFolderPath(nameOrPath, mBaseScriptFolderPath)) {//不带基础路径的情况
                 final String filePath = FileUtil.buildPath(mBaseScriptFolderPath, nameOrPath);
@@ -418,6 +428,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     private String buildPathInAssets(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseAssetPath) && !FileUtil.isContainsFolderPath(nameOrPath, mBaseAssetPath)) {//不带基础路径，或者不在asset下
             final String assetFilePath = FileUtil.buildPath(mBaseAssetPath, nameOrPath);
             LogUtil.d("[buildPathInAssets-Assets]", assetFilePath);
