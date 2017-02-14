@@ -187,7 +187,6 @@ static int SERVER_PORT = 9876;
             break;
         case NSStreamEventHasSpaceAvailable:
             self.canWrite = YES;
-            [self sendOneData];
             break;
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered:
