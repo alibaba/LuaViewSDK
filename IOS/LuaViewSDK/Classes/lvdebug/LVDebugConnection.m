@@ -2,8 +2,8 @@
 //  LVDebuger.m
 //  CFSocketDemo
 //
-//  Created by dongxicheng on 9/16/15.
-//  Copyright (c) 2015 dongxicheng. All rights reserved.
+//  Created by 罗何 on 9/16/15.
+//  Copyright © 2015年 luohe. All rights reserved.
 //
 
 #import "LVDebugConnection.h"
@@ -27,7 +27,7 @@
 static NSString* SERVER_IP = @"127.0.0.1";
 static int SERVER_PORT = 9876;
 
-@interface LVDebugConnection ()
+@interface LVDebugConnection ()<NSStreamDelegate>
 @property(nonatomic,strong) NSThread* myThread;
 @property(nonatomic,assign) BOOL canWrite;
 @property(nonatomic,assign) NSInteger state;
@@ -35,7 +35,11 @@ static int SERVER_PORT = 9876;
 @end
 
 @implementation LVDebugConnection{
-    CFSocketRef _socket;
+    NSOutputStream *_outputStream;
+    NSInputStream *_inputStream;
+    
+    BOOL _outputStreamCompleted;
+    BOOL _inputStreamCompleted;
 }
 
 -(id) init{
@@ -43,7 +47,7 @@ static int SERVER_PORT = 9876;
     if( self ) {
         static int index = 0;
         self.myThread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];
-        self.myThread.name = [NSString stringWithFormat:@"LuaView.Debuger.%d",index];
+        self.myThread.name = [NSString stringWithFormat:@"LV.Debuger.%d",index];
         self.sendArray = [[NSMutableArray alloc] init];
         self.receivedArray = [[NSMutableArray alloc] init];
         [self startThread];
@@ -111,164 +115,139 @@ static int SERVER_PORT = 9876;
     [self sendString:buffer];
 }
 
--(void)Connect:(NSString*) ip port:(NSUInteger)port
-{
+-(void)Connect:(NSString*) ip port:(NSUInteger)port{
 #ifdef DEBUG
-    //////////////////////创建套接字//////////////
-    CFSocketContext socketConent = {0,NULL,NULL,NULL,NULL};
-    socketConent.info = (__bridge void *)(self);
-    _socket = CFSocketCreate(
-                             kCFAllocatorDefault,
-                             PF_INET,
-                             SOCK_STREAM,
-                             IPPROTO_TCP,
-                             kCFSocketConnectCallBack|kCFSocketReadCallBack|kCFSocketWriteCallBack,     // 类型，表示连接时调用
-                             ServerConnectCallBack,    // 调用的函数
-                             &socketConent );
+    CFReadStreamRef readStream = NULL;
+    CFWriteStreamRef writeStream = NULL;
+    CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, (__bridge CFStringRef)ip, (UInt32)port, &readStream, &writeStream);
+    // 记录已经分配的输入流和输出流
+    _inputStream = (__bridge NSInputStream *)readStream;
+    _outputStream = (__bridge NSOutputStream *)writeStream;
     
-    ////////////////////////////设置地址///////////////////
-    struct   sockaddr_in  addr = {0};
-    memset(&addr , 0,sizeof(addr));
-    addr.sin_len = sizeof(addr);
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);// 端口
-    addr.sin_addr.s_addr = inet_addr([ip  UTF8String]);
+    //设置属性SSL
+    //    [_inputStream setProperty:NSStreamSocketSecurityLevelSSLv3 forKey:NSStreamSocketSecurityLevelKey];
+    //    [_outputStream setProperty:NSStreamSocketSecurityLevelSSLv3 forKey:NSStreamSocketSecurityLevelKey];
+    //    CFWriteStreamSetProperty(writeStream, kCFStreamPropertySSLSettings, (__bridge CFTypeRef)([NSMutableDictionary dictionaryWithObjectsAndKeys:(id)kCFBooleanFalse,kCFStreamSSLValidatesCertificateChain,kCFBooleanFalse,kCFStreamSSLIsServer,nil]));
     
-    CFDataRef address = CFDataCreate(
-                                     kCFAllocatorDefault,
-                                     (UInt8*)&addr,
-                                     sizeof(addr));
+    // 设置代理，监听输入流和输出流中的变化
+    _inputStream.delegate = self;
+    _outputStream.delegate = self;
     
-    /////////////////////////////执行连接/////////////////////
-    CFSocketConnectToAddress(_socket,address,-1);
-    CFRunLoopRef cfrl = CFRunLoopGetCurrent();   // 获取当前运行循环
-    CFRunLoopSourceRef  source = CFSocketCreateRunLoopSource(kCFAllocatorDefault,_socket,0);//定义循环对象
-    CFRunLoopAddSource(cfrl,source,kCFRunLoopCommonModes); //将循环对象加入当前循环中
-    LVReleaseAndNull(source);
-    LVReleaseAndNull(address);
+    // Scoket是建立的长连接，需要将输入输出流添加到主运行循环
+    [_inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    
+    // 打开输入流和输出流，准备开始文件读写操作
+    [_inputStream open];
+    [_outputStream open];
 #endif
 }
 
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode{
+    switch (eventCode) {
+        case NSStreamEventOpenCompleted:
+            if(aStream == _inputStream) _inputStreamCompleted = YES;
+            if(aStream == _outputStream) _outputStreamCompleted = YES;
+            if(_inputStreamCompleted && _outputStreamCompleted) self.state = SOCKET_SUCCESS;
+            break;
+        case NSStreamEventHasBytesAvailable:{
+            
+            uint8_t buf[16 * 1024];
+            uint8_t *buffer = NULL;
+            NSUInteger len = 0;
+            if (![_inputStream getBuffer:&buffer length:&len]) {
+                NSInteger amount = [_inputStream read:buf maxLength:sizeof(buf)];
+                buffer = buf;
+                len = amount;
+            }
+            if (0 < len) {
+                //head
+//                NSUInteger d0 = buffer[0];
+//                NSUInteger d1 = buffer[1];
+//                NSUInteger d2 = buffer[2];
+//                NSUInteger d3 = buffer[3];
+//                len = (d0<<24) + (d1<<16) + (d2<<8) + d3;
+//                buffer = buffer + 4;
+                
+                NSString *cmd = [[NSString alloc] initWithBytes:buffer length:len encoding:NSUTF8StringEncoding];
+                if ( cmd && cmd.length>0) {
+                    LVLog(@"received CMD: %@", cmd);
+                    [self.receivedArray insertObject:cmd atIndex:0];
+                }
+                // 关闭掉socket
+                if ( cmd.length<=0 ){
+                    [self closeAll];
+                    [self.receivedArray addObject:@"close"];
+                    [self.receivedArray addObject:@"close"];
+                } else {
+                    [self.lview  callLuaToExecuteServerCmd];
+                }
+            }
+        }
+            break;
+        case NSStreamEventHasSpaceAvailable:
+            self.canWrite = YES;
+            [self sendOneData];
+            break;
+        case NSStreamEventErrorOccurred:
+        case NSStreamEventEndEncountered:
+            [self closeAll];
+            [self.receivedArray addObject:@"close"];
+            [self.receivedArray addObject:@"close"];
+            [self.lview  callLuaToExecuteServerCmd];
+        default:
+            break;
+    }
+}
+
 -(void) closeAll{
+    _outputStreamCompleted = NO;
+    _inputStreamCompleted = NO;
+    
     self.canWrite = FALSE;
     self.state = -1;
     
-    if (_socket != NULL)
-    {
-        CFSocketInvalidate(_socket);
-        LVReleaseAndNull(_socket);
-    }
+    [_inputStream close];
+    _inputStream = nil;
+    
+    [_outputStream close];
+    _outputStream = nil;
     
     if( !self.myThread.isCancelled ) {
         [self.myThread cancel];
     }
 }
 
-#ifdef DEBUG
-static void ServerConnectCallBack( CFSocketRef socket,
-                                  CFSocketCallBackType type,
-                                  CFDataRef address,
-                                  const void *data,
-                                  void* info)
-{
-    LVDebugConnection* debuger = (__bridge LVDebugConnection *)(info);
-    switch ( type ){
-        case kCFSocketReadCallBack: {
-            NSString* cmd = readString(socket);
-            if ( cmd && cmd.length>0) {
-                LVLog(@"received CMD: %@", cmd);
-                [debuger.receivedArray insertObject:cmd atIndex:0];
-            }
-            // 关闭掉socket
-            if ( cmd.length<=0 ){
-                [debuger closeAll];
-                [debuger.receivedArray insertObject:@"close" atIndex:0];
-                [debuger.receivedArray insertObject:@"close" atIndex:0];
-            } else {
-                [debuger.lview  callLuaToExecuteServerCmd];
-            }
-            break;
-        }
-        case kCFSocketWriteCallBack: {
-            debuger.canWrite = YES;
-            [debuger sendOneData];
-            break;
-        }
-        case kCFSocketConnectCallBack:
-            if( data ) {
-                // LVLog(@"Debuger Socket Connect failed" );
-                debuger.state = SOCKET_ERROR;
-            } else {
-                LVLog(@"Debuger Socket connect Success");
-                debuger.state = SOCKET_SUCCESS;
-            }
-            break;
-        default: {
-            LVLog(@"connect type %d", (int)type );
-            break;
-        }
-    }
-}
-#endif
-
 -(void) sendOneData{
     NSData* data = self.sendArray.lastObject;
     if( self.canWrite && data) {
         [self.sendArray removeLastObject];
-        if( data ) {
-            NSInteger sendLength = send(CFSocketGetNative(_socket), data.bytes, data.length, 0);
-            if( sendLength!=data.length ) {
+        if( data.length > 0 ) {
+            NSInteger sendLength = [_outputStream write:data.bytes maxLength:data.length];
+            if( sendLength != data.length ) {
                 LVError(@"Debuger socket Send length Error : %d != %d", (int)sendLength, (int)data.length);
             }
         }
     }
 }
 
-///////////////////监听来自服务器的信息///////////////////
-
-#ifdef DEBUG
-static NSString* readString(CFSocketRef socket)
-{
-    unsigned char head[4] = {0};
-    NSUInteger readLength0 = 0;
-    if( recv( CFSocketGetNative(socket), head, sizeof(head), 0 )==sizeof(head) ) {
-        NSUInteger d0 = head[0];
-        NSUInteger d1 = head[1];
-        NSUInteger d2 = head[2];
-        NSUInteger d3 = head[3];
-        readLength0 = (d0<<24) + (d1<<16) + (d2<<8) + d3;
-    }
-    
-    unsigned char buffer[512] = {0};
-    NSUInteger readLen = readLength0;
-    NSMutableData* data = [[NSMutableData alloc] init];
-    for(;readLen>0;){
-        NSUInteger bufferLen = readLen>=sizeof(buffer)?sizeof(buffer):readLen;
-        NSUInteger recvLen = recv( CFSocketGetNative(socket), buffer, bufferLen, 0 );
-        if ( recvLen>0 ) {
-            [data appendBytes:buffer length:recvLen];
-            readLen -= recvLen;
-        } else {
-            break;
-        }
-    }
-    NSString* ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return ret;
-}
-#endif
 /////////////////////////发送信息给服务器////////////////////////
 - (void) sendString:(NSString *)string
 {
     if( self.canWrite ) {
         NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
-        NSUInteger len = data.length;
+        
         NSMutableData* buffer = [[NSMutableData alloc] init];
-        unsigned char head[4] = {0};
-        head[0] = (len>>24);
-        head[1] = (len>>16);
-        head[2] = (len>>8);
-        head[3] = (len);
-        [buffer appendBytes:head length:4];
+        
+        //head
+//        NSUInteger len = data.length;
+//        unsigned char head[4] = {0};
+//        head[0] = (len>>24);
+//        head[1] = (len>>16);
+//        head[2] = (len>>8);
+//        head[3] = (len);
+//        [buffer appendBytes:head length:4];
+        
         [buffer appendData:data];
         
         [self.sendArray insertObject:buffer atIndex:0];
