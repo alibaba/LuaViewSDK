@@ -51,7 +51,7 @@ static int runningLine (lua_State *L) {
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
     LView* luaView = LV_LUASTATE_VIEW(L);
-    [luaView.debugConnection  sendCmd:@"running" fileName:fileName info:lineInfo];
+    [luaView.debugConnection  sendCmd:@"running" fileName:fileName info:lineInfo args:@{@"Line-Number":lineInfo}];
     return 0;
 }
 

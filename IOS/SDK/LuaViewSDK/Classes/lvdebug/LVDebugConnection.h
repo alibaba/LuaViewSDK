@@ -23,6 +23,7 @@
 
 - (void) sendCmd:(NSString*) cmdName info:(NSString*) info;
 - (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info;
+- (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info args:(NSDictionary*) args;
 
 -(void) closeAll;
 

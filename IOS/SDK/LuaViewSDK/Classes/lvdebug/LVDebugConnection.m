@@ -97,12 +97,24 @@ static int SERVER_PORT = 9876;
 }
 
 - (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
+    [self sendCmd:cmdName fileName:fileName info:info args:nil];
+}
+
+- (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info args:(NSDictionary*) args{
     NSMutableString* buffer = [[NSMutableString alloc] init];
     if ( cmdName ) {
         [buffer appendFormat:@"Cmd-Name:%@\n",cmdName];
     }
     if ( fileName ){
         [buffer appendFormat:@"File-Name:%@\n",fileName];
+    }
+    NSArray* keys = args.allKeys;
+    for( int i=0; i<keys.count; i++) {
+        NSString* key = keys[i];
+        NSString* value = args[key];
+        if( key && value ) {
+            [buffer appendFormat:@"%@:%@\n",key, value];
+        }
     }
     [buffer appendString:@"\n"];
     if ( info ){
