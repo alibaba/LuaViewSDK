@@ -126,6 +126,8 @@ import java.util.Stack;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
+
+    public boolean isInited = false;
     /**
      * Android parent view
      */

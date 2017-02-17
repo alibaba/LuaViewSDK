@@ -18,7 +18,6 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
-import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.EncryptUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
@@ -640,52 +639,21 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         new SimpleTask1<LuaValue>() {
             @Override
             protected LuaValue doInBackground(Object... params) {
-                try {
-                    if (mGlobals != null) {
-                        return mGlobals.loadfile(luaFileName);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtil.e("[Load Script Failed]", luaFileName, e);
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(LuaValue value) {
-                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
-                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
-                    //执行脚本，在主线程
-                    executeScript(value, activity, viewObj, callback);
-                }
-            }
-        }.executeInPool();
-        return this;
-    }
-
-    /**
-     * 加载纯脚本
-     *
-     * @param scriptFile
-     */
-    private LuaView loadScriptInternal(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        new SimpleTask1<LuaValue>() {//load async
-            @Override
-            protected LuaValue doInBackground(Object... params) {
-                if (scriptFile != null) {//prototype
-                    String filePath = scriptFile.getFilePath();
-
-                    if (mGlobals != null && scriptFile.prototype != null) {//prototype
-                        return mGlobals.load(scriptFile.prototype, filePath);
-                    } else {//source code
+                if (mGlobals != null) {
+                    if (mGlobals.isInited) {
                         try {
-                            if (mGlobals != null) {
-                                return mGlobals.load(scriptFile.getScriptString(), filePath);
-                            }
+                            LogUtil.d("yesong-loadfile");
+                            return mGlobals.loadfile(luaFileName);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            LogUtil.e("[Load Script Failed]", filePath, e);
+                            LogUtil.e("[Load Script Failed]", luaFileName, e);
+                        }
+                    } else {
+                        try {
+                            Thread.sleep(16);
+                            return doInBackground(params);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -701,7 +669,58 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
                     executeScript(value, activity, viewObj, callback);
                 }
             }
-        }.executeSerial();//TODO 这里使用execute，而不是executeInPoll，与createGlobalAsync保持一致
+        }.executeInPool();//TODO 这里使用execute，而不是executeInPoll，与createGlobalAsync保持一致
+
+        return this;
+    }
+
+    /**
+     * 加载纯脚本
+     *
+     * @param scriptFile
+     */
+
+    private LuaView loadScriptInternal(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        new SimpleTask1<LuaValue>() {//load async
+            @Override
+            protected LuaValue doInBackground(Object... params) {
+                if (mGlobals != null) {
+                    if (mGlobals.isInited) {
+                        if (scriptFile != null) {//prototype
+                            String filePath = scriptFile.getFilePath();
+                            if (scriptFile.prototype != null) {//prototype
+                                return mGlobals.load(scriptFile.prototype, filePath);
+                            } else {//source code
+                                try {
+                                    return mGlobals.load(scriptFile.getScriptString(), filePath);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    LogUtil.e("[Load Script Failed]", filePath, e);
+                                }
+                            }
+                        }
+                    } else {
+                        try {
+                            Thread.sleep(16);
+                            return doInBackground(params);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(LuaValue value) {
+                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
+                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
+                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
+                    //执行脚本，在主线程
+                    executeScript(value, activity, viewObj, callback);
+                }
+            }
+        }.executeInPool();//TODO 这里使用execute，而不是executeInPoll，与createGlobalAsync保持一致
         return this;
     }
 

@@ -51,8 +51,6 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask0;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
@@ -166,6 +164,7 @@ public class LuaViewManager {
                 LuaDC.install(globals);
             }
             loadLuaViewLibs(globals);//加载用户lib TODO 性能瓶颈
+            globals.isInited = true;
         }
     }
 
