@@ -107,6 +107,30 @@ public class JsePlatform {
         return globals;
     }
 
+    /**
+     * Create a standard set of globals for JSE including all the libraries.
+     *
+     * @return Table of globals initialized with the standard JSE libraries
+     * @see #debugGlobals()
+     * @see JsePlatform
+     * @see JmePlatform
+     */
+    public static Globals standardGlobals(Globals globals) {
+        globals.load(new JseBaseLib());
+        globals.load(new PackageLib());
+        globals.load(new Bit32Lib());
+        globals.load(new TableLib());
+        globals.load(new StringLib());
+        globals.load(new CoroutineLib());
+        globals.load(new JseMathLib());
+        globals.load(new JseOsLib());
+//		globals.load(new JseIoLib());//安全考虑，删除for LuaView
+//		globals.load(new LuajavaLib());//安全考虑，删除for LuaView
+        LoadState.install(globals);
+        LuaC.install(globals);
+        return globals;
+    }
+
     /** Create standard globals including the {@link debug} library.
      *
      * @return Table of globals initialized with the standard JSE and debug libraries
@@ -117,6 +141,20 @@ public class JsePlatform {
      */
     public static Globals debugGlobals() {
         Globals globals = standardGlobals();
+        globals.load(new DebugLib());
+        return globals;
+    }
+
+    /** Create standard globals including the {@link debug} library.
+     *
+     * @return Table of globals initialized with the standard JSE and debug libraries
+     * @see #standardGlobals()
+     * @see JsePlatform
+     * @see JmePlatform
+     * @see DebugLib
+     */
+    public static Globals debugGlobals(Globals globals) {
+        standardGlobals(globals);
         globals.load(new DebugLib());
         return globals;
     }

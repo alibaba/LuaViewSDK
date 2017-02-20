@@ -5,12 +5,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleLoadDelegate;
 import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.DrawableUtil;
 import com.taobao.luaview.util.FileUtil;
@@ -92,11 +92,11 @@ public class LuaResourceFinder implements ResourceFinder {
             return scriptFile.getInputStream();
         }
 
-        if (LuaScriptManager.isLuaEncryptScript(nameOrPath)) {//.lv
-            return ScriptBundleLoadTask.loadEncryptScript(mContext, findFile(nameOrPath));
+        if (LuaScriptManager.isLuaEncryptScript(nameOrPath)) {//.lv TODO 这里需要去掉，不再有本地lv文件
+            return ScriptBundleLoadDelegate.loadEncryptScript(mContext, findFile(nameOrPath));
         } else {//.lua 或者 输入folder名字（其实是lvbundle的名字，如ppt440), 则加载 main.lua
             final String newName = LuaScriptManager.isLuaScript(nameOrPath) ? nameOrPath : DEFAULT_MAIN_ENTRY;//如果是脚本则加载，否则加载main.lua
-            InputStream inputStream = ScriptBundleLoadTask.loadEncryptScript(mContext, findFile(LuaScriptManager.changeSuffix(newName, LuaScriptManager.POSTFIX_LV)));
+            InputStream inputStream = ScriptBundleLoadDelegate.loadEncryptScript(mContext, findFile(LuaScriptManager.changeSuffix(newName, LuaScriptManager.POSTFIX_LV)));
             if (inputStream == null) {//如果.lv不存在，则尝试读取.lua
                 inputStream = findFile(newName);
             }
@@ -132,7 +132,7 @@ public class LuaResourceFinder implements ResourceFinder {
                     callback.onFinish(drawable);
                 }
             }
-        }.execute();
+        }.executeInPool();
     }
 
     /**
@@ -147,7 +147,7 @@ public class LuaResourceFinder implements ResourceFinder {
             protected void onPreExecute() {
                 super.onPreExecute();
                 if (imageView != null && nameOrPath != null) {
-                    imageView.setTag(R.id.lv_tag_url, nameOrPath);
+                    imageView.setTag(Constants.RES_LV_TAG_URL, nameOrPath);
                 }
             }
 
@@ -159,11 +159,11 @@ public class LuaResourceFinder implements ResourceFinder {
             @Override
             protected void onPostExecute(Drawable drawable) {
                 super.onPostExecute(drawable);
-                if (imageView != null && nameOrPath != null && nameOrPath.equals(imageView.getTag(R.id.lv_tag_url))) {
+                if (imageView != null && nameOrPath != null && nameOrPath.equals(imageView.getTag(Constants.RES_LV_TAG_URL))) {
                     imageView.setImageDrawable(drawable);
                 }
             }
-        }.execute();
+        }.executeInPool();
     }
 
     /**
@@ -324,7 +324,7 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildSecurePathInSdcard(final String nameOrPath) {//主要用在文件操作
         String path = buildPathInBundleFolder(nameOrPath);
-        if (path != null) {//处理../../../
+        if (path != null) {//处理../../../ TODO 这里如何应对全局路径
             final String canonicalPath = FileUtil.getCanonicalPath(path);
             if (canonicalPath != null && canonicalPath.startsWith(mBaseScriptFolderPath)) {
                 return path;
@@ -344,6 +344,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildPathInBundleFolder(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseBundlePath)) {
             if (!FileUtil.isContainsFolderPath(nameOrPath, mBaseBundlePath)) {//不带基础路径的情况
                 final String filePath = FileUtil.buildPath(mBaseBundlePath, nameOrPath);
@@ -365,6 +370,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     public String buildPathInRootFolder(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseScriptFolderPath)) {
             if (!FileUtil.isContainsFolderPath(nameOrPath, mBaseScriptFolderPath)) {//不带基础路径的情况
                 final String filePath = FileUtil.buildPath(mBaseScriptFolderPath, nameOrPath);
@@ -418,6 +428,11 @@ public class LuaResourceFinder implements ResourceFinder {
      */
     private String buildPathInAssets(final String nameOrPath) {
         String result = null;
+
+        if(nameOrPath != null && nameOrPath.startsWith("/")){//如果反斜杠开头，则直接返回，TODO 待优化
+            return nameOrPath;
+        }
+
         if (!TextUtils.isEmpty(mBaseAssetPath) && !FileUtil.isContainsFolderPath(nameOrPath, mBaseAssetPath)) {//不带基础路径，或者不在asset下
             final String assetFilePath = FileUtil.buildPath(mBaseAssetPath, nameOrPath);
             LogUtil.d("[buildPathInAssets-Assets]", assetFilePath);

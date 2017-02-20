@@ -21,6 +21,8 @@
  ******************************************************************************/
 package org.luaj.vm2.lib;
 
+//TODO 与3.0不一样
+
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;

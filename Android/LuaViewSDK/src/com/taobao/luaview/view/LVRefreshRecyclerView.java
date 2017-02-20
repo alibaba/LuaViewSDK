@@ -79,12 +79,6 @@ public class LVRefreshRecyclerView extends SwipeRefreshLayout implements ILVRecy
     }
 
     @Override
-    public void addLVView(View view, Varargs varargs) {
-        //TODO 这里不做操作，因为ListView不应该加子view
-    }
-
-
-    @Override
     public RecyclerView.Adapter getLVAdapter() {
         return mRecyclerView != null ? mRecyclerView.getLVAdapter() : null;
     }

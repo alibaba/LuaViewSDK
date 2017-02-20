@@ -14,11 +14,11 @@ function myprint( s , s2 )
 	end
 end
 
--- 1
-timer1 = Timer(function()
-    myprint("Timer1 Run")
-end);
-timer1 = timer1.start(0.1, false);
+---- 1
+--timer1 = Timer(function()
+--    myprint("Timer1 Run")
+--end);
+--timer1 = timer1.start(0.1, false);
 
 --2
 index2 = 1;
@@ -27,14 +27,10 @@ timer2.callback(
 	function() 
 		myprint("Timer2 Run",index2) 
 		index2 = index2 + 1;
+
+		if(index2 > 10) then
+			timer2.cancel()
+		end
 	end
 	)
 timer2.start(0.2, true)
-
---3
-timer3 = Timer(function()
-    timer2.cancel()
-	myprint("Timer3 Run") 
-end)
-timer3.start(10)
-

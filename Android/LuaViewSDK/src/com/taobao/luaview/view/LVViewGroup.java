@@ -85,14 +85,6 @@ public class LVViewGroup<T extends UDViewGroup> extends ForegroundRelativeLayout
         return mLuaUserdata;
     }
 
-    @Override
-    public void addLVView(final View view, Varargs a) {
-        if (this != view) {//不能自己加自己
-            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-            LVViewGroup.this.addView(LuaViewUtil.removeFromParent(view), layoutParams);
-        }
-    }
-
     public void show() {
         LVViewGroup.this.setVisibility(View.VISIBLE);
     }
@@ -173,7 +165,7 @@ public class LVViewGroup<T extends UDViewGroup> extends ForegroundRelativeLayout
             UDView nodeView = mChildNodeViews.get(i);
             View view = nodeView.getView();
 
-            addLVView(view, null);
+            LuaViewUtil.addView(this, view, null);
             getCssNode().addChild(nodeView.getCssNode());
         }
     }

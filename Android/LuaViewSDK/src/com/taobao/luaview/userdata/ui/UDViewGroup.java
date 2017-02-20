@@ -123,12 +123,13 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
         final ViewGroup viewGroup = getContainer();
         if (viewGroup != null && subView != null && subView.getView() != null) {
             final View view = subView.getView();
-            if (viewGroup instanceof ILVViewGroup) {
-                ((ILVViewGroup) viewGroup).addLVView(view, null);
-            } else {
-                final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-                viewGroup.addView(view, layoutParams);
-            }
+            LuaViewUtil.addView(viewGroup, view, null);
+//            if (viewGroup instanceof ILVViewGroup) {
+//                LuaViewUtil.addView(viewGroup, view, null);
+//            } else {
+//                final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
+//                viewGroup.addView(view, layoutParams);
+//            }
         }
         return this;
     }
@@ -166,10 +167,10 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      * @return
      */
     public UDViewGroup children(LuaFunction callback) {
-        if (getView() instanceof ILVViewGroup) {
+        if (getView() instanceof ViewGroup) {
             Globals globals = getGlobals();
             if (globals != null) {
-                globals.pushContainer((ILVViewGroup) getView());
+                globals.pushContainer(getView());
                 LuaUtil.callFunction(callback, this);
                 globals.popContainer();
             }

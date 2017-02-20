@@ -21,13 +21,17 @@
  ******************************************************************************/
 package org.luaj.vm2;
 
+//TODO 与3.0不一样
+
 import android.content.Context;
+import android.view.ViewGroup;
 
 import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
@@ -122,15 +126,17 @@ import java.util.Stack;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
+
+    public boolean isInited = false;
     /**
      * Android parent view
      */
     private WeakReference<LuaView> mLuaView;
-    public ILVViewGroup container;
-    private ILVViewGroup tmpContainer;
+    public ViewGroup container;
+    private ViewGroup tmpContainer;
 
     //containers
-    private Stack<ILVViewGroup> mContainers;
+    private Stack<ViewGroup> mContainers;
 
     /**
      * The current default input stream.
@@ -177,6 +183,8 @@ public class Globals extends LuaTable {
     public DebugLib debuglib;
     public DebugConnection debugConnection;//用作debug
 
+    private Boolean isStandardSyntax = null;
+
     /**
      * Interface for module that converts a Prototype into a LuaFunction with an environment.
      */
@@ -194,7 +202,7 @@ public class Globals extends LuaTable {
         /**
          * Compile lua source into a Prototype. The InputStream is assumed to be in UTF-8.
          */
-        Prototype compile(InputStream stream, String chunkname) throws IOException;
+        Prototype compile(InputStream stream, String chunkname, boolean standardSyntax) throws IOException;
     }
 
     /**
@@ -383,7 +391,7 @@ public class Globals extends LuaTable {
     public Prototype compilePrototype(InputStream stream, String chunkname) throws IOException {
         if (compiler == null)
             error("No compiler.");
-        return compiler.compile(stream, chunkname);
+        return compiler.compile(stream, chunkname, isStandardSyntax());
     }
 
     /**
@@ -568,6 +576,30 @@ public class Globals extends LuaTable {
     //----------------------------------------------------------------------------------------------
 
     /**
+     * 设置是否标准语法，如果为null的时候则依据url来判断
+     *
+     * @param standardSyntax
+     */
+    public void setUseStandardSyntax(boolean standardSyntax) {
+        isStandardSyntax = standardSyntax;
+    }
+
+    /**
+     * 是否是标准语法
+     *
+     * @return
+     */
+    public boolean isStandardSyntax() {
+        if (isStandardSyntax != null) {
+            return isStandardSyntax;
+        } else {
+            final LuaResourceFinder finder = getLuaResourceFinder();
+            final String url = finder != null ? finder.getUri() : null;
+            return LuaScriptManager.isLuaStandardSyntaxUrl(url);
+        }
+    }
+
+    /**
      * 延迟加载库
      *
      * @param binder
@@ -582,7 +614,7 @@ public class Globals extends LuaTable {
      * @param viewGroup
      */
     @Deprecated
-    public void saveContainer(final ILVViewGroup viewGroup) {
+    public void saveContainer(final ViewGroup viewGroup) {
         if (this.container == null) {
             this.tmpContainer = viewGroup;
             this.container = viewGroup;
@@ -605,9 +637,9 @@ public class Globals extends LuaTable {
      *
      * @param viewGroup
      */
-    public void pushContainer(final ILVViewGroup viewGroup) {
+    public void pushContainer(final ViewGroup viewGroup) {
         if (this.mContainers == null) {
-            this.mContainers = new Stack<ILVViewGroup>();
+            this.mContainers = new Stack<ViewGroup>();
         }
         this.mContainers.push(this.container);
         this.container = viewGroup;

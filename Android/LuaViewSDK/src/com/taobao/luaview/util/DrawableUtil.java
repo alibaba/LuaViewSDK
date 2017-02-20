@@ -27,11 +27,12 @@ public class DrawableUtil {
         if (drawable == null) {
             try {
                 drawable = Drawable.createFromPath(filePath);
+                WeakCache.getCache(TAG).put(filePath, drawable);
             } catch (Exception e) {
                 LogUtil.e("[DrawableUtil-getByPath Failed]", e);
             }
         }
-        return WeakCache.getCache(TAG).put(filePath, drawable);
+        return drawable;
     }
 
     /**
@@ -47,12 +48,13 @@ public class DrawableUtil {
             try {
                 if (context != null) {
                     drawable = Drawable.createFromStream(context.getAssets().open(filePath), null);
+                    WeakCache.getCache(TAG).put(filePath, drawable);
                 }
             } catch (Exception e) {
                 LogUtil.e("[DrawableUtil-getAssetByPath Failed]", e);
             }
         }
-        return WeakCache.getCache(TAG).put(filePath, drawable);
+        return drawable;
     }
 
     /**
@@ -70,12 +72,13 @@ public class DrawableUtil {
                 final int resourceId = resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
                 try {
                     drawable = resources.getDrawable(resourceId);
+                    WeakCache.getCache(TAG).put(name, drawable);
                 } catch (Exception e){
                     LogUtil.e("[DrawableUtil-getByName Failed]", e);
                 }
             }
         }
-        return WeakCache.getCache(TAG).put(name, drawable);
+        return drawable;
     }
 
     /**
