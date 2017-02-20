@@ -147,7 +147,7 @@ public class UDView<T extends View> extends BaseUserdata {
      * @param bottom
      * @return
      */
-    public UDView setMargin(Integer left, Integer top, Integer right, Integer bottom) {
+    public UDView setMargin(Integer left, Integer top, Integer right, Integer bottom) {//TODO 这里的margin，MarginLayoutParams上有一个问题，当left+right=width或者top+bottom=height有一个问题
         final View view = getView();
         if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();

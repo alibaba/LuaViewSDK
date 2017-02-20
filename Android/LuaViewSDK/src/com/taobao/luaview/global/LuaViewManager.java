@@ -39,6 +39,7 @@ import com.taobao.luaview.fun.binder.ui.UIListViewBinder;
 import com.taobao.luaview.fun.binder.ui.UILoadingDialogBinder;
 import com.taobao.luaview.fun.binder.ui.UILoadingViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIRecyclerViewBinder;
+import com.taobao.luaview.fun.binder.ui.UIRefreshLayoutBinder;
 import com.taobao.luaview.fun.binder.ui.UIRefreshListViewBinder;
 import com.taobao.luaview.fun.binder.ui.UIRefreshRecyclerViewBinder;
 import com.taobao.luaview.fun.binder.ui.UITextViewBinder;
@@ -48,6 +49,8 @@ import com.taobao.luaview.fun.binder.ui.UIViewPagerBinder;
 import com.taobao.luaview.fun.binder.ui.UIWebViewBinder;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.fun.mapper.ui.NewIndexFunction;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask;
+import com.taobao.luaview.scriptbundle.asynctask.SimpleTask0;
 import com.taobao.luaview.vm.extend.luadc.LuaDC;
 
 import org.luaj.vm2.Globals;
@@ -72,6 +75,30 @@ import java.util.List;
 public class LuaViewManager {
     private static final String CACHE_METATABLES = AppCache.CACHE_METATABLES;
 
+    public static Globals sStaticGlobals;//使用该全局Globals来加速加载，需要提前创建Globals
+
+    /**
+     * pre create globals
+     *
+     * @return
+     */
+    public static synchronized void preCreateGlobals() {
+        synchronized (LuaViewManager.class) {
+            if (sStaticGlobals == null) {
+                new SimpleTask0() {
+                    @Override
+                    public void doTask() {
+                        synchronized (LuaViewManager.class) {
+                            if (sStaticGlobals == null) {
+                                sStaticGlobals = createGlobals();
+                            }
+                        }
+                    }
+                }.executeInPool();
+            }
+        }
+    }
+
     /**
      * 创建Globals
      * 根据是否用lua-to-java bytecode来处理（如果使用LuaJC的话则会使用库bcel 533k)
@@ -79,12 +106,66 @@ public class LuaViewManager {
      * @return
      */
     public static Globals createGlobals() {
-        final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs
-        if (LuaViewConfig.isUseLuaDC()) {
-            LuaDC.install(globals);
+        if (sStaticGlobals != null) {
+            synchronized (sStaticGlobals) {
+                Globals result = sStaticGlobals;
+                sStaticGlobals = null;
+                return result;
+            }
+        } else {
+            final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs TODO 性能瓶颈
+            if (LuaViewConfig.isUseLuaDC()) {
+                LuaDC.install(globals);
+            }
+            loadLuaViewLibs(globals);//加载用户lib TODO 性能瓶颈
+            return globals;
         }
-        loadLuaViewLibs(globals);//加载用户lib
-        return globals;
+    }
+
+    /**
+     * 创建Globals
+     * 根据是否用lua-to-java bytecode来处理（如果使用LuaJC的话则会使用库bcel 533k)
+     *
+     * @return
+     */
+    public static Globals createGlobalsAsync() {
+        if (sStaticGlobals != null) {
+            synchronized (sStaticGlobals) {
+                Globals result = sStaticGlobals;
+                sStaticGlobals = null;
+                return result;
+            }
+        } else {
+            final Globals globals = new Globals();
+            new SimpleTask<Globals>() {
+                @Override
+                public void doTask(Globals... params) {
+                    setupGlobals(params != null && params.length > 0 ? params[0] : null);
+                }
+            }.executeSerial(globals);//TODO 这里放到serial线程中执行，而不是executeInPool中执行，为了保证后续的执行时序列
+            return globals;
+        }
+    }
+
+    /**
+     * setup global values
+     *
+     * @param globals
+     */
+    private static void setupGlobals(Globals globals) {
+        if (globals != null) {
+            if (LuaViewConfig.isOpenDebugger()) {
+                JsePlatform.debugGlobals(globals);
+            } else {
+                JsePlatform.standardGlobals(globals);//加载系统libs TODO 性能瓶颈
+            }
+
+            if (LuaViewConfig.isUseLuaDC()) {
+                LuaDC.install(globals);
+            }
+            loadLuaViewLibs(globals);//加载用户lib TODO 性能瓶颈
+            globals.isInited = true;
+        }
     }
 
     /**
@@ -117,6 +198,7 @@ public class LuaViewManager {
 
         globals.tryLazyLoad(new UIWebViewBinder());
         globals.tryLazyLoad(new UICustomViewBinder());
+        globals.tryLazyLoad(new UIRefreshLayoutBinder());
 
         //animation
         globals.tryLazyLoad(new UIAnimatorBinder());

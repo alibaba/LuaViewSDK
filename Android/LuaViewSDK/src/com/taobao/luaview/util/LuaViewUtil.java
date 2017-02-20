@@ -17,6 +17,7 @@ import com.taobao.luaview.userdata.ui.UDSpannableString;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -112,6 +113,22 @@ public class LuaViewUtil {
             } else {
                 view.setBackgroundDrawable(drawable);
             }
+        }
+    }
+
+    //--------------------------------------------add view------------------------------------------
+
+    /**
+     * add target view to parent
+     *
+     * @param parent
+     * @param target
+     * @param varargs
+     */
+    public static void addView(ViewGroup parent, View target, Varargs varargs) {
+        if (parent != null && target != null && parent != target) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(target);
+            parent.addView(LuaViewUtil.removeFromParent(target), layoutParams);
         }
     }
 

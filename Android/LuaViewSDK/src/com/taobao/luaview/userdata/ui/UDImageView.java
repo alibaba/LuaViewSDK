@@ -9,8 +9,8 @@ import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 
-import com.taobao.android.luaview.R;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
@@ -152,7 +152,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                             imageView.setImageBitmap(bitmap);
                         }
                     }
-                }.execute();
+                }.executeInPool();
             }
         }
         return this;
@@ -170,13 +170,13 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
         if (imageView != null) {
             if (!TextUtils.isEmpty(urlOrName)) {
                 if (URLUtil.isNetworkUrl(urlOrName)) {//network
-                    imageView.setTag(R.id.lv_tag_url, urlOrName);//需要设置tag，防止callback在回调的时候调用错误
+                    imageView.setTag(Constants.RES_LV_TAG_URL, urlOrName);//需要设置tag，防止callback在回调的时候调用错误
                     imageView.setIsNetworkMode(true);
                     imageView.loadUrl(urlOrName, callback == null ? null : new BaseImageView.LoadCallback() {
                         @Override
                         public void onLoadResult(Drawable drawable) {
                             if (callback != null) {
-                                if (imageView != null && urlOrName != null && urlOrName.equals(imageView.getTag(R.id.lv_tag_url))) {//异步回调，需要checktag
+                                if (imageView != null && urlOrName != null && urlOrName.equals(imageView.getTag(Constants.RES_LV_TAG_URL))) {//异步回调，需要checktag
                                     LuaUtil.callFunction(callback, drawable != null ? LuaBoolean.TRUE : LuaBoolean.FALSE);
                                 }
                             }
@@ -184,7 +184,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                     });
                 } else {
                     imageView.setIsNetworkMode(false);
-                    imageView.setTag(R.id.lv_tag_url, null);
+                    imageView.setTag(Constants.RES_LV_TAG_URL, null);
                     imageView.setUrl(urlOrName);
                     Drawable drawable = null;
                     if (getLuaResourceFinder() != null) {
@@ -213,13 +213,13 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 @Override
                 public void onStart(String urlOrPath) {
                     if (imageView != null && urlOrName != null) {
-                        imageView.setTag(R.id.lv_tag_url, urlOrName);
+                        imageView.setTag(Constants.RES_LV_TAG_URL, urlOrName);
                     }
                 }
 
                 @Override
                 public void onFinish(Drawable drawable) {
-                    if (imageView != null && urlOrName != null && urlOrName.equals(imageView.getTag(R.id.lv_tag_url))) {
+                    if (imageView != null && urlOrName != null && urlOrName.equals(imageView.getTag(Constants.RES_LV_TAG_URL))) {
                         imageView.setImageDrawable(drawable);
                     }
 

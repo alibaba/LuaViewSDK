@@ -11,6 +11,7 @@ import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.list.UDListView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.adapter.LVListViewAdapter;
 import com.taobao.luaview.view.interfaces.ILVListView;
 
@@ -98,11 +99,6 @@ public class LVListView extends ListView implements ILVListView {
     }
 
     @Override
-    public void addLVView(View view, Varargs varargs) {
-        //TODO 这里不做操作，因为ListView不应该加子view
-    }
-
-    @Override
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
 
     }
@@ -117,7 +113,7 @@ public class LVListView extends ListView implements ILVListView {
         if (mHeaderContainer == null) {
             initHeaderContainer();
         }
-        mHeaderContainer.addLVView(view, null);
+        LuaViewUtil.addView(mHeaderContainer, view, null);
     }
 
     @Override
@@ -132,7 +128,7 @@ public class LVListView extends ListView implements ILVListView {
         if (mFooterContainer != null) {
             initFooterContainer();
         }
-        mFooterContainer.addLVView(view, null);
+        LuaViewUtil.addView(mFooterContainer, view, null);
     }
 
     @Override
