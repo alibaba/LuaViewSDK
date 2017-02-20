@@ -51,7 +51,6 @@ public class LVPagerAdapter extends PagerAdapter {
     }
 
     public Object newItem(ViewGroup container, int position) {
-//        LogUtil.d("yesong", "newItem", position);
         //View封装
         final UDView page = new UDViewGroup(createPageLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
         //对外数据封装，必须使用LuaTable

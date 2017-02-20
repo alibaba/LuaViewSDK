@@ -1,6 +1,5 @@
 package com.taobao.luaview.util;
 
-import android.os.Debug;
 import android.text.TextUtils;
 
 import java.util.HashMap;
@@ -26,7 +25,7 @@ public class DebugUtil {
      * time start
      */
     public static void ts(String method) {
-        tsTime = Debug.threadCpuTimeNanos();
+        tsTime = System.nanoTime();
     }
 
     /**
@@ -35,7 +34,7 @@ public class DebugUtil {
      * @param method
      */
     public static void tsi(String method) {
-        sTime.put(method, Debug.threadCpuTimeNanos());
+        sTime.put(method, System.nanoTime());
     }
 
     /**
@@ -44,7 +43,7 @@ public class DebugUtil {
      * @param method
      */
     public static long te(String method) {
-        long nanoTime = Debug.threadCpuTimeNanos() - tsTime;
+        long nanoTime = System.nanoTime() - tsTime;
         LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
         return nanoTime;
     }
@@ -57,7 +56,7 @@ public class DebugUtil {
     public static void tei(String method) {
         Long startTime = sTime.get(method);
         if (startTime != null) {
-            Long nanoTime = Debug.threadCpuTimeNanos() - startTime;
+            Long nanoTime = System.nanoTime() - startTime;
             LogUtil.d("[Debug-time]", method, nanoTime / 1000000, nanoTime);
         }
     }
@@ -72,7 +71,7 @@ public class DebugUtil {
             totalTime = 0;
             sMethod = method;
         }
-        ttsTime = Debug.threadCpuTimeNanos();
+        ttsTime = System.nanoTime();
     }
 
     /**
@@ -82,7 +81,7 @@ public class DebugUtil {
      * @return
      */
     public static long tte(String method) {
-        long nanoTime = Debug.threadCpuTimeNanos() - ttsTime;
+        long nanoTime = System.nanoTime() - ttsTime;
         totalTime = totalTime + nanoTime;
         LogUtil.d("[Debug-time]", method, totalTime / 1000000, totalTime);
         return totalTime;

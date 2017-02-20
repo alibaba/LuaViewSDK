@@ -36,7 +36,7 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     private void init(Globals globals) {
         this.setHorizontalScrollBarEnabled(false);//不显示滚动条
         mContainer = new LVViewGroup(globals, mLuaUserdata.getmetatable(), null);
-        addView(mContainer, LuaViewUtil.createRelativeLayoutParamsMM());
+        super.addView(mContainer, LuaViewUtil.createRelativeLayoutParamsMM());
     }
 
     @Override
@@ -45,10 +45,9 @@ public class LVHorizontalScrollView extends HorizontalScrollView implements ILVV
     }
 
     @Override
-    public void addLVView(final View view, Varargs varargs) {
+    public void addView(View view, ViewGroup.LayoutParams layoutParams) {
         if(mContainer != view) {
-            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-            mContainer.addView(LuaViewUtil.removeFromParent(view), layoutParams);
+            mContainer.addView(view, layoutParams);
         }
     }
 

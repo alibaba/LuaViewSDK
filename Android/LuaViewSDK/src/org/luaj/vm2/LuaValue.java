@@ -3282,7 +3282,7 @@ public class LuaValue extends Varargs {
 				if ((!res.isnil()) || (tm = t.metatag(INDEX)).isnil())
 					return res;
 			} else if ((tm = t.metatag(INDEX)).isnil())
-				t.indexerror();
+				t.indexerror(key);//modified by song
 			if (tm.isfunction())
 				return tm.call(t, key);
 			t = tm;
@@ -3376,6 +3376,10 @@ public class LuaValue extends Varargs {
 	 */
     private void indexerror() {
 		error( "attempt to index ? (a "+typename()+" value)" );
+	}
+
+	private void indexerror(LuaValue key) {//add by song
+		error( "attempt to index ? (a "+typename()+" value) of key " + (key != null ? key.tojstring() : "nil"));
 	}
  	
 	/** Construct a {@link Varargs} around an array of {@link LuaValue}s.

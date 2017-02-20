@@ -3,7 +3,6 @@ package com.taobao.luaview.demo.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.taobao.luaview.activity.LuaViewActivity;
 import com.taobao.luaview.demo.provider.GlideImageProvider;
 import com.taobao.luaview.demo.ui.CustomError;
 import com.taobao.luaview.demo.ui.CustomLoading;
@@ -11,15 +10,11 @@ import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaScriptLoader;
 import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
-import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.JsonUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.view.LVLoadingDialog;
 
 import org.luaj.vm2.LuaValue;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * 通过LuaView、注入bridge对象，实现Lua-Java通信
@@ -30,7 +25,7 @@ import java.io.InputStream;
  * 修改描述
  * 下午4:50 song XXX
  */
-public class DemoLuaViewActivity extends LuaViewActivity {
+public class DemoLuaViewActivity extends Activity {
     private LuaView mLuaView;
     private LVLoadingDialog mDialog;
 
@@ -67,6 +62,7 @@ public class DemoLuaViewActivity extends LuaViewActivity {
         luaView.registerPanel(CustomError.class);
         luaView.registerPanel(CustomLoading.class);
         luaView.register("bridge", new LuaViewBridge(this));
+        luaView.setUseStandardSyntax(DemoActivity.useStandardSyntax);//是否使用标准语法
     }
 
     /**
@@ -136,5 +132,8 @@ public class DemoLuaViewActivity extends LuaViewActivity {
     protected void onDestroy() {
         LogUtil.d("yesong-onDestroy");
         super.onDestroy();
+        if (mLuaView != null) {
+            mLuaView.onDestroy();
+        }
     }
 }

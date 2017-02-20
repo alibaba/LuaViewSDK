@@ -6,9 +6,9 @@ import android.text.TextUtils;
 import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleDownloadTask;
-import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleLoadTask;
-import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleUnpackTask;
+import com.taobao.luaview.scriptbundle.asynctask.ScriptBundleUltimateLoadTask;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleUnpackDelegate;
 import com.taobao.luaview.util.FileUtil;
 
 import org.luaj.vm2.LuaValue;
@@ -24,7 +24,11 @@ public class LuaScriptLoader {
 
     public LuaScriptLoader(final Context context) {
         if (context != null) {
-            this.mContext = context.getApplicationContext();
+            try {
+                this.mContext = context.getApplicationContext();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         LuaScriptManager.init(context);
     }
@@ -55,7 +59,8 @@ public class LuaScriptLoader {
 
         /**
          * 脚本执行完成，参数表示是否执行成功，保证一定被调用到
-         * @param uri 原始的加载url
+         *
+         * @param uri             原始的加载url
          * @param executedSuccess
          */
         void onScriptExecuted(String uri, boolean executedSuccess);
@@ -70,7 +75,7 @@ public class LuaScriptLoader {
      */
     public void unpackAllAssetBundle(final String basePath) {
         if (basePath != null) {
-            ScriptBundleUnpackTask.unpackAllAssetScripts(mContext, basePath);
+            ScriptBundleUnpackDelegate.unpackAllAssetScripts(mContext, basePath);
         }
     }
 
@@ -89,7 +94,7 @@ public class LuaScriptLoader {
                     FileUtil.delete(folderPath);
                     return null;
                 }
-            }.execute();
+            }.executeInPool();
         }
     }
 
@@ -113,11 +118,43 @@ public class LuaScriptLoader {
      * @param callback
      */
     public void load(final String url, final String sha256, final ScriptLoaderCallback callback) {
-        if (LuaScriptManager.existsScriptBundle(url)) {//load local
-            new ScriptBundleLoadTask(mContext, callback).execute(url);
-        } else {
-            new ScriptBundleDownloadTask(mContext, callback).execute(url, sha256);
-        }
+//        if (LuaScriptManager.existsScriptBundle(url)) {//load local
+//            new ScriptBundleLoadTask(mContext, callback).executeInPool(url);
+//        } else {
+//            new ScriptBundleDownloadTask(mContext, callback).executeInPool(url, sha256);
+//        }
+
+        new ScriptBundleUltimateLoadTask(mContext, callback).load(url, sha256);
     }
 
+
+    //--------------------------------preload script------------------------------------------------
+
+    /**
+     * preload script
+     *
+     * @param url
+     * @param sha256
+     */
+    public void preload(final String url, final String sha256) {
+//        if (LuaScriptManager.existsScriptBundle(url)) {//load local
+//            new ScriptBundleLoadTask(mContext, null).executeInPool(url);
+//        } else {
+//            new ScriptBundleDownloadTask(mContext, null).executeInPool(url, sha256);
+//        }
+        new ScriptBundleUltimateLoadTask(mContext, null).load(url, sha256);
+    }
+
+
+    /**
+     * download script
+     *
+     * @param url
+     * @param sha256
+     */
+    public void download(final String url, final String sha256) {
+        if (!LuaScriptManager.existsScriptBundle(url)) {//load local
+            new ScriptBundleDownloadTask(mContext, null).executeInPool(url, sha256);
+        }
+    }
 }

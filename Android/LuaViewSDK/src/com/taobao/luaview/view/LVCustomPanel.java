@@ -36,15 +36,6 @@ public abstract class LVCustomPanel extends LVViewGroup<UDCustomPanel> implement
         return new UDCustomPanel(this, globals, metaTable, varargs);
     }
 
-
-    @Override
-    public void addLVView(final View view, Varargs a) {
-        if (this != view) {
-            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-            super.addView(LuaViewUtil.removeFromParent(view), layoutParams);
-        }
-    }
-
     public void show() {
         LVCustomPanel.this.setVisibility(View.VISIBLE);
     }

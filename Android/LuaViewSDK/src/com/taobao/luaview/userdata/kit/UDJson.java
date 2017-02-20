@@ -47,7 +47,7 @@ public class UDJson extends BaseLuaTable {
                     protected void onPostExecute(LuaValue result) {
                         LuaUtil.callFunction(callback, result);
                     }
-                }.execute();
+                }.executeInPool();
                 return LuaValue.NIL;
             } else {
                 return isValid(target);
@@ -83,7 +83,7 @@ public class UDJson extends BaseLuaTable {
                     protected void onPostExecute(LuaValue result) {
                         LuaUtil.callFunction(callback, result);
                     }
-                }.execute();
+                }.executeInPool();
                 return NIL;
             } else {
                 return toTable(target);

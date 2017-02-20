@@ -74,7 +74,7 @@ public class UDFile extends BaseLuaTable {
                                 protected void onPostExecute(Boolean o) {
                                     LuaUtil.callFunction(callback, o);
                                 }
-                            }.execute(name, data);
+                            }.executeInPool(name, data);
                         } else {
                             final String path = finder.buildSecurePathInSdcard(name);
                             return valueOf(FileUtil.save(path, data));
@@ -112,7 +112,7 @@ public class UDFile extends BaseLuaTable {
                                 protected void onPostExecute(UDData udData) {
                                     LuaUtil.callFunction(callback, udData);
                                 }
-                            }.execute();
+                            }.executeInPool();
                         } else {
                             LuaUtil.callFunction(callback, NIL);
                         }
