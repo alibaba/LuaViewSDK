@@ -119,6 +119,45 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         }.executeInPool();
     }
 
+    /**
+     * create LuaView async
+     *
+     * @param context
+     * @param createdCallback
+     */
+    public static void createAsync2(final Context context, final CreatedCallback createdCallback) {
+        new SimpleTask1<Globals>() {
+            @Override
+            protected Globals doInBackground(Object... params) {
+                //init
+                initAsync();
+
+                //create globals
+                return LuaViewManager.createGlobals();//TODO 异步创建有风险，如果使用的时候尚未创建完成则会加载失败
+            }
+
+            @Override
+            protected void onPostExecute(Globals globals) {
+                //create luaview
+                createViewAsync(globals);
+            }
+
+            //初始化
+            private void initAsync() {
+                Constants.init(context);
+                LuaScriptManager.init(context);
+            }
+
+            //创建view
+            private void createViewAsync(Globals globals) {
+                final LuaView luaView = createLuaView(context, globals);
+                if (createdCallback != null) {
+                    createdCallback.onCreated(luaView);
+                }
+            }
+        }.executeInPool();
+    }
+
     private static LuaView createLuaView(final Context context, final Globals globals) {
         final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
         globals.setLuaView(luaView);
