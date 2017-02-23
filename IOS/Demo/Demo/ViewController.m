@@ -18,6 +18,7 @@
 #import "JHSLVImage.h"
 #import "JHSLuaViewController.h"
 #import "LVUtil.h"
+#import "LVDebugConnection.h"
 
 
 @interface ViewController ()
@@ -54,7 +55,10 @@
 
     [LViewController disableReloadKeyCommand:YES];
 
-    // [self changeAllLuaFile];// LuaView新老语法格式转换工具
+    //  [self changeAllLuaFile];// LuaView新老语法格式转换工具
+    //  [LVDebugConnection openUrlServer:^(NSDictionary *args) {
+    //      NSLog(@"");
+    //  }];
 }
 
 -(void) test{

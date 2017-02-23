@@ -292,4 +292,47 @@ static NSString* readString(CFSocketRef socket)
         [self sendOneData];
     }
 }
+
+
+#ifdef DEBUG
++ (id)jsonObject:(NSString *)s{
+    NSData* data = [s dataUsingEncoding:NSUTF8StringEncoding];
+    @try {
+        NSError *error = nil;
+        NSJSONReadingOptions options = 0;
+        id obj = [NSJSONSerialization JSONObjectWithData:data options:options error:&error];
+        if (error) {
+            return nil;
+        }
+        return obj;
+    } @catch (NSException *exception) {
+        return nil;
+    }
+}
+
++(void) openUrlServer:( void(^)(NSDictionary* args) ) callback{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        LVDebugConnection* debugConnection = [[LVDebugConnection alloc] init];
+        if( [debugConnection waitUntilConnectionEnd]>0 ) {
+            [debugConnection sendCmd:@"debugger" info:@"true"];
+            for(;;) {
+                NSString* cmd = [debugConnection getCmd];
+                if( cmd ) {
+                    if( callback ) {
+                        callback( [LVDebugConnection jsonObject:cmd] );
+                    }
+                    break;
+                } else {
+                    [NSThread sleepForTimeInterval:0.01];
+                }
+            }
+            [debugConnection closeAll];
+        } else {
+            [debugConnection closeAll];
+        }
+    });
+}
+#endif
+
+
 @end

@@ -31,4 +31,7 @@
 // 设置调试器的IP和端口, 用于远程调试
 +(void) setDebugerIP:(NSString*) ip port:(int) port;
 
+#ifdef DEBUG
++(void) openUrlServer:( void(^)(NSDictionary* args) ) callback;
+#endif
 @end
