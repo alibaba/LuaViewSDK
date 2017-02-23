@@ -320,8 +320,10 @@ function debug_execute_cmd( env )
         debug_disable_bp( expr )
     elseif c == "bt" then
         local trace = debug.traceback("", 3);
-        debug.writeCmd("trace", trace, nil);
         print( trace );
+    elseif c == "stack" then
+        local trace = debug.traceback("", 3);
+        debug.writeCmd("stack", trace, nil);
     elseif c == "h" then
         debug_help()
     else
