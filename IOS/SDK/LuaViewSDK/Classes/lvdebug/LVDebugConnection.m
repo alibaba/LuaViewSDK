@@ -96,6 +96,10 @@ static int SERVER_PORT = 9876;
     [self sendCmd:cmdName fileName:nil info:info];
 }
 
+- (void) sendCmd:(NSString*) cmdName info:(NSString*) info args:(NSDictionary*) args{
+    [self sendCmd:cmdName fileName:nil info:info args:args];
+}
+
 - (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
     [self sendCmd:cmdName fileName:fileName info:info args:nil];
 }

@@ -27,6 +27,16 @@ static int DebugReadCmd (lua_State *L) {
     return 1;
 }
 
+static int DebugWriteCmd (lua_State *L) {
+    LView* luaView = LV_LUASTATE_VIEW(L);
+    NSString* cmd = lv_paramString(L, 1);
+    NSString* info = lv_paramString(L, 2);
+    NSDictionary* args = lv_luaTableToDictionary(L, 3);
+    
+    [luaView.debugConnection sendCmd:cmd info:info args:args];
+    return 0;
+}
+
 static int DebugSleep (lua_State *L) {
     float time = lua_tonumber(L, 1);
     if( time>0 ) {
@@ -72,6 +82,7 @@ static int db_traceback_count (lua_State *L) {
 
 static const luaL_Reg dblib[] = {
     {"readCmd", DebugReadCmd},
+    {"writeCmd", DebugWriteCmd},
     {"sleep", DebugSleep},
     {"printToServer", DebugPrintToServer},
     {"runningLine", runningLine},
