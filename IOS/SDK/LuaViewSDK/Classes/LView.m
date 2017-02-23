@@ -99,6 +99,7 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.checkDebugerServer = YES;
     self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
@@ -263,12 +264,12 @@ extern char g_debug_lua[];
 
 
 -(void) checkDeuggerIsRunningToLoadDebugModel{
-    if( self.debugConnection== nil) {
+    if( self.checkDebugerServer && self.debugConnection== nil) {
         self.debugConnection = [[LVDebugConnection alloc] init];
         self.debugConnection.lview = self;
     }
 
-    if( [self.debugConnection waitUntilConnectionEnd]>0 ) {
+    if( self.checkDebugerServer && [self.debugConnection waitUntilConnectionEnd]>0 ) {
         if( self.loadedDebugScript == NO ) {
             self.loadedDebugScript = YES;
             [self.debugConnection sendCmd:@"log" info:@"[LuaView][调试日志] 开始调试!\n"];

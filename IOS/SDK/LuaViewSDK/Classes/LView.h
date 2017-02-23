@@ -33,6 +33,8 @@
 
 @property (nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是非标准语法，需要转换
 
+@property (nonatomic,assign) BOOL checkDebugerServer; // 是否检查调试器
+
 /**
  *  load and run script
  *
