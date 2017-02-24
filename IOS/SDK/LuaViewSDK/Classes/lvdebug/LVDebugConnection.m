@@ -311,25 +311,35 @@ static NSString* readString(CFSocketRef socket)
 }
 
 +(void) openUrlServer:( void(^)(NSDictionary* args) ) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // 处理耗时操作的代码块...
+        
         LVDebugConnection* debugConnection = [[LVDebugConnection alloc] init];
         if( [debugConnection waitUntilConnectionEnd]>0 ) {
             [debugConnection sendCmd:@"debugger" info:@"true"];
             for(;;) {
                 NSString* cmd = [debugConnection getCmd];
                 if( cmd ) {
-                    if( callback ) {
-                        callback( [LVDebugConnection jsonObject:cmd] );
+                    NSDictionary* dic = [LVDebugConnection jsonObject:cmd];
+                    if( dic && [dic isKindOfClass:[NSDictionary class]] ) {
+                        //通知主线程刷新
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            //回调或者说是通知主线程刷新，
+                            if( callback ) {
+                                callback( dic );
+                            }
+                        });
                     }
                     break;
                 } else {
-                    [NSThread sleepForTimeInterval:0.01];
+                    [NSThread sleepForTimeInterval:0.1];
                 }
             }
             [debugConnection closeAll];
         } else {
             [debugConnection closeAll];
         }
+        
     });
 }
 #endif
