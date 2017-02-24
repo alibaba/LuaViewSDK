@@ -58,6 +58,7 @@ static inline NSInteger mapSection(NSInteger section){
     }
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    cell.contentView.frame = cell.bounds;//脚本的window是ContentView大小可能和Cell不同步
     LView* lview = self.owner.lv_lview;
     lua_State* L = lview.l;
     lview.conentView = cell.contentView;
