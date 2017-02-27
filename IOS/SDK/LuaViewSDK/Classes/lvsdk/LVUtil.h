@@ -222,6 +222,10 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key );
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
                                          block:(void (^)(NSTimer *timer))block
                                        repeats:(BOOL)inRepeats;
+/*
+ * 显示Lua的调用堆栈
+ */
++ (NSString*) luaTrace:(lua_State*) L;
 
 @end
 
