@@ -17,6 +17,7 @@ import com.taobao.luaview.view.interfaces.ILVRecyclerView;
 import com.taobao.luaview.view.recyclerview.LVRecyclerViewAdapter;
 import com.taobao.luaview.view.recyclerview.RecyclerViewHelper;
 import com.taobao.luaview.view.recyclerview.decoration.DividerGridItemDecoration;
+import com.taobao.luaview.view.recyclerview.decoration.DividerItemDecoration;
 import com.taobao.luaview.view.recyclerview.layout.LVGridLayoutManager;
 
 import org.luaj.vm2.Globals;
@@ -140,7 +141,7 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         if (mItemDecoration == null || mSpacing != spacing) {
             this.removeItemDecoration(mItemDecoration);
             mSpacing = spacing;
-            mItemDecoration = new DividerGridItemDecoration(spacing);
+            mItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL_LIST, spacing);
             this.addItemDecoration(mItemDecoration);
         }
     }
