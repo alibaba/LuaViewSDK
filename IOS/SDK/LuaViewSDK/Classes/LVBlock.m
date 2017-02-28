@@ -75,7 +75,11 @@
     }
 }
 
-- (NSString*) callWithArgs:(NSArray*) args{
+- (NSString*) callWithArgs:(NSArray*) args {
+    return [self callWithArgs:args returnValueNum:self.returnValueNum];
+}
+
+- (NSString*) callWithArgs:(NSArray*) args returnValueNum:(int) returnValueNum{
     lua_State* L = self.lview.l;
     if( L ) {
         lua_checkstack(L, (int)args.count*2+2 );
@@ -89,7 +93,7 @@
         
         [LVUtil pushRegistryValue:L key:self.retainKey];
         
-        NSString* ret = lv_runFunctionWithArgs(L, (int)args.count, self.returnValueNum);
+        NSString* ret = lv_runFunctionWithArgs(L, (int)args.count, returnValueNum);
         
         NSMutableArray* values = [[NSMutableArray alloc] init];
         int newStackNum = lua_gettop(L);
@@ -114,6 +118,10 @@
     if( L ){
         [LVUtil pushRegistryValue:L key:self.retainKey];
     }
+}
+
+-(id) returnValue{
+    return [self returnValue:0];
 }
 
 -(id) returnValue:(int)index{
