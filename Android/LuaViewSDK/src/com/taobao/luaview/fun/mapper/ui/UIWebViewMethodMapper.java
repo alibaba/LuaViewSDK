@@ -20,16 +20,16 @@ public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapp
     private static final String TAG = "UIWebViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "loadUrl",  //0
-            "canGoBack",
-            "canGoForward",
-            "goBack",
-            "goForward",
-            "reload",
-            "title",
-            "isLoading",
-            "stopLoading",
-            "url",
-            "pullRefreshEnable"
+            "canGoBack", // 1
+            "canGoForward", //2
+            "goBack", //3
+            "goForward",//4
+            "reload",//5
+            "title",//6
+            "isLoading",//7
+            "stopLoading",//8
+            "url",//9
+            "pullRefreshEnable"//10
     };
 
     @Override
