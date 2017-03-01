@@ -147,9 +147,9 @@ public class UDSystem extends BaseLuaTable {
     class keepScreenOn extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs varargs) {
-            if (getGlobals() != null && getGlobals().getLuaView() != null) {
+            if (getGlobals() != null && getGlobals().getRenderTarget() != null) {
                 final Boolean keepScreenOn = LuaUtil.getBoolean(varargs, 2);
-                getGlobals().getLuaView().setKeepScreenOn(keepScreenOn != null ? keepScreenOn : true);
+                getGlobals().getRenderTarget().setKeepScreenOn(keepScreenOn != null ? keepScreenOn : true);
             }
             return LuaValue.NIL;
         }
