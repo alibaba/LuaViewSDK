@@ -371,6 +371,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public Varargs initParams(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setInitParams(view, varargs);
@@ -490,6 +491,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"IOS不支持图片"})
     public Varargs backgroundColor(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setBackgroundColor(view, varargs);
@@ -649,10 +651,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignLeftTop(U view, Varargs args) {
         return alignTopLeft(view, args);
     }
 
+    @Deprecated
     public LuaValue alignTopLeft(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.ALIGN_PARENT_LEFT);
     }
@@ -664,10 +668,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignCenterTop(U view, Varargs args) {
         return alignTopCenter(view, args);
     }
 
+    @Deprecated
     public LuaValue alignTopCenter(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.CENTER_HORIZONTAL);
     }
@@ -679,10 +685,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignRightTop(U view, Varargs args) {
         return alignTopRight(view, args);
     }
 
+    @Deprecated
     public LuaValue alignTopRight(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.ALIGN_PARENT_RIGHT);
     }
@@ -694,10 +702,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignLeftBottom(U view, Varargs args) {
         return alignBottomLeft(view, args);
     }
 
+    @Deprecated
     public LuaValue alignBottomLeft(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.ALIGN_PARENT_LEFT);
     }
@@ -709,10 +719,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignCenterBottom(U view, Varargs args) {
         return alignBottomCenter(view, args);
     }
 
+    @Deprecated
     public LuaValue alignBottomCenter(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.CENTER_HORIZONTAL);
     }
@@ -724,10 +736,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignRightBottom(U view, Varargs args) {
         return alignBottomRight(view, args);
     }
 
+    @Deprecated
     public LuaValue alignBottomRight(U view, Varargs args) {
         return view.align(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.ALIGN_PARENT_RIGHT);
     }
@@ -751,10 +765,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignLeftCenter(U view, Varargs args) {
         return alignCenterLeft(view, args);
     }
 
+    @Deprecated
     public LuaValue alignCenterLeft(U view, Varargs args) {
         return view.align(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.ALIGN_PARENT_LEFT);
     }
@@ -766,10 +782,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignRightCenter(U view, Varargs args) {
         return alignCenterRight(view, args);
     }
 
+    @Deprecated
     public LuaValue alignCenterRight(U view, Varargs args) {
         return view.align(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.ALIGN_PARENT_RIGHT);
     }
@@ -781,10 +799,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignCenterHorizontal(U view, Varargs args) {
         return alignHorizontalCenter(view, args);
     }
 
+    @Deprecated
     public LuaValue alignHorizontalCenter(U view, Varargs args) {
         return view.align(RelativeLayout.CENTER_HORIZONTAL);
     }
@@ -796,10 +816,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param args
      * @return
      */
+    @Deprecated
     public LuaValue alignCenterVertical(U view, Varargs args) {
         return alignVerticalCenter(view, args);
     }
 
+    @Deprecated
     public LuaValue alignVerticalCenter(U view, Varargs args) {
         return view.align(RelativeLayout.CENTER_VERTICAL);
     }
@@ -1013,6 +1035,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue minWidth(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setMinWidth(view, varargs);
@@ -1143,10 +1166,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue show(U view, Varargs varargs) {
         return view.show();
     }
 
+    @Deprecated
     public LuaValue isShow(U view, Varargs varargs) {
         return valueOf(view.isShow());
     }
@@ -1158,10 +1183,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue hide(U view, Varargs varargs) {
         return view.hide();
     }
 
+    @Deprecated
     public LuaValue isHide(U view, Varargs varargs) {
         return valueOf(view.isHide());
     }
@@ -1298,6 +1325,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = "Only for iOS")
     public LuaValue clipsToBounds(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setClipsToBounds(view, varargs);
@@ -1324,6 +1352,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue shadowPath(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShadowPath(view, varargs);
@@ -1349,6 +1378,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue masksToBounds(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setMasksToBounds(view, varargs);
@@ -1374,6 +1404,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue shadowOffset(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShadowOffset(view, varargs);
@@ -1401,6 +1432,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue shadowRadius(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShadowRadius(view, varargs);
@@ -1428,6 +1460,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue shadowOpacity(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShadowOpacity(view, varargs);
@@ -1453,6 +1486,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue shadowColor(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShadowColor(view, varargs);
@@ -1478,6 +1512,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS平台特性，待废弃"})
     public LuaValue sizeToFit(U view, Varargs varargs) {
         //TODO
         return view;
@@ -1490,6 +1525,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue addGestureRecognizer(U view, Varargs varargs) {
         //TODO
         return view;
@@ -1502,6 +1538,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue removeGestureRecognizer(U view, Varargs varargs) {
         //TODO
         return view;
@@ -1514,6 +1551,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue transform3D(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTransform3D(view, varargs);

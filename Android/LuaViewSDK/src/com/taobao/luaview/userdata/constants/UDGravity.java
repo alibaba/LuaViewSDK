@@ -32,14 +32,15 @@ public class UDGravity extends BaseLuaTable {
         set("TOP", Gravity.TOP);
         set("RIGHT", Gravity.RIGHT);
         set("BOTTOM", Gravity.BOTTOM);
-        set("START", Gravity.START);
-        set("END", Gravity.END);
-        set("CENTER", Gravity.CENTER);
         set("H_CENTER", Gravity.CENTER_HORIZONTAL);
         set("V_CENTER", Gravity.CENTER_VERTICAL);
-        set("FILL", Gravity.FILL);
-        set("H_FILL", Gravity.FILL_HORIZONTAL);
-        set("V_FILL", Gravity.FILL_VERTICAL);
+
+        set("CENTER", Gravity.CENTER);//TODO IOS无
+        set("START", Gravity.START);//TODO IOS无
+        set("END", Gravity.END);//TODO IOS无
+        set("FILL", Gravity.FILL);//TODO IOS无
+        set("H_FILL", Gravity.FILL_HORIZONTAL);//TODO IOS无
+        set("V_FILL", Gravity.FILL_VERTICAL);//TODO IOS无
     }
 
 }
