@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.kit;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
@@ -21,6 +22,7 @@ import org.luaj.vm2.lib.ZeroArgFunction;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UDSystem extends BaseLuaTable {
 
     public UDSystem(Globals globals, LuaValue metatable) {

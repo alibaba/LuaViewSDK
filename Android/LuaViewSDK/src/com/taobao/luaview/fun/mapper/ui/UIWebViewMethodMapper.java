@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by tuoli on 10/9/16.
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UIWebViewMethodMapper";

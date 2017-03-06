@@ -15,7 +15,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class DataMethodMapper<U extends UDData> extends BaseMethodMapper<U> {
     private static final String TAG = "DataMethodMapper";
 

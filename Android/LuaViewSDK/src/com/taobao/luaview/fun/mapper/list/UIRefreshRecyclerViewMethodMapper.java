@@ -14,7 +14,7 @@ import java.util.List;
  * Refreshable RecyclerView的方法映射
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> extends UIBaseRecyclerViewMethodMapper<U> {
 
     private static final String TAG = "UIRefreshRecyclerViewMethodMapper";
@@ -77,6 +77,7 @@ public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> 
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue initRefreshing(U view, Varargs varargs) {
         return view;
     }

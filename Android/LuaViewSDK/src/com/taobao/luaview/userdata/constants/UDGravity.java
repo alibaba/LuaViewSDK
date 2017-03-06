@@ -2,6 +2,7 @@ package com.taobao.luaview.userdata.constants;
 
 import android.view.Gravity;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -13,6 +14,7 @@ import org.luaj.vm2.LuaValue;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标", "IOS不支持"})
 public class UDGravity extends BaseLuaTable {
 
     public UDGravity(Globals globals, LuaValue metatable) {

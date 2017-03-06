@@ -14,6 +14,7 @@ import java.util.List;
  * @author song
  */
 @LuaViewLib
+@Deprecated
 public class UIListViewMethodMapper<U extends UDListView> extends UIBaseListViewMethodMapper<U> {
     private static final String TAG = "UIListViewMethodMapper";
 

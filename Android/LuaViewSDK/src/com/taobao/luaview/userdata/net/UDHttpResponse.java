@@ -32,7 +32,7 @@ public class UDHttpResponse extends BaseLuaTable {
         set("data", new data());
         set("code", new code());
         set("header", new header());
-        set("message", new message());
+        set("message", new message());//TODO iOS无
     }
 
     public UDHttpResponse setData(byte[] mData) {

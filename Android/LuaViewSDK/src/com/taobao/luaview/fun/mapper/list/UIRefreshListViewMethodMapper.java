@@ -16,6 +16,7 @@ import java.util.List;
  * @author song
  */
 @LuaViewLib
+@Deprecated
 public class UIRefreshListViewMethodMapper<U extends UDRefreshListView> extends UIBaseListViewMethodMapper<U> {
 
     private static final String TAG = "UIRefreshListViewMethodMapper";

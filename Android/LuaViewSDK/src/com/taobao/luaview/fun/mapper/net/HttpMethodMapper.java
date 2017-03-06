@@ -18,7 +18,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "iOS不支持对象调用，只支持创建方式调用，待统一"})
 public class HttpMethodMapper<U extends UDHttp> extends BaseMethodMapper<U> {
 
     private static final String TAG = "HttpMethodMapper";

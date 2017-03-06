@@ -322,7 +322,7 @@ public class UDAudio extends BaseCacheUserdata implements MediaPlayer.OnPrepared
         }
 
         if (mCallback != null) {
-            LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "onComplete", "onComplete"));
+            LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "onComplete", "OnComplete"));
         }
     }
 
