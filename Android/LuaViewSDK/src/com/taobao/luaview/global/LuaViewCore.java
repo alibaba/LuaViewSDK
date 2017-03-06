@@ -78,17 +78,36 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     }
 
     /**
-     * create LuaViewCore async
+     * create LuaViewCore async （带返回值）
+     *
+     * @param context
+     */
+    public static LuaViewCore createAsync(final Context context) {
+        final Globals globals = LuaViewManager.createGlobalsAsync();
+        return createLuaViewCore(context, globals);
+    }
+
+    /**
+     * create LuaViewCore async（兼容老的，没必要包装一层SimpleTask）
      *
      * @param context
      * @param createdCallback
      */
     public static void createAsync(final Context context, final LuaViewCore.CreatedCallback createdCallback) {
-        final Globals globals = LuaViewManager.createGlobalsAsync();
-        final LuaViewCore luaViewCore = createLuaViewCore(context, globals);
-        if (createdCallback != null) {
-            createdCallback.onCreated(luaViewCore);
-        }
+        new SimpleTask1<LuaViewCore>() {
+            @Override
+            protected LuaViewCore doInBackground(Object... params) {
+                final Globals globals = LuaViewManager.createGlobalsAsync();
+                return createLuaViewCore(context, globals);
+            }
+
+            @Override
+            protected void onPostExecute(LuaViewCore luaViewCore) {
+                if (createdCallback != null) {
+                    createdCallback.onCreated(luaViewCore);
+                }
+            }
+        }.executeInPool();
     }
 
     /**
@@ -463,7 +482,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param enable
      */
     public void setRefreshContainerEnable(boolean enable) {
-        if(this.mGlobals != null) {
+        if (this.mGlobals != null) {
             this.mGlobals.isRefreshContainerEnable = enable;
         }
     }
@@ -507,7 +526,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         this.mGlobals = globals;
     }
 
-    private void init(Context context){
+    private void init(Context context) {
         //常量初始化
         Constants.init(context);
         //初始化脚本管理

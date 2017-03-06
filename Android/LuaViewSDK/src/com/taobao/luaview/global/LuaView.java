@@ -53,6 +53,17 @@ public class LuaView extends LVViewGroup {
      * create LuaView async
      *
      * @param context
+     * @return
+     */
+    public static LuaView createAsync(final Context context) {
+        LuaViewCore luaViewCore = LuaViewCore.createAsync(context);
+        return createLuaView(context, luaViewCore);
+    }
+
+    /**
+     * create LuaView async (兼容老的，可以使用无回调方法）
+     *
+     * @param context
      * @param createdCallback
      */
     public static void createAsync(final Context context, final CreatedCallback createdCallback) {
