@@ -217,7 +217,7 @@ static int __index (lua_State *L) {
               @"DOWN":@(LVTouchEventType_DOWN),
               @"MOVE":@(LVTouchEventType_MOVE),
               @"OUTSIDE":@(UIEventTypeRemoteControl),
-              @"PRESSES":@(UIEventTypePresses),
+              @"PRESSES":@(UIEventTypePresses),// for IOS
               @"UP":@(LVTouchEventType_UP),
               @"CANCEL":@(LVTouchEventType_CANCEL),
               };

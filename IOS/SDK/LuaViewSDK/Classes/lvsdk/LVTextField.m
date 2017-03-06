@@ -185,7 +185,7 @@ static int placeholder (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},
-        {"placeholder", placeholder},
+        {"placeholder", placeholder}, //__deprecated_msg("Use hint")
         {NULL, NULL}
     };
     

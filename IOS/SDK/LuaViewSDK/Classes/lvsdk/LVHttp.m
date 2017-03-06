@@ -300,6 +300,9 @@ static int cancel (lua_State *L) {
             {"data", data },
             {"code", responseStatusCode },
             {"header", responseHeaderFields },
+            // IOS: meesage 服务端错误信息
+            // timeout
+            // retryTimes
             
             {"get", get },
             {"post", post },

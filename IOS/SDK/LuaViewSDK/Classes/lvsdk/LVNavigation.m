@@ -146,7 +146,7 @@ static int setStatusBarStyle (lua_State *L) {
         {"left", setLeftButton},
         {"right", setRightButton},
         {"background", setBackground},
-        {"statusBarStyle", setStatusBarStyle},
+        {"statusBarStyle", setStatusBarStyle}, // for IOS
         {LUAVIEW_SYS_TABLE_KEY, setBackground},
         {NULL, NULL}
     };

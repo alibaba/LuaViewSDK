@@ -163,6 +163,13 @@ static int __tostring (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },
+        // pause
+        // resume
+        // callback { onComplete onError }
+        
+        // playing
+        // looping
+        // pausing
         
         {"__gc", __gc },
         {"__tostring", __tostring },

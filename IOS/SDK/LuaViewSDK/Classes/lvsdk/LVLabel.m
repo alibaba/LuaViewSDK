@@ -250,13 +250,14 @@ static int ellipsize (lua_State *L) {
         
         {"font",    font},
         {"fontSize",    fontSize},
-        {"textSize",    fontSize},
+        {"textSize",    fontSize}, // __deprecated_msg("Use fontSize")
         
         {"ellipsize",    ellipsize},
         {"textAlign",    textAlignment},
-        {"gravity",    textAlignment},
+        {"gravity",    textAlignment},// 上中下 IOS 不支持,需要考虑支持
         
-        {"lineCount",    lineCount},
+        {"lineCount",    lineCount}, // __deprecated_msg("Use lines")
+        // lines
         
         {"adjustFontSize",  adjustFontSize},
         

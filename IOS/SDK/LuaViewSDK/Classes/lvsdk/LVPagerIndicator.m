@@ -139,8 +139,8 @@ static int currentPageIndicatorTintColor(lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         
-        {"pageColor",     pageIndicatorTintColor },
-        {"currentPageColor",     currentPageIndicatorTintColor },
+        {"pageColor",     pageIndicatorTintColor },//__deprecated_msg("Use unselectedColor")
+        {"currentPageColor",     currentPageIndicatorTintColor },//__deprecated_msg("Use selectedColor")
         
         {"unselectedColor",     pageIndicatorTintColor },
         {"selectedColor",     currentPageIndicatorTintColor },

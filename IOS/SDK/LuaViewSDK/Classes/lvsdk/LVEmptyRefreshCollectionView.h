@@ -11,6 +11,7 @@
 #import "UIScrollView+LuaView.h"
 #import "LVCollectionView.h"
 
+// for IOS
 @interface LVEmptyRefreshCollectionView : LVCollectionView
 
 @end

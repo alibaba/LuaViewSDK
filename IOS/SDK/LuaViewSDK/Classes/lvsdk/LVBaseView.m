@@ -651,6 +651,7 @@ static int layerMode(lua_State *L) {
 }
 
 #pragma -mark hidden
+//__deprecated_msg("Use hide")
 static int hidden(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -1530,15 +1531,16 @@ static int invalidate (lua_State *L) {
 
 static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
+    // visible
     
-    {"hide",    hide },
-    {"isHide",    isHide },
+    {"hide",    hide },//__deprecated_msg("Use hidden")
+    {"isHide",    isHide },//__deprecated_msg("Use hidden")
     
-    {"show",    show },
-    {"isShow",    isShow },
+    {"show",    show },//__deprecated_msg("Use visible")
+    {"isShow",    isShow },//__deprecated_msg("Use visible")
     
     {"enabled",    userInteractionEnabled },
-    {"clipsToBounds",    clipsToBounds },
+    {"clipsToBounds",    clipsToBounds },// for IOS
     
     {"backgroundColor",     backgroundColor },
     
@@ -1551,18 +1553,18 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"borderColor",         borderColor },
     {"borderDash",         borderDash },
     
-    {"shadowPath",       setShadowPath },
-    {"masksToBounds",    setMasksToBounds },
-    {"shadowOffset",     setShadowOffset },
-    {"shadowRadius",     setShadowRadius },
-    {"shadowOpacity",    setShadowOpacity },
-    {"shadowColor",      setShadowColor },
+    {"shadowPath",       setShadowPath }, // for IOS
+    {"masksToBounds",    setMasksToBounds },// for IOS
+    {"shadowOffset",     setShadowOffset },// for IOS
+    {"shadowRadius",     setShadowRadius },// for IOS
+    {"shadowOpacity",    setShadowOpacity },// for IOS
+    {"shadowColor",      setShadowColor },// for IOS
     
     {"frame",     frame },
     
     {"size",     size },
     
-    {"origin",     origin },
+    {"origin",     origin },//__deprecated_msg("Use xy")
     {"xy",     origin },
     
     {"center",    center},
@@ -1580,21 +1582,22 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"width",    width},
     {"height",    height},
     
-    {"adjustSize", adjustSize},
+    {"adjustSize", adjustSize},// 带讨论
     
-    {"addGesture",          addGestureRecognizer },
-    {"removeGesture",       removeGestureRecognizer },
+    {"addGesture",          addGestureRecognizer }, //__deprecated_msg("Use onTouch")
+    {"removeGesture",       removeGestureRecognizer }, //__deprecated_msg("Use onTouch")
     
     {"addView",          addSubview },
     {"children", children },
     {"removeFromSuper", removeFromSuperview },
-    {"removeFromParent", removeFromSuperview },
+    {"removeFromParent", removeFromSuperview }, //__deprecated_msg("Use removeFromSuper")
     {"removeAllViews", removeAllSubviews },
+    //{"bringToFront", bringToFront},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
     {"rotationY", rotationY },
-    {"rotationZ", rotationZ },
+    {"rotationZ", rotationZ },//__deprecated_msg("Use rotation")
     
     {"scale", scale },
     {"scaleX", scaleX },
@@ -1610,17 +1613,21 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"onLayout",     onLayout },
     {"onClick",     onClick },
     {"onTouch",     onTouch },
+    // onShow
+    // onHide
+    // onLongClick
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
-    {"cancelFocus",    resignFirstResponder },
+    {"cancelFocus",    resignFirstResponder }, //__deprecated_msg("Use hidden")
+    {"clearFocus",    resignFirstResponder },
     
-    {"transform3D",    transform3D },
+    {"transform3D",    transform3D }, //__deprecated_msg("Use")
     
     {"startAnimation", startAnimation },
     {"stopAnimation", stopAnimation },
     
-    {"release",     releaseObject},
+    {"release",     releaseObject}, //__deprecated_msg("Use")
     
     {"__gc",        __gc },
     
@@ -1629,7 +1636,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     // {"__newindex",  __newindex },
 
     {"flexChildren",  flxChildViews },
-    {"flxLayout",  flxLayout },
+    {"flxLayout",  flxLayout },// 安卓无
     {"flexCss", flxBindingInlineCSS},
   
     // align
@@ -1639,13 +1646,15 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"alignTop", alignTop},
     {"alignBottom", alignBottom},
     {"alignCenter", alignCenter},
+    // padding
+    // margin
     
     // getNativeView
-    {"getNativeView", getNativeView},
+    {"getNativeView", getNativeView}, //__deprecated_msg("Use nativeView")
     {"nativeView", getNativeView},
     
-    {"effects",effects},
-    {"layerMode",layerMode},
+    {"effects",effects}, // IOS 视差效果
+    {"layerMode",layerMode}, // for IOS
     
     {"invalidate",invalidate},
     {NULL, NULL}

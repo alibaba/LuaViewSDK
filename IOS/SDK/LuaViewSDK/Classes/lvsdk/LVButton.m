@@ -280,15 +280,16 @@ static int fontSize (lua_State *L) {
         
         {"font",    font},
         {"fontSize",    fontSize},
-        {"textSize",    fontSize},
+        {"textSize",    fontSize}, // __deprecated_msg("Use lines")
+
         
-        {"titleColor",    titleColor},
-        {"title",    title},
+        {"titleColor",    titleColor}, // __deprecated_msg("Use lines")
+        {"title",    title}, // __deprecated_msg("Use lines")
         {"textColor",    titleColor},
         {"text",    title},
 
-        {"selected",    selected},
-        {"enabled",    enabled},
+        {"selected",    selected}, // __deprecated_msg("Use lines")
+        {"enabled",    enabled}, // __deprecated_msg("Use lines")
         
         //{"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
         {NULL, NULL}

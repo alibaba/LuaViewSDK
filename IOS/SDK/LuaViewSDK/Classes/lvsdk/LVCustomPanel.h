@@ -20,5 +20,7 @@
 
 - (void) callLuaWithArgument:(NSString*) info;
 - (void) callLuaWithArguments:(NSArray*) args;
+// callLuaFunction()
+// callLuaCallback
 
 @end

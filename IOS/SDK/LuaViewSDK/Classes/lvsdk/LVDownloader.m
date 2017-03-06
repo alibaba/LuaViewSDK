@@ -129,7 +129,7 @@ static int PathOfResource (lua_State *L) {
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     lv_defineGlobalFunc("PathOfResource",  PathOfResource, L);
     
-    [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"];
+    [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"]; // __deprecated_msg("")
     const struct luaL_Reg memberFunctions [] = {
         {"__gc", __gc },
         

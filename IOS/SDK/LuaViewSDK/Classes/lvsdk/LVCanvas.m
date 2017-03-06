@@ -674,13 +674,15 @@ static int lvNewCanvas (lua_State *L) {
         {"__gc", lvCanvasGC },
         {"nativeObj", nativeObj},
         
+        // size
+        // font
         
         {"drawPoint",canvas_drawPoint},
         {"drawLine",canvas_drawLine},
         {"drawRect",canvas_drawRect},
         {"drawRoundRect",canvas_drawRoundRect},
         {"drawCircle",canvas_drawCircle},
-        {"drawEllipse",canvas_drawEllipse},
+        {"drawEllipse",canvas_drawEllipse}, //__deprecated_msg("Use rotation")
         {"drawText",drawText},
         {"drawOval",canvas_drawOval},
         {"drawArc",canvas_drawArc},
@@ -718,10 +720,10 @@ static int lvNewCanvas (lua_State *L) {
         NSDictionary* v = nil;
         v = @{
               @"FILL":    @(kCGPathFill),
-              @"EOFILL":   @(kCGPathEOFill),
+              @"EOFILL":   @(kCGPathEOFill),//__deprecated_msg("")
               @"STROKE":   @(kCGPathStroke),
               @"FILLSTROKE":   @(kCGPathFillStroke),
-              @"EOFILLSTROKE":   @(kCGPathEOFillStroke),
+              @"EOFILLSTROKE":   @(kCGPathEOFillStroke),//__deprecated_msg("")
         };
         [LVUtil defineGlobal:@"PaintStyle" value:v L:L];
     }

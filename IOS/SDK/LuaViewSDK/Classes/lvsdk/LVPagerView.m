@@ -595,7 +595,7 @@ static int __gc (lua_State *L) {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
-        {"autoScroll", autoScroll},
+        {"autoScroll", autoScroll}, // IOS: 需要支持正反滚动
         {"looping", looping},
         {"indicator", indicator},
         

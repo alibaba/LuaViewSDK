@@ -155,7 +155,7 @@ static int tableToString(lua_State*L){
             {"android", android},
             {"network", netWorkType},
             {"keepScreenOn", keepScreenOn},// 保持屏幕常亮接口
-            {"layerMode", layerMode},// 是否开启layer模式
+            {"layerMode", layerMode},// (for IOS) 是否开启layer模式
             {NULL, NULL}
         };
         luaL_openlib(L, "System", staticFunctions, 0);
@@ -164,6 +164,7 @@ static int tableToString(lua_State*L){
         // Json Table相互转换
         const struct luaL_Reg fs [] = {
             {"toString", tableToString},
+            {"toJson", tableToString},
             {"toTable",stringToTable},
             {NULL, NULL}
         };
@@ -214,7 +215,9 @@ static int tableToString(lua_State*L){
         v = @{
               @"NORMAL":@"normal",//正常
               @"ITALIC":@"italic",//斜体
-              @"OBLIQUE":@"oblique",//倾斜
+              @"OBLIQUE":@"oblique",//倾斜 //__deprecated_msg("")
+              // BOLD IOS 不支持
+              // 
               };
         [LVUtil defineGlobal:@"FontStyle" value:v L:L];
     }
@@ -264,8 +267,8 @@ static int tableToString(lua_State*L){
         NSDictionary* v = nil;
         v = @{
               @"YES":@(YES),
-              @"Yes":@(YES),
-              @"yes":@(YES),
+              @"Yes":@(YES),//__deprecated_msg("Use YES")
+              @"yes":@(YES),//__deprecated_msg("Use YES")
               };
         [LVUtil defineGlobal:@"Pinned" value:v L:L];
     }
@@ -281,7 +284,8 @@ static int tableToString(lua_State*L){
               };
         [LVUtil defineGlobal:@"ViewEffect" value:v L:L];
     }
-    // 震动
+    
+    // 震动 完全不兼容安卓, 安卓是类, vabrate(数组) cancel() hasVabrate();
     lv_defineGlobalFunc("Vibrate", vibrate, L);
     
     // create class api

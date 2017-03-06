@@ -115,8 +115,8 @@ static int color(lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"start",  startAnimating },
         {"stop",   stopAnimating },
-        {"show",  startAnimating },
-        {"hide",   stopAnimating },
+        {"show",  startAnimating },//__deprecated_msg("Use start")
+        {"hide",   stopAnimating },//__deprecated_msg("Use stop")
         {"isAnimating",  isAnimating },
         {"color", color},
         {NULL, NULL}

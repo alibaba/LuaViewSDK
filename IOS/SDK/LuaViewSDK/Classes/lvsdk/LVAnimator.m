@@ -450,7 +450,7 @@ static int value(lua_State *L) {
         { "duration", duration },
         { "delay", delay },
         { "repeatCount", repeatCount },
-        { "reverses", autoreverses },
+        { "reverses", autoreverses }, // 和安卓特性不一样
         { "interpolator", interpolator },
         
         { "cancel", cancel },
@@ -476,7 +476,8 @@ static int value(lua_State *L) {
         { "translation", translation },
         { "translationX", translationX },
         { "translationY", translationY },
-        { "value", value },
+        { "value", value }, // IOS支持一个, 安卓支持多个值
+        //{ "values", value },
         
         { NULL, NULL}
     };

@@ -208,12 +208,12 @@ static int __tostring (lua_State *L) {
         
         {"start", start },
         {"cancel", cancel },
-        {"stop", cancel },
+        {"stop", cancel }, //__deprecated_msg("Use hidden")
         
         
         {"delay", delay },
         {"repeat", repeat },
-        {"repeatCount", repeat },
+        {"repeatCount", repeat }, //__deprecated_msg("Use hidden")
         {"interval", interval },
         
         {"__gc", __gc },

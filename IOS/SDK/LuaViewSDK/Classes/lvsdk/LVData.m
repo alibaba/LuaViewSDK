@@ -193,6 +193,11 @@ static int __add (lua_State *L) {
     [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
     
     const struct luaL_Reg memberFunctions [] = {
+        // toJson 判断是否json
+        // toString 判断是否字符串
+        // toTable
+        // append
+        
         {"__index", __index },
         {"__newindex", __newindex },
         

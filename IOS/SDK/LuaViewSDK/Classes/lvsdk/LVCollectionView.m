@@ -241,11 +241,12 @@ static int scrollToTop(lua_State *L) {
     [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:[self globalName]];
     
     const struct luaL_Reg memberFunctions [] = {
-        {"reload",    reload},
+        // refreshEnable // IOS 为实现
+        {"reload",    reload},// 安卓支持section row
         
         {"miniSpacing", miniSpacing},
         
-        {"scrollDirection", scrollDirection},
+        {"scrollDirection", scrollDirection},// for IOS
         
         
         {"scrollToCell", scrollToCell},

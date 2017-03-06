@@ -56,6 +56,7 @@ static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWei
     }
     if( [fontWeigth isKindOfClass:[NSString class]] &&
        [fontWeigth compare:@"bold" options:NSCaseInsensitiveSearch]==NSOrderedSame ){
+        //  TODO: 支持数值?
         return [UIFont boldSystemFontOfSize:fontSize.floatValue];
     }
     return [UIFont systemFontOfSize:fontSize.floatValue];

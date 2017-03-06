@@ -343,18 +343,19 @@ static int __gc (lua_State *L) {
 static const struct luaL_Reg memberFunctions [] = {
     {"callback",     callback },// 回调
     
-    {"contentSize",     contentSize },//TODO
-    {"offset",     contentOffset },//TODO
+    {"contentSize",     contentSize },// for IOS
+    {"offset",     contentOffset },//
+    // offsetBy
     
-    {"contentInset",     contentInset },
+    {"contentInset",     contentInset },// for IOS
     
-    {"showScrollIndicator",     showScrollIndicator },
+    {"showScrollIndicator",     showScrollIndicator },// for IOS
     
     // 下拉刷新
     //    {"initRefreshing", initRefreshHeader},
-    {"startRefreshing", startHeaderRefreshing},
-    {"stopRefreshing", stopHeaderRefreshing},
-    {"isRefreshing", isHeaderRefreshing},
+    {"startRefreshing", startHeaderRefreshing},// for IOS ScrollView
+    {"stopRefreshing", stopHeaderRefreshing},// for IOS ScrollView
+    {"isRefreshing", isHeaderRefreshing},// for IOS ScrollView
     
     // 上拉加载更多
     //    {"footerNoticeNoMoreData", footerNoticeNoMoreData},

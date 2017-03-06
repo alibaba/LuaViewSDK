@@ -268,11 +268,11 @@ static int disableAnimate (lua_State *L) {
         {"image",  setImage},
         {"scaleType",  scaleType},
         
-        {"startAnimationImages",  startAnimating},
-        {"stopAnimationImages",  stopAnimating},
-        {"isAnimationImages",  isAnimating},
+        {"startAnimationImages",  startAnimating},//__deprecated_msg("")
+        {"stopAnimationImages",  stopAnimating},//__deprecated_msg("")
+        {"isAnimationImages",  isAnimating},//__deprecated_msg("")
         
-        {"disableAnimate",  disableAnimate},
+        {"disableAnimate",  disableAnimate},//__deprecated_msg("")
         {NULL, NULL}
     };
     
