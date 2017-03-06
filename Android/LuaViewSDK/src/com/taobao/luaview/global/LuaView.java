@@ -223,6 +223,19 @@ public class LuaView extends LVViewGroup {
         return this;
     }
 
+
+    /**
+     * execute script
+     *
+     * @param value
+     * @param activity
+     * @param viewObj
+     * @param callback
+     * @return
+     */
+    public boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        return mLuaViewCore != null ? mLuaViewCore.executeScript(value, activity, viewObj, callback) : false;
+    }
     //---------------------------------------注册函数------------------------------------------------
 
     /**
@@ -384,7 +397,7 @@ public class LuaView extends LVViewGroup {
         return mLuaViewCore != null ? mLuaViewCore.getGlobals() : null;
     }
 
-    public LuaViewCore getLuaViewCore(){
+    public LuaViewCore getLuaViewCore() {
         return mLuaViewCore;
     }
     //-------------------------------------------私有------------------------------------------------
