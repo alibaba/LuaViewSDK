@@ -24,7 +24,7 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     private static final String TAG = "UIViewMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -491,7 +491,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-    @LuaViewApi(revisions = {"IOS不支持图片"})
+    @LuaViewApi(revisions = {"IOS不支持图片", "待替换成background"})
     public Varargs backgroundColor(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setBackgroundColor(view, varargs);
@@ -1577,6 +1577,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"名称有待讨论"})
     public Varargs anchorPoint(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setAnchorPoint(view, varargs);
@@ -1603,10 +1604,12 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"名称待讨论"})
     public LuaValue removeFromSuper(U view, Varargs varargs) {
         return view.removeFromParent();
     }
 
+    @Deprecated
     public LuaValue removeFromParent(U view, Varargs varargs) {
         return view.removeFromParent();
     }
@@ -1651,6 +1654,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"待优化，增加rotationX, rotationY"})
     public LuaValue rotation(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setRotation(view, varargs);
@@ -1676,6 +1680,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @Deprecated
     public Varargs rotationXY(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setRotationXY(view, varargs);
@@ -1835,6 +1840,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = "iOS待新增")
     public LuaValue bringToFront(U view, Varargs varargs) {
         return view.bringToFront();
     }
@@ -1847,6 +1853,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue scrollTo(U view, Varargs varargs) {
         final int x = DimenUtil.dpiToPx(varargs.arg(2));
         final int y = DimenUtil.dpiToPx(varargs.arg(3));
@@ -1860,6 +1867,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue scrollBy(U view, Varargs varargs) {
         final int dx = DimenUtil.dpiToPx(varargs.arg(2));
         final int dy = DimenUtil.dpiToPx(varargs.arg(3));
@@ -1873,6 +1881,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue scrollX(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setScrollX(view, varargs);
@@ -1899,6 +1908,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue offsetX(U view, Varargs varargs) {
         return scrollX(view, varargs);
     }
@@ -1918,6 +1928,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue scrollY(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setScrollY(view, varargs);
@@ -1943,6 +1954,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public LuaValue offsetY(U view, Varargs varargs) {
         return scrollY(view, varargs);
     }
@@ -1962,6 +1974,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public Varargs scrollXY(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setScrollXY(view, varargs);
@@ -1987,6 +2000,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public Varargs offsetXY(U view, Varargs varargs) {
         return scrollXY(view, varargs);
     }
@@ -2006,6 +2020,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public Varargs offset(U view, Varargs varargs) {
         return scrollXY(view, varargs);
     }
@@ -2026,6 +2041,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无，待迁移到ScrollView"})
     public Varargs showScrollIndicator(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShowScrollIndicator(view, varargs);
@@ -2153,6 +2169,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      *
      * @return
      */
+    @LuaViewApi(revisions = {"待沟通，是否需要"})
     public LuaValue adjustSize(U view, Varargs varargs) {
         return view.adjustSize();
     }
@@ -2189,6 +2206,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"待废弃"})
     public LuaValue startAnimation(U view, Varargs varargs) {
         LuaValue[] animators = null;
         if (varargs.narg() > 1) {
@@ -2200,12 +2218,13 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
         return view.startAnimation(animators);
     }
 
-    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API"})
+    @LuaViewApi(revisions = {VmVersion.V_500, "修改了底层的停止API", "待废弃"})
     public LuaValue stopAnimation(U view, Varargs varargs) {
         view.cancelAnimation();
         return view;
     }
 
+    @LuaViewApi(revisions = {"待废弃"})
     public LuaValue isAnimating(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
@@ -2244,7 +2263,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-    @LuaViewApi(since = VmVersion.V_500)
+    @LuaViewApi(since = VmVersion.V_500, revisions = {"iOS有，待沟通"})
     public LuaValue flxLayout(U view, Varargs varargs) {
         // Android doing nothing here
         return view;

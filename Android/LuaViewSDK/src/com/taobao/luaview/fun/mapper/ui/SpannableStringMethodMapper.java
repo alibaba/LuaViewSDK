@@ -15,7 +15,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "待沟通，支持lineSpace、charSpace"})
 public class SpannableStringMethodMapper<U extends UDSpannableString> extends BaseMethodMapper<U> {
 
     private static final String TAG = "SpannableStringMethodMapper";

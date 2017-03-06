@@ -16,4 +16,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface LuaViewLib {
+    /**
+     * api 修订版本，标示该API修订过，之前可能有bug，或者只是空实现。
+     * 字符串，默认为空。
+     * 每次新增两个字符串：第一个标示版本，第二句标示修订内容。
+     *
+     * @return
+     */
+    String[] revisions() default {};
 }

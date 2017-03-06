@@ -17,7 +17,7 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UICustomViewMethodMapper<U extends UDCustomView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UICustomViewMethodMapper";
