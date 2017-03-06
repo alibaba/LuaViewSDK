@@ -12,6 +12,7 @@ import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
 import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
+import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
@@ -501,8 +502,16 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param globals
      */
     private LuaViewCore(Context context, Globals globals) {
+        init(context);
         this.mContext = context;
         this.mGlobals = globals;
+    }
+
+    private void init(Context context){
+        //常量初始化
+        Constants.init(context);
+        //初始化脚本管理
+        LuaScriptManager.init(context);
     }
 
     /**

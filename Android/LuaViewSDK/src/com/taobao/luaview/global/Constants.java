@@ -37,6 +37,8 @@ public class Constants {
     public static final int RES_LV_TAG_INIT = R.id.lv_tag_init;
 
     public static void init(Context context) {
-        sScale = AndroidUtil.getDensity(context);
+        if(sScale == -1) {
+            sScale = AndroidUtil.getDensity(context);
+        }
     }
 }

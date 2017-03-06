@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 
 import com.taobao.android.luaview.BuildConfig;
-import com.taobao.luaview.scriptbundle.LuaScriptManager;
 
 /**
  * LuaView 全局设置
@@ -30,10 +29,6 @@ public class LuaViewConfig {
      * @param context
      */
     public static void init(Context context) {
-        //常量初始化
-        Constants.init(context);
-        //初始化脚本管理
-        LuaScriptManager.init(context);
         //延迟加载Libs
         LuaViewConfig.setLibsLazyLoad(true);
         //是否使用非反射方式API调用（默认为true)
