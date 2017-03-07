@@ -74,6 +74,11 @@ public class UDActionBar extends BaseLuaTable {
                     final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
                     if (actionBar != null) {
                         actionBar.setTitle(title);
+                    } else {
+                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+                        if (supportActionBar != null) {
+                            supportActionBar.setTitle(title);
+                        }
                     }
                 }
             } else if (args.isuserdata(2)) {//view
@@ -88,6 +93,16 @@ public class UDActionBar extends BaseLuaTable {
                         actionBar.setDisplayShowCustomEnabled(true);
                         actionBar.setCustomView(LuaViewUtil.removeFromParent(view));
 
+                    } else {
+                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+                        if (supportActionBar != null) {
+                            final View view = ((UDView) titleViewValue).getView();
+                            if (view != null) {
+                                view.setTag(Constants.RES_LV_TAG, titleViewValue);
+                            }
+                            supportActionBar.setDisplayShowCustomEnabled(true);
+                            supportActionBar.setCustomView(LuaViewUtil.removeFromParent(view));
+                        }
                     }
                 }
             }
