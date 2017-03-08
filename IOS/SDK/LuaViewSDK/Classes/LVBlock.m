@@ -7,11 +7,11 @@
 //
 
 #import "LVBlock.h"
-#import "LView.h"
+#import "LuaViewCore.h"
 #import "LVHeads.h"
 
 @interface LVBlock ()
-@property (nonatomic,weak) LView* lview;
+@property (nonatomic,weak) LuaViewCore* lview;
 @property (nonatomic,strong) id retainKey;
 @property (nonatomic,strong) NSArray* returnValues;
 @end

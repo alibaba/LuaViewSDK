@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@class LView;
+@class LuaView;
 
-typedef void(^LuaViewRegister)(LView* lv);
+typedef void(^LuaViewRegister)(LuaView* lv);
 
 @interface LViewController : UIViewController
 
-@property(nonatomic, readonly) LView *lv;
+@property(nonatomic, readonly) LuaView *lv;
 @property(nonatomic, readonly) NSString *mainScriptName;
 @property(nonatomic, readonly) NSString *packagePath;
 
@@ -24,8 +24,8 @@ typedef void(^LuaViewRegister)(LView* lv);
 - (instancetype)initWithPackage:(NSString *)path mainScript:(NSString *)scriptName;
 
 - (void)willCreateLuaView;
-- (void)didCreateLuaView:(LView *)view;
-- (void)willDestroyLuaView:(LView *)view;
+- (void)didCreateLuaView:(LuaView *) view;
+- (void)willDestroyLuaView:(LuaView *) view;
 - (void)didDestroyLuaView;
 
 @property(nonatomic,copy) LuaViewRegister luaviewRegister;

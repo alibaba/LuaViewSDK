@@ -54,7 +54,7 @@ static int lvNewCustomView (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_CustomView );
             lua_setmetatable(L, -2);
         }
-        LView* father = LV_LUASTATE_VIEW(L);
+        LuaViewCore* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:customView];
         }

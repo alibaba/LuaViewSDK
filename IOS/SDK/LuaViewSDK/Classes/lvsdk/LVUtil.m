@@ -866,7 +866,7 @@ void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* 
     }
 }
 
-void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
+void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview){
     [subview removeFromSuperview];
     [subview.layer removeFromSuperlayer];
     if( lv.closeLayerMode

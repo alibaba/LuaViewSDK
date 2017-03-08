@@ -98,7 +98,7 @@ static int lvNewAudioPlayer (lua_State *L) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
         
         LVAudioPlayer* player = [[c alloc] init:L];
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
         

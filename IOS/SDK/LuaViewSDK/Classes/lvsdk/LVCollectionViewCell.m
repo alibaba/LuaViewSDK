@@ -12,7 +12,7 @@
 #import "lapi.h"
 
 @interface LVCollectionViewCell ()
-@property (nonatomic,weak) LView* lv_lview;
+@property (nonatomic,weak) LuaViewCore* lv_lview;
 @end
 
 
@@ -27,7 +27,7 @@
     }
 }
 
--(void) doInitWithLView:(LView*) lview{
+-(void) doInitWithLView:(LuaViewCore*) lview{
     self.lv_lview = lview;
     lua_State* L = lview.l;
     if( L ) {

@@ -104,7 +104,7 @@ static int lvNewCollectionView(lua_State *L) {
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
     
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:collectionView];
     }

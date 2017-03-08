@@ -16,7 +16,7 @@
 
 
 static int DebugReadCmd (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     
     NSString* cmd = [luaView.debugConnection getCmd];
     if( cmd ){
@@ -28,7 +28,7 @@ static int DebugReadCmd (lua_State *L) {
 }
 
 static int DebugWriteCmd (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     NSString* cmd = lv_paramString(L, 1);
     NSString* info = lv_paramString(L, 2);
     NSDictionary* args = lv_luaTableToDictionary(L, 3);
@@ -46,7 +46,7 @@ static int DebugSleep (lua_State *L) {
 }
 
 static int DebugPrintToServer (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     BOOL open = lua_toboolean(L, 1);
     luaView.debugConnection.printToServer = !!open;
     return 0;
@@ -60,7 +60,7 @@ static int runningLine (lua_State *L) {
     int lineNumber = lua_tonumber(L, 2);
     
     NSString* lineInfo = [NSString stringWithFormat:@"%d",lineNumber];
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     [luaView.debugConnection  sendCmd:@"running" fileName:fileName info:lineInfo args:@{@"Line-Number":lineInfo}];
     return 0;
 }
@@ -98,7 +98,7 @@ static const luaL_Reg dblib[] = {
 
 // 把日志传送到服务器
 void lv_printToServer(lua_State* L, const char* cs, int withTabChar){
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     if( lview.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
         if( withTabChar ){

@@ -12,7 +12,7 @@
 @interface LVDebugConnection : NSObject
 
 @property (nonatomic,assign) BOOL printToServer;
-@property (nonatomic,weak) LView* lview;
+@property (nonatomic,weak) LuaViewCore* lview;
 @property (atomic,strong) NSMutableArray* receivedArray;
 
 - (BOOL) isOk;

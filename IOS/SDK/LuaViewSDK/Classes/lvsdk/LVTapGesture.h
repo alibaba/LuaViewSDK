@@ -13,7 +13,7 @@
 
 @interface LVTapGesture : UITapGestureRecognizer<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lua_State*) l;

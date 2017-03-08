@@ -7,7 +7,9 @@
 //
 
 #import "UIScrollView+LuaView.h"
-#import "LView.h"
+#import "LuaViewCore.h"
+#import "NSObject+LuaView.h"
+
 
 @implementation UIScrollView (UIScrollViewLuaView)
 

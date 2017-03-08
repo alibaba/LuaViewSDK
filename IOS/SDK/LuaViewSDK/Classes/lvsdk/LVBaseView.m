@@ -546,7 +546,7 @@ static int removeGestureRecognizer (lua_State *L) {
 static int addSubview (lua_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lua_touserdata(L, 2);
-    LView* luaview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaview = LV_LUASTATE_VIEW(L);
     if( father &&  LVIsType(son, View) ){
         UIView* superview = (__bridge UIView *)(father->object);
         UIView* subview = (__bridge UIView *)(son->object);
@@ -576,7 +576,7 @@ static int getNativeView (lua_State *L) {
 
 #pragma -mark 运行环境
 static int children (lua_State *L) {
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     UIView* oldContent = lview.conentView;
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
@@ -1405,8 +1405,8 @@ static int releaseObject(lua_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         [view removeFromSuperview];
         [view.layer removeFromSuperlayer];
-        if( [view isKindOfClass:[LView class]] ){
-            LView* lView = (LView*)view;
+        if( [view isKindOfClass:[LuaViewCore class]] ){
+            LuaViewCore* lView = (LuaViewCore*)view;
             lView.l = NULL;
             G(L)->ud = NULL;
             [lView releaseLuaView];
@@ -1627,7 +1627,6 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"startAnimation", startAnimation },
     {"stopAnimation", stopAnimation },
     
-    {"release",     releaseObject}, //__deprecated_msg("Use")
     
     {"__gc",        __gc },
     
@@ -1661,6 +1660,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
 };
 
 static const struct luaL_Reg luaViewMemberFunctions [] = {
+    {"release",     releaseObject},
     {NULL,    NULL },
 };
 
@@ -1681,7 +1681,7 @@ static int lvNewView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIView );
         lua_setmetatable(L, -2);
         
-        LView* lView = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lView = LV_LUASTATE_VIEW(L);
         if( lView ){
             [lView containerAddSubview:view];
         }

@@ -8,6 +8,7 @@
 
 #import "LVWebView.h"
 #import "LVBaseView.h"
+#import "NSObject+LuaView.h"
 
 @interface LVWebView ()<UIWebViewDelegate>
 @property(nonatomic,strong) UIWebView* webView;
@@ -144,7 +145,7 @@ static int lvNewWebView(lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIWebView );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:webView];
     }

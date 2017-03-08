@@ -15,4 +15,6 @@
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
 
++(void) registry:(lua_State*)L  window:(UIView*)window;
+
 @end

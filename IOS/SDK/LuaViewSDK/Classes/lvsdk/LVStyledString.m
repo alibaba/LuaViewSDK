@@ -167,7 +167,7 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
 }
 
 static int lvNewAttributedString (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
     if( luaView && lua_gettop(L)>=2 ) {
         if( ( lua_type(L, 1)==LUA_TSTRING || lua_type(L, 1)==LUA_TNUMBER ) && lua_type(L, 2)==LUA_TTABLE ){

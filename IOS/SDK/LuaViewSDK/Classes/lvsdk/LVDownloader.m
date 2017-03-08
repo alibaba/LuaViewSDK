@@ -120,7 +120,7 @@ static int __tostring (lua_State *L) {
 
 static int PathOfResource (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
     lua_pushstring(L, path.UTF8String);
     return 1;

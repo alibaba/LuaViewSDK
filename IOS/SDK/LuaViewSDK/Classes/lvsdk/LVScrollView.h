@@ -12,7 +12,7 @@
 
 @interface LVScrollView : UIScrollView<UIScrollViewDelegate, LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 @property(nonatomic,assign) NSUInteger lv_align;
 @property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;

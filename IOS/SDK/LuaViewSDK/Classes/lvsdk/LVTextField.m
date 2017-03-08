@@ -94,7 +94,7 @@ static int lvNewTextField (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UITextField );
         lua_setmetatable(L, -2);
     }
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:textFiled];
     }

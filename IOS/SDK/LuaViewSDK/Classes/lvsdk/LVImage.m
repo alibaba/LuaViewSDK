@@ -129,7 +129,7 @@ static int lvNewImageView(lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIImageView );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:imageView];
     }
@@ -205,7 +205,7 @@ static int startAnimating (lua_State *L) {
             if( lua_gettop(L)>=4 ){
                 repeatCount = lua_tonumber(L, 4);
             }
-            LView* lview = LV_LUASTATE_VIEW(L);
+            LuaViewCore* lview = LV_LUASTATE_VIEW(L);
             LVBundle* bundle = lview.bundle;
             NSMutableArray  *arrayM=[NSMutableArray array];
             for (NSString* url in urlArray) {

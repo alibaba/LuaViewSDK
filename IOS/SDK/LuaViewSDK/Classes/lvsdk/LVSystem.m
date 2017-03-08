@@ -54,7 +54,7 @@ static int netWorkType (lua_State *L) {
 static int layerMode (lua_State *L) {
     if( lua_gettop(L)>0 ){
         BOOL yes = lua_toboolean(L, -1);
-        LView* luaview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* luaview = LV_LUASTATE_VIEW(L);
         luaview.closeLayerMode = !yes;
     }
     return 0;

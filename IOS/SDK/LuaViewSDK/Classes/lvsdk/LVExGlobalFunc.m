@@ -47,7 +47,7 @@ static int lv_print (lua_State *L) {
 
 #pragma -mark registryApi
 // 全局静态常量 和 静态方法
-+(void) registryStaticMethod:(lua_State *)L lView:(LView *)lView{
++(void) registryStaticMethod:(lua_State *)L lView:(LuaViewCore *)lView{
     lv_defineGlobalFunc("print",  lv_print, L);
     
     lv_defineGlobalFunc("loadJson",  loadJson, L);
@@ -67,17 +67,17 @@ static int lv_print (lua_State *L) {
 }
 
 // 注册函数
-+(void) registryApi:(lua_State*)L  lView:(LView*)lView{
++(void) registryApi:(lua_State*)L  lView:(LuaViewCore*)lView{
     
     
     return;
 }
 
 // 注册系统对象 window
-+(void) registryWindow:(lua_State*)L  lView:(LView*)lView{
++(void) registry:(lua_State*)L  window:(UIView*)window{
     NEW_USERDATA(userData, View);
-    userData->object = CFBridgingRetain(lView);
-    lView.lv_userData = userData;
+    userData->object = CFBridgingRetain(window);
+    window.lv_userData = userData;
     
     luaL_getmetatable(L, META_TABLE_LuaView );
     lua_setmetatable(L, -2);
@@ -131,7 +131,7 @@ static int loaderForLuaView (lua_State *L) {
         // submodule
         moduleName = [moduleName stringByReplacingOccurrencesOfString:@"." withString:@"/"];
         
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         if( lview ) {
             __block NSString *fullName = nil, *format = nil, *ext = nil;
             BOOL(^findFile)() = ^BOOL() { // set fullName and return YES if found
@@ -169,12 +169,12 @@ static int loaderForLuaView (lua_State *L) {
 
 
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
-    LView* lView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lView = LV_LUASTATE_VIEW(L);
     // 注册静态全局方法和常量
     [LVExGlobalFunc registryStaticMethod:L lView:lView];
     
     // 注册 系统对象window
-    [LVExGlobalFunc registryWindow:L lView:lView];
+    [LVExGlobalFunc registry:L window:lView.window];
     
     //外链注册器
     [LVNativeObjBox lvClassDefine:L globalName:nil];

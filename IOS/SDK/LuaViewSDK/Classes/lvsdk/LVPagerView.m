@@ -227,7 +227,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 - (LVPagerViewCell*) cellLayoutAtPageIdx:(int)pageIdx {
     LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
-    LView* lview = self.lv_lview;
+    LuaViewCore* lview = self.lv_lview;
     lua_State* l = lview.l;
     lview.conentView = cell;
     lview.contentViewIsWindow = NO;
@@ -351,7 +351,7 @@ static int lvNewPagerView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIPageView );
         lua_setmetatable(L, -2);
         
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         if( lview ){
             [lview containerAddSubview:pageView];
         }

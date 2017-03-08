@@ -13,7 +13,7 @@
 //LVData
 @interface LVStyledString : NSObject<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic,strong) NSMutableAttributedString* mutableStyledString;//真实的数据

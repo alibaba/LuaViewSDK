@@ -51,7 +51,7 @@ static int lvNewLabel(lua_State *L) {
             luaL_getmetatable(L, META_TABLE_UILabel );
             lua_setmetatable(L, -2);
         }
-        LView* view = LV_LUASTATE_VIEW(L);
+        LuaViewCore* view = LV_LUASTATE_VIEW(L);
         if( view ){
             [view containerAddSubview:label];
         }
@@ -152,7 +152,7 @@ static int textColor (lua_State *L) {
 }
 
 static int font (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( luaView && user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);

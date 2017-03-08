@@ -76,7 +76,7 @@ static int lvNewCustomPanelView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_CustomPanel );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:errorNotice];
     }

@@ -9,7 +9,7 @@
 #import "LVAnimator.h"
 #import "LVHeads.h"
 #import "LVUtil.h"
-#import "LView.h"
+#import "LuaViewCore.h"
 #import "LVTransform3D.h"
 #import <QuartzCore/CoreAnimation.h>
 

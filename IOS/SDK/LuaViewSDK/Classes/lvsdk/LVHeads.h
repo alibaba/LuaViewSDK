@@ -86,10 +86,10 @@ typedef struct _LVUserDataInfo {
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------
-@class LView;
+@class LuaViewCore;
 @protocol LVProtocal <NSObject>
 @required
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject; // 返回native对象
 @end
@@ -206,6 +206,7 @@ LVTypeIDEnum lua_typeID(const char* type);
 typedef void(^LVLoadFinished)(id errorInfo);
 
 #import "UIView+LuaView.h"
+#import "NSObject+LuaView.h"
 #import "UIScrollView+LuaView.h"
 #import "LVBundle.h"
 
@@ -213,7 +214,7 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define EFFECT_CLICK    1
 #define EFFECT_PARALLAX 2
 
-#define LV_LUASTATE_VIEW(L)     ( (__bridge LView *)( G(L)->ud ) )
+#define LV_LUASTATE_VIEW(L)     ( (__bridge LuaViewCore *)( G(L)->ud ) )
 #define LUAVIEW_SYS_TABLE_KEY   "..::luaview::.."
 
 #ifndef MakeSureNotNil
