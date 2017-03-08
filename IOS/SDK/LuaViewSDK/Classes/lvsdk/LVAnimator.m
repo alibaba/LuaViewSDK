@@ -44,7 +44,7 @@ static int lvNewAnimator(lua_State *L) {
     userData->object = CFBridgingRetain(animator);
     
     animator.lv_userData = userData;
-    animator.lv_lview =  LV_LUASTATE_VIEW(L);
+    animator.lv_luaviewCore =  LV_LUASTATE_VIEW(L);
     
     luaL_getmetatable(L, META_TABLE_Animator);
     lua_setmetatable(L, -2);
@@ -60,7 +60,7 @@ static int __gc(lua_State *L) {
         CFBridgingRelease((__bridge CFTypeRef)(animator));
         data->object = nil;
         
-        animator.lv_lview = nil;
+        animator.lv_luaviewCore = nil;
         animator.lv_userData = NULL;
     }
     
@@ -106,7 +106,7 @@ static int clone(lua_State *L) {
         userData->object = CFBridgingRetain(animator);
         
         animator.lv_userData = userData;
-        animator.lv_lview = LV_LUASTATE_VIEW(L);
+        animator.lv_luaviewCore = LV_LUASTATE_VIEW(L);
         
         luaL_getmetatable(L, META_TABLE_Animator);
         lua_setmetatable(L, -2);
@@ -749,7 +749,7 @@ static void syncValue(CAAnimation *animation, CALayer *layer) {
 }
 
 - (void)callback:(LVAnimatorCallback)idx {
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if (l && self.lv_userData) {
         int stackIndex = lua_gettop(l);
 

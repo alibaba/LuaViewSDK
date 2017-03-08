@@ -28,7 +28,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
         user->object = NULL;
         if( http ){
             http.lv_userData = NULL;
-            http.lv_lview = nil;
+            http.lv_luaviewCore = nil;
             http.mySelf = nil;
         }
     }
@@ -40,7 +40,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.mySelf = self;
         self.function = [[NSMutableString alloc] init];
         self.response = [[LVHttpResponse alloc] init];
@@ -50,7 +50,7 @@ static void releaseUserDataHttp(LVUserDataInfo* user){
 }
 
 -(void) requesetEndToDo{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l ){
         lua_checkstack32(l);
         [LVUtil pushRegistryValue:l key:self];

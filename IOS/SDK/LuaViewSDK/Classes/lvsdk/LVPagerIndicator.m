@@ -18,7 +18,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.clipsToBounds = YES;
         self.userInteractionEnabled = NO;
     }

@@ -27,7 +27,7 @@
     LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.collectionViewDelegate = [[LVCollectionViewDelegate alloc] init:self];
         self.delegate = self.collectionViewDelegate;
         self.dataSource = self.collectionViewDelegate;
@@ -63,8 +63,8 @@
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    if ( self.lv_lview.l ) {
-        lua_settop(self.lv_lview.l, 0);
+    if ( self.lv_luaviewCore.l ) {
+        lua_settop(self.lv_luaviewCore.l, 0);
     }
     [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }

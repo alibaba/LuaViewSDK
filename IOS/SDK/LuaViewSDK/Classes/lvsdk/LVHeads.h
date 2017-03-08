@@ -89,7 +89,7 @@ typedef struct _LVUserDataInfo {
 @class LuaViewCore;
 @protocol LVProtocal <NSObject>
 @required
-@property(nonatomic,weak) LuaViewCore* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject; // 返回native对象
 @end

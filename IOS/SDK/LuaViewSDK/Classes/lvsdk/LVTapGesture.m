@@ -22,7 +22,7 @@
 -(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
     }
     return self;
 }
@@ -30,7 +30,7 @@
 
 
 -(void) handleGesture:(LVTapGesture*)sender {
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if ( l ){
         lua_checkstack32(l);
         lv_pushUserdata(l, self.lv_userData);

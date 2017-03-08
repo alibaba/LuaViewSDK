@@ -205,7 +205,7 @@
 @property (nonatomic,assign) BOOL runInSignModel;// 加密模式，优先加载加密脚本
 
 @property (nonatomic, weak)   UIView* conentView; // 运行环境view
-@property (nonatomic, weak)   LuaViewCore* lv_lview;
+@property (nonatomic, weak)   LuaViewCore* lv_luaviewCore;
 @property (nonatomic, assign) LVUserDataInfo* lv_userData;// 脚本中的window对象 数据绑定
 @property (nonatomic, assign) lua_State* l; // lua 状态机
 @property(nonatomic,assign) BOOL contentViewIsWindow;// contentView是否是窗口

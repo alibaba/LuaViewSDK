@@ -12,7 +12,7 @@
 #import "lapi.h"
 
 @interface LVCollectionViewCell ()
-@property (nonatomic,weak) LuaViewCore* lv_lview;
+@property (nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @end
 
 
@@ -21,14 +21,14 @@
 
 
 -(void) dealloc{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         [LVUtil unregistry:L key:self];
     }
 }
 
 -(void) doInitWithLView:(LuaViewCore*) lview{
-    self.lv_lview = lview;
+    self.lv_luaviewCore = lview;
     lua_State* L = lview.l;
     if( L ) {
         lua_createtable(L, 0, 0);
@@ -38,7 +38,7 @@
 }
 
 -(void) pushTableToStack{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         [LVUtil pushRegistryValue:L key:self];
     }

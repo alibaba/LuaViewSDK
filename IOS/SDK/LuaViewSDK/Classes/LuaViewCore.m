@@ -134,7 +134,7 @@
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
     
-    self.lv_lview = self;
+    self.lv_luaviewCore = self;
     self.rsa = [[LVRSA alloc] init];
     self.bundle = [[LVBundle alloc] init];
 }

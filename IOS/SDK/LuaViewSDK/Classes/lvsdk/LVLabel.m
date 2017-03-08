@@ -22,7 +22,7 @@
 -(id) init:(NSString*)imageName l:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.text = imageName;
         self.backgroundColor = [UIColor clearColor];
         self.textAlignment = NSTextAlignmentLeft;

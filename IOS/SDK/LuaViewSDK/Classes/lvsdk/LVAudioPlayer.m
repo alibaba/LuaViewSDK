@@ -26,7 +26,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
         if( palyer ){
             [palyer stop];
             palyer.lv_userData = NULL;
-            palyer.lv_lview = nil;
+            palyer.lv_luaviewCore = nil;
         }
     }
 }
@@ -38,7 +38,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 -(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
     }
     return self;
 }

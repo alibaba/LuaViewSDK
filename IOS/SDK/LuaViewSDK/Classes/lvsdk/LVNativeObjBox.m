@@ -23,7 +23,7 @@ static NSArray<NSString*>* ARG_ARR = nil;
 -(id) init:(lua_State*) l  nativeObject:(id)nativeObject{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.realObject = nativeObject;
         
         NSString* className = NSStringFromClass([nativeObject class]);
@@ -135,7 +135,7 @@ static void releaseNativeObject(LVUserDataInfo* user){
         user->object = NULL;
         if( data ){
             data.lv_userData = nil;
-            data.lv_lview = nil;
+            data.lv_luaviewCore = nil;
             data.realObject = nil;
         }
     }

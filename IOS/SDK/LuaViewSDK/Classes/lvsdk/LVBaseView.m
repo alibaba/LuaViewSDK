@@ -27,7 +27,7 @@
 -(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
         self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
     }
@@ -40,7 +40,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         userdata->object = NULL;
         if( view ){
             view.lv_userData = nil;
-            view.lv_lview = nil;
+            view.lv_luaviewCore = nil;
             [view removeFromSuperview];
             [view.layer removeFromSuperlayer];
         }

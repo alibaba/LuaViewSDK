@@ -17,7 +17,7 @@
 -(id) init:(lua_State*) l{
     self = [super initWithTarget:self action:@selector(handleGesture:)];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.delegate = self;
     }
     return self;
@@ -28,7 +28,7 @@
 }
 
 -(void) handleGesture:(LVGesture*)sender event:(UIEvent*) event eventType:(NSInteger) eventType{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if ( l ){
         lua_settop(l, 0);
         lua_checkstack32(l);
@@ -74,7 +74,7 @@ static void releaseUserData(LVUserDataInfo * user){
         UIGestureRecognizer<LVProtocal>* gesture = CFBridgingRelease(user->object);
         user->object = NULL;
         if( gesture ){
-            gesture.lv_lview = nil;
+            gesture.lv_luaviewCore = nil;
             gesture.lv_userData = NULL;
         }
     }

@@ -18,7 +18,7 @@
 -(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
     }
     return self;
 }
@@ -33,7 +33,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
         user->object = NULL;
         if( data ){
             data.lv_userData = NULL;
-            data.lv_lview = nil;
+            data.lv_luaviewCore = nil;
             data.mutableStyledString = nil;
         }
     }

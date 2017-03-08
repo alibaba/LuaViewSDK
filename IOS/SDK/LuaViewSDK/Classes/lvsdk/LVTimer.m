@@ -28,7 +28,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
         if( timer ){
             [timer cancel];
             timer.lv_userData = nil;
-            timer.lv_lview = nil;
+            timer.lv_luaviewCore = nil;
         }
     }
 }
@@ -40,7 +40,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.delay = 0;     // 默认延时
         self.repeat = NO;   // 默认重复次数
         self.interval = 1;  // 默认间隔1秒
@@ -49,7 +49,7 @@ static void releaseUserDataTimer(LVUserDataInfo* user){
 }
 
 -(void) timerCallBack{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE );

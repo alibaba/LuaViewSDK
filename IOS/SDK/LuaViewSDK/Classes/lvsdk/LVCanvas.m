@@ -33,7 +33,7 @@
 -(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
     }
     return self;
 }
@@ -468,7 +468,7 @@ static int canvas_drawImage (lua_State *L) {
         UIImage* image = nil;
         if ( lua_type(L, 2)==LUA_TSTRING ) {
             NSString* imageName = lv_paramString(L, 2);// 2
-            image = [canvas.lv_lview.bundle imageWithName:imageName];
+            image = [canvas.lv_luaviewCore.bundle imageWithName:imageName];
         } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
             LVUserDataInfo * userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
             if( LVIsType(userdata, View) ){
@@ -625,7 +625,7 @@ static void releaseCanvasUserData(LVUserDataInfo* user){
         user->object = NULL;
         if( canvas ){
             canvas.lv_userData = NULL;
-            canvas.lv_lview = nil;
+            canvas.lv_luaviewCore = nil;
             canvas.contentRef = nil;
         }
     }

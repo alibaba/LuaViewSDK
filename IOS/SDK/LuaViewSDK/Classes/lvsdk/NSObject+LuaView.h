@@ -12,7 +12,7 @@
 
 @interface NSObject(NSObjectLuaView)<LVProtocal>
 
-@property(nonatomic,weak) LuaViewCore* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject;
 

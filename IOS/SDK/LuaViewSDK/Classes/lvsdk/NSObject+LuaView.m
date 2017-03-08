@@ -11,11 +11,11 @@
 
 @implementation NSObject(NSObjectLuaView)
 
-- (LuaViewCore*) lv_lview{
+- (LuaViewCore*) lv_luaviewCore{
     return nil;
 }
 
-- (void) setLv_lview:(LuaViewCore *)lview{
+- (void) setLv_luaviewCore:(LuaViewCore *)lv_luaviewCore{
 }
 
 - (LVUserDataInfo*)lv_userData{
@@ -30,7 +30,7 @@
 }
 
 - (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData && key1){
         lua_checkstack32(l);
         lv_pushUserdata(l, self.lv_userData);
@@ -48,7 +48,7 @@
 }
 
 -(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ){
         lua_checkstack(L, (int)args.count*2 + 2);
         
@@ -63,7 +63,7 @@
 }
 
 -(void) lv_buttonCallBack{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         int num = lua_gettop(L);
         lv_pushUserdata(L, self.lv_userData);

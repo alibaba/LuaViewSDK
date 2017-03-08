@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
-#import "UIGestureRecognizer+LuaView.h"
+#import "NSObject+LuaView.h"
 
 @interface LVTapGesture : UITapGestureRecognizer<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LuaViewCore* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lua_State*) l;

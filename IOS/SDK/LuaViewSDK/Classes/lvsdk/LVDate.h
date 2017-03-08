@@ -11,7 +11,7 @@
 
 @interface LVDate : NSObject<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LuaViewCore* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic,strong) NSDate* date;

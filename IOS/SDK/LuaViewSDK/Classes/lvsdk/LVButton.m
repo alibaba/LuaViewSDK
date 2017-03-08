@@ -24,7 +24,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         [self addTarget:self action:@selector(lvButtonCallBack) forControlEvents:UIControlEventTouchUpInside];
         
         // 默认黑色字
@@ -54,7 +54,7 @@
         [self setWebImageUrl:url forState:state finished:nil];
     } else {
         if( url ) {
-            LVBundle* bundle = self.lv_lview.bundle;
+            LVBundle* bundle = self.lv_luaviewCore.bundle;
             [self setImage:[bundle imageWithName:url] forState:state];
         }
     }

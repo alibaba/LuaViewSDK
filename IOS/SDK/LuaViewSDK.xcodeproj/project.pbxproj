@@ -55,7 +55,6 @@
 		3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
 		3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
 		3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
-		3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
@@ -118,7 +117,6 @@
 		84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
 		84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
 		84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
-		84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
@@ -175,7 +173,6 @@
 		84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E8E1AAD934D00107DFC /* LVRotationGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D13F1A7F732500774565 /* LVHttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D1441A7FA7A400774565 /* LVHttpResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -324,8 +321,6 @@
 		84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStyledString.m; sourceTree = "<group>"; };
 		843447481B61DDED0039B98A /* UIView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LuaView.h"; sourceTree = "<group>"; };
 		843447491B61DDED0039B98A /* UIView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LuaView.m"; sourceTree = "<group>"; };
-		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
-		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
 		8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNinePatchImage.h; sourceTree = "<group>"; };
 		8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNinePatchImage.m; sourceTree = "<group>"; };
 		8454D13F1A7F732500774565 /* LVHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttp.h; sourceTree = "<group>"; };
@@ -759,8 +754,6 @@
 				918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */,
 				84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */,
 				84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */,
-				8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */,
-				8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */,
 			);
 			name = gesture;
 			sourceTree = "<group>";
@@ -1010,7 +1003,6 @@
 				84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */,
 				84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */,
 				84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */,
-				84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */,
 				914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */,
 				84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */,
 				84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */,
@@ -1233,7 +1225,6 @@
 				91B1A48A1E6E873F000F71B3 /* LuaView.m in Sources */,
 				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
 				3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */,
-				3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */,
 				3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */,
 				3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */,
 				3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */,
@@ -1324,7 +1315,6 @@
 				91B1A4891E6E873F000F71B3 /* LuaView.m in Sources */,
 				84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */,
 				84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */,
-				84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */,
 				84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */,
 				840BCEDB1CB7602C00D816AD /* LVNetworkStatus.m in Sources */,
 				84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */,
