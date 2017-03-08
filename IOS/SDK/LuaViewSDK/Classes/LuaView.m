@@ -10,6 +10,7 @@
 #import "LuaViewCore.h"
 
 @interface LuaView ()
+@property (nonatomic,assign) BOOL isOnShowed;
 @end
 
 @implementation LuaView
@@ -59,25 +60,6 @@
 -(void) releaseLuaView{
     [self.luaviewCore releaseLuaView];
 }
-
-//
--(void) viewWillAppear{
-    [self.luaviewCore viewWillAppear];
-}
-
--(void) viewDidAppear{
-    [self.luaviewCore viewDidAppear];
-}
-
--(void) viewWillDisAppear{
-    [self.luaviewCore viewWillDisAppear];
-}
-
--(void) viewDidDisAppear{
-    [self.luaviewCore viewDidDisAppear];
-}
-
-
 
 #pragma mark - 摇一摇回调
 // 摇一摇开始摇动
@@ -187,5 +169,91 @@
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key{
     [self.luaviewCore setObject:object forKeyedSubscript:key];
 }
+
+
+#pragma mark - view appear
+
+-(void) viewWillAppear{
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"ViewWillAppear"];
+    }
+}
+
+-(void) viewDidAppear{
+    self.isOnShowed = YES;
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
+    }
+}
+
+-(void) viewWillDisAppear{
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"ViewWillDisAppear"];
+    }
+}
+
+-(void) viewDidDisAppear{
+    self.isOnShowed = NO;
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
+    }
+}
+
+-(void) onForeground {
+    lua_State* L = self.luaviewCore.l;
+    if( L && self.isOnShowed ) {
+        lua_checkstack32(L);
+        lua_pushboolean(L, YES);
+        [self lv_callLuaByKey1:@"onShow" key2:nil argN:1];
+    }
+}
+
+-(void) onBackground {
+    lua_State* L = self.luaviewCore.l;
+    if( L && self.isOnShowed ) {
+        lua_checkstack32(L);
+        lua_pushboolean(L, YES);
+        [self lv_callLuaByKey1:@"onHide" key2:nil argN:1];
+    }
+}
+
+- (void)didMoveToSuperview{
+    [super didMoveToSuperview];
+    
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
+    }
+}
+
+- (void)didMoveToWindow{
+    [super didMoveToWindow];
+    
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
+    }
+}
+
+-(void) layoutSubviews{
+    [super layoutSubviews];
+    
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    }
+}
+
 
 @end

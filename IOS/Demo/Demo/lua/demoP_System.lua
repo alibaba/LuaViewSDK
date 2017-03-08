@@ -29,24 +29,27 @@ myprint("---end---",nil);
 
 window:callback({
         ViewDidAppear = function ()
+            print("ViewDidAppear");
             System:keepScreenOn(true);-- 屏幕常亮
         end,
         ViewDidDisAppear = function ()
+            print("ViewDidDisAppear");
             System:keepScreenOn(false);-- 屏幕不常亮
         end,
         onShow = function ()
+            print("onShow");
             System:keepScreenOn(true);-- 屏幕常亮
         end,
         onHide = function ()
+            print("onHide");
             System:keepScreenOn(false);-- 屏幕不常亮
         end})
 t = {1,2,3,a = 1 , b = 2}
 
-print( table:getn(t), table:getn(t) )
 
-print( math:abs(-1), math.abs(-1) )
 
-print( string:len("123"), string.len("123") )
+print(  math.abs(-1) )
+
 
 
 
@@ -55,15 +58,6 @@ t.hour = 10;
 t.min = 0;
 t.sec = 0;
 local ostime = os.time(t);
-print(ostime)
-
-
-
-local t = os:date( "*t" );
-t.hour = 10;
-t.min = 0;
-t.sec = 0;
-local ostime = os:time(t);
 print(ostime)
 
 

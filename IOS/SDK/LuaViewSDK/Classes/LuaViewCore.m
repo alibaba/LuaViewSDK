@@ -82,7 +82,6 @@
 
 @property (nonatomic,strong) LVRSA* rsa;
 
-@property (nonatomic,assign) BOOL isOnShowed;
 @end
 
 @implementation LuaViewCore
@@ -462,79 +461,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 //----------------------------------------------------------------------------------------
 
 
-#pragma mark - view appear
-
--(void) viewWillAppear{
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"ViewWillAppear"];
-    }
-}
-
--(void) viewDidAppear{
-    self.isOnShowed = YES;
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
-    }
-}
-
--(void) viewWillDisAppear{
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"ViewWillDisAppear"];
-    }
-}
-
--(void) viewDidDisAppear{
-    self.isOnShowed = NO;
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
-    }
-}
-
--(void) onForeground {
-    lua_State* L = self.l;
-    if( L && self.isOnShowed ) {
-        lua_checkstack32(L);
-        lua_pushboolean(L, YES);
-        [self lv_callLuaByKey1:@"onShow" key2:nil argN:1];
-    }
-}
-
--(void) onBackground {
-    lua_State* L = self.l;
-    if( L && self.isOnShowed ) {
-        lua_checkstack32(L);
-        lua_pushboolean(L, YES);
-        [self lv_callLuaByKey1:@"onHide" key2:nil argN:1];
-    }
-}
-
-- (void)didMoveToSuperview{
-    //[super didMoveToSuperview];
-    
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
-    }
-}
-
-- (void)didMoveToWindow{
-    //[super didMoveToWindow];
-    
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@"DidMoveToSuperview"];
-    }
-}
 
 #pragma mark - keyboard
 
@@ -602,16 +528,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 #pragma mark - layout
-
--(void) layoutSubviews{
-    //[super layoutSubviews];
-    
-    lua_State* L = self.l;
-    if( L ) {
-        lua_checkstack32(L);
-        [self lv_callLuaByKey1:@STR_ON_LAYOUT];
-    }
-}
 
 -(void) addSubview:(UIView *)view{
     if( self.contentViewIsWindow && self.conentView ){

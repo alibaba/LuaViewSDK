@@ -1674,16 +1674,17 @@ static int lvNewView (lua_State *L) {
     
     LVBaseView* view = [[c alloc] init:L];
     {
+        LuaViewCore* luaviewCore = LV_LUASTATE_VIEW(L);
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(view);
         view.lv_userData = userData;
+        view.lv_luaviewCore = luaviewCore;
         
         luaL_getmetatable(L, META_TABLE_UIView );
         lua_setmetatable(L, -2);
         
-        LuaViewCore* lView = LV_LUASTATE_VIEW(L);
-        if( lView ){
-            [lView containerAddSubview:view];
+        if( luaviewCore ){
+            [luaviewCore containerAddSubview:view];
         }
     }
     return 1; /* new userdatum is already on the stack */
