@@ -6,7 +6,7 @@
 platform :ios, "8.0"
 
 target 'LuaViewSDK' do
-    pod 'liblua', '5.1.4-SNAPSHOT'
+    pod 'liblua', '5.1.4.0'
 end
 
 target 'Dummy' do

@@ -207,10 +207,10 @@
 		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
 		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
 		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
-		91666CF61E6ECDE8005BC162 /* NSObject+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */; };
+		91666CF61E6ECDE8005BC162 /* NSObject+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91666CF71E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */; };
 		91666CF81E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */; };
-		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; };
+		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
 		91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
 		91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA31E11004B0088EFD6 /* LVRefreshConst.h */; };

@@ -112,5 +112,6 @@
  */
 -(NSString*) loadFile:(NSString *)fileName;
 
+- (void) setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
 
 @end
