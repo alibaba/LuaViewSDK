@@ -103,35 +103,7 @@
     self.closeLayerMode = YES;
     self.mySelf = self;
     self.backgroundColor = [UIColor clearColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardDidHideNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onForeground)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onBackground)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
+
     
     self.lv_luaviewCore = self;
     self.rsa = [[LVRSA alloc] init];
@@ -139,7 +111,6 @@
 }
 
 -(void) dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.debugConnection closeAll];
 }
 
