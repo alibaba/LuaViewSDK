@@ -148,23 +148,23 @@
 
 @end
 
-#pragma mark -  各种系统回调, 回调会传递到lua脚本中执行脚本代码
-@interface LuaViewCore ()
-
--(void) viewWillAppear;
--(void) viewDidAppear;
--(void) viewWillDisAppear;
--(void) viewDidDisAppear;
-
-#pragma mark - 摇一摇回调
-// 摇一摇开始摇动
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;
-// 摇一摇取消摇动
-- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event;
-// 摇一摇摇动结束
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event;
-
-@end
+//#pragma mark -  各种系统回调, 回调会传递到lua脚本中执行脚本代码
+//@interface LuaViewCore ()
+//
+//-(void) viewWillAppear;
+//-(void) viewDidAppear;
+//-(void) viewWillDisAppear;
+//-(void) viewDidDisAppear;
+//
+//#pragma mark - 摇一摇回调
+//// 摇一摇开始摇动
+//- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;
+//// 摇一摇取消摇动
+//- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event;
+//// 摇一摇摇动结束
+//- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event;
+//
+//@end
 
 
 #pragma mark - Register 注册外部api接口

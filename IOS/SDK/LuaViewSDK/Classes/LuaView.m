@@ -94,21 +94,6 @@
     [self.luaviewCore releaseLuaView];
 }
 
-#pragma mark - 摇一摇回调
-// 摇一摇开始摇动
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    [self.luaviewCore motionBegan:motion withEvent:event];
-}
-
-// 摇一摇取消摇动
-- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    [self.luaviewCore motionCancelled:motion withEvent:event];
-}
-
-// 摇一摇摇动结束
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    [self.luaviewCore motionEnded:motion withEvent:event];
-}
 
 /**
  *  load and run script
@@ -285,6 +270,72 @@
     if( L ) {
         lua_checkstack32(L);
         [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    }
+}
+
+
+#pragma mark - keyboard
+
+-(void) keyboardWillShow:(NSNotification *)notification {
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"KeyboardWillShow"];
+    }
+}
+-(void) keyboardDidShow:(NSNotification *)notification {
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"KeyboardDidShow"];
+    }
+}
+-(void) keyboardWillHide:(NSNotification *)notification {
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"KeyboardWillHide"];
+    }
+}
+-(void) keyboardDidHide:(NSNotification *)notification {
+    lua_State* L = self.luaviewCore.l;
+    if( L ) {
+        lua_checkstack32(L);
+        [self lv_callLuaByKey1:@"KeyboardDidHide"];
+    }
+}
+
+#pragma mark - 摇一摇相关方法
+// 摇一摇开始摇动
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    lua_State* L = self.luaviewCore.l;
+    if (event.subtype == UIEventSubtypeMotionShake) {
+        if( L ) {
+            lua_checkstack32(L);
+            [self lv_callLuaByKey1:@"ShakeBegin"];
+        }
+    }
+}
+
+// 摇一摇取消摇动
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (event.subtype == UIEventSubtypeMotionShake) {
+        lua_State* L = self.luaviewCore.l;
+        if( L ) {
+            lua_checkstack32(L);
+            [self lv_callLuaByKey1:@"ShakeCanceled"];
+        }
+    }
+}
+
+// 摇一摇摇动结束
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (event.subtype == UIEventSubtypeMotionShake) {
+        lua_State* L = self.luaviewCore.l;
+        if( L ) {
+            lua_checkstack32(L);
+            [self lv_callLuaByKey1:@"ShakeEnded"];
+        }
     }
 }
 
