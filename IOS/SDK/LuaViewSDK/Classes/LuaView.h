@@ -116,4 +116,7 @@
 
 - (void) setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
 
+
+-(lua_State*) l; // 获取 lua 状态机
+
 @end

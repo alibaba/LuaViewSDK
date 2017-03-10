@@ -339,5 +339,8 @@
     }
 }
 
+-(lua_State*) l{
+    return self.luaviewCore.l;
+}
 
 @end
