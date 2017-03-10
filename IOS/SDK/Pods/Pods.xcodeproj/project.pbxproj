@@ -10,47 +10,6 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>032A00D40E8EFF1C1B42D49286BEB984</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>4F8B8F68BA8C687161A0FE38814CD0B2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>03F5E17642FF621A3E6B3C8A79FE2037</key>
-		<dict>
-			<key>fileRef</key>
-			<string>25F3DE1E626709F7B169AFA595A16607</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>055AFE660BCD0AB5C45DC5F7C4B43E30</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D9051579867A89B63EE77BD43A8F4D17</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>056A2FA3A6CB21742E8E3B2CB0E63082</key>
 		<dict>
 			<key>children</key>
@@ -64,32 +23,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0910EA33AE641F3E1A2E7D636E4ACF63</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>91C8CCDF82291E41AA8CB5F4BABA1877</string>
-			<key>buildPhases</key>
-			<array>
-				<string>D4BC537B6A6A284FB6EC191811FE0014</string>
-				<string>14B53BC76331E30FF62DCC0AEC0D1B6A</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>A235853D5B130847F13C9B5462195854</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-LuaViewSDK</string>
-			<key>productName</key>
-			<string>Pods-LuaViewSDK</string>
-			<key>productReference</key>
-			<string>C79EFA004EAB3153F8D23D3FD0731063</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
 		<key>0A46B22D7733AFEBC7C5ABFE07CFB36C</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -101,7 +34,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>14A47D841846A91E21E6EF48C2FAB151</key>
+		<key>0DDDB42DC3B54E98B7A6867BC96FF37F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -110,177 +43,56 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lgc.h</string>
+			<string>lcode.h</string>
 			<key>path</key>
-			<string>include/lgc.h</string>
+			<string>include/lcode.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>14B53BC76331E30FF62DCC0AEC0D1B6A</key>
+		<key>11C2B6B6A4B84C26FDB9E0D97C50F4CD</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DF463C233E728B2F8BF8684E05C63BEF</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lua.h</string>
+			<key>path</key>
+			<string>include/lua.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>267AC7C3342785F1CBB02BC488A6775D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lstate.h</string>
+			<key>path</key>
+			<string>include/lstate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>26FD8F995071C90891F58A71E66C587D</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
 			<string>0</string>
-		</dict>
-		<key>162171F6DF66D9FBEFC6D164239AC865</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1F8144B39BD8F6068CE036B77A6C6DB2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>16C0A4C666CB1AA246AD5917AFB47576</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lstring.h</string>
+			<string>libPods-LuaViewSDK.a</string>
 			<key>path</key>
-			<string>include/lstring.h</string>
+			<string>libPods-LuaViewSDK.a</string>
 			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>17BDCA80D0FD89BE8022322AD60F5D39</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FE0E5C0E5851EF149900D1E7690B1100</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1E2E2AFECB99EC0645D21A2E4094BBAA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>86C8CEB6A2EC186BC1666ABE49C2988A</string>
-				<string>587A7E91775EA8749E8E17DA8344FCB5</string>
-				<string>9C11DA1F70D1F6941A8FF9F706B317B7</string>
-				<string>3D882D0816A3C4829D4BC0801209D7C0</string>
-				<string>A8A906F9EFB1D4B17953B79991158662</string>
-				<string>162171F6DF66D9FBEFC6D164239AC865</string>
-				<string>A5BD867BDE7ED1A2011F9415ADC88906</string>
-				<string>39C1F421D835E757D7C74A444741F35B</string>
-				<string>03F5E17642FF621A3E6B3C8A79FE2037</string>
-				<string>273F9E94557E3413B96E8231F48EDB91</string>
-				<string>6CCFB1E61037F6664F6DF9F691663617</string>
-				<string>B5BE6C2BB7FEB3C7C942E0A1D6D00972</string>
-				<string>BBEB4C43967B8AB33863D29E23CEC3F5</string>
-				<string>EBBF7AD270531236A3B62D6CE6D2DA17</string>
-				<string>9E344812D802FC013ED016A773E21B5E</string>
-				<string>055AFE660BCD0AB5C45DC5F7C4B43E30</string>
-				<string>4CEF9C85CECF4813841255A8856115D3</string>
-				<string>8690934CC28FFF03E1F806A4D3231B1A</string>
-				<string>A7A7FD6942070E48C66BC900BFFF0F99</string>
-				<string>C6C902648E07E7639927CBCE8450F351</string>
-				<string>3D05F971505AAA0859E6EB716DB99112</string>
-				<string>533111A57C877A21C07421AD14594827</string>
-				<string>9EC3F385FBD20F9EF9DACAA58AE9E04F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>1F8144B39BD8F6068CE036B77A6C6DB2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lfunc.h</string>
-			<key>path</key>
-			<string>include/lfunc.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>25F3DE1E626709F7B169AFA595A16607</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>llimits.h</string>
-			<key>path</key>
-			<string>include/llimits.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>273F9E94557E3413B96E8231F48EDB91</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A3D71ADE3C2C5D1824D73512679485E3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>28A8CF5612EB06742583FDEBD80AB279</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4B5BF7940E472F485FC92E22F9ED4FB5</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/liblua/liblua-prefix.pch</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
 		<dict>
@@ -296,7 +108,7 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>31BEAA036A554A03D4AAB7667671ED94</key>
+		<key>312732138A25DD780E02CF2209411190</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -305,67 +117,71 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lauxlib.h</string>
+			<string>lgc.h</string>
 			<key>path</key>
-			<string>include/lauxlib.h</string>
+			<string>include/lgc.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>33EDA760D8C8F23E628EB15260CB9A88</key>
+		<key>390FA70093DF3DF31238A2C5FFBDAE1D</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
+			<key>fileRef</key>
+			<string>3E4E89230EF59BC255123B67864ACF77</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3964458B8E7D205C9CB68AFAB56CCA86</key>
+		<dict>
+			<key>children</key>
 			<array>
-				<string>6BE06D090D2437083B7E8C262D283843</string>
-				<string>17BDCA80D0FD89BE8022322AD60F5D39</string>
+				<string>DB62BD23CF003FA1B9267FEE59F027C1</string>
+				<string>3E811C995FA73A86D770ECC87C5749AA</string>
+				<string>0DDDB42DC3B54E98B7A6867BC96FF37F</string>
+				<string>D0083DAD99ECAF62C212607A6350A3E2</string>
+				<string>5E5B94E16BD206C75BD6B65A7ECAD961</string>
+				<string>ECFA9E11D4F508E194A653DB54B65D08</string>
+				<string>312732138A25DD780E02CF2209411190</string>
+				<string>4B2FC280C9B91E636EEB5C312E3AC696</string>
+				<string>A415A3124761D60699F51D4CFBB06649</string>
+				<string>DAB9D55CED32DDD0EC264DA9FB67DD27</string>
+				<string>E69CBBB823A3BCF1B11E3782184EA9D8</string>
+				<string>BB39C0FA9F5A310EC70419BC3B882CCB</string>
+				<string>B2547B51976EAC7769ECD885B6722F76</string>
+				<string>267AC7C3342785F1CBB02BC488A6775D</string>
+				<string>B29970FF14BC57628904B992117C9CF1</string>
+				<string>D47A00253E8F5F2DF40001F00CCD78C0</string>
+				<string>82992175BDF8D6BFAA3804F0CAC51405</string>
+				<string>11C2B6B6A4B84C26FDB9E0D97C50F4CD</string>
+				<string>8D1B536DFF548BF58F8C51E256CE3D24</string>
+				<string>3C6A9470FA6C41264147C65B429E502C</string>
+				<string>60BB9505F8A843D03B4D6504524849EB</string>
+				<string>3FDB703A110AB23F5AF9656DFCA2356F</string>
+				<string>9B4525398F9E82E4F82AE31C1926F88A</string>
+				<string>BD6F68E26C817A30DFF125BAD7660196</string>
 			</array>
 			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>liblua</string>
+			<key>path</key>
+			<string>liblua</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>39C1F421D835E757D7C74A444741F35B</key>
+		<key>3C6A9470FA6C41264147C65B429E502C</key>
 		<dict>
-			<key>fileRef</key>
-			<string>B80DC68FE55C74FEBBC652BA688C1A4A</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>3D05F971505AAA0859E6EB716DB99112</key>
-		<dict>
-			<key>fileRef</key>
-			<string>755693318EBCC9AA5E617825728C161B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>3D882D0816A3C4829D4BC0801209D7C0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E8B6D2513BFA8723E2CFBA537871D10A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lualib.h</string>
+			<key>path</key>
+			<string>include/lualib.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>3E4E89230EF59BC255123B67864ACF77</key>
 		<dict>
@@ -380,96 +196,7 @@
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>3E71B077D6D8F6B53C81E997E5ADF7A0</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4B5BF7940E472F485FC92E22F9ED4FB5</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/liblua/liblua-prefix.pch</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>4008EC9A1480D8FEB6596627165196B3</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libliblua.a</string>
-			<key>path</key>
-			<string>libliblua.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>44585EE6E163AD0FA28E98D7BEDF0C5B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>7BF30D7EDA1DD3B3F7D68E1239586080</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>44F935E0966BE9FCA5D539EF11EB1A76</key>
+		<key>3E811C995FA73A86D770ECC87C5749AA</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -478,39 +205,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lopcodes.h</string>
+			<string>lauxlib.h</string>
 			<key>path</key>
-			<string>include/lopcodes.h</string>
+			<string>include/lauxlib.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4514E65A9088938F09718C7109BFCF46</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>liblua-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4B5BF7940E472F485FC92E22F9ED4FB5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>liblua.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4CD9D5EF6D970154008D4FE0EDF8BFF7</key>
+		<key>3FDB703A110AB23F5AF9656DFCA2356F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -519,73 +220,52 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lcode.h</string>
+			<string>lvm.h</string>
 			<key>path</key>
-			<string>include/lcode.h</string>
+			<string>include/lvm.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4CEF9C85CECF4813841255A8856115D3</key>
+		<key>4B2FC280C9B91E636EEB5C312E3AC696</key>
 		<dict>
-			<key>fileRef</key>
-			<string>5C54F0BEAEB8B8BF2330F01FA269E5BF</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>llex.h</string>
+			<key>path</key>
+			<string>include/llex.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4EB88650AAE88B18AAED91679A0BCDA5</key>
+		<key>4D0C65FEF03CD3B6762F042EC53326A3</key>
 		<dict>
-			<key>children</key>
+			<key>buildConfigurationList</key>
+			<string>B119FA2B0F77412E99BA07319FAB17EF</string>
+			<key>buildPhases</key>
+			<array>
+				<string>C9C3CE8033DCA1B85FE69A4E616FE604</string>
+				<string>F3130081A8C787CE325BBB01060CA44F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
 			<array/>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXNativeTarget</string>
 			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>Pods-LuaViewSDK</string>
+			<key>productName</key>
+			<string>Pods-LuaViewSDK</string>
+			<key>productReference</key>
+			<string>26FD8F995071C90891F58A71E66C587D</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>4F8B8F68BA8C687161A0FE38814CD0B2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>533111A57C877A21C07421AD14594827</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D28295C5F2B734DE38B1ACAFE533807A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>587A7E91775EA8749E8E17DA8344FCB5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>31BEAA036A554A03D4AAB7667671ED94</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>5C54F0BEAEB8B8BF2330F01FA269E5BF</key>
+		<key>5E5B94E16BD206C75BD6B65A7ECAD961</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -594,9 +274,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>ltm.h</string>
+			<string>ldo.h</string>
 			<key>path</key>
-			<string>include/ltm.h</string>
+			<string>include/ldo.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -613,85 +293,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>6960C1B1E8BB6F2A63D7D7FE42F73B1A</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>A92FD0A218F7CBAD473B1A6EB32C4334</string>
-			<key>buildPhases</key>
-			<array>
-				<string>33EDA760D8C8F23E628EB15260CB9A88</string>
-				<string>032A00D40E8EFF1C1B42D49286BEB984</string>
-				<string>1E2E2AFECB99EC0645D21A2E4094BBAA</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>liblua</string>
-			<key>productName</key>
-			<string>liblua</string>
-			<key>productReference</key>
-			<string>4008EC9A1480D8FEB6596627165196B3</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>6BE06D090D2437083B7E8C262D283843</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C6E4E70F3080F23D972122B1CC22752B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CCFB1E61037F6664F6DF9F691663617</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FE9896C83CA1709575228AFC88999095</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>718D5CA0B88AA509821079792D3C4B9C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>luaconf.h</string>
-			<key>path</key>
-			<string>include/luaconf.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>719A0B67F8FF31FE5F2CB5DE75DA7B05</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4B5BF7940E472F485FC92E22F9ED4FB5</string>
-				<string>C6E4E70F3080F23D972122B1CC22752B</string>
-				<string>4514E65A9088938F09718C7109BFCF46</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/liblua</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>755693318EBCC9AA5E617825728C161B</key>
+		<key>60BB9505F8A843D03B4D6504524849EB</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -703,6 +305,19 @@
 			<string>lundump.h</string>
 			<key>path</key>
 			<string>include/lundump.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>78A612D23682CAB99566BF2C1AF26BAA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3964458B8E7D205C9CB68AFAB56CCA86</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -719,29 +334,14 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7CFC064338D876AF3691308DA2B7FC68</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lstate.h</string>
-			<key>path</key>
-			<string>include/lstate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>7DB346D0F39D3F0E887471402A8071AB</key>
 		<dict>
 			<key>children</key>
 			<array>
 				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
 				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
-				<string>AED1866793D6531FFEE4A270A1E8FD0B</string>
-				<string>E18C041B9B75DC49F1540F7ADA51EFDD</string>
+				<string>78A612D23682CAB99566BF2C1AF26BAA</string>
+				<string>B4ED99D5573387B570B45792D22E365A</string>
 				<string>056A2FA3A6CB21742E8E3B2CB0E63082</string>
 			</array>
 			<key>isa</key>
@@ -762,7 +362,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>820AA2625C1C2381074C043360782B83</key>
+		<key>82992175BDF8D6BFAA3804F0CAC51405</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -771,53 +371,62 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lapi.h</string>
+			<string>ltm.h</string>
 			<key>path</key>
-			<string>include/lapi.h</string>
+			<string>include/ltm.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8690934CC28FFF03E1F806A4D3231B1A</key>
+		<key>87415CC8BE852DA72DCDE7F67C414834</key>
 		<dict>
-			<key>fileRef</key>
-			<string>B2915E083EE2B4359D254BC10340E2A3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
+			<key>baseConfigurationReference</key>
+			<string>B5D85768A86F0B65A2C2AEFDA81FD8DD</string>
+			<key>buildSettings</key>
 			<dict>
-				<key>ATTRIBUTES</key>
+				<key>ARCHS</key>
 				<array>
-					<string>Public</string>
+					<string>$(ARCHS_STANDARD)</string>
 				</array>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
 			</dict>
-		</dict>
-		<key>86C8CEB6A2EC186BC1666ABE49C2988A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>820AA2625C1C2381074C043360782B83</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
 		</dict>
-		<key>91C8CCDF82291E41AA8CB5F4BABA1877</key>
+		<key>8D1B536DFF548BF58F8C51E256CE3D24</key>
 		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>B7251F27037C7ECA23636F4BB57DE6F1</string>
-				<string>44585EE6E163AD0FA28E98D7BEDF0C5B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>XCConfigurationList</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>luaconf.h</string>
+			<key>path</key>
+			<string>include/luaconf.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>91E11CF231AD6A98273E79153B60A54E</key>
 		<dict>
@@ -841,7 +450,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>976EE19C23D707BFFB7752D67E3935FC</key>
+		<key>9B4525398F9E82E4F82AE31C1926F88A</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -850,25 +459,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lparser.h</string>
+			<string>lzio.h</string>
 			<key>path</key>
-			<string>include/lparser.h</string>
+			<string>include/lzio.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9C11DA1F70D1F6941A8FF9F706B317B7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4CD9D5EF6D970154008D4FE0EDF8BFF7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>9C4A26A7E662B89508753AF6876675BF</key>
 		<dict>
@@ -883,59 +478,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9E344812D802FC013ED016A773E21B5E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>16C0A4C666CB1AA246AD5917AFB47576</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>9EC3F385FBD20F9EF9DACAA58AE9E04F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C000FB272656C52C6182A5A4885B623E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>A09DCFDA06DCEBF23F0B31C262525F02</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>6960C1B1E8BB6F2A63D7D7FE42F73B1A</string>
-			<key>remoteInfo</key>
-			<string>liblua</string>
-		</dict>
-		<key>A235853D5B130847F13C9B5462195854</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>liblua</string>
-			<key>target</key>
-			<string>6960C1B1E8BB6F2A63D7D7FE42F73B1A</string>
-			<key>targetProxy</key>
-			<string>A09DCFDA06DCEBF23F0B31C262525F02</string>
-		</dict>
-		<key>A3D71ADE3C2C5D1824D73512679485E3</key>
+		<key>A415A3124761D60699F51D4CFBB06649</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -944,9 +487,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lmem.h</string>
+			<string>llimits.h</string>
 			<key>path</key>
-			<string>include/lmem.h</string>
+			<string>include/llimits.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -962,20 +505,6 @@
 			<string>Pods-LuaViewSDK-acknowledgements.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A5BD867BDE7ED1A2011F9415ADC88906</key>
-		<dict>
-			<key>fileRef</key>
-			<string>14A47D841846A91E21E6EF48C2FAB151</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>A70CDAD61F90AC503C7D04CC22DA2923</key>
 		<dict>
@@ -1050,40 +579,12 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>A7A7FD6942070E48C66BC900BFFF0F99</key>
-		<dict>
-			<key>fileRef</key>
-			<string>718D5CA0B88AA509821079792D3C4B9C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>A8A906F9EFB1D4B17953B79991158662</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F8330AF5FFDAA0B78CF46FA5A0EB3DCC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>A92FD0A218F7CBAD473B1A6EB32C4334</key>
+		<key>B119FA2B0F77412E99BA07319FAB17EF</key>
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>28A8CF5612EB06742583FDEBD80AB279</string>
-				<string>3E71B077D6D8F6B53C81E997E5ADF7A0</string>
+				<string>87415CC8BE852DA72DCDE7F67C414834</string>
+				<string>F123AA7859E016F51C2C79FE7CF9C0B6</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -1092,27 +593,7 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>AE5DF5F5B39128F0EFFA298A469A8AFC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80C19BE02AD880BF3F3906FCE6255738</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>AED1866793D6531FFEE4A270A1E8FD0B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BBD9EC069A5F068FE1A14ADF6E244FCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B2915E083EE2B4359D254BC10340E2A3</key>
+		<key>B2547B51976EAC7769ECD885B6722F76</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1121,25 +602,39 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lua.h</string>
+			<string>lparser.h</string>
 			<key>path</key>
-			<string>include/lua.h</string>
+			<string>include/lparser.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B5BE6C2BB7FEB3C7C942E0A1D6D00972</key>
+		<key>B29970FF14BC57628904B992117C9CF1</key>
 		<dict>
-			<key>fileRef</key>
-			<string>44F935E0966BE9FCA5D539EF11EB1A76</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lstring.h</string>
+			<key>path</key>
+			<string>include/lstring.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B4ED99D5573387B570B45792D22E365A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>26FD8F995071C90891F58A71E66C587D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>B5D85768A86F0B65A2C2AEFDA81FD8DD</key>
 		<dict>
@@ -1151,57 +646,6 @@
 			<string>text.xcconfig</string>
 			<key>path</key>
 			<string>Pods-LuaViewSDK.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B7251F27037C7ECA23636F4BB57DE6F1</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>B5D85768A86F0B65A2C2AEFDA81FD8DD</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>B80DC68FE55C74FEBBC652BA688C1A4A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>llex.h</string>
-			<key>path</key>
-			<string>include/llex.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1222,59 +666,20 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>BBD9EC069A5F068FE1A14ADF6E244FCD</key>
+		<key>BB39C0FA9F5A310EC70419BC3B882CCB</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>820AA2625C1C2381074C043360782B83</string>
-				<string>31BEAA036A554A03D4AAB7667671ED94</string>
-				<string>4CD9D5EF6D970154008D4FE0EDF8BFF7</string>
-				<string>E8B6D2513BFA8723E2CFBA537871D10A</string>
-				<string>F8330AF5FFDAA0B78CF46FA5A0EB3DCC</string>
-				<string>1F8144B39BD8F6068CE036B77A6C6DB2</string>
-				<string>14A47D841846A91E21E6EF48C2FAB151</string>
-				<string>FE0E5C0E5851EF149900D1E7690B1100</string>
-				<string>B80DC68FE55C74FEBBC652BA688C1A4A</string>
-				<string>25F3DE1E626709F7B169AFA595A16607</string>
-				<string>A3D71ADE3C2C5D1824D73512679485E3</string>
-				<string>FE9896C83CA1709575228AFC88999095</string>
-				<string>44F935E0966BE9FCA5D539EF11EB1A76</string>
-				<string>976EE19C23D707BFFB7752D67E3935FC</string>
-				<string>7CFC064338D876AF3691308DA2B7FC68</string>
-				<string>16C0A4C666CB1AA246AD5917AFB47576</string>
-				<string>D9051579867A89B63EE77BD43A8F4D17</string>
-				<string>5C54F0BEAEB8B8BF2330F01FA269E5BF</string>
-				<string>B2915E083EE2B4359D254BC10340E2A3</string>
-				<string>718D5CA0B88AA509821079792D3C4B9C</string>
-				<string>BD8868666D424B49E9771C68A5053962</string>
-				<string>755693318EBCC9AA5E617825728C161B</string>
-				<string>D28295C5F2B734DE38B1ACAFE533807A</string>
-				<string>C000FB272656C52C6182A5A4885B623E</string>
-				<string>4EB88650AAE88B18AAED91679A0BCDA5</string>
-				<string>719A0B67F8FF31FE5F2CB5DE75DA7B05</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>liblua</string>
+			<string>lopcodes.h</string>
 			<key>path</key>
-			<string>liblua</string>
+			<string>include/lopcodes.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BBEB4C43967B8AB33863D29E23CEC3F5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>976EE19C23D707BFFB7752D67E3935FC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
 		<dict>
@@ -1289,18 +694,16 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BD8868666D424B49E9771C68A5053962</key>
+		<key>BD6F68E26C817A30DFF125BAD7660196</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>C1ED9902BE40F60630E814E9759605A4</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>lualib.h</string>
-			<key>path</key>
-			<string>include/lualib.h</string>
+			<string>Frameworks</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1317,64 +720,42 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C000FB272656C52C6182A5A4885B623E</key>
+		<key>C1ED9902BE40F60630E814E9759605A4</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>archive.ar</string>
 			<key>name</key>
-			<string>lzio.h</string>
+			<string>liblua.a</string>
 			<key>path</key>
-			<string>include/lzio.h</string>
+			<string>lib/liblua.a</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C6C902648E07E7639927CBCE8450F351</key>
+		<key>C7607B55A8A893BD6114B1B0C522A630</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BD8868666D424B49E9771C68A5053962</string>
+			<string>80C19BE02AD880BF3F3906FCE6255738</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
-		<key>C6E4E70F3080F23D972122B1CC22752B</key>
+		<key>C9C3CE8033DCA1B85FE69A4E616FE604</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C7607B55A8A893BD6114B1B0C522A630</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>liblua-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C79EFA004EAB3153F8D23D3FD0731063</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods-LuaViewSDK.a</string>
-			<key>path</key>
-			<string>libPods-LuaViewSDK.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>D28295C5F2B734DE38B1ACAFE533807A</key>
+		<key>D0083DAD99ECAF62C212607A6350A3E2</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1383,9 +764,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>lvm.h</string>
+			<string>ldebug.h</string>
 			<key>path</key>
-			<string>include/lvm.h</string>
+			<string>include/ldebug.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1415,7 +796,7 @@
 			<key>mainGroup</key>
 			<string>7DB346D0F39D3F0E887471402A8071AB</string>
 			<key>productRefGroup</key>
-			<string>E18C041B9B75DC49F1540F7ADA51EFDD</string>
+			<string>B4ED99D5573387B570B45792D22E365A</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -1424,24 +805,10 @@
 			<string></string>
 			<key>targets</key>
 			<array>
-				<string>6960C1B1E8BB6F2A63D7D7FE42F73B1A</string>
-				<string>0910EA33AE641F3E1A2E7D636E4ACF63</string>
+				<string>4D0C65FEF03CD3B6762F042EC53326A3</string>
 			</array>
 		</dict>
-		<key>D4BC537B6A6A284FB6EC191811FE0014</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>AE5DF5F5B39128F0EFFA298A469A8AFC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>D9051579867A89B63EE77BD43A8F4D17</key>
+		<key>D47A00253E8F5F2DF40001F00CCD78C0</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1456,28 +823,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>DF463C233E728B2F8BF8684E05C63BEF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E18C041B9B75DC49F1540F7ADA51EFDD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4008EC9A1480D8FEB6596627165196B3</string>
-				<string>C79EFA004EAB3153F8D23D3FD0731063</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E8B6D2513BFA8723E2CFBA537871D10A</key>
+		<key>DAB9D55CED32DDD0EC264DA9FB67DD27</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1486,25 +832,41 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>ldebug.h</string>
+			<string>lmem.h</string>
 			<key>path</key>
-			<string>include/ldebug.h</string>
+			<string>include/lmem.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>EBBF7AD270531236A3B62D6CE6D2DA17</key>
+		<key>DB62BD23CF003FA1B9267FEE59F027C1</key>
 		<dict>
-			<key>fileRef</key>
-			<string>7CFC064338D876AF3691308DA2B7FC68</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lapi.h</string>
+			<key>path</key>
+			<string>include/lapi.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E69CBBB823A3BCF1B11E3782184EA9D8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>lobject.h</string>
+			<key>path</key>
+			<string>include/lobject.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>EC2F8537471FE5495C3B0747FD1A75E1</key>
 		<dict>
@@ -1519,7 +881,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F8330AF5FFDAA0B78CF46FA5A0EB3DCC</key>
+		<key>ECFA9E11D4F508E194A653DB54B65D08</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1528,11 +890,60 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>ldo.h</string>
+			<string>lfunc.h</string>
 			<key>path</key>
-			<string>include/ldo.h</string>
+			<string>include/lfunc.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F123AA7859E016F51C2C79FE7CF9C0B6</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>7BF30D7EDA1DD3B3F7D68E1239586080</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ARCHS</key>
+				<array>
+					<string>$(ARCHS_STANDARD)</string>
+				</array>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>F3130081A8C787CE325BBB01060CA44F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>390FA70093DF3DF31238A2C5FFBDAE1D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>FB45FFD90572718D82AB9092B750F0CA</key>
 		<dict>
@@ -1601,36 +1012,6 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
-		</dict>
-		<key>FE0E5C0E5851EF149900D1E7690B1100</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>name</key>
-			<string>liblua.a</string>
-			<key>path</key>
-			<string>lib/liblua.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FE9896C83CA1709575228AFC88999095</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lobject.h</string>
-			<key>path</key>
-			<string>include/lobject.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

@@ -1,10 +1,10 @@
 PODS:
-  - liblua (5.1.4.0)
+  - liblua (5.1.4.3)
 
 DEPENDENCIES:
-  - liblua (= 5.1.4.0)
+  - liblua (= 5.1.4.3)
 
 SPEC CHECKSUMS:
-  liblua: b44536351debe259f476ddc1adfd3a9ab1697a87
+  liblua: 1e187e0fd4e6cec2f712463cff9ace4d17dedcb0
 
 COCOAPODS: 0.39.0
