@@ -79,9 +79,6 @@
 @property (nonatomic,assign) BOOL stateInited;
 @property (nonatomic,assign) BOOL loadedDebugScript;
 @property (atomic,assign) NSInteger callLuaTimes;
-
-@property (nonatomic,strong) LVRSA* rsa;
-
 @end
 
 @implementation LuaViewCore
@@ -685,11 +682,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     } else {
         lv_addSubview(self, self.window, view);
     }
-}
-
-// 证书
-- (void) setPublicKeyFilePath:(NSString*) filePath{
-    [self.rsa setPublicKeyFilePath:filePath];
 }
 
 -(void) setWindow:(UIView *)window{

@@ -16,6 +16,14 @@
 
 @property (nonatomic,assign) BOOL checkDebugerServer; // 是否检查调试器
 
+// 设置证书地址
+- (void) setPublicKeyFilePath:(NSString*) filePath;
+
+-(LVBlock*) getLuaBlock:(NSString*) name;
+
+-(NSString*) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args;
+-(NSString*) callLua:(NSString*) functionName environment:(UIView*) environment args:(NSArray*) args;
+-(NSString*) callLua:(NSString*) functionName args:(NSArray*) args;
 
 @end
 
