@@ -679,10 +679,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     return 0;
 }
 
--(NSString*) description{
-    return [NSString stringWithFormat:@"<View(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
-}
-
 -(void) containerAddSubview:(UIView *)view{
     if( self.conentView ) {
         lv_addSubview(self, self.conentView, view);
@@ -692,7 +688,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 // 证书
-
 - (void) setPublicKeyFilePath:(NSString*) filePath{
     [self.rsa setPublicKeyFilePath:filePath];
 }
