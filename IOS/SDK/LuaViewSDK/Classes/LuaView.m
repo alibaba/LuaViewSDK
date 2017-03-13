@@ -20,7 +20,6 @@
 -(id) init{
     self = [super init];
     if( self ) {
-        [self createLuaViewCore];
     }
     return self;
 }
@@ -37,9 +36,9 @@
  * 初始化LuaViewCore
  */
 -(void) createLuaViewCore{
-    self.backgroundColor = [UIColor clearColor];
     self.luaviewCore = [[LuaViewCore alloc] init];
-    self.luaviewCore.window = self;
+    [self.luaviewCore pushWindow:self];
+    self.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification

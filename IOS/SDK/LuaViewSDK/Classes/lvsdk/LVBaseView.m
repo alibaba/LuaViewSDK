@@ -39,7 +39,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         UIView<LVProtocal>* view = CFBridgingRelease(userdata->object);
         userdata->object = NULL;
         if( view ){
-            view.lv_userData = nil;
+            view.lv_userData = NULL;
             view.lv_luaviewCore = nil;
             if( !userdata->isWindow ) {
                 [view removeFromSuperview];
@@ -581,16 +581,12 @@ static int children (lua_State *L) {
     LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
-    UIView* newContentView = (__bridge UIView *)(user->object);
-    if ( lview && newContentView && lua_type(L, 2)==LUA_TFUNCTION ) {
-        UIView* oldContent = lview.conentView;
-        UIView* oldWindow = lview.window;
+    UIView* newWindow = (__bridge UIView *)(user->object);
+    if ( lview && newWindow && lua_type(L, 2)==LUA_TFUNCTION ) {
         lua_settop(L, 2);
-        lview.conentView = newContentView;
-        lview.window = newContentView;
+        [lview pushWindow:newWindow];
         lv_runFunctionWithArgs(L, 1, 0);
-        lview.conentView = oldContent;
-        lview.window = oldWindow;
+        [lview popWindow:newWindow];
     }
     return 0;
 }

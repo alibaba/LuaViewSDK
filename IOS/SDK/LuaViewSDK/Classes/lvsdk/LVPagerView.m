@@ -13,6 +13,7 @@
 #import "LVPagerViewCell.h"
 #import "LVPagerIndicator.h"
 #import "LVHeads.h"
+#import "LuaViewCore.h"
 
 static inline NSInteger mapPageIdx(NSInteger pageIdx){
     return pageIdx + 1;
@@ -229,11 +230,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
     LuaViewCore* lview = self.lv_luaviewCore;
     lua_State* l = lview.l;
-    UIView* oldContentView = lview.conentView;
-    UIView* oldWindow = lview.window;
-    lview.conentView = cell.contentView;
-    lview.window = cell.contentView;
-    lview.contentViewIsWindow = NO;
+    UIView* newWindow = cell.contentView;
+    [lview pushWindow:newWindow];
     if ( l ) {
         // 只有两个Cell的时候开启特殊翻倍模式！！！
         if( self.doubleMode && pageIdx>=2 ) {
@@ -265,9 +263,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LUA_TNONE];
         }
     }
-    lview.conentView = oldContentView;
-    lview.window = oldWindow;
-    lview.contentViewIsWindow = NO;
+    [lview popWindow:newWindow];
     return cell;
 }
 

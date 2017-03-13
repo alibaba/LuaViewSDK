@@ -175,9 +175,6 @@ static int loaderForLuaView (lua_State *L) {
     // 注册静态全局方法和常量
     [LVExGlobalFunc registryStaticMethod:L lView:lView];
     
-    // 注册 系统对象window
-    [LVExGlobalFunc registry:L window:lView.window];
-    
     //外链注册器
     [LVNativeObjBox lvClassDefine:L globalName:nil];
     // 调试

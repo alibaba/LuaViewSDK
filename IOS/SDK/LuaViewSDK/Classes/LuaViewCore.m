@@ -79,6 +79,8 @@
 @property (nonatomic,assign) BOOL stateInited;
 @property (nonatomic,assign) BOOL loadedDebugScript;
 @property (atomic,assign) NSInteger callLuaTimes;
+@property(nonatomic,weak) UIView* window;
+@property (nonatomic,assign) int windowIdx;
 @end
 
 @implementation LuaViewCore
@@ -431,11 +433,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 #pragma mark - layout
 
 -(void) addSubview:(UIView *)view{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView addSubview:view];
-    } else {
-        [self.window addSubview:view];
-    }
+    [self.window addSubview:view];
 }
     
 #pragma mark - call lua global function
@@ -443,11 +441,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     lua_State* L = self.l;
     if( L ){
         lua_checkstack(L, 8 + (int)args.count*2);
-        UIView* oldContentView = self.conentView;
-        UIView* oldWindow = self.window;
-        self.conentView = environment;
-        self.window = environment;
-        self.contentViewIsWindow = YES;
+        [self pushWindow:environment];
         
         [LVUtil pushRegistryValue:L key:tag]; // param1: cell
         
@@ -462,9 +456,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         }
         lua_getglobal(L, functionName.UTF8String);// function
         NSString* ret = lv_runFunctionWithArgs(L, (int)args.count+1, 0);
-        self.conentView = oldContentView;
-        self.window = oldWindow;
-        self.contentViewIsWindow = NO;
+        [self popWindow:environment];
         return ret;
     }
     return nil;
@@ -478,8 +470,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     lua_State* L = self.l;
     if( L ){
         lua_checkstack(L, (int)args.count*2 + 2);
-        self.conentView = nil;
-        self.contentViewIsWindow = NO;
         
         for( int i=0; i<args.count; i++ ){
             id obj = args[i];
@@ -576,19 +566,56 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(void) containerAddSubview:(UIView *)view{
-    if( self.conentView ) {
-        lv_addSubview(self, self.conentView, view);
-    } else {
-        lv_addSubview(self, self.window, view);
-    }
+    lv_addSubview(self, self.window, view);
 }
 
--(void) setWindow:(UIView *)window{
-    if( _window!=window ) {
-        _window = window;
-        [LVExGlobalFunc registry:self.l window:_window];
+-(void) createWindow:(UIView *)window{
+    self.window = window;
+    [LVExGlobalFunc registry:self.l window:self.window];
+}
+    
+-(const char*) windowName{
+    const char* name = [NSString stringWithFormat:@"core.window.%d",self.windowIdx].UTF8String;
+    return name;
+}
+    
+-(void) pushWindow:(UIView*) window{
+    lua_State* L = self.l;
+    lua_checkstack(L,8);
+    
+    // 老的window 压栈
+    const char* newWindowName = [self windowName];
+    lua_getglobal(L, "window");
+    lua_setglobal(L, newWindowName);
+    self.windowIdx ++;
+    
+    // 创建新的window
+    [self createWindow:window];//创建window
+}
+
+-(void) popWindow:(UIView*) window{
+    if( self.window==window ) {
+        lua_State* L = self.l;
+        lua_checkstack(L,8);
+        self.windowIdx --;
+        const char* oldWindowName = [self windowName];
+        
+        // 出栈
+        lua_getglobal(L, oldWindowName);
+        lua_setglobal(L, "window");
+        lua_getglobal(L, "window");
+        
+        LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, -1);
+        if( user ) {
+            self.window = (__bridge UIView *)(user->object);
+        }
+    } else {
+        LVError(@"pop window!!!!");
     }
 }
+    -(void) setWindow:(UIView *)window{
+        _window = window;
+    }
 
 @end
 
