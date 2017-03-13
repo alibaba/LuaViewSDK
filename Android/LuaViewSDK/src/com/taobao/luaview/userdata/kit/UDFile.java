@@ -107,7 +107,12 @@ public class UDFile extends BaseLuaTable {
                                 @Override
                                 protected UDData doInBackground(Object... params) {
                                     byte[] data = FileUtil.readBytes(new File(path));
-                                    return new UDData(getGlobals(), getmetatable(), null).append(data);
+                                    if (data != null) {
+                                        return new UDData(getGlobals(), getmetatable(), null).append(data);
+                                    } else {       // 外存储卡读取不到的情况下，尝试在assets资源包下读取
+                                        data = finder.readFromAssets(name);
+                                        return new UDData(getGlobals(), getmetatable(), null).append(data);
+                                    }
                                 }
 
                                 @Override
@@ -121,7 +126,16 @@ public class UDFile extends BaseLuaTable {
                     } else {
                         if (path != null) {
                             byte[] data = FileUtil.readBytes(new File(path));
-                            return new UDData(getGlobals(), getmetatable(), null).append(data);
+                            if (data != null) {
+                                return new UDData(getGlobals(), getmetatable(), null).append(data);
+                            } else {       // 外存储卡读取不到的情况下，尝试在assets资源包下读取
+                                data = finder.readFromAssets(name);
+                                if (data != null) {
+                                    return new UDData(getGlobals(), getmetatable(), null).append(data);
+                                } else {
+                                    return NIL;
+                                }
+                            }
                         } else {
                             return NIL;
                         }
