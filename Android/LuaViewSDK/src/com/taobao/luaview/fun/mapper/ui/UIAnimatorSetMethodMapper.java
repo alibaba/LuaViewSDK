@@ -25,6 +25,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
+@Deprecated
 @LuaViewLib
 public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMethodMapper<U> {
 

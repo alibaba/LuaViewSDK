@@ -19,7 +19,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
     private static final String TAG = "TimerMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -123,6 +123,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
      * @return
      */
     @LuaViewApi(since = VmVersion.V_511)
+    @Deprecated
     public LuaValue repeatCount(U udTimer, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setRepeatCount(udTimer, varargs);

@@ -16,7 +16,8 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "iOS无"})
+@Deprecated
 public class UICustomViewPagerIndicatorMethodMapper<U extends UDCustomViewPagerIndicator> extends UIViewMethodMapper<U> {
     private static final String TAG = "UICustomViewPagerIndicatorMethodMapper";
     private static final String[] sMethods = new String[]{

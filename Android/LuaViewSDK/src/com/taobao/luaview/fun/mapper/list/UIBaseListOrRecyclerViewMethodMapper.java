@@ -18,7 +18,7 @@ import java.util.List;
  * @author song
  * @date 15/11/30
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup> extends UIViewGroupMethodMapper<U> {
     private static final String TAG = "UIBaseListOrRecyclerViewMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -89,6 +89,7 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue contentSize(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setContentSize(view, varargs);
@@ -116,6 +117,7 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue contentOffset(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setContentOffset(view, varargs);
@@ -143,6 +145,7 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue contentInset(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setContentInset(view, varargs);
@@ -196,7 +199,6 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
-    @Deprecated
     public LuaValue scrollToTop(U view, Varargs varargs) {
         final int offset = varargs.isnumber(2) ? DimenUtil.dpiToPx(varargs.arg(2)) : 0;
         final boolean animate = varargs.isnumber(2) ? varargs.optboolean(3, true) : varargs.optboolean(2, true);
@@ -210,7 +212,6 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
-    @Deprecated
     public LuaValue scrollToCell(U view, Varargs varargs) {
         final int section = LuaUtil.toJavaInt(varargs.arg(2));//lua从1开始
         final int rowInSection = LuaUtil.toJavaInt(varargs.arg(3));//lua从1开始
@@ -253,6 +254,7 @@ public abstract class UIBaseListOrRecyclerViewMethodMapper<U extends UDViewGroup
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue lazyLoad(U view, Varargs varargs) {
         final UDBaseListOrRecyclerView udBaseListOrRecyclerView = getUDBaseListOrRecyclerView(varargs);
         Boolean lazyLoad = LuaUtil.getBoolean(varargs, 2);

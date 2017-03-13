@@ -16,7 +16,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIToastMethodMapper<U extends UDToast> extends BaseMethodMapper<U> {
     private static final String TAG = "UIToastMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -47,6 +47,7 @@ public class UIToastMethodMapper<U extends UDToast> extends BaseMethodMapper<U> 
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue show(U view, Varargs varargs) {
         final CharSequence text = LuaViewUtil.getText(varargs.optvalue(2, NIL));
         return view.show(text);

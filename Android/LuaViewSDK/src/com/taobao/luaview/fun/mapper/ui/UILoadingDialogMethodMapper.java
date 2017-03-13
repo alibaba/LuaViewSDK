@@ -1,7 +1,5 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import android.graphics.Color;
-
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDLoadingDialog;
@@ -13,7 +11,7 @@ import org.luaj.vm2.Varargs;
 
 import java.util.List;
 
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends BaseMethodMapper<U> {
 
     private static final String TAG = "UILoadingDialogMethodMapper";
@@ -73,10 +71,12 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue show(U view, Varargs varargs) {
         return view.startAnimating();
     }
 
+    @Deprecated
     public LuaValue isShow(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
@@ -93,6 +93,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
         return view.startAnimating();
     }
 
+    @Deprecated
     public LuaValue isStart(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
@@ -104,6 +105,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue startAnimating(U view, Varargs varargs) {
         return view.startAnimating();
     }
@@ -120,6 +122,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue hide(U view, Varargs varargs) {
         return view.stopAnimating();
     }
@@ -128,6 +131,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
         return view.stopAnimating();
     }
 
+    @Deprecated
     public LuaValue stopAnimating(U view, Varargs varargs) {
         return view.stopAnimating();
     }

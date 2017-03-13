@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDHorizontalScrollView;
 import com.taobao.luaview.util.DimenUtil;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * HorizontalScrollView的方法映射
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = "UIHorizontalScrollViewMethodMapper";
@@ -223,6 +224,7 @@ public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS特有，待沟通"})
     public LuaValue contentSize(U view, Varargs varargs) {
         return view;
     }

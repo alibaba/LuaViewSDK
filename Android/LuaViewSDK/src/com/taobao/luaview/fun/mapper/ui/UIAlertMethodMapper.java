@@ -14,7 +14,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "跟iOS不统一待统一"})
 public class UIAlertMethodMapper<U extends UDAlert> extends BaseMethodMapper<U> {
     private static final String TAG = "UIAlertMethodMapper";
 

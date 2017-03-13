@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.constants;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -14,6 +15,7 @@ import org.luaj.vm2.LuaValue;
  * 修改描述
  * 下午4:01 song XXX
  */
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UDViewEffect extends BaseLuaTable {
     public static final int EFFECT_NONE = -1;
     public static final int EFFECT_CLICK = 1;

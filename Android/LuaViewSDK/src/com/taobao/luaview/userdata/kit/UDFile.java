@@ -3,6 +3,7 @@ package com.taobao.luaview.userdata.kit;
 import android.text.TextUtils;
 
 import com.taobao.luaview.fun.mapper.LuaViewApi;
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
@@ -23,6 +24,7 @@ import java.io.File;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标"})
 @LuaViewApi(since = VmVersion.V_550)
 public class UDFile extends BaseLuaTable {
 

@@ -12,7 +12,7 @@ import org.luaj.vm2.Varargs;
 
 import java.util.List;
 
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = "UIViewPagerMethodMapper";
@@ -135,6 +135,7 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue currentItem(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setCurrentItem(view, varargs);

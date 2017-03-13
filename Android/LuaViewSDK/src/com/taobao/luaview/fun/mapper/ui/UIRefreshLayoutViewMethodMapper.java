@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDRefreshLayout;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by tuoli on 12/20/16.
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "iOS无"})
 public class UIRefreshLayoutViewMethodMapper <U extends UDRefreshLayout> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = "UIRefreshLayoutViewMethodMapper";
@@ -45,6 +46,7 @@ public class UIRefreshLayoutViewMethodMapper <U extends UDRefreshLayout> extends
         return this;
     }
 
+    @LuaViewApi(revisions = {"名称去掉set"})
     public LuaValue setRefreshingOffset(U view, Varargs varargs) {
         final LuaValue offset = varargs.optvalue(2, NIL);
         view.setRefreshingOffset(offset.tofloat());

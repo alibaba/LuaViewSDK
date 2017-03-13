@@ -15,7 +15,7 @@ import java.util.List;
  * @author song
  * @param <U>
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMethodMapper<U> {
 
     private static final String TAG = "UIEditTextMethodMapper";
@@ -75,6 +75,7 @@ public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMeth
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue placeholder(U view, Varargs varargs) {
         return hint(view, varargs);
     }

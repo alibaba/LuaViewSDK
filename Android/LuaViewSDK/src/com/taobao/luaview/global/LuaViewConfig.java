@@ -1,10 +1,12 @@
 package com.taobao.luaview.global;
 
+import android.content.Context;
 import android.os.Build;
+
 import com.taobao.android.luaview.BuildConfig;
 
 /**
- * LuaView 系统设置，设置是否debug，是否可以调试等
+ * LuaView 全局设置
  *
  * @author song
  * @date 15/9/9
@@ -18,7 +20,20 @@ public class LuaViewConfig {
     private static boolean isCachePrototype = false;//是否缓存prototype，默认不缓存
     private static boolean isAutoSetupClickEffects = false;//是否自动设置点击效果
 
+    //设备标识
     private static String sTtid = null;
+
+    /**
+     * init luaview
+     *
+     * @param context
+     */
+    public static void init(Context context) {
+        //延迟加载Libs
+        LuaViewConfig.setLibsLazyLoad(true);
+        //是否使用非反射方式API调用（默认为true)
+        LuaViewConfig.setUseNoReflection(true);
+    }
 
     public static boolean isDebug() {
         return isDebug;
@@ -107,6 +122,7 @@ public class LuaViewConfig {
 
     /**
      * 设置不使用反射
+     *
      * @param useNoReflection
      */
     public static void setUseNoReflection(boolean useNoReflection) {
@@ -120,16 +136,17 @@ public class LuaViewConfig {
     /**
      * 是否缓存prototype
      */
-    public static void setCachePrototype(boolean cachePrototype){
+    public static void setCachePrototype(boolean cachePrototype) {
         isCachePrototype = cachePrototype;
     }
 
-    public static boolean isCachePrototype(){
+    public static boolean isCachePrototype() {
         return isCachePrototype;
     }
 
     /**
      * 是否自动设置ripple effects
+     *
      * @param isAutoSetupClickEffects
      */
     public static void setAutoSetupClickEffects(boolean isAutoSetupClickEffects) {

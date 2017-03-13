@@ -2,6 +2,7 @@ package com.taobao.luaview.fun.binder.ui;
 
 import com.taobao.luaview.fun.base.BaseFunctionBinder;
 import com.taobao.luaview.fun.base.BaseVarArgCreator;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.ui.UILoadingDialogMethodMapper;
 import com.taobao.luaview.userdata.ui.UDLoadingDialog;
 
@@ -14,6 +15,8 @@ import org.luaj.vm2.lib.LibFunction;
  * 菊花（对话框）
  * @author song
  */
+@Deprecated
+@LuaViewApi(revisions = {"iOS 无"})
 public class UILoadingDialogBinder extends BaseFunctionBinder {
 
     public UILoadingDialogBinder() {

@@ -1,5 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -19,7 +20,7 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UIViewGroupMethodMapper";
@@ -124,6 +125,7 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"Android特有"})
     public LuaValue onBack(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setOnBack(view, varargs);

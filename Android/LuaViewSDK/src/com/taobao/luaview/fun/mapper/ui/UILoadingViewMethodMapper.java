@@ -1,7 +1,6 @@
 package com.taobao.luaview.fun.mapper.ui;
 
-import android.graphics.Color;
-
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDLoadingView;
 import com.taobao.luaview.util.ColorUtil;
@@ -14,10 +13,11 @@ import java.util.List;
 
 /**
  * Loading View 接口封装
- * @author song
+ *
  * @param <U>
+ * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGroupMethodMapper<U> {
 
     private static final String TAG = "UILoadingViewMethodMapper";
@@ -72,6 +72,7 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
         return view.show();
     }
 
+    @Deprecated
     public LuaValue isStart(U view, Varargs varargs) {
         return valueOf(view.isShow());
     }
@@ -83,6 +84,7 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue startAnimating(U view, Varargs varargs) {
         return view.show();
     }
@@ -103,6 +105,7 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
         return view.hide();
     }
 
+    @Deprecated
     public LuaValue stopAnimating(U view, Varargs varargs) {
         return view.hide();
     }
@@ -114,6 +117,7 @@ public class UILoadingViewMethodMapper<U extends UDLoadingView> extends UIViewGr
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"支持alpha"})
     public LuaValue color(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setColor(view, varargs);

@@ -59,10 +59,7 @@ public abstract class LVCustomPanel extends LVViewGroup<UDCustomPanel> implement
         if (userdata != null) {
             Globals globals = userdata.getGlobals();
             if (globals != null) {
-                LuaView luaView = globals.getLuaView();
-                if (luaView != null) {
-                    luaView.callLuaFunction(name, objs);
-                }
+                globals.callLuaFunction(name, objs);
             }
         }
     }

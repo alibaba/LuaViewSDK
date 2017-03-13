@@ -1,5 +1,6 @@
 package com.taobao.luaview.userdata.constants;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -11,6 +12,8 @@ import org.luaj.vm2.LuaValue;
  * @author song
  * @date 16/3/16
  */
+@LuaViewLib(revisions = {"20170306已对标"})
+@Deprecated
 public class UDFontSize extends BaseLuaTable {
     public static final int FONTSIZE_MICRO = 12;
     public static final int FONTSIZE_SMALL = 14;

@@ -12,6 +12,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -23,6 +24,7 @@ import org.luaj.vm2.LuaValue;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标", "ios部分无"})
 public class UDInterpolator extends BaseLuaTable {
 
     public UDInterpolator(Globals globals, LuaValue metatable) {
@@ -42,8 +44,8 @@ public class UDInterpolator extends BaseLuaTable {
         set("ACCELERATE", 1);
         set("ANTICIPATE", 2);
         set("ANTICIPATE_OVERSHOOT", 3);
-        set("BOUNCE", 4);
-        set("CYCLE", 5);
+        set("BOUNCE", 4);//TODO IOS 无
+        set("CYCLE", 5);//TODO IOS 无
         set("DECELERATE", 6);
         set("LINEAR", 7);
         set("OVERSHOOT", 8);
