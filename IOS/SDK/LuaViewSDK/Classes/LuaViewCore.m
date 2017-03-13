@@ -99,7 +99,6 @@
     self.disableAnimate = YES;
     self.closeLayerMode = YES;
     self.mySelf = self;
-    self.backgroundColor = [UIColor clearColor];
 
     
     self.lv_luaviewCore = self;
@@ -176,35 +175,6 @@
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
     return [self loadData:data fileName:fileName changeGrammar:self.changeGrammar];
-}
-
-- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
-    if( changeGrammar ) {
-        data = lv_toStandLuaGrammar(data);
-    }
-    if (!data || !data.length || !fileName || !fileName.length) {
-        LVError( @"running chars == NULL, file:%@", fileName);
-        return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
-    }
-    
-#ifdef DEBUG
-    [self checkDeuggerIsRunningToLoadDebugModel];
-    [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
-#endif
-    
-    lua_State* L = self.l;
-    int error = luaL_loadbuffer(L, data.bytes, data.length, fileName.UTF8String);
-    if (error) {
-        const char* s = lua_tostring(L, -1);
-        LVError( @"%s", s );
-#ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
-        lv_printToServer(L, string.UTF8String, 0);
-#endif
-        return [NSString stringWithFormat:@"%s",s];
-    } else {
-        return nil;
-    }
 }
 
 #ifdef DEBUG
@@ -332,6 +302,35 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
     return [self runData:data fileName:fileName changeGrammar:self.changeGrammar];
 }
+    
+- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
+    if( changeGrammar ) {
+        data = lv_toStandLuaGrammar(data);
+    }
+    if (!data || !data.length || !fileName || !fileName.length) {
+        LVError( @"running chars == NULL, file:%@", fileName);
+        return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
+    }
+    
+#ifdef DEBUG
+    [self checkDeuggerIsRunningToLoadDebugModel];
+    [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
+#endif
+    
+    lua_State* L = self.l;
+    int error = luaL_loadbuffer(L, data.bytes, data.length, fileName.UTF8String);
+    if (error) {
+        const char* s = lua_tostring(L, -1);
+        LVError( @"%s", s );
+#ifdef DEBUG
+        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
+        lv_printToServer(L, string.UTF8String, 0);
+#endif
+        return [NSString stringWithFormat:@"%s",s];
+    } else {
+        return nil;
+    }
+}
 
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{
     if( changeGrammar ) {
@@ -438,117 +437,16 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         [self.window addSubview:view];
     }
 }
-
--(void) setFrame:(CGRect)frame{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setFrame:frame];
-    } else {
-        [self.window setFrame:frame];
-    }
-}
-
--(CGRect) frame{
-    if( self.contentViewIsWindow && self.conentView ){
-        return self.conentView.frame;
-    } else {
-        return self.window.frame;
-    }
-}
-
--(void) setBackgroundColor:(UIColor *)backgroundColor{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setBackgroundColor:backgroundColor];
-    } else {
-        [self.window setBackgroundColor:backgroundColor];
-    }
-}
-
--(UIColor*) backgroundColor{
-    if( self.contentViewIsWindow && self.conentView ){
-        return [self.conentView backgroundColor];
-    } else {
-        return [self.window backgroundColor];
-    }
-}
-
--(void) setClipsToBounds:(BOOL)clipsToBounds{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setClipsToBounds:clipsToBounds];
-    } else {
-        [self.window setClipsToBounds:clipsToBounds];
-    }
-}
-
--(BOOL) clipsToBounds{
-    if( self.contentViewIsWindow && self.conentView ){
-        return self.conentView.clipsToBounds;
-    } else {
-        return [self.window clipsToBounds];
-    }
-}
-
--(void) setAlpha:(CGFloat)alpha{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setAlpha:alpha];
-    } else {
-        [self.window setAlpha:alpha];
-    }
-}
-
--(CGFloat) alpha{
-    if( self.contentViewIsWindow && self.conentView ){
-        return self.conentView.alpha;
-    } else {
-        return [self.window alpha];
-    }
-}
-
--(void) setCenter:(CGPoint)center{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setCenter:center];
-    } else {
-        [self.window setCenter:center];
-    }
-}
-
--(CGPoint) center{
-    if( self.contentViewIsWindow && self.conentView ){
-        return [self.conentView center];
-    } else {
-        return [self.window center];
-    }
-}
-
--(void) setHidden:(BOOL)hidden{
-    if( self.contentViewIsWindow && self.conentView ){
-        [self.conentView setHidden:hidden];
-    } else {
-        [self.window setHidden:hidden];
-    }
-}
-
--(BOOL) isHidden{
-    if( self.contentViewIsWindow && self.conentView ){
-        return [self.conentView isHidden];
-    } else {
-        return [self.window isHidden];
-    }
-}
-
--(CALayer*) layer{
-    if( self.contentViewIsWindow && self.conentView ){
-        return [self.conentView layer];
-    } else {
-        return [self.window layer];
-    }
-}
-
+    
 #pragma mark - call lua global function
 -(NSString*) callLua:(NSString*) functionName tag:(id) tag environment:(UIView*)environment args:(NSArray*) args{
     lua_State* L = self.l;
     if( L ){
         lua_checkstack(L, 8 + (int)args.count*2);
+        UIView* oldContentView = self.conentView;
+        UIView* oldWindow = self.window;
         self.conentView = environment;
+        self.window = environment;
         self.contentViewIsWindow = YES;
         
         [LVUtil pushRegistryValue:L key:tag]; // param1: cell
@@ -564,7 +462,8 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         }
         lua_getglobal(L, functionName.UTF8String);// function
         NSString* ret = lv_runFunctionWithArgs(L, (int)args.count+1, 0);
-        self.conentView = nil;
+        self.conentView = oldContentView;
+        self.window = oldWindow;
         self.contentViewIsWindow = NO;
         return ret;
     }
@@ -685,8 +584,10 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(void) setWindow:(UIView *)window{
-    _window = window;
-    [LVExGlobalFunc registry:self.l window:_window];
+    if( _window!=window ) {
+        _window = window;
+        [LVExGlobalFunc registry:self.l window:_window];
+    }
 }
 
 @end

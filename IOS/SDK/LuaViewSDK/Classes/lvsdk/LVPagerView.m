@@ -229,7 +229,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
     LuaViewCore* lview = self.lv_luaviewCore;
     lua_State* l = lview.l;
-    lview.conentView = cell;
+    UIView* oldContentView = lview.conentView;
+    UIView* oldWindow = lview.window;
+    lview.conentView = cell.contentView;
+    lview.window = cell.contentView;
     lview.contentViewIsWindow = NO;
     if ( l ) {
         // 只有两个Cell的时候开启特殊翻倍模式！！！
@@ -262,7 +265,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LUA_TNONE];
         }
     }
-    lview.conentView = nil;
+    lview.conentView = oldContentView;
+    lview.window = oldWindow;
     lview.contentViewIsWindow = NO;
     return cell;
 }

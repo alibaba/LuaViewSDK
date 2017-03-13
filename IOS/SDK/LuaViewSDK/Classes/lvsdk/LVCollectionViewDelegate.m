@@ -61,7 +61,10 @@ static inline NSInteger mapSection(NSInteger section){
     cell.contentView.frame = cell.bounds;//脚本的window是ContentView大小可能和Cell不同步
     LuaViewCore* lview = self.owner.lv_luaviewCore;
     lua_State* L = lview.l;
+    UIView* oldContentView = lview.conentView;
+    UIView* oldWindow = lview.window;
     lview.conentView = cell.contentView;
+    lview.window = cell.contentView;
     lview.contentViewIsWindow = NO;
     if ( L ) {
         if( !cell.isInited ){
@@ -92,7 +95,8 @@ static inline NSInteger mapSection(NSInteger section){
             [LVUtil call:L key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LUA_TNONE];
         }
     }
-    lview.conentView = nil;
+    lview.conentView = oldContentView;
+    lview.window = oldWindow;
     lview.contentViewIsWindow = NO;
     return cell;
 }

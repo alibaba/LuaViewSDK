@@ -54,6 +54,7 @@ extern NSString * const LVScriptExts[2];
     LVUserDataInfo* var = ( (LVUserDataInfo*)lua_newuserdata( L, sizeof(LVUserDataInfo)) ); \
     lv_createUDataLuatable(L,-1);\
     var->type = LVType_##typeName; \
+    var->isWindow = 0; \
 //
 
 
@@ -83,6 +84,7 @@ extern const char* LVType_Event;
 typedef struct _LVUserDataInfo {
     const char* type;// 用户类型
     const void* object;// 真实的用户对象
+    int isWindow;
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------

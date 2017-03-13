@@ -37,6 +37,7 @@
  * 初始化LuaViewCore
  */
 -(void) createLuaViewCore{
+    self.backgroundColor = [UIColor clearColor];
     self.luaviewCore = [[LuaViewCore alloc] init];
     self.luaviewCore.window = self;
     [[NSNotificationCenter defaultCenter] addObserver:self

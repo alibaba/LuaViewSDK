@@ -78,7 +78,8 @@ static int lv_print (lua_State *L) {
     NEW_USERDATA(userData, View);
     userData->object = CFBridgingRetain(window);
     window.lv_userData = userData;
-    window.lv_luaviewCore = LV_LUASTATE_VIEW(L);;
+    window.lv_luaviewCore = LV_LUASTATE_VIEW(L);
+    userData->isWindow = 1;
     
     luaL_getmetatable(L, META_TABLE_LuaView );
     lua_setmetatable(L, -2);

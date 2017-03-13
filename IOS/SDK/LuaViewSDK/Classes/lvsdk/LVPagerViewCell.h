@@ -17,5 +17,7 @@
 -(void) pushTableToStack;
 
 -(void) doInitWithLView:(LuaViewCore*) lview;
-
+    
+-(UIView*) contentView;
+    
 @end

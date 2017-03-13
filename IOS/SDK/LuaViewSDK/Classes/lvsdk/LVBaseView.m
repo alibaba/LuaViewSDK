@@ -41,8 +41,10 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         if( view ){
             view.lv_userData = nil;
             view.lv_luaviewCore = nil;
-            [view removeFromSuperview];
-            [view.layer removeFromSuperlayer];
+            if( !userdata->isWindow ) {
+                [view removeFromSuperview];
+                [view.layer removeFromSuperlayer];
+            }
         }
     }
 }
@@ -577,16 +579,19 @@ static int getNativeView (lua_State *L) {
 #pragma -mark 运行环境
 static int children (lua_State *L) {
     LuaViewCore* lview = LV_LUASTATE_VIEW(L);
-    UIView* oldContent = lview.conentView;
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
     UIView* newContentView = (__bridge UIView *)(user->object);
     if ( lview && newContentView && lua_type(L, 2)==LUA_TFUNCTION ) {
+        UIView* oldContent = lview.conentView;
+        UIView* oldWindow = lview.window;
         lua_settop(L, 2);
         lview.conentView = newContentView;
+        lview.window = newContentView;
         lv_runFunctionWithArgs(L, 1, 0);
+        lview.conentView = oldContent;
+        lview.window = oldWindow;
     }
-    lview.conentView = oldContent;
     return 0;
 }
 
