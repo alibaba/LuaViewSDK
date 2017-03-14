@@ -86,12 +86,6 @@
 - (NSString*) loadData:(NSData *)data fileName:(NSString *)fileNam;
 
 /**
- * 加载包
- */
-- (NSString*) loadPackage:(NSString*) packageName;
-
-
-/**
 *  load and run script
 *
 *  @param fileName 本地文件名
@@ -118,6 +112,11 @@
 *  @return 返回运行结果
 */
 -(NSString*) runPackage:(NSString*) packageName args:(NSArray*) args;
+
+/**
+ * 加载包
+ */
+- (NSString*) loadPackage:(NSString*) packageName;
 
 /**
 *  运行签名的脚本文件

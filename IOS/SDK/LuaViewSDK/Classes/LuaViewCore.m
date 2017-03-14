@@ -317,9 +317,18 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     if( changeGrammar ) {
         data = lv_toStandLuaGrammar(data);
     }
-    if (!data || !data.length || !fileName || !fileName.length) {
-        LVError( @"running chars == NULL, file:%@", fileName);
-        return [NSString stringWithFormat:@"running chars == NULL, file:%@",fileName];
+    lua_State* L = self.l;
+    if( L==NULL ){
+        LVError( @"Lua State is released !!!");
+        return @"Lua State is released !!!";
+    }
+    if( fileName==nil ){
+        static int i = 0;
+        fileName = [NSString stringWithFormat:@"%d.lua",i];
+    }
+    if( data.length<=0 ){
+        LVError(@"running chars == NULL, file: %@",fileName);
+        return [NSString stringWithFormat:@"running chars == NULL, file: %@",fileName];
     }
     
 #ifdef DEBUG
@@ -327,7 +336,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
 #endif
     
-    lua_State* L = self.l;
     int error = luaL_loadbuffer(L, data.bytes, data.length, fileName.UTF8String);
     if (error) {
         const char* s = lua_tostring(L, -1);
@@ -343,37 +351,10 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{
-    if( changeGrammar ) {
-        data = lv_toStandLuaGrammar(data);
-    }
     lua_State* L = self.l;
-    if( L==NULL ){
-        LVError( @"Lua State is released !!!");
-        return @"Lua State is released !!!";
-    }
-    if( fileName==nil ){
-        static int i = 0;
-        fileName = [NSString stringWithFormat:@"%d.lua",i];
-    }
-    if( data.length<=0 ){
-        LVError(@"running chars == NULL, file: %@",fileName);
-        return [NSString stringWithFormat:@"running chars == NULL, file: %@",fileName];
-    }
-#ifdef DEBUG
-    [self checkDeuggerIsRunningToLoadDebugModel];
-    [self checkDebugOrNot:data.bytes length:data.length fileName:fileName];
-#endif
-    
-    int error = -1;
-    error = luaL_loadbuffer(L, data.bytes , data.length, fileName.UTF8String) ;
-    if ( error ) {
-        const char* s = lua_tostring(L, -1);
-        LVError( @"%s", s );
-#ifdef DEBUG
-        NSString* string = [NSString stringWithFormat:@"[LuaView][error] %s\n",s];
-        lv_printToServer(L, string.UTF8String, 0);
-#endif
-        return [NSString stringWithFormat:@"%s",s];
+    NSString* ret = [self loadData:data fileName:fileName changeGrammar:changeGrammar];
+    if ( ret ) {
+        return ret;
     } else {
         return lv_runFunction(L);
     }
