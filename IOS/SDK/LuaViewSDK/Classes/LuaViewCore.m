@@ -578,7 +578,11 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     const char* name = [NSString stringWithFormat:@"core.window.%d",self.windowIdx].UTF8String;
     return name;
 }
-    
+
+-(void) pushRenderTarget:(UIView *)window{
+    [self pushWindow:window];
+}
+
 -(void) pushWindow:(UIView*) window{
     lua_State* L = self.l;
     lua_checkstack(L,8);
@@ -591,6 +595,10 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     
     // 创建新的window
     [self createWindow:window];//创建window
+}
+
+-(void) popRenderTarget:(UIView *)window{
+    [self popWindow:window];
 }
 
 -(void) popWindow:(UIView*) window{

@@ -43,12 +43,14 @@
      *
      */
     -(void) pushWindow:(UIView*) window;
-    
+    -(void) pushRenderTarget:(UIView*) window;
+
     /**
      * 出栈
      */
     -(void) popWindow:(UIView*) window;
-    
+    -(void) popRenderTarget:(UIView*) window;
+
     /**
      * 加载脚本文件，读取文件并调用lvL_loadbuffer
      *
