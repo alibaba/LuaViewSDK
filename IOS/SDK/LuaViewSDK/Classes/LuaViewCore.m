@@ -127,6 +127,10 @@
     return [self runData:code fileName:fileName];
 }
 
+- (NSString*) loadPackage:(NSString*) packageName{
+    return [self runPackage:packageName];
+}
+
 -(NSString*) runPackage:(NSString*) packageName {
     return [self runPackage:packageName args:nil];
 }
@@ -173,6 +177,10 @@
 - (NSString*)loadSignFile:(NSString *)fileName {
     NSData* code = [self.bundle signedScriptWithName:fileName rsa:self.rsa];
     return [self loadData:code fileName:fileName];
+}
+
+-(NSString*) loadScript:(NSString *)script fileName:(NSString *)fileName{
+    return [self loadData:[script dataUsingEncoding:NSUTF8StringEncoding] fileName:fileName];
 }
 
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {

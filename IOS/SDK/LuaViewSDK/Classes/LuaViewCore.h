@@ -76,9 +76,20 @@
 -(NSString*) loadSignFile:(NSString *)fileName;
 
 /**
+ * 加载代码String
+ */
+- (NSString*) loadScript:(NSString*)script fileName:(NSString *)fileNam;
+
+/**
 * 加载代码data
 */
-- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileNam;
+- (NSString*) loadData:(NSData *)data fileName:(NSString *)fileNam;
+
+/**
+ * 加载包
+ */
+- (NSString*) loadPackage:(NSString*) packageName;
+
 
 /**
 *  load and run script
