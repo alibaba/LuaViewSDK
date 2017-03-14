@@ -7,6 +7,7 @@ import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -229,26 +230,23 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      */
     public LuaValue flexChildren(U view, Varargs varargs) {
         ArrayList<UDView> flexChildren = new ArrayList<UDView>();
-        for (int i = 2; i <= varargs.narg(); i++) {
-            LuaValue luaValue = varargs.optvalue(i, null);
-            if (luaValue != null && luaValue instanceof UDView) {
-                flexChildren.add((UDView) luaValue);
+        LuaValue children = varargs.arg(2);
+        if (children != null && children instanceof LuaTable) {     // 子节点以一个表的形式作为参数传入
+            for (int i = 0; i <= children.length(); i++) {
+                LuaValue luaValue = children.get(i + 1);
+                if (luaValue != null && luaValue instanceof UDView) {
+                    flexChildren.add((UDView) luaValue);
+                }
+            }
+        } else {
+            for (int i = 2; i <= varargs.narg(); i++) {
+                LuaValue luaValue = varargs.optvalue(i, null);
+                if (luaValue != null && luaValue instanceof UDView) {
+                    flexChildren.add((UDView) luaValue);
+                }
             }
         }
         view.setChildNodeViews(flexChildren);
-
-//        final LuaTable children = LuaUtil.getTable(varargs, 2);
-//        if (children != null) {
-//            ArrayList<UDView> flexChildren = new ArrayList<UDView>();
-//            for(int i = 0; i < children.length(); i++){
-//                LuaValue child = children.get(i + 1);
-//                if(child != null && child instanceof UDView){
-//                    flexChildren.add((UDView)child);
-//                }
-//            }
-//            view.setChildNodeViews(flexChildren);
-//        }
-
         return view;
     }
 }
