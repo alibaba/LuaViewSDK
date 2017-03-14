@@ -535,6 +535,33 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     [LVNativeObjBox unregisteObjectWithL:L name:name];
 }
 
+- (void) registerLibs:(id) lib{
+    lua_State* L = self.l;
+    if( [lib respondsToSelector:@selector(lvClassDefine:globalName:)] ) {
+        [lib lvClassDefine:L globalName:nil];
+        return;
+    }
+}
+
+- (void) registerName:(NSString*) name withObject:(id) object{
+    [self registerObject:object forName:name];
+}
+
+- (void) registerPanel:(id) panel{
+    [self registerPanel:panel forName:nil];
+}
+
+- (void) registerPanel:(id) panel forName:(NSString*) name{
+    lua_State* L = self.l;
+    if( [panel respondsToSelector:@selector(lvClassDefine:globalName:)] ) {
+        [panel lvClassDefine:L globalName:name];
+        return;
+    }
+}
+
+- (void) unregister:(NSString*) name{
+    [self unregisteObjectForName:name];
+}
 #pragma mark - package
 
 +(void) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*)info{

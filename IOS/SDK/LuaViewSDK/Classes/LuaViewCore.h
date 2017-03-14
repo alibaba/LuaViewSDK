@@ -185,6 +185,13 @@
 - (void) registerObject:(id) object forName:(NSString*) name weakMode:(BOOL) weakMode;// 注册改对象的所有api
 - (void) unregisteObjectForName:(NSString*) name;// 取消注册对象
 
+
+- (void) registerLibs:(id) lib;
+- (void) registerName:(NSString*) name withObject:(id) object;
+- (void) registerPanel:(id) panel;
+- (void) registerPanel:(id) panel forName:(NSString*) name;
+- (void) unregister:(NSString*) name;
+
 @end
 
 
