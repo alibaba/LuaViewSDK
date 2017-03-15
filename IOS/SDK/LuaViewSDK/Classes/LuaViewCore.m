@@ -637,9 +637,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         LVError(@"pop window!!!!");
     }
 }
-    -(void) setWindow:(UIView *)window{
-        _window = window;
-    }
 
 @end
 
