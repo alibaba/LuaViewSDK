@@ -1,1 +1,0 @@
-../../../liblua/include/luaconf.h

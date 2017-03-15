@@ -1,10 +1,14 @@
 PODS:
-  - liblua (5.1.4.3)
+  - lua (5.1.4)
 
 DEPENDENCIES:
-  - liblua (= 5.1.4.3)
+  - lua (from `../lua/`)
+
+EXTERNAL SOURCES:
+  lua:
+    :path: "../lua/"
 
 SPEC CHECKSUMS:
-  liblua: 1e187e0fd4e6cec2f712463cff9ace4d17dedcb0
+  lua: 1f24c327489c7e8ce63f3bc561dd2735aeb5e857
 
 COCOAPODS: 0.39.0

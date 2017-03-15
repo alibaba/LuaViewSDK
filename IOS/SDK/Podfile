@@ -6,7 +6,8 @@
 platform :ios, "8.0"
 
 target 'LuaViewSDK' do
-    pod 'liblua', '5.1.4.3'
+    #pod 'liblua', '5.1.4.3'
+    pod 'lua', :path => '../lua/'
 end
 
 target 'Dummy' do
