@@ -19,7 +19,7 @@
 -(id) init:(lua_State *)l gesture:(UIGestureRecognizer*) gesture{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.gesture = gesture;
     }
     return self;
@@ -42,7 +42,7 @@ static void releaseEventUserData(LVUserDataInfo* user){
         user->object = NULL;
         if( lvEvent ){
             lvEvent.lv_userData = NULL;
-            lvEvent.lv_lview = nil;
+            lvEvent.lv_luaviewCore = nil;
             lvEvent.event = nil;
             lvEvent.touches = nil;
         }
@@ -217,7 +217,7 @@ static int __index (lua_State *L) {
               @"DOWN":@(LVTouchEventType_DOWN),
               @"MOVE":@(LVTouchEventType_MOVE),
               @"OUTSIDE":@(UIEventTypeRemoteControl),
-              @"PRESSES":@(UIEventTypePresses),
+              @"PRESSES":@(UIEventTypePresses),// for IOS
               @"UP":@(LVTouchEventType_UP),
               @"CANCEL":@(LVTouchEventType_CANCEL),
               };

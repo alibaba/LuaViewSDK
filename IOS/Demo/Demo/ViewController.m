@@ -18,6 +18,7 @@
 #import "JHSLVImage.h"
 #import "JHSLuaViewController.h"
 #import "LVUtil.h"
+#import "LVDebugConnection.h"
 
 
 @interface ViewController ()
@@ -54,7 +55,21 @@
 
     [LViewController disableReloadKeyCommand:YES];
 
-    // [self changeAllLuaFile];// LuaView新老语法格式转换工具
+    //  [self changeAllLuaFile];// LuaView新老语法格式转换工具
+    //  [LVDebugConnection openUrlServer:^(NSDictionary *args) {
+    //      NSLog(@"");
+    //  }];
+    
+#ifdef DEBUG
+    // 是否开启调试服务
+    [LVDebugConnection openUrlServer:^(NSDictionary *args) {
+        NSLog(@"%@",args);
+        NSString* url = args[@"openUrl"];
+        if( url ) {
+            [self openUrl:url];
+        }
+    }];
+#endif
 }
 
 -(void) test{
@@ -129,6 +144,28 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) openUrl:(NSString*) url{
+    NSArray* arr = [url componentsSeparatedByString:@"?"];
+    NSString* args = arr.lastObject;
+    NSArray* argArr = [args componentsSeparatedByString:@"&"];
+    NSMutableDictionary* jtArgs = [[NSMutableDictionary alloc] init];
+    for( NSString* line in argArr ) {
+        NSArray* arg = [line componentsSeparatedByString:@"="];
+        if( arg.count==2 ) {
+            jtArgs[arg.firstObject] = arg.lastObject;
+        }
+    }
+    // 调试模式下支持运行一个目录下脚本
+    NSString* path = jtArgs[@"_lv_path"];
+    if( path ) {
+        NSString* mainScript = jtArgs[@"_lv_main"];
+        JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:path mainScript:mainScript];
+        [self.navigationController pushViewController:c animated:YES];
+    } else {
+        LVError(@"缺少调试参数!!");
+    }
 }
 
 

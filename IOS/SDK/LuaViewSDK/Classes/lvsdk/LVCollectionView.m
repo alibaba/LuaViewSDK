@@ -27,7 +27,7 @@
     LVFlowLayout* flowLayout = [[LVFlowLayout alloc] init];
     self = [super initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.collectionViewDelegate = [[LVCollectionViewDelegate alloc] init:self];
         self.delegate = self.collectionViewDelegate;
         self.dataSource = self.collectionViewDelegate;
@@ -63,8 +63,8 @@
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    if ( self.lv_lview.l ) {
-        lua_settop(self.lv_lview.l, 0);
+    if ( self.lv_luaviewCore.l ) {
+        lua_settop(self.lv_luaviewCore.l, 0);
     }
     [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
@@ -104,7 +104,7 @@ static int lvNewCollectionView(lua_State *L) {
         lv_udataRef(L, USERDATA_KEY_DELEGATE );
     }
     
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:collectionView];
     }
@@ -241,11 +241,12 @@ static int scrollToTop(lua_State *L) {
     [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:[self globalName]];
     
     const struct luaL_Reg memberFunctions [] = {
-        {"reload",    reload},
+        // refreshEnable // IOS 为实现
+        {"reload",    reload},// 安卓支持section row
         
         {"miniSpacing", miniSpacing},
         
-        {"scrollDirection", scrollDirection},
+        {"scrollDirection", scrollDirection},// for IOS
         
         
         {"scrollToCell", scrollToCell},

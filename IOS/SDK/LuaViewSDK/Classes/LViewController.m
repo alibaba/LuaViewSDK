@@ -7,7 +7,7 @@
 //
 
 #import "LViewController.h"
-#import "LView.h"
+#import "LuaView.h"
 #import "LVUtil.h"
 
 #if DEBUG
@@ -16,7 +16,7 @@
 
 @interface LViewController ()
 
-@property (nonatomic, strong) LView *lv;
+@property (nonatomic, strong) LuaView *lv;
 
 @property (nonatomic, strong) NSString *packagePath, *mainScriptName;
 
@@ -103,7 +103,7 @@ static BOOL __disableReloadKeyCommand = NO;
     
     CGRect rect = self.view.bounds;
     
-    self.lv = [[LView alloc] initWithFrame:rect];
+    self.lv = [[LuaView alloc] initWithFrame:rect];
     self.lv.viewController = self;
     
     if( self.luaviewRegister ) {

@@ -319,7 +319,11 @@ function debug_execute_cmd( env )
     elseif c == "bd" then
         debug_disable_bp( expr )
     elseif c == "bt" then
-        print( debug.traceback("", 3) )
+        local trace = debug.traceback("", 3);
+        print( trace );
+    elseif c == "stack" then
+        local trace = debug.traceback("", 3);
+        debug.writeCmd("stack", trace, nil);
     elseif c == "h" then
         debug_help()
     else

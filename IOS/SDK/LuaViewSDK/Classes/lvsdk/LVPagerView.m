@@ -13,6 +13,7 @@
 #import "LVPagerViewCell.h"
 #import "LVPagerIndicator.h"
 #import "LVHeads.h"
+#import "LuaViewCore.h"
 
 static inline NSInteger mapPageIdx(NSInteger pageIdx){
     return pageIdx + 1;
@@ -58,7 +59,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 -(id) init:(lua_State*) l {
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.cellArray = [[NSMutableArray alloc] init];
         self.scrollview = ({
@@ -227,10 +228,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 - (LVPagerViewCell*) cellLayoutAtPageIdx:(int)pageIdx {
     LVPagerViewCell* cell = [self cellOfPageIdx:pageIdx];
-    LView* lview = self.lv_lview;
+    LuaViewCore* lview = self.lv_luaviewCore;
     lua_State* l = lview.l;
-    lview.conentView = cell;
-    lview.contentViewIsWindow = NO;
+    UIView* newWindow = cell.contentView;
+    [lview pushWindow:newWindow];
     if ( l ) {
         // 只有两个Cell的时候开启特殊翻倍模式！！！
         if( self.doubleMode && pageIdx>=2 ) {
@@ -262,14 +263,13 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
             [LVUtil call:l key1:"Pages" key2:"Layout" key3:NULL nargs:2 nrets:0 retType:LUA_TNONE];
         }
     }
-    lview.conentView = nil;
-    lview.contentViewIsWindow = NO;
+    [lview popWindow:newWindow];
     return cell;
 }
 
 // section数量
 - (NSInteger) numberOfPagesInPageView{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData ){
         lv_pushUserdata(l, self.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -326,14 +326,14 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 // 有动画
 -(void) changeOffsetWithAnimation:(NSNumber*) value{
-    if( self.lv_lview ) {
+    if( self.lv_luaviewCore ) {
         [self.scrollview setContentOffset:self.nextOffset animated:YES];
     }
 }
 
 // 无动画
 -(void) changeOffsetNoAnimation:(NSNumber*) value{
-    if( self.lv_lview ) {
+    if( self.lv_luaviewCore ) {
         [self.scrollview setContentOffset:self.nextOffset animated:NO];
     }
 }
@@ -351,7 +351,7 @@ static int lvNewPagerView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIPageView );
         lua_setmetatable(L, -2);
         
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         if( lview ){
             [lview containerAddSubview:pageView];
         }
@@ -576,7 +576,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
             view.scrollview = nil;
             
             view.lv_userData = nil;
-            view.lv_lview = nil;
+            view.lv_luaviewCore = nil;
             [view removeFromSuperview];
         }
     }
@@ -595,7 +595,7 @@ static int __gc (lua_State *L) {
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
-        {"autoScroll", autoScroll},
+        {"autoScroll", autoScroll}, // IOS: 需要支持正反滚动
         {"looping", looping},
         {"indicator", indicator},
         
@@ -625,7 +625,7 @@ static int __gc (lua_State *L) {
     self.pageIdx = [self xindex2index:pageIndex];
     [self setPageIndicatorIdx:[self xindex2index:pageIndex + 0.5]];
 
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData ){
         lua_settop(l, 0);
         lua_checkstack32(l);
@@ -655,7 +655,7 @@ static int __gc (lua_State *L) {
         self.pageIdx = [self xindex2index:pageIndex + 0.1];
         [self setPageIndicatorIdx:[self xindex2index:pageIndex + 0.1]];
     }
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData ){
         lua_checkstack32(l);
         NSInteger pageIdx = self.pageIdx;

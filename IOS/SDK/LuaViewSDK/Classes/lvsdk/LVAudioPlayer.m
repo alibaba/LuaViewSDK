@@ -26,7 +26,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
         if( palyer ){
             [palyer stop];
             palyer.lv_userData = NULL;
-            palyer.lv_lview = nil;
+            palyer.lv_luaviewCore = nil;
         }
     }
 }
@@ -38,7 +38,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 -(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
     }
     return self;
 }
@@ -98,7 +98,7 @@ static int lvNewAudioPlayer (lua_State *L) {
         Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
         
         LVAudioPlayer* player = [[c alloc] init:L];
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
         
@@ -163,6 +163,13 @@ static int __tostring (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },
+        // pause
+        // resume
+        // callback { onComplete onError }
+        
+        // playing
+        // looping
+        // pausing
         
         {"__gc", __gc },
         {"__tostring", __tostring },

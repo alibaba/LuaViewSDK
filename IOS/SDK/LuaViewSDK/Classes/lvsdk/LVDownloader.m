@@ -27,7 +27,7 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
         user->object = NULL;
         if( downloader ){
             downloader.lv_userData = nil;
-            downloader.lv_lview = nil;
+            downloader.lv_luaviewCore = nil;
         }
     }
 }
@@ -44,7 +44,7 @@ static void releaseUserDataDownloader(LVUserDataInfo* user){
     self = [super init];
     if( self ){
         self.luaObjRetainKey = [[NSMutableString alloc] init];
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.strongSelf = self;
     }
     return self;
@@ -86,7 +86,7 @@ static int lvNewDownloader (lua_State *L) {
 }
 
 -(void) didFileLoaded{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ){
         if( self.data ) {
             [LVData createDataObject:L data:self.data];
@@ -120,7 +120,7 @@ static int __tostring (lua_State *L) {
 
 static int PathOfResource (lua_State *L) {
     NSString* fileName = lv_paramString(L, 1);
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
     lua_pushstring(L, path.UTF8String);
     return 1;
@@ -129,7 +129,7 @@ static int PathOfResource (lua_State *L) {
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     lv_defineGlobalFunc("PathOfResource",  PathOfResource, L);
     
-    [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"];
+    [LVUtil reg:L clas:self cfunc:lvNewDownloader globalName:globalName defaultName:@"Download"]; // __deprecated_msg("")
     const struct luaL_Reg memberFunctions [] = {
         {"__gc", __gc },
         

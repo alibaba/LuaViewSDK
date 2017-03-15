@@ -27,7 +27,7 @@
 -(id) init:(lua_State*) L{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
         self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
     }
@@ -39,10 +39,12 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         UIView<LVProtocal>* view = CFBridgingRelease(userdata->object);
         userdata->object = NULL;
         if( view ){
-            view.lv_userData = nil;
-            view.lv_lview = nil;
-            [view removeFromSuperview];
-            [view.layer removeFromSuperlayer];
+            view.lv_userData = NULL;
+            view.lv_luaviewCore = nil;
+            if( !userdata->isWindow ) {
+                [view removeFromSuperview];
+                [view.layer removeFromSuperlayer];
+            }
         }
     }
 }
@@ -546,7 +548,7 @@ static int removeGestureRecognizer (lua_State *L) {
 static int addSubview (lua_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lua_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lua_touserdata(L, 2);
-    LView* luaview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaview = LV_LUASTATE_VIEW(L);
     if( father &&  LVIsType(son, View) ){
         UIView* superview = (__bridge UIView *)(father->object);
         UIView* subview = (__bridge UIView *)(son->object);
@@ -576,17 +578,16 @@ static int getNativeView (lua_State *L) {
 
 #pragma -mark 运行环境
 static int children (lua_State *L) {
-    LView* lview = LV_LUASTATE_VIEW(L);
-    UIView* oldContent = lview.conentView;
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     
-    UIView* newContentView = (__bridge UIView *)(user->object);
-    if ( lview && newContentView && lua_type(L, 2)==LUA_TFUNCTION ) {
+    UIView* newWindow = (__bridge UIView *)(user->object);
+    if ( lview && newWindow && lua_type(L, 2)==LUA_TFUNCTION ) {
         lua_settop(L, 2);
-        lview.conentView = newContentView;
+        [lview pushWindow:newWindow];
         lv_runFunctionWithArgs(L, 1, 0);
+        [lview popWindow:newWindow];
     }
-    lview.conentView = oldContent;
     return 0;
 }
 
@@ -651,6 +652,7 @@ static int layerMode(lua_State *L) {
 }
 
 #pragma -mark hidden
+//__deprecated_msg("Use hide")
 static int hidden(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -1404,8 +1406,8 @@ static int releaseObject(lua_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         [view removeFromSuperview];
         [view.layer removeFromSuperlayer];
-        if( [view isKindOfClass:[LView class]] ){
-            LView* lView = (LView*)view;
+        if( [view isKindOfClass:[LuaViewCore class]] ){
+            LuaViewCore* lView = (LuaViewCore*)view;
             lView.l = NULL;
             G(L)->ud = NULL;
             [lView releaseLuaView];
@@ -1530,15 +1532,16 @@ static int invalidate (lua_State *L) {
 
 static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
+    // visible
     
-    {"hide",    hide },
-    {"isHide",    isHide },
+    {"hide",    hide },//__deprecated_msg("Use hidden")
+    {"isHide",    isHide },//__deprecated_msg("Use hidden")
     
-    {"show",    show },
-    {"isShow",    isShow },
+    {"show",    show },//__deprecated_msg("Use visible")
+    {"isShow",    isShow },//__deprecated_msg("Use visible")
     
     {"enabled",    userInteractionEnabled },
-    {"clipsToBounds",    clipsToBounds },
+    {"clipsToBounds",    clipsToBounds },// for IOS
     
     {"backgroundColor",     backgroundColor },
     
@@ -1551,18 +1554,18 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"borderColor",         borderColor },
     {"borderDash",         borderDash },
     
-    {"shadowPath",       setShadowPath },
-    {"masksToBounds",    setMasksToBounds },
-    {"shadowOffset",     setShadowOffset },
-    {"shadowRadius",     setShadowRadius },
-    {"shadowOpacity",    setShadowOpacity },
-    {"shadowColor",      setShadowColor },
+    {"shadowPath",       setShadowPath }, // for IOS
+    {"masksToBounds",    setMasksToBounds },// for IOS
+    {"shadowOffset",     setShadowOffset },// for IOS
+    {"shadowRadius",     setShadowRadius },// for IOS
+    {"shadowOpacity",    setShadowOpacity },// for IOS
+    {"shadowColor",      setShadowColor },// for IOS
     
     {"frame",     frame },
     
     {"size",     size },
     
-    {"origin",     origin },
+    {"origin",     origin },//__deprecated_msg("Use xy")
     {"xy",     origin },
     
     {"center",    center},
@@ -1580,21 +1583,22 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"width",    width},
     {"height",    height},
     
-    {"adjustSize", adjustSize},
+    {"adjustSize", adjustSize},// 带讨论
     
-    {"addGesture",          addGestureRecognizer },
-    {"removeGesture",       removeGestureRecognizer },
+    {"addGesture",          addGestureRecognizer }, //__deprecated_msg("Use onTouch")
+    {"removeGesture",       removeGestureRecognizer }, //__deprecated_msg("Use onTouch")
     
     {"addView",          addSubview },
     {"children", children },
     {"removeFromSuper", removeFromSuperview },
-    {"removeFromParent", removeFromSuperview },
+    {"removeFromParent", removeFromSuperview }, //__deprecated_msg("Use removeFromSuper")
     {"removeAllViews", removeAllSubviews },
+    //{"bringToFront", bringToFront},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
     {"rotationY", rotationY },
-    {"rotationZ", rotationZ },
+    {"rotationZ", rotationZ },//__deprecated_msg("Use rotation")
     
     {"scale", scale },
     {"scaleX", scaleX },
@@ -1610,17 +1614,20 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"onLayout",     onLayout },
     {"onClick",     onClick },
     {"onTouch",     onTouch },
+    // onShow
+    // onHide
+    // onLongClick
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
-    {"cancelFocus",    resignFirstResponder },
+    {"cancelFocus",    resignFirstResponder }, //__deprecated_msg("Use hidden")
+    {"clearFocus",    resignFirstResponder },
     
-    {"transform3D",    transform3D },
+    {"transform3D",    transform3D }, //__deprecated_msg("Use")
     
     {"startAnimation", startAnimation },
     {"stopAnimation", stopAnimation },
     
-    {"release",     releaseObject},
     
     {"__gc",        __gc },
     
@@ -1629,7 +1636,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     // {"__newindex",  __newindex },
 
     {"flexChildren",  flxChildViews },
-    {"flxLayout",  flxLayout },
+    {"flxLayout",  flxLayout },// 安卓无
     {"flexCss", flxBindingInlineCSS},
   
     // align
@@ -1639,19 +1646,22 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"alignTop", alignTop},
     {"alignBottom", alignBottom},
     {"alignCenter", alignCenter},
+    // padding
+    // margin
     
     // getNativeView
-    {"getNativeView", getNativeView},
+    {"getNativeView", getNativeView}, //__deprecated_msg("Use nativeView")
     {"nativeView", getNativeView},
     
-    {"effects",effects},
-    {"layerMode",layerMode},
+    {"effects",effects}, // IOS 视差效果
+    {"layerMode",layerMode}, // for IOS
     
     {"invalidate",invalidate},
     {NULL, NULL}
 };
 
 static const struct luaL_Reg luaViewMemberFunctions [] = {
+    {"release",     releaseObject},
     {NULL,    NULL },
 };
 
@@ -1672,9 +1682,9 @@ static int lvNewView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIView );
         lua_setmetatable(L, -2);
         
-        LView* lView = LV_LUASTATE_VIEW(L);
-        if( lView ){
-            [lView containerAddSubview:view];
+        LuaViewCore* luaviewCore = LV_LUASTATE_VIEW(L);
+        if( luaviewCore ){
+            [luaviewCore containerAddSubview:view];
         }
     }
     return 1; /* new userdatum is already on the stack */

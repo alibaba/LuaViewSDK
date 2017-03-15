@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LView.h"
+#import "LuaViewCore.h"
 
 @interface LVPagerViewCell : UIView
 
@@ -16,6 +16,8 @@
 
 -(void) pushTableToStack;
 
--(void) doInitWithLView:(LView*) lview;
-
+-(void) doInitWithLView:(LuaViewCore*) lview;
+    
+-(UIView*) contentView;
+    
 @end

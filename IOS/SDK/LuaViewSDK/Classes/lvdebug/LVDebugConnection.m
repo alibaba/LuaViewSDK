@@ -96,6 +96,10 @@ static int SERVER_PORT = 9876;
     [self sendCmd:cmdName fileName:nil info:info];
 }
 
+- (void) sendCmd:(NSString*) cmdName info:(NSString*) info args:(NSDictionary*) args{
+    [self sendCmd:cmdName fileName:nil info:info args:args];
+}
+
 - (void) sendCmd:(NSString*) cmdName fileName:(NSString*)fileName info:(NSString*) info{
     [self sendCmd:cmdName fileName:fileName info:info args:nil];
 }
@@ -288,4 +292,57 @@ static NSString* readString(CFSocketRef socket)
         [self sendOneData];
     }
 }
+
+
+#ifdef DEBUG
++ (id)jsonObject:(NSString *)s{
+    NSData* data = [s dataUsingEncoding:NSUTF8StringEncoding];
+    @try {
+        NSError *error = nil;
+        NSJSONReadingOptions options = 0;
+        id obj = [NSJSONSerialization JSONObjectWithData:data options:options error:&error];
+        if (error) {
+            return nil;
+        }
+        return obj;
+    } @catch (NSException *exception) {
+        return nil;
+    }
+}
+
++(void) openUrlServer:( void(^)(NSDictionary* args) ) callback{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // 处理耗时操作的代码块...
+        
+        LVDebugConnection* debugConnection = [[LVDebugConnection alloc] init];
+        if( [debugConnection waitUntilConnectionEnd]>0 ) {
+            [debugConnection sendCmd:@"debugger" info:@"true"];
+            for(;;) {
+                NSString* cmd = [debugConnection getCmd];
+                if( cmd ) {
+                    NSDictionary* dic = [LVDebugConnection jsonObject:cmd];
+                    if( dic && [dic isKindOfClass:[NSDictionary class]] ) {
+                        //通知主线程刷新
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            //回调或者说是通知主线程刷新，
+                            if( callback ) {
+                                callback( dic );
+                            }
+                        });
+                    }
+                    break;
+                } else {
+                    [NSThread sleepForTimeInterval:0.1];
+                }
+            }
+            [debugConnection closeAll];
+        } else {
+            [debugConnection closeAll];
+        }
+        
+    });
+}
+#endif
+
+
 @end

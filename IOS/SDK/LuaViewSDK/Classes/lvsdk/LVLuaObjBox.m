@@ -8,13 +8,13 @@
 
 #import "LVLuaObjBox.h"
 #import <objc/runtime.h>
-#import "LView.h"
+#import "LuaViewCore.h"
 #import "LVTypeConvert.h"
 #import "LVHeads.h"
 
 @interface LVLuaObjBox ()
 @property (nonatomic, strong) NSMutableArray* protocolArray;
-@property (nonatomic, weak) LView* lview;
+@property (nonatomic, weak) LuaViewCore* lview;
 @property (nonatomic, strong) NSMutableDictionary* methodSigHashtable;
 @end
 
@@ -34,7 +34,7 @@
 }
 
 - (void) dealloc{
-    LView* lview = self.lview;
+    LuaViewCore* lview = self.lview;
     if( lview) {
         lua_State* L = lview.l;
         if( L ) {
@@ -156,7 +156,7 @@ static BOOL lv_object_isProtocol(id obj ) {
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
     NSString *key = NSStringFromSelector([invocation selector]);
-    LView* lview = self.lview;
+    LuaViewCore* lview = self.lview;
     lua_State* L = lview.l;
     if ( lview && L) {
         int luaArgNum = 1;

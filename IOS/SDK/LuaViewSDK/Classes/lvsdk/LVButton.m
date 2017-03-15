@@ -13,6 +13,7 @@
 #import "LView.h"
 #import "LVStyledString.h"
 #import "UIView+LuaView.h"
+#import "NSObject+LuaView.h"
 #import "LVHeads.h"
 
 @interface  LVButton()
@@ -23,7 +24,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         [self addTarget:self action:@selector(lvButtonCallBack) forControlEvents:UIControlEventTouchUpInside];
         
         // 默认黑色字
@@ -53,7 +54,7 @@
         [self setWebImageUrl:url forState:state finished:nil];
     } else {
         if( url ) {
-            LVBundle* bundle = self.lv_lview.bundle;
+            LVBundle* bundle = self.lv_luaviewCore.bundle;
             [self setImage:[bundle imageWithName:url] forState:state];
         }
     }
@@ -73,7 +74,7 @@ static int lvNewButton (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_UIButton );
             lua_setmetatable(L, -2);
         }
-        LView* father = LV_LUASTATE_VIEW(L);
+        LuaViewCore* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:button];
         }
@@ -209,7 +210,7 @@ static int titleColor (lua_State *L) {
 }
 
 static int font (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
         LVButton* view = (__bridge LVButton *)(user->object);
@@ -280,15 +281,16 @@ static int fontSize (lua_State *L) {
         
         {"font",    font},
         {"fontSize",    fontSize},
-        {"textSize",    fontSize},
+        {"textSize",    fontSize}, // __deprecated_msg("Use lines")
+
         
-        {"titleColor",    titleColor},
-        {"title",    title},
+        {"titleColor",    titleColor}, // __deprecated_msg("Use lines")
+        {"title",    title}, // __deprecated_msg("Use lines")
         {"textColor",    titleColor},
         {"text",    title},
 
-        {"selected",    selected},
-        {"enabled",    enabled},
+        {"selected",    selected}, // __deprecated_msg("Use lines")
+        {"enabled",    enabled}, // __deprecated_msg("Use lines")
         
         //{"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
         {NULL, NULL}

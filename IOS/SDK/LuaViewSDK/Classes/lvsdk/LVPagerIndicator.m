@@ -18,7 +18,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.clipsToBounds = YES;
         self.userInteractionEnabled = NO;
     }
@@ -41,7 +41,7 @@ static int lvNewPagerIndicator (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_PagerIndicator );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:pageControl];
     }
@@ -139,8 +139,8 @@ static int currentPageIndicatorTintColor(lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"currentPage",     setCurrentPage },
         
-        {"pageColor",     pageIndicatorTintColor },
-        {"currentPageColor",     currentPageIndicatorTintColor },
+        {"pageColor",     pageIndicatorTintColor },//__deprecated_msg("Use unselectedColor")
+        {"currentPageColor",     currentPageIndicatorTintColor },//__deprecated_msg("Use selectedColor")
         
         {"unselectedColor",     pageIndicatorTintColor },
         {"selectedColor",     currentPageIndicatorTintColor },

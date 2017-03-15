@@ -22,7 +22,7 @@
 -(id) init:(NSString*)imageName l:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.text = imageName;
         self.backgroundColor = [UIColor clearColor];
         self.textAlignment = NSTextAlignmentLeft;
@@ -51,7 +51,7 @@ static int lvNewLabel(lua_State *L) {
             luaL_getmetatable(L, META_TABLE_UILabel );
             lua_setmetatable(L, -2);
         }
-        LView* view = LV_LUASTATE_VIEW(L);
+        LuaViewCore* view = LV_LUASTATE_VIEW(L);
         if( view ){
             [view containerAddSubview:label];
         }
@@ -152,7 +152,7 @@ static int textColor (lua_State *L) {
 }
 
 static int font (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( luaView && user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);
@@ -250,13 +250,14 @@ static int ellipsize (lua_State *L) {
         
         {"font",    font},
         {"fontSize",    fontSize},
-        {"textSize",    fontSize},
+        {"textSize",    fontSize}, // __deprecated_msg("Use fontSize")
         
         {"ellipsize",    ellipsize},
         {"textAlign",    textAlignment},
-        {"gravity",    textAlignment},
+        {"gravity",    textAlignment},// 上中下 IOS 不支持,需要考虑支持
         
-        {"lineCount",    lineCount},
+        {"lineCount",    lineCount}, // __deprecated_msg("Use lines")
+        // lines
         
         {"adjustFontSize",  adjustFontSize},
         

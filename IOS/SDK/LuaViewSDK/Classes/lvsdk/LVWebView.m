@@ -8,6 +8,7 @@
 
 #import "LVWebView.h"
 #import "LVBaseView.h"
+#import "NSObject+LuaView.h"
 
 @interface LVWebView ()<UIWebViewDelegate>
 @property(nonatomic,strong) UIWebView* webView;
@@ -19,7 +20,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
@@ -29,7 +30,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         lua_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageStarted];
@@ -37,7 +38,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         lua_settop(L, 0);
         [self lv_callLuaByKey1:@STR_onPageFinished];
@@ -45,7 +46,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         lua_settop(L, 0);
         NSInteger errorCode = error.code;
@@ -144,7 +145,7 @@ static int lvNewWebView(lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIWebView );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:webView];
     }

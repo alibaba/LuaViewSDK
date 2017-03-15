@@ -82,7 +82,7 @@ static int file_read(lua_State *L){
             }
         }
         if ( fileName ) {
-            LView* lview = LV_LUASTATE_VIEW(L);
+            LuaViewCore* lview = LV_LUASTATE_VIEW(L);
             NSData* data = [lview.bundle resourceWithName:fileName];
             if( data ){
                 if( readCallback(L, callbackIndex, fileName, data) ){
@@ -101,7 +101,7 @@ static int file_read(lua_State *L){
 static int file_exist(lua_State *L){
     if( L && lua_gettop(L)>=1 ){
         NSString* fileName = lv_paramString(L, -1);
-        LView* lview = LV_LUASTATE_VIEW(L);
+        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         if(  [lview.bundle resourcePathWithName:fileName] ){
             lua_pushboolean(L, 1);
             return 1;
@@ -113,7 +113,7 @@ static int file_exist(lua_State *L){
 
 static int file_path (lua_State *L) {
     NSString* fileName = lv_paramString(L, -1);
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     NSString* path = [lview.bundle resourcePathWithName:fileName];
     lua_pushstring(L, path.UTF8String);
     return 1;

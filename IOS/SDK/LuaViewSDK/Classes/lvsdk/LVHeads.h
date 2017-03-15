@@ -54,6 +54,7 @@ extern NSString * const LVScriptExts[2];
     LVUserDataInfo* var = ( (LVUserDataInfo*)lua_newuserdata( L, sizeof(LVUserDataInfo)) ); \
     lv_createUDataLuatable(L,-1);\
     var->type = LVType_##typeName; \
+    var->isWindow = 0; \
 //
 
 
@@ -83,13 +84,14 @@ extern const char* LVType_Event;
 typedef struct _LVUserDataInfo {
     const char* type;// 用户类型
     const void* object;// 真实的用户对象
+    int isWindow;
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------
-@class LView;
+@class LuaViewCore;
 @protocol LVProtocal <NSObject>
 @required
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject; // 返回native对象
 @end
@@ -206,6 +208,7 @@ LVTypeIDEnum lua_typeID(const char* type);
 typedef void(^LVLoadFinished)(id errorInfo);
 
 #import "UIView+LuaView.h"
+#import "NSObject+LuaView.h"
 #import "UIScrollView+LuaView.h"
 #import "LVBundle.h"
 
@@ -213,7 +216,7 @@ typedef void(^LVLoadFinished)(id errorInfo);
 #define EFFECT_CLICK    1
 #define EFFECT_PARALLAX 2
 
-#define LV_LUASTATE_VIEW(L)     ( (__bridge LView *)( G(L)->ud ) )
+#define LV_LUASTATE_VIEW(L)     ( (__bridge LuaViewCore *)( G(L)->ud ) )
 #define LUAVIEW_SYS_TABLE_KEY   "..::luaview::.."
 
 #ifndef MakeSureNotNil

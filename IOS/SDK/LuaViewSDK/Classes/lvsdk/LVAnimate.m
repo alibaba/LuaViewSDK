@@ -24,13 +24,13 @@
     self = [super init];
     if( self ){
         self.mySelf = self;
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
     }
     return self;
 }
 
 -(void) dealloc{
-    self.lv_lview = nil;
+    self.lv_luaviewCore = nil;
     self.lv_userData = nil;
 }
 
@@ -89,12 +89,12 @@ static int lvNewAnimate (lua_State *L) {
                  usingSpringWithDamping:dampingRatio
                   initialSpringVelocity:velocity
                                 options:option animations:^{
-                if( animate.lv_lview && animate.lv_lview.l ) {
-                    lua_checkstack32( animate.lv_lview.l);
-                    [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
+                if( animate.lv_luaviewCore && animate.lv_luaviewCore.l ) {
+                    lua_checkstack32( animate.lv_luaviewCore.l);
+                    [LVUtil call:animate.lv_luaviewCore.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                 }
             } completion:^(BOOL finished) {
-                lua_State* l = animate.lv_lview.l;
+                lua_State* l = animate.lv_luaviewCore.l;
                 if( l ) {
                     lua_settop(l, 0);
                     lua_checkstack32(l);
@@ -108,12 +108,12 @@ static int lvNewAnimate (lua_State *L) {
             [UIView animateWithDuration:duration
                                   delay:delay
                                 options:option animations:^{
-                                    if( animate.lv_lview && animate.lv_lview.l ) {
-                                        lua_checkstack32( animate.lv_lview.l);
-                                        [LVUtil call:animate.lv_lview.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
+                                    if( animate.lv_luaviewCore && animate.lv_luaviewCore.l ) {
+                                        lua_checkstack32( animate.lv_luaviewCore.l);
+                                        [LVUtil call:animate.lv_luaviewCore.l lightUserData:animate key1:"animations" key2:NULL nargs:0];
                                     }
                                 } completion:^(BOOL finished) {
-                                    lua_State* l = animate.lv_lview.l;
+                                    lua_State* l = animate.lv_luaviewCore.l;
                                     if( l ) {
                                         lua_settop(l, 0);
                                         lua_checkstack32(l);

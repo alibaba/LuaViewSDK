@@ -18,7 +18,7 @@
 -(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
     }
     return self;
 }
@@ -33,7 +33,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
         user->object = NULL;
         if( data ){
             data.lv_userData = NULL;
-            data.lv_lview = nil;
+            data.lv_luaviewCore = nil;
             data.mutableStyledString = nil;
         }
     }
@@ -56,6 +56,7 @@ static UIFont* getFont(NSString* fontName, NSNumber* fontSize, NSString* fontWei
     }
     if( [fontWeigth isKindOfClass:[NSString class]] &&
        [fontWeigth compare:@"bold" options:NSCaseInsensitiveSearch]==NSOrderedSame ){
+        //  TODO: 支持数值?
         return [UIFont boldSystemFontOfSize:fontSize.floatValue];
     }
     return [UIFont systemFontOfSize:fontSize.floatValue];
@@ -166,7 +167,7 @@ static void resetAttributedString(NSMutableAttributedString* attString, NSDictio
 }
 
 static int lvNewAttributedString (lua_State *L) {
-    LView* luaView = LV_LUASTATE_VIEW(L);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
     if( luaView && lua_gettop(L)>=2 ) {
         if( ( lua_type(L, 1)==LUA_TSTRING || lua_type(L, 1)==LUA_TNUMBER ) && lua_type(L, 2)==LUA_TTABLE ){

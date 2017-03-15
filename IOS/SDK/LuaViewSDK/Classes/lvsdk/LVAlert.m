@@ -22,7 +22,7 @@
 }
 
 -(void) dealloc{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     for ( int i=0; i<self.functionNum; i++ ) {
         if( lua_type(L, i) == LUA_TFUNCTION ) {
             NSString* tag = self.cmdArray[i];
@@ -49,7 +49,7 @@
                                 getArgs(L, 9, num),nil];
     if( self ){
         self.argNum = num;
-        self.lv_lview = LV_LUASTATE_VIEW(L);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         NSMutableArray* mutArray = [[NSMutableArray alloc] init];
@@ -63,12 +63,12 @@
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l ) {
         lua_checkstack32(l);
         lua_pushnumber(l, buttonIndex);
         [LVUtil call:l lightUserData:self.cmdArray[buttonIndex] key1:NULL key2:NULL nargs:1];
-        self.lv_lview = nil;
+        self.lv_luaviewCore = nil;
     }
 }
 

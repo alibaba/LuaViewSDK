@@ -12,7 +12,7 @@
 
 @interface LVAudioPlayer : NSObject<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lua_State*) l;

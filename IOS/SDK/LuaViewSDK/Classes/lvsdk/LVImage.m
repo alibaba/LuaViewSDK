@@ -30,13 +30,13 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.functionTag = [[NSMutableString alloc] init];
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
         self.lv_isCallbackAddClickGesture = YES;
-        self.disableAnimate = self.lv_lview.disableAnimate;
+        self.disableAnimate = self.lv_luaviewCore.disableAnimate;
     }
     return self;
 }
@@ -45,7 +45,7 @@
 }
 
 -(void) callLuaDelegate:(id) obj{
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         lua_checkstack(L, 4);
         lua_pushboolean(L, obj?0:1);
@@ -70,7 +70,7 @@
         }];
     } else {
         // local Image
-        UIImage* image = [self.lv_lview.bundle imageWithName:imageName];
+        UIImage* image = [self.lv_luaviewCore.bundle imageWithName:imageName];
         if ( [LVNinePatchImage isNinePathImageName:imageName] ) {
             image = [LVNinePatchImage createNinePatchImage:image];
             [self setImage:image];
@@ -129,7 +129,7 @@ static int lvNewImageView(lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIImageView );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:imageView];
     }
@@ -205,7 +205,7 @@ static int startAnimating (lua_State *L) {
             if( lua_gettop(L)>=4 ){
                 repeatCount = lua_tonumber(L, 4);
             }
-            LView* lview = LV_LUASTATE_VIEW(L);
+            LuaViewCore* lview = LV_LUASTATE_VIEW(L);
             LVBundle* bundle = lview.bundle;
             NSMutableArray  *arrayM=[NSMutableArray array];
             for (NSString* url in urlArray) {
@@ -268,11 +268,11 @@ static int disableAnimate (lua_State *L) {
         {"image",  setImage},
         {"scaleType",  scaleType},
         
-        {"startAnimationImages",  startAnimating},
-        {"stopAnimationImages",  stopAnimating},
-        {"isAnimationImages",  isAnimating},
+        {"startAnimationImages",  startAnimating},//__deprecated_msg("")
+        {"stopAnimationImages",  stopAnimating},//__deprecated_msg("")
+        {"isAnimationImages",  isAnimating},//__deprecated_msg("")
         
-        {"disableAnimate",  disableAnimate},
+        {"disableAnimate",  disableAnimate},//__deprecated_msg("")
         {NULL, NULL}
     };
     

@@ -11,7 +11,7 @@
 #import "LVHeads.h"
 
 @class LVBundle;
-@class LView;
+@class LuaViewCore;
 
 typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 
@@ -211,7 +211,7 @@ BOOL lv_objcEqual(id obj1, id obj2);
 +(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L;
 void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L);
 
-void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
+void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview);
 
 extern NSString* safe_stringForKey(NSDictionary*dic, id key);
 extern NSDictionary * safe_dictionaryForKey(NSDictionary* dic, id key);
@@ -222,6 +222,10 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key );
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
                                          block:(void (^)(NSTimer *timer))block
                                        repeats:(BOOL)inRepeats;
+/*
+ * 显示Lua的调用堆栈
+ */
++ (NSString*) luaTrace:(lua_State*) L;
 
 @end
 

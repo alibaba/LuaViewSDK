@@ -34,7 +34,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
 
 @property(nonatomic, weak) UIView *target;
 
-@property(nonatomic, weak) LView* lv_lview;
+@property(nonatomic, weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic, assign) LVUserDataInfo* lv_userData;
 
 @property(nonatomic, readonly, getter=isRunning) BOOL running;

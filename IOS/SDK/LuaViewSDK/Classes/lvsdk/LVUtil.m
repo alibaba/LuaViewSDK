@@ -866,7 +866,7 @@ void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* 
     }
 }
 
-void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
+void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview){
     [subview removeFromSuperview];
     [subview.layer removeFromSuperlayer];
     if( lv.closeLayerMode
@@ -921,6 +921,19 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key ){
         block(aTimer);
 }
 
++ (NSString*) luaTrace:(lua_State*) L{
+    // 打印lua调用栈开始
+    lua_getglobal(L, "debug");
+    lua_getfield(L, -1, "traceback");
+    int iError = lua_pcall( L,//VMachine
+                           0,//Argument Count
+                           1,//Return Value Count
+                           0);
+    const char* s = lua_tostring(L, -1);
+    NSString* stack = [NSString stringWithFormat:@"%s",s];
+    NSLog(@"err:%d \n %@", iError, stack);
+    return stack;
+}
 
 
 void LVLog( NSString* format, ... ){

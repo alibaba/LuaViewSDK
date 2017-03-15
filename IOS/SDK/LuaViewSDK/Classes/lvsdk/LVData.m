@@ -17,7 +17,7 @@
 -(id) init:(lua_State *)l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.data = [[NSMutableData alloc] init];
     }
     return self;
@@ -33,7 +33,7 @@ static void releaseUserDataData(LVUserDataInfo* user){
         user->object = NULL;
         if( data ){
             data.lv_userData = NULL;
-            data.lv_lview = nil;
+            data.lv_luaviewCore = nil;
             data.data = nil;
         }
     }
@@ -193,6 +193,11 @@ static int __add (lua_State *L) {
     [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
     
     const struct luaL_Reg memberFunctions [] = {
+        // toJson 判断是否json
+        // toString 判断是否字符串
+        // toTable
+        // append
+        
         {"__index", __index },
         {"__newindex", __newindex },
         

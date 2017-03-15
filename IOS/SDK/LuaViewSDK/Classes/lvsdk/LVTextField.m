@@ -22,7 +22,7 @@
 -(id) init:(lua_State*) l{
     self = [super initWithFrame:CGRectMake(0, 0, 100, 40)];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
@@ -36,7 +36,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     // became first responder
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l ) {
         lua_checkstack32(l);
         [self lv_callLuaByKey1:@"BeginEditing"];
@@ -44,7 +44,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    lua_State* l = self.lv_lview.l;
+    lua_State* l = self.lv_luaviewCore.l;
     if( l ) {
         lua_checkstack32(l);
         [self lv_callLuaByKey1:@"EndEditing"];
@@ -52,7 +52,7 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-//    lua_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_luaviewCore.l;
 //    if( l ) {
 //        lua_checkstack32(l);
 //        if(  [LVUtil call:l lightUserData:self key:"清理"] ){
@@ -65,7 +65,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-//    lua_State* l = self.lv_lview.l;
+//    lua_State* l = self.lv_luaviewCore.l;
 //    if( l ) {
 //        lua_checkstack32(l);
 //        if( [LVUtil call:l lightUserData:self key:"返回"]==0 ){
@@ -94,7 +94,7 @@ static int lvNewTextField (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UITextField );
         lua_setmetatable(L, -2);
     }
-    LView* lview = LV_LUASTATE_VIEW(L);
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
     if( lview ){
         [lview containerAddSubview:textFiled];
     }
@@ -185,7 +185,7 @@ static int placeholder (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"text", text},
         {"hint", placeholder},
-        {"placeholder", placeholder},
+        {"placeholder", placeholder}, //__deprecated_msg("Use hint")
         {NULL, NULL}
     };
     

@@ -24,7 +24,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.scrollViewDelegate = [[LVScrollViewDelegate alloc] init:self];
         self.delegate = self.scrollViewDelegate;
         self.alwaysBounceHorizontal = YES;
@@ -72,7 +72,7 @@ static int lvNewScrollView (lua_State *L) {
         luaL_getmetatable(L, META_TABLE_UIScrollView );
         lua_setmetatable(L, -2);
         
-        LView* view = LV_LUASTATE_VIEW(L);
+        LuaViewCore* view = LV_LUASTATE_VIEW(L);
         if( view ){
             [view containerAddSubview:scrollView];
         }
@@ -316,7 +316,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
         userdata->object = NULL;
         if( view ){
             view.lv_userData = nil;
-            view.lv_lview = nil;
+            view.lv_luaviewCore = nil;
             [view removeFromSuperview];
             [view.layer removeFromSuperlayer];
             if( [view isKindOfClass:[UICollectionView class]] ) {
@@ -343,18 +343,19 @@ static int __gc (lua_State *L) {
 static const struct luaL_Reg memberFunctions [] = {
     {"callback",     callback },// 回调
     
-    {"contentSize",     contentSize },//TODO
-    {"offset",     contentOffset },//TODO
+    {"contentSize",     contentSize },// for IOS
+    {"offset",     contentOffset },//
+    // offsetBy
     
-    {"contentInset",     contentInset },
+    {"contentInset",     contentInset },// for IOS
     
-    {"showScrollIndicator",     showScrollIndicator },
+    {"showScrollIndicator",     showScrollIndicator },// for IOS
     
     // 下拉刷新
     //    {"initRefreshing", initRefreshHeader},
-    {"startRefreshing", startHeaderRefreshing},
-    {"stopRefreshing", stopHeaderRefreshing},
-    {"isRefreshing", isHeaderRefreshing},
+    {"startRefreshing", startHeaderRefreshing},// for IOS ScrollView
+    {"stopRefreshing", stopHeaderRefreshing},// for IOS ScrollView
+    {"isRefreshing", isHeaderRefreshing},// for IOS ScrollView
     
     // 上拉加载更多
     //    {"footerNoticeNoMoreData", footerNoticeNoMoreData},

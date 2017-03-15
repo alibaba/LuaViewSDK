@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
-#import "UIGestureRecognizer+LuaView.h"
+#import "NSObject+LuaView.h"
 
 @interface LVPanGesture : UIPanGestureRecognizer<LVProtocal, LVClassProtocal>
 
-@property(nonatomic,weak) LView* lv_lview;
+@property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
 -(id) init:(lua_State*) l;

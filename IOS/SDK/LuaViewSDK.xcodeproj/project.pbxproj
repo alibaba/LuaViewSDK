@@ -55,7 +55,6 @@
 		3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
 		3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
 		3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
-		3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
@@ -118,7 +117,6 @@
 		84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 91882E8F1AAD934D00107DFC /* LVRotationGesture.m */; };
 		84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */; };
 		84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */; };
-		84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */; };
 		84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1401A7F732500774565 /* LVHttp.m */; };
 		84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454D1451A7FA7A400774565 /* LVHttpResponse.m */; };
 		84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842532461ADCB7C0003C05BF /* LVAudioPlayer.m */; };
@@ -175,7 +173,6 @@
 		84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 91882E8E1AAD934D00107DFC /* LVRotationGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D13F1A7F732500774565 /* LVHttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8454D1441A7FA7A400774565 /* LVHttpResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 842532451ADCB7C0003C05BF /* LVAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -210,7 +207,10 @@
 		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
 		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
 		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
-		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; };
+		91666CF61E6ECDE8005BC162 /* NSObject+LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91666CF71E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */; };
+		91666CF81E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */; };
+		91695AA91E11004B0088EFD6 /* UIScrollView+LVRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
 		91695AAB1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */; };
 		91695AAC1E11004B0088EFD6 /* LVRefreshConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AA31E11004B0088EFD6 /* LVRefreshConst.h */; };
@@ -228,6 +228,12 @@
 		91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
 		91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
+		91B1A4831E6E871E000F71B3 /* LuaViewCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 91B1A4811E6E871E000F71B3 /* LuaViewCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91B1A4841E6E871E000F71B3 /* LuaViewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A4821E6E871E000F71B3 /* LuaViewCore.m */; };
+		91B1A4851E6E871E000F71B3 /* LuaViewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A4821E6E871E000F71B3 /* LuaViewCore.m */; };
+		91B1A4881E6E873F000F71B3 /* LuaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91B1A4861E6E873F000F71B3 /* LuaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91B1A4891E6E873F000F71B3 /* LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A4871E6E873F000F71B3 /* LuaView.m */; };
+		91B1A48A1E6E873F000F71B3 /* LuaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A4871E6E873F000F71B3 /* LuaView.m */; };
 		91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C55C701DD07185000BCB0B /* LVFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91C55C731DD07185000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
 		91C55C741DD07DAF000BCB0B /* LVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C55C711DD07185000BCB0B /* LVFlowLayout.m */; };
@@ -282,16 +288,16 @@
 /* Begin PBXFileReference section */
 		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
-		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
-		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
+		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LViewController.h; path = ../LViewController.h; sourceTree = "<group>"; };
+		3C98A5391C7C0C100001508E /* LViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LViewController.m; path = ../LViewController.m; sourceTree = "<group>"; };
 		3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVZipArchive.h; path = PKG/LVZipArchive.h; sourceTree = "<group>"; };
 		3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVZipArchive.m; path = PKG/LVZipArchive.m; sourceTree = "<group>"; };
 		3CFF77A91C7473A800847C05 /* libLuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
-		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
-		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
+		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LView.h; path = ../LView.h; sourceTree = "<group>"; };
+		840AD5321A5EAB4A0075CB58 /* LView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LView.m; path = ../LView.m; sourceTree = "<group>"; };
 		840BCED81CB7602C00D816AD /* LVNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNetworkStatus.h; sourceTree = "<group>"; };
 		840BCED91CB7602C00D816AD /* LVNetworkStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNetworkStatus.m; sourceTree = "<group>"; };
 		8410D9A91A70A00400B22E49 /* LVPanGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVPanGesture.h; sourceTree = "<group>"; };
@@ -315,8 +321,6 @@
 		84342D8D1AE0E02B00ECB4EF /* LVStyledString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVStyledString.m; sourceTree = "<group>"; };
 		843447481B61DDED0039B98A /* UIView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LuaView.h"; sourceTree = "<group>"; };
 		843447491B61DDED0039B98A /* UIView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LuaView.m"; sourceTree = "<group>"; };
-		8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+LuaView.h"; sourceTree = "<group>"; };
-		8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+LuaView.m"; sourceTree = "<group>"; };
 		8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVNinePatchImage.h; sourceTree = "<group>"; };
 		8446F15C1BDF57F2007E4064 /* LVNinePatchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVNinePatchImage.m; sourceTree = "<group>"; };
 		8454D13F1A7F732500774565 /* LVHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVHttp.h; sourceTree = "<group>"; };
@@ -402,10 +406,10 @@
 		84DDB85C1B43BAEB006ACE9A /* LVPointerValueBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVPointerValueBox.m; sourceTree = "<group>"; };
 		84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVTapGesture.h; sourceTree = "<group>"; };
 		84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTapGesture.m; sourceTree = "<group>"; };
-		84E446961AEE0655009C9A8A /* LVBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBlock.h; sourceTree = "<group>"; };
-		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBlock.m; sourceTree = "<group>"; };
-		84E85C181C33B84B007DE3DF /* LVBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBundle.h; sourceTree = "<group>"; };
-		84E85C191C33B84B007DE3DF /* LVBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBundle.m; sourceTree = "<group>"; };
+		84E446961AEE0655009C9A8A /* LVBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVBlock.h; path = ../LVBlock.h; sourceTree = "<group>"; };
+		84E446971AEE0655009C9A8A /* LVBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVBlock.m; path = ../LVBlock.m; sourceTree = "<group>"; };
+		84E85C181C33B84B007DE3DF /* LVBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVBundle.h; path = ../LVBundle.h; sourceTree = "<group>"; };
+		84E85C191C33B84B007DE3DF /* LVBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVBundle.m; path = ../LVBundle.m; sourceTree = "<group>"; };
 		84F4A01D1B4B9E600062A7B2 /* UIScrollView+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LuaView.h"; sourceTree = "<group>"; };
 		84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LuaView.m"; sourceTree = "<group>"; };
 		911270981DFAC65F001F8047 /* LVEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVEvent.h; sourceTree = "<group>"; };
@@ -416,6 +420,8 @@
 		914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVGrammarChanger.m; sourceTree = "<group>"; };
 		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
 		914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVClassInfo.m; sourceTree = "<group>"; };
+		91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LuaView.h"; sourceTree = "<group>"; };
+		91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LuaView.m"; sourceTree = "<group>"; };
 		91695AA11E11004B0088EFD6 /* UIScrollView+LVRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LVRefresh.h"; sourceTree = "<group>"; };
 		91695AA21E11004B0088EFD6 /* UIScrollView+LVRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LVRefresh.m"; sourceTree = "<group>"; };
 		91695AA31E11004B0088EFD6 /* LVRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVRefreshConst.h; sourceTree = "<group>"; };
@@ -438,6 +444,10 @@
 		91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgInfo.m; path = PKG/LVPkgInfo.m; sourceTree = "<group>"; };
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
 		91ACCE761AC531160034D9B3 /* LVDebuger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVDebuger.m; path = lvdebug/LVDebuger.m; sourceTree = "<group>"; };
+		91B1A4811E6E871E000F71B3 /* LuaViewCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaViewCore.h; path = ../LuaViewCore.h; sourceTree = "<group>"; };
+		91B1A4821E6E871E000F71B3 /* LuaViewCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LuaViewCore.m; path = ../LuaViewCore.m; sourceTree = "<group>"; };
+		91B1A4861E6E873F000F71B3 /* LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaView.h; path = ../LuaView.h; sourceTree = "<group>"; };
+		91B1A4871E6E873F000F71B3 /* LuaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LuaView.m; path = ../LuaView.m; sourceTree = "<group>"; };
 		91C55C701DD07185000BCB0B /* LVFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVFlowLayout.h; sourceTree = "<group>"; };
 		91C55C711DD07185000BCB0B /* LVFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVFlowLayout.m; sourceTree = "<group>"; };
 		91F678821DF520920042D6FC /* LVCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomView.h; sourceTree = "<group>"; };
@@ -503,14 +513,6 @@
 				84B1E37E1AEF24330054B9F1 /* RSA */,
 				91ACCE741AC530CA0034D9B3 /* lvdebug */,
 				846481A51A64C61F00DE6204 /* lvsdk */,
-				840AD5311A5EAB4A0075CB58 /* LView.h */,
-				840AD5321A5EAB4A0075CB58 /* LView.m */,
-				3C98A5381C7C0C100001508E /* LViewController.h */,
-				3C98A5391C7C0C100001508E /* LViewController.m */,
-				84E85C181C33B84B007DE3DF /* LVBundle.h */,
-				84E85C191C33B84B007DE3DF /* LVBundle.m */,
-				84E446961AEE0655009C9A8A /* LVBlock.h */,
-				84E446971AEE0655009C9A8A /* LVBlock.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -640,6 +642,8 @@
 				84F4A01E1B4B9E600062A7B2 /* UIScrollView+LuaView.m */,
 				843447481B61DDED0039B98A /* UIView+LuaView.h */,
 				843447491B61DDED0039B98A /* UIView+LuaView.m */,
+				91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */,
+				91666CF51E6ECDE8005BC162 /* NSObject+LuaView.m */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -647,6 +651,20 @@
 		846481A51A64C61F00DE6204 /* lvsdk */ = {
 			isa = PBXGroup;
 			children = (
+				846481AC1A64C61F00DE6204 /* LVHeads.h */,
+				846481AD1A64C61F00DE6204 /* LVHeads.m */,
+				840AD5311A5EAB4A0075CB58 /* LView.h */,
+				840AD5321A5EAB4A0075CB58 /* LView.m */,
+				91B1A4861E6E873F000F71B3 /* LuaView.h */,
+				91B1A4871E6E873F000F71B3 /* LuaView.m */,
+				91B1A4811E6E871E000F71B3 /* LuaViewCore.h */,
+				91B1A4821E6E871E000F71B3 /* LuaViewCore.m */,
+				84E85C181C33B84B007DE3DF /* LVBundle.h */,
+				84E85C191C33B84B007DE3DF /* LVBundle.m */,
+				3C98A5381C7C0C100001508E /* LViewController.h */,
+				3C98A5391C7C0C100001508E /* LViewController.m */,
+				84E446961AEE0655009C9A8A /* LVBlock.h */,
+				84E446971AEE0655009C9A8A /* LVBlock.m */,
 				84A52BFC1AE7985D00E464AC /* ui */,
 				84A52C021AE7995D00E464AC /* basic */,
 				84A52BFE1AE7988A00E464AC /* gesture */,
@@ -657,8 +675,6 @@
 				844317A61BC61E3900968368 /* system */,
 				84CF566B1AE8EC0B00A49B36 /* objectbox */,
 				84A52C011AE7992600E464AC /* util */,
-				846481AC1A64C61F00DE6204 /* LVHeads.h */,
-				846481AD1A64C61F00DE6204 /* LVHeads.m */,
 			);
 			path = lvsdk;
 			sourceTree = "<group>";
@@ -738,8 +754,6 @@
 				918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */,
 				84DF1DA41A6F5BC9009F970A /* LVTapGesture.h */,
 				84DF1DA51A6F5BC9009F970A /* LVTapGesture.m */,
-				8434474D1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.h */,
-				8434474E1B61E7FD0039B98A /* UIGestureRecognizer+LuaView.m */,
 			);
 			name = gesture;
 			sourceTree = "<group>";
@@ -940,6 +954,7 @@
 				84C1D8381C16C4490058E974 /* LVDebugConnection.h in Headers */,
 				84C1D8391C16C4490058E974 /* LVBaseView.h in Headers */,
 				84C1D83A1C16C4490058E974 /* UIScrollView+LuaView.h in Headers */,
+				91666CF61E6ECDE8005BC162 /* NSObject+LuaView.h in Headers */,
 				91F678891DF561D40042D6FC /* LVCanvas.h in Headers */,
 				84C1D83B1C16C44A0058E974 /* UIView+LuaView.h in Headers */,
 				84C1D83C1C16C44A0058E974 /* LVButton.h in Headers */,
@@ -951,6 +966,7 @@
 				BEEB28D01CA90EC200EC2D86 /* JUFLXLayoutKit.h in Headers */,
 				84C1D8411C16C44A0058E974 /* LVLoadingIndicator.h in Headers */,
 				84C1D8421C16C44A0058E974 /* LVPagerIndicator.h in Headers */,
+				91B1A4831E6E871E000F71B3 /* LuaViewCore.h in Headers */,
 				91C55C721DD07185000BCB0B /* LVFlowLayout.h in Headers */,
 				84C1D8461C16C44A0058E974 /* LVPagerView.h in Headers */,
 				84C1D8471C16C44A0058E974 /* LVPagerViewCell.h in Headers */,
@@ -969,6 +985,7 @@
 				91695AAF1E11004B0088EFD6 /* LVRefreshComponent.h in Headers */,
 				84C1D8521C16C44B0058E974 /* LVTransform3D.h in Headers */,
 				BEEB28D51CA90EC200EC2D86 /* JUFLXLinearLayoutView.h in Headers */,
+				91B1A4881E6E873F000F71B3 /* LuaView.h in Headers */,
 				84C1D8531C16C44B0058E974 /* LVData.h in Headers */,
 				84C1D8541C16C44B0058E974 /* LVDate.h in Headers */,
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
@@ -986,7 +1003,6 @@
 				84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */,
 				84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */,
 				84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */,
-				84C1D85E1C16C44C0058E974 /* UIGestureRecognizer+LuaView.h in Headers */,
 				914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */,
 				84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */,
 				84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */,
@@ -1174,6 +1190,7 @@
 				3CFF77BD1C74740800847C05 /* LVNinePatchImage.m in Sources */,
 				3CFF77BE1C74740800847C05 /* LVLabel.m in Sources */,
 				3CFF77BF1C74740800847C05 /* LVTextField.m in Sources */,
+				91666CF81E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */,
 				3CFF77C01C74740800847C05 /* LVLoadingIndicator.m in Sources */,
 				3CFF77C11C74740800847C05 /* LVPagerIndicator.m in Sources */,
 				914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */,
@@ -1205,12 +1222,13 @@
 				3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */,
 				3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */,
 				914BB65E1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
+				91B1A48A1E6E873F000F71B3 /* LuaView.m in Sources */,
 				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
 				3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */,
-				3CFF77DE1C74740900847C05 /* UIGestureRecognizer+LuaView.m in Sources */,
 				3CFF77DF1C74740900847C05 /* LVHttp.m in Sources */,
 				3CFF77E01C74740900847C05 /* LVHttpResponse.m in Sources */,
 				3CFF77E11C74740900847C05 /* LVAudioPlayer.m in Sources */,
+				91B1A4851E6E871E000F71B3 /* LuaViewCore.m in Sources */,
 				3CFF77E21C74740900847C05 /* LVDB.m in Sources */,
 				3CFF77E31C74740900847C05 /* LVDownloader.m in Sources */,
 				3CFF77E41C74740900847C05 /* LVFile.m in Sources */,
@@ -1262,6 +1280,7 @@
 				84C1D7DE1C16C3FA0058E974 /* LVImage.m in Sources */,
 				84C1D7DF1C16C3FA0058E974 /* LVNinePatchImage.m in Sources */,
 				84C1D7E01C16C3FA0058E974 /* LVLabel.m in Sources */,
+				91666CF71E6ECDE8005BC162 /* NSObject+LuaView.m in Sources */,
 				84C1D7E11C16C3FA0058E974 /* LVTextField.m in Sources */,
 				84C1D7E21C16C3FA0058E974 /* LVLoadingIndicator.m in Sources */,
 				84C1D7E31C16C3FA0058E974 /* LVPagerIndicator.m in Sources */,
@@ -1293,12 +1312,13 @@
 				84C1D7FB1C16C3FA0058E974 /* LVPinchGesture.m in Sources */,
 				914BB65D1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
 				84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */,
+				91B1A4891E6E873F000F71B3 /* LuaView.m in Sources */,
 				84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */,
 				84C1D7FE1C16C3FA0058E974 /* LVTapGesture.m in Sources */,
-				84C1D7FF1C16C3FA0058E974 /* UIGestureRecognizer+LuaView.m in Sources */,
 				84C1D8001C16C3FA0058E974 /* LVHttp.m in Sources */,
 				840BCEDB1CB7602C00D816AD /* LVNetworkStatus.m in Sources */,
 				84C1D8011C16C3FA0058E974 /* LVHttpResponse.m in Sources */,
+				91B1A4841E6E871E000F71B3 /* LuaViewCore.m in Sources */,
 				84C1D8021C16C3FA0058E974 /* LVAudioPlayer.m in Sources */,
 				84C1D8031C16C3FA0058E974 /* LVDB.m in Sources */,
 				84C1D8041C16C3FA0058E974 /* LVDownloader.m in Sources */,

@@ -20,7 +20,7 @@
 - (void) callLuaWithArguments:(NSArray*) args{
     // 外部回调脚本一定要在主线程调用
     dispatch_block_t f = ^(){
-        lua_State* L = self.lv_lview.l;
+        lua_State* L = self.lv_luaviewCore.l;
         if( L && self.lv_userData ){
             lua_checkstack(L,32);
             int num = lua_gettop(L);
@@ -71,12 +71,12 @@ static int lvNewCustomPanelView (lua_State *L) {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(errorNotice);
         errorNotice.lv_userData = userData;
-        errorNotice.lv_lview = LV_LUASTATE_VIEW(L);
+        errorNotice.lv_luaviewCore = LV_LUASTATE_VIEW(L);
         
         luaL_getmetatable(L, META_TABLE_CustomPanel );
         lua_setmetatable(L, -2);
     }
-    LView* view = LV_LUASTATE_VIEW(L);
+    LuaViewCore* view = LV_LUASTATE_VIEW(L);
     if( view ){
         [view containerAddSubview:errorNotice];
     }

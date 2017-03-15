@@ -20,7 +20,7 @@
 -(id) init:(lua_State*) l{
     self = [super init];
     if( self ){
-        self.lv_lview = LV_LUASTATE_VIEW(l);
+        self.lv_luaviewCore = LV_LUASTATE_VIEW(l);
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
     }
@@ -30,7 +30,7 @@
 -(void) drawRect:(CGRect)rect{
     [super drawRect:rect];
     
-    lua_State* L = self.lv_lview.l;
+    lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         lua_settop(L, 0);
          CGContextRef contextRef = UIGraphicsGetCurrentContext();
@@ -54,7 +54,7 @@ static int lvNewCustomView (lua_State *L) {
             luaL_getmetatable(L, META_TABLE_CustomView );
             lua_setmetatable(L, -2);
         }
-        LView* father = LV_LUASTATE_VIEW(L);
+        LuaViewCore* father = LV_LUASTATE_VIEW(L);
         if( father ){
             [father containerAddSubview:customView];
         }

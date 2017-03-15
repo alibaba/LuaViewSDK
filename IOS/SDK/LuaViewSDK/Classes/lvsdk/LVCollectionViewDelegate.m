@@ -58,10 +58,11 @@ static inline NSInteger mapSection(NSInteger section){
     }
     [self tryRegisterId:identifier inCollectionView:collectionView];
     LVCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    LView* lview = self.owner.lv_lview;
+    cell.contentView.frame = cell.bounds;//脚本的window是ContentView大小可能和Cell不同步
+    LuaViewCore* lview = self.owner.lv_luaviewCore;
     lua_State* L = lview.l;
-    lview.conentView = cell.contentView;
-    lview.contentViewIsWindow = NO;
+    UIView* newWindow = cell.contentView;
+    [lview pushWindow:newWindow];
     if ( L ) {
         if( !cell.isInited ){
             cell.isInited = YES;
@@ -91,14 +92,13 @@ static inline NSInteger mapSection(NSInteger section){
             [LVUtil call:L key1:"Cell" key2:identifier.UTF8String key3:"Layout" nargs:3 nrets:0 retType:LUA_TNONE];
         }
     }
-    lview.conentView = nil;
-    lview.contentViewIsWindow = NO;
+    [lview popWindow:newWindow];
     return cell;
 }
 
 // section数量
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l && self.owner.lv_userData ){
         lv_pushUserdata(l, self.owner.lv_userData);
         lv_pushUDataRef(l, USERDATA_KEY_DELEGATE);
@@ -115,7 +115,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 // 每个区域的行数
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         // args
         lua_pushnumber(l, mapSection(section) );
@@ -169,7 +169,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 
 - (CGFloat) retFloatCallKey1:(const char*) funcName key2:(const char*) key2 mapedSection:(NSInteger) mapedSection {
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         lua_checkstack(l, 12);
         lua_pushnumber(l, mapedSection);
@@ -188,7 +188,7 @@ static inline NSInteger mapSection(NSInteger section){
 
 - (NSString*) retStringCallKey1:(const char*) key1 key2:(const char*)key2
                    mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow pinned:(BOOL*) pinned{
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         // args
         lua_checkstack(l, 12);
@@ -215,7 +215,7 @@ static inline NSInteger mapSection(NSInteger section){
 
 - (CGSize) retSizeCallKey1:(const char*) key1 key2:(const char*)key2 key3:(const char*)key3
               mapedSection:(NSInteger) mapedSection mapedRow:(NSInteger) mapedRow {
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         // args
         lua_checkstack(l, 12);
@@ -242,7 +242,7 @@ static inline NSInteger mapSection(NSInteger section){
 }
 - (UIEdgeInsets) retInsetCallKey1:(const char*) key1 key2:(const char*)key2
                      mapedSection:(NSInteger) mapSection mapedRow:(NSInteger)mapedRow {
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         // args
         lua_checkstack(l, 12);
@@ -268,7 +268,7 @@ static inline NSInteger mapSection(NSInteger section){
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    lua_State* l = self.owner.lv_lview.l;
+    lua_State* l = self.owner.lv_luaviewCore.l;
     if( l ){
         NSString* identifier = [self retStringCallKey1:"Cell" key2:IDENTIFIER mapedSection:mapSection(section) mapedRow:mapRow(row) pinned:NULL];
         if ( identifier ) {
@@ -301,7 +301,7 @@ static inline NSInteger mapSection(NSInteger section){
             indexPath0 = indexPath;
         }
     }
-    lua_State* L = self.owner.lv_lview.l;
+    lua_State* L = self.owner.lv_luaviewCore.l;
     if( L && indexPath0 ) {
         NSInteger section = indexPath0.section;
         NSInteger row = indexPath0.row;
