@@ -154,4 +154,12 @@ if (Common == nil) then
             print(t)
         end
     end
+
+    function Common:loadString(param)
+        if (System:android()) then
+            return load(param)
+        else
+            return loadstring(param)
+        end
+    end
 end

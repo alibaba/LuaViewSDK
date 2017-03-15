@@ -19,7 +19,7 @@ end
 
 local function start()
     local pica = require("kit.pica")
-    tableView = CollectionView({
+    local tableView = CollectionView({
         Section = {
             SectionCount = function()
                 return 1
@@ -40,6 +40,7 @@ local function start()
                     local xml = File:read("xml/label.xml")
                     pica:parseXml(xml)
 
+                    print("tuoli", "eeeee")
                     local fs1 = pica:getViewByName("fs1")
                     fs1:text(StyledString("normal", {fontStyle = "normal"}))
                     local fs2 = pica:getViewByName("fs2")
@@ -50,6 +51,7 @@ local function start()
                     td1:text(StyledString("strikethrough", {strikethrough = true}))
                     local td2 = pica:getViewByName("td2")
                     td2:text(StyledString("underline", {underline = true}))
+                    print("tuoli", "eeeee")
                 end
             }
         }

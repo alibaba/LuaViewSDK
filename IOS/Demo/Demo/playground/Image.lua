@@ -19,7 +19,7 @@ end
 
 local function start()
     local pica = require("kit.pica")
-    tableView = CollectionView({
+    local tableView = CollectionView({
         Section = {
             SectionCount = function()
                 return 1

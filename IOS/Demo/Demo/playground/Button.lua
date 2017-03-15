@@ -9,7 +9,7 @@
 Navigation:title("Button.lua")
 
 local function start()
-pica = require("kit.pica"):new()
+    local pica = require("kit.pica")
 
     local xml = File:read("xml/button.xml")
     pica:parseXml(xml)

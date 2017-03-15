@@ -30,7 +30,7 @@ local function start()
     img:flexCss("margin: 0, height: " .. imgWidth .. ", width: " .. imgWidth)
     img:image("http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png")
 
-rowTop:flexChildren({img})
+    rowTop:flexChildren(img)
 
     local rowBottom = View()
     rowBottom:flexCss("flex: 1, flex-wrap: wrap, flex-direction: column")
@@ -71,7 +71,7 @@ rowTop:flexChildren({img})
         alpha:with(img):start()
     end)
 
-top1:flexChildren({button1, button2, button3})
+    top1:flexChildren(button1, button2, button3)
 
     local top2 = View()
     top2:flexCss("flex: 1, flex-direction: row")
@@ -103,11 +103,11 @@ top1:flexChildren({button1, button2, button3})
     button6:callback(function()
     end)
 
-top2:flexChildren({button4, button5, button6})
+    top2:flexChildren(button4, button5, button6)
 
-rowBottom:flexChildren({top1, top2})
+    rowBottom:flexChildren(top1, top2)
 
-root:flexChildren({rowTop, rowBottom})
+    root:flexChildren(rowTop, rowBottom)
     root:flxLayout(true)     -- iOS
 end
 

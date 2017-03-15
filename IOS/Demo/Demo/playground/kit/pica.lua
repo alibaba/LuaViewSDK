@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
---require("kit.common")
+require("kit.common")
 
 local Pica = {}
 
@@ -19,13 +19,13 @@ else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
 
-function Pica:new(o)
-    local AppMeta = {__index = self}
-    local instance = o or {}
-    instance.functions={}
-    setmetatable(instance, AppMeta)
-    return instance
-end
+--function Pica:new(o)
+--    local AppMeta = {__index = self}
+--    local instance = o or {}
+--    instance.functions={}
+--    setmetatable(instance, AppMeta)
+--    return instance
+--end
 
 function Pica:parseXml(xml)
     if (g_xmlParser == nil) then
@@ -35,44 +35,54 @@ function Pica:parseXml(xml)
         print("tuoli", "require kit.slaxdom end")
     end
 
+    self.objs = {}
+    self.identifierObjs = {}
+    if (not System:android()) then
+        self.flxLayoutObjs = {}
+    end
+
     if (type(xml) ~= "string") then
         xml = tostring(xml)
+        print("tuoli xml", string.len(xml))
     end
 
     print("tuoli", "xml dom start")
     local root = g_xmlParser:dom(xml)
     print("tuoli", "xml dom end")
-    self.objs = {}
-    self.identifierObjs = {}
     print("tuoli", "parse element start")
     self:parseElement(root, nil)
     print("tuoli", "parse element end")
     print("tuoli", "flex start")
     self:flexOrNot()
-    print("tuoli", "flex send")
+    print("tuoli", "flex end")
 end
 
 --[[
 --  遍历self.objs,找出有子节点的父节点,并决定是否需要对其子节点进行flex布局
  ]]
 function Pica:flexOrNot()
-    for _k, _v in pairs(self.objs) do
+    for _k, _ in pairs(self.objs) do
         local isFlex = false
-        for _m, _ in pairs(_k.attr) do
-            if (_m == "flexCss") then
-                isFlex = true
-            end
+        if (_k.attr["flexCss"] ~= nil) then
+            isFlex = true
         end
 
+        -- 如果遍历出来的对象是一个flex根节点,则遍历它的孩子节点,并设置flexChildren
         if (isFlex == true and table.getn(_k.kids) > 0) then
             local children = {}
-            for __k, __v in pairs(_k.kids) do
+            for _, __v in pairs(_k.kids) do
                 if (self.objs[__v]) then
                     table.insert(children, self.objs[__v])
                 end
             end
             self.objs[_k]:flexChildren(children)
-            self.objs[_k]:flxLayout(true)
+        end
+    end
+
+    -- iOS能否在SDK层屏蔽掉flxLayout的调用
+    if (not System:android()) then
+        for _, _view in pairs(self.flxLayoutObjs) do
+            _view:flxLayout(true)
         end
     end
 end
@@ -137,17 +147,20 @@ function Pica:parseElement(element, parent)
                 if (parent and parent.name == "View") then
                     self.objs[parent]:addView(self.objs[element])
                 end
-                local paramFun = loadstring("return " .. _v.value)
+                local paramFun = Common:loadString("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
             elseif (_v.name == "backgroundColor") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
             elseif (_v.name == "id") then
---                self.objs[element]:identifier(_v.value)
                 -- 考虑到性能问题,不采用遍历的方式来取得开发者所关注的对象。而是使用字典的形式来获取。
                 self.identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "flexCss") then
-                print("tuoli 3")
                 self.objs[element]:flexCss(_v.value)
+                if (not System:android()) then
+                    if (parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
+                        table.insert(self.flxLayoutObjs, self.objs[element])
+                    end
+                end
             elseif (_v.name == "title") then
                 self.objs[element]:title(_v.value)
             elseif (_v.name == "titleColor") then
@@ -174,10 +187,10 @@ function Pica:parseElement(element, parent)
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
-                local paramFun = loadstring("return " .. _v.value)
+                local paramFun = Common:loadString("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "ellipsize") then
-                local paramFun = loadstring("return " .. _v.value)
+                local paramFun = Common:loadString("return " .. _v.value)
                 self.objs[element]:ellipsize(paramFun())
             else
                 print("LuaError::Layout", "方法名不对: " .. _v.name)
