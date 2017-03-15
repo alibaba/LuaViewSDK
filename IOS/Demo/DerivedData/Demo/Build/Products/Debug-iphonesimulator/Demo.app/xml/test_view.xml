@@ -1,0 +1,16 @@
+<doc>
+    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" backgroundColor="0xffff00" >
+        <Button id="button1" frame="50, 50, 100, 100" ></Button>
+        <Button id="button2" frame="150, 50, 150, 100" ></Button>
+        <View id="root2" frame="20, 200, SCREEN_WIDTH-40, 400" backgroundColor="0xff0000" >
+            <Button id="button3" frame="0, 0, 100, 100" ></Button>
+            <Button id="button4" frame="100, 100, 100, 100" ></Button>
+        </View>
+
+        <!-- frame和flex混合使用 -->
+        <!--<View id="root2" frame="20, 200, SCREEN_WIDTH-40, 400" backgroundColor="0xff0000" flexCss="flex-direction: column" >-->
+            <!--<Button id="left.button1" flexCss="flex: 1, margin: 10"></Button>-->
+            <!--<Button id="left.button2" flexCss="flex: 1, margin: 10" backgroundColor="0x0000ff"></Button>-->
+        <!--</View>-->
+    </View>
+</doc>

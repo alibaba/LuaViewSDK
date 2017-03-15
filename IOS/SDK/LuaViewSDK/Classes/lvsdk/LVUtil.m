@@ -148,6 +148,16 @@ id lv_luaTableToDictionary(lua_State* L ,int index){
             value = lv_luaTableToDictionary(L,-1);
         } else if( lua_type(L, -1)==LUA_TBOOLEAN ){
             value = @( ((BOOL)lua_toboolean(L, -1)) );
+        } else if ( lua_type(L, -1)==LUA_TUSERDATA ) {
+            LVUserDataInfo* user =  (LVUserDataInfo*)lua_touserdata(L, -1);
+            id<LVProtocal> obj =  (__bridge id<LVProtocal>)(user->object);
+            if( [obj respondsToSelector:@selector(lv_nativeObject)] ){
+                value = [obj lv_nativeObject];
+            } else {
+                LVError(@"lv_luaTableToDictionary.1");
+            }
+        } else {
+            LVError(@"lv_luaTableToDictionary.2");
         }
         // stack now contains: -1 => value; -2 => key; -3 => table
         if( value ) {

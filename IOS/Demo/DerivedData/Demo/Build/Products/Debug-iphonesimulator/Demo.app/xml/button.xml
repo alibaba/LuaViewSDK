@@ -1,0 +1,21 @@
+<doc>
+    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: row" >
+        <View id="left.panel" flexCss="flex-direction: column, flex: 1">
+            <Button id="left.button1" flexCss="flex: 1, margin: 10"></Button>
+            <Button id="left.button2" flexCss="flex: 1, margin: 10" backgroundColor="0x0000ff"></Button>
+            <Button id="left.button3" flexCss="flex: 1, margin: 10" title="Click Me" titleColor="0xff0000"></Button>
+            <Button id="left.button4" flexCss="flex: 1, margin: 10" backgroundColor="0xff0000"
+                image="http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png, http://online.sccnn.com/icon/517/actionIcons_006.png"></Button>
+            <Button id="left.button5" flexCss="flex: 1, margin: 10" backgroundColor="0x00ff00" titleColor="0xffffff" title="Click Me" cornerRadius="10"></Button>
+            <Button id="left.button6" flexCss="flex: 1, margin: 10" backgroundColor="0xffffff" borderWidth="1" borderColor="0x000000" cornerRadius="10"></Button>
+        </View>
+        <View id="right.panel" flexCss="flex-direction: column, flex: 1">
+            <Button id="right.button1" flexCss="flex: 1, margin: 10" backgroundColor="0x00ff00"></Button>
+            <Button id="right.button2" flexCss="flex: 1, margin: 10" backgroundColor="0xff0000"></Button>
+            <Button id="right.button3" flexCss="flex: 1, margin: 10" backgroundColor="0x00ff00"></Button>
+            <Button id="right.button4" flexCss="flex: 1, margin: 10" backgroundColor="0xff0000"></Button>
+            <Button id="right.button5" flexCss="flex: 1, margin: 10" backgroundColor="0x00ff00"></Button>
+            <Button id="right.button6" flexCss="flex: 1, margin: 10" backgroundColor="0xff0000"></Button>
+        </View>
+    </View>
+</doc>

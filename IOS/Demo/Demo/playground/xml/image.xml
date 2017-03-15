@@ -1,0 +1,16 @@
+<doc>
+    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT+SCREEN_HEIGHT/2" flexCss="flex-direction: column" >
+        <View id="row1" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
+            <Label id="localTips" flexCss="height: 50" backgroundColor="0x0000ff" text="Local Image" fontSize="25" textColor="0xffffff"></Label>
+            <Image id="localImg" flexCss="flex: 1" image="http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png"></Image>
+        </View>
+        <View id="row2" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
+            <Label id="httpTips" flexCss="height:50" backgroundColor="0x0000ff" text="Http Image" fontSize="25" textColor="0xffffff"></Label>
+            <Image id="httpImg" flexCss="flex: 1" image="http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png"></Image>
+        </View>
+        <View id="row3" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
+            <Label id="gifTips" flexCss="height:50" backgroundColor="0x0000ff" text="Gif Image" fontSize="25" textColor="0xffffff"></Label>
+            <Image id="gifImg" flexCss="flex: 1" image="http://img3.3lian.com/2006/013/08/20051105163412739.gif"></Image>
+        </View>
+    </View>
+</doc>

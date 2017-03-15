@@ -13,6 +13,7 @@
 #import "JHSLVCollectionView.h"
 #import "JHSLVButton.h"
 #import "JHSLVImage.h"
+#import "Bridge.h"
 
 #import "AppDelegate.h"
 
@@ -50,13 +51,14 @@
     self.lv[@"Image"] = [JHSLVImage class];
     self.lv[@"Button"] = [JHSLVButton class];
     self.lv[@"RefreshCollectionView"] = [JHSLVCollectionView class];
+    self.lv[@"Bridge"] = [Bridge class];
     
     // 注册 用户面板类型
     self.lv[@"CustomError"] = [JHSLVCustomError class];
     self.lv[@"CustomLoading"] = [JHSLVCustomLoading class];
     
     // 注册 外部对象.
-    self.lv[@"viewController"] = self;
+    self.lv[@"Bridge"] = self;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -75,6 +77,11 @@
  */
 -(void) openUrl:(NSString*)actionUrl{
     LVLog(@"%@",actionUrl);
+}
+
+-(void)jumpTo:(NSString*)actionUrl{
+    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:actionUrl];
+    [self.navigationController pushViewController:c animated:YES];
 }
 
 -(void) gotoHistory{

@@ -43,6 +43,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
             view.lv_lview = nil;
             [view removeFromSuperview];
             [view.layer removeFromSuperlayer];
+            NSLog(@"[tuoli] released view");
         }
     }
 }
@@ -310,6 +311,19 @@ static int flxChildViews(lua_State *L)
         UIView *view = (__bridge UIView *)(user->object);
         int childNum = lua_gettop(L);
         if (view && childNum>=2 ) {
+            NSArray *arr =  (NSArray*)lv_luaValueToNativeObject(L, 2);
+            if ([arr isKindOfClass:[NSArray class]] && arr.count > 0) {
+                NSMutableArray* childs = [[NSMutableArray alloc] init];
+                for( int i=0; i<arr.count; i++ ) {
+                    UIView* temp = arr[i];
+                    if( temp ) {
+                        [childs addObject:temp.ju_flxNode];
+                    }
+                }
+                view.ju_flxNode.childNodes = childs;
+                return 0;
+            }
+            
             NSMutableArray* childs = [[NSMutableArray alloc] init];
             for( int i=2; i<=childNum; i++ ) {
                 LVUserDataInfo * childUser = (LVUserDataInfo *)lua_touserdata(L, i);
