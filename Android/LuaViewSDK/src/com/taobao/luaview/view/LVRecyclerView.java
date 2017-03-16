@@ -141,7 +141,7 @@ public class LVRecyclerView extends RecyclerView implements ILVRecyclerView {
         if (mItemDecoration == null || mSpacing != spacing) {
             this.removeItemDecoration(mItemDecoration);
             mSpacing = spacing;
-            mItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL_LIST, spacing);
+            mItemDecoration = new DividerGridItemDecoration(spacing);
             this.addItemDecoration(mItemDecoration);
         }
     }
