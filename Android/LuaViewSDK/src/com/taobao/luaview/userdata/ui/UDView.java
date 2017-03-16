@@ -62,8 +62,6 @@ public class UDView<T extends View> extends BaseUserdata {
     private CSSNode mCssNode;
     private String mFlexCss;
 
-    private String mId;
-
     //effects
     private Integer mEffects;
 
@@ -1475,15 +1473,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public String getFlexCss() {
         return mFlexCss;
-    }
-
-    public UDView setIdentifier(String id) {
-        mId = id;
-        return this;
-    }
-
-    public String getIdentifier() {
-        return mId;
     }
 
 }

@@ -12,7 +12,6 @@ import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -134,8 +133,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "nativeView",//102
             "borderDash",//103
             "margin",//104
-            "onTouch",//105
-            "identifier"//106
+            "onTouch"//105
     };
 
     @Override
@@ -359,8 +357,6 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return margin(target, varargs);
             case 105:
                 return onTouch(target, varargs);
-            case 106:
-                return identifier(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -2258,26 +2254,6 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
     @LuaViewApi(since = VmVersion.V_500)
     public LuaValue getFlexCss(U view, Varargs varargs) {
         return valueOf(view.getFlexCss());
-    }
-
-    /**
-     * 设置视图的id名称
-     */
-    public LuaValue identifier(U view, Varargs varargs) {
-        if (varargs.narg() > 1) {
-            return setIdentifier(view, varargs);
-        } else {
-            return getIdentifier(view, varargs);
-        }
-    }
-
-    public LuaValue setIdentifier(U view, Varargs varargs) {
-        final String id = LuaUtil.getString(varargs, 2);
-        return view.setIdentifier(id);
-    }
-
-    public LuaValue getIdentifier(U view, Varargs varargs) {
-        return valueOf(view.getIdentifier());
     }
 
     /**
