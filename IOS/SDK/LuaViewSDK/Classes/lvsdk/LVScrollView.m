@@ -307,7 +307,7 @@ static int isHeaderRefreshing (lua_State *L){
 //}
 
 static int callback (lua_State *L) {
-    return lv_setCallbackByKey(L, STR_CALLBACK, NO);
+    return lv_setCallbackByKey(L, nil, NO);
 }
 
 static void releaseUserDataView(LVUserDataInfo* userdata){
