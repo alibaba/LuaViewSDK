@@ -631,5 +631,18 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
     }
 }
 
+-(void) luaviewGC {
+    // 清理luaview对应的内存
+    lua_State *state = self.l;
+    if (state) {
+        lua_checkstack(state, 8);
+        lua_pushnil(state);
+        [LVUtil registryValue:state key:self stack:-1];
+        LVBlock *block = [self getLuaBlock:@"System.gc"];
+        [block callWithArgs:nil];
+    }
+}
+
+
 @end
 

@@ -37,19 +37,6 @@
 @property (nonatomic,assign) BOOL checkDebugerServer; // 是否检查调试器
 // @property (nonatomic,assign) BOOL openDebugger; // 开启调试
 
-//---------------------------------------------------------------------
-/**
-* 渲染窗口 压栈
-*
-*/
--(void) pushWindow:(UIView*) window;
--(void) pushRenderTarget:(UIView*) window;
-
-/**
-* 渲染窗口 出栈
-*/
--(void) popWindow:(UIView*) window;
--(void) popRenderTarget:(UIView*) window;
 
 //---------------------------------------------------------------------
 /**
@@ -229,6 +216,27 @@
 
 -(void) containerAddSubview:(UIView *)view;
 
+
+@end
+
+
+
+//------------ 窗口渲染接口, 必须成对出现! 慎用! ------------------------------
+@interface LuaViewCore ()
+/**
+ * 渲染窗口 压栈
+ *
+ */
+-(void) pushWindow:(UIView*) window;
+-(void) pushRenderTarget:(UIView*) window;
+
+/**
+ * 渲染窗口 出栈
+ */
+-(void) popWindow:(UIView*) window;
+-(void) popRenderTarget:(UIView*) window;
+
+-(void) luaviewG;
 
 @end
 
