@@ -168,7 +168,7 @@
         }
     }
     
-    return nil;
+    return name;
 }
 
 - (NSData *)scriptWithName:(NSString *)name {
