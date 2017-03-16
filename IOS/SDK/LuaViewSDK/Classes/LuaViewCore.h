@@ -236,7 +236,7 @@
 -(void) popWindow:(UIView*) window;
 -(void) popRenderTarget:(UIView*) window;
 
--(void) luaviewG;
+-(void) luaviewGC;
 
 @end
 
