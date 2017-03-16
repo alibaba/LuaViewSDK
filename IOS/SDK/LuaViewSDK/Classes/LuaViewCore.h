@@ -24,7 +24,10 @@
 
 @property (nonatomic,strong) LVBundle* bundle;
 
-@property (nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是非标准语法，需要转换
+/**
+ * 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是标准语法，使用非标准语法需要转换成标准语法才设置成true
+ */
+@property (nonatomic,assign) BOOL changeGrammar;
 
 //---------------------------------------------------------------------
 /**
