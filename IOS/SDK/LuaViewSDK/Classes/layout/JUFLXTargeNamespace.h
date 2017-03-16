@@ -1,11 +1,10 @@
-//
-//  JUFLXLayoutDefine.h
-//  LuaViewSDK
-//
-//  Fork from https://github.com/google/gdata-objectivec-client/blob/master/Source%2FGDataTargetNamespace.h
-//  Created by xiekw on 16/3/31.
-//  Copyright © 2016年 dongxicheng. All rights reserved.
-//
+/**
+  * Created by LuaView.
+  * Copyright (c) 2017, Alibaba Group. All rights reserved.
+  *
+  * This source code is licensed under the MIT.
+  * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+  */
 
 #if defined(JUFLX_LAYOUT_NAMESPACE)
 
