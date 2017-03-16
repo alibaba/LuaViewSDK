@@ -39,6 +39,11 @@ static BOOL __disableReloadKeyCommand = NO;
     return self;
 }
 
+-(void) dealloc{
+    [self.lv releaseLuaView];
+    self.lv = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;

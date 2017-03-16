@@ -32,7 +32,6 @@
 }
 
 - (void) dealloc{
-    [self.lv releaseLuaView];
 }
 
 - (void)willCreateLuaView {
