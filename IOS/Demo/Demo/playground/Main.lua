@@ -8,56 +8,179 @@
 
 Navigation:title("Main.lua")
 
-local _jsonData = ' ["00xml", "Label", "Button", "Image", "TextField", "Loading", "List", "ListPullDown", ' ..
-                    ' "Slider", "Web", "Animation", "Http", "Timer", "Storage", "Audio", ' ..
-                    ' "Tabbar", "Navigator", "Picker", "Dropdown", "Clipboard", "Video", "Camera"] '
+local _jsonDataWidget = ' ["00xml", "Label", "Button", "Image", "TextField", "Loading", "List", "ListPullDown", ' ..
+        ' "Slider", "Web", "Animation", "Http", "Timer", "Storage", "Audio", ' ..
+        ' "Picker", "Dropdown", "Clipboard", "Video", "Camera"] '
 
-local _data = Json:toTable(_jsonData)
+local _dataWidget = Json:toTable(_jsonDataWidget)
+
+local _jsonDataDemo = ' ["douban", "github"] '
+
+local _dataDemo = Json:toTable(_jsonDataDemo)
 
 local _screenWidth, _screenHeight = System:screenSize()
 
 -- 减掉ActionBar和StatusBar的高度
 if (System:android()) then
-    _screenHeight = _screenHeight - 80 -- Android, 不同机型, 高度不定, 比较蛋疼
+    _screenHeight = _screenHeight - 79 -- Android, 不同机型, 高度不定, 比较蛋疼
 else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
 
 local function main()
-    local tableData = {
-        Section = {
-            SectionCount = function()
-                return 1
-            end,
-            RowCount = function(section)
-                return table.getn(_data)
-            end
-        },
-        Cell = {
-            Id = function(section, row)
-                return "SampleCell"
-            end,
-            SampleCell = {
-                Size = function(section, row)
-                    return _screenWidth, 80
+    local pica = require("kit.pica")
+
+    print("tuoli", "xml read start")
+    local callback = function(data)
+        print("tuoli", "xml read end")
+        pica:parseXml(data)
+
+        widgetTableView = CollectionView({
+            Section = {
+                SectionCount = function()
+                    return 1
                 end,
-                Init = function(cell, section, row)
-                    cell.label = Label()
-                    cell.label:frame(15, 15, _screenWidth-15*2, 80-15*2)
-                end,
-                Layout = function(cell, section, row)
-                    local style = StyledString(_data[row], { fontSize = 25, fontColor = 0x000000})
-                    cell.label:text(style)
-                end,
-                Callback = function(cell, section, row)
-                    Bridge:jumpTo(_data[row] .. ".lua")
+                RowCount = function(section)
+                    return table.getn(_dataWidget)
                 end
+            },
+            Cell = {
+                Id = function(section, row)
+                    return "SampleCell"
+                end,
+                SampleCell = {
+                    Size = function(section, row)
+                        return _screenWidth, 80
+                    end,
+                    Init = function(cell, section, row)
+                        cell.window:backgroundColor(0xffffff)
+                        cell.label = Label()
+                        cell.label:frame(15, 15, _screenWidth-15*2, 80-15*2)
+                    end,
+                    Layout = function(cell, section, row)
+                        local style = StyledString(_dataWidget[row], { fontSize = 25, fontColor = 0x000000})
+                        cell.label:text(style)
+                    end,
+                    Callback = function(cell, section, row)
+                        Bridge:jumpTo("widget/" .. _dataWidget[row] .. ".lua")
+                    end
+                }
             }
-        }
-    }
-    local tableView = CollectionView(tableData)
-    tableView:frame(0, 0, _screenWidth, _screenHeight)
-    tableView:miniSpacing(1)
+        })
+        if (not System:android()) then
+            widgetTableView:frame(0, 0, _screenWidth, _screenHeight*0.9)
+        end
+        widgetTableView:backgroundColor(0xeeeeee)
+        widgetTableView:miniSpacing(1)
+
+        local topContainer = pica:getViewByName("topContainer")
+        topContainer:addView(widgetTableView)
+
+        local tab1 = pica:getViewByName("tab1")
+        local tab2 = pica:getViewByName("tab2")
+        local tab3 = pica:getViewByName("tab3")
+        tab1:callback(function()
+            tab1:textColor(0xff0000)
+            tab2:textColor(0x000000)
+            tab3:textColor(0x000000)
+            if (widgetTableView) then
+                widgetTableView:show()
+            end
+
+            if (demoTableView) then
+                demoTableView:hide()
+            end
+
+            if (aboutView) then
+                aboutView:hide()
+            end
+        end)
+        tab2:callback(function()
+            tab1:textColor(0x000000)
+            tab2:textColor(0xff0000)
+            tab3:textColor(0x000000)
+            if (demoTableView) then
+                demoTableView:show()
+            else
+                demoTableView = CollectionView({
+                    Section = {
+                        SectionCount = function()
+                            return 1
+                        end,
+                        RowCount = function(section)
+                            return table.getn(_dataDemo)
+                        end
+                    },
+                    Cell = {
+                        Id = function(section, row)
+                            return "SampleCell"
+                        end,
+                        SampleCell = {
+                            Size = function(section, row)
+                                return _screenWidth, 80
+                            end,
+                            Init = function(cell, section, row)
+                                cell.window:backgroundColor(0xffffff)
+                                cell.label = Label()
+                                cell.label:frame(15, 15, _screenWidth-15*2, 80-15*2)
+                            end,
+                            Layout = function(cell, section, row)
+                                local style = StyledString(_dataDemo[row], { fontSize = 25, fontColor = 0x000000})
+                                cell.label:text(style)
+                            end,
+                            Callback = function(cell, section, row)
+                                Bridge:jumpTo("demo/" .. _dataDemo[row] .. ".lua")
+                            end
+                        }
+                    }
+                })
+                demoTableView:miniSpacing(1)
+                if (not System:android()) then
+                    demoTableView:frame(0, 0, _screenWidth, _screenHeight*0.9)
+                end
+                demoTableView:backgroundColor(0xeeeeee)
+                topContainer:addView(demoTableView)
+            end
+
+            if (widgetTableView) then
+                widgetTableView:hide()
+            end
+
+            if (aboutView) then
+                aboutView:hide()
+            end
+        end)
+        tab3:callback(function()
+            tab1:textColor(0x000000)
+            tab2:textColor(0x000000)
+            tab3:textColor(0xff0000)
+            if (aboutView) then
+                aboutView:show()
+            else
+                local xml = File:read("about.xml")
+                pica:parseXml(xml)
+
+                aboutView = pica:getViewByName("root")
+                aboutView:frame(widgetTableView:frame())
+                aboutView:backgroundColor(0xeeeeee)
+                topContainer:addView(aboutView)
+
+                local info = pica:getViewByName("info")
+                if (System:android()) then
+                    info:nativeView():setLineSpacing(10,1)
+                end
+            end
+
+            if (widgetTableView) then
+                widgetTableView:hide()
+            end
+
+            if (demoTableView) then
+                demoTableView:hide()
+            end
+        end)
+    end
+    File:read("main.xml", callback)
 end
 
 main()

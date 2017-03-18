@@ -1,12 +1,15 @@
 --
 -- Created by IntelliJ IDEA.
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:55
+-- Date: 17/3/17
+-- Time: 14:27
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Clipboard.lua")
+Navigation:title("Github.lua")
 
-Toast("Clipboard.lua")
+local function start()
 
+end
+
+start()

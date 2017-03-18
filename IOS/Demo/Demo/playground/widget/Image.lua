@@ -18,8 +18,7 @@ else
 end
 
 local function start()
-    local pica = require("kit.pica")
-    local tableView = CollectionView({
+    local tableData = {
         Section = {
             SectionCount = function()
                 return 1
@@ -37,12 +36,20 @@ local function start()
                     return _screenWidth, _screenHeight + _screenHeight/2
                 end,
                 Init = function(cell, section, row)
-                    local xml = File:read("xml/image.xml")
-                    pica:parseXml(xml)
+                    local pica = require("kit.pica")
+
+                    print("tuoli", "xml read start")
+                    local callback = function(data)
+                        print("tuoli", "xml read end")
+                        pica:parseXml(data)
+                    end
+
+                    File:read("widget/image.xml", callback)
                 end
             }
         }
-    })
+    }
+    tableView = CollectionView(tableData)
     tableView:frame(0, 0, _screenWidth, _screenHeight)
 end
 

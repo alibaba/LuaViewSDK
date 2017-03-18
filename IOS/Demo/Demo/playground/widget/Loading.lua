@@ -24,7 +24,7 @@ local function start()
 
     local loading = LoadingIndicator()
     loading:flexCss("height: 50")
-    loading:startAnimating()
+    loading:start()
 
     root:flexChildren(loading)
     root:flxLayout(true)     -- iOS

@@ -11,10 +11,12 @@ require("kit.common")
 local Pica = {}
 
 local _screenWidth, _screenHeight = System:screenSize()
+local _isAndroid = System:android()
+
 
 -- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    _screenHeight = _screenHeight - 80 -- Android, 不同机型, 高度不定, 比较蛋疼
+if (_isAndroid) then
+    _screenHeight = _screenHeight - 80      -- Android, 不同机型, 高度不定, 比较蛋疼
 else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
@@ -37,10 +39,11 @@ function Pica:parseXml(xml)
 
     self.objs = {}
     self.identifierObjs = {}
-    if (not System:android()) then
+    if (not _isAndroid) then
         self.flxLayoutObjs = {}
     end
 
+--    print("tuoli xml", xml)
     if (type(xml) ~= "string") then
         xml = tostring(xml)
         print("tuoli xml", string.len(xml))
@@ -75,12 +78,14 @@ function Pica:flexOrNot()
                     table.insert(children, self.objs[__v])
                 end
             end
-            self.objs[_k]:flexChildren(children)
+            if (table.getn(children) > 0) then
+                self.objs[_k]:flexChildren(children)
+            end
         end
     end
 
     -- iOS能否在SDK层屏蔽掉flxLayout的调用
-    if (not System:android()) then
+    if (not _isAndroid) then
         for _, _view in pairs(self.flxLayoutObjs) do
             _view:flxLayout(true)
         end
@@ -156,8 +161,8 @@ function Pica:parseElement(element, parent)
                 self.identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "flexCss") then
                 self.objs[element]:flexCss(_v.value)
-                if (not System:android()) then
-                    if (parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
+                if (not _isAndroid) then
+                    if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end
@@ -184,14 +189,18 @@ function Pica:parseElement(element, parent)
                 self.objs[element]:fontSize(tonumber(_v.value))
             elseif (_v.name == "lineCount") then
                 self.objs[element]:lineCount(tonumber(_v.value))
+            elseif (_v.name == "alpha") then
+                self.objs[element]:alpha(tonumber(_v.value))
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
                 local paramFun = Common:loadString("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "ellipsize") then
-                local paramFun = Common:loadString("return " .. _v.value)
-                self.objs[element]:ellipsize(paramFun())
+                if (_isAndroid) then
+                    local paramFun = Common:loadString("return " .. _v.value)
+                    self.objs[element]:ellipsize(paramFun())
+                end
             else
                 print("LuaError::Layout", "方法名不对: " .. _v.name)
             end
