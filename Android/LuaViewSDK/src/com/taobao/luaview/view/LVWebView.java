@@ -43,6 +43,7 @@ public class LVWebView extends SwipeRefreshLayout implements ILVNativeViewProvid
         this.mWebView = new WebView(context);
         this.addView(this.mWebView, LuaViewUtil.createRelativeLayoutParamsMM());
         this.mWebView.getSettings().setJavaScriptEnabled(true);
+        this.mWebView.getSettings().setSavePassword(false);
         this.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {

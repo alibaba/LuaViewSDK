@@ -36,7 +36,7 @@ public class LVRefreshListView extends SwipeRefreshLayout implements ILVListView
         this.addView(mListView, LuaViewUtil.createRelativeLayoutParamsMM());
         globals.restoreContainer();
 
-        if (globals.getLuaView() == null || globals.getLuaView().isRefreshContainerEnable() == false) {
+        if (!globals.isRefreshContainerEnable) {
             this.setEnabled(false);
         } else {
             ((UDRefreshListView) getUserdata()).initPullRefresh();

@@ -17,7 +17,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class AudioMethodMapper<U extends UDAudio> extends BaseMethodMapper<U> {
     private static final String TAG = "AudioMethodMapper";
     private static final String[] sMethods = new String[]{

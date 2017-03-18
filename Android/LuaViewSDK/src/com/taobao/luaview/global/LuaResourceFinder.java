@@ -1,6 +1,7 @@
 package com.taobao.luaview.global;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleLoadDelega
 import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.DrawableUtil;
 import com.taobao.luaview.util.FileUtil;
+import com.taobao.luaview.util.IOUtil;
 import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.ParamUtil;
 import com.taobao.luaview.util.TypefaceUtil;
@@ -21,6 +23,9 @@ import com.taobao.luaview.view.imageview.BaseImageView;
 
 import org.luaj.vm2.lib.ResourceFinder;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -442,5 +447,25 @@ public class LuaResourceFinder implements ResourceFinder {
             result = nameOrPath;
         }
         return result;
+    }
+
+    public byte[] readFromAssets(String name) {
+        AssetManager assetManager = this.mContext.getAssets();
+        InputStream inputStream = null;
+        try {
+            inputStream = assetManager.open(name);
+            return IOUtil.toBytes(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.userdata.ui.UDImageView;
@@ -26,6 +27,7 @@ import org.luaj.vm2.lib.VarArgFunction;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UDActionBar extends BaseLuaTable {
 
     public UDActionBar(Globals globals, LuaValue metatable) {
@@ -41,9 +43,9 @@ public class UDActionBar extends BaseLuaTable {
         set("setBackground", new setBackground());
         set("getBackground", new getBackground());
         set("left", new left());
-        set("leftBarButton", new left());
+        set("leftBarButton", new left());//@Deprecated
         set("right", new right());
-        set("rightBarButton", new right());
+        set("rightBarButton", new right());//@Deprecated
     }
 
     /**
@@ -61,6 +63,7 @@ public class UDActionBar extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class setTitle extends VarArgFunction {
 
         @Override
@@ -71,6 +74,11 @@ public class UDActionBar extends BaseLuaTable {
                     final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
                     if (actionBar != null) {
                         actionBar.setTitle(title);
+                    } else {
+                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+                        if (supportActionBar != null) {
+                            supportActionBar.setTitle(title);
+                        }
                     }
                 }
             } else if (args.isuserdata(2)) {//view
@@ -85,6 +93,16 @@ public class UDActionBar extends BaseLuaTable {
                         actionBar.setDisplayShowCustomEnabled(true);
                         actionBar.setCustomView(LuaViewUtil.removeFromParent(view));
 
+                    } else {
+                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+                        if (supportActionBar != null) {
+                            final View view = ((UDView) titleViewValue).getView();
+                            if (view != null) {
+                                view.setTag(Constants.RES_LV_TAG, titleViewValue);
+                            }
+                            supportActionBar.setDisplayShowCustomEnabled(true);
+                            supportActionBar.setCustomView(LuaViewUtil.removeFromParent(view));
+                        }
                     }
                 }
             }
@@ -92,6 +110,7 @@ public class UDActionBar extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class getTitle extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
@@ -127,6 +146,7 @@ public class UDActionBar extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class setBackground extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
@@ -164,6 +184,7 @@ public class UDActionBar extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class getBackground extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {

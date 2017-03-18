@@ -1,6 +1,7 @@
 package com.taobao.luaview.fun.mapper.kit;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.kit.UDVibrator;
 import com.taobao.luaview.util.DateUtil;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "iOS不支持复杂功能"})
 public class VibratorMethodMapper<U extends UDVibrator> extends BaseMethodMapper<U> {
     private static final String TAG = "VibratorMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -54,6 +55,7 @@ public class VibratorMethodMapper<U extends UDVibrator> extends BaseMethodMapper
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS无此方法"})
     public LuaValue hasVibrator(U vibrator, Varargs varargs){
         return valueOf(vibrator.hasVibrator());
     }

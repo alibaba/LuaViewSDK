@@ -43,7 +43,7 @@ public class LuaScriptManager {
      * @param context
      */
     public static void init(final Context context) {
-        if (context != null) {
+        if (TextUtils.isEmpty(BASE_FILECACHE_PATH) && context != null) {
             if (!LuaViewConfig.isDebug()) {//真实环境优先使用data/data目录
                 initInternalFilePath(context);
             } else {//测试环境优先使用sd卡路径
@@ -199,6 +199,7 @@ public class LuaScriptManager {
 
     /**
      * 是否是lua的zip包（zip，bzip，szip）
+     *
      * @param fileName
      * @return
      */

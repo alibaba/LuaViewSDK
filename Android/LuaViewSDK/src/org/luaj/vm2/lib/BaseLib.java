@@ -88,7 +88,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 
     public LuaValue call(LuaValue modname, LuaValue env) {
         globals = env.checkglobals();
-        globals.finder = this;
+//        globals.finder = this;// finder 由Globals自行设置
         globals.baselib = this;
         env.set("_G", env);
         env.set("_VERSION", Lua._VERSION);
@@ -461,7 +461,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
      * @return Varargs containing chunk, or NIL,error-text on error
      */
     public Varargs loadFile(String filename, String mode, LuaValue env) {
-        InputStream is = globals.finder.findResource(filename);
+        InputStream is = globals.getLuaResourceFinder().findResource(filename);//modify by song
         if (is == null)
             return varargsOf(NIL, valueOf("cannot open " + filename + ": No such file or directory"));
         try {

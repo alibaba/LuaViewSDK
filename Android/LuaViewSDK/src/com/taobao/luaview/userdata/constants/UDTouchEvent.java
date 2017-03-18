@@ -2,6 +2,7 @@ package com.taobao.luaview.userdata.constants;
 
 import android.view.MotionEvent;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -13,6 +14,7 @@ import org.luaj.vm2.LuaValue;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标", "ios有更多的属性"})
 public class UDTouchEvent extends BaseLuaTable {
 
     public UDTouchEvent(Globals globals, LuaValue metatable) {

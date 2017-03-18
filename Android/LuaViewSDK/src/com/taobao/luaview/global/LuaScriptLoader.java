@@ -118,12 +118,6 @@ public class LuaScriptLoader {
      * @param callback
      */
     public void load(final String url, final String sha256, final ScriptLoaderCallback callback) {
-//        if (LuaScriptManager.existsScriptBundle(url)) {//load local
-//            new ScriptBundleLoadTask(mContext, callback).executeInPool(url);
-//        } else {
-//            new ScriptBundleDownloadTask(mContext, callback).executeInPool(url, sha256);
-//        }
-
         new ScriptBundleUltimateLoadTask(mContext, callback).load(url, sha256);
     }
 
@@ -137,14 +131,8 @@ public class LuaScriptLoader {
      * @param sha256
      */
     public void preload(final String url, final String sha256) {
-//        if (LuaScriptManager.existsScriptBundle(url)) {//load local
-//            new ScriptBundleLoadTask(mContext, null).executeInPool(url);
-//        } else {
-//            new ScriptBundleDownloadTask(mContext, null).executeInPool(url, sha256);
-//        }
         new ScriptBundleUltimateLoadTask(mContext, null).load(url, sha256);
     }
-
 
     /**
      * download script

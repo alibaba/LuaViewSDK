@@ -2,6 +2,7 @@ package com.taobao.luaview.userdata.kit;
 
 import android.text.TextUtils;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.DateUtil;
 import com.taobao.luaview.util.EncryptUtil;
@@ -18,6 +19,8 @@ import org.luaj.vm2.lib.VarArgFunction;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标"})
+@Deprecated
 public class UDDownloader extends BaseLuaTable {
 
     public UDDownloader(Globals globals, LuaValue metatable) {

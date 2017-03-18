@@ -25,8 +25,8 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
-public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapper<U> {
+@LuaViewLib(revisions = {"20170306已对标"})
+        public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapper<U> {
 
     private static final String TAG = "UIAnimatorMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -252,6 +252,7 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
         return udAnimation.setRepeatMode(reverse ? ValueAnimator.REVERSE : ValueAnimator.RESTART);
     }
 
+    @LuaViewApi(revisions = {"跟IOS名称不一样，iOS只支持一个值"})
     public LuaValue values(U udAnimator, Varargs varargs) {
         return udAnimator.setFloatValues(ParamUtil.getFloatValues(varargs, 2));
     }
@@ -289,6 +290,8 @@ public class UIAnimatorMethodMapper<U extends UDAnimator> extends BaseMethodMapp
         return udAnimator.setOnPauseCallback(callback);
     }
 
+    @LuaViewApi(revisions = {"iOS无"})
+    @Deprecated
     public LuaValue onUpdate(U udAnimator, Varargs varargs) {
         final LuaValue callback = varargs.optvalue(2, NIL);
         return udAnimator.setOnUpdateCallback(callback);

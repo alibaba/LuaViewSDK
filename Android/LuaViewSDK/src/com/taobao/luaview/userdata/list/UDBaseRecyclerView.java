@@ -236,7 +236,9 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 mPinnedContainer.removeView(pinnedView);
                 parentItemView.addView(pinnedView);
                 mCurrentPinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
-                mCurrentPinnedView.setVisibility(View.VISIBLE);
+                if (mCurrentPinnedView != null) {
+                    mCurrentPinnedView.setVisibility(View.VISIBLE);
+                }
             }
 
             mCurrentPinnedPosition = pinnedViewPosition;

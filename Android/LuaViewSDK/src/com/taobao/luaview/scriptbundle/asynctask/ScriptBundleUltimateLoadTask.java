@@ -22,7 +22,7 @@ import java.net.HttpURLConnection;
 import java.util.Random;
 
 /**
- * download lua script bundle from server and return saved path in local file system
+ * download lua script bundle from server and load as a ScriptBundle
  *
  * @author song
  */
@@ -47,7 +47,6 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
         isAsset = true;
         super.executeInPool(params);
     }
-
 
     /**
      * 接受两个参数，第一个是下载的url，第二个是存储的地址

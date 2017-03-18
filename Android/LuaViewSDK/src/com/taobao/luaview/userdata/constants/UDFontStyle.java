@@ -3,6 +3,7 @@ package com.taobao.luaview.userdata.constants;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 
 import org.luaj.vm2.Globals;
@@ -14,11 +15,12 @@ import org.luaj.vm2.LuaValue;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标", "iOS无BOLD"})
 public class UDFontStyle extends BaseLuaTable {
 
     public static final String STYLE_NORMAL = "normal";
     public static final String STYLE_ITALIC = "italic";
-    public static final String STYLE_BOLD = "bold";
+    public static final String STYLE_BOLD = "bold";//TODO 需要跟fontWeight的Bold统一
 
     public UDFontStyle(Globals globals, LuaValue metatable) {
         super(globals, metatable);

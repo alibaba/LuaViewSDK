@@ -14,7 +14,7 @@ import java.util.List;
  * @author song
  * @param <U>
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "跟iOS不一致，iOS继承自View"})
 public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMapper<U> {
     private static final String TAG = "UIButtonMethodMapper";
     private static final String[] sMethods = new String[]{
@@ -55,6 +55,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs Varargs
      * @return LuaValue
      */
+    @Deprecated
     public LuaValue title(U view, Varargs varargs) {
         return text(view, varargs);
     }
@@ -74,6 +75,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue titleColor(U view, Varargs varargs) {
         return textColor(view, varargs);
     }
@@ -118,6 +120,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue showsTouchWhenHighlighted(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShowsTouchWhenHighlighted(view, varargs);
