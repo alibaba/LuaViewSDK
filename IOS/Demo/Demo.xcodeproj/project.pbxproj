@@ -29,34 +29,16 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
+		AC94B8E91E7FD231002838C4 /* about.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E21E7FD231002838C4 /* about.xml */; };
+		AC94B8EA1E7FD231002838C4 /* demo in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E31E7FD231002838C4 /* demo */; };
+		AC94B8EB1E7FD231002838C4 /* demo_item.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E41E7FD231002838C4 /* demo_item.xml */; };
+		AC94B8EC1E7FD231002838C4 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E51E7FD231002838C4 /* kit */; };
+		AC94B8ED1E7FD231002838C4 /* Main.lua in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E61E7FD231002838C4 /* Main.lua */; };
+		AC94B8EE1E7FD231002838C4 /* main.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E71E7FD231002838C4 /* main.xml */; };
+		AC94B8EF1E7FD231002838C4 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8E81E7FD231002838C4 /* widget */; };
+		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
-		DC839D591E791414005C346B /* 00xml.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D401E791414005C346B /* 00xml.lua */; };
-		DC839D5A1E791414005C346B /* Animation.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D411E791414005C346B /* Animation.lua */; };
-		DC839D5B1E791414005C346B /* Audio.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D421E791414005C346B /* Audio.lua */; };
-		DC839D5C1E791414005C346B /* Button.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D431E791414005C346B /* Button.lua */; };
-		DC839D5D1E791414005C346B /* Camera.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D441E791414005C346B /* Camera.lua */; };
-		DC839D5E1E791414005C346B /* Clipboard.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D451E791414005C346B /* Clipboard.lua */; };
-		DC839D5F1E791414005C346B /* Dropdown.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D461E791414005C346B /* Dropdown.lua */; };
-		DC839D601E791414005C346B /* Http.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D471E791414005C346B /* Http.lua */; };
-		DC839D611E791414005C346B /* Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D481E791414005C346B /* Image.lua */; };
-		DC839D621E791414005C346B /* kit in Resources */ = {isa = PBXBuildFile; fileRef = DC839D491E791414005C346B /* kit */; };
-		DC839D631E791414005C346B /* Label.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4A1E791414005C346B /* Label.lua */; };
-		DC839D641E791414005C346B /* List.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4B1E791414005C346B /* List.lua */; };
-		DC839D651E791414005C346B /* ListPullDown.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4C1E791414005C346B /* ListPullDown.lua */; };
-		DC839D661E791414005C346B /* Loading.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4D1E791414005C346B /* Loading.lua */; };
-		DC839D671E791414005C346B /* Main.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4E1E791414005C346B /* Main.lua */; };
-		DC839D681E791414005C346B /* Navigator.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D4F1E791414005C346B /* Navigator.lua */; };
-		DC839D691E791414005C346B /* Picker.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D501E791414005C346B /* Picker.lua */; };
-		DC839D6A1E791414005C346B /* Slider.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D511E791414005C346B /* Slider.lua */; };
-		DC839D6B1E791414005C346B /* Storage.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D521E791414005C346B /* Storage.lua */; };
-		DC839D6C1E791414005C346B /* Tabbar.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D531E791414005C346B /* Tabbar.lua */; };
-		DC839D6D1E791414005C346B /* TextField.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D541E791414005C346B /* TextField.lua */; };
-		DC839D6E1E791414005C346B /* Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D551E791414005C346B /* Timer.lua */; };
-		DC839D6F1E791414005C346B /* Video.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D561E791414005C346B /* Video.lua */; };
-		DC839D701E791414005C346B /* Web.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC839D571E791414005C346B /* Web.lua */; };
-		DC839D711E791414005C346B /* xml in Resources */ = {isa = PBXBuildFile; fileRef = DC839D581E791414005C346B /* xml */; };
-		DC839D731E791FCF005C346B /* animate1.png in Resources */ = {isa = PBXBuildFile; fileRef = DC839D721E791FCF005C346B /* animate1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,34 +86,16 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AC94B8E21E7FD231002838C4 /* about.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = about.xml; path = playground/about.xml; sourceTree = "<group>"; };
+		AC94B8E31E7FD231002838C4 /* demo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = demo; path = playground/demo; sourceTree = "<group>"; };
+		AC94B8E41E7FD231002838C4 /* demo_item.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo_item.xml; path = playground/demo_item.xml; sourceTree = "<group>"; };
+		AC94B8E51E7FD231002838C4 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
+		AC94B8E61E7FD231002838C4 /* Main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.lua; path = playground/Main.lua; sourceTree = "<group>"; };
+		AC94B8E71E7FD231002838C4 /* main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.xml; path = playground/main.xml; sourceTree = "<group>"; };
+		AC94B8E81E7FD231002838C4 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
+		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
 		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
-		DC839D401E791414005C346B /* 00xml.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 00xml.lua; path = playground/00xml.lua; sourceTree = "<group>"; };
-		DC839D411E791414005C346B /* Animation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Animation.lua; path = playground/Animation.lua; sourceTree = "<group>"; };
-		DC839D421E791414005C346B /* Audio.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Audio.lua; path = playground/Audio.lua; sourceTree = "<group>"; };
-		DC839D431E791414005C346B /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Button.lua; path = playground/Button.lua; sourceTree = "<group>"; };
-		DC839D441E791414005C346B /* Camera.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Camera.lua; path = playground/Camera.lua; sourceTree = "<group>"; };
-		DC839D451E791414005C346B /* Clipboard.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Clipboard.lua; path = playground/Clipboard.lua; sourceTree = "<group>"; };
-		DC839D461E791414005C346B /* Dropdown.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Dropdown.lua; path = playground/Dropdown.lua; sourceTree = "<group>"; };
-		DC839D471E791414005C346B /* Http.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Http.lua; path = playground/Http.lua; sourceTree = "<group>"; };
-		DC839D481E791414005C346B /* Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Image.lua; path = playground/Image.lua; sourceTree = "<group>"; };
-		DC839D491E791414005C346B /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
-		DC839D4A1E791414005C346B /* Label.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Label.lua; path = playground/Label.lua; sourceTree = "<group>"; };
-		DC839D4B1E791414005C346B /* List.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = List.lua; path = playground/List.lua; sourceTree = "<group>"; };
-		DC839D4C1E791414005C346B /* ListPullDown.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ListPullDown.lua; path = playground/ListPullDown.lua; sourceTree = "<group>"; };
-		DC839D4D1E791414005C346B /* Loading.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loading.lua; path = playground/Loading.lua; sourceTree = "<group>"; };
-		DC839D4E1E791414005C346B /* Main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.lua; path = playground/Main.lua; sourceTree = "<group>"; };
-		DC839D4F1E791414005C346B /* Navigator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Navigator.lua; path = playground/Navigator.lua; sourceTree = "<group>"; };
-		DC839D501E791414005C346B /* Picker.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Picker.lua; path = playground/Picker.lua; sourceTree = "<group>"; };
-		DC839D511E791414005C346B /* Slider.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Slider.lua; path = playground/Slider.lua; sourceTree = "<group>"; };
-		DC839D521E791414005C346B /* Storage.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Storage.lua; path = playground/Storage.lua; sourceTree = "<group>"; };
-		DC839D531E791414005C346B /* Tabbar.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Tabbar.lua; path = playground/Tabbar.lua; sourceTree = "<group>"; };
-		DC839D541E791414005C346B /* TextField.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TextField.lua; path = playground/TextField.lua; sourceTree = "<group>"; };
-		DC839D551E791414005C346B /* Timer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Timer.lua; path = playground/Timer.lua; sourceTree = "<group>"; };
-		DC839D561E791414005C346B /* Video.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Video.lua; path = playground/Video.lua; sourceTree = "<group>"; };
-		DC839D571E791414005C346B /* Web.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Web.lua; path = playground/Web.lua; sourceTree = "<group>"; };
-		DC839D581E791414005C346B /* xml */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xml; path = playground/xml; sourceTree = "<group>"; };
-		DC839D721E791FCF005C346B /* animate1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animate1.png; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -257,32 +221,14 @@
 		DC839D3F1E791402005C346B /* playground */ = {
 			isa = PBXGroup;
 			children = (
-				DC839D721E791FCF005C346B /* animate1.png */,
-				DC839D401E791414005C346B /* 00xml.lua */,
-				DC839D411E791414005C346B /* Animation.lua */,
-				DC839D421E791414005C346B /* Audio.lua */,
-				DC839D431E791414005C346B /* Button.lua */,
-				DC839D441E791414005C346B /* Camera.lua */,
-				DC839D451E791414005C346B /* Clipboard.lua */,
-				DC839D461E791414005C346B /* Dropdown.lua */,
-				DC839D471E791414005C346B /* Http.lua */,
-				DC839D481E791414005C346B /* Image.lua */,
-				DC839D491E791414005C346B /* kit */,
-				DC839D4A1E791414005C346B /* Label.lua */,
-				DC839D4B1E791414005C346B /* List.lua */,
-				DC839D4C1E791414005C346B /* ListPullDown.lua */,
-				DC839D4D1E791414005C346B /* Loading.lua */,
-				DC839D4E1E791414005C346B /* Main.lua */,
-				DC839D4F1E791414005C346B /* Navigator.lua */,
-				DC839D501E791414005C346B /* Picker.lua */,
-				DC839D511E791414005C346B /* Slider.lua */,
-				DC839D521E791414005C346B /* Storage.lua */,
-				DC839D531E791414005C346B /* Tabbar.lua */,
-				DC839D541E791414005C346B /* TextField.lua */,
-				DC839D551E791414005C346B /* Timer.lua */,
-				DC839D561E791414005C346B /* Video.lua */,
-				DC839D571E791414005C346B /* Web.lua */,
-				DC839D581E791414005C346B /* xml */,
+				AC94B8F01E7FD296002838C4 /* luaview.png */,
+				AC94B8E21E7FD231002838C4 /* about.xml */,
+				AC94B8E31E7FD231002838C4 /* demo */,
+				AC94B8E41E7FD231002838C4 /* demo_item.xml */,
+				AC94B8E51E7FD231002838C4 /* kit */,
+				AC94B8E61E7FD231002838C4 /* Main.lua */,
+				AC94B8E71E7FD231002838C4 /* main.xml */,
+				AC94B8E81E7FD231002838C4 /* widget */,
 			);
 			name = playground;
 			sourceTree = "<group>";
@@ -352,7 +298,7 @@
 				TargetAttributes = {
 					3CC2F8191C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 6L4X75AQK7;
+						ProvisioningStyle = Automatic;
 					};
 					3CC2F8321C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -384,42 +330,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC839D6B1E791414005C346B /* Storage.lua in Resources */,
-				DC839D631E791414005C346B /* Label.lua in Resources */,
-				DC839D671E791414005C346B /* Main.lua in Resources */,
-				DC839D691E791414005C346B /* Picker.lua in Resources */,
+				AC94B8EF1E7FD231002838C4 /* widget in Resources */,
+				AC94B8EB1E7FD231002838C4 /* demo_item.xml in Resources */,
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
-				DC839D611E791414005C346B /* Image.lua in Resources */,
 				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
-				DC839D5F1E791414005C346B /* Dropdown.lua in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
-				DC839D641E791414005C346B /* List.lua in Resources */,
-				DC839D621E791414005C346B /* kit in Resources */,
-				DC839D5A1E791414005C346B /* Animation.lua in Resources */,
+				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
-				DC839D731E791FCF005C346B /* animate1.png in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
-				DC839D651E791414005C346B /* ListPullDown.lua in Resources */,
-				DC839D5C1E791414005C346B /* Button.lua in Resources */,
-				DC839D6C1E791414005C346B /* Tabbar.lua in Resources */,
-				DC839D6A1E791414005C346B /* Slider.lua in Resources */,
-				DC839D711E791414005C346B /* xml in Resources */,
-				DC839D591E791414005C346B /* 00xml.lua in Resources */,
-				DC839D701E791414005C346B /* Web.lua in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
-				DC839D6D1E791414005C346B /* TextField.lua in Resources */,
-				DC839D6F1E791414005C346B /* Video.lua in Resources */,
-				DC839D661E791414005C346B /* Loading.lua in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
-				DC839D5D1E791414005C346B /* Camera.lua in Resources */,
-				DC839D6E1E791414005C346B /* Timer.lua in Resources */,
-				DC839D601E791414005C346B /* Http.lua in Resources */,
-				DC839D681E791414005C346B /* Navigator.lua in Resources */,
-				DC839D5E1E791414005C346B /* Clipboard.lua in Resources */,
+				AC94B8EA1E7FD231002838C4 /* demo in Resources */,
+				AC94B8ED1E7FD231002838C4 /* Main.lua in Resources */,
+				AC94B8EE1E7FD231002838C4 /* main.xml in Resources */,
+				AC94B8EC1E7FD231002838C4 /* kit in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
-				DC839D5B1E791414005C346B /* Audio.lua in Resources */,
+				AC94B8E91E7FD231002838C4 /* about.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,10 +566,11 @@
 			baseConfigurationReference = 1D91B87B0C382EBA586DA7E1 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6L4X75AQK7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -654,11 +583,12 @@
 			baseConfigurationReference = 39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6L4X75AQK7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
