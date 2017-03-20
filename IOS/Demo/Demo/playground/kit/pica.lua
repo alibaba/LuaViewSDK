@@ -16,7 +16,8 @@ local _isAndroid = System:android()
 
 -- 减掉ActionBar和StatusBar的高度
 if (_isAndroid) then
-    _screenHeight = _screenHeight - 80      -- Android, 不同机型, 高度不定, 比较蛋疼
+    local device = System:device()
+    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
 else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
@@ -30,6 +31,11 @@ end
 --end
 
 function Pica:parseXml(xml)
+    if (type(xml) ~= "string") then
+        xml = tostring(xml)
+        print("tuoli xml", string.len(xml))
+    end
+
     if (g_xmlParser == nil) then
         print("tuoli", "确保一个虚拟机只有一个xmlParser")
         print("tuoli", "require kit.slaxdom start")
@@ -41,12 +47,6 @@ function Pica:parseXml(xml)
     self.identifierObjs = {}
     if (not _isAndroid) then
         self.flxLayoutObjs = {}
-    end
-
---    print("tuoli xml", xml)
-    if (type(xml) ~= "string") then
-        xml = tostring(xml)
-        print("tuoli xml", string.len(xml))
     end
 
     print("tuoli", "xml dom start")
@@ -104,13 +104,18 @@ function Pica:isViewElement(element)
         view = Image()
     elseif (element.name == "HScrollView") then
         view = HScrollView()
+    elseif (element.name == "WebView") then
+        view = WebView()
     elseif (element.name == "TextField") then
         view = TextField()
     elseif (element.name == "CollectionView") then
         view = CollectionView()
     elseif (element.name == "RefreshCollectionView") then
         view = RefreshCollectionView()
+    elseif (element.name == "LoadingIndicator") then
+        view = LoadingIndicator()
     else
+--        print("tuoli error", element.name .. " not found")
         view = nil
     end
 
@@ -201,6 +206,10 @@ function Pica:parseElement(element, parent)
                     local paramFun = Common:loadString("return " .. _v.value)
                     self.objs[element]:ellipsize(paramFun())
                 end
+            elseif (_v.name == "hint") then
+                self.objs[element]:hint(_v.value)
+            elseif (_v.name == "loadUrl") then
+                self.objs[element]:loadUrl(_v.value)
             else
                 print("LuaError::Layout", "方法名不对: " .. _v.name)
             end

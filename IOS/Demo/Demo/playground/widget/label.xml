@@ -1,57 +1,58 @@
 <doc>
     <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*2.5" flexCss="flex-direction: column" >
-        <View id="row1" flexCss="flex-direction: column, flex: 1">
-            <Label id="colorTips" flexCss="height: 50" backgroundColor="0x0000ff" text="Color" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="colorContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="c1" flexCss="flex: 1" text="0x000000" fontSize="25" textColor="0x000000"></Label>
-                <Label id="c2" flexCss="flex: 1" text="0x00ff00" fontSize="25" textColor="0x00ff00"></Label>
-                <Label id="c3" flexCss="flex: 1" text="0x2f0090" fontSize="25" textColor="0x2f0090"></Label>
-            </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Color" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="row2" flexCss="flex-direction: column, flex: 1">
-            <Label id="fontSizeTips" flexCss="height: 50" backgroundColor="0x0000ff" text="FontSize" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="fontSizeContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="f1" flexCss="flex: 1" text="15" fontSize="15"></Label>
-                <Label id="f2" flexCss="flex: 1" text="32" fontSize="32"></Label>
-                <Label id="f3" flexCss="flex: 1" text="100" fontSize="100"></Label>
-            </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label flexCss="flex: 1" text="default" fontSize="20"></Label>
+            <Label flexCss="flex: 1" text="0x6C8154" fontSize="20" textColor="0x6C8154"></Label>
+            <Label flexCss="flex: 1" text="0xFF0090" fontSize="20" textColor="0xFF0090"></Label>
+            <Label flexCss="flex: 1" text="0x33FF0090" fontSize="20" textColor="0x33FF0090"></Label>
         </View>
-        <View id="row3" flexCss="flex-direction: column, flex: 1">
-            <Label id="lineCountTips" flexCss="height: 50" backgroundColor="0x0000ff" text="LineCount" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="lineCountContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="l1" flexCss="flex: 1" text="one line one line one line one line one line one line" fontSize="25" lineCount="1"></Label>
-                <Label id="l2" flexCss="flex: 1" text="two lines two lines two lines two lines two lines two lines" fontSize="25" lineCount="2"></Label>
-            </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="FontSize" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="row4" flexCss="flex-direction: column, flex: 1">
-            <Label id="fontStyleTips" flexCss="height: 50" backgroundColor="0x0000ff" text="FontStyle" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="fontStyleContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="fs1" flexCss="flex: 1" text="normal" fontSize="25"></Label>
-                <Label id="fs2" flexCss="flex: 1" text="bold" fontSize="25"></Label>
-                <Label id="fs3" flexCss="flex: 1" text="italic" fontSize="25"></Label>
-            </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label flexCss="flex: 1" text="15" fontSize="15"></Label>
+            <Label flexCss="flex: 2" text="32" fontSize="32"></Label>
+            <Label flexCss="flex: 4" text="90" fontSize="90"></Label>
         </View>
-        <View id="row5" flexCss="flex-direction: column, flex: 1">
-            <Label id="textDecorationTips" flexCss="height: 50" backgroundColor="0x0000ff" text="TextDecoration" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="textDecorationContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="td1" flexCss="flex: 1" text="strikethrough" fontSize="25"></Label>
-                <Label id="td2" flexCss="flex: 1" text="underline" fontSize="25"></Label>
-            </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="LineCount" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="row6" flexCss="flex-direction: column, flex: 1">
-            <Label id="textAlignTips" flexCss="height: 50" backgroundColor="0x0000ff" text="TextAlign" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="textAlignContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="ta1" flexCss="flex: 1" text="left" fontSize="25" textAlign="TextAlign.LEFT"></Label>
-                <Label id="ta2" flexCss="flex: 1" text="center" fontSize="25" textAlign="TextAlign.CENTER"></Label>
-                <Label id="ta3" flexCss="flex: 1" text="right" fontSize="25" textAlign="TextAlign.RIGHT"></Label>
-            </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label flexCss="flex: 1" text="one line one line one line one line one line one line" fontSize="25" lineCount="1"></Label>
+            <Label flexCss="flex: 1" text="two lines two lines two lines two lines two lines two lines" fontSize="25" lineCount="2"></Label>
         </View>
-        <View id="row7" flexCss="flex-direction: column, flex: 1">
-            <Label id="textOverflowTips" flexCss="height: 50" backgroundColor="0x0000ff" text="TextOverflow" fontSize="25" textColor="0xffffff" textAlign="TextAlign.CENTER"></Label>
-            <View id="textOverflowContainer" flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-                <Label id="to1" flexCss="flex: 1" text="no text-overflow" fontSize="25"></Label>
-                <Label id="to2" flexCss="flex: 1" text="text-overflow:ellipsis,ellipsis,ellipsis,ellipsis" fontSize="25" ellipsize="Ellipsize.END"></Label>
-            </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="FontStyle" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label id="fs1" flexCss="flex: 1" text="normal" fontSize="25"></Label>
+            <Label id="fs2" flexCss="flex: 1" text="bold" fontSize="25"></Label>
+            <Label id="fs3" flexCss="flex: 1" text="italic" fontSize="25"></Label>
+        </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="TextDecoration" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label id="td1" flexCss="flex: 1" text="strikethrough" fontSize="25"></Label>
+            <Label id="td2" flexCss="flex: 1" text="underline" fontSize="25"></Label>
+        </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="TextAlign" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label flexCss="flex: 1" text="left" fontSize="25" textAlign="TextAlign.LEFT"></Label>
+            <Label flexCss="flex: 1" text="center" fontSize="25" textAlign="TextAlign.CENTER"></Label>
+            <Label flexCss="flex: 1" text="right" fontSize="25" textAlign="TextAlign.RIGHT"></Label>
+        </View>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="TextOverflow" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
+            <Label flexCss="flex: 1" text="no text-overflow" fontSize="25"></Label>
+            <Label flexCss="flex: 1" text="text-overflow:ellipsis,ellipsis,ellipsis,ellipsis" fontSize="25" ellipsize="Ellipsize.END"></Label>
         </View>
     </View>
 </doc>

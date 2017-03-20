@@ -1,7 +1,7 @@
 <doc>
     <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column">
         <View id="topContainer" flexCss="flex: 9"></View>
-        <View id="bottomContainer" flexCss="flex-direction: column, flex: 1" >
+        <View id="bottomContainer" flexCss="flex-direction: column, flex: 1">
             <View flexCss="height: 1" backgroundColor="0x000000" alpha="0.3"></View>
             <View flexCss="flex: 1, flex-direction: row">
                 <Label id="tab1" flexCss="flex: 1" text="Widget" textAlign="TextAlign.CENTER" textColor="0xff0000"></Label>

@@ -1,0 +1,5 @@
+<doc>
+    <View frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column, justify-content: center" >
+        <LoadingIndicator id="loading" flexCss="height: 50"></LoadingIndicator>
+    </View>
+</doc>

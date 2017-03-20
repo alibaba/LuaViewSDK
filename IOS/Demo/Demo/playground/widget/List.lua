@@ -12,16 +12,29 @@ local _screenWidth, _screenHeight = System:screenSize()
 
 -- 减掉ActionBar和StatusBar的高度
 if (System:android()) then
-    _screenHeight = _screenHeight - 80      -- Android, 不同机型, 高度不定, 比较蛋疼, 最好是底层直接计算好
+    local device = System:device()
+    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
 else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
 
 local function start()
-    local tableView = CollectionView({
+    local pica = require("kit.pica")
+    local xml = File:read("widget/list.xml")
+    pica:parseXml(xml)
+    local header = pica:getViewByName("headerText")
+    local tableContainer = pica:getViewByName("tableContainer")
+
+    local timer = Timer()
+    timer:callback(function()
+        tableView:stopRefreshing()
+        timer:cancel()
+    end)
+
+    tableView = RefreshCollectionView({
         Section = {
             SectionCount = function()
-                return 5
+                return 1
             end,
             RowCount = function(section)
                 return 20
@@ -29,41 +42,16 @@ local function start()
         },
         Cell = {
             Id = function(section, row)
-                if (row == 1) then
-                    return "HeaderCell", Pinned.YES
-                else
-                    return "RowCell"
-                end
+                return "RowCell"
             end,
-            HeaderCell = {
+            RowCell = {
                 Size = function(section, row)
                     return _screenWidth, 60
                 end,
                 Init = function(cell, section, row)
                     cell.window:frame(0, 0, _screenWidth, 60)
                     cell.window:flexCss("flex-direction: row")
-                    cell.window:backgroundColor(0x0000ff)
-
-                    local label = Label()
-                    label:flexCss("flex: 1")
-                    label:textAlign(TextAlign.CENTER)
-
-                    cell.label = label
-                    cell.window:flexChildren(cell.label)
-                    cell.window:flxLayout(true) -- iOS
-                end,
-                Layout = function(cell, section, row)
-                    local style = StyledString("section " .. section .. " row " .. row, { fontSize = 25, fontColor = 0xffffff})
-                    cell.label:text(style)
-                end
-            },
-            RowCell = {
-                Size = function(section, row)
-                    return _screenWidth, 80
-                end,
-                Init = function(cell, section, row)
-                    cell.window:frame(0, 0, _screenWidth, 80)
-                    cell.window:flexCss("flex-direction: row")
+                    cell.window:backgroundColor(0xffffff)
 
                     local label = Label()
                     label:flexCss("margin: 15, flex: 1")
@@ -73,15 +61,24 @@ local function start()
                     cell.window:flxLayout(true) -- iOS
                 end,
                 Layout = function(cell, section, row)
-                    local style = StyledString("section " .. section .. " row " .. row, { fontSize = 25, fontColor = 0x000000})
+                    local style = StyledString("row " .. row, { fontSize = 16, fontColor = 0x000000})
                     cell.label:text(style)
                 end
             }
+        },
+        Callback = {
+            Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
+                header:text("Visible Items: " .. firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount)
+            end,
+            PullDown = function()
+                timer:start(3)
+            end
         }
     })
-    tableView:flexCss("flex: 1")
+    tableView:backgroundColor(0xeeeeee)
     tableView:miniSpacing(1)
     tableView:showScrollIndicator(false)
+    tableContainer:addView(tableView)
 end
 
 start()

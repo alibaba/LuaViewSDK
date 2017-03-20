@@ -1,17 +1,17 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT+SCREEN_HEIGHT/2" flexCss="flex-direction: column" >
-        <View id="row1" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
-            <Label id="localTips" flexCss="height: 50" backgroundColor="0x0000ff" text="Local Image" fontSize="25" textColor="0xffffff"></Label>
-            <!--为了兼容iOS,本地图片需要加后缀-->
-            <Image id="localImg" flexCss="flex: 1" image="animate1.png"></Image>
+    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee" >
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Local Image" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="row2" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
-            <Label id="httpTips" flexCss="height:50" backgroundColor="0x0000ff" text="Http Image" fontSize="25" textColor="0xffffff"></Label>
-            <Image id="httpImg" flexCss="flex: 1" image="http://g.alicdn.com/ju/lua/2.0.25/doc/icon.png"></Image>
+        <!--&lt;!&ndash;为了兼容iOS,本地图片需要加后缀&ndash;&gt;-->
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="luaview.png"></Image>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Http Image" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="row3" flexCss="flex-direction: column, flex: 1, margin-bottom: 10">
-            <Label id="gifTips" flexCss="height:50" backgroundColor="0x0000ff" text="Gif Image" fontSize="25" textColor="0xffffff"></Label>
-            <Image id="gifImg" flexCss="flex: 1" image="http://img3.3lian.com/2006/013/08/20051105163412739.gif"></Image>
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="https://gw.alicdn.com/tfs/TB1..OGQXXXXXaaXVXXXXXXXXXX-330-320.png"></Image>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Gif Image" fontSize="20" textColor="0xffffff"></Label>
         </View>
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="https://gw.alicdn.com/tfs/TB1JYiJQXXXXXbIXFXXXXXXXXXX-330-320.gif"></Image>
     </View>
 </doc>

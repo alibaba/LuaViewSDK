@@ -12,7 +12,8 @@ local _screenWidth, _screenHeight = System:screenSize()
 
 -- 减掉ActionBar和StatusBar的高度
 if (System:android()) then
-    _screenHeight = _screenHeight - 80 -- Android, 不同机型, 高度不定, 比较蛋疼
+    local device = System:device()
+    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
 else
     _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
 end
@@ -39,21 +40,23 @@ local function start()
                     local pica = require("kit.pica")
 
                     print("tuoli", "xml read start")
-                    local callback = function(data)
-                        print("tuoli", "xml read end")
-                        pica:parseXml(data)
-                        local fs1 = pica:getViewByName("fs1")
-                        fs1:text(StyledString("normal", {fontStyle = "normal"}))
-                        local fs2 = pica:getViewByName("fs2")
-                        fs2:text(StyledString("bold", {fontStyle = "bold"}))
-                        local fs3 = pica:getViewByName("fs3")
-                        fs3:text(StyledString("italic", {fontStyle = "italic"}))
-                        local td1 = pica:getViewByName("td1")
-                        td1:text(StyledString("strikethrough", {strikethrough = true}))
-                        local td2 = pica:getViewByName("td2")
-                        td2:text(StyledString("underline", {underline = true}))
-                    end
-                    File:read("widget/label.xml", callback)  -- 有时候会返回nil
+                    local data = File:read("widget/label.xml")
+                    print("tuoli", "xml read end")
+                    pica:parseXml(data)
+
+                    local root = pica:getViewByName("root")
+                    cell.window:addView(root)
+
+                    local fs1 = pica:getViewByName("fs1")
+                    fs1:text(StyledString("normal", {fontStyle = "normal"}))
+                    local fs2 = pica:getViewByName("fs2")
+                    fs2:text(StyledString("bold", {fontStyle = "bold"}))
+                    local fs3 = pica:getViewByName("fs3")
+                    fs3:text(StyledString("italic", {fontStyle = "italic"}))
+                    local td1 = pica:getViewByName("td1")
+                    td1:text(StyledString("strikethrough", {strikethrough = true}))
+                    local td2 = pica:getViewByName("td2")
+                    td2:text(StyledString("underline", {underline = true}))
                 end
             }
         }
