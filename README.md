@@ -1,34 +1,38 @@
-# 1. 介绍
-## 1.1 我们是谁
-我们是聚划算无线开发团队，主要负责聚划算独立客户端，手机淘宝、手机天猫中的聚划算模块，以及俪人购客户端。
+# 欢迎来到LuaViewSDK
 
-## 1.2 为什么会有 LuaView 
-LuaViewSDK 主要解决客户端开发中的两个常见问题：
+LuaViewSDK是一个跨iOS和Android平台的界面动态化解决方案，使用同一套Lua脚本在iOS和Android平台构建原生页面，同时兼具了H5的灵活性和Native的高性能
 
-- 相同的业务逻辑需要在 iOS 和 Android 平台各实现一次，除了开发成本高，也会引入体验的细微差别。是否有一种技术方案可以做到**一份代码，两个平台运行，行为相同** ？
+## 为什么选择Lua
 
-* 移动 APP 开发领域，要极致体验发布就不灵活（Native），要灵活发布就没有极致体验（H5）。有没有一种技术方案可以兼顾极致的体验和灵活的发布？
+为了解决类似的问题，市面上有许多类似的方案，比如React Native和Weex，他们使用了JS框架，配合DSL来进行界面布局，使用JS引擎进行脚本动态解析，实现了动态化的Native界面渲染能力。LuaViewSDK使用lua虚拟机进行脚本解析，通过构建lua与native之间的一系列基础bridge功能，从另一个角度实现了动态化的native能力。相比于基于JS虚拟机的解决方案，LuaViewSDK有如下特性：
 
-LuaView 可以完美解决上述两个问题。
+- lua虚拟机极为轻量高效。单个lua虚拟机只消耗大约200到300k的内存空间，同屏渲染几十个LuaView没有任何负担
+- Lua天生就是作为一个极其轻量、可嵌入的设计实现，它更适合做API的封装或是数据传输的中间层。在App的开发上，更适合作为胶水语言，来直接操作native对象
+- 使用App开发人员更为熟悉的Native编程模式，直接创建和操作各种界面对象
+- 轻松桥接native组件，只需要一行代码即可实现在LuaView脚本中操作用户自定义的native功能
 
-LuaView 是一种运行在一个 ViewController/Activity 中，可以灵活加载Lua 脚本，并能够按照 Native 的方式运行的一种面向业务的开发技术方案。可以快速开发电商应用中既要求体验又要求灵活性的页面功能，例如首页，类目首页，垂直频道，大促活动会场等。
+## 试用Playground App
 
-## 1.3 RoadMap
-- 1.0
-	- 必要的文档，例如环境搭建手册，LuaView API 手册
-	- 简单的示例代码，例如 Hello World 示例，Todo List 示例，UIExplorer 示例
-	- 网络功能
-	- 基于 flexbox 的自动布局
+LuaViewSDK Playground App下载地址 [Download](https://github.com/alibaba/LuaViewSDK/releases)
 
-- 2.0
-	- 页面生命周期
-	- 页面间跳转，具备开发完整 APP 能力相关的功能。
+## 如何使用LuaViewSDK
 
-# 2. 入门
-## 2.1 [新手入门 - iOS](IOS/Documentation/新手入门-iOS/新手入门 - iOS.md) 
-## 2.2 [新手入门 - Android](Android/Documentation/新手入门-android/新手入门 - android.md)
-## 2.3 交流
-	QQ群: 539262083
+- [使用说明](https://alibaba.github.io/LuaViewSDK/guide.html)
+- [接口文档](https://alibaba.github.io/LuaViewSDK/apimenu.html)
 
-# 3. 文档
-http://luaview.github.io 
+## 开发者
+
+- [董希成](xicheng.dxc@alibaba-inc.com)
+- [陈松涛](songtao.cst@alibaba-inc.com)
+
+## 许可证
+
+[MIT](https://github.com/alibaba/LuaViewSDK/blob/master/LICENSE.txt)
+
+## 社区
+
+[Github Wiki](https://github.com/alibaba/LuaViewSDK/wiki)
+
+QQ群：539262083
+
+Twitter：[@luaview](https://twitter.com/luaview)
