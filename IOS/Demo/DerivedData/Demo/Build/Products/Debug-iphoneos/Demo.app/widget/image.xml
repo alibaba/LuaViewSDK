@@ -1,0 +1,17 @@
+<doc>
+    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee" >
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Local Image" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <!--&lt;!&ndash;为了兼容iOS,本地图片需要加后缀&ndash;&gt;-->
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="luaview.png"></Image>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Http Image" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="https://gw.alicdn.com/tfs/TB1..OGQXXXXXaaXVXXXXXXXXXX-330-320.png"></Image>
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label flexCss="flex: 1, margin: 10" text="Gif Image" fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="https://gw.alicdn.com/tfs/TB1JYiJQXXXXXbIXFXXXXXXXXXX-330-320.gif"></Image>
+    </View>
+</doc>

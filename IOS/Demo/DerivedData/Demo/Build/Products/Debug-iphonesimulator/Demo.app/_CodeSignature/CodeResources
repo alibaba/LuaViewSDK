@@ -4,23 +4,11 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>00xml.lua</key>
-		<data>
-		CnZZ8l/M5sCWcHceTi5RsZDQADo=
-		</data>
-		<key>Animation.lua</key>
-		<data>
-		JdU/+7sb2J4DSKWlOHdS9ejYMns=
-		</data>
-		<key>Audio.lua</key>
-		<data>
-		1bdo06YLfqkd/0OQSpN3IezOa7c=
-		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LzfRtZAIwjZ05/nLf6TYvk7QLhw=
+			BTeOwv7+H6ACv4+0niS6acZvgS0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -38,54 +26,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YGPUbbgPLnS7pX+S1kAajZqLHUM=
+			TtalnVz99W2L9QtEFxexYXJi+MQ=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Button.lua</key>
-		<data>
-		GhFWnW3EOC/ued2lezWJc4DE+AQ=
-		</data>
-		<key>Camera.lua</key>
-		<data>
-		YmAjbjjKYZkFanjqrjCD2JMRjcc=
-		</data>
-		<key>Clipboard.lua</key>
-		<data>
-		Pov8yuTFHq0kYngZDXQinfNdAr8=
-		</data>
-		<key>Dropdown.lua</key>
-		<data>
-		+Er3R0g8iSt0OSxa8STLCeTRuhk=
-		</data>
-		<key>Http.lua</key>
-		<data>
-		pAj58JrPndhhA9kjn9xLIp6FGVs=
-		</data>
-		<key>Image.lua</key>
-		<data>
-		WHcMZwB2Ki8m/9lp9Nxhl8on9rg=
-		</data>
 		<key>Info.plist</key>
 		<data>
-		5AMi6H1lvnyBSUvqeQSNgopoNTg=
-		</data>
-		<key>Label.lua</key>
-		<data>
-		EiyQjpE3+jB82Iwx7NcjOFL2kWQ=
-		</data>
-		<key>List.lua</key>
-		<data>
-		/Owi9opc1BTaMV9mWItWWOh1M7M=
-		</data>
-		<key>ListPullDown.lua</key>
-		<data>
-		Oyfz8LimCLm4i7i6BrT1ddI0XSM=
-		</data>
-		<key>Loading.lua</key>
-		<data>
-		Vn884+iI3uH6U+RQf1hRHcJzPag=
+		uMc244LuLP1VqJtCciRLumFamj4=
 		</data>
 		<key>MJRefresh.bundle/arrow@2x.png</key>
 		<data>
@@ -120,51 +68,15 @@
 		</dict>
 		<key>Main.lua</key>
 		<data>
-		hDE3Uu8L3rnoGpaBdyyF2jmcwAc=
-		</data>
-		<key>Navigator.lua</key>
-		<data>
-		QG290tyfw8W0r0on+3Znv1pmPGk=
-		</data>
-		<key>Picker.lua</key>
-		<data>
-		W4JLbWBnW8LALH9r72qPwrb5SnA=
+		9NvsyF9cz1v1qE0Z4n+gseC7O6k=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
-		<key>Slider.lua</key>
+		<key>about.xml</key>
 		<data>
-		PpIiu0U6Zm0qf39GMBXkSxs8qiY=
-		</data>
-		<key>Storage.lua</key>
-		<data>
-		r1RuI+nTBFJRKItvK+b0g+ikhsU=
-		</data>
-		<key>Tabbar.lua</key>
-		<data>
-		6NCAAFYqwNGJcLECQb3V/bhuGNg=
-		</data>
-		<key>TextField.lua</key>
-		<data>
-		aYYMtbsoUo6rDP9iHCjRrx/33lk=
-		</data>
-		<key>Timer.lua</key>
-		<data>
-		t6yawukSMqTohKMN5SS7D7oA/zo=
-		</data>
-		<key>Video.lua</key>
-		<data>
-		jXtvlkXtK22a5d5GrX6JMmiOVc4=
-		</data>
-		<key>Web.lua</key>
-		<data>
-		DAOwBT9ggFLnX+8qqs5Lx9JzXJ0=
-		</data>
-		<key>animate1.png</key>
-		<data>
-		D6RRSV23s/UjOhsj9Thwzvg86cs=
+		FcxdzefdyxOpQ6mU+m/UqXe+t40=
 		</data>
 		<key>close.png</key>
 		<data>
@@ -173,6 +85,10 @@
 		<key>demoZ_1212.lua</key>
 		<data>
 		Nr7b9nVfvdutfnHdPMb99zAijoE=
+		</data>
+		<key>demo_item.xml</key>
+		<data>
+		lHmbu2dFjWyzSuwsuTX2Acbji3U=
 		</data>
 		<key>enter.png</key>
 		<data>
@@ -196,11 +112,11 @@
 		</data>
 		<key>kit/common.lua</key>
 		<data>
-		ttnWk5Oc0VM90b9XTwpgR7UjVlI=
+		Lrq7uHIhx5YJ9bKzVB6YM6WJiXA=
 		</data>
 		<key>kit/pica.lua</key>
 		<data>
-		kRFaihjKRuqn73Wo9rMOyJgLhFI=
+		8R9lpLAWp+8sD6qXliiSji72Ky4=
 		</data>
 		<key>kit/slaxdom.lua</key>
 		<data>
@@ -214,67 +130,130 @@
 		<data>
 		bDwQD56zkKt6mlnaWKrx0X39PsQ=
 		</data>
-		<key>xml/button.xml</key>
+		<key>luaview.png</key>
 		<data>
-		kIGwaMJBbdtdDf8n6x7PmsGslH0=
+		KZ8ZQfSzSJ4nJPlaUX5fSAepzqY=
 		</data>
-		<key>xml/image.xml</key>
+		<key>main.xml</key>
 		<data>
-		R489DrPeB86lNCCu5gxNKYmguEk=
+		HzxIEnhuUo3DxzztxtzQCnHrFbI=
 		</data>
-		<key>xml/label.xml</key>
+		<key>widget/Animation.lua</key>
 		<data>
-		gLuFwjAuWLF0Ra7F0jDaUEoQLSo=
+		Kl80ljBMRmnw0ISSzd7AzbKXPlQ=
 		</data>
-		<key>xml/test_view.xml</key>
+		<key>widget/Audio.lua</key>
 		<data>
-		QMUzIXBecHkCUcvPmbZv1xe2DGA=
+		1bdo06YLfqkd/0OQSpN3IezOa7c=
+		</data>
+		<key>widget/Button.lua</key>
+		<data>
+		EVX0PFUZEJ3xbGmroQYpAYh0hlc=
+		</data>
+		<key>widget/Camera.lua</key>
+		<data>
+		VdQ5tNaFZvMoz4iSTnv1ZJRbCBk=
+		</data>
+		<key>widget/Clipboard.lua</key>
+		<data>
+		rCGACieg7vACToOM5BZhUf7DiFA=
+		</data>
+		<key>widget/Dropdown.lua</key>
+		<data>
+		gpMmoBxiK6DfUlj8VSsYrCG/hHQ=
+		</data>
+		<key>widget/Image.lua</key>
+		<data>
+		ly+VPRwK0SL5zPrBlXr3KuN8VZY=
+		</data>
+		<key>widget/Label.lua</key>
+		<data>
+		aacTVRHTAzlIP7qcZT8gU66BjXw=
+		</data>
+		<key>widget/List.lua</key>
+		<data>
+		BtIWSD4OJSze0C4wQjvklZbeQ7c=
+		</data>
+		<key>widget/Loading.lua</key>
+		<data>
+		iSbR2/01S6X2O2IhTApU9qdJJEg=
+		</data>
+		<key>widget/PagerView.lua</key>
+		<data>
+		3lYVYD06G54r67O05P37lpcw4pc=
+		</data>
+		<key>widget/Picker.lua</key>
+		<data>
+		88DcfHd+WeLmHmNeyOE230cV1kI=
+		</data>
+		<key>widget/Storage.lua</key>
+		<data>
+		r1RuI+nTBFJRKItvK+b0g+ikhsU=
+		</data>
+		<key>widget/TextField.lua</key>
+		<data>
+		KErVe6B6/BFdGVYz0atQ0ZPDjVA=
+		</data>
+		<key>widget/Video.lua</key>
+		<data>
+		pNpST6axduSwOpwG6o3BxtON4nc=
+		</data>
+		<key>widget/WebView.lua</key>
+		<data>
+		HYDbWAt0nY3tljxViYClYH5hfvM=
+		</data>
+		<key>widget/animation.xml</key>
+		<data>
+		ExI2bzxHgN6SVw9UZHqj78n2dxw=
+		</data>
+		<key>widget/button.xml</key>
+		<data>
+		iVPYbfaUFeygGm41UBuyMVFdfiU=
+		</data>
+		<key>widget/image.xml</key>
+		<data>
+		5mh2hag7YZ74gerhMrIllbA3ub4=
+		</data>
+		<key>widget/label.xml</key>
+		<data>
+		QvEepCOEy3ic/2TalW74OjMMsrI=
+		</data>
+		<key>widget/list.xml</key>
+		<data>
+		xsclbbFlCbDUOriu174mq//5c44=
+		</data>
+		<key>widget/loading.xml</key>
+		<data>
+		2r8AFvlg/BwoM3Ck1oxvORrfEbI=
+		</data>
+		<key>widget/pagerview.xml</key>
+		<data>
+		879Qb6qWSUzbNx/HiVO72DmICw4=
+		</data>
+		<key>widget/pagerview_page.xml</key>
+		<data>
+		CMaVOPTDpR1aBRcdzTKSMzWYu88=
+		</data>
+		<key>widget/textfield.xml</key>
+		<data>
+		8EYhjVWzfIJOVix3XhsWJ3/hVQ0=
+		</data>
+		<key>widget/webview.xml</key>
+		<data>
+		8kwYTnZKpaZi/t7G4waZlofKqcQ=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>00xml.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			CnZZ8l/M5sCWcHceTi5RsZDQADo=
-			</data>
-			<key>hash2</key>
-			<data>
-			P/fbKQvsMGr6aSlSBybDXvtGbjd5GisBnyCJkRiFJmk=
-			</data>
-		</dict>
-		<key>Animation.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			JdU/+7sb2J4DSKWlOHdS9ejYMns=
-			</data>
-			<key>hash2</key>
-			<data>
-			BtVGWsrjIkM16eXwbIXN+JtYtx/yrpJwCuCK1vSrmSc=
-			</data>
-		</dict>
-		<key>Audio.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			1bdo06YLfqkd/0OQSpN3IezOa7c=
-			</data>
-			<key>hash2</key>
-			<data>
-			fMorH/eh8O3PmU+D5jdvWaSo9zUi887/aukrZO7sBRY=
-			</data>
-		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LzfRtZAIwjZ05/nLf6TYvk7QLhw=
+			BTeOwv7+H6ACv4+0niS6acZvgS0=
 			</data>
 			<key>hash2</key>
 			<data>
-			4pv64SmpcsSk8tbvYnKiaUXrR3gC+EiwgCyOmid9+1E=
+			5Iextfb0addtdwQHlHNoN8esprXZ5Q/IsnNWvtCDqVE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -296,124 +275,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YGPUbbgPLnS7pX+S1kAajZqLHUM=
+			TtalnVz99W2L9QtEFxexYXJi+MQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			n3TL9wY6UFVRK8jrGxclTRkdCTj/3DPrE25KRjSZibo=
+			hDlHEDfv07SXzL7RwnkFP7U+yRncBWaOKVv2LlKiVyE=
 			</data>
 			<key>optional</key>
 			<true/>
-		</dict>
-		<key>Button.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			GhFWnW3EOC/ued2lezWJc4DE+AQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			VqCST1Wpi0bp6w9vqxO3W2ad216jwtLa6eNBhimZjnk=
-			</data>
-		</dict>
-		<key>Camera.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			YmAjbjjKYZkFanjqrjCD2JMRjcc=
-			</data>
-			<key>hash2</key>
-			<data>
-			69NJIwGcvhQA/uAHhqQ2bL1WDnBg239T31CHnHbPMQg=
-			</data>
-		</dict>
-		<key>Clipboard.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Pov8yuTFHq0kYngZDXQinfNdAr8=
-			</data>
-			<key>hash2</key>
-			<data>
-			TN6i64rShPLf+mEbSNd6Pgt8/MMxKvlOoPp/na74F7k=
-			</data>
-		</dict>
-		<key>Dropdown.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+Er3R0g8iSt0OSxa8STLCeTRuhk=
-			</data>
-			<key>hash2</key>
-			<data>
-			lY33ksKVhhe88d7RpQAMDfGa8FE27pBYOqE4XBTmZ80=
-			</data>
-		</dict>
-		<key>Http.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			pAj58JrPndhhA9kjn9xLIp6FGVs=
-			</data>
-			<key>hash2</key>
-			<data>
-			n93tpFAPDAQP4w/hLh7dejfs79evC4IapOqLk0WVIFg=
-			</data>
-		</dict>
-		<key>Image.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			WHcMZwB2Ki8m/9lp9Nxhl8on9rg=
-			</data>
-			<key>hash2</key>
-			<data>
-			AZawLVV1jXzNSOFuipt9Ns+7v8WZI2MUsiUADwL2zZc=
-			</data>
-		</dict>
-		<key>Label.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			EiyQjpE3+jB82Iwx7NcjOFL2kWQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			kvqJgF5gRs7EjTfvsJRDFgN1Ft8Cu99jU6IiR68etiQ=
-			</data>
-		</dict>
-		<key>List.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/Owi9opc1BTaMV9mWItWWOh1M7M=
-			</data>
-			<key>hash2</key>
-			<data>
-			/DJxkjpOgwqIqtSazVy4lHYG6K1oF2hmYW5xHdGLTL0=
-			</data>
-		</dict>
-		<key>ListPullDown.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Oyfz8LimCLm4i7i6BrT1ddI0XSM=
-			</data>
-			<key>hash2</key>
-			<data>
-			IXa0UkACzWRmUhFaMWrza97P0f8Sjdq7nHCcC/iMC7A=
-			</data>
-		</dict>
-		<key>Loading.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Vn884+iI3uH6U+RQf1hRHcJzPag=
-			</data>
-			<key>hash2</key>
-			<data>
-			zcVFXkEUoRAJyfFqi51Gv0trXV7LARGoQSnpfhyoemo=
-			</data>
 		</dict>
 		<key>MJRefresh.bundle/arrow@2x.png</key>
 		<dict>
@@ -469,121 +338,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hDE3Uu8L3rnoGpaBdyyF2jmcwAc=
+			9NvsyF9cz1v1qE0Z4n+gseC7O6k=
 			</data>
 			<key>hash2</key>
 			<data>
-			EURlQ/zmKW4m013K82beUXCEfBHn50jsg0x59b+YtYU=
+			IvWk7fo0IskdqQ0QNM2M/Pj5PDsJ/7o10gtj4qceWEE=
 			</data>
 		</dict>
-		<key>Navigator.lua</key>
+		<key>about.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QG290tyfw8W0r0on+3Znv1pmPGk=
+			FcxdzefdyxOpQ6mU+m/UqXe+t40=
 			</data>
 			<key>hash2</key>
 			<data>
-			CKpzdR6f4RC2JuuyCDNHJhXBBHs3dXpBmkb5HnyqafU=
-			</data>
-		</dict>
-		<key>Picker.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			W4JLbWBnW8LALH9r72qPwrb5SnA=
-			</data>
-			<key>hash2</key>
-			<data>
-			wv4l+PynB8VqRy62DUWSEHclaRlti3gn+duUMtchreY=
-			</data>
-		</dict>
-		<key>Slider.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			PpIiu0U6Zm0qf39GMBXkSxs8qiY=
-			</data>
-			<key>hash2</key>
-			<data>
-			1pRC9Npxv07seOFwsTG3L+br3Yl3OHiUaKmbgOnlb7U=
-			</data>
-		</dict>
-		<key>Storage.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			r1RuI+nTBFJRKItvK+b0g+ikhsU=
-			</data>
-			<key>hash2</key>
-			<data>
-			1+D6oO1JC0LlrdQNZ+Jb87POXbN1/Qbx+N33lXkzjaQ=
-			</data>
-		</dict>
-		<key>Tabbar.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			6NCAAFYqwNGJcLECQb3V/bhuGNg=
-			</data>
-			<key>hash2</key>
-			<data>
-			F8RJOTok/e0tYWF6Ursq0prKMWlMmjaWUsJk24zwWpY=
-			</data>
-		</dict>
-		<key>TextField.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			aYYMtbsoUo6rDP9iHCjRrx/33lk=
-			</data>
-			<key>hash2</key>
-			<data>
-			gYIEvLcfrw+rI8JKrOEhp86lKUPJS/6RtGerLgxNsss=
-			</data>
-		</dict>
-		<key>Timer.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			t6yawukSMqTohKMN5SS7D7oA/zo=
-			</data>
-			<key>hash2</key>
-			<data>
-			oXWzoXG80QJz3qPYlNjcL7kBK9SX1cLtSvscMi5b+GQ=
-			</data>
-		</dict>
-		<key>Video.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			jXtvlkXtK22a5d5GrX6JMmiOVc4=
-			</data>
-			<key>hash2</key>
-			<data>
-			8KXF98fZpPBg2wxwTIYBrycXSqlnYUBGxZZShHIbOD8=
-			</data>
-		</dict>
-		<key>Web.lua</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			DAOwBT9ggFLnX+8qqs5Lx9JzXJ0=
-			</data>
-			<key>hash2</key>
-			<data>
-			35qXlXRY+1Mu3kJewvyX2CUtr0TlPleKV7pTHByozwU=
-			</data>
-		</dict>
-		<key>animate1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			D6RRSV23s/UjOhsj9Thwzvg86cs=
-			</data>
-			<key>hash2</key>
-			<data>
-			S/2Y9rkBUwZ3mA7iXWbdwTNWKII4cDbZ93RGN1MVGxc=
+			o02UBEuUtuqLCNKq48GtoeyizUiAas7BDAgHTVlg/Wc=
 			</data>
 		</dict>
 		<key>close.png</key>
@@ -606,6 +376,17 @@
 			<key>hash2</key>
 			<data>
 			bCw85aek/2MqDbEHpNVadInTG67ctSVT6cAySuUYxKo=
+			</data>
+		</dict>
+		<key>demo_item.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lHmbu2dFjWyzSuwsuTX2Acbji3U=
+			</data>
+			<key>hash2</key>
+			<data>
+			rMtDo6soXdK2gbbIrwx37PnIFqVYdlHOXcTrBrCfDoI=
 			</data>
 		</dict>
 		<key>enter.png</key>
@@ -667,22 +448,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ttnWk5Oc0VM90b9XTwpgR7UjVlI=
+			Lrq7uHIhx5YJ9bKzVB6YM6WJiXA=
 			</data>
 			<key>hash2</key>
 			<data>
-			5VrTgE1qm/AJphLWlvL5xxnebyfhMfbbBSMhUi3VOwk=
+			j6XrKNHeRGWxaIoNU86qJPGjOCQ9Hf6fZiEgL+O+i4I=
 			</data>
 		</dict>
 		<key>kit/pica.lua</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kRFaihjKRuqn73Wo9rMOyJgLhFI=
+			8R9lpLAWp+8sD6qXliiSji72Ky4=
 			</data>
 			<key>hash2</key>
 			<data>
-			DpKyNce3704RuRneEnwyil4B7nEPSudbywSrWE+PSNs=
+			Bu2OWlwd4jstGXdZDzSEQ27ePW+4S1AJD7m5CH6Gm+A=
 			</data>
 		</dict>
 		<key>kit/slaxdom.lua</key>
@@ -718,48 +499,312 @@
 			1Uwhsx+MAcnVijLB7sIyVtixyQ6DdCYCP66MtogjRGk=
 			</data>
 		</dict>
-		<key>xml/button.xml</key>
+		<key>luaview.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kIGwaMJBbdtdDf8n6x7PmsGslH0=
+			KZ8ZQfSzSJ4nJPlaUX5fSAepzqY=
 			</data>
 			<key>hash2</key>
 			<data>
-			qFiE9WrrBbmrRFGqfRpimzPeCSnJkrt9nwtSWprCI7U=
+			ElcA7uzilcGf6zab4OB4OGLwTx7U5KV8d2cyEYiNimQ=
 			</data>
 		</dict>
-		<key>xml/image.xml</key>
+		<key>main.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			R489DrPeB86lNCCu5gxNKYmguEk=
+			HzxIEnhuUo3DxzztxtzQCnHrFbI=
 			</data>
 			<key>hash2</key>
 			<data>
-			hSyDuifOB588u74bzbq00HNR3sQ2d7kRkw7Pu4uuLiA=
+			f2NcUGtAWmr8ZIl6iMxteCkrLHf9fl1VygywT8GBYv8=
 			</data>
 		</dict>
-		<key>xml/label.xml</key>
+		<key>widget/Animation.lua</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gLuFwjAuWLF0Ra7F0jDaUEoQLSo=
+			Kl80ljBMRmnw0ISSzd7AzbKXPlQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			amn8WQ2dlqPJDkD1TBD1VOa6ShUpttHCkbFAlS10iHs=
+			jy7SMqB5e7G2ivEEucWE929cZTj7rzytPDn4LjHiZxQ=
 			</data>
 		</dict>
-		<key>xml/test_view.xml</key>
+		<key>widget/Audio.lua</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QMUzIXBecHkCUcvPmbZv1xe2DGA=
+			1bdo06YLfqkd/0OQSpN3IezOa7c=
 			</data>
 			<key>hash2</key>
 			<data>
-			WR6ghLSewBqS6Uju83gjB4gjtxBfZ5uchDsjeI5aNUU=
+			fMorH/eh8O3PmU+D5jdvWaSo9zUi887/aukrZO7sBRY=
+			</data>
+		</dict>
+		<key>widget/Button.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EVX0PFUZEJ3xbGmroQYpAYh0hlc=
+			</data>
+			<key>hash2</key>
+			<data>
+			4RVOJ6O2L5AUxmm+i6g4Gz4SxImMp8wSXM9oF6gs2IQ=
+			</data>
+		</dict>
+		<key>widget/Camera.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VdQ5tNaFZvMoz4iSTnv1ZJRbCBk=
+			</data>
+			<key>hash2</key>
+			<data>
+			mqJ+Y7wi+TpxRkQ6E+tFy8duqMdvlUpbkUkF1ciaB1U=
+			</data>
+		</dict>
+		<key>widget/Clipboard.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rCGACieg7vACToOM5BZhUf7DiFA=
+			</data>
+			<key>hash2</key>
+			<data>
+			nynlVKWTX0vFUjzS9/cY6nYeU6sU+sEGT5M9JDOutns=
+			</data>
+		</dict>
+		<key>widget/Dropdown.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gpMmoBxiK6DfUlj8VSsYrCG/hHQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			UdFpuPOG25u5eLfcgK3PTgGO1Cd3g6SOwprD+uu1paY=
+			</data>
+		</dict>
+		<key>widget/Image.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ly+VPRwK0SL5zPrBlXr3KuN8VZY=
+			</data>
+			<key>hash2</key>
+			<data>
+			Fmn4TbQ84sKZ8ma5nz+6xQF92Z1c63CaJ/rFjho4ekU=
+			</data>
+		</dict>
+		<key>widget/Label.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aacTVRHTAzlIP7qcZT8gU66BjXw=
+			</data>
+			<key>hash2</key>
+			<data>
+			vljCCVtFeiIdobJvSmBj8YsVi9H+emKBD6jZ4u8tPM4=
+			</data>
+		</dict>
+		<key>widget/List.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BtIWSD4OJSze0C4wQjvklZbeQ7c=
+			</data>
+			<key>hash2</key>
+			<data>
+			cnO1bEkuUr5q2iaLFOhnbDbOj7quBWBOEVp8HAWWBXI=
+			</data>
+		</dict>
+		<key>widget/Loading.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iSbR2/01S6X2O2IhTApU9qdJJEg=
+			</data>
+			<key>hash2</key>
+			<data>
+			YiM+RwufQ4aT4KtNq0d2ENCkcgV+pUX0cFZic3Yos0o=
+			</data>
+		</dict>
+		<key>widget/PagerView.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3lYVYD06G54r67O05P37lpcw4pc=
+			</data>
+			<key>hash2</key>
+			<data>
+			0lZMbccLgTbA97dNWEWlLOHO38k3N+JtKgkO6PXi82Q=
+			</data>
+		</dict>
+		<key>widget/Picker.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			88DcfHd+WeLmHmNeyOE230cV1kI=
+			</data>
+			<key>hash2</key>
+			<data>
+			1pU4LndiY5xwgRisTQJk89FF+HAE25x5uAKHFNqd18Y=
+			</data>
+		</dict>
+		<key>widget/Storage.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			r1RuI+nTBFJRKItvK+b0g+ikhsU=
+			</data>
+			<key>hash2</key>
+			<data>
+			1+D6oO1JC0LlrdQNZ+Jb87POXbN1/Qbx+N33lXkzjaQ=
+			</data>
+		</dict>
+		<key>widget/TextField.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KErVe6B6/BFdGVYz0atQ0ZPDjVA=
+			</data>
+			<key>hash2</key>
+			<data>
+			aSopdh6xiFb7uIXDiQvDS2Nc5798j8bmYj/9nwXyjB0=
+			</data>
+		</dict>
+		<key>widget/Video.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			pNpST6axduSwOpwG6o3BxtON4nc=
+			</data>
+			<key>hash2</key>
+			<data>
+			Gwqk9yXxzslbddDC4iKmcljNpX45XWpfCB0HIzYhp6U=
+			</data>
+		</dict>
+		<key>widget/WebView.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HYDbWAt0nY3tljxViYClYH5hfvM=
+			</data>
+			<key>hash2</key>
+			<data>
+			iXCgj1FPjblnsldwWH/gBMLFSLXiW+1QmV+6flXzTU0=
+			</data>
+		</dict>
+		<key>widget/animation.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ExI2bzxHgN6SVw9UZHqj78n2dxw=
+			</data>
+			<key>hash2</key>
+			<data>
+			/f5OlLnSUewmQLUSjduWDQn7Gv6f+2hCTrj5T1WWJ54=
+			</data>
+		</dict>
+		<key>widget/button.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iVPYbfaUFeygGm41UBuyMVFdfiU=
+			</data>
+			<key>hash2</key>
+			<data>
+			eZezQ8ALTqvjfpSgGMZTdWC3phvnCWoc6A4rpyMBmg0=
+			</data>
+		</dict>
+		<key>widget/image.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5mh2hag7YZ74gerhMrIllbA3ub4=
+			</data>
+			<key>hash2</key>
+			<data>
+			oDqh2uRiXHrrvb7hGPPSRZIPMw0l3iF/vjvog+B/Qrw=
+			</data>
+		</dict>
+		<key>widget/label.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QvEepCOEy3ic/2TalW74OjMMsrI=
+			</data>
+			<key>hash2</key>
+			<data>
+			sk0Numgc6HfuBrG6LQbolc2MLFz0inrWj1TFeOa0NAQ=
+			</data>
+		</dict>
+		<key>widget/list.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xsclbbFlCbDUOriu174mq//5c44=
+			</data>
+			<key>hash2</key>
+			<data>
+			nGQQ+QeDT8YeTaAsU8OWfjKQuoMZaxLeYDGzQVOmJN0=
+			</data>
+		</dict>
+		<key>widget/loading.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2r8AFvlg/BwoM3Ck1oxvORrfEbI=
+			</data>
+			<key>hash2</key>
+			<data>
+			aquvjdH37sDE4H4gPZBTKn0tCGED6EKsejCx9A50JxE=
+			</data>
+		</dict>
+		<key>widget/pagerview.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			879Qb6qWSUzbNx/HiVO72DmICw4=
+			</data>
+			<key>hash2</key>
+			<data>
+			BBIrgZpz+h5eV0NpTjy371f79G8G2fvfKYtJJqj6FLw=
+			</data>
+		</dict>
+		<key>widget/pagerview_page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CMaVOPTDpR1aBRcdzTKSMzWYu88=
+			</data>
+			<key>hash2</key>
+			<data>
+			IXJSnAlD01SVTl8Q/kjEafD3h7BBfy9RprBe6IwG45g=
+			</data>
+		</dict>
+		<key>widget/textfield.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8EYhjVWzfIJOVix3XhsWJ3/hVQ0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Gzcw1xjh7b8DLOfidcK9iKoXBmtoa5/wUdErsnLSkRI=
+			</data>
+		</dict>
+		<key>widget/webview.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8kwYTnZKpaZi/t7G4waZlofKqcQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			LxheWF1TEHlmGZ+uXPAW97uqva6Hp2yRbz6LzUgDCLA=
 			</data>
 		</dict>
 	</dict>
