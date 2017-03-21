@@ -10,3 +10,4 @@
         <View id="pagerContainer2" flexCss="flex: 1" frame="0, ((SCREEN_HEIGHT-100)/2)+100, SCREEN_WIDTH, (SCREEN_HEIGHT-100)/2"></View>
     </View>
 </doc>
+

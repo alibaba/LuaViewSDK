@@ -10,10 +10,17 @@ Navigation:title("TextField.lua")
 
 local function start()
     local pica = require("kit.pica")
+
     print("tuoli", "xml read start")
-    local data = File:read("widget/textfield.xml")
-    print("tuoli", "xml read end")
-    pica:parseXml(data)
+    if (System:android()) then
+        local xml = File:read("widget/textfield_android.xml")
+        print("tuoli", "xml read end")
+        pica:parseXml(xml)
+    else
+        local xml = File:read("widget/textfield_ios.xml")
+        print("tuoli", "xml read end")
+        pica:parseXml(xml)
+    end
 end
 
 start()

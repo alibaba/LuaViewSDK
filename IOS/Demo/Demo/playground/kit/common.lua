@@ -163,3 +163,17 @@ if (Common == nil) then
         end
     end
 end
+
+ScaleType = {};
+
+if( System:ios() ) then
+    -- ios
+    ScaleType.ScaleAspectFit = 1;
+    ScaleType.ScaleAspectFill = 2;
+    ScaleType.SCALE_FIT_XY = 0;
+else
+    -- 安卓
+    ScaleType.ScaleAspectFit = "FIT_CENTER";
+    ScaleType.ScaleAspectFill = "CENTER_CROP";
+    ScaleType.SCALE_FIT_XY = "FIT_XY";
+end
