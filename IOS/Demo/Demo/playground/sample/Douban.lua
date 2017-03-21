@@ -21,19 +21,18 @@ end
 local function start()
     local loading = LoadingIndicator()
     loading:frame(0, _screenHeight/2 - 50, _screenWidth, 50)
+    loading:color(0xF06292)
     loading:show()
 
     local pica = require("kit.pica")
 
     local http = Http()
     print("tuoli", "http request start")
-    http:get("http://api.douban.com/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a", {
-        query = 1
-    }, function(response)
+    http:get("http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a", function(response)
         print("tuoli", "http request end")
         loading:hide()
         print("tuoli to json start")
-        local jsonData = Json:toTable(response:data())
+        local jsonData = Json:toTable(tostring(response:data()))
         print("tuoli to json end")
         if (tostring(response:code()) == "200") then
             local tableData = {
@@ -59,7 +58,9 @@ local function start()
                             print("tuoli", "xml read end")
                             pica:parseXml(xml)
 
-                            local root = pica:getViewByName("root")
+                            cell.left = pica:getViewByName("left.pannel")
+                            cell.right = pica:getViewByName("right.pannel")
+                            cell.root = pica:getViewByName("root")
                             cell.window:addView(root)
                             cell.profile = pica:getViewByName("profile")
                             cell.movieName = pica:getViewByName("movieName")
@@ -81,9 +82,24 @@ local function start()
                             cell.number:text(jsonData["subjects"][row]["collect_count"] .. "人看过")
                         end
                     }
+                },
+                Callback = {
+                    PullDown = function()
+                        local httpReload = Http()
+                        httpReload:get("http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a",
+                            function(response)
+                                jsonData = Json:toTable(tostring(response:data()))
+                                if (tostring(response:code()) == "200") then
+                                    tableView:reload()
+                                end
+
+                                tableView:stopRefreshing()
+                            end
+                        )
+                    end
                 }
             }
-            tableView = CollectionView(tableData)
+            tableView = RefreshCollectionView(tableData)
             tableView:backgroundColor(0xeeeeee)
             tableView:frame(0, 0, _screenWidth, _screenHeight)
         else

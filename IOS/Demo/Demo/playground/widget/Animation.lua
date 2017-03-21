@@ -29,7 +29,7 @@ local function start()
 
     local button3 = pica:getViewByName("button3")
     button3:callback(function()
-        local alpha = Animation():alpha(1, 0.3):duration(1)
+        local alpha = Animation():alpha(0.3):duration(1)
         alpha:with(img):start()
     end)
 end

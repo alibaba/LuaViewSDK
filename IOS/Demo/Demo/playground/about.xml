@@ -15,7 +15,7 @@
                 <View flexCss="height:1, margin-left: 10, margin-right: 10" backgroundColor="0xeeeeee"></View>
                 <View flexCss="flex: 1, flex-direction: row">
                     <Label flexCss="flex: 1, margin-left: 10" textAlign="TextAlign.LEFT" text="官网"></Label>
-                    <Label flexCss="flex: 1, margin-right: 10" textAlign="TextAlign.RIGHT" text="www.luaviewxxxx.org"></Label>
+                    <Label flexCss="flex: 3, margin-right: 10" textAlign="TextAlign.RIGHT" text="https://alibaba.github.io/LuaViewSDK"></Label>
                 </View>
             </View>
             <View flexCss="flex-direction: column, flex: 3">

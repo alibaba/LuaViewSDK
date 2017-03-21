@@ -21,7 +21,7 @@
             <Label flexCss="flex: 1, margin: 10" text="LineCount" fontSize="20" textColor="0xffffff"></Label>
         </View>
         <View flexCss="flex-direction: column, flex: 1, margin-top: 5, margin-bottom: 5, margin-left: 15, margin-right: 15">
-            <Label flexCss="flex: 1" text="one line one line one line one line one line one line" fontSize="25" lineCount="1"></Label>
+            <Label flexCss="flex: 1" text="one line one line one line one line one line one line" fontSize="25" lineCount="1" ellipsize="Ellipsize.END"></Label>
             <Label flexCss="flex: 1" text="two lines two lines two lines two lines two lines two lines" fontSize="25" lineCount="2"></Label>
         </View>
         <View flexCss="height: 50" backgroundColor="0x004B97">

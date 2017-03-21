@@ -9,7 +9,6 @@
 Navigation:title("Playground")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
---                        ' "Audio", "Picker", "Dropdown", "Clipboard", "Video", "Camera"] '
 
 local _dataWidget = Json:toTable(_jsonDataWidget)
 

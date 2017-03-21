@@ -3,18 +3,18 @@
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Input Hint" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <TextField flexCss="flex: 1, margin-left: 10, margin-right: 10" hint="Input Something"></TextField>
+        <TextField flexCss="flex: 1, margin: 10" hint="Input Something"></TextField>
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Text Input" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <TextField flexCss="flex: 1, margin-left: 10, margin-right: 10"></TextField>
+        <TextField flexCss="flex: 1, margin: 10"></TextField>
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <TextField flexCss="flex: 1, margin-left: 10, margin-right: 10"></TextField>
+        <TextField flexCss="flex: 1, margin: 10"></TextField>
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <TextField flexCss="flex: 1, margin-left: 10, margin-right: 10"></TextField>
+        <TextField flexCss="flex: 1, margin: 10"></TextField>
     </View>
 </doc>
