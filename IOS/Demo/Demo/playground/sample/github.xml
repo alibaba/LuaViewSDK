@@ -1,7 +1,9 @@
 <doc>
     <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xffffff" >
-        <View flexCss="flex-direction: row, height: 70">
-            <TextField id="input" flexCss="flex: 3, margin: 10" hint="Search"></TextField>
+        <View id="topContainer" flexCss="flex-direction: row, height: 70">
+            <View id="inputContainer" flexCss="flex-direction: row, flex: 3, margin: 10, align-items: center">
+                <TextField id="input" flexCss="flex: 1" hint="Search.."></TextField>
+            </View>
             <Button id="go" flexCss="flex: 1, margin: 10" backgroundColor="0xffffff" borderWidth="1" title="GO" borderColor="0x000000" cornerRadius="10"></Button>
         </View>
         <View id="container" flexCss="flex: 8" backgroundColor="0xeeeeee"></View>
