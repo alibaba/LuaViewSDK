@@ -1,0 +1,3 @@
+{
+  "plugins":["-sharing", "-livereload", "-mathjax", "splitter", "prism","toggle-chapters"]
+}

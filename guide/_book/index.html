@@ -1,0 +1,340 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>LuaViewSDK概述 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="downloads.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    LuaViewSDK概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="downloads.html">
+            
+                <a href="downloads.html">
+            
+                    
+                    相关下载说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="userguide_ios.html">
+            
+                <a href="userguide_ios.html">
+            
+                    
+                    SDK使用说明 - iOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="userguide_android.html">
+            
+                <a href="userguide_android.html">
+            
+                    
+                    SDK使用说明 - Android
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Change log
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >LuaViewSDK概述</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="luaviewsdk&#x6982;&#x8FF0;">LuaViewSDK&#x6982;&#x8FF0;</h1>
+<h2 id="1-luaviewsdk&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">1. LuaViewSDK&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h2>
+<blockquote>
+<p><strong>LuaViewSDK &#x4E3B;&#x8981;&#x89E3;&#x51B3;&#x4E24;&#x4E2A;&#x95EE;&#x9898;</strong></p>
+</blockquote>
+<ol>
+<li>&#x76F8;&#x540C;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x9700;&#x8981;&#x5728; iOS &#x548C; Android &#x5E73;&#x53F0;&#x5404;&#x5B9E;&#x73B0;&#x4E00;&#x6B21;&#xFF0C;&#x9664;&#x4E86;&#x6210;&#x672C;&#x8FD8;&#x6709;&#x4F53;&#x9A8C;&#x7684;&#x7EC6;&#x5FAE;&#x5DEE;&#x522B;&#xFF0C;&#x662F;&#x5426;&#x6709;&#x4E00;&#x79CD;&#x65B9;&#x6848;&#x53EF;&#x4EE5; Write once run both&#xFF1F;LuaViewSDK &#x662F;&#x7B54;&#x6848;&#x3002;</li>
+<li>&#x79FB;&#x52A8; APP&#xFF0C;&#x8981;&#x4F53;&#x9A8C;&#x53D1;&#x5E03;&#x5C31;&#x4E0D;&#x7075;&#x6D3B;&#xFF08;Native&#xFF09;&#xFF0C;&#x8981;&#x53D1;&#x5E03;&#x7075;&#x6D3B;&#x5C31;&#x4F53;&#x9A8C;&#x6B20;&#x7F3A;&#xFF08;H5&#xFF09;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x4E00;&#x79CD;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x517C;&#x987E; Nativa &#x7684;&#x4F53;&#x9A8C;&#x548C; H5&#x7684;&#x53D1;&#x5E03;&#x7075;&#x6D3B;&#x6027;&#xFF1F;LuaViewSDK &#x5C31;&#x662F;&#x7B54;&#x6848;&#x3002;</li>
+</ol>
+<p>LuaView &#x662F;&#x4E00;&#x79CD;&#x8FD0;&#x884C;&#x5728;&#x4E00;&#x4E2A; ViewController/Activity &#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x7075;&#x6D3B;&#x52A0;&#x8F7D;Lua &#x811A;&#x672C;&#xFF0C;&#x5E76;&#x80FD;&#x591F;&#x6309;&#x7167; Native &#x7684;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;&#x7684;&#x4E00;&#x79CD;&#x9762;&#x5411;&#x4E1A;&#x52A1;&#x7684;&#x5F00;&#x53D1;&#x6280;&#x672F;&#x65B9;&#x6848;&#x3002;&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#x7535;&#x5546;&#x5E94;&#x7528;&#x4E2D;&#x65E2;&#x8981;&#x6C42;&#x4F53;&#x9A8C;&#x53C8;&#x8981;&#x6C42;&#x7075;&#x6D3B;&#x6027;&#x7684;&#x9875;&#x9762;&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x5404;&#x7C7B;&#x6D3B;&#x52A8;&#x9875;&#x9762;&#xFF0C;&#x5927;&#x4FC3;&#x4F1A;&#x573A;&#x9875;&#x9762;&#x7B49;&#x3002;&#x73B0;&#x5728;&#x4F7F;&#x7528; LuaViewSDK &#x5B8C;&#x6210;&#x7684;&#x7EBF;&#x4E0A;&#x529F;&#x80FD;&#x6709;&#x805A;&#x5212;&#x7B97;&#x7684;&#x54C1;&#x724C;&#x56E2;&#xFF0C;&#x805A;&#x540D;&#x54C1;&#xFF0C;&#x91CF;&#x8D29;&#x56E2;&#xFF0C;&#x975E;&#x5E38;&#x5927;&#x724C;&#xFF0C;&#x805A;&#x5BB6;&#x88C5;&#xFF0C;&#x5168;&#x7403;&#x7CBE;&#x9009;&#x7B49;&#x9875;&#x9762;</p>
+<p>LuaViewSDK&#x76EE;&#x524D;&#x5DF2;&#x7ECF;&#x5728; Alibaba &#x6574;&#x4F53;&#x5F00;&#x6E90;&#x6846;&#x67B6;&#x4E0B;&#x5B8C;&#x6574;&#x5F00;&#x6E90;&#xFF08;MIT&#x534F;&#x8BAE;&#xFF09;&#xFF0C;&#x6B22;&#x8FCE;&#x5927;&#x5BB6;&#x4F7F;&#x7528;&#x3001;&#x8BA8;&#x8BBA;&#x3002;
+&#x5F00;&#x6E90;&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/alibaba/LuaViewSDK" target="_blank">https://github.com/alibaba/LuaViewSDK</a></p>
+<h2 id="2-&#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9;lua">2. &#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9;lua</h2>
+<blockquote>
+<p>lua&#x7684;&#x76EE;&#x6807;&#x662F;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x5F88;&#x5BB9;&#x6613;&#x5D4C;&#x5165;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x8BED;&#x8A00;&#x3002;lua&#x4F53;&#x79EF;&#x5C0F;&#x3001;&#x542F;&#x52A8;&#x901F;&#x5EA6;&#x5FEB;&#x3002;</p>
+</blockquote>
+<ol>
+<li><p><strong>&#x5C0F;&#x5DE7;</strong></p>
+<p>&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;lua&#x89E3;&#x91CA;&#x5668;&#x4E0D;&#x8FC7;200k</p>
+</li>
+<li><p><strong>&#x9AD8;&#x6548;</strong></p>
+<p>&#x5728;&#x811A;&#x672C;&#x5F15;&#x64CE;&#x4E2D;&#xFF0C;&#x76EE;&#x524D;lua&#x662F;&#x6700;&#x5FEB;&#x7684;</p>
+</li>
+<li><p><strong>&#x5DF2;&#x7ECF;&#x88AB;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;</strong></p>
+<p>&#x5927;&#x91CF;&#x7684;&#x6E38;&#x620F;&#x5F15;&#x64CE;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x5E94;&#x7528;&#x5747;&#x5728;&#x4F7F;&#x7528;lua</p>
+</li>
+<li><p><strong>&#x6210;&#x719F;</strong></p>
+<p>&#x5728;Android&#x3001;iOS&#x5E73;&#x53F0;&#x5DF2;&#x7ECF;&#x6709;&#x73B0;&#x6210;&#x7684;Lua&#x89E3;&#x91CA;&#x5668;&#x3002;LuaJ&#x548C;LuaC</p>
+</li>
+</ol>
+<h2 id="3-luaviewsdk&#x57FA;&#x7840;&#x67B6;&#x6784;">3. LuaViewSDK&#x57FA;&#x7840;&#x67B6;&#x6784;</h2>
+<blockquote>
+<p><strong>LuaView SDK&#x4E3B;&#x8981;&#x7531;Lua Engine&#x3001;UI Lib&#x3001;Script Manager&#x4EE5;&#x53CA;Security&#x6A21;&#x5757;&#x6784;&#x6210;&#x3002;</strong></p>
+</blockquote>
+<p><img src="http://gtms03.alicdn.com/tps/i3/TB1wmiNKFXXXXbvXXXXVxDVQFXX-1750-1402.png" alt=""></p>
+<ol>
+<li><p><strong>Lua Engine</strong></p>
+<p>Lua&#x811A;&#x672C;&#x5230;Native&#x8BED;&#x8A00;&#x7684;&#x6865;&#x6881;&#x3002;&#x53EF;&#x4EE5;&#x5C06;Lua&#x811A;&#x672C;&#x7FFB;&#x8BD1;&#x6210;&#x76EE;&#x6807;&#x8BED;&#x8A00;&#x3002;&#x76EE;&#x524D;Android&#x7AEF;&#x4F7F;&#x7528;LuaJ&#x3001;iOS&#x7AEF;&#x4F7F;&#x7528;LuaC&#x4F5C;&#x4E3A;&#x811A;&#x672C;&#x89E3;&#x6790;&#x5668;&#x3002;</p>
+</li>
+<li><p><strong>Lua-Native UI Lib</strong></p>
+<p>&#x6574;&#x4E2A;LuaView&#x7684;&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;&#xFF0C;&#x4E3B;&#x8981;&#x5728;Android&#x3001;iOS&#x7AEF;&#x7EDF;&#x4E00;&#x4E86;&#x5404;&#x79CD;UI&#x7EC4;&#x4EF6;&#xFF0C;&#x5305;&#x62EC;View&#x3001;Label&#x3001;Image&#x3001;Button&#x3001;TableView&#x3001;ViewPager&#x3001;Alert&#x7B49;&#x7B49;&#x7EC4;&#x4EF6;&#x3002;&#x5F00;&#x53D1;&#x8005;&#x4E5F;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;UI&#x7EC4;&#x4EF6;&#xFF0C;&#x5728;Lua&#x5C42;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x548C;&#x64CD;&#x4F5C;Native&#x5BF9;&#x8C61;&#x3002;</p>
+</li>
+<li><p><strong>Script Manager</strong></p>
+<p>Lua&#x811A;&#x672C;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x4E3B;&#x8981;&#x5B8C;&#x6210;&#x811A;&#x672C;&#x7684;&#x89E3;&#x538B;&#x3001;&#x52A0;&#x8F7D;&#x7B49;&#x529F;&#x80FD;&#x3002;</p>
+</li>
+<li><p><strong>Security</strong></p>
+<p>&#x4E3B;&#x8981;&#x5B8C;&#x6210;&#x811A;&#x672C;&#x7684;&#x9A8C;&#x8BC1;&#x3001;&#x89E3;&#x5BC6;&#x7B49;&#x529F;&#x80FD;&#x3002;</p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="downloads.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 相关下载说明">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"LuaViewSDK概述","level":"1.1","depth":1,"next":{"title":"相关下载说明","level":"1.2","depth":1,"path":"downloads.md","ref":"downloads.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-sharing","-livereload","-mathjax","splitter","prism","toggle-chapters"],"pluginsConfig":{"splitter":{},"prism":{},"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-03-19T06:45:25.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-19T13:02:58.090Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
