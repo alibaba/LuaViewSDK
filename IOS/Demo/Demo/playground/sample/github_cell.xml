@@ -4,10 +4,10 @@
         <Label id="description" flexCss="flex: 3, margin-top: 10, margin-left: 10, margin-right: 10" fontSize="14" lineCount="3"></Label>
         <View id="bottomContainer" flexCss="flex-direction: row, flex: 2, margin: 10">
             <View id="bottomLeft" flexCss="flex: 1, flex-direction: row">
-                <Label id="author" flexCss="flex: 1" text="Author: " fontSize="16"></Label>
-                <Image id="profile" flexCss="flex: 2"></Image>
+                <Label id="author" flexCss="flex: 1" text="Author: " fontSize="16" textAlign="TextAlign.LEFT"></Label>
+                <Image id="profile" flexCss="flex: 1" scaleType="ScaleType.SCALE_FIT_XY"></Image>
             </View>
-            <Label id="stars" flexCss="flex: 1" textAlign="TextAlign.CENTER" text="Stars: " fontSize="16"></Label>
+            <Label id="stars" flexCss="flex: 1" textAlign="TextAlign.RIGHT" text="Stars: " fontSize="16"></Label>
         </View>
     </View>
 </doc>

@@ -48,15 +48,15 @@ local function start()
                     cell.window:addView(root)
 
                     local fs1 = pica:getViewByName("fs1")
-                    fs1:text(StyledString("normal", {fontStyle = "normal"}))
+                    fs1:text(StyledString("normal", {fontStyle = "normal", fontSize=25}))
                     local fs2 = pica:getViewByName("fs2")
-                    fs2:text(StyledString("bold", {fontStyle = "bold"}))
+                    fs2:text(StyledString("bold", {fontStyle = "bold", fontSize=25}))
                     local fs3 = pica:getViewByName("fs3")
-                    fs3:text(StyledString("italic", {fontStyle = "italic"}))
+                    fs3:text(StyledString("italic", {fontStyle = "italic", fontSize=25}))
                     local td1 = pica:getViewByName("td1")
-                    td1:text(StyledString("strikethrough", {strikethrough = true}))
+                    td1:text(StyledString("strikethrough", {strikethrough = true, fontSize=25}))
                     local td2 = pica:getViewByName("td2")
-                    td2:text(StyledString("underline", {underline = true}))
+                    td2:text(StyledString("underline", {underline = true, fontSize=25}))
                 end
             }
         }

@@ -22,12 +22,19 @@ local function start()
     local pica = require("kit.pica")
 
     print("tuoli", "xml read start")
-    local xml = File:read("sample/github.xml")
-    print("tuoli", "xml read end")
-    pica:parseXml(xml)
+    if (System:android()) then
+        local xml = File:read("sample/github_android.xml")
+        print("tuoli", "xml read end")
+        pica:parseXml(xml)
+    else
+        local xml = File:read("sample/github_ios.xml")
+        print("tuoli", "xml read end")
+        pica:parseXml(xml)
+    end
 
     root = pica:getViewByName("root")
     topContainer = pica:getViewByName("topContainer")
+    inputContainer = pica:getViewByName("inputContainer")
     go = pica:getViewByName("go")
     input = pica:getViewByName("input")
     container = pica:getViewByName("container")
@@ -60,7 +67,7 @@ local function start()
             print("tuoli", "http request end")
             loading:hide()
             local jsonData = Json:toTable(tostring(response:data()))
---                Common:printTable(jsonData)
+            --                Common:printTable(jsonData)
             if (tostring(response:code()) == "200") then
                 if (table.getn(jsonData["items"]) == 0) then
                     Toast("No Result")

@@ -211,6 +211,9 @@ function Pica:parseElement(element, parent)
             elseif (_v.name == "textAlign") then
                 local paramFun = Common:loadString("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
+            elseif (_v.name == "scaleType") then
+                local paramFun = Common:loadString("return " .. _v.value)
+                self.objs[element]:scaleType(paramFun())
             elseif (_v.name == "ellipsize") then
                 if (_isAndroid) then
                     local paramFun = Common:loadString("return " .. _v.value)
