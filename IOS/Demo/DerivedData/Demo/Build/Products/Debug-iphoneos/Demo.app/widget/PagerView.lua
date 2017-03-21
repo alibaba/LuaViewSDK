@@ -32,12 +32,15 @@ local function start()
     local pagerContainer1 = pica:getViewByName("pagerContainer1")
     local pagerContainer2 = pica:getViewByName("pagerContainer2")
 
-    local autoSlider = PagerView({
+    autoSlider = PagerView({
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
                 local xml_page = File:read("widget/pagerview_page.xml")
                 pica:parseXml(xml_page)
+
+                page.root = pica:getViewByName("root")
+                page.img = pica:getViewByName("img")
             end,
             Layout = function(page, pos)
             end
@@ -46,24 +49,29 @@ local function start()
 
     autoSlider:autoScroll(3)
     autoSlider:looping(true)
+    autoSlider:frame(0, 0, _screenWidth, (_screenHeight - 100)/2)
     pagerContainer1:addView(autoSlider)
     local indicator = createIndicator()
     indicator:frame(0, _screenHeight/3, _screenWidth, 20)
     pagerContainer1:addView(indicator)
     autoSlider:indicator(indicator)
 
-    local manualSlider = PagerView({
+    manualSlider = PagerView({
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
                 local xml_page = File:read("widget/pagerview_page.xml")
                 pica:parseXml(xml_page)
+
+                page.root = pica:getViewByName("root")
+                page.img = pica:getViewByName("img")
             end,
             Layout = function(page, pos)
             end
         }
     })
 
+    manualSlider:frame(0, 0, _screenWidth, (_screenHeight - 100)/2)
     pagerContainer2:addView(manualSlider)
     local indicator2 = createIndicator()
     indicator2:frame(0, _screenHeight/3, _screenWidth, 20)

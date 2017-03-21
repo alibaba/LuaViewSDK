@@ -11,8 +11,8 @@ require("kit.common")
 local Pica = {}
 
 local _screenWidth, _screenHeight = System:screenSize()
-local _isAndroid = System:android()
 
+local _isAndroid = System:android()
 
 -- 减掉ActionBar和StatusBar的高度
 if (_isAndroid) then
@@ -161,6 +161,10 @@ function Pica:parseElement(element, parent)
                 self.objs[element]:frame(paramFun())
             elseif (_v.name == "backgroundColor") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
+            elseif (_v.name == "color") then
+                if (element.name == "LoadingIndicator") then
+                    self.objs[element]:color(tonumber(_v.value))
+                end
             elseif (_v.name == "id") then
                 -- 考虑到性能问题,不采用遍历的方式来取得开发者所关注的对象。而是使用字典的形式来获取。
                 self.identifierObjs[_v.value] = self.objs[element]
@@ -189,7 +193,13 @@ function Pica:parseElement(element, parent)
             elseif (_v.name == "borderWidth") then
                 self.objs[element]:borderWidth(tonumber(_v.value))
             elseif (_v.name == "textColor") then
-                self.objs[element]:textColor(tonumber(_v.value))
+                if (not _isAndroid and string.len(_v.value) == 10) then
+                    local alphaStr = string.sub(_v.value, 3, 4)
+                    local alpha = tonumber(alphaStr)/tonumber("0xFF")
+                    self.objs[element]:textColor(tonumber(_v.value), alpha)
+                else
+                    self.objs[element]:textColor(tonumber(_v.value))
+                end
             elseif (_v.name == "fontSize") then
                 self.objs[element]:fontSize(tonumber(_v.value))
             elseif (_v.name == "lineCount") then

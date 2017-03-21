@@ -9,7 +9,6 @@
 Navigation:title("Playground")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
---                        ' "Audio", "Picker", "Dropdown", "Clipboard", "Video", "Camera"] '
 
 local _dataWidget = Json:toTable(_jsonDataWidget)
 
@@ -141,7 +140,7 @@ local function main()
                             cell.subitem:text(_dataDescription[row])
                         end,
                         Callback = function(cell, section, row)
-                            Bridge:jumpTo("demo/" .. _dataDemo[row] .. ".lua")
+                            Bridge:jumpTo("sample/" .. _dataDemo[row] .. ".lua")
                         end
                     }
                 }

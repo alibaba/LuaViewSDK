@@ -78,6 +78,7 @@ local function start()
     tableView:backgroundColor(0xeeeeee)
     tableView:miniSpacing(1)
     tableView:showScrollIndicator(false)
+    tableView:frame(0, 0, _screenWidth, _screenHeight - 50)
     tableContainer:addView(tableView)
 end
 

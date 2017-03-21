@@ -4,6 +4,38 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<data>
+		T3H2rA+pOnrtNnfc6jYFZa0pUzY=
+		</data>
+		<key>AppIcon20x20@3x.png</key>
+		<data>
+		h/IYUvmx/y74vusWmNJBcOaaXhg=
+		</data>
+		<key>AppIcon29x29@2x.png</key>
+		<data>
+		9LTPmsExraYb2kADjZMeD83WxX0=
+		</data>
+		<key>AppIcon29x29@3x.png</key>
+		<data>
+		U2htK/29VCGMP5+AvxNL7qJl7cM=
+		</data>
+		<key>AppIcon40x40@2x.png</key>
+		<data>
+		Urmh5GIIJzxImic/zQkM5rUOSGM=
+		</data>
+		<key>AppIcon40x40@3x.png</key>
+		<data>
+		4apBm4TY3wtdHfa3SbBEH87uh4o=
+		</data>
+		<key>AppIcon60x60@2x.png</key>
+		<data>
+		4apBm4TY3wtdHfa3SbBEH87uh4o=
+		</data>
+		<key>AppIcon60x60@3x.png</key>
+		<data>
+		/8tawI9m0xN50TIkr7Op44DDUbU=
+		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
@@ -33,7 +65,7 @@
 		</dict>
 		<key>Info.plist</key>
 		<data>
-		uMc244LuLP1VqJtCciRLumFamj4=
+		Ubt6sLKADmu1YlWvxNyVj4982cg=
 		</data>
 		<key>MJRefresh.bundle/arrow@2x.png</key>
 		<data>
@@ -68,7 +100,7 @@
 		</dict>
 		<key>Main.lua</key>
 		<data>
-		9NvsyF9cz1v1qE0Z4n+gseC7O6k=
+		vEJf6269c++Ge9FcbeSNTZupy7w=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -76,7 +108,7 @@
 		</data>
 		<key>about.xml</key>
 		<data>
-		FcxdzefdyxOpQ6mU+m/UqXe+t40=
+		lMrH16cSkymPZOJpsBqHFQeb9bA=
 		</data>
 		<key>close.png</key>
 		<data>
@@ -116,7 +148,7 @@
 		</data>
 		<key>kit/pica.lua</key>
 		<data>
-		8R9lpLAWp+8sD6qXliiSji72Ky4=
+		jlFc18ROQlcWi/j9+C7/RzrzciQ=
 		</data>
 		<key>kit/slaxdom.lua</key>
 		<data>
@@ -138,9 +170,29 @@
 		<data>
 		HzxIEnhuUo3DxzztxtzQCnHrFbI=
 		</data>
+		<key>sample/Douban.lua</key>
+		<data>
+		Zh4OpRhLaPy7LQ9ueIYoRn7Nkso=
+		</data>
+		<key>sample/GitHub.lua</key>
+		<data>
+		sbvyNr5CswL2Uc4IxsZZX+Bjczo=
+		</data>
+		<key>sample/douban.xml</key>
+		<data>
+		8k4MUmSCRG0tFpDoh5a12RAnzWY=
+		</data>
+		<key>sample/github.xml</key>
+		<data>
+		YPO9ISMuTszDxmpXHQEf+oq6KT0=
+		</data>
+		<key>sample/github_cell.xml</key>
+		<data>
+		P0zDhy9FTd3GWsSvBcvEUb4lXWc=
+		</data>
 		<key>widget/Animation.lua</key>
 		<data>
-		Kl80ljBMRmnw0ISSzd7AzbKXPlQ=
+		gfmrddUZDLm/ADiZOjp54GXOf+Q=
 		</data>
 		<key>widget/Audio.lua</key>
 		<data>
@@ -172,7 +224,7 @@
 		</data>
 		<key>widget/List.lua</key>
 		<data>
-		BtIWSD4OJSze0C4wQjvklZbeQ7c=
+		z1G63odgIKWeA7+fRjWt9JYF4N4=
 		</data>
 		<key>widget/Loading.lua</key>
 		<data>
@@ -180,7 +232,7 @@
 		</data>
 		<key>widget/PagerView.lua</key>
 		<data>
-		3lYVYD06G54r67O05P37lpcw4pc=
+		VzEcyHkoSda+dSxzCfm4IdTGJyU=
 		</data>
 		<key>widget/Picker.lua</key>
 		<data>
@@ -212,11 +264,11 @@
 		</data>
 		<key>widget/image.xml</key>
 		<data>
-		5mh2hag7YZ74gerhMrIllbA3ub4=
+		6qiR+bZb9prfM0ID5BARuhDZJYI=
 		</data>
 		<key>widget/label.xml</key>
 		<data>
-		QvEepCOEy3ic/2TalW74OjMMsrI=
+		HuocRMHkqFwSuBtHqn0c3ZdfdHY=
 		</data>
 		<key>widget/list.xml</key>
 		<data>
@@ -224,19 +276,19 @@
 		</data>
 		<key>widget/loading.xml</key>
 		<data>
-		2r8AFvlg/BwoM3Ck1oxvORrfEbI=
+		U11M8m6iQjRrtm+iMlCYE8pcw70=
 		</data>
 		<key>widget/pagerview.xml</key>
 		<data>
-		879Qb6qWSUzbNx/HiVO72DmICw4=
+		UhoUdYDOKadWkOvGKPVwnUxVMqA=
 		</data>
 		<key>widget/pagerview_page.xml</key>
 		<data>
-		CMaVOPTDpR1aBRcdzTKSMzWYu88=
+		7fmAU80Hc753hl58lqJs8ZUPAy4=
 		</data>
 		<key>widget/textfield.xml</key>
 		<data>
-		8EYhjVWzfIJOVix3XhsWJ3/hVQ0=
+		S9Mkx+aUeX3N80vgErcGzbH66F8=
 		</data>
 		<key>widget/webview.xml</key>
 		<data>
@@ -245,6 +297,94 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			T3H2rA+pOnrtNnfc6jYFZa0pUzY=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZDu3Pk/0oWpVlmZk2N2PnJwYsVPqxPy9u/y5JTo+vaw=
+			</data>
+		</dict>
+		<key>AppIcon20x20@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h/IYUvmx/y74vusWmNJBcOaaXhg=
+			</data>
+			<key>hash2</key>
+			<data>
+			o5ZP0eAVRnCfVFvTvsrkO2rsHkgP893tKgsZ+FtFgLc=
+			</data>
+		</dict>
+		<key>AppIcon29x29@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9LTPmsExraYb2kADjZMeD83WxX0=
+			</data>
+			<key>hash2</key>
+			<data>
+			34aachbuCvly0gJIGAGZjPBhhImTAclbqJKLVQSTfrw=
+			</data>
+		</dict>
+		<key>AppIcon29x29@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			U2htK/29VCGMP5+AvxNL7qJl7cM=
+			</data>
+			<key>hash2</key>
+			<data>
+			1fwksNFvHiAEf3Jq0aE/+iBCE3nR5v06aQfcETWgyXg=
+			</data>
+		</dict>
+		<key>AppIcon40x40@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Urmh5GIIJzxImic/zQkM5rUOSGM=
+			</data>
+			<key>hash2</key>
+			<data>
+			N/Bqq+A90aj7pY9pgUAn9iG9cDN4/QaKYus7J0S9Kpw=
+			</data>
+		</dict>
+		<key>AppIcon40x40@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4apBm4TY3wtdHfa3SbBEH87uh4o=
+			</data>
+			<key>hash2</key>
+			<data>
+			5nnd9xHapE3AUd66W4rjJIFQDG+zfuoHOaSbPtpdyh8=
+			</data>
+		</dict>
+		<key>AppIcon60x60@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4apBm4TY3wtdHfa3SbBEH87uh4o=
+			</data>
+			<key>hash2</key>
+			<data>
+			5nnd9xHapE3AUd66W4rjJIFQDG+zfuoHOaSbPtpdyh8=
+			</data>
+		</dict>
+		<key>AppIcon60x60@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/8tawI9m0xN50TIkr7Op44DDUbU=
+			</data>
+			<key>hash2</key>
+			<data>
+			rjrkk1eKHVtN1+1MQYQzeAqqslgFwPTTKr+6xzNNw7c=
+			</data>
+		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
@@ -338,22 +478,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9NvsyF9cz1v1qE0Z4n+gseC7O6k=
+			vEJf6269c++Ge9FcbeSNTZupy7w=
 			</data>
 			<key>hash2</key>
 			<data>
-			IvWk7fo0IskdqQ0QNM2M/Pj5PDsJ/7o10gtj4qceWEE=
+			kpBkEh/oXayFov3tKEbH0ZzKy81G6FHDeC226tYin5E=
 			</data>
 		</dict>
 		<key>about.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FcxdzefdyxOpQ6mU+m/UqXe+t40=
+			lMrH16cSkymPZOJpsBqHFQeb9bA=
 			</data>
 			<key>hash2</key>
 			<data>
-			o02UBEuUtuqLCNKq48GtoeyizUiAas7BDAgHTVlg/Wc=
+			2NaQTdnngI6uHApjmYHhvQ8j8nBwoNtQiyvnN7Lz1o0=
 			</data>
 		</dict>
 		<key>close.png</key>
@@ -459,11 +599,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8R9lpLAWp+8sD6qXliiSji72Ky4=
+			jlFc18ROQlcWi/j9+C7/RzrzciQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			Bu2OWlwd4jstGXdZDzSEQ27ePW+4S1AJD7m5CH6Gm+A=
+			5gLTiW3HctBSJl4QqUPo9L/gtI0M5xvIVhDjthpKQi8=
 			</data>
 		</dict>
 		<key>kit/slaxdom.lua</key>
@@ -521,15 +661,70 @@
 			f2NcUGtAWmr8ZIl6iMxteCkrLHf9fl1VygywT8GBYv8=
 			</data>
 		</dict>
+		<key>sample/Douban.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Zh4OpRhLaPy7LQ9ueIYoRn7Nkso=
+			</data>
+			<key>hash2</key>
+			<data>
+			8lcd2IWDMkzdhnxFwtfuhijNGPU/gJfLjzZSdss2s3A=
+			</data>
+		</dict>
+		<key>sample/GitHub.lua</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sbvyNr5CswL2Uc4IxsZZX+Bjczo=
+			</data>
+			<key>hash2</key>
+			<data>
+			QDgC86I7a7bn7dR9cSEcFr6eSZvzVjR8eJc8n9NlO8A=
+			</data>
+		</dict>
+		<key>sample/douban.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8k4MUmSCRG0tFpDoh5a12RAnzWY=
+			</data>
+			<key>hash2</key>
+			<data>
+			WocpGpxnNl8+8c+nECejZr+HtrgzbSflhHel0r5SYLQ=
+			</data>
+		</dict>
+		<key>sample/github.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YPO9ISMuTszDxmpXHQEf+oq6KT0=
+			</data>
+			<key>hash2</key>
+			<data>
+			4QFnqWsTpQjQNir22fETbwU7u7IRAaZqCvXJKrK2dvQ=
+			</data>
+		</dict>
+		<key>sample/github_cell.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			P0zDhy9FTd3GWsSvBcvEUb4lXWc=
+			</data>
+			<key>hash2</key>
+			<data>
+			W6+pL61qW4nPs5o6FOZIrXYDsNrx0Iw7YZPUHrxpXCA=
+			</data>
+		</dict>
 		<key>widget/Animation.lua</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Kl80ljBMRmnw0ISSzd7AzbKXPlQ=
+			gfmrddUZDLm/ADiZOjp54GXOf+Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			jy7SMqB5e7G2ivEEucWE929cZTj7rzytPDn4LjHiZxQ=
+			QH3ClMK967Wa6I4s11zopLNEkky5BlKyGxcWjIcUG4o=
 			</data>
 		</dict>
 		<key>widget/Audio.lua</key>
@@ -613,11 +808,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BtIWSD4OJSze0C4wQjvklZbeQ7c=
+			z1G63odgIKWeA7+fRjWt9JYF4N4=
 			</data>
 			<key>hash2</key>
 			<data>
-			cnO1bEkuUr5q2iaLFOhnbDbOj7quBWBOEVp8HAWWBXI=
+			eWbjEWOaVIg5tUxD25I/X4xlXD5i8SHxuxKle6nGltk=
 			</data>
 		</dict>
 		<key>widget/Loading.lua</key>
@@ -635,11 +830,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3lYVYD06G54r67O05P37lpcw4pc=
+			VzEcyHkoSda+dSxzCfm4IdTGJyU=
 			</data>
 			<key>hash2</key>
 			<data>
-			0lZMbccLgTbA97dNWEWlLOHO38k3N+JtKgkO6PXi82Q=
+			61NPGBwWadNU7Uuic0J0H8CBD0zRq5CyNSBdC06yX/8=
 			</data>
 		</dict>
 		<key>widget/Picker.lua</key>
@@ -723,22 +918,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5mh2hag7YZ74gerhMrIllbA3ub4=
+			6qiR+bZb9prfM0ID5BARuhDZJYI=
 			</data>
 			<key>hash2</key>
 			<data>
-			oDqh2uRiXHrrvb7hGPPSRZIPMw0l3iF/vjvog+B/Qrw=
+			KDvnAM+hxAqIs7mwF7KbV3Fg8kjWr4X+rN+829Qb3mI=
 			</data>
 		</dict>
 		<key>widget/label.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QvEepCOEy3ic/2TalW74OjMMsrI=
+			HuocRMHkqFwSuBtHqn0c3ZdfdHY=
 			</data>
 			<key>hash2</key>
 			<data>
-			sk0Numgc6HfuBrG6LQbolc2MLFz0inrWj1TFeOa0NAQ=
+			qoLy5wE6C8foUMKuSUnhL+3jXdvsdoSzi4Ma4/o8wR0=
 			</data>
 		</dict>
 		<key>widget/list.xml</key>
@@ -756,44 +951,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2r8AFvlg/BwoM3Ck1oxvORrfEbI=
+			U11M8m6iQjRrtm+iMlCYE8pcw70=
 			</data>
 			<key>hash2</key>
 			<data>
-			aquvjdH37sDE4H4gPZBTKn0tCGED6EKsejCx9A50JxE=
+			z1kBq9svk9mTyRi5Ap0GDu0ldfGx1xbQ06uPAhsjbV4=
 			</data>
 		</dict>
 		<key>widget/pagerview.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			879Qb6qWSUzbNx/HiVO72DmICw4=
+			UhoUdYDOKadWkOvGKPVwnUxVMqA=
 			</data>
 			<key>hash2</key>
 			<data>
-			BBIrgZpz+h5eV0NpTjy371f79G8G2fvfKYtJJqj6FLw=
+			g705jo9gI1s4Mw7BNiFsGZd339ISTuRh/NsHwU85CKw=
 			</data>
 		</dict>
 		<key>widget/pagerview_page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CMaVOPTDpR1aBRcdzTKSMzWYu88=
+			7fmAU80Hc753hl58lqJs8ZUPAy4=
 			</data>
 			<key>hash2</key>
 			<data>
-			IXJSnAlD01SVTl8Q/kjEafD3h7BBfy9RprBe6IwG45g=
+			1Qg0iJmX+1ai78siDrlwbsOC1hcxl9ZQqt0XaBW067U=
 			</data>
 		</dict>
 		<key>widget/textfield.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8EYhjVWzfIJOVix3XhsWJ3/hVQ0=
+			S9Mkx+aUeX3N80vgErcGzbH66F8=
 			</data>
 			<key>hash2</key>
 			<data>
-			Gzcw1xjh7b8DLOfidcK9iKoXBmtoa5/wUdErsnLSkRI=
+			W6biXAHpd5W5lLioEE0OVT96NdYz68oLABHP2BCk4yg=
 			</data>
 		</dict>
 		<key>widget/webview.xml</key>
