@@ -20,7 +20,7 @@
 
 * ## Playground App
 
-  Playground App第一版提供了LuaViewSDK的能力展示，从基础的功能组件到完整的应用页面
+  Playground App第一版提供了LuaViewSDK的基础能力展示，从基础的功能组件到完整的应用页面搭建
 
   iOS版
 

@@ -98,27 +98,6 @@
     <!-- /.intro-header -->
 
     <!-- Page Content -->
-
-	<a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">优势</h2>
-                    <p class="lead">轻量，高性能，易扩展，iOS/Android双平台通用，Native的编程模型</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="https://gw.alicdn.com/tps/TB1eJVdPVXXXXb7XXXXXXXXXXXX-1625-1083.jpg" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
     <!-- /.content-section-a -->
 
     <div class="content-section-b">
@@ -130,18 +109,9 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">使用Lua来构建跨平台原生应用</h2>
-                    <ul>
-                        <li>
-                            <p class="lead">使用标准的Lua语法，一份统一的Lua脚本，可以直接在iOS/Android两个平台上渲染出原生页面，极大提高开发效率</p>
-                        </li>
-                        <li>
-                            <p class="lead">相比于JS虚拟机，Lua虚拟机极为轻量，iOS上一个独立的Lua虚拟机仅占用200到300k的内存空间；脚本到native的执行栈极短，性能消耗低</p>
-                        </li>
-                        <!-- <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                        </li> -->
-                    </ul>
-
+                        <p class="lead">使用标准的Lua语法，一份统一的Lua脚本，可以在iOS/Android两个平台上渲染出同样的原生页面，极大提高开发效率</p>
+                        <p class="lead">相比于JS虚拟机，Lua虚拟机极为轻量，iOS上一个独立的Lua虚拟机仅占用200到300k的内存空间；脚本到native的执行栈短，速度极快</p>
+                        <p class="lead">WebAssembly发展迅速，很快LuaView将支持H5渲染！</p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
                     <img class="img-responsive" src="img/Lua-logo.png" alt="">
@@ -161,8 +131,9 @@
                   <div class="col-lg-5 col-sm-6">
                       <hr class="section-heading-spacer">
                       <div class="clearfix"></div>
-                      <h2 class="section-heading">Native编程规范，支持Flex布局</h2>
-                      <p class="lead">iOS与Android的开发同学可以无缝切换到LuaView的开发模式上来，同时支持Flex，进行不同机型下的自适应布局</p>
+                      <h2 class="section-heading">Native编程规范，极易上手</h2>
+                      <p class="lead">看到RN的前端语言感到无从下手？iOS与Android的开发同学可以无缝切换到LuaView的开发模式！同时支持Flex，进行不同机型下的自适应布局</p>
+                      <p class="lead">LuaViewSDK使用Lua标准语法，只需极短时间即可上手，配合定制化的LuaView IDE和调试器，开发Lua从未如此轻松！</p>
                   </div>
                   <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                       <img class="img-responsive" src="https://gw.alicdn.com/tps/TB1eJVdPVXXXXb7XXXXXXXXXXXX-1625-1083.jpg" alt="">
@@ -173,7 +144,7 @@
           <!-- /.container -->
 
       </div><!-- /.content-section-a -->
-      <div class="content-section-a">
+      <div class="content-section-b">
 
           <div class="container">
 
@@ -181,8 +152,11 @@
                   <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                       <hr class="section-heading-spacer">
                       <div class="clearfix"></div>
-                      <h2 class="section-heading">应用范围</h2>
-                      <p class="lead">可以在Native页面中嵌入一小块LuaView</p><p class="lead">可以实现完全由LuaView渲染的页面</p><p class="lead">可以通过Canvas绘图能力实现小游戏的制作</p><p class="lead">可以通过注册自定义的Native Component轻松实现功能扩展和定制化</p>
+                      <h2 class="section-heading">使用场景</h2>
+                      <p class="lead">可以在任意Native页面中嵌入一小块LuaView，实现部分动态化</p>
+                      <p class="lead">可以用LuaView渲染一整个页面，实现页面级的动态化</p>
+                      <p class="lead">可以通过Canvas绘图能力实现小游戏的制作</p>
+                      <p class="lead">可以通过注册自定义的Native Component轻松实现功能扩展和定制化，比如股票App中插入自定义的K线图组件</p>
                   </div>
                   <div class="col-lg-5 col-sm-pull-6  col-sm-6">
                       <img class="img-responsive" src="img/dog.png" alt="">
@@ -195,7 +169,7 @@
       </div>
       <!-- /.content-section-b -->
       <a  name=""></a>
-        <div class="content-section-b">
+        <div class="content-section-a">
 
             <div class="container">
                 <div class="row">
@@ -203,7 +177,7 @@
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
                         <h2 class="section-heading">基本原理</h2>
-                        <p class="lead">通过桥接能力的实现+定制了基础的Native API供Lua脚本调用，LuaViewSDK轻松实现了高性能的跨平台动态化能力</p>
+                        <p class="lead">在Lua虚拟机的基础之上，LuaViewSDK通过lua脚本桥接能力实现了一系列基础的Native API供Lua脚本调用，同时提供了极为方便的桥接接口供开发者使用，实现了Native和脚本层之间的双向调用</p>
                     </div>
                     <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                         <img class="img-responsive" src="http://gtms03.alicdn.com/tps/i3/TB1wmiNKFXXXXbvXXXXVxDVQFXX-1750-1402.png" alt="">
@@ -215,17 +189,41 @@
 
         </div>
         <!-- /.content-section-b -->
-<a  name="about"></a>
+        <div class="content-section-b">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">谁在用LuaViewSDK</h2>
+                        <p class="lead">LuaViewSDK已经接入到手机淘宝，手机天猫，聚划算等客户端，承接了十多个垂直业务频道的开发，支持了2016年全年聚划算大促活动的会场页面，相关页面日常UV达到数千万级别，可靠性，性能，灵活性已经接受了最严苛的考验</p>
+                    </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        <img class="img-responsive" src="img/dog.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+<a  name="aboutus"></a>
     <div class="content-section-b">
 
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-1 col-sm-11">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">关于我们</h2>
-                    <p class="lead">我们是天猫营销中台无线团队，欢迎随时<a href="mailto:jinjin.jj@alibaba-inc.com">联系</a></p>
+                    <p class="lead">我们是来自天猫产品技术部的营销中台无线团队，有任何建议和意见，欢迎随时联系。同时诚招iOS、Android、虚拟机、算法、数据分析等方面的人才！</p>
+                    <p><span>Twitter: <a href="https://twitter.com/luaview">@luaview<a></span></p>
+                    <p><span>邮箱: <a href="mailto:jinjin.jj@alibaba-inc.com">jinjin.jj@alibaba-inc.com</a></span></p>
+                    <p><span>QQ群: 539262083</span></p>
+                    <p><span>Github Wiki: <a href="https://github.com/alibaba/LuaViewSDK/wiki">https://github.com/alibaba/LuaViewSDK/wiki</a></span></p>
                 </div>
             </div>
 
@@ -269,9 +267,12 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="flow">
+                <div class="col-lg-6 col-md-6">
                   <p class="copyright text-muted small">Copyright &copy; Alibaba Group 2017. All Rights Reserved</p>
+                </div>
+                <div class="col-lg-6 col-md-6 text-right">
+                  <p class="copyright text-muted small"><a href="#">回顶部</a></p>
                 </div>
             </div>
         </div>

@@ -116,11 +116,11 @@ LuaViewSDK提供了两种方法进行LuaView脚本的动态渲染，一种使用
    }
    ```
 
-2. **进阶：使用LuaViewCore加载脚本**
+2. **进阶：使用LuaViewCore加载脚本进行共享虚拟机渲染 - 一个虚拟机渲染多个页面**
 
-   由于LuaView可以作为一个标准的View放到任何页面使用，所以当一个页面中有多个LuaView时，可能会造成性能下降；在这种情况下，为了提高性能和渲染效率，我们建议使用LuaViewCore作为共享虚拟机进行渲染。如下图所示，聚划算客户端的首页是Native结构，但是其中所有的商品坑位都是使用同一个LuaViewCore进行共享渲染
+   由于LuaView可以作为一个标准的View放到任何页面使用，虽然LuaViewSDK性能相对较高，但是当一个页面中有过多个LuaView时，依然可能会造成性能下降；在这种情况下，为了提高性能和渲染效率，我们建议使用LuaViewCore作为共享虚拟机进行渲染。如下图所示，聚划算客户端的首页是Native结构，但是其中所有的商品坑位都是使用同一个LuaViewCore进行共享渲染
 
-   <img src="https://img.alicdn.com/tfs/TB1WC45QXXXXXabXVXXXXXXXXXX-1242-2208.jpg" align="left" height="50%" width="50%" >
+   <img src="https://img.alicdn.com/tfs/TB1WC45QXXXXXabXVXXXXXXXXXX-1242-2208.jpg" width='50%' height='50%'/>
 
    **如何使用共享LuaViewCore进行渲染？**
 
@@ -158,7 +158,7 @@ LuaViewSDK提供了两种方法进行LuaView脚本的动态渲染，一种使用
 
 3. **如何使用加密脚本**
 
-   LuaViewSDK支持RSA非对称加密。如果脚本使用了RSA加密，那么在加载脚本之前需要加载公钥证书
+   LuaViewSDK支持RSA非对称加密。如果脚本使用了RSA加密，那么在加载脚本之前需要加载公钥证书。
 
    ```objectivec
    LuaView *luaview = [[LuaView alloc] init];
@@ -201,7 +201,20 @@ LuaViewSDK提供了两种方法进行LuaView脚本的动态渲染，一种使用
 
 ### *LuaViewCore对象方法*
 
-TODO
+| API               | 参数                       | 返回值      | 备注                       |
+| ----------------- | ------------------------ | -------- | ------------------------ |
+| bundle            | -                        | Bundle对象 | LuaView的bundle属性用于脚本目录管理 |
+| loadFile          | url: String              | 错误信息     | 加载指定资源（本地）               |
+| loadSignFile      | url: String              | 错误信息     | 加载指定资源本地                 |
+| runFile           | url: String              | 错误信息     | 加载指定资源（本地）               |
+| runSignFile       | url: String              | 错误信息     | 加载指定资源本地                 |
+| runData           | data: 数据块, fileName:调试信息 | 错误信息     | 加载指定资源（本地）               |
+| viewWillAppear    | -                        | -        | viewWillAppear           |
+| viewDidAppear     | -                        | -        | viewDidAppear            |
+| viewWillDisAppear | -                        | -        | viewWillDisAppear        |
+| viewDidDisAppear  | -                        | -        | viewDidDisAppear         |
+| motionBegan       | -                        | -        | motionBegan              |
+| motionEnded       | -                        | -        | motionEnded              |
 
 ### *Bundle对象方法*
 
