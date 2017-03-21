@@ -286,6 +286,9 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
                 ];
         self.registerClasses = arr;
         [self registerAllClass];
+        
+        // 默认支持RefreshCollectionView
+        self[@"RefreshCollectionView"] = [LVCollectionView class];
     }
 }
 

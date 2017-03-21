@@ -24,6 +24,12 @@ static int vmVersion (lua_State *L) {
 }
 
 // lv 扩展API
+static int sdkVersion (lua_State *L) {
+    lua_pushstring(L, LUAVIEW_SDK_VERSION ) ;
+    return 1; /* number of results */
+}
+
+// lv 扩展API
 static int osVersion (lua_State *L) {
     NSString* v = [[UIDevice currentDevice] systemVersion];
     lua_pushstring(L, v.UTF8String);
@@ -148,6 +154,7 @@ static int tableToString(lua_State*L){
             {"gc",static_gc},
             {"osVersion", osVersion},
             {"vmVersion", vmVersion},
+            {"sdkVersion", sdkVersion},
             {"scale", scale},
             {"platform",platform},
             {"device",device},
