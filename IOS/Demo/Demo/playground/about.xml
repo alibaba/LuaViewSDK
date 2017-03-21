@@ -1,10 +1,10 @@
 <doc>
     <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee">
         <View flexCss="flex: 4" backgroundColor="0xffffff">
-            <View flexCss="flex: 1, justify-content: center">
-                <Image flexCss="flex: 1, margin-left: 150, margin-right: 150, margin-top: 20, margin-bottom: 20" image="luaview.png"></Image>
+            <View flexCss="flex: 1, justify-content: center, align-items: center">
+                <Image flexCss="height: 100, width: 100" image="luaview.png"></Image>
             </View>
-            <Label id="info" flexCss="flex: 1, margin-left: 10, margin-right: 10" fontSize="16" textColor="0x000000" lineCount="4" text="LuaView是一套跨平台的移动开发方案。我们致力于让开发者只写一份业务代码就可以在Android和iOS两个移动平台运行, 同时带来与Native开发相当的流畅度。"></Label>
+            <Label id="info" flexCss="flex: 1, margin-left: 10, margin-right: 10" fontSize="16" textColor="0x000000" lineCount="3" text="LuaView是一套跨平台的移动开发方案。我们致力于让开发者只写一份业务代码就可以在Android和iOS两个移动平台运行, 同时带来与Native开发相当的流畅度。"></Label>
         </View>
         <View flexCss="flex-direction: column, flex: 3, margin-top: 10">
             <View flexCss="flex-direction: column, flex: 2" backgroundColor="0xffffff">

@@ -11,8 +11,8 @@ require("kit.common")
 local Pica = {}
 
 local _screenWidth, _screenHeight = System:screenSize()
-local _isAndroid = System:android()
 
+local _isAndroid = System:android()
 
 -- 减掉ActionBar和StatusBar的高度
 if (_isAndroid) then

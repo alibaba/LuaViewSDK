@@ -141,7 +141,7 @@ local function main()
                             cell.subitem:text(_dataDescription[row])
                         end,
                         Callback = function(cell, section, row)
-                            Bridge:jumpTo("demo/" .. _dataDemo[row] .. ".lua")
+                            Bridge:jumpTo("sample/" .. _dataDemo[row] .. ".lua")
                         end
                     }
                 }

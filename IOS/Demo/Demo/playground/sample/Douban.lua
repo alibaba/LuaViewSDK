@@ -55,7 +55,7 @@ local function start()
                         end,
                         Init = function(cell, section, row)
                             print("tuoli", "xml read start")
-                            local xml = File:read("demo/douban.xml")
+                            local xml = File:read("sample/douban.xml")
                             print("tuoli", "xml read end")
                             pica:parseXml(xml)
 

@@ -22,7 +22,7 @@ local function start()
     local pica = require("kit.pica")
 
     print("tuoli", "xml read start")
-    local xml = File:read("demo/github.xml")
+    local xml = File:read("sample/github.xml")
     print("tuoli", "xml read end")
     pica:parseXml(xml)
 
@@ -85,7 +85,7 @@ local function start()
                                     end,
                                     Init = function(cell, section, row)
                                         print("tuoli", "xml read start")
-                                        local xml = File:read("demo/github_cell.xml")
+                                        local xml = File:read("sample/github_cell.xml")
                                         print("tuoli", "xml read end")
                                         pica:parseXml(xml)
 
