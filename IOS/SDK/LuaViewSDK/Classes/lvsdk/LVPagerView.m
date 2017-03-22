@@ -51,6 +51,8 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 @property (nonatomic,assign) CGFloat sideRight;
 
 @property (nonatomic,assign) BOOL doubleMode;
+
+@property (nonatomic,assign) float autoScrollInterval;
 @end
 
 
@@ -155,27 +157,29 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 
 -(void) moveCenter{
     CGFloat width = self.scrollview.bounds.size.width;
-    CGPoint p = self.scrollview.contentOffset;
-    if( self.looping ) {
-        if( self.cellArray.count>2 ) {
-            if( p.x < width*0.5 ) {
-                self.pageIdx0 += 1;
-                self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
-                [self resetCellFrame];
-            } else if( p.x> width*1.5 ){
-                self.pageIdx0 -= 1;
-                self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
-                [self resetCellFrame];
-            }
-        } else {
-            if( p.x< 0 ) {
-                self.pageIdx0 += 1;
-                self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
-                [self resetCellFrame];
-            } else if( p.x>=width ){
-                self.pageIdx0 -= 1;
-                self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
-                [self resetCellFrame];
+    if( width>0 ) {
+        CGPoint p = self.scrollview.contentOffset;
+        if( self.looping ) {
+            if( self.cellArray.count>2 ) {
+                if( p.x < width*0.5 ) {
+                    self.pageIdx0 += 1;
+                    self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
+                    [self resetCellFrame];
+                } else if( p.x> width*1.5 ){
+                    self.pageIdx0 -= 1;
+                    self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
+                    [self resetCellFrame];
+                }
+            } else {
+                if( p.x< 0 ) {
+                    self.pageIdx0 += 1;
+                    self.scrollview.contentOffset = CGPointMake( p.x + width, 0);
+                    [self resetCellFrame];
+                } else if( p.x>=width ){
+                    self.pageIdx0 -= 1;
+                    self.scrollview.contentOffset = CGPointMake( p.x - width, 0);
+                    [self resetCellFrame];
+                }
             }
         }
     }
@@ -380,6 +384,7 @@ static int lvNewPagerView (lua_State *L) {
     [self createAllCell];
     [self moveCenter];
     [self checkCellVisible];
+    self.autoScrollInterval = self.autoScrollInterval;
 }
 
 -(void) reloadDataASync{
@@ -437,23 +442,28 @@ static int setCurrentPage(lua_State *L) {
     return 0;
 }
 
+-(void) setAutoScrollInterval:(float) interval{
+    _autoScrollInterval = interval;
+    NSInteger totalPages = self.cellArray.count;
+    if ( totalPages < 2 ){//小于两个没有效果
+        [self stopTimer];
+        return ;
+    }
+    if ( interval > 0.02 ) {//start timer
+        [self startTimer:interval repeat:YES];
+    } else {//stop timer
+        [self stopTimer];
+    }
+}
+
 static int autoScroll(lua_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if(user){
         LVPagerView * view = (__bridge LVPagerView *)(user -> object);
-        NSInteger totalPages = view.cellArray.count;
-        if ( totalPages < 2 ){//小于两个没有效果
-            return 0;
-        }
         
         if(lua_gettop(L) >= 2) {
             float interval = lua_tonumber(L, 2);
-            
-            if ( interval > 0.02 ) {//start timer
-                [view startTimer:interval repeat:YES];
-            } else {//stop timer
-                [view stopTimer];
-            }
+            [view setAutoScrollInterval:interval];
         }
     }
     return 0;
