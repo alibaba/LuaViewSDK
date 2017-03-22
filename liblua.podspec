@@ -1,16 +1,16 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "lua"
+  s.name         = "liblua"
   s.version  = "5.1.4"
-  s.summary      = "lua"
+  s.summary      = "liblua"
 
   s.description  = <<-DESC
-                   A longer description of lua.podspec in Markdown format.
+                   A longer description of liblua.podspec in Markdown format.
                    * LuaView
                    DESC
 
-  s.homepage     = "http://gitlab.alibaba-inc.com/luaview/lua"
+  s.homepage     = "http://gitlab.alibaba-inc.com/luaview/liblua"
 
 
   s.license      = { :type => 'GNU General Public Licence (GPL), Version 2.0', :file => 'LICENSE.txt' }
