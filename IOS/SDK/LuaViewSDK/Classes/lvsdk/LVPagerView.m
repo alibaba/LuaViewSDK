@@ -342,6 +342,10 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
 static int lvNewPagerView (lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVPagerView class]];
     
+    if( lua_gettop(L)<=0 ) {
+        lua_createtable(L, 8, 0);
+    }
+    
     if ( lua_gettop(L)>=1 && lua_type(L, 1)==LUA_TTABLE ) {
         LVPagerView* pageView = [[c alloc] init:L];
         

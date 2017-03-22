@@ -342,6 +342,7 @@ static int __gc (lua_State *L) {
 
 static const struct luaL_Reg memberFunctions [] = {
     {"callback",     callback },// 回调
+    {"initParams",   callback },// 回调
     
     {"contentSize",     contentSize },// for IOS
     {"offset",     contentOffset },//
