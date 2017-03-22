@@ -34,7 +34,7 @@ public class UDSystem extends BaseLuaTable {
     private void init() {
         set("ios", new ios());//是否ios
         set("android", new android());//是否android
-        set("vmVersion", new vmVersion());//Lua虚拟机版本
+        set("vmVersion", new vmVersion());//LuaView早期的版本系统 @Deprecated
         set("sdkVersion", new sdkVersion());//LuaView版本
         set("osVersion", new osVersion());//系统版本
         set("platform", new platform());//平台信息
@@ -60,6 +60,7 @@ public class UDSystem extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class vmVersion extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
