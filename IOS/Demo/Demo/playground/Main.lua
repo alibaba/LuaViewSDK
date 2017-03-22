@@ -6,37 +6,20 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Playground")
+require("kit.common")
+require("kit.platform")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
-
-local _dataWidget = Json:toTable(_jsonDataWidget)
-
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
-
-local _dataDemo = Json:toTable(_jsonDataDemo)
-
 local _jsonDataDescription = ' ["从豆瓣开放API获取电影信息", "按关键字检索GitHub的代码仓库"] '
-
+local _dataWidget = Json:toTable(_jsonDataWidget)
+local _dataDemo = Json:toTable(_jsonDataDemo)
 local _dataDescription = Json:toTable(_jsonDataDescription)
 
-local _screenWidth, _screenHeight = System:screenSize()
-
--- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
+local _pica = require("kit.pica")
 
 local function main()
-    local pica = require("kit.pica")
-
-    print("tuoli", "xml read start")
-    local data = File:read("main.xml")
-    print("tuoli", "xml read end")
-    pica:parseXml(data)
+    _pica:parseXml("main.xml")
 
     widgetTableView = CollectionView({
         Section = {
@@ -53,12 +36,12 @@ local function main()
             end,
             SampleCell = {
                 Size = function(section, row)
-                    return _screenWidth, 80
+                    return Platform.contentWidth, 80
                 end,
                 Init = function(cell, section, row)
                     cell.window:backgroundColor(0xffffff)
                     cell.label = Label()
-                    cell.label:frame(15, 15, _screenWidth-15*2, 80-15*2)
+                    cell.label:frame(15, 15, Platform.contentWidth-15*2, 80-15*2)
                 end,
                 Layout = function(cell, section, row)
                     local style = StyledString(_dataWidget[row], { fontSize = 25, fontColor = 0x000000})
@@ -70,22 +53,22 @@ local function main()
             }
         }
     })
-    if (not System:android()) then
-        widgetTableView:frame(0, 0, _screenWidth, _screenHeight*0.9)
+    if (not Platform.isAndroid) then
+        widgetTableView:frame(0, 0, Platform.contentWidth , Platform.contentHeight*0.9)
     end
     widgetTableView:backgroundColor(0xeeeeee)
     widgetTableView:miniSpacing(1)
 
-    local topContainer = pica:getViewByName("topContainer")
+    local topContainer = _pica:getViewByName("topContainer")
     topContainer:addView(widgetTableView)
 
-    local tab1 = pica:getViewByName("tab1")
-    local tab2 = pica:getViewByName("tab2")
-    local tab3 = pica:getViewByName("tab3")
-    tab1:callback(function()
-        tab1:textColor(0xff0000)
-        tab2:textColor(0x000000)
-        tab3:textColor(0x000000)
+    local widgetTab = _pica:getViewByName("widgetTab")
+    local sampleTab = _pica:getViewByName("sampleTab")
+    local aboutTab = _pica:getViewByName("aboutTab")
+    widgetTab:callback(function()
+        widgetTab:textColor(0xff0000)
+        sampleTab:textColor(0x000000)
+        aboutTab:textColor(0x000000)
         if (widgetTableView) then
             widgetTableView:show()
         end
@@ -98,10 +81,10 @@ local function main()
             aboutView:hide()
         end
     end)
-    tab2:callback(function()
-        tab1:textColor(0x000000)
-        tab2:textColor(0xff0000)
-        tab3:textColor(0x000000)
+    sampleTab:callback(function()
+        widgetTab:textColor(0x000000)
+        sampleTab:textColor(0xff0000)
+        aboutTab:textColor(0x000000)
         if (demoTableView) then
             demoTableView:show()
         else
@@ -120,20 +103,17 @@ local function main()
                     end,
                     SampleCell = {
                         Size = function(section, row)
-                            return _screenWidth, 120
+                            return Platform.contentWidth, 120
                         end,
                         Init = function(cell, section, row)
-                            print("tuoli", "xml read start")
-                            local xml = File:read("demo_item.xml")
-                            print("tuoli", "xml read end")
-                            pica:parseXml(xml)
+                            _pica:parseXml("demo_item.xml")
 
-                            local root = pica:getViewByName("root")
+                            local root = _pica:getViewByName("root")
                             cell.window:addView(root)
                             cell.window:backgroundColor(0xffffff)
 
-                            cell.item = pica:getViewByName("item")
-                            cell.subitem = pica:getViewByName("subitem")
+                            cell.item = _pica:getViewByName("item")
+                            cell.subitem = _pica:getViewByName("subitem")
                         end,
                         Layout = function(cell, section, row)
                             cell.item:text(_dataDemo[row])
@@ -146,8 +126,8 @@ local function main()
                 }
             })
             demoTableView:miniSpacing(1)
-            if (not System:android()) then
-                demoTableView:frame(0, 0, _screenWidth, _screenHeight*0.9)
+            if (not Platform.isAndroid) then
+                demoTableView:frame(0, 0, Platform.contentWidth, Platform.contentHeight*0.9)
             end
             demoTableView:backgroundColor(0xeeeeee)
             topContainer:addView(demoTableView)
@@ -161,23 +141,22 @@ local function main()
             aboutView:hide()
         end
     end)
-    tab3:callback(function()
-        tab1:textColor(0x000000)
-        tab2:textColor(0x000000)
-        tab3:textColor(0xff0000)
+    aboutTab:callback(function()
+        widgetTab:textColor(0x000000)
+        sampleTab:textColor(0x000000)
+        aboutTab:textColor(0xff0000)
         if (aboutView) then
             aboutView:show()
         else
-            local xml = File:read("about.xml")
-            pica:parseXml(xml)
+            _pica:parseXml("about.xml")
 
-            aboutView = pica:getViewByName("root")
+            aboutView = _pica:getViewByName("root")
             aboutView:frame(widgetTableView:frame())
             aboutView:backgroundColor(0xeeeeee)
             topContainer:addView(aboutView)
 
-            local info = pica:getViewByName("info")
-            if (System:android()) then
+            local info = _pica:getViewByName("info")
+            if (Platform.isAndroid) then
                 info:nativeView():setLineSpacing(10,1)
             end
         end
@@ -192,4 +171,5 @@ local function main()
     end)
 end
 
+Navigation:title("Playground")
 main()

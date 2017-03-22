@@ -1,5 +1,5 @@
 <doc>
-    <View frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column, justify-content: center, align-items: center" >
+    <View frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column, justify-content: center, align-items: center" >
         <LoadingIndicator id="loading" flexCss="height: 50, width: 50" color="0xF06292"></LoadingIndicator>
     </View>
 </doc>

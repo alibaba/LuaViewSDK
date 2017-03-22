@@ -6,35 +6,28 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Douban.lua")
+require("kit.common")
+require("kit.platform")
 
-local _screenWidth, _screenHeight = System:screenSize()
-
--- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
+local _pica = require("kit.pica")
 
 local function start()
-    local loading = LoadingIndicator()
-    loading:frame(0, _screenHeight/2 - 50, _screenWidth, 50)
-    loading:color(0xF06292)
-    loading:show()
+    _pica:parseXml("sample/douban.xml")
 
-    local pica = require("kit.pica")
+    local loading = _pica:getViewByName("loading")
+    tableView = _pica:getViewByName("tableView")
+
+    loading:show()
 
     local http = Http()
     print("tuoli", "http request start")
     http:get("http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a", function(response)
         print("tuoli", "http request end")
+
         loading:hide()
-        print("tuoli to json start")
-        local jsonData = Json:toTable(tostring(response:data()))
-        print("tuoli to json end")
+
         if (tostring(response:code()) == "200") then
+            local jsonData = Json:toTable(tostring(response:data()))
             local tableData = {
                 Section = {
                     SectionCount = function()
@@ -50,23 +43,20 @@ local function start()
                     end,
                     ItemCell = {
                         Size = function(section, row)
-                            return _screenWidth, _screenHeight/3
+                            return Platform.contentWidth, Platform.contentHeight/3
                         end,
                         Init = function(cell, section, row)
-                            print("tuoli", "xml read start")
-                            local xml = File:read("sample/douban.xml")
-                            print("tuoli", "xml read end")
-                            pica:parseXml(xml)
+                            _pica:parseXml("sample/douban_cell.xml")
 
-                            cell.left = pica:getViewByName("left.pannel")
-                            cell.right = pica:getViewByName("right.pannel")
-                            cell.root = pica:getViewByName("root")
+                            cell.left = _pica:getViewByName("left.pannel")
+                            cell.right = _pica:getViewByName("right.pannel")
+                            cell.root = _pica:getViewByName("root")
                             cell.window:addView(root)
-                            cell.profile = pica:getViewByName("profile")
-                            cell.movieName = pica:getViewByName("movieName")
-                            cell.score = pica:getViewByName("score")
-                            cell.character = pica:getViewByName("character")
-                            cell.number = pica:getViewByName("number")
+                            cell.profile = _pica:getViewByName("profile")
+                            cell.movieName = _pica:getViewByName("movieName")
+                            cell.score = _pica:getViewByName("score")
+                            cell.character = _pica:getViewByName("character")
+                            cell.number = _pica:getViewByName("number")
                         end,
                         Layout = function(cell, section, row)
                             cell.profile:image(jsonData["subjects"][row]["images"]["large"])
@@ -99,14 +89,15 @@ local function start()
                     end
                 }
             }
-            tableView = RefreshCollectionView(tableData)
-            tableView:backgroundColor(0xeeeeee)
-            tableView:frame(0, 0, _screenWidth, _screenHeight)
+
+            tableView:initParams(tableData)
+            tableView:reload()
         else
             Toast("Request Error")
         end
     end)
 end
 
+Navigation:title("Douban.lua")
 start()
 

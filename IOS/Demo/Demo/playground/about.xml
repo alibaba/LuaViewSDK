@@ -1,5 +1,5 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee">
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee">
         <View flexCss="flex: 4" backgroundColor="0xffffff">
             <View flexCss="flex: 1, justify-content: center, align-items: center">
                 <Image flexCss="height: 100, width: 100" image="luaview.png"></Image>

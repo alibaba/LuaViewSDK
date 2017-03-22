@@ -1,5 +1,5 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee" >
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee" >
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Local Image" fontSize="20" textColor="0xffffff"></Label>
         </View>

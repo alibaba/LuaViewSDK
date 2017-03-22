@@ -6,18 +6,15 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Loading.lua")
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-    print("tuoli", "xml read start")
-    local data = File:read("widget/loading.xml")
-    print("tuoli", "xml read end")
-    pica:parseXml(data)
+    _pica:parseXml("widget/loading.xml")
 
-    local loading = pica:getViewByName("loading")
+    local loading = _pica:getViewByName("loading")
     loading:start()
 end
 
+Navigation:title("Loading.lua")
 start()
 

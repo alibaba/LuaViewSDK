@@ -6,14 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("WebView.lua")
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-    local xml = File:read("widget/webview.xml")
-    pica:parseXml(xml)
+    _pica:parseXml("widget/webview.xml")
 
-    local web = pica:getViewByName("web")
+    local web = _pica:getViewByName("web")
     web:callback({
         onPageStarted = function()
             print("started")
@@ -27,5 +25,6 @@ local function start()
     })
 end
 
+Navigation:title("WebView.lua")
 start()
 

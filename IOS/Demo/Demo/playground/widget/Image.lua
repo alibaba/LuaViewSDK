@@ -6,15 +6,11 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Image.lua")
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-
-    print("tuoli", "xml read start")
-    local data = File:read("widget/image.xml")
-    print("tuoli", "xml read end")
-    pica:parseXml(data)
+    _pica:parseXml("widget/image.xml")
 end
 
+Navigation:title("Image.lua")
 start()
