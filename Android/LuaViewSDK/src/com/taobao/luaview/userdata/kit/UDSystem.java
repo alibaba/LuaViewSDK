@@ -1,6 +1,7 @@
 package com.taobao.luaview.userdata.kit;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.SdkVersion;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
@@ -34,6 +35,7 @@ public class UDSystem extends BaseLuaTable {
         set("ios", new ios());//是否ios
         set("android", new android());//是否android
         set("vmVersion", new vmVersion());//Lua虚拟机版本
+        set("sdkVersion", new sdkVersion());//LuaView版本
         set("osVersion", new osVersion());//系统版本
         set("platform", new platform());//平台信息
         set("scale", new scale());//屏幕分辨率
@@ -62,6 +64,13 @@ public class UDSystem extends BaseLuaTable {
         @Override
         public Varargs invoke(Varargs args) {
             return valueOf(VmVersion.getCurrent());
+        }
+    }
+
+    class sdkVersion extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs args) {
+            return valueOf(SdkVersion.getCurrent());
         }
     }
 

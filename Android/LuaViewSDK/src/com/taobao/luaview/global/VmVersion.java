@@ -20,9 +20,10 @@ public class VmVersion {
     public static final String V_570 = "5.7.0";
     public static final String V_580 = "5.8.0";
     public static final String V_590 = "5.9.0";
+    public static final String V_5170 = "5.17.0";
 
     public static String getCurrent() {
-        return V_590;
+        return V_5170;
     }
 
     /**
