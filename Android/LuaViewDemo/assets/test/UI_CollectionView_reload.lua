@@ -1,3 +1,9 @@
+-- Created by LuaView.
+-- Copyright (c) 2017, Alibaba Group. All rights reserved.
+--
+-- This source code is licensed under the MIT.
+-- For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+
 w, h = System.screenSize()
 cellHeight = 100
 imageUrl1 = "http://gju2.alicdn.com/bao/uploaded/i1/10000073270926575/TB2fpg0cXXXXXb6XpXXXXXXXXXX_!!0-0-juitemmedia.jpg"

@@ -1,10 +1,8 @@
+-- Created by LuaView.
+-- Copyright (c) 2017, Alibaba Group. All rights reserved.
 --
--- Created by IntelliJ IDEA.
--- User: song
--- Date: 16/3/30
--- Time: 上午10:32
--- To change this template use File | Settings | File Templates.
---
+-- This source code is licensed under the MIT.
+-- For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
 
 view1 = View()
 view1.cornerRadius(25)
