@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.ui;
 
 import android.animation.Animator;
@@ -989,9 +997,9 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setCallback(final LuaValue callbacks) {
         this.mCallback = callbacks;
         if (this.mCallback != null) {
-            mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");
-            mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;
-            mOnTouch = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onTouch", "OnTouch") : null;
+            mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");//TODO OnClick
+            mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;//TODO OnLongClick
+            mOnTouch = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onTouch", "OnTouch") : null;//TODO OnTouch
 
             //setup listener
             setOnClickListener();

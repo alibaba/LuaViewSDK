@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.list;
 
 import android.support.v7.widget.GridLayoutManager;
@@ -51,7 +59,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
     // 缓存被Pinned标记的position
     public SparseBooleanArray mIsPinnedSparseArray = new SparseBooleanArray();
     // 缓存被pinned标记的viewType, position
-    public SparseIntArray mPinnedViewTypePosition  = new SparseIntArray();
+    public SparseIntArray mPinnedViewTypePosition = new SparseIntArray();
     // 缓存被pinned标记的position,Holder
     public SparseArray<LVRecyclerViewHolder> mPinnedPositionHolder = new SparseArray<LVRecyclerViewHolder>();
 
@@ -216,7 +224,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         // 从firstVisiblePosition位置开始递减查找上一个pinned position
         int pinnedViewPosition = findPinnedViewPositionDecrease(firstVisiblePosition);
         if (pinnedViewPosition >= 0 && mCurrentPinnedPosition != pinnedViewPosition) {
-            ViewGroup itemView = (ViewGroup)mPinnedPositionHolder.get(pinnedViewPosition).itemView;
+            ViewGroup itemView = (ViewGroup) mPinnedPositionHolder.get(pinnedViewPosition).itemView;
             View child = itemView.getChildAt(0);
             if (child != null) {
                 // 从itemView移除child之前,先设置其与child一样的宽高占位。
@@ -236,7 +244,9 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 mPinnedContainer.removeView(pinnedView);
                 parentItemView.addView(pinnedView);
                 mCurrentPinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
-                mCurrentPinnedView.setVisibility(View.VISIBLE);
+                if (mCurrentPinnedView != null) {
+                    mCurrentPinnedView.setVisibility(View.VISIBLE);
+                }
             }
 
             mCurrentPinnedPosition = pinnedViewPosition;
@@ -248,7 +258,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
             mPinnedContainer.removeView(subview);
             // 从position 0开始找第一个pinned标记的itemView,并把最后一个吸顶视图添加回到它的原本位置
             int firstPinnedPosition = findPinnedViewPositionIncrease(0);
-            ViewGroup parentItemView = (ViewGroup)mPinnedPositionHolder.get(firstPinnedPosition).itemView;
+            ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolder.get(firstPinnedPosition).itemView;
             parentItemView.addView(subview);
             // 列表恢复没有吸顶视图的状态
             mCurrentPinnedPosition = -1;
@@ -374,7 +384,7 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                         id = args.arg(1).optjstring("");
                     }
                 } else { // 兼容旧版本的写法,只有一个String参数的情况
-                    id = ((LuaValue)args).optjstring("");
+                    id = ((LuaValue) args).optjstring("");
                 }
             }
 

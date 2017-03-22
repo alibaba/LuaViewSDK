@@ -1,5 +1,14 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.kit;
 
+import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.JsonUtil;
@@ -16,6 +25,7 @@ import org.luaj.vm2.lib.VarArgFunction;
  * @author song
  * @date 15/9/6
  */
+@LuaViewLib(revisions = {"20170306已对标", "iOS有toJson方法"})
 public class UDJson extends BaseLuaTable {
 
     public UDJson(Globals globals, LuaValue metatable) {

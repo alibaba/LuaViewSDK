@@ -1,7 +1,16 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.text.TextUtils;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDEllipsize;
 import com.taobao.luaview.userdata.ui.UDTextView;
@@ -15,7 +24,7 @@ import org.luaj.vm2.Varargs;
 
 import java.util.List;
 
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UITextViewMethodMapper";
@@ -115,6 +124,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs Varargs
      * @return LuaValue
      */
+    @LuaViewApi(revisions = {"iOS支持多个参数，可以支持alpha"})
     public LuaValue textColor(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTextColor(view, varargs);
@@ -140,6 +150,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs Varargs
      * @return LuaValue
      */
+    @Deprecated
     public LuaValue textSize(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setTextSize(view, varargs);
@@ -183,6 +194,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue fontName(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setFontName(view, varargs);
@@ -207,6 +219,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"需要支持只传一个String"})
     public Varargs font(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setFont(view, varargs);
@@ -237,6 +250,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = "待废弃，集成到textAlign中")
     public LuaValue gravity(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setGravity(view, varargs);
@@ -312,6 +326,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue maxLines(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setMaxLines(view, varargs);
@@ -336,6 +351,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue lineCount(U view, Varargs varargs) {
         return maxLines(view, varargs);
     }
@@ -356,6 +372,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue minLines(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setMinLines(view, varargs);
@@ -404,6 +421,7 @@ public class UITextViewMethodMapper<U extends UDTextView> extends UIViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue adjustTextSize(U view, Varargs varargs) {
         return view.adjustTextSize();
     }

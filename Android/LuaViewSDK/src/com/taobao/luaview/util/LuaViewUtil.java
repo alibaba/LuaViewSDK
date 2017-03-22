@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.annotation.TargetApi;
@@ -8,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -94,6 +103,13 @@ public class LuaViewUtil {
     public static ActionBar getActionBar(Globals globals) {
         if (globals != null && globals.getContext() instanceof Activity) {
             return ((Activity) (globals.getContext())).getActionBar();
+        }
+        return null;
+    }
+
+    public static android.support.v7.app.ActionBar getSupportActionBar(Globals globals) {
+        if (globals != null && globals.getContext() instanceof AppCompatActivity) {
+            return ((AppCompatActivity) (globals.getContext())).getSupportActionBar();
         }
         return null;
     }

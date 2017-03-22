@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.net;
 
 import com.taobao.luaview.userdata.base.BaseLuaTable;
@@ -32,7 +40,7 @@ public class UDHttpResponse extends BaseLuaTable {
         set("data", new data());
         set("code", new code());
         set("header", new header());
-        set("message", new message());
+        set("message", new message());//TODO iOS无
     }
 
     public UDHttpResponse setData(byte[] mData) {

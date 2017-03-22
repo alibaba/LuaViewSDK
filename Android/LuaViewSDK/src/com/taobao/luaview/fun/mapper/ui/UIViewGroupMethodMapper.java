@@ -1,11 +1,21 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -19,7 +29,7 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UIViewGroupMethodMapper";
@@ -124,6 +134,7 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"Android特有"})
     public LuaValue onBack(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setOnBack(view, varargs);
@@ -227,26 +238,23 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      */
     public LuaValue flexChildren(U view, Varargs varargs) {
         ArrayList<UDView> flexChildren = new ArrayList<UDView>();
-        for (int i = 2; i <= varargs.narg(); i++) {
-            LuaValue luaValue = varargs.optvalue(i, null);
-            if (luaValue != null && luaValue instanceof UDView) {
-                flexChildren.add((UDView) luaValue);
+        LuaValue children = varargs.arg(2);
+        if (children != null && children instanceof LuaTable) {     // 子节点以一个表的形式作为参数传入
+            for (int i = 0; i <= children.length(); i++) {
+                LuaValue luaValue = children.get(i + 1);
+                if (luaValue != null && luaValue instanceof UDView) {
+                    flexChildren.add((UDView) luaValue);
+                }
+            }
+        } else {
+            for (int i = 2; i <= varargs.narg(); i++) {
+                LuaValue luaValue = varargs.optvalue(i, null);
+                if (luaValue != null && luaValue instanceof UDView) {
+                    flexChildren.add((UDView) luaValue);
+                }
             }
         }
         view.setChildNodeViews(flexChildren);
-
-//        final LuaTable children = LuaUtil.getTable(varargs, 2);
-//        if (children != null) {
-//            ArrayList<UDView> flexChildren = new ArrayList<UDView>();
-//            for(int i = 0; i < children.length(); i++){
-//                LuaValue child = children.get(i + 1);
-//                if(child != null && child instanceof UDView){
-//                    flexChildren.add((UDView)child);
-//                }
-//            }
-//            view.setChildNodeViews(flexChildren);
-//        }
-
         return view;
     }
 }

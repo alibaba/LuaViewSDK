@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.base;
 
 import com.taobao.luaview.cache.LuaCache;
@@ -38,9 +46,9 @@ public abstract class BaseCacheUserdata extends BaseUserdata implements LuaCache
 
     private void cacheObject() {
         final Globals globals = getGlobals();
-        final LuaView luaView = globals != null ? globals.getLuaView() : null;
-        if (luaView != null) {
-            luaView.cacheObject(getClass(), this);
+        final LuaCache luaCache = globals != null ? globals.getLuaCache() : null;
+        if(luaCache != null){
+            luaCache.cacheObject(getClass(), this);
         }
     }
 

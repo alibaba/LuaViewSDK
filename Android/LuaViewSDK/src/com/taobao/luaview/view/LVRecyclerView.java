@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view;
 
 import android.content.Context;
@@ -17,6 +25,7 @@ import com.taobao.luaview.view.interfaces.ILVRecyclerView;
 import com.taobao.luaview.view.recyclerview.LVRecyclerViewAdapter;
 import com.taobao.luaview.view.recyclerview.RecyclerViewHelper;
 import com.taobao.luaview.view.recyclerview.decoration.DividerGridItemDecoration;
+import com.taobao.luaview.view.recyclerview.decoration.DividerItemDecoration;
 import com.taobao.luaview.view.recyclerview.layout.LVGridLayoutManager;
 
 import org.luaj.vm2.Globals;

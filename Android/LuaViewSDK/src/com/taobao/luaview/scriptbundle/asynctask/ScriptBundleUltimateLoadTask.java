@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.scriptbundle.asynctask;
 
 import android.content.Context;
@@ -22,7 +30,7 @@ import java.net.HttpURLConnection;
 import java.util.Random;
 
 /**
- * download lua script bundle from server and return saved path in local file system
+ * download lua script bundle from server and load as a ScriptBundle
  *
  * @author song
  */
@@ -47,7 +55,6 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
         isAsset = true;
         super.executeInPool(params);
     }
-
 
     /**
      * 接受两个参数，第一个是下载的url，第二个是存储的地址

@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view;
 
 import android.support.annotation.NonNull;
@@ -59,10 +67,7 @@ public abstract class LVCustomPanel extends LVViewGroup<UDCustomPanel> implement
         if (userdata != null) {
             Globals globals = userdata.getGlobals();
             if (globals != null) {
-                LuaView luaView = globals.getLuaView();
-                if (luaView != null) {
-                    luaView.callLuaFunction(name, objs);
-                }
+                globals.callLuaFunction(name, objs);
             }
         }
     }

@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.list;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -14,7 +22,7 @@ import java.util.List;
  * Refreshable RecyclerView的方法映射
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> extends UIBaseRecyclerViewMethodMapper<U> {
 
     private static final String TAG = "UIRefreshRecyclerViewMethodMapper";
@@ -77,6 +85,7 @@ public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> 
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue initRefreshing(U view, Varargs varargs) {
         return view;
     }

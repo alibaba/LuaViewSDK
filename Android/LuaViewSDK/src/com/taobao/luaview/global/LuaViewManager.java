@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.global;
 
 import com.taobao.luaview.cache.AppCache;
@@ -90,7 +98,7 @@ public class LuaViewManager {
                     public void doTask() {
                         synchronized (LuaViewManager.class) {
                             if (sStaticGlobals == null) {
-                                sStaticGlobals = createGlobals();
+                                sStaticGlobals = setupGlobals(new Globals());
                             }
                         }
                     }
@@ -113,12 +121,7 @@ public class LuaViewManager {
                 return result;
             }
         } else {
-            final Globals globals = LuaViewConfig.isOpenDebugger() ? JsePlatform.debugGlobals() : JsePlatform.standardGlobals();//加载系统libs TODO 性能瓶颈
-            if (LuaViewConfig.isUseLuaDC()) {
-                LuaDC.install(globals);
-            }
-            loadLuaViewLibs(globals);//加载用户lib TODO 性能瓶颈
-            return globals;
+            return setupGlobals(new Globals());
         }
     }
 
@@ -152,7 +155,7 @@ public class LuaViewManager {
      *
      * @param globals
      */
-    private static void setupGlobals(Globals globals) {
+    private static Globals setupGlobals(Globals globals) {
         if (globals != null) {
             if (LuaViewConfig.isOpenDebugger()) {
                 JsePlatform.debugGlobals(globals);
@@ -166,6 +169,7 @@ public class LuaViewManager {
             loadLuaViewLibs(globals);//加载用户lib TODO 性能瓶颈
             globals.isInited = true;
         }
+        return globals;
     }
 
     /**
@@ -174,7 +178,7 @@ public class LuaViewManager {
      *
      * @param globals
      */
-    public static void loadLuaViewLibs(final Globals globals) {
+    private static void loadLuaViewLibs(final Globals globals) {
         //ui
         globals.tryLazyLoad(new UITextViewBinder());
         globals.tryLazyLoad(new UIEditTextBinder());

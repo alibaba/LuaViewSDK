@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.widget.ImageView;
@@ -20,7 +28,7 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
 
     private static final String TAG = "UIImageViewMethodMapper";
@@ -101,6 +109,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue contentMode(U view, Varargs varargs) {
         return scaleType(view, varargs);
     }
@@ -147,6 +156,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs 时间是秒而不是毫秒
      * @return
      */
+    @Deprecated
     public LuaValue startAnimationImages(U view, Varargs varargs) {
         final LuaTable imagesTable = varargs.opttable(2, null);
         final double duration = varargs.optdouble(3, 1f);
@@ -174,6 +184,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue stopAnimationImages(U view, Varargs varargs) {
         return view.stopAnimationImages();
     }
@@ -185,6 +196,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue isAnimationImages(U view, Varargs varargs) {
         return valueOf(view.isAnimationImages());
     }

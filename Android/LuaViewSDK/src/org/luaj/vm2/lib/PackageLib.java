@@ -332,7 +332,7 @@ public class PackageLib extends TwoArgFunction {
                 }
 
                 // try opening the file
-                InputStream is = globals.finder.findResource(filename);
+                InputStream is = globals.getLuaResourceFinder().findResource(filename);//modify by song
                 if (is != null) {
                     try {
                         is.close();

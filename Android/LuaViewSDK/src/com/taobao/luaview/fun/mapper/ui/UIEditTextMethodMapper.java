@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -15,7 +23,7 @@ import java.util.List;
  * @author song
  * @param <U>
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMethodMapper<U> {
 
     private static final String TAG = "UIEditTextMethodMapper";
@@ -75,6 +83,7 @@ public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMeth
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue placeholder(U view, Varargs varargs) {
         return hint(view, varargs);
     }

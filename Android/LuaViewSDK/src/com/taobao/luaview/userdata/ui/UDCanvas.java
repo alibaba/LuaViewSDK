@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.ui;
 
 import android.graphics.Bitmap;
@@ -101,6 +109,7 @@ public class UDCanvas extends BaseLuaTable {
     private void init(LVViewGroup target, Canvas canvas) {
         setCanvas(canvas);
 
+        //其他 5
         set("nativeObj", new nativeObj());//获取canvas对象
 
         set("size", new size());//获取canvas的宽高, size(), return 100, 100
@@ -108,7 +117,7 @@ public class UDCanvas extends BaseLuaTable {
         set("restore", new restore());//恢复canvas状态, restore()
         set("clipRect", new clipRect());//clip rect, clipRect(left, top, right, bottom)
 
-        //paint
+        //paint 8
         set("color", new color());//color(0xff0000)
         set("textSize", new textSize());//textSize(20)
         set("alpha", new alpha());//alpha(0.5)
@@ -118,13 +127,13 @@ public class UDCanvas extends BaseLuaTable {
         set("bold", new textBold());//bold(true)
         set("resetPaint", new resetPaint());//resetPaint()
 
-        //变换操作
+        //变换操作 4
         set("translate", new translate());//translate(dx, dy), translate(-10, 10)
         set("scale", new scale());//scale(2, 2) or scale(2, 2, 坐标x, 坐标y)
         set("rotate", new rotate());//rotate(30) or rotate(30, 0, 0)
         set("skew", new skew());//skew(x, y)
 
-        //绘制操作
+        //绘制操作 9
         set("drawLine", new drawLine());//drawLine(x1, y1, x2, y2)
         set("drawPoint", new drawPoint());//drawPoint(x, y)
         set("drawRect", new drawRect());//drawRect(x1, y1, x2, y2)
