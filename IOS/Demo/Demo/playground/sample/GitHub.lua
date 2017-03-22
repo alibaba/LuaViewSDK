@@ -45,6 +45,10 @@ local function start()
 
     local isSearching = false
     go:callback(function()
+        if (not System:android()) then
+            input:cancelFocus()
+        end
+
         if (isSearching == true) then
             return
         end
