@@ -1,10 +1,20 @@
 PODS:
-  - liblua (5.1.4.3)
+  - liblua (5.1.4)
 
 DEPENDENCIES:
-  - liblua (= 5.1.4.3)
+  - liblua (from `git@gitlab.alibaba-inc.com:luaview/LuaViewSDK.git`, branch `develop`)
+
+EXTERNAL SOURCES:
+  liblua:
+    :branch: develop
+    :git: git@gitlab.alibaba-inc.com:luaview/LuaViewSDK.git
+
+CHECKOUT OPTIONS:
+  liblua:
+    :commit: b68f47338f2eecf35e00f96b518534a86e721b16
+    :git: git@gitlab.alibaba-inc.com:luaview/LuaViewSDK.git
 
 SPEC CHECKSUMS:
-  liblua: 1e187e0fd4e6cec2f712463cff9ace4d17dedcb0
+  liblua: 62307b0c1413bd1267b843b341605108f9feadd3
 
 COCOAPODS: 0.39.0
