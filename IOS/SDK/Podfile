@@ -6,8 +6,7 @@
 platform :ios, "8.0"
 
 target 'LuaViewSDK' do
-    pod 'liblua', :git => 'git@gitlab.alibaba-inc.com:luaview/LuaViewSDK.git', :branch => 'develop'
-    #pod 'liblua', :git => 'https://github.com/alibaba/LuaViewSDK.git', :branch => 'develop'
+    pod 'liblua', :git => 'https://github.com/alibaba/LuaViewSDK.git', :branch => 'develop'
 end
 
 target 'Dummy' do
