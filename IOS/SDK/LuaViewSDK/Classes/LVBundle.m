@@ -111,6 +111,13 @@
         }
     }
     
+    for (NSString *dir in _currentPath) {
+        fullPath = [self absolutePath:[dir stringByAppendingPathComponent:name]];
+        if ([_fileManager fileExistsAtPath:fullPath]) {
+            return fullPath;
+        }
+    }
+    
     return nil;
 }
 

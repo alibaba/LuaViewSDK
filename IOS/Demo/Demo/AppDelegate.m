@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "JHSLuaViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.window.rootViewController = [[UINavigationController alloc]
-                                      initWithRootViewController:[ViewController new]];
+                                      initWithRootViewController:[[JHSLuaViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"Main.lua"]];
     [self.window makeKeyAndVisible];
     
     return YES;

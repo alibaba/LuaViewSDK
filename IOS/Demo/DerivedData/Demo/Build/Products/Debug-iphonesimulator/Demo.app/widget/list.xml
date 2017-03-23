@@ -1,0 +1,8 @@
+<doc>
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" >
+        <View flexCss="height: 50" backgroundColor="0x004B97">
+            <Label id="headerText" flexCss="flex: 1, margin: 10" text="Visible Items: " fontSize="20" textColor="0xffffff"></Label>
+        </View>
+        <RefreshCollectionView id="tableView" flexCss="flex: 1" backgroundColor="0xeeeeee" miniSpacing="1" showScrollIndicator="false"></RefreshCollectionView>
+    </View>
+</doc>
