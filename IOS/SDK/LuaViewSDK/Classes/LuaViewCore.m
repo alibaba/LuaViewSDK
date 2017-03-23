@@ -310,6 +310,8 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
     
 - (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
+    fileName = [fileName stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+
     if( changeGrammar ) {
         data = lv_toStandLuaGrammar(data);
     }
