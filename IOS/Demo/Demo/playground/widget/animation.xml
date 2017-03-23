@@ -5,6 +5,6 @@
             <Button id="button2" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" cornerRadius="10"></Button>
             <Button id="button3" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" cornerRadius="10"></Button>
         </View>
-        <Image id="img" flexCss="margin-top: 20, height: 100, width: 100" image="luaview.png"></Image>
+        <Image id="img" flexCss="margin-top: 20, margin-left: 20, height: 100, width: 100" image="luaview.png"></Image>
     </View>
 </doc>
