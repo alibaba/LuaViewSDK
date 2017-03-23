@@ -1,6 +1,15 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.kit;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.SdkVersion;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.util.AndroidUtil;
@@ -33,7 +42,8 @@ public class UDSystem extends BaseLuaTable {
     private void init() {
         set("ios", new ios());//是否ios
         set("android", new android());//是否android
-        set("vmVersion", new vmVersion());//Lua虚拟机版本
+        set("vmVersion", new vmVersion());//LuaView早期的版本系统 @Deprecated
+        set("sdkVersion", new sdkVersion());//LuaView版本
         set("osVersion", new osVersion());//系统版本
         set("platform", new platform());//平台信息
         set("scale", new scale());//屏幕分辨率
@@ -58,10 +68,18 @@ public class UDSystem extends BaseLuaTable {
         }
     }
 
+    @Deprecated
     class vmVersion extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
             return valueOf(VmVersion.getCurrent());
+        }
+    }
+
+    class sdkVersion extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs args) {
+            return valueOf(SdkVersion.getCurrent());
         }
     }
 
