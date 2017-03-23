@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
-    aniObjs = Pica:getInstance():render("widget/animation.xml")
+    aniObjs = Pickup:getInstance():render("widget/animation.xml")
 
     local img = aniObjs["img"]
 

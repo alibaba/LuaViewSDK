@@ -9,16 +9,16 @@
 require("kit.common")
 require("kit.platform")
 
-Pica = {}
+Pickup = {}
 
-function Pica:new(o)
+function Pickup:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function Pica:getInstance()
+function Pickup:getInstance()
     if (self.instance == nil) then
         self.instance = self:new()
         print("tuoli", "确保一个虚拟机只有一个xmlParser")
@@ -30,7 +30,7 @@ function Pica:getInstance()
     return self.instance
 end
 
-function Pica:render(xmlFile)
+function Pickup:render(xmlFile)
     print("tuoli", "xml read start")
     local data = File:read(xmlFile)
     print("tuoli", "xml read end")
@@ -61,7 +61,7 @@ end
 --[[
 --  遍历self.objs,找出有子节点的父节点,并决定是否需要对其子节点进行flex布局
  ]]
-function Pica:flexOrNot()
+function Pickup:flexOrNot()
     for _k, _ in pairs(self.objs) do
         local isFlex = false
         if (_k.attr["flexCss"] ~= nil) then
@@ -90,7 +90,7 @@ function Pica:flexOrNot()
     end
 end
 
-function Pica:isViewElement(element)
+function Pickup:isViewElement(element)
     local view
     if (element.name == "View") then
         view = View()
@@ -132,7 +132,7 @@ end
 --[[
 --  分割字符串,并去除字符串中的空格符
  ]]
-function Pica:split(str, delimiter)
+function Pickup:split(str, delimiter)
     if str==nil or str=='' or delimiter==nil then
         return nil
     end
@@ -145,7 +145,7 @@ function Pica:split(str, delimiter)
     return result
 end
 
-function Pica:parseElement(element, parent, identifierObjs)
+function Pickup:parseElement(element, parent, identifierObjs)
     if (element.type == "comment") then
         return
     end
@@ -258,7 +258,7 @@ function Pica:parseElement(element, parent, identifierObjs)
     end
 end
 
-return Pica
+return Pickup
 
 
 

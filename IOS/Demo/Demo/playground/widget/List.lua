@@ -6,14 +6,15 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
-    listObjs = Pica:getInstance():render("widget/list.xml")
+    listObjs = Pickup:getInstance():render("widget/list.xml")
 
     local tableView = listObjs["tableView"]
     local header = listObjs["headerText"]
     if (not Platform.isAndroid) then
+        -- iOS还有bug，暂时屏蔽
         header:hide()
     end
 

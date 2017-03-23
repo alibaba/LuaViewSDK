@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
-    doubanObjs = Pica:getInstance():render("sample/douban.xml")
+    doubanObjs = Pickup:getInstance():render("sample/douban.xml")
 
     local loading = doubanObjs["loading"]
     local tableView = doubanObjs["tableView"]
@@ -43,7 +43,7 @@ local function start()
                             return Platform.contentWidth, Platform.contentHeight/3
                         end,
                         Init = function(cell, section, row)
-                            cell.objs = Pica:getInstance():render("sample/douban_cell.xml")
+                            cell.objs = Pickup:getInstance():render("sample/douban_cell.xml")
                         end,
                         Layout = function(cell, section, row)
                             cell.objs["profile"]:image(jsonData["subjects"][row]["images"]["large"])

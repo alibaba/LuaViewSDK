@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
-    pvObjs = Pica:getInstance():render("widget/pagerview.xml")
+    pvObjs = Pickup:getInstance():render("widget/pagerview.xml")
 
     local autoSlider = pvObjs["pagerView1"]
     local indicator1 = pvObjs["indicator1"]
@@ -18,7 +18,7 @@ local function start()
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                page.objs = Pica:getInstance():render("widget/pagerview_page.xml")
+                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
             end
@@ -35,7 +35,7 @@ local function start()
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                page.objs = Pica:getInstance():render("widget/pagerview_page.xml")
+                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
             end

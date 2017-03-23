@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
-    webObjs = Pica:getInstance():render("widget/webview.xml")
+    webObjs = Pickup:getInstance():render("widget/webview.xml")
 
     local web = webObjs["web"]
     web:callback({

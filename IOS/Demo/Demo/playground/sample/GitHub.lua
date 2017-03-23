@@ -6,13 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
     if (Platform.isAndroid) then
-        githubObjs = Pica:getInstance():render("sample/github_android.xml")
+        githubObjs = Pickup:getInstance():render("sample/github_android.xml")
     else
-        githubObjs = Pica:getInstance():render("sample/github_ios.xml")
+        githubObjs = Pickup:getInstance():render("sample/github_ios.xml")
     end
 
     local go = githubObjs["go"]
@@ -68,7 +68,7 @@ local function start()
                                     return Platform.contentWidth, Platform.contentHeight/3
                                 end,
                                 Init = function(cell, section, row)
-                                    cell.objs = Pica:getInstance():render("sample/github_cell.xml")
+                                    cell.objs = Pickup:getInstance():render("sample/github_cell.xml")
                                 end,
                                 Layout = function(cell, section, row)
                                     cell.objs["name"]:text(jsonData["items"][row]["full_name"])
@@ -95,5 +95,5 @@ local function start()
     end)
 end
 
-Navigation:title("Github.lua")
+Navigation:title("GitHub.lua")
 start()

@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local function start()
     local tableData = {
@@ -27,7 +27,7 @@ local function start()
                     return Platform.contentWidth, Platform.contentHeight*2.5
                 end,
                 Init = function(cell, section, row)
-                    cell.objs = Pica:getInstance():render("widget/label_item.xml")
+                    cell.objs = Pickup:getInstance():render("widget/label_item.xml")
 
                     local fs1 = cell.objs["fs1"]
                     fs1:text(StyledString("normal", {fontStyle = "normal", fontSize=25}))

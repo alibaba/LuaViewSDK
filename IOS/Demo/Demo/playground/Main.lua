@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pica_new")
+require("kit.pickup")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
@@ -16,7 +16,7 @@ local _dataDemo = Json:toTable(_jsonDataDemo)
 local _dataDescription = Json:toTable(_jsonDataDescription)
 
 local function main()
-    mainObjs = Pica:getInstance():render("main.xml")
+    mainObjs = Pickup:getInstance():render("main.xml")
 
     widgetTableView = CollectionView({
         Section = {
@@ -105,7 +105,7 @@ local function main()
                             return Platform.contentWidth, 120
                         end,
                         Init = function(cell, section, row)
-                            cell.objs = Pica:getInstance():render("demo_item.xml")
+                            cell.objs = Pickup:getInstance():render("demo_item.xml")
                         end,
                         Layout = function(cell, section, row)
                             cell.objs["item"]:text(_dataDemo[row])
@@ -140,7 +140,7 @@ local function main()
         if (aboutView) then
             aboutView:show()
         else
-            aboutObjs = Pica:getInstance():render("about.xml")
+            aboutObjs = Pickup:getInstance():render("about.xml")
 
             aboutView = aboutObjs["root"]
             aboutView:frame(widgetTableView:frame())
