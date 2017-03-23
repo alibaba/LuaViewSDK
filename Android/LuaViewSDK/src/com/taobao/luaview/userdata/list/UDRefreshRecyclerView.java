@@ -19,6 +19,8 @@ import org.luaj.vm2.Varargs;
  */
 public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerView> implements OnLVRefreshListener {
 
+    private boolean mIsPullDownInit;
+
     public UDRefreshRecyclerView(LVRefreshRecyclerView view, Globals globals, LuaValue metaTable, Varargs initParams) {
         super(view, globals, metaTable, initParams);
     }
@@ -34,6 +36,10 @@ public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerV
      * 初始化下拉刷新
      */
     public void initPullRefresh() {
+        if (mIsPullDownInit) {
+            return;
+        }
+
         final LVRefreshRecyclerView view = getView();
         if (view != null && LuaUtil.isValid(mCallback)) {
             view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -42,7 +48,15 @@ public class UDRefreshRecyclerView extends UDBaseRecyclerView<LVRefreshRecyclerV
                     UDRefreshRecyclerView.this.onRefresh(null);
                 }
             });
+            mIsPullDownInit = true;
         }
+    }
+
+    @Override
+    public UDBaseRecyclerView reload(Integer section, Integer row) {
+        UDBaseRecyclerView view = super.reload(section, row);
+        initPullRefresh();
+        return view;
     }
 
     /**
