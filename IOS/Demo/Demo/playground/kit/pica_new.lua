@@ -1,25 +1,36 @@
 --
 -- Created by IntelliJ IDEA.
 -- User: tuoli
--- Date: 17/3/10
--- Time: 10:10
+-- Date: 17/3/23
+-- Time: 10:03
 -- To change this template use File | Settings | File Templates.
 --
 
 require("kit.common")
 require("kit.platform")
 
-local Pica = {}
+Pica = {}
 
---function Pica:new(o)
---    local AppMeta = {__index = self}
---    local instance = o or {}
---    instance.functions={}
---    setmetatable(instance, AppMeta)
---    return instance
---end
+function Pica:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
 
-function Pica:parseXml(xmlFile)
+function Pica:getInstance()
+    if (self.instance == nil) then
+        self.instance = self:new()
+        print("tuoli", "确保一个虚拟机只有一个xmlParser")
+        print("tuoli", "require kit.slaxdom start")
+        self.xmlParser = require("kit.slaxdom")
+        print("tuoli", "require kit.slaxdom end")
+    end
+
+    return self.instance
+end
+
+function Pica:render(xmlFile)
     print("tuoli", "xml read start")
     local data = File:read(xmlFile)
     print("tuoli", "xml read end")
@@ -29,28 +40,22 @@ function Pica:parseXml(xmlFile)
         print("tuoli xml", string.len(data))
     end
 
-    if (g_xmlParser == nil) then
-        print("tuoli", "确保一个虚拟机只有一个xmlParser")
-        print("tuoli", "require kit.slaxdom start")
-        g_xmlParser = require("kit.slaxdom")
-        print("tuoli", "require kit.slaxdom end")
-    end
-
     self.objs = {}
-    self.identifierObjs = {}
-    if (not Platform.isAndroid) then
-        self.flxLayoutObjs = {}
-    end
+    self.flxLayoutObjs = {}
+
+    local identifierObjs = {}
 
     print("tuoli", "xml dom start")
-    local root = g_xmlParser:dom(data)
+    local root = self.xmlParser:dom(data)
     print("tuoli", "xml dom end")
     print("tuoli", "parse element start")
-    self:parseElement(root, nil)
+    self:parseElement(root, nil, identifierObjs)
     print("tuoli", "parse element end")
     print("tuoli", "flex start")
     self:flexOrNot()
     print("tuoli", "flex end")
+
+    return identifierObjs
 end
 
 --[[
@@ -112,7 +117,7 @@ function Pica:isViewElement(element)
     elseif (element.name == "PagerIndicator") then
         view = PagerIndicator()
     else
---        print("tuoli error", element.name .. " not found")
+        --        print("tuoli error", element.name .. " not found")
         view = nil
     end
 
@@ -140,7 +145,7 @@ function Pica:split(str, delimiter)
     return result
 end
 
-function Pica:parseElement(element, parent)
+function Pica:parseElement(element, parent, identifierObjs)
     if (element.type == "comment") then
         return
     end
@@ -164,7 +169,7 @@ function Pica:parseElement(element, parent)
                 end
             elseif (_v.name == "id") then
                 -- 考虑到性能问题,不采用遍历的方式来取得开发者所关注的对象。而是使用字典的形式来获取。
-                self.identifierObjs[_v.value] = self.objs[element]
+                identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "flexCss") then
                 self.objs[element]:flexCss(_v.value)
                 if (not Platform.isAndroid) then
@@ -248,16 +253,14 @@ function Pica:parseElement(element, parent)
 
     if (element.kids ~= nil) then
         for _, kid in pairs(element.kids) do
-            self:parseElement(kid, element);
+            self:parseElement(kid, element, identifierObjs);
         end
     end
 end
 
-function Pica:getViewByName( name )
-    return self.identifierObjs[name]
-end
-
 return Pica
+
+
 
 
 

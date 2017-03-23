@@ -6,16 +6,16 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
-
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
-    _pica:parseXml("widget/list.xml")
+    listObjs = Pica:getInstance():render("widget/list.xml")
 
-    local header = _pica:getViewByName("headerText")
-    tableView = _pica:getViewByName("tableView")
+    local tableView = listObjs["tableView"]
+    local header = listObjs["headerText"]
+    if (not Platform.isAndroid) then
+        header:hide()
+    end
 
     local timer = Timer()
     timer:callback(function()

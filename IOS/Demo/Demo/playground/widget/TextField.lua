@@ -6,16 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
-
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
     if (Platform.isAndroid) then
-        _pica:parseXml("widget/textfield_android.xml")
+        Pica:getInstance():render("widget/textfield_android.xml")
     else
-        _pica:parseXml("widget/textfield_ios.xml")
+        Pica:getInstance():render("widget/textfield_ios.xml")
     end
 end
 

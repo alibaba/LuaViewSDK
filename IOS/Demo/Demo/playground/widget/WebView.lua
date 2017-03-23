@@ -6,12 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
-    _pica:parseXml("widget/webview.xml")
+    webObjs = Pica:getInstance():render("widget/webview.xml")
 
-    local web = _pica:getViewByName("web")
+    local web = webObjs["web"]
     web:callback({
         onPageStarted = function()
             print("started")

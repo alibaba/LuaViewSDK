@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
-    _pica:parseXml("widget/image.xml")
+    Pica:getInstance():render("widget/image.xml")
 end
 
 Navigation:title("Image.lua")

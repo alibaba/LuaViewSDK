@@ -6,26 +6,19 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
-
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
     if (Platform.isAndroid) then
-        _pica:parseXml("sample/github_android.xml")
+        githubObjs = Pica:getInstance():render("sample/github_android.xml")
     else
-        _pica:parseXml("sample/github_ios.xml")
+        githubObjs = Pica:getInstance():render("sample/github_ios.xml")
     end
 
-    root = _pica:getViewByName("root")
-    topContainer = _pica:getViewByName("topContainer")
-    inputContainer = _pica:getViewByName("inputContainer")
-    go = _pica:getViewByName("go")
-    input = _pica:getViewByName("input")
-    tableView = _pica:getViewByName("tableView")
-
-    loading = _pica:getViewByName("loading")
+    local go = githubObjs["go"]
+    local input = githubObjs["input"]
+    local tableView = githubObjs["tableView"]
+    local loading = githubObjs["loading"]
 
     local isSearching = false
     go:callback(function()
@@ -75,30 +68,18 @@ local function start()
                                     return Platform.contentWidth, Platform.contentHeight/3
                                 end,
                                 Init = function(cell, section, row)
-                                    _pica:parseXml("sample/github_cell.xml")
-
-                                    cell.root = _pica:getViewByName("root")
-                                    cell.window:addView(cell.root)
-
-                                    cell.bottomContainer = _pica:getViewByName("bottomContainer")
-                                    cell.bottomLeft = _pica:getViewByName("bottomLeft")
-                                    cell.author = _pica:getViewByName("author")
-
-                                    cell.name = _pica:getViewByName("name")
-                                    cell.description = _pica:getViewByName("description")
-                                    cell.profile = _pica:getViewByName("profile")
-                                    cell.stars = _pica:getViewByName("stars")
+                                    cell.objs = Pica:getInstance():render("sample/github_cell.xml")
                                 end,
                                 Layout = function(cell, section, row)
-                                    cell.name:text(jsonData["items"][row]["full_name"])
+                                    cell.objs["name"]:text(jsonData["items"][row]["full_name"])
                                     if (jsonData["items"][row]["description"]) then
-                                        cell.description:text(jsonData["items"][row]["description"])
+                                        cell.objs["description"]:text(jsonData["items"][row]["description"])
                                     else
-                                        cell.description:text("no descriptions")
+                                        cell.objs["description"]:text("no descriptions")
                                     end
-                                    cell.profile:image(jsonData["items"][row]["owner"]["avatar_url"])
-                                    cell.profile:scaleType(ScaleType.FIT_CENTER)
-                                    cell.stars:text("Stars: " .. jsonData["items"][row]["stargazers_count"])
+                                    cell.objs["profile"]:image(jsonData["items"][row]["owner"]["avatar_url"])
+                                    cell.objs["profile"]:scaleType(ScaleType.FIT_CENTER)
+                                    cell.objs["stars"]:text("Stars: " .. jsonData["items"][row]["stargazers_count"])
                                 end
                             }
                         }

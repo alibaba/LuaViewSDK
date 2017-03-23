@@ -6,12 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
-    _pica:parseXml("widget/loading.xml")
+    loadingObjs = Pica:getInstance():render("widget/loading.xml")
 
-    local loading = _pica:getViewByName("loading")
+    local loading = loadingObjs["loading"]
     loading:start()
 end
 

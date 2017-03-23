@@ -6,10 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
-
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
     local tableData = {
@@ -30,20 +27,17 @@ local function start()
                     return Platform.contentWidth, Platform.contentHeight*2.5
                 end,
                 Init = function(cell, section, row)
-                    _pica:parseXml("widget/label_item.xml")
+                    cell.objs = Pica:getInstance():render("widget/label_item.xml")
 
-                    local root = _pica:getViewByName("root")
-                    cell.window:addView(root)
-
-                    local fs1 = _pica:getViewByName("fs1")
+                    local fs1 = cell.objs["fs1"]
                     fs1:text(StyledString("normal", {fontStyle = "normal", fontSize=25}))
-                    local fs2 = _pica:getViewByName("fs2")
+                    local fs2 = cell.objs["fs2"]
                     fs2:text(StyledString("bold", {fontStyle = "bold", fontSize=25}))
-                    local fs3 = _pica:getViewByName("fs3")
+                    local fs3 = cell.objs["fs3"]
                     fs3:text(StyledString("italic", {fontStyle = "italic", fontSize=25}))
-                    local td1 = _pica:getViewByName("td1")
+                    local td1 = cell.objs["td1"]
                     td1:text(StyledString("strikethrough", {strikethrough = true, fontSize=25}))
-                    local td2 = _pica:getViewByName("td2")
+                    local td2 = cell.objs["td2"]
                     td2:text(StyledString("underline", {underline = true, fontSize=25}))
                 end
             }

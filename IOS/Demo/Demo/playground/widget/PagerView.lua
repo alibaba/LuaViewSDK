@@ -6,25 +6,19 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
-
-local _pica = require("kit.pica")
+require("kit.pica_new")
 
 local function start()
-    _pica:parseXml("widget/pagerview.xml")
+    pvObjs = Pica:getInstance():render("widget/pagerview.xml")
 
-    autoSlider = _pica:getViewByName("pagerView1")
-    indicator1 = _pica:getViewByName("indicator1")
+    local autoSlider = pvObjs["pagerView1"]
+    local indicator1 = pvObjs["indicator1"]
 
     local data = {
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                _pica:parseXml("widget/pagerview_page.xml")
-
-                page.root = _pica:getViewByName("root")
-                page.img = _pica:getViewByName("img")
+                page.objs = Pica:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
             end
@@ -35,16 +29,13 @@ local function start()
     autoSlider:reload()
     autoSlider:indicator(indicator1)
 
-    manualSlider = _pica:getViewByName("pagerView2")
-    local indicator2 = _pica:getViewByName("indicator2")
+    local manualSlider = pvObjs["pagerView2"]
+    local indicator2 = pvObjs["indicator2"]
     local data2 = {
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                _pica:parseXml("widget/pagerview_page.xml")
-
-                page.root = _pica:getViewByName("root")
-                page.img = _pica:getViewByName("img")
+                page.objs = Pica:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
             end

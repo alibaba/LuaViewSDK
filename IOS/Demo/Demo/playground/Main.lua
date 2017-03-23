@@ -6,8 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
+require("kit.pica_new")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
@@ -16,10 +15,8 @@ local _dataWidget = Json:toTable(_jsonDataWidget)
 local _dataDemo = Json:toTable(_jsonDataDemo)
 local _dataDescription = Json:toTable(_jsonDataDescription)
 
-local _pica = require("kit.pica")
-
 local function main()
-    _pica:parseXml("main.xml")
+    mainObjs = Pica:getInstance():render("main.xml")
 
     widgetTableView = CollectionView({
         Section = {
@@ -59,12 +56,13 @@ local function main()
     widgetTableView:backgroundColor(0xeeeeee)
     widgetTableView:miniSpacing(1)
 
-    local topContainer = _pica:getViewByName("topContainer")
+    local topContainer = mainObjs["topContainer"]
     topContainer:addView(widgetTableView)
 
-    local widgetTab = _pica:getViewByName("widgetTab")
-    local sampleTab = _pica:getViewByName("sampleTab")
-    local aboutTab = _pica:getViewByName("aboutTab")
+    local widgetTab = mainObjs["widgetTab"]
+    local sampleTab = mainObjs["sampleTab"]
+    local aboutTab = mainObjs["aboutTab"]
+
     widgetTab:callback(function()
         widgetTab:textColor(0xff0000)
         sampleTab:textColor(0x000000)
@@ -81,6 +79,7 @@ local function main()
             aboutView:hide()
         end
     end)
+
     sampleTab:callback(function()
         widgetTab:textColor(0x000000)
         sampleTab:textColor(0xff0000)
@@ -106,18 +105,11 @@ local function main()
                             return Platform.contentWidth, 120
                         end,
                         Init = function(cell, section, row)
-                            _pica:parseXml("demo_item.xml")
-
-                            local root = _pica:getViewByName("root")
-                            cell.window:addView(root)
-                            cell.window:backgroundColor(0xffffff)
-
-                            cell.item = _pica:getViewByName("item")
-                            cell.subitem = _pica:getViewByName("subitem")
+                            cell.objs = Pica:getInstance():render("demo_item.xml")
                         end,
                         Layout = function(cell, section, row)
-                            cell.item:text(_dataDemo[row])
-                            cell.subitem:text(_dataDescription[row])
+                            cell.objs["item"]:text(_dataDemo[row])
+                            cell.objs["subitem"]:text(_dataDescription[row])
                         end,
                         Callback = function(cell, section, row)
                             Bridge:jumpTo("sample/" .. _dataDemo[row] .. ".lua")
@@ -148,14 +140,14 @@ local function main()
         if (aboutView) then
             aboutView:show()
         else
-            _pica:parseXml("about.xml")
+            aboutObjs = Pica:getInstance():render("about.xml")
 
-            aboutView = _pica:getViewByName("root")
+            aboutView = aboutObjs["root"]
             aboutView:frame(widgetTableView:frame())
             aboutView:backgroundColor(0xeeeeee)
             topContainer:addView(aboutView)
 
-            local info = _pica:getViewByName("info")
+            local info = aboutObjs["info"]
             if (Platform.isAndroid) then
                 info:nativeView():setLineSpacing(10,1)
             end
