@@ -10,13 +10,13 @@
             <Label flexCss="flex: 1, margin: 10" text="Http Image" fontSize="20" textColor="0xffffff"></Label>
         </View>
         <View flexCss="flex: 1, justify-content: center, align-items: center">
-            <Image flexCss="height: 100, width: 100" image="https://gw.alicdn.com/tfs/TB1..OGQXXXXXaaXVXXXXXXXXXX-330-320.png"></Image>
+            <Image flexCss="height: 100, width: 100" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></Image>
         </View>
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label flexCss="flex: 1, margin: 10" text="Gif Image" fontSize="20" textColor="0xffffff"></Label>
         </View>
         <View flexCss="flex: 1, justify-content: center, align-items: center">
-            <Image flexCss="height: 100, width: 100" image="https://gw.alicdn.com/tfs/TB1JYiJQXXXXXbIXFXXXXXXXXXX-330-320.gif"></Image>
+            <Image flexCss="height: 100, width: 100" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></Image>
         </View>
     </View>
 </doc>
