@@ -1,5 +1,5 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" >
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" >
         <WebView id="web" flexCss="flex: 1" loadUrl="http://m.taobao.com"></WebView>
     </View>
 </doc>

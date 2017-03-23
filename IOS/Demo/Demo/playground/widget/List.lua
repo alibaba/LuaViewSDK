@@ -6,24 +6,16 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("List.lua")
+require("kit.common")
+require("kit.platform")
 
-local _screenWidth, _screenHeight = System:screenSize()
-
--- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-    local xml = File:read("widget/list.xml")
-    pica:parseXml(xml)
-    local header = pica:getViewByName("headerText")
-    local tableContainer = pica:getViewByName("tableContainer")
+    _pica:parseXml("widget/list.xml")
+
+    local header = _pica:getViewByName("headerText")
+    tableView = _pica:getViewByName("tableView")
 
     local timer = Timer()
     timer:callback(function()
@@ -31,7 +23,7 @@ local function start()
         timer:cancel()
     end)
 
-    tableView = RefreshCollectionView({
+    local tableData = {
         Section = {
             SectionCount = function()
                 return 1
@@ -46,10 +38,10 @@ local function start()
             end,
             RowCell = {
                 Size = function(section, row)
-                    return _screenWidth, 60
+                    return Platform.contentWidth, 60
                 end,
                 Init = function(cell, section, row)
-                    cell.window:frame(0, 0, _screenWidth, 60)
+                    cell.window:frame(0, 0, Platform.contentWidth, 60)
                     cell.window:flexCss("flex-direction: row")
                     cell.window:backgroundColor(0xffffff)
 
@@ -74,13 +66,12 @@ local function start()
                 timer:start(3)
             end
         }
-    })
-    tableView:backgroundColor(0xeeeeee)
-    tableView:miniSpacing(1)
-    tableView:showScrollIndicator(false)
-    tableView:frame(0, 0, _screenWidth, _screenHeight - 50)
-    tableContainer:addView(tableView)
+    }
+
+    tableView:initParams(tableData)
+    tableView:reload()
 end
 
+Navigation:title("List.lua")
 start()
 

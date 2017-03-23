@@ -6,45 +6,33 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("Github.lua")
+require("kit.common")
+require("kit.platform")
 
-local _screenWidth, _screenHeight = System:screenSize()
-
--- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-
-    print("tuoli", "xml read start")
-    if (System:android()) then
-        local xml = File:read("sample/github_android.xml")
-        print("tuoli", "xml read end")
-        pica:parseXml(xml)
+    if (Platform.isAndroid) then
+        _pica:parseXml("sample/github_android.xml")
     else
-        local xml = File:read("sample/github_ios.xml")
-        print("tuoli", "xml read end")
-        pica:parseXml(xml)
+        _pica:parseXml("sample/github_ios.xml")
     end
 
-    root = pica:getViewByName("root")
-    topContainer = pica:getViewByName("topContainer")
-    inputContainer = pica:getViewByName("inputContainer")
-    go = pica:getViewByName("go")
-    input = pica:getViewByName("input")
-    container = pica:getViewByName("container")
+    root = _pica:getViewByName("root")
+    topContainer = _pica:getViewByName("topContainer")
+    inputContainer = _pica:getViewByName("inputContainer")
+    go = _pica:getViewByName("go")
+    input = _pica:getViewByName("input")
+    tableView = _pica:getViewByName("tableView")
 
-    local loading = LoadingIndicator()
-    loading:frame(0, _screenHeight/2 - 50, _screenWidth, 50)
-    loading:color(0xF06292)
+    loading = _pica:getViewByName("loading")
 
     local isSearching = false
     go:callback(function()
+        if (not Platform.isAndroid) then
+            input:cancelFocus()
+        end
+
         if (isSearching == true) then
             return
         end
@@ -52,23 +40,20 @@ local function start()
         local content = input:text()
         local baseUrl = "https://api.github.com/search/repositories?sort=stars&q="
 
-        if (tableView) then
-            tableView:removeFromSuper()
-        end
-
         loading:show()
-
-        print("tuoli", "http request start")
         isSearching = true
 
+        print("tuoli", "http request start")
         local http = Http()
         http:get(baseUrl .. content, function(response)
             isSearching = false
             print("tuoli", "http request end")
+
             loading:hide()
-            local jsonData = Json:toTable(tostring(response:data()))
-            --                Common:printTable(jsonData)
+
             if (tostring(response:code()) == "200") then
+                local jsonData = Json:toTable(tostring(response:data()))
+
                 if (table.getn(jsonData["items"]) == 0) then
                     Toast("No Result")
                 else
@@ -78,7 +63,6 @@ local function start()
                                 return 1
                             end,
                             RowCount = function(section)
-                                print("tuoli", "hhhhhhh")
                                 return table.getn(jsonData["items"])
                             end
                         },
@@ -88,25 +72,22 @@ local function start()
                             end,
                             ItemCell = {
                                 Size = function(section, row)
-                                    return _screenWidth, _screenHeight/3
+                                    return Platform.contentWidth, Platform.contentHeight/3
                                 end,
                                 Init = function(cell, section, row)
-                                    print("tuoli", "xml read start")
-                                    local xml = File:read("sample/github_cell.xml")
-                                    print("tuoli", "xml read end")
-                                    pica:parseXml(xml)
+                                    _pica:parseXml("sample/github_cell.xml")
 
-                                    cell.root = pica:getViewByName("root")
+                                    cell.root = _pica:getViewByName("root")
                                     cell.window:addView(cell.root)
 
-                                    cell.bottomContainer = pica:getViewByName("bottomContainer")
-                                    cell.bottomLeft = pica:getViewByName("bottomLeft")
-                                    cell.author = pica:getViewByName("author")
+                                    cell.bottomContainer = _pica:getViewByName("bottomContainer")
+                                    cell.bottomLeft = _pica:getViewByName("bottomLeft")
+                                    cell.author = _pica:getViewByName("author")
 
-                                    cell.name = pica:getViewByName("name")
-                                    cell.description = pica:getViewByName("description")
-                                    cell.profile = pica:getViewByName("profile")
-                                    cell.stars = pica:getViewByName("stars")
+                                    cell.name = _pica:getViewByName("name")
+                                    cell.description = _pica:getViewByName("description")
+                                    cell.profile = _pica:getViewByName("profile")
+                                    cell.stars = _pica:getViewByName("stars")
                                 end,
                                 Layout = function(cell, section, row)
                                     cell.name:text(jsonData["items"][row]["full_name"])
@@ -122,10 +103,9 @@ local function start()
                             }
                         }
                     }
-                    tableView = CollectionView(tableData)
-                    local x, y, w, h = container:frame()
-                    tableView:frame(0, 0, w, h)
-                    container:addView(tableView)
+
+                    tableView:initParams(tableData)
+                    tableView:reload()
                 end
             else
                 Toast("Request Error")
@@ -134,4 +114,5 @@ local function start()
     end)
 end
 
+Navigation:title("Github.lua")
 start()

@@ -6,78 +6,55 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("PagerView.lua")
+require("kit.common")
+require("kit.platform")
 
-local _screenWidth, _screenHeight = System:screenSize()
-
--- 减掉ActionBar和StatusBar的高度
-if (System:android()) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
-
-local function createIndicator()
-    local indicator = PagerIndicator()
-    indicator:selectedColor(0x666666)
-    indicator:unselectedColor(0xeeeeee)
-    return indicator
-end
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-    local xml = File:read("widget/pagerview.xml")
-    pica:parseXml(xml)
-    local pagerContainer1 = pica:getViewByName("pagerContainer1")
-    local pagerContainer2 = pica:getViewByName("pagerContainer2")
+    _pica:parseXml("widget/pagerview.xml")
 
-    autoSlider = PagerView({
+    autoSlider = _pica:getViewByName("pagerView1")
+    indicator1 = _pica:getViewByName("indicator1")
+
+    local data = {
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                local xml_page = File:read("widget/pagerview_page.xml")
-                pica:parseXml(xml_page)
+                _pica:parseXml("widget/pagerview_page.xml")
 
-                page.root = pica:getViewByName("root")
-                page.img = pica:getViewByName("img")
+                page.root = _pica:getViewByName("root")
+                page.img = _pica:getViewByName("img")
             end,
             Layout = function(page, pos)
             end
         }
-    })
+    }
 
-    autoSlider:autoScroll(3)
-    autoSlider:looping(true)
-    autoSlider:frame(0, 0, _screenWidth, (_screenHeight - 100)/2)
-    pagerContainer1:addView(autoSlider)
-    local indicator = createIndicator()
-    indicator:frame(0, _screenHeight/3, _screenWidth, 20)
-    pagerContainer1:addView(indicator)
-    autoSlider:indicator(indicator)
+    autoSlider:initParams(data)
+    autoSlider:reload()
+    autoSlider:indicator(indicator1)
 
-    manualSlider = PagerView({
+    manualSlider = _pica:getViewByName("pagerView2")
+    local indicator2 = _pica:getViewByName("indicator2")
+    local data2 = {
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                local xml_page = File:read("widget/pagerview_page.xml")
-                pica:parseXml(xml_page)
+                _pica:parseXml("widget/pagerview_page.xml")
 
-                page.root = pica:getViewByName("root")
-                page.img = pica:getViewByName("img")
+                page.root = _pica:getViewByName("root")
+                page.img = _pica:getViewByName("img")
             end,
             Layout = function(page, pos)
             end
         }
-    })
-
-    manualSlider:frame(0, 0, _screenWidth, (_screenHeight - 100)/2)
-    pagerContainer2:addView(manualSlider)
-    local indicator2 = createIndicator()
-    indicator2:frame(0, _screenHeight/3, _screenWidth, 20)
-    pagerContainer2:addView(indicator2)
+    }
+    manualSlider:initParams(data2)
+    manualSlider:reload()
     manualSlider:indicator(indicator2)
 end
 
+Navigation:title("PagerView.lua")
 start()
 

@@ -1,13 +1,22 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" >
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" >
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label id="headerText" flexCss="flex: 1, margin: 10" text="Auto Play" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="pagerContainer1" flexCss="flex: 1" frame="0, 50, SCREEN_WIDTH, (SCREEN_HEIGHT-100)/2"></View>
+        <View id="container1" flexCss="flex: 1">
+            <PagerView id="pagerView1" flexCss="flex: 1" autoScroll="2" looping="true"></PagerView>
+            <PagerIndicator id="indicator1" flexCss="height: 20"  selectedColor="0x666666" unselectedColor="0xeeeeee"></PagerIndicator>
+        </View>
         <View flexCss="height: 50" backgroundColor="0x004B97">
             <Label id="headerText" flexCss="flex: 1, margin: 10" text="Manual Play" fontSize="20" textColor="0xffffff"></Label>
         </View>
-        <View id="pagerContainer2" flexCss="flex: 1" frame="0, ((SCREEN_HEIGHT-100)/2)+100, SCREEN_WIDTH, (SCREEN_HEIGHT-100)/2"></View>
+        <View id="container2" flexCss="flex: 1">
+            <PagerView id="pagerView2" flexCss="flex: 1" looping="true"></PagerView>
+            <View flexCss="height: 20, flex-direction: row">
+                <View flexCss="flex: 1"></View>
+                <PagerIndicator id="indicator2" flexCss="flex: 1" selectedColor="0x666666" unselectedColor="0xeeeeee"></PagerIndicator>
+            </View>
+        </View>
     </View>
 </doc>
 

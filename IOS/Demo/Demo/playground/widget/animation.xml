@@ -1,5 +1,5 @@
 <doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT/2" flexCss="flex-direction: column" >
+    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT/2" flexCss="flex-direction: column" >
         <View flexCss="height: 60, flex-direction: row">
             <Button id="button1" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" cornerRadius="10"></Button>
             <Button id="button2" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" cornerRadius="10"></Button>

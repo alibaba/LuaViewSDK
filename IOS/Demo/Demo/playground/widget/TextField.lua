@@ -6,21 +6,18 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-Navigation:title("TextField.lua")
+require("kit.common")
+require("kit.platform")
+
+local _pica = require("kit.pica")
 
 local function start()
-    local pica = require("kit.pica")
-
-    print("tuoli", "xml read start")
-    if (System:android()) then
-        local xml = File:read("widget/textfield_android.xml")
-        print("tuoli", "xml read end")
-        pica:parseXml(xml)
+    if (Platform.isAndroid) then
+        _pica:parseXml("widget/textfield_android.xml")
     else
-        local xml = File:read("widget/textfield_ios.xml")
-        print("tuoli", "xml read end")
-        pica:parseXml(xml)
+        _pica:parseXml("widget/textfield_ios.xml")
     end
 end
 
+Navigation:title("TextField.lua")
 start()

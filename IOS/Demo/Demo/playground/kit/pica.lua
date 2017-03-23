@@ -7,20 +7,9 @@
 --
 
 require("kit.common")
+require("kit.platform")
 
 local Pica = {}
-
-local _screenWidth, _screenHeight = System:screenSize()
-
-local _isAndroid = System:android()
-
--- 减掉ActionBar和StatusBar的高度
-if (_isAndroid) then
-    local device = System:device()
-    _screenHeight = device.window_height - device.status_bar_height - device.nav_height
-else
-    _screenHeight = _screenHeight - 64      -- iOS, 稳定在这个值
-end
 
 --function Pica:new(o)
 --    local AppMeta = {__index = self}
@@ -30,10 +19,14 @@ end
 --    return instance
 --end
 
-function Pica:parseXml(xml)
-    if (type(xml) ~= "string") then
-        xml = tostring(xml)
-        print("tuoli xml", string.len(xml))
+function Pica:parseXml(xmlFile)
+    print("tuoli", "xml read start")
+    local data = File:read(xmlFile)
+    print("tuoli", "xml read end")
+
+    if (type(data) ~= "string") then
+        data = tostring(data)
+        print("tuoli xml", string.len(data))
     end
 
     if (g_xmlParser == nil) then
@@ -45,12 +38,12 @@ function Pica:parseXml(xml)
 
     self.objs = {}
     self.identifierObjs = {}
-    if (not _isAndroid) then
+    if (not Platform.isAndroid) then
         self.flxLayoutObjs = {}
     end
 
     print("tuoli", "xml dom start")
-    local root = g_xmlParser:dom(xml)
+    local root = g_xmlParser:dom(data)
     print("tuoli", "xml dom end")
     print("tuoli", "parse element start")
     self:parseElement(root, nil)
@@ -85,7 +78,7 @@ function Pica:flexOrNot()
     end
 
     -- iOS能否在SDK层屏蔽掉flxLayout的调用
-    if (not _isAndroid) then
+    if (not Platform.isAndroid) then
         for _, _view in pairs(self.flxLayoutObjs) do
             _view:flxLayout(true)
         end
@@ -114,6 +107,10 @@ function Pica:isViewElement(element)
         view = RefreshCollectionView()
     elseif (element.name == "LoadingIndicator") then
         view = LoadingIndicator()
+    elseif (element.name == "PagerView") then
+        view = PagerView()
+    elseif (element.name == "PagerIndicator") then
+        view = PagerIndicator()
     else
 --        print("tuoli error", element.name .. " not found")
         view = nil
@@ -152,12 +149,12 @@ function Pica:parseElement(element, parent)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                _v.value = _v.value:gsub("SCREEN_WIDTH", _screenWidth)
-                _v.value = _v.value:gsub("SCREEN_HEIGHT", _screenHeight)
+                _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
+                _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
                 if (parent and parent.name == "View") then
                     self.objs[parent]:addView(self.objs[element])
                 end
-                local paramFun = Common:loadString("return " .. _v.value)
+                local paramFun = Platform:loadString("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
             elseif (_v.name == "backgroundColor") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
@@ -170,7 +167,7 @@ function Pica:parseElement(element, parent)
                 self.identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "flexCss") then
                 self.objs[element]:flexCss(_v.value)
-                if (not _isAndroid) then
+                if (not Platform.isAndroid) then
                     if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
@@ -193,7 +190,7 @@ function Pica:parseElement(element, parent)
             elseif (_v.name == "borderWidth") then
                 self.objs[element]:borderWidth(tonumber(_v.value))
             elseif (_v.name == "textColor") then
-                if (not _isAndroid and string.len(_v.value) == 10) then
+                if (not Platform.isAndroid and string.len(_v.value) == 10) then
                     local alphaStr = string.sub(_v.value, 3, 4)
                     local alpha = tonumber(alphaStr)/tonumber("0xFF")
                     self.objs[element]:textColor(tonumber(_v.value), alpha)
@@ -209,18 +206,38 @@ function Pica:parseElement(element, parent)
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
-                local paramFun = Common:loadString("return " .. _v.value)
+                local paramFun = Platform:loadString("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "scaleType") then
-                local paramFun = Common:loadString("return " .. _v.value)
+                local paramFun = Platform:loadString("return " .. _v.value)
                 self.objs[element]:scaleType(paramFun())
             elseif (_v.name == "ellipsize") then
-                if (_isAndroid) then
-                    local paramFun = Common:loadString("return " .. _v.value)
+                if (Platform.isAndroid) then
+                    local paramFun = Platform:loadString("return " .. _v.value)
                     self.objs[element]:ellipsize(paramFun())
                 end
             elseif (_v.name == "hint") then
                 self.objs[element]:hint(_v.value)
+            elseif (_v.name == "miniSpacing") then
+                self.objs[element]:miniSpacing(tonumber(_v.value))
+            elseif (_v.name == "autoScroll") then
+                self.objs[element]:autoScroll(tonumber(_v.value))
+            elseif (_v.name == "looping") then
+                if (_v.value == "true") then
+                    self.objs[element]:looping(true)
+                else
+                    self.objs[element]:looping(false)
+                end
+            elseif (_v.name == "selectedColor") then
+                self.objs[element]:selectedColor(tonumber(_v.value))
+            elseif (_v.name == "unselectedColor") then
+                self.objs[element]:unselectedColor(tonumber(_v.value))
+            elseif (_v.name == "showScrollIndicator") then
+                if (_v.value == "true") then
+                    self.objs[element]:showScrollIndicator(true)
+                else
+                    self.objs[element]:showScrollIndicator(false)
+                end
             elseif (_v.name == "loadUrl") then
                 self.objs[element]:loadUrl(_v.value)
             else

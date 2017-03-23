@@ -8,82 +8,6 @@
 
 if (Common == nil) then
     Common = {}
-
-    --function Common:setFlex(view, flex)
-    --    local flexCss = ""
-    --    for k, v in pairs(flex) do
-    --        if (k == "flexDirection") then
-    --            flexCss = flexCss .. "flex-direction: " .. v .. ","
-    --        elseif (k == "marginLeft") then
-    --            flexCss = flexCss .. "margin-left: " .. v .. ","
-    --        elseif (k == "marginRight") then
-    --            flexCss = flexCss .. "margin-right: " .. v .. ","
-    --        elseif (k == "marginTop") then
-    --            flexCss = flexCss .. "margin-top: " .. v .. ","
-    --        elseif (k == "marginBottom") then
-    --            flexCss = flexCss .. "margin-bottom: " .. v .. ","
-    --        else
-    --            flexCss = flexCss .. k .. ": " .. v .. ","
-    --        end
-    --    end
-    --
-    --    view:flexCss(flexCss)
-    --end
-    --
-    --function Common:renderView(view, style)
-    --    for _k, _v in pairs(style) do
-    --        if (_k == "flexCss" and type(_v) == "table") then
-    --            Common:setFlex(view, _v)
-    --        end
-    --
-    --        if (_k == "property" and type(_v) == "table") then
-    --            for k, v in pairs(_v) do
-    --                if (k == "frame") then
-    --                    view:frame(v[1], v[2], v[3], v[4])
-    --                end
-    --            end
-    --        end
-    --    end
-    --end
-    --
-    --function Common:renderLabel(view, style)
-    --    for _k, _v in pairs(style) do
-    --        if (_k == "flexCss" and type(_v) == "table") then
-    --            Common:setFlex(view, _v)
-    --        end
-    --
-    --        if (_k == "property" and type(_v) == "table") then
-    --            for k, v in pairs(_v) do
-    --                if (k == "frame") then
-    --                    view:frame(v[1], v[2], v[3], v[4])
-    --                else
-    --                    view[k](view, v)
-    --                end
-    --            end
-    --        end
-    --    end
-    --end
-    --
-    --function Common:renderButton(view, style)
-    --    for _k, _v in pairs(style) do
-    --        if (_k == "flexCss" and type(_v) == "table") then
-    --            Common:setFlex(view, _v)
-    --        end
-    --
-    --        if (_k == "property" and type(_v) == "table") then
-    --            for k, v in pairs(_v) do
-    --                if (k == "frame") then
-    --                    view:frame(v[1], v[2], v[3], v[4])
-    --                elseif (k == "image") then
-    --                    view:image(v[1], v[2])
-    --                else
-    --                    view[k](view, v)
-    --                end
-    --            end
-    --        end
-    --    end
-    --end
-
     function Common:printTable(t, exclusions)
         if (type(t) == "table") then
             local nests = 0
@@ -154,26 +78,4 @@ if (Common == nil) then
             print(t)
         end
     end
-
-    function Common:loadString(param)
-        if (System:android()) then
-            return load(param)
-        else
-            return loadstring(param)
-        end
-    end
-end
-
-ScaleType = {};
-
-if( System:ios() ) then
-    -- ios
-    ScaleType.ScaleAspectFit = 1;
-    ScaleType.ScaleAspectFill = 2;
-    ScaleType.SCALE_FIT_XY = 0;
-else
-    -- 安卓
-    ScaleType.ScaleAspectFit = "FIT_CENTER";
-    ScaleType.ScaleAspectFill = "CENTER_CROP";
-    ScaleType.SCALE_FIT_XY = "FIT_XY";
 end
