@@ -1,8 +1,0 @@
-<doc>
-    <View id="root" frame="0, 0, SCREEN_WIDTH, SCREEN_HEIGHT" flexCss="flex-direction: column" >
-        <View flexCss="height: 50" backgroundColor="0x004B97">
-            <Label id="headerText" flexCss="flex: 1, margin: 10" text="Visible Items: " fontSize="20" textColor="0xffffff"></Label>
-        </View>
-        <View id="tableContainer" flexCss="flex: 1"></View>
-    </View>
-</doc>

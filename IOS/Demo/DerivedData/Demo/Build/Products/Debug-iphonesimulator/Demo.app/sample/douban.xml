@@ -1,6 +1,0 @@
-<doc>
-    <View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT">
-        <CollectionView id="tableView" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" backgroundColor="0xeeeeee"></CollectionView>
-        <LoadingIndicator id="loading" color="0xF06292" frame="0, CONTENT_HEIGHT/2 - 50, CONTENT_WIDTH, 50"></LoadingIndicator>
-    </View>
-</doc>
