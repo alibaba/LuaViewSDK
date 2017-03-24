@@ -1,0 +1,15 @@
+# Uncomment this line to define a global platform for your project
+
+platform :ios, "8.0"
+
+target 'Demo' do
+
+    pod 'MJRefresh'
+    pod 'SDWebImage', '3.7.5'
+    
+    # pod 'liblua', '5.1.4.3'
+    #pod 'lua', :path => '../lua/'
+    pod 'LuaViewSDK', :path => '../../'
+
+end
+

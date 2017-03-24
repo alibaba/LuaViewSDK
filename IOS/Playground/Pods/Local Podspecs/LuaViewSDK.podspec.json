@@ -1,0 +1,32 @@
+{
+  "name": "LuaViewSDK",
+  "version": "2.5.16.5",
+  "summary": "LuaView SDK",
+  "description": "A longer description of LuaViewSDK.podspec in Markdown format.\n* LuaView",
+  "homepage": "http://gitlab.alibaba-inc.com/luaview/LuaViewSDK",
+  "license": {
+    "type": "GNU General Public Licence (GPL), Version 2.0",
+    "file": "LICENSE.txt"
+  },
+  "authors": {
+    "城西": "xicheng.dxc@alibaba-inc.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "git@gitlab.alibaba-inc.com:luaview/LuaViewSDK.git",
+    "tag": "2.1.1.2"
+  },
+  "source_files": [
+    "IOS/SDK/LuaViewSDK/Classes/**/*.{h,m,c}",
+    "IOS/lua/lua/*.{h,m,c}"
+  ],
+  "frameworks": [
+    "Foundation",
+    "UIKit",
+    "CoreGraphics"
+  ],
+  "libraries": "z",
+  "requires_arc": true
+}
