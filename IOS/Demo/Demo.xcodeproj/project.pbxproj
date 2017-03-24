@@ -10,6 +10,7 @@
 		3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C98A55A1C7D5B310001508E /* LaunchScreen.storyboard */; };
 		3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F81E1C706B1D00D1E0B7 /* main.m */; };
 		3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */; };
+		3CC2F8251C706B1D00D1E0B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8241C706B1D00D1E0B7 /* ViewController.m */; };
 		3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */; };
 		3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */; };
 		3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */; };
@@ -17,6 +18,44 @@
 		3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */; };
 		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
 		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
+		3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */; };
+		3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */; };
+		3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */; };
+		3CC2F89F1C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8631C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua */; };
+		3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8641C706BFA00D1E0B7 /* demoC_Label.lua */; };
+		3CC2F8A11C706BFA00D1E0B7 /* demoE_Button.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8651C706BFA00D1E0B7 /* demoE_Button.lua */; };
+		3CC2F8A41C706BFA00D1E0B7 /* demoH2_CollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8681C706BFA00D1E0B7 /* demoH2_CollectionView.lua */; };
+		3CC2F8A51C706BFA00D1E0B7 /* demoK_PagerView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8691C706BFA00D1E0B7 /* demoK_PagerView.lua */; };
+		3CC2F8A61C706BFA00D1E0B7 /* demoK_ScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86A1C706BFA00D1E0B7 /* demoK_ScrollView.lua */; };
+		3CC2F8A71C706BFA00D1E0B7 /* demoL_Alert.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86B1C706BFA00D1E0B7 /* demoL_Alert.lua */; };
+		3CC2F8A81C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86C1C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua */; };
+		3CC2F8A91C706BFA00D1E0B7 /* demoM_Navigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86D1C706BFA00D1E0B7 /* demoM_Navigation.lua */; };
+		3CC2F8AA1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86E1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua */; };
+		3CC2F8AB1C706BFA00D1E0B7 /* demoO_table.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F86F1C706BFA00D1E0B7 /* demoO_table.lua */; };
+		3CC2F8AC1C706BFA00D1E0B7 /* demoO_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8701C706BFA00D1E0B7 /* demoO_Timer.lua */; };
+		3CC2F8AD1C706BFA00D1E0B7 /* demoP_string.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8711C706BFA00D1E0B7 /* demoP_string.lua */; };
+		3CC2F8AE1C706BFA00D1E0B7 /* demoP_System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8721C706BFA00D1E0B7 /* demoP_System.lua */; };
+		3CC2F8AF1C706BFA00D1E0B7 /* demoV1_CustomError.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8731C706BFA00D1E0B7 /* demoV1_CustomError.lua */; };
+		3CC2F8B01C706BFA00D1E0B7 /* demoV1_Customloading.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8741C706BFA00D1E0B7 /* demoV1_Customloading.lua */; };
+		3CC2F8B11C706BFA00D1E0B7 /* demoW1_shake.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8751C706BFA00D1E0B7 /* demoW1_shake.lua */; };
+		3CC2F8B21C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8761C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua */; };
+		3CC2F8B31C706BFA00D1E0B7 /* demoY2_flxNode.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8771C706BFA00D1E0B7 /* demoY2_flxNode.lua */; };
+		3CC2F8B41C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8781C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua */; };
+		3CC2F8B51C706BFA00D1E0B7 /* demoZ1_luabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */; };
+		3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */; };
+		3CC2F8B71C706BFA00D1E0B7 /* demoZ_2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */; };
+		3CC2F8B81C706BFA00D1E0B7 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */; };
+		3CC2F8B91C706BFA00D1E0B7 /* demoZ_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */; };
+		3CC2F8BE1C706BFA00D1E0B7 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */; };
+		3CC2F8C01C706BFA00D1E0B7 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8841C706BFA00D1E0B7 /* img1.tiff */; };
+		3CC2F8C11C706BFA00D1E0B7 /* img10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8851C706BFA00D1E0B7 /* img10.tiff */; };
+		3CC2F8C21C706BFA00D1E0B7 /* img13.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8861C706BFA00D1E0B7 /* img13.tiff */; };
+		3CC2F8C31C706BFA00D1E0B7 /* img16.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8871C706BFA00D1E0B7 /* img16.tiff */; };
+		3CC2F8C41C706BFA00D1E0B7 /* img4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8881C706BFA00D1E0B7 /* img4.tiff */; };
+		3CC2F8C51C706BFA00D1E0B7 /* img7.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8891C706BFA00D1E0B7 /* img7.tiff */; };
+		3CC2F8C61C706BFA00D1E0B7 /* JHSIconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */; };
+		3CC2F8C71C706BFA00D1E0B7 /* lv_kit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */; };
+		3CC2F8C81C706BFA00D1E0B7 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88C1C706BFA00D1E0B7 /* snow.png */; };
 		3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88E1C706BFA00D1E0B7 /* close.png */; };
 		3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */; };
 		3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8901C706BFA00D1E0B7 /* enter.png */; };
@@ -29,16 +68,24 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
-		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
-		ACF78CB01E829CEA0024CD98 /* about.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CA91E829CEA0024CD98 /* about.xml */; };
-		ACF78CB11E829CEA0024CD98 /* demo_item.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAA1E829CEA0024CD98 /* demo_item.xml */; };
-		ACF78CB21E829CEA0024CD98 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAB1E829CEA0024CD98 /* kit */; };
-		ACF78CB31E829CEA0024CD98 /* Main.lua in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAC1E829CEA0024CD98 /* Main.lua */; };
-		ACF78CB41E829CEA0024CD98 /* main.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAD1E829CEA0024CD98 /* main.xml */; };
-		ACF78CB51E829CEA0024CD98 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAE1E829CEA0024CD98 /* sample */; };
-		ACF78CB61E829CEA0024CD98 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAF1E829CEA0024CD98 /* widget */; };
+		3CC2F9191C70BB8E00D1E0B7 /* candle in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F9181C70BB8E00D1E0B7 /* candle */; };
+		840412871CCE351100B34D28 /* demoD_requestFromHttp.lua in Resources */ = {isa = PBXBuildFile; fileRef = 840412861CCE351100B34D28 /* demoD_requestFromHttp.lua */; };
+		840BCEEC1CB79E1A00D816AD /* tags.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 840BCEEB1CB79E1A00D816AD /* tags.9.png */; };
+		840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 840BCEED1CB7A0B700D816AD /* tags2.9.png */; };
+		848645CD1CAB785D004F4FD8 /* demoP_Http.lua in Resources */ = {isa = PBXBuildFile; fileRef = 848645CC1CAB785D004F4FD8 /* demoP_Http.lua */; };
+		8486B6011C96897500A82BA1 /* demoP_Json.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8486B6001C96897500A82BA1 /* demoP_Json.lua */; };
+		84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */; };
+		84F9A0471C92CA7300481334 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0451C92CA7300481334 /* button0.png */; };
+		84F9A0481C92CA7300481334 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A0461C92CA7300481334 /* button1.png */; };
+		911270911DFA954D001F8047 /* demoL3_onTouch.lua in Resources */ = {isa = PBXBuildFile; fileRef = 911270901DFA954D001F8047 /* demoL3_onTouch.lua */; };
+		911270971DFAA464001F8047 /* demoZ_Gesture.lua in Resources */ = {isa = PBXBuildFile; fileRef = 911270961DFAA464001F8047 /* demoZ_Gesture.lua */; };
+		91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */; };
+		914822D41E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 914822D31E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua */; };
+		91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91912B0B1DF9658200ACDF0C /* animate1.jpg */; };
+		91A9AB0E1E2374B70069115C /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = 91A9AB0D1E2374B70069115C /* demo.zip */; };
+		91F6788D1DF582770042D6FC /* demoL2_CustomView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */; };
+		BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
-		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +106,8 @@
 		3CC2F81E1C706B1D00D1E0B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3CC2F8231C706B1D00D1E0B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3CC2F8241C706B1D00D1E0B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CC2F82E1C706B1D00D1E0B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CC2F8331C706B1D00D1E0B7 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +123,44 @@
 		3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
 		3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVImage.h; sourceTree = "<group>"; };
 		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
+		3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_catebrand_more.9.png; sourceTree = "<group>"; };
+		3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_Image.lua; sourceTree = "<group>"; };
+		3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ImageAnimate.lua; sourceTree = "<group>"; };
+		3CC2F8631C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC2_IconFontLabel.lua; sourceTree = "<group>"; };
+		3CC2F8641C706BFA00D1E0B7 /* demoC_Label.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoC_Label.lua; sourceTree = "<group>"; };
+		3CC2F8651C706BFA00D1E0B7 /* demoE_Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoE_Button.lua; sourceTree = "<group>"; };
+		3CC2F8681C706BFA00D1E0B7 /* demoH2_CollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoH2_CollectionView.lua; sourceTree = "<group>"; };
+		3CC2F8691C706BFA00D1E0B7 /* demoK_PagerView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_PagerView.lua; sourceTree = "<group>"; };
+		3CC2F86A1C706BFA00D1E0B7 /* demoK_ScrollView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_ScrollView.lua; sourceTree = "<group>"; };
+		3CC2F86B1C706BFA00D1E0B7 /* demoL_Alert.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL_Alert.lua; sourceTree = "<group>"; };
+		3CC2F86C1C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL_LoadingIndicator.lua; sourceTree = "<group>"; };
+		3CC2F86D1C706BFA00D1E0B7 /* demoM_Navigation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoM_Navigation.lua; sourceTree = "<group>"; };
+		3CC2F86E1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_coroutineDemo.lua; sourceTree = "<group>"; };
+		3CC2F86F1C706BFA00D1E0B7 /* demoO_table.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_table.lua; sourceTree = "<group>"; };
+		3CC2F8701C706BFA00D1E0B7 /* demoO_Timer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoO_Timer.lua; sourceTree = "<group>"; };
+		3CC2F8711C706BFA00D1E0B7 /* demoP_string.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_string.lua; sourceTree = "<group>"; };
+		3CC2F8721C706BFA00D1E0B7 /* demoP_System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_System.lua; sourceTree = "<group>"; };
+		3CC2F8731C706BFA00D1E0B7 /* demoV1_CustomError.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoV1_CustomError.lua; sourceTree = "<group>"; };
+		3CC2F8741C706BFA00D1E0B7 /* demoV1_Customloading.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoV1_Customloading.lua; sourceTree = "<group>"; };
+		3CC2F8751C706BFA00D1E0B7 /* demoW1_shake.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoW1_shake.lua; sourceTree = "<group>"; };
+		3CC2F8761C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoW2_AudioPlayer.lua; sourceTree = "<group>"; };
+		3CC2F8771C706BFA00D1E0B7 /* demoY2_flxNode.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoY2_flxNode.lua; sourceTree = "<group>"; };
+		3CC2F8781C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoY5_DownloadAndFile.lua; sourceTree = "<group>"; };
+		3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ1_luabox.lua; sourceTree = "<group>"; };
+		3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ2_callOC.lua; sourceTree = "<group>"; };
+		3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_2015_testunit.lua; sourceTree = "<group>"; };
+		3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_decodeUrl.lua; sourceTree = "<group>"; };
+		3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_testunit.lua; sourceTree = "<group>"; };
+		3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZB1_Animator.lua; sourceTree = "<group>"; };
+		3CC2F8841C706BFA00D1E0B7 /* img1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img1.tiff; sourceTree = "<group>"; };
+		3CC2F8851C706BFA00D1E0B7 /* img10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img10.tiff; sourceTree = "<group>"; };
+		3CC2F8861C706BFA00D1E0B7 /* img13.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img13.tiff; sourceTree = "<group>"; };
+		3CC2F8871C706BFA00D1E0B7 /* img16.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img16.tiff; sourceTree = "<group>"; };
+		3CC2F8881C706BFA00D1E0B7 /* img4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img4.tiff; sourceTree = "<group>"; };
+		3CC2F8891C706BFA00D1E0B7 /* img7.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = img7.tiff; sourceTree = "<group>"; };
+		3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JHSIconfont.ttf; sourceTree = "<group>"; };
+		3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lv_kit.lua; sourceTree = "<group>"; };
+		3CC2F88C1C706BFA00D1E0B7 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		3CC2F88E1C706BFA00D1E0B7 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_1212.lua; sourceTree = "<group>"; };
 		3CC2F8901C706BFA00D1E0B7 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
@@ -86,16 +173,23 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
-		ACF78CA91E829CEA0024CD98 /* about.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = about.xml; path = playground/about.xml; sourceTree = "<group>"; };
-		ACF78CAA1E829CEA0024CD98 /* demo_item.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo_item.xml; path = playground/demo_item.xml; sourceTree = "<group>"; };
-		ACF78CAB1E829CEA0024CD98 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
-		ACF78CAC1E829CEA0024CD98 /* Main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.lua; path = playground/Main.lua; sourceTree = "<group>"; };
-		ACF78CAD1E829CEA0024CD98 /* main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.xml; path = playground/main.xml; sourceTree = "<group>"; };
-		ACF78CAE1E829CEA0024CD98 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
-		ACF78CAF1E829CEA0024CD98 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
-		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
-		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
+		3CC2F9181C70BB8E00D1E0B7 /* candle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = candle; sourceTree = "<group>"; };
+		840412861CCE351100B34D28 /* demoD_requestFromHttp.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoD_requestFromHttp.lua; sourceTree = "<group>"; };
+		840BCEEB1CB79E1A00D816AD /* tags.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tags.9.png; sourceTree = "<group>"; };
+		840BCEED1CB7A0B700D816AD /* tags2.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tags2.9.png; sourceTree = "<group>"; };
+		848645CC1CAB785D004F4FD8 /* demoP_Http.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_Http.lua; sourceTree = "<group>"; };
+		8486B6001C96897500A82BA1 /* demoP_Json.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoP_Json.lua; sourceTree = "<group>"; };
+		84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_ViewChildren.lua; sourceTree = "<group>"; };
+		84F9A0451C92CA7300481334 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button0.png; sourceTree = "<group>"; };
+		84F9A0461C92CA7300481334 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
+		911270901DFA954D001F8047 /* demoL3_onTouch.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL3_onTouch.lua; sourceTree = "<group>"; };
+		911270961DFAA464001F8047 /* demoZ_Gesture.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_Gesture.lua; sourceTree = "<group>"; };
+		91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoK_WebView.lua; sourceTree = "<group>"; };
+		914822D31E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoH2_EmptyRefreshCollectionView.lua; sourceTree = "<group>"; };
+		91912B0B1DF9658200ACDF0C /* animate1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = animate1.jpg; sourceTree = "<group>"; };
+		91A9AB0D1E2374B70069115C /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = demo.zip; sourceTree = "<group>"; };
+		91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoL2_CustomView.lua; sourceTree = "<group>"; };
+		BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoA_FlexBox.lua; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,11 +239,13 @@
 		3CC2F81C1C706B1D00D1E0B7 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				DC839D3F1E791402005C346B /* playground */,
 				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
+				3CC2F8581C706BFA00D1E0B7 /* luaviewDemos */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
 				3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */,
+				3CC2F8231C706B1D00D1E0B7 /* ViewController.h */,
+				3CC2F8241C706B1D00D1E0B7 /* ViewController.m */,
 				3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */,
 				3C98A55A1C7D5B310001508E /* LaunchScreen.storyboard */,
 				3CC2F82E1C706B1D00D1E0B7 /* Info.plist */,
@@ -181,10 +277,71 @@
 				3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */,
 				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
 				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
-				DC839C541E782D78005C346B /* Bridge.h */,
-				DC839C551E782D78005C346B /* Bridge.m */,
 			);
 			name = luaviewEx;
+			sourceTree = "<group>";
+		};
+		3CC2F8581C706BFA00D1E0B7 /* luaviewDemos */ = {
+			isa = PBXGroup;
+			children = (
+				3CC2F9181C70BB8E00D1E0B7 /* candle */,
+				BEEB28D91CA90F0A00EC2D86 /* demoA_FlexBox.lua */,
+				3CC2F8611C706BFA00D1E0B7 /* demoA_Image.lua */,
+				3CC2F8621C706BFA00D1E0B7 /* demoA_ImageAnimate.lua */,
+				84F9A0381C92BB2B00481334 /* demoA_ViewChildren.lua */,
+				3CC2F8641C706BFA00D1E0B7 /* demoC_Label.lua */,
+				3CC2F8631C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua */,
+				840412861CCE351100B34D28 /* demoD_requestFromHttp.lua */,
+				3CC2F8651C706BFA00D1E0B7 /* demoE_Button.lua */,
+				3CC2F8681C706BFA00D1E0B7 /* demoH2_CollectionView.lua */,
+				914822D31E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua */,
+				3CC2F8691C706BFA00D1E0B7 /* demoK_PagerView.lua */,
+				3CC2F86A1C706BFA00D1E0B7 /* demoK_ScrollView.lua */,
+				91232AAF1DAB7BFB00536E0C /* demoK_WebView.lua */,
+				3CC2F86B1C706BFA00D1E0B7 /* demoL_Alert.lua */,
+				3CC2F86C1C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua */,
+				91F6788C1DF582770042D6FC /* demoL2_CustomView.lua */,
+				911270901DFA954D001F8047 /* demoL3_onTouch.lua */,
+				3CC2F86D1C706BFA00D1E0B7 /* demoM_Navigation.lua */,
+				3CC2F86E1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua */,
+				3CC2F86F1C706BFA00D1E0B7 /* demoO_table.lua */,
+				3CC2F8701C706BFA00D1E0B7 /* demoO_Timer.lua */,
+				848645CC1CAB785D004F4FD8 /* demoP_Http.lua */,
+				8486B6001C96897500A82BA1 /* demoP_Json.lua */,
+				3CC2F8711C706BFA00D1E0B7 /* demoP_string.lua */,
+				3CC2F8721C706BFA00D1E0B7 /* demoP_System.lua */,
+				3CC2F8731C706BFA00D1E0B7 /* demoV1_CustomError.lua */,
+				3CC2F8741C706BFA00D1E0B7 /* demoV1_Customloading.lua */,
+				3CC2F8751C706BFA00D1E0B7 /* demoW1_shake.lua */,
+				3CC2F8761C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua */,
+				3CC2F8771C706BFA00D1E0B7 /* demoY2_flxNode.lua */,
+				3CC2F8781C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua */,
+				3CC2F87B1C706BFA00D1E0B7 /* demoZ_2015_testunit.lua */,
+				3CC2F87C1C706BFA00D1E0B7 /* demoZ_decodeUrl.lua */,
+				3CC2F87D1C706BFA00D1E0B7 /* demoZ_testunit.lua */,
+				3CC2F8791C706BFA00D1E0B7 /* demoZ1_luabox.lua */,
+				3CC2F87A1C706BFA00D1E0B7 /* demoZ2_callOC.lua */,
+				3CC2F8821C706BFA00D1E0B7 /* demoZB1_Animator.lua */,
+				911270961DFAA464001F8047 /* demoZ_Gesture.lua */,
+				3CC2F88B1C706BFA00D1E0B7 /* lv_kit.lua */,
+				91912B0B1DF9658200ACDF0C /* animate1.jpg */,
+				3CC2F85B1C706BFA00D1E0B7 /* bt_catebrand_more.9.png */,
+				84F9A0451C92CA7300481334 /* button0.png */,
+				84F9A0461C92CA7300481334 /* button1.png */,
+				3CC2F88C1C706BFA00D1E0B7 /* snow.png */,
+				840BCEEB1CB79E1A00D816AD /* tags.9.png */,
+				840BCEED1CB7A0B700D816AD /* tags2.9.png */,
+				3CC2F8841C706BFA00D1E0B7 /* img1.tiff */,
+				3CC2F8881C706BFA00D1E0B7 /* img4.tiff */,
+				3CC2F8891C706BFA00D1E0B7 /* img7.tiff */,
+				3CC2F8851C706BFA00D1E0B7 /* img10.tiff */,
+				3CC2F8861C706BFA00D1E0B7 /* img13.tiff */,
+				3CC2F8871C706BFA00D1E0B7 /* img16.tiff */,
+				3CC2F88A1C706BFA00D1E0B7 /* JHSIconfont.ttf */,
+				91A9AB0D1E2374B70069115C /* demo.zip */,
+			);
+			name = luaviewDemos;
+			path = lua;
 			sourceTree = "<group>";
 		};
 		3CC2F88D1C706BFA00D1E0B7 /* lua_animate */ = {
@@ -216,21 +373,6 @@
 				39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		DC839D3F1E791402005C346B /* playground */ = {
-			isa = PBXGroup;
-			children = (
-				ACF78CA91E829CEA0024CD98 /* about.xml */,
-				ACF78CAA1E829CEA0024CD98 /* demo_item.xml */,
-				ACF78CAB1E829CEA0024CD98 /* kit */,
-				ACF78CAC1E829CEA0024CD98 /* Main.lua */,
-				ACF78CAD1E829CEA0024CD98 /* main.xml */,
-				ACF78CAE1E829CEA0024CD98 /* sample */,
-				ACF78CAF1E829CEA0024CD98 /* widget */,
-				AC94B8F01E7FD296002838C4 /* luaview.png */,
-			);
-			name = playground;
 			sourceTree = "<group>";
 		};
 		E828AAF6D9BD6A045BEE78AA /* Frameworks */ = {
@@ -298,8 +440,7 @@
 				TargetAttributes = {
 					3CC2F8191C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = R4T52FY9CM;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 6L4X75AQK7;
 					};
 					3CC2F8321C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -331,24 +472,71 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF78CB11E829CEA0024CD98 /* demo_item.xml in Resources */,
+				3CC2F8BE1C706BFA00D1E0B7 /* demoZB1_Animator.lua in Resources */,
+				3CC2F8B01C706BFA00D1E0B7 /* demoV1_Customloading.lua in Resources */,
+				3CC2F8A51C706BFA00D1E0B7 /* demoK_PagerView.lua in Resources */,
+				911270911DFA954D001F8047 /* demoL3_onTouch.lua in Resources */,
+				3CC2F8AA1C706BFA00D1E0B7 /* demoO_coroutineDemo.lua in Resources */,
+				3CC2F8B91C706BFA00D1E0B7 /* demoZ_testunit.lua in Resources */,
+				3CC2F8A71C706BFA00D1E0B7 /* demoL_Alert.lua in Resources */,
+				3CC2F8AE1C706BFA00D1E0B7 /* demoP_System.lua in Resources */,
+				3CC2F8A91C706BFA00D1E0B7 /* demoM_Navigation.lua in Resources */,
+				3CC2F8B41C706BFA00D1E0B7 /* demoY5_DownloadAndFile.lua in Resources */,
+				84F9A0471C92CA7300481334 /* button0.png in Resources */,
+				3CC2F8C71C706BFA00D1E0B7 /* lv_kit.lua in Resources */,
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
-				ACF78CB61E829CEA0024CD98 /* widget in Resources */,
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
+				3CC2F8AD1C706BFA00D1E0B7 /* demoP_string.lua in Resources */,
+				840BCEEC1CB79E1A00D816AD /* tags.9.png in Resources */,
+				3CC2F8C11C706BFA00D1E0B7 /* img10.tiff in Resources */,
 				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
+				3CC2F8B11C706BFA00D1E0B7 /* demoW1_shake.lua in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
-				ACF78CB51E829CEA0024CD98 /* sample in Resources */,
+				3CC2F9191C70BB8E00D1E0B7 /* candle in Resources */,
+				3CC2F8981C706BFA00D1E0B7 /* bt_catebrand_more.9.png in Resources */,
+				91F6788D1DF582770042D6FC /* demoL2_CustomView.lua in Resources */,
+				3CC2F8AF1C706BFA00D1E0B7 /* demoV1_CustomError.lua in Resources */,
+				914822D41E128BEB00634FEF /* demoH2_EmptyRefreshCollectionView.lua in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
-				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
+				3CC2F8C41C706BFA00D1E0B7 /* img4.tiff in Resources */,
+				84F9A0481C92CA7300481334 /* button1.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
+				91A9AB0E1E2374B70069115C /* demo.zip in Resources */,
+				3CC2F8A11C706BFA00D1E0B7 /* demoE_Button.lua in Resources */,
+				3CC2F8B31C706BFA00D1E0B7 /* demoY2_flxNode.lua in Resources */,
+				91232AB01DAB7BFB00536E0C /* demoK_WebView.lua in Resources */,
+				3CC2F8C81C706BFA00D1E0B7 /* snow.png in Resources */,
+				3CC2F8AB1C706BFA00D1E0B7 /* demoO_table.lua in Resources */,
+				3CC2F8A61C706BFA00D1E0B7 /* demoK_ScrollView.lua in Resources */,
+				3CC2F8A81C706BFA00D1E0B7 /* demoL_LoadingIndicator.lua in Resources */,
+				3CC2F8B81C706BFA00D1E0B7 /* demoZ_decodeUrl.lua in Resources */,
+				3CC2F8C51C706BFA00D1E0B7 /* img7.tiff in Resources */,
+				3CC2F8B71C706BFA00D1E0B7 /* demoZ_2015_testunit.lua in Resources */,
+				8486B6011C96897500A82BA1 /* demoP_Json.lua in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
+				3CC2F89E1C706BFA00D1E0B7 /* demoA_ImageAnimate.lua in Resources */,
+				840BCEEE1CB7A0B700D816AD /* tags2.9.png in Resources */,
+				911270971DFAA464001F8047 /* demoZ_Gesture.lua in Resources */,
+				91912B0C1DF9658200ACDF0C /* animate1.jpg in Resources */,
+				3CC2F8A01C706BFA00D1E0B7 /* demoC_Label.lua in Resources */,
+				3CC2F89D1C706BFA00D1E0B7 /* demoA_Image.lua in Resources */,
+				84F9A0391C92BB2B00481334 /* demoA_ViewChildren.lua in Resources */,
+				3CC2F8B21C706BFA00D1E0B7 /* demoW2_AudioPlayer.lua in Resources */,
+				840412871CCE351100B34D28 /* demoD_requestFromHttp.lua in Resources */,
+				3CC2F8C01C706BFA00D1E0B7 /* img1.tiff in Resources */,
+				848645CD1CAB785D004F4FD8 /* demoP_Http.lua in Resources */,
+				3CC2F8C21C706BFA00D1E0B7 /* img13.tiff in Resources */,
+				3CC2F8B51C706BFA00D1E0B7 /* demoZ1_luabox.lua in Resources */,
+				3CC2F8AC1C706BFA00D1E0B7 /* demoO_Timer.lua in Resources */,
+				3CC2F8B61C706BFA00D1E0B7 /* demoZ2_callOC.lua in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
-				ACF78CB31E829CEA0024CD98 /* Main.lua in Resources */,
-				ACF78CB41E829CEA0024CD98 /* main.xml in Resources */,
-				ACF78CB21E829CEA0024CD98 /* kit in Resources */,
+				3CC2F8C61C706BFA00D1E0B7 /* JHSIconfont.ttf in Resources */,
+				3CC2F89F1C706BFA00D1E0B7 /* demoC2_IconFontLabel.lua in Resources */,
+				3CC2F8A41C706BFA00D1E0B7 /* demoH2_CollectionView.lua in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
-				ACF78CB01E829CEA0024CD98 /* about.xml in Resources */,
+				BEEB28DA1CA90F0A00EC2D86 /* demoA_FlexBox.lua in Resources */,
+				3CC2F8C31C706BFA00D1E0B7 /* img16.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,8 +617,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC2F8251C706B1D00D1E0B7 /* ViewController.m in Sources */,
 				3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */,
-				DC839C561E782D78005C346B /* Bridge.m in Sources */,
 				3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */,
 				3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */,
 				3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */,
@@ -507,7 +695,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -550,7 +738,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -567,14 +755,12 @@
 			baseConfigurationReference = 1D91B87B0C382EBA586DA7E1 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = 6L4X75AQK7;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.juhuasuanaaa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -585,15 +771,13 @@
 			baseConfigurationReference = 39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = 6L4X75AQK7;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taobao.juhuasuanaaa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.juhuasuan.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
