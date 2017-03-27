@@ -6,13 +6,10 @@
 
   SDK包括了以下几个部分：
 
-  iOS SDK：iOS版本的LuaViewSDK
-
-  Android SDK：Android版本的LuaViewSDK
-
-  LuaViewDebugger：LuaView的调试器
-
-  LuaViewBytecodeCompiler：用于Android版本LuaViewSDK的lua字节码编译器
+  * iOS SDK：iOS版本的LuaViewSDK
+  * Android SDK：Android版本的LuaViewSDK
+  * LuaViewDebugger：LuaView的调试器
+  * LuaViewBytecodeCompiler：用于Android版本LuaViewSDK的lua字节码编译器
 
 * ## IDE
 
