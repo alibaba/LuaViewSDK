@@ -24,4 +24,8 @@
 
   iOS版
 
+  * App Store审核中，敬请期待
+
   Android版
+
+  ![](playground_android.png)
