@@ -245,6 +245,12 @@ function Pickup:parseElement(element, parent, identifierObjs)
                 end
             elseif (_v.name == "loadUrl") then
                 self.objs[element]:loadUrl(_v.value)
+            elseif (_v.name == "hide") then
+                if (_v.value == "true") then
+                    self.objs[element]:hide(true)
+                else
+                    self.objs[element]:hide(false)
+                end
             else
                 print("LuaError::Layout", "方法名不对: " .. _v.name)
             end
