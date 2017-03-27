@@ -29,16 +29,65 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
-		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
-		ACBD919F1E83AE8200EF859A /* about.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACBD91981E83AE8200EF859A /* about.xml */; };
-		ACBD91A01E83AE8200EF859A /* demo_item.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACBD91991E83AE8200EF859A /* demo_item.xml */; };
-		ACBD91A11E83AE8200EF859A /* kit in Resources */ = {isa = PBXBuildFile; fileRef = ACBD919A1E83AE8200EF859A /* kit */; };
-		ACBD91A21E83AE8200EF859A /* Main.lua in Resources */ = {isa = PBXBuildFile; fileRef = ACBD919B1E83AE8200EF859A /* Main.lua */; };
-		ACBD91A31E83AE8200EF859A /* main.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACBD919C1E83AE8200EF859A /* main.xml */; };
-		ACBD91A41E83AE8200EF859A /* sample in Resources */ = {isa = PBXBuildFile; fileRef = ACBD919D1E83AE8200EF859A /* sample */; };
-		ACBD91A51E83AE8200EF859A /* widget in Resources */ = {isa = PBXBuildFile; fileRef = ACBD919E1E83AE8200EF859A /* widget */; };
+		913C34DF1E88F34200409378 /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A61E88F34200409378 /* animate1.jpg */; };
+		913C34E01E88F34200409378 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A71E88F34200409378 /* bt_catebrand_more.9.png */; };
+		913C34E11E88F34200409378 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A81E88F34200409378 /* button0.png */; };
+		913C34E21E88F34200409378 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A91E88F34200409378 /* button1.png */; };
+		913C34E31E88F34200409378 /* candle in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AA1E88F34200409378 /* candle */; };
+		913C34E41E88F34200409378 /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AB1E88F34200409378 /* demo.zip */; };
+		913C34E51E88F34200409378 /* demoA_FlexBox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AC1E88F34200409378 /* demoA_FlexBox.lua */; };
+		913C34E61E88F34200409378 /* demoA_Hello.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AD1E88F34200409378 /* demoA_Hello.lua */; };
+		913C34E71E88F34200409378 /* demoA_Image.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AE1E88F34200409378 /* demoA_Image.lua */; };
+		913C34E81E88F34200409378 /* demoA_ImageAnimate.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34AF1E88F34200409378 /* demoA_ImageAnimate.lua */; };
+		913C34E91E88F34200409378 /* demoA_ViewChildren.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B01E88F34200409378 /* demoA_ViewChildren.lua */; };
+		913C34EA1E88F34200409378 /* demoC_Label.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B11E88F34200409378 /* demoC_Label.lua */; };
+		913C34EB1E88F34200409378 /* demoC2_IconFontLabel.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B21E88F34200409378 /* demoC2_IconFontLabel.lua */; };
+		913C34EC1E88F34200409378 /* demoD_requestFromHttp.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B31E88F34200409378 /* demoD_requestFromHttp.lua */; };
+		913C34ED1E88F34200409378 /* demoE_Button.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B41E88F34200409378 /* demoE_Button.lua */; };
+		913C34EE1E88F34200409378 /* demoH2_CollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B51E88F34200409378 /* demoH2_CollectionView.lua */; };
+		913C34EF1E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B61E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua */; };
+		913C34F01E88F34200409378 /* demoK_PagerView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B71E88F34200409378 /* demoK_PagerView.lua */; };
+		913C34F11E88F34200409378 /* demoK_ScrollView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B81E88F34200409378 /* demoK_ScrollView.lua */; };
+		913C34F21E88F34200409378 /* demoK_WebView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34B91E88F34200409378 /* demoK_WebView.lua */; };
+		913C34F31E88F34200409378 /* demoL_Alert.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BA1E88F34200409378 /* demoL_Alert.lua */; };
+		913C34F41E88F34200409378 /* demoL_LoadingIndicator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BB1E88F34200409378 /* demoL_LoadingIndicator.lua */; };
+		913C34F51E88F34200409378 /* demoL2_CustomView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BC1E88F34200409378 /* demoL2_CustomView.lua */; };
+		913C34F61E88F34200409378 /* demoL3_onTouch.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BD1E88F34200409378 /* demoL3_onTouch.lua */; };
+		913C34F71E88F34200409378 /* demoM_Navigation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BE1E88F34200409378 /* demoM_Navigation.lua */; };
+		913C34F81E88F34200409378 /* demoO_coroutineDemo.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34BF1E88F34200409378 /* demoO_coroutineDemo.lua */; };
+		913C34F91E88F34200409378 /* demoO_table.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C01E88F34200409378 /* demoO_table.lua */; };
+		913C34FA1E88F34200409378 /* demoO_Timer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C11E88F34200409378 /* demoO_Timer.lua */; };
+		913C34FB1E88F34200409378 /* demoP_Http.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C21E88F34200409378 /* demoP_Http.lua */; };
+		913C34FC1E88F34200409378 /* demoP_Json.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C31E88F34200409378 /* demoP_Json.lua */; };
+		913C34FD1E88F34200409378 /* demoP_string.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C41E88F34200409378 /* demoP_string.lua */; };
+		913C34FE1E88F34200409378 /* demoP_System.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C51E88F34200409378 /* demoP_System.lua */; };
+		913C34FF1E88F34200409378 /* demoV1_CustomError.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C61E88F34200409378 /* demoV1_CustomError.lua */; };
+		913C35001E88F34200409378 /* demoV1_Customloading.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C71E88F34200409378 /* demoV1_Customloading.lua */; };
+		913C35011E88F34200409378 /* demoW1_shake.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C81E88F34200409378 /* demoW1_shake.lua */; };
+		913C35021E88F34200409378 /* demoW2_AudioPlayer.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34C91E88F34200409378 /* demoW2_AudioPlayer.lua */; };
+		913C35031E88F34200409378 /* demoY2_flxNode.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CA1E88F34200409378 /* demoY2_flxNode.lua */; };
+		913C35041E88F34200409378 /* demoY5_DownloadAndFile.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CB1E88F34200409378 /* demoY5_DownloadAndFile.lua */; };
+		913C35051E88F34200409378 /* demoZ_2015_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CC1E88F34200409378 /* demoZ_2015_testunit.lua */; };
+		913C35061E88F34200409378 /* demoZ_decodeUrl.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CD1E88F34200409378 /* demoZ_decodeUrl.lua */; };
+		913C35071E88F34200409378 /* demoZ_Gesture.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CE1E88F34200409378 /* demoZ_Gesture.lua */; };
+		913C35081E88F34200409378 /* demoZ_testunit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34CF1E88F34200409378 /* demoZ_testunit.lua */; };
+		913C35091E88F34200409378 /* demoZ1_luabox.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D01E88F34200409378 /* demoZ1_luabox.lua */; };
+		913C350A1E88F34200409378 /* demoZ2_callOC.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D11E88F34200409378 /* demoZ2_callOC.lua */; };
+		913C350B1E88F34200409378 /* demoZB1_Animator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D21E88F34200409378 /* demoZB1_Animator.lua */; };
+		913C350C1E88F34200409378 /* img1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D31E88F34200409378 /* img1.tiff */; };
+		913C350D1E88F34200409378 /* img4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D41E88F34200409378 /* img4.tiff */; };
+		913C350E1E88F34200409378 /* img7.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D51E88F34200409378 /* img7.tiff */; };
+		913C350F1E88F34200409378 /* img10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D61E88F34200409378 /* img10.tiff */; };
+		913C35101E88F34200409378 /* img13.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D71E88F34200409378 /* img13.tiff */; };
+		913C35111E88F34200409378 /* img16.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D81E88F34200409378 /* img16.tiff */; };
+		913C35121E88F34200409378 /* JHSIconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913C34D91E88F34200409378 /* JHSIconfont.ttf */; };
+		913C35131E88F34200409378 /* lv_kit.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DA1E88F34200409378 /* lv_kit.lua */; };
+		913C35141E88F34200409378 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DB1E88F34200409378 /* main.lua */; };
+		913C35151E88F34200409378 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DC1E88F34200409378 /* snow.png */; };
+		913C35161E88F34200409378 /* tags.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DD1E88F34200409378 /* tags.9.png */; };
+		913C35171E88F34200409378 /* tags2.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DE1E88F34200409378 /* tags2.9.png */; };
+		913C351A1E88F35000409378 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913C35191E88F35000409378 /* ViewController.m */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
-		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,16 +135,65 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
-		ACBD91981E83AE8200EF859A /* about.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = about.xml; path = playground/about.xml; sourceTree = "<group>"; };
-		ACBD91991E83AE8200EF859A /* demo_item.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo_item.xml; path = playground/demo_item.xml; sourceTree = "<group>"; };
-		ACBD919A1E83AE8200EF859A /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
-		ACBD919B1E83AE8200EF859A /* Main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.lua; path = playground/Main.lua; sourceTree = "<group>"; };
-		ACBD919C1E83AE8200EF859A /* main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.xml; path = playground/main.xml; sourceTree = "<group>"; };
-		ACBD919D1E83AE8200EF859A /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
-		ACBD919E1E83AE8200EF859A /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
-		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
-		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
+		913C34A61E88F34200409378 /* animate1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = animate1.jpg; path = lua/animate1.jpg; sourceTree = "<group>"; };
+		913C34A71E88F34200409378 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bt_catebrand_more.9.png; path = lua/bt_catebrand_more.9.png; sourceTree = "<group>"; };
+		913C34A81E88F34200409378 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button0.png; path = lua/button0.png; sourceTree = "<group>"; };
+		913C34A91E88F34200409378 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button1.png; path = lua/button1.png; sourceTree = "<group>"; };
+		913C34AA1E88F34200409378 /* candle */ = {isa = PBXFileReference; lastKnownFileType = folder; name = candle; path = lua/candle; sourceTree = "<group>"; };
+		913C34AB1E88F34200409378 /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = demo.zip; path = lua/demo.zip; sourceTree = "<group>"; };
+		913C34AC1E88F34200409378 /* demoA_FlexBox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoA_FlexBox.lua; path = lua/demoA_FlexBox.lua; sourceTree = "<group>"; };
+		913C34AD1E88F34200409378 /* demoA_Hello.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoA_Hello.lua; path = lua/demoA_Hello.lua; sourceTree = "<group>"; };
+		913C34AE1E88F34200409378 /* demoA_Image.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoA_Image.lua; path = lua/demoA_Image.lua; sourceTree = "<group>"; };
+		913C34AF1E88F34200409378 /* demoA_ImageAnimate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoA_ImageAnimate.lua; path = lua/demoA_ImageAnimate.lua; sourceTree = "<group>"; };
+		913C34B01E88F34200409378 /* demoA_ViewChildren.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoA_ViewChildren.lua; path = lua/demoA_ViewChildren.lua; sourceTree = "<group>"; };
+		913C34B11E88F34200409378 /* demoC_Label.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoC_Label.lua; path = lua/demoC_Label.lua; sourceTree = "<group>"; };
+		913C34B21E88F34200409378 /* demoC2_IconFontLabel.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoC2_IconFontLabel.lua; path = lua/demoC2_IconFontLabel.lua; sourceTree = "<group>"; };
+		913C34B31E88F34200409378 /* demoD_requestFromHttp.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoD_requestFromHttp.lua; path = lua/demoD_requestFromHttp.lua; sourceTree = "<group>"; };
+		913C34B41E88F34200409378 /* demoE_Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoE_Button.lua; path = lua/demoE_Button.lua; sourceTree = "<group>"; };
+		913C34B51E88F34200409378 /* demoH2_CollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoH2_CollectionView.lua; path = lua/demoH2_CollectionView.lua; sourceTree = "<group>"; };
+		913C34B61E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoH2_EmptyRefreshCollectionView.lua; path = lua/demoH2_EmptyRefreshCollectionView.lua; sourceTree = "<group>"; };
+		913C34B71E88F34200409378 /* demoK_PagerView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoK_PagerView.lua; path = lua/demoK_PagerView.lua; sourceTree = "<group>"; };
+		913C34B81E88F34200409378 /* demoK_ScrollView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoK_ScrollView.lua; path = lua/demoK_ScrollView.lua; sourceTree = "<group>"; };
+		913C34B91E88F34200409378 /* demoK_WebView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoK_WebView.lua; path = lua/demoK_WebView.lua; sourceTree = "<group>"; };
+		913C34BA1E88F34200409378 /* demoL_Alert.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoL_Alert.lua; path = lua/demoL_Alert.lua; sourceTree = "<group>"; };
+		913C34BB1E88F34200409378 /* demoL_LoadingIndicator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoL_LoadingIndicator.lua; path = lua/demoL_LoadingIndicator.lua; sourceTree = "<group>"; };
+		913C34BC1E88F34200409378 /* demoL2_CustomView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoL2_CustomView.lua; path = lua/demoL2_CustomView.lua; sourceTree = "<group>"; };
+		913C34BD1E88F34200409378 /* demoL3_onTouch.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoL3_onTouch.lua; path = lua/demoL3_onTouch.lua; sourceTree = "<group>"; };
+		913C34BE1E88F34200409378 /* demoM_Navigation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoM_Navigation.lua; path = lua/demoM_Navigation.lua; sourceTree = "<group>"; };
+		913C34BF1E88F34200409378 /* demoO_coroutineDemo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoO_coroutineDemo.lua; path = lua/demoO_coroutineDemo.lua; sourceTree = "<group>"; };
+		913C34C01E88F34200409378 /* demoO_table.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoO_table.lua; path = lua/demoO_table.lua; sourceTree = "<group>"; };
+		913C34C11E88F34200409378 /* demoO_Timer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoO_Timer.lua; path = lua/demoO_Timer.lua; sourceTree = "<group>"; };
+		913C34C21E88F34200409378 /* demoP_Http.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoP_Http.lua; path = lua/demoP_Http.lua; sourceTree = "<group>"; };
+		913C34C31E88F34200409378 /* demoP_Json.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoP_Json.lua; path = lua/demoP_Json.lua; sourceTree = "<group>"; };
+		913C34C41E88F34200409378 /* demoP_string.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoP_string.lua; path = lua/demoP_string.lua; sourceTree = "<group>"; };
+		913C34C51E88F34200409378 /* demoP_System.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoP_System.lua; path = lua/demoP_System.lua; sourceTree = "<group>"; };
+		913C34C61E88F34200409378 /* demoV1_CustomError.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoV1_CustomError.lua; path = lua/demoV1_CustomError.lua; sourceTree = "<group>"; };
+		913C34C71E88F34200409378 /* demoV1_Customloading.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoV1_Customloading.lua; path = lua/demoV1_Customloading.lua; sourceTree = "<group>"; };
+		913C34C81E88F34200409378 /* demoW1_shake.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoW1_shake.lua; path = lua/demoW1_shake.lua; sourceTree = "<group>"; };
+		913C34C91E88F34200409378 /* demoW2_AudioPlayer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoW2_AudioPlayer.lua; path = lua/demoW2_AudioPlayer.lua; sourceTree = "<group>"; };
+		913C34CA1E88F34200409378 /* demoY2_flxNode.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoY2_flxNode.lua; path = lua/demoY2_flxNode.lua; sourceTree = "<group>"; };
+		913C34CB1E88F34200409378 /* demoY5_DownloadAndFile.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoY5_DownloadAndFile.lua; path = lua/demoY5_DownloadAndFile.lua; sourceTree = "<group>"; };
+		913C34CC1E88F34200409378 /* demoZ_2015_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ_2015_testunit.lua; path = lua/demoZ_2015_testunit.lua; sourceTree = "<group>"; };
+		913C34CD1E88F34200409378 /* demoZ_decodeUrl.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ_decodeUrl.lua; path = lua/demoZ_decodeUrl.lua; sourceTree = "<group>"; };
+		913C34CE1E88F34200409378 /* demoZ_Gesture.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ_Gesture.lua; path = lua/demoZ_Gesture.lua; sourceTree = "<group>"; };
+		913C34CF1E88F34200409378 /* demoZ_testunit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ_testunit.lua; path = lua/demoZ_testunit.lua; sourceTree = "<group>"; };
+		913C34D01E88F34200409378 /* demoZ1_luabox.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ1_luabox.lua; path = lua/demoZ1_luabox.lua; sourceTree = "<group>"; };
+		913C34D11E88F34200409378 /* demoZ2_callOC.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZ2_callOC.lua; path = lua/demoZ2_callOC.lua; sourceTree = "<group>"; };
+		913C34D21E88F34200409378 /* demoZB1_Animator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZB1_Animator.lua; path = lua/demoZB1_Animator.lua; sourceTree = "<group>"; };
+		913C34D31E88F34200409378 /* img1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img1.tiff; path = lua/img1.tiff; sourceTree = "<group>"; };
+		913C34D41E88F34200409378 /* img4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img4.tiff; path = lua/img4.tiff; sourceTree = "<group>"; };
+		913C34D51E88F34200409378 /* img7.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img7.tiff; path = lua/img7.tiff; sourceTree = "<group>"; };
+		913C34D61E88F34200409378 /* img10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img10.tiff; path = lua/img10.tiff; sourceTree = "<group>"; };
+		913C34D71E88F34200409378 /* img13.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img13.tiff; path = lua/img13.tiff; sourceTree = "<group>"; };
+		913C34D81E88F34200409378 /* img16.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = img16.tiff; path = lua/img16.tiff; sourceTree = "<group>"; };
+		913C34D91E88F34200409378 /* JHSIconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = JHSIconfont.ttf; path = lua/JHSIconfont.ttf; sourceTree = "<group>"; };
+		913C34DA1E88F34200409378 /* lv_kit.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lv_kit.lua; path = lua/lv_kit.lua; sourceTree = "<group>"; };
+		913C34DB1E88F34200409378 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = lua/main.lua; sourceTree = "<group>"; };
+		913C34DC1E88F34200409378 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = snow.png; path = lua/snow.png; sourceTree = "<group>"; };
+		913C34DD1E88F34200409378 /* tags.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tags.9.png; path = lua/tags.9.png; sourceTree = "<group>"; };
+		913C34DE1E88F34200409378 /* tags2.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tags2.9.png; path = lua/tags2.9.png; sourceTree = "<group>"; };
+		913C35181E88F35000409378 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		913C35191E88F35000409378 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,8 +243,8 @@
 		3CC2F81C1C706B1D00D1E0B7 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				DC839D3F1E791402005C346B /* playground */,
 				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
+				913C34A51E88F33300409378 /* lua */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
 				3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */,
@@ -169,6 +267,8 @@
 		3CC2F8421C706BD900D1E0B7 /* luaviewEx */ = {
 			isa = PBXGroup;
 			children = (
+				913C35181E88F35000409378 /* ViewController.h */,
+				913C35191E88F35000409378 /* ViewController.m */,
 				3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */,
 				3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */,
 				3CC2F8451C706BE700D1E0B7 /* JHSLVButton.h */,
@@ -181,8 +281,6 @@
 				3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */,
 				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
 				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
-				DC839C541E782D78005C346B /* Bridge.h */,
-				DC839C551E782D78005C346B /* Bridge.m */,
 			);
 			name = luaviewEx;
 			sourceTree = "<group>";
@@ -209,6 +307,70 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		913C34A51E88F33300409378 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				913C34A61E88F34200409378 /* animate1.jpg */,
+				913C34A71E88F34200409378 /* bt_catebrand_more.9.png */,
+				913C34A81E88F34200409378 /* button0.png */,
+				913C34A91E88F34200409378 /* button1.png */,
+				913C34AA1E88F34200409378 /* candle */,
+				913C34AB1E88F34200409378 /* demo.zip */,
+				913C34AC1E88F34200409378 /* demoA_FlexBox.lua */,
+				913C34AD1E88F34200409378 /* demoA_Hello.lua */,
+				913C34AE1E88F34200409378 /* demoA_Image.lua */,
+				913C34AF1E88F34200409378 /* demoA_ImageAnimate.lua */,
+				913C34B01E88F34200409378 /* demoA_ViewChildren.lua */,
+				913C34B11E88F34200409378 /* demoC_Label.lua */,
+				913C34B21E88F34200409378 /* demoC2_IconFontLabel.lua */,
+				913C34B31E88F34200409378 /* demoD_requestFromHttp.lua */,
+				913C34B41E88F34200409378 /* demoE_Button.lua */,
+				913C34B51E88F34200409378 /* demoH2_CollectionView.lua */,
+				913C34B61E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua */,
+				913C34B71E88F34200409378 /* demoK_PagerView.lua */,
+				913C34B81E88F34200409378 /* demoK_ScrollView.lua */,
+				913C34B91E88F34200409378 /* demoK_WebView.lua */,
+				913C34BA1E88F34200409378 /* demoL_Alert.lua */,
+				913C34BB1E88F34200409378 /* demoL_LoadingIndicator.lua */,
+				913C34BC1E88F34200409378 /* demoL2_CustomView.lua */,
+				913C34BD1E88F34200409378 /* demoL3_onTouch.lua */,
+				913C34BE1E88F34200409378 /* demoM_Navigation.lua */,
+				913C34BF1E88F34200409378 /* demoO_coroutineDemo.lua */,
+				913C34C01E88F34200409378 /* demoO_table.lua */,
+				913C34C11E88F34200409378 /* demoO_Timer.lua */,
+				913C34C21E88F34200409378 /* demoP_Http.lua */,
+				913C34C31E88F34200409378 /* demoP_Json.lua */,
+				913C34C41E88F34200409378 /* demoP_string.lua */,
+				913C34C51E88F34200409378 /* demoP_System.lua */,
+				913C34C61E88F34200409378 /* demoV1_CustomError.lua */,
+				913C34C71E88F34200409378 /* demoV1_Customloading.lua */,
+				913C34C81E88F34200409378 /* demoW1_shake.lua */,
+				913C34C91E88F34200409378 /* demoW2_AudioPlayer.lua */,
+				913C34CA1E88F34200409378 /* demoY2_flxNode.lua */,
+				913C34CB1E88F34200409378 /* demoY5_DownloadAndFile.lua */,
+				913C34CC1E88F34200409378 /* demoZ_2015_testunit.lua */,
+				913C34CD1E88F34200409378 /* demoZ_decodeUrl.lua */,
+				913C34CE1E88F34200409378 /* demoZ_Gesture.lua */,
+				913C34CF1E88F34200409378 /* demoZ_testunit.lua */,
+				913C34D01E88F34200409378 /* demoZ1_luabox.lua */,
+				913C34D11E88F34200409378 /* demoZ2_callOC.lua */,
+				913C34D21E88F34200409378 /* demoZB1_Animator.lua */,
+				913C34D31E88F34200409378 /* img1.tiff */,
+				913C34D41E88F34200409378 /* img4.tiff */,
+				913C34D51E88F34200409378 /* img7.tiff */,
+				913C34D61E88F34200409378 /* img10.tiff */,
+				913C34D71E88F34200409378 /* img13.tiff */,
+				913C34D81E88F34200409378 /* img16.tiff */,
+				913C34D91E88F34200409378 /* JHSIconfont.ttf */,
+				913C34DA1E88F34200409378 /* lv_kit.lua */,
+				913C34DB1E88F34200409378 /* main.lua */,
+				913C34DC1E88F34200409378 /* snow.png */,
+				913C34DD1E88F34200409378 /* tags.9.png */,
+				913C34DE1E88F34200409378 /* tags2.9.png */,
+			);
+			name = lua;
+			sourceTree = "<group>";
+		};
 		A3A75680B7849B8043AF49A6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,21 +378,6 @@
 				39A1B496E543E8E483B39034 /* Pods-Demo.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		DC839D3F1E791402005C346B /* playground */ = {
-			isa = PBXGroup;
-			children = (
-				ACBD91981E83AE8200EF859A /* about.xml */,
-				ACBD91991E83AE8200EF859A /* demo_item.xml */,
-				ACBD919A1E83AE8200EF859A /* kit */,
-				ACBD919B1E83AE8200EF859A /* Main.lua */,
-				ACBD919C1E83AE8200EF859A /* main.xml */,
-				ACBD919D1E83AE8200EF859A /* sample */,
-				ACBD919E1E83AE8200EF859A /* widget */,
-				AC94B8F01E7FD296002838C4 /* luaview.png */,
-			);
-			name = playground;
 			sourceTree = "<group>";
 		};
 		E828AAF6D9BD6A045BEE78AA /* Frameworks */ = {
@@ -331,24 +478,73 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACBD91A01E83AE8200EF859A /* demo_item.xml in Resources */,
+				913C34F01E88F34200409378 /* demoK_PagerView.lua in Resources */,
+				913C34EA1E88F34200409378 /* demoC_Label.lua in Resources */,
+				913C34E61E88F34200409378 /* demoA_Hello.lua in Resources */,
+				913C34F81E88F34200409378 /* demoO_coroutineDemo.lua in Resources */,
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
-				ACBD91A51E83AE8200EF859A /* widget in Resources */,
+				913C34EF1E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua in Resources */,
+				913C35021E88F34200409378 /* demoW2_AudioPlayer.lua in Resources */,
+				913C35131E88F34200409378 /* lv_kit.lua in Resources */,
+				913C34E11E88F34200409378 /* button0.png in Resources */,
+				913C350F1E88F34200409378 /* img10.tiff in Resources */,
+				913C34F51E88F34200409378 /* demoL2_CustomView.lua in Resources */,
+				913C34EE1E88F34200409378 /* demoH2_CollectionView.lua in Resources */,
+				913C34FA1E88F34200409378 /* demoO_Timer.lua in Resources */,
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
+				913C35081E88F34200409378 /* demoZ_testunit.lua in Resources */,
+				913C35161E88F34200409378 /* tags.9.png in Resources */,
+				913C350A1E88F34200409378 /* demoZ2_callOC.lua in Resources */,
+				913C350C1E88F34200409378 /* img1.tiff in Resources */,
+				913C35121E88F34200409378 /* JHSIconfont.ttf in Resources */,
+				913C35111E88F34200409378 /* img16.tiff in Resources */,
+				913C35061E88F34200409378 /* demoZ_decodeUrl.lua in Resources */,
+				913C34F91E88F34200409378 /* demoO_table.lua in Resources */,
+				913C35001E88F34200409378 /* demoV1_Customloading.lua in Resources */,
+				913C34FC1E88F34200409378 /* demoP_Json.lua in Resources */,
+				913C34E21E88F34200409378 /* button1.png in Resources */,
+				913C35011E88F34200409378 /* demoW1_shake.lua in Resources */,
+				913C34FB1E88F34200409378 /* demoP_Http.lua in Resources */,
+				913C350B1E88F34200409378 /* demoZB1_Animator.lua in Resources */,
+				913C34E81E88F34200409378 /* demoA_ImageAnimate.lua in Resources */,
+				913C34DF1E88F34200409378 /* animate1.jpg in Resources */,
+				913C35141E88F34200409378 /* main.lua in Resources */,
+				913C35101E88F34200409378 /* img13.tiff in Resources */,
+				913C34F21E88F34200409378 /* demoK_WebView.lua in Resources */,
+				913C34FD1E88F34200409378 /* demoP_string.lua in Resources */,
+				913C34FF1E88F34200409378 /* demoV1_CustomError.lua in Resources */,
+				913C34E91E88F34200409378 /* demoA_ViewChildren.lua in Resources */,
 				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
-				ACBD91A41E83AE8200EF859A /* sample in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
-				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
+				913C350E1E88F34200409378 /* img7.tiff in Resources */,
+				913C350D1E88F34200409378 /* img4.tiff in Resources */,
+				913C34E51E88F34200409378 /* demoA_FlexBox.lua in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
+				913C35171E88F34200409378 /* tags2.9.png in Resources */,
+				913C34EC1E88F34200409378 /* demoD_requestFromHttp.lua in Resources */,
+				913C34ED1E88F34200409378 /* demoE_Button.lua in Resources */,
+				913C34F11E88F34200409378 /* demoK_ScrollView.lua in Resources */,
+				913C34F41E88F34200409378 /* demoL_LoadingIndicator.lua in Resources */,
+				913C34FE1E88F34200409378 /* demoP_System.lua in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
+				913C35051E88F34200409378 /* demoZ_2015_testunit.lua in Resources */,
+				913C35091E88F34200409378 /* demoZ1_luabox.lua in Resources */,
+				913C34F71E88F34200409378 /* demoM_Navigation.lua in Resources */,
+				913C35031E88F34200409378 /* demoY2_flxNode.lua in Resources */,
+				913C34E31E88F34200409378 /* candle in Resources */,
+				913C34E01E88F34200409378 /* bt_catebrand_more.9.png in Resources */,
+				913C35041E88F34200409378 /* demoY5_DownloadAndFile.lua in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
+				913C35071E88F34200409378 /* demoZ_Gesture.lua in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
-				ACBD91A21E83AE8200EF859A /* Main.lua in Resources */,
-				ACBD91A31E83AE8200EF859A /* main.xml in Resources */,
-				ACBD91A11E83AE8200EF859A /* kit in Resources */,
+				913C34F31E88F34200409378 /* demoL_Alert.lua in Resources */,
+				913C34EB1E88F34200409378 /* demoC2_IconFontLabel.lua in Resources */,
+				913C34E41E88F34200409378 /* demo.zip in Resources */,
+				913C35151E88F34200409378 /* snow.png in Resources */,
+				913C34F61E88F34200409378 /* demoL3_onTouch.lua in Resources */,
+				913C34E71E88F34200409378 /* demoA_Image.lua in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
-				ACBD919F1E83AE8200EF859A /* about.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,8 +625,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				913C351A1E88F35000409378 /* ViewController.m in Sources */,
 				3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */,
-				DC839C561E782D78005C346B /* Bridge.m in Sources */,
 				3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */,
 				3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */,
 				3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */,
