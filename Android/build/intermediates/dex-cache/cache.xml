@@ -2,11 +2,85 @@
 <items version="2" >
 
     <item
-        jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
         jumboMode="false"
+        optimize="true"
         revision="23.0.1"
-        sha1="59d68886d9402d70b70cf4b21b48259a3c25200b">
-        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-e97368caa11d3df2fb363f5e3a2504bef3be0ecd.jar" />
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_6abd71d82d98c7c63061de2f4eef1f9ccfcc4354.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_61da187370a879b7d50998029efefdb9743dce19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_3b6b8d0ed7a51f56473c61f4c0d10625a821cba7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fae69d5a690a7bdc59cbea3ab82a5ab39b3b81e8">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/Android-LuaViewSDK-unspecified_3bedf647a1d00a904d8a9916473df814f20bfca9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_2483785d069cabe33713ccff84268f20381754f3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/huaqin/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/glide-3.7.0_4672f8d4da3c2ab88d75a91dbbaef032be50a94b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.0.1_5cde05e0fc67b999923f0c3920c9b027fde12ebc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_40bb948426f5ce2c3084b9d1f22cc6c1369f452d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/workspace/LV/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_9c5083ac6d29fd1ff27e7c455c046477db2a8988.jar" />
     </item>
 
 </items>

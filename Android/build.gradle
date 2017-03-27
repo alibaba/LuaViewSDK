@@ -5,6 +5,20 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
     }
-    System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+}
+
+allprojects {
+    repositories {
+        jcenter {
+            url "http://jcenter.bintray.com/"
+        }
+        maven  {
+            url "http://repo1.maven.org/maven2"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
 
