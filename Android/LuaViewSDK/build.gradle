@@ -59,5 +59,8 @@ android {
             debuggable true
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
