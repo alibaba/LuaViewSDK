@@ -1,13 +1,11 @@
-<doc>
-    <View id="root" frame="10, 5, CONTENT_WIDTH-20, CONTENT_HEIGHT/3-10" flexCss="flex-direction: column" backgroundColor="0xffffff" >
-        <Label id="name" flexCss="flex: 1, margin-top: 10, margin-left: 10, margin-right: 10" fontSize="16" textColor="0x000000"></Label>
-        <Label id="description" flexCss="flex: 3, margin-top: 10, margin-left: 10, margin-right: 10" fontSize="14" lineCount="3"></Label>
-        <View id="bottomContainer" flexCss="flex-direction: row, flex: 2, margin: 10">
-            <View id="bottomLeft" flexCss="flex: 1, flex-direction: row">
-                <Label id="author" flexCss="flex: 1" text="Author: " fontSize="16" textAlign="TextAlign.LEFT"></Label>
-                <Image id="profile" flexCss="flex: 1" scaleType="Platform.ScaleFitXY"></Image>
-            </View>
-            <Label id="stars" flexCss="flex: 1" textAlign="TextAlign.RIGHT" text="Stars: " fontSize="16"></Label>
+<View id="root" frame="10, 5, CONTENT_WIDTH-20, CONTENT_HEIGHT/3-10" flexCss="flex-direction: column" backgroundColor="0xffffff" >
+    <Label id="name" flexCss="flex: 1, margin-top: 10, margin-left: 10, margin-right: 10" fontSize="16" textColor="0x000000"></Label>
+    <Label id="description" flexCss="flex: 3, margin-top: 10, margin-left: 10, margin-right: 10" fontSize="14" lineCount="3"></Label>
+    <View id="bottomContainer" flexCss="flex-direction: row, flex: 2, margin: 10">
+        <View id="bottomLeft" flexCss="flex: 1, flex-direction: row">
+            <Label id="author" flexCss="flex: 1" text="Author: " fontSize="16" textAlign="TextAlign.LEFT"></Label>
+            <Image id="profile" flexCss="flex: 1" scaleType="Platform.ScaleFitXY"></Image>
         </View>
+        <Label id="stars" flexCss="flex: 1" textAlign="TextAlign.RIGHT" text="Stars: " fontSize="16"></Label>
     </View>
-</doc>
+</View>

@@ -5,6 +5,10 @@ import android.os.Bundle;
 
 import com.taobao.luaview.global.LuaView;
 
+/**
+ * Created by tuoli on 17/3/27.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private LuaView mLuaView;
