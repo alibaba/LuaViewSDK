@@ -246,7 +246,7 @@ static int tableToString(lua_State*L){
               @"CENTER":@(UIViewContentModeCenter),//按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
               @"CENTER_CROP":@(UIViewContentModeScaleAspectFill),//将图片等比居中显示，完全覆盖view，尽可能小；
               @"CENTER_INSIDE":@(UIViewContentModeScaleAspectFit),//将图片的内容完整居中显示，尽可能的大
-              @"FIT_CENTER":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，居中显示
+              @"FIT_CENTER":@(UIViewContentModeScaleAspectFit),//将图片的内容完整居中显示，尽可能的大
               @"FIT_END":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，显示在View的下部分位置
               @"FIT_START":@(UIViewContentModeScaleAspectFill),//把图片按比例扩大(缩小)到View的宽度，显示在View的上部分位置
               @"FIT_XY":@(UIViewContentModeScaleToFill),//把图片按照指定的大小在View中显示
