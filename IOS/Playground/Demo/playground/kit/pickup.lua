@@ -156,7 +156,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
             if (_v.name == "frame") then
                 _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
                 _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
-                if (parent and parent.name == "View") then
+                if (parent and (parent.name == "View" or parent.name == "HScrollView")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
                 local paramFun = Platform:loadString("return " .. _v.value)
@@ -250,6 +250,13 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:hide(true)
                 else
                     self.objs[element]:hide(false)
+                end
+            elseif (_v.name == "contentSize") then
+                if (not Platform.isAndroid) then
+                    _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
+                    _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
+                    local paramFun = Platform:loadString("return " .. _v.value)
+                    self.objs[element]:contentSize(paramFun())
                 end
             else
                 print("LuaError::Layout", "方法名不对: " .. _v.name)

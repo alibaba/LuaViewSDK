@@ -8,7 +8,7 @@
 
 require("kit.pickup")
 
-local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "WebView", "Animation"] '
+local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "HScrollView", "WebView", "Animation"] '
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
 local _jsonDataDescription = ' ["从豆瓣开放API获取电影信息", "按关键字检索GitHub的代码仓库"] '
 local _dataWidget = Json:toTable(_jsonDataWidget)
@@ -104,7 +104,7 @@ local function main()
     local aboutTab = mainObjs["aboutTab"]
 
     widgetTab:callback(function()
-        widgetTab:textColor(0xff0000)
+        widgetTab:textColor(0xEB3131)
         sampleTab:textColor(0x000000)
         aboutTab:textColor(0x000000)
 
@@ -114,7 +114,7 @@ local function main()
     end)
     sampleTab:callback(function()
         widgetTab:textColor(0x000000)
-        sampleTab:textColor(0xff0000)
+        sampleTab:textColor(0xEB3131)
         aboutTab:textColor(0x000000)
 
         sampleTableView:show()
@@ -124,7 +124,7 @@ local function main()
     aboutTab:callback(function()
         widgetTab:textColor(0x000000)
         sampleTab:textColor(0x000000)
-        aboutTab:textColor(0xff0000)
+        aboutTab:textColor(0xEB3131)
 
         aboutView:show()
         widgetTableView:hide()
