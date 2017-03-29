@@ -13,7 +13,7 @@ LuaViewSDK是一个跨iOS和Android平台的界面动态化解决方案，使用
 
 ## 试用Playground App
 
-LuaViewSDK Playground App下载地址 [Download](https://github.com/alibaba/LuaViewSDK/releases)
+LuaViewSDK Playground App下载地址 [Download](https://alibaba.github.io/LuaViewSDK/download.html)
 
 ## 如何使用LuaViewSDK
 
