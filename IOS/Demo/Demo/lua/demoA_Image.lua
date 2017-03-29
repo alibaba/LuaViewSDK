@@ -51,22 +51,15 @@ imageView4:image("jhs.png");
 local scaleType = 0;
 imageView4:callback(function ()
 	if( scaleType == 0 ) then
-		imageView4:scaleType(ScaleType.CENTER)
-	elseif( scaleType == 1 ) then
 		imageView4:scaleType(ScaleType.CENTER_CROP)
-	elseif( scaleType==2 ) then
+	elseif( scaleType == 1 ) then
 		imageView4:scaleType(ScaleType.CENTER_INSIDE)
-	elseif( scaleType==3 ) then
+	elseif( scaleType==2 ) then
 		imageView4:scaleType(ScaleType.FIT_CENTER)
-	elseif( scaleType==4 ) then
+	elseif( scaleType==3 ) then
 		imageView4:scaleType(ScaleType.FIT_XY)
-	elseif( scaleType==5 ) then
-		imageView4:scaleType(ScaleType.FIT_START)
-	elseif( scaleType==6 ) then
-		imageView4:scaleType(ScaleType.FIT_END)
-	elseif( scaleType==7 ) then
-		imageView4:scaleType(ScaleType.MATRIX)
-	elseif( scaleType==8 ) then
+	else
+		scaleType = -1;
 	end
 	scaleType = scaleType + 1;
 end)
