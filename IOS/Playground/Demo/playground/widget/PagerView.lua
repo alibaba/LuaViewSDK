@@ -8,11 +8,30 @@
 
 require("kit.pickup")
 
+local _color = {0xA066D3, 0xFF7F50, 0x228B22}
+
 local function start()
     pvObjs = Pickup:getInstance():render("widget/pagerview.xml")
 
-    local autoSlider = pvObjs["pagerView1"]
-    local indicator1 = pvObjs["indicator1"]
+    local manualSlider = pvObjs["pagerView1"]
+    local indicator2 = pvObjs["indicator1"]
+    local data2 = {
+        PageCount = 3,
+        Pages = {
+            Init = function(page, pos)
+                page.objs = Pickup:getInstance():render("widget/pagerview_page1.xml")
+            end,
+            Layout = function(page, pos)
+                page.objs["root"]:backgroundColor(_color[pos])
+            end
+        }
+    }
+    manualSlider:initParams(data2)
+    manualSlider:reload()
+    manualSlider:indicator(indicator2)
+
+    local autoSlider = pvObjs["pagerView2"]
+    local indicator1 = pvObjs["indicator2"]
 
     local data = {
         PageCount = 3,
@@ -21,6 +40,7 @@ local function start()
                 page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
+                page.objs["root"]:backgroundColor(_color[pos])
             end
         }
     }
@@ -28,22 +48,6 @@ local function start()
     autoSlider:initParams(data)
     autoSlider:reload()
     autoSlider:indicator(indicator1)
-
-    local manualSlider = pvObjs["pagerView2"]
-    local indicator2 = pvObjs["indicator2"]
-    local data2 = {
-        PageCount = 3,
-        Pages = {
-            Init = function(page, pos)
-                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
-            end,
-            Layout = function(page, pos)
-            end
-        }
-    }
-    manualSlider:initParams(data2)
-    manualSlider:reload()
-    manualSlider:indicator(indicator2)
 end
 
 Navigation:title("PagerView.lua")
