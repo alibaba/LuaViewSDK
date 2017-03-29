@@ -1,0 +1,15 @@
+<!-- HScrollView 不支持用flex布局子节点 -->
+<HScrollView id="scroller" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT/10" backgroundColor="0x004B97" contentSize="CONTENT_WIDTH/4*12, CONTENT_HEIGHT/10" >
+    <Button id="button1" frame="0, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item1" backgroundColor="0xEB3131" titleColor="0xffffff"></Button>
+    <Button id="button2" frame="CONTENT_WIDTH/4, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item2" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button3" frame="CONTENT_WIDTH/4*2, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item3" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button4" frame="CONTENT_WIDTH/4*3, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item4" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button5" frame="CONTENT_WIDTH/4*4, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item5" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button6" frame="CONTENT_WIDTH/4*5, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item6" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button7" frame="CONTENT_WIDTH/4*6, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item7" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button8" frame="CONTENT_WIDTH/4*7, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item8" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button9" frame="CONTENT_WIDTH/4*8, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item9" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button10" frame="CONTENT_WIDTH/4*9, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item10" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button11" frame="CONTENT_WIDTH/4*10, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item11" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="button12" frame="CONTENT_WIDTH/4*11, 0, CONTENT_WIDTH/4, CONTENT_HEIGHT/10" title="item12" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
+</HScrollView>

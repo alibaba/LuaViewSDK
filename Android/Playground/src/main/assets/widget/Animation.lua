@@ -13,23 +13,41 @@ local function start()
 
     local img = aniObjs["img"]
 
-    local button1 = aniObjs["button1"]
-    button1:callback(function()
+    local translateBtn = aniObjs["translateBtn"]
+    translateBtn:callback(function()
         local translate = Animation():translation(200, 50):duration(1)
         translate:with(img):start()
     end)
 
-    local button2 = aniObjs["button2"]
-    button2:callback(function()
+    local scaleBtn = aniObjs["scaleBtn"]
+    scaleBtn:callback(function()
         local scale = Animation():scale(0.5, 0.5):duration(1)
         scale:with(img):start()
     end)
 
-    local button3 = aniObjs["button3"]
-    button3:callback(function()
+    local alphaBtn = aniObjs["alphaBtn"]
+    alphaBtn:callback(function()
         local alpha = Animation():alpha(0.3):duration(1)
         alpha:with(img):start()
     end)
+
+    local resetBtn = aniObjs["resetBtn"]
+    resetBtn:callback(function()
+        img:translation(0, 0)
+        img:scale(1, 1)
+        img:alpha(1)
+    end)
+
+    local allBtn = aniObjs["allBtn"]
+    allBtn:callback(function()
+        local translate = Animation():translation(200, 50):duration(1)
+        local scale = Animation():scale(0.5, 0.5):duration(1)
+        local alpha = Animation():alpha(0.3):duration(1)
+        alpha:with(img):start()
+        scale:with(img):start()
+        translate:with(img):start()
+    end)
+
 end
 
 Navigation:title("Animation.lua")
