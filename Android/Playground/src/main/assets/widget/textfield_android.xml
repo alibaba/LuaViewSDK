@@ -1,26 +1,26 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT*0.8" flexCss="flex-direction: column" >
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Input Hint" fontSize="20" textColor="0xffffff"></Label>
+<View id="root" frame="0, 0, Sys.contW, Sys.contH" flexCss="{flex-direction='column'}" >
+    <View flexCss="{height=Sys.contH*0.1}" backgroundColor="0x004B97">
+        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Input Hint" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10">
-        <TextField flexCss="flex: 1" hint="Input Something"></TextField>
+    <View flexCss="{flex-direction='row', flex=1, margin=10*Sys.scale}">
+        <TextField flexCss="{flex=1}" hint="Input Something"></TextField>
     </View>
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Text Input" fontSize="20" textColor="0xffffff"></Label>
+    <View flexCss="{height=Sys.contH*0.1}" backgroundColor="0x004B97">
+        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Text Input" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10">
-        <TextField flexCss="flex: 1"></TextField>
+    <View flexCss="{flex-direction='row', flex=1, margin=10*Sys.scale}">
+        <TextField flexCss="{flex=1}"></TextField>
     </View>
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
+    <View flexCss="{height=Sys.contH*0.1}" backgroundColor="0x004B97">
+        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10">
-        <TextField flexCss="flex: 1"></TextField>
+    <View flexCss="{flex-direction='row', flex=1, margin=10*Sys.scale}">
+        <TextField flexCss="{flex=1}"></TextField>
     </View>
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
+    <View flexCss="{height=Sys.contH*0.1}" backgroundColor="0x004B97">
+        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10">
-        <TextField flexCss="flex: 1"></TextField>
+    <View flexCss="{flex-direction='row', flex=1, margin=10*Sys.scale}">
+        <TextField flexCss="{flex=1}"></TextField>
     </View>
 </View>

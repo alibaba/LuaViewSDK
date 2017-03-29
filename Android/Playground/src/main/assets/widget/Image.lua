@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    Pickup:getInstance():render("widget/image.xml")
+    Pica:getInstance():render("widget/image.xml")
 end
 
 Navigation:title("Image.lua")

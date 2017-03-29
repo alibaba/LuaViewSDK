@@ -6,14 +6,14 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    listObjs = Pickup:getInstance():render("widget/list.xml")
+    listObjs = Pica:getInstance():render("widget/list.xml")
 
     local tableView = listObjs["tableView"]
     local header = listObjs["headerText"]
-    if (not Platform.isAndroid) then
+    if (not Sys.android) then
         -- iOS还有bug，暂时屏蔽
         header:hide()
     end
@@ -39,10 +39,10 @@ local function start()
             end,
             RowCell = {
                 Size = function(section, row)
-                    return Platform.contentWidth, 60
+                    return Sys.contW, Sys.contH/10
                 end,
                 Init = function(cell, section, row)
-                    cell.window:frame(0, 0, Platform.contentWidth, 60)
+                    cell.window:frame(0, 0, Sys.contW, Sys.contH/10)
                     cell.window:flexCss("flex-direction: row")
                     cell.window:backgroundColor(0xffffff)
 
@@ -54,7 +54,7 @@ local function start()
                     cell.window:flxLayout(true) -- iOS
                 end,
                 Layout = function(cell, section, row)
-                    local style = StyledString("row " .. row, { fontSize = 16, fontColor = 0x000000})
+                    local style = StyledString("row " .. row, { fontSize = 16*Sys.scale, fontColor = 0x000000})
                     cell.label:text(style)
                 end
             }

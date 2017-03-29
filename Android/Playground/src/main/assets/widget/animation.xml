@@ -1,12 +1,12 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT/2" flexCss="flex-direction: column" >
-    <View flexCss="height: 60, flex-direction: row">
-        <Button id="translateBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="scaleBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="alphaBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" cornerRadius="10"></Button>
+<View id="root" frame="0, 0, Sys.contW, Sys.contH" flexCss="{flex-direction='column'}" >
+    <View flexCss="{height=Sys.contH/10, flex-direction='row'}">
+        <Button id="translateBtn" flexCss="{flex=1, margin=5*Sys.scale}" backgroundColor="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" cornerRadius="10"></Button>
+        <Button id="scaleBtn" flexCss="{flex=1, margin=5*Sys.scale}" backgroundColor="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" cornerRadius="10"></Button>
+        <Button id="alphaBtn" flexCss="{flex=1, margin=5*Sys.scale}" backgroundColor="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" cornerRadius="10"></Button>
     </View>
-    <View flexCss="height: 60, flex-direction: row">
-        <Button id="resetBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="allBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" cornerRadius="10"></Button>
+    <View flexCss="{height=Sys.contH/10, flex-direction='row'}">
+        <Button id="resetBtn" flexCss="{flex=1, margin=5*Sys.scale}" backgroundColor="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" cornerRadius="10"></Button>
+        <Button id="allBtn" flexCss="{flex=1, margin=5*Sys.scale}" backgroundColor="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" cornerRadius="10"></Button>
     </View>
-    <Image id="img" flexCss="margin-top: 20, margin-left: 20, height: 100, width: 100" image="luaview.png"></Image>
+    <Image id="img" flexCss="{margin-top=20*Sys.scale, margin-left=20*Sys.scale, height=Sys.contW/4, width=Sys.contW/4}" image="luaview.png"></Image>
 </View>

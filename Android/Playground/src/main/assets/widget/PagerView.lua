@@ -6,12 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local _color = {0xA066D3, 0xFF7F50, 0x228B22}
 
 local function start()
-    pvObjs = Pickup:getInstance():render("widget/pagerview.xml")
+    pvObjs = Pica:getInstance():render("widget/pagerview.xml")
 
     local manualSlider = pvObjs["pagerView1"]
     local indicator2 = pvObjs["indicator1"]
@@ -19,7 +19,7 @@ local function start()
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                page.objs = Pickup:getInstance():render("widget/pagerview_page1.xml")
+                page.objs = Pica:getInstance():render("widget/pagerview_page1.xml")
             end,
             Layout = function(page, pos)
                 page.objs["root"]:backgroundColor(_color[pos])
@@ -37,7 +37,7 @@ local function start()
         PageCount = 3,
         Pages = {
             Init = function(page, pos)
-                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
+                page.objs = Pica:getInstance():render("widget/pagerview_page.xml")
             end,
             Layout = function(page, pos)
                 page.objs["root"]:backgroundColor(_color[pos])

@@ -6,19 +6,19 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.common")
-require("kit.platform")
+require("kit.util")
+require("kit.sys")
 
-Pickup = {}
+Pica = {}
 
-function Pickup:new(o)
+function Pica:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function Pickup:getInstance()
+function Pica:getInstance()
     if (self.instance == nil) then
         self.instance = self:new()
         print("tuoli", "确保一个虚拟机只有一个xmlParser")
@@ -30,7 +30,7 @@ function Pickup:getInstance()
     return self.instance
 end
 
-function Pickup:render(xmlFile)
+function Pica:render(xmlFile)
     print("tuoli", "xml read start")
     local data = File:read(xmlFile)
     print("tuoli", "xml read end")
@@ -61,7 +61,7 @@ end
 --[[
 --  遍历self.objs,找出有子节点的父节点,并决定是否需要对其子节点进行flex布局
  ]]
-function Pickup:flexOrNot()
+function Pica:flexOrNot()
     for _k, _ in pairs(self.objs) do
         local isFlex = false
         if (_k.attr["flexCss"] ~= nil) then
@@ -83,19 +83,21 @@ function Pickup:flexOrNot()
     end
 
     -- iOS能否在SDK层屏蔽掉flxLayout的调用
-    if (not Platform.isAndroid) then
+    if (not Sys.android) then
         for _, _view in pairs(self.flxLayoutObjs) do
             _view:flxLayout(true)
         end
     end
 end
 
-function Pickup:isViewElement(element)
+function Pica:isViewElement(element)
     local view
     if (element.name == "View") then
         view = View()
     elseif (element.name == "Label") then
         view = Label()
+        view:ellipsize(Ellipsize.END)   -- default setting
+        view:textColor(0x000000)
     elseif (element.name == "Button") then
         view = Button()
     elseif (element.name == "Image") then
@@ -117,7 +119,6 @@ function Pickup:isViewElement(element)
     elseif (element.name == "PagerIndicator") then
         view = PagerIndicator()
     else
-        --        print("tuoli error", element.name .. " is not view")
         view = nil
     end
 
@@ -132,7 +133,7 @@ end
 --[[
 --  分割字符串,并去除字符串中的空格符
  ]]
-function Pickup:split(str, delimiter)
+function Pica:split(str, delimiter)
     if str==nil or str=='' or delimiter==nil then
         return nil
     end
@@ -145,7 +146,7 @@ function Pickup:split(str, delimiter)
     return result
 end
 
-function Pickup:parseElement(element, parent, identifierObjs)
+function Pica:parseElement(element, parent, identifierObjs)
     if (element.type == "comment") then
         return
     end
@@ -154,12 +155,10 @@ function Pickup:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
-                _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
                 if (parent and (parent.name == "View" or parent.name == "HScrollView")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = Sys:loadString("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
             elseif (_v.name == "backgroundColor") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
@@ -168,11 +167,21 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:color(tonumber(_v.value))
                 end
             elseif (_v.name == "id") then
-                -- 考虑到性能问题,不采用遍历的方式来取得开发者所关注的对象。而是使用字典的形式来获取。
+                -- 考虑到性能问题,不采用数组的形式来存取开发者所关注的对象,而是使用字典的形式来存取。
                 identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "flexCss") then
-                self.objs[element]:flexCss(_v.value)
-                if (not Platform.isAndroid) then
+                print("tuoli", "start dddd")
+                _v.value = string.gsub(_v.value, "-","_")
+                local paramFun = Sys:loadString("return " .. _v.value)
+                local tb = paramFun()
+                local css = ""
+                for _k, _v in pairs(tb) do
+                    _k = string.gsub(_k, "_","-")
+                    css = css .. _k .. ":" .. _v .. ","
+                end
+                print("tuoli", "end dddd")
+                self.objs[element]:flexCss(css)
+                if (not Sys.android) then
                     if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
@@ -189,13 +198,13 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:image(_v.value)
                 end
             elseif (_v.name == "cornerRadius") then
-                self.objs[element]:cornerRadius(tonumber(_v.value))
+                self.objs[element]:cornerRadius(tonumber(_v.value)*Sys.scale)
             elseif (_v.name == "borderColor") then
                 self.objs[element]:borderColor(tonumber(_v.value))
             elseif (_v.name == "borderWidth") then
                 self.objs[element]:borderWidth(tonumber(_v.value))
             elseif (_v.name == "textColor") then
-                if (not Platform.isAndroid and string.len(_v.value) == 10) then
+                if (not Sys.android and string.len(_v.value) == 10) then
                     local alphaStr = string.sub(_v.value, 3, 4)
                     local alpha = tonumber(alphaStr)/tonumber("0xFF")
                     self.objs[element]:textColor(tonumber(_v.value), alpha)
@@ -203,7 +212,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:textColor(tonumber(_v.value))
                 end
             elseif (_v.name == "fontSize") then
-                self.objs[element]:fontSize(tonumber(_v.value))
+                self.objs[element]:fontSize(tonumber(_v.value)*Sys.scale)
             elseif (_v.name == "lineCount") then
                 self.objs[element]:lineCount(tonumber(_v.value))
             elseif (_v.name == "alpha") then
@@ -211,16 +220,11 @@ function Pickup:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = Sys:loadString("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "scaleType") then
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = Sys:loadString("return " .. _v.value)
                 self.objs[element]:scaleType(paramFun())
-            elseif (_v.name == "ellipsize") then
-                if (Platform.isAndroid) then
-                    local paramFun = Platform:loadString("return " .. _v.value)
-                    self.objs[element]:ellipsize(paramFun())
-                end
             elseif (_v.name == "hint") then
                 self.objs[element]:hint(_v.value)
             elseif (_v.name == "miniSpacing") then
@@ -252,10 +256,8 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:hide(false)
                 end
             elseif (_v.name == "contentSize") then
-                if (not Platform.isAndroid) then
-                    _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
-                    _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
-                    local paramFun = Platform:loadString("return " .. _v.value)
+                if (not Sys.android) then
+                    local paramFun = Sys:loadString("return " .. _v.value)
                     self.objs[element]:contentSize(paramFun())
                 end
             else
@@ -271,7 +273,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
     end
 end
 
-return Pickup
+return Pica
 
 
 

@@ -6,13 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    if (Platform.isAndroid) then
-        Pickup:getInstance():render("widget/textfield_android.xml")
+    if (Sys.android) then
+        Pica:getInstance():render("widget/textfield_android.xml")
     else
-        Pickup:getInstance():render("widget/textfield_ios.xml")
+        Pica:getInstance():render("widget/textfield_ios.xml")
     end
 end
 

@@ -6,9 +6,9 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-if (Common == nil) then
-    Common = {}
-    function Common:printTable(t, exclusions)
+if (Util == nil) then
+    Util = {}
+    function Util:printTable(t, exclusions)
         if (type(t) == "table") then
             local nests = 0
             if not exclusions then exclusions = {} end
