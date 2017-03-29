@@ -10,7 +10,7 @@ require("kit.pickup")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "HScrollView", "WebView", "Animation"] '
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
-local _jsonDataDescription = ' ["从豆瓣开放API获取电影信息", "按关键字检索GitHub的代码仓库"] '
+local _jsonDataDescription = ' ["Get movie information from Douban.", "Search repositories from GitHub."] '
 local _dataWidget = Json:toTable(_jsonDataWidget)
 local _dataDemo = Json:toTable(_jsonDataDemo)
 local _dataDescription = Json:toTable(_jsonDataDescription)

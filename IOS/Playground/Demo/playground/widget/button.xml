@@ -9,6 +9,6 @@
         <Button id="button6" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="Border" borderColor="0x000000" cornerRadius="10"></Button>
     </View>
     <View flexCss="flex-direction: row, flex: 1">
-        <Button id="button4" flexCss="flex: 1, margin: 5" backgroundColor="0x00ffffff" image="https://gw.alicdn.com/tfs/TB1.2WHQXXXXXb9XFXXXXXXXXXX-250-80.png, https://gw.alicdn.com/tfs/TB1XrmBQXXXXXcKXVXXXXXXXXXX-250-80.png"></Button>
+        <Button id="button4" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" image="https://gw.alicdn.com/tfs/TB124hiQpXXXXceapXXXXXXXXXX-375-80.jpg, https://gw.alicdn.com/tfs/TB1DMdMQpXXXXbOXFXXXXXXXXXX-375-80.jpg"></Button>
     </View>
 </View>

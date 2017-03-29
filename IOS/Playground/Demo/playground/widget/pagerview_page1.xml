@@ -1,0 +1,3 @@
+<View id="root" frame="0, 0, CONTENT_WIDTH, (CONTENT_HEIGHT/2)-50" flexCss="flex-direction: column, justify-content: center, align-items: center" >
+    <Image id="img" flexCss="height: 100, width: 100" image="luaview.png"></Image>
+</View>
