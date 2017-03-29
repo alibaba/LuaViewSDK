@@ -68,7 +68,7 @@ local function main()
             end,
             SampleCell = {
                 Size = function(section, row)
-                    return Platform.contentWidth, 120
+                    return Platform.contentWidth, Platform.contentHeight/5
                 end,
                 Init = function(cell, section, row)
                     cell.objs = Pickup:getInstance():render("demo_item.xml")

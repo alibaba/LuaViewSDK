@@ -2,25 +2,25 @@
     <View flexCss="height: 50" backgroundColor="0x004B97">
         <Label flexCss="flex: 1, margin: 10" text="Input Hint" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center">
-        <TextField flexCss="flex: 1" hint="Input Something" borderWidth="1" borderColor="0x000000"></TextField>
+    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center" borderWidth="1" borderColor="0x000000">
+        <TextField flexCss="flex: 1, margin-left: 5, margin-right: 5" hint="Input Something"></TextField>
     </View>
     <View flexCss="height: 50" backgroundColor="0x004B97">
         <Label flexCss="flex: 1, margin: 10" text="Text Input" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center">
-        <TextField flexCss="flex: 1" borderWidth="1" borderColor="0x000000"></TextField>
+    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center" borderWidth="1" borderColor="0x000000">
+        <TextField flexCss="flex: 1, margin-left: 5, margin-right: 5"></TextField>
     </View>
     <View flexCss="height: 50" backgroundColor="0x004B97">
         <Label flexCss="flex: 1, margin: 10" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center">
-        <TextField flexCss="flex: 1" borderWidth="1" borderColor="0x000000"></TextField>
+    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center" borderWidth="1" borderColor="0x000000">
+        <TextField flexCss="flex: 1, margin-left: 5, margin-right: 5"></TextField>
     </View>
     <View flexCss="height: 50" backgroundColor="0x004B97">
         <Label flexCss="flex: 1, margin: 10" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Label>
     </View>
-    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center">
-        <TextField flexCss="flex: 1" borderWidth="1" borderColor="0x000000"></TextField>
+    <View flexCss="flex-direction: row, flex: 1, margin: 10, align-items: center" borderWidth="1" borderColor="0x000000">
+        <TextField flexCss="flex: 1, margin-left: 5, margin-right: 5"></TextField>
     </View>
 </View>
