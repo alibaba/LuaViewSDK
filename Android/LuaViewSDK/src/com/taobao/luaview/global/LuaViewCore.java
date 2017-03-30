@@ -249,6 +249,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     }
 
     public LuaViewCore loadScript(final String script, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        updateUri("");
         if (!TextUtils.isEmpty(script)) {
             this.loadScriptInternal(new ScriptFile(script, EncryptUtil.md5Hex(script)), callback);
         } else {
@@ -270,6 +271,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     }
 
     public LuaViewCore loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        updateUri("");
         if (scriptFile != null) {
             this.loadScriptInternal(scriptFile, callback);
         } else if (callback != null) {
