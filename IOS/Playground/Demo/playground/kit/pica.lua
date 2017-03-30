@@ -1,27 +1,24 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/3/23
--- Time: 10:03
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.util")
-require("kit.sys")
-
-Pica = {}
+pica = {}
 
 local _gsub = string.gsub
 local _find = string.find
 
-function Pica:new(o)
+function pica:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function Pica:getInstance()
+function pica:getInstance()
     if (self.instance == nil) then
         self.instance = self:new()
         print("tuoli", "确保一个虚拟机只有一个xmlParser")
@@ -33,7 +30,9 @@ function Pica:getInstance()
     return self.instance
 end
 
-function Pica:render(xmlFile)
+function pica:render(xmlFile)
+    print("tuoli", "render start", xmlFile)
+
     print("tuoli", "xml read start")
     local data = File:read(xmlFile)
     print("tuoli", "xml read end")
@@ -57,14 +56,14 @@ function Pica:render(xmlFile)
     print("tuoli", "flex start")
     self:flexOrNot()
     print("tuoli", "flex end")
-
+    print("tuoli", "render end", xmlFile)
     return identifierObjs
 end
 
 --[[
 --  遍历self.objs,找出有子节点的父节点,并决定是否需要对其子节点进行flex布局
  ]]
-function Pica:flexOrNot()
+function pica:flexOrNot()
     for _k, _ in pairs(self.objs) do
         local isFlex = false
         if (_k.attr["css"] ~= nil) then
@@ -86,16 +85,16 @@ function Pica:flexOrNot()
     end
 
     -- iOS能否在SDK层屏蔽掉flxLayout的调用
-    if (not Sys.android) then
+    if (not sys.android) then
         for _, _view in pairs(self.flxLayoutObjs) do
             _view:flxLayout(true)
         end
     end
 end
 
-function Pica:isViewElement(element)
+function pica:isViewElement(element)
     local view
-    if (element.name == "v") then
+    if (element.name == "div") then
         view = View()
     elseif (element.name == "l") then
         view = Label()
@@ -138,7 +137,7 @@ end
 --[[
 --  分割字符串,并去除字符串中的空格符
  ]]
-function Pica:split(str, delimiter)
+function pica:split(str, delimiter)
     if str==nil or str=='' or delimiter==nil then
         return nil
     end
@@ -151,7 +150,7 @@ function Pica:split(str, delimiter)
     return result
 end
 
-function Pica:parseElement(element, parent, identifierObjs)
+function pica:parseElement(element, parent, identifierObjs)
     if (element.type == "comment") then
         return
     end
@@ -160,10 +159,10 @@ function Pica:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                if (parent and (parent.name == "v" or parent.name == "hscroll")) then
+                if (parent and (parent.name == "div" or parent.name == "hscroll")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
-                local paramFun = Sys:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
             elseif (_v.name == "bg") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
@@ -173,23 +172,23 @@ function Pica:parseElement(element, parent, identifierObjs)
                 -- 考虑到性能问题,不采用数组的形式来存取开发者所关注的对象,而是使用字典的形式来存取。
                 identifierObjs[_v.value] = self.objs[element]
             elseif (_v.name == "css") then
-                print("tuoli ddddddd start")
+--                print("tuoli css start")
                 _v.value = _gsub(_v.value, "-","_")
-                local paramFun = Sys:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 local t = paramFun()
                 local css = ""
                 for _k, _v in pairs(t) do
                     _k = _gsub(_k, "_","-")
                     if (_find(_k, "margin")) then
-                        css = css .. _k .. ":" .. _v*Sys.scale .. ","
+                        css = css .. _k .. ":" .. _v*sys.scale .. ","
                     else
                         css = css .. _k .. ":" .. _v .. ","
                     end
                 end
-                print("tuoli ddddddd end")
+--                print("tuoli css end")
                 self.objs[element]:flexCss(css)
-                if (not Sys.android) then
-                    if (element.name == "v" and parent and (parent.name ~= "v" or (parent.name == "v" and parent.attr["css"] == nil))) then
+                if (not sys.android) then
+                    if (element.name == "div" and parent and (parent.name ~= "div" or (parent.name == "div" and parent.attr["css"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end
@@ -205,13 +204,13 @@ function Pica:parseElement(element, parent, identifierObjs)
                     self.objs[element]:image(_v.value)
                 end
             elseif (_v.name == "corner") then
-                self.objs[element]:cornerRadius(tonumber(_v.value)*Sys.scale)
+                self.objs[element]:cornerRadius(tonumber(_v.value)*sys.scale)
             elseif (_v.name == "borderColor") then
                 self.objs[element]:borderColor(tonumber(_v.value))
             elseif (_v.name == "borderWidth") then
                 self.objs[element]:borderWidth(tonumber(_v.value))
             elseif (_v.name == "textColor") then
-                if (not Sys.android and string.len(_v.value) == 10) then
+                if (not sys.android and string.len(_v.value) == 10) then
                     local alphaStr = string.sub(_v.value, 3, 4)
                     local alpha = tonumber(alphaStr)/tonumber("0xFF")
                     self.objs[element]:textColor(tonumber(_v.value), alpha)
@@ -219,7 +218,7 @@ function Pica:parseElement(element, parent, identifierObjs)
                     self.objs[element]:textColor(tonumber(_v.value))
                 end
             elseif (_v.name == "fontSize") then
-                self.objs[element]:fontSize(tonumber(_v.value)*Sys.scale)
+                self.objs[element]:fontSize(tonumber(_v.value)*sys.scale)
             elseif (_v.name == "lineCount") then
                 self.objs[element]:lineCount(tonumber(_v.value))
             elseif (_v.name == "alpha") then
@@ -227,10 +226,10 @@ function Pica:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
-                local paramFun = Sys:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "scaleType") then
-                local paramFun = Sys:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:scaleType(paramFun())
             elseif (_v.name == "hint") then
                 self.objs[element]:hint(_v.value)
@@ -263,8 +262,8 @@ function Pica:parseElement(element, parent, identifierObjs)
                     self.objs[element]:hide(false)
                 end
             elseif (_v.name == "contentSize") then
-                if (not Sys.android) then
-                    local paramFun = Sys:loadString("return " .. _v.value)
+                if (not sys.android) then
+                    local paramFun = sys:loadstring("return " .. _v.value)
                     self.objs[element]:contentSize(paramFun())
                 end
             else
@@ -280,7 +279,7 @@ function Pica:parseElement(element, parent, identifierObjs)
     end
 end
 
-return Pica
+return pica
 
 
 

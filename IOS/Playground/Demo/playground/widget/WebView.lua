@@ -1,18 +1,24 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:53
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("WebView.lua")
 
-local function start()
-    webObjs = Pica:getInstance():render("widget/webview.xml")
+local meta = object:new()
 
-    local web = webObjs["web"]
-    web:callback({
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/webview.xml")
+    self.web = self.views["web"]
+
+    self:handle()
+end
+
+function meta:handle()
+    self.web:callback({
         onPageStarted = function()
             print("started")
         end,
@@ -25,6 +31,5 @@ local function start()
     })
 end
 
-Navigation:title("WebView.lua")
-start()
+return meta
 

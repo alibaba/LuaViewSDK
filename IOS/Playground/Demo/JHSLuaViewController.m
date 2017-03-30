@@ -77,8 +77,8 @@
     LVLog(@"%@",actionUrl);
 }
 
--(void)jumpTo:(NSDictionary*)args {
-    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:@"Main.lua"];
+-(void)require:(NSDictionary*)args {
+    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:@"main.lua"];
     c.args = args;
     [self.navigationController pushViewController:c animated:YES];
 }

@@ -1,12 +1,12 @@
-<v id="root" frame="0, 0, sys.contW, sys.contH" bg="0xffffff" >
-    <v id="container" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', flex=1}">
-        <v id="topContainer" css="{flex-direction='row', height=sys.contH*0.12}">
-            <v id="inputContainer" css="{flex-direction='row', flex=5, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+<div id="root" frame="0, 0, sys.contW, sys.contH" bg="0xffffff" >
+    <div id="container" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', flex=1}">
+        <div id="topContainer" css="{flex-direction='row', height=sys.contH*0.12}">
+            <div id="inputContainer" css="{flex-direction='row', flex=5, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
                 <field id="input" css="{flex=1, margin-left=5, margin-right=5}" hint="Input Keyword.." text="LuaView"></field>
-            </v>
+            </div>
             <btn id="go" css="{flex=2, margin=10}" bg="0xffffff" borderWidth="1" title="Search" borderColor="0x000000" corner="10"></btn>
-        </v>
+        </div>
         <list id="tableView" css="{flex=8}" bg="0xeeeeee"></list>
-    </v>
+    </div>
     <load id="loading" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8" color="0xF06292"></load>
-</v>
+</div>

@@ -1,14 +1,14 @@
-<v id="root" frame="0, 0, Sys.contW, Sys.contH/3" css="{flex-direction='column'}" >
-    <v css="{flex-direction='row', flex=1}">
+<div id="root" frame="0, 0, sys.contW, sys.contH/3" css="{flex-direction='column'}" >
+    <div css="{flex-direction='row', flex=1}">
         <btn id="button1" css="{flex=1, margin=5}" title="Default" borderWidth="1" borderColor="0x000000"></btn>
         <btn id="button2" css="{flex=1, margin=5}" title="BG Color" bg="0xA066D3"></btn>
         <btn id="button3" css="{flex=1, margin=5}" title="Title Color" titleColor="0xFF7F50" borderWidth="1" borderColor="0x000000"></btn>
-    </v>
-    <v css="{flex-direction='row', flex=1}">
+    </div>
+    <div css="{flex-direction='row', flex=1}">
         <btn id="button5" css="{flex=1, margin=5}" bg="0x228B22" titleColor="0xffffff" title="Corner" corner="10"></btn>
         <btn id="button6" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="Border" borderColor="0x000000" corner="10"></btn>
-    </v>
-    <v css="{flex-direction='row', flex=1}">
+    </div>
+    <div css="{flex-direction='row', flex=1}">
         <btn id="button4" css="{flex=1, margin=5}" bg="0xffffff" image="https://gw.alicdn.com/tfs/TB124hiQpXXXXceapXXXXXXXXXX-375-80.jpg, https://gw.alicdn.com/tfs/TB1DMdMQpXXXXbOXFXXXXXXXXXX-375-80.jpg"></btn>
-    </v>
-</v>
+    </div>
+</div>

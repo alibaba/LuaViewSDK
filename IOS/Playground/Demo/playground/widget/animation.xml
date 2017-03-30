@@ -1,12 +1,12 @@
-<v id="root" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column'}" >
-    <v css="{height=Sys.contH/10, flex-direction='row'}">
+<div id="root" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <div css="{height=sys.contH/10, flex-direction='row'}">
         <btn id="translateBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" corner="10"></btn>
         <btn id="scaleBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" corner="10"></btn>
         <btn id="alphaBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" corner="10"></btn>
-    </v>
-    <v css="{height=Sys.contH/10, flex-direction='row'}">
-        <btn id="resetBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" corner="10"></btn>
+    </div>
+    <div css="{height=sys.contH/10, flex-direction='row'}">
         <btn id="allBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" corner="10"></btn>
-    </v>
-    <img id="img" css="{margin-top=20, margin-left=20, height=Sys.contW/4, width=Sys.contW/4}" image="luaview.png"></img>
-</v>
+        <btn id="resetBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" corner="10"></btn>
+    </div>
+    <img id="img" css="{margin-top=20, margin-left=20, height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></img>
+</div>

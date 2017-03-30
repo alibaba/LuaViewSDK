@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(mLuaView);
                     mLuaView.register("Bridge", new MyBridge(MainActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
-                    mLuaView.loadScript("require('kit.launcher'):run('App')");
+                    mLuaView.load("main.lua", null, null);
                 }
             }
         });

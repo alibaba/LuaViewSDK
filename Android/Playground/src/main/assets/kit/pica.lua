@@ -94,7 +94,7 @@ end
 
 function pica:isViewElement(element)
     local view
-    if (element.name == "v") then
+    if (element.name == "div") then
         view = View()
     elseif (element.name == "l") then
         view = Label()
@@ -159,7 +159,7 @@ function pica:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                if (parent and (parent.name == "v" or parent.name == "hscroll")) then
+                if (parent and (parent.name == "div" or parent.name == "hscroll")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
                 local paramFun = sys:loadstring("return " .. _v.value)
@@ -188,7 +188,7 @@ function pica:parseElement(element, parent, identifierObjs)
 --                print("tuoli css end")
                 self.objs[element]:flexCss(css)
                 if (not sys.android) then
-                    if (element.name == "v" and parent and (parent.name ~= "v" or (parent.name == "v" and parent.attr["css"] == nil))) then
+                    if (element.name == "div" and parent and (parent.name ~= "div" or (parent.name == "div" and parent.attr["css"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end

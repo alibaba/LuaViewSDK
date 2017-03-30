@@ -21,15 +21,19 @@ public class MyBridge {
         this.mActivity = activity;
     }
 
-    public void jump(String pageUri, boolean isPlainScript) {
-        Intent intent = new Intent(mActivity, CommonActivity.class);
+    public void require(String pageUri) {
+        Intent intent = new Intent(mActivity, MainActivity.class);
         intent.putExtra(Constants.PARAM_URI, pageUri);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("isPlainScript", isPlainScript);
-        intent.putExtras(bundle);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
         mActivity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+    }
+
+    public String args() {
+        if (mActivity.getIntent() != null && mActivity.getIntent().hasExtra(Constants.PARAM_URI)) {
+            return mActivity.getIntent().getStringExtra(Constants.PARAM_URI);
+        }
+        return null;
     }
 }
 

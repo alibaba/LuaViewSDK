@@ -1,34 +1,34 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/3/22
--- Time: 12:02
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-if (Sys == nil) then
-    Sys = {}
+if (sys == nil) then
+    sys = {}
 
    --
    -- Variables
    --
-   Sys.android = System:android()
-   Sys.scrW, Sys.scrH = System:screenSize()
-   Sys.contW = Sys.scrW
-   Sys.scale = Sys.scrW/375 > 1 and 1 or Sys.scrW/375 <= 1 and Sys.scrW/375
+   sys.android = System:android()
+   sys.scrW, sys.scrH = System:screenSize()
+   sys.contW = sys.scrW
+   sys.scale = sys.scrW/375 > 1 and 1 or sys.scrW/375 <= 1 and sys.scrW/375
    -- 减掉ActionBar和StatusBar的高度
-   if (Sys.android) then
+   if (sys.android) then
        local device = System:device()
-       Sys.contH = device.window_height - device.status_bar_height - device.nav_height
+       sys.contH = device.window_height - device.status_bar_height - device.nav_height
    else
-       Sys.contH = Sys.scrH - 64      -- iOS, 稳定在这个值
+       sys.contH = sys.scrH - 64      -- iOS, 稳定在这个值
    end
 
    --
    -- Functions
    --
-   function Sys:loadString(param)
-       if (Sys.android) then
+   function sys:loadstring(param)
+       if (sys.android) then
            return load(param)
        else
            return loadstring(param)

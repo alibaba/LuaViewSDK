@@ -1,20 +1,20 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:52
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("Loading.lua")
 
-local function start()
-    loadingObjs = Pica:getInstance():render("widget/loading.xml")
+local meta = object:new()
 
-    local loading = loadingObjs["loading"]
-    loading:start()
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/loading.xml")
+    self.loading = self.views["loading"]
+    self.loading:start()
 end
 
-Navigation:title("Loading.lua")
-start()
+return meta
 
