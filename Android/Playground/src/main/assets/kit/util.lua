@@ -6,9 +6,9 @@
 -- Date: 17/3/30
 --
 
-if (Util == nil) then
-    Util = {}
-    function Util:printTable(t, exclusions)
+if (util == nil) then
+    util = {}
+    function util:printTable(t, exclusions)
         if (type(t) == "table") then
             local nests = 0
             if not exclusions then exclusions = {} end

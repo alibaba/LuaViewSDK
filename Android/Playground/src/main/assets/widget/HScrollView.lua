@@ -10,7 +10,7 @@ Navigation:title("HScrollView.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("widget/hscrollview.xml")
     self.scroller = self.views["scroller"]
 
