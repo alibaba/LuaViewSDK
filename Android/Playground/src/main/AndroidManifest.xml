@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CommonActivity" />
     </application>
 
 </manifest>

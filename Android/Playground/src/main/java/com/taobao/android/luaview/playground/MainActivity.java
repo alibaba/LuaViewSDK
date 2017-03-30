@@ -6,6 +6,9 @@ import android.os.Bundle;
 import com.taobao.luaview.global.LuaView;
 
 /**
+ * Copyright 2017 Alibaba Group
+ * License: MIT
+ * https://alibaba.github.io/LuaViewSDK
  * Created by tuoli on 17/3/27.
  */
 
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(mLuaView);
                     mLuaView.register("Bridge", new MyBridge(MainActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
-                    mLuaView.load("Main.lua", null, null);
+                    mLuaView.load("main.lua", null, null);
                 }
             }
         });

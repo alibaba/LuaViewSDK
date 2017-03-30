@@ -1,20 +1,21 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:52
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("TextField.lua")
 
-local function start()
-    if (Platform.isAndroid) then
-        Pickup:getInstance():render("widget/textfield_android.xml")
+local meta = object:new()
+
+function meta:onInit()
+    if (sys.android) then
+        pica:getInstance():render("widget/textfield_android.xml")
     else
-        Pickup:getInstance():render("widget/textfield_ios.xml")
+        pica:getInstance():render("widget/textfield_ios.xml")
     end
 end
 
-Navigation:title("TextField.lua")
-start()
+return meta

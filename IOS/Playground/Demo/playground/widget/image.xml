@@ -1,20 +1,20 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column" backgroundColor="0xeeeeee" >
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Local Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="flex: 1, justify-content: center, align-items: center">
-        <Image flexCss="height: 120, width: 120" image="luaview.png"></Image>
-    </View>
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Http Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="flex: 1, justify-content: center, align-items: center">
-        <Image flexCss="height: 100, width: 100" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></Image>
-    </View>
-    <View flexCss="height: 50" backgroundColor="0x004B97">
-        <Label flexCss="flex: 1, margin: 10" text="Gif Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="flex: 1, justify-content: center, align-items: center">
-        <Image flexCss="height: 80, width: 80" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></Image>
-    </View>
-</View>
+<div id="root" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" bg="0xeeeeee" >
+    <div css="{height=sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Local Image" fontSize="20" textColor="0xffffff"></l>
+    </div>
+    <div css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></img>
+    </div>
+    <div css="{height=sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Http Image" fontSize="20" textColor="0xffffff"></l>
+    </div>
+    <div css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=sys.contW/5, width=sys.contW/5}" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></img>
+    </div>
+    <div css="{height=sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Gif Image" fontSize="20" textColor="0xffffff"></l>
+    </div>
+    <div css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=sys.contW/6, width=sys.contW/6}" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></img>
+    </div>
+</div>

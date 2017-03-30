@@ -1,4 +1,4 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT">
-    <RefreshCollectionView id="tableView" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" backgroundColor="0xeeeeee"></RefreshCollectionView>
-    <LoadingIndicator id="loading" color="0xF06292" frame="0, CONTENT_HEIGHT/2 - 50, CONTENT_WIDTH, 50"></LoadingIndicator>
-</View>
+<div id="root" frame="0, 0, sys.contW, sys.contH">
+    <pull id="tableView" frame="0, 0, sys.contW, sys.contH" bg="0xeeeeee"></pull>
+    <load id="loading" color="0xF06292" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8"></load>
+</div>

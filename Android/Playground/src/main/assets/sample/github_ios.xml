@@ -1,12 +1,12 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" backgroundColor="0xffffff" >
-    <View id="container" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT" flexCss="flex-direction: column, flex: 1">
-        <View id="topContainer" flexCss="flex-direction: row, height: 70">
-            <View id="inputContainer" flexCss="flex-direction: row, flex: 3, margin: 10, align-items: center" borderWidth="1" borderColor="0x000000">
-                <TextField id="input" flexCss="flex: 1, margin-left: 5, margin-right: 5" hint="Search.." text="LuaView"></TextField>
-            </View>
-            <Button id="go" flexCss="flex: 1, margin: 10" backgroundColor="0xffffff" borderWidth="1" title="GO" borderColor="0x000000" cornerRadius="10"></Button>
-        </View>
-        <CollectionView id="tableView" flexCss="flex: 8" backgroundColor="0xeeeeee"></CollectionView>
-    </View>
-    <LoadingIndicator id="loading" frame="0, CONTENT_HEIGHT/2 - 50, CONTENT_WIDTH, 50" color="0xF06292"></LoadingIndicator>
-</View>
+<div id="root" frame="0, 0, sys.contW, sys.contH" bg="0xffffff" >
+    <div id="container" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', flex=1}">
+        <div id="topContainer" css="{flex-direction='row', height=sys.contH*0.12}">
+            <div id="inputContainer" css="{flex-direction='row', flex=5, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+                <field id="input" css="{flex=1, margin-left=5, margin-right=5}" hint="Input Keyword.." text="LuaView"></field>
+            </div>
+            <btn id="go" css="{flex=2, margin=10}" bg="0xffffff" borderWidth="1" title="Search" borderColor="0x000000" corner="10"></btn>
+        </div>
+        <list id="tableView" css="{flex=8}" bg="0xeeeeee"></list>
+    </div>
+    <load id="loading" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8" color="0xF06292"></load>
+</div>

@@ -1,24 +1,24 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/3/23
--- Time: 10:03
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.common")
-require("kit.platform")
+pica = {}
 
-Pickup = {}
+local _gsub = string.gsub
+local _find = string.find
 
-function Pickup:new(o)
+function pica:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function Pickup:getInstance()
+function pica:getInstance()
     if (self.instance == nil) then
         self.instance = self:new()
         print("tuoli", "确保一个虚拟机只有一个xmlParser")
@@ -30,7 +30,9 @@ function Pickup:getInstance()
     return self.instance
 end
 
-function Pickup:render(xmlFile)
+function pica:render(xmlFile)
+    print("tuoli", "render start", xmlFile)
+
     print("tuoli", "xml read start")
     local data = File:read(xmlFile)
     print("tuoli", "xml read end")
@@ -54,17 +56,17 @@ function Pickup:render(xmlFile)
     print("tuoli", "flex start")
     self:flexOrNot()
     print("tuoli", "flex end")
-
+    print("tuoli", "render end", xmlFile)
     return identifierObjs
 end
 
 --[[
 --  遍历self.objs,找出有子节点的父节点,并决定是否需要对其子节点进行flex布局
  ]]
-function Pickup:flexOrNot()
+function pica:flexOrNot()
     for _k, _ in pairs(self.objs) do
         local isFlex = false
-        if (_k.attr["flexCss"] ~= nil) then
+        if (_k.attr["css"] ~= nil) then
             isFlex = true
         end
 
@@ -83,41 +85,44 @@ function Pickup:flexOrNot()
     end
 
     -- iOS能否在SDK层屏蔽掉flxLayout的调用
-    if (not Platform.isAndroid) then
+    if (not sys.android) then
         for _, _view in pairs(self.flxLayoutObjs) do
             _view:flxLayout(true)
         end
     end
 end
 
-function Pickup:isViewElement(element)
+function pica:isViewElement(element)
     local view
-    if (element.name == "View") then
+    if (element.name == "div") then
         view = View()
-    elseif (element.name == "Label") then
+    elseif (element.name == "l") then
         view = Label()
-    elseif (element.name == "Button") then
+        view:ellipsize(Ellipsize.END)   -- default setting
+        view:textColor(0x000000)
+    elseif (element.name == "btn") then
         view = Button()
-    elseif (element.name == "Image") then
+    elseif (element.name == "img") then
         view = Image()
-    elseif (element.name == "HScrollView") then
+    elseif (element.name == "hscroll") then
         view = HScrollView()
-    elseif (element.name == "WebView") then
+    elseif (element.name == "web") then
         view = WebView()
-    elseif (element.name == "TextField") then
+    elseif (element.name == "field") then
         view = TextField()
-    elseif (element.name == "CollectionView") then
+    elseif (element.name == "list") then
         view = CollectionView()
-    elseif (element.name == "RefreshCollectionView") then
+        view:miniSpacing(0)
+    elseif (element.name == "pull") then
         view = RefreshCollectionView()
-    elseif (element.name == "LoadingIndicator") then
+        view:miniSpacing(0)
+    elseif (element.name == "load") then
         view = LoadingIndicator()
-    elseif (element.name == "PagerView") then
+    elseif (element.name == "page") then
         view = PagerView()
-    elseif (element.name == "PagerIndicator") then
+    elseif (element.name == "ind") then
         view = PagerIndicator()
     else
-        --        print("tuoli error", element.name .. " is not view")
         view = nil
     end
 
@@ -132,7 +137,7 @@ end
 --[[
 --  分割字符串,并去除字符串中的空格符
  ]]
-function Pickup:split(str, delimiter)
+function pica:split(str, delimiter)
     if str==nil or str=='' or delimiter==nil then
         return nil
     end
@@ -145,7 +150,7 @@ function Pickup:split(str, delimiter)
     return result
 end
 
-function Pickup:parseElement(element, parent, identifierObjs)
+function pica:parseElement(element, parent, identifierObjs)
     if (element.type == "comment") then
         return
     end
@@ -154,26 +159,36 @@ function Pickup:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
-                _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
-                if (parent and (parent.name == "View" or parent.name == "HScrollView")) then
+                if (parent and (parent.name == "div" or parent.name == "hscroll")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
-            elseif (_v.name == "backgroundColor") then
+            elseif (_v.name == "bg") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
             elseif (_v.name == "color") then
-                if (element.name == "LoadingIndicator") then
-                    self.objs[element]:color(tonumber(_v.value))
-                end
+                self.objs[element]:color(tonumber(_v.value))
             elseif (_v.name == "id") then
-                -- 考虑到性能问题,不采用遍历的方式来取得开发者所关注的对象。而是使用字典的形式来获取。
+                -- 考虑到性能问题,不采用数组的形式来存取开发者所关注的对象,而是使用字典的形式来存取。
                 identifierObjs[_v.value] = self.objs[element]
-            elseif (_v.name == "flexCss") then
-                self.objs[element]:flexCss(_v.value)
-                if (not Platform.isAndroid) then
-                    if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
+            elseif (_v.name == "css") then
+--                print("tuoli css start")
+                _v.value = _gsub(_v.value, "-","_")
+                local paramFun = sys:loadstring("return " .. _v.value)
+                local t = paramFun()
+                local css = ""
+                for _k, _v in pairs(t) do
+                    _k = _gsub(_k, "_","-")
+                    if (_find(_k, "margin")) then
+                        css = css .. _k .. ":" .. _v*sys.scale .. ","
+                    else
+                        css = css .. _k .. ":" .. _v .. ","
+                    end
+                end
+--                print("tuoli css end")
+                self.objs[element]:flexCss(css)
+                if (not sys.android) then
+                    if (element.name == "div" and parent and (parent.name ~= "div" or (parent.name == "div" and parent.attr["css"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end
@@ -182,20 +197,20 @@ function Pickup:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "titleColor") then
                 self.objs[element]:titleColor(tonumber(_v.value))
             elseif (_v.name == "image") then
-                if (element.name == "Button") then
+                if (element.name == "btn") then
                     local params = self:split(_v.value, ",")
                     self.objs[element]:image(params[1], params[2])
-                elseif (element.name == "Image") then
+                elseif (element.name == "img") then
                     self.objs[element]:image(_v.value)
                 end
-            elseif (_v.name == "cornerRadius") then
-                self.objs[element]:cornerRadius(tonumber(_v.value))
+            elseif (_v.name == "corner") then
+                self.objs[element]:cornerRadius(tonumber(_v.value)*sys.scale)
             elseif (_v.name == "borderColor") then
                 self.objs[element]:borderColor(tonumber(_v.value))
             elseif (_v.name == "borderWidth") then
                 self.objs[element]:borderWidth(tonumber(_v.value))
             elseif (_v.name == "textColor") then
-                if (not Platform.isAndroid and string.len(_v.value) == 10) then
+                if (not sys.android and string.len(_v.value) == 10) then
                     local alphaStr = string.sub(_v.value, 3, 4)
                     local alpha = tonumber(alphaStr)/tonumber("0xFF")
                     self.objs[element]:textColor(tonumber(_v.value), alpha)
@@ -203,7 +218,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:textColor(tonumber(_v.value))
                 end
             elseif (_v.name == "fontSize") then
-                self.objs[element]:fontSize(tonumber(_v.value))
+                self.objs[element]:fontSize(tonumber(_v.value)*sys.scale)
             elseif (_v.name == "lineCount") then
                 self.objs[element]:lineCount(tonumber(_v.value))
             elseif (_v.name == "alpha") then
@@ -211,19 +226,14 @@ function Pickup:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "text") then
                 self.objs[element]:text(_v.value)
             elseif (_v.name == "textAlign") then
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:textAlign(paramFun())
             elseif (_v.name == "scaleType") then
-                local paramFun = Platform:loadString("return " .. _v.value)
+                local paramFun = sys:loadstring("return " .. _v.value)
                 self.objs[element]:scaleType(paramFun())
-            elseif (_v.name == "ellipsize") then
-                if (Platform.isAndroid) then
-                    local paramFun = Platform:loadString("return " .. _v.value)
-                    self.objs[element]:ellipsize(paramFun())
-                end
             elseif (_v.name == "hint") then
                 self.objs[element]:hint(_v.value)
-            elseif (_v.name == "miniSpacing") then
+            elseif (_v.name == "space") then
                 self.objs[element]:miniSpacing(tonumber(_v.value))
             elseif (_v.name == "autoScroll") then
                 self.objs[element]:autoScroll(tonumber(_v.value))
@@ -233,9 +243,9 @@ function Pickup:parseElement(element, parent, identifierObjs)
                 else
                     self.objs[element]:looping(false)
                 end
-            elseif (_v.name == "selectedColor") then
+            elseif (_v.name == "selected") then
                 self.objs[element]:selectedColor(tonumber(_v.value))
-            elseif (_v.name == "unselectedColor") then
+            elseif (_v.name == "unselected") then
                 self.objs[element]:unselectedColor(tonumber(_v.value))
             elseif (_v.name == "showScrollIndicator") then
                 if (_v.value == "true") then
@@ -243,7 +253,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
                 else
                     self.objs[element]:showScrollIndicator(false)
                 end
-            elseif (_v.name == "loadUrl") then
+            elseif (_v.name == "url") then
                 self.objs[element]:loadUrl(_v.value)
             elseif (_v.name == "hide") then
                 if (_v.value == "true") then
@@ -252,10 +262,8 @@ function Pickup:parseElement(element, parent, identifierObjs)
                     self.objs[element]:hide(false)
                 end
             elseif (_v.name == "contentSize") then
-                if (not Platform.isAndroid) then
-                    _v.value = _v.value:gsub("CONTENT_WIDTH", Platform.contentWidth)
-                    _v.value = _v.value:gsub("CONTENT_HEIGHT", Platform.contentHeight)
-                    local paramFun = Platform:loadString("return " .. _v.value)
+                if (not sys.android) then
+                    local paramFun = sys:loadstring("return " .. _v.value)
                     self.objs[element]:contentSize(paramFun())
                 end
             else
@@ -271,7 +279,7 @@ function Pickup:parseElement(element, parent, identifierObjs)
     end
 end
 
-return Pickup
+return pica
 
 
 

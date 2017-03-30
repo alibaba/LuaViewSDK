@@ -11,4 +11,6 @@
 
 @interface JHSLuaViewController : LViewController
 
+@property(nonatomic,copy) NSDictionary* args;
+
 @end

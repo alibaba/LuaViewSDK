@@ -1,41 +1,46 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:51
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("Button.lua")
 
-local function start()
-    buttonObjs = Pickup:getInstance():render("widget/button.xml")
+local meta = object:new()
 
-    local button1 = buttonObjs["button1"]
-    button1:callback(function()
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/button.xml")
+    self.button1 = self.views["button1"]
+    self.button2 = self.views["button2"]
+    self.button3 = self.views["button3"]
+    self.button4 = self.views["button4"]
+    self.button5 = self.views["button5"]
+    self.button6 = self.views["button6"]
+
+    self:handle()
+end
+
+function meta:handle()
+    self.button1:callback(function()
         Toast("Clicked")
     end)
-    local button2 = buttonObjs["button2"]
-    button2:callback(function()
+    self.button2:callback(function()
         Toast("Clicked")
     end)
-    local button3 = buttonObjs["button3"]
-    button3:callback(function()
+    self.button3:callback(function()
         Toast("Clicked")
     end)
-    local button4 = buttonObjs["button4"]
-    button4:callback(function()
+    self.button4:callback(function()
         Toast("Clicked")
     end)
-    local button5 = buttonObjs["button5"]
-    button5:callback(function()
+    self.button5:callback(function()
         Toast("Clicked")
     end)
-    local button6 = buttonObjs["button6"]
-    button6:callback(function()
+    self.button6:callback(function()
         Toast("Clicked")
     end)
 end
 
-Navigation:title("Button.lua")
-start()
+return meta

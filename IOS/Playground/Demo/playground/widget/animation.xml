@@ -1,12 +1,12 @@
-<View id="root" frame="0, 0, CONTENT_WIDTH, CONTENT_HEIGHT/2" flexCss="flex-direction: column" >
-    <View flexCss="height: 60, flex-direction: row">
-        <Button id="translateBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="scaleBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="alphaBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" cornerRadius="10"></Button>
-    </View>
-    <View flexCss="height: 60, flex-direction: row">
-        <Button id="resetBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" cornerRadius="10"></Button>
-        <Button id="allBtn" flexCss="flex: 1, margin: 5" backgroundColor="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" cornerRadius="10"></Button>
-    </View>
-    <Image id="img" flexCss="margin-top: 20, margin-left: 20, height: 100, width: 100" image="luaview.png"></Image>
-</View>
+<div id="root" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <div css="{height=sys.contH/10, flex-direction='row'}">
+        <btn id="translateBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" corner="10"></btn>
+        <btn id="scaleBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" corner="10"></btn>
+        <btn id="alphaBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" corner="10"></btn>
+    </div>
+    <div css="{height=sys.contH/10, flex-direction='row'}">
+        <btn id="allBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" corner="10"></btn>
+        <btn id="resetBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" corner="10"></btn>
+    </div>
+    <img id="img" css="{margin-top=20, margin-left=20, height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></img>
+</div>
