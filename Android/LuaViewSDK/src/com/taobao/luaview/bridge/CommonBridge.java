@@ -26,7 +26,6 @@ public class CommonBridge {
         intent.putExtra(Constants.PARAM_URI, pageUri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
-//        mActivity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
     }
 
     public String args() {
