@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".MyApplication">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.taobao.luaview.activity.CommonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

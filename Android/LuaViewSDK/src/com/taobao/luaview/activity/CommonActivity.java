@@ -1,8 +1,9 @@
-package com.taobao.android.luaview.playground;
+package com.taobao.luaview.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.taobao.luaview.bridge.CommonBridge;
 import com.taobao.luaview.global.LuaView;
 
 /**
@@ -12,9 +13,9 @@ import com.taobao.luaview.global.LuaView;
  * Created by tuoli on 17/3/27.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class CommonActivity extends AppCompatActivity {
 
-    private LuaView mLuaView;
+    protected LuaView mLuaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 mLuaView = luaView;
                 if (mLuaView != null) {
                     setContentView(mLuaView);
-                    mLuaView.register("Bridge", new MyBridge(MainActivity.this));
+                    mLuaView.register("Bridge", new CommonBridge(CommonActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
                     mLuaView.load("main.lua", null, null);
                 }

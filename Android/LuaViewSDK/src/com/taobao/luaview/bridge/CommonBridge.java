@@ -1,32 +1,32 @@
-package com.taobao.android.luaview.playground;
+package com.taobao.luaview.bridge;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
+import com.taobao.luaview.activity.CommonActivity;
 import com.taobao.luaview.global.Constants;
 
 /**
  * Copyright 2017 Alibaba Group
  * License: MIT
  * https://alibaba.github.io/LuaViewSDK
- * Created by tuoli on 17/3/27.
+ * Created by tuoli on 17/3/30.
  */
 
-public class MyBridge {
+public class CommonBridge {
 
     private Activity mActivity;
 
-    public MyBridge(Activity activity) {
+    public CommonBridge(Activity activity) {
         this.mActivity = activity;
     }
 
     public void require(String pageUri) {
-        Intent intent = new Intent(mActivity, MainActivity.class);
+        Intent intent = new Intent(mActivity, CommonActivity.class);
         intent.putExtra(Constants.PARAM_URI, pageUri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
-        mActivity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+//        mActivity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
     }
 
     public String args() {
@@ -35,5 +35,5 @@ public class MyBridge {
         }
         return null;
     }
-}
 
+}
