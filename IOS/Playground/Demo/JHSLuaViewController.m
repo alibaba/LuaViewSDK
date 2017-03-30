@@ -50,7 +50,6 @@
     self.lv[@"Image"] = [JHSLVImage class];
     self.lv[@"Button"] = [JHSLVButton class];
     self.lv[@"RefreshCollectionView"] = [JHSLVCollectionView class];
-    self.lv[@"Bridge"] = [Bridge class];
     
     // 注册 用户面板类型
     self.lv[@"CustomError"] = [JHSLVCustomError class];
@@ -78,8 +77,9 @@
     LVLog(@"%@",actionUrl);
 }
 
--(void)jumpTo:(NSString*)actionUrl{
-    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:actionUrl];
+-(void)jumpTo:(NSDictionary*)args {
+    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:@"Main.lua"];
+    c.args = args;
     [self.navigationController pushViewController:c animated:YES];
 }
 
