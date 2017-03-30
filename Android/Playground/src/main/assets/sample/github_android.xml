@@ -1,6 +1,6 @@
-<v id="root" frame="0, 0, Sys.contW, Sys.contH" bg="0xffffff" >
-    <v id="container" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column', flex=1}">
-        <v id="topContainer" css="{flex-direction='row', height=Sys.contH*0.12}">
+<v id="root" frame="0, 0, sys.contW, sys.contH" bg="0xffffff" >
+    <v id="container" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', flex=1}">
+        <v id="topContainer" css="{flex-direction='row', height=sys.contH*0.12}">
             <v id="inputContainer" css="{flex-direction='column', flex=5, margin=10}">
                 <field id="input" css="{flex=1}" hint="Input Keyword.." text="LuaView"></field>
             </v>
@@ -8,5 +8,5 @@
         </v>
         <list id="tableView" css="{flex=8}" bg="0xeeeeee"></list>
     </v>
-    <load id="loading" frame="0, Sys.contH/2 - Sys.contW/8, Sys.contW, Sys.contW/8" color="0xF06292"></load>
+    <load id="loading" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8" color="0xF06292"></load>
 </v>

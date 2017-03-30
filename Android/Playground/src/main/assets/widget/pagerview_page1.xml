@@ -1,3 +1,3 @@
-<v id="root" frame="0, 0, Sys.contW, (Sys.contH/2)-Sys.contH/10" css="{flex-direction='column', justify-content='center', align-items='center'}" >
-    <img id="img" css="{height=Sys.contW/4, width=Sys.contW/4}" image="luaview.png"></img>
+<v id="root" frame="0, 0, sys.contW, (sys.contH/2)-sys.contH/10" css="{flex-direction='column', justify-content='center', align-items='center'}" >
+    <img id="img" css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></img>
 </v>

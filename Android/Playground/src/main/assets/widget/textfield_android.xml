@@ -1,23 +1,23 @@
-<v id="root" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column'}" >
-    <v css="{height=Sys.contH*0.1}" bg="0x004B97">
+<v id="root" frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <v css="{height=sys.contH*0.1}" bg="0x004B97">
         <l css="{flex=1, margin=10}" text="Input Hint" fontSize="20" textColor="0xffffff"></l>
     </v>
     <v css="{flex-direction='row', flex=1, margin=10}">
         <field css="{flex=1}" hint="Input Something"></field>
     </v>
-    <v css="{height=Sys.contH*0.1}" bg="0x004B97">
+    <v css="{height=sys.contH*0.1}" bg="0x004B97">
         <l css="{flex=1, margin=10}" text="Text Input" fontSize="20" textColor="0xffffff"></l>
     </v>
     <v css="{flex-direction='row', flex=1, margin=10}">
         <field css="{flex=1}"></field>
     </v>
-    <v css="{height=Sys.contH*0.1}" bg="0x004B97">
+    <v css="{height=sys.contH*0.1}" bg="0x004B97">
         <l css="{flex=1, margin=10}" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></l>
     </v>
     <v css="{flex-direction='row', flex=1, margin=10}">
         <field css="{flex=1}"></field>
     </v>
-    <v css="{height=Sys.contH*0.1}" bg="0x004B97">
+    <v css="{height=sys.contH*0.1}" bg="0x004B97">
         <l css="{flex=1, margin=10}" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></l>
     </v>
     <v css="{flex-direction='row', flex=1, margin=10}">

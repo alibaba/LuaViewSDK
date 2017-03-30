@@ -6,50 +6,48 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("Animation.lua")
 
-local function start()
-    aniObjs = Pica:getInstance():render("widget/animation.xml")
+local meta = object:new()
 
-    local img = aniObjs["img"]
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/animation.xml")
+    self.spirit = self.views["img"]
+    self.translateBtn = self.views["translateBtn"]
+    self.scaleBtn = self.views["scaleBtn"]
+    self.alphaBtn = self.views["alphaBtn"]
+    self.resetBtn = self.views["resetBtn"]
+    self.allBtn = self.views["allBtn"]
 
-    local translateBtn = aniObjs["translateBtn"]
-    translateBtn:callback(function()
-        local translate = Animation():translation(Sys.contW/2, Sys.contW/2):duration(1)
-        translate:with(img):start()
-    end)
-
-    local scaleBtn = aniObjs["scaleBtn"]
-    scaleBtn:callback(function()
-        local scale = Animation():scale(0.5, 0.5):duration(1)
-        scale:with(img):start()
-    end)
-
-    local alphaBtn = aniObjs["alphaBtn"]
-    alphaBtn:callback(function()
-        local alpha = Animation():alpha(0.3):duration(1)
-        alpha:with(img):start()
-    end)
-
-    local resetBtn = aniObjs["resetBtn"]
-    resetBtn:callback(function()
-        img:translation(0, 0)
-        img:scale(1, 1)
-        img:alpha(1)
-    end)
-
-    local allBtn = aniObjs["allBtn"]
-    allBtn:callback(function()
-        local translate = Animation():translation(Sys.contW/2, Sys.contW/2):duration(1)
-        local scale = Animation():scale(0.5, 0.5):duration(1)
-        local alpha = Animation():alpha(0.3):duration(1)
-        alpha:with(img):start()
-        scale:with(img):start()
-        translate:with(img):start()
-    end)
-
+    self:handle()
 end
 
-Navigation:title("Animation.lua")
-start()
+function meta:handle()
+    self.translateBtn:callback(function()
+        local translate = Animation():translation(sys.contW/2, sys.contW/2):duration(1)
+        translate:with(self.spirit):start()
+    end)
+    self.scaleBtn:callback(function()
+        local scale = Animation():scale(0.5, 0.5):duration(1)
+        scale:with(self.spirit):start()
+    end)
+    self.alphaBtn:callback(function()
+        local alpha = Animation():alpha(0.3):duration(1)
+        alpha:with(self.spirit):start()
+    end)
+    self.allBtn:callback(function()
+        local translate = Animation():translation(sys.contW/2, sys.contW/2):duration(1)
+        local scale = Animation():scale(0.5, 0.5):duration(1)
+        local alpha = Animation():alpha(0.3):duration(1)
+        alpha:with(self.spirit):start()
+        scale:with(self.spirit):start()
+        translate:with(self.spirit):start()
+    end)
+    self.resetBtn:callback(function()
+        self.spirit:translation(0, 0)
+        self.spirit:scale(1, 1)
+        self.spirit:alpha(1)
+    end)
+end
 
+return meta

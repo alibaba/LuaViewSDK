@@ -6,43 +6,48 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("GitHub.lua")
 
-local function start()
-    if (Sys.android) then
-        githubObjs = Pica:getInstance():render("sample/github_android.xml")
+local meta = object:new()
+
+function meta:onInit()
+    if (sys.android) then
+        self.views = pica:getInstance():render("sample/github_android.xml")
     else
-        githubObjs = Pica:getInstance():render("sample/github_ios.xml")
+        self.views = pica:getInstance():render("sample/github_ios.xml")
     end
 
-    local go = githubObjs["go"]
-    local input = githubObjs["input"]
-    local tableView = githubObjs["tableView"]
-    local loading = githubObjs["loading"]
+    self.search = self.views["go"]
+    self.input = self.views["input"]
+    self.list = self.views["tableView"]
+    self.loading = self.views["loading"]
 
+    self:handle()
+end
+
+function meta:handle()
     local isSearching = false
-    go:callback(function()
-        if (not Sys.android) then
-            input:cancelFocus()
+    self.search:callback(function()
+        if (not sys.android) then
+            self.input:cancelFocus()
         end
 
         if (isSearching == true) then
             return
         end
 
-        local content = input:text()
+        local content = self.input:text()
         local baseUrl = "https://api.github.com/search/repositories?sort=stars&q="
 
-        loading:show()
+        self.loading:show()
         isSearching = true
 
         print("tuoli", "http request start")
-        local http = Http()
-        http:get(baseUrl .. content, function(response)
+        Http():get(baseUrl .. content, function(response)
             isSearching = false
             print("tuoli", "http request end")
 
-            loading:hide()
+            self.loading:hide()
 
             if (tostring(response:code()) == "200") then
                 local jsonData = Json:toTable(tostring(response:data()))
@@ -65,10 +70,10 @@ local function start()
                             end,
                             ItemCell = {
                                 Size = function(section, row)
-                                    return Sys.contW, Sys.contH/3
+                                    return sys.contW, sys.contH/3
                                 end,
                                 Init = function(cell, section, row)
-                                    cell.objs = Pica:getInstance():render("sample/github_cell.xml")
+                                    cell.objs = pica:getInstance():render("sample/github_cell.xml")
                                 end,
                                 Layout = function(cell, section, row)
                                     cell.objs["name"]:text(jsonData["items"][row]["full_name"])
@@ -85,8 +90,8 @@ local function start()
                         }
                     }
 
-                    tableView:initParams(tableData)
-                    tableView:reload()
+                    self.list:initParams(tableData)
+                    self.list:reload()
                 end
             else
                 Toast("Request Error")
@@ -95,5 +100,4 @@ local function start()
     end)
 end
 
-Navigation:title("GitHub.lua")
-start()
+return meta

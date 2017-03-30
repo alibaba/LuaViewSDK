@@ -1,4 +1,4 @@
-<v id="root" frame="0, 0, Sys.contW, Sys.contH/3" css="{flex-direction='column'}" >
+<v id="root" frame="0, 0, sys.contW, sys.contH/3" css="{flex-direction='column'}" >
     <v css="{flex-direction='row', flex=1}">
         <btn id="button1" css="{flex=1, margin=5}" title="Default" borderWidth="1" borderColor="0x000000"></btn>
         <btn id="button2" css="{flex=1, margin=5}" title="BG Color" bg="0xA066D3"></btn>

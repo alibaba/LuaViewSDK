@@ -6,25 +6,30 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("List.lua")
 
-local function start()
-    listObjs = Pica:getInstance():render("widget/list.xml")
+local meta = object:new()
 
-    local tableView = listObjs["tableView"]
-    local header = listObjs["headerText"]
-    if (not Sys.android) then
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/list.xml")
+    self.list = self.views["tableView"]
+    self.header = self.views["headerText"]
+    if (not sys.android) then
         -- iOS还有bug，暂时屏蔽
-        header:hide()
+        self.header:hide()
     end
 
-    local timer = Timer()
-    timer:callback(function()
-        tableView:stopRefreshing()
-        timer:cancel()
+    self.timer = Timer()
+    self:handle()
+end
+
+function meta:handle()
+    self.timer:callback(function()
+        self.list:stopRefreshing()
+        self.timer:cancel()
     end)
 
-    local tableData = {
+    self.list:initParams({
         Section = {
             SectionCount = function()
                 return 1
@@ -39,10 +44,10 @@ local function start()
             end,
             RowCell = {
                 Size = function(section, row)
-                    return Sys.contW, Sys.contH/10
+                    return sys.contW, sys.contH/10
                 end,
                 Init = function(cell, section, row)
-                    cell.window:frame(0, 0, Sys.contW, Sys.contH/10)
+                    cell.window:frame(0, 0, sys.contW, sys.contH/10)
                     cell.window:flexCss("flex-direction: row")
                     cell.window:backgroundColor(0xffffff)
 
@@ -54,25 +59,23 @@ local function start()
                     cell.window:flxLayout(true) -- iOS
                 end,
                 Layout = function(cell, section, row)
-                    local style = StyledString("row " .. row, { fontSize = 16*Sys.scale, fontColor = 0x000000})
+                    local style = StyledString("row " .. row, { fontSize = 16*sys.scale, fontColor = 0x000000})
                     cell.label:text(style)
                 end
             }
         },
         Callback = {
             Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-                header:text("Visible Items: " .. firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount)
+                self.header:text("Visible Items: " .. firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount)
             end,
             PullDown = function()
-                timer:start(3)
+                self.timer:start(3)
             end
         }
-    }
+    })
 
-    tableView:initParams(tableData)
-    tableView:reload()
+    self.list:reload()
 end
 
-Navigation:title("List.lua")
-start()
+return meta
 

@@ -6,15 +6,16 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("TextField.lua")
 
-local function start()
-    if (Sys.android) then
-        Pica:getInstance():render("widget/textfield_android.xml")
+local meta = object:new()
+
+function meta:onInit()
+    if (sys.android) then
+        pica:getInstance():render("widget/textfield_android.xml")
     else
-        Pica:getInstance():render("widget/textfield_ios.xml")
+        pica:getInstance():render("widget/textfield_ios.xml")
     end
 end
 
-Navigation:title("TextField.lua")
-start()
+return meta

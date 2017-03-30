@@ -6,11 +6,12 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
+Navigation:title("Image.lua")
 
-local function start()
-    Pica:getInstance():render("widget/image.xml")
+local meta = object:new()
+
+function meta:onInit()
+    self.views = pica:getInstance():render("widget/image.xml")
 end
 
-Navigation:title("Image.lua")
-start()
+return meta
