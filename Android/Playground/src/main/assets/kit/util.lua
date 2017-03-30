@@ -1,9 +1,9 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/3/7
--- Time: 20:57
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
 if (Util == nil) then

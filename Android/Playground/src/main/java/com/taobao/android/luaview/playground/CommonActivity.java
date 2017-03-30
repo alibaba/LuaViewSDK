@@ -7,6 +7,9 @@ import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaView;
 
 /**
+ * Copyright 2017 Alibaba Group
+ * License: MIT
+ * https://alibaba.github.io/LuaViewSDK
  * Created by tuoli on 17/3/27.
  */
 

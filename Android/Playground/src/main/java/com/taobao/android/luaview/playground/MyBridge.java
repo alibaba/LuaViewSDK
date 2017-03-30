@@ -6,6 +6,9 @@ import android.content.Intent;
 import com.taobao.luaview.global.Constants;
 
 /**
+ * Copyright 2017 Alibaba Group
+ * License: MIT
+ * https://alibaba.github.io/LuaViewSDK
  * Created by tuoli on 17/3/27.
  */
 
