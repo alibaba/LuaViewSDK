@@ -12,13 +12,7 @@ require("kit.sys")
 require("kit.pica")
 
 function main(args)
-    local page = ""
-    if (args ~= nil) then
-        page = require(args)
-    else
-        page = require('App')
-    end
-
+    local page = require(args)
     if (page.onCreate == nil) then
         Toast("请实现" .. pageName .. ".lua页面的meta:onCreate()方法!")
     else

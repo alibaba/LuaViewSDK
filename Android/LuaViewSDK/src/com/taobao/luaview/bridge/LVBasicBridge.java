@@ -3,7 +3,7 @@ package com.taobao.luaview.bridge;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.taobao.luaview.activity.CommonActivity;
+import com.taobao.luaview.activity.LVBasicActivity;
 import com.taobao.luaview.global.Constants;
 
 /**
@@ -13,16 +13,16 @@ import com.taobao.luaview.global.Constants;
  * Created by tuoli on 17/3/30.
  */
 
-public class CommonBridge {
+public class LVBasicBridge {
 
     private Activity mActivity;
 
-    public CommonBridge(Activity activity) {
+    public LVBasicBridge(Activity activity) {
         this.mActivity = activity;
     }
 
     public void require(String pageUri) {
-        Intent intent = new Intent(mActivity, CommonActivity.class);
+        Intent intent = new Intent(mActivity, LVBasicActivity.class);
         intent.putExtra(Constants.PARAM_URI, pageUri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
