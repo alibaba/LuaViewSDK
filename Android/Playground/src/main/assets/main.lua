@@ -6,11 +6,23 @@
 -- Date: 17/3/30
 --
 
+require("kit.object")
+require("kit.util")
+require("kit.sys")
+require("kit.pica")
+
 function main(args)
+    local page = ""
     if (args ~= nil) then
-        require('kit.launcher'):run(args)
+        page = require(args)
     else
-        require('kit.launcher'):run('App')
+        page = require('App')
+    end
+
+    if (page.onCreate == nil) then
+        Toast("请实现" .. pageName .. ".lua页面的meta:onCreate()方法!")
+    else
+        page:onCreate()
     end
 end
 
