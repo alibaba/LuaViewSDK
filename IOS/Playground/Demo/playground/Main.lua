@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local _jsonDataWidget = ' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "HScrollView", "WebView", "Animation"] '
 local _jsonDataDemo = ' ["Douban", "GitHub"] '
@@ -17,7 +17,7 @@ local _dataDescription = Json:toTable(_jsonDataDescription)
 
 local function main()
     print("tuoli", "render start")
-    mainObjs = Pickup:getInstance():render("main.xml")
+    mainObjs = Pica:getInstance():render("main.xml")
     print("tuoli", "render end")
 
     local widgetData = {
@@ -35,15 +35,15 @@ local function main()
             end,
             SampleCell = {
                 Size = function(section, row)
-                    return Platform.contentWidth, 80
+                    return Sys.contW, Sys.contH/8
                 end,
                 Init = function(cell, section, row)
                     cell.window:backgroundColor(0xffffff)
                     cell.label = Label()
-                    cell.label:frame(15, 15, Platform.contentWidth-15*2, 80-15*2)
+                    cell.label:frame(15*Sys.scale, 15*Sys.scale, Sys.contW-15*2*Sys.scale, (Sys.contH/8-15*2*Sys.scale))
                 end,
                 Layout = function(cell, section, row)
-                    local style = StyledString(_dataWidget[row], { fontSize = 25, fontColor = 0x000000})
+                    local style = StyledString(_dataWidget[row], { fontSize = 25*Sys.scale, fontColor = 0x000000})
                     cell.label:text(style)
                 end,
                 Callback = function(cell, section, row)
@@ -68,10 +68,10 @@ local function main()
             end,
             SampleCell = {
                 Size = function(section, row)
-                    return Platform.contentWidth, Platform.contentHeight/5
+                    return Sys.contW, Sys.contH/5
                 end,
                 Init = function(cell, section, row)
-                    cell.objs = Pickup:getInstance():render("demo_item.xml")
+                    cell.objs = Pica:getInstance():render("demo_item.xml")
                 end,
                 Layout = function(cell, section, row)
                     cell.objs["item"]:text(_dataDemo[row])
@@ -95,8 +95,8 @@ local function main()
     local aboutView = mainObjs["aboutView"]
 
     local info = mainObjs["info"]
-    if (Platform.isAndroid) then
-        info:nativeView():setLineSpacing(10,1)
+    if (Sys.android) then
+        info:nativeView():setLineSpacing(10*Sys.scale,1)
     end
 
     local widgetTab = mainObjs["widgetTab"]

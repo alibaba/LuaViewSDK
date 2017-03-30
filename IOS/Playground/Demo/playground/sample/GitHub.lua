@@ -6,13 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    if (Platform.isAndroid) then
-        githubObjs = Pickup:getInstance():render("sample/github_android.xml")
+    if (Sys.android) then
+        githubObjs = Pica:getInstance():render("sample/github_android.xml")
     else
-        githubObjs = Pickup:getInstance():render("sample/github_ios.xml")
+        githubObjs = Pica:getInstance():render("sample/github_ios.xml")
     end
 
     local go = githubObjs["go"]
@@ -22,7 +22,7 @@ local function start()
 
     local isSearching = false
     go:callback(function()
-        if (not Platform.isAndroid) then
+        if (not Sys.android) then
             input:cancelFocus()
         end
 
@@ -65,10 +65,10 @@ local function start()
                             end,
                             ItemCell = {
                                 Size = function(section, row)
-                                    return Platform.contentWidth, Platform.contentHeight/3
+                                    return Sys.contW, Sys.contH/3
                                 end,
                                 Init = function(cell, section, row)
-                                    cell.objs = Pickup:getInstance():render("sample/github_cell.xml")
+                                    cell.objs = Pica:getInstance():render("sample/github_cell.xml")
                                 end,
                                 Layout = function(cell, section, row)
                                     cell.objs["name"]:text(jsonData["items"][row]["full_name"])

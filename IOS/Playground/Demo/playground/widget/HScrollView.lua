@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    objects = Pickup:getInstance():render("widget/hscrollview.xml")
+    objects = Pica:getInstance():render("widget/hscrollview.xml")
 
     local scroller = objects["scroller"]
 
@@ -25,7 +25,7 @@ local function start()
                     end
                 end
                 local x, y, w, h = v:frame()
-                local dx = (Platform.contentWidth - w)/2
+                local dx = (Sys.contW - w)/2
                 scroller:offset(x-dx, 0, true)
             end)
         end

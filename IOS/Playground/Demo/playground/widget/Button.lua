@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    buttonObjs = Pickup:getInstance():render("widget/button.xml")
+    buttonObjs = Pica:getInstance():render("widget/button.xml")
 
     local button1 = buttonObjs["button1"]
     button1:callback(function()

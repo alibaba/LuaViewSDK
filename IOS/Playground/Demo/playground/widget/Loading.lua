@@ -6,10 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    loadingObjs = Pickup:getInstance():render("widget/loading.xml")
+    loadingObjs = Pica:getInstance():render("widget/loading.xml")
 
     local loading = loadingObjs["loading"]
     loading:start()

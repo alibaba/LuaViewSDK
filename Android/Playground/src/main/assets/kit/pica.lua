@@ -113,8 +113,10 @@ function Pica:isViewElement(element)
         view = TextField()
     elseif (element.name == "list") then
         view = CollectionView()
+        view:miniSpacing(0)
     elseif (element.name == "pull") then
         view = RefreshCollectionView()
+        view:miniSpacing(0)
     elseif (element.name == "load") then
         view = LoadingIndicator()
     elseif (element.name == "page") then
@@ -166,9 +168,7 @@ function Pica:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "bg") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
             elseif (_v.name == "color") then
-                if (element.name == "LoadingIndicator") then
-                    self.objs[element]:color(tonumber(_v.value))
-                end
+                self.objs[element]:color(tonumber(_v.value))
             elseif (_v.name == "id") then
                 -- 考虑到性能问题,不采用数组的形式来存取开发者所关注的对象,而是使用字典的形式来存取。
                 identifierObjs[_v.value] = self.objs[element]

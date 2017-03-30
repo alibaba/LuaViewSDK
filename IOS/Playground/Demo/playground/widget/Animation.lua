@@ -6,16 +6,16 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("kit.pickup")
+require("kit.pica")
 
 local function start()
-    aniObjs = Pickup:getInstance():render("widget/animation.xml")
+    aniObjs = Pica:getInstance():render("widget/animation.xml")
 
     local img = aniObjs["img"]
 
     local translateBtn = aniObjs["translateBtn"]
     translateBtn:callback(function()
-        local translate = Animation():translation(200, 50):duration(1)
+        local translate = Animation():translation(Sys.contW/2, Sys.contW/2):duration(1)
         translate:with(img):start()
     end)
 
@@ -40,7 +40,7 @@ local function start()
 
     local allBtn = aniObjs["allBtn"]
     allBtn:callback(function()
-        local translate = Animation():translation(200, 50):duration(1)
+        local translate = Animation():translation(Sys.contW/2, Sys.contW/2):duration(1)
         local scale = Animation():scale(0.5, 0.5):duration(1)
         local alpha = Animation():alpha(0.3):duration(1)
         alpha:with(img):start()
