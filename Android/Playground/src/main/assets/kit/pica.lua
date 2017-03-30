@@ -11,6 +11,9 @@ require("kit.sys")
 
 Pica = {}
 
+local _gsub = string.gsub
+local _find = string.find
+
 function Pica:new(o)
     o = o or {}
     setmetatable(o, self)
@@ -64,7 +67,7 @@ end
 function Pica:flexOrNot()
     for _k, _ in pairs(self.objs) do
         local isFlex = false
-        if (_k.attr["flexCss"] ~= nil) then
+        if (_k.attr["css"] ~= nil) then
             isFlex = true
         end
 
@@ -92,31 +95,31 @@ end
 
 function Pica:isViewElement(element)
     local view
-    if (element.name == "View") then
+    if (element.name == "v") then
         view = View()
-    elseif (element.name == "Label") then
+    elseif (element.name == "l") then
         view = Label()
         view:ellipsize(Ellipsize.END)   -- default setting
         view:textColor(0x000000)
-    elseif (element.name == "Button") then
+    elseif (element.name == "btn") then
         view = Button()
-    elseif (element.name == "Image") then
+    elseif (element.name == "img") then
         view = Image()
-    elseif (element.name == "HScrollView") then
+    elseif (element.name == "hscroll") then
         view = HScrollView()
-    elseif (element.name == "WebView") then
+    elseif (element.name == "web") then
         view = WebView()
-    elseif (element.name == "TextField") then
+    elseif (element.name == "field") then
         view = TextField()
-    elseif (element.name == "CollectionView") then
+    elseif (element.name == "list") then
         view = CollectionView()
-    elseif (element.name == "RefreshCollectionView") then
+    elseif (element.name == "pull") then
         view = RefreshCollectionView()
-    elseif (element.name == "LoadingIndicator") then
+    elseif (element.name == "load") then
         view = LoadingIndicator()
-    elseif (element.name == "PagerView") then
+    elseif (element.name == "page") then
         view = PagerView()
-    elseif (element.name == "PagerIndicator") then
+    elseif (element.name == "ind") then
         view = PagerIndicator()
     else
         view = nil
@@ -155,12 +158,12 @@ function Pica:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                if (parent and (parent.name == "View" or parent.name == "HScrollView")) then
+                if (parent and (parent.name == "v" or parent.name == "hscroll")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
                 local paramFun = Sys:loadString("return " .. _v.value)
                 self.objs[element]:frame(paramFun())
-            elseif (_v.name == "backgroundColor") then
+            elseif (_v.name == "bg") then
                 self.objs[element]:backgroundColor(tonumber(_v.value))
             elseif (_v.name == "color") then
                 if (element.name == "LoadingIndicator") then
@@ -169,20 +172,24 @@ function Pica:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "id") then
                 -- 考虑到性能问题,不采用数组的形式来存取开发者所关注的对象,而是使用字典的形式来存取。
                 identifierObjs[_v.value] = self.objs[element]
-            elseif (_v.name == "flexCss") then
-                print("tuoli", "start dddd")
-                _v.value = string.gsub(_v.value, "-","_")
+            elseif (_v.name == "css") then
+                print("tuoli ddddddd start")
+                _v.value = _gsub(_v.value, "-","_")
                 local paramFun = Sys:loadString("return " .. _v.value)
-                local tb = paramFun()
+                local t = paramFun()
                 local css = ""
-                for _k, _v in pairs(tb) do
-                    _k = string.gsub(_k, "_","-")
-                    css = css .. _k .. ":" .. _v .. ","
+                for _k, _v in pairs(t) do
+                    _k = _gsub(_k, "_","-")
+                    if (_find(_k, "margin")) then
+                        css = css .. _k .. ":" .. _v*Sys.scale .. ","
+                    else
+                        css = css .. _k .. ":" .. _v .. ","
+                    end
                 end
-                print("tuoli", "end dddd")
+                print("tuoli ddddddd end")
                 self.objs[element]:flexCss(css)
                 if (not Sys.android) then
-                    if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["flexCss"] == nil))) then
+                    if (element.name == "v" and parent and (parent.name ~= "v" or (parent.name == "v" and parent.attr["css"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end
@@ -191,13 +198,13 @@ function Pica:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "titleColor") then
                 self.objs[element]:titleColor(tonumber(_v.value))
             elseif (_v.name == "image") then
-                if (element.name == "Button") then
+                if (element.name == "btn") then
                     local params = self:split(_v.value, ",")
                     self.objs[element]:image(params[1], params[2])
-                elseif (element.name == "Image") then
+                elseif (element.name == "img") then
                     self.objs[element]:image(_v.value)
                 end
-            elseif (_v.name == "cornerRadius") then
+            elseif (_v.name == "corner") then
                 self.objs[element]:cornerRadius(tonumber(_v.value)*Sys.scale)
             elseif (_v.name == "borderColor") then
                 self.objs[element]:borderColor(tonumber(_v.value))
@@ -227,7 +234,7 @@ function Pica:parseElement(element, parent, identifierObjs)
                 self.objs[element]:scaleType(paramFun())
             elseif (_v.name == "hint") then
                 self.objs[element]:hint(_v.value)
-            elseif (_v.name == "miniSpacing") then
+            elseif (_v.name == "space") then
                 self.objs[element]:miniSpacing(tonumber(_v.value))
             elseif (_v.name == "autoScroll") then
                 self.objs[element]:autoScroll(tonumber(_v.value))
@@ -237,9 +244,9 @@ function Pica:parseElement(element, parent, identifierObjs)
                 else
                     self.objs[element]:looping(false)
                 end
-            elseif (_v.name == "selectedColor") then
+            elseif (_v.name == "selected") then
                 self.objs[element]:selectedColor(tonumber(_v.value))
-            elseif (_v.name == "unselectedColor") then
+            elseif (_v.name == "unselected") then
                 self.objs[element]:unselectedColor(tonumber(_v.value))
             elseif (_v.name == "showScrollIndicator") then
                 if (_v.value == "true") then
@@ -247,7 +254,7 @@ function Pica:parseElement(element, parent, identifierObjs)
                 else
                     self.objs[element]:showScrollIndicator(false)
                 end
-            elseif (_v.name == "loadUrl") then
+            elseif (_v.name == "url") then
                 self.objs[element]:loadUrl(_v.value)
             elseif (_v.name == "hide") then
                 if (_v.value == "true") then

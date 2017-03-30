@@ -1,15 +1,15 @@
 <!-- HScrollView 不支持用flex布局子节点 -->
-<HScrollView id="scroller" frame="0, 0, Sys.contW, Sys.contH/10" backgroundColor="0x004B97" contentSize="Sys.contW/4*12, Sys.contH/10" >
-    <Button id="button1" frame="0, 0, Sys.contW/4, Sys.contH/10" title="item1" backgroundColor="0xEB3131" titleColor="0xffffff"></Button>
-    <Button id="button2" frame="Sys.contW/4, 0, Sys.contW/4, Sys.contH/10" title="item2" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button3" frame="Sys.contW/4*2, 0, Sys.contW/4, Sys.contH/10" title="item3" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button4" frame="Sys.contW/4*3, 0, Sys.contW/4, Sys.contH/10" title="item4" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button5" frame="Sys.contW/4*4, 0, Sys.contW/4, Sys.contH/10" title="item5" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button6" frame="Sys.contW/4*5, 0, Sys.contW/4, Sys.contH/10" title="item6" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button7" frame="Sys.contW/4*6, 0, Sys.contW/4, Sys.contH/10" title="item7" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button8" frame="Sys.contW/4*7, 0, Sys.contW/4, Sys.contH/10" title="item8" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button9" frame="Sys.contW/4*8, 0, Sys.contW/4, Sys.contH/10" title="item9" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button10" frame="Sys.contW/4*9, 0, Sys.contW/4, Sys.contH/10" title="item10" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button11" frame="Sys.contW/4*10, 0, Sys.contW/4, Sys.contH/10" title="item11" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-    <Button id="button12" frame="Sys.contW/4*11, 0, Sys.contW/4, Sys.contH/10" title="item12" backgroundColor="0x004B97" titleColor="0xffffff"></Button>
-</HScrollView>
+<hscroll id="scroller" frame="0, 0, Sys.contW, Sys.contH/10" bg="0x004B97" contentSize="Sys.contW/4*12, Sys.contH/10" >
+    <btn id="button1" frame="0, 0, Sys.contW/4, Sys.contH/10" title="item1" bg="0xEB3131" titleColor="0xffffff"></btn>
+    <btn id="button2" frame="Sys.contW/4, 0, Sys.contW/4, Sys.contH/10" title="item2" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button3" frame="Sys.contW/4*2, 0, Sys.contW/4, Sys.contH/10" title="item3" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button4" frame="Sys.contW/4*3, 0, Sys.contW/4, Sys.contH/10" title="item4" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button5" frame="Sys.contW/4*4, 0, Sys.contW/4, Sys.contH/10" title="item5" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button6" frame="Sys.contW/4*5, 0, Sys.contW/4, Sys.contH/10" title="item6" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button7" frame="Sys.contW/4*6, 0, Sys.contW/4, Sys.contH/10" title="item7" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button8" frame="Sys.contW/4*7, 0, Sys.contW/4, Sys.contH/10" title="item8" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button9" frame="Sys.contW/4*8, 0, Sys.contW/4, Sys.contH/10" title="item9" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button10" frame="Sys.contW/4*9, 0, Sys.contW/4, Sys.contH/10" title="item10" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button11" frame="Sys.contW/4*10, 0, Sys.contW/4, Sys.contH/10" title="item11" bg="0x004B97" titleColor="0xffffff"></btn>
+    <btn id="button12" frame="Sys.contW/4*11, 0, Sys.contW/4, Sys.contH/10" title="item12" bg="0x004B97" titleColor="0xffffff"></btn>
+</hscroll>

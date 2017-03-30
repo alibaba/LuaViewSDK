@@ -1,20 +1,20 @@
-<View id="root" frame="0, 0, Sys.contW, Sys.contH" flexCss="{flex-direction='column'}" backgroundColor="0xeeeeee" >
-    <View flexCss="{height=Sys.contH/11}" backgroundColor="0x004B97">
-        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Local Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="{flex=1, justify-content='center', align-items='center'}">
-        <Image flexCss="{height=Sys.contW/4, width=Sys.contW/4}" image="luaview.png"></Image>
-    </View>
-    <View flexCss="{height=Sys.contH/11}" backgroundColor="0x004B97">
-        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Http Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="{flex=1, justify-content='center', align-items='center'}">
-        <Image flexCss="{height=Sys.contW/5, width=Sys.contW/5}" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></Image>
-    </View>
-    <View flexCss="{height=Sys.contH/11}" backgroundColor="0x004B97">
-        <Label flexCss="{flex=1, margin=10*Sys.scale}" text="Gif Image" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View flexCss="{flex=1, justify-content='center', align-items='center'}">
-        <Image flexCss="{height=Sys.contW/6, width=Sys.contW/6}" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></Image>
-    </View>
-</View>
+<v id="root" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column'}" bg="0xeeeeee" >
+    <v css="{height=Sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Local Image" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <v css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=Sys.contW/4, width=Sys.contW/4}" image="luaview.png"></img>
+    </v>
+    <v css="{height=Sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Http Image" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <v css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=Sys.contW/5, width=Sys.contW/5}" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></img>
+    </v>
+    <v css="{height=Sys.contH/11}" bg="0x004B97">
+        <l css="{flex=1, margin=10}" text="Gif Image" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <v css="{flex=1, justify-content='center', align-items='center'}">
+        <img css="{height=Sys.contW/6, width=Sys.contW/6}" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></img>
+    </v>
+</v>

@@ -1,6 +1,6 @@
-<View id="root" frame="0, 0, Sys.contW, Sys.contH" flexCss="{flex-direction='column'}" >
-    <View flexCss="{height=Sys.contH/10}" backgroundColor="0x004B97">
-        <Label id="headerText" flexCss="{flex=1, margin=10*Sys.scale}" text="Visible Items=" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <RefreshCollectionView id="tableView" flexCss="{flex=1}" backgroundColor="0xeeeeee" miniSpacing="1" showScrollIndicator="false"></RefreshCollectionView>
-</View>
+<v id="root" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column'}" >
+    <v css="{height=Sys.contH/10}" bg="0x004B97">
+        <l id="headerText" css="{flex=1, margin=10}" text="Visible Items=" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <pull id="tableView" css="{flex=1}" bg="0xeeeeee" space="1" showScrollIndicator="false"></pull>
+</v>

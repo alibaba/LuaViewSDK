@@ -1,17 +1,17 @@
-<View id="root" frame="0, 0, Sys.contW, Sys.contH" flexCss="{flex-direction='column'}" >
-    <View flexCss="{height=Sys.contH/10}" backgroundColor="0x004B97">
-        <Label id="headerText" flexCss="{flex=1, margin=10*Sys.scale}" text="Manual Play" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View id="container1" flexCss="{flex=1}">
-        <PagerView id="pagerView1" flexCss="{flex=1}" looping="true"></PagerView>
-        <PagerIndicator id="indicator1" flexCss="{position='absolute', left=5*Sys.scale, top=10*Sys.scale, width=Sys.contW/4, height=20*Sys.scale}" selectedColor="0x666666" unselectedColor="0xeeeeee"></PagerIndicator>
-    </View>
-    <View flexCss="{height=Sys.contH/10}" backgroundColor="0x004B97">
-        <Label id="headerText" flexCss="{flex=1, margin=10*Sys.scale}" text="Auto Play" fontSize="20" textColor="0xffffff"></Label>
-    </View>
-    <View id="container2" flexCss="{flex=1}">
-        <PagerView id="pagerView2" flexCss="{flex=1}" autoScroll="2" looping="true"></PagerView>
-        <PagerIndicator id="indicator2" flexCss="{height=20*Sys.scale}"  selectedColor="0x666666" unselectedColor="0xeeeeee"></PagerIndicator>
-    </View>
-</View>
+<v id="root" frame="0, 0, Sys.contW, Sys.contH" css="{flex-direction='column'}" >
+    <v css="{height=Sys.contH/10}" bg="0x004B97">
+        <l id="headerText" css="{flex=1, margin=10}" text="Manual Play" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <v id="container1" css="{flex=1}">
+        <page id="pagerView1" css="{flex=1}" looping="true"></page>
+        <ind id="indicator1" css="{position='absolute', left=5, top=10, width=Sys.contW/4, height=20}" selected="0x666666" unselected="0xeeeeee"></ind>
+    </v>
+    <v css="{height=Sys.contH/10}" bg="0x004B97">
+        <l id="headerText" css="{flex=1, margin=10}" text="Auto Play" fontSize="20" textColor="0xffffff"></l>
+    </v>
+    <v id="container2" css="{flex=1}">
+        <page id="pagerView2" css="{flex=1}" autoScroll="2" looping="true"></page>
+        <ind id="indicator2" css="{height=20}"  selected="0x666666" unselected="0xeeeeee"></ind>
+    </v>
+</v>
 
