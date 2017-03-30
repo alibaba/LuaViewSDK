@@ -29,7 +29,12 @@ public class CommonActivity extends AppCompatActivity {
                     setContentView(mLuaView);
                     mLuaView.register("Bridge", new MyBridge(CommonActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
-                    mLuaView.load(getLuaUri(), null, null);
+                    if (isPlainScript()) {
+                        mLuaView.loadScript(getLuaUri());
+                    } else {
+                        mLuaView.load(getLuaUri(), null, null);
+                    }
+
                 }
             }
         });
@@ -45,6 +50,13 @@ public class CommonActivity extends AppCompatActivity {
             return getIntent().getStringExtra(Constants.PARAM_URI);
         }
         return null;
+    }
+
+    private boolean isPlainScript() {
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            return getIntent().getExtras().getBoolean("isPlainScript");
+        }
+        return false;
     }
 
     @Override

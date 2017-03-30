@@ -2,6 +2,7 @@ package com.taobao.android.luaview.playground;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.taobao.luaview.global.Constants;
 
@@ -20,9 +21,12 @@ public class MyBridge {
         this.mActivity = activity;
     }
 
-    public void jumpTo(String pageUri) {
+    public void jump(String pageUri, boolean isPlainScript) {
         Intent intent = new Intent(mActivity, CommonActivity.class);
         intent.putExtra(Constants.PARAM_URI, pageUri);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isPlainScript", isPlainScript);
+        intent.putExtras(bundle);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
         mActivity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
