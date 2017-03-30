@@ -10,7 +10,7 @@ Navigation:title("Loading.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("widget/loading.xml")
     self.loading = self.views["loading"]
     self.loading:start()

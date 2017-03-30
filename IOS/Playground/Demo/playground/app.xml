@@ -1,7 +1,7 @@
 <div id="root" frame="0, 0, sys.contW, sys.contH">
     <div id="topContainer" frame="0, 0, sys.contW, sys.contH*0.9">
-        <list id="widgetTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee"></list>
-        <list id="sampleTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee" hide="true"></list>
+        <list id="widgetTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee" showScrollIndicator="false"></list>
+        <list id="sampleTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee" showScrollIndicator="false" hide="true"></list>
         <div id="aboutView" frame="0, 0, sys.contW, sys.contH*0.9" css="{flex-direction='column'}" bg="0xffffff" hide="true">
             <div css="{flex=1, justify-content='center', align-items='center', margin-left=10, margin-right=10}">
                 <img css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></img>

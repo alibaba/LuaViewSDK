@@ -10,7 +10,7 @@ Navigation:title("GitHub.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     if (sys.android) then
         self.views = pica:getInstance():render("sample/github_android.xml")
     else
