@@ -29,14 +29,13 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
+		AC11EE611E8D610500FF9F04 /* App.lua in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE5B1E8D610500FF9F04 /* App.lua */; };
+		AC11EE621E8D610500FF9F04 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE5C1E8D610500FF9F04 /* app.xml */; };
+		AC11EE631E8D610500FF9F04 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE5D1E8D610500FF9F04 /* demo.xml */; };
+		AC11EE641E8D610500FF9F04 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE5E1E8D610500FF9F04 /* kit */; };
+		AC11EE651E8D610500FF9F04 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE5F1E8D610500FF9F04 /* sample */; };
+		AC11EE661E8D610500FF9F04 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE601E8D610500FF9F04 /* widget */; };
 		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
-		ACDD57FE1E8D34F60069FBE0 /* App.lua in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57F71E8D34F60069FBE0 /* App.lua */; };
-		ACDD57FF1E8D34F60069FBE0 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57F81E8D34F60069FBE0 /* app.xml */; };
-		ACDD58001E8D34F60069FBE0 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57F91E8D34F60069FBE0 /* demo.xml */; };
-		ACDD58011E8D34F60069FBE0 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57FA1E8D34F60069FBE0 /* kit */; };
-		ACDD58021E8D34F60069FBE0 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57FB1E8D34F60069FBE0 /* main.lua */; };
-		ACDD58031E8D34F60069FBE0 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57FC1E8D34F60069FBE0 /* sample */; };
-		ACDD58041E8D34F60069FBE0 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = ACDD57FD1E8D34F60069FBE0 /* widget */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
 /* End PBXBuildFile section */
@@ -86,14 +85,13 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AC11EE5B1E8D610500FF9F04 /* App.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.lua; path = playground/App.lua; sourceTree = "<group>"; };
+		AC11EE5C1E8D610500FF9F04 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = app.xml; path = playground/app.xml; sourceTree = "<group>"; };
+		AC11EE5D1E8D610500FF9F04 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
+		AC11EE5E1E8D610500FF9F04 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
+		AC11EE5F1E8D610500FF9F04 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
+		AC11EE601E8D610500FF9F04 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
 		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
-		ACDD57F71E8D34F60069FBE0 /* App.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.lua; path = playground/App.lua; sourceTree = "<group>"; };
-		ACDD57F81E8D34F60069FBE0 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = app.xml; path = playground/app.xml; sourceTree = "<group>"; };
-		ACDD57F91E8D34F60069FBE0 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
-		ACDD57FA1E8D34F60069FBE0 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
-		ACDD57FB1E8D34F60069FBE0 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = playground/main.lua; sourceTree = "<group>"; };
-		ACDD57FC1E8D34F60069FBE0 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
-		ACDD57FD1E8D34F60069FBE0 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
 		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,13 +219,12 @@
 		DC839D3F1E791402005C346B /* playground */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD57F71E8D34F60069FBE0 /* App.lua */,
-				ACDD57F81E8D34F60069FBE0 /* app.xml */,
-				ACDD57F91E8D34F60069FBE0 /* demo.xml */,
-				ACDD57FA1E8D34F60069FBE0 /* kit */,
-				ACDD57FB1E8D34F60069FBE0 /* main.lua */,
-				ACDD57FC1E8D34F60069FBE0 /* sample */,
-				ACDD57FD1E8D34F60069FBE0 /* widget */,
+				AC11EE5B1E8D610500FF9F04 /* App.lua */,
+				AC11EE5C1E8D610500FF9F04 /* app.xml */,
+				AC11EE5D1E8D610500FF9F04 /* demo.xml */,
+				AC11EE5E1E8D610500FF9F04 /* kit */,
+				AC11EE5F1E8D610500FF9F04 /* sample */,
+				AC11EE601E8D610500FF9F04 /* widget */,
 				AC94B8F01E7FD296002838C4 /* luaview.png */,
 			);
 			name = playground;
@@ -331,22 +328,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACDD57FE1E8D34F60069FBE0 /* App.lua in Resources */,
+				AC11EE661E8D610500FF9F04 /* widget in Resources */,
+				AC11EE611E8D610500FF9F04 /* App.lua in Resources */,
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
-				ACDD58041E8D34F60069FBE0 /* widget in Resources */,
-				ACDD58001E8D34F60069FBE0 /* demo.xml in Resources */,
+				AC11EE631E8D610500FF9F04 /* demo.xml in Resources */,
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
 				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
-				ACDD58031E8D34F60069FBE0 /* sample in Resources */,
-				ACDD57FF1E8D34F60069FBE0 /* app.xml in Resources */,
+				AC11EE621E8D610500FF9F04 /* app.xml in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
+				AC11EE651E8D610500FF9F04 /* sample in Resources */,
 				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
-				ACDD58011E8D34F60069FBE0 /* kit in Resources */,
-				ACDD58021E8D34F60069FBE0 /* main.lua in Resources */,
+				AC11EE641E8D610500FF9F04 /* kit in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
 			);
