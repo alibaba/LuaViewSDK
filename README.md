@@ -1,19 +1,87 @@
+# Welcome to LuaViewSDK
+
+LuaViewSDK is a cross-platform framework which is designed to build native, dynamic and swift user interfaces. It's based on Lua VM and chooses lua as it's script language.
+
+## Why Lua
+
+* Lua is a efficient and swift language. A single Lua VM costs 200k to 300k memorys only in iOS
+* Lua is widly used and it's easy to bind to third party frameworks
+* LuaView API is nature to native mobile developers, you guys don't have to understand what React.js or Vue.js or DOM is.
+
+## Demos
+
+* Complex LuaViewSDK-rendered native pages
+
+  <img src='https://gw.alicdn.com/tfs/TB1RzmbQpXXXXXAapXXXXXXXXXX-1198-931.png'/>
+
+* Simple games
+
+  ![](https://gw.alicdn.com/tfs/TB1rKx2QpXXXXbVapXXXXXXXXXX-340-603.gif)
+
+## Try Playground App
+
+- iOS download (coming soon)
+
+- Android download
+
+  ![img](https://alibaba.github.io/LuaViewSDK/guide/doc/playground_android.png)
+
+## How to use LuaViewSDK
+
+- [User Guide](https://alibaba.github.io/LuaViewSDK/guide.html)
+- [API manual](https://alibaba.github.io/LuaViewSDK/apimenu.html)
+
+## Developers
+
+- [Xicheng Dong](xicheng.dxc@alibaba-inc.com)
+- [Songtao Chen](songtao.cst@alibaba-inc.com)
+
+## License
+
+[MIT](https://github.com/alibaba/LuaViewSDK/blob/master/LICENSE.txt)
+
+## Communities
+
+[Github Wiki](https://github.com/alibaba/LuaViewSDK/wiki)
+
+QQ group：539262083
+
+Twitter：[@luaview](https://twitter.com/luaview)
+
+## Who we are
+
+We are from Tmall tech team. LuaViewSDK has been widely used in Taobao app, Tmall app and Juhuasuan App nearly two years. And DAU of pages that are developed by LuaViewSDK is over 10 million.  
+
+---
+
 # 欢迎来到LuaViewSDK
 
 LuaViewSDK是一个跨iOS和Android平台的界面动态化解决方案，使用同一套Lua脚本在iOS和Android平台构建原生页面，同时兼具了H5的灵活性和Native的高性能
 
-## 为什么选择Lua
+## 为什么选择Lua？
 
-为了解决类似的问题，市面上有许多类似的方案，比如React Native和Weex，他们使用了JS框架，配合DSL来进行界面布局，使用JS引擎进行脚本动态解析，实现了动态化的Native界面渲染能力。LuaViewSDK使用lua虚拟机进行脚本解析，通过构建lua与native之间的一系列基础bridge功能，从另一个角度实现了动态化的native能力。相比于基于JS虚拟机的解决方案，LuaViewSDK有如下特性：
+- Lua是一个高效灵活的语言，在iOS上单个Lua虚拟机仅占用200k到300k
+- Lua已经被广泛应用于对于性能要求和灵活性要求都非常高的场合，比如游戏
+- Lua可以非常方便的绑定各类底层库
+- Lua的API对于native开发人员来说非常自然，不用再去理解各类前端开发概念
 
-- lua虚拟机极为轻量高效。单个lua虚拟机只消耗大约200到300k的内存空间，同屏渲染几十个LuaView没有任何负担
-- Lua天生就是作为一个极其轻量、可嵌入的设计实现，它更适合做API的封装或是数据传输的中间层。在App的开发上，更适合作为胶水语言，来直接操作native对象
-- 使用App开发人员更为熟悉的Native编程模式，直接创建和操作各种界面对象
-- 轻松桥接native组件，只需要一行代码即可实现在LuaView脚本中操作用户自定义的native功能
+## Demo
+
+* LuaViewSDK渲染的Native的复杂业务页面
+
+  <img src='https://gw.alicdn.com/tfs/TB1RzmbQpXXXXXAapXXXXXXXXXX-1198-931.png'/>
+
+* 小游戏
+
+  ![](https://gw.alicdn.com/tfs/TB1rKx2QpXXXXbVapXXXXXXXXXX-340-603.gif)
 
 ## 试用Playground App
 
-LuaViewSDK Playground App下载地址 [Download](https://alibaba.github.io/LuaViewSDK/download.html)
+- iOS download (coming soon)
+
+- Android download
+
+  ![img](https://alibaba.github.io/LuaViewSDK/guide/doc/playground_android.png)
 
 ## 如何使用LuaViewSDK
 
