@@ -1,20 +1,20 @@
-package com.taobao.luaview.activity;
+package com.taobao.android.luaview.common.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.taobao.luaview.bridge.LVBasicBridge;
-import com.taobao.luaview.global.Constants;
+import com.taobao.android.luaview.common.bridge.LuaViewBasicBridge;
+import com.taobao.android.luaview.common.interfaces.ILuaViewMainEntry;
 import com.taobao.luaview.global.LuaView;
 
 /**
  * Copyright 2017 Alibaba Group
  * License: MIT
  * https://alibaba.github.io/LuaViewSDK
- * Created by tuoli on 17/3/27.
+ * Created by tuoli on 17/3/31.
  */
 
-public class LVBasicActivity extends AppCompatActivity implements ILuaViewEntry {
+public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewMainEntry {
 
     protected LuaView mLuaView;
 
@@ -33,7 +33,7 @@ public class LVBasicActivity extends AppCompatActivity implements ILuaViewEntry 
                 mLuaView = luaView;
                 if (mLuaView != null) {
                     setContentView(mLuaView);
-                    mLuaView.register("Bridge", new LVBasicBridge(LVBasicActivity.this));
+                    mLuaView.register("Bridge", new LuaViewBasicBridge(LuaViewBasicActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
                     mLuaView.load(getLuaViewEntry(), null, null);
                 }

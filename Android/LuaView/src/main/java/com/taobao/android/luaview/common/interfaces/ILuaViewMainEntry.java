@@ -1,4 +1,4 @@
-package com.taobao.luaview.activity;
+package com.taobao.android.luaview.common.interfaces;
 
 /**
  * Copyright 2017 Alibaba Group
@@ -7,6 +7,6 @@ package com.taobao.luaview.activity;
  * Created by tuoli on 17/3/31.
  */
 
-public interface ILuaViewEntry {
+public interface ILuaViewMainEntry {
     String getLuaViewEntry();
 }
