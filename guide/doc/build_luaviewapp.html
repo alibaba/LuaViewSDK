@@ -1,0 +1,572 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>构建你的第一个LuaView App · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="changelog.html" />
+    
+    
+    <link rel="prev" href="nativebridge.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    LuaViewSDK概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="downloads.html">
+            
+                <a href="downloads.html">
+            
+                    
+                    相关下载说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="userguide_ios.html">
+            
+                <a href="userguide_ios.html">
+            
+                    
+                    SDK使用说明 - iOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="userguide_android.html">
+            
+                <a href="userguide_android.html">
+            
+                    
+                    SDK使用说明 - Android
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="nativebridge.html">
+            
+                <a href="nativebridge.html">
+            
+                    
+                    桥接自定义native功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="build_luaviewapp.html">
+            
+                <a href="build_luaviewapp.html">
+            
+                    
+                    构建你的第一个LuaView App
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Change log
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >构建你的第一个LuaView App</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6784;&#x5EFA;&#x4F60;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;luaview&#x5E94;&#x7528;">&#x6784;&#x5EFA;&#x4F60;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;LuaView&#x5E94;&#x7528;</h1>
+<h2 id="1-&#x4ECE;github&#x514B;&#x9686;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;luaviewsdk&#x5230;&#x672C;&#x5730;&#x3002;">1 &#x4ECE;GitHub&#x514B;&#x9686;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;LuaViewSDK&#x5230;&#x672C;&#x5730;&#x3002;</h2>
+<ul>
+<li>github&#x7F51;&#x5740;: <a href="https://github.com/alibaba/LuaViewSDK" target="_blank">https://github.com/alibaba/LuaViewSDK</a></li>
+<li>https&#x65B9;&#x5F0F;&#xFF1A;git clone <a href="https://github.com/alibaba/LuaViewSDK.git" target="_blank">https://github.com/alibaba/LuaViewSDK.git</a></li>
+<li>ssh&#x65B9;&#x5F0F;&#xFF1A;git clone git@github.com:alibaba/LuaViewSDK.git</li>
+</ul>
+<h2 id="2-android&#x5DE5;&#x7A0B;&#x642D;&#x5EFA;">2 Android&#x5DE5;&#x7A0B;&#x642D;&#x5EFA;</h2>
+<h3 id="21-&#x6253;&#x5F00;android-studio&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;android&#x5DE5;&#x7A0B;">2.1 &#x6253;&#x5F00;Android Studio&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Android&#x5DE5;&#x7A0B;</h3>
+<h3 id="22-&#x5728;&#x5DE5;&#x7A0B;&#x91CC;&#x6DFB;&#x52A0;luaview&#x7684;&#x4F9D;&#x8D56;">2.2 &#x5728;&#x5DE5;&#x7A0B;&#x91CC;&#x6DFB;&#x52A0;LuaView&#x7684;&#x4F9D;&#x8D56;</h3>
+<p>&#xFF08;1&#xFF09;&#x901A;&#x8FC7; File -&gt; New -&gt; Import Module&#xFF0C;&#x9009;&#x62E9;&#x514B;&#x9686;&#x5230;&#x672C;&#x5730;&#x7684;LuaViewSDK&#x76EE;&#x5F55;&#x4E0B;&#x7684;Android/LuaView&#x5B50;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#xFF08;2&#xFF09;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x7684;build.gradle&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;LuaView&#x7684;&#x4F9D;&#x8D56;</p>
+<pre class="language-"><code>dependencies {
+    .....
+    compile project(&apos;:LuaView&apos;)
+}
+</code></pre><h3 id="23-&#x7EE7;&#x627F;&#x81EA;luaviewbasicactivity">2.3 &#x7EE7;&#x627F;&#x81EA;LuaViewBasicActivity</h3>
+<p>&#x628A;&#x5E94;&#x7528;&#x7684;Launch Activity&#x6539;&#x6210;&#x7EE7;&#x627F;&#x81EA;LuaViewBasicActivity&#x3002;&#x9ED8;&#x8BA4;Lua&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x7684;&#x4E3B;&#x5165;&#x53E3;&#x662F;LuaView&#x5305;&#x91CC;&#x7684;assets/kit/main.lua&#xFF0C;&#x9ED8;&#x8BA4;&#x5165;&#x53E3;&#x4E3B;&#x9875;&#x9762;&#x662F;App.lua&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x66F4;&#x6539;&#x8FD9;&#x4E24;&#x4E2A;&#x8BBE;&#x7F6E;&#x3002;</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyActivity</span> <span class="token keyword">extends</span> <span class="token class-name">LuaViewBasicActivity</span> <span class="token punctuation">{</span>
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment" spellcheck="true">/**
+      * &#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x66F4;&#x6539;&#x5165;&#x53E3;&#x4E3B;&#x9875;&#x9762;, &#x9ED8;&#x8BA4;&#x662F;App.lua
+      * @return
+      */</span>
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">public</span> String <span class="token function">getMainPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token string">&quot;App&quot;</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment" spellcheck="true">/**
+      * &#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x66F4;&#x6539;Lua&#x4EE3;&#x7801;&#x7684;&#x4E3B;&#x5165;&#x53E3;
+      * &#x9ED8;&#x8BA4;&#x4F7F;&#x7528;kit&#x5305;&#x4E0B;&#x7684;main.lua
+      * &#x8BE5;&#x5305;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x5957;&#x754C;&#x9762;&#x63CF;&#x8FF0;&#x548C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5206;&#x79BB;&#x7684;&#x673A;&#x5236;
+      * @return
+      */</span>
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">public</span> String <span class="token function">getLuaViewEntry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token string">&quot;kit/main.lua&quot;</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="3-ios&#x5DE5;&#x7A0B;&#x642D;&#x5EFA;">3 iOS&#x5DE5;&#x7A0B;&#x642D;&#x5EFA;</h2>
+<h3 id="31-&#x6253;&#x5F00;xcode&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;ios&#x5DE5;&#x7A0B;">3.1 &#x6253;&#x5F00;Xcode&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;iOS&#x5DE5;&#x7A0B;</h3>
+<h3 id="32-&#x5728;&#x5DE5;&#x7A0B;&#x91CC;&#x6DFB;&#x52A0;&#x76F8;&#x5173;&#x4F9D;&#x8D56;">3.2 &#x5728;&#x5DE5;&#x7A0B;&#x91CC;&#x6DFB;&#x52A0;&#x76F8;&#x5173;&#x4F9D;&#x8D56;</h3>
+<p>&#x65B0;&#x5EFA;podfile&#x6587;&#x4EF6;
+&#x5728;podfile&#x6587;&#x4EF6;&#x91CC;&#x9762;&#x6DFB;&#x52A0;</p>
+<pre class="language-"><code class="lang-objectivec">    pod <span class="token string">&apos;LuaViewSDK&apos;</span>
+</code></pre>
+<p>&#x6267;&#x884C; <code>pod install</code></p>
+<h3 id="33-&#x6DFB;&#x52A0;&#x76F8;&#x5173;&#x4F9D;&#x8D56;&#x4EE3;&#x7801;">3.3 &#x6DFB;&#x52A0;&#x76F8;&#x5173;&#x4F9D;&#x8D56;&#x4EE3;&#x7801;</h3>
+<p>&#x65B0;&#x5EFA;XXLuaViewController &#x4F5C;&#x4E3A;&#x5BB9;&#x5668;</p>
+<pre class="language-"><code class="lang-objectivec"><span class="token macro property">#<span class="token directive keyword">import</span> &lt;UIKit/UIKit.h&gt;</span>
+<span class="token macro property">#<span class="token directive keyword">import</span> &quot;LViewController.h&quot;</span>
+
+<span class="token keyword">@interface</span> MyLuaViewController <span class="token punctuation">:</span> LViewController
+
+<span class="token keyword">@end</span>
+</code></pre>
+<p>&#x5728;AppDelegate&#x4E2D;&#x8BBE;MyLuaViewController &#x4E3A;rootViewController,&#x540C;&#x65F6;&#x8F7D;&#x5165;&#x9996;&#x9875;&#x811A;&#x672C;</p>
+<pre class="language-"><code class="lang-objectivec"><span class="token keyword">@implementation</span> AppDelegate
+
+<span class="token operator">-</span> <span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span>application<span class="token punctuation">:</span><span class="token punctuation">(</span>UIApplication <span class="token operator">*</span><span class="token punctuation">)</span>application didFinishLaunchingWithOptions<span class="token punctuation">:</span><span class="token punctuation">(</span>NSDictionary <span class="token operator">*</span><span class="token punctuation">)</span>launchOptions <span class="token punctuation">{</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>window <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>UIWindow alloc<span class="token punctuation">]</span> initWithFrame<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">[</span>UIScreen mainScreen<span class="token punctuation">]</span> bounds<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>window<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">[</span>UIColor whiteColor<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    MyLuaViewController<span class="token operator">*</span> controller <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>MyLuaViewController alloc<span class="token punctuation">]</span> initWithPackage<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">[</span>NSBundle mainBundle<span class="token punctuation">]</span> resourcePath<span class="token punctuation">]</span> mainScript<span class="token punctuation">:</span><span class="token string">@&quot;kit/main.lua&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    NSString<span class="token operator">*</span> entry <span class="token operator">=</span> <span class="token string">@&quot;Playground&quot;</span><span class="token punctuation">;</span>
+    controller<span class="token punctuation">.</span>args <span class="token operator">=</span> <span class="token punctuation">(</span>NSDictionary<span class="token operator">*</span><span class="token punctuation">)</span>entry<span class="token punctuation">;</span>
+
+    <span class="token keyword">self</span><span class="token punctuation">.</span>window<span class="token punctuation">.</span>rootViewController <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>UINavigationController alloc<span class="token punctuation">]</span>
+                                  initWithRootViewController<span class="token punctuation">:</span>controller<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>window makeKeyAndVisible<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> YES<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6DFB;&#x52A0;&#x9875;&#x9762;&#x8DF3;&#x8F6C;&#x7684;Bridge&#x63A5;&#x53E3;</p>
+<pre class="language-"><code class="lang-objectivec"><span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>didCreateLuaView<span class="token punctuation">:</span><span class="token punctuation">(</span>LView <span class="token operator">*</span><span class="token punctuation">)</span>view <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token keyword">super</span> didCreateLuaView<span class="token punctuation">:</span>view<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>lv<span class="token punctuation">[</span><span class="token string">@&quot;Bridge&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">self</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>require<span class="token punctuation">:</span><span class="token punctuation">(</span>NSDictionary<span class="token operator">*</span><span class="token punctuation">)</span>args <span class="token punctuation">{</span>
+    JHSLuaViewController<span class="token operator">*</span> c <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>JHSLuaViewController alloc<span class="token punctuation">]</span> initWithPackage<span class="token punctuation">:</span>nil mainScript<span class="token punctuation">:</span><span class="token string">@&quot;kit/main.lua&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    c<span class="token punctuation">.</span>args <span class="token operator">=</span> args<span class="token punctuation">;</span>
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>navigationController pushViewController<span class="token punctuation">:</span>c animated<span class="token punctuation">:</span>YES<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="4-lua&#x4E1A;&#x52A1;&#x4EE3;&#x7801;">4 Lua&#x4E1A;&#x52A1;&#x4EE3;&#x7801;</h2>
+<h3 id="41-&#x5173;&#x4E8E;lua&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x7684;&#x4E3B;&#x5165;&#x53E3;kitmainlua">4.1 &#x5173;&#x4E8E;Lua&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x7684;&#x4E3B;&#x5165;&#x53E3;kit/main.lua</h3>
+<p>kit&#x5305;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x57FA;&#x4E8E;XML&#x7684;&#x5E03;&#x5C40;&#x673A;&#x5236;&#xFF0C;&#x5206;&#x79BB;&#x51FA;&#x754C;&#x9762;&#x63CF;&#x8FF0;&#x548C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x4F7F;&#x5F97;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x5199;&#x5F97;&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x3002;&#x5176;&#x4E2D;&#xFF0C;pica.lua&#x662F;&#x4E00;&#x4E2A;&#x8D1F;&#x8D23;&#x89E3;&#x6790;XML&#x6807;&#x7B7E;&#x3001;&#x521B;&#x5EFA;&#x63A7;&#x4EF6;&#x5BF9;&#x8C61;&#x3001;&#x8BBE;&#x7F6E;&#x63A7;&#x4EF6;&#x5C5E;&#x6027;&#xFF0C;&#x4EE5;&#x53CA;&#x6700;&#x7EC8;&#x5E03;&#x5C40;&#x548C;&#x6E32;&#x67D3;&#x89C6;&#x56FE;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x3002;&#x6BCF;&#x4E2A;&#x865A;&#x62DF;&#x673A;&#x4EC5;&#x9700;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;</p>
+<h3 id="42-&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x9875;&#x9762;">4.2 &#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x9875;&#x9762;</h3>
+<p>&#x5728;&#x5DE5;&#x7A0B;&#x7684;assets&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;App.lua&#x6587;&#x4EF6;&#xFF0C;Lua&#x9875;&#x9762;&#x7684;&#x5199;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-lua"><span class="token keyword">local</span> meta <span class="token operator">=</span> object<span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> meta<span class="token punctuation">:</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views <span class="token operator">=</span> pica<span class="token punctuation">:</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">&quot;app.xml&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">return</span> meta
+</code></pre>
+<p>onCreate()&#x65B9;&#x6CD5;&#x4F1A;&#x5728;&#x9875;&#x9762;&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#x88AB;&#x8C03;&#x7528;&#x3002;<code>pica:getInstance():render(&quot;app.xml&quot;)</code>&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;XML&#x6587;&#x4EF6;&#x4E2D;&#x6240;&#x6709;&#x5E26;&#x6709;id&#x7684;UI&#x5BF9;&#x8C61;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x4EE5;&#x5B57;&#x5178;&#x7684;&#x65B9;&#x5F0F;&#x53D6;&#x5F97;&#x81EA;&#x5DF1;&#x6240;&#x5173;&#x6CE8;&#x7684;&#x5BF9;&#x8C61;&#x7528;&#x4E8E;&#x64CD;&#x4F5C;&#x89C6;&#x56FE;&#x3002;</p>
+<h3 id="43-&#x5B9E;&#x73B0;appxml&#x5E03;&#x5C40;&#x6587;&#x4EF6;">4.3 &#x5B9E;&#x73B0;app.xml&#x5E03;&#x5C40;&#x6587;&#x4EF6;</h3>
+<p>&#x540C;&#x6837;&#x5730;&#x5728;assets&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;app.xml&#x6587;&#x4EF6;&#xFF0C;XML&#x6587;&#x4EF6;&#x7684;&#x5199;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span> <span class="token attr-name">frame</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0, 0, sys.contW, sys.contH<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{justify-content<span class="token punctuation">=</span><span class="token punctuation">&apos;</span>center<span class="token punctuation">&apos;</span>, align-items<span class="token punctuation">=</span><span class="token punctuation">&apos;</span>center<span class="token punctuation">&apos;</span>}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{width<span class="token punctuation">=</span>sys.contW/2, height<span class="token punctuation">=</span>sys.contW/8}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>Hello World<span class="token punctuation">&quot;</span></span> <span class="token attr-name">fontSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>18<span class="token punctuation">&quot;</span></span> <span class="token attr-name">textAlign</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>TextAlign.CENTER<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>&#x5728;XML&#x4E2D;&#xFF0C;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x5E03;&#x5C40;&#x65B9;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x662F;frame&#x5E03;&#x5C40;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7EDD;&#x5BF9;&#x5E03;&#x5C40;&#x3002;&#x53E6;&#x4E00;&#x79CD;&#x662F;flex&#x5E03;&#x5C40;&#xFF0C;&#x4F7F;&#x7528;Facebook&#x7684;csslayout&#x5E03;&#x5C40;&#x3002;&#x5230;&#x6B64;&#x4E3A;&#x6B62;&#xFF0C;&#x8FD0;&#x884C;&#x5DE5;&#x7A0B;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;LuaView&#x7684;Hello World&#x4E86;&#x3002;</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1_8mWQpXXXXa9aXXXXXXXXXXX-738-1306.png =369x653" alt="Hello World"></p>
+<h2 id="5-&#x5217;&#x8868;&#x793A;&#x4F8B;">5 &#x5217;&#x8868;&#x793A;&#x4F8B;</h2>
+<p>&#x5B8C;&#x6210;&#x4E86;LuaView&#x7684;Hello World&#x793A;&#x4F8B;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x6765;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x5C55;&#x793A;&#x5982;&#x4F55;&#x5728;LuaView&#x4E2D;&#x4F7F;&#x7528;&#x5217;&#x8868;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4F1A;&#x4ECE;&#x8C46;&#x74E3;&#x7684;&#x5F00;&#x653E;API&#x83B7;&#x53D6;&#x6B63;&#x5728;&#x70ED;&#x6620;&#x7684;20&#x90E8;&#x7535;&#x5F71;&#xFF0C;&#x5E76;&#x5728;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x4E2D;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x53EA;&#x5C55;&#x73B0;&#x4E00;&#x90E8;&#x7535;&#x5F71;&#x7684;&#x7F29;&#x7565;&#x56FE;&#x3001;&#x7247;&#x540D;&#x3001;&#x6F14;&#x804C;&#x5458;&#x4FE1;&#x606F;&#x4EE5;&#x53CA;&#x8BC4;&#x5206;&#x548C;&#x770B;&#x8FC7;&#x7684;&#x4EBA;&#x6570;&#x3002;&#x4FEE;&#x6539;app.xml&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>root<span class="token punctuation">&quot;</span></span> <span class="token attr-name">frame</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>10, 5, sys.contW-20, sys.contH/3-10<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex-direction<span class="token punctuation">=</span><span class="token punctuation">&apos;</span>row<span class="token punctuation">&apos;</span>}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">bg</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0xffffff<span class="token punctuation">&quot;</span></span> <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>left.pannel<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex-direction<span class="token punctuation">=</span><span class="token punctuation">&apos;</span>column<span class="token punctuation">&apos;</span>, flex<span class="token punctuation">=</span>2}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Image</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>profile<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex<span class="token punctuation">=</span>1, margin<span class="token punctuation">=</span>15}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Image</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>right.pannel<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex-direction<span class="token punctuation">=</span><span class="token punctuation">&apos;</span>column<span class="token punctuation">&apos;</span>, flex<span class="token punctuation">=</span>3}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>movieName<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex<span class="token punctuation">=</span>1, margin-top<span class="token punctuation">=</span>15}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">fontSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>18<span class="token punctuation">&quot;</span></span> <span class="token attr-name">textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0x000000<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>score<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{height<span class="token punctuation">=</span>20}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0xe61414<span class="token punctuation">&quot;</span></span> <span class="token attr-name">fontSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>14<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>character<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex<span class="token punctuation">=</span>2}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">lineCount</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>3<span class="token punctuation">&quot;</span></span> <span class="token attr-name">textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0x666666<span class="token punctuation">&quot;</span></span> <span class="token attr-name">fontSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>16<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>number<span class="token punctuation">&quot;</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{flex<span class="token punctuation">=</span>1, margin-bottom<span class="token punctuation">=</span>10}<span class="token punctuation">&quot;</span></span> <span class="token attr-name">textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0xe61414<span class="token punctuation">&quot;</span></span> <span class="token attr-name">fontSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>14<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;mock&#x6570;&#x636E;&#x6765;&#x586B;&#x5145;&#x89C6;&#x56FE;&#xFF0C;&#x5728;App.lua&#x4E2D;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-lua"><span class="token keyword">local</span> meta <span class="token operator">=</span> object<span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> meta<span class="token punctuation">:</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views <span class="token operator">=</span> pica<span class="token punctuation">:</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">&quot;app.xml&quot;</span><span class="token punctuation">)</span>
+
+    self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;profile&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">backgroundColor</span><span class="token punctuation">(</span><span class="token number">0x666666</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;movieName&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7535;&#x5F71;&#x540D;&#x79F0;&quot;</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;score&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8BC4;&#x5206;: 8&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">local</span> director <span class="token operator">=</span> <span class="token string">&quot;&#x5BFC;&#x6F14;: &#x67D0;&#x67D0;&#x67D0;&quot;</span>
+    <span class="token keyword">local</span> actors <span class="token operator">=</span> <span class="token string">&quot;&#x4E3B;&#x6F14;: &#x67D0;&#x67D0;A/&#x67D0;&#x67D0;B&quot;</span>
+    self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;character&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>director <span class="token operator">..</span> <span class="token string">&quot;\n&quot;</span> <span class="token operator">..</span> actors<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;number&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">&quot;1900&#x4EBA;&#x770B;&#x8FC7;&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">return</span> meta
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x6839;&#x636E;app.xml&#x4E2D;&#x7684;id&#x53EF;&#x4EE5;&#x53D6;&#x51FA;&#x5173;&#x6CE8;&#x7684;&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;&#x3002;&#x518D;&#x6B21;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5C4F;&#x5E55;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#x3002;</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1i7fnQpXXXXXkXFXXXXXXXXXX-734-1300.png =369x653" alt="Item"></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4ECE;&#x8C46;&#x74E3;&#x7684;&#x5F00;&#x653E;API&#x6293;&#x53D6;&#x771F;&#x5B9E;&#x7684;&#x6570;&#x636E;&#x7528;&#x6765;&#x5C55;&#x793A;&#xFF1A;</p>
+<pre class="language-"><code class="lang-lua"><span class="token keyword">local</span> meta <span class="token operator">=</span> object<span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> meta<span class="token punctuation">:</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views <span class="token operator">=</span> pica<span class="token punctuation">:</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">&quot;app.xml&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token function">Http</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tostring</span><span class="token punctuation">(</span>response<span class="token punctuation">:</span><span class="token function">code</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;200&quot;</span><span class="token punctuation">)</span> <span class="token keyword">then</span>
+            <span class="token keyword">local</span> _jsonData <span class="token operator">=</span> Json<span class="token punctuation">:</span><span class="token function">toTable</span><span class="token punctuation">(</span><span class="token function">tostring</span><span class="token punctuation">(</span>response<span class="token punctuation">:</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;profile&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">image</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;images&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;large&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;movieName&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;title&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;score&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8BC4;&#x5206;: &quot;</span> <span class="token operator">..</span> _jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;rating&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;average&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">local</span> director <span class="token operator">=</span> <span class="token string">&quot;&#x5BFC;&#x6F14;: &quot;</span> <span class="token operator">..</span> _jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;directors&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span>
+            <span class="token keyword">local</span> actors <span class="token operator">=</span> <span class="token string">&quot;&#x4E3B;&#x6F14;: &quot;</span>
+            <span class="token keyword">for</span> _k<span class="token punctuation">,</span> _v <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;casts&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+                actors <span class="token operator">=</span> actors <span class="token operator">..</span> _v<span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span> <span class="token operator">..</span> <span class="token string">&quot;/&quot;</span>
+            <span class="token keyword">end</span>
+            self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;character&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>director <span class="token operator">..</span> <span class="token string">&quot;\n&quot;</span> <span class="token operator">..</span> actors<span class="token punctuation">)</span>
+
+            self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;number&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;collect_count&quot;</span><span class="token punctuation">]</span> <span class="token operator">..</span> <span class="token string">&quot;&#x4EBA;&#x770B;&#x8FC7;&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span>
+            <span class="token function">Toast</span><span class="token punctuation">(</span><span class="token string">&quot;Request Error&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">return</span> meta
+</code></pre>
+<p>&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#xFF0C;&#x53EA;&#x662F;&#x5C55;&#x793A;&#x4E00;&#x90E8;&#x7535;&#x5F71;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4E3A;&#x4E86;&#x6E32;&#x67D3;&#x66F4;&#x591A;&#x7684;&#x6761;&#x76EE;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;List&#x7EC4;&#x4EF6;&#x3002;&#x53E6;&#x5916;&#x7531;&#x4E8E;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x7684;&#x4E0D;&#x7A33;&#x5B9A;&#x6027;&#x548C;&#x8017;&#x65F6;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;Load&#x52A0;&#x8F7D;&#x7EC4;&#x4EF6;&#x3002;&#x5728;assets&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x589E;&#x4E00;&#x4E2A;list.xml&#x6587;&#x4EF6;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>root<span class="token punctuation">&quot;</span></span> <span class="token attr-name">frame</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0, 0, sys.contW, sys.contH<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>List</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>tableView<span class="token punctuation">&quot;</span></span> <span class="token attr-name">frame</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0, 0, sys.contW, sys.contH<span class="token punctuation">&quot;</span></span> <span class="token attr-name">bg</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0xeeeeee<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>List</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Load</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0xF06292<span class="token punctuation">&quot;</span></span> <span class="token attr-name">frame</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Load</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>&#x76F8;&#x5E94;&#x5730;&#xFF0C;App.lua&#x4E5F;&#x8981;&#x505A;&#x51FA;&#x66F4;&#x6539;&#xFF1A;</p>
+<pre class="language-"><code class="lang-lua"><span class="token keyword">local</span> meta <span class="token operator">=</span> object<span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> meta<span class="token punctuation">:</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>views <span class="token operator">=</span> pica<span class="token punctuation">:</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">&quot;list.xml&quot;</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>loading <span class="token operator">=</span> self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;loading&quot;</span><span class="token punctuation">]</span>
+    self<span class="token punctuation">.</span>list <span class="token operator">=</span> self<span class="token punctuation">.</span>views<span class="token punctuation">[</span><span class="token string">&quot;tableView&quot;</span><span class="token punctuation">]</span>
+
+    self<span class="token punctuation">:</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">function</span> meta<span class="token punctuation">:</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>loading<span class="token punctuation">:</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">Http</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>loading<span class="token punctuation">:</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tostring</span><span class="token punctuation">(</span>response<span class="token punctuation">:</span><span class="token function">code</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;200&quot;</span><span class="token punctuation">)</span> <span class="token keyword">then</span>
+            <span class="token keyword">local</span> _jsonData <span class="token operator">=</span> Json<span class="token punctuation">:</span><span class="token function">toTable</span><span class="token punctuation">(</span><span class="token function">tostring</span><span class="token punctuation">(</span>response<span class="token punctuation">:</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>list<span class="token punctuation">:</span><span class="token function">initParams</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                Section <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    SectionCount <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span> <span class="token number">1</span>
+                    <span class="token keyword">end</span><span class="token punctuation">,</span>
+                    RowCount <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>section<span class="token punctuation">)</span>
+                        <span class="token keyword">return</span> _jsonData<span class="token punctuation">[</span><span class="token string">&quot;count&quot;</span><span class="token punctuation">]</span>
+                    <span class="token keyword">end</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                Cell <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    Id <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>section<span class="token punctuation">,</span> row<span class="token punctuation">)</span>
+                        <span class="token keyword">return</span> <span class="token string">&quot;ItemCell&quot;</span>
+                    <span class="token keyword">end</span><span class="token punctuation">,</span>
+                    ItemCell <span class="token operator">=</span> <span class="token punctuation">{</span>
+                        Size <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>section<span class="token punctuation">,</span> row<span class="token punctuation">)</span>
+                            <span class="token keyword">return</span> sys<span class="token punctuation">.</span>contW<span class="token punctuation">,</span> sys<span class="token punctuation">.</span>contH<span class="token operator">/</span><span class="token number">3</span>
+                        <span class="token keyword">end</span><span class="token punctuation">,</span>
+                        Init <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>cell<span class="token punctuation">,</span> section<span class="token punctuation">,</span> row<span class="token punctuation">)</span>
+                            cell<span class="token punctuation">.</span>objs <span class="token operator">=</span> pica<span class="token punctuation">:</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">&quot;app.xml&quot;</span><span class="token punctuation">)</span>
+                        <span class="token keyword">end</span><span class="token punctuation">,</span>
+                        Layout <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>cell<span class="token punctuation">,</span> section<span class="token punctuation">,</span> row<span class="token punctuation">)</span>
+                            cell<span class="token punctuation">.</span>objs<span class="token punctuation">[</span><span class="token string">&quot;profile&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">image</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;images&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;large&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                            cell<span class="token punctuation">.</span>objs<span class="token punctuation">[</span><span class="token string">&quot;movieName&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;title&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                            cell<span class="token punctuation">.</span>objs<span class="token punctuation">[</span><span class="token string">&quot;score&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8BC4;&#x5206;: &quot;</span> <span class="token operator">..</span> _jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;rating&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;average&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+                            <span class="token keyword">local</span> director <span class="token operator">=</span> <span class="token string">&quot;&#x5BFC;&#x6F14;: &quot;</span> <span class="token operator">..</span> _jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;directors&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span>
+                            <span class="token keyword">local</span> actors <span class="token operator">=</span> <span class="token string">&quot;&#x4E3B;&#x6F14;: &quot;</span>
+                            <span class="token keyword">for</span> _k<span class="token punctuation">,</span> _v <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;casts&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+                                actors <span class="token operator">=</span> actors <span class="token operator">..</span> _v<span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span> <span class="token operator">..</span> <span class="token string">&quot;/&quot;</span>
+                            <span class="token keyword">end</span>
+                            cell<span class="token punctuation">.</span>objs<span class="token punctuation">[</span><span class="token string">&quot;character&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>director <span class="token operator">..</span> <span class="token string">&quot;\n&quot;</span> <span class="token operator">..</span> actors<span class="token punctuation">)</span>
+
+                            cell<span class="token punctuation">.</span>objs<span class="token punctuation">[</span><span class="token string">&quot;number&quot;</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span>_jsonData<span class="token punctuation">[</span><span class="token string">&quot;subjects&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;collect_count&quot;</span><span class="token punctuation">]</span> <span class="token operator">..</span> <span class="token string">&quot;&#x4EBA;&#x770B;&#x8FC7;&quot;</span><span class="token punctuation">)</span>
+                        <span class="token keyword">end</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+            self<span class="token punctuation">.</span>list<span class="token punctuation">:</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span>
+            <span class="token function">Toast</span><span class="token punctuation">(</span><span class="token string">&quot;Request Error&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">return</span> meta
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x7684;&#x5173;&#x952E;&#x662F;&#x8981;&#x5F80;List&#x4E2D;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x5E76;&#x4E14;&#x91CD;&#x65B0;reload&#x5217;&#x8868;&#x3002;&#x5173;&#x4E8E;List&#x7684;&#x66F4;&#x591A;&#x7528;&#x6CD5;&#x53EF;&#x4EE5;&#x67E5;&#x770B;API&#x6587;&#x6863;&#xFF0C;<a href="https://alibaba.github.io/LuaViewSDK/apimenu.html" target="_blank">https://alibaba.github.io/LuaViewSDK/apimenu.html</a>&#x3002;&#x6B64;&#x65F6;&#xFF0C;&#x518D;&#x6B21;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x754C;&#x9762;&#x751F;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x7535;&#x5F71;&#x5217;&#x8868;&#x3002;</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1GL6vQpXXXXa9XpXXXXXXXXXX-728-1296.png =369x653" alt="List"></p>
+<p>&#x606D;&#x559C;&#x4F60;&#x5B8C;&#x6210;&#x4E86;&#x7B2C;&#x4E00;&#x4E2A;LuaView&#x5E94;&#x7528;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5F00;&#x542F;&#x4F60;&#x7684;LuaView&#x4E4B;&#x65C5;&#x5427;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="nativebridge.html" class="navigation navigation-prev " aria-label="Previous page: 桥接自定义native功能">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="changelog.html" class="navigation navigation-next " aria-label="Next page: Change log">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"构建你的第一个LuaView App","level":"1.6","depth":1,"next":{"title":"Change log","level":"1.7","depth":1,"path":"changelog.md","ref":"changelog.md","articles":[]},"previous":{"title":"桥接自定义native功能","level":"1.5","depth":1,"path":"nativebridge.md","ref":"nativebridge.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-sharing","-livereload","-mathjax","splitter","prism","toggle-chapters"],"pluginsConfig":{"splitter":{},"prism":{},"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"build_luaviewapp.md","mtime":"2017-04-07T05:50:03.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-07T05:50:08.546Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
