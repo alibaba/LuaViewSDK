@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.taobao.luaview.bridge.LVBasicBridge;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaView;
 
 /**
@@ -13,9 +14,14 @@ import com.taobao.luaview.global.LuaView;
  * Created by tuoli on 17/3/27.
  */
 
-public class LVBasicActivity extends AppCompatActivity {
+public class LVBasicActivity extends AppCompatActivity implements ILuaViewEntry {
 
     protected LuaView mLuaView;
+
+    @Override
+    public String getLuaViewEntry() {
+        return "kit/main.lua";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,7 @@ public class LVBasicActivity extends AppCompatActivity {
                     setContentView(mLuaView);
                     mLuaView.register("Bridge", new LVBasicBridge(LVBasicActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
-                    mLuaView.load("kit/main.lua", null, null);
+                    mLuaView.load(getLuaViewEntry(), null, null);
                 }
             }
         });
@@ -41,5 +47,9 @@ public class LVBasicActivity extends AppCompatActivity {
         if (mLuaView != null) {
             mLuaView.onDestroy();
         }
+    }
+
+    public String getMainPage() {
+        return "App";
     }
 }

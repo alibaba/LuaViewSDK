@@ -15,24 +15,25 @@ import com.taobao.luaview.global.Constants;
 
 public class LVBasicBridge {
 
-    private Activity mActivity;
+    private LVBasicActivity mActivity;
 
-    public LVBasicBridge(Activity activity) {
+    public LVBasicBridge(LVBasicActivity activity) {
         this.mActivity = activity;
     }
 
-    public void require(String pageUri) {
+    public void require(String pageName) {
         Intent intent = new Intent(mActivity, LVBasicActivity.class);
-        intent.putExtra(Constants.PARAM_URI, pageUri);
+        intent.putExtra(Constants.PAGE_NAME, pageName);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
     }
 
     public String args() {
-        if (mActivity.getIntent() != null && mActivity.getIntent().hasExtra(Constants.PARAM_URI)) {
-            return mActivity.getIntent().getStringExtra(Constants.PARAM_URI);
+        if (mActivity.getIntent() != null && mActivity.getIntent().hasExtra(Constants.PAGE_NAME)) {
+            return mActivity.getIntent().getStringExtra(Constants.PAGE_NAME);
+        } else {
+            return mActivity.getMainPage();
         }
-        return null;
     }
 
 }
