@@ -39,6 +39,10 @@
         
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
         self.scrollsToTop = NO;
+        
+        // 默认行间距都是0
+        self.lvflowLayout.minimumLineSpacing = 0;
+        self.lvflowLayout.minimumInteritemSpacing = 0;
     }
     return self;
 }
