@@ -94,33 +94,33 @@ end
 
 function pica:isViewElement(element)
     local view
-    if (element.name == "div") then
+    if (element.name == "View") then
         view = View()
-    elseif (element.name == "l") then
+    elseif (element.name == "Text") then
         view = Label()
         view:ellipsize(Ellipsize.END)   -- default setting
         view:textColor(0x000000)
-    elseif (element.name == "btn") then
+    elseif (element.name == "Button") then
         view = Button()
-    elseif (element.name == "img") then
+    elseif (element.name == "Image") then
         view = Image()
-    elseif (element.name == "hscroll") then
+    elseif (element.name == "HScroll") then
         view = HScrollView()
-    elseif (element.name == "web") then
+    elseif (element.name == "Web") then
         view = WebView()
-    elseif (element.name == "field") then
+    elseif (element.name == "Input") then
         view = TextField()
-    elseif (element.name == "list") then
+    elseif (element.name == "List") then
         view = CollectionView()
         view:miniSpacing(0)
-    elseif (element.name == "pull") then
+    elseif (element.name == "Pull") then
         view = RefreshCollectionView()
         view:miniSpacing(0)
-    elseif (element.name == "load") then
+    elseif (element.name == "Load") then
         view = LoadingIndicator()
-    elseif (element.name == "page") then
+    elseif (element.name == "Slider") then
         view = PagerView()
-    elseif (element.name == "ind") then
+    elseif (element.name == "Indicator") then
         view = PagerIndicator()
     else
         view = nil
@@ -159,7 +159,7 @@ function pica:parseElement(element, parent, identifierObjs)
     if (isContains == true and element.attr ~= nil) then
         for _, _v in ipairs(element.attr) do
             if (_v.name == "frame") then
-                if (parent and (parent.name == "div" or parent.name == "hscroll")) then
+                if (parent and (parent.name == "View" or parent.name == "HScroll")) then
                     self.objs[parent]:addView(self.objs[element])
                 end
                 local paramFun = sys:loadstring("return " .. _v.value)
@@ -188,7 +188,7 @@ function pica:parseElement(element, parent, identifierObjs)
 --                print("tuoli css end")
                 self.objs[element]:flexCss(css)
                 if (not sys.android) then
-                    if (element.name == "div" and parent and (parent.name ~= "div" or (parent.name == "div" and parent.attr["css"] == nil))) then
+                    if (element.name == "View" and parent and (parent.name ~= "View" or (parent.name == "View" and parent.attr["css"] == nil))) then
                         table.insert(self.flxLayoutObjs, self.objs[element])
                     end
                 end
@@ -197,10 +197,10 @@ function pica:parseElement(element, parent, identifierObjs)
             elseif (_v.name == "titleColor") then
                 self.objs[element]:titleColor(tonumber(_v.value))
             elseif (_v.name == "image") then
-                if (element.name == "btn") then
+                if (element.name == "Button") then
                     local params = self:split(_v.value, ",")
                     self.objs[element]:image(params[1], params[2])
-                elseif (element.name == "img") then
+                elseif (element.name == "Image") then
                     self.objs[element]:image(_v.value)
                 end
             elseif (_v.name == "corner") then
