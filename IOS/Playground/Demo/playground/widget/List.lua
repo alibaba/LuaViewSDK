@@ -10,7 +10,7 @@ Navigation:title("List.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("widget/list.xml")
     self.list = self.views["tableView"]
     self.header = self.views["headerText"]

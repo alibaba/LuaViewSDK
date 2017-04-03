@@ -10,7 +10,7 @@ Navigation:title("TextField.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     if (sys.android) then
         pica:getInstance():render("widget/textfield_android.xml")
     else

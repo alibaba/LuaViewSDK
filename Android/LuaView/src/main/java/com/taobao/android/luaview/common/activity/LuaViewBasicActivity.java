@@ -1,20 +1,27 @@
-package com.taobao.android.luaview.playground;
+package com.taobao.android.luaview.common.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
+import com.taobao.android.luaview.common.bridge.LuaViewBasicBridge;
+import com.taobao.android.luaview.common.interfaces.ILuaViewMainEntry;
 import com.taobao.luaview.global.LuaView;
 
 /**
  * Copyright 2017 Alibaba Group
  * License: MIT
  * https://alibaba.github.io/LuaViewSDK
- * Created by tuoli on 17/3/27.
+ * Created by tuoli on 17/3/31.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewMainEntry {
 
-    private LuaView mLuaView;
+    protected LuaView mLuaView;
+
+    @Override
+    public String getLuaViewEntry() {
+        return "kit/main.lua";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 mLuaView = luaView;
                 if (mLuaView != null) {
                     setContentView(mLuaView);
-                    mLuaView.register("Bridge", new MyBridge(MainActivity.this));
+                    mLuaView.register("Bridge", new LuaViewBasicBridge(LuaViewBasicActivity.this));
                     mLuaView.setUseStandardSyntax(true);     // 使用标准语法
-                    mLuaView.load("main.lua", null, null);
+                    mLuaView.load(getLuaViewEntry(), null, null);
                 }
             }
         });
@@ -40,5 +47,9 @@ public class MainActivity extends AppCompatActivity {
         if (mLuaView != null) {
             mLuaView.onDestroy();
         }
+    }
+
+    public String getMainPage() {
+        return "App";
     }
 }

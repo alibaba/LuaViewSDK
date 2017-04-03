@@ -22,6 +22,7 @@ import com.taobao.luaview.util.AndroidUtil;
 public class Constants {
     public static float sScale = -1;
     public static final String PARAM_URI = "uri";
+    public static final String PAGE_NAME = "page";
 
     //Bundle encrypt and decrypt
     public static final String PUBLIC_KEY_PATH = "luaview/luaview_rsa_public_key.der";

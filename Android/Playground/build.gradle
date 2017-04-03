@@ -42,7 +42,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
 
-    compile project(':LuaViewSDK')
+    compile project(':LuaView')
 
     //glide for ImageView
     compile 'com.github.bumptech.glide:glide:3.7.0'

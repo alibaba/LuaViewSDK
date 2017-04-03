@@ -10,7 +10,7 @@ Navigation:title("PagerView.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("widget/pagerview.xml")
     self.manualSlider = self.views["pagerView1"]
     self.indicator1 = self.views["indicator1"]

@@ -10,7 +10,7 @@ Navigation:title("Playground")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("app.xml")
     self.widgetList = self.views["widgetTableView"]
     self.sampleList = self.views["sampleTableView"]

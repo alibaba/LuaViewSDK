@@ -10,7 +10,7 @@ Navigation:title("Douban.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("sample/douban.xml")
     self.loading = self.views["loading"]
     self.list = self.views["tableView"]

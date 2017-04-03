@@ -78,7 +78,7 @@
 }
 
 -(void)require:(NSDictionary*)args {
-    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:@"main.lua"];
+    JHSLuaViewController* c = [[JHSLuaViewController alloc] initWithPackage:nil mainScript:@"kit/main.lua"];
     c.args = args;
     [self.navigationController pushViewController:c animated:YES];
 }

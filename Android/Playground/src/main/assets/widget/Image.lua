@@ -10,7 +10,7 @@ Navigation:title("Image.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.views = pica:getInstance():render("widget/image.xml")
 end
 

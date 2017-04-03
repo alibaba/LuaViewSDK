@@ -12,7 +12,7 @@ Navigation:title("Label.lua")
 
 local meta = object:new()
 
-function meta:onInit()
+function meta:onCreate()
     self.list = CollectionView()
     self.list:frame(0, 0, sys.contW, sys.contH)
     self.list:initParams({
