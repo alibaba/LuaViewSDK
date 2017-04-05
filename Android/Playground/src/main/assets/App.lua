@@ -10,7 +10,7 @@ Navigation:title("Playground")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     self.views = pica:getInstance():render("app.xml")
     self.widgetList = self.views["widgetTableView"]
     self.sampleList = self.views["sampleTableView"]
@@ -58,7 +58,7 @@ function meta:handle()
                     cell.label:text(style)
                 end,
                 Callback = function(cell, section, row)
-                    Bridge:require("widget/" .. self.widgetData[row])
+                    Bridge:require({page="widget/" .. self.widgetData[row]})
                 end
             }
         }
@@ -90,7 +90,7 @@ function meta:handle()
                     cell.objs["subitem"]:text(self.sampleSpec[row])
                 end,
                 Callback = function(cell, section, row)
-                    Bridge:require("sample/" .. self.sampleData[row])
+                    Bridge:require({page="sample/" .. self.sampleData[row]})
                 end
             }
         }

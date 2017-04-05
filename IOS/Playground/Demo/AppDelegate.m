@@ -20,8 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     JHSLuaViewController* controller = [[JHSLuaViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
-    NSString* entry = @"App";
-    controller.args = (NSDictionary*)entry;
+    controller.args = @{@"page":@"App"};
     
     self.window.rootViewController = [[UINavigationController alloc]
                                       initWithRootViewController:controller];

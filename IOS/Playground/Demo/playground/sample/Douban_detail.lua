@@ -3,17 +3,21 @@
 -- License: MIT
 -- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/3/30
+-- Date: 17/4/5
 --
 
-Navigation:title("Loading.lua")
+Navigation:title("豆瓣电影详情")
 
 local meta = object:new()
 
 function meta:onCreate(args)
-    self.views = pica:getInstance():render("widget/loading.xml")
-    self.loading = self.views["loading"]
-    self.loading:start()
+    self.web = WebView()
+    self.web:frame(0, 0, sys.contW, sys.contH)
+    self.web:loadUrl(args.url)
+end
+
+function meta:handle()
+
 end
 
 return meta

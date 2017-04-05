@@ -10,7 +10,7 @@ Navigation:title("GitHub.lua")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     if (sys.android) then
         self.views = pica:getInstance():render("sample/github_android.xml")
     else
@@ -85,6 +85,10 @@ function meta:handle()
                                     cell.objs["profile"]:image(jsonData["items"][row]["owner"]["avatar_url"])
                                     cell.objs["profile"]:scaleType(ScaleType.FIT_CENTER)
                                     cell.objs["stars"]:text("Stars: " .. jsonData["items"][row]["stargazers_count"])
+
+                                    cell.objs["item"]:callback(function()
+                                        Bridge:require({page="sample.GitHub_detail", url=jsonData["items"][row]["html_url"]})
+                                    end)
                                 end
                             }
                         }

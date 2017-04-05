@@ -10,7 +10,7 @@ Navigation:title("WebView.lua")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     self.views = pica:getInstance():render("widget/webview.xml")
     self.web = self.views["web"]
 

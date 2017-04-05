@@ -10,7 +10,7 @@ Navigation:title("Douban.lua")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     self.views = pica:getInstance():render("sample/douban.xml")
     self.loading = self.views["loading"]
     self.list = self.views["tableView"]
@@ -50,15 +50,17 @@ function meta:handle()
                             cell.objs["profile"]:image(_jsonData["subjects"][row]["images"]["large"])
                             cell.objs["movieName"]:text(_jsonData["subjects"][row]["title"])
                             cell.objs["score"]:text("评分: " .. _jsonData["subjects"][row]["rating"]["average"])
-
                             local director = "导演: " .. _jsonData["subjects"][row]["directors"][1]["name"]
                             local actors = "主演: "
                             for _k, _v in pairs(_jsonData["subjects"][row]["casts"]) do
                                 actors = actors .. _v["name"] .. "/"
                             end
                             cell.objs["character"]:text(director .. "\n" .. actors)
-
                             cell.objs["number"]:text(_jsonData["subjects"][row]["collect_count"] .. "人看过")
+
+                            cell.objs["item"]:callback(function()
+                                Bridge:require({page="sample.Douban_detail", url=_jsonData["subjects"][row]["alt"] .. "mobile"})
+                            end)
                         end
                     }
                 },

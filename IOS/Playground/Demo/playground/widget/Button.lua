@@ -10,7 +10,7 @@ Navigation:title("Button.lua")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     self.views = pica:getInstance():render("widget/button.xml")
     self.button1 = self.views["button1"]
     self.button2 = self.views["button2"]

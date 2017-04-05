@@ -5,6 +5,12 @@ import android.content.Intent;
 import com.taobao.android.luaview.common.activity.LuaViewBasicActivity;
 import com.taobao.luaview.global.Constants;
 
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Copyright 2017 Alibaba Group
  * License: MIT
@@ -20,18 +26,32 @@ public class LuaViewBasicBridge {
         this.mActivity = activity;
     }
 
-    public void require(String pageName) {
+    public void require(LuaTable params) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+
+        LuaValue[] k = params.keys();
+        for (int i=0; i < k.length; i++) {
+            hashMap.put(k[i].optjstring(null), params.get(k[i]).optjstring(null));
+        }
+
         Intent intent = new Intent(mActivity, LuaViewBasicActivity.class);
-        intent.putExtra(Constants.PAGE_NAME, pageName);
+        intent.putExtra(Constants.PAGE_PARAMS, hashMap);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
     }
 
-    public String args() {
-        if (mActivity.getIntent() != null && mActivity.getIntent().hasExtra(Constants.PAGE_NAME)) {
-            return mActivity.getIntent().getStringExtra(Constants.PAGE_NAME);
+    public LuaTable args() {
+        if (mActivity.getIntent() != null && mActivity.getIntent().hasExtra(Constants.PAGE_PARAMS)) {
+            HashMap<String, String> hashMap = (HashMap<String, String>)mActivity.getIntent().getSerializableExtra(Constants.PAGE_PARAMS);
+            LuaTable table = new LuaTable();
+            for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+                table.set(entry.getKey(), entry.getValue());
+            }
+            return table;
         } else {
-            return mActivity.getMainPage();
+            LuaTable table = new LuaTable();
+            table.set("page", mActivity.getMainPage());
+            return table;
         }
     }
 }

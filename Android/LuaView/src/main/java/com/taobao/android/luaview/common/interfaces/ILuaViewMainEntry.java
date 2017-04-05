@@ -9,4 +9,5 @@ package com.taobao.android.luaview.common.interfaces;
 
 public interface ILuaViewMainEntry {
     String getLuaViewEntry();
+    String getMainPage();
 }

@@ -1,4 +1,4 @@
-<View id="root" frame="10, 5, sys.contW-20, sys.contH/3-10" css="{flex-direction='row'}" bg="0xffffff" >
+<View id="item" frame="10, 5, sys.contW-20, sys.contH/3-10" css="{flex-direction='row'}" bg="0xffffff" >
     <View id="left.pannel" css="{flex-direction='column', flex=2}">
         <Image id="profile" css="{flex=1, margin=15}"></Image>
     </View>

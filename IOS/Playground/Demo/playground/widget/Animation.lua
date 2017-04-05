@@ -10,7 +10,7 @@ Navigation:title("Animation.lua")
 
 local meta = object:new()
 
-function meta:onCreate()
+function meta:onCreate(args)
     self.views = pica:getInstance():render("widget/animation.xml")
     self.spirit = self.views["img"]
     self.translateBtn = self.views["translateBtn"]

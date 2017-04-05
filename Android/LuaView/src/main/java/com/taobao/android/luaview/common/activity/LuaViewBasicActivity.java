@@ -26,6 +26,11 @@ public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewM
     }
 
     @Override
+    public String getMainPage() {
+        return "App";
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -60,9 +65,5 @@ public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewM
         if (mLuaView != null) {
             mLuaView.onDestroy();
         }
-    }
-
-    public String getMainPage() {
-        return "App";
     }
 }
