@@ -1,4 +1,4 @@
-package com.taobao.android.luaview.playground;
+package com.taobao.android.luaview.common.provider;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +15,9 @@ import com.taobao.luaview.view.imageview.BaseImageView;
 import java.lang.ref.WeakReference;
 
 /**
- * XXX
+ * Copyright 2017 Alibaba Group
+ * License: MIT
+ * https://alibaba.github.io/LuaViewSDK
  *
  * @author song
  * @date 16/4/11
@@ -101,3 +103,4 @@ public class GlideImageProvider implements ImageProvider {
         }
     }
 }
+

@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.taobao.android.luaview.common.bridge.LuaViewBasicBridge;
 import com.taobao.android.luaview.common.interfaces.ILuaViewMainEntry;
+import com.taobao.android.luaview.common.provider.GlideImageProvider;
 import com.taobao.luaview.global.LuaView;
+import com.taobao.luaview.global.LuaViewConfig;
 
 /**
  * Copyright 2017 Alibaba Group
@@ -27,6 +29,8 @@ public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        init();
+
         LuaView.createAsync(this, new LuaView.CreatedCallback() {
             @Override
             public void onCreated(LuaView luaView) {
@@ -39,6 +43,15 @@ public class LuaViewBasicActivity extends AppCompatActivity implements ILuaViewM
                 }
             }
         });
+    }
+
+    private void init() {
+        LuaViewConfig.setDebug(true);
+        LuaViewConfig.setOpenDebugger(false);
+        LuaViewConfig.setLibsLazyLoad(true);
+        LuaViewConfig.setAutoSetupClickEffects(true);
+
+        LuaView.registerImageProvider(GlideImageProvider.class);
     }
 
     @Override

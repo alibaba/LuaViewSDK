@@ -3,7 +3,6 @@
     package="com.taobao.android.luaview.playground">
 
     <application
-        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
