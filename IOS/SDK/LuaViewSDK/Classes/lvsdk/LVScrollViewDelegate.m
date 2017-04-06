@@ -21,7 +21,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.owner lv_callbackKey:@"Scrolling"];
+    [self.owner lv_callbackWithKey:@"Scrolling"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
         [self.delegate scrollViewDidScroll:scrollView];
     }
@@ -34,34 +34,34 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self.owner lv_callbackKey:@"ScrollEnd"];
+    [self.owner lv_callbackWithKey:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
         [self.delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.owner lv_callbackKey:@"ScrollEnd"];
+    [self.owner lv_callbackWithKey:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
         [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.owner lv_callbackKey:@"ScrollBegin"];
+    [self.owner lv_callbackWithKey:@"ScrollBegin"];
     if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
         [self.delegate scrollViewWillBeginDragging:scrollView];
     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    [self.owner lv_callbackKey:@"DragEnd"];
+    [self.owner lv_callbackWithKey:@"DragEnd"];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self.owner lv_callbackKey:@"DragEnd"];
+    [self.owner lv_callbackWithKey:@"DragEnd"];
     if( !decelerate ) {
-        [self.owner lv_callbackKey:@"ScrollEnd"];
+        [self.owner lv_callbackWithKey:@"ScrollEnd"];
     }
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
         [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];

@@ -39,7 +39,7 @@
     lua_State* l = self.lv_luaviewCore.l;
     if( l ) {
         lua_checkstack32(l);
-        [self lv_callbackKey:@"BeginEditing"];
+        [self lv_callbackWithKey:@"BeginEditing"];
     }
 }
 
@@ -47,7 +47,7 @@
     lua_State* l = self.lv_luaviewCore.l;
     if( l ) {
         lua_checkstack32(l);
-        [self lv_callbackKey:@"EndEditing"];
+        [self lv_callbackWithKey:@"EndEditing"];
     }
 }
 

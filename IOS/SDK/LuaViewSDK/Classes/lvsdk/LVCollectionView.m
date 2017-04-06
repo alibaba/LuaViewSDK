@@ -70,7 +70,7 @@
     if ( self.lv_luaviewCore.l ) {
         lua_settop(self.lv_luaviewCore.l, 0);
     }
-    [self lv_callbackKey:@STR_ON_LAYOUT];
+    [self lv_callbackWithKey:@STR_ON_LAYOUT];
 }
 
 // 重载以实现可能的定制需求, contentOffset
