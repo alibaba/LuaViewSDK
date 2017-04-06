@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://gitlab.alibaba-inc.com/luaview/LuaViewSDK"
 
 
-  s.license      = { :type => 'GNU General Public Licence (GPL), Version 2.0', :file => 'LICENSE.txt' }
+  s.license      = { :type => 'The MIT License (MIT)', :file => 'LICENSE.txt' }
 
   s.author             = { "城西" => "xicheng.dxc@alibaba-inc.com" }
 
