@@ -59,7 +59,7 @@ function meta:handle()
                             cell.objs["number"]:text(_jsonData["subjects"][row]["collect_count"] .. "人看过")
 
                             cell.objs["item"]:callback(function()
-                                Bridge:require({page="sample.Douban_detail", url=_jsonData["subjects"][row]["alt"] .. "mobile"})
+                                Bridge:require({page="sample.Douban_detail", detail_id=_jsonData["subjects"][row]["id"]})
                             end)
                         end
                     }

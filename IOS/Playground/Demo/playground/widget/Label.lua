@@ -6,8 +6,6 @@
 -- Date: 17/3/30
 --
 
-require("kit.pica")
-
 Navigation:title("Label.lua")
 
 local meta = object:new()
