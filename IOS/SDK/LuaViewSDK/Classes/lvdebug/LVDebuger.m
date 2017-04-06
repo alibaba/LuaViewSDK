@@ -14,6 +14,8 @@
 
 @implementation LVDebuger
 
+#ifdef DEBUG
+//---------------------------------------------------------
 
 static int DebugReadCmd (lua_State *L) {
     LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
@@ -91,10 +93,6 @@ static const luaL_Reg dblib[] = {
     {NULL, NULL}
 };
 
-+(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
-    luaL_register(L, LUA_DBLIBNAME, dblib);
-    return 0;
-}
 
 // 把日志传送到服务器
 void lv_printToServer(lua_State* L, const char* cs, int withTabChar){
@@ -121,6 +119,20 @@ void lv_printToServer(lua_State* L, const char* cs, int withTabChar){
 //    va_end(argumentList);
 //}
 
+
+
+//---------------------------------------------------------
+#endif
+
+
+
++(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+#ifdef DEBUG
+    luaL_register(L, LUA_DBLIBNAME, dblib);
+#endif
+    
+    return 0;
+}
 
 
 @end
