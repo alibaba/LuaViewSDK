@@ -1,1 +1,1 @@
-../../../../../lua/lua/lauxlib.h
+../../../LuaViewSDK/IOS/lua/lua/lauxlib.h

@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/LViewController.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/LViewController.h

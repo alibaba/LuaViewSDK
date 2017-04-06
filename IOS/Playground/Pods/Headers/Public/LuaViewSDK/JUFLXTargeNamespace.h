@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/layout/JUFLXTargeNamespace.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/layout/JUFLXTargeNamespace.h

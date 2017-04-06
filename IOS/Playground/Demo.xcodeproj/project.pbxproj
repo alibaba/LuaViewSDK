@@ -11,12 +11,6 @@
 		3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F81E1C706B1D00D1E0B7 /* main.m */; };
 		3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */; };
 		3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */; };
-		3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */; };
-		3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */; };
-		3CC2F8531C706BE700D1E0B7 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */; };
-		3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */; };
-		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
-		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
 		3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88E1C706BFA00D1E0B7 /* close.png */; };
 		3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */; };
 		3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8901C706BFA00D1E0B7 /* enter.png */; };
@@ -37,7 +31,6 @@
 		AC11EE721E94D4F600FF9F04 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE6C1E94D4F600FF9F04 /* widget */; };
 		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
-		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,18 +54,6 @@
 		3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CC2F82E1C706B1D00D1E0B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CC2F8331C706B1D00D1E0B7 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaViewController.h; sourceTree = "<group>"; };
-		3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaViewController.m; sourceTree = "<group>"; };
-		3CC2F8451C706BE700D1E0B7 /* JHSLVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVButton.h; sourceTree = "<group>"; };
-		3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVButton.m; sourceTree = "<group>"; };
-		3CC2F8471C706BE700D1E0B7 /* JHSLVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCollectionView.h; sourceTree = "<group>"; };
-		3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCollectionView.m; sourceTree = "<group>"; };
-		3CC2F8491C706BE700D1E0B7 /* JHSLVCustomError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomError.h; sourceTree = "<group>"; };
-		3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomError.m; sourceTree = "<group>"; };
-		3CC2F84B1C706BE700D1E0B7 /* JHSLVCustomLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomLoading.h; sourceTree = "<group>"; };
-		3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
-		3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVImage.h; sourceTree = "<group>"; };
-		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
 		3CC2F88E1C706BFA00D1E0B7 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_1212.lua; sourceTree = "<group>"; };
 		3CC2F8901C706BFA00D1E0B7 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
@@ -92,8 +73,6 @@
 		AC11EE6B1E94D4F600FF9F04 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
 		AC11EE6C1E94D4F600FF9F04 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
 		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
-		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
-		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				DC839D3F1E791402005C346B /* playground */,
-				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
 				3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */,
@@ -162,27 +140,6 @@
 				3CC2F81E1C706B1D00D1E0B7 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3CC2F8421C706BD900D1E0B7 /* luaviewEx */ = {
-			isa = PBXGroup;
-			children = (
-				3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */,
-				3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */,
-				3CC2F8451C706BE700D1E0B7 /* JHSLVButton.h */,
-				3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */,
-				3CC2F8471C706BE700D1E0B7 /* JHSLVCollectionView.h */,
-				3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */,
-				3CC2F8491C706BE700D1E0B7 /* JHSLVCustomError.h */,
-				3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */,
-				3CC2F84B1C706BE700D1E0B7 /* JHSLVCustomLoading.h */,
-				3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */,
-				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
-				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
-				DC839C541E782D78005C346B /* Bridge.h */,
-				DC839C551E782D78005C346B /* Bridge.m */,
-			);
-			name = luaviewEx;
 			sourceTree = "<group>";
 		};
 		3CC2F88D1C706BFA00D1E0B7 /* lua_animate */ = {
@@ -425,15 +382,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */,
-				DC839C561E782D78005C346B /* Bridge.m in Sources */,
 				3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */,
 				3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */,
-				3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */,
-				3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */,
-				3CC2F8531C706BE700D1E0B7 /* JHSLVCollectionView.m in Sources */,
-				3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */,
-				3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
