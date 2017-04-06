@@ -51,7 +51,7 @@
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callbackKey:@STR_ON_LAYOUT];
 }
 
 -(id)lv_getNativeView{

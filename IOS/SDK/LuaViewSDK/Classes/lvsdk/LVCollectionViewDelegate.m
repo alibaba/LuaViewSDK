@@ -312,7 +312,7 @@ static inline NSInteger mapSection(NSInteger section){
         lua_pushnumber(L, mapSection(section) );
         lua_pushnumber(L, mapRow(row) );
         lua_pushnumber(L, visibleCount );
-        [self.owner lv_callLuaByKey1:functionName key2:nil argN:3];
+        [self.owner lv_callbackKey:functionName key2:nil argN:3];
     }
 }
 

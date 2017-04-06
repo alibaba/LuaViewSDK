@@ -217,7 +217,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     [self moveCenter];
     [self checkCellVisible];
     
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callbackKey:@STR_ON_LAYOUT];
 }
 
 -(void) dealloc{
@@ -694,10 +694,10 @@ static int __gc (lua_State *L) {
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.isScrollEndTimes = 0;
-    [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
+    [self lv_callbackKey:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self lv_callLuaByKey1:@STR_CALLBACK key2:@"BeginDecelerating"];
+    //[self lv_callbackKey:@STR_CALLBACK key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

@@ -25,11 +25,11 @@
 - (void) setLv_userData:(LVUserDataInfo *)userData{
 }
 
-- (void) lv_callLuaByKey1:(NSString*) key1{
-    [self lv_callLuaByKey1:key1 key2:nil argN:0];
+- (void) lv_callbackKey:(NSString*) key1{
+    [self lv_callbackKey:key1 key2:nil argN:0];
 }
 
-- (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
+- (void) lv_callbackKey:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
     lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData && key1){
         lua_checkstack32(l);

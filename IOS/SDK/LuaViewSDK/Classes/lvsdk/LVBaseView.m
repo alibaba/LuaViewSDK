@@ -1420,7 +1420,7 @@ static int onTouch (lua_State *L) {
         
         LVGesture* gesture = [[LVGesture alloc] init:L];
         gesture.onTouchEventCallback = ^(LVGesture* gesture, int argN){
-            [view lv_callLuaByKey1:@STR_ON_TOUCH key2:nil argN:1];
+            [view lv_callbackKey:@STR_ON_TOUCH key2:nil argN:1];
         };
         [view addGestureRecognizer:gesture];
     }
@@ -1450,7 +1450,7 @@ static int __tostring (lua_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callbackKey:@STR_ON_LAYOUT];
 }
 
 static int releaseObject(lua_State *L) {
