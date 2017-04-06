@@ -45,12 +45,12 @@
 
 - (void) lv_refreshHeaderToRefresh{
     // 开始下拉刷新调用
-    [self lv_callLuaByKey1:@"PullDown"];
+    [self lv_callLuaCallback:@"PullDown"];
 }
 
 - (void) lv_refreshFooterToLoadMore{
     // 开始上拉刷新调用
-    [self lv_callLuaByKey1:@"PullUpRefresh"];
+    [self lv_callLuaCallback:@"PullUpRefresh"];
 }
 
 
