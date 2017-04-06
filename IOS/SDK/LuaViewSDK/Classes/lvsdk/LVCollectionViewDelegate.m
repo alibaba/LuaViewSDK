@@ -289,7 +289,7 @@ static inline NSInteger mapSection(NSInteger section){
     }
 }
 
--(void) callWithScrollArgsForKey:(NSString*) functionName{
+-(void) callWithScrollArgsForKey:(NSString*) keyName{
     UICollectionView* tableView = (UICollectionView*)self.owner;
     NSArray<NSIndexPath *>* indexPaths = [tableView indexPathsForVisibleItems];
     int visibleCount = 0;
@@ -312,7 +312,7 @@ static inline NSInteger mapSection(NSInteger section){
         lua_pushnumber(L, mapSection(section) );
         lua_pushnumber(L, mapRow(row) );
         lua_pushnumber(L, visibleCount );
-        [self.owner lv_callbackKey:functionName key2:nil argN:3];
+        [self.owner lv_callbackKey:keyName key2:nil argN:3];
     }
 }
 
