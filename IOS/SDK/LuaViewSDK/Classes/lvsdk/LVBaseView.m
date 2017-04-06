@@ -711,6 +711,24 @@ static int hide(lua_State *L) {
     return 0;
 }
 
+static int visible(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if ( lua_gettop(L)>=2 ) {
+                BOOL yes = lua_toboolean(L, 2);
+                view.hidden = !yes;
+                return 0;
+            } else {
+                lua_pushboolean(L, !view.hidden );
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 static int show(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -1373,6 +1391,14 @@ static int onClick (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static int onShow (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_SHOW, NO);
+}
+
+static int onHide (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_HIDE, NO);
+}
+
 static void removeOnTouchEventGesture(UIView* view){
     NSArray< UIGestureRecognizer *> * gestures = view.gestureRecognizers;
     for( LVGesture* g in gestures ) {
@@ -1560,7 +1586,7 @@ static int invalidate (lua_State *L) {
 
 static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
-    // visible
+    {"visible",    visible },
     
     {"hide",    hide },//__deprecated_msg("Use hidden")
     {"isHide",    isHide },//__deprecated_msg("Use hidden")
@@ -1642,8 +1668,9 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"onLayout",     onLayout },
     {"onClick",     onClick },
     {"onTouch",     onTouch },
-    // onShow
-    // onHide
+    {"onShow",     onShow },
+    {"onHide",     onHide },
+    
     // onLongClick
     
     {"hasFocus",        isFirstResponder },
@@ -1677,7 +1704,6 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     // padding
     // margin
     
-    // getNativeView
     {"getNativeView", getNativeView}, //__deprecated_msg("Use nativeView")
     {"nativeView", getNativeView},
     
