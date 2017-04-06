@@ -15,9 +15,9 @@
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 - (id) lv_nativeObject;
 
-- (void) lv_callbackWithKey:(NSString*) key1;
-- (void) lv_callbackWithKey:(NSString*) key1 key2:(NSString*) key2 argN:(int) argN;
--(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args;
+- (void) lv_callLuaCallback:(NSString*) key1;
+- (void) lv_callLuaCallback:(NSString*) key1 key2:(NSString*) key2 argN:(int) argN;
+- (NSString*) lv_callLuaFunc:(NSString*) funcName args:(NSArray*) args;
 
 - (void) lv_buttonCallBack;
 

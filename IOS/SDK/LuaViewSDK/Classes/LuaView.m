@@ -195,7 +195,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"ViewWillAppear"];
+        [self lv_callLuaCallback:@"ViewWillAppear"];
     }
 }
 
@@ -204,7 +204,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"onShow"];//@"ViewDidAppear"
+        [self lv_callLuaCallback:@"onShow"];//@"ViewDidAppear"
     }
 }
 
@@ -212,7 +212,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"ViewWillDisAppear"];
+        [self lv_callLuaCallback:@"ViewWillDisAppear"];
     }
 }
 
@@ -221,7 +221,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"onHide"];//@"ViewDidDisAppear"
+        [self lv_callLuaCallback:@"onHide"];//@"ViewDidDisAppear"
     }
 }
 
@@ -230,7 +230,7 @@
     if( L && self.isOnShowed ) {
         lua_checkstack32(L);
         lua_pushboolean(L, YES);
-        [self lv_callbackWithKey:@"onShow" key2:nil argN:1];
+        [self lv_callLuaCallback:@"onShow" key2:nil argN:1];
     }
 }
 
@@ -239,7 +239,7 @@
     if( L && self.isOnShowed ) {
         lua_checkstack32(L);
         lua_pushboolean(L, YES);
-        [self lv_callbackWithKey:@"onHide" key2:nil argN:1];
+        [self lv_callLuaCallback:@"onHide" key2:nil argN:1];
     }
 }
 
@@ -249,7 +249,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"DidMoveToSuperview"];
+        [self lv_callLuaCallback:@"DidMoveToSuperview"];
     }
 }
 
@@ -259,7 +259,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"DidMoveToSuperview"];
+        [self lv_callLuaCallback:@"DidMoveToSuperview"];
     }
 }
 
@@ -269,7 +269,7 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@STR_ON_LAYOUT];
+        [self lv_callLuaCallback:@STR_ON_LAYOUT];
     }
 }
 
@@ -280,28 +280,28 @@
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"KeyboardWillShow"];
+        [self lv_callLuaCallback:@"KeyboardWillShow"];
     }
 }
 -(void) keyboardDidShow:(NSNotification *)notification {
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"KeyboardDidShow"];
+        [self lv_callLuaCallback:@"KeyboardDidShow"];
     }
 }
 -(void) keyboardWillHide:(NSNotification *)notification {
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"KeyboardWillHide"];
+        [self lv_callLuaCallback:@"KeyboardWillHide"];
     }
 }
 -(void) keyboardDidHide:(NSNotification *)notification {
     lua_State* L = self.luaviewCore.l;
     if( L ) {
         lua_checkstack32(L);
-        [self lv_callbackWithKey:@"KeyboardDidHide"];
+        [self lv_callLuaCallback:@"KeyboardDidHide"];
     }
 }
 
@@ -312,7 +312,7 @@
     if (event.subtype == UIEventSubtypeMotionShake) {
         if( L ) {
             lua_checkstack32(L);
-            [self lv_callbackWithKey:@"ShakeBegin"];
+            [self lv_callLuaCallback:@"ShakeBegin"];
         }
     }
 }
@@ -323,7 +323,7 @@
         lua_State* L = self.luaviewCore.l;
         if( L ) {
             lua_checkstack32(L);
-            [self lv_callbackWithKey:@"ShakeCanceled"];
+            [self lv_callLuaCallback:@"ShakeCanceled"];
         }
     }
 }
@@ -334,7 +334,7 @@
         lua_State* L = self.luaviewCore.l;
         if( L ) {
             lua_checkstack32(L);
-            [self lv_callbackWithKey:@"ShakeEnded"];
+            [self lv_callLuaCallback:@"ShakeEnded"];
         }
     }
 }
