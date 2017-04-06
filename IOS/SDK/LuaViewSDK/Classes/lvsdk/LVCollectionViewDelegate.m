@@ -299,6 +299,8 @@ static inline NSInteger mapSection(NSInteger section){
         visibleCount ++;
         if( indexPath0== nil ) {
             indexPath0 = indexPath;
+        } else if( indexPath.row <indexPath0.row || indexPath.section<indexPath0.section ){
+            indexPath0 = indexPath;
         }
     }
     lua_State* L = self.owner.lv_luaviewCore.l;
