@@ -1,0 +1,5 @@
+target 'luaviewEx_Example' do
+  pod 'luaviewEx', :path => '../'
+  pod 'SDWebImage', '3.7.5'
+  pod 'LuaViewSDK', :git => 'https://github.com/alibaba/LuaViewSDK.git',  :branch=>'develop'
+end
