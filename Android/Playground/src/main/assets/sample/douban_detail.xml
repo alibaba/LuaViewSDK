@@ -1,0 +1,17 @@
+<View frame="0, 0, sys.contW, sys.contH*1.5" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH*0.4, justify-content='center', align-items='center'}" bg="0x004B97">
+        <Image id="profile" css="{width=sys.contW*0.37, height=sys.contW*0.37*1.3}"></Image>
+    </View>
+    <View css="{flex-direction='column', height=sys.contH*0.15}">
+        <Text id="title" css="{flex=1, margin-left=20, margin-right=20, margin-top=20}" fontSize="26"></Text>
+        <Text id="tag" css="{flex=1, margin-left=20, margin-right=20}" fontSize="12"></Text>
+    </View>
+    <View css="{flex-direction='column', height=sys.contH*0.6}">
+        <Text css="{sizetofit=1, margin-left=20, margin-top=20}" fontSize="14" text="剧情介绍"></Text>
+        <Text id="intro" css="{flex=1, margin-left=20, margin-right=20, margin-top=10}" fontSize="16" lineCount="10"></Text>
+    </View>
+    <View css="{flex-direction='column', height=sys.contH*0.35}">
+        <Text css="{sizetofit=1, margin-left=20, margin-top=20}" fontSize="14" text="影人介绍"></Text>
+        <HScroll id="scroller" css="{flex=1, margin-left=20, margin-right=20, margin-top=10}"></HScroll>
+    </View>
+</View>
