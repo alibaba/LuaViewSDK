@@ -36,7 +36,6 @@ function meta:onCreate(args)
                     Http():get("http://api.douban.com/v2/movie/subject/" .. self.args.detail_id, function(response)
                         if (tostring(response:code()) == "200") then
                             local _jsonData = Json:toTable(tostring(response:data()))
-                            util:printTable(_jsonData)
                             cell.objs["profile"]:image(_jsonData["images"]["large"])
                             cell.objs["title"]:text(_jsonData["title"])
                             local tagInfo = _jsonData["year"]
