@@ -19,8 +19,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    LVViewController* controller = [[LVViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
-    controller.args = @{@"page":@"App"};
+    LVViewController* controller = [[LVViewController alloc] initWithPackage];
+    
+    //    LVViewController* controller = [[LVViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
     
     self.window.rootViewController = [[UINavigationController alloc]
                                       initWithRootViewController:controller];

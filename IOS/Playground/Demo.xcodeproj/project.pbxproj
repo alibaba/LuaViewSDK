@@ -26,7 +26,6 @@
 		AC11EE791E96C0A900FF9F04 /* App.lua in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE731E96C0A900FF9F04 /* App.lua */; };
 		AC11EE7A1E96C0A900FF9F04 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE741E96C0A900FF9F04 /* app.xml */; };
 		AC11EE7B1E96C0A900FF9F04 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE751E96C0A900FF9F04 /* demo.xml */; };
-		AC11EE7C1E96C0A900FF9F04 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE761E96C0A900FF9F04 /* kit */; };
 		AC11EE7D1E96C0A900FF9F04 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE771E96C0A900FF9F04 /* sample */; };
 		AC11EE7E1E96C0A900FF9F04 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE781E96C0A900FF9F04 /* widget */; };
 		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
@@ -69,7 +68,6 @@
 		AC11EE731E96C0A900FF9F04 /* App.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.lua; path = playground/App.lua; sourceTree = "<group>"; };
 		AC11EE741E96C0A900FF9F04 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = app.xml; path = playground/app.xml; sourceTree = "<group>"; };
 		AC11EE751E96C0A900FF9F04 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
-		AC11EE761E96C0A900FF9F04 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
 		AC11EE771E96C0A900FF9F04 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
 		AC11EE781E96C0A900FF9F04 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
 		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				AC11EE731E96C0A900FF9F04 /* App.lua */,
 				AC11EE741E96C0A900FF9F04 /* app.xml */,
 				AC11EE751E96C0A900FF9F04 /* demo.xml */,
-				AC11EE761E96C0A900FF9F04 /* kit */,
 				AC11EE771E96C0A900FF9F04 /* sample */,
 				AC11EE781E96C0A900FF9F04 /* widget */,
 				AC94B8F01E7FD296002838C4 /* luaview.png */,
@@ -299,7 +296,6 @@
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
-				AC11EE7C1E96C0A900FF9F04 /* kit in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
 			);

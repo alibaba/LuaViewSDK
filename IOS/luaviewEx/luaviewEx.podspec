@@ -41,6 +41,6 @@ TODO: Add long description of the pod here.
     s.dependency 'LuaViewSDK'
     s.dependency 'SDWebImage', '~> 3.7.5'
 
-s.xcconfig = { 'INFOPLIST_FILE' =>  '../../luaviewEx/Classes/luaviewEx-info.plist'}
+s.xcconfig = { 'INFOPLIST_FILE' =>  '../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist'}
 
 end
