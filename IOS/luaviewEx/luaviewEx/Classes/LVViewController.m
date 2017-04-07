@@ -21,7 +21,7 @@
     NSURL *bundleUrl = [[NSBundle mainBundle] URLForResource:@"luaviewEx" withExtension:@"bundle"];
     NSBundle *customBundle = [NSBundle bundleWithURL:bundleUrl];
     NSString *bundlePath = [customBundle bundlePath];
-    if (self = [super initWithPackage:bundlePath mainScript:@"main.lua"]) {
+    if (self = [super initWithPackage:bundlePath mainScript:@"kit/main.lua"]) {
         self.args = @{@"page":@"App"};
     }
     
