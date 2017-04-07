@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVCollectionViewCell.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVCollectionViewCell.h

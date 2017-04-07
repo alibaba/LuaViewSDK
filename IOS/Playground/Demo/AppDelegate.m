@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "JHSLuaViewController.h"
+#import "LVViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +19,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    JHSLuaViewController* controller = [[JHSLuaViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
+    LVViewController* controller = [[LVViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
     controller.args = @{@"page":@"App"};
     
     self.window.rootViewController = [[UINavigationController alloc]

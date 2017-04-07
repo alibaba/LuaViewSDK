@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVTimer.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVTimer.h

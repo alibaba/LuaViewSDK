@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/layout/UIView+JUFLXNode.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/layout/UIView+JUFLXNode.h

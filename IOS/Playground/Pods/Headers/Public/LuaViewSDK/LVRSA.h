@@ -1,1 +1,1 @@
-../../../../../SDK/LuaViewSDK/Classes/RSA/LVRSA.h
+../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/RSA/LVRSA.h

@@ -1,1 +1,1 @@
-../../../../../lua/lua/lgc.h
+../../../LuaViewSDK/IOS/lua/lua/lgc.h
