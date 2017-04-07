@@ -20,7 +20,11 @@ LuaViewSDK is a cross-platform framework which is designed to build native, dyna
 
 ## Try Playground App
 
-- iOS download (coming soon)
+- iOS download
+
+  [View in App Store](https://itunes.apple.com/cn/app/luaviewplayground/id1216114838?mt=8)
+
+  ![](https://gw.alicdn.com/tfs/TB1aFkkQpXXXXcBXFXXXXXXXXXX-280-280.png)
 
 - Android download
 
@@ -77,7 +81,11 @@ LuaViewSDK是一个跨iOS和Android平台的界面动态化解决方案，使用
 
 ## 试用Playground App
 
-- iOS download (coming soon)
+- iOS download
+
+  [在App Store中查看](https://itunes.apple.com/cn/app/luaviewplayground/id1216114838?mt=8)
+
+  ![](https://gw.alicdn.com/tfs/TB1aFkkQpXXXXcBXFXXXXXXXXXX-280-280.png)
 
 - Android download
 
