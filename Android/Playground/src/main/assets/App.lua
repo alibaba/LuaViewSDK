@@ -42,9 +42,9 @@ function meta:handle()
         },
         Cell = {
             Id = function(section, row)
-                return "SampleCell"
+                return "WidgetCell"
             end,
-            SampleCell = {
+            WidgetCell = {
                 Size = function(section, row)
                     return sys.contW, sys.contH/8
                 end,
@@ -90,7 +90,13 @@ function meta:handle()
                     cell.objs["subitem"]:text(self.sampleSpec[row])
                 end,
                 Callback = function(cell, section, row)
-                    Bridge:require({page="sample/" .. self.sampleData[row]})
+                    if (row == 1) then
+                        Bridge:require({page="sample/douban/Douban"})
+                    end
+
+                    if (row == 2) then
+                        Bridge:require({page="sample/github/GitHub"})
+                    end
                 end
             }
         }
