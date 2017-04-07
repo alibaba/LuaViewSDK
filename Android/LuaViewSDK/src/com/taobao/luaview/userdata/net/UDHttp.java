@@ -11,6 +11,7 @@ package com.taobao.luaview.userdata.net;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.webkit.CookieSyncManager;
 
 import com.taobao.luaview.userdata.base.BaseUserdata;
 import com.taobao.luaview.util.IOUtil;
@@ -280,6 +281,7 @@ public class UDHttp extends BaseUserdata {
                     //timeout
                     connection.setConnectTimeout(mTimeout * 1000);
 
+                    CookieSyncManager.createInstance(getContext());
                     //请求的cookie
                     CookieManager.handleRequestCookies(connection, mUrl);
 

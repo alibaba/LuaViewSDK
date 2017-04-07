@@ -13,7 +13,7 @@ require("kit.pica")
 
 function main(args)
     if (args and type(args) == "table") then
-        local page = require(args.page)
+        local page = require(args.page):new()
         if (page.onCreate == nil) then
             Toast("请实现" .. pageName .. ".lua页面的meta:onCreate()方法!")
         else
