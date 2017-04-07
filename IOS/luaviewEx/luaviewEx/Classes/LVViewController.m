@@ -10,6 +10,7 @@
 #import "LView.h"
 #import "LVExImage.h"
 #import "LVExButton.h"
+#import "LVExCollectionView.h"
 
 @interface LVViewController ()
 
@@ -54,6 +55,7 @@
 - (void)didCreateLuaView:(LView *)view {
     [super didCreateLuaView:view];
     
+    self.lv[@"RefreshCollectionView"] = [LVExCollectionView class];
     self.lv[@"Image"] = [LVExImage class];
     self.lv[@"Button"] = [LVExButton class];
     // 注册 外部对象.
