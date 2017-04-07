@@ -24,6 +24,7 @@
       "luaviewEx/Assets/**/*.{lua}"
     ]
   },
+  "resources": "luaviewEx/luaview/luaview.bundle",
   "public_header_files": "Pod/Classes/*.h",
   "dependencies": {
     "LuaViewSDK": [
@@ -34,6 +35,6 @@
     ]
   },
   "xcconfig": {
-    "INFOPLIST_FILE": "../../luaviewEx/Classes/luaviewEx-info.plist"
+    "INFOPLIST_FILE": "../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist"
   }
 }

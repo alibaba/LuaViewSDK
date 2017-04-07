@@ -18,7 +18,7 @@
 @implementation LVViewController
 
 - (instancetype)initWithPackage {
-    NSURL *bundleUrl = [[NSBundle mainBundle] URLForResource:@"luaviewEx" withExtension:@"bundle"];
+    NSURL *bundleUrl = [[NSBundle mainBundle] URLForResource:@"luaview" withExtension:@"bundle"];
     NSBundle *customBundle = [NSBundle bundleWithURL:bundleUrl];
     NSString *bundlePath = [customBundle bundlePath];
     if (self = [super initWithPackage:bundlePath mainScript:@"kit/main.lua"]) {
@@ -61,7 +61,10 @@
 }
 
 -(void)require:(NSDictionary*)args {
-    LVViewController* c = [[LVViewController alloc] initWithPackage:nil mainScript:@"kit/main.lua"];
+    NSURL *bundleUrl = [[NSBundle mainBundle] URLForResource:@"luaview" withExtension:@"bundle"];
+    NSBundle *customBundle = [NSBundle bundleWithURL:bundleUrl];
+    NSString *bundlePath = [customBundle bundlePath];
+    LVViewController* c = [[LVViewController alloc] initWithPackage:bundlePath mainScript:@"kit/main.lua"];
     c.args = args;
     [self.navigationController pushViewController:c animated:YES];
 }
