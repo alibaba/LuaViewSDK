@@ -12,5 +12,6 @@
 @interface LVViewController : LViewController
 
 @property(nonatomic,copy) NSDictionary* args;
+- (instancetype)initWithPackage;
 
 @end
