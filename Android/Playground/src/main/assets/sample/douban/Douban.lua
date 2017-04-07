@@ -10,10 +10,10 @@ Navigation:title("Douban.lua")
 
 local meta = object:new()
 
-local _httpPrototype = require("sample.http")
+local _httpPrototype = require("sample.douban.http")
 
 function meta:onCreate(args)
-    self.views = pica:getInstance():render("sample/douban.xml")
+    self.views = pica:getInstance():render("sample/douban/douban.xml")
     self.loading = self.views["loading"]
     self.list = self.views["tableView"]
     self.left = self.views["left"]
@@ -26,8 +26,8 @@ function meta:onCreate(args)
 
     self.isLeft = true
 
-    self.theatersUrl = "http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a"
-    self.comingUrl = "http://api.douban.com/v2/movie/coming_soon?apikey=0df993c66c0c636e29ecbb5344252a4a"
+    self.theatersUrl = "http://api.douban.com/v2/movie/in_theaters"
+    self.comingUrl = "http://api.douban.com/v2/movie/coming_soon"
 
     self:handle()
 end
@@ -65,7 +65,7 @@ function meta:handle()
                     return sys.contW, sys.contH/3
                 end,
                 Init = function(cell, section, row)
-                    cell.objs = pica:getInstance():render("sample/douban_cell.xml")
+                    cell.objs = pica:getInstance():render("sample/douban/douban_cell.xml")
                 end,
                 Layout = function(cell, section, row)
                     cell.objs["profile"]:image(self.cacheData["subjects"][row]["images"]["large"])
@@ -80,7 +80,7 @@ function meta:handle()
                     cell.objs["number"]:text(self.cacheData["subjects"][row]["collect_count"] .. "人看过")
 
                     cell.objs["item"]:callback(function()
-                        Bridge:require({page="sample.Douban_detail", detail_id=self.cacheData["subjects"][row]["id"]})
+                        Bridge:require({page="sample.douban.Douban_detail", detail_id=self.cacheData["subjects"][row]["id"]})
                     end)
                 end
             }
@@ -88,7 +88,7 @@ function meta:handle()
         Callback = {
             PullDown = function()
                 if (self.isLeft) then
-                    self.http = self:request(self.theathersUrl,
+                    self.http = self:request(self.theatersUrl,
                         function(data)
                             self.theatersDta = data
                             self.cacheData = self.theatersDta
@@ -110,7 +110,7 @@ function meta:handle()
         }
     })
 
-    self.http = self:request(self.theathersUrl,
+    self.http = self:request(self.theatersUrl,
         function(data)
             self.theatersDta = data
             self.cacheData = self.theatersDta
@@ -139,7 +139,7 @@ function meta:leftClick()
         self.list:reload()
 
         self.loading:show()
-        self.http = self:request(self.theathersUrl,
+        self.http = self:request(self.theatersUrl,
             function(data)
                 self.theatersDta = data
                 self.cacheData = self.theatersDta

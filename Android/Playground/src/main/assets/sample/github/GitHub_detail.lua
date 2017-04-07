@@ -16,9 +16,5 @@ function meta:onCreate(args)
     self.web:loadUrl(args.url)
 end
 
-function meta:handle()
-
-end
-
 return meta
 

@@ -12,9 +12,9 @@ local meta = object:new()
 
 function meta:onCreate(args)
     if (sys.android) then
-        self.views = pica:getInstance():render("sample/github_android.xml")
+        self.views = pica:getInstance():render("sample/github/github_android.xml")
     else
-        self.views = pica:getInstance():render("sample/github_ios.xml")
+        self.views = pica:getInstance():render("sample/github/github_ios.xml")
     end
 
     self.search = self.views["go"]
@@ -73,7 +73,7 @@ function meta:handle()
                                     return sys.contW, sys.contH/3
                                 end,
                                 Init = function(cell, section, row)
-                                    cell.objs = pica:getInstance():render("sample/github_cell.xml")
+                                    cell.objs = pica:getInstance():render("sample/github/github_cell.xml")
                                 end,
                                 Layout = function(cell, section, row)
                                     cell.objs["name"]:text(jsonData["items"][row]["full_name"])
@@ -87,7 +87,7 @@ function meta:handle()
                                     cell.objs["stars"]:text("Stars: " .. jsonData["items"][row]["stargazers_count"])
 
                                     cell.objs["item"]:callback(function()
-                                        Bridge:require({page="sample.GitHub_detail", url=jsonData["items"][row]["html_url"]})
+                                        Bridge:require({page="sample.github.GitHub_detail", url=jsonData["items"][row]["html_url"]})
                                     end)
                                 end
                             }
