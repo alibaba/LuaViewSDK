@@ -16,7 +16,7 @@ function meta:request(url, callback)
     print("tuoli", "http request start")
     self.isCancel = false
     Http():get(url, function(response)
-        print("tuoli", "http request end", self.isCancel)
+        print("tuoli", "http request end")
         if (callback ~= nil and self.isCancel == false) then
             callback(response)
         end

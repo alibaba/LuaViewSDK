@@ -32,7 +32,7 @@ function meta:onCreate(args)
                     return sys.contW, sys.contH*1.5
                 end,
                 Init = function(cell)
-                    cell.objs = pica:getInstance():render("sample/douban_detail.xml")
+                    cell.objs = pica:getInstance():render("sample/douban/douban_detail.xml")
                     Http():get("http://api.douban.com/v2/movie/subject/" .. self.args.detail_id, function(response)
                         if (tostring(response:code()) == "200") then
                             local _jsonData = Json:toTable(tostring(response:data()))
