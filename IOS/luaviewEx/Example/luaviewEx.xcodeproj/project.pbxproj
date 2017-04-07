@@ -24,7 +24,6 @@
 		DC8E1D021E962C8D008A8064 /* App.lua in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1CFB1E962C8D008A8064 /* App.lua */; };
 		DC8E1D031E962C8D008A8064 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1CFC1E962C8D008A8064 /* app.xml */; };
 		DC8E1D041E962C8D008A8064 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1CFD1E962C8D008A8064 /* demo.xml */; };
-		DC8E1D051E962C8D008A8064 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1CFE1E962C8D008A8064 /* kit */; };
 		DC8E1D061E962C8D008A8064 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1CFF1E962C8D008A8064 /* luaview.png */; };
 		DC8E1D071E962C8D008A8064 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1D001E962C8D008A8064 /* sample */; };
 		DC8E1D081E962C8D008A8064 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = DC8E1D011E962C8D008A8064 /* widget */; };
@@ -67,7 +66,6 @@
 		DC8E1CFB1E962C8D008A8064 /* App.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.lua; path = playground/App.lua; sourceTree = "<group>"; };
 		DC8E1CFC1E962C8D008A8064 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = app.xml; path = playground/app.xml; sourceTree = "<group>"; };
 		DC8E1CFD1E962C8D008A8064 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
-		DC8E1CFE1E962C8D008A8064 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
 		DC8E1CFF1E962C8D008A8064 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
 		DC8E1D001E962C8D008A8064 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
 		DC8E1D011E962C8D008A8064 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 				DC8E1CFB1E962C8D008A8064 /* App.lua */,
 				DC8E1CFC1E962C8D008A8064 /* app.xml */,
 				DC8E1CFD1E962C8D008A8064 /* demo.xml */,
-				DC8E1CFE1E962C8D008A8064 /* kit */,
 				DC8E1CFF1E962C8D008A8064 /* luaview.png */,
 				DC8E1D001E962C8D008A8064 /* sample */,
 				DC8E1D011E962C8D008A8064 /* widget */,
@@ -296,7 +293,6 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				DC8E1D061E962C8D008A8064 /* luaview.png in Resources */,
 				DC8E1D031E962C8D008A8064 /* app.xml in Resources */,
-				DC8E1D051E962C8D008A8064 /* kit in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				DC8E1D071E962C8D008A8064 /* sample in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
@@ -510,6 +506,7 @@
 			baseConfigurationReference = 7E6F87FB063AB9201AA9EF27 /* Pods-luaviewEx_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "luaviewEx/luaviewEx-Prefix.pch";
 				INFOPLIST_FILE = "luaviewEx/luaviewEx-Info.plist";
@@ -526,6 +523,7 @@
 			baseConfigurationReference = E911704A145F862454D3D51D /* Pods-luaviewEx_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "luaviewEx/luaviewEx-Prefix.pch";
 				INFOPLIST_FILE = "luaviewEx/luaviewEx-Info.plist";

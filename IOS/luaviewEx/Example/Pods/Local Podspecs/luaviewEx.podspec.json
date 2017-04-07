@@ -19,7 +19,12 @@
     "ios": "8.0"
   },
   "source_files": "luaviewEx/Classes/*",
-  "public_header_files": "Pod/Classes/**/*.h",
+  "resource_bundles": {
+    "luaviewEx": [
+      "luaviewEx/Assets/**/*.{lua}"
+    ]
+  },
+  "public_header_files": "Pod/Classes/*.h",
   "dependencies": {
     "LuaViewSDK": [
 
@@ -27,5 +32,8 @@
     "SDWebImage": [
       "~> 3.7.5"
     ]
+  },
+  "xcconfig": {
+    "INFOPLIST_FILE": "../../luaviewEx/Classes/luaviewEx-info.plist"
   }
 }

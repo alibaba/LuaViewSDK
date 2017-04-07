@@ -32,12 +32,15 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'luaviewEx/Classes/*'
   
-  # s.resource_bundles = {
-  #   'luaviewEx' => ['luaviewEx/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'luaviewEx' => ['luaviewEx/Assets/**/*.{lua}']
+  }
 
     s.public_header_files = 'Pod/Classes/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
     s.dependency 'LuaViewSDK'
     s.dependency 'SDWebImage', '~> 3.7.5'
+
+s.xcconfig = { 'INFOPLIST_FILE' =>  '../../luaviewEx/Classes/luaviewEx-info.plist'}
+
 end

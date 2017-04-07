@@ -17,12 +17,23 @@
 
 @implementation LVViewController
 
+- (instancetype)initWithPackage {
+    NSURL *bundleUrl = [[NSBundle mainBundle] URLForResource:@"luaviewEx" withExtension:@"bundle"];
+    NSBundle *customBundle = [NSBundle bundleWithURL:bundleUrl];
+    NSString *bundlePath = [customBundle bundlePath];
+    if (self = [super initWithPackage:bundlePath mainScript:@"main.lua"]) {
+        self.args = @{@"page":@"App"};
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    // Do any additional setup after loading the view, typically from a nib.
+
 }
 
 - (void)didReceiveMemoryWarning

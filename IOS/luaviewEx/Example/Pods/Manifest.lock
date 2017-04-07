@@ -3,6 +3,7 @@ PODS:
     - LuaViewSDK
     - SDWebImage (~> 3.7.5)
   - LuaViewSDK (2.5.16.5)
+  - MJRefresh (3.1.12)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -10,6 +11,7 @@ PODS:
 DEPENDENCIES:
   - luaviewEx (from `../`)
   - LuaViewSDK (from `https://github.com/alibaba/LuaViewSDK.git`, branch `develop`)
+  - MJRefresh
   - SDWebImage (= 3.7.5)
 
 EXTERNAL SOURCES:
@@ -25,8 +27,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/alibaba/LuaViewSDK.git
 
 SPEC CHECKSUMS:
-  luaviewEx: dfcbe4d846325d9686c7525cfadd4e94f19c8ba0
+  luaviewEx: 6fd6581868833a6b12a26b77b5eb352c36b70167
   LuaViewSDK: 54bae1ca82369020590e4b4db5b7a9a552f8abbb
+  MJRefresh: 11e1c9d86f2093ddcdbda7836bc2da477ddf568d
   SDWebImage: 033e39d6f389724696c4d790b4daffcb4395a9f6
 
 COCOAPODS: 0.39.0
