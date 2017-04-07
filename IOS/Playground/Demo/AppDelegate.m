@@ -21,7 +21,8 @@
     
     LVViewController* controller = [[LVViewController alloc] initWithPackage];
     
-    //    LVViewController* controller = [[LVViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
+//    LVViewController* controller = [[LVViewController alloc] initWithPackage:[[NSBundle mainBundle] resourcePath] mainScript:@"kit/main.lua"];
+//    self.args = @{@"page":@"App"};
     
     self.window.rootViewController = [[UINavigationController alloc]
                                       initWithRootViewController:controller];
