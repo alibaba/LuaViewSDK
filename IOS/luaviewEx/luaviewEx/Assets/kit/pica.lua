@@ -99,7 +99,9 @@ function pica:isViewElement(element)
         view = View()
     elseif (element.name == "Text") then
         view = Label()
-        view:ellipsize(Ellipsize.END)   -- default setting
+        if (sys.android) then
+            view:ellipsize(Ellipsize.END)   -- default setting
+        end
         view:textColor(0x000000)
     elseif (element.name == "Button") then
         view = Button()
