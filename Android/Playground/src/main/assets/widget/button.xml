@@ -1,4 +1,4 @@
-<View id="root" frame="0, 0, sys.contW, sys.contH/3" css="{flex-direction='column'}" >
+<View frame="0, 0, sys.contW, sys.contH/3" css="{flex-direction='column'}" >
     <View css="{flex-direction='row', flex=1}">
         <Button id="button1" css="{flex=1, margin=5}" title="Default" borderWidth="1" borderColor="0x000000"></Button>
         <Button id="button2" css="{flex=1, margin=5}" title="BG Color" bg="0xA066D3"></Button>

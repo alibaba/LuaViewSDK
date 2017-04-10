@@ -25,6 +25,7 @@ function pica:getInstance()
         print("tuoli", "require kit.slaxdom start")
         self.xmlParser = require("kit.slaxdom")
         print("tuoli", "require kit.slaxdom end")
+        self.allViewObjects = {}   -- 用于存储所有用该xmlParser解析的xml里的UI对象, 否则在iOS会被回收
     end
 
     return self.instance
@@ -128,6 +129,7 @@ function pica:isViewElement(element)
 
     if (view ~= nil) then
         self.objs[element] = view
+        table.insert(self.allViewObjects, view)
         return true
     else
         return false

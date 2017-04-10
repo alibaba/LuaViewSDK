@@ -1,4 +1,4 @@
-<View id="root" frame="0, 0, sys.contW, sys.contH*2.5" css="{flex-direction='column'}" >
+<View frame="0, 0, sys.contW, sys.contH*2.5" css="{flex-direction='column'}" >
     <View css="{height=sys.contH/10}" bg="0x004B97">
         <Text css="{flex=1, margin=10}" text="Color" fontSize="20" textColor="0xffffff"></Text>
     </View>
