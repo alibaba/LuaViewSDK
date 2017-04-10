@@ -62,7 +62,7 @@ function meta:handle()
         },
         Callback = {
             Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-                self.header:text("Visible Items: " .. firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount)
+                self.header:text("Visible Items: " .. firstVisibleSection * firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount - 1)
             end,
             PullDown = function()
                 self.timer:start(3)
