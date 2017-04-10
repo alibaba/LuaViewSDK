@@ -42,6 +42,7 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
     s.dependency 'LuaViewSDK'
     s.dependency 'SDWebImage', '~> 3.7.5'
+    s.dependency 'MJRefresh'
 
 s.xcconfig = { 'INFOPLIST_FILE' =>  '../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist'}
 

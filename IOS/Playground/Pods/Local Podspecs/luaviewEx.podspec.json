@@ -32,6 +32,9 @@
     ],
     "SDWebImage": [
       "~> 3.7.5"
+    ],
+    "MJRefresh": [
+
     ]
   },
   "xcconfig": {
