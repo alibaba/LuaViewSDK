@@ -639,6 +639,21 @@ static int removeAllSubviews (lua_State *L) {
     return 0;
 }
 
+
+static int bringToFront (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            UIView* superView = view.superview;
+            [superView bringSubviewToFront:view];
+            lua_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int layerMode(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -691,6 +706,24 @@ static int hide(lua_State *L) {
         if( view ){
             view.hidden = YES;
             return 0;
+        }
+    }
+    return 0;
+}
+
+static int visible(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if ( lua_gettop(L)>=2 ) {
+                BOOL yes = lua_toboolean(L, 2);
+                view.hidden = !yes;
+                return 0;
+            } else {
+                lua_pushboolean(L, !view.hidden );
+                return 1;
+            }
         }
     }
     return 0;
@@ -1358,6 +1391,14 @@ static int onClick (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static int onShow (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_SHOW, NO);
+}
+
+static int onHide (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_HIDE, NO);
+}
+
 static void removeOnTouchEventGesture(UIView* view){
     NSArray< UIGestureRecognizer *> * gestures = view.gestureRecognizers;
     for( LVGesture* g in gestures ) {
@@ -1379,7 +1420,7 @@ static int onTouch (lua_State *L) {
         
         LVGesture* gesture = [[LVGesture alloc] init:L];
         gesture.onTouchEventCallback = ^(LVGesture* gesture, int argN){
-            [view lv_callLuaByKey1:@STR_ON_TOUCH key2:nil argN:1];
+            [view lv_callLuaCallback:@STR_ON_TOUCH key2:nil argN:1];
         };
         [view addGestureRecognizer:gesture];
     }
@@ -1409,7 +1450,7 @@ static int __tostring (lua_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callLuaCallback:@STR_ON_LAYOUT];
 }
 
 static int releaseObject(lua_State *L) {
@@ -1545,7 +1586,7 @@ static int invalidate (lua_State *L) {
 
 static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
-    // visible
+    {"visible",    visible },
     
     {"hide",    hide },//__deprecated_msg("Use hidden")
     {"isHide",    isHide },//__deprecated_msg("Use hidden")
@@ -1606,7 +1647,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"removeFromSuper", removeFromSuperview },
     {"removeFromParent", removeFromSuperview }, //__deprecated_msg("Use removeFromSuper")
     {"removeAllViews", removeAllSubviews },
-    //{"bringToFront", bringToFront},
+    {"bringToFront", bringToFront},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
@@ -1627,8 +1668,9 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"onLayout",     onLayout },
     {"onClick",     onClick },
     {"onTouch",     onTouch },
-    // onShow
-    // onHide
+    {"onShow",     onShow },
+    {"onHide",     onHide },
+    
     // onLongClick
     
     {"hasFocus",        isFirstResponder },
@@ -1662,7 +1704,6 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     // padding
     // margin
     
-    // getNativeView
     {"getNativeView", getNativeView}, //__deprecated_msg("Use nativeView")
     {"nativeView", getNativeView},
     

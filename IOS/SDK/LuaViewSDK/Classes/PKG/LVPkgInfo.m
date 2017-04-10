@@ -27,6 +27,10 @@
             self.url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL key2:LV_PKGINFO_URL2];
             self.sha256 = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
             self.changeGrammar = YES;
+            // 检查后缀名, 如果是.szip, 说明是标准语法格式, 不需要转换(兼容安卓)
+            if( [self.url hasSuffix:@".szip"] ) {
+                self.changeGrammar = NO;
+            }
         }
         self.url = [self stringByDecodingURLFormat:self.url]; // 下载地址可能需要解码
         self.url = [self addHttpPrefix:self.url];// 下载地址可能需要加https前缀

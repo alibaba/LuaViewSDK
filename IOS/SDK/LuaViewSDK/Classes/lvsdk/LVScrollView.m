@@ -51,7 +51,7 @@
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callLuaCallback:@STR_ON_LAYOUT];
 }
 
 #pragma -mark ScrollView

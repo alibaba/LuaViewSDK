@@ -202,7 +202,10 @@
 @interface LuaViewCore ()
 
 -(void) callLuaToExecuteServerCmd;
+
+#ifdef DEBUG
 @property (nonatomic,strong) LVDebugConnection* debugConnection;
+#endif
 
 @end
 

@@ -249,7 +249,7 @@
 				TargetAttributes = {
 					3CC2F8191C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = R4T52FY9CM;
+						DevelopmentTeam = EAA28CVMQM;
 						ProvisioningStyle = Automatic;
 					};
 					3CC2F8321C706B1D00D1E0B7 = {
@@ -511,7 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = EAA28CVMQM;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -529,7 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = EAA28CVMQM;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;

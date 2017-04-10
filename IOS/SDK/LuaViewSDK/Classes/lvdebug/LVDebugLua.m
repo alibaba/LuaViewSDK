@@ -1,4 +1,7 @@
 
+
+#ifdef DEBUG
+
 // debug.lua
 char g_debug_lua[10674] = {
     '_','D','E','B','U','G','_','F','I','L','E',' ','=',' ','"','d','e','b','u','g','.','l','u','a','"',0xa,
@@ -756,4 +759,5 @@ char g_debug_lua[10674] = {
     0xa,
     0
 };
+#endif
 

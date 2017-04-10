@@ -152,6 +152,8 @@ typedef struct _LVUserDataInfo {
 #define STR_ON_CLICK    "onClick"
 #define STR_ON_DRAW     "onDraw"
 #define STR_ON_TOUCH    "onTouch"
+#define STR_ON_SHOW     "onShow"
+#define STR_ON_HIDE     "onHide"
 #define STR_onPageStarted   "onPageStarted"
 #define STR_onPageFinished  "onPageFinished"
 #define STR_onReceivedError "onReceivedError"

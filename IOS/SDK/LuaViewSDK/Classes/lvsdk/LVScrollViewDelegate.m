@@ -21,7 +21,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"Scrolling"];
+    [self.owner lv_callLuaCallback:@"Scrolling"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidScroll:)] ) {
         [self.delegate scrollViewDidScroll:scrollView];
     }
@@ -34,34 +34,34 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollEnd"];
+    [self.owner lv_callLuaCallback:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)] ) {
         [self.delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollEnd"];
+    [self.owner lv_callLuaCallback:@"ScrollEnd"];
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)] ) {
         [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.owner lv_callLuaByKey1:@"ScrollBegin"];
+    [self.owner lv_callLuaCallback:@"ScrollBegin"];
     if( [self.delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)] ) {
         [self.delegate scrollViewWillBeginDragging:scrollView];
     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    [self.owner lv_callLuaByKey1:@"DragEnd"];
+    [self.owner lv_callLuaCallback:@"DragEnd"];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self.owner lv_callLuaByKey1:@"DragEnd"];
+    [self.owner lv_callLuaCallback:@"DragEnd"];
     if( !decelerate ) {
-        [self.owner lv_callLuaByKey1:@"ScrollEnd"];
+        [self.owner lv_callLuaCallback:@"ScrollEnd"];
     }
     if( [self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)] ) {
         [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
