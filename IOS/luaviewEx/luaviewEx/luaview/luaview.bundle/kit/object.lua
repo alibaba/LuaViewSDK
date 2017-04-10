@@ -6,14 +6,12 @@
 -- Date: 17/3/30
 --
 
-local meta = {}
+object = {}
 
-function meta:new(o)
+function object:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
-
-object = meta
 
