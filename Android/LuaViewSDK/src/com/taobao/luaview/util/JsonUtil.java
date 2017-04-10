@@ -22,6 +22,17 @@ public class JsonUtil {
      * @param table
      * @return
      */
+    public static String toStringPlain(LuaTable table) {
+        JSONObject obj = toJSONObject(table);
+        return obj.toString();
+    }
+
+    /**
+     * convert a lua table to data string
+     *
+     * @param table
+     * @return
+     */
     public static String toString(LuaTable table) {
         JSONObject obj = toJSONObject(table);
         try {
