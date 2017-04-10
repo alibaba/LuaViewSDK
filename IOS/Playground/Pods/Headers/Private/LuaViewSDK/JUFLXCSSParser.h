@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/layout/JUFLXCSSParser.h
+../../../../../SDK/LuaViewSDK/Classes/layout/JUFLXCSSParser.h

@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVTransform3D.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVTransform3D.h

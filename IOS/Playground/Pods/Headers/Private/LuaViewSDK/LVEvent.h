@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVEvent.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVEvent.h

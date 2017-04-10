@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVLabel.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVLabel.h

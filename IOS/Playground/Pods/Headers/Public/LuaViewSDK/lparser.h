@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lparser.h
+../../../../../lua/lua/lparser.h

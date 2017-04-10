@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lapi.h
+../../../../../lua/lua/lapi.h

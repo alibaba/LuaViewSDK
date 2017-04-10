@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVPagerViewCell.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVPagerViewCell.h

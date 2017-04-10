@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lundump.h
+../../../../../lua/lua/lundump.h

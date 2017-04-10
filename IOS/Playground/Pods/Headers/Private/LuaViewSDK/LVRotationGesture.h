@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVRotationGesture.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVRotationGesture.h

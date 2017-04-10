@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lfunc.h
+../../../../../lua/lua/lfunc.h

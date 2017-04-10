@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVNetworkStatus.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVNetworkStatus.h

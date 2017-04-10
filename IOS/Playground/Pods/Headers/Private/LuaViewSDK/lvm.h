@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lvm.h
+../../../../../lua/lua/lvm.h

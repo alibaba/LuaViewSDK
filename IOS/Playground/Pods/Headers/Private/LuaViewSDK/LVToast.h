@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVToast.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVToast.h

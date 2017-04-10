@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVNavigation.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVNavigation.h

@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVAudioPlayer.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVAudioPlayer.h

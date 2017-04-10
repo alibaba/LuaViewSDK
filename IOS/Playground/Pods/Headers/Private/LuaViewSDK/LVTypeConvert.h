@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVTypeConvert.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVTypeConvert.h

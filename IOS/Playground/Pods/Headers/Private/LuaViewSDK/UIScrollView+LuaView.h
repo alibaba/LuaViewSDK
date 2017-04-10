@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/UIScrollView+LuaView.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/UIScrollView+LuaView.h

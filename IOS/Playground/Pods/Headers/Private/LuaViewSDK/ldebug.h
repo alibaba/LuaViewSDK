@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/ldebug.h
+../../../../../lua/lua/ldebug.h

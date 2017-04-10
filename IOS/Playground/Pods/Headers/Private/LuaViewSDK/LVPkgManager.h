@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/PKG/LVPkgManager.h
+../../../../../SDK/LuaViewSDK/Classes/PKG/LVPkgManager.h

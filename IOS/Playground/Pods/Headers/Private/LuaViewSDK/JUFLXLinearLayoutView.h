@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/layout/LayoutExtensions/JUFLXLinearLayoutView.h
+../../../../../SDK/LuaViewSDK/Classes/layout/LayoutExtensions/JUFLXLinearLayoutView.h

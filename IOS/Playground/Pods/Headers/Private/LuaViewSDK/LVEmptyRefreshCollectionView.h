@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVEmptyRefreshCollectionView.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVEmptyRefreshCollectionView.h

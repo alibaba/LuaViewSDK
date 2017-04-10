@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVCanvas.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVCanvas.h

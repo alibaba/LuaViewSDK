@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVFile.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVFile.h

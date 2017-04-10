@@ -14,10 +14,6 @@ function meta:onCreate(args)
     self.views = pica:getInstance():render("widget/list.xml")
     self.list = self.views["tableView"]
     self.header = self.views["headerText"]
-    if (not sys.android) then
-        -- iOS还有bug，暂时屏蔽
-        self.header:hide()
-    end
 
     self.timer = Timer()
     self:handle()

@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVAnimate.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVAnimate.h

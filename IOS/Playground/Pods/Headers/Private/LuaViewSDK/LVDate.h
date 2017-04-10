@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVDate.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVDate.h

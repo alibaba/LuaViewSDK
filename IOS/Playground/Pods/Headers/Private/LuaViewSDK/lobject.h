@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lobject.h
+../../../../../lua/lua/lobject.h

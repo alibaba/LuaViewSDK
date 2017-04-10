@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVLuaObjBox.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVLuaObjBox.h

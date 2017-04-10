@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVCustomPanel.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVCustomPanel.h

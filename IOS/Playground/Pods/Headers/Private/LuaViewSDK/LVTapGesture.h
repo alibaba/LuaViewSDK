@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVTapGesture.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVTapGesture.h

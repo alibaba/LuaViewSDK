@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lstate.h
+../../../../../lua/lua/lstate.h

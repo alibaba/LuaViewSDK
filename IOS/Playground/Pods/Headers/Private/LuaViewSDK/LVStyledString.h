@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVStyledString.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVStyledString.h

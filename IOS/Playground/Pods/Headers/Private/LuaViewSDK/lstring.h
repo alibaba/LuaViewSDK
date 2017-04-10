@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/lstring.h
+../../../../../lua/lua/lstring.h

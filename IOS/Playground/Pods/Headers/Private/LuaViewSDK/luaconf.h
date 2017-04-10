@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/luaconf.h
+../../../../../lua/lua/luaconf.h

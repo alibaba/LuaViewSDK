@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVPinchGesture.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVPinchGesture.h

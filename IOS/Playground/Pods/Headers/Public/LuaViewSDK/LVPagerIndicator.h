@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVPagerIndicator.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVPagerIndicator.h

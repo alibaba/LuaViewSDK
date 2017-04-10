@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVMethod.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVMethod.h

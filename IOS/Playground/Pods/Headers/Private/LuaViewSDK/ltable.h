@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/lua/lua/ltable.h
+../../../../../lua/lua/ltable.h

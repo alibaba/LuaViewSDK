@@ -7,7 +7,9 @@ target 'Demo' do
     pod 'MJRefresh'
     pod 'SDWebImage', '3.7.5'
     
-    pod 'LuaViewSDK', :git => 'https://github.com/alibaba/LuaViewSDK.git',  :branch=>'develop'
+    #pod 'LuaViewSDK', :git => 'https://github.com/alibaba/LuaViewSDK.git',  :branch=>'develop'
+    
+    pod 'LuaViewSDK', :path => '../../'
     pod 'luaviewEx', :path => '../luaviewEx'
 end
 

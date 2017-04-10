@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvdebug/LVDebuger.h
+../../../../../SDK/LuaViewSDK/Classes/lvdebug/LVDebuger.h

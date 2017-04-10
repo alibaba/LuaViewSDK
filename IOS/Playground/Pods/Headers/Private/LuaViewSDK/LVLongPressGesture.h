@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVLongPressGesture.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVLongPressGesture.h

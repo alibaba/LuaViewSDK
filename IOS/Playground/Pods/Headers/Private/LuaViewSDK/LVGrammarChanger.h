@@ -1,1 +1,1 @@
-../../../LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvsdk/LVGrammarChanger.h
+../../../../../SDK/LuaViewSDK/Classes/lvsdk/LVGrammarChanger.h
