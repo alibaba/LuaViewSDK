@@ -166,7 +166,7 @@ static int title (lua_State *L) {
                 return 0;
             } else { // getValue
                 for (int j=0; j<4; j++ ){
-                    NSString* text1 = [button titleForState:g_states[j++] ];
+                    NSString* text1 = [button titleForState:g_states[j] ];
                     lua_pushstring(L, text1.UTF8String);
                 }
                 return 4;
