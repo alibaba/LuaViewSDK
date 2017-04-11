@@ -346,7 +346,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param binders
      * @return
      */
-    public LuaViewCore registerLibs(LuaValue... binders) {
+    public synchronized LuaViewCore registerLibs(LuaValue... binders) {
         if (mGlobals != null && binders != null) {
             for (LuaValue binder : binders) {
                 mGlobals.tryLazyLoad(binder);
@@ -362,7 +362,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param obj
      * @return
      */
-    public LuaViewCore register(final String luaName, final Object obj) {
+    public synchronized LuaViewCore register(final String luaName, final Object obj) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             final LuaValue value = mGlobals.get(luaName);
             if (obj != value) {
@@ -380,7 +380,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param clazz
      * @return
      */
-    public LuaViewCore registerPanel(final Class<? extends LVCustomPanel> clazz) {
+    public synchronized LuaViewCore registerPanel(final Class<? extends LVCustomPanel> clazz) {
         return registerPanel(clazz != null ? clazz.getSimpleName() : null, clazz);
     }
 
@@ -391,7 +391,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param clazz
      * @return
      */
-    public LuaViewCore registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
+    public synchronized LuaViewCore registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
             final LuaValue value = mGlobals.get(luaName);
             if (value == null || value.isnil()) {
@@ -411,7 +411,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param luaName
      * @return
      */
-    public LuaViewCore unregister(final String luaName) {
+    public synchronized LuaViewCore unregister(final String luaName) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             mGlobals.set(luaName, LuaValue.NIL);
         }
@@ -803,7 +803,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     /**
      * 销毁的时候从外部调用，清空所有外部引用
      */
-    public void onDestroy() {
+    public synchronized void onDestroy() {
         clearCache();
         if (mGlobals != null) {
             mGlobals.onDestroy();
