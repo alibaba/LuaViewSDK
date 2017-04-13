@@ -27,7 +27,7 @@ end
 
 function meta:handle()
     local isSearching = false
-    self.search:callback(function()
+    self.search:onClick(function()
         if (not sys.android) then
             self.input:cancelFocus()
         end
@@ -55,7 +55,7 @@ function meta:handle()
                 if (table.getn(jsonData["items"]) == 0) then
                     Toast("No Result")
                 else
-                    local tableData = {
+                    self.list:initParams({
                         Section = {
                             SectionCount = function()
                                 return 1
@@ -86,16 +86,13 @@ function meta:handle()
                                     cell.objs["profile"]:scaleType(ScaleType.FIT_CENTER)
                                     cell.objs["stars"]:text("Stars: " .. jsonData["items"][row]["stargazers_count"])
 
-                                    cell.objs["item"]:callback(function()
+                                    cell.objs["item"]:onClick(function()
                                         Bridge:require({page="sample.github.GitHub_detail", url=jsonData["items"][row]["html_url"]})
                                     end)
                                 end
                             }
                         }
-                    }
-
-                    self.list:initParams(tableData)
-                    self.list:reload()
+                    })
                 end
             else
                 Toast("Request Error")

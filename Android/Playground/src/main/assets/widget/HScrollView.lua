@@ -20,7 +20,7 @@ end
 function meta:handle()
     for k, v in pairs(self.views) do
         if k ~= "scroller" then
-            v:callback(function()
+            v:onClick(function()
                 v:backgroundColor(0xEB3131)
                 for _k, _v in pairs(self.views) do
                     if _k ~= "scroller" then

@@ -90,8 +90,6 @@ function meta:onCreate(args)
             }
         }
     })
-
-    self.list:reload()
 end
 
 return meta

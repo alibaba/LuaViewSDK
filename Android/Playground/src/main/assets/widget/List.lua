@@ -15,16 +15,10 @@ function meta:onCreate(args)
     self.list = self.views["tableView"]
     self.header = self.views["headerText"]
 
-    self.timer = Timer()
     self:handle()
 end
 
 function meta:handle()
-    self.timer:callback(function()
-        self.list:stopRefreshing()
-        self.timer:cancel()
-    end)
-
     self.list:initParams({
         Section = {
             SectionCount = function()
@@ -63,14 +57,9 @@ function meta:handle()
         Callback = {
             Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
                 self.header:text("Visible Items: " .. firstVisibleSection * firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount - 1)
-            end,
-            PullDown = function()
-                self.timer:start(3)
             end
         }
     })
-
-    self.list:reload()
 end
 
 return meta

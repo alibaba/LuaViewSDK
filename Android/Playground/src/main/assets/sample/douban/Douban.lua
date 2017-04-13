@@ -35,11 +35,11 @@ end
 function meta:handle()
     self.loading:show()
 
-    self.left:callback(function()
+    self.left:onClick(function()
         self:leftClick()
     end)
 
-    self.right:callback(function()
+    self.right:onClick(function()
         self:rightClick()
     end)
 
@@ -79,7 +79,7 @@ function meta:handle()
                     cell.objs["character"]:text(director .. "\n" .. actors)
                     cell.objs["number"]:text(self.cacheData["subjects"][row]["collect_count"] .. "人看过")
 
-                    cell.objs["item"]:callback(function()
+                    cell.objs["item"]:onClick(function()
                         Bridge:require({page="sample.douban.Douban_detail", detail_id=self.cacheData["subjects"][row]["id"]})
                     end)
                 end
