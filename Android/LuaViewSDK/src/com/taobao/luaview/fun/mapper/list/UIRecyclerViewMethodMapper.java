@@ -8,10 +8,14 @@
 
 package com.taobao.luaview.fun.mapper.list;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.list.UDBaseListOrRecyclerView;
 import com.taobao.luaview.userdata.list.UDBaseRecyclerView;
 import com.taobao.luaview.userdata.list.UDRecyclerView;
+import com.taobao.luaview.util.DimenUtil;
 
 import org.luaj.vm2.Varargs;
 
@@ -59,5 +63,19 @@ public class UIRecyclerViewMethodMapper<U extends UDRecyclerView> extends UIBase
         Varargs ret = super.initParams(view, varargs);
         this.reload(view, varargs);
         return ret;
+    }
+
+    @Override
+    public Varargs offset(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setScrollXY(view, varargs);
+        } else {
+            LinearLayoutManager layoutManager = (LinearLayoutManager) view.getLVRecyclerView().getLayoutManager();
+            int position = layoutManager.findFirstVisibleItemPosition();
+            View firstVisiableChildView = layoutManager.findViewByPosition(position);
+            int itemHeight = firstVisiableChildView.getHeight();
+            int dy = (position) * itemHeight - firstVisiableChildView.getTop();
+            return varargsOf(valueOf(0), valueOf(DimenUtil.pxToDpi(dy)));
+        }
     }
 }

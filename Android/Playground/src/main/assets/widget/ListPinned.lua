@@ -16,17 +16,21 @@ function meta:onCreate(args)
     self.list:initParams({
         Section = {
             SectionCount = function()
-                return 1
+                return (1 + 1 + 12)
             end,
             RowCount = function(section)
-                return 10*12 + 2
+                if (section == 1 or section == 2) then
+                    return 1
+                else
+                    return 10
+                end
             end
         },
         Cell = {
             Id = function(section, row)
-                if (row == 1) then
+                if (section == 1) then
                     return "HeaderCell"
-                elseif (row == 2) then
+                elseif (section == 2) then
                     return "PinnedCell", Pinned.YES
                 else
                     return "CommonCell"
@@ -50,6 +54,7 @@ function meta:onCreate(args)
                     for k, v in pairs(cell.objs) do
                         if k ~= "scroller" then
                             v:onClick(function()
+                                self.gotoTop:show()
                                 v:backgroundColor(0xEB3131)
                                 for _k, _v in pairs(cell.objs) do
                                     if _k ~= "scroller" then
@@ -64,9 +69,9 @@ function meta:onCreate(args)
                                 local index = math.floor(x/(sys.contW/4))
                                 -- todo: SDK需要统一这个API的第三个参数offset
                                 if (sys.android) then
-                                    self.list:scrollToCell(1, 3 + index*10, sys.contH/10, false)
+                                    self.list:scrollToCell(index+3, 1, sys.contH/10, false)
                                 else
-                                    self.list:scrollToCell(1, 3 + index*10, -sys.contH/10, false)
+                                    self.list:scrollToCell(index+3, 1, -sys.contH/10, false)
                                 end
                             end)
                         end
@@ -81,40 +86,17 @@ function meta:onCreate(args)
                     cell.objs = pica:getInstance():render("widget/button.xml")
                 end,
                 Layout = function(cell, section, row)
-                    cell.objs["button1"]:title(tostring(row))
-                    print("tuoli ddd", section, row)
+                    cell.objs["button1"]:title(tostring((section-2)*10+row-1))
                 end
             }
         },
         Callback = {
             Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-                if (sys.android) then
-                    if (firstVisibleRow >= 2) then
-                        self.gotoTop:show()
-                    else
-                        self.gotoTop:hide()
-                    end
-
-                    local startIndex = firstVisibleSection * firstVisibleRow
-                    local endIndex = firstVisibleRow + visibleCellCount - 1
-                    local index = math.floor(((startIndex+1-3)/10)+1)
-                    if (self.pinnedViews["item"..index]) then
-                        local x, y, w, h = self.pinnedViews["item"..index]:frame()
-                        local dx = (sys.contW - w)/2
-                        self.pinnedViews["scroller"]:offset(x-dx, 0, true)
-                        for _k, _v in pairs(self.pinnedViews) do
-                            if _k ~= "scroller" then
-                                if (_k ~= "item"..index) then
-                                    _v:backgroundColor(0x004B97)
-                                else
-                                    _v:backgroundColor(0xEB3131)
-                                end
-                            end
-                        end
-                    end
-                else
-                end
-            end
+                self:onScrolling()
+            end,
+            ScrollEnd = function(firstVisibleSection, firstVisibleRow, visibleCellCount )
+--                self:onScrollEnd()
+            end,
         }
     })
 
@@ -123,6 +105,7 @@ function meta:onCreate(args)
     self.gotoTop:image("backtop.png")
     self.gotoTop:hide()
     self.gotoTop:onClick(function()
+        self.gotoTop:hide()
         self.list:scrollToCell(1, 1, 0, false)
         if (self.pinnedViews) then
             self.pinnedViews["scroller"]:offset(0, 0, true)
@@ -137,6 +120,52 @@ function meta:onCreate(args)
             end
         end
     end)
+end
+
+function meta:onScrolling()
+    local dx, dy = self.list:offset()
+    print("tuoli dddd", dy, sys.contH*0.3)
+    local diff = dy-sys.contH*0.3
+    if (diff >= 0) then
+        self.gotoTop:show()
+        local index = math.floor(diff/(10*sys.contH/3)+0.01) + 1
+        if (self.pinnedViews["item"..index]) then
+            local x, y, w, h = self.pinnedViews["item"..index]:frame()
+            local dx = (sys.contW - w)/2
+            self.pinnedViews["scroller"]:offset(x-dx, 0, true)
+            for _k, _v in pairs(self.pinnedViews) do
+                if _k ~= "scroller" then
+                    if (_k ~= "item"..index) then
+                        _v:backgroundColor(0x004B97)
+                    else
+                        _v:backgroundColor(0xEB3131)
+                    end
+                end
+            end
+        end
+    else
+        self.gotoTop:hide()
+    end
+end
+
+function meta:onScrollEnd()
+    self:onScrolling()
+
+    local dx, dy = self.list:offset()
+    if (dy <= 0) then
+        if (self.pinnedViews) then
+            self.pinnedViews["scroller"]:offset(0, 0, true)
+            for _k, _v in pairs(self.pinnedViews) do
+                if _k ~= "scroller" then
+                    if (_k ~= "item1") then
+                        _v:backgroundColor(0x004B97)
+                    else
+                        _v:backgroundColor(0xEB3131)
+                    end
+                end
+            end
+        end
+    end
 end
 
 return meta
