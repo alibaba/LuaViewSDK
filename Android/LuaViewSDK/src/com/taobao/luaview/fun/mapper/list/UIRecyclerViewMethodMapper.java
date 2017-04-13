@@ -53,4 +53,11 @@ public class UIRecyclerViewMethodMapper<U extends UDRecyclerView> extends UIBase
     public UDBaseListOrRecyclerView getUDBaseListOrRecyclerView(Varargs varargs) {
         return getUD(varargs);
     }
+
+    @Override
+    public Varargs initParams(U view, Varargs varargs) {
+        Varargs ret = super.initParams(view, varargs);
+        this.reload(view, varargs);
+        return ret;
+    }
 }
