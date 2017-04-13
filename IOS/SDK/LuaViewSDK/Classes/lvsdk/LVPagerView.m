@@ -619,8 +619,6 @@ static int initParams (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"initParams",   initParams },// 回调
         {"reload",    reload},
-        
-        {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
         {"autoScroll", autoScroll}, // IOS: 需要支持正反滚动
