@@ -23,9 +23,9 @@ function meta:onCreate(args)
         self.aboutInfo:nativeView():setLineSpacing(10*sys.scale,1)
     end
 
-    self.widgetData = Json:toTable(' ["Label", "Button", "Image", "TextField", "Loading", "List", "PagerView", "HScrollView", "WebView", "Animation"] ')
+    self.widgetData = Json:toTable(' ["Label", "Button", "Image", "TextField", "Loading", "List", "ListPinned", "PagerView", "HScrollView", "WebView", "Animation"] ')
     self.sampleData = Json:toTable(' ["Douban", "GitHub"] ')
-    self.sampleSpec = Json:toTable(' ["Get movie information from Douban.", "Search repositories from GitHub."] ')
+    self.sampleSpec = Json:toTable(' ["Get movie information from Douban.", "Search repositories on GitHub."] ')
 
     self:handle()
 end
@@ -63,7 +63,6 @@ function meta:handle()
             }
         }
     })
-    self.widgetList:reload()
 
     self.sampleList:initParams({
         Section = {
@@ -101,9 +100,8 @@ function meta:handle()
             }
         }
     })
-    self.sampleList:reload()
 
-    self.widgetTab:callback(function()
+    self.widgetTab:onClick(function()
         self.widgetTab:textColor(0xEB3131)
         self.sampleTab:textColor(0x000000)
         self.aboutTab:textColor(0x000000)
@@ -112,7 +110,7 @@ function meta:handle()
         self.sampleList:hide()
         self.aboutView:hide()
     end)
-    self.sampleTab:callback(function()
+    self.sampleTab:onClick(function()
         self.widgetTab:textColor(0x000000)
         self.sampleTab:textColor(0xEB3131)
         self.aboutTab:textColor(0x000000)
@@ -121,7 +119,7 @@ function meta:handle()
         self.widgetList:hide()
         self.aboutView:hide()
     end)
-    self.aboutTab:callback(function()
+    self.aboutTab:onClick(function()
         self.widgetTab:textColor(0x000000)
         self.sampleTab:textColor(0x000000)
         self.aboutTab:textColor(0xEB3131)

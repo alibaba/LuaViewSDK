@@ -28,6 +28,7 @@
 		AC11EE7B1E96C0A900FF9F04 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE751E96C0A900FF9F04 /* demo.xml */; };
 		AC11EE7D1E96C0A900FF9F04 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE771E96C0A900FF9F04 /* sample */; };
 		AC11EE7E1E96C0A900FF9F04 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE781E96C0A900FF9F04 /* widget */; };
+		AC27157E1E9E344700B82941 /* backtop.png in Resources */ = {isa = PBXBuildFile; fileRef = AC27157D1E9E344700B82941 /* backtop.png */; };
 		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		AC11EE751E96C0A900FF9F04 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
 		AC11EE771E96C0A900FF9F04 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
 		AC11EE781E96C0A900FF9F04 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
+		AC27157D1E9E344700B82941 /* backtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtop.png; sourceTree = "<group>"; };
 		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,6 +182,7 @@
 				AC11EE771E96C0A900FF9F04 /* sample */,
 				AC11EE781E96C0A900FF9F04 /* widget */,
 				AC94B8F01E7FD296002838C4 /* luaview.png */,
+				AC27157D1E9E344700B82941 /* backtop.png */,
 			);
 			name = playground;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
 				AC11EE7D1E96C0A900FF9F04 /* sample in Resources */,
+				AC27157E1E9E344700B82941 /* backtop.png in Resources */,
 				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,

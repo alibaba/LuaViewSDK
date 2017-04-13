@@ -34,7 +34,6 @@ function meta:handle()
             end
         }
     })
-    self.manualSlider:reload()
     self.manualSlider:indicator(self.indicator1)
 
     self.autoSlider:initParams({
@@ -48,7 +47,6 @@ function meta:handle()
             end
         }
     })
-    self.autoSlider:reload()
     self.autoSlider:indicator(self.indicator2)
 end
 
