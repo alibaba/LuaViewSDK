@@ -602,10 +602,24 @@ static int __gc (lua_State *L) {
     return 0;
 }
 
+static int initParams (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
+        int ret =  lv_setCallbackByKey(L, nil, NO);
+        [pageView reloadDataASync];
+        return ret;
+    }
+    return 0;
+}
+
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPagerView globalName:globalName defaultName:@"PagerView"];
     
     const struct luaL_Reg memberFunctions [] = {
+        {"initParams",   initParams },// 回调
+        {"reload",    reload},
+        
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
