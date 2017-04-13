@@ -240,11 +240,24 @@ static int scrollToTop(lua_State *L) {
     return @"CollectionView";
 }
 
+static int initParams (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
+        //reload接口异步拉起，确保layout中也能调用reload
+        int ret =  lv_setCallbackByKey(L, nil, NO);
+        [tableView reloadDataASync];
+        return ret;
+    }
+    return 0;
+}
+
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:[self globalName]];
     
     const struct luaL_Reg memberFunctions [] = {
+        {"initParams",   initParams },
         // refreshEnable // IOS 为实现
         {"reload",    reload},// 安卓支持section row
         
