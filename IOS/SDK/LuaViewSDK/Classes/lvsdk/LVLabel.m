@@ -94,7 +94,7 @@ static int text (lua_State *L) {
                     }
                 }
             } else {
-                // 取值操作
+                // 脚本层无入参(除了self), 则 返回text
                 NSString* text = view.text;
                 lua_pushstring(L, text.UTF8String);
                 return 1;// 返回参数的个数
@@ -118,7 +118,7 @@ static int lineCount(lua_State *L) {
                 return 0;
             }
         } else {
-            // 如果参数个数小于两个说明是取值, 返回参数个数
+            // 脚本层无入参(除了self), 则 返回numberOfLines
             lua_pushnumber(L, view.numberOfLines );// 返回文本的行数
             return 1;// 返回参数个数
         }
@@ -158,7 +158,7 @@ static int textColor (lua_State *L) {
                 return 0;
             }
         } else {
-            // 如果只要一个参数(self), 返回颜色值
+            // 脚本层无入参(除了self), 则 返回颜色值
             UIColor* color = view.textColor;
             NSUInteger c = 0;
             CGFloat a = 0;
@@ -195,7 +195,7 @@ static int font (lua_State *L) {
                 }
                 return 0;
             } else {
-                // 如果参数只有一个, 返回两个参数: 字体名称+字体大小
+                // 脚本层无入参(除了self), 则 返回两个参数: 字体名称+字体大小
                 UIFont* font = view.font;
                 NSString* fontName = font.fontName;
                 CGFloat fontSize = font.pointSize;
@@ -222,7 +222,7 @@ static int fontSize (lua_State *L) {
                 view.font = [UIFont systemFontOfSize:fontSize];
                 return 0;
             } else {
-                // 脚本层无入参, 则返回字体大小
+                // 脚本层无入参(除了self), 则 返回字体大小
                 UIFont* font = view.font;
                 CGFloat fontSize = font.pointSize;
                 lua_pushnumber(L, fontSize);
@@ -248,7 +248,7 @@ static int textAlignment (lua_State *L) {
                 return 0;
             }
         } else {
-            // 脚本层无参数: 则返回 对齐方式的值
+            // 脚本层无入参(除了self), 则 返回 对齐方式的值
             int align = view.textAlignment;
             lua_pushnumber(L, align );
             return 1;
@@ -261,16 +261,18 @@ static int textAlignment (lua_State *L) {
  * 脚本label实例对象label.ellipsize()方法对应的Native实现
  */
 static int ellipsize (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->object);
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取self对应的native对象
         if( lua_gettop(L)>=2 ) {
+            // 两个参数: 第一个对象自身, 第二个参数lineBreakMode
             NSInteger lineBreakMode = lua_tonumber(L, 2);// 2
             if( [view isKindOfClass:[LVLabel class]] ){
                 view.lineBreakMode = lineBreakMode;
                 return 0;
             }
         } else {
+            // 脚本层无入参(除了self), 则 返回 lineBreakMode
             int lineBreakMode = view.lineBreakMode;
             lua_pushnumber(L, lineBreakMode );
             return 1;
