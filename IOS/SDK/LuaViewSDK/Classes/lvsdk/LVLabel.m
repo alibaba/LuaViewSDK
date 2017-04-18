@@ -17,7 +17,6 @@
 
 @implementation LVLabel
 
-
 -(id) init:(NSString*)imageName l:(lua_State*) l{
     self = [super init];
     if( self ){
@@ -36,6 +35,9 @@
 }
 
 #pragma -mark UILabel
+/*
+ * lua脚本中Label() 对应的构造方法
+ */
 static int lvNewLabel(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVLabel class]];
     {
@@ -58,6 +60,9 @@ static int lvNewLabel(lua_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
+/*
+ * 脚本label实例对象label.text()方法对应的Native实现
+ */
 static int text (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ) {
@@ -93,6 +98,9 @@ static int text (lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.lineCount()方法对应的Native实现
+ */
 static int lineCount(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -111,6 +119,9 @@ static int lineCount(lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.adjustFontSize()方法对应的Native实现
+ */
 static int adjustFontSize(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -126,6 +137,9 @@ static int adjustFontSize(lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.textColor()方法对应的Native实现
+ */
 static int textColor (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -150,6 +164,9 @@ static int textColor (lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.font()方法对应的Native实现
+ */
 static int font (lua_State *L) {
     LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
@@ -180,7 +197,9 @@ static int font (lua_State *L) {
     return 0;
 }
 
-
+/*
+ * 脚本label实例对象label.fontSize()方法对应的Native实现
+ */
 static int fontSize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -201,6 +220,9 @@ static int fontSize (lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.textAlign()方法对应的Native实现
+ */
 static int textAlignment (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -220,6 +242,9 @@ static int textAlignment (lua_State *L) {
     return 0;
 }
 
+/*
+ * 脚本label实例对象label.ellipsize()方法对应的Native实现
+ */
 static int ellipsize (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -239,9 +264,14 @@ static int ellipsize (lua_State *L) {
     return 0;
 }
 
+/*
+ * luaview所有扩展类的桥接协议: 只是一个静态协议, luaview统一调用该接口加载luaview扩展的类
+ */
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
+    // 注册lua的构造方法: "Label" 对应的closure 是 "lvNewLabel"
     [LVUtil reg:L clas:self cfunc:lvNewLabel globalName:globalName defaultName:@"Label"];
     
+    // lua Labe构造方法创建的对象对应的方法列表
     const struct luaL_Reg memberFunctions [] = {
         {"text",    text},
         
@@ -263,17 +293,20 @@ static int ellipsize (lua_State *L) {
         {NULL, NULL}
     };
     
+    // 创建Label类的方法列表
     lv_createClassMetaTable(L, META_TABLE_UILabel);
     
-    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
-    luaL_openlib(L, NULL, memberFunctions, 0);
+    luaL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0); // 继承基类View的所有方法列表
+    luaL_openlib(L, NULL, memberFunctions, 0); // 当前类Label特有的方法列表
     
-    const char* keys[] = { "addView", NULL};// 移除多余API
-    lv_luaTableRemoveKeys(L, keys );
+    const char* keys[] = { "addView", NULL};//列出需要移除的多余API
+    lv_luaTableRemoveKeys(L, keys );// 移除冗余API 兼容安卓
     return 1;
 }
 
-
+/*
+ * 脚本中print(obj)的时候会调用该接口 显示该对象的相关信息
+ */
 -(NSString*) description{
     return [NSString stringWithFormat:@"<Label(0x%x) frame = %@>", (int)[self hash], NSStringFromCGRect(self.frame) ];
 }
