@@ -16,11 +16,9 @@
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
-@property (nonatomic,strong) UIImageView* blurImageView;
-@property (nonatomic,strong) UIVisualEffectView *blurEffectView;
 @property (nonatomic,assign) BOOL needCallLuaFunc;
-@property (nonatomic,strong) UITapGestureRecognizer* tapGesture;
 @property (nonatomic,strong) id errorInfo;
+@property (nonatomic,strong) UITapGestureRecognizer* tapGesture;
 @property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
 @end
 
