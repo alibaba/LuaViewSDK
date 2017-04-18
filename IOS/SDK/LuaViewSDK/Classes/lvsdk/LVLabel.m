@@ -58,14 +58,14 @@ static int lvNewLabel(lua_State *L) {
             [view containerAddSubview:label]; // 把label对象加到LuaViewCore里面
         }
     }
-    return 1; /* new userdatum is already on the stack */
+    return 1; // 返回参数的个数
 }
 
 /*
  * 脚本label实例对象label.text()方法对应的Native实现
  */
 static int text (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata)
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata, 对象自身)
     if( user ) {
         LVLabel* view = (__bridge LVLabel *)(user->object);// 当前userdata对应的native对象
         if ( [view isKindOfClass:[LVLabel class]] ) {// 检查类型是否匹配(其实可以不用检查一般一定是对的)
@@ -97,7 +97,7 @@ static int text (lua_State *L) {
                 // 取值操作
                 NSString* text = view.text;
                 lua_pushstring(L, text.UTF8String);
-                return 1;
+                return 1;// 返回参数的个数
             }
         }
     }
@@ -108,7 +108,7 @@ static int text (lua_State *L) {
  * 脚本label实例对象label.lineCount()方法对应的Native实现
  */
 static int lineCount(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata)
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata, 对象自身)
     if( user ){
         LVLabel* view = (__bridge LVLabel *)(user->object);// 获取userdata对应的native对象
         if( lua_gettop(L)>=2 ) {// 检查参数大于等于两个(self+lineCount), 如果只要一个是取值操作, 两个是赋值操作
@@ -130,12 +130,12 @@ static int lineCount(lua_State *L) {
  * 脚本label实例对象label.adjustFontSize()方法对应的Native实现
  */
 static int adjustFontSize(lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata, 对象自身)
     if( user ){
-        BOOL yes = lua_toboolean(L, 2);// 2
-        LVLabel* view = (__bridge LVLabel *)(user->object);
+        BOOL yes = lua_toboolean(L, 2);// 获取第二个参数 bool值
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取userdata对应的native对象
         if( [view isKindOfClass:[LVLabel class]] ){
-            view.adjustsFontSizeToFitWidth = yes;
+            view.adjustsFontSizeToFitWidth = yes;// 是否自适应字体
             
             lua_pushvalue(L,1);
             return 1;
@@ -148,23 +148,24 @@ static int adjustFontSize(lua_State *L) {
  * 脚本label实例对象label.textColor()方法对应的Native实现
  */
 static int textColor (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数永远是self(lua的userdata, 对象自身)
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->object);
-        if( lua_gettop(L)>=2 ) {
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取userdata对应的native对象
+        if( lua_gettop(L)>=2 ) {// 如果参数大于两个
             if( [view isKindOfClass:[LVLabel class]] ){
-                UIColor* color = lv_getColorFromStack(L, 2);
-                view.textColor = color;
+                UIColor* color = lv_getColorFromStack(L, 2); // 获取第二个参数的值(颜色)
+                view.textColor = color; // 设置颜色
                 return 0;
             }
         } else {
+            // 如果只要一个参数(self), 返回颜色值
             UIColor* color = view.textColor;
             NSUInteger c = 0;
             CGFloat a = 0;
             if( lv_uicolor2int(color, &c, &a) ){
-                lua_pushnumber(L, c );
-                lua_pushnumber(L, a);
-                return 2;
+                lua_pushnumber(L, c ); // 颜色值
+                lua_pushnumber(L, a);// 透明度
+                return 2;// 返回参数的个数
             }
         }
     }
@@ -175,29 +176,32 @@ static int textColor (lua_State *L) {
  * 脚本label实例对象label.font()方法对应的Native实现
  */
 static int font (lua_State *L) {
-    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LuaViewCore* luaView = LV_LUASTATE_VIEW(L);// 获取LuaView的内核LuaViewCore
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( luaView && user ){
-        LVLabel* view = (__bridge LVLabel *)(user->object);
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取self对应的native对象
         if( [view isKindOfClass:[LVLabel class]] ){
-            if( lua_gettop(L)>=2 ) {
+            if( lua_gettop(L)>=2 ) {// 参数大于两个
                 if( lua_gettop(L)>=3 && lua_type(L, 2)==LUA_TSTRING ) {
+                    // 参数大于等于三个: 第一个对象自身 第二个是字体名称, 第三个是字体大小
                     NSString* fontName = lv_paramString(L, 2);
                     float fontSize = lua_tonumber(L, 3);
                     UIFont* font = [LVUtil fontWithName:fontName size:fontSize bundle:luaView.bundle];
                     view.font = font;
                 } else {
+                    // 只有两个参数: 第一个对象自身, 第二个字体大小
                     float fontSize = lua_tonumber(L, 2);
                     view.font = [UIFont systemFontOfSize:fontSize];
                 }
                 return 0;
             } else {
+                // 如果参数只有一个, 返回两个参数: 字体名称+字体大小
                 UIFont* font = view.font;
                 NSString* fontName = font.fontName;
                 CGFloat fontSize = font.pointSize;
                 lua_pushstring(L, fontName.UTF8String);
                 lua_pushnumber(L, fontSize);
-                return 2;
+                return 2;// 返回参数的个数
             }
         }
     }
@@ -208,15 +212,17 @@ static int font (lua_State *L) {
  * 脚本label实例对象label.fontSize()方法对应的Native实现
  */
 static int fontSize (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->object);
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取self对应的native对象
         if( [view isKindOfClass:[LVLabel class]] ){
             if( lua_gettop(L)>=2 ) {
+                // 两个参数: 第一个对象自身, 第二个字体大小
                 float fontSize = lua_tonumber(L, 2);
                 view.font = [UIFont systemFontOfSize:fontSize];
                 return 0;
             } else {
+                // 脚本层无入参, 则返回字体大小
                 UIFont* font = view.font;
                 CGFloat fontSize = font.pointSize;
                 lua_pushnumber(L, fontSize);
