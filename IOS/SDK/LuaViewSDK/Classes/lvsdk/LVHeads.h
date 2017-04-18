@@ -88,6 +88,9 @@ typedef struct _LVUserDataInfo {
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------
+/*
+ * 确保所有在luaview扩展类的实例对象都包含有这些基本的属性和方法, 是所有LuaView扩展类的实例对象的通用协议
+ */
 @class LuaViewCore;
 @protocol LVProtocal <NSObject>
 @required
@@ -96,6 +99,9 @@ typedef struct _LVUserDataInfo {
 - (id) lv_nativeObject; // 返回native对象
 @end
 
+/*
+ * luaview所有扩展类的桥接协议: 只是一个静态协议, luaview统一调用该接口加载luaview扩展的类
+ */
 @protocol LVClassProtocal <NSObject>
 @required
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;

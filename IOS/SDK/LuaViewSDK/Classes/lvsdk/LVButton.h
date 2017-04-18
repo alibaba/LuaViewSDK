@@ -11,6 +11,11 @@
 #import "LView.h"
 
 
+/*
+ * luaview虚拟机注册的组件标准: 需要满足两个协议 LVProtocal(功能协议), LVClassProtocal(注册协议)
+ * 
+ *
+ */
 @interface LVButton : UIButton<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
