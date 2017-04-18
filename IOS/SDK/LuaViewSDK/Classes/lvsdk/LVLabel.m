@@ -237,16 +237,18 @@ static int fontSize (lua_State *L) {
  * 脚本label实例对象label.textAlign()方法对应的Native实现
  */
 static int textAlignment (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( user ){
-        LVLabel* view = (__bridge LVLabel *)(user->object);
+        LVLabel* view = (__bridge LVLabel *)(user->object);// 获取self对应的native对象
         if( lua_gettop(L)>=2 ) {
-            NSInteger align = lua_tonumber(L, 2);// 2
+            // 两个参数: 第一个对象自身, 第二个对齐方式
+            NSInteger align = lua_tonumber(L, 2);// 获取第二个参数对齐方式
             if( [view isKindOfClass:[LVLabel class]] ){
                 view.textAlignment = align;
                 return 0;
             }
         } else {
+            // 脚本层无参数: 则返回 对齐方式的值
             int align = view.textAlignment;
             lua_pushnumber(L, align );
             return 1;
