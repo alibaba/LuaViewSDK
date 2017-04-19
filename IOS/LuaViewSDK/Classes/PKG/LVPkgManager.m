@@ -177,11 +177,11 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     if( info ) {
         if( [LVPkgManager compareLocalInfoOfPackage:packageName withServerInfo:info] ){
             [LVPkgManager doDownLoadPackage:packageName withInfo:info callback:callback];
-            return 1;
+            return LV_DOWNLOAD_NET;
         }
-        return 0;
+        return LV_DOWNLOAD_CACHE;
     }
-    return -1;
+    return LV_DOWNLOAD_ERROR;
 }
 
 +(BOOL) sha256Check:(NSData*) data ret:(NSString*) string{
@@ -204,7 +204,7 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
     NSString* sha256 = [LVPkgManager safe_string:info forKey:LV_PKGINFO_SHA256];// SHA256完整性验证
     
     if ( callback == nil ){// 回调一定不是空
-        callback = ^(NSDictionary* dic, NSString* erro ){
+        callback = ^(NSDictionary* dic, NSString* erro , LVDownloadDataType dataType){
         };
     }
     
@@ -219,7 +219,7 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
                         if ( [LVPkgManager unpackageData:data packageName:pkgName localMode:NO] ) {
                             // 解包成功
                             if(  [LVPkgManager wirteTimeForPackage:pkgName time:time] ){// 写标记成功
-                                callback(info, nil);
+                                callback(info, nil, LV_DOWNLOAD_NET);
                                 return ;
                             }
                         }
@@ -227,7 +227,7 @@ NSString * const LV_LOCAL_PACKAGE_TIME_FILE_NAME = @"___time__local__";
                 } else {
                     LVError(@"[downLoadPackage] error: url=%@",url);
                 }
-                callback(info, @"error");
+                callback(info, @"error", LV_DOWNLOAD_ERROR);
             });
         }];
     }

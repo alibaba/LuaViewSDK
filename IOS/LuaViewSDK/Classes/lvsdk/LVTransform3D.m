@@ -21,9 +21,11 @@
 }
 
 static int lvNewTransform3D (lv_State *L) {
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVTransform3D class]];
+    
     {
         NEW_USERDATA(userData, Transform3D);
-        LVTransform3D* trans = [[LVTransform3D alloc] init];
+        LVTransform3D* trans = [[c alloc] init];
         userData->object = CFBridgingRetain(trans);
         trans.transform = CATransform3DIdentity;
         lvL_getmetatable(L, META_TABLE_Transform3D );
@@ -200,11 +202,9 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewTransform3D);
-        lv_setglobal(L, "Transform3D");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewTransform3D globalName:globalName defaultName:@"Transform3D"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__eq", __eq},
         {"__mul", __mul},

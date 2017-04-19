@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.kit;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
@@ -15,10 +23,10 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class DataMethodMapper<U extends UDData> extends BaseMethodMapper<U> {
+    private static final String TAG = "DataMethodMapper";
 
-    private static final String TAG = DataMethodMapper.class.getSimpleName();
     private static final String[] sMethods = new String[]{
             "append",//0
             "toString",//1

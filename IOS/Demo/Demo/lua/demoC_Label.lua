@@ -6,15 +6,16 @@ window.backgroundColor(0xDDDDDD);
 Y0 = 50
 
 att1 = StyledString( "123test",  { fontSize=12, fontWeight=FontWeight.BOLD, fontColor=0x220000ff, foregroundAlpha=0.5 } );
-att2 = StyledString( "测试测试",  { fontSize=30, fontColor=0xff0000, backgroundColor=0xff} );
+att2 = StyledString( "测试",  { fontSize=30, fontColor=0xff0000, backgroundColor=0xff} );
 att3 = StyledString( "2897348",  { fontSize=13, fontColor=0x777777, strikethrough =1} );
 att4 = StyledString( "下划线", { fontSize=9, fontColor=0x777777, underline=true} );
 att5 = StyledString( "粗体", { fontWeight=FontWeight.BOLD } );
 att6 = StyledString( "II斜体II", { fontStyle=FontStyle.ITALIC } );
+att7 = StyledString( 123, { fontSize=13, fontColor=0x777777, strikethrough =1} );
 
 label = Label();
-label.frame(0,Y0,w, 60);
-label.text(att1 + att2 + att3 + att4  + att5  + att6 + "字符串");
+label.frame(0, Y0, w, 60);
+label.text(att1 + att2 + att3 + att4  + att5  + att6 + "字符" + att7);
 
 
 

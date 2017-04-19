@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 
@@ -17,10 +25,10 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "增加调用Lua方法"})
 public class UICustomPanelMethodMapper<U extends UDCustomPanel> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UICustomPanelMethodMapper.class.getSimpleName();
+    private static final String TAG = "UICustomPanelMethodMapper";
     private static final String[] sMethods = new String[]{
             "nativeView",//0
             "getNativeView"//1

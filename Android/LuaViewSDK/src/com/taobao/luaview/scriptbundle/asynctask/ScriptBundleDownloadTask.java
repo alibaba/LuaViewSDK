@@ -1,96 +1,52 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.scriptbundle.asynctask;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.taobao.luaview.global.LuaScriptLoader;
-import com.taobao.luaview.scriptbundle.LuaScriptManager;
-import com.taobao.luaview.util.EncryptUtil;
-import com.taobao.luaview.util.FileUtil;
-import com.taobao.luaview.util.HexUtil;
-import com.taobao.luaview.util.IOUtil;
-import com.taobao.luaview.util.LogUtil;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleDownloadDelegate;
+import com.taobao.luaview.util.DebugUtil;
 
 /**
  * download lua script bundle from server and return saved path in local file system
+ *
  * @author song
  */
-public class ScriptBundleDownloadTask extends AsyncTask<String, Integer, String> {
+public class ScriptBundleDownloadTask extends BaseAsyncTask<String, Integer, String> {
     private Context mContext;
     private LuaScriptLoader.ScriptLoaderCallback mScriptLoaderCallback;
 
     public ScriptBundleDownloadTask(final Context context, LuaScriptLoader.ScriptLoaderCallback callback) {
-        if(context != null) {
+        if (context != null) {
             mContext = context.getApplicationContext();
         }
         mScriptLoaderCallback = callback;
     }
 
     /**
-     * 接受两个参数，第一个是下载的url，第二个是存储的地址
+     * 接受两个参数，第一个是下载的url，第二个是sha256
      *
      * @param params
      * @return
      */
     @Override
     protected String doInBackground(String... params) {
-        InputStream input = null;
-        OutputStream output = null;
-        HttpURLConnection connection = null;
-        try {
-            final String url = params[0];
-            final URL uri = new URL(url);
-            connection = (HttpURLConnection) uri.openConnection();
-            connection.connect();
+        DebugUtil.tsi("luaviewp-scriptDownloadTask");
 
-            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                LogUtil.e("[Server Returned HTTP] ", connection.getResponseCode(), connection.getResponseMessage());
-                return null;
-            }
+        final String url = params[0];
+        final String sha256 = params.length > 1 ? params[1] : null;
 
-            // download the file
-            input = connection.getInputStream();
-            String destFilePath = LuaScriptManager.buildScriptBundleFilePath(url);
-
-            //check sha256
-            final String sha256 = params.length > 1 ? params[1] : null;
-            final byte[] fileData = IOUtil.toBytes(input);
-            if (sha256 != null && !sha256.equalsIgnoreCase(HexUtil.bytesToHex(EncryptUtil.sha256(fileData)))) {//验证脚本的完整性
-                return null;
-            }
-
-            File destFile = FileUtil.createFile(destFilePath);
-            output = new FileOutputStream(destFile);
-            output.write(fileData);
-
+        if (new ScriptBundleDownloadDelegate(url, sha256).download()) {
             return url;
-        } catch (Exception e) {
-            LogUtil.e("[Script Download Error] ", e);
-            e.printStackTrace();
+        } else {
             return null;
-        } finally {
-            try {
-                if (output != null) {
-                    output.flush();
-                    output.close();
-                }
-                if (input != null) {
-                    input.close();
-                }
-            } catch (IOException ignored) {
-                ignored.printStackTrace();
-            }
-            if (connection != null) {
-                connection.disconnect();
-            }
         }
     }
 
@@ -106,12 +62,13 @@ public class ScriptBundleDownloadTask extends AsyncTask<String, Integer, String>
 
     @Override
     protected void onPostExecute(String url) {
+        DebugUtil.tei("luaviewp-scriptDownloadTask");
         callLoaderCallback(url);
     }
 
     private void callLoaderCallback(String url) {
         if (url != null) {//如果下载保存成功，则进行解包操作（不论是否需要请求回调 ）
-            new ScriptBundleUnpackTask(mContext, mScriptLoaderCallback).execute(url);
+            new ScriptBundleUnpackTask(mContext, mScriptLoaderCallback).executeInPool(url);
         } else if (mScriptLoaderCallback != null) {
             mScriptLoaderCallback.onScriptLoaded(null);
         }

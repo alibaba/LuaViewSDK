@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
 @class LView;
+
+typedef void(^LuaViewRegister)(LView* lv);
 
 @interface LViewController : UIViewController
 
@@ -24,5 +27,7 @@
 - (void)didCreateLuaView:(LView *)view;
 - (void)willDestroyLuaView:(LView *)view;
 - (void)didDestroyLuaView;
+
+@property(nonatomic,copy) LuaViewRegister luaviewRegister;
 
 @end

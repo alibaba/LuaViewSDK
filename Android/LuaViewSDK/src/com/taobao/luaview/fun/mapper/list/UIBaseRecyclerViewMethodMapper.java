@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.list;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -14,7 +22,7 @@ import java.util.List;
  */
 @LuaViewLib
 public abstract class UIBaseRecyclerViewMethodMapper<U extends UDBaseRecyclerView> extends UIBaseListOrRecyclerViewMethodMapper<U> {
-    private  static final String TAG = UIBaseRecyclerViewMethodMapper.class.getSimpleName();
+    private  static final String TAG = "UIBaseRecyclerViewMethodMapper";
 
     @Override
     public List<String> getAllFunctionNames() {

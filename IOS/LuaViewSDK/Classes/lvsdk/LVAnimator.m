@@ -39,7 +39,9 @@ static char *callbackKeys[] = { "", "onStart", "onEnd", "onCancel", "onPause", "
 }
 
 static int lvNewAnimator(lv_State *L) {
-    LVAnimator *animator = [LVAnimator new];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVAnimator class]];
+    
+    LVAnimator *animator = [c new];
 
     NEW_USERDATA(userData, Animator);
     userData->object = CFBridgingRetain(animator);
@@ -436,9 +438,8 @@ static int value(lv_State *L) {
     return updateFloat(L, nil);
 }
 
-+(int)classDefine:(lv_State *)L {
-    lv_pushcfunction(L, lvNewAnimator);
-    lv_setglobal(L, "Animation");
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewAnimator globalName:globalName defaultName:@"Animation"];
     
     const struct lvL_reg memberFunctions[] = {
         { "__gc", __gc },
@@ -591,7 +592,7 @@ static int value(lv_State *L) {
         animation = a;
     }
     
-    animation.delegate = self;
+    animation.delegate = (id)self;
     animation.duration = self.duration;
     animation.fillMode = @"both";
     

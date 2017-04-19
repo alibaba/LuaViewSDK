@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.animation.ValueAnimator;
@@ -25,10 +33,11 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
+@Deprecated
 @LuaViewLib
 public class UIAnimatorSetMethodMapper<U extends UDAnimatorSet> extends BaseMethodMapper<U> {
 
-    private static final String TAG = UIAnimatorSetMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIAnimatorSetMethodMapper";
     private static final String[] sMethods = new String[]{
             "with",//0
             "start",//1

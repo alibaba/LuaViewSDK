@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.kit;
 
 import com.taobao.luaview.userdata.base.BaseUserdata;
@@ -41,6 +49,17 @@ public class UDData extends BaseUserdata {
         }
     }
 
+    /**
+     * get bytes of this data
+     * @return
+     */
+    public byte[] bytes() {
+        if (userdata() instanceof ByteArrayOutputStream) {
+            return ((ByteArrayOutputStream) userdata()).toByteArray();
+        }
+        return null;
+    }
+
     @Override
     public LuaValue add(LuaValue data2) {
         return new UDData(getGlobals(), getmetatable(), null).append(this).append(data2);
@@ -67,6 +86,12 @@ public class UDData extends BaseUserdata {
     @Override
     public String tojstring() {
         return toString(DEFAULT_ENCODE);
+    }
+
+
+    @Override
+    public String toString() {
+        return tojstring();
     }
 
     /**

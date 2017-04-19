@@ -1,41 +1,30 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.global;
 
 import android.content.Context;
-import android.os.StrictMode;
-import android.text.TextUtils;
-import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.URLUtil;
 
-import com.taobao.luaview.cache.LuaCache;
-import com.taobao.luaview.debug.DebugConnection;
-import com.taobao.luaview.fun.binder.ui.UICustomPanelBinder;
 import com.taobao.luaview.fun.mapper.ui.UIViewGroupMethodMapper;
 import com.taobao.luaview.provider.ImageProvider;
-import com.taobao.luaview.receiver.ConnectionStateChangeBroadcastReceiver;
-import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.ScriptFile;
-import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.ui.UDView;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.EncryptUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
-import com.taobao.luaview.util.NetworkUtil;
 import com.taobao.luaview.view.LVCustomPanel;
 import com.taobao.luaview.view.LVViewGroup;
-import com.taobao.luaview.view.interfaces.ILVView;
-import com.taobao.luaview.view.interfaces.ILVViewGroup;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.Prototype;
 import org.luaj.vm2.Varargs;
-import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -44,21 +33,14 @@ import java.io.InputStream;
  * @author song
  * @date 15/8/20
  */
-public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadcastReceiver.OnConnectionChangeListener {
-    //image provider clazz
-    private static Class<? extends ImageProvider> mImageProviderClazz;
-    private static ImageProvider mImageProvider;
-    private boolean isRefreshContainerEnable = true;
+public class LuaView extends LVViewGroup {
 
-    //cache
-    private LuaCache mLuaCache;
+    //LuaViewCore
+    private LuaViewCore mLuaViewCore;
 
-    //需要渲染的Target
-    private ILVViewGroup mRenderTarget;
-
-    //globals
-    public Globals mGlobals;
-
+    /**
+     * created callback
+     */
     public interface CreatedCallback {
         void onCreated(LuaView luaView);
     }
@@ -71,73 +53,43 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public static LuaView create(final Context context) {
-        //初始化
-        init(context);
-
-        //create globals
-        final Globals globals = createGlobals(context);
-
-        //设置metaTable
-        return createLuaView(context, globals);
+        LuaViewCore luaViewCore = LuaViewCore.create(context);
+        return createLuaView(context, luaViewCore);
     }
-
 
     /**
      * create LuaView async
      *
      * @param context
+     * @return
+     */
+    public static LuaView createAsync(final Context context) {
+        LuaViewCore luaViewCore = LuaViewCore.createAsync(context);
+        return createLuaView(context, luaViewCore);
+    }
+
+    /**
+     * create LuaView async (兼容老的，可以使用无回调方法）
+     *
+     * @param context
      * @param createdCallback
      */
     public static void createAsync(final Context context, final CreatedCallback createdCallback) {
-        new SimpleTask1<Globals>() {
+        LuaViewCore.createAsync(context, new LuaViewCore.CreatedCallback() {
             @Override
-            protected Globals doInBackground(Object... params) {
-                //init
-                initAsync();
-
-                //create globals
-                return createGlobalsAsync();
-            }
-
-            @Override
-            protected void onPostExecute(Globals globals) {
-                //create luaview
-                createViewAsync(globals);
-            }
-
-            //初始化
-            private void initAsync() {
-                Constants.init(context);
-                LuaScriptManager.init(context);
-            }
-
-            //创建globals
-            private Globals createGlobalsAsync() {
-                return createGlobals(context);
-            }
-
-            //创建view
-            private void createViewAsync(Globals globals) {
-                final LuaView luaView = createLuaView(context, globals);
+            public void onCreated(LuaViewCore luaViewCore) {
+                final LuaView luaView = createLuaView(context, luaViewCore);
                 if (createdCallback != null) {
                     createdCallback.onCreated(luaView);
                 }
             }
-        }.execute();
+        });
     }
 
-    private static Globals createGlobals(final Context context) {
-        final Globals globals = LuaViewManager.createGlobals();
-        return globals;
-    }
-
-    private static LuaView createLuaView(final Context context, final Globals globals) {
-        final LuaView luaView = new LuaView(context, globals, createMetaTableForLuaView());
-        globals.setLuaView(luaView);
-        globals.finder = new LuaResourceFinder(context);
-        if (LuaViewConfig.isOpenDebugger()) {//如果是debug，支持ide调试
-            luaView.openDebugger();
-        }
+    private static LuaView createLuaView(final Context context, LuaViewCore luaViewCore) {
+        final LuaView luaView = new LuaView(context, luaViewCore, createMetaTableForLuaView());
+        luaViewCore.setRenderTarget(luaView);
+        luaViewCore.setWindowUserdata(luaView.getUserdata());
         return luaView;
     }
     //-----------------------------------------加载函数----------------------------------------------
@@ -156,60 +108,17 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
         return load(urlOrFileOrScript, null, null);
     }
 
-    /**
-     * 加载，可能是url，可能是Asset，可能是文件，也可能是脚本
-     * url : http or https, http://[xxx] or https://[xxx]
-     * asset : folder or file, file://android_asset/[xxx]
-     * file : folder or file, file://[xxx]
-     * script: content://[xxx]
-     *
-     * @param urlOrFileOrScript
-     * @return
-     */
     public LuaView load(final String urlOrFileOrScript, final LuaScriptLoader.ScriptExecuteCallback callback) {
         return load(urlOrFileOrScript, null, callback);
     }
 
-    /**
-     * 加载，可能是url，可能是Asset，可能是文件，也可能是脚本
-     * url : http or https, http://[xxx] or https://[xxx]
-     * asset : folder or file, file://android_asset/[xxx]
-     * file : folder or file, file://[xxx]
-     * script: content://[xxx]
-     *
-     * @param urlOrFileOrScript
-     * @return
-     */
     public LuaView load(final String urlOrFileOrScript, final String sha256) {
         return load(urlOrFileOrScript, sha256, null);
     }
 
     public LuaView load(final String urlOrFileOrScript, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        if (!TextUtils.isEmpty(urlOrFileOrScript)) {
-            if (URLUtil.isNetworkUrl(urlOrFileOrScript)) {//url, http:// or https://
-                loadUrl(urlOrFileOrScript, sha256, callback);
-            } else {
-                loadFile(urlOrFileOrScript, callback);
-            }
-            /*if (URLUtil.isHttpUrl(urlOrFileOrScript) || URLUtil.isHttpsUrl(urlOrFileOrScript)) {//url, http:// or https://
-                loadUrl(urlOrFileOrScript, sha256, callback);
-            } else if (URLUtil.isAssetUrl(urlOrFileOrScript)) {//加载asset, file:///android_asset/
-                loadAsset(urlOrFileOrScript, callback);
-            } else if (URLUtil.isFileUrl(urlOrFileOrScript)) {//加载文件, file://
-                loadFile(urlOrFileOrScript);
-            } else if (URLUtil.isContentUrl(urlOrFileOrScript)) {//纯脚本, content://
-                loadScript(urlOrFileOrScript);
-            } else {//默认尝试加载文件，有可能是文件系统的，也有可能是asset的，也有可能是其他的
-                if (AssetUtil.exists(getContext(), urlOrFileOrScript)) {//是asset
-                    loadAsset(urlOrFileOrScript, callback);
-                } else if (FileUtil.exists(urlOrFileOrScript) || LuaScriptManager.exists(urlOrFileOrScript)) {//在文件系统或者脚本目录
-                    loadFile(urlOrFileOrScript);
-                } else {
-                    loadScript(urlOrFileOrScript);
-                }
-            }*/
-        } else if (callback != null) {
-            callback.onScriptExecuted(null, false);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.load(urlOrFileOrScript, sha256, callback);
         }
         return this;
     }
@@ -225,20 +134,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     public LuaView loadUrl(final String url, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        updateUri(url);
-        if (!TextUtils.isEmpty(url)) {
-            new LuaScriptLoader(getContext()).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback() {
-                @Override
-                public void onScriptLoaded(ScriptBundle bundle) {
-                    if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备完成，且不第三方自己执行
-                        loadScriptBundle(bundle, callback);
-                    } else if (callback != null) {
-                        callback.onScriptExecuted(url, false);
-                    }
-                }
-            });
-        } else if (callback != null) {
-            callback.onScriptExecuted(null, false);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadUrl(url, sha256, callback);
         }
         return this;
     }
@@ -254,7 +151,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private LuaView loadAsset(final String assetPath, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        //TODO
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadAsset(assetPath, callback);
+        }
         return this;
     }
 
@@ -269,19 +168,14 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private LuaView loadFile(final String luaFileName, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        updateUri(luaFileName);
-        if (!TextUtils.isEmpty(luaFileName)) {
-            this.loadFileInternal(luaFileName, callback);//加载文件
-        } else {
-            if (callback != null) {
-                callback.onScriptExecuted(getUri(), false);
-            }
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadFile(luaFileName, callback);
         }
         return this;
     }
 
     /**
-     * 加载脚本
+     * Load plain Script Code
      *
      * @param script
      * @return
@@ -291,18 +185,14 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     public LuaView loadScript(final String script, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        if (!TextUtils.isEmpty(script)) {
-            this.loadScriptInternal(new ScriptFile(script, EncryptUtil.md5Hex(script)), callback);
-        } else {
-            if (callback != null) {
-                callback.onScriptExecuted(getUri(), false);
-            }
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadScript(script, callback);
         }
         return this;
     }
 
     /**
-     * 加载script bundle
+     * 加载Script Bundle (zip file)
      *
      * @param scriptFile
      * @return
@@ -312,10 +202,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     private LuaView loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        if (scriptFile != null) {
-            this.loadScriptInternal(scriptFile, callback);
-        } else if (callback != null) {
-            callback.onScriptExecuted(getUri(), false);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadScript(scriptFile, callback);
         }
         return this;
     }
@@ -331,24 +219,12 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     public LuaView loadScriptBundle(final ScriptBundle scriptBundle, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        loadScriptBundle(scriptBundle, LuaResourceFinder.DEFAULT_MAIN_ENTRY, callback);
-        return this;
+        return loadScriptBundle(scriptBundle, LuaResourceFinder.DEFAULT_MAIN_ENTRY, callback);
     }
 
     public LuaView loadScriptBundle(final ScriptBundle scriptBundle, final String mainScriptFileName, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        if (scriptBundle != null) {
-            if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
-                mGlobals.getLuaResourceFinder().setScriptBundle(scriptBundle);
-            }
-            if (scriptBundle.containsKey(mainScriptFileName)) {
-                final ScriptFile scriptFile = scriptBundle.getScriptFile(mainScriptFileName);
-                loadScript(scriptFile, callback);
-                return this;
-            }
-        }
-        //出错回调
-        if (callback != null) {
-            callback.onScriptExecuted(getUri(), false);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadScriptBundle(scriptBundle, mainScriptFileName, callback);
         }
         return this;
     }
@@ -360,35 +236,25 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView loadPrototype(final InputStream inputStream, final String name, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        new SimpleTask1<LuaValue>() {
-            @Override
-            protected LuaValue doInBackground(Object... params) {
-                try {
-                    if (mGlobals != null) {
-                        Prototype prototype = mGlobals.loadPrototype(inputStream, name, "bt");
-                        if (prototype != null) {
-                            LuaValue result = mGlobals.load(prototype, name);
-                            return result;
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(LuaValue value) {
-                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
-                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
-                    executeScript(value, activity, viewObj, null);
-                }
-            }
-        }.execute();
+        if (mLuaViewCore != null) {
+            mLuaViewCore.loadPrototype(inputStream, name, callback);
+        }
         return this;
     }
 
+
+    /**
+     * execute script
+     *
+     * @param value
+     * @param activity
+     * @param viewObj
+     * @param callback
+     * @return
+     */
+    public boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
+        return mLuaViewCore != null ? mLuaViewCore.executeScript(value, activity, viewObj, callback) : false;
+    }
     //---------------------------------------注册函数------------------------------------------------
 
     /**
@@ -399,10 +265,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView registerLibs(LuaValue... binders) {
-        if (mGlobals != null && binders != null) {
-            for (LuaValue binder : binders) {
-                mGlobals.tryLazyLoad(binder);
-            }
+        if (mLuaViewCore != null) {
+            mLuaViewCore.registerLibs(binders);
         }
         return this;
     }
@@ -415,13 +279,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView register(final String luaName, final Object obj) {
-        if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
-            final LuaValue value = mGlobals.get(luaName);
-            if (obj != value) {
-                mGlobals.set(luaName, CoerceJavaToLua.coerce(obj));
-            }
-        } else {
-            LogUtil.e("name " + luaName + " is invalid!");
+        if (mLuaViewCore != null) {
+            mLuaViewCore.register(luaName, obj);
         }
         return this;
     }
@@ -444,15 +303,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
-        if (mGlobals != null && !TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
-            final LuaValue value = mGlobals.get(luaName);
-            if (value == null || value.isnil()) {
-                mGlobals.tryLazyLoad(new UICustomPanelBinder(clazz, luaName));
-            } else {
-                LogUtil.e("panel name " + luaName + " is already registered!");
-            }
-        } else {
-            LogUtil.e("name " + luaName + " is invalid or Class " + clazz + " is not subclass of " + LVCustomPanel.class.getSimpleName());
+        if (mLuaViewCore != null) {
+            mLuaViewCore.registerPanel(luaName, clazz);
         }
         return this;
     }
@@ -464,8 +316,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public LuaView unregister(final String luaName) {
-        if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
-            mGlobals.set(luaName, LuaValue.NIL);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.unregister(luaName);
         }
         return this;
     }
@@ -480,9 +332,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public Object callLuaFunction(String funName, Object... objs) {
-        if (mGlobals != null && funName != null) {
-            final LuaValue callback = mGlobals.get(funName);
-            return LuaUtil.callFunction(callback, objs);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.callLuaFunction(funName, objs);
         }
         return LuaValue.NIL;
     }
@@ -512,9 +363,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     /**
      * 注册ImageProvider
      */
-
     public static void registerImageProvider(final Class<? extends ImageProvider> clazz) {
-        mImageProviderClazz = clazz;
+        LuaViewCore.registerImageProvider(clazz);
     }
 
     /**
@@ -523,19 +373,21 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @return
      */
     public static ImageProvider getImageProvider() {
-        if (mImageProvider == null && mImageProviderClazz != null) {
-            try {
-                mImageProvider = mImageProviderClazz.newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        return mImageProvider;
+        return LuaViewCore.getImageProvider();
     }
 
     //----------------------------------------setup functions---------------------------------------
+
+    /**
+     * 设置使用标准语法
+     *
+     * @param standardSyntax
+     */
+    public void setUseStandardSyntax(boolean standardSyntax) {
+        if (mLuaViewCore != null) {
+            mLuaViewCore.setUseStandardSyntax(standardSyntax);
+        }
+    }
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
@@ -543,38 +395,31 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param enable
      */
     public void setRefreshContainerEnable(boolean enable) {
-        this.isRefreshContainerEnable = enable;
+        if (mLuaViewCore != null) {
+            mLuaViewCore.setRefreshContainerEnable(enable);
+        }
     }
 
     /**
      * 刷新容器是否可以刷新(用在RefreshCollectionView初始化的地方)
      */
     public boolean isRefreshContainerEnable() {
-        return this.isRefreshContainerEnable;
+        return mLuaViewCore != null ? mLuaViewCore.isRefreshContainerEnable() : true;
     }
 
 
     public String getUri() {
-        if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
-            return mGlobals.getLuaResourceFinder().getUri();
-        }
-        return null;
+        return mLuaViewCore != null ? mLuaViewCore.getUri() : null;
     }
 
     public Globals getGlobals() {
-        return mGlobals;
+        return mLuaViewCore != null ? mLuaViewCore.getGlobals() : null;
+    }
+
+    public LuaViewCore getLuaViewCore() {
+        return mLuaViewCore;
     }
     //-------------------------------------------私有------------------------------------------------
-
-    /**
-     * 初始化
-     *
-     * @param context
-     */
-    private static void init(final Context context) {
-        Constants.init(context);
-        LuaScriptManager.init(context);
-    }
 
     /**
      * TODO 优化
@@ -587,152 +432,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     }
 
     /**
-     * @param context   View级别的Context
-     * @param globals
+     * @param context     View级别的Context
+     * @param luaViewCore
      * @param metaTable
      */
-    private LuaView(Context context, Globals globals, LuaValue metaTable) {
-        super(context, globals, metaTable, LuaValue.NIL);
-        this.mLuaCache = new LuaCache();
-        this.mGlobals = globals;
-    }
-
-    /**
-     * 开启debugger
-     */
-    private void openDebugger() {
-        loadFile("debug.lua", new LuaScriptLoader.ScriptExecuteCallback() {
-            @Override
-            public boolean onScriptPrepared(ScriptBundle bundle) {
-                return false;
-            }
-
-            @Override
-            public boolean onScriptCompiled(LuaValue value, LuaValue activity, LuaValue obj) {
-                return false;
-            }
-
-            @Override
-            public void onScriptExecuted(String uri, boolean executedSuccess) {
-                if (executedSuccess && mGlobals != null) {
-                    StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                            .detectNetwork()   // or .detectAll() for all detectable problems，主线程执行socket
-                            .build());
-                    mGlobals.debugConnection = DebugConnection.create();
-                }
-            }
-        });
-    }
-
-    //-----------------------------------------私有load函数------------------------------------------
-    private void updateUri(String uri) {
-        if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
-            mGlobals.getLuaResourceFinder().setUri(uri);
-        }
-    }
-
-    /**
-     * 初始化
-     *
-     * @param luaFileName
-     */
-    private LuaView loadFileInternal(final String luaFileName, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        new SimpleTask1<LuaValue>() {
-            @Override
-            protected LuaValue doInBackground(Object... params) {
-                try {
-                    if (mGlobals != null) {
-                        return mGlobals.loadfile(luaFileName);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtil.e("[Load Script Failed]", luaFileName, e);
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(LuaValue value) {
-                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
-                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
-                    //执行脚本，在主线程
-                    executeScript(value, activity, viewObj, callback);
-                }
-            }
-        }.execute();
-        return this;
-    }
-
-    /**
-     * 加载纯脚本
-     *
-     * @param scriptFile
-     */
-    private LuaView loadScriptInternal(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        new SimpleTask1<LuaValue>() {//load async
-            @Override
-            protected LuaValue doInBackground(Object... params) {
-                if (scriptFile != null) {//prototype
-                    String luaScript = scriptFile.getScriptString();
-                    String filePath = scriptFile.getFilePath();
-                    if (mGlobals != null && scriptFile.prototype != null) {//prototype
-                        return mGlobals.load(scriptFile.prototype, filePath);
-                    } else {//source code
-                        try {
-                            if (mGlobals != null) {
-                                return mGlobals.load(luaScript, filePath);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            LogUtil.e("[Load Script Failed]", filePath, e);
-                        }
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(LuaValue value) {
-                final LuaValue activity = CoerceJavaToLua.coerce(getContext());
-                final LuaValue viewObj = CoerceJavaToLua.coerce(LuaView.this);
-                if (callback == null || callback.onScriptCompiled(value, activity, viewObj) == false) {
-                    //执行脚本，在主线程
-                    executeScript(value, activity, viewObj, callback);
-                }
-            }
-        }.execute();
-        return this;
-    }
-
-    /**
-     * 执行脚本
-     *
-     * @param value
-     * @param activity
-     * @param viewObj
-     * @param callback
-     */
-    private boolean executeScript(LuaValue value, LuaValue activity, LuaValue viewObj, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        try {
-            if (mGlobals != null && value != null) {
-                mGlobals.saveContainer(getRenderTarget());
-                mGlobals.set("window", getUserdata());//TODO 优化到其他地方?，设置window对象
-                value.call(activity, viewObj);
-                mGlobals.restoreContainer();
-                if (callback != null) {
-                    callback.onScriptExecuted(getUri(), true);
-                }
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            LogUtil.e("[Executed Script Failed]", e);
-        }
-        if (callback != null) {
-            callback.onScriptExecuted(getUri(), false);
-        }
-        return false;
+    private LuaView(Context context, LuaViewCore luaViewCore, LuaValue metaTable) {
+        super(context, luaViewCore.getGlobals(), metaTable, LuaValue.NIL);
+        this.mLuaViewCore = luaViewCore;
     }
 
     //-----------------------------------------网络回调----------------------------------------------
@@ -742,9 +448,13 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        onShow(visibility);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.onShow(visibility);
+        }
         super.onWindowVisibilityChanged(visibility);
-        onHide(visibility);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.onHide(visibility);
+        }
     }
 
     /**
@@ -752,7 +462,9 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      */
     @Override
     protected void onAttachedToWindow() {
-        onAttached();
+        if (mLuaViewCore != null) {
+            mLuaViewCore.onAttached();
+        }
         super.onAttachedToWindow();
     }
 
@@ -762,36 +474,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        onDetached();
-    }
-
-    @Override
-    public void onConnectionClosed() {
-        UDView userdata = getUserdata();
-        if (userdata != null) {
-            if (userdata.getCallback() != null && userdata.getCallback().istable()) {
-                LuaUtil.callFunction(LuaUtil.getFunction(userdata.getCallback(), "onConnectionClosed", "OnConnectionClosed"));
-            }
-        }
-    }
-
-    @Override
-    public void onMobileConnected() {
-        UDView userdata = getUserdata();
-        if (userdata != null) {
-            if (userdata.getCallback() != null && userdata.getCallback().istable()) {
-                LuaUtil.callFunction(LuaUtil.getFunction(userdata.getCallback(), "onMobileConnected", "OnMobileConnected"));
-            }
-        }
-    }
-
-    @Override
-    public void onWifiConnected() {
-        UDView userdata = getUserdata();
-        if (userdata != null) {
-            if (userdata.getCallback() != null && userdata.getCallback().istable()) {
-                LuaUtil.callFunction(LuaUtil.getFunction(userdata.getCallback(), "onWifiConnected", "OnWifiConnected"));
-            }
+        if (mLuaViewCore != null) {
+            mLuaViewCore.onDetached();
         }
     }
 
@@ -802,8 +486,8 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      *
      * @return
      */
-    public ILVViewGroup createDefaultRenderTarget() {
-        return new LVViewGroup(mGlobals, createMetaTableForLuaView(), null);
+    public ViewGroup createDefaultRenderTarget() {
+        return new LVViewGroup(getGlobals(), createMetaTableForLuaView(), null);
     }
 
     /**
@@ -812,8 +496,11 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      * @param viewGroup
      * @return
      */
-    public LuaView setRenderTarget(ILVViewGroup viewGroup) {
-        this.mRenderTarget = viewGroup;
+    public LuaView setRenderTarget(ViewGroup viewGroup) {
+        if (mLuaViewCore != null) {
+            mLuaViewCore.setRenderTarget(viewGroup);
+            //TODO 需要在这里设置setWindowUserdata(XXX)
+        }
         return this;
     }
 
@@ -822,73 +509,19 @@ public class LuaView extends LVViewGroup implements ConnectionStateChangeBroadca
      *
      * @return
      */
-    private ILVViewGroup getRenderTarget() {
-        return mRenderTarget != null ? mRenderTarget : this;
+    private ViewGroup getRenderTarget() {
+        return mLuaViewCore != null ? mLuaViewCore.getRenderTarget() : this;
     }
 
-    //----------------------------------------显示的生命周期 管理-------------------------------------
-
-    /**
-     * View初始化的时候注册监听
-     */
-    private void onAttached() {
-    }
-
-    /**
-     * 显示
-     *
-     * @param visibility
-     */
-    private void onShow(int visibility) {
-        if (visibility == View.VISIBLE) {//onShow
-            NetworkUtil.registerConnectionChangeListener(getContext(), this);//show之前注册
-        }
-    }
-
-    /**
-     * 隐藏
-     *
-     * @param visibility
-     */
-    private void onHide(int visibility) {
-        if (visibility != View.VISIBLE) {//onHide
-            NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//hide之后调用
-        }
-    }
-
-    /**
-     * 在onDetached的时候清空cache
-     */
-    private void onDetached() {
-        clearCache();
-    }
+    //----------------------------------------生命周期 管理----------------------------------------
 
     /**
      * 销毁的时候从外部调用，清空所有外部引用
      */
     public void onDestroy() {
-        clearCache();
-        if (mGlobals != null) {
-            mGlobals.onDestroy();
-            mGlobals = null;
-        }
-    }
-
-    /**
-     * 清空cache
-     */
-    private void clearCache() {
-        if (mLuaCache != null) {//清空cache数据
-            mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
-        }
-        LuaCache.clear();
-        NetworkUtil.unregisterConnectionChangeListener(getContext(), this);//反注册connection state change listener
-    }
-
-    //----------------------------------------cached object 管理-------------------------------------
-    public void cacheObject(Class type, LuaCache.CacheableObject obj) {
-        if (mLuaCache != null) {
-            mLuaCache.cacheObject(type, obj);
+        if (mLuaViewCore != null) {
+            mLuaViewCore.onDestroy();
+            mLuaViewCore = null;
         }
     }
 }

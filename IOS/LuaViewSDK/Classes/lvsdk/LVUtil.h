@@ -11,6 +11,7 @@
 #import "LVHeads.h"
 
 @class LVBundle;
+@class LView;
 
 typedef void(^LVFuncDownloadEndCallback)(NSData* data);
 
@@ -26,10 +27,14 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  *  @return stackNumber
  */
 +(NSString*) call:(lv_State*) l  lightUserData:(id) lightUserData key1:(const char*)key1 key2:(const char*)key2 nargs:(int)nargs;
-
+    
 +(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3
-      nargs:(int)nargs nrets:(int)nret
-    retType:(int) retType;
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType;
+    
++(NSString*) call:(lv_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3 key4:(const char*)key4
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType;
 
 /*
  * download file
@@ -195,6 +200,15 @@ void LVError( NSString* format, ... );
 int lv_callbackFunction(lv_State* l, const char* functionName);
 
 BOOL lv_objcEqual(id obj1, id obj2);
+
++(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
+
++(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass;
+
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L;
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L;
+
+void lv_addSubview(LView* lv, UIView* superview, UIView* subview);
 
 @end
 

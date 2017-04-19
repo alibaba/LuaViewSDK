@@ -185,7 +185,7 @@ static int __newindex (lv_State *L) {
     return 0; /* new userdatum is already on the stack */
 }
 
-+(int) classDefine:(lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     {
         lv_pushcfunction(L, lvNewStruct);
         lv_setglobal(L, "Struct");

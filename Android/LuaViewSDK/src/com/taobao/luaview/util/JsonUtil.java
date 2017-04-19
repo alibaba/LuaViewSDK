@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import org.json.JSONArray;
@@ -15,6 +23,17 @@ import java.util.Iterator;
  * @date 15/9/6
  */
 public class JsonUtil {
+
+    /**
+     * convert a lua table to data string
+     *
+     * @param table
+     * @return
+     */
+    public static String toStringPlain(LuaTable table) {
+        JSONObject obj = toJSONObject(table);
+        return obj.toString();
+    }
 
     /**
      * convert a lua table to data string

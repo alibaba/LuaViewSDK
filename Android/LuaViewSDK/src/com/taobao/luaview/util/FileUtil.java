@@ -1,8 +1,17 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.os.Environment;
 import android.text.TextUtils;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +19,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * 文件操作类
@@ -26,11 +37,11 @@ public class FileUtil {
      * @param folderPath
      * @return
      */
-    public static boolean isContainsFolderPath(final String filePath, final String folderPath) {
+    public static boolean isContainsFolderPath(final String filePath, final String folderPath) {//TODO ../../目录处理
         if (filePath != null && folderPath != null) {//filePath本身是folder，并且包含folderPath
             if (folderPath.charAt(folderPath.length() - 1) == '/') {//本身是路径
-                filePath.startsWith(folderPath);
-            } else {
+                return filePath.startsWith(folderPath);
+            } else {//非路径的话需要判断路径
                 return filePath.startsWith(folderPath + "/");
             }
         }
@@ -177,6 +188,28 @@ public class FileUtil {
         return nameOrPath;
     }
 
+
+    /**
+     * get filepath
+     *
+     * @param filepath
+     * @return
+     */
+    public static String getCanonicalPath(String filepath) {
+        if (filepath != null) {
+            if (filepath.contains("../")) {
+                try {
+                    return new File(filepath).getCanonicalPath();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return filepath;
+            }
+        }
+        return null;
+    }
+
     /**
      * 不包含父路径，有父路径的话则去掉父路径
      *
@@ -237,7 +270,7 @@ public class FileUtil {
      * @return
      */
     public static byte[] readBytes(File f) {
-        if (f != null) {
+        if (f != null && f.exists() && f.isFile()) {
             InputStream inputStream = null;
             try {
                 inputStream = new FileInputStream(f);
@@ -258,22 +291,58 @@ public class FileUtil {
     }
 
     /**
+     * read bytes of given f
+     *
+     * @param f
+     * @return
+     */
+    public static byte[] fastReadBytes(File f) {
+        if (f != null && f.exists() && f.isFile()) {
+            FileInputStream inputStream = null;
+            try {
+                inputStream = new FileInputStream(f);
+
+                MappedByteBuffer buffer = inputStream.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, f.length());
+                byte[] result = new byte[(int) f.length()];
+                buffer.get(result);
+                return result;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * save data to a file
      *
      * @param path file path with file name
      * @param data data to saved
      */
-    public static void save(final String path, final byte[] data) {
+    public static boolean fastSave(final String path, final byte[] data) {
         if (!TextUtils.isEmpty(path) && data != null && data.length > 0) {
             FileOutputStream out = null;
             try {
                 File destFile = createFile(path);
                 out = new FileOutputStream(destFile);
                 out.write(data);
+                return true;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                return false;
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             } finally {
                 try {
                     if (out != null) {
@@ -285,6 +354,41 @@ public class FileUtil {
                 }
             }
         }
+        return false;
+    }
+
+    /**
+     * save data to a file
+     *
+     * @param path file path with file name
+     * @param data data to saved
+     */
+    public static boolean save(final String path, final byte[] data) {
+        if (!TextUtils.isEmpty(path) && data != null && data.length > 0) {
+            FileOutputStream out = null;
+            try {
+                File destFile = createFile(path);
+                out = new FileOutputStream(destFile);
+                out.write(data);
+                return true;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                try {
+                    if (out != null) {
+                        out.flush();
+                        out.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -326,12 +430,13 @@ public class FileUtil {
      * @return
      */
     public static boolean copy(final InputStream input, final String filePath) {
+        final int bufSize = 8 * 1024;// or other buffer size
         boolean result = false;
-        File file = new File(filePath);
+        File file = FileUtil.createFile(filePath);
         OutputStream output = null;
         try {
-            output = new FileOutputStream(file);
-            byte[] buffer = new byte[8 * 1024]; // or other buffer size
+            output = new BufferedOutputStream(new FileOutputStream(file), bufSize);
+            byte[] buffer = new byte[bufSize];
             int read;
             while ((read = input.read(buffer)) != -1) {
                 output.write(buffer, 0, read);
@@ -347,7 +452,6 @@ public class FileUtil {
                     output.flush();
                     output.close();
                 }
-                input.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

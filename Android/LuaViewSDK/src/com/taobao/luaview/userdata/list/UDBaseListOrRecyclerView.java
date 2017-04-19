@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.list;
 
 import android.graphics.Point;
@@ -154,6 +162,10 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * @return
      */
     protected int getRawSectionCount() {
+        if (this.mSectionDelegate == null) {
+            return 0;
+        }
+
         return LuaUtil.getOrCallFunction(this.mSectionDelegate.get("SectionCount")).optint(1);
     }
 

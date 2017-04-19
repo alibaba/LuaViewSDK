@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
@@ -14,9 +22,9 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "跟iOS不统一待统一"})
 public class UIAlertMethodMapper<U extends UDAlert> extends BaseMethodMapper<U> {
-    private static final String TAG = UIAlertMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIAlertMethodMapper";
 
     @Override
     public List<String> getAllFunctionNames() {

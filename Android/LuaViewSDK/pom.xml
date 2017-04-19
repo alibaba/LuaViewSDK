@@ -10,9 +10,9 @@
     </parent>-->
 
     <groupId>com.taobao.ju.android</groupId>
-    <artifactId>LuaViewSDK</artifactId>
+    <artifactId>luaviewsdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>aar</packaging>
+    <packaging>${packaging.type}</packaging>
 
     <name>LuaView-Android SDK</name>
 
@@ -20,28 +20,28 @@
         LuaView Android SDK, 2015.11.23 add by song
     </description>
 
+    <properties>
+        <app.releasemode>true</app.releasemode>
+        <pakageidsegment>57</pakageidsegment>
+        <packaging.type>aar</packaging.type>
+        <project.build.Encoding>UTF-8</project.build.Encoding>
+    </properties>
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>com.taobao.maven.plugins.android</groupId>
                 <artifactId>android-maven-plugin</artifactId>
                 <!--<version>3.7.0</version>-->
                 <!--sdk打包-->
+                <version>1.3.6.7</version>
                 <inherited>true</inherited>
                 <extensions>true</extensions>
                 <configuration>
+                    <customPackageID>${pakageidsegment}</customPackageID>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     <sourceDirectories>${project.basedir}/src</sourceDirectories>
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>com.android.support</groupId>
             <artifactId>recyclerview-v7</artifactId>
-            <version>23.0.1</version>
+            <version>23.4.0</version>
             <type>aar</type>
             <scope>provided</scope>
         </dependency>

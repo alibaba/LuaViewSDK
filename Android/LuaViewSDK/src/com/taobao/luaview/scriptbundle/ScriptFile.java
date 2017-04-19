@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.scriptbundle;
 
 import org.luaj.vm2.Prototype;
@@ -45,8 +53,8 @@ public class ScriptFile {
     public ScriptFile(final String url, final String baseFilePath, final String fileName, final byte[] scriptData, final byte[] signData) {
         this.url = url;
         this.baseFilePath = baseFilePath;
-        this.fileName = LuaScriptManager.changeSuffix(fileName, LuaScriptManager.POSTFIX_LUA);//这里使用真实的lua脚本名称，因为这里的脚本都是被解密过的
-        this.signFileName = new StringBuffer().append(fileName).append(LuaScriptManager.POSTFIX_SIGN).toString();//sign文件名称
+        this.fileName = LuaScriptManager.changeSuffix(fileName, LuaScriptManager.POSTFIX_LUA);//main.lv->main.lua 这里使用真实的lua脚本名称，因为这里的脚本都是被解密过的
+        this.signFileName = fileName + LuaScriptManager.POSTFIX_SIGN;//sign文件名称, 使用的是fileName，main.lv.sign
         this.scriptData = scriptData;
         this.signData = signData;
     }

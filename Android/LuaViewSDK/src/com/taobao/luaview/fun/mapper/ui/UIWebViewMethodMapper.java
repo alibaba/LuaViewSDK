@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import com.taobao.luaview.fun.mapper.LuaViewApi;
@@ -14,22 +22,22 @@ import java.util.List;
 /**
  * Created by tuoli on 10/9/16.
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIWebViewMethodMapper<U extends UDWebView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIWebViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIWebViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "loadUrl",  //0
-            "canGoBack",
-            "canGoForward",
-            "goBack",
-            "goForward",
-            "reload",
-            "title",
-            "isLoading",
-            "stopLoading",
-            "url",
-            "pullRefreshEnable"
+            "canGoBack", // 1
+            "canGoForward", //2
+            "goBack", //3
+            "goForward",//4
+            "reload",//5
+            "title",//6
+            "isLoading",//7
+            "stopLoading",//8
+            "url",//9
+            "pullRefreshEnable"//10
     };
 
     @Override

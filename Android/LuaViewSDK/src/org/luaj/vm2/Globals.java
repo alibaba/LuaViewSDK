@@ -21,15 +21,19 @@
  ******************************************************************************/
 package org.luaj.vm2;
 
+//TODO 与3.0不一样
+
 import android.content.Context;
+import android.view.ViewGroup;
 
 import com.taobao.luaview.cache.AppCache;
+import com.taobao.luaview.cache.LuaCache;
 import com.taobao.luaview.debug.DebugConnection;
 import com.taobao.luaview.global.LuaResourceFinder;
-import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.global.LuaViewConfig;
+import com.taobao.luaview.scriptbundle.LuaScriptManager;
 import com.taobao.luaview.util.LogUtil;
-import com.taobao.luaview.view.interfaces.ILVViewGroup;
+import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
@@ -122,18 +126,22 @@ import java.util.Stack;
  * @see LuaJC
  */
 public class Globals extends LuaTable {
-    private static final String TAG = Globals.class.getSimpleName();
-    private static final String CACHE_PROTOTYPE = AppCache.CACHE_PROTOTYPE;
 
+    public boolean isInited = false;
+
+    public boolean isRefreshContainerEnable = true;
     /**
      * Android parent view
      */
-    private WeakReference<LuaView> mLuaView;
-    public ILVViewGroup container;
-    private ILVViewGroup tmpContainer;
+    private WeakReference<ViewGroup> mRenderTarget;
+    public ViewGroup container;
+    private ViewGroup tmpContainer;
 
     //containers
-    private Stack<ILVViewGroup> mContainers;
+    private Stack<ViewGroup> mContainers;
+
+    //luacaches
+    private LuaCache mLuaCache = new LuaCache();
 
     /**
      * The current default input stream.
@@ -153,10 +161,13 @@ public class Globals extends LuaTable {
     /**
      * The installed ResourceFinder for looking files by name.
      */
-    public ResourceFinder finder;
+    private ResourceFinder finder;
 
     public LuaResourceFinder getLuaResourceFinder() {
-        return finder instanceof LuaResourceFinder ? (LuaResourceFinder) finder : null;
+        if (!(finder instanceof LuaResourceFinder)) {
+            finder = new LuaResourceFinder(getContext());
+        }
+        return (LuaResourceFinder) finder;
     }
 
     /**
@@ -180,6 +191,8 @@ public class Globals extends LuaTable {
     public DebugLib debuglib;
     public DebugConnection debugConnection;//用作debug
 
+    private Boolean isStandardSyntax = null;
+
     /**
      * Interface for module that converts a Prototype into a LuaFunction with an environment.
      */
@@ -197,7 +210,7 @@ public class Globals extends LuaTable {
         /**
          * Compile lua source into a Prototype. The InputStream is assumed to be in UTF-8.
          */
-        Prototype compile(InputStream stream, String chunkname) throws IOException;
+        Prototype compile(InputStream stream, String chunkname, boolean standardSyntax) throws IOException;
     }
 
     /**
@@ -250,11 +263,11 @@ public class Globals extends LuaTable {
             LuaResourceFinder luaFinder = getLuaResourceFinder();
             StringBuffer sb = new StringBuffer();
             if (luaFinder != null) {
-                sb.append(luaFinder.getBasePath()).append(filename);
+                sb.append(luaFinder.getBaseBundlePath()).append(filename);
             } else {
                 sb.append(this.hashCode()).append("@").append(filename);
             }
-            return load(finder.findResource(filename), sb.toString(), "bt", this);
+            return load(luaFinder.findResource(filename), sb.toString(), "bt", this);
         } catch (Exception e) {
             return error("load " + filename + ": " + e);
         }
@@ -386,7 +399,7 @@ public class Globals extends LuaTable {
     public Prototype compilePrototype(InputStream stream, String chunkname) throws IOException {
         if (compiler == null)
             error("No compiler.");
-        return compiler.compile(stream, chunkname);
+        return compiler.compile(stream, chunkname, isStandardSyntax());
     }
 
     /**
@@ -571,6 +584,47 @@ public class Globals extends LuaTable {
     //----------------------------------------------------------------------------------------------
 
     /**
+     * call Lua Function
+     *
+     * @param funName
+     * @param objs
+     * @return
+     */
+    public Object callLuaFunction(String funName, Object... objs) {
+        if (funName != null) {
+            final LuaValue callback = this.get(funName);
+            return LuaUtil.callFunction(callback, objs);
+        }
+        return LuaValue.NIL;
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * 设置是否标准语法，如果为null的时候则依据url来判断
+     *
+     * @param standardSyntax
+     */
+    public void setUseStandardSyntax(boolean standardSyntax) {
+        isStandardSyntax = standardSyntax;
+    }
+
+    /**
+     * 是否是标准语法
+     *
+     * @return
+     */
+    public boolean isStandardSyntax() {
+        if (isStandardSyntax != null) {
+            return isStandardSyntax;
+        } else {
+            final LuaResourceFinder finder = getLuaResourceFinder();
+            final String url = finder != null ? finder.getUri() : null;
+            return LuaScriptManager.isLuaStandardSyntaxUrl(url);
+        }
+    }
+
+    /**
      * 延迟加载库
      *
      * @param binder
@@ -585,7 +639,7 @@ public class Globals extends LuaTable {
      * @param viewGroup
      */
     @Deprecated
-    public void saveContainer(final ILVViewGroup viewGroup) {
+    public void saveContainer(final ViewGroup viewGroup) {
         if (this.container == null) {
             this.tmpContainer = viewGroup;
             this.container = viewGroup;
@@ -608,9 +662,9 @@ public class Globals extends LuaTable {
      *
      * @param viewGroup
      */
-    public void pushContainer(final ILVViewGroup viewGroup) {
+    public void pushContainer(final ViewGroup viewGroup) {
         if (this.mContainers == null) {
-            this.mContainers = new Stack<ILVViewGroup>();
+            this.mContainers = new Stack<ViewGroup>();
         }
         this.mContainers.push(this.container);
         this.container = viewGroup;
@@ -628,10 +682,10 @@ public class Globals extends LuaTable {
     /**
      * 设置LuaView，对LuaView弱引用
      *
-     * @param luaView
+     * @param renderTarget
      */
-    public void setLuaView(LuaView luaView) {
-        this.mLuaView = new WeakReference<LuaView>(luaView);
+    public void setRenderTarget(ViewGroup renderTarget) {
+        this.mRenderTarget = new WeakReference<ViewGroup>(renderTarget);
     }
 
     /**
@@ -639,8 +693,13 @@ public class Globals extends LuaTable {
      *
      * @return
      */
-    public LuaView getLuaView() {
-        return this.mLuaView != null ? this.mLuaView.get() : null;
+    public ViewGroup getRenderTarget() {
+        return this.mRenderTarget != null ? this.mRenderTarget.get() : null;
+    }
+
+
+    public LuaCache getLuaCache() {
+        return mLuaCache;
     }
 
     /**
@@ -649,8 +708,8 @@ public class Globals extends LuaTable {
      * @return
      */
     public Context getContext() {
-        final LuaView luaView = this.mLuaView != null ? this.mLuaView.get() : null;
-        return luaView != null ? luaView.getContext() : null;
+        ViewGroup renderTarget = this.mRenderTarget != null ? this.mRenderTarget.get() : null;
+        return renderTarget != null ? renderTarget.getContext() : null;
     }
 
     /**
@@ -667,8 +726,20 @@ public class Globals extends LuaTable {
      */
     public void onDestroy() {
         finder = null;
-        mLuaView = null;
+        mRenderTarget = null;
         container = null;
         tmpContainer = null;
+        clearCache();
+        mLuaCache = null;
+    }
+
+    /**
+     * clear Cache
+     */
+    public void clearCache() {
+        if (mLuaCache != null) {//清空cache数据
+            mLuaCache.clearCachedObjects();//从window中移除的时候清理数据(临时的数据)
+        }
+        LuaCache.clear();
     }
 }

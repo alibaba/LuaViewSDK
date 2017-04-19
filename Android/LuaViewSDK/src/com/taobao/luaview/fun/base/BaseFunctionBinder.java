@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.base;
 
 import com.taobao.luaview.global.LuaViewConfig;
@@ -15,7 +23,6 @@ import org.luaj.vm2.lib.TwoArgFunction;
  * @date 15/8/14
  */
 public abstract class BaseFunctionBinder extends TwoArgFunction {
-    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
     public String[] luaNames;
 
     public BaseFunctionBinder(String... name) {

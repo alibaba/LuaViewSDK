@@ -34,15 +34,17 @@
 }
 
 #pragma -mark lvNewActivityIndicator
-static int lvNewActivityIndicator (lv_State *L) {
+static int lvNewLoadingIndicator (lv_State *L) {
     {
-        LVLoadingIndicator* pageControl = [[LVLoadingIndicator alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVLoadingIndicator class]];
+        
+        LVLoadingIndicator* pageControl = [[c alloc] init:L];
         
         {
             NEW_USERDATA(userData, View);
             userData->object = CFBridgingRetain(pageControl);
             
-            lvL_getmetatable(L, META_TABLE_UIActivityIndicatorView );
+            lvL_getmetatable(L, META_TABLE_LoadingIndicator );
             lv_setmetatable(L, -2);
         }
         LView* view = (__bridge LView *)(L->lView);
@@ -111,11 +113,9 @@ static int color(lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewActivityIndicator);
-        lv_setglobal(L, "LoadingIndicator");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewLoadingIndicator globalName:globalName defaultName:@"LoadingIndicator"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"start",  startAnimating },
         {"stop",   stopAnimating },
@@ -126,7 +126,7 @@ static int color(lv_State *L) {
         {NULL, NULL}
     };
     
-    lv_createClassMetaTable(L, META_TABLE_UIActivityIndicatorView);
+    lv_createClassMetaTable(L, META_TABLE_LoadingIndicator);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);
     lvL_openlib(L, NULL, memberFunctions, 0);

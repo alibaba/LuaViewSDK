@@ -7,7 +7,7 @@
 //
 
 #import "LView.h"
-#import "LVRegisterManager.h"
+#import "LVExGlobalFunc.h"
 #import "LVTimer.h"
 #import "LVDebuger.h"
 #import "lVtable.h"
@@ -26,7 +26,49 @@
 #import "lVgc.h"
 #import "LVRSA.h"
 #import "LVBundle.h"
-
+#import "LVButton.h"
+#import "LVScrollView.h"
+#import "LView.h"
+#import "LVTimer.h"
+#import "LVUtil.h"
+#import "LVPagerIndicator.h"
+#import "LVLoadingIndicator.h"
+#import "LVImage.h"
+#import "LVWebView.h"
+#import "LVLabel.h"
+#import "LVBaseView.h"
+#import "LVTransform3D.h"
+#import "LVTextField.h"
+#import "LVAnimate.h"
+#import "LVAnimator.h"
+#import "LVDate.h"
+#import "LVAlert.h"
+#import "LVSystem.h"
+#import "LVDB.h"
+#import "LVGesture.h"
+#import "LVTapGesture.h"
+#import "LVPanGesture.h"
+#import "LVPinchGesture.h"
+#import "LVRotationGesture.h"
+#import "LVHttp.h"
+#import "LVData.h"
+#import "LVSwipeGesture.h"
+#import "LVLongPressGesture.h"
+#import "LVDebuger.h"
+#import "LVDownloader.h"
+#import "LVAudioPlayer.h"
+#import "LVFile.h"
+#import "LVStyledString.h"
+#import "LVNativeObjBox.h"
+#import "LVCollectionView.h"
+#import "LVEmptyRefreshCollectionView.h"
+#import "LVStruct.h"
+#import "LVNavigation.h"
+#import "LVCustomPanel.h"
+#import "LVCustomView.h"
+#import "LVPagerView.h"
+#import "LVCanvas.h"
+#import "LVEvent.h"
 
 @interface LView ()
 @property (nonatomic,strong) id mySelf;
@@ -35,6 +77,8 @@
 @property (atomic,assign) NSInteger callLuaTimes;
 
 @property (nonatomic,strong) LVRSA* rsa;
+
+@property (nonatomic,assign) BOOL isOnShowed;
 @end
 
 @implementation LView
@@ -60,6 +104,8 @@
 #pragma mark - init
 
 -(void) myInit{
+    self.disableAnimate = YES;
+    self.closeLayerMode = YES;
     self.mySelf = self;
     self.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -81,6 +127,17 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onForeground)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onBackground)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
     self.lv_lview = self;
     self.rsa = [[LVRSA alloc] init];
     self.bundle = [[LVBundle alloc] init];
@@ -222,11 +279,69 @@ extern char g_debug_lua[];
     if( !self.stateInited ) {
         self.stateInited = YES;
         self.l =  lvL_newstate();//lv_open();  /* opens */
-        lvL_openlibs(self.l);
-        
-        [LVRegisterManager registryApi:self.l lView:self];
         self.l->lView = (__bridge void *)(self);
+        lvL_openlibs(self.l);
+        NSArray* arr = nil;
+        arr = @[
+                [LVSystem class],
+                [LVData class],
+                [LVStruct class],
+                [LVBaseView class],
+                [LVButton class],
+                [LVImage class],
+                [LVWebView class],
+                [LVLabel class],
+                [LVScrollView class],
+                [LVCollectionView class],
+                [LVEmptyRefreshCollectionView class],
+                [LVPagerView class],
+                [LVCustomView class],
+                [LVCanvas class],
+                [LVEvent class],
+                [LVTimer class],
+                [LVPagerIndicator class],
+                [LVCustomPanel class],
+                [LVTransform3D class],
+                [LVAnimator class],
+                [LVTextField class],
+                [LVAnimate class],
+                [LVDate class],
+                [LVAlert class],
+                [LVDB class],
+                [LVGesture class],
+                [LVTapGesture class],
+                [LVPinchGesture class],
+                [LVRotationGesture class],
+                [LVSwipeGesture class],
+                [LVLongPressGesture class],
+                [LVPanGesture class],
+                [LVLoadingIndicator class],
+                [LVHttp class],
+                [LVDownloader class],
+                [LVFile class],
+                [LVAudioPlayer class],
+                [LVStyledString class],
+                [LVNavigation class],
+                [LVExGlobalFunc class],
+                [LVNativeObjBox class],
+                [LVDebuger class],
+                ];
+        self.registerClasses = arr;
+        [self registerAllClass];
     }
+}
+
+-(void) registerAllClass{
+    lv_State* L = self.l;
+    //清理栈
+    for( NSInteger i =0; i<self.registerClasses.count; i++ ){
+        lv_settop(L, 0);
+        lv_checkstack(L, 128);
+        id c = self.registerClasses[i];
+        [c lvClassDefine:L globalName:nil];
+    }
+    //清理栈
+    lv_settop(L, 0);
 }
 
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
@@ -331,6 +446,7 @@ extern char g_debug_lua[];
 }
 
 -(void) viewDidAppear{
+    self.isOnShowed = YES;
     if( self.l ) {
         lv_checkStack32(self.l);
         [self lv_callLuaByKey1:@"onShow"];//@"ViewDidAppear"
@@ -345,9 +461,26 @@ extern char g_debug_lua[];
 }
 
 -(void) viewDidDisAppear{
+    self.isOnShowed = NO;
     if( self.l ) {
         lv_checkStack32(self.l);
         [self lv_callLuaByKey1:@"onHide"];//@"ViewDidDisAppear"
+    }
+}
+
+-(void) onForeground {
+    if( self.l && self.isOnShowed ) {
+        lv_checkStack32(self.l);
+        lv_pushboolean(self.l, YES);
+        [self lv_callLuaByKey1:@"onShow" key2:nil argN:1];
+    }
+}
+
+-(void) onBackground {
+    if( self.l && self.isOnShowed ) {
+        lv_checkStack32(self.l);
+        lv_pushboolean(self.l, YES);
+        [self lv_callLuaByKey1:@"onHide" key2:nil argN:1];
     }
 }
 
@@ -434,7 +567,7 @@ extern char g_debug_lua[];
     
     if( self.l ) {
         lv_checkStack32(self.l);
-        [self lv_callLuaByKey1:@"LayoutSubviews"];
+        [self lv_callLuaByKey1:@STR_ON_LAYOUT];
     }
 }
 
@@ -630,11 +763,11 @@ extern char g_debug_lua[];
         LVError( @"Lua State is released !!!");
         return;
     }
-    if( [key isKindOfClass:[NSString class]]
-       && class_isMetaClass(object_getClass(object))
-       && [object isSubclassOfClass:[LVCustomPanel class]] ) {
-        [self registerCustomPanel:object boundName:(NSString*)key];
-        return;
+    if( [key isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(object)) ) {
+        if( [object respondsToSelector:@selector(lvClassDefine:globalName:)] ) {
+            [object lvClassDefine:self.l globalName:(NSString*)key];
+            return;
+        }
     }
     if ( [key isKindOfClass:[NSString class]] ){
         [LVNativeObjBox registeObjectWithL:self.l nativeObject:object name:(NSString*)key sel:nil weakMode:YES];
@@ -647,12 +780,6 @@ extern char g_debug_lua[];
         return ;
     }
     [LVNativeObjBox unregisteObjectWithL:self.l name:name];
-}
-
-- (void) registerCustomPanel:(Class) c boundName:(NSString*) boundName{
-    if( self.l ) {
-        [LVCustomPanel addCustomPanel:c boundName:boundName state:self.l];
-    }
 }
 
 #pragma mark - package
@@ -688,13 +815,9 @@ extern char g_debug_lua[];
 
 -(void) containerAddSubview:(UIView *)view{
     if( self.conentView ) {
-        if( view.superview!=self.conentView ) {
-            [self.conentView addSubview:view];
-        }
+        lv_addSubview(self, self.conentView, view);
     } else {
-        if( view.superview!=self ) {
-            [super addSubview:view];
-        }
+        lv_addSubview(self, self, view);
     }
 }
 

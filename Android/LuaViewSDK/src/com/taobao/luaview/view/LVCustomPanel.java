@@ -1,9 +1,18 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view;
 
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.luaview.global.LuaView;
 import com.taobao.luaview.userdata.ui.UDCustomPanel;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.userdata.ui.UDViewGroup;
@@ -23,7 +32,7 @@ import org.luaj.vm2.Varargs;
  * @author song
  * @date 15/8/20
  */
-public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup, ILVNativeViewProvider {
+public abstract class LVCustomPanel extends LVViewGroup<UDCustomPanel> implements ILVViewGroup, ILVNativeViewProvider {
 
     public LVCustomPanel(Globals globals, LuaValue metaTable, Varargs varargs) {
         super(globals, metaTable, varargs);
@@ -31,17 +40,8 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
     }
 
     @NonNull
-    public UDViewGroup createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
+    public UDCustomPanel createUserdata(Globals globals, LuaValue metaTable, Varargs varargs) {
         return new UDCustomPanel(this, globals, metaTable, varargs);
-    }
-
-
-    @Override
-    public void addLVView(final View view, Varargs a) {
-        if(this != view) {
-            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-            super.addView(LuaViewUtil.removeFromParent(view), layoutParams);
-        }
     }
 
     public void show() {
@@ -58,11 +58,26 @@ public abstract class LVCustomPanel extends LVViewGroup implements ILVViewGroup,
     public abstract void initPanel();
 
     /**
+     * call LuaView 的 global functions
+     *
+     * @param objs
+     */
+    public void callLuaFunction(String name, Object... objs) {
+        UDView userdata = getUserdata();
+        if (userdata != null) {
+            Globals globals = userdata.getGlobals();
+            if (globals != null) {
+                globals.callLuaFunction(name, objs);
+            }
+        }
+    }
+
+    /**
      * 子类实现该方法，用于Lua回调该方法
      */
     public void callLuaCallback(Object... objs) {
         UDView userdata = getUserdata();
-        if(userdata != null) {
+        if (userdata != null) {
             final LuaValue callback = userdata.getCallback();
             LuaUtil.callFunction(callback, objs);
         }

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/CAAnimation.h>
 #import "LVHeads.h"
 #import "lVtable.h"
 
@@ -20,7 +21,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
     LVOvershootInterpolator,
 };
 
-@interface LVAnimator : NSObject <LVProtocal, NSCopying, NSMutableCopying>
+@interface LVAnimator : NSObject <LVProtocal, LVClassProtocal, NSCopying, NSMutableCopying>
 
 @property(nonatomic, copy) NSString *keyPath;
 @property(nonatomic, copy) NSValue *toValue;
@@ -39,7 +40,7 @@ typedef NS_ENUM(int, LVAniamtorInterpolator) {
 @property(nonatomic, readonly, getter=isRunning) BOOL running;
 @property(nonatomic, readonly, getter=isPaused) BOOL paused;
 
-+ (int)classDefine:(lv_State *)L;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 - (void)start;
 - (void)cancel;

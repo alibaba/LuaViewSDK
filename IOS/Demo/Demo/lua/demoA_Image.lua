@@ -98,3 +98,11 @@ end);
 closeButton.title("关闭");
 closeButton.frame(0,0,100,100);
 
+
+view3 = Image()
+view3.frame(230, 100, 100, 100)
+view3.image("http://gw.alicdn.com/tps/TB1qMx0KFXXXXXSXXXXXXXXXXXX-1065-765.png")
+view3.cornerRadius(20)
+view3.borderColor(0xff0000)
+view3.borderWidth(4)
+view3.borderDash(5, 5)

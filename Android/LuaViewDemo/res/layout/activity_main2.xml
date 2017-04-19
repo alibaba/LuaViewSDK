@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="${relativePackage}.${activityClass}">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="100px"
+        android:alpha="0.5"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:background="@android:color/holo_red_light">
+
+
+        <ImageView
+            android:id="@+id/child"
+            android:layout_width="300px"
+            android:layout_height="300px"
+            android:layout_marginTop="200px"
+            android:layout_marginBottom="-200px"
+            android:alpha="0.5"
+            android:background="@drawable/ic_launcher"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

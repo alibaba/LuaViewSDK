@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.ui;
 
 import android.animation.Animator;
@@ -5,6 +13,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -23,13 +32,13 @@ import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.LVImageView;
 import com.taobao.luaview.view.LVRecyclerView;
-import com.taobao.luaview.view.LVRefreshRecyclerView;
 import com.taobao.luaview.view.LVViewGroup;
 import com.taobao.luaview.view.drawable.LVGradientDrawable;
 import com.taobao.luaview.view.foreground.ForegroundDelegate;
 import com.taobao.luaview.view.interfaces.ILVNativeViewProvider;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -50,6 +59,9 @@ public class UDView<T extends View> extends BaseUserdata {
     //点击
     private LuaValue mOnClick;
     private LuaValue mOnLongClick;
+    private LuaValue mOnTouch;
+    private LuaTable mOnTouchEventData;
+
 
     //动画列表
     private List<Animator> mAnimators;
@@ -63,15 +75,6 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public UDView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
-        init(initParams);
-    }
-
-    /**
-     * 初始化调用
-     *
-     * @param initParams
-     */
-    public void init(Varargs initParams) {
         setSize(0, 0);//默认初始化size全0
     }
 
@@ -141,6 +144,72 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public int getPaddingBottom() {
         return getView() != null ? getView().getPaddingBottom() : 0;
+    }
+
+    /**
+     * 设置Margin
+     *
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @return
+     */
+    public UDView setMargin(Integer left, Integer top, Integer right, Integer bottom) {//TODO 这里的margin，MarginLayoutParams上有一个问题，当left+right=width或者top+bottom=height有一个问题
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            if (left != null) {
+                layoutParams.leftMargin = left;
+            }
+            if (top != null) {
+                layoutParams.topMargin = top;
+            }
+            if (right != null) {
+                layoutParams.rightMargin = right;
+            }
+            if (bottom != null) {
+                layoutParams.bottomMargin = bottom;
+            }
+            view.setLayoutParams(layoutParams);
+        }
+        return this;
+    }
+
+    public int getMarginLeft() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.leftMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginTop() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.topMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginRight() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.rightMargin;
+        }
+        return 0;
+    }
+
+    public int getMarginBottom() {
+        final View view = getView();
+        if (view != null && view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            return layoutParams.bottomMargin;
+        }
+        return 0;
     }
 
     /**
@@ -746,7 +815,7 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setEnabled(boolean enable) {
         final View view = getView();
         if (view != null) {
-            if(view instanceof LVRecyclerView) {
+            if (view instanceof LVRecyclerView) {
                 LVRecyclerView view2 = (LVRecyclerView) view;
                 view2.setNestedScrollingEnabled(false);
                 return this;
@@ -928,15 +997,17 @@ public class UDView<T extends View> extends BaseUserdata {
     public UDView setCallback(final LuaValue callbacks) {
         this.mCallback = callbacks;
         if (this.mCallback != null) {
-            mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");
-            mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;
+            mOnClick = mCallback.isfunction() ? mCallback : LuaUtil.getFunction(mCallback, "onClick", "Click", "OnClick", "click");//TODO OnClick
+            mOnLongClick = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onLongClick", "LongClick", "OnLongClick", "longClick") : null;//TODO OnLongClick
+            mOnTouch = mCallback.istable() ? LuaUtil.getFunction(mCallback, "onTouch", "OnTouch") : null;//TODO OnTouch
 
             //setup listener
             setOnClickListener();
             setOnLongClickListener();
+            setOnTouchListener();
 
             //setup click effects
-            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick));
+            setupClickEffects(LuaUtil.isValid(mOnClick) || LuaUtil.isValid(mOnLongClick) || LuaUtil.isValid(mOnTouch));
         }
         return this;
     }
@@ -964,9 +1035,27 @@ public class UDView<T extends View> extends BaseUserdata {
         return this;
     }
 
+    /**
+     * 设置长按事件
+     *
+     * @param callback
+     * @return
+     */
     public UDView setOnLongClickCallback(final LuaValue callback) {
         this.mOnLongClick = callback;
         setOnLongClickListener();
+        return this;
+    }
+
+    /**
+     * 设置触摸事件
+     *
+     * @param callback
+     * @return
+     */
+    public UDView setOnTouchCallback(final LuaValue callback) {
+        this.mOnTouch = callback;
+        setOnTouchListener();
         return this;
     }
 
@@ -983,20 +1072,24 @@ public class UDView<T extends View> extends BaseUserdata {
         return LuaUtil.callFunction(this.mOnLongClick).optboolean(false);
     }
 
+    public boolean callOnTouch(Object... params) {
+        return LuaUtil.callFunction(this.mOnTouch, params).arg1().optboolean(false);
+    }
+
     /**
      * 点击
      */
     private void setOnClickListener() {
-        if (LuaUtil.isValid(this.mOnClick)) {
-            final T view = getView();
-            if (view != null) {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnClick)) {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         callOnClick();
                     }
                 });
-            }
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
         }
     }
 
@@ -1004,16 +1097,45 @@ public class UDView<T extends View> extends BaseUserdata {
      * 长按
      */
     private void setOnLongClickListener() {
-        if (LuaUtil.isValid(this.mOnLongClick)) {
-            final T view = getView();
-            if (view != null) {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnLongClick)) {
                 view.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         return callOnLongClick();
                     }
                 });
-            }
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
+        }
+    }
+
+    /**
+     * 设置触摸事件
+     */
+
+    private void setOnTouchListener() {
+        final T view = getView();
+        if (view != null) {
+            if (LuaUtil.isValid(this.mOnTouch)) {
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (mOnTouchEventData == null) {
+                            mOnTouchEventData = new LuaTable();
+                        }
+                        if (event != null) {
+                            mOnTouchEventData.set("action", event.getActionMasked());//0按下，1起来，2移动，3取消，4外部
+                            mOnTouchEventData.set("pointer", event.getPointerId(event.getActionIndex()));
+                            mOnTouchEventData.set("x", DimenUtil.pxToDpi(event.getX()));
+                            mOnTouchEventData.set("y", DimenUtil.pxToDpi(event.getY()));
+                            mOnTouchEventData.set("gx", DimenUtil.pxToDpi(event.getRawX()));
+                            mOnTouchEventData.set("gy", DimenUtil.pxToDpi(event.getRawY()));
+                        }
+                        return callOnTouch(mOnTouchEventData);
+                    }
+                });
+            }//TODO mOnClick 为nil的时候（非null）的时候如何清空onClick，且不影响事件传递
         }
     }
 
@@ -1033,6 +1155,10 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public LuaValue getOnLongClickCallback() {
         return this.mOnLongClick;
+    }
+
+    public LuaValue getOnTouchCallback() {
+        return this.mOnTouch;
     }
 
     /**

@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.constants;
 
 import android.view.Gravity;
@@ -14,6 +22,9 @@ import org.luaj.vm2.LuaValue;
  * @date 15/9/6
  */
 public class UDTextAlign extends BaseLuaTable {
+    public static final int LEFT = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+    public static final int CENTER = Gravity.CENTER;
+    public static final int RIGHT = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
 
     public UDTextAlign(Globals globals, LuaValue metatable) {
         super(globals, metatable);
@@ -29,9 +40,9 @@ public class UDTextAlign extends BaseLuaTable {
      * 文字的排版
      */
     private void initTextViewAlignment() {
-        set("LEFT", Gravity.LEFT | Gravity.CENTER_VERTICAL);//默认竖直居中，ios不支持居上
-        set("CENTER", Gravity.CENTER);
-        set("RIGHT", Gravity.RIGHT | Gravity.CENTER_VERTICAL);//默认竖直居中，ios不支持居上
+        set("LEFT", LEFT);//默认竖直居中，ios不支持居上
+        set("CENTER", CENTER);
+        set("RIGHT", RIGHT);//默认竖直居中，ios不支持居上
 
 
         //以下在两端统一后开启

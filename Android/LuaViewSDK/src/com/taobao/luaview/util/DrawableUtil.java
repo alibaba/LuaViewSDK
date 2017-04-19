@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.content.Context;
@@ -14,7 +22,7 @@ import com.taobao.luaview.cache.WeakCache;
  * @date 15/9/9
  */
 public class DrawableUtil {
-    private static final String TAG = DrawableUtil.class.getSimpleName();
+    private static final String TAG = "DrawableUtil";
 
     /**
      * get drawable by path
@@ -27,11 +35,12 @@ public class DrawableUtil {
         if (drawable == null) {
             try {
                 drawable = Drawable.createFromPath(filePath);
+                WeakCache.getCache(TAG).put(filePath, drawable);
             } catch (Exception e) {
                 LogUtil.e("[DrawableUtil-getByPath Failed]", e);
             }
         }
-        return WeakCache.getCache(TAG).put(filePath, drawable);
+        return drawable;
     }
 
     /**
@@ -47,12 +56,13 @@ public class DrawableUtil {
             try {
                 if (context != null) {
                     drawable = Drawable.createFromStream(context.getAssets().open(filePath), null);
+                    WeakCache.getCache(TAG).put(filePath, drawable);
                 }
             } catch (Exception e) {
                 LogUtil.e("[DrawableUtil-getAssetByPath Failed]", e);
             }
         }
-        return WeakCache.getCache(TAG).put(filePath, drawable);
+        return drawable;
     }
 
     /**
@@ -70,12 +80,13 @@ public class DrawableUtil {
                 final int resourceId = resources.getIdentifier(ParamUtil.getFileNameWithoutPostfix(name), "drawable", context.getPackageName());
                 try {
                     drawable = resources.getDrawable(resourceId);
+                    WeakCache.getCache(TAG).put(name, drawable);
                 } catch (Exception e){
                     LogUtil.e("[DrawableUtil-getByName Failed]", e);
                 }
             }
         }
-        return WeakCache.getCache(TAG).put(name, drawable);
+        return drawable;
     }
 
     /**

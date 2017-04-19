@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 
@@ -32,6 +40,13 @@ public class DimenUtil {
      * @return
      */
     public static int dpiToPx(LuaValue value, int defaultValue) {
+        if (value != null && value.isnumber()) {
+            return (int) (value.optdouble(0.0f) * Constants.sScale + 0.5f);//向上取整数
+        }
+        return defaultValue;
+    }
+
+    public static Integer dpiToPx(LuaValue value, Integer defaultValue) {
         if (value != null && value.isnumber()) {
             return (int) (value.optdouble(0.0f) * Constants.sScale + 0.5f);//向上取整数
         }

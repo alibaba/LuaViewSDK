@@ -1,6 +1,12 @@
-package com.taobao.luaview.fun.mapper.ui;
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
 
-import android.graphics.Color;
+package com.taobao.luaview.fun.mapper.ui;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -13,10 +19,10 @@ import org.luaj.vm2.Varargs;
 
 import java.util.List;
 
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends BaseMethodMapper<U> {
 
-    private static final String TAG = UILoadingDialogMethodMapper.class.getSimpleName();
+    private static final String TAG = "UILoadingDialogMethodMapper";
     private static final String[] sMethods = new String[]{
             "show",//0
             "isShow",//1
@@ -73,10 +79,12 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue show(U view, Varargs varargs) {
         return view.startAnimating();
     }
 
+    @Deprecated
     public LuaValue isShow(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
@@ -93,6 +101,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
         return view.startAnimating();
     }
 
+    @Deprecated
     public LuaValue isStart(U view, Varargs varargs) {
         return valueOf(view.isAnimating());
     }
@@ -104,6 +113,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue startAnimating(U view, Varargs varargs) {
         return view.startAnimating();
     }
@@ -120,6 +130,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue hide(U view, Varargs varargs) {
         return view.stopAnimating();
     }
@@ -128,6 +139,7 @@ public class UILoadingDialogMethodMapper<U extends UDLoadingDialog> extends Base
         return view.stopAnimating();
     }
 
+    @Deprecated
     public LuaValue stopAnimating(U view, Varargs varargs) {
         return view.stopAnimating();
     }

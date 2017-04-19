@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view;
 
 import android.graphics.Color;
@@ -11,6 +19,7 @@ import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.list.UDBaseListView;
 import com.taobao.luaview.userdata.list.UDListView;
 import com.taobao.luaview.userdata.ui.UDView;
+import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.adapter.LVListViewAdapter;
 import com.taobao.luaview.view.interfaces.ILVListView;
 
@@ -98,11 +107,6 @@ public class LVListView extends ListView implements ILVListView {
     }
 
     @Override
-    public void addLVView(View view, Varargs varargs) {
-        //TODO 这里不做操作，因为ListView不应该加子view
-    }
-
-    @Override
     public void setChildNodeViews(ArrayList<UDView> childNodeViews) {
 
     }
@@ -117,7 +121,7 @@ public class LVListView extends ListView implements ILVListView {
         if (mHeaderContainer == null) {
             initHeaderContainer();
         }
-        mHeaderContainer.addLVView(view, null);
+        LuaViewUtil.addView(mHeaderContainer, view, null);
     }
 
     @Override
@@ -132,7 +136,7 @@ public class LVListView extends ListView implements ILVListView {
         if (mFooterContainer != null) {
             initFooterContainer();
         }
-        mFooterContainer.addLVView(view, null);
+        LuaViewUtil.addView(mFooterContainer, view, null);
     }
 
     @Override

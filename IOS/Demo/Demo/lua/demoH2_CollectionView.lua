@@ -9,7 +9,7 @@ imageUrl2 = "http://img4.duitang.com/uploads/item/201306/25/20130625045508_sairr
 collectionView = nil;
 collectionView = RefreshCollectionView {
 	Section = {
-		SectionCount = 2,
+		SectionCount = 10,
 
 		RowCount = function(section)
 			return 10;
@@ -26,7 +26,7 @@ collectionView = RefreshCollectionView {
 			if( section%2==1 ) then
 				return "ImageAndLabel";
 			else
-				return "ImageAndLabel2";
+				return "ImageAndLabel2",(row==2 );
 			end
 		end,
 		ImageAndLabel = {
@@ -57,6 +57,10 @@ collectionView = RefreshCollectionView {
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,
 			Callback = function(cell, section, row)
+				if( row%2 == 0 )then
+					collectionView.reload();
+					return;
+				end
                 print(section, row);
                 collectionView.stopRefreshing();
 				System.gc();
@@ -98,6 +102,7 @@ collectionView = RefreshCollectionView {
 
 				cell.icon2.image(imageUrl1)
 				print("布局Cell--" , section, "--", row);
+				cell.button.text(tostring(section) .. "," .. tostring(row) );
 
 				cell.window.backgroundColor( section*0x770000 +  (row%3)*0x33 );
 			end,

@@ -1,5 +1,14 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
+import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDHorizontalScrollView;
 import com.taobao.luaview.util.DimenUtil;
@@ -12,10 +21,10 @@ import java.util.List;
 /**
  * HorizontalScrollView的方法映射
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView> extends UIViewGroupMethodMapper<U> {
 
-    private static final String TAG = UIHorizontalScrollViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIHorizontalScrollViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "offset",//0
             "scrollTo",//1
@@ -223,6 +232,7 @@ public class UIHorizontalScrollViewMethodMapper<U extends UDHorizontalScrollView
      * @param varargs
      * @return
      */
+    @LuaViewApi(revisions = {"iOS特有，待沟通"})
     public LuaValue contentSize(U view, Varargs varargs) {
         return view;
     }

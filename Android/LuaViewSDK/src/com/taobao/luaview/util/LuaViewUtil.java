@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.annotation.TargetApi;
@@ -8,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -17,6 +26,7 @@ import com.taobao.luaview.userdata.ui.UDSpannableString;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -97,6 +107,13 @@ public class LuaViewUtil {
         return null;
     }
 
+    public static android.support.v7.app.ActionBar getSupportActionBar(Globals globals) {
+        if (globals != null && globals.getContext() instanceof AppCompatActivity) {
+            return ((AppCompatActivity) (globals.getContext())).getSupportActionBar();
+        }
+        return null;
+    }
+
 
     /**
      * 设置背景
@@ -112,6 +129,22 @@ public class LuaViewUtil {
             } else {
                 view.setBackgroundDrawable(drawable);
             }
+        }
+    }
+
+    //--------------------------------------------add view------------------------------------------
+
+    /**
+     * add target view to parent
+     *
+     * @param parent
+     * @param target
+     * @param varargs
+     */
+    public static void addView(ViewGroup parent, View target, Varargs varargs) {
+        if (parent != null && target != null && parent != target) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(target);
+            parent.addView(LuaViewUtil.removeFromParent(target), layoutParams);
         }
     }
 

@@ -13,10 +13,13 @@
 #import "LView.h"
 
 @interface LVBundle () {
-    NSMutableArray *_scriptPaths, *_resourcePaths;
+    NSMutableArray *_scriptPaths;
+    NSMutableArray *_resourcePaths;
     NSFileManager *_fileManager;
     NSString *_currentPath;
 }
+
+@property(nonatomic,strong) NSMutableDictionary* imageCaches;
 
 @end
 
@@ -33,6 +36,7 @@
         
         _resourcePaths = [NSMutableArray arrayWithObjects:[LVUtil PathForCachesResource:nil], @".", nil];
         _scriptPaths = [NSMutableArray arrayWithObject:@"."];
+        _imageCaches = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -127,13 +131,20 @@
     if (name == nil) {
         return nil;
     }
-    
-    NSData *data = [self resourceWithName:name];
-    if (data == nil) {
-        return [UIImage imageNamed:name];
+    UIImage* image = self.imageCaches[name];
+    if( image ) {
+        return image;
     }
-    
-    return [UIImage imageWithData:data];
+    NSString *path = [self resourcePathWithName:name];
+    if( path ) {
+        image = [UIImage imageWithContentsOfFile:path];
+    } else {
+        image = [UIImage imageNamed:name];
+    }
+    if( image ){
+        self.imageCaches[name] = image;
+    }
+    return image;
 }
 
 - (NSString *)scriptPathWithName:(NSString *)name {

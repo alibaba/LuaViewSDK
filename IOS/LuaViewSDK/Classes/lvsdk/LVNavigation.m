@@ -144,7 +144,7 @@ static int setStatusBarStyle (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L{
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     const struct lvL_reg fs [] = {
         {"title", setTitle},
         {"left", setLeftButton},

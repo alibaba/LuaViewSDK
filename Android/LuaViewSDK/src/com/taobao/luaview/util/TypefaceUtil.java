@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.content.Context;
@@ -12,8 +20,8 @@ import com.taobao.luaview.cache.SimpleCache;
  * @date 15/11/6
  */
 public class TypefaceUtil {
-    private static final String TAG = TypefaceUtil.class.getSimpleName();
-    private static final String TAG_TYPEFACE_NAME = TypefaceUtil.class.getSimpleName() + "_NAME";
+    private static final String TAG = "TypefaceUtil";
+    private static final String TAG_TYPEFACE_NAME = "TypefaceUtil_NAME";
 
     /**
      * 未知

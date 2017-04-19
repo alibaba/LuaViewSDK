@@ -20,7 +20,9 @@
 //* THE SOFTWARE.
 //******************************************************************************/
 //package org.luaj.vm2;
-//
+
+//TODO 与3.0不一样
+
 //import java.io.ByteArrayOutputStream;
 //import java.io.PrintStream;
 //

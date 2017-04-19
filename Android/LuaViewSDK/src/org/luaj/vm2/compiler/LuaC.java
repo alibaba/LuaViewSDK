@@ -249,8 +249,8 @@ public class LuaC extends Lua implements Globals.Compiler, Globals.Loader {
 	 * @return Prototype representing the lua chunk for this source.
 	 * @throws IOException
 	 */
-	public Prototype compile(InputStream stream, String chunkname) throws IOException {
-		return (new LuaC(new Hashtable())).luaY_parser(stream, chunkname);
+	public Prototype compile(InputStream stream, String chunkname, boolean standardSyntax) throws IOException {
+		return (new LuaC(new Hashtable())).luaY_parser(stream, chunkname, standardSyntax);
 	}
 
 	/** @deprecated
@@ -258,13 +258,13 @@ public class LuaC extends Lua implements Globals.Compiler, Globals.Loader {
 	 * or LuaC.compil(InputStream, String) and construct LuaClosure directly.
 	 */
 	public LuaValue load(InputStream stream, String chunkname, Globals globals) throws IOException {
-		return new LuaClosure(compile(stream, chunkname), globals);
+		return new LuaClosure(compile(stream, chunkname, globals.isStandardSyntax()), globals);
 	}
 
 
 	/** Parse the input */
-	private Prototype luaY_parser(InputStream z, String name) throws IOException{
-		LexState lexstate = new LexState(this, z);
+	private Prototype luaY_parser(InputStream z, String name, boolean standardSyntax) throws IOException{
+		LexState lexstate = new LexState(this, z, standardSyntax);
 		FuncState funcstate = new FuncState();
 		// lexstate.buff = buff;
 		lexstate.fs = funcstate;

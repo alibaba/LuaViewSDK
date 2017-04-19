@@ -50,7 +50,9 @@ static int lvDataGC (lv_State *L) {
 }
 
 static int lvNewData (lv_State *L) {
-    LVData* data = [[LVData alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVData class]];
+    
+    LVData* data = [[c alloc] init:L];
     int argN = lv_gettop(L);
     if( argN>0 ) {
         if ( lv_type(L, 1)==LV_TSTRING ) {// 支持字符串转 NSData
@@ -191,11 +193,9 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewData);
-        lv_setglobal(L, "Data");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewData globalName:globalName defaultName:@"Data"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"__index", __index },
         {"__newindex", __newindex },

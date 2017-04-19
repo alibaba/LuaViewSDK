@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.list;
 
 import android.view.ViewGroup;
@@ -35,7 +43,7 @@ public abstract class UDBaseListView<T extends ViewGroup> extends UDBaseListOrRe
     public UDBaseListOrRecyclerView reload(Integer section, Integer row) {
         final T lv = getView();
         if (lv instanceof ILVListView) {
-            init(this.initParams);//重新初始化数据
+            init();//重新初始化数据
             if (((ILVListView) lv).getLVAdapter() != null) {
                 ((ILVListView) lv).getLVAdapter().notifyDataSetChanged();
             }

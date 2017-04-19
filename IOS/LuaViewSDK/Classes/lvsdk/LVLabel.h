@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "LVHeads.h"
 
-@interface LVLabel : UILabel<LVProtocal>
+@interface LVLabel : UILabel<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 @property(nonatomic,assign) NSUInteger lv_align;
+@property(nonatomic,strong) CAShapeLayer* lv_shapeLayer;
 
 -(id) init:(NSString*)imageName l:(lv_State*) l;
 
-+(int) classDefine: (lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

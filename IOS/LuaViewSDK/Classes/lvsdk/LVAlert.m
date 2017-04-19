@@ -115,17 +115,15 @@ static int toast (lv_State *L) {
 }
 
 
-+(int) classDefine: (lv_State *)L {
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
     
     {// 自动消失的提示框
         lv_pushcfunction(L, toast);
         lv_setglobal(L, "Toast");
     }
 
-    {// 系统Alert提示框
-        lv_pushcfunction(L, lvNewAlertView);
-        lv_setglobal(L, "Alert");
-    }
+    // 系统Alert提示框
+    [LVUtil reg:L clas:self cfunc:lvNewAlertView globalName:globalName defaultName:@"Alert"];
     const struct lvL_reg memberFunctions [] = {
         {NULL, NULL}
     };

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVFile : NSObject
+@interface LVFile : NSObject<LVClassProtocal>
 
-+(int) classDefine:(lv_State *)l ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

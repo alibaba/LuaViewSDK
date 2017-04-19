@@ -5,19 +5,31 @@
 
 
 
-## tag: 2.0.0.8
+## tag: 2.4.1.13 -> LuaViewSDK 5.5.0
 ### Feature
-* 手淘插件,猫客插件中使用
+* 新加功能：
+* 1.新加cell吸顶 + 视差效果 + 3Dbox
+* 2.新加View的Layer模式
+* 3.新加CustomView Canvas绘图组件
+* 4.新加onTouch API
+* 5.http -> https
 
 
-## tag: jhs4.4.0.8
+
+## tag: 2.4.1.15 -> LuaViewSDK 5.7.0
 ### Feature
-* 聚客4.4.0 中使用
+* 新加功能：
+* 1.PagerView左右留边
 
 
-## tag: jhs4.5.0.1
+
+## tag: 2.4.1.8 -> LuaViewSDK 5.8.0
 ### Feature
-* 聚客4.5.0 中使用
+* 新加功能：
+* 1.功能正常，内容为空的下拉刷新
+
+
+
 
 
 

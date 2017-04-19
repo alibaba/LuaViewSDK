@@ -15,6 +15,10 @@
 #import "lVstate.h"
 #import "lVgc.h"
 
+@interface LVAudioPlayer ()
+@property(nonatomic,assign) BOOL playing;
+@end
+
 @implementation LVAudioPlayer{
     AVAudioPlayer* audioPlayer;
 }
@@ -47,7 +51,14 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     NSString* path = [bundle resourcePathWithName:fileName];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];//使用本地URL创建
+        NSError* error = nil;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//使用本地URL创建
+        if( error ) {
+            NSLog(@"[LuaView][error]%@",error);
+        }
+    }
+    if( self.playing ) {
+        [self play];
     }
 }
 
@@ -55,11 +66,12 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
-        // fixme: 构造完成后调用play()无效，下载完成后没有回调
         [LVUtil download:fileName callback:^(NSData *fileData) {
+            NSString* suffix = [fileName componentsSeparatedByString:@"."].lastObject;
             NSData* theFileNameData = [fileName dataUsingEncoding:NSUTF8StringEncoding];
             NSString* md5Path = [LVUtil MD5HashFromData:theFileNameData];
-            if(  [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
+            md5Path = [NSString stringWithFormat:@"%@.%@",md5Path,suffix];//Mp3文件一定要加后缀，否则无法播放
+            if( [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
                 [self setPlayFileName0:md5Path bundle:bundle];
             }
         }];
@@ -70,10 +82,12 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 
 -(void) play {
     [audioPlayer play];
+    self.playing = YES;
 }
 
 -(void) stop {
     [audioPlayer stop];
+    self.playing = NO;
 }
 
 - (id) lv_nativeObject{
@@ -85,7 +99,9 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 
 static int lvNewAudioPlayer (lv_State *L) {
     if( lv_gettop(L)>=1 ) {
-        LVAudioPlayer* player = [[LVAudioPlayer alloc] init:L];
+        Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
+        
+        LVAudioPlayer* player = [[c alloc] init:L];
         LView* lview = (__bridge LView *)(L->lView);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
@@ -145,11 +161,9 @@ static int __tostring (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewAudioPlayer);
-        lv_setglobal(L, "AudioPlayer");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewAudioPlayer globalName:globalName defaultName:@"AudioPlayer"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },

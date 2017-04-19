@@ -42,8 +42,14 @@
 +(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2 nargs:(int)nargs nrets:(int)nret{
     return [LVUtil call:l key1:key1 key2:key2 key3:NULL nargs:nargs nrets:nret retType:-8];
 }
-
+    
 +(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3
+            nargs:(int)nargs nrets:(int)nret
+          retType:(int) retType{
+    return [self call:l key1:key1 key2:key2 key3:key3 key4:NULL nargs:nargs nrets:nret retType:retType];
+}
+    
++(NSString*) call:(lv_State*) l key1:(const char*) key1 key2:(const char*)key2  key3:(const char*)key3 key4:(const char*)key4
       nargs:(int)nargs nrets:(int)nret
     retType:(int) retType{
     if( l ){
@@ -60,6 +66,11 @@
                 if( lv_type(l, -1)==LV_TTABLE && key3){//table
                     lv_getfield(l, -1, key3);
                     lv_remove(l, -2);
+                    
+                    if( lv_type(l, -1)==LV_TTABLE && key4){//table
+                        lv_getfield(l, -1, key4);
+                        lv_remove(l, -2);
+                    }
                 }
             }
         }
@@ -337,6 +348,12 @@ UIColor* lv_getColorFromStack(lv_State* L, int stackID){
 }
 
 +(void) download:(NSString*) urlStr callback:(LVFuncDownloadEndCallback) nextStep{
+    if( [urlStr hasPrefix:@"//"] ) {
+        urlStr = [NSString stringWithFormat:@"https:%@",urlStr];
+    }
+    if( [urlStr.lowercaseString hasPrefix:@"http://"] ){
+        urlStr = [NSString stringWithFormat:@"https://%@",[urlStr substringFromIndex:7]];
+    }
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
@@ -558,24 +575,7 @@ id lv_luaValueToNativeObject(lv_State* L, int idx){
 
 void lv_pushNativeObject(lv_State* L, id value){
     lv_checkstack(L, 4);
-    if( value==nil || value == [NSNull null] ) {
-        lv_pushnil(L);
-        return;
-    } else if( [value isKindOfClass:[NSNumber class]] ) {
-        static Class boolClass = nil;;
-        if ( boolClass ==nil ) {
-            boolClass = [@(YES) class];
-        }
-        NSNumber* number = value;
-        if( [value class] == boolClass) {
-            //  是否是bool类型
-            lv_pushboolean(L, number.boolValue);
-            return;
-        } else {
-            lv_pushnumber(L, number.doubleValue);
-            return;
-        }
-    }  else if( [value isKindOfClass:[NSString class]] ) {
+    if( [value isKindOfClass:[NSString class]] ) {
         NSString* s = value;
         lv_pushstring(L, s.UTF8String);
         return;
@@ -599,6 +599,23 @@ void lv_pushNativeObject(lv_State* L, id value){
             lv_pushNativeObject(L,value);
             lv_settable(L, -3);
         }
+        return;
+    } else if( [value isKindOfClass:[NSNumber class]] ) {
+        static Class boolClass = nil;;
+        if ( boolClass ==nil ) {
+            boolClass = [@(YES) class];
+        }
+        NSNumber* number = value;
+        if( [value class] == boolClass) {
+            //  是否是bool类型
+            lv_pushboolean(L, number.boolValue);
+            return;
+        } else {
+            lv_pushnumber(L, number.doubleValue);
+            return;
+        }
+    }  else if( value==nil || value == [NSNull null] ) {
+        lv_pushnil(L);
         return;
     } else if( [value isKindOfClass:[LVBlock class] ] ) {
         LVBlock* block = (LVBlock*)value;
@@ -782,6 +799,60 @@ BOOL lv_objcEqual(id obj1, id obj2) {
     LVReleaseAndNull(font);
     LVReleaseAndNull(provider);
     return ret;
+}
+
+
++(void) reg:(lv_State*)L clas:(id) c cfunc:(lv_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName{
+    if( defaultName || globalName ) {
+        lv_checkstack(L, 12);
+        NSString* className = NSStringFromClass(c);
+        lv_pushstring(L, className.UTF8String);
+        lv_pushcclosure(L, cfunc, 1);
+        
+        lv_setglobal(L, globalName ? globalName.UTF8String : defaultName.UTF8String );
+    }
+}
+
++(Class) upvalueClass:(lv_State*)L defaultClass:(Class) defaultClass{
+    const char* classNameChars = lv_tostring(L, lv_upvalueindex(1));
+    NSMutableString* className = [NSMutableString stringWithFormat:@"%s",classNameChars];
+    Class c = NSClassFromString(className);
+    if( c == nil ) {
+        c = defaultClass;
+    }
+    return c;
+}
+
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lv_State*)L {
+    if( globalName && value ) {
+        lv_checkstack(L, 12);
+        lv_pushNativeObject(L, value);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Value");
+    }
+}
+
++(void) defineGlobal:(NSString*)globalName func:(lv_CFunction) func L:(lv_State*)L {
+    if( globalName && func ) {
+        lv_checkstack(L, 12);
+        lv_pushcfunction(L, func);
+        lv_setglobal(L, globalName.UTF8String);
+    } else {
+        LVError(@"define Global Function");
+    }
+}
+
+void lv_addSubview(LView* lv, UIView* superview, UIView* subview){
+    [subview removeFromSuperview];
+    [subview.layer removeFromSuperlayer];
+    if( lv.closeLayerMode
+       || [superview isKindOfClass:[UIScrollView class]]
+       || [subview isKindOfClass:[UIScrollView class]] ) {
+        [superview addSubview:subview];
+    } else {
+        [superview.layer addSublayer:subview.layer];
+    }
 }
 
 void LVLog( NSString* format, ... ){

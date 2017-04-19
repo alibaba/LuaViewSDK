@@ -11,9 +11,9 @@
 
 extern void lv_printToServer(lv_State* L, const char* cs, int withTabChar);
 
-@interface LVDebuger : NSObject
+@interface LVDebuger : NSObject<LVClassProtocal>
 
-+(int) classDefine:(lv_State *)L;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 
 @end

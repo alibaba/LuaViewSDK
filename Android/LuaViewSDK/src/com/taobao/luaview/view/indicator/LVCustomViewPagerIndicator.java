@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view.indicator;
 
 import android.support.v4.view.PagerAdapter;
@@ -6,6 +14,7 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 
 import com.taobao.android.luaview.R;
+import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.userdata.base.UDLuaTable;
 import com.taobao.luaview.userdata.indicator.UDCustomViewPagerIndicator;
 import com.taobao.luaview.userdata.ui.UDView;
@@ -49,7 +58,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
 
     private void init() {
         this.setHorizontalScrollBarEnabled(false);
-        addView(mLayout, LuaViewUtil.createRelativeLayoutParamsMM());
+        super.addView(mLayout, LuaViewUtil.createRelativeLayoutParamsMM());
     }
 
     @Override
@@ -117,7 +126,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
         //set tag
         View view = cellData.getView();
         if (view != null) {
-            view.setTag(R.id.lv_tag, cellData);
+            view.setTag(Constants.RES_LV_TAG, cellData);
         }
         return cellData;
     }
@@ -191,7 +200,7 @@ public class LVCustomViewPagerIndicator extends HorizontalScrollView implements 
             }
 
             //TODO 这里需要优化一下，实现的太低效，有bug
-            Object obj = child.getTag(R.id.lv_tag);
+            Object obj = child.getTag(Constants.RES_LV_TAG);
             if (obj instanceof LuaValue) {
                 LuaValue cellData = (LuaValue) obj;
                 mLuaUserdata.callCellLayout(cellData, i, item);//绘制

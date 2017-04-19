@@ -11,7 +11,7 @@
 
 
 //LVData
-@interface LVStyledString : NSObject<LVProtocal>
+@interface LVStyledString : NSObject<LVProtocal, LVClassProtocal>
 
 @property(nonatomic,weak) LView* lv_lview;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
@@ -19,6 +19,6 @@
 @property(nonatomic,strong) NSMutableAttributedString* mutableStyledString;//真实的数据
 
 -(id) init:(lv_State*) l;
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 @end

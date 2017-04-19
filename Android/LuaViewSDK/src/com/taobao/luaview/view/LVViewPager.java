@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view;
 
 import android.support.v4.app.Fragment;
@@ -133,13 +141,6 @@ public class LVViewPager extends AutoScrollViewPager implements ILVViewGroup {
     @Override
     public UDView getUserdata() {
         return mLuaUserdata;
-    }
-
-    @Override
-    public void addLVView(View view, Varargs a) {
-        if(this != view) {
-            this.addView(view);
-        }
     }
 
     @Override

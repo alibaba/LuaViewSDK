@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.kit;
 
 import com.taobao.luaview.fun.base.BaseMethodMapper;
@@ -19,9 +27,9 @@ import java.util.List;
  * @author song
  * @date 15/8/21
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
-    private static final String TAG = TimerMethodMapper.class.getSimpleName();
+    private static final String TAG = "TimerMethodMapper";
     private static final String[] sMethods = new String[]{
             "delay",//0
             "repeat",//1
@@ -123,6 +131,7 @@ public class TimerMethodMapper<U extends UDTimer> extends BaseMethodMapper<U> {
      * @return
      */
     @LuaViewApi(since = VmVersion.V_511)
+    @Deprecated
     public LuaValue repeatCount(U udTimer, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setRepeatCount(udTimer, varargs);

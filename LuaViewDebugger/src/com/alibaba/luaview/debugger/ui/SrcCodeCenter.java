@@ -37,9 +37,37 @@ public class SrcCodeCenter {
 			table.remove(fileName);
 		}
 		SrcCodeViewer viewer = new SrcCodeViewer(fileName, content, this.center);
-		tabbedPane.addTab(fileName, viewer);
+		this.addToTabbedPane(tabbedPane, fileName, viewer);
 		table.put(fileName, viewer);
 		return viewer;
+	}
+
+	private void addToTabbedPane(JTabbedPane tabbedPane, String fileName, SrcCodeViewer viewer) {
+		int num = tabbedPane.getTabCount();
+		String newTitle = this.shortName(fileName);
+		for (int i = 0; i < num; i++) {
+			String title = tabbedPane.getTitleAt(i);
+			if (newTitle.compareTo(title) > 0) {
+				tabbedPane.insertTab(newTitle, null, viewer, null, i);
+				return;
+			}
+		}
+		tabbedPane.addTab(newTitle, viewer);
+	}
+
+	private String shortName(String s) {
+		int index = s.lastIndexOf('/');
+		if (index >= 0) {
+			s = s.substring(index + 1);
+		}
+		s = s.trim();
+		if (s.endsWith(".lua")) {
+			s = s.substring(0, s.length() - 4);
+		}
+		if (s.endsWith(".lv")) {
+			s = s.substring(0, s.length() - 3);
+		}
+		return s.trim();
 	}
 
 	public void running(String fileName, String lineNumber) {

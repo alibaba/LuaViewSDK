@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.view.adapter;
 
 import android.support.v4.view.PagerAdapter;
@@ -51,7 +59,6 @@ public class LVPagerAdapter extends PagerAdapter {
     }
 
     public Object newItem(ViewGroup container, int position) {
-//        LogUtil.d("yesong", "newItem", position);
         //View封装
         final UDView page = new UDViewGroup(createPageLayout(), mGlobals, null);//TODO 为什么用mLuaUserData.getmetatable()不行
         //对外数据封装，必须使用LuaTable

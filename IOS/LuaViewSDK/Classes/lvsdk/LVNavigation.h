@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "LVHeads.h"
 
-@interface LVNavigation : NSObject
+@interface LVNavigation : NSObject<LVClassProtocal>
 
-+(int) classDefine:(lv_State *)L ;
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName;
 
 // 空实现去除编译警告
 -(void) lv_setNavigationItemTitleView:(UIView*) view;

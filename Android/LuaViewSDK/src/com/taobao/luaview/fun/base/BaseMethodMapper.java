@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.base;
 
 import com.taobao.luaview.cache.AppCache;
@@ -20,7 +28,6 @@ import java.util.List;
  * @date 15/8/14
  */
 public abstract class BaseMethodMapper<U extends LuaValue> extends VarArgFunction {
-    private static final String TAG = BaseFunctionBinder.class.getSimpleName();
     private static final String CACHE_METHODS = AppCache.CACHE_METHODS;
 
     /**

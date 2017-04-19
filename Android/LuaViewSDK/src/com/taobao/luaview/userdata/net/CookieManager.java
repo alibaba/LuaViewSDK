@@ -1,6 +1,16 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.net;
 
+import android.os.Build;
 import android.text.TextUtils;
+import android.webkit.CookieSyncManager;
 
 import com.taobao.luaview.util.LogUtil;
 
@@ -22,7 +32,7 @@ import java.util.Map;
  * 下午5:20 song XXX
  */
 public class CookieManager {
-    private static final String TAG = CookieManager.class.getSimpleName();
+    private static final String TAG = "CookieManager";
     public static final String COOKIE = "Cookie";
     public static final String COOKIES_HEADER = "Set-Cookie";
 
@@ -75,11 +85,25 @@ public class CookieManager {
     private static String getWebkitRequestCookies(String requestUrl) {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
         if (cookieManager != null) {
+            syncWebkitCookies(cookieManager);
             final String webkitCookie = cookieManager.getCookie(requestUrl);
             LogUtil.d(TAG, "get-webkit", webkitCookie);
             return webkitCookie;
         }
         return null;
+    }
+
+    /**
+     * synchronous cookies for webkit
+     *
+     * @param cookieManager
+     */
+    private static void syncWebkitCookies(android.webkit.CookieManager cookieManager) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {//同步cookie synchronous
+            CookieSyncManager.getInstance().sync();
+        } else {
+            cookieManager.flush();
+        }
     }
 
     /**

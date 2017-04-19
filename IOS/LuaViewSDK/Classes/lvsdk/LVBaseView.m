@@ -19,6 +19,7 @@
 #import "lVgc.h"
 #import "JUFLXLayoutKit.h"
 #import "UIView+JUFLXNode.h"
+#import "LVGesture.h"
 
 @interface LVBaseView ()
 @property(nonatomic,assign) BOOL lv_isCallbackAddClickGesture;// 支持Callback 点击事件
@@ -45,6 +46,7 @@ static void releaseUserDataView(LVUserDataInfo* userdata){
             view.lv_userData = nil;
             view.lv_lview = nil;
             [view removeFromSuperview];
+            [view.layer removeFromSuperlayer];
         }
     }
 }
@@ -546,14 +548,13 @@ static int removeGestureRecognizer (lv_State *L) {
 static int addSubview (lv_State *L) {
     LVUserDataInfo * father = (LVUserDataInfo *)lv_touserdata(L, 1);
     LVUserDataInfo * son = (LVUserDataInfo *)lv_touserdata(L, 2);
+    LView* luaview = (__bridge LView *)(L->lView);
     if( father &&  LVIsType(son, View) ){
-        UIView* viewRoot = (__bridge UIView *)(father->object);
-        UIView* viewSub = (__bridge UIView *)(son->object);
-        if( viewRoot && viewSub ){
-            [viewSub removeFromSuperview];
-            [viewRoot addSubview:viewSub];
-            
-            [viewSub lv_alignSelfWithSuperRect:viewRoot.frame];
+        UIView* superview = (__bridge UIView *)(father->object);
+        UIView* subview = (__bridge UIView *)(son->object);
+        if( superview && subview ){
+            lv_addSubview(luaview, superview, subview);
+            [subview lv_alignSelfWithSuperRect:superview.frame];
             lv_pushvalue(L,1);
             return 1;
         }
@@ -598,6 +599,7 @@ static int removeFromSuperview (lv_State *L) {
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
             [view removeFromSuperview];
+            [view.layer removeFromSuperlayer];
             lv_pushvalue(L,1);
             return 1;
         }
@@ -610,12 +612,41 @@ static int removeAllSubviews (lv_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if( view ){
-            while (view.subviews.count) {
-                UIView* child = view.subviews.lastObject;
+            NSArray* subviews = view.subviews;
+            for( UIView* child in subviews ) {
                 [child removeFromSuperview];
+            }
+            NSArray* sublayers = view.layer.sublayers;
+            for(CALayer * sublayer in sublayers ) {
+                [sublayer removeFromSuperlayer];
             }
             lv_pushvalue(L,1);
             return 1;
+        }
+    }
+    return 0;
+}
+
+static int layerMode(lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if ( lv_gettop(L)>=2 ) {
+                UIView* superview = view.superview;
+                BOOL yes = lvL_checkbool(L, 2);
+                if( yes ) {
+                    [view removeFromSuperview];
+                    [superview.layer addSublayer:view.layer];
+                } else {
+                    [view.layer removeFromSuperlayer];
+                    [superview addSubview:view];
+                }
+                return 0;
+            } else {
+                //lv_pushboolean(L, view.hidden );
+                //return 1;
+            }
         }
     }
     return 0;
@@ -941,24 +972,58 @@ static int borderColor (lv_State *L) {
     return 0;
 }
 
+static int borderDash (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        int argN = lv_gettop(L);
+        if ( argN>=2 ) {
+            NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:argN];
+            for( int i=2; i<=argN; i++) {
+                if( lv_type(L, i)==LV_TNUMBER ) {
+                    int v = lv_tonumber(L, i);
+                    [arr addObject:[NSNumber numberWithInt:v]];
+                }
+            }
+            //虚线边框
+            if( arr.count>0 ) {
+                [view lv_createShapelayer:arr];
+            } else {
+                view.lv_shapeLayer.lineDashPattern = nil;
+                [view.lv_shapeLayer removeFromSuperlayer];
+                view.lv_shapeLayer = nil;
+            }
+            return 0;
+        } else {
+            NSArray<NSNumber*>* numbers = view.lv_shapeLayer.lineDashPattern;
+            for( int i=0; i<numbers.count; i++) {
+                NSNumber* number = numbers[i];
+                lv_pushnumber(L, number.floatValue );
+            }
+            return (int)numbers.count;
+        }
+    }
+    return 0;
+}
+
 #pragma -mark clipsToBounds
-//static int clipsToBounds(lv_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lv_touserdata(L, 1);
-//    if( user ){
-//        UIView* view = (__bridge UIView *)(user->view);
-//        if( view ){
-//            if( lv_gettop(L)>=2 ) {
-//                BOOL yes = lvL_checkbool(L, 2);
-//                view.clipsToBounds = yes;
-//                return 0;
-//            } else {
-//                lv_pushnumber(L, view.clipsToBounds );
-//                return 1;
-//            }
-//        }
-//    }
-//    return 0;
-//}
+static int clipsToBounds(lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if( lv_gettop(L)>=2 ) {
+                BOOL yes = lvL_checkbool(L, 2);
+                view.clipsToBounds = yes;
+                return 0;
+            } else {
+                lv_pushnumber(L, view.clipsToBounds );
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 static int adjustSize(lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1280,6 +1345,34 @@ static int onClick (lv_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static void removeOnTouchEventGesture(UIView* view){
+    NSArray< UIGestureRecognizer *> * gestures = view.gestureRecognizers;
+    for( LVGesture* g in gestures ) {
+        if( [g isKindOfClass:[LVGesture class]] ) {
+            if( g.onTouchEventCallback ) {
+                [view removeGestureRecognizer:g];
+                break;
+            }
+        }
+    }
+}
+
+static int onTouch (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    int ret = lv_setCallbackByKey(L, STR_ON_TOUCH, NO);
+    if( user ){
+        __weak UIView* view = (__bridge UIView *)(user->object);
+        removeOnTouchEventGesture(view);
+        
+        LVGesture* gesture = [[LVGesture alloc] init:L];
+        gesture.onTouchEventCallback = ^(LVGesture* gesture, int argN){
+            [view lv_callLuaByKey1:@STR_ON_TOUCH key2:nil argN:1];
+        };
+        [view addGestureRecognizer:gesture];
+    }
+    return ret;
+}
+
 #pragma -mark __gc
 static int __gc (lv_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
@@ -1303,7 +1396,7 @@ static int __tostring (lv_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_runCallBack:STR_ON_LAYOUT];
+    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
 }
 
 static int releaseObject(lv_State *L) {
@@ -1311,12 +1404,13 @@ static int releaseObject(lv_State *L) {
     if( user ){
         //[LVUtil unregistry:L key:(__bridge id)user->view];
         UIView* view = (__bridge UIView *)(user->object);
+        [view removeFromSuperview];
+        [view.layer removeFromSuperlayer];
         if( [view isKindOfClass:[LView class]] ){
             LView* lView = (LView*)view;
             L->lView = NULL;
             [lView releaseLuaView];
         }
-        [view removeFromSuperview];
     }
     return 0;
 }
@@ -1395,6 +1489,45 @@ static int alignCenter(lv_State *L ) {
     return alignInfo(L, LV_ALIGN_H_CENTER|LV_ALIGN_V_CENTER);
 }
 
+static int effects (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( [view isKindOfClass:[UIView class]] ) {
+            int effectType = lv_tonumber(L, 2);
+            switch (effectType) {
+                case EFFECT_NONE:
+                    break;
+                case EFFECT_CLICK:{
+                    NSInteger color = lv_tonumber(L, 3);
+                    CGFloat alpha = lv_tonumber(L, 4);
+                    [view lv_effectClick:color alpha:alpha];
+                    break;
+                }
+                case EFFECT_PARALLAX:{
+                    CGFloat dx = lv_tonumber(L, 3);
+                    CGFloat dy = lv_tonumber(L, 4);
+                    [view lv_effectParallax:dx dy:dy];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    return 0;
+}
+
+static int invalidate (lv_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lv_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( [view isKindOfClass:[UIView class]] ) {
+            [view setNeedsDisplay];
+        }
+    }
+    return 0;
+}
 
 static const struct lvL_reg baseMemberFunctions [] = {
     {"hidden",    hidden },
@@ -1406,6 +1539,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"isShow",    isShow },
     
     {"enabled",    userInteractionEnabled },
+    {"clipsToBounds",    clipsToBounds },
     
     {"backgroundColor",     backgroundColor },
     
@@ -1416,6 +1550,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"borderWidth",         borderWidth },
     
     {"borderColor",         borderColor },
+    {"borderDash",         borderDash },
     
     {"shadowPath",       setShadowPath },
     {"masksToBounds",    setMasksToBounds },
@@ -1475,6 +1610,7 @@ static const struct lvL_reg baseMemberFunctions [] = {
     {"callback",     callback },
     {"onLayout",     onLayout },
     {"onClick",     onClick },
+    {"onTouch",     onTouch },
     
     {"hasFocus",        isFirstResponder },
     {"requestFocus",    becomeFirstResponder },
@@ -1508,6 +1644,11 @@ static const struct lvL_reg baseMemberFunctions [] = {
     // getNativeView
     {"getNativeView", getNativeView},
     {"nativeView", getNativeView},
+    
+    {"effects",effects},
+    {"layerMode",layerMode},
+    
+    {"invalidate",invalidate},
     {NULL, NULL}
 };
 
@@ -1521,7 +1662,9 @@ static const struct lvL_reg luaViewMemberFunctions [] = {
 
 #pragma -mark UIView
 static int lvNewView (lv_State *L) {
-    LVBaseView* view = [[LVBaseView alloc] init:L];
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVBaseView class]];
+    
+    LVBaseView* view = [[c alloc] init:L];
     {
         NEW_USERDATA(userData, View);
         userData->object = CFBridgingRetain(view);
@@ -1538,11 +1681,9 @@ static int lvNewView (lv_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
-+(int) classDefine: (lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewView);
-        lv_setglobal(L, "View");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewView globalName:globalName defaultName:@"View"];
+    
     lv_createClassMetaTable(L, META_TABLE_UIView);
     
     lvL_openlib(L, NULL, [LVBaseView baseMemberFunctions], 0);

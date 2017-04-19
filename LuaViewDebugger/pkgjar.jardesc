@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="/Users/admin/Desktop/LuaViewSDK/LuaViewDebugger/LuaViewDebugger.jar"/>
+    <jar path="LuaViewDebugger/LuaViewDebugger.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/LuaViewDebugger/pkgjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -13,8 +13,7 @@
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba"/>
         <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger.ui"/>
-        <file path="/LuaViewDebugger/src/.DS_Store"/>
-        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger"/>
         <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com"/>
+        <javaElement handleIdentifier="=LuaViewDebugger/src&lt;com.alibaba.luaview.debugger"/>
     </selectedElements>
 </jardesc>

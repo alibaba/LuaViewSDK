@@ -173,8 +173,12 @@ static int lvNewAttributedString (lv_State *L) {
     LView* luaView = (__bridge LView *)(L->lView);
     LVStyledString* attString = [[LVStyledString alloc] init:L];
     if( luaView && lv_gettop(L)>=2 ) {
-        if( lv_type(L, 1)==LV_TSTRING && lv_type(L, 2)==LV_TTABLE ){
-            NSString* s = lv_paramString(L, 1);
+        if( ( lv_type(L, 1)==LV_TSTRING || lv_type(L, 1)==LV_TNUMBER ) && lv_type(L, 2)==LV_TTABLE ){
+            NSString* s = nil;
+            size_t n = 0;
+            const char* chars = lv_tolstring(L, 1, &n );
+            s = [NSString stringWithUTF8String:chars];
+            
             attString.mutableStyledString = [[NSMutableAttributedString alloc] initWithString:s];
             
             NSDictionary* dic = lv_luaTableToDictionary(L,2);
@@ -249,9 +253,16 @@ static int __add (lv_State *L) {
             }
             return 1;
         }
-    } else if( lv_type(L, 2)==LV_TSTRING ) {
+    } else if( lv_type(L, 2)==LV_TSTRING || lv_type(L, 2)==LV_TNUMBER ) {
         LVUserDataInfo * user1 = (LVUserDataInfo *)lv_touserdata(L, 1);
-        NSString* stringArg = lv_paramString(L, 2);
+        NSString* stringArg = nil;
+        if( lv_type(L, 2)==LV_TSTRING ) {
+            stringArg = lv_paramString(L, 2);
+        } else {
+            size_t n = 0;
+            const char* chars = lv_tolstring(L, 2, &n );
+            stringArg = [NSString stringWithUTF8String:chars];
+        }
         if( LVIsType(user1, StyledString)  ){
             LVStyledString* user1AttString = (__bridge LVStyledString *)(user1->object);
             
@@ -276,11 +287,9 @@ static int __add (lv_State *L) {
     return 0;
 }
 
-+(int) classDefine:(lv_State *)L {
-    {
-        lv_pushcfunction(L, lvNewAttributedString);
-        lv_setglobal(L, "StyledString");
-    }
++(int) lvClassDefine:(lv_State *)L globalName:(NSString*) globalName{
+    [LVUtil reg:L clas:self cfunc:lvNewAttributedString globalName:globalName defaultName:@"StyledString"];
+    
     const struct lvL_reg memberFunctions [] = {
         {"append", append },
         

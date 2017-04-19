@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.content.Context;
@@ -29,7 +37,7 @@ import java.security.spec.X509EncodedKeySpec;
  * @date 15/11/10
  */
 public class VerifyUtil {
-    private static final String TAG = VerifyUtil.class.getSimpleName();
+    private static final String TAG = "VerifyUtil";
     private static final String CACHE_PUBLIC_KEY = AppCache.CACHE_PUBLIC_KEY;
 
     public static final String ALGORITHM_RSA = "RSA";

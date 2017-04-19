@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.util;
 
 import android.annotation.TargetApi;
@@ -5,11 +13,13 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Point;
-import android.os.*;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * 获取系统一些属性
@@ -34,6 +44,7 @@ public class AndroidUtil {
 
     /**
      * 获取所有的内存大小(in k)
+     *
      * @param context
      * @return
      */
@@ -232,5 +243,81 @@ public class AndroidUtil {
      */
     public static int getActionBarHeightInDp(Context context) {
         return (int) DimenUtil.pxToDpi(getActionBarHeight(context));
+    }
+
+
+    /**
+     * 获取系统的Navigation bar height
+     *
+     * @param context
+     * @return
+     */
+    public static int getNavigationBarHeightInDp(Context context) {
+        Point size = getNavigationBarSize(context);
+        return (int) DimenUtil.pxToDpi(size != null ? size.y : 0);
+    }
+
+    public static Point getNavigationBarSize(Context context) {
+        Point appUsableSize = getAppUsableScreenSize(context);
+        Point realScreenSize = getRealScreenSize(context);
+
+        // navigation bar on the right
+        if (appUsableSize.x < realScreenSize.x) {
+            return new Point(realScreenSize.x - appUsableSize.x, appUsableSize.y);
+        }
+
+        // navigation bar at the bottom
+        if (appUsableSize.y < realScreenSize.y) {
+            return new Point(appUsableSize.x, realScreenSize.y - appUsableSize.y);
+        }
+
+        // navigation bar is not present
+        return new Point();
+    }
+
+    public static Point getAppUsableScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size;
+    }
+
+    public static Point getRealScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+
+        if (Build.VERSION.SDK_INT >= 17) {
+            display.getRealSize(size);
+        } else if (Build.VERSION.SDK_INT >= 14) {
+            try {
+                size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+                size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException e) {
+            } catch (NoSuchMethodException e) {
+            }
+        }
+        return size;
+    }
+
+    /**
+     * get status bar height in dp
+     *
+     * @param context
+     * @return
+     */
+    public static int getStatusBarHeightInDp(Context context) {
+        return (int) DimenUtil.pxToDpi(getStatusBarHeight(context));
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

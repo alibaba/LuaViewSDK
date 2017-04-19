@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
@@ -14,9 +22,9 @@ import java.util.List;
  * @author song
  * @param <U>
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标", "跟iOS不一致，iOS继承自View"})
 public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMapper<U> {
-    private static final String TAG = UIButtonMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIButtonMethodMapper";
     private static final String[] sMethods = new String[]{
             "title",//0
             "titleColor",//1
@@ -55,6 +63,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs Varargs
      * @return LuaValue
      */
+    @Deprecated
     public LuaValue title(U view, Varargs varargs) {
         return text(view, varargs);
     }
@@ -74,6 +83,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue titleColor(U view, Varargs varargs) {
         return textColor(view, varargs);
     }
@@ -101,7 +111,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
         }
     }
 
-    public LuaValue setImage(U view, Varargs varargs) {
+    public LuaValue setImage(U view, Varargs varargs) {//TODO 支持参数为Data类型
         final String normalImage = varargs.optjstring(2, null);
         final String pressedImage = varargs.optjstring(3, null);
         return view.setImage(normalImage, pressedImage);
@@ -118,6 +128,7 @@ public class UIButtonMethodMapper<U extends UDButton> extends UITextViewMethodMa
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue showsTouchWhenHighlighted(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setShowsTouchWhenHighlighted(view, varargs);

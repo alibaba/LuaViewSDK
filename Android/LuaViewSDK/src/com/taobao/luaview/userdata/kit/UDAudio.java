@@ -1,3 +1,11 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.userdata.kit;
 
 import android.content.Context;
@@ -118,7 +126,7 @@ public class UDAudio extends BaseCacheUserdata implements MediaPlayer.OnPrepared
                 if (URLUtil.isNetworkUrl(this.mUriOrName) || URLUtil.isFileUrl(this.mUriOrName) || URLUtil.isAssetUrl(this.mUriOrName)) {//net & file & asset
                     uri = this.mUriOrName;
                 } else {//plain text, use as file path
-                    uri = getLuaResourceFinder().findFullPath(this.mUriOrName);
+                    uri = getLuaResourceFinder().buildFullPathInBundleOrAssets(this.mUriOrName);
                     assetFileExist = AssetUtil.exists(getContext(), uri);
                 }
                 try {
@@ -322,7 +330,7 @@ public class UDAudio extends BaseCacheUserdata implements MediaPlayer.OnPrepared
         }
 
         if (mCallback != null) {
-            LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "onComplete", "onComplete"));
+            LuaUtil.callFunction(LuaUtil.getFunction(mCallback, "onComplete", "OnComplete"));
         }
     }
 

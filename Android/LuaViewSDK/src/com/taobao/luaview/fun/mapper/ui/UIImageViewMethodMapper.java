@@ -1,9 +1,18 @@
+/*
+ * Created by LuaView.
+ * Copyright (c) 2017, Alibaba Group. All rights reserved.
+ *
+ * This source code is licensed under the MIT.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
 package com.taobao.luaview.fun.mapper.ui;
 
 import android.widget.ImageView;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDImageScaleType;
+import com.taobao.luaview.userdata.kit.UDData;
 import com.taobao.luaview.userdata.ui.UDImageView;
 
 import org.luaj.vm2.LuaFunction;
@@ -19,10 +28,10 @@ import java.util.List;
  * @param <U>
  * @author song
  */
-@LuaViewLib
+@LuaViewLib(revisions = {"20170306已对标"})
 public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethodMapper<U> {
 
-    private static final String TAG = UIImageViewMethodMapper.class.getSimpleName();
+    private static final String TAG = "UIImageViewMethodMapper";
     private static final String[] sMethods = new String[]{
             "image",//0
             "contentMode",//1
@@ -76,9 +85,15 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
     }
 
     public LuaValue setImage(U view, Varargs varargs) {
-        final String url = varargs.optjstring(2, null);
-        final LuaFunction callback = varargs.optfunction(3, null);
-        return view.setImageUrl(url, callback);
+        if (varargs.isstring(2)) {
+            final String url = varargs.optjstring(2, null);
+            final LuaFunction callback = varargs.optfunction(3, null);
+            return view.setImageUrl(url, callback);
+        } else if (varargs.arg(2) instanceof UDData) {//data
+            final UDData data = (UDData) varargs.arg(2);
+            return view.setImageBitmap(data != null ? data.bytes() : null);
+        }
+        return view;
     }
 
     public LuaValue getImage(U view, Varargs varargs) {
@@ -94,6 +109,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue contentMode(U view, Varargs varargs) {
         return scaleType(view, varargs);
     }
@@ -140,6 +156,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs 时间是秒而不是毫秒
      * @return
      */
+    @Deprecated
     public LuaValue startAnimationImages(U view, Varargs varargs) {
         final LuaTable imagesTable = varargs.opttable(2, null);
         final double duration = varargs.optdouble(3, 1f);
@@ -167,6 +184,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue stopAnimationImages(U view, Varargs varargs) {
         return view.stopAnimationImages();
     }
@@ -178,6 +196,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @param varargs
      * @return
      */
+    @Deprecated
     public LuaValue isAnimationImages(U view, Varargs varargs) {
         return valueOf(view.isAnimationImages());
     }
