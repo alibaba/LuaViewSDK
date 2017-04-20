@@ -1,0 +1,15 @@
+<!-- HScrollView 不支持用flex布局子节点 -->
+<HScroll id="scroller" frame="0, 0, sys.contW, sys.contH/10" bg="0x004B97" contentSize="sys.contW/4*12, sys.contH/10" >
+    <Button id="item1" frame="0, 0, sys.contW/4, sys.contH/10" title="item1" bg="0xEB3131" titleColor="0xffffff"></Button>
+    <Button id="item2" frame="sys.contW/4, 0, sys.contW/4, sys.contH/10" title="item2" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item3" frame="sys.contW/4*2, 0, sys.contW/4, sys.contH/10" title="item3" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item4" frame="sys.contW/4*3, 0, sys.contW/4, sys.contH/10" title="item4" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item5" frame="sys.contW/4*4, 0, sys.contW/4, sys.contH/10" title="item5" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item6" frame="sys.contW/4*5, 0, sys.contW/4, sys.contH/10" title="item6" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item7" frame="sys.contW/4*6, 0, sys.contW/4, sys.contH/10" title="item7" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item8" frame="sys.contW/4*7, 0, sys.contW/4, sys.contH/10" title="item8" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item9" frame="sys.contW/4*8, 0, sys.contW/4, sys.contH/10" title="item9" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item10" frame="sys.contW/4*9, 0, sys.contW/4, sys.contH/10" title="item10" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item11" frame="sys.contW/4*10, 0, sys.contW/4, sys.contH/10" title="item11" bg="0x004B97" titleColor="0xffffff"></Button>
+    <Button id="item12" frame="sys.contW/4*11, 0, sys.contW/4, sys.contH/10" title="item12" bg="0x004B97" titleColor="0xffffff"></Button>
+</HScroll>

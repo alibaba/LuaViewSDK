@@ -1,0 +1,56 @@
+<View frame="0, 0, sys.contW, sys.contH*2.5" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Color" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text css="{flex=1}" text="default" fontSize="20"></Text>
+        <Text css="{flex=1}" text="0x6C8154" fontSize="20" textColor="0x6C8154"></Text>
+        <Text css="{flex=1}" text="0xFF0090" fontSize="20" textColor="0xFF0090"></Text>
+        <Text css="{flex=1}" text="0x33FF0090" fontSize="20" textColor="0x33FF0090"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="FontSize" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='row', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text css="{flex=1}" text="15" fontSize="15"></Text>
+        <Text css="{flex=1}" text="30" fontSize="30"></Text>
+        <Text css="{flex=1}" text="60" fontSize="60"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="LineCount" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text css="{flex=1}" text="one line one line one line one line one line one line" fontSize="25" lineCount="1"></Text>
+        <Text css="{flex=1}" text="two lines two lines two lines two lines two lines two lines two lines two lines" fontSize="25" lineCount="2"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="FontStyle" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text id="fs1" css="{flex=1}" text="normal" fontSize="25"></Text>
+        <Text id="fs2" css="{flex=1}" text="bold" fontSize="25"></Text>
+        <Text id="fs3" css="{flex=1}" text="italic" fontSize="25"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="TextDecoration" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text id="td1" css="{flex=1}" text="strikethrough" fontSize="25"></Text>
+        <Text id="td2" css="{flex=1}" text="underline" fontSize="25"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="TextAlign" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text css="{flex=1}" text="left" fontSize="25" textAlign="TextAlign.LEFT"></Text>
+        <Text css="{flex=1}" text="center" fontSize="25" textAlign="TextAlign.CENTER"></Text>
+        <Text css="{flex=1}" text="right" fontSize="25" textAlign="TextAlign.RIGHT"></Text>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="TextOverflow" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='column', flex=1, margin-top=5, margin-bottom=5, margin-left=15, margin-right=15}">
+        <Text css="{flex=1}" text="no text-overflow" fontSize="25"></Text>
+        <Text css="{flex=1}" text="text-overflow:ellipsis,ellipsis,ellipsis,ellipsis" fontSize="25"></Text>
+    </View>
+</View>

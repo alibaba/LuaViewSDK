@@ -1,0 +1,17 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Manual Play" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex=1}">
+        <Slider id="pagerView1" css="{flex=1}" looping="true"></Slider>
+        <Indicator id="indicator1" css="{position='absolute', left=5, top=10, width=sys.contW/4, height=20}" selected="0x666666" unselected="0xeeeeee"></Indicator>
+    </View>
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Auto Play" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex=1}">
+        <Slider id="pagerView2" css="{flex=1}" autoScroll="2" looping="true"></Slider>
+        <Indicator id="indicator2" css="{height=20}"  selected="0x666666" unselected="0xeeeeee"></Indicator>
+    </View>
+</View>
+

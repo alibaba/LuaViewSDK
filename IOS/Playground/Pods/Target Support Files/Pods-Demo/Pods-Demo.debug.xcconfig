@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/LuaViewSDK" "${PODS_ROOT}/Headers/Public/MJRefresh" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/luaviewEx"
+INFOPLIST_FILE = ../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/LuaViewSDK" -isystem "${PODS_ROOT}/Headers/Public/MJRefresh" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage" -isystem "${PODS_ROOT}/Headers/Public/luaviewEx"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"LuaViewSDK" -l"MJRefresh" -l"SDWebImage" -l"luaviewEx" -l"z" -framework "CoreGraphics" -framework "Foundation" -framework "ImageIO" -framework "UIKit"
+PODS_ROOT = ${SRCROOT}/Pods

@@ -1,0 +1,3 @@
+<View id="root" frame="0, 0, sys.contW, (sys.contH/2)-(sys.contH/10 + 20)" css="{flex-direction='column', justify-content='center', align-items='center'}" >
+    <Image id="img" css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></Image>
+</View>

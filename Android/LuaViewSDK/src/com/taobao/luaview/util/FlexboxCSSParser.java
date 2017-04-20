@@ -191,7 +191,7 @@ public class FlexboxCSSParser {
     private static void setFlex() {
         String flex = mInlineMap.get(FLEX);
         if (flex != null) {
-            mNode.setFlex(pixelFloat(flex));
+            mNode.setFlex(Float.parseFloat(flex));
         }
     }
 

@@ -60,6 +60,6 @@ public class RecyclerViewHelper {
     public static int getVisibleItemCount(RecyclerView rv) {
         final int firstVisiblePos = getFirstVisiblePosition(rv);
         final int lastVisiblePos = getLastVisiblePosition(rv);
-        return Math.max(0, lastVisiblePos - firstVisiblePos);
+        return Math.max(0, lastVisiblePos - firstVisiblePos + 1);
     }
 }

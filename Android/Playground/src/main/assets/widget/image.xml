@@ -1,0 +1,20 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" bg="0xeeeeee" >
+    <View css="{height=sys.contH/11}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Local Image" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex=1, justify-content='center', align-items='center'}">
+        <Image css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></Image>
+    </View>
+    <View css="{height=sys.contH/11}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Http Image" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex=1, justify-content='center', align-items='center'}">
+        <Image css="{height=sys.contW/5, width=sys.contW/5}" image="https://gw.alicdn.com/tfs/TB1Lb_4QXXXXXcGXFXXXXXXXXXX-180-180.png"></Image>
+    </View>
+    <View css="{height=sys.contH/11}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Gif Image" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex=1, justify-content='center', align-items='center'}">
+        <Image css="{height=sys.contW/6, width=sys.contW/6}" image="https://gw.alicdn.com/tfs/TB1ZY3bQXXXXXX.XpXXXXXXXXXX-180-180.gif"></Image>
+    </View>
+</View>

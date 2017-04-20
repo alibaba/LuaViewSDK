@@ -1,0 +1,11 @@
+<View frame="0, 0, sys.contW, sys.contH">
+    <HScroll frame="0, 0, sys.contW, sys.contH*0.1-2" contentSize="sys.contW, sys.contH*0.1-2">
+        <Text id="left" frame="0, 0, sys.contW/2, sys.contH*0.1-2" text="正在热映" textAlign="TextAlign.CENTER" fontSize="16" textColor="0xEB3131"></Text>
+        <Text id="right" frame="sys.contW/2, 0, sys.contW/2, sys.contH*0.1-2" text="即将上映" textAlign="TextAlign.CENTER" fontSize="16"></Text>
+    </HScroll>
+    <View id="line" frame="0, sys.contH*0.1-2, sys.contW/2, 2" bg="0xEB3131"></View>
+    <View frame="0, sys.contH*0.1, sys.contW, sys.contH*0.9">
+        <Pull id="tableView" frame="0, 0, sys.contW, sys.contH*0.9" bg="0xeeeeee"></Pull>
+        <Load id="loading" color="0xF06292" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8"></Load>
+    </View>
+</View>

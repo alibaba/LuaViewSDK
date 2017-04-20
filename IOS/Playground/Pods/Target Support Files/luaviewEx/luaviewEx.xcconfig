@@ -1,0 +1,5 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/luaviewEx" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/LuaViewSDK" "${PODS_ROOT}/Headers/Public/MJRefresh" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/luaviewEx"
+INFOPLIST_FILE = ../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

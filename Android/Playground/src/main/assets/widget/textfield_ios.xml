@@ -1,0 +1,26 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH*0.1}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Input Hint" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='row', flex=1, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+        <Input css="{flex=1, margin-left=5, margin-right=5}" hint="Input Something"></Input>
+    </View>
+    <View css="{height=sys.contH*0.1}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Text Input" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='row', flex=1, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+        <Input css="{flex=1, margin-left=5, margin-right=5}"></Input>
+    </View>
+    <View css="{height=sys.contH*0.1}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Password Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='row', flex=1, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+        <Input css="{flex=1, margin-left=5, margin-right=5}"></Input>
+    </View>
+    <View css="{height=sys.contH*0.1}" bg="0x004B97">
+        <Text css="{flex=1, margin=10}" text="Number Input(SDK规划中)" fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <View css="{flex-direction='row', flex=1, margin=10, align-items='center'}" borderWidth="1" borderColor="0x000000">
+        <Input css="{flex=1, margin-left=5, margin-right=5}"></Input>
+    </View>
+</View>

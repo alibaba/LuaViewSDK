@@ -1,0 +1,14 @@
+<View frame="0, 0, sys.contW, sys.contH/3" css="{flex-direction='column'}" >
+    <View css="{flex-direction='row', flex=1}">
+        <Button id="button1" css="{flex=1, margin=5}" title="Default" borderWidth="1" borderColor="0x000000"></Button>
+        <Button id="button2" css="{flex=1, margin=5}" title="BG Color" bg="0xA066D3"></Button>
+        <Button id="button3" css="{flex=1, margin=5}" title="Title Color" titleColor="0xFF7F50" borderWidth="1" borderColor="0x000000"></Button>
+    </View>
+    <View css="{flex-direction='row', flex=1}">
+        <Button id="button5" css="{flex=1, margin=5}" bg="0x228B22" titleColor="0xffffff" title="Corner" corner="10"></Button>
+        <Button id="button6" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="Border" borderColor="0x000000" corner="10"></Button>
+    </View>
+    <View css="{flex-direction='row', flex=1}">
+        <Button id="button4" css="{flex=1, margin=5}" bg="0xffffff" image="https://gw.alicdn.com/tfs/TB124hiQpXXXXceapXXXXXXXXXX-375-80.jpg, https://gw.alicdn.com/tfs/TB1DMdMQpXXXXbOXFXXXXXXXXXX-375-80.jpg"></Button>
+    </View>
+</View>

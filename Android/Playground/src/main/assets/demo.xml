@@ -1,0 +1,4 @@
+<View frame="0, 0, sys.contW, sys.contH/5" css="{flex-direction='column'}" bg="0xffffff">
+    <Text id="item" css="{flex=1, margin=15}" fontSize="25"></Text>
+    <Text id="subitem" css="{flex=1, margin-left=30, margin-right=15, margin-bottom=15}" fontSize="16"></Text>
+</View>

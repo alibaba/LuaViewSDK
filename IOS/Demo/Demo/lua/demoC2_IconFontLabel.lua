@@ -1,7 +1,7 @@
 
-w,h = System.screenSize();
-window.frame(0, 0, w, h);
-window.backgroundColor(0xDDDDDD);
+w,h = System:screenSize();
+window:frame(0, 0, w, h);
+window:backgroundColor(0xDDDDDD);
 
 Y0 = 50
 
@@ -12,12 +12,12 @@ att3 = StyledString( "2897348",  { fontSize=13, fontColor=0x777777, strikethroug
 att4 = StyledString( "下划线测试", { fontSize=9, fontColor=0x777777, underline=true} );
 
 label = Label();
-label.frame(0,Y0,w, 60);
-label.text(att1 + att2 +iconFontAtt+ att3 + att4 + "字符串");
+label:frame(0,Y0,w, 60);
+label:text(att1 + att2 +iconFontAtt+ att3 + att4 + "字符串");
 
 
 
 label2 = Label();
-label2.frame(0,Y0+100,w, 60);
-label2.font("JHSIconfont", 18);
-label2.text(Unicode(0xe611));
+label2:frame(0,Y0+100,w, 60);
+label2:font("JHSIconfont", 18);
+label2:text(Unicode(0xe611));
