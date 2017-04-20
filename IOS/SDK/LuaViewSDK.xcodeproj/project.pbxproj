@@ -225,6 +225,8 @@
 		91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */; };
 		91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
 		91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		9190C01A1EA868670051E919 /* LVBitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9190C0181EA868670051E919 /* LVBitmap.h */; };
+		9190C01B1EA868670051E919 /* LVBitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 9190C0191EA868670051E919 /* LVBitmap.m */; };
 		91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
 		91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
@@ -437,6 +439,8 @@
 		91882E8F1AAD934D00107DFC /* LVRotationGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRotationGesture.m; sourceTree = "<group>"; };
 		918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSwipeGesture.h; sourceTree = "<group>"; };
 		918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSwipeGesture.m; sourceTree = "<group>"; };
+		9190C0181EA868670051E919 /* LVBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBitmap.h; sourceTree = "<group>"; };
+		9190C0191EA868670051E919 /* LVBitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBitmap.m; sourceTree = "<group>"; };
 		91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgInfo.h; path = PKG/LVPkgInfo.h; sourceTree = "<group>"; };
 		91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgInfo.m; path = PKG/LVPkgInfo.m; sourceTree = "<group>"; };
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
@@ -531,6 +535,8 @@
 				846481AB1A64C61F00DE6204 /* LVButton.m */,
 				846481AE1A64C61F00DE6204 /* LVImage.h */,
 				846481AF1A64C61F00DE6204 /* LVImage.m */,
+				9190C0181EA868670051E919 /* LVBitmap.h */,
+				9190C0191EA868670051E919 /* LVBitmap.m */,
 				91232AAA1DAB67FC00536E0C /* LVWebView.h */,
 				91232AAB1DAB67FC00536E0C /* LVWebView.m */,
 				8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */,
@@ -1003,6 +1009,7 @@
 				84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */,
 				84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */,
 				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
+				9190C01A1EA868670051E919 /* LVBitmap.h in Headers */,
 				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
 				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
 				84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */,
@@ -1273,6 +1280,7 @@
 				914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */,
 				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
+				9190C01B1EA868670051E919 /* LVBitmap.m in Sources */,
 				91F678851DF520920042D6FC /* LVCustomView.m in Sources */,
 				91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
 				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,

@@ -123,6 +123,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_PagerIndicator       "UI.PagerIndicator"
 #define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"
 #define META_TABLE_UIImageView          "UI.ImageView"
+#define META_TABLE_Bitmap               "UI.Bitmap"
 #define META_TABLE_UIWebView            "UI.WebView"
 #define META_TABLE_UILabel              "UI.Label"
 #define META_TABLE_UITextField          "UI.TextField"
