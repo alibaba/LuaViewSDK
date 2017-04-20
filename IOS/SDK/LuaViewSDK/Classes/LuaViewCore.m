@@ -66,6 +66,7 @@
 #import "LVPagerView.h"
 #import "LVCanvas.h"
 #import "LVEvent.h"
+#import "LVBitmap.h"
 
 @interface LuaViewCore ()
 @property (nonatomic,strong) id mySelf;
@@ -252,6 +253,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
                 [LVBaseView class],
                 [LVButton class],
                 [LVImage class],
+                [LVBitmap class],
                 [LVWebView class],
                 [LVLabel class],
                 [LVScrollView class],

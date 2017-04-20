@@ -227,6 +227,10 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key );
  */
 + (NSString*) luaTrace:(lua_State*) L;
 
+/*
+ * 切图
+ */
++ (UIImage*) image:(UIImage*)image croppingToRect:(CGRect)rect;
 @end
 
 

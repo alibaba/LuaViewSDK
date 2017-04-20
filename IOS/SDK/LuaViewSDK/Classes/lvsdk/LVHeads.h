@@ -78,6 +78,7 @@ extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
 extern const char* LVType_Canvas;
 extern const char* LVType_Event;
+extern const char* LVType_Bitmap;
 
 
 //----------------View的用户数据结构------------------------------------------------
@@ -123,6 +124,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_PagerIndicator       "UI.PagerIndicator"
 #define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"
 #define META_TABLE_UIImageView          "UI.ImageView"
+#define META_TABLE_Bitmap               "UI.Bitmap"
 #define META_TABLE_UIWebView            "UI.WebView"
 #define META_TABLE_UILabel              "UI.Label"
 #define META_TABLE_UITextField          "UI.TextField"
