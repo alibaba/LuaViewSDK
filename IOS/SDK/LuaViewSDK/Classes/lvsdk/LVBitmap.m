@@ -44,6 +44,18 @@
     [LVUtil unregistry:L key:self.functionTag];
 }
 
+
+-(void) callLuaSprite:(id) obj{
+    lua_State* L = self.lv_luaviewCore.l;
+    if( L ) {
+        lua_checkstack(L, 4);
+        lv_pushUserdata(L, self.lv_userData);
+        [LVUtil pushRegistryValue:L key:self.functionTag];
+        lv_runFunctionWithArgs(L, 1, 0);
+    }
+    [LVUtil unregistry:L key:self.functionTag];
+}
+
 -(void) loadImageByUrl:(NSString*) url finished:(LVWebImageCompletionBlock) finished{
     [LVUtil download:url callback:^(NSData *data) {
         UIImage* image = [UIImage imageWithData:data];
@@ -81,9 +93,9 @@
     }
 }
 
+
 -(UIImage*) sprite:(CGFloat)x y:(CGFloat)y w:(CGFloat)w h:(CGFloat) h{
-    CIImage* ciimage= [self.nativeImage.CIImage imageByCroppingToRect:CGRectMake(x, y, w, h)];
-    return [UIImage imageWithCIImage:ciimage];
+    return [LVUtil image:self.nativeImage croppingToRect:CGRectMake(x, y, w, h)];
 }
 
 -(void) dealloc{
@@ -141,6 +153,8 @@ static int sprite (lua_State *L) {
         CGFloat y = lua_tonumber(L, 3);
         CGFloat w = lua_tonumber(L, 4);
         CGFloat h = lua_tonumber(L, 5);
+        
+        
         LVBitmap* view = (__bridge LVBitmap *)(user->object);
         if( view ){
             LVBitmap* bitmap = [[LVBitmap alloc] init:L];
@@ -151,8 +165,13 @@ static int sprite (lua_State *L) {
                 
                 luaL_getmetatable(L, META_TABLE_Bitmap );
                 lua_setmetatable(L, -2);
+                
+                if( lua_type(L, 6) == LUA_TFUNCTION ) {
+                    [LVUtil registryValue:L key:bitmap.functionTag stack:6];
+                }
             }
             bitmap.nativeImage = [view sprite:x y:y w:w h:h];
+            [bitmap performSelectorOnMainThread:@selector(callLuaSprite:) withObject:nil waitUntilDone:NO];
             return 1;
         }
     }
