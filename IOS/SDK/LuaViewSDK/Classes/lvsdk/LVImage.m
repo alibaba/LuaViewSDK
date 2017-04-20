@@ -13,6 +13,7 @@
 #import <Accelerate/Accelerate.h>
 #import "LVNinePatchImage.h"
 #import "LVHeads.h"
+#import "LVBitmap.h"
 
 @interface LVImage ()
 @property (nonatomic,strong) id functionTag;
@@ -155,9 +156,14 @@ static int setImage (lua_State *L) {
                 }
             } else if ( lua_type(L, 2)==LUA_TUSERDATA ) {
                 LVUserDataInfo * userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
-                LVData* lvdata = (__bridge LVData *)(userdata->object);
                 if( LVIsType(userdata, Data) ) {
+                    LVData* lvdata = (__bridge LVData *)(userdata->object);
                     [imageView setImageByData:lvdata.data];
+                    lua_pushvalue(L,1);
+                    return 1;
+                } else if( LVIsType(userdata, Bitmap) ) {
+                    LVBitmap* bitmap = (__bridge LVBitmap *)(userdata->object);
+                    [imageView setImage:bitmap.nativeImage];
                     lua_pushvalue(L,1);
                     return 1;
                 }

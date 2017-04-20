@@ -29,5 +29,6 @@ const char* LVType_NativeObject = "LVType_UserDataNativeObject";
 const char* LVType_Struct = "LVType_UserDataStruct";
 const char* LVType_Canvas = "LVType_UserDataCanvas";
 const char* LVType_Event = "LVType_UserDataEvent";
+const char* LVType_Bitmap = "LVType_UserDataBitmap";
 
 @end

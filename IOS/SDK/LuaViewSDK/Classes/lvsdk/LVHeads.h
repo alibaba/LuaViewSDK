@@ -78,6 +78,7 @@ extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
 extern const char* LVType_Canvas;
 extern const char* LVType_Event;
+extern const char* LVType_Bitmap;
 
 
 //----------------View的用户数据结构------------------------------------------------

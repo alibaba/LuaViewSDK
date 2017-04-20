@@ -19,6 +19,8 @@ typedef void(^LVWebImageCompletionBlock)(UIImage *image, NSError *error, int cac
 @property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
 
+@property (nonatomic,strong) UIImage* nativeImage;// Bitmap实体对象
+
 -(id) init:(lua_State*) l;
 
 -(void) loadImageByUrl:(NSString*) url finished:(LVWebImageCompletionBlock) finished;

@@ -19,7 +19,6 @@
 @property (nonatomic,assign) BOOL needCallLuaFunc;
 @property (nonatomic,strong) id errorInfo;
 
-@property (nonatomic,strong) UIImage* nativeImage;// Bitmap实体对象
 @end
 
 @implementation LVBitmap
@@ -49,7 +48,10 @@
     [LVUtil download:url callback:^(NSData *data) {
         UIImage* image = [UIImage imageWithData:data];
         NSString* error = (data?nil:@"download error");
-        NSError* err = [NSError errorWithDomain:error code:0 userInfo:nil];
+        NSError* err = nil;
+        if( error ) {
+            err = [NSError errorWithDomain:error code:0 userInfo:nil];
+        }
         if( finished ) {
             finished(image, err, 0, [NSURL URLWithString:url] );
         }
@@ -99,8 +101,8 @@ static int lvNewImage(lua_State *L) {
     
     LVBitmap* bitmap = [[c alloc] init:L];
     
-    if( lua_type(L, 3) == LUA_TFUNCTION ) {
-        [LVUtil registryValue:L key:bitmap.functionTag stack:3];
+    if( lua_type(L, 2) == LUA_TFUNCTION ) {
+        [LVUtil registryValue:L key:bitmap.functionTag stack:2];
         bitmap.needCallLuaFunc = YES;
     } else {
         bitmap.needCallLuaFunc = NO;
@@ -108,7 +110,7 @@ static int lvNewImage(lua_State *L) {
     
     [bitmap setImageByName:imageName];
     {
-        NEW_USERDATA(userData, View);
+        NEW_USERDATA(userData, Bitmap);
         userData->object = CFBridgingRetain(bitmap);
         bitmap.lv_userData = userData;
         
@@ -143,7 +145,7 @@ static int sprite (lua_State *L) {
         if( view ){
             LVBitmap* bitmap = [[LVBitmap alloc] init:L];
             {
-                NEW_USERDATA(userData, View);
+                NEW_USERDATA(userData, Bitmap);
                 userData->object = CFBridgingRetain(bitmap);
                 bitmap.lv_userData = userData;
                 
