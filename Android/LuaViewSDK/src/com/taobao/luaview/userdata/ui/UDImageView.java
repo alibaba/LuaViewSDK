@@ -22,10 +22,12 @@ import com.taobao.luaview.global.Constants;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
+import com.taobao.luaview.userdata.kit.UDBitmap;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.imageview.BaseImageView;
+import com.taobao.luaview.view.imageview.DrawableLoadCallback;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaBoolean;
@@ -144,7 +146,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
      * @param data
      * @return
      */
-    public UDImageView setImageBitmap(final byte[] data) {
+    public UDImageView setImageBytes(final byte[] data) {
         if (data != null) {
             final T imageView = getView();
             if (imageView != null) {
@@ -167,6 +169,20 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
     }
 
     /**
+     * set image bitmap
+     *
+     * @param bitmap
+     * @return
+     */
+    public UDImageView setImageBitmap(UDBitmap bitmap) {
+        final T imageView = getView();
+        if (imageView != null) {
+            imageView.setImageBitmap(bitmap.getBitmap());
+        }
+        return this;
+    }
+
+    /**
      * 设置图片
      *
      * @param urlOrName
@@ -180,7 +196,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 if (URLUtil.isNetworkUrl(urlOrName)) {//network
                     imageView.setTag(Constants.RES_LV_TAG_URL, urlOrName);//需要设置tag，防止callback在回调的时候调用错误
                     imageView.setIsNetworkMode(true);
-                    imageView.loadUrl(urlOrName, callback == null ? null : new BaseImageView.LoadCallback() {
+                    imageView.loadUrl(urlOrName, callback == null ? null : new DrawableLoadCallback() {
                         @Override
                         public void onLoadResult(Drawable drawable) {
                             if (callback != null) {

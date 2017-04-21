@@ -41,6 +41,8 @@ public class UDTimer extends BaseCacheUserdata {
     //间隔，重复间隔，默认为1秒
     private long mInterval = 1000L;
 
+    private long mLastStartTime = 0;
+
     //isRunning
     private boolean isRunning = false;
 
@@ -110,7 +112,7 @@ public class UDTimer extends BaseCacheUserdata {
      * @return
      */
     public UDTimer setInterval(long interval) {
-        if(interval >= 0) {
+        if (interval >= 0) {
             this.mInterval = interval;
         }
         return this;
@@ -119,7 +121,6 @@ public class UDTimer extends BaseCacheUserdata {
     public long getInterval() {
         return mInterval;
     }
-
 
 
     /**
@@ -137,14 +138,16 @@ public class UDTimer extends BaseCacheUserdata {
             mRepeat = repeat;
         }
 
-        if(mTimerRunnable != null){//start新的时候新停掉老的
+        if (mTimerRunnable != null) {//start新的时候新停掉老的
             cancel();
         }
 
         mTimerRunnable = new Runnable() {
             @Override
             public void run() {
-                if(isRunning) {
+                if (isRunning) {
+                    long mDelay = mInterval - (System.currentTimeMillis() - mLastStartTime) % mInterval;
+
                     LuaViewUtil.runOnUiThread(getContext(), new Runnable() {
                         @Override
                         public void run() {
@@ -152,8 +155,10 @@ public class UDTimer extends BaseCacheUserdata {
                         }
                     });
                     if (mRepeat && mTimerHandler != null) {
-                        mTimerHandler.postDelayed(this, mInterval);
+                        mTimerHandler.postDelayed(this, mDelay);
                     }
+
+                    mLastStartTime = System.currentTimeMillis();
                 }
             }
         };
@@ -169,6 +174,7 @@ public class UDTimer extends BaseCacheUserdata {
         if (this.mTimerHandler != null && this.mTimerRunnable != null) {
             this.mTimerHandler.removeCallbacks(this.mTimerRunnable);
             this.mTimerRunnable = null;
+            this.mLastStartTime = 0;
             this.isRunning = false;
         }
         return this;

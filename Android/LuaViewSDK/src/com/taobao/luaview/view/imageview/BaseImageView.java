@@ -43,14 +43,6 @@ public abstract class BaseImageView extends ForegroundImageView {
         this.isNetworkMode = isNetworkMode;
     }
 
-    /**
-     * 图片加载回调
-     */
-    public interface LoadCallback {
-        //drawable = null 表示失败，drawable != null表示成功
-        void onLoadResult(Drawable drawable);
-    }
-
     public BaseImageView(Context context) {
         super(context);
         initRecycler(context);
@@ -62,11 +54,11 @@ public abstract class BaseImageView extends ForegroundImageView {
         }
     }
 
-    public void loadUrl(final String url, final LoadCallback callback) {
+    public void loadUrl(final String url, final DrawableLoadCallback callback) {
         this.mUrl = url;
         final ImageProvider provider = LuaView.getImageProvider();
         if (provider != null) {
-            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<LoadCallback>(callback));
+            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<DrawableLoadCallback>(callback));
         }
     }
 

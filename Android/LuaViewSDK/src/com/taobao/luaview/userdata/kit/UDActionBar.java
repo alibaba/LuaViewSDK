@@ -23,6 +23,7 @@ import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ImageUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.imageview.BaseImageView;
+import com.taobao.luaview.view.imageview.DrawableLoadCallback;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -83,10 +84,10 @@ public class UDActionBar extends BaseLuaTable {
                     if (actionBar != null) {
                         actionBar.setTitle(title);
                     } else {
-                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
-                        if (supportActionBar != null) {
-                            supportActionBar.setTitle(title);
-                        }
+//                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+//                        if (supportActionBar != null) {
+//                            supportActionBar.setTitle(title);
+//                        }
                     }
                 }
             } else if (args.isuserdata(2)) {//view
@@ -102,15 +103,15 @@ public class UDActionBar extends BaseLuaTable {
                         actionBar.setCustomView(LuaViewUtil.removeFromParent(view));
 
                     } else {
-                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
-                        if (supportActionBar != null) {
-                            final View view = ((UDView) titleViewValue).getView();
-                            if (view != null) {
-                                view.setTag(Constants.RES_LV_TAG, titleViewValue);
-                            }
-                            supportActionBar.setDisplayShowCustomEnabled(true);
-                            supportActionBar.setCustomView(LuaViewUtil.removeFromParent(view));
-                        }
+//                        final android.support.v7.app.ActionBar supportActionBar = LuaViewUtil.getSupportActionBar(getGlobals());
+//                        if (supportActionBar != null) {
+//                            final View view = ((UDView) titleViewValue).getView();
+//                            if (view != null) {
+//                                view.setTag(Constants.RES_LV_TAG, titleViewValue);
+//                            }
+//                            supportActionBar.setDisplayShowCustomEnabled(true);
+//                            supportActionBar.setCustomView(LuaViewUtil.removeFromParent(view));
+//                        }
                     }
                 }
             }
@@ -159,24 +160,26 @@ public class UDActionBar extends BaseLuaTable {
         @Override
         public Varargs invoke(Varargs args) {
             if (args.isstring(2)) {
-                ImageUtil.fetch(getContext(), getLuaResourceFinder(), args.optjstring(2, null), new BaseImageView.LoadCallback() {
+                ImageUtil.fetch(getContext(), getLuaResourceFinder(), args.optjstring(2, null), new DrawableLoadCallback() {
                     @Override
                     public void onLoadResult(Drawable drawable) {
                         setupActionBarDrawable(drawable);
                     }
                 });
             } else if (args.isuserdata(2)) {//view
-                final LuaValue backgroundImageView = args.optvalue(2, null);
-                if (backgroundImageView instanceof UDImageView) {
-                    final ImageView imageView = (ImageView) LuaViewUtil.removeFromParent(((UDImageView) backgroundImageView).getView());
+                final LuaValue data = args.optvalue(2, null);
+                if (data instanceof UDImageView) {
+                    final ImageView imageView = (ImageView) LuaViewUtil.removeFromParent(((UDImageView) data).getView());
                     if (imageView instanceof BaseImageView) {//TODO ActionBar支持gif
-                        ImageUtil.fetch(getContext(), getLuaResourceFinder(), ((BaseImageView) imageView).getUrl(), new BaseImageView.LoadCallback() {
+                        ImageUtil.fetch(getContext(), getLuaResourceFinder(), ((BaseImageView) imageView).getUrl(), new DrawableLoadCallback() {
                             @Override
                             public void onLoadResult(Drawable drawable) {
                                 setupActionBarDrawable(drawable);
                             }
                         });
                     }
+                } else if (data instanceof UDBitmap) {
+                    setupActionBarDrawable(((UDBitmap) data).createDrawable());
                 }
             }
             return UDActionBar.this;

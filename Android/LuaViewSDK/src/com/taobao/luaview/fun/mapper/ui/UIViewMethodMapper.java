@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.taobao.luaview.fun.base.BaseMethodMapper;
 import com.taobao.luaview.fun.mapper.LuaViewApi;
 import com.taobao.luaview.fun.mapper.LuaViewLib;
+import com.taobao.luaview.global.SdkVersion;
 import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.userdata.ui.UDView;
 import com.taobao.luaview.util.ColorUtil;
@@ -20,6 +21,7 @@ import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.LuaFunction;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -141,7 +143,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "nativeView",//102
             "borderDash",//103
             "margin",//104
-            "onTouch"//105
+            "onTouch",//105
+            "matrix"//106
     };
 
     @Override
@@ -365,6 +368,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return margin(target, varargs);
             case 105:
                 return onTouch(target, varargs);
+            case 106:
+                return matrix(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
@@ -379,7 +384,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-//    @Deprecated
+    @Deprecated
     public Varargs initParams(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setInitParams(view, varargs);
@@ -2170,6 +2175,32 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     public LuaValue getOnTouch(U view, Varargs varargs) {
         return view.getOnTouchCallback();
+    }
+
+
+    @LuaViewApi(since = SdkVersion.V_051)
+    public LuaValue matrix(U view, Varargs varargs) {
+        if (varargs.istable(2)) {
+            LuaTable table = LuaUtil.getTable(varargs, 2);
+            int n = table.length();
+            if (n >= 9) {
+                float[] values = new float[9];
+                for (int i = 0; i < 9; i++) {
+                    values[i] = LuaUtil.getFloat(table, 0F, i + 1);
+                }
+                return view.setMatrix(values);
+            }
+        } else {
+            int n = varargs.narg();
+            if (n >= 9) {
+                float[] values = new float[9];
+                for (int i = 0; i < 9; i++) {
+                    values[i] = LuaUtil.getFloat(varargs, 0F, i + 1);
+                }
+                return view.setMatrix(values);
+            }
+        }
+        return view;
     }
 
     /**
