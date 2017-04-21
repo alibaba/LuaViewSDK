@@ -41,8 +41,6 @@ public class UDTimer extends BaseCacheUserdata {
     //间隔，重复间隔，默认为1秒
     private long mInterval = 1000L;
 
-    private long mLastStartTime = 0;
-
     //isRunning
     private boolean isRunning = false;
 
@@ -146,19 +144,15 @@ public class UDTimer extends BaseCacheUserdata {
             @Override
             public void run() {
                 if (isRunning) {
-                    long mDelay = mInterval - (System.currentTimeMillis() - mLastStartTime) % mInterval;
-
+                    if (mRepeat && mTimerHandler != null) {
+                        mTimerHandler.postDelayed(this, mInterval);
+                    }
                     LuaViewUtil.runOnUiThread(getContext(), new Runnable() {
                         @Override
                         public void run() {
                             LuaUtil.callFunction(mCallback);
                         }
                     });
-                    if (mRepeat && mTimerHandler != null) {
-                        mTimerHandler.postDelayed(this, mDelay);
-                    }
-
-                    mLastStartTime = System.currentTimeMillis();
                 }
             }
         };
@@ -174,7 +168,6 @@ public class UDTimer extends BaseCacheUserdata {
         if (this.mTimerHandler != null && this.mTimerRunnable != null) {
             this.mTimerHandler.removeCallbacks(this.mTimerRunnable);
             this.mTimerRunnable = null;
-            this.mLastStartTime = 0;
             this.isRunning = false;
         }
         return this;

@@ -161,7 +161,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @return
      */
     @Deprecated
-    public LuaValue startAnimationImages(U view, Varargs varargs) {
+    public LuaValue startAnimationImages(U view, Varargs varargs) {//TODO 支持UDImageView和UDBitmap
         final LuaTable imagesTable = varargs.opttable(2, null);
         final double duration = varargs.optdouble(3, 1f);
         boolean repeat = false;

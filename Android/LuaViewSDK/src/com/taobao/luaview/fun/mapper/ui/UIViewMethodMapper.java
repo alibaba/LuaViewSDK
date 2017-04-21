@@ -2184,20 +2184,39 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             if (varargs.istable(2)) {
                 LuaTable table = LuaUtil.getTable(varargs, 2);
                 int n = table.length();
-                if (n >= 9) {
+                if (n > 9) {
                     float[] values = new float[9];
                     for (int i = 0; i < 9; i++) {
-                        values[i] = LuaUtil.getFloat(table, 0F, i + 1);
+                        values[i] = LuaUtil.getFloat(table, 0F, i + 2);
                     }
                     return view.setMatrix(values);
+                } else if (n > 6){
+                    float[] values = new float[9];
+                    for (int i = 0; i < 6; i++) {
+                        values[i] = LuaUtil.getFloat(table, 0F, i + 2);
+                    }
+                    values[6] = 0;
+                    values[7] = 0;
+                    values[8] = 1;
+                    return view.setMatrix(values);
+
                 }
             } else {
                 int n = varargs.narg();
-                if (n >= 9) {
+                if (n > 9) {
                     float[] values = new float[9];
                     for (int i = 0; i < 9; i++) {
-                        values[i] = LuaUtil.getFloat(varargs, 0F, i + 1);
+                        values[i] = LuaUtil.getFloat(varargs, 0F, i + 2);
                     }
+                    return view.setMatrix(values);
+                } else if (n > 6){
+                    float[] values = new float[9];
+                    for (int i = 0; i < 6; i++) {
+                        values[i] = LuaUtil.getFloat(varargs, 0F, i + 2);
+                    }
+                    values[6] = 0;
+                    values[7] = 0;
+                    values[8] = 1;
                     return view.setMatrix(values);
                 }
             }
@@ -2205,7 +2224,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             float[] values = view.getMatrix();
             if (values != null) {
                 LuaTable table = new LuaTable();
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < 6; i++) {
                     table.set(i + 1, valueOf(values[i]));
                 }
                 return table;

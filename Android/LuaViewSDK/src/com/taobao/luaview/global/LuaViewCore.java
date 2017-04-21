@@ -271,7 +271,6 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     }
 
     public LuaViewCore loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        updateUri("");
         if (scriptFile != null) {
             this.loadScriptInternal(scriptFile, callback);
         } else if (callback != null) {

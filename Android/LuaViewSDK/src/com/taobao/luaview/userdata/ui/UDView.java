@@ -44,6 +44,9 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1495,10 +1498,18 @@ public class UDView<T extends View> extends BaseUserdata {
     public LuaValue setMatrix(float values[]) {
         View view = getView();
         if (view != null) {
-            Matrix matrix = view.getMatrix();
-            if (matrix != null) {
-                mMatrix = values;
+            try {
+                Field field = View.class.getDeclaredField("mRenderNode");
+                field.setAccessible(true);
+                Object renderNode = field.get(view);
+                Method method1 = renderNode.getClass().getDeclaredMethod("setAnimationMatrix", Matrix.class);
+
+                Matrix matrix = new Matrix();
+                matrix.reset();
                 matrix.setValues(values);
+                method1.invoke(renderNode, matrix);
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
         return this;

@@ -312,7 +312,7 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                         for (Drawable frame : frames) {
                             mFrameAnimation.addFrame(frame, duration);
                         }
-                    } catch (Throwable e){
+                    } catch (Throwable e) {
                         e.printStackTrace();
                         LogUtil.e("[LuaView-Error] UDImageView.startAnimationImages failed!");
                     }

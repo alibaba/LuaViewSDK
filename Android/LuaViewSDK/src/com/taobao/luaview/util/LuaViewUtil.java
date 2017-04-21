@@ -147,6 +147,20 @@ public class LuaViewUtil {
         }
     }
 
+    /**
+     * add target view to parent
+     *
+     * @param parent
+     * @param target
+     * @param varargs
+     */
+    public static void addView(ViewGroup parent, View target, int pos, Varargs varargs) {
+        if (parent != null && target != null && parent != target) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(target);
+            parent.addView(LuaViewUtil.removeFromParent(target), pos, layoutParams);
+        }
+    }
+
     //--------------------------------------------remove--------------------------------------------
 
     /**
