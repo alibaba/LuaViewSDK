@@ -654,6 +654,20 @@ static int bringToFront (lua_State *L) {
     return 0;
 }
 
+static int bringToBack (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            UIView* superView = view.superview;
+            [superView sendSubviewToBack:view];
+            lua_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int layerMode(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -1647,7 +1661,9 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"removeFromSuper", removeFromSuperview },
     {"removeFromParent", removeFromSuperview }, //__deprecated_msg("Use removeFromSuper")
     {"removeAllViews", removeAllSubviews },
+    
     {"bringToFront", bringToFront},
+    {"bringToBack", bringToBack},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
