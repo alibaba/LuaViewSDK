@@ -1682,7 +1682,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"removeAllViews", removeAllSubviews },
     
     {"bringToFront", bringToFront},
-    {"bringToBack", bringToBack},
+    {"sendToBack", bringToBack},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
