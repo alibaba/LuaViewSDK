@@ -33,7 +33,8 @@
     return self;
 }
 
--(void) callLuaDelegate:(id) obj{
+//加载完成回调
+-(void) callLuaWhenLoadCompleted:(id) obj{
     lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         lua_checkstack(L, 4);
@@ -44,8 +45,8 @@
     [LVUtil unregistry:L key:self.functionTag];
 }
 
-
--(void) callLuaSprite:(id) obj{
+// 图片裁剪回调
+-(void) callLuaSpriteCompleted:(id) obj{
     lua_State* L = self.lv_luaviewCore.l;
     if( L ) {
         lua_checkstack(L, 4);
@@ -56,6 +57,7 @@
     [LVUtil unregistry:L key:self.functionTag];
 }
 
+// 加载
 -(void) loadImageByUrl:(NSString*) url finished:(LVWebImageCompletionBlock) finished{
     [LVUtil download:url callback:^(NSData *data) {
         UIImage* image = [UIImage imageWithData:data];
@@ -70,6 +72,7 @@
     }];
 }
 
+// 设置Bitmap url
 -(void) setBitmapUrl:(NSString*) url{
     if( url==nil )
         return;
@@ -82,7 +85,7 @@
             
             if( weakImage.needCallLuaFunc ) {
                 weakImage.errorInfo = error;
-                [weakImage performSelectorOnMainThread:@selector(callLuaDelegate:) withObject:error waitUntilDone:NO];
+                [weakImage performSelectorOnMainThread:@selector(callLuaWhenLoadCompleted:) withObject:error waitUntilDone:NO];
             }
         }];
     } else {
@@ -92,7 +95,7 @@
     }
 }
 
-
+// 图片切割
 -(UIImage*) sprite:(CGFloat)x y:(CGFloat)y w:(CGFloat)w h:(CGFloat) h{
     return [LVUtil image:self.nativeImage croppingToRect:CGRectMake(x, y, w, h)];
 }
@@ -180,7 +183,7 @@ static int sprite (lua_State *L) {
             // 调用native图片切割对象
             bitmap.nativeImage = [view sprite:x y:y w:w h:h];
             // 出发回调
-            [bitmap performSelectorOnMainThread:@selector(callLuaSprite:) withObject:nil waitUntilDone:NO];
+            [bitmap performSelectorOnMainThread:@selector(callLuaSpriteCompleted:) withObject:nil waitUntilDone:NO];
             return 1;
         }
     }
@@ -192,15 +195,19 @@ static int sprite (lua_State *L) {
  */
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
+    // 注册构造方法: "Bitmap" 对应的C函数(lvNewBitmap) + 对应的类Class(self/LVBitmap)
     [LVUtil reg:L clas:self cfunc:lvNewBitmap globalName:globalName defaultName:@"Bitmap"];
     
+    // lua中Bitmap对象对应的方法列表
     const struct luaL_Reg memberFunctions [] = {
         {"size",  size},
         {"sprite",  sprite},
         {NULL, NULL}
     };
     
+    // 创建Label类的方法列表
     lv_createClassMetaTable(L, META_TABLE_Bitmap);
+    // 注册类方法列表
     luaL_openlib(L, NULL, memberFunctions, 0);
     return 1;
 }
