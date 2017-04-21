@@ -1299,14 +1299,32 @@ static int matrix (lua_State *L) {
     if( user ){
         UIView* view = (__bridge UIView *)(user->object);
         if ( lua_gettop(L)>=2 ) {
-            CGFloat a[10] = {0};
-            for( int i=2; i<=7; i++ ) {
-                a[i] = lua_tonumber(L, i);
+            if( lua_type(L, 2)== LUA_TTABLE ) {
+                NSArray* arr = lv_luaValueToNativeObject(L, 2);
+                if( [arr isKindOfClass:[NSArray class]] ) {
+                    CGFloat a[12] = {0};
+                    for( int i=0; i<arr.count; i++ ) {
+                        NSNumber* number = arr[i];
+                        if( [number isKindOfClass:[NSNumber class]] ) {
+                            a[2+i] = number.floatValue;
+                        }
+                    }
+                    CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
+                    view.transform = t;
+                }
+            } else {
+                CGFloat a[18] = {0};
+                for( int i=2; i<=7; i++ ) {
+                    a[i] = lua_tonumber(L, i);
+                }
+                CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
+                view.transform = t;
             }
-            CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
-            view.transform = t;
         } else {
-            return 0;
+            CGAffineTransform t = view.transform;
+            NSArray* a = @[ @(t.a), @(t.b), @(t.c), @(t.d), @(t.tx), @(t.ty) ];
+            lv_pushNativeObject(L, a);
+            return 1;
         }
     }
     return 0;
