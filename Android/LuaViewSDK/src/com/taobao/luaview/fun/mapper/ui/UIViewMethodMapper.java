@@ -2180,24 +2180,35 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
 
     @LuaViewApi(since = SdkVersion.V_051)
     public LuaValue matrix(U view, Varargs varargs) {
-        if (varargs.istable(2)) {
-            LuaTable table = LuaUtil.getTable(varargs, 2);
-            int n = table.length();
-            if (n >= 9) {
-                float[] values = new float[9];
-                for (int i = 0; i < 9; i++) {
-                    values[i] = LuaUtil.getFloat(table, 0F, i + 1);
+        if (varargs.narg() > 1) {
+            if (varargs.istable(2)) {
+                LuaTable table = LuaUtil.getTable(varargs, 2);
+                int n = table.length();
+                if (n >= 9) {
+                    float[] values = new float[9];
+                    for (int i = 0; i < 9; i++) {
+                        values[i] = LuaUtil.getFloat(table, 0F, i + 1);
+                    }
+                    return view.setMatrix(values);
                 }
-                return view.setMatrix(values);
+            } else {
+                int n = varargs.narg();
+                if (n >= 9) {
+                    float[] values = new float[9];
+                    for (int i = 0; i < 9; i++) {
+                        values[i] = LuaUtil.getFloat(varargs, 0F, i + 1);
+                    }
+                    return view.setMatrix(values);
+                }
             }
         } else {
-            int n = varargs.narg();
-            if (n >= 9) {
-                float[] values = new float[9];
+            float[] values = view.getMatrix();
+            if (values != null) {
+                LuaTable table = new LuaTable();
                 for (int i = 0; i < 9; i++) {
-                    values[i] = LuaUtil.getFloat(varargs, 0F, i + 1);
+                    table.set(i + 1, valueOf(values[i]));
                 }
-                return view.setMatrix(values);
+                return table;
             }
         }
         return view;
