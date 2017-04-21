@@ -70,13 +70,12 @@
     }];
 }
 
--(void) setImageByName:(NSString*) imageName{
-    if( imageName==nil )
+-(void) setBitmapUrl:(NSString*) url{
+    if( url==nil )
         return;
     
-    if( [LVUtil isExternalUrl:imageName] ){
+    if( [LVUtil isExternalUrl:url] ){
         __weak LVBitmap* weakImage = self;
-        NSString* url = imageName;
         [self loadImageByUrl:url finished:^(UIImage *image, NSError *error, int cacheType, NSURL *imageURL) {
             
             weakImage.nativeImage = image;
@@ -88,7 +87,7 @@
         }];
     } else {
         // local Image
-        NSData* data = [self.lv_luaviewCore.bundle resourceWithName:imageName];
+        NSData* data = [self.lv_luaviewCore.bundle resourceWithName:url];
         self.nativeImage = [[UIImage alloc] initWithData:data];
     }
 }
@@ -106,21 +105,24 @@
 }
 
 #pragma -mark ImageView
-static int lvNewImage(lua_State *L) {
+/*
+ * lua脚本中 local bitmap = Bitmap() 对应的构造方法
+ */
+static int lvNewBitmap(lua_State *L) {
     Class c = [LVUtil upvalueClass:L defaultClass:[LVBitmap class]];
     
-    NSString* imageName = lv_paramString(L, 1);
+    NSString* url = lv_paramString(L, 1);// url
     
     LVBitmap* bitmap = [[c alloc] init:L];
     
     if( lua_type(L, 2) == LUA_TFUNCTION ) {
-        [LVUtil registryValue:L key:bitmap.functionTag stack:2];
+        [LVUtil registryValue:L key:bitmap.functionTag stack:2];// 图片加载完成回调
         bitmap.needCallLuaFunc = YES;
     } else {
         bitmap.needCallLuaFunc = NO;
     }
     
-    [bitmap setImageByName:imageName];
+    [bitmap setBitmapUrl:url];
     {
         NEW_USERDATA(userData, Bitmap);
         userData->object = CFBridgingRetain(bitmap);
@@ -132,23 +134,26 @@ static int lvNewImage(lua_State *L) {
     return 1; /* new userdatum is already on the stack */
 }
 
+// Lua的Bitmap对象size接口对应的native实现
 static int size (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( user ){
         LVBitmap* view = (__bridge LVBitmap *)(user->object);
         if( view ){
-            CGSize size = view.nativeImage.size;
-            lua_pushnumber(L, size.width  );
-            lua_pushnumber(L, size.height );
-            return 2;
+            CGSize size = view.nativeImage.size;// 获取native size
+            lua_pushnumber(L, size.width  );//参数压栈
+            lua_pushnumber(L, size.height );//参数压栈
+            return 2;// 返回两个参数
         }
     }
     return 0;
 }
 
+// 切图接口
 static int sprite (lua_State *L) {
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);// 获取第一个参数(self,lua的userdata, 对象自身)
     if( user && lua_gettop(L)>=5 ){
+        // 获取lua传送过来的参数
         CGFloat x = lua_tonumber(L, 2);
         CGFloat y = lua_tonumber(L, 3);
         CGFloat w = lua_tonumber(L, 4);
@@ -157,8 +162,10 @@ static int sprite (lua_State *L) {
         
         LVBitmap* view = (__bridge LVBitmap *)(user->object);
         if( view ){
+            // 创建新的bitmap对象(Native实例)
             LVBitmap* bitmap = [[LVBitmap alloc] init:L];
             {
+                // 创建新的Bitmap对象(lua实例)
                 NEW_USERDATA(userData, Bitmap);
                 userData->object = CFBridgingRetain(bitmap);
                 bitmap.lv_userData = userData;
@@ -170,7 +177,9 @@ static int sprite (lua_State *L) {
                     [LVUtil registryValue:L key:bitmap.functionTag stack:6];
                 }
             }
+            // 调用native图片切割对象
             bitmap.nativeImage = [view sprite:x y:y w:w h:h];
+            // 出发回调
             [bitmap performSelectorOnMainThread:@selector(callLuaSprite:) withObject:nil waitUntilDone:NO];
             return 1;
         }
@@ -178,9 +187,12 @@ static int sprite (lua_State *L) {
     return 0;
 }
 
+/*
+ * luaview所有扩展类的桥接协议: 只是一个静态协议, luaview统一调用该接口加载luaview扩展的类
+ */
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
-    [LVUtil reg:L clas:self cfunc:lvNewImage globalName:globalName defaultName:@"Bitmap"];
+    [LVUtil reg:L clas:self cfunc:lvNewBitmap globalName:globalName defaultName:@"Bitmap"];
     
     const struct luaL_Reg memberFunctions [] = {
         {"size",  size},
