@@ -566,7 +566,12 @@ static int addSubview (lua_State *L) {
         UIView* superview = (__bridge UIView *)(father->object);
         UIView* subview = (__bridge UIView *)(son->object);
         if( superview && subview ){
-            lv_addSubview(luaview, superview, subview);
+            if( lua_gettop(L)>=3 && lua_type(L,3)==LUA_TNUMBER ){
+                int index = lua_tonumber(L,3);
+                lv_addSubviewByIndex(luaview, superview, subview, index);
+            } else {
+                lv_addSubview(luaview, superview, subview);
+            }
             [subview lv_alignSelfWithSuperRect:superview.frame];
             lua_pushvalue(L,1);
             return 1;

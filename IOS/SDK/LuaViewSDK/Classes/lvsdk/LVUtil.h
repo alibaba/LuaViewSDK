@@ -212,6 +212,7 @@ BOOL lv_objcEqual(id obj1, id obj2);
 void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L);
 
 void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview);
+void lv_addSubviewByIndex(LuaViewCore* lv, UIView* superview, UIView* subview, int index);
 
 extern NSString* safe_stringForKey(NSDictionary*dic, id key);
 extern NSDictionary * safe_dictionaryForKey(NSDictionary* dic, id key);
