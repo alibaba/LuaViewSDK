@@ -1270,7 +1270,7 @@ static int transform3D (lua_State *L) {
             LVUserDataInfo* userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
             if ( LVIsType(userdata, Transform3D)) {
                 CALayer *layer = view.layer;
-
+                
                 LVTransform3D* tran = (__bridge LVTransform3D *)(userdata->object);
                 layer.transform = tran.transform;
                 
@@ -1279,10 +1279,29 @@ static int transform3D (lua_State *L) {
             }
         } else {
             CALayer *layer = view.layer.presentationLayer ?: view.layer;
-
+            
             CATransform3D t = layer.transform;
             [LVTransform3D pushTransform3D:L transform3d:t];
             return 1;
+        }
+    }
+    return 0;
+}
+
+
+static int matrix (lua_State *L) {
+    LVUserDataInfo* user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( lua_gettop(L)>=2 ) {
+            CGFloat a[10] = {0};
+            for( int i=2; i<=7; i++ ) {
+                a[i] = lua_tonumber(L, i);
+            }
+            CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
+            view.transform = t;
+        } else {
+            return 0;
         }
     }
     return 0;
@@ -1695,6 +1714,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"clearFocus",    resignFirstResponder },
     
     {"transform3D",    transform3D }, //__deprecated_msg("Use")
+    {"matrix",    matrix },
     
     {"startAnimation", startAnimation },
     {"stopAnimation", stopAnimation },
