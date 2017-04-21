@@ -24,6 +24,7 @@ import com.taobao.luaview.global.VmVersion;
 import com.taobao.luaview.scriptbundle.asynctask.SimpleTask1;
 import com.taobao.luaview.userdata.kit.UDBitmap;
 import com.taobao.luaview.util.ImageUtil;
+import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 import com.taobao.luaview.view.imageview.BaseImageView;
@@ -307,8 +308,13 @@ public class UDImageView<T extends BaseImageView> extends UDView<T> {
                 }
                 if (frames != null && frames.length > 0) {
                     mFrameAnimation = new AnimationDrawable();
-                    for (Drawable frame : frames) {
-                        mFrameAnimation.addFrame(frame, duration);
+                    try {
+                        for (Drawable frame : frames) {
+                            mFrameAnimation.addFrame(frame, duration);
+                        }
+                    } catch (Throwable e){
+                        e.printStackTrace();
+                        LogUtil.e("[LuaView-Error] UDImageView.startAnimationImages failed!");
                     }
                     mFrameAnimation.setOneShot(!repeat);
                     LuaViewUtil.setBackground(view, mFrameAnimation);

@@ -81,12 +81,9 @@ public class UDBitmap extends BaseUserdata {
                     if (bmpData != null) {
                         try {
                             return BitmapFactory.decodeByteArray(bmpData, 0, bmpData.length);
-                        } catch (OutOfMemoryError error){
-                            error.printStackTrace();
-                            LogUtil.e("[LuaView-Error] Bitmap.fetchBitmapFromData OutOfMemoryError!");
-                        } catch (Exception e){
+                        } catch (Throwable e){
                             e.printStackTrace();
-                            LogUtil.e("[LuaView-Error] Bitmap.fetchBitmapFromData failed!");
+                            LogUtil.e("[LuaView-Error] Bitmap.fetchBitmapFromData OutOfMemoryError!");
                         }
                     }
                     return null;
@@ -116,6 +113,10 @@ public class UDBitmap extends BaseUserdata {
                         public void onLoadResult(Drawable result) {
                             mBitmap = result instanceof BitmapDrawable ? ((BitmapDrawable) result).getBitmap() : null;
                             callCallback(mBitmap);
+
+                            if(mBitmap == null){
+                                LogUtil.i("[LuaView-Info] UDBitmap load image failed");
+                            }
                         }
                     });
                 } else {
@@ -132,6 +133,10 @@ public class UDBitmap extends BaseUserdata {
                         public void onFinish(Drawable drawable) {
                             mBitmap = drawable instanceof BitmapDrawable ? ((BitmapDrawable) drawable).getBitmap() : null;
                             callCallback(drawable);
+
+                            if(mBitmap == null){
+                                LogUtil.i("[LuaView-Info] UDBitmap load image failed");
+                            }
                         }
                     });
                 } else {
@@ -189,10 +194,7 @@ public class UDBitmap extends BaseUserdata {
             try {
                 bitmap.mBitmap = Bitmap.createBitmap(mBitmap, x, y, width, height);
                 return bitmap;
-            } catch (OutOfMemoryError error){
-                error.printStackTrace();
-                LogUtil.e("[LuaView-Error] Bitmap.createSprite failed", x, y, width, height, "Error!");
-            } catch (Exception e) {
+            } catch (Throwable e){
                 e.printStackTrace();
                 LogUtil.e("[LuaView-Error] Bitmap.createSprite failed", x, y, width, height, "Error!");
             }

@@ -52,7 +52,7 @@ view2.callback(function()
     local vx = 0;
     for i = 1, n do
         x = (i - 1) * sw
-        vx = (i - 1) * vw
+        vx = (i - 1) * vw + (i - 1) * 2
         local v = Image()
         v.frame(vx, 403, vw, h)
         v.image(bmp2.sprite(x, 0, sw, h))
