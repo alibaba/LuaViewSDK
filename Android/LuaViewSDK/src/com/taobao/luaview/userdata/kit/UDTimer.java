@@ -9,13 +9,8 @@
 package com.taobao.luaview.userdata.kit;
 
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.util.TimeUtils;
 
 import com.taobao.luaview.userdata.base.BaseCacheUserdata;
-import com.taobao.luaview.util.DateUtil;
-import com.taobao.luaview.util.DebugUtil;
-import com.taobao.luaview.util.LogUtil;
 import com.taobao.luaview.util.LuaUtil;
 import com.taobao.luaview.util.LuaViewUtil;
 
@@ -23,9 +18,6 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Timer 用户数据封装
@@ -155,7 +147,7 @@ public class UDTimer extends BaseCacheUserdata {
             @Override
             public void run() {
                 if (isRunning) {
-                    LogUtil.d("timercallback9", DateUtil.getCurrent("yyyy-MM-dd HH:mm:ss SSS"));
+//                    LogUtil.d("timercallback9", DateUtil.getCurrent("yyyy-MM-dd HH:mm:ss SSS"));
                     if (mRepeat && mTimerHandler != null) {
                         mTimerHandler.postDelayed(this, mInterval);
                     }
@@ -165,11 +157,11 @@ public class UDTimer extends BaseCacheUserdata {
                             LuaUtil.callFunction(mCallback);
                         }
                     });
-//                    if (!isCalling){
-//                        isCalling = true;
-//                        LuaUtil.callFunction(mCallback);
-//                        isCalling = false;
-//                    }
+                    /*if (!isCalling){
+                        isCalling = true;
+                        LuaUtil.callFunction(mCallback);
+                        isCalling = false;
+                    }*/
                 }
             }
         };
