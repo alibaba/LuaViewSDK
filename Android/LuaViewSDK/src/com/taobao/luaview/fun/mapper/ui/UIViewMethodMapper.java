@@ -143,8 +143,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
             "nativeView",//102
             "borderDash",//103
             "margin",//104
-            "onTouch",//105
-            "matrix"//106
+            "onTouch"//105
+//            "matrix"//106
     };
 
     @Override
@@ -368,8 +368,8 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
                 return margin(target, varargs);
             case 105:
                 return onTouch(target, varargs);
-            case 106:
-                return matrix(target, varargs);
+//            case 106:
+//                return matrix(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
