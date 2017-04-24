@@ -11,6 +11,7 @@ package com.taobao.luaview.userdata.ui;
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.MotionEvent;
@@ -43,6 +44,9 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +76,9 @@ public class UDView<T extends View> extends BaseUserdata {
 
     //effects
     private Integer mEffects;
+
+    //values
+    private float[] mMatrix = null;
 
     public UDView(T view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
@@ -1481,6 +1488,48 @@ public class UDView<T extends View> extends BaseUserdata {
 
     public String getFlexCss() {
         return mFlexCss;
+    }
+
+    /**
+     * set matrix for view
+     *
+     * @param values
+     */
+    public LuaValue setMatrix(float values[]) {
+        View view = getView();
+        if (view != null) {
+            try {
+                Field field = View.class.getDeclaredField("mRenderNode");
+                field.setAccessible(true);
+                Object renderNode = field.get(view);
+                Method method1 = renderNode.getClass().getDeclaredMethod("setAnimationMatrix", Matrix.class);
+
+                Matrix matrix = new Matrix();
+                matrix.reset();
+                matrix.setValues(values);
+                method1.invoke(renderNode, matrix);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return this;
+    }
+
+    public float[] getMatrix() {
+        if (mMatrix != null) {
+            return mMatrix;
+        } else {
+            final View view = getView();
+            if (view != null) {
+                Matrix matrix = view.getMatrix();
+                if (matrix != null) {
+                    mMatrix = new float[9];
+                    matrix.getValues(mMatrix);
+                    return mMatrix;
+                }
+            }
+        }
+        return null;
     }
 
 }

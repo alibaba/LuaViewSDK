@@ -162,6 +162,10 @@ public abstract class UDBaseListOrRecyclerView<T extends ViewGroup> extends UDVi
      * @return
      */
     protected int getRawSectionCount() {
+        if (this.mSectionDelegate == null) {
+            return 0;
+        }
+
         return LuaUtil.getOrCallFunction(this.mSectionDelegate.get("SectionCount")).optint(1);
     }
 

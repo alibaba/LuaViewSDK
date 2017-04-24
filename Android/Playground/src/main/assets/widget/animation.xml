@@ -1,0 +1,12 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH/10, flex-direction='row'}">
+        <Button id="translateBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="translate" borderColor="0x000000" corner="10"></Button>
+        <Button id="scaleBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="scale" borderColor="0x000000" corner="10"></Button>
+        <Button id="alphaBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="alpha" borderColor="0x000000" corner="10"></Button>
+    </View>
+    <View css="{height=sys.contH/10, flex-direction='row'}">
+        <Button id="allBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="all in" borderColor="0x000000" corner="10"></Button>
+        <Button id="resetBtn" css="{flex=1, margin=5}" bg="0xffffff" borderWidth="1" title="reset" borderColor="0x000000" corner="10"></Button>
+    </View>
+    <Image id="img" css="{margin-top=20, margin-left=20, height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></Image>
+</View>

@@ -1,6 +1,6 @@
 
 local http = Http();
-http.post("http://www.taobao.com",
+http:post("http://www.taobao.com",
     {
         UserId = "23234234",
         Year = "2016",
@@ -11,8 +11,9 @@ http.post("http://www.taobao.com",
         }
     },
     function ( response )
-        local str = tostring( response.data() );
-        local object = Json.toTable(str);
+        local str = tostring( response:data() );
+        print(str);
+        local object = Json:toTable(str);
 
         if( callback ) then
             callback(object);

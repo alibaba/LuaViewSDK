@@ -127,17 +127,11 @@ public class UDViewGroup<T extends ViewGroup> extends UDView<T> {
      * @param subView
      * @return
      */
-    public UDViewGroup addView(UDView subView) {
+    public UDViewGroup addView(UDView subView, Integer pos) {
         final ViewGroup viewGroup = getContainer();
         if (viewGroup != null && subView != null && subView.getView() != null) {
             final View view = subView.getView();
-            LuaViewUtil.addView(viewGroup, view, null);
-//            if (viewGroup instanceof ILVViewGroup) {
-//                LuaViewUtil.addView(viewGroup, view, null);
-//            } else {
-//                final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(view);
-//                viewGroup.addView(view, layoutParams);
-//            }
+            LuaViewUtil.addView(viewGroup, view, pos != null ? pos : -1, null);
         }
         return this;
     }

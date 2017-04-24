@@ -1,0 +1,6 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
+    <View css="{height=sys.contH/10}" bg="0x004B97">
+        <Text id="headerText" css="{flex=1, margin=10}" text="Visible Items: " fontSize="20" textColor="0xffffff"></Text>
+    </View>
+    <List id="tableView" css="{flex=1}" bg="0xeeeeee" space="1" showScrollIndicator="false"></List>
+</View>

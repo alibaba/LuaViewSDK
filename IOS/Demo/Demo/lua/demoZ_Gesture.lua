@@ -1,5 +1,5 @@
 
-w,h = System.screenSize();--获取屏幕尺寸
+w,h = System:screenSize();--获取屏幕尺寸
 
 gesture = Gesture(
     function( event )
@@ -7,5 +7,5 @@ gesture = Gesture(
 	end
 );
 
-window.addGesture(gesture);
+window:addGesture(gesture);
 

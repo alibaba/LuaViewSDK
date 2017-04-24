@@ -1,0 +1,28 @@
+PODS:
+  - luaviewEx (0.1.0):
+    - LuaViewSDK
+    - MJRefresh
+    - SDWebImage (~> 3.7.5)
+  - LuaViewSDK (0.5.0)
+  - MJRefresh (3.1.12)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+
+DEPENDENCIES:
+  - luaviewEx (from `../luaviewEx`)
+  - LuaViewSDK (from `../../`)
+
+EXTERNAL SOURCES:
+  luaviewEx:
+    :path: ../luaviewEx
+  LuaViewSDK:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  luaviewEx: a5e511e0e83280315ebff29f8bdc2c2cc7fb466b
+  LuaViewSDK: 04f40a2b25e485669ca03ae93fd45f8a145164ce
+  MJRefresh: 11e1c9d86f2093ddcdbda7836bc2da477ddf568d
+  SDWebImage: 485df4197e8008e0a23d95854d6a73050b9ddc3c
+
+COCOAPODS: 0.39.0

@@ -1,14 +1,13 @@
 # Uncomment this line to define a global platform for your project
 
-platform :ios, "7.0"
-
-def demo_pods
-    pod 'MJRefresh'
-    pod 'SDWebImage', '3.7.5'
-end
+platform :ios, "8.0"
 
 target 'Demo' do
-    platform :ios, '7.0'
-    demo_pods
+
+    pod 'MJRefresh'
+    pod 'SDWebImage', '3.7.5'
+
+    pod 'LuaViewSDK', :path => '../../'
+
 end
 

@@ -18,7 +18,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     //recycler view
     compile 'com.android.support:recyclerview-v7:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+//    compile 'com.android.support:appcompat-v7:23.4.0'
 }
 
 /*
@@ -58,6 +58,9 @@ android {
         debug {
             debuggable true
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

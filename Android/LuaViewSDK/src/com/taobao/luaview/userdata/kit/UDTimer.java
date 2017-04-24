@@ -41,6 +41,9 @@ public class UDTimer extends BaseCacheUserdata {
     //间隔，重复间隔，默认为1秒
     private long mInterval = 1000L;
 
+    //是否正在调用callback
+//    private boolean isCalling = false;
+
     //isRunning
     private boolean isRunning = false;
 
@@ -110,7 +113,7 @@ public class UDTimer extends BaseCacheUserdata {
      * @return
      */
     public UDTimer setInterval(long interval) {
-        if(interval >= 0) {
+        if (interval >= 0) {
             this.mInterval = interval;
         }
         return this;
@@ -119,7 +122,6 @@ public class UDTimer extends BaseCacheUserdata {
     public long getInterval() {
         return mInterval;
     }
-
 
 
     /**
@@ -137,28 +139,35 @@ public class UDTimer extends BaseCacheUserdata {
             mRepeat = repeat;
         }
 
-        if(mTimerRunnable != null){//start新的时候新停掉老的
+        if (mTimerRunnable != null) {//start新的时候新停掉老的
             cancel();
         }
 
         mTimerRunnable = new Runnable() {
             @Override
             public void run() {
-                if(isRunning) {
+                if (isRunning) {
+//                    LogUtil.d("timercallback9", DateUtil.getCurrent("yyyy-MM-dd HH:mm:ss SSS"));
+                    if (mRepeat && mTimerHandler != null) {
+                        mTimerHandler.postDelayed(this, mInterval);
+                    }
                     LuaViewUtil.runOnUiThread(getContext(), new Runnable() {
                         @Override
                         public void run() {
                             LuaUtil.callFunction(mCallback);
                         }
                     });
-                    if (mRepeat && mTimerHandler != null) {
-                        mTimerHandler.postDelayed(this, mInterval);
-                    }
+                    /*if (!isCalling){
+                        isCalling = true;
+                        LuaUtil.callFunction(mCallback);
+                        isCalling = false;
+                    }*/
                 }
             }
         };
         this.isRunning = true;
         this.mTimerHandler.postDelayed(mTimerRunnable, mDelay);
+
         return this;
     }
 
@@ -170,6 +179,7 @@ public class UDTimer extends BaseCacheUserdata {
             this.mTimerHandler.removeCallbacks(this.mTimerRunnable);
             this.mTimerRunnable = null;
             this.isRunning = false;
+//            this.isCalling = false;
         }
         return this;
     }

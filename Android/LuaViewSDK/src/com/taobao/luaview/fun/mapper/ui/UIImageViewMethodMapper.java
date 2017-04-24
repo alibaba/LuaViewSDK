@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.constants.UDImageScaleType;
+import com.taobao.luaview.userdata.kit.UDBitmap;
 import com.taobao.luaview.userdata.kit.UDData;
 import com.taobao.luaview.userdata.ui.UDImageView;
 
@@ -91,7 +92,10 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
             return view.setImageUrl(url, callback);
         } else if (varargs.arg(2) instanceof UDData) {//data
             final UDData data = (UDData) varargs.arg(2);
-            return view.setImageBitmap(data != null ? data.bytes() : null);
+            return view.setImageBytes(data != null ? data.bytes() : null);
+        } else if (varargs.arg(2) instanceof UDBitmap){//bitmap
+            final UDBitmap bitmap = (UDBitmap) varargs.arg(2);
+            return view.setImageBitmap(bitmap);
         }
         return view;
     }
@@ -157,7 +161,7 @@ public class UIImageViewMethodMapper<U extends UDImageView> extends UIViewMethod
      * @return
      */
     @Deprecated
-    public LuaValue startAnimationImages(U view, Varargs varargs) {
+    public LuaValue startAnimationImages(U view, Varargs varargs) {//TODO 支持UDImageView和UDBitmap
         final LuaTable imagesTable = varargs.opttable(2, null);
         final double duration = varargs.optdouble(3, 1f);
         boolean repeat = false;

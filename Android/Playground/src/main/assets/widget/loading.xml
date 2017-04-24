@@ -1,0 +1,3 @@
+<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', justify-content='center', align-items='center'}" >
+    <Load id="loading" css="{height=sys.contH/10, width=sys.contH/10}" color="0xF06292"></Load>
+</View>

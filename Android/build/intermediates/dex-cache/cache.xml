@@ -2,11 +2,13 @@
 <items version="2" >
 
     <item
-        jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/exploded-aar/Android/LuaViewSDK/unspecified/jars/classes.jar"
+        is-multidex="false"
+        jar="/workspace/LuaViewSDK/Android/LuaViewSDK/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="59d68886d9402d70b70cf4b21b48259a3c25200b">
-        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/pre-dexed/debug/classes-e97368caa11d3df2fb363f5e3a2504bef3be0ecd.jar" />
+        optimize="true"
+        revision="25.0.2"
+        sha1="2d4264f6f5b10d538b9630658c67b8502bc67449">
+        <dex dex="/workspace/LuaViewSDK/Android/Playground/build/intermediates/pre-dexed/debug/classes_8999f34b14a953c929e7858134b1a9333f73ba5a.jar" />
     </item>
 
 </items>

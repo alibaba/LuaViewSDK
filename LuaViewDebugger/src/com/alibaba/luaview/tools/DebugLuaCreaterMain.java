@@ -14,8 +14,8 @@ public class DebugLuaCreaterMain {
 	}
 
 	private void run() {
-		byte[] bs = file_to_bytes("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/debug.lua");
-		PrintStream ps = getPrintStream("/Users/admin/Desktop/LuaViewSDK/IOS/LuaViewSDK/Classes/lvdebug/LVDebugLua.m");
+		byte[] bs = file_to_bytes("/Users/dongxicheng/Desktop/LuaView-SDK/LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvdebug/debug.lua");
+		PrintStream ps = getPrintStream("/Users/dongxicheng/Desktop/LuaView-SDK/LuaViewSDK/IOS/SDK/LuaViewSDK/Classes/lvdebug/LVDebugLua.m");
 		ps.println();
 		ps.println("// debug.lua");
 		ps.println("char g_debug_lua[" + (bs.length + 1) + "] = {");

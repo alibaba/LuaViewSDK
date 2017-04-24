@@ -1,16 +1,16 @@
 
-scrW,scrH = System.screenSize();
+scrW,scrH = System:screenSize();
 
 btnH = scrH / 12;
 
 function createButton( text, x,y,w,h, callback)
     local button = Button();
-    button.frame( x, y, w, h);
-    button.title( "按钮 " .. text );
-    button.backgroundColor(0x777777,1);
+    button:frame( x, y, w, h);
+    button:title( "按钮 " .. text );
+    button:backgroundColor(0x777777,1);
 
 
-    button.callback( 
+    button:callback( 
      function()
         if( callback ) then
             callback();
