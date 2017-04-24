@@ -22,16 +22,46 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  *
  *  @param l     luastate
  *  @param table 用户数据
- *  @param key
+ *  @param key1 如果是table中查找对应的Key1 再调用
+ *  @param key2 如果是table中查找对应的Key1 再调用
+ *  @param key3
+ *  @param key4
  *
  *  @return stackNumber
  */
 +(NSString*) call:(lua_State*) l  lightUserData:(id) lightUserData key1:(const char*)key1 key2:(const char*)key2 nargs:(int)nargs;
-    
+
+/**
+ *  调用lua对应的方法(如果是function直接调用, 如果是table用key1,key2,key3,key4去查找后再调用)
+ *
+ *  @param l lua状态机
+ *  @param key1 key值
+ *  @param key2 key值
+ *  @param key3 key值
+ *  @param nargs 入参个数
+ *  @param nret  lua函数返回值个数
+ *  @param retType 从表中获取的值, 如果已经是需要的返回值类型, 则直接返回
+ *
+ *  @return 调用失败信息(nil是成功)
+ */
 +(NSString*) call:(lua_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3
             nargs:(int)nargs nrets:(int)nret
           retType:(int) retType;
-    
+
+/**
+ *  调用lua对应的方法(如果是function直接调用, 如果是table用key1,key2,key3,key4去查找后再调用)
+ *
+ *  @param l lua状态机
+ *  @param key1 key值
+ *  @param key2 key值
+ *  @param key3 key值
+ *  @param key4 key值
+ *  @param nargs 入参个数
+ *  @param nret  lua函数返回值个数
+ *  @param retType 从表中获取的值, 如果已经是需要的返回值类型, 则直接返回
+ *
+ *  @return 调用失败信息(nil是成功)
+ */
 +(NSString*) call:(lua_State*) l  key1:(const char*)key1 key2:(const char*)key2 key3:(const char*)key3 key4:(const char*)key4
             nargs:(int)nargs nrets:(int)nret
           retType:(int) retType;
@@ -77,6 +107,9 @@ typedef void(^LVFuncDownloadEndCallback)(NSData* data);
  */
 +(BOOL) createPath:(NSString*) path;
 
+/*
+ * 检查文件是否存在
+ */
 +(BOOL) exist:(NSString*) path;
 
 /*
@@ -212,6 +245,7 @@ BOOL lv_objcEqual(id obj1, id obj2);
 void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L);
 
 void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview);
+void lv_addSubviewByIndex(LuaViewCore* lv, UIView* superview, UIView* subview, int index);
 
 extern NSString* safe_stringForKey(NSDictionary*dic, id key);
 extern NSDictionary * safe_dictionaryForKey(NSDictionary* dic, id key);
@@ -228,7 +262,7 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key );
 + (NSString*) luaTrace:(lua_State*) L;
 
 /*
- * 切图
+ * UIImage 切图 实现
  */
 + (UIImage*) image:(UIImage*)image croppingToRect:(CGRect)rect;
 @end

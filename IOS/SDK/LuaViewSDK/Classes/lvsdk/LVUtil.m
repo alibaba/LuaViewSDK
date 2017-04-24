@@ -888,6 +888,17 @@ void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview){
     }
 }
 
+void lv_addSubviewByIndex(LuaViewCore* lv, UIView* superview, UIView* subview, int index){
+    [subview removeFromSuperview];
+    [subview.layer removeFromSuperlayer];
+    if( lv.closeLayerMode
+       || [superview isKindOfClass:[UIScrollView class]]
+       || [subview isKindOfClass:[UIScrollView class]] ) {
+        [superview insertSubview:subview atIndex:index];
+    } else {
+        [superview.layer addSublayer:subview.layer];
+    }
+}
 
 static id objectForKey(NSDictionary* dic, id key, Class clazz){
     id obj = [dic objectForKey:key];
