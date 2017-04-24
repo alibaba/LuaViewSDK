@@ -108,7 +108,7 @@ public class UDBitmap extends BaseUserdata {
             if (URLUtil.isNetworkUrl(urlOrName)) {//network
                 final ImageProvider provider = LuaView.getImageProvider();
                 if (provider != null) {
-                    provider.preload(getContext(), urlOrName, mCallback == null ? null : new DrawableLoadCallback() {
+                    provider.preload(getContext(), urlOrName, new DrawableLoadCallback() {
                         @Override
                         public void onLoadResult(Drawable result) {
                             mBitmap = result instanceof BitmapDrawable ? ((BitmapDrawable) result).getBitmap() : null;
