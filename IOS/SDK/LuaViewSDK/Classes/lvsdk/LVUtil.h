@@ -131,6 +131,58 @@ NSData *LV_AES256DecryptDataWithKey(NSData *data, NSData* key);
 + (void) unregistry:(lua_State*) L key:(id) key;
 + (void) pushRegistryValue:(lua_State*) L key:(id) key;
 
+/*
+ * Is External Url
+ */
++(BOOL) isExternalUrl:(NSString*) url;
+
+/*
+ * 检查系统版本是否IOS8以上
+ */
++(BOOL) ios8;
+
+/*
+ * 从指定bundle加载字体
+ */
++ (int) loadFont:(NSString*) fileName package:(LVBundle*)bundle;
+
+/*
+ * 从指定bundle创建字体, 如果字体不存在自动加载
+ */
++ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize bundle:(LVBundle*)bundle;
+
+/*
+ * 创建定时器
+ */
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
+                                      block:(void (^)(NSTimer *timer))block
+                                    repeats:(BOOL)inRepeats;
+/*
+ * 显示Lua的调用堆栈
+ */
++ (NSString*) luaTrace:(lua_State*) L;
+
+/*
+ * UIImage 切图 实现
+ */
++ (UIImage*) image:(UIImage*)image croppingToRect:(CGRect)rect;
+
+/*
+ * 创建闭包
+ *  @param clas upvlaue的第一个值是类型
+ */
++(void) reg:(lua_State*)L clas:(id) clas cfunc:(lua_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
+
++(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass;
+
+/*
+ * 定义lua全局变量
+ *  @param globalName 全局变量名
+ *  @param value 全局变量的值
+ *  @param
+ */
++(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L;
+//------------------考虑性能问题, 一下接口试用C实现----------------------
 // UData 关联脚本object
 void lv_udataRef(lua_State* L, int key);  // -2: userdata   -1: value
 void lv_udataUnref(lua_State* L, int key); // -1: userdata
@@ -216,32 +268,15 @@ BOOL lv_uicolor2int(UIColor* color,NSUInteger* c, CGFloat* alpha);
 UIColor* lv_getColorFromStack(lua_State* L, int stackID);
 
 
-/*
- * Is External Url
- */
-+(BOOL) isExternalUrl:(NSString*) url;
-
-UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
-
-+(BOOL) ios8;
-
-
-+ (int) loadFont:(NSString*) fileName package:(LVBundle*)bundle;
-+ (UIFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize bundle:(LVBundle*)bundle;
-
 void LVLog( NSString* format, ... );
 void LVError( NSString* format, ... );
 
-//----------------------------------------
+UIColor* lv_UIColorFromRGBA(NSInteger aRGB ,float alpha);
+
 int lv_callbackFunction(lua_State* l, const char* functionName);
 
 BOOL lv_objcEqual(id obj1, id obj2);
 
-+(void) reg:(lua_State*)L clas:(id) c cfunc:(lua_CFunction) cfunc globalName:(NSString*)globalName defaultName:(NSString*) defaultName;
-
-+(Class) upvalueClass:(lua_State*)L defaultClass:(Class) defaultClass;
-
-+(void) defineGlobal:(NSString*)globalName value:(id) value L:(lua_State*)L;
 void lv_defineGlobalFunc(const char* globalName, lua_CFunction func, lua_State* L);
 
 void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview);
@@ -253,18 +288,6 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key );
 
 
 
-+ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval
-                                         block:(void (^)(NSTimer *timer))block
-                                       repeats:(BOOL)inRepeats;
-/*
- * 显示Lua的调用堆栈
- */
-+ (NSString*) luaTrace:(lua_State*) L;
-
-/*
- * UIImage 切图 实现
- */
-+ (UIImage*) image:(UIImage*)image croppingToRect:(CGRect)rect;
 @end
 
 
