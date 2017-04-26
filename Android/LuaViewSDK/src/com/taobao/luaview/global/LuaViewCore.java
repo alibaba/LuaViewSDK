@@ -105,8 +105,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         new SimpleTask1<LuaViewCore>() {
             @Override
             protected LuaViewCore doInBackground(Object... params) {
-                final Globals globals = LuaViewManager.createGlobalsAsync();
-                return createLuaViewCore(context, globals);
+                return create(context);
             }
 
             @Override
