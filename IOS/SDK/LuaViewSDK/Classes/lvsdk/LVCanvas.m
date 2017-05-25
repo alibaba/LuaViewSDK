@@ -11,6 +11,7 @@
 #import "LVBundle.h"
 #import "LVData.h"
 #import "LVImage.h"
+#import "LVBitmap.h"
 
 #define LV_ANGLE_RADIANS(angle) (M_PI*angle/180)
 
@@ -476,6 +477,9 @@ static int canvas_drawImage (lua_State *L) {
                 if( [lvImage isKindOfClass:[LVImage class]] ) {
                     image = lvImage.image;
                 }
+            } else if( LVIsType(userdata, Bitmap) ) {
+                LVBitmap* bitmap = (__bridge LVBitmap *)(userdata->object);
+                image = bitmap.nativeImage;
             } else if( LVIsType(userdata, Data) ) {
                 LVData* lvdata = (__bridge LVData *)(userdata->object);
                 image = [[UIImage alloc] initWithData:lvdata.data];

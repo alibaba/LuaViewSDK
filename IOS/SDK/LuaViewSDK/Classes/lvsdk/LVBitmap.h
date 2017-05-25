@@ -11,7 +11,7 @@
 #import "LView.h"
 
 
-typedef void(^LVWebImageCompletionBlock)(UIImage *image, NSError *error, int cacheType, NSURL *imageURL);
+typedef void(^LVWebBitmapCompletionBlock)(UIImage *image, NSError *error, int cacheType, NSURL *imageURL);
 
 
 @interface LVBitmap : NSObject<LVProtocal, LVClassProtocal>
@@ -23,7 +23,7 @@ typedef void(^LVWebImageCompletionBlock)(UIImage *image, NSError *error, int cac
 
 -(id) init:(lua_State*) l;
 
--(void) loadImageByUrl:(NSString*) url finished:(LVWebImageCompletionBlock) finished;
+-(void) loadBitmapByUrl:(NSString*) url finished:(LVWebBitmapCompletionBlock) finished;
 
 /*
  * luaview所有扩展类的桥接协议: 只是一个静态协议, luaview统一调用该接口加载luaview扩展的类

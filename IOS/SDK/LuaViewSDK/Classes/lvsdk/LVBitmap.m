@@ -11,7 +11,6 @@
 #import "LVUtil.h"
 #import "LVData.h"
 #import <Accelerate/Accelerate.h>
-#import "LVNinePatchImage.h"
 #import "LVHeads.h"
 
 @interface LVBitmap ()
@@ -58,7 +57,7 @@
 }
 
 // 加载
--(void) loadImageByUrl:(NSString*) url finished:(LVWebImageCompletionBlock) finished{
+-(void) loadBitmapByUrl:(NSString*) url finished:(LVWebBitmapCompletionBlock) finished{
     [LVUtil download:url callback:^(NSData *data) {
         UIImage* image = [UIImage imageWithData:data];
         NSString* error = (data?nil:@"download error");
@@ -78,14 +77,14 @@
         return;
     
     if( [LVUtil isExternalUrl:url] ){
-        __weak LVBitmap* weakImage = self;
-        [self loadImageByUrl:url finished:^(UIImage *image, NSError *error, int cacheType, NSURL *imageURL) {
+        __weak LVBitmap* weakBitmap = self;
+        [self loadBitmapByUrl:url finished:^(UIImage *image, NSError *error, int cacheType, NSURL *imageURL) {
             
-            weakImage.nativeImage = image;
+            weakBitmap.nativeImage = image;
             
-            if( weakImage.needCallLuaFunc ) {
-                weakImage.errorInfo = error;
-                [weakImage performSelectorOnMainThread:@selector(callLuaWhenLoadCompleted:) withObject:error waitUntilDone:NO];
+            if( weakBitmap.needCallLuaFunc ) {
+                weakBitmap.errorInfo = error;
+                [weakBitmap performSelectorOnMainThread:@selector(callLuaWhenLoadCompleted:) withObject:error waitUntilDone:NO];
             }
         }];
     } else {
