@@ -1,0 +1,11 @@
+<View id="item" frame="10, 5, sys.contW-20, sys.contH/3-10" css="{flex-direction='row'}" bg="0xffffff" >
+    <View css="{flex-direction='column', flex=2}">
+        <Image id="profile" css="{flex=1, margin=15}"></Image>
+    </View>
+    <View css="{flex-direction='column', flex=3}">
+        <Text id="movieName" css="{flex=1, margin-top=15}" fontSize="18" textColor="0x000000"></Text>
+        <Text id="score" css="{height=20}" textColor="0xe61414" fontSize="14"></Text>
+        <Text id="character" css="{flex=2}" lineCount="3" textColor="0x666666" fontSize="16"></Text>
+        <Text id="number" css="{flex=1, margin-bottom=10}" textColor="0xe61414" fontSize="14"></Text>
+    </View>
+</View>

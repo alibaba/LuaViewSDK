@@ -888,6 +888,17 @@ void lv_addSubview(LuaViewCore* lv, UIView* superview, UIView* subview){
     }
 }
 
+void lv_addSubviewByIndex(LuaViewCore* lv, UIView* superview, UIView* subview, int index){
+    [subview removeFromSuperview];
+    [subview.layer removeFromSuperlayer];
+    if( lv.closeLayerMode
+       || [superview isKindOfClass:[UIScrollView class]]
+       || [subview isKindOfClass:[UIScrollView class]] ) {
+        [superview insertSubview:subview atIndex:index];
+    } else {
+        [superview.layer addSublayer:subview.layer];
+    }
+}
 
 static id objectForKey(NSDictionary* dic, id key, Class clazz){
     id obj = [dic objectForKey:key];
@@ -945,6 +956,35 @@ NSDate * safe_dateForKey(NSDictionary* dic, id key ){
     return stack;
 }
 
++ (UIImage*) image:(UIImage*)image croppingToRect:(CGRect)rect
+{
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    
+    CGRect clippedRect = CGRectMake(0, 0, rect.size.width, rect.size.height);
+    
+    CGContextClipToRect( currentContext, clippedRect);
+    
+    CGRect drawRect = CGRectMake(rect.origin.x * -1,
+                                 
+                                 rect.origin.y * -1,
+                                 
+                                 image.size.width,
+                                 
+                                 image.size.height);
+    
+    CGContextTranslateCTM(currentContext, 0.0, rect.size.height);
+    
+    CGContextScaleCTM(currentContext, 1.0, -1.0);
+    
+    CGContextDrawImage(currentContext, drawRect, image.CGImage);
+    
+    UIImage *cropped = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return cropped;
+}
 
 void LVLog( NSString* format, ... ){
 #ifdef DEBUG

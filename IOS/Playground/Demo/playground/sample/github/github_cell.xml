@@ -1,0 +1,11 @@
+<View id="item" frame="10, 5, sys.contW-20, sys.contH/3-10" css="{flex-direction='column'}" bg="0xffffff" >
+    <Text id="name" css="{flex=1, margin-top=10, margin-left=10, margin-right=10}" fontSize="16" textColor="0x000000"></Text>
+    <Text id="description" css="{flex=3, margin-top=10, margin-left=10, margin-right=10}" fontSize="14" lineCount="3"></Text>
+    <View css="{flex-direction='row', flex=2, margin=10}">
+        <View css="{flex=1, flex-direction='row'}">
+            <Text id="author" css="{flex=1}" text="Author: " fontSize="16" textAlign="TextAlign.LEFT"></Text>
+            <Image id="profile" css="{flex=1}"></Image>
+        </View>
+        <Text id="stars" css="{flex=1}" textAlign="TextAlign.RIGHT" text="Stars: " fontSize="16"></Text>
+    </View>
+</View>

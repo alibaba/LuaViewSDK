@@ -30,7 +30,7 @@ minimum deployment version. If you need iOS < 5.0 support, please use the last [
 
 [How is SDWebImage better than X?](https://github.com/rs/SDWebImage/wiki/How-is-SDWebImage-better-than-X%3F)
 
-Who Use It
+Who Uses It
 ----------
 
 Find out [who uses SDWebImage](https://github.com/rs/SDWebImage/wiki/Who-Uses-SDWebImage) and add your app to the list.
@@ -213,7 +213,7 @@ Installation
 ------------
 
 There are three ways to use SDWebImage in your project:
-- using Cocoapods
+- using CocoaPods
 - copying all the files into your project
 - importing the project as a static library
 

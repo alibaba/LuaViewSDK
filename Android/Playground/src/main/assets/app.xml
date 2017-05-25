@@ -1,0 +1,31 @@
+<View frame="0, 0, sys.contW, sys.contH">
+    <View frame="0, 0, sys.contW, sys.contH*0.9">
+        <List id="widgetTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee" showScrollIndicator="false"></List>
+        <List id="sampleTableView" frame="0, 0, sys.contW, sys.contH*0.9" space="1" bg="0xeeeeee" showScrollIndicator="false" hide="true"></List>
+        <View id="aboutView" frame="0, 0, sys.contW, sys.contH*0.9" css="{flex-direction='column'}" bg="0xffffff" hide="true">
+            <View css="{flex=1, justify-content='center', align-items='center', margin-left=10, margin-right=10}">
+                <Image css="{height=sys.contW/4, width=sys.contW/4}" image="luaview.png"></Image>
+            </View>
+            <Text id="info" css="{flex=1, margin-left=10, margin-right=10}" fontSize="16" lineCount="4" text="LuaViewSDK is a cross-platform framework which is designed to build native, dynamic and swift user interfaces. It's based on Lua VM and chooses lua as it's script language."></Text>
+            <View css="{flex-direction='column', flex=1}">
+                <View css="{height=10}" bg="0xeeeeee"></View>
+                <View css="{flex=1, flex-direction='row', margin-left=10, margin-right=10}">
+                    <Text css="{flex=1}" textAlign="TextAlign.LEFT" text="QQ Group" fontSize="14"></Text>
+                    <Text css="{flex=1}" textAlign="TextAlign.RIGHT" text="539262083" fontSize="14"></Text>
+                </View>
+                <View css="{height=1, margin-left=10, margin-right=10, margin-left=10, margin-right=10}" bg="0xeeeeee"></View>
+                <View css="{flex=1, flex-direction='row', margin-left=10, margin-right=10}">
+                    <Text css="{flex=1}" textAlign="TextAlign.LEFT" text="Website" fontSize="14"></Text>
+                    <Text css="{flex=3}" textAlign="TextAlign.RIGHT" text="https://alibaba.github.io/LuaViewSDK" fontSize="14"></Text>
+                </View>
+            </View>
+            <Text css="{flex=1}" text="Version: 0.1.1" textAlign="TextAlign.CENTER" bg="0xeeeeee" fontSize="14"></Text>
+        </View>
+    </View>
+    <View id="line" frame="0, sys.contH*0.9, sys.contW, 1" bg="0x000000" alpha="0.3"></View>
+    <View frame="0, sys.contH*0.9+1, sys.contW, sys.contH*0.1-1" css="{flex-direction='row'}">
+        <Text id="widgetTab" css="{flex=1}" text="Widget" textAlign="TextAlign.CENTER" textColor="0xEB3131" fontSize="14"></Text>
+        <Text id="sampleTab" css="{flex=1}" text="Sample" textAlign="TextAlign.CENTER" fontSize="14"></Text>
+        <Text id="aboutTab" css="{flex=1}" text="About" textAlign="TextAlign.CENTER" fontSize="14"></Text>
+    </View>
+</View>

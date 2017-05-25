@@ -78,6 +78,7 @@ extern const char* LVType_NativeObject;
 extern const char* LVType_Struct;
 extern const char* LVType_Canvas;
 extern const char* LVType_Event;
+extern const char* LVType_Bitmap;
 
 
 //----------------View的用户数据结构------------------------------------------------
@@ -88,6 +89,9 @@ typedef struct _LVUserDataInfo {
 } LVUserDataInfo;
 
 //--------------------------------------------------------------------------------
+/*
+ * 确保所有在luaview扩展类的实例对象都包含有这些基本的属性和方法, 是所有LuaView扩展类的实例对象的通用协议
+ */
 @class LuaViewCore;
 @protocol LVProtocal <NSObject>
 @required
@@ -96,6 +100,9 @@ typedef struct _LVUserDataInfo {
 - (id) lv_nativeObject; // 返回native对象
 @end
 
+/*
+ * luaview所有扩展类的桥接协议: 只是一个静态协议, luaview统一调用该接口加载luaview扩展的类
+ */
 @protocol LVClassProtocal <NSObject>
 @required
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName;
@@ -117,6 +124,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_PagerIndicator       "UI.PagerIndicator"
 #define META_TABLE_LoadingIndicator     "UI.LoadingIndicator"
 #define META_TABLE_UIImageView          "UI.ImageView"
+#define META_TABLE_Bitmap               "UI.Bitmap"
 #define META_TABLE_UIWebView            "UI.WebView"
 #define META_TABLE_UILabel              "UI.Label"
 #define META_TABLE_UITextField          "UI.TextField"
@@ -152,6 +160,8 @@ typedef struct _LVUserDataInfo {
 #define STR_ON_CLICK    "onClick"
 #define STR_ON_DRAW     "onDraw"
 #define STR_ON_TOUCH    "onTouch"
+#define STR_ON_SHOW     "onShow"
+#define STR_ON_HIDE     "onHide"
 #define STR_onPageStarted   "onPageStarted"
 #define STR_onPageFinished  "onPageFinished"
 #define STR_onReceivedError "onReceivedError"

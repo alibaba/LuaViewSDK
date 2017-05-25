@@ -35,7 +35,7 @@
         lua_settop(L, 0);
          CGContextRef contextRef = UIGraphicsGetCurrentContext();
         LVCanvas* canvas = [LVCanvas createLuaCanvas:L contentRef:contextRef];
-        [self lv_callLuaByKey1:@STR_ON_DRAW key2:nil argN:1];
+        [self lv_callLuaCallback:@STR_ON_DRAW key2:nil argN:1];
         canvas.contentRef = NULL;
     }
 }

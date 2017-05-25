@@ -1,0 +1,43 @@
+{
+  "name": "luaviewEx",
+  "version": "0.1.0",
+  "summary": "A short description of luaviewEx.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/yechunxiao19/luaviewEx",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "yechunxiao19": "chunxiao.ycx@alibaba-inc.com"
+  },
+  "source": {
+    "git": "https://github.com/yechunxiao19/luaviewEx.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "luaviewEx/Classes/*",
+  "resource_bundles": {
+    "luaviewEx": [
+      "luaviewEx/Assets/**/*.{lua}"
+    ]
+  },
+  "resources": "luaviewEx/luaview/luaview.bundle",
+  "public_header_files": "Pod/Classes/*.h",
+  "dependencies": {
+    "LuaViewSDK": [
+
+    ],
+    "SDWebImage": [
+      "~> 3.7.5"
+    ],
+    "MJRefresh": [
+
+    ]
+  },
+  "xcconfig": {
+    "INFOPLIST_FILE": "../../luaviewEx/luaviewEx/Classes/luaviewEx-info.plist"
+  }
+}

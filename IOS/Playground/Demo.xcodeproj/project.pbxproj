@@ -11,12 +11,6 @@
 		3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F81E1C706B1D00D1E0B7 /* main.m */; };
 		3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */; };
 		3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */; };
-		3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */; };
-		3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */; };
-		3CC2F8531C706BE700D1E0B7 /* JHSLVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */; };
-		3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */; };
-		3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */; };
-		3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */; };
 		3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88E1C706BFA00D1E0B7 /* close.png */; };
 		3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */; };
 		3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F8901C706BFA00D1E0B7 /* enter.png */; };
@@ -29,16 +23,14 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
+		AC11EE791E96C0A900FF9F04 /* App.lua in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE731E96C0A900FF9F04 /* App.lua */; };
+		AC11EE7A1E96C0A900FF9F04 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE741E96C0A900FF9F04 /* app.xml */; };
+		AC11EE7B1E96C0A900FF9F04 /* demo.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE751E96C0A900FF9F04 /* demo.xml */; };
+		AC11EE7D1E96C0A900FF9F04 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE771E96C0A900FF9F04 /* sample */; };
+		AC11EE7E1E96C0A900FF9F04 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = AC11EE781E96C0A900FF9F04 /* widget */; };
+		AC27157E1E9E344700B82941 /* backtop.png in Resources */ = {isa = PBXBuildFile; fileRef = AC27157D1E9E344700B82941 /* backtop.png */; };
 		AC94B8F11E7FD296002838C4 /* luaview.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94B8F01E7FD296002838C4 /* luaview.png */; };
-		ACF78CB01E829CEA0024CD98 /* about.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CA91E829CEA0024CD98 /* about.xml */; };
-		ACF78CB11E829CEA0024CD98 /* demo_item.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAA1E829CEA0024CD98 /* demo_item.xml */; };
-		ACF78CB21E829CEA0024CD98 /* kit in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAB1E829CEA0024CD98 /* kit */; };
-		ACF78CB31E829CEA0024CD98 /* Main.lua in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAC1E829CEA0024CD98 /* Main.lua */; };
-		ACF78CB41E829CEA0024CD98 /* main.xml in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAD1E829CEA0024CD98 /* main.xml */; };
-		ACF78CB51E829CEA0024CD98 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAE1E829CEA0024CD98 /* sample */; };
-		ACF78CB61E829CEA0024CD98 /* widget in Resources */ = {isa = PBXBuildFile; fileRef = ACF78CAF1E829CEA0024CD98 /* widget */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
-		DC839C561E782D78005C346B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC839C551E782D78005C346B /* Bridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,18 +54,6 @@
 		3CC2F8291C706B1D00D1E0B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CC2F82E1C706B1D00D1E0B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CC2F8331C706B1D00D1E0B7 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLuaViewController.h; sourceTree = "<group>"; };
-		3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLuaViewController.m; sourceTree = "<group>"; };
-		3CC2F8451C706BE700D1E0B7 /* JHSLVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVButton.h; sourceTree = "<group>"; };
-		3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVButton.m; sourceTree = "<group>"; };
-		3CC2F8471C706BE700D1E0B7 /* JHSLVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCollectionView.h; sourceTree = "<group>"; };
-		3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCollectionView.m; sourceTree = "<group>"; };
-		3CC2F8491C706BE700D1E0B7 /* JHSLVCustomError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomError.h; sourceTree = "<group>"; };
-		3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomError.m; sourceTree = "<group>"; };
-		3CC2F84B1C706BE700D1E0B7 /* JHSLVCustomLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVCustomLoading.h; sourceTree = "<group>"; };
-		3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVCustomLoading.m; sourceTree = "<group>"; };
-		3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSLVImage.h; sourceTree = "<group>"; };
-		3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSLVImage.m; sourceTree = "<group>"; };
 		3CC2F88E1C706BFA00D1E0B7 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3CC2F88F1C706BFA00D1E0B7 /* demoZ_1212.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demoZ_1212.lua; sourceTree = "<group>"; };
 		3CC2F8901C706BFA00D1E0B7 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
@@ -86,16 +66,13 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AC11EE731E96C0A900FF9F04 /* App.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.lua; path = playground/App.lua; sourceTree = "<group>"; };
+		AC11EE741E96C0A900FF9F04 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = app.xml; path = playground/app.xml; sourceTree = "<group>"; };
+		AC11EE751E96C0A900FF9F04 /* demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo.xml; path = playground/demo.xml; sourceTree = "<group>"; };
+		AC11EE771E96C0A900FF9F04 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
+		AC11EE781E96C0A900FF9F04 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
+		AC27157D1E9E344700B82941 /* backtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtop.png; sourceTree = "<group>"; };
 		AC94B8F01E7FD296002838C4 /* luaview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luaview.png; path = playground/luaview.png; sourceTree = "<group>"; };
-		ACF78CA91E829CEA0024CD98 /* about.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = about.xml; path = playground/about.xml; sourceTree = "<group>"; };
-		ACF78CAA1E829CEA0024CD98 /* demo_item.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demo_item.xml; path = playground/demo_item.xml; sourceTree = "<group>"; };
-		ACF78CAB1E829CEA0024CD98 /* kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kit; path = playground/kit; sourceTree = "<group>"; };
-		ACF78CAC1E829CEA0024CD98 /* Main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.lua; path = playground/Main.lua; sourceTree = "<group>"; };
-		ACF78CAD1E829CEA0024CD98 /* main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.xml; path = playground/main.xml; sourceTree = "<group>"; };
-		ACF78CAE1E829CEA0024CD98 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = playground/sample; sourceTree = "<group>"; };
-		ACF78CAF1E829CEA0024CD98 /* widget */ = {isa = PBXFileReference; lastKnownFileType = folder; name = widget; path = playground/widget; sourceTree = "<group>"; };
-		DC839C541E782D78005C346B /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
-		DC839C551E782D78005C346B /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				DC839D3F1E791402005C346B /* playground */,
-				3CC2F8421C706BD900D1E0B7 /* luaviewEx */,
 				3CC2F88D1C706BFA00D1E0B7 /* lua_animate */,
 				3CC2F8201C706B1D00D1E0B7 /* AppDelegate.h */,
 				3CC2F8211C706B1D00D1E0B7 /* AppDelegate.m */,
@@ -164,27 +140,6 @@
 				3CC2F81E1C706B1D00D1E0B7 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3CC2F8421C706BD900D1E0B7 /* luaviewEx */ = {
-			isa = PBXGroup;
-			children = (
-				3CC2F8431C706BE700D1E0B7 /* JHSLuaViewController.h */,
-				3CC2F8441C706BE700D1E0B7 /* JHSLuaViewController.m */,
-				3CC2F8451C706BE700D1E0B7 /* JHSLVButton.h */,
-				3CC2F8461C706BE700D1E0B7 /* JHSLVButton.m */,
-				3CC2F8471C706BE700D1E0B7 /* JHSLVCollectionView.h */,
-				3CC2F8481C706BE700D1E0B7 /* JHSLVCollectionView.m */,
-				3CC2F8491C706BE700D1E0B7 /* JHSLVCustomError.h */,
-				3CC2F84A1C706BE700D1E0B7 /* JHSLVCustomError.m */,
-				3CC2F84B1C706BE700D1E0B7 /* JHSLVCustomLoading.h */,
-				3CC2F84C1C706BE700D1E0B7 /* JHSLVCustomLoading.m */,
-				3CC2F84D1C706BE700D1E0B7 /* JHSLVImage.h */,
-				3CC2F84E1C706BE700D1E0B7 /* JHSLVImage.m */,
-				DC839C541E782D78005C346B /* Bridge.h */,
-				DC839C551E782D78005C346B /* Bridge.m */,
-			);
-			name = luaviewEx;
 			sourceTree = "<group>";
 		};
 		3CC2F88D1C706BFA00D1E0B7 /* lua_animate */ = {
@@ -221,14 +176,13 @@
 		DC839D3F1E791402005C346B /* playground */ = {
 			isa = PBXGroup;
 			children = (
-				ACF78CA91E829CEA0024CD98 /* about.xml */,
-				ACF78CAA1E829CEA0024CD98 /* demo_item.xml */,
-				ACF78CAB1E829CEA0024CD98 /* kit */,
-				ACF78CAC1E829CEA0024CD98 /* Main.lua */,
-				ACF78CAD1E829CEA0024CD98 /* main.xml */,
-				ACF78CAE1E829CEA0024CD98 /* sample */,
-				ACF78CAF1E829CEA0024CD98 /* widget */,
+				AC11EE731E96C0A900FF9F04 /* App.lua */,
+				AC11EE741E96C0A900FF9F04 /* app.xml */,
+				AC11EE751E96C0A900FF9F04 /* demo.xml */,
+				AC11EE771E96C0A900FF9F04 /* sample */,
+				AC11EE781E96C0A900FF9F04 /* widget */,
 				AC94B8F01E7FD296002838C4 /* luaview.png */,
+				AC27157D1E9E344700B82941 /* backtop.png */,
 			);
 			name = playground;
 			sourceTree = "<group>";
@@ -298,7 +252,7 @@
 				TargetAttributes = {
 					3CC2F8191C706B1D00D1E0B7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = R4T52FY9CM;
+						DevelopmentTeam = EAA28CVMQM;
 						ProvisioningStyle = Automatic;
 					};
 					3CC2F8321C706B1D00D1E0B7 = {
@@ -331,24 +285,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF78CB11E829CEA0024CD98 /* demo_item.xml in Resources */,
+				AC11EE7E1E96C0A900FF9F04 /* widget in Resources */,
+				AC11EE791E96C0A900FF9F04 /* App.lua in Resources */,
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
-				ACF78CB61E829CEA0024CD98 /* widget in Resources */,
+				AC11EE7B1E96C0A900FF9F04 /* demo.xml in Resources */,
 				3CC2F8C91C706BFA00D1E0B7 /* close.png in Resources */,
 				3C98A55C1C7D5B310001508E /* LaunchScreen.storyboard in Resources */,
+				AC11EE7A1E96C0A900FF9F04 /* app.xml in Resources */,
 				3CC2F8CB1C706BFA00D1E0B7 /* enter.png in Resources */,
-				ACF78CB51E829CEA0024CD98 /* sample in Resources */,
 				3CC2F8CA1C706BFA00D1E0B7 /* demoZ_1212.lua in Resources */,
+				AC11EE7D1E96C0A900FF9F04 /* sample in Resources */,
+				AC27157E1E9E344700B82941 /* backtop.png in Resources */,
 				AC94B8F11E7FD296002838C4 /* luaview.png in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				3CC2F82A1C706B1D00D1E0B7 /* Assets.xcassets in Resources */,
 				3CC2F8CE1C706BFA00D1E0B7 /* hongbao.png in Resources */,
 				3CC2F8CF1C706BFA00D1E0B7 /* jhs.png in Resources */,
-				ACF78CB31E829CEA0024CD98 /* Main.lua in Resources */,
-				ACF78CB41E829CEA0024CD98 /* main.xml in Resources */,
-				ACF78CB21E829CEA0024CD98 /* kit in Resources */,
 				3CC2F8CC1C706BFA00D1E0B7 /* enter10.png in Resources */,
-				ACF78CB01E829CEA0024CD98 /* about.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,15 +382,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CC2F8521C706BE700D1E0B7 /* JHSLVButton.m in Sources */,
-				DC839C561E782D78005C346B /* Bridge.m in Sources */,
 				3CC2F8221C706B1D00D1E0B7 /* AppDelegate.m in Sources */,
 				3CC2F81F1C706B1D00D1E0B7 /* main.m in Sources */,
-				3CC2F8561C706BE700D1E0B7 /* JHSLVImage.m in Sources */,
-				3CC2F8541C706BE700D1E0B7 /* JHSLVCustomError.m in Sources */,
-				3CC2F8531C706BE700D1E0B7 /* JHSLVCollectionView.m in Sources */,
-				3CC2F8511C706BE700D1E0B7 /* JHSLuaViewController.m in Sources */,
-				3CC2F8551C706BE700D1E0B7 /* JHSLVCustomLoading.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,7 +515,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = EAA28CVMQM;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -587,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4T52FY9CM;
+				DEVELOPMENT_TEAM = EAA28CVMQM;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../LuaViewSDK/Classes/**";
 				INFOPLIST_FILE = Demo/Info.plist;

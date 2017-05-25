@@ -566,7 +566,12 @@ static int addSubview (lua_State *L) {
         UIView* superview = (__bridge UIView *)(father->object);
         UIView* subview = (__bridge UIView *)(son->object);
         if( superview && subview ){
-            lv_addSubview(luaview, superview, subview);
+            if( lua_gettop(L)>=3 && lua_type(L,3)==LUA_TNUMBER ){
+                int index = lua_tonumber(L,3);
+                lv_addSubviewByIndex(luaview, superview, subview, index);
+            } else {
+                lv_addSubview(luaview, superview, subview);
+            }
             [subview lv_alignSelfWithSuperRect:superview.frame];
             lua_pushvalue(L,1);
             return 1;
@@ -639,6 +644,35 @@ static int removeAllSubviews (lua_State *L) {
     return 0;
 }
 
+
+static int bringToFront (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            UIView* superView = view.superview;
+            [superView bringSubviewToFront:view];
+            lua_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int bringToBack (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            UIView* superView = view.superview;
+            [superView sendSubviewToBack:view];
+            lua_pushvalue(L,1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int layerMode(lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     if( user ){
@@ -691,6 +725,24 @@ static int hide(lua_State *L) {
         if( view ){
             view.hidden = YES;
             return 0;
+        }
+    }
+    return 0;
+}
+
+static int visible(lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if( view ){
+            if ( lua_gettop(L)>=2 ) {
+                BOOL yes = lua_toboolean(L, 2);
+                view.hidden = !yes;
+                return 0;
+            } else {
+                lua_pushboolean(L, !view.hidden );
+                return 1;
+            }
         }
     }
     return 0;
@@ -1223,7 +1275,7 @@ static int transform3D (lua_State *L) {
             LVUserDataInfo* userdata = (LVUserDataInfo *)lua_touserdata(L, 2);
             if ( LVIsType(userdata, Transform3D)) {
                 CALayer *layer = view.layer;
-
+                
                 LVTransform3D* tran = (__bridge LVTransform3D *)(userdata->object);
                 layer.transform = tran.transform;
                 
@@ -1232,9 +1284,46 @@ static int transform3D (lua_State *L) {
             }
         } else {
             CALayer *layer = view.layer.presentationLayer ?: view.layer;
-
+            
             CATransform3D t = layer.transform;
             [LVTransform3D pushTransform3D:L transform3d:t];
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+static int matrix (lua_State *L) {
+    LVUserDataInfo* user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        UIView* view = (__bridge UIView *)(user->object);
+        if ( lua_gettop(L)>=2 ) {
+            if( lua_type(L, 2)== LUA_TTABLE ) {
+                NSArray* arr = lv_luaValueToNativeObject(L, 2);
+                if( [arr isKindOfClass:[NSArray class]] ) {
+                    CGFloat a[12] = {0};
+                    for( int i=0; i<arr.count; i++ ) {
+                        NSNumber* number = arr[i];
+                        if( [number isKindOfClass:[NSNumber class]] ) {
+                            a[2+i] = number.floatValue;
+                        }
+                    }
+                    CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
+                    view.transform = t;
+                }
+            } else {
+                CGFloat a[18] = {0};
+                for( int i=2; i<=7; i++ ) {
+                    a[i] = lua_tonumber(L, i);
+                }
+                CGAffineTransform t = CGAffineTransformMake(a[2], a[3], a[4], a[5], a[6], a[7]);
+                view.transform = t;
+            }
+        } else {
+            CGAffineTransform t = view.transform;
+            NSArray* a = @[ @(t.a), @(t.b), @(t.c), @(t.d), @(t.tx), @(t.ty) ];
+            lv_pushNativeObject(L, a);
             return 1;
         }
     }
@@ -1358,6 +1447,14 @@ static int onClick (lua_State *L) {
     return lv_setCallbackByKey(L, STR_ON_CLICK, YES);
 }
 
+static int onShow (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_SHOW, NO);
+}
+
+static int onHide (lua_State *L) {
+    return lv_setCallbackByKey(L, STR_ON_HIDE, NO);
+}
+
 static void removeOnTouchEventGesture(UIView* view){
     NSArray< UIGestureRecognizer *> * gestures = view.gestureRecognizers;
     for( LVGesture* g in gestures ) {
@@ -1379,7 +1476,7 @@ static int onTouch (lua_State *L) {
         
         LVGesture* gesture = [[LVGesture alloc] init:L];
         gesture.onTouchEventCallback = ^(LVGesture* gesture, int argN){
-            [view lv_callLuaByKey1:@STR_ON_TOUCH key2:nil argN:1];
+            [view lv_callLuaCallback:@STR_ON_TOUCH key2:nil argN:1];
         };
         [view addGestureRecognizer:gesture];
     }
@@ -1409,7 +1506,7 @@ static int __tostring (lua_State *L) {
 - (void) layoutSubviews{
     [super layoutSubviews];
     [self lv_alignSubviews];
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callLuaCallback:@STR_ON_LAYOUT];
 }
 
 static int releaseObject(lua_State *L) {
@@ -1545,7 +1642,7 @@ static int invalidate (lua_State *L) {
 
 static const struct luaL_Reg baseMemberFunctions [] = {
     {"hidden",    hidden },
-    // visible
+    {"visible",    visible },
     
     {"hide",    hide },//__deprecated_msg("Use hidden")
     {"isHide",    isHide },//__deprecated_msg("Use hidden")
@@ -1606,7 +1703,9 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"removeFromSuper", removeFromSuperview },
     {"removeFromParent", removeFromSuperview }, //__deprecated_msg("Use removeFromSuper")
     {"removeAllViews", removeAllSubviews },
-    //{"bringToFront", bringToFront},
+    
+    {"bringToFront", bringToFront},
+    {"sendToBack", bringToBack},
     
     {"rotation",  rotationZ },
     {"rotationX", rotationX },
@@ -1627,8 +1726,9 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"onLayout",     onLayout },
     {"onClick",     onClick },
     {"onTouch",     onTouch },
-    // onShow
-    // onHide
+    {"onShow",     onShow },
+    {"onHide",     onHide },
+    
     // onLongClick
     
     {"hasFocus",        isFirstResponder },
@@ -1637,6 +1737,7 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     {"clearFocus",    resignFirstResponder },
     
     {"transform3D",    transform3D }, //__deprecated_msg("Use")
+    {"matrix",    matrix },
     
     {"startAnimation", startAnimation },
     {"stopAnimation", stopAnimation },
@@ -1662,7 +1763,6 @@ static const struct luaL_Reg baseMemberFunctions [] = {
     // padding
     // margin
     
-    // getNativeView
     {"getNativeView", getNativeView}, //__deprecated_msg("Use nativeView")
     {"nativeView", getNativeView},
     

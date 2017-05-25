@@ -1,30 +1,25 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:53
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("List.lua")
 
-local function start()
-    listObjs = Pickup:getInstance():render("widget/list.xml")
+local meta = object:new()
 
-    local tableView = listObjs["tableView"]
-    local header = listObjs["headerText"]
-    if (not Platform.isAndroid) then
-        -- iOS还有bug，暂时屏蔽
-        header:hide()
-    end
+function meta:onCreate(args)
+    self.views = pica:getInstance():render("widget/list.xml")
+    self.list = self.views["tableView"]
+    self.header = self.views["headerText"]
 
-    local timer = Timer()
-    timer:callback(function()
-        tableView:stopRefreshing()
-        timer:cancel()
-    end)
+    self:handle()
+end
 
-    local tableData = {
+function meta:handle()
+    self.list:initParams({
         Section = {
             SectionCount = function()
                 return 1
@@ -39,10 +34,10 @@ local function start()
             end,
             RowCell = {
                 Size = function(section, row)
-                    return Platform.contentWidth, 60
+                    return sys.contW, sys.contH/10
                 end,
                 Init = function(cell, section, row)
-                    cell.window:frame(0, 0, Platform.contentWidth, 60)
+                    cell.window:frame(0, 0, sys.contW, sys.contH/10)
                     cell.window:flexCss("flex-direction: row")
                     cell.window:backgroundColor(0xffffff)
 
@@ -54,25 +49,18 @@ local function start()
                     cell.window:flxLayout(true) -- iOS
                 end,
                 Layout = function(cell, section, row)
-                    local style = StyledString("row " .. row, { fontSize = 16, fontColor = 0x000000})
+                    local style = StyledString("row " .. row, { fontSize = 16*sys.scale, fontColor = 0x000000})
                     cell.label:text(style)
                 end
             }
         },
         Callback = {
             Scrolling = function( firstVisibleSection, firstVisibleRow, visibleCellCount )
-                header:text("Visible Items: " .. firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount)
-            end,
-            PullDown = function()
-                timer:start(3)
+                self.header:text("Visible Items: " .. firstVisibleSection * firstVisibleRow .. ", " .. firstVisibleRow + visibleCellCount - 1)
             end
         }
-    }
-
-    tableView:initParams(tableData)
-    tableView:reload()
+    })
 end
 
-Navigation:title("List.lua")
-start()
+return meta
 

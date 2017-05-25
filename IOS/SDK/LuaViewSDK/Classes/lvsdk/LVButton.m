@@ -166,7 +166,7 @@ static int title (lua_State *L) {
                 return 0;
             } else { // getValue
                 for (int j=0; j<4; j++ ){
-                    NSString* text1 = [button titleForState:g_states[j++] ];
+                    NSString* text1 = [button titleForState:g_states[j] ];
                     lua_pushstring(L, text1.UTF8String);
                 }
                 return 4;
@@ -257,22 +257,6 @@ static int fontSize (lua_State *L) {
     return 0;
 }
 
-//static int showsTouchWhenHighlighted(lua_State *L) {
-//    LVUserDataView * user = (LVUserDataView *)lua_touserdata(L, 1);
-//    if( user ){
-//        LVButton* button = (__bridge LVButton *)(user->view);
-//        if( lua_gettop(L)<=1 ) {
-//            lua_pushboolean(L, button.showsTouchWhenHighlighted );
-//            return 1;
-//        } else {
-//            BOOL yes = lua_toboolean(L, 2);
-//            button.showsTouchWhenHighlighted = yes;
-//            return 0;
-//        }
-//    }
-//    return 0;
-//}
-
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewButton globalName:globalName defaultName:@"Button"];
     
@@ -291,8 +275,6 @@ static int fontSize (lua_State *L) {
 
         {"selected",    selected}, // __deprecated_msg("Use lines")
         {"enabled",    enabled}, // __deprecated_msg("Use lines")
-        
-        //{"showsTouchWhenHighlighted",    showsTouchWhenHighlighted},
         {NULL, NULL}
     };
     

@@ -1,51 +1,54 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:53
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("PagerView.lua")
 
-local function start()
-    pvObjs = Pickup:getInstance():render("widget/pagerview.xml")
+local meta = object:new()
 
-    local autoSlider = pvObjs["pagerView1"]
-    local indicator1 = pvObjs["indicator1"]
+function meta:onCreate(args)
+    self.views = pica:getInstance():render("widget/pagerview.xml")
+    self.manualSlider = self.views["pagerView1"]
+    self.indicator1 = self.views["indicator1"]
+    self.autoSlider = self.views["pagerView2"]
+    self.indicator2 = self.views["indicator2"]
 
-    local data = {
-        PageCount = 3,
-        Pages = {
-            Init = function(page, pos)
-                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
-            end,
-            Layout = function(page, pos)
-            end
-        }
-    }
+    self.color = {0xA066D3, 0xFF7F50, 0x228B22}
 
-    autoSlider:initParams(data)
-    autoSlider:reload()
-    autoSlider:indicator(indicator1)
-
-    local manualSlider = pvObjs["pagerView2"]
-    local indicator2 = pvObjs["indicator2"]
-    local data2 = {
-        PageCount = 3,
-        Pages = {
-            Init = function(page, pos)
-                page.objs = Pickup:getInstance():render("widget/pagerview_page.xml")
-            end,
-            Layout = function(page, pos)
-            end
-        }
-    }
-    manualSlider:initParams(data2)
-    manualSlider:reload()
-    manualSlider:indicator(indicator2)
+    self:handle()
 end
 
-Navigation:title("PagerView.lua")
-start()
+function meta:handle()
+    self.manualSlider:initParams({
+        PageCount = 3,
+        Pages = {
+            Init = function(page, pos)
+                page.objs = pica:getInstance():render("widget/pagerview_page1.xml")
+            end,
+            Layout = function(page, pos)
+                page.objs["root"]:backgroundColor(self.color[pos])
+            end
+        }
+    })
+    self.manualSlider:indicator(self.indicator1)
+
+    self.autoSlider:initParams({
+        PageCount = 3,
+        Pages = {
+            Init = function(page, pos)
+                page.objs = pica:getInstance():render("widget/pagerview_page.xml")
+            end,
+            Layout = function(page, pos)
+                page.objs["root"]:backgroundColor(self.color[pos])
+            end
+        }
+    })
+    self.autoSlider:indicator(self.indicator2)
+end
+
+return meta
 

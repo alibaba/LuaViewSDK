@@ -33,7 +33,7 @@
     lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         lua_settop(L, 0);
-        [self lv_callLuaByKey1:@STR_onPageStarted];
+        [self lv_callLuaCallback:@STR_onPageStarted];
     }
 }
 
@@ -41,7 +41,7 @@
     lua_State* L = self.lv_luaviewCore.l;
     if( L && self.lv_userData ){
         lua_settop(L, 0);
-        [self lv_callLuaByKey1:@STR_onPageFinished];
+        [self lv_callLuaCallback:@STR_onPageFinished];
     }
 }
 
@@ -55,7 +55,7 @@
         lua_pushnumber(L, errorCode);
         lua_pushstring(L, errorInfo.UTF8String);
         lua_pushstring(L, url.UTF8String);
-        [self lv_callLuaByKey1:@STR_onReceivedError key2:nil argN:3];
+        [self lv_callLuaCallback:@STR_onReceivedError key2:nil argN:3];
     }
 }
 

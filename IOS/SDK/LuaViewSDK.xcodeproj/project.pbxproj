@@ -225,6 +225,8 @@
 		91695AB81E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91695AB61E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.h */; };
 		91695AB91E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
 		91695ABA1E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91695AB71E1222DD0088EFD6 /* LVEmptyRefreshCollectionView.m */; };
+		9190C01A1EA868670051E919 /* LVBitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9190C0181EA868670051E919 /* LVBitmap.h */; };
+		9190C01B1EA868670051E919 /* LVBitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 9190C0191EA868670051E919 /* LVBitmap.m */; };
 		91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91A8CFFA1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
 		91A8CFFB1E1F649F006D1609 /* LVPkgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */; };
@@ -293,7 +295,6 @@
 		3CC1B5511C96B59D001DEEC0 /* LVZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVZipArchive.h; path = PKG/LVZipArchive.h; sourceTree = "<group>"; };
 		3CC1B5521C96B59D001DEEC0 /* LVZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVZipArchive.m; path = PKG/LVZipArchive.m; sourceTree = "<group>"; };
 		3CFF77A91C7473A800847C05 /* libLuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLuaViewLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8405078B1ADF8F7300906BAC /* podinstall.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = podinstall.text; sourceTree = "<group>"; };
 		84056E701B5CA5990078F9D6 /* LVCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCustomPanel.h; sourceTree = "<group>"; };
 		84056E711B5CA5990078F9D6 /* LVCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCustomPanel.m; sourceTree = "<group>"; };
 		840AD5311A5EAB4A0075CB58 /* LView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LView.h; path = ../LView.h; sourceTree = "<group>"; };
@@ -351,8 +352,6 @@
 		846481BB1A64C61F00DE6204 /* LVTransform3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVTransform3D.m; sourceTree = "<group>"; };
 		846481BC1A64C61F00DE6204 /* LVUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVUtil.h; sourceTree = "<group>"; };
 		846481BD1A64C61F00DE6204 /* LVUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVUtil.m; sourceTree = "<group>"; };
-		846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Lua中文教程.pdf"; sourceTree = "<group>"; };
-		846481E41A64F0EB00DE6204 /* lua源码分析.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "lua源码分析.pdf"; sourceTree = "<group>"; };
 		8468C96F1BDA177C002D4B1E /* LVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVToast.h; sourceTree = "<group>"; };
 		8468C9701BDA177C002D4B1E /* LVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVToast.m; sourceTree = "<group>"; };
 		846E87991A653DEC000D14DA /* LVDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVDate.h; sourceTree = "<group>"; };
@@ -440,6 +439,8 @@
 		91882E8F1AAD934D00107DFC /* LVRotationGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVRotationGesture.m; sourceTree = "<group>"; };
 		918B9F1B1AADA0AC00FC7283 /* LVSwipeGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVSwipeGesture.h; sourceTree = "<group>"; };
 		918B9F1C1AADA0AC00FC7283 /* LVSwipeGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVSwipeGesture.m; sourceTree = "<group>"; };
+		9190C0181EA868670051E919 /* LVBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVBitmap.h; sourceTree = "<group>"; };
+		9190C0191EA868670051E919 /* LVBitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVBitmap.m; sourceTree = "<group>"; };
 		91A8CFF71E1F649F006D1609 /* LVPkgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVPkgInfo.h; path = PKG/LVPkgInfo.h; sourceTree = "<group>"; };
 		91A8CFF81E1F649F006D1609 /* LVPkgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVPkgInfo.m; path = PKG/LVPkgInfo.m; sourceTree = "<group>"; };
 		91ACCE751AC531160034D9B3 /* LVDebuger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDebuger.h; path = lvdebug/LVDebuger.h; sourceTree = "<group>"; };
@@ -534,6 +535,8 @@
 				846481AB1A64C61F00DE6204 /* LVButton.m */,
 				846481AE1A64C61F00DE6204 /* LVImage.h */,
 				846481AF1A64C61F00DE6204 /* LVImage.m */,
+				9190C0181EA868670051E919 /* LVBitmap.h */,
+				9190C0191EA868670051E919 /* LVBitmap.m */,
 				91232AAA1DAB67FC00536E0C /* LVWebView.h */,
 				91232AAB1DAB67FC00536E0C /* LVWebView.m */,
 				8446F15B1BDF57F2007E4064 /* LVNinePatchImage.h */,
@@ -679,16 +682,6 @@
 			path = lvsdk;
 			sourceTree = "<group>";
 		};
-		846481E21A64F0EB00DE6204 /* Documentation */ = {
-			isa = PBXGroup;
-			children = (
-				846481E31A64F0EB00DE6204 /* Lua中文教程.pdf */,
-				846481E41A64F0EB00DE6204 /* lua源码分析.pdf */,
-				8405078B1ADF8F7300906BAC /* podinstall.text */,
-			);
-			path = Documentation;
-			sourceTree = "<group>";
-		};
 		848B5C151A0A4CA000F59678 = {
 			isa = PBXGroup;
 			children = (
@@ -696,7 +689,6 @@
 				848B5C1F1A0A4CA000F59678 /* Products */,
 				84C1D88F1C16CA540058E974 /* Dummy */,
 				8DF50822C3B250E24CAD9EC1 /* Frameworks */,
-				846481E21A64F0EB00DE6204 /* Documentation */,
 				CD0201B0E7FEAFF3C6E6611A /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -1017,6 +1009,7 @@
 				84C1D8691C16C44D0058E974 /* LVNativeObjBox.h in Headers */,
 				84C1D86A1C16C44E0058E974 /* LVLuaObjBox.h in Headers */,
 				84C1D86B1C16C44E0058E974 /* LVPointerValueBox.h in Headers */,
+				9190C01A1EA868670051E919 /* LVBitmap.h in Headers */,
 				84C1D86C1C16C44E0058E974 /* LVUtil.h in Headers */,
 				84C1D86D1C16C44E0058E974 /* LVTypeConvert.h in Headers */,
 				84C1D86E1C16C44E0058E974 /* LVExGlobalFunc.h in Headers */,
@@ -1287,6 +1280,7 @@
 				914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */,
 				3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */,
 				84C1D7E71C16C3FA0058E974 /* LVPagerView.m in Sources */,
+				9190C01B1EA868670051E919 /* LVBitmap.m in Sources */,
 				91F678851DF520920042D6FC /* LVCustomView.m in Sources */,
 				91695AAA1E11004B0088EFD6 /* UIScrollView+LVRefresh.m in Sources */,
 				84C1D7E81C16C3FA0058E974 /* LVPagerViewCell.m in Sources */,

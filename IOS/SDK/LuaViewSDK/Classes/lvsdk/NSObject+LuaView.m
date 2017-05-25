@@ -25,11 +25,11 @@
 - (void) setLv_userData:(LVUserDataInfo *)userData{
 }
 
-- (void) lv_callLuaByKey1:(NSString*) key1{
-    [self lv_callLuaByKey1:key1 key2:nil argN:0];
+- (void) lv_callLuaCallback:(NSString*) key1{
+    [self lv_callLuaCallback:key1 key2:nil argN:0];
 }
 
-- (void) lv_callLuaByKey1:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
+- (void) lv_callLuaCallback:(NSString*) key1 key2:(NSString*) key2 argN:(int)argN{
     lua_State* l = self.lv_luaviewCore.l;
     if( l && self.lv_userData && key1){
         lua_checkstack32(l);
@@ -47,7 +47,7 @@
     }
 }
 
--(NSString*) lv_callLua:(NSString*) functionName args:(NSArray*) args{
+-(NSString*) lv_callLuaFunc:(NSString*) functionName args:(NSArray*) args{
     lua_State* L = self.lv_luaviewCore.l;
     if( L ){
         lua_checkstack(L, (int)args.count*2 + 2);

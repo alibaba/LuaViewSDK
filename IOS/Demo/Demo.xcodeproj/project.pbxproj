@@ -29,6 +29,7 @@
 		3CC2F90E1C70758700D1E0B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */; };
 		3CC2F9101C70758B00D1E0B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */; };
 		3CC2F9121C70759100D1E0B7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC2F9111C70759100D1E0B7 /* libz.tbd */; };
+		9113AE261EA9E96E000302C1 /* demoZZ_matrix.lua in Resources */ = {isa = PBXBuildFile; fileRef = 9113AE251EA9E96E000302C1 /* demoZZ_matrix.lua */; };
 		913C34DF1E88F34200409378 /* animate1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A61E88F34200409378 /* animate1.jpg */; };
 		913C34E01E88F34200409378 /* bt_catebrand_more.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A71E88F34200409378 /* bt_catebrand_more.9.png */; };
 		913C34E11E88F34200409378 /* button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34A81E88F34200409378 /* button0.png */; };
@@ -87,6 +88,7 @@
 		913C35161E88F34200409378 /* tags.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DD1E88F34200409378 /* tags.9.png */; };
 		913C35171E88F34200409378 /* tags2.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 913C34DE1E88F34200409378 /* tags2.9.png */; };
 		913C351A1E88F35000409378 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913C35191E88F35000409378 /* ViewController.m */; };
+		9190C01D1EA8D0FF0051E919 /* demoB_Bitmap.lua in Resources */ = {isa = PBXBuildFile; fileRef = 9190C01C1EA8D0FF0051E919 /* demoB_Bitmap.lua */; };
 		DC3E58DF90755933412DC0A4 /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A299A541C820B23BCC7BCA /* libPods-Demo.a */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +137,7 @@
 		3CC2F90D1C70758700D1E0B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CC2F90F1C70758B00D1E0B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CC2F9111C70759100D1E0B7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9113AE251EA9E96E000302C1 /* demoZZ_matrix.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoZZ_matrix.lua; path = lua/demoZZ_matrix.lua; sourceTree = "<group>"; };
 		913C34A61E88F34200409378 /* animate1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = animate1.jpg; path = lua/animate1.jpg; sourceTree = "<group>"; };
 		913C34A71E88F34200409378 /* bt_catebrand_more.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bt_catebrand_more.9.png; path = lua/bt_catebrand_more.9.png; sourceTree = "<group>"; };
 		913C34A81E88F34200409378 /* button0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button0.png; path = lua/button0.png; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 		913C34DE1E88F34200409378 /* tags2.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tags2.9.png; path = lua/tags2.9.png; sourceTree = "<group>"; };
 		913C35181E88F35000409378 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		913C35191E88F35000409378 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9190C01C1EA8D0FF0051E919 /* demoB_Bitmap.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demoB_Bitmap.lua; path = lua/demoB_Bitmap.lua; sourceTree = "<group>"; };
 		E3A299A541C820B23BCC7BCA /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -321,6 +325,7 @@
 				913C34AE1E88F34200409378 /* demoA_Image.lua */,
 				913C34AF1E88F34200409378 /* demoA_ImageAnimate.lua */,
 				913C34B01E88F34200409378 /* demoA_ViewChildren.lua */,
+				9190C01C1EA8D0FF0051E919 /* demoB_Bitmap.lua */,
 				913C34B11E88F34200409378 /* demoC_Label.lua */,
 				913C34B21E88F34200409378 /* demoC2_IconFontLabel.lua */,
 				913C34B31E88F34200409378 /* demoD_requestFromHttp.lua */,
@@ -355,6 +360,7 @@
 				913C34D01E88F34200409378 /* demoZ1_luabox.lua */,
 				913C34D11E88F34200409378 /* demoZ2_callOC.lua */,
 				913C34D21E88F34200409378 /* demoZB1_Animator.lua */,
+				9113AE251EA9E96E000302C1 /* demoZZ_matrix.lua */,
 				913C34D31E88F34200409378 /* img1.tiff */,
 				913C34D41E88F34200409378 /* img4.tiff */,
 				913C34D51E88F34200409378 /* img7.tiff */,
@@ -485,6 +491,7 @@
 				3CC2F8D01C706BFA00D1E0B7 /* line.png in Resources */,
 				913C34EF1E88F34200409378 /* demoH2_EmptyRefreshCollectionView.lua in Resources */,
 				913C35021E88F34200409378 /* demoW2_AudioPlayer.lua in Resources */,
+				9113AE261EA9E96E000302C1 /* demoZZ_matrix.lua in Resources */,
 				913C35131E88F34200409378 /* lv_kit.lua in Resources */,
 				913C34E11E88F34200409378 /* button0.png in Resources */,
 				913C350F1E88F34200409378 /* img10.tiff in Resources */,
@@ -520,6 +527,7 @@
 				913C350E1E88F34200409378 /* img7.tiff in Resources */,
 				913C350D1E88F34200409378 /* img4.tiff in Resources */,
 				913C34E51E88F34200409378 /* demoA_FlexBox.lua in Resources */,
+				9190C01D1EA8D0FF0051E919 /* demoB_Bitmap.lua in Resources */,
 				3CC2F8CD1C706BFA00D1E0B7 /* enter11.png in Resources */,
 				913C35171E88F34200409378 /* tags2.9.png in Resources */,
 				913C34EC1E88F34200409378 /* demoD_requestFromHttp.lua in Resources */,

@@ -1,0 +1,12 @@
+<View frame="0, 0, sys.contW, sys.contH" bg="0xffffff" >
+    <View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column', flex=1}">
+        <View css="{flex-direction='row', height=sys.contH*0.12}">
+            <View css="{flex-direction='column', flex=5, margin=10}">
+                <Input id="input" css="{flex=1}" hint="Input Keyword.." text="LuaView"></Input>
+            </View>
+            <Button id="go" css="{flex=2, margin=10}" bg="0xffffff" borderWidth="1" title="Search" borderColor="0x000000" corner="10"></Button>
+        </View>
+        <List id="tableView" css="{flex=8}" bg="0xeeeeee"></List>
+    </View>
+    <Load id="loading" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8" color="0xF06292"></Load>
+</View>

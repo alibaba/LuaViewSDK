@@ -217,7 +217,7 @@ static inline NSInteger unmapPageIdx(NSInteger pageIdx){
     [self moveCenter];
     [self checkCellVisible];
     
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callLuaCallback:@STR_ON_LAYOUT];
 }
 
 -(void) dealloc{
@@ -602,10 +602,22 @@ static int __gc (lua_State *L) {
     return 0;
 }
 
+static int initParams (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        LVPagerView* pageView = (__bridge LVPagerView *)(user->object);
+        int ret =  lv_setCallbackByKey(L, nil, NO);
+        [pageView reloadDataASync];
+        return ret;
+    }
+    return 0;
+}
+
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     [LVUtil reg:L clas:self cfunc:lvNewPagerView globalName:globalName defaultName:@"PagerView"];
     
     const struct luaL_Reg memberFunctions [] = {
+        {"initParams",   initParams },// 回调
         {"reload",    reload},
         {"showScrollBar",     showScrollBar },
         {"currentPage",     setCurrentPage },
@@ -694,10 +706,10 @@ static int __gc (lua_State *L) {
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.isScrollEndTimes = 0;
-    [self lv_callLuaByKey1:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
+    [self lv_callLuaCallback:@STR_CALLBACK key2:@"ScrollBegin" argN:0];
 }
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    //[self lv_callLuaByKey1:@STR_CALLBACK key2:@"BeginDecelerating"];
+    //[self lv_callLuaCallback:@STR_CALLBACK key2:@"BeginDecelerating"];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

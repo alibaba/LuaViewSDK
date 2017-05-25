@@ -39,6 +39,10 @@
         
         self.alwaysBounceVertical = YES; // 垂直总是有弹性动画
         self.scrollsToTop = NO;
+        
+        // 默认行间距都是0
+        self.lvflowLayout.minimumLineSpacing = 0;
+        self.lvflowLayout.minimumInteritemSpacing = 0;
     }
     return self;
 }
@@ -66,7 +70,7 @@
     if ( self.lv_luaviewCore.l ) {
         lua_settop(self.lv_luaviewCore.l, 0);
     }
-    [self lv_callLuaByKey1:@STR_ON_LAYOUT];
+    [self lv_callLuaCallback:@STR_ON_LAYOUT];
 }
 
 // 重载以实现可能的定制需求, contentOffset
@@ -236,11 +240,24 @@ static int scrollToTop(lua_State *L) {
     return @"CollectionView";
 }
 
+static int initParams (lua_State *L) {
+    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if( user ){
+        LVCollectionView* tableView = (__bridge LVCollectionView *)(user->object);
+        //reload接口异步拉起，确保layout中也能调用reload
+        int ret =  lv_setCallbackByKey(L, nil, NO);
+        [tableView reloadDataASync];
+        return ret;
+    }
+    return 0;
+}
+
 +(int) lvClassDefine:(lua_State *)L globalName:(NSString*) globalName{
     
     [LVUtil reg:L clas:self cfunc:lvNewCollectionView globalName:globalName defaultName:[self globalName]];
     
     const struct luaL_Reg memberFunctions [] = {
+        {"initParams",   initParams },
         // refreshEnable // IOS 为实现
         {"reload",    reload},// 安卓支持section row
         

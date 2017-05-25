@@ -287,6 +287,16 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
                 mPinnedContainer.setTranslationY(0);
             }
         }
+
+        // Fix bug: 解决调用scrollToPositionWithOffset()方法时,吸顶容器没有被绘制的问题。
+        if (mPinnedContainer != null) {
+            mPinnedContainer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPinnedContainer.requestLayout();
+                }
+            }, 1);
+        }
     }
 
     /**

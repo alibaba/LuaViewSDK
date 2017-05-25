@@ -1,16 +1,17 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:52
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("Image.lua")
 
-local function start()
-    Pickup:getInstance():render("widget/image.xml")
+local meta = object:new()
+
+function meta:onCreate(args)
+    self.views = pica:getInstance():render("widget/image.xml")
 end
 
-Navigation:title("Image.lua")
-start()
+return meta

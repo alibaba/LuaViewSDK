@@ -66,6 +66,7 @@
 #import "LVPagerView.h"
 #import "LVCanvas.h"
 #import "LVEvent.h"
+#import "LVBitmap.h"
 
 @interface LuaViewCore ()
 @property (nonatomic,strong) id mySelf;
@@ -102,7 +103,9 @@
 }
 
 -(void) dealloc{
+#ifdef DEBUG
     [self.debugConnection closeAll];
+#endif
 }
 
 #pragma mark - run
@@ -153,6 +156,8 @@
     return ret;
 }
 
+
+#ifdef DEBUG
 -(void) checkDebugOrNot:(const char*) chars length:(NSInteger) len fileName:(NSString*) fileName {
     if( self.debugConnection.printToServer ){
         NSMutableData* data = [[NSMutableData alloc] init];
@@ -161,6 +166,7 @@
         [self.debugConnection sendCmd:@"loadfile" fileName:fileName info:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     }
 }
+#endif
 
 - (NSString*)loadFile:(NSString *)fileName {
     NSData* code = [self.bundle scriptWithName:fileName];
@@ -247,6 +253,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
                 [LVBaseView class],
                 [LVButton class],
                 [LVImage class],
+                [LVBitmap class],
                 [LVWebView class],
                 [LVLabel class],
                 [LVScrollView class],

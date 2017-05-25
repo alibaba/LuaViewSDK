@@ -1,0 +1,4 @@
+<View id="root" frame="0, 0, sys.contW, sys.contH">
+    <Pull id="tableView" frame="0, 0, sys.contW, sys.contH" bg="0xeeeeee"></Pull>
+    <Load id="loading" color="0xF06292" frame="0, sys.contH/2 - sys.contW/8, sys.contW, sys.contW/8"></Load>
+</View>

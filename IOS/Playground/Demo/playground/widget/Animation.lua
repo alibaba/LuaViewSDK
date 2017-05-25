@@ -1,37 +1,53 @@
 --
--- Created by IntelliJ IDEA.
+-- Copyright 2017 Alibaba Group
+-- License: MIT
+-- Website: https://alibaba.github.io/LuaViewSDK
 -- User: tuoli
--- Date: 17/2/28
--- Time: 16:53
--- To change this template use File | Settings | File Templates.
+-- Date: 17/3/30
 --
 
-require("kit.pickup")
+Navigation:title("Animation.lua")
 
-local function start()
-    aniObjs = Pickup:getInstance():render("widget/animation.xml")
+local meta = object:new()
 
-    local img = aniObjs["img"]
+function meta:onCreate(args)
+    self.views = pica:getInstance():render("widget/animation.xml")
+    self.spirit = self.views["img"]
+    self.translateBtn = self.views["translateBtn"]
+    self.scaleBtn = self.views["scaleBtn"]
+    self.alphaBtn = self.views["alphaBtn"]
+    self.resetBtn = self.views["resetBtn"]
+    self.allBtn = self.views["allBtn"]
 
-    local button1 = aniObjs["button1"]
-    button1:callback(function()
-        local translate = Animation():translation(200, 50):duration(1)
-        translate:with(img):start()
+    self:handle()
+end
+
+function meta:handle()
+    self.translateBtn:onClick(function()
+        local translate = Animation():translation(sys.contW/2, sys.contW/2):duration(1)
+        translate:with(self.spirit):start()
     end)
-
-    local button2 = aniObjs["button2"]
-    button2:callback(function()
+    self.scaleBtn:onClick(function()
         local scale = Animation():scale(0.5, 0.5):duration(1)
-        scale:with(img):start()
+        scale:with(self.spirit):start()
     end)
-
-    local button3 = aniObjs["button3"]
-    button3:callback(function()
+    self.alphaBtn:onClick(function()
         local alpha = Animation():alpha(0.3):duration(1)
-        alpha:with(img):start()
+        alpha:with(self.spirit):start()
+    end)
+    self.allBtn:onClick(function()
+        local translate = Animation():translation(sys.contW/2, sys.contW/2):duration(1)
+        local scale = Animation():scale(0.5, 0.5):duration(1)
+        local alpha = Animation():alpha(0.3):duration(1)
+        alpha:with(self.spirit):start()
+        scale:with(self.spirit):start()
+        translate:with(self.spirit):start()
+    end)
+    self.resetBtn:onClick(function()
+        self.spirit:translation(0, 0)
+        self.spirit:scale(1, 1)
+        self.spirit:alpha(1)
     end)
 end
 
-Navigation:title("Animation.lua")
-start()
-
+return meta

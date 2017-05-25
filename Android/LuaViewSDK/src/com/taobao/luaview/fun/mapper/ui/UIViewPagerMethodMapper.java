@@ -199,4 +199,11 @@ public class UIViewPagerMethodMapper<U extends UDViewPager> extends UIViewGroupM
     public LuaValue isLooping(U view, Varargs varargs) {
         return valueOf(view.isLooping());
     }
+
+    @Override
+    public Varargs initParams(U view, Varargs varargs) {
+        Varargs ret = super.initParams(view, varargs);
+        this.reload(view, varargs);
+        return ret;
+    }
 }

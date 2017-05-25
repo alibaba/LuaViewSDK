@@ -379,7 +379,7 @@ public class UIViewMethodMapper<U extends UDView> extends BaseMethodMapper<U> {
      * @param varargs
      * @return
      */
-    @Deprecated
+//    @Deprecated
     public Varargs initParams(U view, Varargs varargs) {
         if (varargs.narg() > 1) {
             return setInitParams(view, varargs);

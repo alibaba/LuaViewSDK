@@ -139,5 +139,11 @@ public class UIRefreshRecyclerViewMethodMapper<U extends UDRefreshRecyclerView> 
         return view.stopPullDownRefreshing();
     }
 
+    @Override
+    public Varargs initParams(U view, Varargs varargs) {
+        Varargs ret = super.initParams(view, varargs);
+        this.reload(view, varargs);
+        return ret;
+    }
 
 }
