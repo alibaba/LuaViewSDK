@@ -48,7 +48,7 @@ LuaViewSDK is a cross-platform framework which is designed to build native, dyna
 
 [Github Wiki](https://github.com/alibaba/LuaViewSDK/wiki)
 
-QQ group：539262083
+QQ group：539262083 
 
 Twitter：[@luaview](https://twitter.com/luaview)
 
