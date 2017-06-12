@@ -1,1 +1,1 @@
-include ':LuaViewDemo', ':LuaViewSDK', ':Playground', ':LuaViewExt'
+include ':LuaViewDemo', ':LuaViewSDK'
