@@ -12,6 +12,7 @@ import com.taobao.luaview.fun.mapper.LuaViewLib;
 import com.taobao.luaview.userdata.ui.UDEditText;
 import com.taobao.luaview.util.LuaViewUtil;
 
+import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 
@@ -29,7 +30,8 @@ public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMeth
     private static final String TAG = "UIEditTextMethodMapper";
     private static final String[] sMethods = new String[]{
             "hint",//0
-            "placeholder"//1
+            "placeholder",//1
+            "inputType"//2
     };
 
     @Override
@@ -45,12 +47,33 @@ public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMeth
                 return hint(target, varargs);
             case 1:
                 return placeholder(target, varargs);
+            case 2:
+                return inputType(target, varargs);
         }
         return super.invoke(code, target, varargs);
     }
 
     //--------------------------------------- API --------------------------------------------------
 
+    /**
+     * 键盘类型
+     */
+    public LuaValue inputType(U view, Varargs varargs) {
+        if (varargs.narg() > 1) {
+            return setInputType(view, varargs);
+        } else {
+            return getInputType(view, varargs);
+        }
+    }
+
+    public LuaValue setInputType(U view, Varargs varargs) {
+        final CharSequence type = LuaViewUtil.getText(varargs.optvalue(2, NIL));
+        return view.setInputType(type);
+    }
+
+    public LuaValue getInputType(U view, Varargs varargs) {
+        return null;
+    }
 
     /**
      * 获取placeHolder内容

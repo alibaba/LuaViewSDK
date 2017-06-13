@@ -9,6 +9,7 @@
 package com.taobao.luaview.userdata.ui;
 
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
@@ -28,6 +29,20 @@ public class UDEditText extends UDTextView<EditText> {
 
     public UDEditText(EditText view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
+    }
+
+    public UDEditText setInputType(CharSequence text) {
+        EditText view = getView();
+        if (view != null) {
+            if (text.equals("number")) {
+                view.setInputType(InputType.TYPE_CLASS_NUMBER);
+            } else if(text.equals("password")) {
+                view.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                view.setInputType(InputType.TYPE_CLASS_TEXT);
+            }
+        }
+        return this;
     }
 
     /**
