@@ -72,7 +72,7 @@ public class UIEditTextMethodMapper<U extends UDEditText> extends UITextViewMeth
     }
 
     public LuaValue getInputType(U view, Varargs varargs) {
-        return null;
+        return valueOf(view.getInputType());
     }
 
     /**

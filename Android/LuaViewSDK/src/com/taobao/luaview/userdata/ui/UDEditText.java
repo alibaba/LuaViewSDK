@@ -27,6 +27,8 @@ import org.luaj.vm2.Varargs;
  */
 public class UDEditText extends UDTextView<EditText> {
 
+    private String mType = "text";
+
     public UDEditText(EditText view, Globals globals, LuaValue metatable, Varargs initParams) {
         super(view, globals, metatable, initParams);
     }
@@ -36,13 +38,23 @@ public class UDEditText extends UDTextView<EditText> {
         if (view != null) {
             if (text.equals("number")) {
                 view.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mType = "number";
             } else if(text.equals("password")) {
                 view.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mType = "password";
+            } else if(text.equals("visible_password")) {
+                view.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                mType = "visible_password";
             } else {
                 view.setInputType(InputType.TYPE_CLASS_TEXT);
+                mType = "text";
             }
         }
         return this;
+    }
+
+    public String getInputType() {
+        return mType;
     }
 
     /**
