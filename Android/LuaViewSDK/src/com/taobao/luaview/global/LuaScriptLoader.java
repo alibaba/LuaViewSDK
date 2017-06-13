@@ -45,6 +45,12 @@ public class LuaScriptLoader {
         void onScriptLoaded(final ScriptBundle bundle);//脚本加载
     }
 
+    public interface ScriptLoaderCallback2 extends ScriptLoaderCallback {
+        void onScriptDownloadStart();//下载开始
+
+        void onScriptDownloadEnd(final ScriptBundle bundle);//包内设置的脚本加载
+    }
+
     /**
      * 脚本运行回调
      */
@@ -72,6 +78,26 @@ public class LuaScriptLoader {
          * @param executedSuccess
          */
         void onScriptExecuted(String uri, boolean executedSuccess);
+    }
+
+    /**
+     * 脚本运行回调
+     */
+    public interface ScriptExecuteCallback2 extends ScriptExecuteCallback {
+
+        /**
+         * 脚本下载开始
+         */
+        void onScriptDownloadStart();
+
+        /**
+         * 脚本下载完毕
+         *
+         * @param bundle
+         * @return
+         */
+        void onScriptDownloadEnd(ScriptBundle bundle);
+
     }
 
     //-----------------------------------------static methods---------------------------------------
@@ -128,7 +154,6 @@ public class LuaScriptLoader {
     public void load(final String url, final String sha256, final ScriptLoaderCallback callback) {
         new ScriptBundleUltimateLoadTask(mContext, callback).load(url, sha256);
     }
-
 
     //--------------------------------preload script------------------------------------------------
 

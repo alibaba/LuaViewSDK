@@ -181,12 +181,35 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         return loadUrl(url, sha256, null);
     }
 
+
+    /**
+     * load url
+     *
+     * @param url
+     * @param sha256
+     * @param callback
+     * @return
+     */
     public LuaViewCore loadUrl(final String url, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
         updateUri(url);
         if (!TextUtils.isEmpty(url)) {
-            new LuaScriptLoader(mContext).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback() {
+            new LuaScriptLoader(mContext).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback2() {
                 @Override
-                public void onScriptLoaded(ScriptBundle bundle) {
+                public void onScriptDownloadStart() {//下载开始，不一定会调用，存在调用失败的情况
+                    if (callback instanceof LuaScriptLoader.ScriptExecuteCallback2) {
+                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onScriptDownloadStart();
+                    }
+                }
+
+                @Override
+                public void onScriptDownloadEnd(ScriptBundle bundle) {//下载完成，不一定会调用，如果调用的话，且packageName不为空的话，则onScriptLoaded加载的是Asset预置脚本
+                    if (callback instanceof LuaScriptLoader.ScriptExecuteCallback2) {
+                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onScriptDownloadEnd(bundle);
+                    }
+                }
+
+                @Override
+                public void onScriptLoaded(ScriptBundle bundle) {//脚本本地 or Asset or 网络 准备成功
                     if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备完成，且不第三方自己执行
                         loadScriptBundle(bundle, callback);
                     } else if (callback != null) {
