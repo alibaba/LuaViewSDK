@@ -26,7 +26,7 @@ import java.io.File;
  */
 public class LuaScriptManager {
     private static String BASE_FILECACHE_PATH;
-    private static String BASE_PREDOWNLOAD_FILECACHE_PATH;
+    private static String BASE_PREDOWNLOAD_FILECACHE_PATH;//预下载都使用data/data目录
     //folders
     private static final String PACKAGE_NAME_DEFAULT = "luaview";
     public static final String FOLDER_SCRIPT = "script";
