@@ -25,8 +25,8 @@ import java.io.File;
  * @date 15/11/9
  */
 public class LuaScriptManager {
-    private static String PACKAGE_NAME;
     private static String BASE_FILECACHE_PATH;
+    private static String BASE_PREDOWNLOAD_FILECACHE_PATH;
     //folders
     private static final String PACKAGE_NAME_DEFAULT = "luaview";
     public static final String FOLDER_SCRIPT = "script";
@@ -57,9 +57,15 @@ public class LuaScriptManager {
                 initInternalFilePath(context);
             } else {//测试环境优先使用sd卡路径
                 if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//                    PACKAGE_NAME = context.getPackageName();//改成luaview
-                    PACKAGE_NAME = PACKAGE_NAME_DEFAULT;
                     BASE_FILECACHE_PATH = context.getExternalCacheDir() + File.separator;
+
+                    //base predownload path
+                    final File file = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
+                    if(file != null) {
+                        BASE_PREDOWNLOAD_FILECACHE_PATH = file.getPath() + File.separator;
+                    } else {
+                        BASE_PREDOWNLOAD_FILECACHE_PATH = context.getCacheDir() + File.separator;
+                    }
                 } else {
                     initInternalFilePath(context);
                 }
@@ -75,14 +81,13 @@ public class LuaScriptManager {
     private static void initInternalFilePath(Context context) {
         final File dir = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
         if (dir != null) {//优先存在 data/data/packagename/luaview
-            PACKAGE_NAME = PACKAGE_NAME_DEFAULT;
             BASE_FILECACHE_PATH = dir.getPath() + File.separator;
         } else {
-            PACKAGE_NAME = PACKAGE_NAME_DEFAULT;
             BASE_FILECACHE_PATH = context.getCacheDir() + File.separator;
         }
-    }
 
+        BASE_PREDOWNLOAD_FILECACHE_PATH = BASE_FILECACHE_PATH;
+    }
     //--------------------------------static methods for get file path------------------------------
 
     /**
@@ -91,7 +96,7 @@ public class LuaScriptManager {
      * @return
      */
     public static String getBaseFilePath() {
-        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator;
+        return BASE_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator;
     }
 
     /**
@@ -100,7 +105,7 @@ public class LuaScriptManager {
      * @return
      */
     public static String getBaseScriptFolderPath() {
-        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator + FOLDER_SCRIPT + File.separator;
+        return BASE_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator + FOLDER_SCRIPT + File.separator;
     }
 
     /**
@@ -109,7 +114,7 @@ public class LuaScriptManager {
      * @return
      */
     public static String getBasePredownloadFolderPath() {
-        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator + FOLDER_PRE_DOWNLOAD + File.separator;
+        return BASE_PREDOWNLOAD_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator + FOLDER_PRE_DOWNLOAD + File.separator;
     }
 
     /**
