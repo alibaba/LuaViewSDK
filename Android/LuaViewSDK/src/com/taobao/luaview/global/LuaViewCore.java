@@ -510,6 +510,12 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         return null;
     }
 
+    public void setUri(String uri) {
+        if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
+            mGlobals.getLuaResourceFinder().setUri(uri);
+        }
+    }
+
     public Globals getGlobals() {
         return mGlobals;
     }
