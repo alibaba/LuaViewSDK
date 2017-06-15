@@ -18,8 +18,10 @@ public class SdkVersion {
 
     public static final String V_051 = "0.5.1";
 
+    public static final String V_052 = "0.5.2";
+
     public static String getCurrent() {
-        return V_051;
+        return V_052;
     }
 
     /**
