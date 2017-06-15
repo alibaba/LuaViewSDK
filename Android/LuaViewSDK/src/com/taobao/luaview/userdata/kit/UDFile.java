@@ -20,6 +20,7 @@ import com.taobao.luaview.util.FileUtil;
 import com.taobao.luaview.util.LuaUtil;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
@@ -64,7 +65,15 @@ public class UDFile extends BaseLuaTable {
                     byte[] data = null;
                     if (LuaUtil.isString(param1)) {
                         name = param1.optjstring(null);
-                        data = param2 instanceof UDData ? ((UDData) param2).bytes() : null;
+
+                        if (param2 instanceof UDData) {
+                            data = ((UDData) param2).bytes();
+                        } else if (param2 instanceof LuaString) {
+                            data = ((LuaString) param2).m_bytes;
+                        } else if (param2 instanceof CharSequence) {
+                            data = param2.toString().getBytes();
+                        }
+
                     } else if (param1 instanceof UDData) {
                         data = ((UDData) param1).bytes();
                         name = param2.optjstring(null);
