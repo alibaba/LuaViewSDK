@@ -159,7 +159,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
 
     public LuaViewCore load(final String urlOrFileOrScript, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (!TextUtils.isEmpty(urlOrFileOrScript)) {
-            if (URLUtil.isNetworkUrl(urlOrFileOrScript)) {//url, http:// or https://
+            if (URLUtil.isNetworkUrl(urlOrFileOrScript) || URLUtil.isAssetUrl(urlOrFileOrScript)) {//url, http:// or https:// or asset://
                 loadUrl(urlOrFileOrScript, sha256, callback);
             } else {
                 loadFile(urlOrFileOrScript, callback);

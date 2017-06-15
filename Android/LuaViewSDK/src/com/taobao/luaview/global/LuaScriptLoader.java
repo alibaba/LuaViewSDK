@@ -154,6 +154,7 @@ public class LuaScriptLoader {
     public void load(final String url, final String sha256, final ScriptLoaderCallback callback) {
         new ScriptBundleUltimateLoadTask(mContext, callback).load(url, sha256);
     }
+    
 
     //--------------------------------preload script------------------------------------------------
 

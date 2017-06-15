@@ -10,6 +10,7 @@ package com.taobao.luaview.scriptbundle.asynctask;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.webkit.URLUtil;
 
 import com.taobao.luaview.cache.AppCache;
 import com.taobao.luaview.global.LuaScriptLoader;
@@ -18,6 +19,7 @@ import com.taobao.luaview.scriptbundle.ScriptBundle;
 import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleDownloadDelegate;
 import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleLoadDelegate;
 import com.taobao.luaview.scriptbundle.asynctask.delegate.ScriptBundleUnpackDelegate;
+import com.taobao.luaview.util.AssetUtil;
 import com.taobao.luaview.util.DebugUtil;
 import com.taobao.luaview.util.FileUtil;
 
@@ -64,36 +66,40 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
     public ScriptBundle doInBackground(String... params) {
         DebugUtil.tsi("luaviewp-ScriptBundleUltimateLoadTask");
 
-        final String url = params[0];
-        final String destFolderPath = LuaScriptManager.buildScriptBundleFolderPath(url);
+        final String urlOrAssetPath = params[0];
+        final String destFolderPath = LuaScriptManager.buildScriptBundleFolderPath(urlOrAssetPath);
         final String sha256 = params.length > 1 ? params[1] : null;
 
         ScriptBundle scriptBundle = null;
 
-        if (LuaScriptManager.existsScriptBundle(url)) {//读取并加载，之前的脚本
-            scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(url);
+        if (LuaScriptManager.existsScriptBundle(urlOrAssetPath)) {//读取并加载，之前的脚本
+            scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(urlOrAssetPath);
             if (scriptBundle != null) {
                 return scriptBundle;
             } else {
                 DebugUtil.tsi("luaviewp-loadBundle");
 
-                scriptBundle = ScriptBundleUnpackDelegate.loadBundle(LuaScriptManager.isLuaBytecodeUrl(url), url, destFolderPath);//TODO 性能瓶颈
+                scriptBundle = ScriptBundleUnpackDelegate.loadBundle(LuaScriptManager.isLuaBytecodeUrl(urlOrAssetPath), urlOrAssetPath, destFolderPath);//TODO 性能瓶颈
 
                 DebugUtil.tei("luaviewp-loadBundle");
             }
 
-        } else if (LuaScriptManager.existsPredownloadBundle(url)) {//预先加载的地址有脚本，则尝试解压并加载 xxx.zip
-            scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(url);
+        } else if (LuaScriptManager.existsPredownloadBundle(urlOrAssetPath)) {//预先加载的地址有脚本，则尝试解压并加载 xxx.zip
+            scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(urlOrAssetPath);
             if (scriptBundle != null) {
                 return scriptBundle;
             } else {
                 DebugUtil.tsi("luaviewp-loadPredownloadBundle");
 
-                String uri = LuaScriptManager.buildPredownloadScriptBundleFilePath(url);
+                String uri = LuaScriptManager.buildPredownloadScriptBundleFilePath(urlOrAssetPath);
                 InputStream inputStream = FileUtil.open(uri);
-                scriptBundle = ScriptBundleUnpackDelegate.unpack(url, inputStream);
+                scriptBundle = ScriptBundleUnpackDelegate.unpack(urlOrAssetPath, inputStream);
 
                 DebugUtil.tei("luaviewp-loadPredownloadBundle");
+            }
+        } else if (URLUtil.isAssetUrl(urlOrAssetPath) && AssetUtil.exists(mContext, urlOrAssetPath)) {//asset file exists
+            if (LuaScriptManager.isLuaScriptZip(urlOrAssetPath)) {//asset下的包加载
+                scriptBundle = ScriptBundleUnpackDelegate.unpack(mContext, FileUtil.removePostfix(urlOrAssetPath), urlOrAssetPath);
             }
         } else {//下载解压加载
 
@@ -104,12 +110,12 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
             callLoaderDownloadStart();
 
             // download
-            ScriptBundleDownloadDelegate downloadDelegate = new ScriptBundleDownloadDelegate(url, sha256);
+            ScriptBundleDownloadDelegate downloadDelegate = new ScriptBundleDownloadDelegate(urlOrAssetPath, sha256);
             HttpURLConnection connection = downloadDelegate.createHttpUrlConnection();
             InputStream inputStream = downloadDelegate.downloadAsStream(connection);
 
             if (inputStream != null) {
-                scriptBundle = ScriptBundleUnpackDelegate.unpack(url, inputStream);//unpack
+                scriptBundle = ScriptBundleUnpackDelegate.unpack(urlOrAssetPath, inputStream);//unpack
             }
 
             if (connection != null) {
@@ -124,13 +130,13 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
 
         if (scriptBundle != null) {
 
-            if (url != null) {
-                scriptBundle.setUrl(url);
+            if (urlOrAssetPath != null) {
+                scriptBundle.setUrl(urlOrAssetPath);
                 scriptBundle.setBaseFilePath(destFolderPath);
             }
 
             //cache
-            AppCache.getCache(AppCache.CACHE_SCRIPTS).putLru(url != null ? url : scriptBundle.getUrl(), scriptBundle);
+            AppCache.getCache(AppCache.CACHE_SCRIPTS).putLru(urlOrAssetPath != null ? urlOrAssetPath : scriptBundle.getUrl(), scriptBundle);
         }
 
         return scriptBundle;
