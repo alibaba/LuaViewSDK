@@ -60,12 +60,14 @@ public class LuaScriptManager {
                     BASE_FILECACHE_PATH = context.getExternalCacheDir() + File.separator;
 
                     //base predownload path
-                    final File file = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
-                    if(file != null) {
-                        BASE_PREDOWNLOAD_FILECACHE_PATH = file.getPath() + File.separator;
-                    } else {
-                        BASE_PREDOWNLOAD_FILECACHE_PATH = context.getCacheDir() + File.separator;
-                    }
+//                    final File file = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
+//                    if(file != null) {
+//                        BASE_PREDOWNLOAD_FILECACHE_PATH = file.getPath() + File.separator;
+//                    } else {
+//                        BASE_PREDOWNLOAD_FILECACHE_PATH = context.getCacheDir() + File.separator;
+//                    }
+
+                    BASE_PREDOWNLOAD_FILECACHE_PATH = "/data/data/" + context.getPackageName() + "/app_luaview/";
                 } else {
                     initInternalFilePath(context);
                 }
@@ -80,7 +82,7 @@ public class LuaScriptManager {
      */
     private static void initInternalFilePath(Context context) {
         final File dir = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
-        if (dir != null) {//优先存在 data/data/packagename/luaview
+        if (dir != null) {//优先存在 data/data/packagename/app_luaview
             BASE_FILECACHE_PATH = dir.getPath() + File.separator;
         } else {
             BASE_FILECACHE_PATH = context.getCacheDir() + File.separator;
@@ -215,7 +217,7 @@ public class LuaScriptManager {
      * @return
      */
     public static String buildPredownloadScriptBundleFilePath(final String uri) {
-        if(uri != null){
+        if (uri != null) {
             String fileName = uri.substring(uri.lastIndexOf('/') + 1);//只取最后的文件名
             return getPredownloadFilePath(fileName);
         } else {
