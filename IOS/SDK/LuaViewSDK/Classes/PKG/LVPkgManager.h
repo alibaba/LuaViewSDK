@@ -34,13 +34,15 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 + (NSString *)pathForFileName:(NSString *)fileName package:(NSString *)packageName;
 
 // 解压失败是-1， 无需解压本地更加新是0， 解压成功是1
-+(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName changeGrammar:(BOOL) changeGrammar;
-+(int) unpackageData:(NSData*) data       packageName:(NSString*) packageName changeGrammar:(BOOL) changeGrammar;
++(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName;
++(int) unpackageData:(NSData*) data       packageName:(NSString*) packageName;
 
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info;
 // 返回值说明   0:本地和线上版本一样;   1:即将去下载;   -1:错误
 +(NSInteger) downloadPackage:(NSString*)packageName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback;
++(NSInteger) unpackageData:(NSData*)data packageName:(NSString*)packageName withInfo:(LVPkgInfo*) info callback:(LVDownloadCallback) callback;
+
 
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*) rsa;
 // download url
@@ -49,9 +51,6 @@ typedef void(^LVDownloadCallback)(NSDictionary* info, NSString* error, LVDownloa
 // timestamp
 +(NSString*) timestampOfPackage:(NSString*)packageName;
 +(BOOL) setPackage:(NSString*)packageName timestamp:(NSString*) time;
-// changeGrammar
-+(NSString*) changeGrammarOfPackage:(NSString*)packageName;
-+(BOOL) setPackage:(NSString*)packageName changeGrammar:(NSString*) timestamp;
 
 // 返回值说明   0:本地和线上版本一样;   -1:错误或者不相等
 +(int) compareDownloadUrlOfPackage:(NSString*)name withServerInfo:(NSDictionary*) info;

@@ -26,7 +26,7 @@
 @property(nonatomic,copy) NSString* url; // 下载地址
 @property(nonatomic,copy) NSString* sha256; // sha256
 @property(nonatomic,copy) NSString* timestamp; // 版本对比时间戳
-@property(nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（‘:’和'.'互换）
+//@property(nonatomic,assign) BOOL changeGrammar; // 是否需要语法转换（‘:’和'.'互换）
 @property(nonatomic,copy) NSString* package; // sha256
 
 /*

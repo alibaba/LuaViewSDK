@@ -94,8 +94,6 @@
  */
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName;
 
--(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar;
-
 /**
  * 加载签名的脚本文件，读取文件并调用lvL_loadbuffer
  *

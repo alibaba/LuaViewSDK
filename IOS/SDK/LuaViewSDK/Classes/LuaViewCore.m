@@ -137,9 +137,7 @@
     NSString *packagePath = [LVPkgManager rootDirectoryOfPackage:packageName];
     [self.bundle addScriptPath:packagePath];
     [self.bundle addResourcePath:packagePath];
-    
-    self.changeGrammar = [[LVPkgManager changeGrammarOfPackage:packageName] isEqualToString:@"true"];
-    
+
     NSString* fileName = @"main.lv";
     NSString* ret = [self runSignFile:fileName];
     lua_State* L = self.l;
@@ -182,16 +180,12 @@
     return [self loadData:[script dataUsingEncoding:NSUTF8StringEncoding] fileName:fileName];
 }
 
-- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName {
-    return [self loadData:data fileName:fileName changeGrammar:self.changeGrammar];
-}
-
 #ifdef DEBUG
 extern char g_debug_lua[];
 
 -(NSString*) loadDebugModel{
     NSData* data = [[NSData alloc] initWithBytes:g_debug_lua length:strlen(g_debug_lua)];
-    return [self runData:data fileName:@"debug.lua" changeGrammar:NO];
+    return [self runData:data fileName:@"debug.lua"];
 }
 
 - (void) callLuaToExecuteServerCmd{
@@ -313,15 +307,18 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 -(NSString*) runData:(NSData *)data fileName:(NSString*)fileName{
-    return [self runData:data fileName:fileName changeGrammar:self.changeGrammar];
+    lua_State* L = self.l;
+    NSString* ret = [self loadData:data fileName:fileName];
+    if ( ret ) {
+        return ret;
+    } else {
+        return lv_runFunction(L);
+    }
 }
     
-- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName changeGrammar:(BOOL)changeGrammar{
+- (NSString*)loadData:(NSData *)data fileName:(NSString *)fileName{
     fileName = [fileName stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
 
-    if( changeGrammar ) {
-        data = lv_toStandLuaGrammar(data);
-    }
     lua_State* L = self.l;
     if( L==NULL ){
         LVError( @"Lua State is released !!!");
@@ -352,16 +349,6 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
         return [NSString stringWithFormat:@"%s",s];
     } else {
         return nil;
-    }
-}
-
--(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar{
-    lua_State* L = self.l;
-    NSString* ret = [self loadData:data fileName:fileName changeGrammar:changeGrammar];
-    if ( ret ) {
-        return ret;
-    } else {
-        return lv_runFunction(L);
     }
 }
 

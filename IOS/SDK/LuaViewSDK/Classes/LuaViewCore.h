@@ -27,7 +27,8 @@
 /**
  * 是否需要语法转换（原先luaview语法和lua标准语法的区别是‘.’和':'互换了），默认是标准语法，使用非标准语法需要转换成标准语法才设置成true
  */
-@property (nonatomic,assign) BOOL changeGrammar;
+//不再支持changeGrammer, 缺省只支持标准语法，不进行转换
+//@property (nonatomic,assign) BOOL changeGrammar;
 
 //---------------------------------------------------------------------
 /**
@@ -119,8 +120,8 @@
 *  @return 运行结果
 */
 -(NSString*) runData:(NSData*) data fileName:(NSString*) fileName;
-
--(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar;
+//
+//-(NSString*) runData:(NSData*) data fileName:(NSString*) fileName changeGrammar:(BOOL) changeGrammar;
 
 /**
 *
