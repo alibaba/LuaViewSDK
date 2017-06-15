@@ -116,7 +116,7 @@ public class LuaScriptManager {
      * @return
      */
     public static String getBasePredownloadFolderPath() {
-        return BASE_PREDOWNLOAD_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator + FOLDER_PRE_DOWNLOAD + File.separator;
+        return BASE_PREDOWNLOAD_FILECACHE_PATH + FOLDER_PRE_DOWNLOAD + File.separator;
     }
 
     /**
