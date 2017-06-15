@@ -25,7 +25,7 @@ import java.util.List;
 
 public class DemoActivity extends ListActivity {
     //测试标准语法
-    public static boolean useStandardSyntax = false;
+    public static boolean useStandardSyntax = true;
 
     //非标准语法代码路径
     private static final String FOLDER_NAME = "test";
