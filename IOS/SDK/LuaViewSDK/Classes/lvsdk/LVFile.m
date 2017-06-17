@@ -34,33 +34,50 @@ static BOOL readCallback(lua_State *L, int callbackIndex, NSString* fileName, NS
     return NO;
 }
 
+//参数顺序
+//File.save(name, data, callback)
+//name: string
+//data: string or data
+//callback: function (optional)
 static int file_save (lua_State *L) {
     int num = lua_gettop(L);
     if( num>=2 ) {
-        LVUserDataInfo * userData = NULL;
-        NSString* fileName = nil;
+        LVUserDataInfo * contentData = NULL;
+        NSString * contentString = nil;
+        NSString * fileName = nil;
         int callbackIndex = 0;
         for( int i=1; i<=num; i++ ) {
-            if( lua_type(L, i)==LUA_TUSERDATA  && userData==nil ) {
-                userData = (LVUserDataInfo *)lua_touserdata(L, i);
-            }
-            if( lua_type(L, i)==LUA_TSTRING  && fileName==nil ) {
-               fileName = lv_paramString(L, i);
-            }
-            if( lua_type(L,i)==LUA_TFUNCTION ) {
+            if (i == 1 && lua_type(L, i) == LUA_TSTRING){
+                fileName = lv_paramString(L, i);
+            }else if (i == 2){
+                if (lua_type(L, LUA_TSTRING)){
+                    contentString = lv_paramString(L, i);
+                }else if (lua_type(L, LUA_TUSERDATA)){
+                    contentData = (LVUserDataInfo *)lua_touserdata(L, i);
+                }
+            }else if (i == 3 && lua_type(L, i) == LUA_TFUNCTION){
                 callbackIndex = i;
             }
         }
-        if ( fileName && userData ) {
-            LVData* lvData1 = (__bridge LVData *)(userData->object);
-            if( LVIsType(userData, Data) && lvData1.data){
-                if( [LVUtil saveData:lvData1.data toFile:[LVUtil PathForCachesResource:fileName]] ){
-                    saveCallback(L, callbackIndex, fileName, YES);
-                    lua_pushboolean(L, 1);
-                    return 1;
-                } else {
-                    saveCallback(L, callbackIndex, fileName, NO);
-                }
+        
+        NSData *content;
+        
+        if (contentData){
+            LVData* lvData1 = (__bridge LVData *)(contentData->object);
+            if( LVIsType(contentData, Data) && lvData1.data){
+                content = lvData1.data;
+            }
+        }else if (contentString){
+            content = [contentString dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        
+        if ( fileName && content ) {
+            if( [LVUtil saveData:content toFile:[LVUtil PathForCachesResource:fileName]] ){
+                saveCallback(L, callbackIndex, fileName, YES);
+                lua_pushboolean(L, 1);
+                return 1;
+            } else {
+                saveCallback(L, callbackIndex, fileName, NO);
             }
         }
     }
