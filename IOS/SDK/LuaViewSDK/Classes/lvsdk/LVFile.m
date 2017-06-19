@@ -50,9 +50,9 @@ static int file_save (lua_State *L) {
             if (i == 1 && lua_type(L, i) == LUA_TSTRING){
                 fileName = lv_paramString(L, i);
             }else if (i == 2){
-                if (lua_type(L, LUA_TSTRING)){
+                if (lua_type(L, i) == LUA_TSTRING){
                     contentString = lv_paramString(L, i);
-                }else if (lua_type(L, LUA_TUSERDATA)){
+                }else if (lua_type(L, i) == LUA_TUSERDATA){
                     contentData = (LVUserDataInfo *)lua_touserdata(L, i);
                 }
             }else if (i == 3 && lua_type(L, i) == LUA_TFUNCTION){
