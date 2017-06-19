@@ -57,6 +57,10 @@ public class UDActionBar extends BaseLuaTable {
         set("rightBarButton", new right());//@Deprecated
     }
 
+    private int fixIndex(Varargs varargs){
+        return varargs != null && varargs.arg1() instanceof UDActionBar ? 1 : 0;
+    }
+
     /**
      * 系统中间View
      */
@@ -64,7 +68,8 @@ public class UDActionBar extends BaseLuaTable {
 
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 return new setTitle().invoke(args);
             } else {
                 return new getTitle().invoke(args);
@@ -77,8 +82,9 @@ public class UDActionBar extends BaseLuaTable {
 
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.isstring(2) || args.optvalue(2, NIL) instanceof UDSpannableString) {//title
-                final CharSequence title = LuaViewUtil.getText(args.optvalue(2, NIL));
+            final int fixIndex = fixIndex(args);
+            if (args.isstring(fixIndex + 1) || args.optvalue(fixIndex + 1, NIL) instanceof UDSpannableString) {//title
+                final CharSequence title = LuaViewUtil.getText(args.optvalue(fixIndex + 1, NIL));
                 if (title != null) {
                     final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
                     if (actionBar != null) {
@@ -90,8 +96,8 @@ public class UDActionBar extends BaseLuaTable {
 //                        }
                     }
                 }
-            } else if (args.isuserdata(2)) {//view
-                final LuaValue titleViewValue = args.optvalue(2, null);
+            } else if (args.isuserdata(fixIndex + 1)) {//view
+                final LuaValue titleViewValue = args.optvalue(fixIndex + 1, null);
                 if (titleViewValue instanceof UDView) {
                     final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
                     if (actionBar != null) {
@@ -147,7 +153,8 @@ public class UDActionBar extends BaseLuaTable {
     class background extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 return new setBackground().invoke(args);
             } else {
                 return new getBackground().invoke(args);
@@ -159,15 +166,16 @@ public class UDActionBar extends BaseLuaTable {
     class setBackground extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.isstring(2)) {
-                ImageUtil.fetch(getContext(), getLuaResourceFinder(), args.optjstring(2, null), new DrawableLoadCallback() {
+            final int fixIndex = fixIndex(args);
+            if (args.isstring(fixIndex + 1)) {
+                ImageUtil.fetch(getContext(), getLuaResourceFinder(), args.optjstring(fixIndex + 1, null), new DrawableLoadCallback() {
                     @Override
                     public void onLoadResult(Drawable drawable) {
                         setupActionBarDrawable(drawable);
                     }
                 });
-            } else if (args.isuserdata(2)) {//view
-                final LuaValue data = args.optvalue(2, null);
+            } else if (args.isuserdata(fixIndex + 1)) {//view
+                final LuaValue data = args.optvalue(fixIndex + 1, null);
                 if (data instanceof UDImageView) {
                     final ImageView imageView = (ImageView) LuaViewUtil.removeFromParent(((UDImageView) data).getView());
                     if (imageView instanceof BaseImageView) {//TODO ActionBar支持gif
@@ -210,7 +218,8 @@ public class UDActionBar extends BaseLuaTable {
     class left extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 return new setLeft().invoke(args);
             } else {
                 return new getLeft().invoke(args);
@@ -223,7 +232,8 @@ public class UDActionBar extends BaseLuaTable {
         public Varargs invoke(Varargs args) {
             final ActionBar actionBar = LuaViewUtil.getActionBar(getGlobals());
             if (actionBar != null) {
-                final boolean showBack = args.optboolean(2, true);
+                final int fixIndex = fixIndex(args);
+                final boolean showBack = args.optboolean(fixIndex + 1, true);
                 actionBar.setDisplayHomeAsUpEnabled(showBack);
             }
             return UDActionBar.this;
@@ -243,7 +253,8 @@ public class UDActionBar extends BaseLuaTable {
     class right extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 return new setRight().invoke(args);
             } else {
                 return new getRight().invoke(args);

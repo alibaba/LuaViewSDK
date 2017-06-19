@@ -49,17 +49,22 @@ public class UDFile extends BaseLuaTable {
         set("path", new path());
     }
 
+    private int fixIndex(Varargs args) {
+        return args != null && args.arg1() instanceof UDFile ? 1 : 0;
+    }
+
     /**
      * 保存文件
      */
     class save extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
-                    final LuaValue param1 = args.arg(2);
-                    final LuaValue param2 = args.arg(3);
+                    final LuaValue param1 = args.arg(fixIndex + 1);
+                    final LuaValue param2 = args.arg(fixIndex + 2);
 
                     String name = null;
                     byte[] data = null;
@@ -80,8 +85,8 @@ public class UDFile extends BaseLuaTable {
                     }
 
                     if (data != null && data.length > 0 && !TextUtils.isEmpty(name)) {
-                        if (args.isfunction(4)) {
-                            final LuaValue callback = LuaUtil.getFunction(args, 4);
+                        if (args.isfunction(fixIndex + 3)) {
+                            final LuaValue callback = LuaUtil.getFunction(args, fixIndex + 3);
                             new SimpleTask1<Boolean>() {
                                 @Override
                                 protected Boolean doInBackground(Object... params) {
@@ -105,20 +110,22 @@ public class UDFile extends BaseLuaTable {
         }
     }
 
+
     /**
      * 读取文件
      */
     class read extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
-                    final String name = LuaUtil.getString(args, 2);
+                    final String name = LuaUtil.getString(args, fixIndex + 1);
                     final String path = finder.buildSecurePathInSdcard(name);
 
-                    if (args.isfunction(3)) {
-                        final LuaValue callback = LuaUtil.getFunction(args, 3);
+                    if (args.isfunction(fixIndex + 2)) {
+                        final LuaValue callback = LuaUtil.getFunction(args, fixIndex + 2);
                         if (path != null) {
                             new SimpleTask1<UDData>() {
                                 @Override
@@ -169,10 +176,11 @@ public class UDFile extends BaseLuaTable {
     class exists extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
-                    final String fileName = LuaUtil.getString(args, 2);
+                    final String fileName = LuaUtil.getString(args, fixIndex + 1);
                     if (!TextUtils.isEmpty(fileName)) {
                         return valueOf(finder.exists(fileName));
                     }
@@ -188,10 +196,11 @@ public class UDFile extends BaseLuaTable {
     class path extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
-            if (args.narg() > 1) {
+            final int fixIndex = fixIndex(args);
+            if (args.narg() > fixIndex) {
                 final LuaResourceFinder finder = getLuaResourceFinder();
                 if (finder != null) {
-                    final String fileName = LuaUtil.getString(args, 2);
+                    final String fileName = LuaUtil.getString(args, fixIndex + 1);
                     final String path = finder.buildSecurePathInSdcard(fileName);
                     return path != null ? valueOf(path) : NIL;
                 }
