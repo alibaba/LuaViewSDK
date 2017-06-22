@@ -75,6 +75,8 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
         if (LuaScriptManager.existsScriptBundle(urlOrAssetPath)) {//读取并加载，之前的脚本
             scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(urlOrAssetPath);
             if (scriptBundle != null) {
+
+                callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_LOAD_CACHE, scriptBundle);
                 return scriptBundle;
             } else {
                 DebugUtil.tsi("luaviewp-loadBundle");
@@ -82,11 +84,14 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
                 scriptBundle = ScriptBundleUnpackDelegate.loadBundle(LuaScriptManager.isLuaBytecodeUrl(urlOrAssetPath), urlOrAssetPath, destFolderPath);//TODO 性能瓶颈
 
                 DebugUtil.tei("luaviewp-loadBundle");
+
+                callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_LOAD_LOCAL, scriptBundle);
             }
 
         } else if (LuaScriptManager.existsPredownloadBundle(urlOrAssetPath)) {//预先加载的地址有脚本，则尝试解压并加载 xxx.zip
             scriptBundle = AppCache.getCache(AppCache.CACHE_SCRIPTS).getLru(urlOrAssetPath);
             if (scriptBundle != null) {
+                callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_LOAD_CACHE, scriptBundle);
                 return scriptBundle;
             } else {
                 DebugUtil.tsi("luaviewp-loadPredownloadBundle");
@@ -96,18 +101,22 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
                 scriptBundle = ScriptBundleUnpackDelegate.unpack(urlOrAssetPath, inputStream);
 
                 DebugUtil.tei("luaviewp-loadPredownloadBundle");
+
+                callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_LOAD_PREDOWNLOAD, scriptBundle);
             }
         } else if (URLUtil.isAssetUrl(urlOrAssetPath) && AssetUtil.exists(mContext, urlOrAssetPath)) {//asset file exists
             if (LuaScriptManager.isLuaScriptZip(urlOrAssetPath)) {//asset下的包加载
                 scriptBundle = ScriptBundleUnpackDelegate.unpack(mContext, FileUtil.removePostfix(urlOrAssetPath), urlOrAssetPath);
             }
+
+            callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_LOAD_ASSET, scriptBundle);
         } else {//下载解压加载
 
             // Assert 预置包
             // loadAssertScriptBundle();
 
             // 下载包
-            callLoaderDownloadStart();
+            callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_DOWNLOAD_START, null);
 
             // download
             ScriptBundleDownloadDelegate downloadDelegate = new ScriptBundleDownloadDelegate(urlOrAssetPath, sha256);
@@ -123,7 +132,7 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
             }
 
             //下载结束
-            callLoaderDownloadEnd(scriptBundle);
+            callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent.EVENT_DOWNLOAD_END, scriptBundle);
         }
 
         scriptBundle = new ScriptBundleLoadDelegate().load(mContext, scriptBundle);//解密脚本或者加载Prototype
@@ -216,22 +225,13 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
     }
 
     /**
-     * 开始下载
+     * 事件回调
+     * @param event
+     * @param args
      */
-    private void callLoaderDownloadStart() {
-        if (mScriptLoaderCallback instanceof LuaScriptLoader.ScriptLoaderCallback2) {
-            ((LuaScriptLoader.ScriptLoaderCallback2) mScriptLoaderCallback).onScriptDownloadStart();
-        }
-    }
-
-    /**
-     * 下载结束
-     *
-     * @param bundle
-     */
-    private void callLoaderDownloadEnd(ScriptBundle bundle) {
-        if (mScriptLoaderCallback instanceof LuaScriptLoader.ScriptLoaderCallback2) {
-            ((LuaScriptLoader.ScriptLoaderCallback2) mScriptLoaderCallback).onScriptDownloadEnd(bundle);
+    private void callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent event, Object args){
+        if(mScriptLoaderCallback instanceof LuaScriptLoader.ScriptExecuteCallback2){
+            ((LuaScriptLoader.ScriptExecuteCallback2) mScriptLoaderCallback).onEvent(event, args);
         }
     }
 

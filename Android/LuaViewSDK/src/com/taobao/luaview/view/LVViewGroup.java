@@ -114,10 +114,18 @@ public class LVViewGroup<T extends UDViewGroup> extends ForegroundRelativeLayout
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            LuaValue result = mLuaUserdata != null ? mLuaUserdata.callOnBack() : LuaValue.FALSE;
-            return result != null && result.optboolean(false);
+            return onBackPressed();
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    /**
+     * onBack pressed
+     * @return
+     */
+    public boolean onBackPressed(){
+        LuaValue result = mLuaUserdata != null ? mLuaUserdata.callOnBack() : LuaValue.FALSE;
+        return result != null && result.optboolean(false);
     }
 
     @Override
