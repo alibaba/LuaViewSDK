@@ -230,8 +230,8 @@ public class ScriptBundleUltimateLoadTask extends BaseAsyncTask<String, Integer,
      * @param args
      */
     private void callLoaderCallbackOnEvent(LuaScriptLoader.LuaScriptLoadEvent event, Object args){
-        if(mScriptLoaderCallback instanceof LuaScriptLoader.ScriptExecuteCallback2){
-            ((LuaScriptLoader.ScriptExecuteCallback2) mScriptLoaderCallback).onEvent(event, args);
+        if(mScriptLoaderCallback instanceof LuaScriptLoader.ScriptLoaderCallback2){
+            ((LuaScriptLoader.ScriptLoaderCallback2) mScriptLoaderCallback).onEvent(event, args);
         }
     }
 
