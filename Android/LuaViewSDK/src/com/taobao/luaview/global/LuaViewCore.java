@@ -195,16 +195,9 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         if (!TextUtils.isEmpty(url)) {
             new LuaScriptLoader(mContext).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback2() {
                 @Override
-                public void onScriptDownloadStart() {//下载开始，不一定会调用，存在调用失败的情况
+                public void onEvent(LuaScriptLoader.LuaScriptLoadEvent event, Object params) {
                     if (callback instanceof LuaScriptLoader.ScriptExecuteCallback2) {
-                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onScriptDownloadStart();
-                    }
-                }
-
-                @Override
-                public void onScriptDownloadEnd(ScriptBundle bundle) {//下载完成，不一定会调用，如果调用的话，且packageName不为空的话，则onScriptLoaded加载的是Asset预置脚本
-                    if (callback instanceof LuaScriptLoader.ScriptExecuteCallback2) {
-                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onScriptDownloadEnd(bundle);
+                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onEvent(event, params);
                     }
                 }
 

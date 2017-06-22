@@ -28,6 +28,20 @@ import org.luaj.vm2.LuaValue;
  * @date 15/11/10
  */
 public class LuaScriptLoader {
+
+    /**
+     * Lua脚本加载事件
+     */
+    public enum LuaScriptLoadEvent {
+        EVENT_DOWNLOAD_START,
+        EVENT_DOWNLOAD_END,
+        EVENT_LOAD_CACHE,
+        EVENT_LOAD_LOCAL,
+        EVENT_LOAD_PREDOWNLOAD,
+        EVENT_LOAD_ASSET
+    }
+
+
     private Context mContext;
 
     public LuaScriptLoader(final Context context) {
@@ -46,9 +60,7 @@ public class LuaScriptLoader {
     }
 
     public interface ScriptLoaderCallback2 extends ScriptLoaderCallback {
-        void onScriptDownloadStart();//下载开始
-
-        void onScriptDownloadEnd(final ScriptBundle bundle);//包内设置的脚本加载
+        void onEvent(LuaScriptLoadEvent event, Object params);
     }
 
     /**
@@ -86,18 +98,10 @@ public class LuaScriptLoader {
     public interface ScriptExecuteCallback2 extends ScriptExecuteCallback {
 
         /**
-         * 脚本下载开始
+         * @param event
+         * @param params
          */
-        void onScriptDownloadStart();
-
-        /**
-         * 脚本下载完毕
-         *
-         * @param bundle
-         * @return
-         */
-        void onScriptDownloadEnd(ScriptBundle bundle);
-
+        void onEvent(LuaScriptLoadEvent event, Object params);
     }
 
     //-----------------------------------------static methods---------------------------------------
@@ -154,7 +158,7 @@ public class LuaScriptLoader {
     public void load(final String url, final String sha256, final ScriptLoaderCallback callback) {
         new ScriptBundleUltimateLoadTask(mContext, callback).load(url, sha256);
     }
-    
+
 
     //--------------------------------preload script------------------------------------------------
 
