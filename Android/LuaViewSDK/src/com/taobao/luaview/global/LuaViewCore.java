@@ -105,8 +105,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         new SimpleTask1<LuaViewCore>() {
             @Override
             protected LuaViewCore doInBackground(Object... params) {
-                final Globals globals = LuaViewManager.createGlobalsAsync();
-                return createLuaViewCore(context, globals);
+                return create(context);
             }
 
             @Override
@@ -160,7 +159,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
 
     public LuaViewCore load(final String urlOrFileOrScript, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
         if (!TextUtils.isEmpty(urlOrFileOrScript)) {
-            if (URLUtil.isNetworkUrl(urlOrFileOrScript)) {//url, http:// or https://
+            if (URLUtil.isNetworkUrl(urlOrFileOrScript) || URLUtil.isAssetUrl(urlOrFileOrScript)) {//url, http:// or https:// or asset://
                 loadUrl(urlOrFileOrScript, sha256, callback);
             } else {
                 loadFile(urlOrFileOrScript, callback);
@@ -182,12 +181,28 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
         return loadUrl(url, sha256, null);
     }
 
+
+    /**
+     * load url
+     *
+     * @param url
+     * @param sha256
+     * @param callback
+     * @return
+     */
     public LuaViewCore loadUrl(final String url, final String sha256, final LuaScriptLoader.ScriptExecuteCallback callback) {
         updateUri(url);
         if (!TextUtils.isEmpty(url)) {
-            new LuaScriptLoader(mContext).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback() {
+            new LuaScriptLoader(mContext).load(url, sha256, new LuaScriptLoader.ScriptLoaderCallback2() {
                 @Override
-                public void onScriptLoaded(ScriptBundle bundle) {
+                public void onEvent(LuaScriptLoader.LuaScriptLoadEvent event, Object params) {
+                    if (callback instanceof LuaScriptLoader.ScriptExecuteCallback2) {
+                        ((LuaScriptLoader.ScriptExecuteCallback2) callback).onEvent(event, params);
+                    }
+                }
+
+                @Override
+                public void onScriptLoaded(ScriptBundle bundle) {//脚本本地 or Asset or 网络 准备成功
                     if (callback == null || callback.onScriptPrepared(bundle) == false) {//脚本准备完成，且不第三方自己执行
                         loadScriptBundle(bundle, callback);
                     } else if (callback != null) {
@@ -271,7 +286,6 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     }
 
     public LuaViewCore loadScript(final ScriptFile scriptFile, final LuaScriptLoader.ScriptExecuteCallback callback) {
-        updateUri("");
         if (scriptFile != null) {
             this.loadScriptInternal(scriptFile, callback);
         } else if (callback != null) {
@@ -356,7 +370,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param binders
      * @return
      */
-    public LuaViewCore registerLibs(LuaValue... binders) {
+    public synchronized LuaViewCore registerLibs(LuaValue... binders) {
         if (mGlobals != null && binders != null) {
             for (LuaValue binder : binders) {
                 mGlobals.tryLazyLoad(binder);
@@ -372,7 +386,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param obj
      * @return
      */
-    public LuaViewCore register(final String luaName, final Object obj) {
+    public synchronized LuaViewCore register(final String luaName, final Object obj) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             final LuaValue value = mGlobals.get(luaName);
             if (obj != value) {
@@ -390,7 +404,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param clazz
      * @return
      */
-    public LuaViewCore registerPanel(final Class<? extends LVCustomPanel> clazz) {
+    public synchronized LuaViewCore registerPanel(final Class<? extends LVCustomPanel> clazz) {
         return registerPanel(clazz != null ? clazz.getSimpleName() : null, clazz);
     }
 
@@ -401,7 +415,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param clazz
      * @return
      */
-    public LuaViewCore registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
+    public synchronized LuaViewCore registerPanel(final String luaName, final Class<? extends LVCustomPanel> clazz) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName) && (clazz != null && clazz.getSuperclass() == LVCustomPanel.class)) {
             final LuaValue value = mGlobals.get(luaName);
             if (value == null || value.isnil()) {
@@ -421,7 +435,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
      * @param luaName
      * @return
      */
-    public LuaViewCore unregister(final String luaName) {
+    public synchronized LuaViewCore unregister(final String luaName) {
         if (mGlobals != null && !TextUtils.isEmpty(luaName)) {
             mGlobals.set(luaName, LuaValue.NIL);
         }
@@ -510,6 +524,12 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
             return mGlobals.getLuaResourceFinder().getUri();
         }
         return null;
+    }
+
+    public void setUri(String uri) {
+        if (mGlobals != null && mGlobals.getLuaResourceFinder() != null) {
+            mGlobals.getLuaResourceFinder().setUri(uri);
+        }
     }
 
     public Globals getGlobals() {
@@ -813,7 +833,7 @@ public class LuaViewCore implements ConnectionStateChangeBroadcastReceiver.OnCon
     /**
      * 销毁的时候从外部调用，清空所有外部引用
      */
-    public void onDestroy() {
+    public synchronized void onDestroy() {
         clearCache();
         if (mGlobals != null) {
             mGlobals.onDestroy();

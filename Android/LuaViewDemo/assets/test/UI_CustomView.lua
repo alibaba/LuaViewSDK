@@ -16,6 +16,13 @@ view.onDraw(function(canvas)
     testCanvasAndroidAndIos(canvas)
 end)
 
+view.onClick(function()
+    view.invalidate()
+    Toast("invalidate")
+end)
+
+bmp = Bitmap("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXXXXXb9XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_560x560Q90.jpg")
+
 function testCanvasAndroidAndIos(canvas)
     print(canvas)
     -- drawLine
@@ -89,6 +96,8 @@ function testCanvasAndroidAndIos(canvas)
         canvas.drawImage(img, 100, 0, 100, 100)
     end
 
+    canvas.drawImage(bmp, 0, 0, 100, 100)
+
     -- clipRect
     canvas.clipRect(100, 100, 35, 35)
     canvas.drawCircle(100, 100, 40)
@@ -104,6 +113,8 @@ img.image("https://gju1.alicdn.com/bao/uploaded/i4/100000120700895002/TB2Qu0_fXX
     view.invalidate()
     print("image load finish")
 end)
+
+
 
 function testCanvasAndroid(canvas)
     print(canvas)

@@ -2,13 +2,22 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="/workspace/LuaViewSDK/Android/LuaViewSDK/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
         optimize="true"
-        revision="25.0.2"
-        sha1="2d4264f6f5b10d538b9630658c67b8502bc67449">
-        <dex dex="/workspace/LuaViewSDK/Android/Playground/build/intermediates/pre-dexed/debug/classes_8999f34b14a953c929e7858134b1a9333f73ba5a.jar" />
+        revision="25.0.0"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_ccb16605852375a6452339ec6b92033151f7ac50/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="083a206b3c6b43c8c8554c99b52ea9599e7ad6a0">
+        <dex dex="/Users/song/Projects/androidstudio/ju/LuaView/LuaViewSDK/Android/LuaViewDemo/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_1be86348480f9c70b069444f321e1340a8a629e3/classes.dex" />
     </item>
 
 </items>

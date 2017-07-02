@@ -54,6 +54,10 @@ public class UDSystem extends BaseLuaTable {
         set("keepScreenOn", new keepScreenOn());
     }
 
+    private int fixIndex(Varargs varargs){
+        return varargs != null && varargs.arg1() instanceof UDSystem ? 1 : 0;
+    }
+
     class ios extends VarArgFunction {
         @Override
         public Varargs invoke(Varargs args) {
@@ -168,7 +172,8 @@ public class UDSystem extends BaseLuaTable {
         @Override
         public Varargs invoke(Varargs varargs) {
             if (getGlobals() != null && getGlobals().getRenderTarget() != null) {
-                final Boolean keepScreenOn = LuaUtil.getBoolean(varargs, 2);
+                final int fixIndex = fixIndex(varargs);
+                final Boolean keepScreenOn = LuaUtil.getBoolean(varargs, fixIndex + 1);
                 getGlobals().getRenderTarget().setKeepScreenOn(keepScreenOn != null ? keepScreenOn : true);
             }
             return LuaValue.NIL;

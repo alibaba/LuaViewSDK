@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import com.taobao.luaview.global.LuaResourceFinder;
 import com.taobao.luaview.userdata.base.BaseLuaTable;
 import com.taobao.luaview.userdata.constants.UDTextAlign;
+import com.taobao.luaview.userdata.kit.UDBitmap;
 import com.taobao.luaview.util.ColorUtil;
 import com.taobao.luaview.util.DimenUtil;
 import com.taobao.luaview.util.LuaUtil;
@@ -1194,6 +1195,7 @@ public class UDCanvas extends BaseLuaTable {
             if (canvas != null && value != null && value.narg() >= 4) {
                 final LuaValue param = LuaUtil.getValue(value, 2);
                 Drawable drawable = null;
+                Bitmap bitmap = null;
                 if (LuaUtil.isString(param)) {
                     final String uri = param.optjstring(null);
                     final LuaResourceFinder finder = getLuaResourceFinder();
@@ -1205,9 +1207,10 @@ public class UDCanvas extends BaseLuaTable {
                     if (view instanceof ImageView) {
                         drawable = ((ImageView) view).getDrawable();
                     }
+                } else if (param instanceof UDBitmap){
+                    bitmap = ((UDBitmap)param).getBitmap();
                 }
 
-                Bitmap bitmap = null;
                 if (drawable != null) {
                     if (drawable instanceof BitmapDrawable) {
                         bitmap = ((BitmapDrawable) drawable).getBitmap();

@@ -13,6 +13,7 @@ package com.taobao.luaview.global;
  *
  * @author song
  */
+@Deprecated
 public class VmVersion {
     public static final String V_440 = "4.4.0";
     public static final String V_450 = "4.5.0";

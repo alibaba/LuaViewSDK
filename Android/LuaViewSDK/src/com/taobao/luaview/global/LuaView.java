@@ -412,6 +412,12 @@ public class LuaView extends LVViewGroup {
         return mLuaViewCore != null ? mLuaViewCore.getUri() : null;
     }
 
+    public void setUri(String uri) {
+        if (mLuaViewCore != null) {
+            mLuaViewCore.setUri(uri);
+        }
+    }
+
     public Globals getGlobals() {
         return mLuaViewCore != null ? mLuaViewCore.getGlobals() : null;
     }

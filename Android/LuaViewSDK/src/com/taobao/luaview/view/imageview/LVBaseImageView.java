@@ -37,11 +37,11 @@ public class LVBaseImageView extends BaseImageView {
     }
 
     @Override
-    public void loadUrl(final String url, final LoadCallback callback) {
+    public void loadUrl(final String url, final DrawableLoadCallback callback) {
         this.mUrl = url;
         final ImageProvider provider = LuaView.getImageProvider();
         if (provider != null) {
-            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<LoadCallback>(callback));
+            provider.load(getContext(), new WeakReference<BaseImageView>(this), url, new WeakReference<DrawableLoadCallback>(callback));
         }
     }
 

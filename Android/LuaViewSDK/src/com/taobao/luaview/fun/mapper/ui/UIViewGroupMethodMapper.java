@@ -185,8 +185,9 @@ public class UIViewGroupMethodMapper<U extends UDViewGroup> extends UIViewMethod
      */
     public LuaValue addView(U view, Varargs varargs) {
         final LuaValue luaValue = varargs.optvalue(2, null);
+        final Integer pos = LuaUtil.getInt(varargs, 3);
         if (luaValue instanceof UDView) {
-            return view.addView((UDView) luaValue);
+            return view.addView((UDView) luaValue, pos);
         }
         return view;
     }

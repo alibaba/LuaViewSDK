@@ -620,7 +620,7 @@ public class Globals extends LuaTable {
         } else {
             final LuaResourceFinder finder = getLuaResourceFinder();
             final String url = finder != null ? finder.getUri() : null;
-            return LuaScriptManager.isLuaStandardSyntaxUrl(url);
+            return !LuaScriptManager.isLuaUnStandardSyntaxUrl(url);
         }
     }
 
