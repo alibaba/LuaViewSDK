@@ -24,6 +24,9 @@ public class Constants {
     public static final String PARAM_URI = "uri";
     public static final String PAGE_PARAMS = "page_params";
 
+    // asset file prefix for loading luaview.load(ASSET_FILE_PREFIX + "foler/name")
+    public static final String ASSET_FILE_PREFIX = "file:///android_asset/";
+
     //Bundle encrypt and decrypt
     public static final String PUBLIC_KEY_PATH = "luaview/luaview_rsa_public_key.der";
     public static final String PUBLIC_KEY_PATH_MD5 = "luaview/luaview_rsa_public_key.der-md5";

@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LuaViewSDK"
-  s.version  = "0.5.1"
+  s.version  = "0.5.2"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
@@ -25,9 +25,10 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/alibaba/LuaViewSDK.git", :tag => "v0.5.0" }
+  s.source       = { :git => "https://github.com/alibaba/LuaViewSDK.git", :tag => "v0.5.2" }
 
-  s.source_files  = "IOS/SDK/LuaViewSDK/Classes/**/*.{h,m,c}",  "IOS/lua/lua/*.{h,m,c}"
+  # s.source_files  = "IOS/SDK/LuaViewSDK/Classes/**/*.{h,m,c}",  "IOS/lua/lua/*.{h,m,c}"
+  s.source_files  = "IOS/SDK/LuaViewSDK/Classes/**/*.{h,m,c}"
   # s.exclude_files = "Classes/Exclude"
 
   #s.public_header_files = "LuaViewSDK/Classes/**/*.h"

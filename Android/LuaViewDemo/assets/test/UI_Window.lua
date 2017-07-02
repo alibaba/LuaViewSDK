@@ -35,7 +35,10 @@ window.callback({
     end,
     onBack = function()
         print("onBack")
-        return false
+
+
+    Toast("onBack")
+        return true
     end,
     onWifiConnected = function()
         print("onWifiConnected")

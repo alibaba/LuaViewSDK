@@ -15,7 +15,7 @@ import android.content.Intent;
 import com.taobao.luaview.util.NetworkUtil;
 
 import java.lang.ref.WeakReference;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * 监听网络状态变化
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author song
  */
 public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
-    private ConcurrentHashMap<Integer, WeakReference<OnConnectionChangeListener>> mOnConnectionChangeListeners;
+    private ConcurrentSkipListMap<Integer, WeakReference<OnConnectionChangeListener>> mOnConnectionChangeListeners;
 
     public interface OnConnectionChangeListener {
         void onConnectionClosed();//所有的连接都断开
@@ -34,7 +34,7 @@ public class ConnectionStateChangeBroadcastReceiver extends BroadcastReceiver {
     }
 
     public ConnectionStateChangeBroadcastReceiver() {
-        this.mOnConnectionChangeListeners = new ConcurrentHashMap<Integer, WeakReference<OnConnectionChangeListener>>();
+        this.mOnConnectionChangeListeners = new ConcurrentSkipListMap<Integer, WeakReference<OnConnectionChangeListener>>();
     }
 
     public void addOnConnectionChangeListener(OnConnectionChangeListener listener) {

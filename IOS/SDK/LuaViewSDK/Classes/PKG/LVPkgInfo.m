@@ -14,24 +14,22 @@
 -(instancetype) init:(NSDictionary*) dic{
     self = [super init];
     if( self ) {
-        NSString* url = nil;
-        NSString* sha = nil;
+        NSString* url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SURL];
         
-        url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SURL];
-        sha = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SSHA key2:LV_PKGINFO_SSHA256];
+        if (!url){
+            url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL];
+        }
+        NSString* sha = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SSHA key2:LV_PKGINFO_SSHA256];
+        
+        if (!sha){
+            sha = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
+        }
+        
         if(  url && sha ) {
             self.url = url;
             self.sha256 = sha;
-            self.changeGrammar = NO;
-        } else {
-            self.url = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_URL key2:LV_PKGINFO_URL2];
-            self.sha256 = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_SHA key2:LV_PKGINFO_SHA256];
-            self.changeGrammar = YES;
-            // 检查后缀名, 如果是.szip, 说明是标准语法格式, 不需要转换(兼容安卓)
-            if( [self.url hasSuffix:@".szip"] ) {
-                self.changeGrammar = NO;
-            }
         }
+
         self.url = [self stringByDecodingURLFormat:self.url]; // 下载地址可能需要解码
         self.url = [self addHttpPrefix:self.url];// 下载地址可能需要加https前缀
         self.package = [LVPkgInfo safe_string:dic forKey:LV_PKGINFO_PACKAGE];
@@ -64,15 +62,9 @@
 
 - (NSDictionary*) dictionaryInfo{
     if( self.url && self.sha256 && self.package ) {
-        if( self.changeGrammar ) {
-            return @{LV_PKGINFO_URL:self.url,
-                     LV_PKGINFO_SHA:self.sha256,
-                     LV_PKGINFO_PACKAGE:self.package};
-        } else {
-            return @{LV_PKGINFO_SURL:self.url ,
-                     LV_PKGINFO_SSHA:self.sha256,
-                     LV_PKGINFO_PACKAGE:self.package};
-        }
+        return @{LV_PKGINFO_SURL:self.url ,
+                 LV_PKGINFO_SSHA:self.sha256,
+                 LV_PKGINFO_PACKAGE:self.package};
     }
     return nil;
 }

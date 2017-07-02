@@ -28,6 +28,20 @@ import org.luaj.vm2.LuaValue;
  * @date 15/11/10
  */
 public class LuaScriptLoader {
+
+    /**
+     * Lua脚本加载事件
+     */
+    public enum LuaScriptLoadEvent {
+        EVENT_DOWNLOAD_START,
+        EVENT_DOWNLOAD_END,
+        EVENT_LOAD_CACHE,
+        EVENT_LOAD_LOCAL,
+        EVENT_LOAD_PREDOWNLOAD,
+        EVENT_LOAD_ASSET
+    }
+
+
     private Context mContext;
 
     public LuaScriptLoader(final Context context) {
@@ -43,6 +57,10 @@ public class LuaScriptLoader {
 
     public interface ScriptLoaderCallback {
         void onScriptLoaded(final ScriptBundle bundle);//脚本加载
+    }
+
+    public interface ScriptLoaderCallback2 extends ScriptLoaderCallback {
+        void onEvent(LuaScriptLoadEvent event, Object params);
     }
 
     /**
@@ -72,6 +90,18 @@ public class LuaScriptLoader {
          * @param executedSuccess
          */
         void onScriptExecuted(String uri, boolean executedSuccess);
+    }
+
+    /**
+     * 脚本运行回调
+     */
+    public interface ScriptExecuteCallback2 extends ScriptExecuteCallback {
+
+        /**
+         * @param event
+         * @param params
+         */
+        void onEvent(LuaScriptLoadEvent event, Object params);
     }
 
     //-----------------------------------------static methods---------------------------------------

@@ -39,13 +39,18 @@ public class UDJson extends BaseLuaTable {
 //        set("parse", new parse());
     }
 
+    private int fixIndex(Varargs varargs){
+        return varargs != null && varargs.arg1() instanceof UDJson ? 1 : 0;
+    }
+
     //is vaild
     class isValid extends VarArgFunction {
 
         @Override
         public LuaValue invoke(Varargs args) {
-            final LuaValue target = args.arg(2);
-            final LuaValue callback = LuaUtil.getFunction(args, 3);
+            final int fixIndex = fixIndex(args);
+            final LuaValue target = args.arg(fixIndex + 1);
+            final LuaValue callback = LuaUtil.getFunction(args, fixIndex + 2);
             if(callback != null){//通过callback来处理
                 new SimpleTask1<LuaValue>() {
                     @Override
@@ -80,8 +85,9 @@ public class UDJson extends BaseLuaTable {
 
         @Override
         public Varargs invoke(Varargs args) {
-            final LuaValue target = args.arg(2);
-            final LuaValue callback = LuaUtil.getFunction(args, 3);
+            final int fixIndex = fixIndex(args);
+            final LuaValue target = args.arg(fixIndex + 1);
+            final LuaValue callback = LuaUtil.getFunction(args, fixIndex + 2);
             if (callback != null) {//通过callback来处理toTable
                 new SimpleTask1<LuaValue>() {
                     @Override

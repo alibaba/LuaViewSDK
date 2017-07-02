@@ -8,6 +8,7 @@
 
 package com.taobao.luaview.view;
 
+import android.text.InputType;
 import android.widget.EditText;
 
 import com.taobao.luaview.userdata.constants.UDFontSize;
@@ -32,6 +33,7 @@ public class LVEditText extends EditText implements ILVView {
         super(globals.getContext());
         this.mLuaUserdata = new UDEditText(this, globals, metaTable, varargs);
         this.setTextSize(UDFontSize.FONTSIZE_SMALL);
+        this.setInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     @Override

@@ -14,7 +14,6 @@
 
 NSString * const LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL = @"___download_url___";
 NSString * const LV_FILE_NAME_OF_PACKAGE_TIMESTAMP = @"___timestamp___";
-NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
 
 @implementation LVPkgManager
 
@@ -51,9 +50,6 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
 }
 +(NSString*) filePathOfPackageTimestamp:(NSString *)packageName {
     return [self pathForFileName:LV_FILE_NAME_OF_PACKAGE_TIMESTAMP package:packageName];
-}
-+(NSString*) filePathOfChangeGrammar:(NSString *)packageName {
-    return [self pathForFileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR package:packageName];
 }
 //------------------------------------------------------------------------------------------
 +(BOOL) deleteFileOfPackageDownloadUrl:(NSString*) packageName{
@@ -93,29 +89,15 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
     NSData* data = [timestamp dataUsingEncoding:NSUTF8StringEncoding];
     return [self writeFile:data packageName:packageName fileName:LV_FILE_NAME_OF_PACKAGE_TIMESTAMP];
 }
-//------------------------------------ read/write change grammar -----------------------------------
-+(NSString*) changeGrammarOfPackage:(NSString*)packageName {
-    NSData* data = [self readFileFromPackage:packageName fileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR];
-    if( data ) {
-        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    } else {
-        return nil;
-    }
-}
 
-+(BOOL) setPackage:(NSString*)packageName changeGrammar:(NSString*) timestamp{
-    // time file
-    NSData* data = [timestamp dataUsingEncoding:NSUTF8StringEncoding];
-    return [self writeFile:data packageName:packageName fileName:LV_FILE_NAME_OF_CHANGE_GRAMMAR];
-}
 
 //------------------------------------------------------------------------------------------
-+(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName  changeGrammar:(BOOL) changeGrammar{
++(int) unpackageFile:(NSString*) fileName packageName:(NSString*) packageName{
     NSString *path = [LVUtil PathForBundle:nil relativePath:fileName];
     
     if( [LVUtil exist:path] ){
         NSData* pkgData = [LVUtil dataReadFromFile:path];
-        return [self unpackageData:pkgData packageName:packageName changeGrammar:changeGrammar];
+        return [self unpackageData:pkgData packageName:packageName];
     }
     return -1;
 }
@@ -124,7 +106,7 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
     return newTS.length>0 && oldTS.length>0 && [newTS compare:oldTS]==NSOrderedDescending;
 }
 
-+(int) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName changeGrammar:(BOOL) changeGrammar{
++(int) unpackageData:(NSData*) pkgData packageName:(NSString*) packageName{
     NSString *path = [self rootDirectoryOfPackage:packageName];
     if( pkgData && [LVUtil createPath:path] ){
         LVZipArchive *archive = [LVZipArchive archiveWithData:pkgData];
@@ -136,7 +118,6 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
         if( (newTS && oldTS==nil) ||  [self checkUpdateWithNewTS:newTS oldTS:oldTS] ){
             BOOL result = [archive unzipToDirectory:path];
             if( result ) {
-                [self setPackage:packageName changeGrammar:(changeGrammar ? @"true":@"false") ];
                 [self setPackage:packageName timestamp:newTS];
                 return 1;
             }
@@ -176,8 +157,17 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
             [self doDownloadPackage:packageName withInfo:info callback:callback];
             return LV_DOWNLOAD_NET;
         }
+        
+        if (callback){
+            callback(info, nil, LV_DOWNLOAD_CACHE);
+        }
         return LV_DOWNLOAD_CACHE;
     }
+    
+    if (callback){
+        callback(info, nil, LV_DOWNLOAD_ERROR);
+    }
+    
     return LV_DOWNLOAD_ERROR;
 }
 
@@ -198,34 +188,41 @@ NSString * const LV_FILE_NAME_OF_CHANGE_GRAMMAR = @"___change_grammar___";
 +(void) doDownloadPackage:(NSString*)pkgName withInfo:(NSDictionary*) info callback:(LVDownloadCallback) callback{
     LVPkgInfo* pkgInfo = [[LVPkgInfo alloc] init:info];
     
-    if ( callback == nil ){// 回调一定不是空
-        callback = ^(NSDictionary* dic, NSString* erro , LVDownloadDataType dataType){
-        };
-    }
-    
+    __weak typeof (self) weakSelf = self;
     if( pkgName.length>0 && pkgInfo.url.length>0 && pkgInfo.timestamp.length>0){
         [LVUtil download:pkgInfo.url callback:^(NSData *data) {
             // 解包过程放在主线程执行!!!!
             dispatch_async(dispatch_get_main_queue(), ^{
-                if( data ){
-                    BOOL sha256OK = [self sha256Check:data ret:pkgInfo.sha256];
-                    if( sha256OK ){
-                        [self deleteFileOfPackageDownloadUrl:pkgName];// 开始解包, 删除时间戳文件
-                        if ( [self unpackageData:data packageName:pkgName changeGrammar:pkgInfo.changeGrammar]>=0 ) {
-                            // 解包成功
-                            if( [self setPackage:pkgName downloadUrl:pkgInfo.url] ){// 写标记成功
-                                callback(pkgInfo.originalDic, nil, LV_DOWNLOAD_NET);
-                                return ;
-                            }
-                        }
-                    }
-                } else {
-                    LVError(@"[downloadPackage] error: url=%@",pkgInfo.url);
-                }
-                callback(pkgInfo.originalDic, @"error", LV_DOWNLOAD_ERROR);
+                [weakSelf unpackageData:data packageName:pkgName withInfo:pkgInfo callback:callback];
             });
         }];
     }
+}
+
++(NSInteger) unpackageData:(NSData*)data packageName:(NSString*)pkgName withInfo:(LVPkgInfo*)pkgInfo callback:(LVDownloadCallback) callback{
+    
+    if( data ){
+        BOOL sha256OK = [self sha256Check:data ret:pkgInfo.sha256];
+        if( sha256OK ){
+            [self deleteFileOfPackageDownloadUrl:pkgName];// 开始解包, 删除时间戳文件
+            
+            NSInteger result = [self unpackageData:data packageName:pkgName];
+            if ( result >= 0 ) {
+                // 解包成功
+                if( [self setPackage:pkgName downloadUrl:pkgInfo.url] && callback){// 写标记成功
+                    callback(pkgInfo.originalDic, nil, LV_DOWNLOAD_NET);
+                }
+                
+                return result;
+            }
+        }
+    } else {
+        LVError(@"[downloadPackage] error: url=%@",pkgInfo.url);
+    }
+    
+    callback(pkgInfo.originalDic, @"error", LV_DOWNLOAD_ERROR);
+    
+    return -1;
 }
 
 +(NSData*) readLuaFile:(NSString*) fileName rsa:(LVRSA*)rsa{

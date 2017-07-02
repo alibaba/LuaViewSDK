@@ -224,32 +224,34 @@ public abstract class UDBaseRecyclerView<T extends ViewGroup> extends UDBaseList
         // 从firstVisiblePosition位置开始递减查找上一个pinned position
         int pinnedViewPosition = findPinnedViewPositionDecrease(firstVisiblePosition);
         if (pinnedViewPosition >= 0 && mCurrentPinnedPosition != pinnedViewPosition) {
-            ViewGroup itemView = (ViewGroup) mPinnedPositionHolder.get(pinnedViewPosition).itemView;
-            View child = itemView.getChildAt(0);
-            if (child != null) {
-                // 从itemView移除child之前,先设置其与child一样的宽高占位。
-                itemView.getLayoutParams().width = child.getLayoutParams().width;
-                itemView.getLayoutParams().height = child.getLayoutParams().height;
-                itemView.removeView(child);
-                mPinnedContainer.addView(child);
-                if (mCurrentPinnedView != null) {
-                    mCurrentPinnedView.setVisibility(View.GONE);
+            if (mPinnedPositionHolder.get(pinnedViewPosition) != null) {
+                ViewGroup itemView = (ViewGroup) mPinnedPositionHolder.get(pinnedViewPosition).itemView;
+                View child = itemView.getChildAt(0);
+                if (child != null) {
+                    // 从itemView移除child之前,先设置其与child一样的宽高占位。
+                    itemView.getLayoutParams().width = child.getLayoutParams().width;
+                    itemView.getLayoutParams().height = child.getLayoutParams().height;
+                    itemView.removeView(child);
+                    mPinnedContainer.addView(child);
+                    if (mCurrentPinnedView != null) {
+                        mCurrentPinnedView.setVisibility(View.GONE);
+                    }
+                    mCurrentPinnedView = child;
+                } else {
+                    // 从(pinnedViewPosition + 1)位置开始递增查找下一个pinned position
+                    int nextPinnedPosition = findPinnedViewPositionIncrease(pinnedViewPosition + 1);
+                    ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolder.get(nextPinnedPosition).itemView;
+                    View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
+                    mPinnedContainer.removeView(pinnedView);
+                    parentItemView.addView(pinnedView);
+                    mCurrentPinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
+                    if (mCurrentPinnedView != null) {
+                        mCurrentPinnedView.setVisibility(View.VISIBLE);
+                    }
                 }
-                mCurrentPinnedView = child;
-            } else {
-                // 从(pinnedViewPosition + 1)位置开始递增查找下一个pinned position
-                int nextPinnedPosition = findPinnedViewPositionIncrease(pinnedViewPosition + 1);
-                ViewGroup parentItemView = (ViewGroup) mPinnedPositionHolder.get(nextPinnedPosition).itemView;
-                View pinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
-                mPinnedContainer.removeView(pinnedView);
-                parentItemView.addView(pinnedView);
-                mCurrentPinnedView = mPinnedContainer.getChildAt(mPinnedContainer.getChildCount() - 1);
-                if (mCurrentPinnedView != null) {
-                    mCurrentPinnedView.setVisibility(View.VISIBLE);
-                }
-            }
 
-            mCurrentPinnedPosition = pinnedViewPosition;
+                mCurrentPinnedPosition = pinnedViewPosition;
+            }
         }
 
         // 第一个吸顶视图被移除的情况,亦即列表恢复没有吸顶视图的状态。

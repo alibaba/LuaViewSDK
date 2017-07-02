@@ -419,7 +419,12 @@ UIColor* lv_getColorFromStack(lua_State* L, int stackID){
 }
 
 + (NSString*) PathForBundle:(NSBundle*) bundle  relativePath:(NSString*) relativePath {
-    NSString* resourcePath = [(nil == bundle ? [NSBundle mainBundle] : bundle) resourcePath];
+    NSString *resourcePath = [bundle resourcePath];
+    
+    if (!resourcePath){
+        resourcePath = @"/";
+    }
+    
     return [resourcePath stringByAppendingPathComponent:relativePath];
 }
 

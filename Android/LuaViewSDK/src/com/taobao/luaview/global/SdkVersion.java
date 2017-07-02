@@ -16,8 +16,12 @@ package com.taobao.luaview.global;
 public class SdkVersion {
     public static final String V_050 = "0.5.0";
 
+    public static final String V_051 = "0.5.1";
+
+    public static final String V_052 = "0.5.2";
+
     public static String getCurrent() {
-        return V_050;
+        return V_052;
     }
 
     /**

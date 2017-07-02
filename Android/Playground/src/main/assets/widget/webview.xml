@@ -1,3 +1,0 @@
-<View frame="0, 0, sys.contW, sys.contH" css="{flex-direction='column'}" >
-    <Web id="web" css="{flex=1}" url="http://m.taobao.com"></Web>
-</View>

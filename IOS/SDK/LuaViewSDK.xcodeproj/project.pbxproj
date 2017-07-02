@@ -201,9 +201,6 @@
 		91232AAC1DAB67FC00536E0C /* LVWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 91232AAA1DAB67FC00536E0C /* LVWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91232AAD1DAB67FC00536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
 		91232AAE1DAB682100536E0C /* LVWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91232AAB1DAB67FC00536E0C /* LVWebView.m */; };
-		914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */ = {isa = PBXBuildFile; fileRef = 914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		914BB65D1E24C69E00C76042 /* LVGrammarChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */; };
-		914BB65E1E24C69E00C76042 /* LVGrammarChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */; };
 		914D5F3B1DD3275D00CEA3FF /* LVClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 914D5F391DD3275D00CEA3FF /* LVClassInfo.h */; };
 		914D5F3C1DD3275D00CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
 		914D5F3D1DD3276400CEA3FF /* LVClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */; };
@@ -415,8 +412,6 @@
 		911270991DFAC65F001F8047 /* LVEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVEvent.m; sourceTree = "<group>"; };
 		91232AAA1DAB67FC00536E0C /* LVWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVWebView.h; sourceTree = "<group>"; };
 		91232AAB1DAB67FC00536E0C /* LVWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVWebView.m; sourceTree = "<group>"; };
-		914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVGrammarChanger.h; sourceTree = "<group>"; };
-		914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVGrammarChanger.m; sourceTree = "<group>"; };
 		914D5F391DD3275D00CEA3FF /* LVClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVClassInfo.h; sourceTree = "<group>"; };
 		914D5F3A1DD3275D00CEA3FF /* LVClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVClassInfo.m; sourceTree = "<group>"; };
 		91666CF41E6ECDE8005BC162 /* NSObject+LuaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LuaView.h"; sourceTree = "<group>"; };
@@ -779,8 +774,6 @@
 				846481BD1A64C61F00DE6204 /* LVUtil.m */,
 				84DCF0391B44D91800AD723B /* LVTypeConvert.h */,
 				84DCF03A1B44D91800AD723B /* LVTypeConvert.m */,
-				914BB65A1E24C69E00C76042 /* LVGrammarChanger.h */,
-				914BB65B1E24C69E00C76042 /* LVGrammarChanger.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -995,7 +988,6 @@
 				84C1D85B1C16C44B0058E974 /* LVRotationGesture.h in Headers */,
 				84C1D85C1C16C44C0058E974 /* LVSwipeGesture.h in Headers */,
 				84C1D85D1C16C44C0058E974 /* LVTapGesture.h in Headers */,
-				914BB65C1E24C69E00C76042 /* LVGrammarChanger.h in Headers */,
 				84C1D85F1C16C44C0058E974 /* LVHttp.h in Headers */,
 				84C1D8601C16C44C0058E974 /* LVHttpResponse.h in Headers */,
 				84C1D8611C16C44C0058E974 /* LVAudioPlayer.h in Headers */,
@@ -1214,7 +1206,6 @@
 				91F6788B1DF561D40042D6FC /* LVCanvas.m in Sources */,
 				3CFF77DA1C74740900847C05 /* LVPinchGesture.m in Sources */,
 				3CFF77DB1C74740900847C05 /* LVRotationGesture.m in Sources */,
-				914BB65E1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
 				91B1A48A1E6E873F000F71B3 /* LuaView.m in Sources */,
 				3CFF77DC1C74740900847C05 /* LVSwipeGesture.m in Sources */,
 				3CFF77DD1C74740900847C05 /* LVTapGesture.m in Sources */,
@@ -1304,7 +1295,6 @@
 				84C1D7FA1C16C3FA0058E974 /* LVPanGesture.m in Sources */,
 				91F6788A1DF561D40042D6FC /* LVCanvas.m in Sources */,
 				84C1D7FB1C16C3FA0058E974 /* LVPinchGesture.m in Sources */,
-				914BB65D1E24C69E00C76042 /* LVGrammarChanger.m in Sources */,
 				84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */,
 				91B1A4891E6E873F000F71B3 /* LuaView.m in Sources */,
 				84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */,

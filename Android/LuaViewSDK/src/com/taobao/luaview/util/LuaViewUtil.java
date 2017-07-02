@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -107,12 +106,12 @@ public class LuaViewUtil {
         return null;
     }
 
-    public static android.support.v7.app.ActionBar getSupportActionBar(Globals globals) {
-        if (globals != null && globals.getContext() instanceof AppCompatActivity) {
-            return ((AppCompatActivity) (globals.getContext())).getSupportActionBar();
-        }
-        return null;
-    }
+//    public static android.support.v7.app.ActionBar getSupportActionBar(Globals globals) {
+//        if (globals != null && globals.getContext() instanceof AppCompatActivity) {
+//            return ((AppCompatActivity) (globals.getContext())).getSupportActionBar();
+//        }
+//        return null;
+//    }
 
 
     /**
@@ -145,6 +144,20 @@ public class LuaViewUtil {
         if (parent != null && target != null && parent != target) {//不能自己加自己
             final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(target);
             parent.addView(LuaViewUtil.removeFromParent(target), layoutParams);
+        }
+    }
+
+    /**
+     * add target view to parent
+     *
+     * @param parent
+     * @param target
+     * @param varargs
+     */
+    public static void addView(ViewGroup parent, View target, int pos, Varargs varargs) {
+        if (parent != null && target != null && parent != target) {//不能自己加自己
+            final ViewGroup.LayoutParams layoutParams = LuaViewUtil.getOrCreateLayoutParams(target);
+            parent.addView(LuaViewUtil.removeFromParent(target), pos, layoutParams);
         }
     }
 

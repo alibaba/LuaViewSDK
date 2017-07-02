@@ -25,11 +25,12 @@ import java.io.File;
  * @date 15/11/9
  */
 public class LuaScriptManager {
-    private static String PACKAGE_NAME;
     private static String BASE_FILECACHE_PATH;
+    private static String BASE_PREDOWNLOAD_FILECACHE_PATH;//预下载都使用data/data目录
     //folders
     private static final String PACKAGE_NAME_DEFAULT = "luaview";
     public static final String FOLDER_SCRIPT = "script";
+    public static final String FOLDER_PRE_DOWNLOAD = "predownload";
 
     //默认缓存文件的后缀
     public static final String POSTFIX_SCRIPT_BUNDLE = ".lvraw";
@@ -56,8 +57,17 @@ public class LuaScriptManager {
                 initInternalFilePath(context);
             } else {//测试环境优先使用sd卡路径
                 if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                    PACKAGE_NAME = context.getPackageName();
                     BASE_FILECACHE_PATH = context.getExternalCacheDir() + File.separator;
+
+                    //base predownload path
+//                    final File file = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
+//                    if(file != null) {
+//                        BASE_PREDOWNLOAD_FILECACHE_PATH = file.getPath() + File.separator;
+//                    } else {
+//                        BASE_PREDOWNLOAD_FILECACHE_PATH = context.getCacheDir() + File.separator;
+//                    }
+
+                    BASE_PREDOWNLOAD_FILECACHE_PATH = "/data/data/" + context.getPackageName() + "/app_luaview/";
                 } else {
                     initInternalFilePath(context);
                 }
@@ -72,24 +82,23 @@ public class LuaScriptManager {
      */
     private static void initInternalFilePath(Context context) {
         final File dir = context.getDir(PACKAGE_NAME_DEFAULT, Context.MODE_PRIVATE);
-        if (dir != null) {//优先存在 data/data/packagename/luaview
-            PACKAGE_NAME = PACKAGE_NAME_DEFAULT;
+        if (dir != null) {//优先存在 data/data/packagename/app_luaview
             BASE_FILECACHE_PATH = dir.getPath() + File.separator;
         } else {
-            PACKAGE_NAME = PACKAGE_NAME_DEFAULT;
             BASE_FILECACHE_PATH = context.getCacheDir() + File.separator;
         }
-    }
 
+        BASE_PREDOWNLOAD_FILECACHE_PATH = BASE_FILECACHE_PATH;
+    }
     //--------------------------------static methods for get file path------------------------------
 
     /**
-     * 获取基础文件路劲
+     * 获取基础文件路径
      *
      * @return
      */
     public static String getBaseFilePath() {
-        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator;
+        return BASE_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator;
     }
 
     /**
@@ -98,7 +107,16 @@ public class LuaScriptManager {
      * @return
      */
     public static String getBaseScriptFolderPath() {
-        return BASE_FILECACHE_PATH + PACKAGE_NAME + File.separator + FOLDER_SCRIPT + File.separator;
+        return BASE_FILECACHE_PATH + PACKAGE_NAME_DEFAULT + File.separator + FOLDER_SCRIPT + File.separator;
+    }
+
+    /**
+     * get predownload folder path
+     *
+     * @return
+     */
+    public static String getBasePredownloadFolderPath() {
+        return BASE_PREDOWNLOAD_FILECACHE_PATH + FOLDER_PRE_DOWNLOAD + File.separator;
     }
 
     /**
@@ -128,6 +146,19 @@ public class LuaScriptManager {
                 .append(fileNameWithPostfix)
                 .toString();
     }
+
+    /**
+     * get pre downloaded file path
+     *
+     * @param fileNameWithPostfix
+     * @return
+     */
+    public static String getPredownloadFilePath(String fileNameWithPostfix) {
+        return new StringBuffer()
+                .append(getBasePredownloadFolderPath())
+                .append(fileNameWithPostfix).toString();
+    }
+
 
     /**
      * 构建文件名称
@@ -178,6 +209,22 @@ public class LuaScriptManager {
         return getFilePath(folderName, fileName);
     }
 
+
+    /**
+     * 构建预下载脚本文件名（这里直接使用脚本地址，不做任何修改）
+     *
+     * @param uri
+     * @return
+     */
+    public static String buildPredownloadScriptBundleFilePath(final String uri) {
+        if (uri != null) {
+            String fileName = uri.substring(uri.lastIndexOf('/') + 1);//只取最后的文件名
+            return getPredownloadFilePath(fileName);
+        } else {
+            return null;
+        }
+    }
+
     //------------------------------------------exists----------------------------------------------
 
     /**
@@ -189,6 +236,19 @@ public class LuaScriptManager {
     public static boolean existsScriptBundle(final String uri) {
         if (!TextUtils.isEmpty(uri)) {
             return FileUtil.exists(buildScriptBundleFilePath(uri));
+        }
+        return false;
+    }
+
+    /**
+     * 预下载目录下的某个文件是否存在
+     *
+     * @param uri
+     * @return
+     */
+    public static boolean existsPredownloadBundle(final String uri) {
+        if (!TextUtils.isEmpty(uri)) {
+            return FileUtil.exists(buildPredownloadScriptBundleFilePath(uri));
         }
         return false;
     }
@@ -240,6 +300,17 @@ public class LuaScriptManager {
     public static boolean isLuaStandardSyntaxUrl(final String url) {
         return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_STANDARD_SYNTAX_ZIP);
     }
+
+    /**
+     * 是否是非标准语法的 zip包
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isLuaUnStandardSyntaxUrl(final String url) {
+        return FileUtil.isSuffix(url, LuaScriptManager.POSTFIX_LV_ZIP);//只有zip包是非标准包，bzip、szip都认为是标准，bzip有问题么？
+    }
+
 
     /**
      * 是否是lua加密脚本
