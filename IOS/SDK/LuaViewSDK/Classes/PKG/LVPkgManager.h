@@ -11,7 +11,7 @@
 
 #define LUAVIEW_ROOT_PATH  @"LUAVIEW_5_11_0"
 #define LUAVIEW_VERSION        "5.16.0"
-#define LUAVIEW_SDK_VERSION    "0.5.1"
+#define LUAVIEW_SDK_VERSION    "0.5.2"
 
 
 extern NSString * const LV_FILE_NAME_OF_PACKAGE_DOWNLOAD_URL;
