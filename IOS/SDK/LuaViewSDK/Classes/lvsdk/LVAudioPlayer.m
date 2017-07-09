@@ -12,7 +12,10 @@
 #import "LVHeads.h"
 
 @interface LVAudioPlayer ()
+
 @property(nonatomic,assign) BOOL playing;
+@property (nonatomic, copy) NSString *fileName;
+
 @end
 
 @implementation LVAudioPlayer{
@@ -44,6 +47,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 }
 
 -(void) setPlayFileName0:(NSString*) fileName bundle:(LVBundle*) bundle{
+    
     NSString* path = [bundle resourcePathWithName:fileName];
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
@@ -51,9 +55,11 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//使用本地URL创建
         if( error ) {
             NSLog(@"[LuaView][error]%@",error);
+        }else{
+            self.fileName = fileName;
         }
     }
-    if( self.playing ) {
+    if( !self.playing ) {
         [self play];
     }
 }
@@ -94,25 +100,26 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 #pragma -mark AudioPlayer
 
 static int lvNewAudioPlayer (lua_State *L) {
+    
+    Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
+    
+    LVAudioPlayer* player = [[c alloc] init:L];
+    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
+    
     if( lua_gettop(L)>=1 ) {
-        Class c = [LVUtil upvalueClass:L defaultClass:[LVAudioPlayer class]];
-        
-        LVAudioPlayer* player = [[c alloc] init:L];
-        LuaViewCore* lview = LV_LUASTATE_VIEW(L);
         NSString* fileName = lv_paramString(L, 1);
         [player setPlayFileName:fileName bundle:lview.bundle];
-        
-        {
-            NEW_USERDATA(userData, AudioPlayer);
-            userData->object = CFBridgingRetain(player);
-            player.lv_userData = userData;
-            
-            luaL_getmetatable(L, META_TABLE_AudioPlayer );
-            lua_setmetatable(L, -2);
-        }
-        return 1;
     }
-    return 0;
+    
+    {
+        NEW_USERDATA(userData, AudioPlayer);
+        userData->object = CFBridgingRetain(player);
+        player.lv_userData = userData;
+        
+        luaL_getmetatable(L, META_TABLE_AudioPlayer );
+        lua_setmetatable(L, -2);
+    }
+    return 1;
 }
 
 static int play (lua_State *L) {
@@ -121,6 +128,19 @@ static int play (lua_State *L) {
     if( user && LVIsType(user, AudioPlayer) ){
         LVAudioPlayer* player = (__bridge LVAudioPlayer *)(user->object);
         if( player ){
+            
+            if( lua_gettop(L)>=2 ) {
+                NSString* fileName = lv_paramString(L, 2);
+                
+                if (![player.fileName isEqualToString:fileName]){
+                    if (player.playing){
+                        [player stop];
+                    }
+                    LuaViewCore* lview = LV_LUASTATE_VIEW(L);
+                    [player setPlayFileName:fileName bundle:lview.bundle];
+                }
+            }
+            
             [player play];
             lua_pushvalue(L,1);
             return 1;
