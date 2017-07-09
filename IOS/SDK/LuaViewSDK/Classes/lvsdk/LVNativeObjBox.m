@@ -116,7 +116,7 @@ static int funcNameFromLuaToOC(NSMutableString* funcName){
         NSMutableString* ocMethodName = [[NSMutableString alloc] initWithString:methodName];
         funcNameFromLuaToOC(ocMethodName);
         id nativeObj = self.realObject;
-        for ( int i=0; i<5; i++ ) {
+        for ( int i=0; i<7; i++ ) {
             SEL sel = NSSelectorFromString(ocMethodName);
             if( [nativeObj respondsToSelector:sel] ){
                 [self.classInfo setMethod:methodName exist:YES];

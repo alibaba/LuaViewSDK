@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224569A41F0B62DA000CDE49 /* LVCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 224569A21F0B62DA000CDE49 /* LVCamera.h */; };
+		224569A51F0B62DA000CDE49 /* LVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 224569A31F0B62DA000CDE49 /* LVCamera.m */; };
 		3C02D1D91C31106E00213386 /* LVAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C02D1D71C31106E00213386 /* LVAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C02D1DA1C31106E00213386 /* LVAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02D1D81C31106E00213386 /* LVAnimator.m */; };
 		3C98A53A1C7C0C100001508E /* LViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C98A5381C7C0C100001508E /* LViewController.h */; };
@@ -285,6 +287,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224569A21F0B62DA000CDE49 /* LVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVCamera.h; sourceTree = "<group>"; };
+		224569A31F0B62DA000CDE49 /* LVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVCamera.m; sourceTree = "<group>"; };
 		3C02D1D71C31106E00213386 /* LVAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAnimator.h; sourceTree = "<group>"; };
 		3C02D1D81C31106E00213386 /* LVAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAnimator.m; sourceTree = "<group>"; };
 		3C98A5381C7C0C100001508E /* LViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LViewController.h; path = ../LViewController.h; sourceTree = "<group>"; };
@@ -492,6 +496,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224569A11F0B6130000CDE49 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				224569A21F0B62DA000CDE49 /* LVCamera.h */,
+				224569A31F0B62DA000CDE49 /* LVCamera.m */,
+			);
+			name = camera;
+			sourceTree = "<group>";
+		};
 		8418E3411A5E67FC00158125 /* LuaViewSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,29 +662,30 @@
 		846481A51A64C61F00DE6204 /* lvsdk */ = {
 			isa = PBXGroup;
 			children = (
-				846481AC1A64C61F00DE6204 /* LVHeads.h */,
-				846481AD1A64C61F00DE6204 /* LVHeads.m */,
-				840AD5311A5EAB4A0075CB58 /* LView.h */,
-				840AD5321A5EAB4A0075CB58 /* LView.m */,
 				91B1A4861E6E873F000F71B3 /* LuaView.h */,
-				91B1A4871E6E873F000F71B3 /* LuaView.m */,
 				91B1A4811E6E871E000F71B3 /* LuaViewCore.h */,
-				91B1A4821E6E871E000F71B3 /* LuaViewCore.m */,
-				84E85C181C33B84B007DE3DF /* LVBundle.h */,
-				84E85C191C33B84B007DE3DF /* LVBundle.m */,
-				3C98A5381C7C0C100001508E /* LViewController.h */,
-				3C98A5391C7C0C100001508E /* LViewController.m */,
 				84E446961AEE0655009C9A8A /* LVBlock.h */,
+				84E85C181C33B84B007DE3DF /* LVBundle.h */,
+				846481AC1A64C61F00DE6204 /* LVHeads.h */,
+				840AD5311A5EAB4A0075CB58 /* LView.h */,
+				3C98A5381C7C0C100001508E /* LViewController.h */,
+				91B1A4871E6E873F000F71B3 /* LuaView.m */,
+				91B1A4821E6E871E000F71B3 /* LuaViewCore.m */,
 				84E446971AEE0655009C9A8A /* LVBlock.m */,
-				84A52BFC1AE7985D00E464AC /* ui */,
-				84A52C021AE7995D00E464AC /* basic */,
-				84A52BFE1AE7988A00E464AC /* gesture */,
-				84A52BFD1AE7986600E464AC /* net */,
+				84E85C191C33B84B007DE3DF /* LVBundle.m */,
+				846481AD1A64C61F00DE6204 /* LVHeads.m */,
+				840AD5321A5EAB4A0075CB58 /* LView.m */,
+				3C98A5391C7C0C100001508E /* LViewController.m */,
 				84A52C001AE7990B00E464AC /* audio */,
+				84A52C021AE7995D00E464AC /* basic */,
+				224569A11F0B6130000CDE49 /* camera */,
 				84A52BFF1AE798A100E464AC /* file */,
+				84A52BFE1AE7988A00E464AC /* gesture */,
 				844317A51BC61CA000968368 /* navigation */,
-				844317A61BC61E3900968368 /* system */,
+				84A52BFD1AE7986600E464AC /* net */,
 				84CF566B1AE8EC0B00A49B36 /* objectbox */,
+				844317A61BC61E3900968368 /* system */,
+				84A52BFC1AE7985D00E464AC /* ui */,
 				84A52C011AE7992600E464AC /* util */,
 			);
 			path = lvsdk;
@@ -976,6 +990,7 @@
 				84C1D8551C16C44B0058E974 /* LVTimer.h in Headers */,
 				91A8CFF91E1F649F006D1609 /* LVPkgInfo.h in Headers */,
 				9112709A1DFAC65F001F8047 /* LVEvent.h in Headers */,
+				224569A41F0B62DA000CDE49 /* LVCamera.h in Headers */,
 				3C98A53A1C7C0C100001508E /* LViewController.h in Headers */,
 				84C1D8561C16C44B0058E974 /* LVStruct.h in Headers */,
 				3CC1B5531C96B59D001DEEC0 /* LVZipArchive.h in Headers */,
@@ -1295,6 +1310,7 @@
 				84C1D7FA1C16C3FA0058E974 /* LVPanGesture.m in Sources */,
 				91F6788A1DF561D40042D6FC /* LVCanvas.m in Sources */,
 				84C1D7FB1C16C3FA0058E974 /* LVPinchGesture.m in Sources */,
+				224569A51F0B62DA000CDE49 /* LVCamera.m in Sources */,
 				84C1D7FC1C16C3FA0058E974 /* LVRotationGesture.m in Sources */,
 				91B1A4891E6E873F000F71B3 /* LuaView.m in Sources */,
 				84C1D7FD1C16C3FA0058E974 /* LVSwipeGesture.m in Sources */,

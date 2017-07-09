@@ -93,10 +93,14 @@ typedef struct _LVUserDataInfo {
  */
 @class LuaViewCore;
 @protocol LVProtocal <NSObject>
+
 @required
 @property(nonatomic,weak) LuaViewCore* lv_luaviewCore;
 @property(nonatomic,assign) LVUserDataInfo* lv_userData;
+
+@optional
 - (id) lv_nativeObject; // 返回native对象
+
 @end
 
 /*
@@ -135,6 +139,7 @@ typedef struct _LVUserDataInfo {
 #define META_TABLE_UIAlertView          "UI.AlertView"
 #define META_TABLE_Transform3D          "UI.Transfrom3D"
 #define META_TABLE_Animator             "UI.Animator"
+#define META_TABLE_Camera               "UI.CameraView"
 
 #define META_TABLE_Timer                "LV.Timer"
 #define META_TABLE_Http                 "LV.Http"

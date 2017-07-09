@@ -67,6 +67,7 @@
 #import "LVCanvas.h"
 #import "LVEvent.h"
 #import "LVBitmap.h"
+#import "LVCamera.h"
 
 @interface LuaViewCore ()
 @property (nonatomic,strong) id mySelf;
@@ -284,6 +285,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
                 [LVExGlobalFunc class],
                 [LVNativeObjBox class],
                 [LVDebuger class],
+                [LVCamera class],
                 ];
         self.registerClasses = arr;
         [self registerAllClass];

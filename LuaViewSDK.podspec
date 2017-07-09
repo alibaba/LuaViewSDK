@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LuaViewSDK"
-  s.version  = "0.5.2"
+  s.version  = "0.5.3"
   s.summary      = "LuaView SDK"
 
   s.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => 'The MIT License (MIT)', :file => 'LICENSE.txt' }
 
-  s.author             = { "城西" => "xicheng.dxc@alibaba-inc.com" }
+  s.author             = { "敛心" => "jinjin.jj@alibaba-inc.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-  s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+  s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics', 'AVFoundation'
   s.libraries = 'z'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
