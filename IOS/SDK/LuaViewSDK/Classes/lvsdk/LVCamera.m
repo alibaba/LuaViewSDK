@@ -193,7 +193,9 @@
         for (AVMetadataObject *metadata in metadataObjects){
             if ([metadata.type isEqualToString:AVMetadataObjectTypeFace]){
                 CGRect face = [self.previewLayer rectForMetadataOutputRectOfInterest:metadata.bounds];
-                [self onFaceDetected:face];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self onFaceDetected:face];
+                });
 #ifdef DEBUG
                 CGPathAddRect(path, NULL, face);
 #endif
