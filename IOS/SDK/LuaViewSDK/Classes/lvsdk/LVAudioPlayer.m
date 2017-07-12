@@ -11,7 +11,7 @@
 #import "LView.h"
 #import "LVHeads.h"
 
-@interface LVAudioPlayer ()
+@interface LVAudioPlayer ()<AVAudioPlayerDelegate>
 
 @property(nonatomic,assign) BOOL playing;
 @property (nonatomic, copy) NSString *fileName;
@@ -52,29 +52,33 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     if( path ) {
         NSURL* url = [[NSURL alloc] initWithString:path];
         NSError* error = nil;
+        [self stop];
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//使用本地URL创建
+        audioPlayer.delegate = self;
+        
         if( error ) {
             NSLog(@"[LuaView][error]%@",error);
         }else{
             self.fileName = fileName;
         }
     }
-    if( !self.playing ) {
-        [self play];
-    }
+    
+    [self play];
 }
 
 -(void) setPlayFileName:(NSString*) fileName bundle:(LVBundle*) bundle{
     if( fileName ==nil )
         return;
     if( [LVUtil isExternalUrl:fileName] ){
+        
+        __weak typeof (self) wself = self;
         [LVUtil download:fileName callback:^(NSData *fileData) {
             NSString* suffix = [fileName componentsSeparatedByString:@"."].lastObject;
             NSData* theFileNameData = [fileName dataUsingEncoding:NSUTF8StringEncoding];
             NSString* md5Path = [LVUtil MD5HashFromData:theFileNameData];
             md5Path = [NSString stringWithFormat:@"%@.%@",md5Path,suffix];//Mp3文件一定要加后缀，否则无法播放
             if( [LVUtil saveData:fileData toFile:[LVUtil PathForCachesResource:md5Path]] ) {
-                [self setPlayFileName0:md5Path bundle:bundle];
+                [wself setPlayFileName0:md5Path bundle:bundle];
             }
         }];
     } else {
@@ -83,8 +87,10 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 }
 
 -(void) play {
-    [audioPlayer play];
-    self.playing = YES;
+    if (!self.playing){
+        [audioPlayer play];
+        self.playing = YES;
+    }
 }
 
 -(void) stop {
@@ -92,10 +98,13 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     self.playing = NO;
 }
 
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    self.playing = NO;
+}
+
 - (id) lv_nativeObject{
     return audioPlayer;
 }
-
 
 #pragma -mark AudioPlayer
 
@@ -133,9 +142,7 @@ static int play (lua_State *L) {
                 NSString* fileName = lv_paramString(L, 2);
                 
                 if (![player.fileName isEqualToString:fileName]){
-                    if (player.playing){
-                        [player stop];
-                    }
+                    [player stop];
                     LuaViewCore* lview = LV_LUASTATE_VIEW(L);
                     [player setPlayFileName:fileName bundle:lview.bundle];
                 }
