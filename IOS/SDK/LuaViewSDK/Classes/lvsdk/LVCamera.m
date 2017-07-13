@@ -359,28 +359,6 @@ static int lvTakePicture(lua_State *L){
     return 0;
 }
 
-static int lvEnableFlash(lua_State *L){
-    LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
-    if( user ){
-        LVCamera* camera = (__bridge LVCamera *)(user->object);
-        if ( lua_gettop(L)>=2 ){
-            BOOL enable = lua_toboolean(L, 2);
-            [camera enableFlash:enable];
-            return 0;
-        }
-    }
-    return 0;
-}
-
-static int lvHasCameraFlash(lua_State *L){
-    //先缺省设置成闪光灯一直存在
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    int available = device.isFlashAvailable;
-    
-    lua_pushboolean(L, available);
-    return 1;
-}
-
 static int __gc(lua_State *L){
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataCamera(user);
@@ -419,11 +397,8 @@ static void releaseUserDataCamera(LVUserDataInfo* user){
     
     //方法列表
     const struct luaL_Reg memberFunctions [] = {
-        {"hasPermission", lvHasPermission},
         {"enableFaceDetect", lvEnableFaceDetect},
         {"takePicture", lvTakePicture},
-        {"enableFlash", lvEnableFlash},
-        {"hasCameraFlash", lvHasCameraFlash},
         {"__gc", __gc },
         {"__tostring", __tostring },
         {NULL, NULL}

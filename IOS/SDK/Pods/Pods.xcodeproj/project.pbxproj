@@ -1,1020 +1,626 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>056A2FA3A6CB21742E8E3B2CB0E63082</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>91E11CF231AD6A98273E79153B60A54E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0A46B22D7733AFEBC7C5ABFE07CFB36C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>copy-framework-resources.rb</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0DDDB42DC3B54E98B7A6867BC96FF37F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lcode.h</string>
-			<key>path</key>
-			<string>include/lcode.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>11C2B6B6A4B84C26FDB9E0D97C50F4CD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lua.h</string>
-			<key>path</key>
-			<string>include/lua.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>267AC7C3342785F1CBB02BC488A6775D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lstate.h</string>
-			<key>path</key>
-			<string>include/lstate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>26FD8F995071C90891F58A71E66C587D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods-LuaViewSDK.a</string>
-			<key>path</key>
-			<string>libPods-LuaViewSDK.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>A70CDAD61F90AC503C7D04CC22DA2923</string>
-				<string>FB45FFD90572718D82AB9092B750F0CA</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>312732138A25DD780E02CF2209411190</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lgc.h</string>
-			<key>path</key>
-			<string>include/lgc.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>390FA70093DF3DF31238A2C5FFBDAE1D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3964458B8E7D205C9CB68AFAB56CCA86</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DB62BD23CF003FA1B9267FEE59F027C1</string>
-				<string>3E811C995FA73A86D770ECC87C5749AA</string>
-				<string>0DDDB42DC3B54E98B7A6867BC96FF37F</string>
-				<string>D0083DAD99ECAF62C212607A6350A3E2</string>
-				<string>5E5B94E16BD206C75BD6B65A7ECAD961</string>
-				<string>ECFA9E11D4F508E194A653DB54B65D08</string>
-				<string>312732138A25DD780E02CF2209411190</string>
-				<string>4B2FC280C9B91E636EEB5C312E3AC696</string>
-				<string>A415A3124761D60699F51D4CFBB06649</string>
-				<string>DAB9D55CED32DDD0EC264DA9FB67DD27</string>
-				<string>E69CBBB823A3BCF1B11E3782184EA9D8</string>
-				<string>BB39C0FA9F5A310EC70419BC3B882CCB</string>
-				<string>B2547B51976EAC7769ECD885B6722F76</string>
-				<string>267AC7C3342785F1CBB02BC488A6775D</string>
-				<string>B29970FF14BC57628904B992117C9CF1</string>
-				<string>D47A00253E8F5F2DF40001F00CCD78C0</string>
-				<string>82992175BDF8D6BFAA3804F0CAC51405</string>
-				<string>11C2B6B6A4B84C26FDB9E0D97C50F4CD</string>
-				<string>8D1B536DFF548BF58F8C51E256CE3D24</string>
-				<string>3C6A9470FA6C41264147C65B429E502C</string>
-				<string>60BB9505F8A843D03B4D6504524849EB</string>
-				<string>3FDB703A110AB23F5AF9656DFCA2356F</string>
-				<string>9B4525398F9E82E4F82AE31C1926F88A</string>
-				<string>BD6F68E26C817A30DFF125BAD7660196</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>liblua</string>
-			<key>path</key>
-			<string>liblua</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3C6A9470FA6C41264147C65B429E502C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lualib.h</string>
-			<key>path</key>
-			<string>include/lualib.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3E4E89230EF59BC255123B67864ACF77</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>3E811C995FA73A86D770ECC87C5749AA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lauxlib.h</string>
-			<key>path</key>
-			<string>include/lauxlib.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3FDB703A110AB23F5AF9656DFCA2356F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lvm.h</string>
-			<key>path</key>
-			<string>include/lvm.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4B2FC280C9B91E636EEB5C312E3AC696</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>llex.h</string>
-			<key>path</key>
-			<string>include/llex.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4D0C65FEF03CD3B6762F042EC53326A3</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>B119FA2B0F77412E99BA07319FAB17EF</string>
-			<key>buildPhases</key>
-			<array>
-				<string>C9C3CE8033DCA1B85FE69A4E616FE604</string>
-				<string>F3130081A8C787CE325BBB01060CA44F</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-LuaViewSDK</string>
-			<key>productName</key>
-			<string>Pods-LuaViewSDK</string>
-			<key>productReference</key>
-			<string>26FD8F995071C90891F58A71E66C587D</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>5E5B94E16BD206C75BD6B65A7ECAD961</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>ldo.h</string>
-			<key>path</key>
-			<string>include/ldo.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5FDC627363BC46112F66AF93256F81FB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>60BB9505F8A843D03B4D6504524849EB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lundump.h</string>
-			<key>path</key>
-			<string>include/lundump.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>78A612D23682CAB99566BF2C1AF26BAA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3964458B8E7D205C9CB68AFAB56CCA86</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7BF30D7EDA1DD3B3F7D68E1239586080</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7DB346D0F39D3F0E887471402A8071AB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
-				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
-				<string>78A612D23682CAB99566BF2C1AF26BAA</string>
-				<string>B4ED99D5573387B570B45792D22E365A</string>
-				<string>056A2FA3A6CB21742E8E3B2CB0E63082</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80C19BE02AD880BF3F3906FCE6255738</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>82992175BDF8D6BFAA3804F0CAC51405</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>ltm.h</string>
-			<key>path</key>
-			<string>include/ltm.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>87415CC8BE852DA72DCDE7F67C414834</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>B5D85768A86F0B65A2C2AEFDA81FD8DD</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>8D1B536DFF548BF58F8C51E256CE3D24</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>luaconf.h</string>
-			<key>path</key>
-			<string>include/luaconf.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>91E11CF231AD6A98273E79153B60A54E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0A46B22D7733AFEBC7C5ABFE07CFB36C</string>
-				<string>EC2F8537471FE5495C3B0747FD1A75E1</string>
-				<string>A461CE654FFE916E0FFB5F3ACFEBDF62</string>
-				<string>80C19BE02AD880BF3F3906FCE6255738</string>
-				<string>9C4A26A7E662B89508753AF6876675BF</string>
-				<string>5FDC627363BC46112F66AF93256F81FB</string>
-				<string>B5D85768A86F0B65A2C2AEFDA81FD8DD</string>
-				<string>7BF30D7EDA1DD3B3F7D68E1239586080</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-LuaViewSDK</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-LuaViewSDK</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9B4525398F9E82E4F82AE31C1926F88A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lzio.h</string>
-			<key>path</key>
-			<string>include/lzio.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9C4A26A7E662B89508753AF6876675BF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A415A3124761D60699F51D4CFBB06649</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>llimits.h</string>
-			<key>path</key>
-			<string>include/llimits.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A461CE654FFE916E0FFB5F3ACFEBDF62</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A70CDAD61F90AC503C7D04CC22DA2923</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>SYMROOT</key>
-				<string>${SRCROOT}/../build</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>B119FA2B0F77412E99BA07319FAB17EF</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>87415CC8BE852DA72DCDE7F67C414834</string>
-				<string>F123AA7859E016F51C2C79FE7CF9C0B6</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>B2547B51976EAC7769ECD885B6722F76</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lparser.h</string>
-			<key>path</key>
-			<string>include/lparser.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B29970FF14BC57628904B992117C9CF1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lstring.h</string>
-			<key>path</key>
-			<string>include/lstring.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B4ED99D5573387B570B45792D22E365A</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>26FD8F995071C90891F58A71E66C587D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B5D85768A86F0B65A2C2AEFDA81FD8DD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>BB39C0FA9F5A310EC70419BC3B882CCB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lopcodes.h</string>
-			<key>path</key>
-			<string>include/lopcodes.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BF6342C8B29F4CEEA088EFF7AB4DE362</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BD6F68E26C817A30DFF125BAD7660196</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C1ED9902BE40F60630E814E9759605A4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF6342C8B29F4CEEA088EFF7AB4DE362</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3E4E89230EF59BC255123B67864ACF77</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C1ED9902BE40F60630E814E9759605A4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>name</key>
-			<string>liblua.a</string>
-			<key>path</key>
-			<string>lib/liblua.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C7607B55A8A893BD6114B1B0C522A630</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80C19BE02AD880BF3F3906FCE6255738</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C9C3CE8033DCA1B85FE69A4E616FE604</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C7607B55A8A893BD6114B1B0C522A630</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>D0083DAD99ECAF62C212607A6350A3E2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>ldebug.h</string>
-			<key>path</key>
-			<string>include/ldebug.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D41D8CD98F00B204E9800998ECF8427E</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0700</string>
-				<key>LastUpgradeCheck</key>
-				<string>0700</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>7DB346D0F39D3F0E887471402A8071AB</string>
-			<key>productRefGroup</key>
-			<string>B4ED99D5573387B570B45792D22E365A</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>4D0C65FEF03CD3B6762F042EC53326A3</string>
-			</array>
-		</dict>
-		<key>D47A00253E8F5F2DF40001F00CCD78C0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>ltable.h</string>
-			<key>path</key>
-			<string>include/ltable.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DAB9D55CED32DDD0EC264DA9FB67DD27</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lmem.h</string>
-			<key>path</key>
-			<string>include/lmem.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DB62BD23CF003FA1B9267FEE59F027C1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lapi.h</string>
-			<key>path</key>
-			<string>include/lapi.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E69CBBB823A3BCF1B11E3782184EA9D8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lobject.h</string>
-			<key>path</key>
-			<string>include/lobject.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC2F8537471FE5495C3B0747FD1A75E1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-LuaViewSDK-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ECFA9E11D4F508E194A653DB54B65D08</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>lfunc.h</string>
-			<key>path</key>
-			<string>include/lfunc.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F123AA7859E016F51C2C79FE7CF9C0B6</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>7BF30D7EDA1DD3B3F7D68E1239586080</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<array>
-					<string>$(ARCHS_STANDARD)</string>
-				</array>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>F3130081A8C787CE325BBB01060CA44F</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>390FA70093DF3DF31238A2C5FFBDAE1D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>FB45FFD90572718D82AB9092B750F0CA</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>RELEASE=1</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>SYMROOT</key>
-				<string>${SRCROOT}/../build</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>D41D8CD98F00B204E9800998ECF8427E</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21DA712F769D001B386DB690AA99B68A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		22EC2627DA2EA33B22E376A202C154B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		3373EFCD7F653DEDC9D947F96D1DE155 /* Pods-LuaViewLib-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 30040E7B1FB9032D835FAB5C1FF15F0B /* Pods-LuaViewLib-dummy.m */; };
+		7ADDCF1BCB9863DD40E7078D178D42FC /* Pods-Dummy-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F554A9CA77276E6BDDFA9BCE0861D7B /* Pods-Dummy-dummy.m */; };
+		86B47FAC5D9A786542E45CB63F77505D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		B96F997B48EF2FE4979413FB565CB555 /* Pods-LuaViewSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBF966D65A9866E7D84114BB97E9DEA /* Pods-LuaViewSDK-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		052F013870A94A6B1A6EFFCA6EA0C736 /* Pods-LuaViewLib-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuaViewLib-frameworks.sh"; sourceTree = "<group>"; };
+		0BA8333E6C78D64DBCB1373E435FEDB1 /* libPods-Dummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Dummy.a"; path = "libPods-Dummy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DDDB42DC3B54E98B7A6867BC96FF37F /* lcode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lcode.h; path = include/lcode.h; sourceTree = "<group>"; };
+		11C2B6B6A4B84C26FDB9E0D97C50F4CD /* lua.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lua.h; path = include/lua.h; sourceTree = "<group>"; };
+		1362E4B105A1605411B72A5FC0685BEC /* Pods-LuaViewLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuaViewLib.debug.xcconfig"; sourceTree = "<group>"; };
+		17FD82A27CCFC34E78D7C5BAEF59D61B /* Pods-Dummy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Dummy.debug.xcconfig"; sourceTree = "<group>"; };
+		18605668A74AFF868DC06363EAB34813 /* Pods-LuaViewSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuaViewSDK.release.xcconfig"; sourceTree = "<group>"; };
+		267AC7C3342785F1CBB02BC488A6775D /* lstate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lstate.h; path = include/lstate.h; sourceTree = "<group>"; };
+		2E501966CDB068ED61DE910EE49DCDC3 /* copy-framework-resources.rb */ = {isa = PBXFileReference; includeInIndex = 1; path = "copy-framework-resources.rb"; sourceTree = "<group>"; };
+		30040E7B1FB9032D835FAB5C1FF15F0B /* Pods-LuaViewLib-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LuaViewLib-dummy.m"; sourceTree = "<group>"; };
+		312732138A25DD780E02CF2209411190 /* lgc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lgc.h; path = include/lgc.h; sourceTree = "<group>"; };
+		36A47ACB460DF76ADB5929B8938C6A23 /* Pods-Dummy-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Dummy-acknowledgements.plist"; sourceTree = "<group>"; };
+		3B7877CA5A1AE189235CA5D0D2A1BF59 /* Pods-LuaViewSDK-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuaViewSDK-frameworks.sh"; sourceTree = "<group>"; };
+		3C6A9470FA6C41264147C65B429E502C /* lualib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lualib.h; path = include/lualib.h; sourceTree = "<group>"; };
+		3DA6D56B67E30E87589C1E70079C227B /* Pods-Dummy-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Dummy-resources.sh"; sourceTree = "<group>"; };
+		3E811C995FA73A86D770ECC87C5749AA /* lauxlib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = include/lauxlib.h; sourceTree = "<group>"; };
+		3FDB703A110AB23F5AF9656DFCA2356F /* lvm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lvm.h; path = include/lvm.h; sourceTree = "<group>"; };
+		4379951CCFAA63938B885ECD3EF10C91 /* Pods-LuaViewSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuaViewSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		43D9F6B5ACC6D96491C42B03C0C16D2A /* libPods-LuaViewSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-LuaViewSDK.a"; path = "libPods-LuaViewSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2FC280C9B91E636EEB5C312E3AC696 /* llex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = llex.h; path = include/llex.h; sourceTree = "<group>"; };
+		5E36E7472C428689D36FB77A26840863 /* Pods-LuaViewLib-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LuaViewLib-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5E5B94E16BD206C75BD6B65A7ECAD961 /* ldo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ldo.h; path = include/ldo.h; sourceTree = "<group>"; };
+		5F554A9CA77276E6BDDFA9BCE0861D7B /* Pods-Dummy-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Dummy-dummy.m"; sourceTree = "<group>"; };
+		60BB9505F8A843D03B4D6504524849EB /* lundump.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lundump.h; path = include/lundump.h; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		67FEC304990A97691115C546995C8834 /* Pods-LuaViewLib-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuaViewLib-resources.sh"; sourceTree = "<group>"; };
+		75A5ECCAA7476792E52941F015CE6F3F /* Pods-Dummy-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Dummy-frameworks.sh"; sourceTree = "<group>"; };
+		7C336F9330C2BAD7144E267031E80DB9 /* Pods-LuaViewSDK-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuaViewSDK-resources.sh"; sourceTree = "<group>"; };
+		7C789567719873177BF6E8332EC81F4D /* Pods-Dummy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Dummy.release.xcconfig"; sourceTree = "<group>"; };
+		82992175BDF8D6BFAA3804F0CAC51405 /* ltm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ltm.h; path = include/ltm.h; sourceTree = "<group>"; };
+		8D1B536DFF548BF58F8C51E256CE3D24 /* luaconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = luaconf.h; path = include/luaconf.h; sourceTree = "<group>"; };
+		905A308B35F8387C93621027CB59DCD8 /* Pods-Dummy-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Dummy-acknowledgements.markdown"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9B4525398F9E82E4F82AE31C1926F88A /* lzio.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lzio.h; path = include/lzio.h; sourceTree = "<group>"; };
+		A415A3124761D60699F51D4CFBB06649 /* llimits.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = llimits.h; path = include/llimits.h; sourceTree = "<group>"; };
+		ACBF966D65A9866E7D84114BB97E9DEA /* Pods-LuaViewSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LuaViewSDK-dummy.m"; sourceTree = "<group>"; };
+		B2547B51976EAC7769ECD885B6722F76 /* lparser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lparser.h; path = include/lparser.h; sourceTree = "<group>"; };
+		B29970FF14BC57628904B992117C9CF1 /* lstring.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lstring.h; path = include/lstring.h; sourceTree = "<group>"; };
+		B788D2F96A8E267E23A57BBC87B4F4E4 /* Pods-LuaViewSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LuaViewSDK-acknowledgements.plist"; sourceTree = "<group>"; };
+		BB39C0FA9F5A310EC70419BC3B882CCB /* lopcodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lopcodes.h; path = include/lopcodes.h; sourceTree = "<group>"; };
+		C1ED9902BE40F60630E814E9759605A4 /* liblua.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = liblua.a; path = lib/liblua.a; sourceTree = "<group>"; };
+		C82CF6B661F6D2E2D693FE14CB88BF6A /* copy-framework-resources.rb */ = {isa = PBXFileReference; includeInIndex = 1; path = "copy-framework-resources.rb"; sourceTree = "<group>"; };
+		D0083DAD99ECAF62C212607A6350A3E2 /* ldebug.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ldebug.h; path = include/ldebug.h; sourceTree = "<group>"; };
+		D04E0E0F3A88D78832B339290FDB04F5 /* copy-framework-resources.rb */ = {isa = PBXFileReference; includeInIndex = 1; path = "copy-framework-resources.rb"; sourceTree = "<group>"; };
+		D3BBEA433DBC432E652C7A31C587436B /* Pods-LuaViewLib-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LuaViewLib-acknowledgements.plist"; sourceTree = "<group>"; };
+		D47A00253E8F5F2DF40001F00CCD78C0 /* ltable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ltable.h; path = include/ltable.h; sourceTree = "<group>"; };
+		DAB9D55CED32DDD0EC264DA9FB67DD27 /* lmem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lmem.h; path = include/lmem.h; sourceTree = "<group>"; };
+		DB62BD23CF003FA1B9267FEE59F027C1 /* lapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lapi.h; path = include/lapi.h; sourceTree = "<group>"; };
+		E0C169C044022E026D92D501C31F62FE /* Pods-LuaViewLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuaViewLib.release.xcconfig"; sourceTree = "<group>"; };
+		E69CBBB823A3BCF1B11E3782184EA9D8 /* lobject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lobject.h; path = include/lobject.h; sourceTree = "<group>"; };
+		ECFA9E11D4F508E194A653DB54B65D08 /* lfunc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lfunc.h; path = include/lfunc.h; sourceTree = "<group>"; };
+		F37FA65868A1450ACE4ADDFC719116A1 /* Pods-LuaViewSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LuaViewSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F46E23D3BB448308B5EC7963A364D83F /* libPods-LuaViewLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-LuaViewLib.a"; path = "libPods-LuaViewLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A79EBAC49A8F00E1B4ED087EBE02B93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21DA712F769D001B386DB690AA99B68A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAE001FC2B2DE2BADD54E44F067220B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22EC2627DA2EA33B22E376A202C154B9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAF840E9E8BA2872EE9246B3D53048F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86B47FAC5D9A786542E45CB63F77505D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F2400327D703634AAC3360F79471872 /* Pods-Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				2E501966CDB068ED61DE910EE49DCDC3 /* copy-framework-resources.rb */,
+				905A308B35F8387C93621027CB59DCD8 /* Pods-Dummy-acknowledgements.markdown */,
+				36A47ACB460DF76ADB5929B8938C6A23 /* Pods-Dummy-acknowledgements.plist */,
+				5F554A9CA77276E6BDDFA9BCE0861D7B /* Pods-Dummy-dummy.m */,
+				75A5ECCAA7476792E52941F015CE6F3F /* Pods-Dummy-frameworks.sh */,
+				3DA6D56B67E30E87589C1E70079C227B /* Pods-Dummy-resources.sh */,
+				17FD82A27CCFC34E78D7C5BAEF59D61B /* Pods-Dummy.debug.xcconfig */,
+				7C789567719873177BF6E8332EC81F4D /* Pods-Dummy.release.xcconfig */,
+			);
+			name = "Pods-Dummy";
+			path = "Target Support Files/Pods-Dummy";
+			sourceTree = "<group>";
+		};
+		2205558409404C0002E1DBB63B1FDA4F /* Pods-LuaViewSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C82CF6B661F6D2E2D693FE14CB88BF6A /* copy-framework-resources.rb */,
+				F37FA65868A1450ACE4ADDFC719116A1 /* Pods-LuaViewSDK-acknowledgements.markdown */,
+				B788D2F96A8E267E23A57BBC87B4F4E4 /* Pods-LuaViewSDK-acknowledgements.plist */,
+				ACBF966D65A9866E7D84114BB97E9DEA /* Pods-LuaViewSDK-dummy.m */,
+				3B7877CA5A1AE189235CA5D0D2A1BF59 /* Pods-LuaViewSDK-frameworks.sh */,
+				7C336F9330C2BAD7144E267031E80DB9 /* Pods-LuaViewSDK-resources.sh */,
+				4379951CCFAA63938B885ECD3EF10C91 /* Pods-LuaViewSDK.debug.xcconfig */,
+				18605668A74AFF868DC06363EAB34813 /* Pods-LuaViewSDK.release.xcconfig */,
+			);
+			name = "Pods-LuaViewSDK";
+			path = "Target Support Files/Pods-LuaViewSDK";
+			sourceTree = "<group>";
+		};
+		3964458B8E7D205C9CB68AFAB56CCA86 /* liblua */ = {
+			isa = PBXGroup;
+			children = (
+				DB62BD23CF003FA1B9267FEE59F027C1 /* lapi.h */,
+				3E811C995FA73A86D770ECC87C5749AA /* lauxlib.h */,
+				0DDDB42DC3B54E98B7A6867BC96FF37F /* lcode.h */,
+				D0083DAD99ECAF62C212607A6350A3E2 /* ldebug.h */,
+				5E5B94E16BD206C75BD6B65A7ECAD961 /* ldo.h */,
+				ECFA9E11D4F508E194A653DB54B65D08 /* lfunc.h */,
+				312732138A25DD780E02CF2209411190 /* lgc.h */,
+				4B2FC280C9B91E636EEB5C312E3AC696 /* llex.h */,
+				A415A3124761D60699F51D4CFBB06649 /* llimits.h */,
+				DAB9D55CED32DDD0EC264DA9FB67DD27 /* lmem.h */,
+				E69CBBB823A3BCF1B11E3782184EA9D8 /* lobject.h */,
+				BB39C0FA9F5A310EC70419BC3B882CCB /* lopcodes.h */,
+				B2547B51976EAC7769ECD885B6722F76 /* lparser.h */,
+				267AC7C3342785F1CBB02BC488A6775D /* lstate.h */,
+				B29970FF14BC57628904B992117C9CF1 /* lstring.h */,
+				D47A00253E8F5F2DF40001F00CCD78C0 /* ltable.h */,
+				82992175BDF8D6BFAA3804F0CAC51405 /* ltm.h */,
+				11C2B6B6A4B84C26FDB9E0D97C50F4CD /* lua.h */,
+				8D1B536DFF548BF58F8C51E256CE3D24 /* luaconf.h */,
+				3C6A9470FA6C41264147C65B429E502C /* lualib.h */,
+				60BB9505F8A843D03B4D6504524849EB /* lundump.h */,
+				3FDB703A110AB23F5AF9656DFCA2356F /* lvm.h */,
+				9B4525398F9E82E4F82AE31C1926F88A /* lzio.h */,
+				BD6F68E26C817A30DFF125BAD7660196 /* Frameworks */,
+			);
+			name = liblua;
+			path = liblua;
+			sourceTree = "<group>";
+		};
+		78A612D23682CAB99566BF2C1AF26BAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3964458B8E7D205C9CB68AFAB56CCA86 /* liblua */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				78A612D23682CAB99566BF2C1AF26BAA /* Pods */,
+				B928F10BA4A05DF21354B54BB45B8B43 /* Products */,
+				917E842DD0C954F07854EA416F8C63F4 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		917E842DD0C954F07854EA416F8C63F4 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F2400327D703634AAC3360F79471872 /* Pods-Dummy */,
+				D52EC4432E855BF9D804BF91AC33323D /* Pods-LuaViewLib */,
+				2205558409404C0002E1DBB63B1FDA4F /* Pods-LuaViewSDK */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B928F10BA4A05DF21354B54BB45B8B43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BA8333E6C78D64DBCB1373E435FEDB1 /* libPods-Dummy.a */,
+				F46E23D3BB448308B5EC7963A364D83F /* libPods-LuaViewLib.a */,
+				43D9F6B5ACC6D96491C42B03C0C16D2A /* libPods-LuaViewSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD6F68E26C817A30DFF125BAD7660196 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C1ED9902BE40F60630E814E9759605A4 /* liblua.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D52EC4432E855BF9D804BF91AC33323D /* Pods-LuaViewLib */ = {
+			isa = PBXGroup;
+			children = (
+				D04E0E0F3A88D78832B339290FDB04F5 /* copy-framework-resources.rb */,
+				5E36E7472C428689D36FB77A26840863 /* Pods-LuaViewLib-acknowledgements.markdown */,
+				D3BBEA433DBC432E652C7A31C587436B /* Pods-LuaViewLib-acknowledgements.plist */,
+				30040E7B1FB9032D835FAB5C1FF15F0B /* Pods-LuaViewLib-dummy.m */,
+				052F013870A94A6B1A6EFFCA6EA0C736 /* Pods-LuaViewLib-frameworks.sh */,
+				67FEC304990A97691115C546995C8834 /* Pods-LuaViewLib-resources.sh */,
+				1362E4B105A1605411B72A5FC0685BEC /* Pods-LuaViewLib.debug.xcconfig */,
+				E0C169C044022E026D92D501C31F62FE /* Pods-LuaViewLib.release.xcconfig */,
+			);
+			name = "Pods-LuaViewLib";
+			path = "Target Support Files/Pods-LuaViewLib";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B9248CE7F8F66B425AF2AB9A326E015 /* Pods-LuaViewSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29D4E060B6661C2C14C5417518576F3E /* Build configuration list for PBXNativeTarget "Pods-LuaViewSDK" */;
+			buildPhases = (
+				39B40A37143072440C309588A61B9FAF /* Sources */,
+				BAE001FC2B2DE2BADD54E44F067220B7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-LuaViewSDK";
+			productName = "Pods-LuaViewSDK";
+			productReference = 43D9F6B5ACC6D96491C42B03C0C16D2A /* libPods-LuaViewSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		53FBD0EA3FFBA318039D7E07C44FB509 /* Pods-Dummy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B08142893BE81AFFB2D0DBCB5773EF4C /* Build configuration list for PBXNativeTarget "Pods-Dummy" */;
+			buildPhases = (
+				D7B5596C81D16784EDEFDE6D1A28B225 /* Sources */,
+				EAF840E9E8BA2872EE9246B3D53048F6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Dummy";
+			productName = "Pods-Dummy";
+			productReference = 0BA8333E6C78D64DBCB1373E435FEDB1 /* libPods-Dummy.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		8EEA3B1586E1628B265C1B9762A2E1FE /* Pods-LuaViewLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FD1832EAA068A2D71862F1A5A468BA4 /* Build configuration list for PBXNativeTarget "Pods-LuaViewLib" */;
+			buildPhases = (
+				129DA7004573FA1F95FC4183FB226A9B /* Sources */,
+				1A79EBAC49A8F00E1B4ED087EBE02B93 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-LuaViewLib";
+			productName = "Pods-LuaViewLib";
+			productReference = F46E23D3BB448308B5EC7963A364D83F /* libPods-LuaViewLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = B928F10BA4A05DF21354B54BB45B8B43 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				53FBD0EA3FFBA318039D7E07C44FB509 /* Pods-Dummy */,
+				8EEA3B1586E1628B265C1B9762A2E1FE /* Pods-LuaViewLib */,
+				4B9248CE7F8F66B425AF2AB9A326E015 /* Pods-LuaViewSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		129DA7004573FA1F95FC4183FB226A9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373EFCD7F653DEDC9D947F96D1DE155 /* Pods-LuaViewLib-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B40A37143072440C309588A61B9FAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B96F997B48EF2FE4979413FB565CB555 /* Pods-LuaViewSDK-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7B5596C81D16784EDEFDE6D1A28B225 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7ADDCF1BCB9863DD40E7078D178D42FC /* Pods-Dummy-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		002215DD4349C411269E732A11239CCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4379951CCFAA63938B885ECD3EF10C91 /* Pods-LuaViewSDK.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		18AB5737FEE2345B0B915B99B1DB2375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18605668A74AFF868DC06363EAB34813 /* Pods-LuaViewSDK.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		34FE9531DA9AF2820790339988D5FF41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E9375D3D9F9193470641E8EAC529981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C169C044022E026D92D501C31F62FE /* Pods-LuaViewLib.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6AD60D4A93D4F220151EDD64F9F210BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C789567719873177BF6E8332EC81F4D /* Pods-Dummy.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A72F28E9C98DD174D627EA09BC317FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17FD82A27CCFC34E78D7C5BAEF59D61B /* Pods-Dummy.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AB0C24D072B5A053DA6715E8609391F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1362E4B105A1605411B72A5FC0685BEC /* Pods-LuaViewLib.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C104F7F091290C3D1E248192F07FE689 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29D4E060B6661C2C14C5417518576F3E /* Build configuration list for PBXNativeTarget "Pods-LuaViewSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				002215DD4349C411269E732A11239CCF /* Debug */,
+				18AB5737FEE2345B0B915B99B1DB2375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C104F7F091290C3D1E248192F07FE689 /* Debug */,
+				34FE9531DA9AF2820790339988D5FF41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8FD1832EAA068A2D71862F1A5A468BA4 /* Build configuration list for PBXNativeTarget "Pods-LuaViewLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB0C24D072B5A053DA6715E8609391F1 /* Debug */,
+				4E9375D3D9F9193470641E8EAC529981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B08142893BE81AFFB2D0DBCB5773EF4C /* Build configuration list for PBXNativeTarget "Pods-Dummy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A72F28E9C98DD174D627EA09BC317FDE /* Debug */,
+				6AD60D4A93D4F220151EDD64F9F210BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

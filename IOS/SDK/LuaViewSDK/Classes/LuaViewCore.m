@@ -31,7 +31,7 @@
 #import "LVPagerIndicator.h"
 #import "LVLoadingIndicator.h"
 #import "LVImage.h"
-#import "LVWebView.h"
+//#import "LVWebView.h"
 #import "LVLabel.h"
 #import "LVBaseView.h"
 #import "LVTransform3D.h"
@@ -249,7 +249,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
                 [LVButton class],
                 [LVImage class],
                 [LVBitmap class],
-                [LVWebView class],
+//                [LVWebView class],
                 [LVLabel class],
                 [LVScrollView class],
                 [LVCollectionView class],

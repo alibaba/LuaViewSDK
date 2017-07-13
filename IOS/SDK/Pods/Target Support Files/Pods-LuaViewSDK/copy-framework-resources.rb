@@ -50,7 +50,8 @@ for framework in frameworks
             if File.directory?(File.join(framework_path, "Resources"))
                 list = Dir.glob(File.join(framework_path, "Resources/*"))
             else
-                ignore_list += [File.basename(framework, '.framework'), "Headers", "PrivateHeaders", "Modules", "Versions", "_CodeSignature"]
+            	#增加Resources的过滤，之前喵街引入的一库，存在Resources，但是指向的目录不存在。导致cp一个空的符号链接会报错 by兵长 20170706
+                ignore_list += [File.basename(framework, '.framework'), "Headers", "PrivateHeaders", "Modules", "Versions", "_CodeSignature", "Resources"]
                 list = Dir.glob(File.join(framework_path, "*"))
             end
             list.reject!{|entry| ignore_list.include?(File.basename(entry)) }

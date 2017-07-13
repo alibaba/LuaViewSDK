@@ -16,6 +16,8 @@
 @property(nonatomic,assign) BOOL playing;
 @property (nonatomic, copy) NSString *fileName;
 
+@property (nonatomic, assign) CGFloat volume;
+
 @end
 
 @implementation LVAudioPlayer{
@@ -42,6 +44,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
     self = [super init];
     if( self ){
         self.lv_luaviewCore = LV_LUASTATE_VIEW(L);
+        _volume = -1;
     }
     return self;
 }
@@ -55,6 +58,8 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
         [self stop];
         audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//使用本地URL创建
         audioPlayer.delegate = self;
+        
+        [self setVolume:_volume];
         
         if( error ) {
             NSLog(@"[LuaView][error]%@",error);
@@ -89,6 +94,7 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 -(void) play {
     if (!self.playing){
         [audioPlayer play];
+        [self setVolume:0.5];
         self.playing = YES;
     }
 }
@@ -96,6 +102,16 @@ static void releaseUserDataAudioPlayer(LVUserDataInfo* user){
 -(void) stop {
     [audioPlayer stop];
     self.playing = NO;
+}
+
+-(void)setVolume:(CGFloat)volume{
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"10.0" options:NSNumericSearch] == NSOrderedDescending){
+        if (volume < 0 || volume > 1){
+            return;
+        }
+        _volume = volume;
+        [audioPlayer setVolume:volume fadeDuration:0];
+    }
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
@@ -167,6 +183,23 @@ static int stop (lua_State *L) {
     return 0;
 }
 
+static int setVolume(lua_State *L){
+    //设置音量接口只有在iOS10.0以上才生效
+    LVUserDataInfo *user = (LVUserDataInfo *)lua_touserdata(L, 1);
+    if (user){
+        LVAudioPlayer *player = (__bridge LVAudioPlayer *)(user->object);
+        if (player){
+            if( lua_gettop(L)>=2 ) {
+                float volume = lua_tonumber(L, 2);
+                
+                [player setVolume:volume];
+            }
+        }
+    }
+    
+    return 0;
+}
+
 static int __gc (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
     releaseUserDataAudioPlayer(user);
@@ -190,6 +223,7 @@ static int __tostring (lua_State *L) {
     const struct luaL_Reg memberFunctions [] = {
         {"play", play },
         {"stop", stop },
+        {"setVolume", setVolume},
         // pause
         // resume
         // callback { onComplete onError }
