@@ -274,7 +274,7 @@
             //保存到本地文件再传给脚本层, 路径为temp/LVCamera
             NSString *path = NSTemporaryDirectory();
             //获取当前毫秒数
-            NSString *filename = [path stringByAppendingFormat:@"%.0f", (double)CFAbsoluteTimeGetCurrent()];
+            NSString *filename = [path stringByAppendingFormat:@"%.0f.jpg", (double)CFAbsoluteTimeGetCurrent()];
             
             NSError *error = nil;
             [imageData writeToFile:filename options:NSDataWritingAtomic error:&error];
