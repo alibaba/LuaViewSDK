@@ -113,14 +113,15 @@ static int setCallback (lua_State *L) {
 
 static int start (lua_State *L) {
     LVUserDataInfo * user = (LVUserDataInfo *)lua_touserdata(L, 1);
-    LVTimer* timer = (__bridge LVTimer *)(user->object);
-    if( lua_gettop(L)>=2 ) {
-        timer.interval = lua_tonumber(L, 2);
-    }
-    if( lua_gettop(L)>=3 ) {
-        timer.repeat = lua_toboolean(L, 3);
-    }
-    if( user ){
+    
+    if ( user ) {
+        LVTimer* timer = (__bridge LVTimer *)(user->object);
+        if( lua_gettop(L)>=2 ) {
+            timer.interval = lua_tonumber(L, 2);
+        }
+        if( lua_gettop(L)>=3 ) {
+            timer.repeat = lua_toboolean(L, 3);
+        }
         if( timer ){
             [timer startTimer];
             lua_pushvalue(L,1);
