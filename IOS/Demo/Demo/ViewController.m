@@ -109,7 +109,6 @@
         if( [path hasSuffix:@".lua"] ) {
             path = [NSString stringWithFormat:@"%@/%@", path0, path];
             NSData* data = [LVUtil dataReadFromFile:path];
-            data = lv_toStandLuaGrammar(data);
             [LVUtil saveData:data toFile:path];
         }
     }

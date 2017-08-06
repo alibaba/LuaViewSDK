@@ -8,3 +8,7 @@ xcuserdata/
 
 # others
 .git_old_branch
+
+# Pods
+TaobaoEnv
+IOS/Demo/Pods/*
