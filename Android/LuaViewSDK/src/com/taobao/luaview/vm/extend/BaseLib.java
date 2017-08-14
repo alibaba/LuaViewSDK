@@ -34,6 +34,7 @@ public class BaseLib {
 
     public void extend(LuaValue env) {
         env.set("printLV", new printLV(baseLib));
+		env.set("printLog", new printLog(baseLib));
     }
 
     // "print", // (...) -> void
@@ -64,4 +65,22 @@ public class BaseLib {
             return NONE;
         }
     }
+	
+	// "printLog(fileName, messsage)", send log info to LuaViewDebugger
+	final class printLog extends TwoArgFunction {
+		final org.luaj.vm2.lib.BaseLib baseLib;
+
+		public log(org.luaj.vm2.lib.BaseLib baseLib) {
+			this.baseLib = baseLib;
+		}
+
+		@Override public LuaValue call(LuaValue arg1, LuaValue arg2) {
+			String fileName = arg1.checkjstring();
+			if (globals.debugConnection != null) {
+				globals.debugConnection.sendCmd("log", fileName, arg2.checkjstring());
+			}
+			LogUtil.i(arg2);
+			return NONE;
+		}
+	}
 }
