@@ -133,7 +133,7 @@ public class LVListView extends ListView implements ILVListView {
 
     @Override
     public void addFooter(View view) {
-        if (mFooterContainer != null) {
+        if (mFooterContainer == null) {
             initFooterContainer();
         }
         LuaViewUtil.addView(mFooterContainer, view, null);
